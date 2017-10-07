@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -35,8 +34,8 @@ const opAddTags = "AddTags"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -93,7 +92,7 @@ func (c *MachineLearning) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *MachineLearning) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -102,7 +101,7 @@ func (c *MachineLearning) AddTagsWithContext(ctx aws.Context, input *AddTagsInpu
 
 const opCreateBatchPrediction = "CreateBatchPrediction"
 
-// CreateBatchPredictionRequest generates a "aws/request.Request" representing the
+// CreateBatchPredictionRequest generates a "aws.Request" representing the
 // client's request for the CreateBatchPrediction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -124,8 +123,8 @@ const opCreateBatchPrediction = "CreateBatchPrediction"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredictionInput) (req *request.Request, output *CreateBatchPredictionOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredictionInput) (req *aws.Request, output *CreateBatchPredictionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBatchPrediction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -191,7 +190,7 @@ func (c *MachineLearning) CreateBatchPrediction(input *CreateBatchPredictionInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateBatchPredictionWithContext(ctx aws.Context, input *CreateBatchPredictionInput, opts ...request.Option) (*CreateBatchPredictionOutput, error) {
+func (c *MachineLearning) CreateBatchPredictionWithContext(ctx aws.Context, input *CreateBatchPredictionInput, opts ...aws.Option) (*CreateBatchPredictionOutput, error) {
 	req, out := c.CreateBatchPredictionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -200,7 +199,7 @@ func (c *MachineLearning) CreateBatchPredictionWithContext(ctx aws.Context, inpu
 
 const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
 
-// CreateDataSourceFromRDSRequest generates a "aws/request.Request" representing the
+// CreateDataSourceFromRDSRequest generates a "aws.Request" representing the
 // client's request for the CreateDataSourceFromRDS operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -222,8 +221,8 @@ const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSourceFromRDSInput) (req *request.Request, output *CreateDataSourceFromRDSOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSourceFromRDSInput) (req *aws.Request, output *CreateDataSourceFromRDSOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDataSourceFromRDS,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -289,7 +288,7 @@ func (c *MachineLearning) CreateDataSourceFromRDS(input *CreateDataSourceFromRDS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateDataSourceFromRDSWithContext(ctx aws.Context, input *CreateDataSourceFromRDSInput, opts ...request.Option) (*CreateDataSourceFromRDSOutput, error) {
+func (c *MachineLearning) CreateDataSourceFromRDSWithContext(ctx aws.Context, input *CreateDataSourceFromRDSInput, opts ...aws.Option) (*CreateDataSourceFromRDSOutput, error) {
 	req, out := c.CreateDataSourceFromRDSRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -298,7 +297,7 @@ func (c *MachineLearning) CreateDataSourceFromRDSWithContext(ctx aws.Context, in
 
 const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
 
-// CreateDataSourceFromRedshiftRequest generates a "aws/request.Request" representing the
+// CreateDataSourceFromRedshiftRequest generates a "aws.Request" representing the
 // client's request for the CreateDataSourceFromRedshift operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -320,8 +319,8 @@ const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataSourceFromRedshiftInput) (req *request.Request, output *CreateDataSourceFromRedshiftOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataSourceFromRedshiftInput) (req *aws.Request, output *CreateDataSourceFromRedshiftOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDataSourceFromRedshift,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -406,7 +405,7 @@ func (c *MachineLearning) CreateDataSourceFromRedshift(input *CreateDataSourceFr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateDataSourceFromRedshiftWithContext(ctx aws.Context, input *CreateDataSourceFromRedshiftInput, opts ...request.Option) (*CreateDataSourceFromRedshiftOutput, error) {
+func (c *MachineLearning) CreateDataSourceFromRedshiftWithContext(ctx aws.Context, input *CreateDataSourceFromRedshiftInput, opts ...aws.Option) (*CreateDataSourceFromRedshiftOutput, error) {
 	req, out := c.CreateDataSourceFromRedshiftRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -415,7 +414,7 @@ func (c *MachineLearning) CreateDataSourceFromRedshiftWithContext(ctx aws.Contex
 
 const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
 
-// CreateDataSourceFromS3Request generates a "aws/request.Request" representing the
+// CreateDataSourceFromS3Request generates a "aws.Request" representing the
 // client's request for the CreateDataSourceFromS3 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -437,8 +436,8 @@ const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Input) (req *request.Request, output *CreateDataSourceFromS3Output) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceFromS3Input) (req *aws.Request, output *CreateDataSourceFromS3Output) {
+	op := &aws.Operation{
 		Name:       opCreateDataSourceFromS3,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -518,7 +517,7 @@ func (c *MachineLearning) CreateDataSourceFromS3(input *CreateDataSourceFromS3In
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateDataSourceFromS3WithContext(ctx aws.Context, input *CreateDataSourceFromS3Input, opts ...request.Option) (*CreateDataSourceFromS3Output, error) {
+func (c *MachineLearning) CreateDataSourceFromS3WithContext(ctx aws.Context, input *CreateDataSourceFromS3Input, opts ...aws.Option) (*CreateDataSourceFromS3Output, error) {
 	req, out := c.CreateDataSourceFromS3Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -527,7 +526,7 @@ func (c *MachineLearning) CreateDataSourceFromS3WithContext(ctx aws.Context, inp
 
 const opCreateEvaluation = "CreateEvaluation"
 
-// CreateEvaluationRequest generates a "aws/request.Request" representing the
+// CreateEvaluationRequest generates a "aws.Request" representing the
 // client's request for the CreateEvaluation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -549,8 +548,8 @@ const opCreateEvaluation = "CreateEvaluation"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) (req *request.Request, output *CreateEvaluationOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) (req *aws.Request, output *CreateEvaluationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateEvaluation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -618,7 +617,7 @@ func (c *MachineLearning) CreateEvaluation(input *CreateEvaluationInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateEvaluationWithContext(ctx aws.Context, input *CreateEvaluationInput, opts ...request.Option) (*CreateEvaluationOutput, error) {
+func (c *MachineLearning) CreateEvaluationWithContext(ctx aws.Context, input *CreateEvaluationInput, opts ...aws.Option) (*CreateEvaluationOutput, error) {
 	req, out := c.CreateEvaluationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -627,7 +626,7 @@ func (c *MachineLearning) CreateEvaluationWithContext(ctx aws.Context, input *Cr
 
 const opCreateMLModel = "CreateMLModel"
 
-// CreateMLModelRequest generates a "aws/request.Request" representing the
+// CreateMLModelRequest generates a "aws.Request" representing the
 // client's request for the CreateMLModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -649,8 +648,8 @@ const opCreateMLModel = "CreateMLModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) (req *request.Request, output *CreateMLModelOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) (req *aws.Request, output *CreateMLModelOutput) {
+	op := &aws.Operation{
 		Name:       opCreateMLModel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -719,7 +718,7 @@ func (c *MachineLearning) CreateMLModel(input *CreateMLModelInput) (*CreateMLMod
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateMLModelWithContext(ctx aws.Context, input *CreateMLModelInput, opts ...request.Option) (*CreateMLModelOutput, error) {
+func (c *MachineLearning) CreateMLModelWithContext(ctx aws.Context, input *CreateMLModelInput, opts ...aws.Option) (*CreateMLModelOutput, error) {
 	req, out := c.CreateMLModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -728,7 +727,7 @@ func (c *MachineLearning) CreateMLModelWithContext(ctx aws.Context, input *Creat
 
 const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 
-// CreateRealtimeEndpointRequest generates a "aws/request.Request" representing the
+// CreateRealtimeEndpointRequest generates a "aws.Request" representing the
 // client's request for the CreateRealtimeEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -750,8 +749,8 @@ const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInput) (req *request.Request, output *CreateRealtimeEndpointOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEndpointInput) (req *aws.Request, output *CreateRealtimeEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRealtimeEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -804,7 +803,7 @@ func (c *MachineLearning) CreateRealtimeEndpoint(input *CreateRealtimeEndpointIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) CreateRealtimeEndpointWithContext(ctx aws.Context, input *CreateRealtimeEndpointInput, opts ...request.Option) (*CreateRealtimeEndpointOutput, error) {
+func (c *MachineLearning) CreateRealtimeEndpointWithContext(ctx aws.Context, input *CreateRealtimeEndpointInput, opts ...aws.Option) (*CreateRealtimeEndpointOutput, error) {
 	req, out := c.CreateRealtimeEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -813,7 +812,7 @@ func (c *MachineLearning) CreateRealtimeEndpointWithContext(ctx aws.Context, inp
 
 const opDeleteBatchPrediction = "DeleteBatchPrediction"
 
-// DeleteBatchPredictionRequest generates a "aws/request.Request" representing the
+// DeleteBatchPredictionRequest generates a "aws.Request" representing the
 // client's request for the DeleteBatchPrediction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -835,8 +834,8 @@ const opDeleteBatchPrediction = "DeleteBatchPrediction"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredictionInput) (req *request.Request, output *DeleteBatchPredictionOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredictionInput) (req *aws.Request, output *DeleteBatchPredictionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBatchPrediction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -892,7 +891,7 @@ func (c *MachineLearning) DeleteBatchPrediction(input *DeleteBatchPredictionInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DeleteBatchPredictionWithContext(ctx aws.Context, input *DeleteBatchPredictionInput, opts ...request.Option) (*DeleteBatchPredictionOutput, error) {
+func (c *MachineLearning) DeleteBatchPredictionWithContext(ctx aws.Context, input *DeleteBatchPredictionInput, opts ...aws.Option) (*DeleteBatchPredictionOutput, error) {
 	req, out := c.DeleteBatchPredictionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -901,7 +900,7 @@ func (c *MachineLearning) DeleteBatchPredictionWithContext(ctx aws.Context, inpu
 
 const opDeleteDataSource = "DeleteDataSource"
 
-// DeleteDataSourceRequest generates a "aws/request.Request" representing the
+// DeleteDataSourceRequest generates a "aws.Request" representing the
 // client's request for the DeleteDataSource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -923,8 +922,8 @@ const opDeleteDataSource = "DeleteDataSource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) (req *request.Request, output *DeleteDataSourceOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) (req *aws.Request, output *DeleteDataSourceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -980,7 +979,7 @@ func (c *MachineLearning) DeleteDataSource(input *DeleteDataSourceInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DeleteDataSourceWithContext(ctx aws.Context, input *DeleteDataSourceInput, opts ...request.Option) (*DeleteDataSourceOutput, error) {
+func (c *MachineLearning) DeleteDataSourceWithContext(ctx aws.Context, input *DeleteDataSourceInput, opts ...aws.Option) (*DeleteDataSourceOutput, error) {
 	req, out := c.DeleteDataSourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -989,7 +988,7 @@ func (c *MachineLearning) DeleteDataSourceWithContext(ctx aws.Context, input *De
 
 const opDeleteEvaluation = "DeleteEvaluation"
 
-// DeleteEvaluationRequest generates a "aws/request.Request" representing the
+// DeleteEvaluationRequest generates a "aws.Request" representing the
 // client's request for the DeleteEvaluation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1011,8 +1010,8 @@ const opDeleteEvaluation = "DeleteEvaluation"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) (req *request.Request, output *DeleteEvaluationOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) (req *aws.Request, output *DeleteEvaluationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEvaluation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1068,7 +1067,7 @@ func (c *MachineLearning) DeleteEvaluation(input *DeleteEvaluationInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DeleteEvaluationWithContext(ctx aws.Context, input *DeleteEvaluationInput, opts ...request.Option) (*DeleteEvaluationOutput, error) {
+func (c *MachineLearning) DeleteEvaluationWithContext(ctx aws.Context, input *DeleteEvaluationInput, opts ...aws.Option) (*DeleteEvaluationOutput, error) {
 	req, out := c.DeleteEvaluationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1077,7 +1076,7 @@ func (c *MachineLearning) DeleteEvaluationWithContext(ctx aws.Context, input *De
 
 const opDeleteMLModel = "DeleteMLModel"
 
-// DeleteMLModelRequest generates a "aws/request.Request" representing the
+// DeleteMLModelRequest generates a "aws.Request" representing the
 // client's request for the DeleteMLModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1099,8 +1098,8 @@ const opDeleteMLModel = "DeleteMLModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) (req *request.Request, output *DeleteMLModelOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) (req *aws.Request, output *DeleteMLModelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMLModel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1156,7 +1155,7 @@ func (c *MachineLearning) DeleteMLModel(input *DeleteMLModelInput) (*DeleteMLMod
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DeleteMLModelWithContext(ctx aws.Context, input *DeleteMLModelInput, opts ...request.Option) (*DeleteMLModelOutput, error) {
+func (c *MachineLearning) DeleteMLModelWithContext(ctx aws.Context, input *DeleteMLModelInput, opts ...aws.Option) (*DeleteMLModelOutput, error) {
 	req, out := c.DeleteMLModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1165,7 +1164,7 @@ func (c *MachineLearning) DeleteMLModelWithContext(ctx aws.Context, input *Delet
 
 const opDeleteRealtimeEndpoint = "DeleteRealtimeEndpoint"
 
-// DeleteRealtimeEndpointRequest generates a "aws/request.Request" representing the
+// DeleteRealtimeEndpointRequest generates a "aws.Request" representing the
 // client's request for the DeleteRealtimeEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1187,8 +1186,8 @@ const opDeleteRealtimeEndpoint = "DeleteRealtimeEndpoint"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEndpointInput) (req *request.Request, output *DeleteRealtimeEndpointOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEndpointInput) (req *aws.Request, output *DeleteRealtimeEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRealtimeEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1239,7 +1238,7 @@ func (c *MachineLearning) DeleteRealtimeEndpoint(input *DeleteRealtimeEndpointIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DeleteRealtimeEndpointWithContext(ctx aws.Context, input *DeleteRealtimeEndpointInput, opts ...request.Option) (*DeleteRealtimeEndpointOutput, error) {
+func (c *MachineLearning) DeleteRealtimeEndpointWithContext(ctx aws.Context, input *DeleteRealtimeEndpointInput, opts ...aws.Option) (*DeleteRealtimeEndpointOutput, error) {
 	req, out := c.DeleteRealtimeEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1248,7 +1247,7 @@ func (c *MachineLearning) DeleteRealtimeEndpointWithContext(ctx aws.Context, inp
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws/request.Request" representing the
+// DeleteTagsRequest generates a "aws.Request" representing the
 // client's request for the DeleteTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1270,8 +1269,8 @@ const opDeleteTags = "DeleteTags"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1327,7 +1326,7 @@ func (c *MachineLearning) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...request.Option) (*DeleteTagsOutput, error) {
+func (c *MachineLearning) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1336,7 +1335,7 @@ func (c *MachineLearning) DeleteTagsWithContext(ctx aws.Context, input *DeleteTa
 
 const opDescribeBatchPredictions = "DescribeBatchPredictions"
 
-// DescribeBatchPredictionsRequest generates a "aws/request.Request" representing the
+// DescribeBatchPredictionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeBatchPredictions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1358,12 +1357,12 @@ const opDescribeBatchPredictions = "DescribeBatchPredictions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPredictionsInput) (req *request.Request, output *DescribeBatchPredictionsOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPredictionsInput) (req *aws.Request, output *DescribeBatchPredictionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBatchPredictions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "Limit",
@@ -1414,7 +1413,7 @@ func (c *MachineLearning) DescribeBatchPredictions(input *DescribeBatchPredictio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeBatchPredictionsWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, opts ...request.Option) (*DescribeBatchPredictionsOutput, error) {
+func (c *MachineLearning) DescribeBatchPredictionsWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, opts ...aws.Option) (*DescribeBatchPredictionsOutput, error) {
 	req, out := c.DescribeBatchPredictionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1449,9 +1448,9 @@ func (c *MachineLearning) DescribeBatchPredictionsPages(input *DescribeBatchPred
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeBatchPredictionsInput
 			if input != nil {
 				tmp := *input
@@ -1473,7 +1472,7 @@ func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Conte
 
 const opDescribeDataSources = "DescribeDataSources"
 
-// DescribeDataSourcesRequest generates a "aws/request.Request" representing the
+// DescribeDataSourcesRequest generates a "aws.Request" representing the
 // client's request for the DescribeDataSources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1495,12 +1494,12 @@ const opDescribeDataSources = "DescribeDataSources"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesInput) (req *request.Request, output *DescribeDataSourcesOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesInput) (req *aws.Request, output *DescribeDataSourcesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDataSources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "Limit",
@@ -1550,7 +1549,7 @@ func (c *MachineLearning) DescribeDataSources(input *DescribeDataSourcesInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeDataSourcesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, opts ...request.Option) (*DescribeDataSourcesOutput, error) {
+func (c *MachineLearning) DescribeDataSourcesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, opts ...aws.Option) (*DescribeDataSourcesOutput, error) {
 	req, out := c.DescribeDataSourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1585,9 +1584,9 @@ func (c *MachineLearning) DescribeDataSourcesPages(input *DescribeDataSourcesInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDataSourcesInput
 			if input != nil {
 				tmp := *input
@@ -1609,7 +1608,7 @@ func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, i
 
 const opDescribeEvaluations = "DescribeEvaluations"
 
-// DescribeEvaluationsRequest generates a "aws/request.Request" representing the
+// DescribeEvaluationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvaluations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1631,12 +1630,12 @@ const opDescribeEvaluations = "DescribeEvaluations"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsInput) (req *request.Request, output *DescribeEvaluationsOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsInput) (req *aws.Request, output *DescribeEvaluationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvaluations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "Limit",
@@ -1687,7 +1686,7 @@ func (c *MachineLearning) DescribeEvaluations(input *DescribeEvaluationsInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeEvaluationsWithContext(ctx aws.Context, input *DescribeEvaluationsInput, opts ...request.Option) (*DescribeEvaluationsOutput, error) {
+func (c *MachineLearning) DescribeEvaluationsWithContext(ctx aws.Context, input *DescribeEvaluationsInput, opts ...aws.Option) (*DescribeEvaluationsOutput, error) {
 	req, out := c.DescribeEvaluationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1722,9 +1721,9 @@ func (c *MachineLearning) DescribeEvaluationsPages(input *DescribeEvaluationsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEvaluationsInput
 			if input != nil {
 				tmp := *input
@@ -1746,7 +1745,7 @@ func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, i
 
 const opDescribeMLModels = "DescribeMLModels"
 
-// DescribeMLModelsRequest generates a "aws/request.Request" representing the
+// DescribeMLModelsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMLModels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1768,12 +1767,12 @@ const opDescribeMLModels = "DescribeMLModels"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) (req *request.Request, output *DescribeMLModelsOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) (req *aws.Request, output *DescribeMLModelsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMLModels,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "Limit",
@@ -1823,7 +1822,7 @@ func (c *MachineLearning) DescribeMLModels(input *DescribeMLModelsInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeMLModelsWithContext(ctx aws.Context, input *DescribeMLModelsInput, opts ...request.Option) (*DescribeMLModelsOutput, error) {
+func (c *MachineLearning) DescribeMLModelsWithContext(ctx aws.Context, input *DescribeMLModelsInput, opts ...aws.Option) (*DescribeMLModelsOutput, error) {
 	req, out := c.DescribeMLModelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1858,9 +1857,9 @@ func (c *MachineLearning) DescribeMLModelsPages(input *DescribeMLModelsInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeMLModelsInput
 			if input != nil {
 				tmp := *input
@@ -1882,7 +1881,7 @@ func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, inpu
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1904,8 +1903,8 @@ const opDescribeTags = "DescribeTags"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1956,7 +1955,7 @@ func (c *MachineLearning) DescribeTags(input *DescribeTagsInput) (*DescribeTagsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *MachineLearning) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1965,7 +1964,7 @@ func (c *MachineLearning) DescribeTagsWithContext(ctx aws.Context, input *Descri
 
 const opGetBatchPrediction = "GetBatchPrediction"
 
-// GetBatchPredictionRequest generates a "aws/request.Request" representing the
+// GetBatchPredictionRequest generates a "aws.Request" representing the
 // client's request for the GetBatchPrediction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1987,8 +1986,8 @@ const opGetBatchPrediction = "GetBatchPrediction"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInput) (req *request.Request, output *GetBatchPredictionOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInput) (req *aws.Request, output *GetBatchPredictionOutput) {
+	op := &aws.Operation{
 		Name:       opGetBatchPrediction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2040,7 +2039,7 @@ func (c *MachineLearning) GetBatchPrediction(input *GetBatchPredictionInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) GetBatchPredictionWithContext(ctx aws.Context, input *GetBatchPredictionInput, opts ...request.Option) (*GetBatchPredictionOutput, error) {
+func (c *MachineLearning) GetBatchPredictionWithContext(ctx aws.Context, input *GetBatchPredictionInput, opts ...aws.Option) (*GetBatchPredictionOutput, error) {
 	req, out := c.GetBatchPredictionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2049,7 +2048,7 @@ func (c *MachineLearning) GetBatchPredictionWithContext(ctx aws.Context, input *
 
 const opGetDataSource = "GetDataSource"
 
-// GetDataSourceRequest generates a "aws/request.Request" representing the
+// GetDataSourceRequest generates a "aws.Request" representing the
 // client's request for the GetDataSource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2071,8 +2070,8 @@ const opGetDataSource = "GetDataSource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) (req *request.Request, output *GetDataSourceOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) (req *aws.Request, output *GetDataSourceOutput) {
+	op := &aws.Operation{
 		Name:       opGetDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2128,7 +2127,7 @@ func (c *MachineLearning) GetDataSource(input *GetDataSourceInput) (*GetDataSour
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) GetDataSourceWithContext(ctx aws.Context, input *GetDataSourceInput, opts ...request.Option) (*GetDataSourceOutput, error) {
+func (c *MachineLearning) GetDataSourceWithContext(ctx aws.Context, input *GetDataSourceInput, opts ...aws.Option) (*GetDataSourceOutput, error) {
 	req, out := c.GetDataSourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2137,7 +2136,7 @@ func (c *MachineLearning) GetDataSourceWithContext(ctx aws.Context, input *GetDa
 
 const opGetEvaluation = "GetEvaluation"
 
-// GetEvaluationRequest generates a "aws/request.Request" representing the
+// GetEvaluationRequest generates a "aws.Request" representing the
 // client's request for the GetEvaluation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2159,8 +2158,8 @@ const opGetEvaluation = "GetEvaluation"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) (req *request.Request, output *GetEvaluationOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) (req *aws.Request, output *GetEvaluationOutput) {
+	op := &aws.Operation{
 		Name:       opGetEvaluation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2212,7 +2211,7 @@ func (c *MachineLearning) GetEvaluation(input *GetEvaluationInput) (*GetEvaluati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) GetEvaluationWithContext(ctx aws.Context, input *GetEvaluationInput, opts ...request.Option) (*GetEvaluationOutput, error) {
+func (c *MachineLearning) GetEvaluationWithContext(ctx aws.Context, input *GetEvaluationInput, opts ...aws.Option) (*GetEvaluationOutput, error) {
 	req, out := c.GetEvaluationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2221,7 +2220,7 @@ func (c *MachineLearning) GetEvaluationWithContext(ctx aws.Context, input *GetEv
 
 const opGetMLModel = "GetMLModel"
 
-// GetMLModelRequest generates a "aws/request.Request" representing the
+// GetMLModelRequest generates a "aws.Request" representing the
 // client's request for the GetMLModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2243,8 +2242,8 @@ const opGetMLModel = "GetMLModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) (req *request.Request, output *GetMLModelOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) (req *aws.Request, output *GetMLModelOutput) {
+	op := &aws.Operation{
 		Name:       opGetMLModel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2298,7 +2297,7 @@ func (c *MachineLearning) GetMLModel(input *GetMLModelInput) (*GetMLModelOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) GetMLModelWithContext(ctx aws.Context, input *GetMLModelInput, opts ...request.Option) (*GetMLModelOutput, error) {
+func (c *MachineLearning) GetMLModelWithContext(ctx aws.Context, input *GetMLModelInput, opts ...aws.Option) (*GetMLModelOutput, error) {
 	req, out := c.GetMLModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2307,7 +2306,7 @@ func (c *MachineLearning) GetMLModelWithContext(ctx aws.Context, input *GetMLMod
 
 const opPredict = "Predict"
 
-// PredictRequest generates a "aws/request.Request" representing the
+// PredictRequest generates a "aws.Request" representing the
 // client's request for the Predict operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2329,8 +2328,8 @@ const opPredict = "Predict"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) PredictRequest(input *PredictInput) (req *request.Request, output *PredictOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) PredictRequest(input *PredictInput) (req *aws.Request, output *PredictOutput) {
+	op := &aws.Operation{
 		Name:       opPredict,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2391,7 +2390,7 @@ func (c *MachineLearning) Predict(input *PredictInput) (*PredictOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) PredictWithContext(ctx aws.Context, input *PredictInput, opts ...request.Option) (*PredictOutput, error) {
+func (c *MachineLearning) PredictWithContext(ctx aws.Context, input *PredictInput, opts ...aws.Option) (*PredictOutput, error) {
 	req, out := c.PredictRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2400,7 +2399,7 @@ func (c *MachineLearning) PredictWithContext(ctx aws.Context, input *PredictInpu
 
 const opUpdateBatchPrediction = "UpdateBatchPrediction"
 
-// UpdateBatchPredictionRequest generates a "aws/request.Request" representing the
+// UpdateBatchPredictionRequest generates a "aws.Request" representing the
 // client's request for the UpdateBatchPrediction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2422,8 +2421,8 @@ const opUpdateBatchPrediction = "UpdateBatchPrediction"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput) (req *request.Request, output *UpdateBatchPredictionOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredictionInput) (req *aws.Request, output *UpdateBatchPredictionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateBatchPrediction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2477,7 +2476,7 @@ func (c *MachineLearning) UpdateBatchPrediction(input *UpdateBatchPredictionInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) UpdateBatchPredictionWithContext(ctx aws.Context, input *UpdateBatchPredictionInput, opts ...request.Option) (*UpdateBatchPredictionOutput, error) {
+func (c *MachineLearning) UpdateBatchPredictionWithContext(ctx aws.Context, input *UpdateBatchPredictionInput, opts ...aws.Option) (*UpdateBatchPredictionOutput, error) {
 	req, out := c.UpdateBatchPredictionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2486,7 +2485,7 @@ func (c *MachineLearning) UpdateBatchPredictionWithContext(ctx aws.Context, inpu
 
 const opUpdateDataSource = "UpdateDataSource"
 
-// UpdateDataSourceRequest generates a "aws/request.Request" representing the
+// UpdateDataSourceRequest generates a "aws.Request" representing the
 // client's request for the UpdateDataSource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2508,8 +2507,8 @@ const opUpdateDataSource = "UpdateDataSource"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) (req *request.Request, output *UpdateDataSourceOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) (req *aws.Request, output *UpdateDataSourceOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2563,7 +2562,7 @@ func (c *MachineLearning) UpdateDataSource(input *UpdateDataSourceInput) (*Updat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) UpdateDataSourceWithContext(ctx aws.Context, input *UpdateDataSourceInput, opts ...request.Option) (*UpdateDataSourceOutput, error) {
+func (c *MachineLearning) UpdateDataSourceWithContext(ctx aws.Context, input *UpdateDataSourceInput, opts ...aws.Option) (*UpdateDataSourceOutput, error) {
 	req, out := c.UpdateDataSourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2572,7 +2571,7 @@ func (c *MachineLearning) UpdateDataSourceWithContext(ctx aws.Context, input *Up
 
 const opUpdateEvaluation = "UpdateEvaluation"
 
-// UpdateEvaluationRequest generates a "aws/request.Request" representing the
+// UpdateEvaluationRequest generates a "aws.Request" representing the
 // client's request for the UpdateEvaluation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2594,8 +2593,8 @@ const opUpdateEvaluation = "UpdateEvaluation"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) (req *request.Request, output *UpdateEvaluationOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) (req *aws.Request, output *UpdateEvaluationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateEvaluation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2649,7 +2648,7 @@ func (c *MachineLearning) UpdateEvaluation(input *UpdateEvaluationInput) (*Updat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) UpdateEvaluationWithContext(ctx aws.Context, input *UpdateEvaluationInput, opts ...request.Option) (*UpdateEvaluationOutput, error) {
+func (c *MachineLearning) UpdateEvaluationWithContext(ctx aws.Context, input *UpdateEvaluationInput, opts ...aws.Option) (*UpdateEvaluationOutput, error) {
 	req, out := c.UpdateEvaluationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2658,7 +2657,7 @@ func (c *MachineLearning) UpdateEvaluationWithContext(ctx aws.Context, input *Up
 
 const opUpdateMLModel = "UpdateMLModel"
 
-// UpdateMLModelRequest generates a "aws/request.Request" representing the
+// UpdateMLModelRequest generates a "aws.Request" representing the
 // client's request for the UpdateMLModel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2680,8 +2679,8 @@ const opUpdateMLModel = "UpdateMLModel"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) (req *request.Request, output *UpdateMLModelOutput) {
-	op := &request.Operation{
+func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) (req *aws.Request, output *UpdateMLModelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMLModel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2735,7 +2734,7 @@ func (c *MachineLearning) UpdateMLModel(input *UpdateMLModelInput) (*UpdateMLMod
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MachineLearning) UpdateMLModelWithContext(ctx aws.Context, input *UpdateMLModelInput, opts ...request.Option) (*UpdateMLModelOutput, error) {
+func (c *MachineLearning) UpdateMLModelWithContext(ctx aws.Context, input *UpdateMLModelInput, opts ...aws.Option) (*UpdateMLModelOutput, error) {
 	req, out := c.UpdateMLModelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2774,18 +2773,18 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2793,7 +2792,7 @@ func (s *AddTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3082,27 +3081,27 @@ func (s CreateBatchPredictionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBatchPredictionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBatchPredictionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBatchPredictionInput"}
 	if s.BatchPredictionDataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchPredictionDataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionDataSourceId"))
 	}
 	if s.BatchPredictionDataSourceId != nil && len(*s.BatchPredictionDataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BatchPredictionDataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionDataSourceId", 1))
 	}
 	if s.BatchPredictionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchPredictionId"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
 	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BatchPredictionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
 	}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 	if s.OutputUri == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputUri"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputUri"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3214,25 +3213,25 @@ func (s CreateDataSourceFromRDSInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDataSourceFromRDSInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDataSourceFromRDSInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromRDSInput"}
 	if s.DataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
 	if s.RDSData == nil {
-		invalidParams.Add(request.NewErrParamRequired("RDSData"))
+		invalidParams.Add(aws.NewErrParamRequired("RDSData"))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.RDSData != nil {
 		if err := s.RDSData.Validate(); err != nil {
-			invalidParams.AddNested("RDSData", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RDSData", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3376,25 +3375,25 @@ func (s CreateDataSourceFromRedshiftInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDataSourceFromRedshiftInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDataSourceFromRedshiftInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromRedshiftInput"}
 	if s.DataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
 	if s.DataSpec == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSpec"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSpec"))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.DataSpec != nil {
 		if err := s.DataSpec.Validate(); err != nil {
-			invalidParams.AddNested("DataSpec", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DataSpec", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3511,19 +3510,19 @@ func (s CreateDataSourceFromS3Input) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDataSourceFromS3Input) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDataSourceFromS3Input"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDataSourceFromS3Input"}
 	if s.DataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
 	if s.DataSpec == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSpec"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSpec"))
 	}
 	if s.DataSpec != nil {
 		if err := s.DataSpec.Validate(); err != nil {
-			invalidParams.AddNested("DataSpec", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DataSpec", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3624,24 +3623,24 @@ func (s CreateEvaluationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEvaluationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEvaluationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEvaluationInput"}
 	if s.EvaluationDataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationDataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationDataSourceId"))
 	}
 	if s.EvaluationDataSourceId != nil && len(*s.EvaluationDataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EvaluationDataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EvaluationDataSourceId", 1))
 	}
 	if s.EvaluationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationId"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
 	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EvaluationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
 	}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3795,21 +3794,21 @@ func (s CreateMLModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMLModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMLModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMLModelInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 	if s.MLModelType == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelType"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelType"))
 	}
 	if s.TrainingDataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrainingDataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("TrainingDataSourceId"))
 	}
 	if s.TrainingDataSourceId != nil && len(*s.TrainingDataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrainingDataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrainingDataSourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3910,12 +3909,12 @@ func (s CreateRealtimeEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRealtimeEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRealtimeEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRealtimeEndpointInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4188,12 +4187,12 @@ func (s DeleteBatchPredictionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBatchPredictionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBatchPredictionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBatchPredictionInput"}
 	if s.BatchPredictionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchPredictionId"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
 	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BatchPredictionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4257,12 +4256,12 @@ func (s DeleteDataSourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDataSourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDataSourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDataSourceInput"}
 	if s.DataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4323,12 +4322,12 @@ func (s DeleteEvaluationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEvaluationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEvaluationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEvaluationInput"}
 	if s.EvaluationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationId"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
 	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EvaluationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4393,12 +4392,12 @@ func (s DeleteMLModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMLModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMLModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMLModelInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4462,12 +4461,12 @@ func (s DeleteRealtimeEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRealtimeEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRealtimeEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRealtimeEndpointInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4549,18 +4548,18 @@ func (s DeleteTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4708,9 +4707,9 @@ func (s DescribeBatchPredictionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBatchPredictionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBatchPredictionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBatchPredictionsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4899,9 +4898,9 @@ func (s DescribeDataSourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDataSourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDataSourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDataSourcesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5095,9 +5094,9 @@ func (s DescribeEvaluationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEvaluationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEvaluationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEvaluationsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5295,9 +5294,9 @@ func (s DescribeMLModelsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMLModelsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMLModelsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMLModelsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5433,15 +5432,15 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5698,12 +5697,12 @@ func (s GetBatchPredictionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBatchPredictionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBatchPredictionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBatchPredictionInput"}
 	if s.BatchPredictionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchPredictionId"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
 	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BatchPredictionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5940,12 +5939,12 @@ func (s GetDataSourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDataSourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDataSourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDataSourceInput"}
 	if s.DataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6209,12 +6208,12 @@ func (s GetEvaluationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEvaluationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEvaluationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEvaluationInput"}
 	if s.EvaluationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationId"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
 	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EvaluationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6441,12 +6440,12 @@ func (s GetMLModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMLModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMLModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMLModelInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7061,18 +7060,18 @@ func (s PredictInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PredictInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PredictInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PredictInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 	if s.PredictEndpoint == nil {
-		invalidParams.Add(request.NewErrParamRequired("PredictEndpoint"))
+		invalidParams.Add(aws.NewErrParamRequired("PredictEndpoint"))
 	}
 	if s.Record == nil {
-		invalidParams.Add(request.NewErrParamRequired("Record"))
+		invalidParams.Add(aws.NewErrParamRequired("Record"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7384,51 +7383,51 @@ func (s RDSDataSpec) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RDSDataSpec) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RDSDataSpec"}
+	invalidParams := aws.ErrInvalidParams{Context: "RDSDataSpec"}
 	if s.DatabaseCredentials == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseCredentials"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseCredentials"))
 	}
 	if s.DatabaseInformation == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseInformation"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseInformation"))
 	}
 	if s.ResourceRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceRole"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceRole"))
 	}
 	if s.ResourceRole != nil && len(*s.ResourceRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceRole", 1))
 	}
 	if s.S3StagingLocation == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3StagingLocation"))
+		invalidParams.Add(aws.NewErrParamRequired("S3StagingLocation"))
 	}
 	if s.SecurityGroupIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecurityGroupIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
 	if s.SelectSqlQuery == nil {
-		invalidParams.Add(request.NewErrParamRequired("SelectSqlQuery"))
+		invalidParams.Add(aws.NewErrParamRequired("SelectSqlQuery"))
 	}
 	if s.SelectSqlQuery != nil && len(*s.SelectSqlQuery) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SelectSqlQuery", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SelectSqlQuery", 1))
 	}
 	if s.ServiceRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRole"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRole"))
 	}
 	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServiceRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceRole", 1))
 	}
 	if s.SubnetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
 	if s.SubnetId != nil && len(*s.SubnetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubnetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetId", 1))
 	}
 	if s.DatabaseCredentials != nil {
 		if err := s.DatabaseCredentials.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseCredentials", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DatabaseCredentials", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DatabaseInformation != nil {
 		if err := s.DatabaseInformation.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseInformation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DatabaseInformation", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7531,18 +7530,18 @@ func (s RDSDatabase) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RDSDatabase) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RDSDatabase"}
+	invalidParams := aws.ErrInvalidParams{Context: "RDSDatabase"}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.InstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceIdentifier"))
 	}
 	if s.InstanceIdentifier != nil && len(*s.InstanceIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InstanceIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceIdentifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7594,18 +7593,18 @@ func (s RDSDatabaseCredentials) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RDSDatabaseCredentials) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RDSDatabaseCredentials"}
+	invalidParams := aws.ErrInvalidParams{Context: "RDSDatabaseCredentials"}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 8 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 8))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 8))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7926,30 +7925,30 @@ func (s RedshiftDataSpec) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDataSpec) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RedshiftDataSpec"}
+	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDataSpec"}
 	if s.DatabaseCredentials == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseCredentials"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseCredentials"))
 	}
 	if s.DatabaseInformation == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseInformation"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseInformation"))
 	}
 	if s.S3StagingLocation == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3StagingLocation"))
+		invalidParams.Add(aws.NewErrParamRequired("S3StagingLocation"))
 	}
 	if s.SelectSqlQuery == nil {
-		invalidParams.Add(request.NewErrParamRequired("SelectSqlQuery"))
+		invalidParams.Add(aws.NewErrParamRequired("SelectSqlQuery"))
 	}
 	if s.SelectSqlQuery != nil && len(*s.SelectSqlQuery) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SelectSqlQuery", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SelectSqlQuery", 1))
 	}
 	if s.DatabaseCredentials != nil {
 		if err := s.DatabaseCredentials.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseCredentials", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DatabaseCredentials", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DatabaseInformation != nil {
 		if err := s.DatabaseInformation.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseInformation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DatabaseInformation", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8029,18 +8028,18 @@ func (s RedshiftDatabase) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDatabase) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RedshiftDatabase"}
+	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDatabase"}
 	if s.ClusterIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if s.ClusterIdentifier != nil && len(*s.ClusterIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterIdentifier", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8095,18 +8094,18 @@ func (s RedshiftDatabaseCredentials) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDatabaseCredentials) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RedshiftDatabaseCredentials"}
+	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDatabaseCredentials"}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 8 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 8))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 8))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8317,9 +8316,9 @@ func (s S3DataSpec) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3DataSpec) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3DataSpec"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3DataSpec"}
 	if s.DataLocationS3 == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataLocationS3"))
+		invalidParams.Add(aws.NewErrParamRequired("DataLocationS3"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8377,9 +8376,9 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8426,15 +8425,15 @@ func (s UpdateBatchPredictionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBatchPredictionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateBatchPredictionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBatchPredictionInput"}
 	if s.BatchPredictionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchPredictionId"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionId"))
 	}
 	if s.BatchPredictionId != nil && len(*s.BatchPredictionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BatchPredictionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BatchPredictionId", 1))
 	}
 	if s.BatchPredictionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchPredictionName"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchPredictionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8509,15 +8508,15 @@ func (s UpdateDataSourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDataSourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDataSourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDataSourceInput"}
 	if s.DataSourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceId"))
 	}
 	if s.DataSourceId != nil && len(*s.DataSourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSourceId", 1))
 	}
 	if s.DataSourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSourceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8592,15 +8591,15 @@ func (s UpdateEvaluationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEvaluationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateEvaluationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEvaluationInput"}
 	if s.EvaluationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationId"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationId"))
 	}
 	if s.EvaluationId != nil && len(*s.EvaluationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EvaluationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EvaluationId", 1))
 	}
 	if s.EvaluationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationName"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8680,12 +8679,12 @@ func (s UpdateMLModelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMLModelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMLModelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMLModelInput"}
 	if s.MLModelId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MLModelId"))
+		invalidParams.Add(aws.NewErrParamRequired("MLModelId"))
 	}
 	if s.MLModelId != nil && len(*s.MLModelId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MLModelId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MLModelId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -6,15 +6,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opPutEvents = "PutEvents"
 
-// PutEventsRequest generates a "aws/request.Request" representing the
+// PutEventsRequest generates a "aws.Request" representing the
 // client's request for the PutEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opPutEvents = "PutEvents"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) (req *request.Request, output *PutEventsOutput) {
-	op := &request.Operation{
+func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) (req *aws.Request, output *PutEventsOutput) {
+	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-06-05/events",
@@ -85,7 +84,7 @@ func (c *MobileAnalytics) PutEvents(input *PutEventsInput) (*PutEventsOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MobileAnalytics) PutEventsWithContext(ctx aws.Context, input *PutEventsInput, opts ...request.Option) (*PutEventsOutput, error) {
+func (c *MobileAnalytics) PutEventsWithContext(ctx aws.Context, input *PutEventsInput, opts ...aws.Option) (*PutEventsOutput, error) {
 	req, out := c.PutEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -139,22 +138,22 @@ func (s Event) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Event) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Event"}
+	invalidParams := aws.ErrInvalidParams{Context: "Event"}
 	if s.EventType == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventType"))
+		invalidParams.Add(aws.NewErrParamRequired("EventType"))
 	}
 	if s.EventType != nil && len(*s.EventType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventType", 1))
 	}
 	if s.Timestamp == nil {
-		invalidParams.Add(request.NewErrParamRequired("Timestamp"))
+		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 	if s.Session != nil {
 		if err := s.Session.Validate(); err != nil {
-			invalidParams.AddNested("Session", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Session", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -231,12 +230,12 @@ func (s PutEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
 	if s.ClientContext == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientContext"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientContext"))
 	}
 	if s.Events == nil {
-		invalidParams.Add(request.NewErrParamRequired("Events"))
+		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
 	if s.Events != nil {
 		for i, v := range s.Events {
@@ -244,7 +243,7 @@ func (s *PutEventsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Events", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Events", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -318,9 +317,9 @@ func (s Session) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Session) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Session"}
+	invalidParams := aws.ErrInvalidParams{Context: "Session"}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {

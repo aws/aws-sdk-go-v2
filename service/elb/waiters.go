@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilAnyInstanceInService uses the Elastic Load Balancing API operation
@@ -25,20 +24,20 @@ func (c *ELB) WaitUntilAnyInstanceInService(input *DescribeInstanceHealthInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) WaitUntilAnyInstanceInServiceWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELB) WaitUntilAnyInstanceInServiceWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilAnyInstanceInService",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "InstanceStates[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "InstanceStates[].State",
 				Expected: "InService",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstanceHealthInput
 			if input != nil {
 				tmp := *input
@@ -71,25 +70,25 @@ func (c *ELB) WaitUntilInstanceDeregistered(input *DescribeInstanceHealthInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) WaitUntilInstanceDeregisteredWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELB) WaitUntilInstanceDeregisteredWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceDeregistered",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "InstanceStates[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "InstanceStates[].State",
 				Expected: "OutOfService",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidInstance",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstanceHealthInput
 			if input != nil {
 				tmp := *input
@@ -122,25 +121,25 @@ func (c *ELB) WaitUntilInstanceInService(input *DescribeInstanceHealthInput) err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) WaitUntilInstanceInServiceWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELB) WaitUntilInstanceInServiceWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceInService",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "InstanceStates[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "InstanceStates[].State",
 				Expected: "InService",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidInstance",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstanceHealthInput
 			if input != nil {
 				tmp := *input

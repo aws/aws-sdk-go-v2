@@ -4,15 +4,14 @@ package iotdataplane
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opDeleteThingShadow = "DeleteThingShadow"
 
-// DeleteThingShadowRequest generates a "aws/request.Request" representing the
+// DeleteThingShadowRequest generates a "aws.Request" representing the
 // client's request for the DeleteThingShadow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opDeleteThingShadow = "DeleteThingShadow"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoTDataPlane) DeleteThingShadowRequest(input *DeleteThingShadowInput) (req *request.Request, output *DeleteThingShadowOutput) {
-	op := &request.Operation{
+func (c *IoTDataPlane) DeleteThingShadowRequest(input *DeleteThingShadowInput) (req *aws.Request, output *DeleteThingShadowOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteThingShadow,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/things/{thingName}/shadow",
@@ -103,7 +102,7 @@ func (c *IoTDataPlane) DeleteThingShadow(input *DeleteThingShadowInput) (*Delete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoTDataPlane) DeleteThingShadowWithContext(ctx aws.Context, input *DeleteThingShadowInput, opts ...request.Option) (*DeleteThingShadowOutput, error) {
+func (c *IoTDataPlane) DeleteThingShadowWithContext(ctx aws.Context, input *DeleteThingShadowInput, opts ...aws.Option) (*DeleteThingShadowOutput, error) {
 	req, out := c.DeleteThingShadowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -112,7 +111,7 @@ func (c *IoTDataPlane) DeleteThingShadowWithContext(ctx aws.Context, input *Dele
 
 const opGetThingShadow = "GetThingShadow"
 
-// GetThingShadowRequest generates a "aws/request.Request" representing the
+// GetThingShadowRequest generates a "aws.Request" representing the
 // client's request for the GetThingShadow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -134,8 +133,8 @@ const opGetThingShadow = "GetThingShadow"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoTDataPlane) GetThingShadowRequest(input *GetThingShadowInput) (req *request.Request, output *GetThingShadowOutput) {
-	op := &request.Operation{
+func (c *IoTDataPlane) GetThingShadowRequest(input *GetThingShadowInput) (req *aws.Request, output *GetThingShadowOutput) {
+	op := &aws.Operation{
 		Name:       opGetThingShadow,
 		HTTPMethod: "GET",
 		HTTPPath:   "/things/{thingName}/shadow",
@@ -203,7 +202,7 @@ func (c *IoTDataPlane) GetThingShadow(input *GetThingShadowInput) (*GetThingShad
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoTDataPlane) GetThingShadowWithContext(ctx aws.Context, input *GetThingShadowInput, opts ...request.Option) (*GetThingShadowOutput, error) {
+func (c *IoTDataPlane) GetThingShadowWithContext(ctx aws.Context, input *GetThingShadowInput, opts ...aws.Option) (*GetThingShadowOutput, error) {
 	req, out := c.GetThingShadowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -212,7 +211,7 @@ func (c *IoTDataPlane) GetThingShadowWithContext(ctx aws.Context, input *GetThin
 
 const opPublish = "Publish"
 
-// PublishRequest generates a "aws/request.Request" representing the
+// PublishRequest generates a "aws.Request" representing the
 // client's request for the Publish operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -234,8 +233,8 @@ const opPublish = "Publish"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoTDataPlane) PublishRequest(input *PublishInput) (req *request.Request, output *PublishOutput) {
-	op := &request.Operation{
+func (c *IoTDataPlane) PublishRequest(input *PublishInput) (req *aws.Request, output *PublishOutput) {
+	op := &aws.Operation{
 		Name:       opPublish,
 		HTTPMethod: "POST",
 		HTTPPath:   "/topics/{topic}",
@@ -293,7 +292,7 @@ func (c *IoTDataPlane) Publish(input *PublishInput) (*PublishOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoTDataPlane) PublishWithContext(ctx aws.Context, input *PublishInput, opts ...request.Option) (*PublishOutput, error) {
+func (c *IoTDataPlane) PublishWithContext(ctx aws.Context, input *PublishInput, opts ...aws.Option) (*PublishOutput, error) {
 	req, out := c.PublishRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -302,7 +301,7 @@ func (c *IoTDataPlane) PublishWithContext(ctx aws.Context, input *PublishInput, 
 
 const opUpdateThingShadow = "UpdateThingShadow"
 
-// UpdateThingShadowRequest generates a "aws/request.Request" representing the
+// UpdateThingShadowRequest generates a "aws.Request" representing the
 // client's request for the UpdateThingShadow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -324,8 +323,8 @@ const opUpdateThingShadow = "UpdateThingShadow"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoTDataPlane) UpdateThingShadowRequest(input *UpdateThingShadowInput) (req *request.Request, output *UpdateThingShadowOutput) {
-	op := &request.Operation{
+func (c *IoTDataPlane) UpdateThingShadowRequest(input *UpdateThingShadowInput) (req *aws.Request, output *UpdateThingShadowOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateThingShadow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/things/{thingName}/shadow",
@@ -396,7 +395,7 @@ func (c *IoTDataPlane) UpdateThingShadow(input *UpdateThingShadowInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoTDataPlane) UpdateThingShadowWithContext(ctx aws.Context, input *UpdateThingShadowInput, opts ...request.Option) (*UpdateThingShadowOutput, error) {
+func (c *IoTDataPlane) UpdateThingShadowWithContext(ctx aws.Context, input *UpdateThingShadowInput, opts ...aws.Option) (*UpdateThingShadowOutput, error) {
 	req, out := c.UpdateThingShadowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -425,12 +424,12 @@ func (s DeleteThingShadowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteThingShadowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteThingShadowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingShadowInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -493,12 +492,12 @@ func (s GetThingShadowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetThingShadowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetThingShadowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetThingShadowInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -565,9 +564,9 @@ func (s PublishInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PublishInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PublishInput"}
 	if s.Topic == nil {
-		invalidParams.Add(request.NewErrParamRequired("Topic"))
+		invalidParams.Add(aws.NewErrParamRequired("Topic"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -635,15 +634,15 @@ func (s UpdateThingShadowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateThingShadowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateThingShadowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingShadowInput"}
 	if s.Payload == nil {
-		invalidParams.Add(request.NewErrParamRequired("Payload"))
+		invalidParams.Add(aws.NewErrParamRequired("Payload"))
 	}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

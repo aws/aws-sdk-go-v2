@@ -10,7 +10,7 @@ import (
 )
 
 func TestRequireEndpointIfRegionProvided(t *testing.T) {
-	svc := iotdataplane.New(unit.Session, &aws.Config{
+	svc := iotdataplane.New(unit.Config, &aws.Config{
 		Region:                 aws.String("mock-region"),
 		DisableParamValidation: aws.Bool(true),
 	})
@@ -29,7 +29,7 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 }
 
 func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
-	svc := iotdataplane.New(unit.Session, &aws.Config{
+	svc := iotdataplane.New(unit.Config, &aws.Config{
 		DisableParamValidation: aws.Bool(true),
 	})
 	fmt.Println(svc.ClientInfo.SigningRegion)
@@ -49,10 +49,10 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 }
 
 func TestRequireEndpointUsed(t *testing.T) {
-	svc := iotdataplane.New(unit.Session, &aws.Config{
+	svc := iotdataplane.New(unit.Config, &aws.Config{
 		Region:                 aws.String("mock-region"),
 		DisableParamValidation: aws.Bool(true),
-		Endpoint:               aws.String("https://endpoint"),
+		EndpointResolver:       aws.ResolveWithEndpointURL("https://endpoint"),
 	})
 	req, _ := svc.GetThingShadowRequest(nil)
 	err := req.Build()

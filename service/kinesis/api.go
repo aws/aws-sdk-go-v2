@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAddTagsToStream = "AddTagsToStream"
 
-// AddTagsToStreamRequest generates a "aws/request.Request" representing the
+// AddTagsToStreamRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAddTagsToStream = "AddTagsToStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStream
-func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) (req *request.Request, output *AddTagsToStreamOutput) {
-	op := &request.Operation{
+func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) (req *aws.Request, output *AddTagsToStreamOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -104,7 +103,7 @@ func (c *Kinesis) AddTagsToStream(input *AddTagsToStreamInput) (*AddTagsToStream
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) AddTagsToStreamWithContext(ctx aws.Context, input *AddTagsToStreamInput, opts ...request.Option) (*AddTagsToStreamOutput, error) {
+func (c *Kinesis) AddTagsToStreamWithContext(ctx aws.Context, input *AddTagsToStreamInput, opts ...aws.Option) (*AddTagsToStreamOutput, error) {
 	req, out := c.AddTagsToStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -113,7 +112,7 @@ func (c *Kinesis) AddTagsToStreamWithContext(ctx aws.Context, input *AddTagsToSt
 
 const opCreateStream = "CreateStream"
 
-// CreateStreamRequest generates a "aws/request.Request" representing the
+// CreateStreamRequest generates a "aws.Request" representing the
 // client's request for the CreateStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -137,8 +136,8 @@ const opCreateStream = "CreateStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream
-func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) (req *request.Request, output *CreateStreamOutput) {
-	op := &request.Operation{
+func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) (req *aws.Request, output *CreateStreamOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -231,7 +230,7 @@ func (c *Kinesis) CreateStream(input *CreateStreamInput) (*CreateStreamOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) CreateStreamWithContext(ctx aws.Context, input *CreateStreamInput, opts ...request.Option) (*CreateStreamOutput, error) {
+func (c *Kinesis) CreateStreamWithContext(ctx aws.Context, input *CreateStreamInput, opts ...aws.Option) (*CreateStreamOutput, error) {
 	req, out := c.CreateStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -240,7 +239,7 @@ func (c *Kinesis) CreateStreamWithContext(ctx aws.Context, input *CreateStreamIn
 
 const opDecreaseStreamRetentionPeriod = "DecreaseStreamRetentionPeriod"
 
-// DecreaseStreamRetentionPeriodRequest generates a "aws/request.Request" representing the
+// DecreaseStreamRetentionPeriodRequest generates a "aws.Request" representing the
 // client's request for the DecreaseStreamRetentionPeriod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -264,8 +263,8 @@ const opDecreaseStreamRetentionPeriod = "DecreaseStreamRetentionPeriod"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriod
-func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRetentionPeriodInput) (req *request.Request, output *DecreaseStreamRetentionPeriodOutput) {
-	op := &request.Operation{
+func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRetentionPeriodInput) (req *aws.Request, output *DecreaseStreamRetentionPeriodOutput) {
+	op := &aws.Operation{
 		Name:       opDecreaseStreamRetentionPeriod,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -327,7 +326,7 @@ func (c *Kinesis) DecreaseStreamRetentionPeriod(input *DecreaseStreamRetentionPe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) DecreaseStreamRetentionPeriodWithContext(ctx aws.Context, input *DecreaseStreamRetentionPeriodInput, opts ...request.Option) (*DecreaseStreamRetentionPeriodOutput, error) {
+func (c *Kinesis) DecreaseStreamRetentionPeriodWithContext(ctx aws.Context, input *DecreaseStreamRetentionPeriodInput, opts ...aws.Option) (*DecreaseStreamRetentionPeriodOutput, error) {
 	req, out := c.DecreaseStreamRetentionPeriodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -336,7 +335,7 @@ func (c *Kinesis) DecreaseStreamRetentionPeriodWithContext(ctx aws.Context, inpu
 
 const opDeleteStream = "DeleteStream"
 
-// DeleteStreamRequest generates a "aws/request.Request" representing the
+// DeleteStreamRequest generates a "aws.Request" representing the
 // client's request for the DeleteStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -360,8 +359,8 @@ const opDeleteStream = "DeleteStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStream
-func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) (req *request.Request, output *DeleteStreamOutput) {
-	op := &request.Operation{
+func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) (req *aws.Request, output *DeleteStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -432,7 +431,7 @@ func (c *Kinesis) DeleteStream(input *DeleteStreamInput) (*DeleteStreamOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) DeleteStreamWithContext(ctx aws.Context, input *DeleteStreamInput, opts ...request.Option) (*DeleteStreamOutput, error) {
+func (c *Kinesis) DeleteStreamWithContext(ctx aws.Context, input *DeleteStreamInput, opts ...aws.Option) (*DeleteStreamOutput, error) {
 	req, out := c.DeleteStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -441,7 +440,7 @@ func (c *Kinesis) DeleteStreamWithContext(ctx aws.Context, input *DeleteStreamIn
 
 const opDescribeLimits = "DescribeLimits"
 
-// DescribeLimitsRequest generates a "aws/request.Request" representing the
+// DescribeLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -465,8 +464,8 @@ const opDescribeLimits = "DescribeLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits
-func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) (req *request.Request, output *DescribeLimitsOutput) {
-	op := &request.Operation{
+func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) (req *aws.Request, output *DescribeLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -517,7 +516,7 @@ func (c *Kinesis) DescribeLimits(input *DescribeLimitsInput) (*DescribeLimitsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimitsInput, opts ...request.Option) (*DescribeLimitsOutput, error) {
+func (c *Kinesis) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimitsInput, opts ...aws.Option) (*DescribeLimitsOutput, error) {
 	req, out := c.DescribeLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -526,7 +525,7 @@ func (c *Kinesis) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimi
 
 const opDescribeStream = "DescribeStream"
 
-// DescribeStreamRequest generates a "aws/request.Request" representing the
+// DescribeStreamRequest generates a "aws.Request" representing the
 // client's request for the DescribeStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -550,12 +549,12 @@ const opDescribeStream = "DescribeStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream
-func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *request.Request, output *DescribeStreamOutput) {
-	op := &request.Operation{
+func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Request, output *DescribeStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"ExclusiveStartShardId"},
 			OutputTokens:    []string{"StreamDescription.Shards[-1].ShardId"},
 			LimitToken:      "Limit",
@@ -625,7 +624,7 @@ func (c *Kinesis) DescribeStream(input *DescribeStreamInput) (*DescribeStreamOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) DescribeStreamWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...request.Option) (*DescribeStreamOutput, error) {
+func (c *Kinesis) DescribeStreamWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.Option) (*DescribeStreamOutput, error) {
 	req, out := c.DescribeStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -660,9 +659,9 @@ func (c *Kinesis) DescribeStreamPages(input *DescribeStreamInput, fn func(*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *DescribeStreamInput, fn func(*DescribeStreamOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *DescribeStreamInput, fn func(*DescribeStreamOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeStreamInput
 			if input != nil {
 				tmp := *input
@@ -684,7 +683,7 @@ func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *Describ
 
 const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 
-// DisableEnhancedMonitoringRequest generates a "aws/request.Request" representing the
+// DisableEnhancedMonitoringRequest generates a "aws.Request" representing the
 // client's request for the DisableEnhancedMonitoring operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -708,8 +707,8 @@ const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoring
-func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitoringInput) (req *request.Request, output *EnhancedMonitoringOutput) {
-	op := &request.Operation{
+func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitoringInput) (req *aws.Request, output *EnhancedMonitoringOutput) {
+	op := &aws.Operation{
 		Name:       opDisableEnhancedMonitoring,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -767,7 +766,7 @@ func (c *Kinesis) DisableEnhancedMonitoring(input *DisableEnhancedMonitoringInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) DisableEnhancedMonitoringWithContext(ctx aws.Context, input *DisableEnhancedMonitoringInput, opts ...request.Option) (*EnhancedMonitoringOutput, error) {
+func (c *Kinesis) DisableEnhancedMonitoringWithContext(ctx aws.Context, input *DisableEnhancedMonitoringInput, opts ...aws.Option) (*EnhancedMonitoringOutput, error) {
 	req, out := c.DisableEnhancedMonitoringRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -776,7 +775,7 @@ func (c *Kinesis) DisableEnhancedMonitoringWithContext(ctx aws.Context, input *D
 
 const opEnableEnhancedMonitoring = "EnableEnhancedMonitoring"
 
-// EnableEnhancedMonitoringRequest generates a "aws/request.Request" representing the
+// EnableEnhancedMonitoringRequest generates a "aws.Request" representing the
 // client's request for the EnableEnhancedMonitoring operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -800,8 +799,8 @@ const opEnableEnhancedMonitoring = "EnableEnhancedMonitoring"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoring
-func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitoringInput) (req *request.Request, output *EnhancedMonitoringOutput) {
-	op := &request.Operation{
+func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitoringInput) (req *aws.Request, output *EnhancedMonitoringOutput) {
+	op := &aws.Operation{
 		Name:       opEnableEnhancedMonitoring,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -859,7 +858,7 @@ func (c *Kinesis) EnableEnhancedMonitoring(input *EnableEnhancedMonitoringInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) EnableEnhancedMonitoringWithContext(ctx aws.Context, input *EnableEnhancedMonitoringInput, opts ...request.Option) (*EnhancedMonitoringOutput, error) {
+func (c *Kinesis) EnableEnhancedMonitoringWithContext(ctx aws.Context, input *EnableEnhancedMonitoringInput, opts ...aws.Option) (*EnhancedMonitoringOutput, error) {
 	req, out := c.EnableEnhancedMonitoringRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -868,7 +867,7 @@ func (c *Kinesis) EnableEnhancedMonitoringWithContext(ctx aws.Context, input *En
 
 const opGetRecords = "GetRecords"
 
-// GetRecordsRequest generates a "aws/request.Request" representing the
+// GetRecordsRequest generates a "aws.Request" representing the
 // client's request for the GetRecords operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -892,8 +891,8 @@ const opGetRecords = "GetRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords
-func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) (req *request.Request, output *GetRecordsOutput) {
-	op := &request.Operation{
+func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) (req *aws.Request, output *GetRecordsOutput) {
+	op := &aws.Operation{
 		Name:       opGetRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1031,7 +1030,7 @@ func (c *Kinesis) GetRecords(input *GetRecordsInput) (*GetRecordsOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput, opts ...request.Option) (*GetRecordsOutput, error) {
+func (c *Kinesis) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput, opts ...aws.Option) (*GetRecordsOutput, error) {
 	req, out := c.GetRecordsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1040,7 +1039,7 @@ func (c *Kinesis) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput,
 
 const opGetShardIterator = "GetShardIterator"
 
-// GetShardIteratorRequest generates a "aws/request.Request" representing the
+// GetShardIteratorRequest generates a "aws.Request" representing the
 // client's request for the GetShardIterator operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1064,8 +1063,8 @@ const opGetShardIterator = "GetShardIterator"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIterator
-func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) (req *request.Request, output *GetShardIteratorOutput) {
-	op := &request.Operation{
+func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) (req *aws.Request, output *GetShardIteratorOutput) {
+	op := &aws.Operation{
 		Name:       opGetShardIterator,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1160,7 +1159,7 @@ func (c *Kinesis) GetShardIterator(input *GetShardIteratorInput) (*GetShardItera
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIteratorInput, opts ...request.Option) (*GetShardIteratorOutput, error) {
+func (c *Kinesis) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIteratorInput, opts ...aws.Option) (*GetShardIteratorOutput, error) {
 	req, out := c.GetShardIteratorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1169,7 +1168,7 @@ func (c *Kinesis) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIt
 
 const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
 
-// IncreaseStreamRetentionPeriodRequest generates a "aws/request.Request" representing the
+// IncreaseStreamRetentionPeriodRequest generates a "aws.Request" representing the
 // client's request for the IncreaseStreamRetentionPeriod operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1193,8 +1192,8 @@ const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriod
-func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRetentionPeriodInput) (req *request.Request, output *IncreaseStreamRetentionPeriodOutput) {
-	op := &request.Operation{
+func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRetentionPeriodInput) (req *aws.Request, output *IncreaseStreamRetentionPeriodOutput) {
+	op := &aws.Operation{
 		Name:       opIncreaseStreamRetentionPeriod,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1260,7 +1259,7 @@ func (c *Kinesis) IncreaseStreamRetentionPeriod(input *IncreaseStreamRetentionPe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) IncreaseStreamRetentionPeriodWithContext(ctx aws.Context, input *IncreaseStreamRetentionPeriodInput, opts ...request.Option) (*IncreaseStreamRetentionPeriodOutput, error) {
+func (c *Kinesis) IncreaseStreamRetentionPeriodWithContext(ctx aws.Context, input *IncreaseStreamRetentionPeriodInput, opts ...aws.Option) (*IncreaseStreamRetentionPeriodOutput, error) {
 	req, out := c.IncreaseStreamRetentionPeriodRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1269,7 +1268,7 @@ func (c *Kinesis) IncreaseStreamRetentionPeriodWithContext(ctx aws.Context, inpu
 
 const opListStreams = "ListStreams"
 
-// ListStreamsRequest generates a "aws/request.Request" representing the
+// ListStreamsRequest generates a "aws.Request" representing the
 // client's request for the ListStreams operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1293,12 +1292,12 @@ const opListStreams = "ListStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreams
-func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) (req *request.Request, output *ListStreamsOutput) {
-	op := &request.Operation{
+func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) (req *aws.Request, output *ListStreamsOutput) {
+	op := &aws.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"ExclusiveStartStreamName"},
 			OutputTokens:    []string{"StreamNames[-1]"},
 			LimitToken:      "Limit",
@@ -1361,7 +1360,7 @@ func (c *Kinesis) ListStreams(input *ListStreamsInput) (*ListStreamsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) ListStreamsWithContext(ctx aws.Context, input *ListStreamsInput, opts ...request.Option) (*ListStreamsOutput, error) {
+func (c *Kinesis) ListStreamsWithContext(ctx aws.Context, input *ListStreamsInput, opts ...aws.Option) (*ListStreamsOutput, error) {
 	req, out := c.ListStreamsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1396,9 +1395,9 @@ func (c *Kinesis) ListStreamsPages(input *ListStreamsInput, fn func(*ListStreams
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStreamsInput, fn func(*ListStreamsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStreamsInput, fn func(*ListStreamsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStreamsInput
 			if input != nil {
 				tmp := *input
@@ -1420,7 +1419,7 @@ func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStream
 
 const opListTagsForStream = "ListTagsForStream"
 
-// ListTagsForStreamRequest generates a "aws/request.Request" representing the
+// ListTagsForStreamRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1444,8 +1443,8 @@ const opListTagsForStream = "ListTagsForStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStream
-func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) (req *request.Request, output *ListTagsForStreamOutput) {
-	op := &request.Operation{
+func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) (req *aws.Request, output *ListTagsForStreamOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1499,7 +1498,7 @@ func (c *Kinesis) ListTagsForStream(input *ListTagsForStreamInput) (*ListTagsFor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) ListTagsForStreamWithContext(ctx aws.Context, input *ListTagsForStreamInput, opts ...request.Option) (*ListTagsForStreamOutput, error) {
+func (c *Kinesis) ListTagsForStreamWithContext(ctx aws.Context, input *ListTagsForStreamInput, opts ...aws.Option) (*ListTagsForStreamOutput, error) {
 	req, out := c.ListTagsForStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1508,7 +1507,7 @@ func (c *Kinesis) ListTagsForStreamWithContext(ctx aws.Context, input *ListTagsF
 
 const opMergeShards = "MergeShards"
 
-// MergeShardsRequest generates a "aws/request.Request" representing the
+// MergeShardsRequest generates a "aws.Request" representing the
 // client's request for the MergeShards operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1532,8 +1531,8 @@ const opMergeShards = "MergeShards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards
-func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) (req *request.Request, output *MergeShardsOutput) {
-	op := &request.Operation{
+func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) (req *aws.Request, output *MergeShardsOutput) {
+	op := &aws.Operation{
 		Name:       opMergeShards,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1628,7 +1627,7 @@ func (c *Kinesis) MergeShards(input *MergeShardsInput) (*MergeShardsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) MergeShardsWithContext(ctx aws.Context, input *MergeShardsInput, opts ...request.Option) (*MergeShardsOutput, error) {
+func (c *Kinesis) MergeShardsWithContext(ctx aws.Context, input *MergeShardsInput, opts ...aws.Option) (*MergeShardsOutput, error) {
 	req, out := c.MergeShardsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1637,7 +1636,7 @@ func (c *Kinesis) MergeShardsWithContext(ctx aws.Context, input *MergeShardsInpu
 
 const opPutRecord = "PutRecord"
 
-// PutRecordRequest generates a "aws/request.Request" representing the
+// PutRecordRequest generates a "aws.Request" representing the
 // client's request for the PutRecord operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1661,8 +1660,8 @@ const opPutRecord = "PutRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord
-func (c *Kinesis) PutRecordRequest(input *PutRecordInput) (req *request.Request, output *PutRecordOutput) {
-	op := &request.Operation{
+func (c *Kinesis) PutRecordRequest(input *PutRecordInput) (req *aws.Request, output *PutRecordOutput) {
+	op := &aws.Operation{
 		Name:       opPutRecord,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1783,7 +1782,7 @@ func (c *Kinesis) PutRecord(input *PutRecordInput) (*PutRecordOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, opts ...request.Option) (*PutRecordOutput, error) {
+func (c *Kinesis) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, opts ...aws.Option) (*PutRecordOutput, error) {
 	req, out := c.PutRecordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1792,7 +1791,7 @@ func (c *Kinesis) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, o
 
 const opPutRecords = "PutRecords"
 
-// PutRecordsRequest generates a "aws/request.Request" representing the
+// PutRecordsRequest generates a "aws.Request" representing the
 // client's request for the PutRecords operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1816,8 +1815,8 @@ const opPutRecords = "PutRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecords
-func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) (req *request.Request, output *PutRecordsOutput) {
-	op := &request.Operation{
+func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) (req *aws.Request, output *PutRecordsOutput) {
+	op := &aws.Operation{
 		Name:       opPutRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1958,7 +1957,7 @@ func (c *Kinesis) PutRecords(input *PutRecordsInput) (*PutRecordsOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) PutRecordsWithContext(ctx aws.Context, input *PutRecordsInput, opts ...request.Option) (*PutRecordsOutput, error) {
+func (c *Kinesis) PutRecordsWithContext(ctx aws.Context, input *PutRecordsInput, opts ...aws.Option) (*PutRecordsOutput, error) {
 	req, out := c.PutRecordsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1967,7 +1966,7 @@ func (c *Kinesis) PutRecordsWithContext(ctx aws.Context, input *PutRecordsInput,
 
 const opRemoveTagsFromStream = "RemoveTagsFromStream"
 
-// RemoveTagsFromStreamRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromStreamRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1991,8 +1990,8 @@ const opRemoveTagsFromStream = "RemoveTagsFromStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStream
-func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) (req *request.Request, output *RemoveTagsFromStreamOutput) {
-	op := &request.Operation{
+func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) (req *aws.Request, output *RemoveTagsFromStreamOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2055,7 +2054,7 @@ func (c *Kinesis) RemoveTagsFromStream(input *RemoveTagsFromStreamInput) (*Remov
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) RemoveTagsFromStreamWithContext(ctx aws.Context, input *RemoveTagsFromStreamInput, opts ...request.Option) (*RemoveTagsFromStreamOutput, error) {
+func (c *Kinesis) RemoveTagsFromStreamWithContext(ctx aws.Context, input *RemoveTagsFromStreamInput, opts ...aws.Option) (*RemoveTagsFromStreamOutput, error) {
 	req, out := c.RemoveTagsFromStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2064,7 +2063,7 @@ func (c *Kinesis) RemoveTagsFromStreamWithContext(ctx aws.Context, input *Remove
 
 const opSplitShard = "SplitShard"
 
-// SplitShardRequest generates a "aws/request.Request" representing the
+// SplitShardRequest generates a "aws.Request" representing the
 // client's request for the SplitShard operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2088,8 +2087,8 @@ const opSplitShard = "SplitShard"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShard
-func (c *Kinesis) SplitShardRequest(input *SplitShardInput) (req *request.Request, output *SplitShardOutput) {
-	op := &request.Operation{
+func (c *Kinesis) SplitShardRequest(input *SplitShardInput) (req *aws.Request, output *SplitShardOutput) {
+	op := &aws.Operation{
 		Name:       opSplitShard,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2193,7 +2192,7 @@ func (c *Kinesis) SplitShard(input *SplitShardInput) (*SplitShardOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) SplitShardWithContext(ctx aws.Context, input *SplitShardInput, opts ...request.Option) (*SplitShardOutput, error) {
+func (c *Kinesis) SplitShardWithContext(ctx aws.Context, input *SplitShardInput, opts ...aws.Option) (*SplitShardOutput, error) {
 	req, out := c.SplitShardRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2202,7 +2201,7 @@ func (c *Kinesis) SplitShardWithContext(ctx aws.Context, input *SplitShardInput,
 
 const opStartStreamEncryption = "StartStreamEncryption"
 
-// StartStreamEncryptionRequest generates a "aws/request.Request" representing the
+// StartStreamEncryptionRequest generates a "aws.Request" representing the
 // client's request for the StartStreamEncryption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2226,8 +2225,8 @@ const opStartStreamEncryption = "StartStreamEncryption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StartStreamEncryption
-func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput) (req *request.Request, output *StartStreamEncryptionOutput) {
-	op := &request.Operation{
+func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput) (req *aws.Request, output *StartStreamEncryptionOutput) {
+	op := &aws.Operation{
 		Name:       opStartStreamEncryption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2329,7 +2328,7 @@ func (c *Kinesis) StartStreamEncryption(input *StartStreamEncryptionInput) (*Sta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) StartStreamEncryptionWithContext(ctx aws.Context, input *StartStreamEncryptionInput, opts ...request.Option) (*StartStreamEncryptionOutput, error) {
+func (c *Kinesis) StartStreamEncryptionWithContext(ctx aws.Context, input *StartStreamEncryptionInput, opts ...aws.Option) (*StartStreamEncryptionOutput, error) {
 	req, out := c.StartStreamEncryptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2338,7 +2337,7 @@ func (c *Kinesis) StartStreamEncryptionWithContext(ctx aws.Context, input *Start
 
 const opStopStreamEncryption = "StopStreamEncryption"
 
-// StopStreamEncryptionRequest generates a "aws/request.Request" representing the
+// StopStreamEncryptionRequest generates a "aws.Request" representing the
 // client's request for the StopStreamEncryption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2362,8 +2361,8 @@ const opStopStreamEncryption = "StopStreamEncryption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StopStreamEncryption
-func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) (req *request.Request, output *StopStreamEncryptionOutput) {
-	op := &request.Operation{
+func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) (req *aws.Request, output *StopStreamEncryptionOutput) {
+	op := &aws.Operation{
 		Name:       opStopStreamEncryption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2440,7 +2439,7 @@ func (c *Kinesis) StopStreamEncryption(input *StopStreamEncryptionInput) (*StopS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) StopStreamEncryptionWithContext(ctx aws.Context, input *StopStreamEncryptionInput, opts ...request.Option) (*StopStreamEncryptionOutput, error) {
+func (c *Kinesis) StopStreamEncryptionWithContext(ctx aws.Context, input *StopStreamEncryptionInput, opts ...aws.Option) (*StopStreamEncryptionOutput, error) {
 	req, out := c.StopStreamEncryptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2449,7 +2448,7 @@ func (c *Kinesis) StopStreamEncryptionWithContext(ctx aws.Context, input *StopSt
 
 const opUpdateShardCount = "UpdateShardCount"
 
-// UpdateShardCountRequest generates a "aws/request.Request" representing the
+// UpdateShardCountRequest generates a "aws.Request" representing the
 // client's request for the UpdateShardCount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2473,8 +2472,8 @@ const opUpdateShardCount = "UpdateShardCount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCount
-func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) (req *request.Request, output *UpdateShardCountOutput) {
-	op := &request.Operation{
+func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) (req *aws.Request, output *UpdateShardCountOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateShardCount,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2565,7 +2564,7 @@ func (c *Kinesis) UpdateShardCount(input *UpdateShardCountInput) (*UpdateShardCo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Kinesis) UpdateShardCountWithContext(ctx aws.Context, input *UpdateShardCountInput, opts ...request.Option) (*UpdateShardCountOutput, error) {
+func (c *Kinesis) UpdateShardCountWithContext(ctx aws.Context, input *UpdateShardCountInput, opts ...aws.Option) (*UpdateShardCountOutput, error) {
 	req, out := c.UpdateShardCountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2600,18 +2599,18 @@ func (s AddTagsToStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToStreamInput"}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2683,18 +2682,18 @@ func (s CreateStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamInput"}
 	if s.ShardCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardCount"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardCount"))
 	}
 	if s.ShardCount != nil && *s.ShardCount < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("ShardCount", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("ShardCount", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2759,18 +2758,18 @@ func (s DecreaseStreamRetentionPeriodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecreaseStreamRetentionPeriodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DecreaseStreamRetentionPeriodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DecreaseStreamRetentionPeriodInput"}
 	if s.RetentionPeriodHours == nil {
-		invalidParams.Add(request.NewErrParamRequired("RetentionPeriodHours"))
+		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodHours"))
 	}
 	if s.RetentionPeriodHours != nil && *s.RetentionPeriodHours < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RetentionPeriodHours", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodHours", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2829,12 +2828,12 @@ func (s DeleteStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamInput"}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2946,18 +2945,18 @@ func (s DescribeStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamInput"}
 	if s.ExclusiveStartShardId != nil && len(*s.ExclusiveStartShardId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartShardId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartShardId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3063,18 +3062,18 @@ func (s DisableEnhancedMonitoringInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableEnhancedMonitoringInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableEnhancedMonitoringInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableEnhancedMonitoringInput"}
 	if s.ShardLevelMetrics == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardLevelMetrics"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardLevelMetrics"))
 	}
 	if s.ShardLevelMetrics != nil && len(s.ShardLevelMetrics) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardLevelMetrics", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardLevelMetrics", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3146,18 +3145,18 @@ func (s EnableEnhancedMonitoringInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableEnhancedMonitoringInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableEnhancedMonitoringInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableEnhancedMonitoringInput"}
 	if s.ShardLevelMetrics == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardLevelMetrics"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardLevelMetrics"))
 	}
 	if s.ShardLevelMetrics != nil && len(s.ShardLevelMetrics) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardLevelMetrics", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardLevelMetrics", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3300,15 +3299,15 @@ func (s GetRecordsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRecordsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRecordsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRecordsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.ShardIterator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardIterator"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardIterator"))
 	}
 	if s.ShardIterator != nil && len(*s.ShardIterator) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardIterator", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardIterator", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3443,21 +3442,21 @@ func (s GetShardIteratorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetShardIteratorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetShardIteratorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetShardIteratorInput"}
 	if s.ShardId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardId"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardId"))
 	}
 	if s.ShardId != nil && len(*s.ShardId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardId", 1))
 	}
 	if s.ShardIteratorType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardIteratorType"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardIteratorType"))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3591,18 +3590,18 @@ func (s IncreaseStreamRetentionPeriodInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IncreaseStreamRetentionPeriodInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IncreaseStreamRetentionPeriodInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "IncreaseStreamRetentionPeriodInput"}
 	if s.RetentionPeriodHours == nil {
-		invalidParams.Add(request.NewErrParamRequired("RetentionPeriodHours"))
+		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodHours"))
 	}
 	if s.RetentionPeriodHours != nil && *s.RetentionPeriodHours < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RetentionPeriodHours", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodHours", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3662,12 +3661,12 @@ func (s ListStreamsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStreamsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStreamsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStreamsInput"}
 	if s.ExclusiveStartStreamName != nil && len(*s.ExclusiveStartStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartStreamName", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3759,18 +3758,18 @@ func (s ListTagsForStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForStreamInput"}
 	if s.ExclusiveStartTagKey != nil && len(*s.ExclusiveStartTagKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartTagKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartTagKey", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3870,24 +3869,24 @@ func (s MergeShardsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MergeShardsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MergeShardsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "MergeShardsInput"}
 	if s.AdjacentShardToMerge == nil {
-		invalidParams.Add(request.NewErrParamRequired("AdjacentShardToMerge"))
+		invalidParams.Add(aws.NewErrParamRequired("AdjacentShardToMerge"))
 	}
 	if s.AdjacentShardToMerge != nil && len(*s.AdjacentShardToMerge) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AdjacentShardToMerge", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AdjacentShardToMerge", 1))
 	}
 	if s.ShardToMerge == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardToMerge"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardToMerge"))
 	}
 	if s.ShardToMerge != nil && len(*s.ShardToMerge) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardToMerge", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardToMerge", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3985,21 +3984,21 @@ func (s PutRecordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRecordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRecordInput"}
 	if s.Data == nil {
-		invalidParams.Add(request.NewErrParamRequired("Data"))
+		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
 	if s.PartitionKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionKey"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionKey"))
 	}
 	if s.PartitionKey != nil && len(*s.PartitionKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PartitionKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PartitionKey", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4122,18 +4121,18 @@ func (s PutRecordsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRecordsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRecordsInput"}
 	if s.Records == nil {
-		invalidParams.Add(request.NewErrParamRequired("Records"))
+		invalidParams.Add(aws.NewErrParamRequired("Records"))
 	}
 	if s.Records != nil && len(s.Records) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Records", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Records", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 	if s.Records != nil {
 		for i, v := range s.Records {
@@ -4141,7 +4140,7 @@ func (s *PutRecordsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4263,15 +4262,15 @@ func (s PutRecordsRequestEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordsRequestEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRecordsRequestEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRecordsRequestEntry"}
 	if s.Data == nil {
-		invalidParams.Add(request.NewErrParamRequired("Data"))
+		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
 	if s.PartitionKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionKey"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionKey"))
 	}
 	if s.PartitionKey != nil && len(*s.PartitionKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PartitionKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PartitionKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4465,18 +4464,18 @@ func (s RemoveTagsFromStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromStreamInput"}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 	if s.TagKeys != nil && len(s.TagKeys) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagKeys", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4656,21 +4655,21 @@ func (s SplitShardInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SplitShardInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SplitShardInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SplitShardInput"}
 	if s.NewStartingHashKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewStartingHashKey"))
+		invalidParams.Add(aws.NewErrParamRequired("NewStartingHashKey"))
 	}
 	if s.ShardToSplit == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardToSplit"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardToSplit"))
 	}
 	if s.ShardToSplit != nil && len(*s.ShardToSplit) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardToSplit", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardToSplit", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4751,21 +4750,21 @@ func (s StartStreamEncryptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartStreamEncryptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartStreamEncryptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartStreamEncryptionInput"}
 	if s.EncryptionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("EncryptionType"))
+		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
 	}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4845,21 +4844,21 @@ func (s StopStreamEncryptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopStreamEncryptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopStreamEncryptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopStreamEncryptionInput"}
 	if s.EncryptionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("EncryptionType"))
+		invalidParams.Add(aws.NewErrParamRequired("EncryptionType"))
 	}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5115,21 +5114,21 @@ func (s UpdateShardCountInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateShardCountInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateShardCountInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateShardCountInput"}
 	if s.ScalingType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalingType"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalingType"))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 	if s.StreamName != nil && len(*s.StreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamName", 1))
 	}
 	if s.TargetShardCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetShardCount"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetShardCount"))
 	}
 	if s.TargetShardCount != nil && *s.TargetShardCount < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TargetShardCount", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TargetShardCount", 1))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opCreateBotVersion = "CreateBotVersion"
 
-// CreateBotVersionRequest generates a "aws/request.Request" representing the
+// CreateBotVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateBotVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opCreateBotVersion = "CreateBotVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion
-func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersionInput) (req *request.Request, output *CreateBotVersionOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersionInput) (req *aws.Request, output *CreateBotVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBotVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/bots/{name}/versions",
@@ -113,7 +112,7 @@ func (c *LexModelBuildingService) CreateBotVersion(input *CreateBotVersionInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) CreateBotVersionWithContext(ctx aws.Context, input *CreateBotVersionInput, opts ...request.Option) (*CreateBotVersionOutput, error) {
+func (c *LexModelBuildingService) CreateBotVersionWithContext(ctx aws.Context, input *CreateBotVersionInput, opts ...aws.Option) (*CreateBotVersionOutput, error) {
 	req, out := c.CreateBotVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -122,7 +121,7 @@ func (c *LexModelBuildingService) CreateBotVersionWithContext(ctx aws.Context, i
 
 const opCreateIntentVersion = "CreateIntentVersion"
 
-// CreateIntentVersionRequest generates a "aws/request.Request" representing the
+// CreateIntentVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateIntentVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -146,8 +145,8 @@ const opCreateIntentVersion = "CreateIntentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateIntentVersion
-func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntentVersionInput) (req *request.Request, output *CreateIntentVersionOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntentVersionInput) (req *aws.Request, output *CreateIntentVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateIntentVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/intents/{name}/versions",
@@ -222,7 +221,7 @@ func (c *LexModelBuildingService) CreateIntentVersion(input *CreateIntentVersion
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) CreateIntentVersionWithContext(ctx aws.Context, input *CreateIntentVersionInput, opts ...request.Option) (*CreateIntentVersionOutput, error) {
+func (c *LexModelBuildingService) CreateIntentVersionWithContext(ctx aws.Context, input *CreateIntentVersionInput, opts ...aws.Option) (*CreateIntentVersionOutput, error) {
 	req, out := c.CreateIntentVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -231,7 +230,7 @@ func (c *LexModelBuildingService) CreateIntentVersionWithContext(ctx aws.Context
 
 const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
 
-// CreateSlotTypeVersionRequest generates a "aws/request.Request" representing the
+// CreateSlotTypeVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateSlotTypeVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -255,8 +254,8 @@ const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateSlotTypeVersion
-func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput) (req *request.Request, output *CreateSlotTypeVersionOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlotTypeVersionInput) (req *aws.Request, output *CreateSlotTypeVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSlotTypeVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/slottypes/{name}/versions",
@@ -330,7 +329,7 @@ func (c *LexModelBuildingService) CreateSlotTypeVersion(input *CreateSlotTypeVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) CreateSlotTypeVersionWithContext(ctx aws.Context, input *CreateSlotTypeVersionInput, opts ...request.Option) (*CreateSlotTypeVersionOutput, error) {
+func (c *LexModelBuildingService) CreateSlotTypeVersionWithContext(ctx aws.Context, input *CreateSlotTypeVersionInput, opts ...aws.Option) (*CreateSlotTypeVersionOutput, error) {
 	req, out := c.CreateSlotTypeVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -339,7 +338,7 @@ func (c *LexModelBuildingService) CreateSlotTypeVersionWithContext(ctx aws.Conte
 
 const opDeleteBot = "DeleteBot"
 
-// DeleteBotRequest generates a "aws/request.Request" representing the
+// DeleteBotRequest generates a "aws.Request" representing the
 // client's request for the DeleteBot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -363,8 +362,8 @@ const opDeleteBot = "DeleteBot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBot
-func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) (req *request.Request, output *DeleteBotOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) (req *aws.Request, output *DeleteBotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBot,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/bots/{name}",
@@ -447,7 +446,7 @@ func (c *LexModelBuildingService) DeleteBot(input *DeleteBotInput) (*DeleteBotOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotWithContext(ctx aws.Context, input *DeleteBotInput, opts ...request.Option) (*DeleteBotOutput, error) {
+func (c *LexModelBuildingService) DeleteBotWithContext(ctx aws.Context, input *DeleteBotInput, opts ...aws.Option) (*DeleteBotOutput, error) {
 	req, out := c.DeleteBotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -456,7 +455,7 @@ func (c *LexModelBuildingService) DeleteBotWithContext(ctx aws.Context, input *D
 
 const opDeleteBotAlias = "DeleteBotAlias"
 
-// DeleteBotAliasRequest generates a "aws/request.Request" representing the
+// DeleteBotAliasRequest generates a "aws.Request" representing the
 // client's request for the DeleteBotAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -480,8 +479,8 @@ const opDeleteBotAlias = "DeleteBotAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotAlias
-func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInput) (req *request.Request, output *DeleteBotAliasOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInput) (req *aws.Request, output *DeleteBotAliasOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBotAlias,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/bots/{botName}/aliases/{name}",
@@ -563,7 +562,7 @@ func (c *LexModelBuildingService) DeleteBotAlias(input *DeleteBotAliasInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotAliasWithContext(ctx aws.Context, input *DeleteBotAliasInput, opts ...request.Option) (*DeleteBotAliasOutput, error) {
+func (c *LexModelBuildingService) DeleteBotAliasWithContext(ctx aws.Context, input *DeleteBotAliasInput, opts ...aws.Option) (*DeleteBotAliasOutput, error) {
 	req, out := c.DeleteBotAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -572,7 +571,7 @@ func (c *LexModelBuildingService) DeleteBotAliasWithContext(ctx aws.Context, inp
 
 const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
 
-// DeleteBotChannelAssociationRequest generates a "aws/request.Request" representing the
+// DeleteBotChannelAssociationRequest generates a "aws.Request" representing the
 // client's request for the DeleteBotChannelAssociation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -596,8 +595,8 @@ const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotChannelAssociation
-func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssociationInput) (req *request.Request, output *DeleteBotChannelAssociationOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *DeleteBotChannelAssociationInput) (req *aws.Request, output *DeleteBotChannelAssociationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBotChannelAssociation,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/bots/{botName}/aliases/{aliasName}/channels/{name}",
@@ -661,7 +660,7 @@ func (c *LexModelBuildingService) DeleteBotChannelAssociation(input *DeleteBotCh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotChannelAssociationWithContext(ctx aws.Context, input *DeleteBotChannelAssociationInput, opts ...request.Option) (*DeleteBotChannelAssociationOutput, error) {
+func (c *LexModelBuildingService) DeleteBotChannelAssociationWithContext(ctx aws.Context, input *DeleteBotChannelAssociationInput, opts ...aws.Option) (*DeleteBotChannelAssociationOutput, error) {
 	req, out := c.DeleteBotChannelAssociationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -670,7 +669,7 @@ func (c *LexModelBuildingService) DeleteBotChannelAssociationWithContext(ctx aws
 
 const opDeleteBotVersion = "DeleteBotVersion"
 
-// DeleteBotVersionRequest generates a "aws/request.Request" representing the
+// DeleteBotVersionRequest generates a "aws.Request" representing the
 // client's request for the DeleteBotVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -694,8 +693,8 @@ const opDeleteBotVersion = "DeleteBotVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersion
-func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersionInput) (req *request.Request, output *DeleteBotVersionOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersionInput) (req *aws.Request, output *DeleteBotVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBotVersion,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/bots/{name}/versions/{version}",
@@ -772,7 +771,7 @@ func (c *LexModelBuildingService) DeleteBotVersion(input *DeleteBotVersionInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteBotVersionWithContext(ctx aws.Context, input *DeleteBotVersionInput, opts ...request.Option) (*DeleteBotVersionOutput, error) {
+func (c *LexModelBuildingService) DeleteBotVersionWithContext(ctx aws.Context, input *DeleteBotVersionInput, opts ...aws.Option) (*DeleteBotVersionOutput, error) {
 	req, out := c.DeleteBotVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -781,7 +780,7 @@ func (c *LexModelBuildingService) DeleteBotVersionWithContext(ctx aws.Context, i
 
 const opDeleteIntent = "DeleteIntent"
 
-// DeleteIntentRequest generates a "aws/request.Request" representing the
+// DeleteIntentRequest generates a "aws.Request" representing the
 // client's request for the DeleteIntent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -805,8 +804,8 @@ const opDeleteIntent = "DeleteIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntent
-func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) (req *request.Request, output *DeleteIntentOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) (req *aws.Request, output *DeleteIntentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIntent,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/intents/{name}",
@@ -893,7 +892,7 @@ func (c *LexModelBuildingService) DeleteIntent(input *DeleteIntentInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteIntentWithContext(ctx aws.Context, input *DeleteIntentInput, opts ...request.Option) (*DeleteIntentOutput, error) {
+func (c *LexModelBuildingService) DeleteIntentWithContext(ctx aws.Context, input *DeleteIntentInput, opts ...aws.Option) (*DeleteIntentOutput, error) {
 	req, out := c.DeleteIntentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -902,7 +901,7 @@ func (c *LexModelBuildingService) DeleteIntentWithContext(ctx aws.Context, input
 
 const opDeleteIntentVersion = "DeleteIntentVersion"
 
-// DeleteIntentVersionRequest generates a "aws/request.Request" representing the
+// DeleteIntentVersionRequest generates a "aws.Request" representing the
 // client's request for the DeleteIntentVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -926,8 +925,8 @@ const opDeleteIntentVersion = "DeleteIntentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersion
-func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntentVersionInput) (req *request.Request, output *DeleteIntentVersionOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntentVersionInput) (req *aws.Request, output *DeleteIntentVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIntentVersion,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/intents/{name}/versions/{version}",
@@ -1004,7 +1003,7 @@ func (c *LexModelBuildingService) DeleteIntentVersion(input *DeleteIntentVersion
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteIntentVersionWithContext(ctx aws.Context, input *DeleteIntentVersionInput, opts ...request.Option) (*DeleteIntentVersionOutput, error) {
+func (c *LexModelBuildingService) DeleteIntentVersionWithContext(ctx aws.Context, input *DeleteIntentVersionInput, opts ...aws.Option) (*DeleteIntentVersionOutput, error) {
 	req, out := c.DeleteIntentVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1013,7 +1012,7 @@ func (c *LexModelBuildingService) DeleteIntentVersionWithContext(ctx aws.Context
 
 const opDeleteSlotType = "DeleteSlotType"
 
-// DeleteSlotTypeRequest generates a "aws/request.Request" representing the
+// DeleteSlotTypeRequest generates a "aws.Request" representing the
 // client's request for the DeleteSlotType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1037,8 +1036,8 @@ const opDeleteSlotType = "DeleteSlotType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotType
-func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) (req *request.Request, output *DeleteSlotTypeOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInput) (req *aws.Request, output *DeleteSlotTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSlotType,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/slottypes/{name}",
@@ -1127,7 +1126,7 @@ func (c *LexModelBuildingService) DeleteSlotType(input *DeleteSlotTypeInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteSlotTypeWithContext(ctx aws.Context, input *DeleteSlotTypeInput, opts ...request.Option) (*DeleteSlotTypeOutput, error) {
+func (c *LexModelBuildingService) DeleteSlotTypeWithContext(ctx aws.Context, input *DeleteSlotTypeInput, opts ...aws.Option) (*DeleteSlotTypeOutput, error) {
 	req, out := c.DeleteSlotTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1136,7 +1135,7 @@ func (c *LexModelBuildingService) DeleteSlotTypeWithContext(ctx aws.Context, inp
 
 const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
 
-// DeleteSlotTypeVersionRequest generates a "aws/request.Request" representing the
+// DeleteSlotTypeVersionRequest generates a "aws.Request" representing the
 // client's request for the DeleteSlotTypeVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1160,8 +1159,8 @@ const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersion
-func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput) (req *request.Request, output *DeleteSlotTypeVersionOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlotTypeVersionInput) (req *aws.Request, output *DeleteSlotTypeVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSlotTypeVersion,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/slottypes/{name}/version/{version}",
@@ -1238,7 +1237,7 @@ func (c *LexModelBuildingService) DeleteSlotTypeVersion(input *DeleteSlotTypeVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteSlotTypeVersionWithContext(ctx aws.Context, input *DeleteSlotTypeVersionInput, opts ...request.Option) (*DeleteSlotTypeVersionOutput, error) {
+func (c *LexModelBuildingService) DeleteSlotTypeVersionWithContext(ctx aws.Context, input *DeleteSlotTypeVersionInput, opts ...aws.Option) (*DeleteSlotTypeVersionOutput, error) {
 	req, out := c.DeleteSlotTypeVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1247,7 +1246,7 @@ func (c *LexModelBuildingService) DeleteSlotTypeVersionWithContext(ctx aws.Conte
 
 const opDeleteUtterances = "DeleteUtterances"
 
-// DeleteUtterancesRequest generates a "aws/request.Request" representing the
+// DeleteUtterancesRequest generates a "aws.Request" representing the
 // client's request for the DeleteUtterances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1271,8 +1270,8 @@ const opDeleteUtterances = "DeleteUtterances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteUtterances
-func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterancesInput) (req *request.Request, output *DeleteUtterancesOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterancesInput) (req *aws.Request, output *DeleteUtterancesOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUtterances,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/bots/{botName}/utterances/{userId}",
@@ -1340,7 +1339,7 @@ func (c *LexModelBuildingService) DeleteUtterances(input *DeleteUtterancesInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) DeleteUtterancesWithContext(ctx aws.Context, input *DeleteUtterancesInput, opts ...request.Option) (*DeleteUtterancesOutput, error) {
+func (c *LexModelBuildingService) DeleteUtterancesWithContext(ctx aws.Context, input *DeleteUtterancesInput, opts ...aws.Option) (*DeleteUtterancesOutput, error) {
 	req, out := c.DeleteUtterancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1349,7 +1348,7 @@ func (c *LexModelBuildingService) DeleteUtterancesWithContext(ctx aws.Context, i
 
 const opGetBot = "GetBot"
 
-// GetBotRequest generates a "aws/request.Request" representing the
+// GetBotRequest generates a "aws.Request" representing the
 // client's request for the GetBot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1373,8 +1372,8 @@ const opGetBot = "GetBot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot
-func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) (req *request.Request, output *GetBotOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) (req *aws.Request, output *GetBotOutput) {
+	op := &aws.Operation{
 		Name:       opGetBot,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{name}/versions/{versionoralias}",
@@ -1433,7 +1432,7 @@ func (c *LexModelBuildingService) GetBot(input *GetBotInput) (*GetBotOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotWithContext(ctx aws.Context, input *GetBotInput, opts ...request.Option) (*GetBotOutput, error) {
+func (c *LexModelBuildingService) GetBotWithContext(ctx aws.Context, input *GetBotInput, opts ...aws.Option) (*GetBotOutput, error) {
 	req, out := c.GetBotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1442,7 +1441,7 @@ func (c *LexModelBuildingService) GetBotWithContext(ctx aws.Context, input *GetB
 
 const opGetBotAlias = "GetBotAlias"
 
-// GetBotAliasRequest generates a "aws/request.Request" representing the
+// GetBotAliasRequest generates a "aws.Request" representing the
 // client's request for the GetBotAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1466,8 +1465,8 @@ const opGetBotAlias = "GetBotAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAlias
-func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) (req *request.Request, output *GetBotAliasOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) (req *aws.Request, output *GetBotAliasOutput) {
+	op := &aws.Operation{
 		Name:       opGetBotAlias,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{botName}/aliases/{name}",
@@ -1526,7 +1525,7 @@ func (c *LexModelBuildingService) GetBotAlias(input *GetBotAliasInput) (*GetBotA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasWithContext(ctx aws.Context, input *GetBotAliasInput, opts ...request.Option) (*GetBotAliasOutput, error) {
+func (c *LexModelBuildingService) GetBotAliasWithContext(ctx aws.Context, input *GetBotAliasInput, opts ...aws.Option) (*GetBotAliasOutput, error) {
 	req, out := c.GetBotAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1535,7 +1534,7 @@ func (c *LexModelBuildingService) GetBotAliasWithContext(ctx aws.Context, input 
 
 const opGetBotAliases = "GetBotAliases"
 
-// GetBotAliasesRequest generates a "aws/request.Request" representing the
+// GetBotAliasesRequest generates a "aws.Request" representing the
 // client's request for the GetBotAliases operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1559,12 +1558,12 @@ const opGetBotAliases = "GetBotAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotAliases
-func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput) (req *request.Request, output *GetBotAliasesOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput) (req *aws.Request, output *GetBotAliasesOutput) {
+	op := &aws.Operation{
 		Name:       opGetBotAliases,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{botName}/aliases/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1620,7 +1619,7 @@ func (c *LexModelBuildingService) GetBotAliases(input *GetBotAliasesInput) (*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasesWithContext(ctx aws.Context, input *GetBotAliasesInput, opts ...request.Option) (*GetBotAliasesOutput, error) {
+func (c *LexModelBuildingService) GetBotAliasesWithContext(ctx aws.Context, input *GetBotAliasesInput, opts ...aws.Option) (*GetBotAliasesOutput, error) {
 	req, out := c.GetBotAliasesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1655,9 +1654,9 @@ func (c *LexModelBuildingService) GetBotAliasesPages(input *GetBotAliasesInput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context, input *GetBotAliasesInput, fn func(*GetBotAliasesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context, input *GetBotAliasesInput, fn func(*GetBotAliasesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotAliasesInput
 			if input != nil {
 				tmp := *input
@@ -1679,7 +1678,7 @@ func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context,
 
 const opGetBotChannelAssociation = "GetBotChannelAssociation"
 
-// GetBotChannelAssociationRequest generates a "aws/request.Request" representing the
+// GetBotChannelAssociationRequest generates a "aws.Request" representing the
 // client's request for the GetBotChannelAssociation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1703,8 +1702,8 @@ const opGetBotChannelAssociation = "GetBotChannelAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociation
-func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotChannelAssociationInput) (req *request.Request, output *GetBotChannelAssociationOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotChannelAssociationInput) (req *aws.Request, output *GetBotChannelAssociationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBotChannelAssociation,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{botName}/aliases/{aliasName}/channels/{name}",
@@ -1764,7 +1763,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociation(input *GetBotChannelA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationWithContext(ctx aws.Context, input *GetBotChannelAssociationInput, opts ...request.Option) (*GetBotChannelAssociationOutput, error) {
+func (c *LexModelBuildingService) GetBotChannelAssociationWithContext(ctx aws.Context, input *GetBotChannelAssociationInput, opts ...aws.Option) (*GetBotChannelAssociationOutput, error) {
 	req, out := c.GetBotChannelAssociationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1773,7 +1772,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociationWithContext(ctx aws.Co
 
 const opGetBotChannelAssociations = "GetBotChannelAssociations"
 
-// GetBotChannelAssociationsRequest generates a "aws/request.Request" representing the
+// GetBotChannelAssociationsRequest generates a "aws.Request" representing the
 // client's request for the GetBotChannelAssociations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1797,12 +1796,12 @@ const opGetBotChannelAssociations = "GetBotChannelAssociations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociations
-func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBotChannelAssociationsInput) (req *request.Request, output *GetBotChannelAssociationsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBotChannelAssociationsInput) (req *aws.Request, output *GetBotChannelAssociationsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBotChannelAssociations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{botName}/aliases/{aliasName}/channels/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1859,7 +1858,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociations(input *GetBotChannel
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationsWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, opts ...request.Option) (*GetBotChannelAssociationsOutput, error) {
+func (c *LexModelBuildingService) GetBotChannelAssociationsWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, opts ...aws.Option) (*GetBotChannelAssociationsOutput, error) {
 	req, out := c.GetBotChannelAssociationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1894,9 +1893,9 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsPages(input *GetBotCh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, fn func(*GetBotChannelAssociationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, fn func(*GetBotChannelAssociationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotChannelAssociationsInput
 			if input != nil {
 				tmp := *input
@@ -1918,7 +1917,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx 
 
 const opGetBotVersions = "GetBotVersions"
 
-// GetBotVersionsRequest generates a "aws/request.Request" representing the
+// GetBotVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetBotVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1942,12 +1941,12 @@ const opGetBotVersions = "GetBotVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotVersions
-func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInput) (req *request.Request, output *GetBotVersionsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInput) (req *aws.Request, output *GetBotVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBotVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{name}/versions/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2015,7 +2014,7 @@ func (c *LexModelBuildingService) GetBotVersions(input *GetBotVersionsInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotVersionsWithContext(ctx aws.Context, input *GetBotVersionsInput, opts ...request.Option) (*GetBotVersionsOutput, error) {
+func (c *LexModelBuildingService) GetBotVersionsWithContext(ctx aws.Context, input *GetBotVersionsInput, opts ...aws.Option) (*GetBotVersionsOutput, error) {
 	req, out := c.GetBotVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2050,9 +2049,9 @@ func (c *LexModelBuildingService) GetBotVersionsPages(input *GetBotVersionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context, input *GetBotVersionsInput, fn func(*GetBotVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context, input *GetBotVersionsInput, fn func(*GetBotVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotVersionsInput
 			if input != nil {
 				tmp := *input
@@ -2074,7 +2073,7 @@ func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context
 
 const opGetBots = "GetBots"
 
-// GetBotsRequest generates a "aws/request.Request" representing the
+// GetBotsRequest generates a "aws.Request" representing the
 // client's request for the GetBots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2098,12 +2097,12 @@ const opGetBots = "GetBots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBots
-func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) (req *request.Request, output *GetBotsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) (req *aws.Request, output *GetBotsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBots,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2170,7 +2169,7 @@ func (c *LexModelBuildingService) GetBots(input *GetBotsInput) (*GetBotsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotsWithContext(ctx aws.Context, input *GetBotsInput, opts ...request.Option) (*GetBotsOutput, error) {
+func (c *LexModelBuildingService) GetBotsWithContext(ctx aws.Context, input *GetBotsInput, opts ...aws.Option) (*GetBotsOutput, error) {
 	req, out := c.GetBotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2205,9 +2204,9 @@ func (c *LexModelBuildingService) GetBotsPages(input *GetBotsInput, fn func(*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input *GetBotsInput, fn func(*GetBotsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input *GetBotsInput, fn func(*GetBotsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotsInput
 			if input != nil {
 				tmp := *input
@@ -2229,7 +2228,7 @@ func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input
 
 const opGetBuiltinIntent = "GetBuiltinIntent"
 
-// GetBuiltinIntentRequest generates a "aws/request.Request" representing the
+// GetBuiltinIntentRequest generates a "aws.Request" representing the
 // client's request for the GetBuiltinIntent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2253,8 +2252,8 @@ const opGetBuiltinIntent = "GetBuiltinIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntent
-func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinIntentInput) (req *request.Request, output *GetBuiltinIntentOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinIntentInput) (req *aws.Request, output *GetBuiltinIntentOutput) {
+	op := &aws.Operation{
 		Name:       opGetBuiltinIntent,
 		HTTPMethod: "GET",
 		HTTPPath:   "/builtins/intents/{signature}",
@@ -2312,7 +2311,7 @@ func (c *LexModelBuildingService) GetBuiltinIntent(input *GetBuiltinIntentInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentWithContext(ctx aws.Context, input *GetBuiltinIntentInput, opts ...request.Option) (*GetBuiltinIntentOutput, error) {
+func (c *LexModelBuildingService) GetBuiltinIntentWithContext(ctx aws.Context, input *GetBuiltinIntentInput, opts ...aws.Option) (*GetBuiltinIntentOutput, error) {
 	req, out := c.GetBuiltinIntentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2321,7 +2320,7 @@ func (c *LexModelBuildingService) GetBuiltinIntentWithContext(ctx aws.Context, i
 
 const opGetBuiltinIntents = "GetBuiltinIntents"
 
-// GetBuiltinIntentsRequest generates a "aws/request.Request" representing the
+// GetBuiltinIntentsRequest generates a "aws.Request" representing the
 // client's request for the GetBuiltinIntents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2345,12 +2344,12 @@ const opGetBuiltinIntents = "GetBuiltinIntents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents
-func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) (req *request.Request, output *GetBuiltinIntentsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinIntentsInput) (req *aws.Request, output *GetBuiltinIntentsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBuiltinIntents,
 		HTTPMethod: "GET",
 		HTTPPath:   "/builtins/intents/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2406,7 +2405,7 @@ func (c *LexModelBuildingService) GetBuiltinIntents(input *GetBuiltinIntentsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentsWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, opts ...request.Option) (*GetBuiltinIntentsOutput, error) {
+func (c *LexModelBuildingService) GetBuiltinIntentsWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, opts ...aws.Option) (*GetBuiltinIntentsOutput, error) {
 	req, out := c.GetBuiltinIntentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2441,9 +2440,9 @@ func (c *LexModelBuildingService) GetBuiltinIntentsPages(input *GetBuiltinIntent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, fn func(*GetBuiltinIntentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, fn func(*GetBuiltinIntentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBuiltinIntentsInput
 			if input != nil {
 				tmp := *input
@@ -2465,7 +2464,7 @@ func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Cont
 
 const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
 
-// GetBuiltinSlotTypesRequest generates a "aws/request.Request" representing the
+// GetBuiltinSlotTypesRequest generates a "aws.Request" representing the
 // client's request for the GetBuiltinSlotTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2489,12 +2488,12 @@ const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes
-func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) (req *request.Request, output *GetBuiltinSlotTypesOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSlotTypesInput) (req *aws.Request, output *GetBuiltinSlotTypesOutput) {
+	op := &aws.Operation{
 		Name:       opGetBuiltinSlotTypes,
 		HTTPMethod: "GET",
 		HTTPPath:   "/builtins/slottypes/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2553,7 +2552,7 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypes(input *GetBuiltinSlotTypes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinSlotTypesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, opts ...request.Option) (*GetBuiltinSlotTypesOutput, error) {
+func (c *LexModelBuildingService) GetBuiltinSlotTypesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, opts ...aws.Option) (*GetBuiltinSlotTypesOutput, error) {
 	req, out := c.GetBuiltinSlotTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2588,9 +2587,9 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesPages(input *GetBuiltinSlot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, fn func(*GetBuiltinSlotTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, fn func(*GetBuiltinSlotTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBuiltinSlotTypesInput
 			if input != nil {
 				tmp := *input
@@ -2612,7 +2611,7 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Co
 
 const opGetExport = "GetExport"
 
-// GetExportRequest generates a "aws/request.Request" representing the
+// GetExportRequest generates a "aws.Request" representing the
 // client's request for the GetExport operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2636,8 +2635,8 @@ const opGetExport = "GetExport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetExport
-func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) (req *request.Request, output *GetExportOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) (req *aws.Request, output *GetExportOutput) {
+	op := &aws.Operation{
 		Name:       opGetExport,
 		HTTPMethod: "GET",
 		HTTPPath:   "/exports/",
@@ -2693,7 +2692,7 @@ func (c *LexModelBuildingService) GetExport(input *GetExportInput) (*GetExportOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetExportWithContext(ctx aws.Context, input *GetExportInput, opts ...request.Option) (*GetExportOutput, error) {
+func (c *LexModelBuildingService) GetExportWithContext(ctx aws.Context, input *GetExportInput, opts ...aws.Option) (*GetExportOutput, error) {
 	req, out := c.GetExportRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2702,7 +2701,7 @@ func (c *LexModelBuildingService) GetExportWithContext(ctx aws.Context, input *G
 
 const opGetIntent = "GetIntent"
 
-// GetIntentRequest generates a "aws/request.Request" representing the
+// GetIntentRequest generates a "aws.Request" representing the
 // client's request for the GetIntent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2726,8 +2725,8 @@ const opGetIntent = "GetIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntent
-func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) (req *request.Request, output *GetIntentOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) (req *aws.Request, output *GetIntentOutput) {
+	op := &aws.Operation{
 		Name:       opGetIntent,
 		HTTPMethod: "GET",
 		HTTPPath:   "/intents/{name}/versions/{version}",
@@ -2786,7 +2785,7 @@ func (c *LexModelBuildingService) GetIntent(input *GetIntentInput) (*GetIntentOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentWithContext(ctx aws.Context, input *GetIntentInput, opts ...request.Option) (*GetIntentOutput, error) {
+func (c *LexModelBuildingService) GetIntentWithContext(ctx aws.Context, input *GetIntentInput, opts ...aws.Option) (*GetIntentOutput, error) {
 	req, out := c.GetIntentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2795,7 +2794,7 @@ func (c *LexModelBuildingService) GetIntentWithContext(ctx aws.Context, input *G
 
 const opGetIntentVersions = "GetIntentVersions"
 
-// GetIntentVersionsRequest generates a "aws/request.Request" representing the
+// GetIntentVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetIntentVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2819,12 +2818,12 @@ const opGetIntentVersions = "GetIntentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentVersions
-func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersionsInput) (req *request.Request, output *GetIntentVersionsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersionsInput) (req *aws.Request, output *GetIntentVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetIntentVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/intents/{name}/versions/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2892,7 +2891,7 @@ func (c *LexModelBuildingService) GetIntentVersions(input *GetIntentVersionsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentVersionsWithContext(ctx aws.Context, input *GetIntentVersionsInput, opts ...request.Option) (*GetIntentVersionsOutput, error) {
+func (c *LexModelBuildingService) GetIntentVersionsWithContext(ctx aws.Context, input *GetIntentVersionsInput, opts ...aws.Option) (*GetIntentVersionsOutput, error) {
 	req, out := c.GetIntentVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2927,9 +2926,9 @@ func (c *LexModelBuildingService) GetIntentVersionsPages(input *GetIntentVersion
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Context, input *GetIntentVersionsInput, fn func(*GetIntentVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Context, input *GetIntentVersionsInput, fn func(*GetIntentVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetIntentVersionsInput
 			if input != nil {
 				tmp := *input
@@ -2951,7 +2950,7 @@ func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Cont
 
 const opGetIntents = "GetIntents"
 
-// GetIntentsRequest generates a "aws/request.Request" representing the
+// GetIntentsRequest generates a "aws.Request" representing the
 // client's request for the GetIntents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2975,12 +2974,12 @@ const opGetIntents = "GetIntents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntents
-func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) (req *request.Request, output *GetIntentsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) (req *aws.Request, output *GetIntentsOutput) {
+	op := &aws.Operation{
 		Name:       opGetIntents,
 		HTTPMethod: "GET",
 		HTTPPath:   "/intents/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -3046,7 +3045,7 @@ func (c *LexModelBuildingService) GetIntents(input *GetIntentsInput) (*GetIntent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentsWithContext(ctx aws.Context, input *GetIntentsInput, opts ...request.Option) (*GetIntentsOutput, error) {
+func (c *LexModelBuildingService) GetIntentsWithContext(ctx aws.Context, input *GetIntentsInput, opts ...aws.Option) (*GetIntentsOutput, error) {
 	req, out := c.GetIntentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3081,9 +3080,9 @@ func (c *LexModelBuildingService) GetIntentsPages(input *GetIntentsInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, input *GetIntentsInput, fn func(*GetIntentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, input *GetIntentsInput, fn func(*GetIntentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetIntentsInput
 			if input != nil {
 				tmp := *input
@@ -3105,7 +3104,7 @@ func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, in
 
 const opGetSlotType = "GetSlotType"
 
-// GetSlotTypeRequest generates a "aws/request.Request" representing the
+// GetSlotTypeRequest generates a "aws.Request" representing the
 // client's request for the GetSlotType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3129,8 +3128,8 @@ const opGetSlotType = "GetSlotType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotType
-func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) (req *request.Request, output *GetSlotTypeOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) (req *aws.Request, output *GetSlotTypeOutput) {
+	op := &aws.Operation{
 		Name:       opGetSlotType,
 		HTTPMethod: "GET",
 		HTTPPath:   "/slottypes/{name}/versions/{version}",
@@ -3189,7 +3188,7 @@ func (c *LexModelBuildingService) GetSlotType(input *GetSlotTypeInput) (*GetSlot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeWithContext(ctx aws.Context, input *GetSlotTypeInput, opts ...request.Option) (*GetSlotTypeOutput, error) {
+func (c *LexModelBuildingService) GetSlotTypeWithContext(ctx aws.Context, input *GetSlotTypeInput, opts ...aws.Option) (*GetSlotTypeOutput, error) {
 	req, out := c.GetSlotTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3198,7 +3197,7 @@ func (c *LexModelBuildingService) GetSlotTypeWithContext(ctx aws.Context, input 
 
 const opGetSlotTypeVersions = "GetSlotTypeVersions"
 
-// GetSlotTypeVersionsRequest generates a "aws/request.Request" representing the
+// GetSlotTypeVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetSlotTypeVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3222,12 +3221,12 @@ const opGetSlotTypeVersions = "GetSlotTypeVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypeVersions
-func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeVersionsInput) (req *request.Request, output *GetSlotTypeVersionsOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeVersionsInput) (req *aws.Request, output *GetSlotTypeVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSlotTypeVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/slottypes/{name}/versions/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -3295,7 +3294,7 @@ func (c *LexModelBuildingService) GetSlotTypeVersions(input *GetSlotTypeVersions
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeVersionsWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, opts ...request.Option) (*GetSlotTypeVersionsOutput, error) {
+func (c *LexModelBuildingService) GetSlotTypeVersionsWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, opts ...aws.Option) (*GetSlotTypeVersionsOutput, error) {
 	req, out := c.GetSlotTypeVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3330,9 +3329,9 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsPages(input *GetSlotTypeVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, fn func(*GetSlotTypeVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, fn func(*GetSlotTypeVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetSlotTypeVersionsInput
 			if input != nil {
 				tmp := *input
@@ -3354,7 +3353,7 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Co
 
 const opGetSlotTypes = "GetSlotTypes"
 
-// GetSlotTypesRequest generates a "aws/request.Request" representing the
+// GetSlotTypesRequest generates a "aws.Request" representing the
 // client's request for the GetSlotTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3378,12 +3377,12 @@ const opGetSlotTypes = "GetSlotTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetSlotTypes
-func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) (req *request.Request, output *GetSlotTypesOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) (req *aws.Request, output *GetSlotTypesOutput) {
+	op := &aws.Operation{
 		Name:       opGetSlotTypes,
 		HTTPMethod: "GET",
 		HTTPPath:   "/slottypes/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -3449,7 +3448,7 @@ func (c *LexModelBuildingService) GetSlotTypes(input *GetSlotTypesInput) (*GetSl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypesWithContext(ctx aws.Context, input *GetSlotTypesInput, opts ...request.Option) (*GetSlotTypesOutput, error) {
+func (c *LexModelBuildingService) GetSlotTypesWithContext(ctx aws.Context, input *GetSlotTypesInput, opts ...aws.Option) (*GetSlotTypesOutput, error) {
 	req, out := c.GetSlotTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3484,9 +3483,9 @@ func (c *LexModelBuildingService) GetSlotTypesPages(input *GetSlotTypesInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, input *GetSlotTypesInput, fn func(*GetSlotTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, input *GetSlotTypesInput, fn func(*GetSlotTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetSlotTypesInput
 			if input != nil {
 				tmp := *input
@@ -3508,7 +3507,7 @@ func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, 
 
 const opGetUtterancesView = "GetUtterancesView"
 
-// GetUtterancesViewRequest generates a "aws/request.Request" representing the
+// GetUtterancesViewRequest generates a "aws.Request" representing the
 // client's request for the GetUtterancesView operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3532,8 +3531,8 @@ const opGetUtterancesView = "GetUtterancesView"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetUtterancesView
-func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesViewInput) (req *request.Request, output *GetUtterancesViewOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesViewInput) (req *aws.Request, output *GetUtterancesViewOutput) {
+	op := &aws.Operation{
 		Name:       opGetUtterancesView,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bots/{botname}/utterances?view=aggregation",
@@ -3608,7 +3607,7 @@ func (c *LexModelBuildingService) GetUtterancesView(input *GetUtterancesViewInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) GetUtterancesViewWithContext(ctx aws.Context, input *GetUtterancesViewInput, opts ...request.Option) (*GetUtterancesViewOutput, error) {
+func (c *LexModelBuildingService) GetUtterancesViewWithContext(ctx aws.Context, input *GetUtterancesViewInput, opts ...aws.Option) (*GetUtterancesViewOutput, error) {
 	req, out := c.GetUtterancesViewRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3617,7 +3616,7 @@ func (c *LexModelBuildingService) GetUtterancesViewWithContext(ctx aws.Context, 
 
 const opPutBot = "PutBot"
 
-// PutBotRequest generates a "aws/request.Request" representing the
+// PutBotRequest generates a "aws.Request" representing the
 // client's request for the PutBot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3641,8 +3640,8 @@ const opPutBot = "PutBot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot
-func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) (req *request.Request, output *PutBotOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) (req *aws.Request, output *PutBotOutput) {
+	op := &aws.Operation{
 		Name:       opPutBot,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/bots/{name}/versions/$LATEST",
@@ -3713,7 +3712,7 @@ func (c *LexModelBuildingService) PutBot(input *PutBotInput) (*PutBotOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) PutBotWithContext(ctx aws.Context, input *PutBotInput, opts ...request.Option) (*PutBotOutput, error) {
+func (c *LexModelBuildingService) PutBotWithContext(ctx aws.Context, input *PutBotInput, opts ...aws.Option) (*PutBotOutput, error) {
 	req, out := c.PutBotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3722,7 +3721,7 @@ func (c *LexModelBuildingService) PutBotWithContext(ctx aws.Context, input *PutB
 
 const opPutBotAlias = "PutBotAlias"
 
-// PutBotAliasRequest generates a "aws/request.Request" representing the
+// PutBotAliasRequest generates a "aws.Request" representing the
 // client's request for the PutBotAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3746,8 +3745,8 @@ const opPutBotAlias = "PutBotAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotAlias
-func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) (req *request.Request, output *PutBotAliasOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) (req *aws.Request, output *PutBotAliasOutput) {
+	op := &aws.Operation{
 		Name:       opPutBotAlias,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/bots/{botName}/aliases/{name}",
@@ -3810,7 +3809,7 @@ func (c *LexModelBuildingService) PutBotAlias(input *PutBotAliasInput) (*PutBotA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) PutBotAliasWithContext(ctx aws.Context, input *PutBotAliasInput, opts ...request.Option) (*PutBotAliasOutput, error) {
+func (c *LexModelBuildingService) PutBotAliasWithContext(ctx aws.Context, input *PutBotAliasInput, opts ...aws.Option) (*PutBotAliasOutput, error) {
 	req, out := c.PutBotAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3819,7 +3818,7 @@ func (c *LexModelBuildingService) PutBotAliasWithContext(ctx aws.Context, input 
 
 const opPutIntent = "PutIntent"
 
-// PutIntentRequest generates a "aws/request.Request" representing the
+// PutIntentRequest generates a "aws.Request" representing the
 // client's request for the PutIntent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3843,8 +3842,8 @@ const opPutIntent = "PutIntent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent
-func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) (req *request.Request, output *PutIntentOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) (req *aws.Request, output *PutIntentOutput) {
+	op := &aws.Operation{
 		Name:       opPutIntent,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/intents/{name}/versions/$LATEST",
@@ -3946,7 +3945,7 @@ func (c *LexModelBuildingService) PutIntent(input *PutIntentInput) (*PutIntentOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) PutIntentWithContext(ctx aws.Context, input *PutIntentInput, opts ...request.Option) (*PutIntentOutput, error) {
+func (c *LexModelBuildingService) PutIntentWithContext(ctx aws.Context, input *PutIntentInput, opts ...aws.Option) (*PutIntentOutput, error) {
 	req, out := c.PutIntentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3955,7 +3954,7 @@ func (c *LexModelBuildingService) PutIntentWithContext(ctx aws.Context, input *P
 
 const opPutSlotType = "PutSlotType"
 
-// PutSlotTypeRequest generates a "aws/request.Request" representing the
+// PutSlotTypeRequest generates a "aws.Request" representing the
 // client's request for the PutSlotType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3979,8 +3978,8 @@ const opPutSlotType = "PutSlotType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType
-func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) (req *request.Request, output *PutSlotTypeOutput) {
-	op := &request.Operation{
+func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) (req *aws.Request, output *PutSlotTypeOutput) {
+	op := &aws.Operation{
 		Name:       opPutSlotType,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/slottypes/{name}/versions/$LATEST",
@@ -4050,7 +4049,7 @@ func (c *LexModelBuildingService) PutSlotType(input *PutSlotTypeInput) (*PutSlot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexModelBuildingService) PutSlotTypeWithContext(ctx aws.Context, input *PutSlotTypeInput, opts ...request.Option) (*PutSlotTypeOutput, error) {
+func (c *LexModelBuildingService) PutSlotTypeWithContext(ctx aws.Context, input *PutSlotTypeInput, opts ...aws.Option) (*PutSlotTypeOutput, error) {
 	req, out := c.PutSlotTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4421,18 +4420,18 @@ func (s CodeHook) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeHook) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CodeHook"}
+	invalidParams := aws.ErrInvalidParams{Context: "CodeHook"}
 	if s.MessageVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("MessageVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("MessageVersion"))
 	}
 	if s.MessageVersion != nil && len(*s.MessageVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MessageVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MessageVersion", 1))
 	}
 	if s.Uri == nil {
-		invalidParams.Add(request.NewErrParamRequired("Uri"))
+		invalidParams.Add(aws.NewErrParamRequired("Uri"))
 	}
 	if s.Uri != nil && len(*s.Uri) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("Uri", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("Uri", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4483,12 +4482,12 @@ func (s CreateBotVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBotVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBotVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBotVersionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4719,12 +4718,12 @@ func (s CreateIntentVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIntentVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateIntentVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateIntentVersionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4930,12 +4929,12 @@ func (s CreateSlotTypeVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSlotTypeVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSlotTypeVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSlotTypeVersionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5073,18 +5072,18 @@ func (s DeleteBotAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBotAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotAliasInput"}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5153,24 +5152,24 @@ func (s DeleteBotChannelAssociationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotChannelAssociationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBotChannelAssociationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotChannelAssociationInput"}
 	if s.BotAlias == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BotAlias", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
 	}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5234,12 +5233,12 @@ func (s DeleteBotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5297,18 +5296,18 @@ func (s DeleteBotVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBotVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBotVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBotVersionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5366,12 +5365,12 @@ func (s DeleteIntentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIntentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntentInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5429,18 +5428,18 @@ func (s DeleteIntentVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIntentVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIntentVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIntentVersionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5498,12 +5497,12 @@ func (s DeleteSlotTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSlotTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSlotTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSlotTypeInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5561,18 +5560,18 @@ func (s DeleteSlotTypeVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSlotTypeVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSlotTypeVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSlotTypeVersionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5638,18 +5637,18 @@ func (s DeleteUtterancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUtterancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUtterancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUtterancesInput"}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5722,12 +5721,12 @@ func (s EnumerationValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnumerationValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnumerationValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnumerationValue"}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5779,21 +5778,21 @@ func (s FollowUpPrompt) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FollowUpPrompt) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FollowUpPrompt"}
+	invalidParams := aws.ErrInvalidParams{Context: "FollowUpPrompt"}
 	if s.Prompt == nil {
-		invalidParams.Add(request.NewErrParamRequired("Prompt"))
+		invalidParams.Add(aws.NewErrParamRequired("Prompt"))
 	}
 	if s.RejectionStatement == nil {
-		invalidParams.Add(request.NewErrParamRequired("RejectionStatement"))
+		invalidParams.Add(aws.NewErrParamRequired("RejectionStatement"))
 	}
 	if s.Prompt != nil {
 		if err := s.Prompt.Validate(); err != nil {
-			invalidParams.AddNested("Prompt", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Prompt", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RejectionStatement != nil {
 		if err := s.RejectionStatement.Validate(); err != nil {
-			invalidParams.AddNested("RejectionStatement", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RejectionStatement", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5859,13 +5858,13 @@ func (s FulfillmentActivity) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FulfillmentActivity) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FulfillmentActivity"}
+	invalidParams := aws.ErrInvalidParams{Context: "FulfillmentActivity"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.CodeHook != nil {
 		if err := s.CodeHook.Validate(); err != nil {
-			invalidParams.AddNested("CodeHook", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CodeHook", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5914,18 +5913,18 @@ func (s GetBotAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotAliasInput"}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6062,18 +6061,18 @@ func (s GetBotAliasesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotAliasesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotAliasesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotAliasesInput"}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NameContains != nil && len(*s.NameContains) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NameContains", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6176,24 +6175,24 @@ func (s GetBotChannelAssociationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotChannelAssociationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotChannelAssociationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotChannelAssociationInput"}
 	if s.BotAlias == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BotAlias", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
 	}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6344,24 +6343,24 @@ func (s GetBotChannelAssociationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotChannelAssociationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotChannelAssociationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotChannelAssociationsInput"}
 	if s.BotAlias == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotAlias != nil && len(*s.BotAlias) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BotAlias", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BotAlias", 1))
 	}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NameContains != nil && len(*s.NameContains) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NameContains", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6464,15 +6463,15 @@ func (s GetBotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 	if s.VersionOrAlias == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionOrAlias"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionOrAlias"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6706,15 +6705,15 @@ func (s GetBotVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotVersionsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6810,12 +6809,12 @@ func (s GetBotsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBotsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBotsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBotsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NameContains != nil && len(*s.NameContains) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("NameContains", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6900,9 +6899,9 @@ func (s GetBuiltinIntentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBuiltinIntentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBuiltinIntentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBuiltinIntentInput"}
 	if s.Signature == nil {
-		invalidParams.Add(request.NewErrParamRequired("Signature"))
+		invalidParams.Add(aws.NewErrParamRequired("Signature"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6995,9 +6994,9 @@ func (s GetBuiltinIntentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBuiltinIntentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBuiltinIntentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBuiltinIntentsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7101,9 +7100,9 @@ func (s GetBuiltinSlotTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBuiltinSlotTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBuiltinSlotTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBuiltinSlotTypesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7208,24 +7207,24 @@ func (s GetExportInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetExportInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetExportInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetExportInput"}
 	if s.ExportType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExportType"))
+		invalidParams.Add(aws.NewErrParamRequired("ExportType"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7373,18 +7372,18 @@ func (s GetIntentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIntentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIntentInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7593,15 +7592,15 @@ func (s GetIntentVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntentVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIntentVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIntentVersionsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7696,12 +7695,12 @@ func (s GetIntentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIntentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIntentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIntentsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NameContains != nil && len(*s.NameContains) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NameContains", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7789,18 +7788,18 @@ func (s GetSlotTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSlotTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSlotTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSlotTypeInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7943,15 +7942,15 @@ func (s GetSlotTypeVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSlotTypeVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSlotTypeVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSlotTypeVersionsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8047,12 +8046,12 @@ func (s GetSlotTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSlotTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSlotTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSlotTypesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NameContains != nil && len(*s.NameContains) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NameContains", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8148,21 +8147,21 @@ func (s GetUtterancesViewInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUtterancesViewInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUtterancesViewInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUtterancesViewInput"}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.BotVersions == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotVersions"))
+		invalidParams.Add(aws.NewErrParamRequired("BotVersions"))
 	}
 	if s.BotVersions != nil && len(s.BotVersions) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BotVersions", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BotVersions", 1))
 	}
 	if s.StatusType == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatusType"))
+		invalidParams.Add(aws.NewErrParamRequired("StatusType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8252,18 +8251,18 @@ func (s Intent) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Intent) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Intent"}
+	invalidParams := aws.ErrInvalidParams{Context: "Intent"}
 	if s.IntentName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IntentName"))
+		invalidParams.Add(aws.NewErrParamRequired("IntentName"))
 	}
 	if s.IntentName != nil && len(*s.IntentName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IntentName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IntentName", 1))
 	}
 	if s.IntentVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("IntentVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("IntentVersion"))
 	}
 	if s.IntentVersion != nil && len(*s.IntentVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IntentVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IntentVersion", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8374,15 +8373,15 @@ func (s Message) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Message) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Message"}
+	invalidParams := aws.ErrInvalidParams{Context: "Message"}
 	if s.Content == nil {
-		invalidParams.Add(request.NewErrParamRequired("Content"))
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Content", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
 	if s.ContentType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContentType"))
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8441,21 +8440,21 @@ func (s Prompt) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Prompt) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Prompt"}
+	invalidParams := aws.ErrInvalidParams{Context: "Prompt"}
 	if s.MaxAttempts == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxAttempts"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxAttempts"))
 	}
 	if s.MaxAttempts != nil && *s.MaxAttempts < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxAttempts", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxAttempts", 1))
 	}
 	if s.Messages == nil {
-		invalidParams.Add(request.NewErrParamRequired("Messages"))
+		invalidParams.Add(aws.NewErrParamRequired("Messages"))
 	}
 	if s.Messages != nil && len(s.Messages) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Messages", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Messages", 1))
 	}
 	if s.ResponseCard != nil && len(*s.ResponseCard) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResponseCard", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseCard", 1))
 	}
 	if s.Messages != nil {
 		for i, v := range s.Messages {
@@ -8463,7 +8462,7 @@ func (s *Prompt) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Messages", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Messages", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8538,24 +8537,24 @@ func (s PutBotAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBotAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBotAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBotAliasInput"}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.BotName != nil && len(*s.BotName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("BotName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("BotName", 2))
 	}
 	if s.BotVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("BotVersion"))
 	}
 	if s.BotVersion != nil && len(*s.BotVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BotVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BotVersion", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8808,30 +8807,30 @@ func (s PutBotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBotInput"}
 	if s.ChildDirected == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChildDirected"))
+		invalidParams.Add(aws.NewErrParamRequired("ChildDirected"))
 	}
 	if s.IdleSessionTTLInSeconds != nil && *s.IdleSessionTTLInSeconds < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("IdleSessionTTLInSeconds", 60))
+		invalidParams.Add(aws.NewErrParamMinValue("IdleSessionTTLInSeconds", 60))
 	}
 	if s.Locale == nil {
-		invalidParams.Add(request.NewErrParamRequired("Locale"))
+		invalidParams.Add(aws.NewErrParamRequired("Locale"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 	if s.AbortStatement != nil {
 		if err := s.AbortStatement.Validate(); err != nil {
-			invalidParams.AddNested("AbortStatement", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AbortStatement", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ClarificationPrompt != nil {
 		if err := s.ClarificationPrompt.Validate(); err != nil {
-			invalidParams.AddNested("ClarificationPrompt", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ClarificationPrompt", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Intents != nil {
@@ -8840,7 +8839,7 @@ func (s *PutBotInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Intents", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Intents", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9234,41 +9233,41 @@ func (s PutIntentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIntentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutIntentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutIntentInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ConclusionStatement != nil {
 		if err := s.ConclusionStatement.Validate(); err != nil {
-			invalidParams.AddNested("ConclusionStatement", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConclusionStatement", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ConfirmationPrompt != nil {
 		if err := s.ConfirmationPrompt.Validate(); err != nil {
-			invalidParams.AddNested("ConfirmationPrompt", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConfirmationPrompt", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DialogCodeHook != nil {
 		if err := s.DialogCodeHook.Validate(); err != nil {
-			invalidParams.AddNested("DialogCodeHook", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DialogCodeHook", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.FollowUpPrompt != nil {
 		if err := s.FollowUpPrompt.Validate(); err != nil {
-			invalidParams.AddNested("FollowUpPrompt", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FollowUpPrompt", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.FulfillmentActivity != nil {
 		if err := s.FulfillmentActivity.Validate(); err != nil {
-			invalidParams.AddNested("FulfillmentActivity", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FulfillmentActivity", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RejectionStatement != nil {
 		if err := s.RejectionStatement.Validate(); err != nil {
-			invalidParams.AddNested("RejectionStatement", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RejectionStatement", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Slots != nil {
@@ -9277,7 +9276,7 @@ func (s *PutIntentInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Slots", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Slots", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9587,15 +9586,15 @@ func (s PutSlotTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutSlotTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutSlotTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutSlotTypeInput"}
 	if s.EnumerationValues != nil && len(s.EnumerationValues) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EnumerationValues", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EnumerationValues", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.EnumerationValues != nil {
 		for i, v := range s.EnumerationValues {
@@ -9603,7 +9602,7 @@ func (s *PutSlotTypeInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnumerationValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnumerationValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9833,28 +9832,28 @@ func (s Slot) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Slot) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Slot"}
+	invalidParams := aws.ErrInvalidParams{Context: "Slot"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ResponseCard != nil && len(*s.ResponseCard) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResponseCard", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseCard", 1))
 	}
 	if s.SlotConstraint == nil {
-		invalidParams.Add(request.NewErrParamRequired("SlotConstraint"))
+		invalidParams.Add(aws.NewErrParamRequired("SlotConstraint"))
 	}
 	if s.SlotType != nil && len(*s.SlotType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SlotType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SlotType", 1))
 	}
 	if s.SlotTypeVersion != nil && len(*s.SlotTypeVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SlotTypeVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SlotTypeVersion", 1))
 	}
 	if s.ValueElicitationPrompt != nil {
 		if err := s.ValueElicitationPrompt.Validate(); err != nil {
-			invalidParams.AddNested("ValueElicitationPrompt", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ValueElicitationPrompt", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10010,15 +10009,15 @@ func (s Statement) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Statement) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Statement"}
+	invalidParams := aws.ErrInvalidParams{Context: "Statement"}
 	if s.Messages == nil {
-		invalidParams.Add(request.NewErrParamRequired("Messages"))
+		invalidParams.Add(aws.NewErrParamRequired("Messages"))
 	}
 	if s.Messages != nil && len(s.Messages) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Messages", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Messages", 1))
 	}
 	if s.ResponseCard != nil && len(*s.ResponseCard) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResponseCard", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseCard", 1))
 	}
 	if s.Messages != nil {
 		for i, v := range s.Messages {
@@ -10026,7 +10025,7 @@ func (s *Statement) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Messages", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Messages", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

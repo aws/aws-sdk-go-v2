@@ -6,15 +6,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAssociateKmsKey = "AssociateKmsKey"
 
-// AssociateKmsKeyRequest generates a "aws/request.Request" representing the
+// AssociateKmsKeyRequest generates a "aws.Request" representing the
 // client's request for the AssociateKmsKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAssociateKmsKey = "AssociateKmsKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKey
-func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) (req *request.Request, output *AssociateKmsKeyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) (req *aws.Request, output *AssociateKmsKeyOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateKmsKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -108,7 +107,7 @@ func (c *CloudWatchLogs) AssociateKmsKey(input *AssociateKmsKeyInput) (*Associat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) AssociateKmsKeyWithContext(ctx aws.Context, input *AssociateKmsKeyInput, opts ...request.Option) (*AssociateKmsKeyOutput, error) {
+func (c *CloudWatchLogs) AssociateKmsKeyWithContext(ctx aws.Context, input *AssociateKmsKeyInput, opts ...aws.Option) (*AssociateKmsKeyOutput, error) {
 	req, out := c.AssociateKmsKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -117,7 +116,7 @@ func (c *CloudWatchLogs) AssociateKmsKeyWithContext(ctx aws.Context, input *Asso
 
 const opCancelExportTask = "CancelExportTask"
 
-// CancelExportTaskRequest generates a "aws/request.Request" representing the
+// CancelExportTaskRequest generates a "aws.Request" representing the
 // client's request for the CancelExportTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -141,8 +140,8 @@ const opCancelExportTask = "CancelExportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTask
-func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) (req *request.Request, output *CancelExportTaskOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) (req *aws.Request, output *CancelExportTaskOutput) {
+	op := &aws.Operation{
 		Name:       opCancelExportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -200,7 +199,7 @@ func (c *CloudWatchLogs) CancelExportTask(input *CancelExportTaskInput) (*Cancel
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) CancelExportTaskWithContext(ctx aws.Context, input *CancelExportTaskInput, opts ...request.Option) (*CancelExportTaskOutput, error) {
+func (c *CloudWatchLogs) CancelExportTaskWithContext(ctx aws.Context, input *CancelExportTaskInput, opts ...aws.Option) (*CancelExportTaskOutput, error) {
 	req, out := c.CancelExportTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -209,7 +208,7 @@ func (c *CloudWatchLogs) CancelExportTaskWithContext(ctx aws.Context, input *Can
 
 const opCreateExportTask = "CreateExportTask"
 
-// CreateExportTaskRequest generates a "aws/request.Request" representing the
+// CreateExportTaskRequest generates a "aws.Request" representing the
 // client's request for the CreateExportTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -233,8 +232,8 @@ const opCreateExportTask = "CreateExportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTask
-func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) (req *request.Request, output *CreateExportTaskOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) (req *aws.Request, output *CreateExportTaskOutput) {
+	op := &aws.Operation{
 		Name:       opCreateExportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -305,7 +304,7 @@ func (c *CloudWatchLogs) CreateExportTask(input *CreateExportTaskInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) CreateExportTaskWithContext(ctx aws.Context, input *CreateExportTaskInput, opts ...request.Option) (*CreateExportTaskOutput, error) {
+func (c *CloudWatchLogs) CreateExportTaskWithContext(ctx aws.Context, input *CreateExportTaskInput, opts ...aws.Option) (*CreateExportTaskOutput, error) {
 	req, out := c.CreateExportTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -314,7 +313,7 @@ func (c *CloudWatchLogs) CreateExportTaskWithContext(ctx aws.Context, input *Cre
 
 const opCreateLogGroup = "CreateLogGroup"
 
-// CreateLogGroupRequest generates a "aws/request.Request" representing the
+// CreateLogGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateLogGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -338,8 +337,8 @@ const opCreateLogGroup = "CreateLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup
-func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) (req *request.Request, output *CreateLogGroupOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) (req *aws.Request, output *CreateLogGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLogGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -419,7 +418,7 @@ func (c *CloudWatchLogs) CreateLogGroup(input *CreateLogGroupInput) (*CreateLogG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) CreateLogGroupWithContext(ctx aws.Context, input *CreateLogGroupInput, opts ...request.Option) (*CreateLogGroupOutput, error) {
+func (c *CloudWatchLogs) CreateLogGroupWithContext(ctx aws.Context, input *CreateLogGroupInput, opts ...aws.Option) (*CreateLogGroupOutput, error) {
 	req, out := c.CreateLogGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -428,7 +427,7 @@ func (c *CloudWatchLogs) CreateLogGroupWithContext(ctx aws.Context, input *Creat
 
 const opCreateLogStream = "CreateLogStream"
 
-// CreateLogStreamRequest generates a "aws/request.Request" representing the
+// CreateLogStreamRequest generates a "aws.Request" representing the
 // client's request for the CreateLogStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -452,8 +451,8 @@ const opCreateLogStream = "CreateLogStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStream
-func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) (req *request.Request, output *CreateLogStreamOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) (req *aws.Request, output *CreateLogStreamOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLogStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -520,7 +519,7 @@ func (c *CloudWatchLogs) CreateLogStream(input *CreateLogStreamInput) (*CreateLo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) CreateLogStreamWithContext(ctx aws.Context, input *CreateLogStreamInput, opts ...request.Option) (*CreateLogStreamOutput, error) {
+func (c *CloudWatchLogs) CreateLogStreamWithContext(ctx aws.Context, input *CreateLogStreamInput, opts ...aws.Option) (*CreateLogStreamOutput, error) {
 	req, out := c.CreateLogStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -529,7 +528,7 @@ func (c *CloudWatchLogs) CreateLogStreamWithContext(ctx aws.Context, input *Crea
 
 const opDeleteDestination = "DeleteDestination"
 
-// DeleteDestinationRequest generates a "aws/request.Request" representing the
+// DeleteDestinationRequest generates a "aws.Request" representing the
 // client's request for the DeleteDestination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -553,8 +552,8 @@ const opDeleteDestination = "DeleteDestination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestination
-func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput) (req *request.Request, output *DeleteDestinationOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput) (req *aws.Request, output *DeleteDestinationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDestination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -612,7 +611,7 @@ func (c *CloudWatchLogs) DeleteDestination(input *DeleteDestinationInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteDestinationWithContext(ctx aws.Context, input *DeleteDestinationInput, opts ...request.Option) (*DeleteDestinationOutput, error) {
+func (c *CloudWatchLogs) DeleteDestinationWithContext(ctx aws.Context, input *DeleteDestinationInput, opts ...aws.Option) (*DeleteDestinationOutput, error) {
 	req, out := c.DeleteDestinationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -621,7 +620,7 @@ func (c *CloudWatchLogs) DeleteDestinationWithContext(ctx aws.Context, input *De
 
 const opDeleteLogGroup = "DeleteLogGroup"
 
-// DeleteLogGroupRequest generates a "aws/request.Request" representing the
+// DeleteLogGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteLogGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -645,8 +644,8 @@ const opDeleteLogGroup = "DeleteLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroup
-func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) (req *request.Request, output *DeleteLogGroupOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) (req *aws.Request, output *DeleteLogGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLogGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -703,7 +702,7 @@ func (c *CloudWatchLogs) DeleteLogGroup(input *DeleteLogGroupInput) (*DeleteLogG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteLogGroupWithContext(ctx aws.Context, input *DeleteLogGroupInput, opts ...request.Option) (*DeleteLogGroupOutput, error) {
+func (c *CloudWatchLogs) DeleteLogGroupWithContext(ctx aws.Context, input *DeleteLogGroupInput, opts ...aws.Option) (*DeleteLogGroupOutput, error) {
 	req, out := c.DeleteLogGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -712,7 +711,7 @@ func (c *CloudWatchLogs) DeleteLogGroupWithContext(ctx aws.Context, input *Delet
 
 const opDeleteLogStream = "DeleteLogStream"
 
-// DeleteLogStreamRequest generates a "aws/request.Request" representing the
+// DeleteLogStreamRequest generates a "aws.Request" representing the
 // client's request for the DeleteLogStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -736,8 +735,8 @@ const opDeleteLogStream = "DeleteLogStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStream
-func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) (req *request.Request, output *DeleteLogStreamOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) (req *aws.Request, output *DeleteLogStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLogStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -794,7 +793,7 @@ func (c *CloudWatchLogs) DeleteLogStream(input *DeleteLogStreamInput) (*DeleteLo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteLogStreamWithContext(ctx aws.Context, input *DeleteLogStreamInput, opts ...request.Option) (*DeleteLogStreamOutput, error) {
+func (c *CloudWatchLogs) DeleteLogStreamWithContext(ctx aws.Context, input *DeleteLogStreamInput, opts ...aws.Option) (*DeleteLogStreamOutput, error) {
 	req, out := c.DeleteLogStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -803,7 +802,7 @@ func (c *CloudWatchLogs) DeleteLogStreamWithContext(ctx aws.Context, input *Dele
 
 const opDeleteMetricFilter = "DeleteMetricFilter"
 
-// DeleteMetricFilterRequest generates a "aws/request.Request" representing the
+// DeleteMetricFilterRequest generates a "aws.Request" representing the
 // client's request for the DeleteMetricFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -827,8 +826,8 @@ const opDeleteMetricFilter = "DeleteMetricFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilter
-func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) (req *request.Request, output *DeleteMetricFilterOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInput) (req *aws.Request, output *DeleteMetricFilterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMetricFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -884,7 +883,7 @@ func (c *CloudWatchLogs) DeleteMetricFilter(input *DeleteMetricFilterInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteMetricFilterWithContext(ctx aws.Context, input *DeleteMetricFilterInput, opts ...request.Option) (*DeleteMetricFilterOutput, error) {
+func (c *CloudWatchLogs) DeleteMetricFilterWithContext(ctx aws.Context, input *DeleteMetricFilterInput, opts ...aws.Option) (*DeleteMetricFilterOutput, error) {
 	req, out := c.DeleteMetricFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -893,7 +892,7 @@ func (c *CloudWatchLogs) DeleteMetricFilterWithContext(ctx aws.Context, input *D
 
 const opDeleteResourcePolicy = "DeleteResourcePolicy"
 
-// DeleteResourcePolicyRequest generates a "aws/request.Request" representing the
+// DeleteResourcePolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteResourcePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -917,8 +916,8 @@ const opDeleteResourcePolicy = "DeleteResourcePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteResourcePolicy
-func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) (req *request.Request, output *DeleteResourcePolicyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicyInput) (req *aws.Request, output *DeleteResourcePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteResourcePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -972,7 +971,7 @@ func (c *CloudWatchLogs) DeleteResourcePolicy(input *DeleteResourcePolicyInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteResourcePolicyWithContext(ctx aws.Context, input *DeleteResourcePolicyInput, opts ...request.Option) (*DeleteResourcePolicyOutput, error) {
+func (c *CloudWatchLogs) DeleteResourcePolicyWithContext(ctx aws.Context, input *DeleteResourcePolicyInput, opts ...aws.Option) (*DeleteResourcePolicyOutput, error) {
 	req, out := c.DeleteResourcePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -981,7 +980,7 @@ func (c *CloudWatchLogs) DeleteResourcePolicyWithContext(ctx aws.Context, input 
 
 const opDeleteRetentionPolicy = "DeleteRetentionPolicy"
 
-// DeleteRetentionPolicyRequest generates a "aws/request.Request" representing the
+// DeleteRetentionPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteRetentionPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1005,8 +1004,8 @@ const opDeleteRetentionPolicy = "DeleteRetentionPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicy
-func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPolicyInput) (req *request.Request, output *DeleteRetentionPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPolicyInput) (req *aws.Request, output *DeleteRetentionPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRetentionPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1065,7 +1064,7 @@ func (c *CloudWatchLogs) DeleteRetentionPolicy(input *DeleteRetentionPolicyInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteRetentionPolicyWithContext(ctx aws.Context, input *DeleteRetentionPolicyInput, opts ...request.Option) (*DeleteRetentionPolicyOutput, error) {
+func (c *CloudWatchLogs) DeleteRetentionPolicyWithContext(ctx aws.Context, input *DeleteRetentionPolicyInput, opts ...aws.Option) (*DeleteRetentionPolicyOutput, error) {
 	req, out := c.DeleteRetentionPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1074,7 +1073,7 @@ func (c *CloudWatchLogs) DeleteRetentionPolicyWithContext(ctx aws.Context, input
 
 const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
 
-// DeleteSubscriptionFilterRequest generates a "aws/request.Request" representing the
+// DeleteSubscriptionFilterRequest generates a "aws.Request" representing the
 // client's request for the DeleteSubscriptionFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1098,8 +1097,8 @@ const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilter
-func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilterInput) (req *request.Request, output *DeleteSubscriptionFilterOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscriptionFilterInput) (req *aws.Request, output *DeleteSubscriptionFilterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSubscriptionFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1155,7 +1154,7 @@ func (c *CloudWatchLogs) DeleteSubscriptionFilter(input *DeleteSubscriptionFilte
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DeleteSubscriptionFilterWithContext(ctx aws.Context, input *DeleteSubscriptionFilterInput, opts ...request.Option) (*DeleteSubscriptionFilterOutput, error) {
+func (c *CloudWatchLogs) DeleteSubscriptionFilterWithContext(ctx aws.Context, input *DeleteSubscriptionFilterInput, opts ...aws.Option) (*DeleteSubscriptionFilterOutput, error) {
 	req, out := c.DeleteSubscriptionFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1164,7 +1163,7 @@ func (c *CloudWatchLogs) DeleteSubscriptionFilterWithContext(ctx aws.Context, in
 
 const opDescribeDestinations = "DescribeDestinations"
 
-// DescribeDestinationsRequest generates a "aws/request.Request" representing the
+// DescribeDestinationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDestinations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1188,12 +1187,12 @@ const opDescribeDestinations = "DescribeDestinations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinations
-func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinationsInput) (req *request.Request, output *DescribeDestinationsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinationsInput) (req *aws.Request, output *DescribeDestinationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDestinations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -1244,7 +1243,7 @@ func (c *CloudWatchLogs) DescribeDestinations(input *DescribeDestinationsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeDestinationsWithContext(ctx aws.Context, input *DescribeDestinationsInput, opts ...request.Option) (*DescribeDestinationsOutput, error) {
+func (c *CloudWatchLogs) DescribeDestinationsWithContext(ctx aws.Context, input *DescribeDestinationsInput, opts ...aws.Option) (*DescribeDestinationsOutput, error) {
 	req, out := c.DescribeDestinationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1279,9 +1278,9 @@ func (c *CloudWatchLogs) DescribeDestinationsPages(input *DescribeDestinationsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeDestinationsPagesWithContext(ctx aws.Context, input *DescribeDestinationsInput, fn func(*DescribeDestinationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) DescribeDestinationsPagesWithContext(ctx aws.Context, input *DescribeDestinationsInput, fn func(*DescribeDestinationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDestinationsInput
 			if input != nil {
 				tmp := *input
@@ -1303,7 +1302,7 @@ func (c *CloudWatchLogs) DescribeDestinationsPagesWithContext(ctx aws.Context, i
 
 const opDescribeExportTasks = "DescribeExportTasks"
 
-// DescribeExportTasksRequest generates a "aws/request.Request" representing the
+// DescribeExportTasksRequest generates a "aws.Request" representing the
 // client's request for the DescribeExportTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1327,8 +1326,8 @@ const opDescribeExportTasks = "DescribeExportTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasks
-func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *request.Request, output *DescribeExportTasksOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *aws.Request, output *DescribeExportTasksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1377,7 +1376,7 @@ func (c *CloudWatchLogs) DescribeExportTasks(input *DescribeExportTasksInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeExportTasksWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...request.Option) (*DescribeExportTasksOutput, error) {
+func (c *CloudWatchLogs) DescribeExportTasksWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.Option) (*DescribeExportTasksOutput, error) {
 	req, out := c.DescribeExportTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1386,7 +1385,7 @@ func (c *CloudWatchLogs) DescribeExportTasksWithContext(ctx aws.Context, input *
 
 const opDescribeLogGroups = "DescribeLogGroups"
 
-// DescribeLogGroupsRequest generates a "aws/request.Request" representing the
+// DescribeLogGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeLogGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1410,12 +1409,12 @@ const opDescribeLogGroups = "DescribeLogGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups
-func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) (req *request.Request, output *DescribeLogGroupsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput) (req *aws.Request, output *DescribeLogGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLogGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -1466,7 +1465,7 @@ func (c *CloudWatchLogs) DescribeLogGroups(input *DescribeLogGroupsInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogGroupsWithContext(ctx aws.Context, input *DescribeLogGroupsInput, opts ...request.Option) (*DescribeLogGroupsOutput, error) {
+func (c *CloudWatchLogs) DescribeLogGroupsWithContext(ctx aws.Context, input *DescribeLogGroupsInput, opts ...aws.Option) (*DescribeLogGroupsOutput, error) {
 	req, out := c.DescribeLogGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1501,9 +1500,9 @@ func (c *CloudWatchLogs) DescribeLogGroupsPages(input *DescribeLogGroupsInput, f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogGroupsPagesWithContext(ctx aws.Context, input *DescribeLogGroupsInput, fn func(*DescribeLogGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) DescribeLogGroupsPagesWithContext(ctx aws.Context, input *DescribeLogGroupsInput, fn func(*DescribeLogGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeLogGroupsInput
 			if input != nil {
 				tmp := *input
@@ -1525,7 +1524,7 @@ func (c *CloudWatchLogs) DescribeLogGroupsPagesWithContext(ctx aws.Context, inpu
 
 const opDescribeLogStreams = "DescribeLogStreams"
 
-// DescribeLogStreamsRequest generates a "aws/request.Request" representing the
+// DescribeLogStreamsRequest generates a "aws.Request" representing the
 // client's request for the DescribeLogStreams operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1549,12 +1548,12 @@ const opDescribeLogStreams = "DescribeLogStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreams
-func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) (req *request.Request, output *DescribeLogStreamsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInput) (req *aws.Request, output *DescribeLogStreamsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLogStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -1612,7 +1611,7 @@ func (c *CloudWatchLogs) DescribeLogStreams(input *DescribeLogStreamsInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogStreamsWithContext(ctx aws.Context, input *DescribeLogStreamsInput, opts ...request.Option) (*DescribeLogStreamsOutput, error) {
+func (c *CloudWatchLogs) DescribeLogStreamsWithContext(ctx aws.Context, input *DescribeLogStreamsInput, opts ...aws.Option) (*DescribeLogStreamsOutput, error) {
 	req, out := c.DescribeLogStreamsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1647,9 +1646,9 @@ func (c *CloudWatchLogs) DescribeLogStreamsPages(input *DescribeLogStreamsInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogStreamsPagesWithContext(ctx aws.Context, input *DescribeLogStreamsInput, fn func(*DescribeLogStreamsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) DescribeLogStreamsPagesWithContext(ctx aws.Context, input *DescribeLogStreamsInput, fn func(*DescribeLogStreamsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeLogStreamsInput
 			if input != nil {
 				tmp := *input
@@ -1671,7 +1670,7 @@ func (c *CloudWatchLogs) DescribeLogStreamsPagesWithContext(ctx aws.Context, inp
 
 const opDescribeMetricFilters = "DescribeMetricFilters"
 
-// DescribeMetricFiltersRequest generates a "aws/request.Request" representing the
+// DescribeMetricFiltersRequest generates a "aws.Request" representing the
 // client's request for the DescribeMetricFilters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1695,12 +1694,12 @@ const opDescribeMetricFilters = "DescribeMetricFilters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFilters
-func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFiltersInput) (req *request.Request, output *DescribeMetricFiltersOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFiltersInput) (req *aws.Request, output *DescribeMetricFiltersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMetricFilters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -1755,7 +1754,7 @@ func (c *CloudWatchLogs) DescribeMetricFilters(input *DescribeMetricFiltersInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeMetricFiltersWithContext(ctx aws.Context, input *DescribeMetricFiltersInput, opts ...request.Option) (*DescribeMetricFiltersOutput, error) {
+func (c *CloudWatchLogs) DescribeMetricFiltersWithContext(ctx aws.Context, input *DescribeMetricFiltersInput, opts ...aws.Option) (*DescribeMetricFiltersOutput, error) {
 	req, out := c.DescribeMetricFiltersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1790,9 +1789,9 @@ func (c *CloudWatchLogs) DescribeMetricFiltersPages(input *DescribeMetricFilters
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeMetricFiltersPagesWithContext(ctx aws.Context, input *DescribeMetricFiltersInput, fn func(*DescribeMetricFiltersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) DescribeMetricFiltersPagesWithContext(ctx aws.Context, input *DescribeMetricFiltersInput, fn func(*DescribeMetricFiltersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeMetricFiltersInput
 			if input != nil {
 				tmp := *input
@@ -1814,7 +1813,7 @@ func (c *CloudWatchLogs) DescribeMetricFiltersPagesWithContext(ctx aws.Context, 
 
 const opDescribeResourcePolicies = "DescribeResourcePolicies"
 
-// DescribeResourcePoliciesRequest generates a "aws/request.Request" representing the
+// DescribeResourcePoliciesRequest generates a "aws.Request" representing the
 // client's request for the DescribeResourcePolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1838,8 +1837,8 @@ const opDescribeResourcePolicies = "DescribeResourcePolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeResourcePolicies
-func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResourcePoliciesInput) (req *request.Request, output *DescribeResourcePoliciesOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResourcePoliciesInput) (req *aws.Request, output *DescribeResourcePoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeResourcePolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1887,7 +1886,7 @@ func (c *CloudWatchLogs) DescribeResourcePolicies(input *DescribeResourcePolicie
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeResourcePoliciesWithContext(ctx aws.Context, input *DescribeResourcePoliciesInput, opts ...request.Option) (*DescribeResourcePoliciesOutput, error) {
+func (c *CloudWatchLogs) DescribeResourcePoliciesWithContext(ctx aws.Context, input *DescribeResourcePoliciesInput, opts ...aws.Option) (*DescribeResourcePoliciesOutput, error) {
 	req, out := c.DescribeResourcePoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1896,7 +1895,7 @@ func (c *CloudWatchLogs) DescribeResourcePoliciesWithContext(ctx aws.Context, in
 
 const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
 
-// DescribeSubscriptionFiltersRequest generates a "aws/request.Request" representing the
+// DescribeSubscriptionFiltersRequest generates a "aws.Request" representing the
 // client's request for the DescribeSubscriptionFilters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1920,12 +1919,12 @@ const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFilters
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionFiltersInput) (req *request.Request, output *DescribeSubscriptionFiltersOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubscriptionFiltersInput) (req *aws.Request, output *DescribeSubscriptionFiltersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSubscriptionFilters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -1980,7 +1979,7 @@ func (c *CloudWatchLogs) DescribeSubscriptionFilters(input *DescribeSubscription
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersWithContext(ctx aws.Context, input *DescribeSubscriptionFiltersInput, opts ...request.Option) (*DescribeSubscriptionFiltersOutput, error) {
+func (c *CloudWatchLogs) DescribeSubscriptionFiltersWithContext(ctx aws.Context, input *DescribeSubscriptionFiltersInput, opts ...aws.Option) (*DescribeSubscriptionFiltersOutput, error) {
 	req, out := c.DescribeSubscriptionFiltersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2015,9 +2014,9 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersPages(input *DescribeSubscri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersPagesWithContext(ctx aws.Context, input *DescribeSubscriptionFiltersInput, fn func(*DescribeSubscriptionFiltersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) DescribeSubscriptionFiltersPagesWithContext(ctx aws.Context, input *DescribeSubscriptionFiltersInput, fn func(*DescribeSubscriptionFiltersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeSubscriptionFiltersInput
 			if input != nil {
 				tmp := *input
@@ -2039,7 +2038,7 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersPagesWithContext(ctx aws.Con
 
 const opDisassociateKmsKey = "DisassociateKmsKey"
 
-// DisassociateKmsKeyRequest generates a "aws/request.Request" representing the
+// DisassociateKmsKeyRequest generates a "aws.Request" representing the
 // client's request for the DisassociateKmsKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2063,8 +2062,8 @@ const opDisassociateKmsKey = "DisassociateKmsKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DisassociateKmsKey
-func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) (req *request.Request, output *DisassociateKmsKeyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInput) (req *aws.Request, output *DisassociateKmsKeyOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateKmsKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2128,7 +2127,7 @@ func (c *CloudWatchLogs) DisassociateKmsKey(input *DisassociateKmsKeyInput) (*Di
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) DisassociateKmsKeyWithContext(ctx aws.Context, input *DisassociateKmsKeyInput, opts ...request.Option) (*DisassociateKmsKeyOutput, error) {
+func (c *CloudWatchLogs) DisassociateKmsKeyWithContext(ctx aws.Context, input *DisassociateKmsKeyInput, opts ...aws.Option) (*DisassociateKmsKeyOutput, error) {
 	req, out := c.DisassociateKmsKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2137,7 +2136,7 @@ func (c *CloudWatchLogs) DisassociateKmsKeyWithContext(ctx aws.Context, input *D
 
 const opFilterLogEvents = "FilterLogEvents"
 
-// FilterLogEventsRequest generates a "aws/request.Request" representing the
+// FilterLogEventsRequest generates a "aws.Request" representing the
 // client's request for the FilterLogEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2161,12 +2160,12 @@ const opFilterLogEvents = "FilterLogEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEvents
-func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) (req *request.Request, output *FilterLogEventsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) (req *aws.Request, output *FilterLogEventsOutput) {
+	op := &aws.Operation{
 		Name:       opFilterLogEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -2227,7 +2226,7 @@ func (c *CloudWatchLogs) FilterLogEvents(input *FilterLogEventsInput) (*FilterLo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) FilterLogEventsWithContext(ctx aws.Context, input *FilterLogEventsInput, opts ...request.Option) (*FilterLogEventsOutput, error) {
+func (c *CloudWatchLogs) FilterLogEventsWithContext(ctx aws.Context, input *FilterLogEventsInput, opts ...aws.Option) (*FilterLogEventsOutput, error) {
 	req, out := c.FilterLogEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2262,9 +2261,9 @@ func (c *CloudWatchLogs) FilterLogEventsPages(input *FilterLogEventsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) FilterLogEventsPagesWithContext(ctx aws.Context, input *FilterLogEventsInput, fn func(*FilterLogEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) FilterLogEventsPagesWithContext(ctx aws.Context, input *FilterLogEventsInput, fn func(*FilterLogEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *FilterLogEventsInput
 			if input != nil {
 				tmp := *input
@@ -2286,7 +2285,7 @@ func (c *CloudWatchLogs) FilterLogEventsPagesWithContext(ctx aws.Context, input 
 
 const opGetLogEvents = "GetLogEvents"
 
-// GetLogEventsRequest generates a "aws/request.Request" representing the
+// GetLogEventsRequest generates a "aws.Request" representing the
 // client's request for the GetLogEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2310,12 +2309,12 @@ const opGetLogEvents = "GetLogEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEvents
-func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) (req *request.Request, output *GetLogEventsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) (req *aws.Request, output *GetLogEventsOutput) {
+	op := &aws.Operation{
 		Name:       opGetLogEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextForwardToken"},
 			LimitToken:      "limit",
@@ -2373,7 +2372,7 @@ func (c *CloudWatchLogs) GetLogEvents(input *GetLogEventsInput) (*GetLogEventsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) GetLogEventsWithContext(ctx aws.Context, input *GetLogEventsInput, opts ...request.Option) (*GetLogEventsOutput, error) {
+func (c *CloudWatchLogs) GetLogEventsWithContext(ctx aws.Context, input *GetLogEventsInput, opts ...aws.Option) (*GetLogEventsOutput, error) {
 	req, out := c.GetLogEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2408,9 +2407,9 @@ func (c *CloudWatchLogs) GetLogEventsPages(input *GetLogEventsInput, fn func(*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) GetLogEventsPagesWithContext(ctx aws.Context, input *GetLogEventsInput, fn func(*GetLogEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatchLogs) GetLogEventsPagesWithContext(ctx aws.Context, input *GetLogEventsInput, fn func(*GetLogEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetLogEventsInput
 			if input != nil {
 				tmp := *input
@@ -2432,7 +2431,7 @@ func (c *CloudWatchLogs) GetLogEventsPagesWithContext(ctx aws.Context, input *Ge
 
 const opListTagsLogGroup = "ListTagsLogGroup"
 
-// ListTagsLogGroupRequest generates a "aws/request.Request" representing the
+// ListTagsLogGroupRequest generates a "aws.Request" representing the
 // client's request for the ListTagsLogGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2456,8 +2455,8 @@ const opListTagsLogGroup = "ListTagsLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroup
-func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) (req *request.Request, output *ListTagsLogGroupOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) (req *aws.Request, output *ListTagsLogGroupOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsLogGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2505,7 +2504,7 @@ func (c *CloudWatchLogs) ListTagsLogGroup(input *ListTagsLogGroupInput) (*ListTa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) ListTagsLogGroupWithContext(ctx aws.Context, input *ListTagsLogGroupInput, opts ...request.Option) (*ListTagsLogGroupOutput, error) {
+func (c *CloudWatchLogs) ListTagsLogGroupWithContext(ctx aws.Context, input *ListTagsLogGroupInput, opts ...aws.Option) (*ListTagsLogGroupOutput, error) {
 	req, out := c.ListTagsLogGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2514,7 +2513,7 @@ func (c *CloudWatchLogs) ListTagsLogGroupWithContext(ctx aws.Context, input *Lis
 
 const opPutDestination = "PutDestination"
 
-// PutDestinationRequest generates a "aws/request.Request" representing the
+// PutDestinationRequest generates a "aws.Request" representing the
 // client's request for the PutDestination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2538,8 +2537,8 @@ const opPutDestination = "PutDestination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestination
-func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) (req *request.Request, output *PutDestinationOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) (req *aws.Request, output *PutDestinationOutput) {
+	op := &aws.Operation{
 		Name:       opPutDestination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2600,7 +2599,7 @@ func (c *CloudWatchLogs) PutDestination(input *PutDestinationInput) (*PutDestina
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutDestinationWithContext(ctx aws.Context, input *PutDestinationInput, opts ...request.Option) (*PutDestinationOutput, error) {
+func (c *CloudWatchLogs) PutDestinationWithContext(ctx aws.Context, input *PutDestinationInput, opts ...aws.Option) (*PutDestinationOutput, error) {
 	req, out := c.PutDestinationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2609,7 +2608,7 @@ func (c *CloudWatchLogs) PutDestinationWithContext(ctx aws.Context, input *PutDe
 
 const opPutDestinationPolicy = "PutDestinationPolicy"
 
-// PutDestinationPolicyRequest generates a "aws/request.Request" representing the
+// PutDestinationPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutDestinationPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2633,8 +2632,8 @@ const opPutDestinationPolicy = "PutDestinationPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicy
-func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) (req *request.Request, output *PutDestinationPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicyInput) (req *aws.Request, output *PutDestinationPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutDestinationPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2690,7 +2689,7 @@ func (c *CloudWatchLogs) PutDestinationPolicy(input *PutDestinationPolicyInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutDestinationPolicyWithContext(ctx aws.Context, input *PutDestinationPolicyInput, opts ...request.Option) (*PutDestinationPolicyOutput, error) {
+func (c *CloudWatchLogs) PutDestinationPolicyWithContext(ctx aws.Context, input *PutDestinationPolicyInput, opts ...aws.Option) (*PutDestinationPolicyOutput, error) {
 	req, out := c.PutDestinationPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2699,7 +2698,7 @@ func (c *CloudWatchLogs) PutDestinationPolicyWithContext(ctx aws.Context, input 
 
 const opPutLogEvents = "PutLogEvents"
 
-// PutLogEventsRequest generates a "aws/request.Request" representing the
+// PutLogEventsRequest generates a "aws.Request" representing the
 // client's request for the PutLogEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2723,8 +2722,8 @@ const opPutLogEvents = "PutLogEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents
-func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) (req *request.Request, output *PutLogEventsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) (req *aws.Request, output *PutLogEventsOutput) {
+	op := &aws.Operation{
 		Name:       opPutLogEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2808,7 +2807,7 @@ func (c *CloudWatchLogs) PutLogEvents(input *PutLogEventsInput) (*PutLogEventsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutLogEventsWithContext(ctx aws.Context, input *PutLogEventsInput, opts ...request.Option) (*PutLogEventsOutput, error) {
+func (c *CloudWatchLogs) PutLogEventsWithContext(ctx aws.Context, input *PutLogEventsInput, opts ...aws.Option) (*PutLogEventsOutput, error) {
 	req, out := c.PutLogEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2817,7 +2816,7 @@ func (c *CloudWatchLogs) PutLogEventsWithContext(ctx aws.Context, input *PutLogE
 
 const opPutMetricFilter = "PutMetricFilter"
 
-// PutMetricFilterRequest generates a "aws/request.Request" representing the
+// PutMetricFilterRequest generates a "aws.Request" representing the
 // client's request for the PutMetricFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2841,8 +2840,8 @@ const opPutMetricFilter = "PutMetricFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilter
-func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) (req *request.Request, output *PutMetricFilterOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) (req *aws.Request, output *PutMetricFilterOutput) {
+	op := &aws.Operation{
 		Name:       opPutMetricFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2906,7 +2905,7 @@ func (c *CloudWatchLogs) PutMetricFilter(input *PutMetricFilterInput) (*PutMetri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutMetricFilterWithContext(ctx aws.Context, input *PutMetricFilterInput, opts ...request.Option) (*PutMetricFilterOutput, error) {
+func (c *CloudWatchLogs) PutMetricFilterWithContext(ctx aws.Context, input *PutMetricFilterInput, opts ...aws.Option) (*PutMetricFilterOutput, error) {
 	req, out := c.PutMetricFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2915,7 +2914,7 @@ func (c *CloudWatchLogs) PutMetricFilterWithContext(ctx aws.Context, input *PutM
 
 const opPutResourcePolicy = "PutResourcePolicy"
 
-// PutResourcePolicyRequest generates a "aws/request.Request" representing the
+// PutResourcePolicyRequest generates a "aws.Request" representing the
 // client's request for the PutResourcePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2939,8 +2938,8 @@ const opPutResourcePolicy = "PutResourcePolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutResourcePolicy
-func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput) (req *request.Request, output *PutResourcePolicyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput) (req *aws.Request, output *PutResourcePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutResourcePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2993,7 +2992,7 @@ func (c *CloudWatchLogs) PutResourcePolicy(input *PutResourcePolicyInput) (*PutR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutResourcePolicyWithContext(ctx aws.Context, input *PutResourcePolicyInput, opts ...request.Option) (*PutResourcePolicyOutput, error) {
+func (c *CloudWatchLogs) PutResourcePolicyWithContext(ctx aws.Context, input *PutResourcePolicyInput, opts ...aws.Option) (*PutResourcePolicyOutput, error) {
 	req, out := c.PutResourcePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3002,7 +3001,7 @@ func (c *CloudWatchLogs) PutResourcePolicyWithContext(ctx aws.Context, input *Pu
 
 const opPutRetentionPolicy = "PutRetentionPolicy"
 
-// PutRetentionPolicyRequest generates a "aws/request.Request" representing the
+// PutRetentionPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutRetentionPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3026,8 +3025,8 @@ const opPutRetentionPolicy = "PutRetentionPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicy
-func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) (req *request.Request, output *PutRetentionPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInput) (req *aws.Request, output *PutRetentionPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutRetentionPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3085,7 +3084,7 @@ func (c *CloudWatchLogs) PutRetentionPolicy(input *PutRetentionPolicyInput) (*Pu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutRetentionPolicyWithContext(ctx aws.Context, input *PutRetentionPolicyInput, opts ...request.Option) (*PutRetentionPolicyOutput, error) {
+func (c *CloudWatchLogs) PutRetentionPolicyWithContext(ctx aws.Context, input *PutRetentionPolicyInput, opts ...aws.Option) (*PutRetentionPolicyOutput, error) {
 	req, out := c.PutRetentionPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3094,7 +3093,7 @@ func (c *CloudWatchLogs) PutRetentionPolicyWithContext(ctx aws.Context, input *P
 
 const opPutSubscriptionFilter = "PutSubscriptionFilter"
 
-// PutSubscriptionFilterRequest generates a "aws/request.Request" representing the
+// PutSubscriptionFilterRequest generates a "aws.Request" representing the
 // client's request for the PutSubscriptionFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3118,8 +3117,8 @@ const opPutSubscriptionFilter = "PutSubscriptionFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter
-func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput) (req *request.Request, output *PutSubscriptionFilterOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilterInput) (req *aws.Request, output *PutSubscriptionFilterOutput) {
+	op := &aws.Operation{
 		Name:       opPutSubscriptionFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3198,7 +3197,7 @@ func (c *CloudWatchLogs) PutSubscriptionFilter(input *PutSubscriptionFilterInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) PutSubscriptionFilterWithContext(ctx aws.Context, input *PutSubscriptionFilterInput, opts ...request.Option) (*PutSubscriptionFilterOutput, error) {
+func (c *CloudWatchLogs) PutSubscriptionFilterWithContext(ctx aws.Context, input *PutSubscriptionFilterInput, opts ...aws.Option) (*PutSubscriptionFilterOutput, error) {
 	req, out := c.PutSubscriptionFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3207,7 +3206,7 @@ func (c *CloudWatchLogs) PutSubscriptionFilterWithContext(ctx aws.Context, input
 
 const opTagLogGroup = "TagLogGroup"
 
-// TagLogGroupRequest generates a "aws/request.Request" representing the
+// TagLogGroupRequest generates a "aws.Request" representing the
 // client's request for the TagLogGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3231,8 +3230,8 @@ const opTagLogGroup = "TagLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroup
-func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) (req *request.Request, output *TagLogGroupOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) (req *aws.Request, output *TagLogGroupOutput) {
+	op := &aws.Operation{
 		Name:       opTagLogGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3289,7 +3288,7 @@ func (c *CloudWatchLogs) TagLogGroup(input *TagLogGroupInput) (*TagLogGroupOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) TagLogGroupWithContext(ctx aws.Context, input *TagLogGroupInput, opts ...request.Option) (*TagLogGroupOutput, error) {
+func (c *CloudWatchLogs) TagLogGroupWithContext(ctx aws.Context, input *TagLogGroupInput, opts ...aws.Option) (*TagLogGroupOutput, error) {
 	req, out := c.TagLogGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3298,7 +3297,7 @@ func (c *CloudWatchLogs) TagLogGroupWithContext(ctx aws.Context, input *TagLogGr
 
 const opTestMetricFilter = "TestMetricFilter"
 
-// TestMetricFilterRequest generates a "aws/request.Request" representing the
+// TestMetricFilterRequest generates a "aws.Request" representing the
 // client's request for the TestMetricFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3322,8 +3321,8 @@ const opTestMetricFilter = "TestMetricFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilter
-func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) (req *request.Request, output *TestMetricFilterOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) (req *aws.Request, output *TestMetricFilterOutput) {
+	op := &aws.Operation{
 		Name:       opTestMetricFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3373,7 +3372,7 @@ func (c *CloudWatchLogs) TestMetricFilter(input *TestMetricFilterInput) (*TestMe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) TestMetricFilterWithContext(ctx aws.Context, input *TestMetricFilterInput, opts ...request.Option) (*TestMetricFilterOutput, error) {
+func (c *CloudWatchLogs) TestMetricFilterWithContext(ctx aws.Context, input *TestMetricFilterInput, opts ...aws.Option) (*TestMetricFilterOutput, error) {
 	req, out := c.TestMetricFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3382,7 +3381,7 @@ func (c *CloudWatchLogs) TestMetricFilterWithContext(ctx aws.Context, input *Tes
 
 const opUntagLogGroup = "UntagLogGroup"
 
-// UntagLogGroupRequest generates a "aws/request.Request" representing the
+// UntagLogGroupRequest generates a "aws.Request" representing the
 // client's request for the UntagLogGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3406,8 +3405,8 @@ const opUntagLogGroup = "UntagLogGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroup
-func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) (req *request.Request, output *UntagLogGroupOutput) {
-	op := &request.Operation{
+func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) (req *aws.Request, output *UntagLogGroupOutput) {
+	op := &aws.Operation{
 		Name:       opUntagLogGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3457,7 +3456,7 @@ func (c *CloudWatchLogs) UntagLogGroup(input *UntagLogGroupInput) (*UntagLogGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchLogs) UntagLogGroupWithContext(ctx aws.Context, input *UntagLogGroupInput, opts ...request.Option) (*UntagLogGroupOutput, error) {
+func (c *CloudWatchLogs) UntagLogGroupWithContext(ctx aws.Context, input *UntagLogGroupInput, opts ...aws.Option) (*UntagLogGroupOutput, error) {
 	req, out := c.UntagLogGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3493,15 +3492,15 @@ func (s AssociateKmsKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateKmsKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateKmsKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateKmsKeyInput"}
 	if s.KmsKeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KmsKeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KmsKeyId"))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3559,12 +3558,12 @@ func (s CancelExportTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelExportTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelExportTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelExportTaskInput"}
 	if s.TaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3647,30 +3646,30 @@ func (s CreateExportTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateExportTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateExportTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateExportTaskInput"}
 	if s.Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.Destination != nil && len(*s.Destination) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Destination", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Destination", 1))
 	}
 	if s.From == nil {
-		invalidParams.Add(request.NewErrParamRequired("From"))
+		invalidParams.Add(aws.NewErrParamRequired("From"))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamNamePrefix != nil && len(*s.LogStreamNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamNamePrefix", 1))
 	}
 	if s.TaskName != nil && len(*s.TaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskName", 1))
 	}
 	if s.To == nil {
-		invalidParams.Add(request.NewErrParamRequired("To"))
+		invalidParams.Add(aws.NewErrParamRequired("To"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3775,15 +3774,15 @@ func (s CreateLogGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLogGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLogGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLogGroupInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3852,18 +3851,18 @@ func (s CreateLogStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLogStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLogStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLogStreamInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
 	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3921,12 +3920,12 @@ func (s DeleteDestinationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDestinationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDestinationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDestinationInput"}
 	if s.DestinationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationName"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
 	}
 	if s.DestinationName != nil && len(*s.DestinationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3978,12 +3977,12 @@ func (s DeleteLogGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLogGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLogGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogGroupInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4040,18 +4039,18 @@ func (s DeleteLogStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLogStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLogStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLogStreamInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
 	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4114,18 +4113,18 @@ func (s DeleteMetricFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMetricFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMetricFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMetricFilterInput"}
 	if s.FilterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterName"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4222,12 +4221,12 @@ func (s DeleteRetentionPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRetentionPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRetentionPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRetentionPolicyInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4284,18 +4283,18 @@ func (s DeleteSubscriptionFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubscriptionFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSubscriptionFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriptionFilterInput"}
 	if s.FilterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterName"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4359,15 +4358,15 @@ func (s DescribeDestinationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDestinationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDestinationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDestinationsInput"}
 	if s.DestinationNamePrefix != nil && len(*s.DestinationNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationNamePrefix", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4461,15 +4460,15 @@ func (s DescribeExportTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeExportTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeExportTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeExportTasksInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4564,15 +4563,15 @@ func (s DescribeLogGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLogGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLogGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLogGroupsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.LogGroupNamePrefix != nil && len(*s.LogGroupNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupNamePrefix", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4687,21 +4686,21 @@ func (s DescribeLogStreamsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLogStreamsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLogStreamsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLogStreamsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamNamePrefix != nil && len(*s.LogStreamNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamNamePrefix", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4818,18 +4817,18 @@ func (s DescribeMetricFiltersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMetricFiltersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMetricFiltersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMetricFiltersInput"}
 	if s.FilterNamePrefix != nil && len(*s.FilterNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterNamePrefix", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4933,12 +4932,12 @@ func (s DescribeResourcePoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResourcePoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeResourcePoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourcePoliciesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5026,21 +5025,21 @@ func (s DescribeSubscriptionFiltersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSubscriptionFiltersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSubscriptionFiltersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubscriptionFiltersInput"}
 	if s.FilterNamePrefix != nil && len(*s.FilterNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterNamePrefix", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5202,12 +5201,12 @@ func (s DisassociateKmsKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateKmsKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateKmsKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateKmsKeyInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5458,21 +5457,21 @@ func (s FilterLogEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FilterLogEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FilterLogEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "FilterLogEventsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamNames != nil && len(s.LogStreamNames) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamNames", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamNames", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5687,24 +5686,24 @@ func (s GetLogEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLogEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetLogEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetLogEventsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
 	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5829,15 +5828,15 @@ func (s InputLogEvent) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputLogEvent) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputLogEvent"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputLogEvent"}
 	if s.Message == nil {
-		invalidParams.Add(request.NewErrParamRequired("Message"))
+		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.Message != nil && len(*s.Message) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Message", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Message", 1))
 	}
 	if s.Timestamp == nil {
-		invalidParams.Add(request.NewErrParamRequired("Timestamp"))
+		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5880,12 +5879,12 @@ func (s ListTagsLogGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsLogGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsLogGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsLogGroupInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6251,15 +6250,15 @@ func (s MetricTransformation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricTransformation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MetricTransformation"}
+	invalidParams := aws.ErrInvalidParams{Context: "MetricTransformation"}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricNamespace"))
 	}
 	if s.MetricValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricValue"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6370,24 +6369,24 @@ func (s PutDestinationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutDestinationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutDestinationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutDestinationInput"}
 	if s.DestinationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationName"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
 	}
 	if s.DestinationName != nil && len(*s.DestinationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationName", 1))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 	if s.TargetArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
 	}
 	if s.TargetArn != nil && len(*s.TargetArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6466,18 +6465,18 @@ func (s PutDestinationPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutDestinationPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutDestinationPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutDestinationPolicyInput"}
 	if s.AccessPolicy == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessPolicy"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessPolicy"))
 	}
 	if s.AccessPolicy != nil && len(*s.AccessPolicy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AccessPolicy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AccessPolicy", 1))
 	}
 	if s.DestinationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationName"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationName"))
 	}
 	if s.DestinationName != nil && len(*s.DestinationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6552,27 +6551,27 @@ func (s PutLogEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutLogEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutLogEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutLogEventsInput"}
 	if s.LogEvents == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogEvents"))
+		invalidParams.Add(aws.NewErrParamRequired("LogEvents"))
 	}
 	if s.LogEvents != nil && len(s.LogEvents) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogEvents", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogEvents", 1))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.LogStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogStreamName"))
 	}
 	if s.LogStreamName != nil && len(*s.LogStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamName", 1))
 	}
 	if s.SequenceToken != nil && len(*s.SequenceToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SequenceToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SequenceToken", 1))
 	}
 	if s.LogEvents != nil {
 		for i, v := range s.LogEvents {
@@ -6580,7 +6579,7 @@ func (s *PutLogEventsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LogEvents", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LogEvents", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6685,27 +6684,27 @@ func (s PutMetricFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMetricFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutMetricFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutMetricFilterInput"}
 	if s.FilterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterName"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
 	if s.FilterPattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterPattern"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.MetricTransformations == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricTransformations"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricTransformations"))
 	}
 	if s.MetricTransformations != nil && len(s.MetricTransformations) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MetricTransformations", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MetricTransformations", 1))
 	}
 	if s.MetricTransformations != nil {
 		for i, v := range s.MetricTransformations {
@@ -6713,7 +6712,7 @@ func (s *PutMetricFilterInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricTransformations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricTransformations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6795,9 +6794,9 @@ func (s PutResourcePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutResourcePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutResourcePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutResourcePolicyInput"}
 	if s.PolicyDocument != nil && len(*s.PolicyDocument) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyDocument", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyDocument", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6871,15 +6870,15 @@ func (s PutRetentionPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRetentionPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRetentionPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRetentionPolicyInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.RetentionInDays == nil {
-		invalidParams.Add(request.NewErrParamRequired("RetentionInDays"))
+		invalidParams.Add(aws.NewErrParamRequired("RetentionInDays"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6980,30 +6979,30 @@ func (s PutSubscriptionFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutSubscriptionFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutSubscriptionFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutSubscriptionFilterInput"}
 	if s.DestinationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationArn"))
 	}
 	if s.DestinationArn != nil && len(*s.DestinationArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationArn", 1))
 	}
 	if s.FilterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterName"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 	if s.FilterName != nil && len(*s.FilterName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FilterName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FilterName", 1))
 	}
 	if s.FilterPattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterPattern"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
 	}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7295,18 +7294,18 @@ func (s TagLogGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagLogGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagLogGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagLogGroupInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7372,15 +7371,15 @@ func (s TestMetricFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestMetricFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestMetricFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestMetricFilterInput"}
 	if s.FilterPattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterPattern"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterPattern"))
 	}
 	if s.LogEventMessages == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogEventMessages"))
+		invalidParams.Add(aws.NewErrParamRequired("LogEventMessages"))
 	}
 	if s.LogEventMessages != nil && len(s.LogEventMessages) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogEventMessages", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogEventMessages", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7452,18 +7451,18 @@ func (s UntagLogGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagLogGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagLogGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagLogGroupInput"}
 	if s.LogGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("LogGroupName"))
 	}
 	if s.LogGroupName != nil && len(*s.LogGroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogGroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogGroupName", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {

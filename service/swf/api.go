@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opCountClosedWorkflowExecutions = "CountClosedWorkflowExecutions"
 
-// CountClosedWorkflowExecutionsRequest generates a "aws/request.Request" representing the
+// CountClosedWorkflowExecutionsRequest generates a "aws.Request" representing the
 // client's request for the CountClosedWorkflowExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCountClosedWorkflowExecutions = "CountClosedWorkflowExecutions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionCount) {
-	op := &request.Operation{
+func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionCount) {
+	op := &aws.Operation{
 		Name:       opCountClosedWorkflowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -118,7 +117,7 @@ func (c *SWF) CountClosedWorkflowExecutions(input *CountClosedWorkflowExecutions
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) CountClosedWorkflowExecutionsWithContext(ctx aws.Context, input *CountClosedWorkflowExecutionsInput, opts ...request.Option) (*WorkflowExecutionCount, error) {
+func (c *SWF) CountClosedWorkflowExecutionsWithContext(ctx aws.Context, input *CountClosedWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionCount, error) {
 	req, out := c.CountClosedWorkflowExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -127,7 +126,7 @@ func (c *SWF) CountClosedWorkflowExecutionsWithContext(ctx aws.Context, input *C
 
 const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
 
-// CountOpenWorkflowExecutionsRequest generates a "aws/request.Request" representing the
+// CountOpenWorkflowExecutionsRequest generates a "aws.Request" representing the
 // client's request for the CountOpenWorkflowExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -149,8 +148,8 @@ const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionCount) {
-	op := &request.Operation{
+func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionCount) {
+	op := &aws.Operation{
 		Name:       opCountOpenWorkflowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -230,7 +229,7 @@ func (c *SWF) CountOpenWorkflowExecutions(input *CountOpenWorkflowExecutionsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) CountOpenWorkflowExecutionsWithContext(ctx aws.Context, input *CountOpenWorkflowExecutionsInput, opts ...request.Option) (*WorkflowExecutionCount, error) {
+func (c *SWF) CountOpenWorkflowExecutionsWithContext(ctx aws.Context, input *CountOpenWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionCount, error) {
 	req, out := c.CountOpenWorkflowExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -239,7 +238,7 @@ func (c *SWF) CountOpenWorkflowExecutionsWithContext(ctx aws.Context, input *Cou
 
 const opCountPendingActivityTasks = "CountPendingActivityTasks"
 
-// CountPendingActivityTasksRequest generates a "aws/request.Request" representing the
+// CountPendingActivityTasksRequest generates a "aws.Request" representing the
 // client's request for the CountPendingActivityTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -261,8 +260,8 @@ const opCountPendingActivityTasks = "CountPendingActivityTasks"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksInput) (req *request.Request, output *PendingTaskCount) {
-	op := &request.Operation{
+func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksInput) (req *aws.Request, output *PendingTaskCount) {
+	op := &aws.Operation{
 		Name:       opCountPendingActivityTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -336,7 +335,7 @@ func (c *SWF) CountPendingActivityTasks(input *CountPendingActivityTasksInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) CountPendingActivityTasksWithContext(ctx aws.Context, input *CountPendingActivityTasksInput, opts ...request.Option) (*PendingTaskCount, error) {
+func (c *SWF) CountPendingActivityTasksWithContext(ctx aws.Context, input *CountPendingActivityTasksInput, opts ...aws.Option) (*PendingTaskCount, error) {
 	req, out := c.CountPendingActivityTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -345,7 +344,7 @@ func (c *SWF) CountPendingActivityTasksWithContext(ctx aws.Context, input *Count
 
 const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
 
-// CountPendingDecisionTasksRequest generates a "aws/request.Request" representing the
+// CountPendingDecisionTasksRequest generates a "aws.Request" representing the
 // client's request for the CountPendingDecisionTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -367,8 +366,8 @@ const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksInput) (req *request.Request, output *PendingTaskCount) {
-	op := &request.Operation{
+func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksInput) (req *aws.Request, output *PendingTaskCount) {
+	op := &aws.Operation{
 		Name:       opCountPendingDecisionTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -442,7 +441,7 @@ func (c *SWF) CountPendingDecisionTasks(input *CountPendingDecisionTasksInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) CountPendingDecisionTasksWithContext(ctx aws.Context, input *CountPendingDecisionTasksInput, opts ...request.Option) (*PendingTaskCount, error) {
+func (c *SWF) CountPendingDecisionTasksWithContext(ctx aws.Context, input *CountPendingDecisionTasksInput, opts ...aws.Option) (*PendingTaskCount, error) {
 	req, out := c.CountPendingDecisionTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -451,7 +450,7 @@ func (c *SWF) CountPendingDecisionTasksWithContext(ctx aws.Context, input *Count
 
 const opDeprecateActivityType = "DeprecateActivityType"
 
-// DeprecateActivityTypeRequest generates a "aws/request.Request" representing the
+// DeprecateActivityTypeRequest generates a "aws.Request" representing the
 // client's request for the DeprecateActivityType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -473,8 +472,8 @@ const opDeprecateActivityType = "DeprecateActivityType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (req *request.Request, output *DeprecateActivityTypeOutput) {
-	op := &request.Operation{
+func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) (req *aws.Request, output *DeprecateActivityTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDeprecateActivityType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -558,7 +557,7 @@ func (c *SWF) DeprecateActivityType(input *DeprecateActivityTypeInput) (*Depreca
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DeprecateActivityTypeWithContext(ctx aws.Context, input *DeprecateActivityTypeInput, opts ...request.Option) (*DeprecateActivityTypeOutput, error) {
+func (c *SWF) DeprecateActivityTypeWithContext(ctx aws.Context, input *DeprecateActivityTypeInput, opts ...aws.Option) (*DeprecateActivityTypeOutput, error) {
 	req, out := c.DeprecateActivityTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -567,7 +566,7 @@ func (c *SWF) DeprecateActivityTypeWithContext(ctx aws.Context, input *Deprecate
 
 const opDeprecateDomain = "DeprecateDomain"
 
-// DeprecateDomainRequest generates a "aws/request.Request" representing the
+// DeprecateDomainRequest generates a "aws.Request" representing the
 // client's request for the DeprecateDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -589,8 +588,8 @@ const opDeprecateDomain = "DeprecateDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *request.Request, output *DeprecateDomainOutput) {
-	op := &request.Operation{
+func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) (req *aws.Request, output *DeprecateDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeprecateDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -672,7 +671,7 @@ func (c *SWF) DeprecateDomain(input *DeprecateDomainInput) (*DeprecateDomainOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DeprecateDomainWithContext(ctx aws.Context, input *DeprecateDomainInput, opts ...request.Option) (*DeprecateDomainOutput, error) {
+func (c *SWF) DeprecateDomainWithContext(ctx aws.Context, input *DeprecateDomainInput, opts ...aws.Option) (*DeprecateDomainOutput, error) {
 	req, out := c.DeprecateDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -681,7 +680,7 @@ func (c *SWF) DeprecateDomainWithContext(ctx aws.Context, input *DeprecateDomain
 
 const opDeprecateWorkflowType = "DeprecateWorkflowType"
 
-// DeprecateWorkflowTypeRequest generates a "aws/request.Request" representing the
+// DeprecateWorkflowTypeRequest generates a "aws.Request" representing the
 // client's request for the DeprecateWorkflowType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -703,8 +702,8 @@ const opDeprecateWorkflowType = "DeprecateWorkflowType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (req *request.Request, output *DeprecateWorkflowTypeOutput) {
-	op := &request.Operation{
+func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) (req *aws.Request, output *DeprecateWorkflowTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDeprecateWorkflowType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -789,7 +788,7 @@ func (c *SWF) DeprecateWorkflowType(input *DeprecateWorkflowTypeInput) (*Depreca
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DeprecateWorkflowTypeWithContext(ctx aws.Context, input *DeprecateWorkflowTypeInput, opts ...request.Option) (*DeprecateWorkflowTypeOutput, error) {
+func (c *SWF) DeprecateWorkflowTypeWithContext(ctx aws.Context, input *DeprecateWorkflowTypeInput, opts ...aws.Option) (*DeprecateWorkflowTypeOutput, error) {
 	req, out := c.DeprecateWorkflowTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -798,7 +797,7 @@ func (c *SWF) DeprecateWorkflowTypeWithContext(ctx aws.Context, input *Deprecate
 
 const opDescribeActivityType = "DescribeActivityType"
 
-// DescribeActivityTypeRequest generates a "aws/request.Request" representing the
+// DescribeActivityTypeRequest generates a "aws.Request" representing the
 // client's request for the DescribeActivityType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -820,8 +819,8 @@ const opDescribeActivityType = "DescribeActivityType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req *request.Request, output *DescribeActivityTypeOutput) {
-	op := &request.Operation{
+func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) (req *aws.Request, output *DescribeActivityTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeActivityType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -897,7 +896,7 @@ func (c *SWF) DescribeActivityType(input *DescribeActivityTypeInput) (*DescribeA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DescribeActivityTypeWithContext(ctx aws.Context, input *DescribeActivityTypeInput, opts ...request.Option) (*DescribeActivityTypeOutput, error) {
+func (c *SWF) DescribeActivityTypeWithContext(ctx aws.Context, input *DescribeActivityTypeInput, opts ...aws.Option) (*DescribeActivityTypeOutput, error) {
 	req, out := c.DescribeActivityTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -906,7 +905,7 @@ func (c *SWF) DescribeActivityTypeWithContext(ctx aws.Context, input *DescribeAc
 
 const opDescribeDomain = "DescribeDomain"
 
-// DescribeDomainRequest generates a "aws/request.Request" representing the
+// DescribeDomainRequest generates a "aws.Request" representing the
 // client's request for the DescribeDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -928,8 +927,8 @@ const opDescribeDomain = "DescribeDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *request.Request, output *DescribeDomainOutput) {
-	op := &request.Operation{
+func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) (req *aws.Request, output *DescribeDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -999,7 +998,7 @@ func (c *SWF) DescribeDomain(input *DescribeDomainInput) (*DescribeDomainOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DescribeDomainWithContext(ctx aws.Context, input *DescribeDomainInput, opts ...request.Option) (*DescribeDomainOutput, error) {
+func (c *SWF) DescribeDomainWithContext(ctx aws.Context, input *DescribeDomainInput, opts ...aws.Option) (*DescribeDomainOutput, error) {
 	req, out := c.DescribeDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1008,7 +1007,7 @@ func (c *SWF) DescribeDomainWithContext(ctx aws.Context, input *DescribeDomainIn
 
 const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
 
-// DescribeWorkflowExecutionRequest generates a "aws/request.Request" representing the
+// DescribeWorkflowExecutionRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkflowExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1030,8 +1029,8 @@ const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionInput) (req *request.Request, output *DescribeWorkflowExecutionOutput) {
-	op := &request.Operation{
+func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionInput) (req *aws.Request, output *DescribeWorkflowExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1104,7 +1103,7 @@ func (c *SWF) DescribeWorkflowExecution(input *DescribeWorkflowExecutionInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DescribeWorkflowExecutionWithContext(ctx aws.Context, input *DescribeWorkflowExecutionInput, opts ...request.Option) (*DescribeWorkflowExecutionOutput, error) {
+func (c *SWF) DescribeWorkflowExecutionWithContext(ctx aws.Context, input *DescribeWorkflowExecutionInput, opts ...aws.Option) (*DescribeWorkflowExecutionOutput, error) {
 	req, out := c.DescribeWorkflowExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1113,7 +1112,7 @@ func (c *SWF) DescribeWorkflowExecutionWithContext(ctx aws.Context, input *Descr
 
 const opDescribeWorkflowType = "DescribeWorkflowType"
 
-// DescribeWorkflowTypeRequest generates a "aws/request.Request" representing the
+// DescribeWorkflowTypeRequest generates a "aws.Request" representing the
 // client's request for the DescribeWorkflowType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1135,8 +1134,8 @@ const opDescribeWorkflowType = "DescribeWorkflowType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req *request.Request, output *DescribeWorkflowTypeOutput) {
-	op := &request.Operation{
+func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) (req *aws.Request, output *DescribeWorkflowTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeWorkflowType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1212,7 +1211,7 @@ func (c *SWF) DescribeWorkflowType(input *DescribeWorkflowTypeInput) (*DescribeW
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) DescribeWorkflowTypeWithContext(ctx aws.Context, input *DescribeWorkflowTypeInput, opts ...request.Option) (*DescribeWorkflowTypeOutput, error) {
+func (c *SWF) DescribeWorkflowTypeWithContext(ctx aws.Context, input *DescribeWorkflowTypeInput, opts ...aws.Option) (*DescribeWorkflowTypeOutput, error) {
 	req, out := c.DescribeWorkflowTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1221,7 +1220,7 @@ func (c *SWF) DescribeWorkflowTypeWithContext(ctx aws.Context, input *DescribeWo
 
 const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 
-// GetWorkflowExecutionHistoryRequest generates a "aws/request.Request" representing the
+// GetWorkflowExecutionHistoryRequest generates a "aws.Request" representing the
 // client's request for the GetWorkflowExecutionHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1243,12 +1242,12 @@ const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHistoryInput) (req *request.Request, output *GetWorkflowExecutionHistoryOutput) {
-	op := &request.Operation{
+func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHistoryInput) (req *aws.Request, output *GetWorkflowExecutionHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetWorkflowExecutionHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -1324,7 +1323,7 @@ func (c *SWF) GetWorkflowExecutionHistory(input *GetWorkflowExecutionHistoryInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) GetWorkflowExecutionHistoryWithContext(ctx aws.Context, input *GetWorkflowExecutionHistoryInput, opts ...request.Option) (*GetWorkflowExecutionHistoryOutput, error) {
+func (c *SWF) GetWorkflowExecutionHistoryWithContext(ctx aws.Context, input *GetWorkflowExecutionHistoryInput, opts ...aws.Option) (*GetWorkflowExecutionHistoryOutput, error) {
 	req, out := c.GetWorkflowExecutionHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1359,9 +1358,9 @@ func (c *SWF) GetWorkflowExecutionHistoryPages(input *GetWorkflowExecutionHistor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input *GetWorkflowExecutionHistoryInput, fn func(*GetWorkflowExecutionHistoryOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input *GetWorkflowExecutionHistoryInput, fn func(*GetWorkflowExecutionHistoryOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetWorkflowExecutionHistoryInput
 			if input != nil {
 				tmp := *input
@@ -1383,7 +1382,7 @@ func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input
 
 const opListActivityTypes = "ListActivityTypes"
 
-// ListActivityTypesRequest generates a "aws/request.Request" representing the
+// ListActivityTypesRequest generates a "aws.Request" representing the
 // client's request for the ListActivityTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1405,12 +1404,12 @@ const opListActivityTypes = "ListActivityTypes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *request.Request, output *ListActivityTypesOutput) {
-	op := &request.Operation{
+func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) (req *aws.Request, output *ListActivityTypesOutput) {
+	op := &aws.Operation{
 		Name:       opListActivityTypes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -1485,7 +1484,7 @@ func (c *SWF) ListActivityTypes(input *ListActivityTypesInput) (*ListActivityTyp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListActivityTypesWithContext(ctx aws.Context, input *ListActivityTypesInput, opts ...request.Option) (*ListActivityTypesOutput, error) {
+func (c *SWF) ListActivityTypesWithContext(ctx aws.Context, input *ListActivityTypesInput, opts ...aws.Option) (*ListActivityTypesOutput, error) {
 	req, out := c.ListActivityTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1520,9 +1519,9 @@ func (c *SWF) ListActivityTypesPages(input *ListActivityTypesInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActivityTypesInput, fn func(*ListActivityTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActivityTypesInput, fn func(*ListActivityTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListActivityTypesInput
 			if input != nil {
 				tmp := *input
@@ -1544,7 +1543,7 @@ func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActi
 
 const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 
-// ListClosedWorkflowExecutionsRequest generates a "aws/request.Request" representing the
+// ListClosedWorkflowExecutionsRequest generates a "aws.Request" representing the
 // client's request for the ListClosedWorkflowExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1566,12 +1565,12 @@ const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionInfos) {
-	op := &request.Operation{
+func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionInfos) {
+	op := &aws.Operation{
 		Name:       opListClosedWorkflowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -1655,7 +1654,7 @@ func (c *SWF) ListClosedWorkflowExecutions(input *ListClosedWorkflowExecutionsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListClosedWorkflowExecutionsWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, opts ...request.Option) (*WorkflowExecutionInfos, error) {
+func (c *SWF) ListClosedWorkflowExecutionsWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionInfos, error) {
 	req, out := c.ListClosedWorkflowExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1690,9 +1689,9 @@ func (c *SWF) ListClosedWorkflowExecutionsPages(input *ListClosedWorkflowExecuti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListClosedWorkflowExecutionsInput
 			if input != nil {
 				tmp := *input
@@ -1714,7 +1713,7 @@ func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, inpu
 
 const opListDomains = "ListDomains"
 
-// ListDomainsRequest generates a "aws/request.Request" representing the
+// ListDomainsRequest generates a "aws.Request" representing the
 // client's request for the ListDomains operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1736,12 +1735,12 @@ const opListDomains = "ListDomains"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *request.Request, output *ListDomainsOutput) {
-	op := &request.Operation{
+func (c *SWF) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request, output *ListDomainsOutput) {
+	op := &aws.Operation{
 		Name:       opListDomains,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -1813,7 +1812,7 @@ func (c *SWF) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...request.Option) (*ListDomainsOutput, error) {
+func (c *SWF) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...aws.Option) (*ListDomainsOutput, error) {
 	req, out := c.ListDomainsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1848,9 +1847,9 @@ func (c *SWF) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDomainsInput
 			if input != nil {
 				tmp := *input
@@ -1872,7 +1871,7 @@ func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInp
 
 const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 
-// ListOpenWorkflowExecutionsRequest generates a "aws/request.Request" representing the
+// ListOpenWorkflowExecutionsRequest generates a "aws.Request" representing the
 // client's request for the ListOpenWorkflowExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1894,12 +1893,12 @@ const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecutionsInput) (req *request.Request, output *WorkflowExecutionInfos) {
-	op := &request.Operation{
+func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecutionsInput) (req *aws.Request, output *WorkflowExecutionInfos) {
+	op := &aws.Operation{
 		Name:       opListOpenWorkflowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -1983,7 +1982,7 @@ func (c *SWF) ListOpenWorkflowExecutions(input *ListOpenWorkflowExecutionsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListOpenWorkflowExecutionsWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, opts ...request.Option) (*WorkflowExecutionInfos, error) {
+func (c *SWF) ListOpenWorkflowExecutionsWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, opts ...aws.Option) (*WorkflowExecutionInfos, error) {
 	req, out := c.ListOpenWorkflowExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2018,9 +2017,9 @@ func (c *SWF) ListOpenWorkflowExecutionsPages(input *ListOpenWorkflowExecutionsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, fn func(*WorkflowExecutionInfos, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOpenWorkflowExecutionsInput
 			if input != nil {
 				tmp := *input
@@ -2042,7 +2041,7 @@ func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input 
 
 const opListWorkflowTypes = "ListWorkflowTypes"
 
-// ListWorkflowTypesRequest generates a "aws/request.Request" representing the
+// ListWorkflowTypesRequest generates a "aws.Request" representing the
 // client's request for the ListWorkflowTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2064,12 +2063,12 @@ const opListWorkflowTypes = "ListWorkflowTypes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *request.Request, output *ListWorkflowTypesOutput) {
-	op := &request.Operation{
+func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) (req *aws.Request, output *ListWorkflowTypesOutput) {
+	op := &aws.Operation{
 		Name:       opListWorkflowTypes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -2142,7 +2141,7 @@ func (c *SWF) ListWorkflowTypes(input *ListWorkflowTypesInput) (*ListWorkflowTyp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListWorkflowTypesWithContext(ctx aws.Context, input *ListWorkflowTypesInput, opts ...request.Option) (*ListWorkflowTypesOutput, error) {
+func (c *SWF) ListWorkflowTypesWithContext(ctx aws.Context, input *ListWorkflowTypesInput, opts ...aws.Option) (*ListWorkflowTypesOutput, error) {
 	req, out := c.ListWorkflowTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2177,9 +2176,9 @@ func (c *SWF) ListWorkflowTypesPages(input *ListWorkflowTypesInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWorkflowTypesInput, fn func(*ListWorkflowTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWorkflowTypesInput, fn func(*ListWorkflowTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListWorkflowTypesInput
 			if input != nil {
 				tmp := *input
@@ -2201,7 +2200,7 @@ func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWork
 
 const opPollForActivityTask = "PollForActivityTask"
 
-// PollForActivityTaskRequest generates a "aws/request.Request" representing the
+// PollForActivityTaskRequest generates a "aws.Request" representing the
 // client's request for the PollForActivityTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2223,8 +2222,8 @@ const opPollForActivityTask = "PollForActivityTask"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *request.Request, output *PollForActivityTaskOutput) {
-	op := &request.Operation{
+func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) (req *aws.Request, output *PollForActivityTaskOutput) {
+	op := &aws.Operation{
 		Name:       opPollForActivityTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2310,7 +2309,7 @@ func (c *SWF) PollForActivityTask(input *PollForActivityTaskInput) (*PollForActi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) PollForActivityTaskWithContext(ctx aws.Context, input *PollForActivityTaskInput, opts ...request.Option) (*PollForActivityTaskOutput, error) {
+func (c *SWF) PollForActivityTaskWithContext(ctx aws.Context, input *PollForActivityTaskInput, opts ...aws.Option) (*PollForActivityTaskOutput, error) {
 	req, out := c.PollForActivityTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2319,7 +2318,7 @@ func (c *SWF) PollForActivityTaskWithContext(ctx aws.Context, input *PollForActi
 
 const opPollForDecisionTask = "PollForDecisionTask"
 
-// PollForDecisionTaskRequest generates a "aws/request.Request" representing the
+// PollForDecisionTaskRequest generates a "aws.Request" representing the
 // client's request for the PollForDecisionTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2341,12 +2340,12 @@ const opPollForDecisionTask = "PollForDecisionTask"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *request.Request, output *PollForDecisionTaskOutput) {
-	op := &request.Operation{
+func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) (req *aws.Request, output *PollForDecisionTaskOutput) {
+	op := &aws.Operation{
 		Name:       opPollForDecisionTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextPageToken"},
 			OutputTokens:    []string{"nextPageToken"},
 			LimitToken:      "maximumPageSize",
@@ -2444,7 +2443,7 @@ func (c *SWF) PollForDecisionTask(input *PollForDecisionTaskInput) (*PollForDeci
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) PollForDecisionTaskWithContext(ctx aws.Context, input *PollForDecisionTaskInput, opts ...request.Option) (*PollForDecisionTaskOutput, error) {
+func (c *SWF) PollForDecisionTaskWithContext(ctx aws.Context, input *PollForDecisionTaskInput, opts ...aws.Option) (*PollForDecisionTaskOutput, error) {
 	req, out := c.PollForDecisionTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2479,9 +2478,9 @@ func (c *SWF) PollForDecisionTaskPages(input *PollForDecisionTaskInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollForDecisionTaskInput, fn func(*PollForDecisionTaskOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollForDecisionTaskInput, fn func(*PollForDecisionTaskOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *PollForDecisionTaskInput
 			if input != nil {
 				tmp := *input
@@ -2503,7 +2502,7 @@ func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollFo
 
 const opRecordActivityTaskHeartbeat = "RecordActivityTaskHeartbeat"
 
-// RecordActivityTaskHeartbeatRequest generates a "aws/request.Request" representing the
+// RecordActivityTaskHeartbeatRequest generates a "aws.Request" representing the
 // client's request for the RecordActivityTaskHeartbeat operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2525,8 +2524,8 @@ const opRecordActivityTaskHeartbeat = "RecordActivityTaskHeartbeat"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartbeatInput) (req *request.Request, output *RecordActivityTaskHeartbeatOutput) {
-	op := &request.Operation{
+func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartbeatInput) (req *aws.Request, output *RecordActivityTaskHeartbeatOutput) {
+	op := &aws.Operation{
 		Name:       opRecordActivityTaskHeartbeat,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2620,7 +2619,7 @@ func (c *SWF) RecordActivityTaskHeartbeat(input *RecordActivityTaskHeartbeatInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RecordActivityTaskHeartbeatWithContext(ctx aws.Context, input *RecordActivityTaskHeartbeatInput, opts ...request.Option) (*RecordActivityTaskHeartbeatOutput, error) {
+func (c *SWF) RecordActivityTaskHeartbeatWithContext(ctx aws.Context, input *RecordActivityTaskHeartbeatInput, opts ...aws.Option) (*RecordActivityTaskHeartbeatOutput, error) {
 	req, out := c.RecordActivityTaskHeartbeatRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2629,7 +2628,7 @@ func (c *SWF) RecordActivityTaskHeartbeatWithContext(ctx aws.Context, input *Rec
 
 const opRegisterActivityType = "RegisterActivityType"
 
-// RegisterActivityTypeRequest generates a "aws/request.Request" representing the
+// RegisterActivityTypeRequest generates a "aws.Request" representing the
 // client's request for the RegisterActivityType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2651,8 +2650,8 @@ const opRegisterActivityType = "RegisterActivityType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req *request.Request, output *RegisterActivityTypeOutput) {
-	op := &request.Operation{
+func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) (req *aws.Request, output *RegisterActivityTypeOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterActivityType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2746,7 +2745,7 @@ func (c *SWF) RegisterActivityType(input *RegisterActivityTypeInput) (*RegisterA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RegisterActivityTypeWithContext(ctx aws.Context, input *RegisterActivityTypeInput, opts ...request.Option) (*RegisterActivityTypeOutput, error) {
+func (c *SWF) RegisterActivityTypeWithContext(ctx aws.Context, input *RegisterActivityTypeInput, opts ...aws.Option) (*RegisterActivityTypeOutput, error) {
 	req, out := c.RegisterActivityTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2755,7 +2754,7 @@ func (c *SWF) RegisterActivityTypeWithContext(ctx aws.Context, input *RegisterAc
 
 const opRegisterDomain = "RegisterDomain"
 
-// RegisterDomainRequest generates a "aws/request.Request" representing the
+// RegisterDomainRequest generates a "aws.Request" representing the
 // client's request for the RegisterDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2777,8 +2776,8 @@ const opRegisterDomain = "RegisterDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *request.Request, output *RegisterDomainOutput) {
-	op := &request.Operation{
+func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) (req *aws.Request, output *RegisterDomainOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2854,7 +2853,7 @@ func (c *SWF) RegisterDomain(input *RegisterDomainInput) (*RegisterDomainOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RegisterDomainWithContext(ctx aws.Context, input *RegisterDomainInput, opts ...request.Option) (*RegisterDomainOutput, error) {
+func (c *SWF) RegisterDomainWithContext(ctx aws.Context, input *RegisterDomainInput, opts ...aws.Option) (*RegisterDomainOutput, error) {
 	req, out := c.RegisterDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2863,7 +2862,7 @@ func (c *SWF) RegisterDomainWithContext(ctx aws.Context, input *RegisterDomainIn
 
 const opRegisterWorkflowType = "RegisterWorkflowType"
 
-// RegisterWorkflowTypeRequest generates a "aws/request.Request" representing the
+// RegisterWorkflowTypeRequest generates a "aws.Request" representing the
 // client's request for the RegisterWorkflowType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2885,8 +2884,8 @@ const opRegisterWorkflowType = "RegisterWorkflowType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req *request.Request, output *RegisterWorkflowTypeOutput) {
-	op := &request.Operation{
+func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) (req *aws.Request, output *RegisterWorkflowTypeOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterWorkflowType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2983,7 +2982,7 @@ func (c *SWF) RegisterWorkflowType(input *RegisterWorkflowTypeInput) (*RegisterW
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RegisterWorkflowTypeWithContext(ctx aws.Context, input *RegisterWorkflowTypeInput, opts ...request.Option) (*RegisterWorkflowTypeOutput, error) {
+func (c *SWF) RegisterWorkflowTypeWithContext(ctx aws.Context, input *RegisterWorkflowTypeInput, opts ...aws.Option) (*RegisterWorkflowTypeOutput, error) {
 	req, out := c.RegisterWorkflowTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2992,7 +2991,7 @@ func (c *SWF) RegisterWorkflowTypeWithContext(ctx aws.Context, input *RegisterWo
 
 const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
 
-// RequestCancelWorkflowExecutionRequest generates a "aws/request.Request" representing the
+// RequestCancelWorkflowExecutionRequest generates a "aws.Request" representing the
 // client's request for the RequestCancelWorkflowExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3014,8 +3013,8 @@ const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflowExecutionInput) (req *request.Request, output *RequestCancelWorkflowExecutionOutput) {
-	op := &request.Operation{
+func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflowExecutionInput) (req *aws.Request, output *RequestCancelWorkflowExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opRequestCancelWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3097,7 +3096,7 @@ func (c *SWF) RequestCancelWorkflowExecution(input *RequestCancelWorkflowExecuti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RequestCancelWorkflowExecutionWithContext(ctx aws.Context, input *RequestCancelWorkflowExecutionInput, opts ...request.Option) (*RequestCancelWorkflowExecutionOutput, error) {
+func (c *SWF) RequestCancelWorkflowExecutionWithContext(ctx aws.Context, input *RequestCancelWorkflowExecutionInput, opts ...aws.Option) (*RequestCancelWorkflowExecutionOutput, error) {
 	req, out := c.RequestCancelWorkflowExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3106,7 +3105,7 @@ func (c *SWF) RequestCancelWorkflowExecutionWithContext(ctx aws.Context, input *
 
 const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
 
-// RespondActivityTaskCanceledRequest generates a "aws/request.Request" representing the
+// RespondActivityTaskCanceledRequest generates a "aws.Request" representing the
 // client's request for the RespondActivityTaskCanceled operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3128,8 +3127,8 @@ const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCanceledInput) (req *request.Request, output *RespondActivityTaskCanceledOutput) {
-	op := &request.Operation{
+func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCanceledInput) (req *aws.Request, output *RespondActivityTaskCanceledOutput) {
+	op := &aws.Operation{
 		Name:       opRespondActivityTaskCanceled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3214,7 +3213,7 @@ func (c *SWF) RespondActivityTaskCanceled(input *RespondActivityTaskCanceledInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RespondActivityTaskCanceledWithContext(ctx aws.Context, input *RespondActivityTaskCanceledInput, opts ...request.Option) (*RespondActivityTaskCanceledOutput, error) {
+func (c *SWF) RespondActivityTaskCanceledWithContext(ctx aws.Context, input *RespondActivityTaskCanceledInput, opts ...aws.Option) (*RespondActivityTaskCanceledOutput, error) {
 	req, out := c.RespondActivityTaskCanceledRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3223,7 +3222,7 @@ func (c *SWF) RespondActivityTaskCanceledWithContext(ctx aws.Context, input *Res
 
 const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
 
-// RespondActivityTaskCompletedRequest generates a "aws/request.Request" representing the
+// RespondActivityTaskCompletedRequest generates a "aws.Request" representing the
 // client's request for the RespondActivityTaskCompleted operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3245,8 +3244,8 @@ const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskCompletedInput) (req *request.Request, output *RespondActivityTaskCompletedOutput) {
-	op := &request.Operation{
+func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskCompletedInput) (req *aws.Request, output *RespondActivityTaskCompletedOutput) {
+	op := &aws.Operation{
 		Name:       opRespondActivityTaskCompleted,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3330,7 +3329,7 @@ func (c *SWF) RespondActivityTaskCompleted(input *RespondActivityTaskCompletedIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RespondActivityTaskCompletedWithContext(ctx aws.Context, input *RespondActivityTaskCompletedInput, opts ...request.Option) (*RespondActivityTaskCompletedOutput, error) {
+func (c *SWF) RespondActivityTaskCompletedWithContext(ctx aws.Context, input *RespondActivityTaskCompletedInput, opts ...aws.Option) (*RespondActivityTaskCompletedOutput, error) {
 	req, out := c.RespondActivityTaskCompletedRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3339,7 +3338,7 @@ func (c *SWF) RespondActivityTaskCompletedWithContext(ctx aws.Context, input *Re
 
 const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
 
-// RespondActivityTaskFailedRequest generates a "aws/request.Request" representing the
+// RespondActivityTaskFailedRequest generates a "aws.Request" representing the
 // client's request for the RespondActivityTaskFailed operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3361,8 +3360,8 @@ const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedInput) (req *request.Request, output *RespondActivityTaskFailedOutput) {
-	op := &request.Operation{
+func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedInput) (req *aws.Request, output *RespondActivityTaskFailedOutput) {
+	op := &aws.Operation{
 		Name:       opRespondActivityTaskFailed,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3441,7 +3440,7 @@ func (c *SWF) RespondActivityTaskFailed(input *RespondActivityTaskFailedInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RespondActivityTaskFailedWithContext(ctx aws.Context, input *RespondActivityTaskFailedInput, opts ...request.Option) (*RespondActivityTaskFailedOutput, error) {
+func (c *SWF) RespondActivityTaskFailedWithContext(ctx aws.Context, input *RespondActivityTaskFailedInput, opts ...aws.Option) (*RespondActivityTaskFailedOutput, error) {
 	req, out := c.RespondActivityTaskFailedRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3450,7 +3449,7 @@ func (c *SWF) RespondActivityTaskFailedWithContext(ctx aws.Context, input *Respo
 
 const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
 
-// RespondDecisionTaskCompletedRequest generates a "aws/request.Request" representing the
+// RespondDecisionTaskCompletedRequest generates a "aws.Request" representing the
 // client's request for the RespondDecisionTaskCompleted operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3472,8 +3471,8 @@ const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskCompletedInput) (req *request.Request, output *RespondDecisionTaskCompletedOutput) {
-	op := &request.Operation{
+func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskCompletedInput) (req *aws.Request, output *RespondDecisionTaskCompletedOutput) {
+	op := &aws.Operation{
 		Name:       opRespondDecisionTaskCompleted,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3541,7 +3540,7 @@ func (c *SWF) RespondDecisionTaskCompleted(input *RespondDecisionTaskCompletedIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) RespondDecisionTaskCompletedWithContext(ctx aws.Context, input *RespondDecisionTaskCompletedInput, opts ...request.Option) (*RespondDecisionTaskCompletedOutput, error) {
+func (c *SWF) RespondDecisionTaskCompletedWithContext(ctx aws.Context, input *RespondDecisionTaskCompletedInput, opts ...aws.Option) (*RespondDecisionTaskCompletedOutput, error) {
 	req, out := c.RespondDecisionTaskCompletedRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3550,7 +3549,7 @@ func (c *SWF) RespondDecisionTaskCompletedWithContext(ctx aws.Context, input *Re
 
 const opSignalWorkflowExecution = "SignalWorkflowExecution"
 
-// SignalWorkflowExecutionRequest generates a "aws/request.Request" representing the
+// SignalWorkflowExecutionRequest generates a "aws.Request" representing the
 // client's request for the SignalWorkflowExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3572,8 +3571,8 @@ const opSignalWorkflowExecution = "SignalWorkflowExecution"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput) (req *request.Request, output *SignalWorkflowExecutionOutput) {
-	op := &request.Operation{
+func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput) (req *aws.Request, output *SignalWorkflowExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opSignalWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3653,7 +3652,7 @@ func (c *SWF) SignalWorkflowExecution(input *SignalWorkflowExecutionInput) (*Sig
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) SignalWorkflowExecutionWithContext(ctx aws.Context, input *SignalWorkflowExecutionInput, opts ...request.Option) (*SignalWorkflowExecutionOutput, error) {
+func (c *SWF) SignalWorkflowExecutionWithContext(ctx aws.Context, input *SignalWorkflowExecutionInput, opts ...aws.Option) (*SignalWorkflowExecutionOutput, error) {
 	req, out := c.SignalWorkflowExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3662,7 +3661,7 @@ func (c *SWF) SignalWorkflowExecutionWithContext(ctx aws.Context, input *SignalW
 
 const opStartWorkflowExecution = "StartWorkflowExecution"
 
-// StartWorkflowExecutionRequest generates a "aws/request.Request" representing the
+// StartWorkflowExecutionRequest generates a "aws.Request" representing the
 // client's request for the StartWorkflowExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3684,8 +3683,8 @@ const opStartWorkflowExecution = "StartWorkflowExecution"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) (req *request.Request, output *StartWorkflowExecutionOutput) {
-	op := &request.Operation{
+func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) (req *aws.Request, output *StartWorkflowExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStartWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3799,7 +3798,7 @@ func (c *SWF) StartWorkflowExecution(input *StartWorkflowExecutionInput) (*Start
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) StartWorkflowExecutionWithContext(ctx aws.Context, input *StartWorkflowExecutionInput, opts ...request.Option) (*StartWorkflowExecutionOutput, error) {
+func (c *SWF) StartWorkflowExecutionWithContext(ctx aws.Context, input *StartWorkflowExecutionInput, opts ...aws.Option) (*StartWorkflowExecutionOutput, error) {
 	req, out := c.StartWorkflowExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3808,7 +3807,7 @@ func (c *SWF) StartWorkflowExecutionWithContext(ctx aws.Context, input *StartWor
 
 const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
 
-// TerminateWorkflowExecutionRequest generates a "aws/request.Request" representing the
+// TerminateWorkflowExecutionRequest generates a "aws.Request" representing the
 // client's request for the TerminateWorkflowExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3830,8 +3829,8 @@ const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutionInput) (req *request.Request, output *TerminateWorkflowExecutionOutput) {
-	op := &request.Operation{
+func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutionInput) (req *aws.Request, output *TerminateWorkflowExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opTerminateWorkflowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3916,7 +3915,7 @@ func (c *SWF) TerminateWorkflowExecution(input *TerminateWorkflowExecutionInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SWF) TerminateWorkflowExecutionWithContext(ctx aws.Context, input *TerminateWorkflowExecutionInput, opts ...request.Option) (*TerminateWorkflowExecutionOutput, error) {
+func (c *SWF) TerminateWorkflowExecutionWithContext(ctx aws.Context, input *TerminateWorkflowExecutionInput, opts ...aws.Option) (*TerminateWorkflowExecutionOutput, error) {
 	req, out := c.TerminateWorkflowExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4404,18 +4403,18 @@ func (s ActivityType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivityType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ActivityType"}
+	invalidParams := aws.ErrInvalidParams{Context: "ActivityType"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4650,12 +4649,12 @@ func (s CancelTimerDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelTimerDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelTimerDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelTimerDecisionAttributes"}
 	if s.TimerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimerId"))
+		invalidParams.Add(aws.NewErrParamRequired("TimerId"))
 	}
 	if s.TimerId != nil && len(*s.TimerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TimerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TimerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5259,9 +5258,9 @@ func (s CloseStatusFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloseStatusFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloseStatusFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloseStatusFilter"}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5486,16 +5485,16 @@ func (s ContinueAsNewWorkflowExecutionDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContinueAsNewWorkflowExecutionDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ContinueAsNewWorkflowExecutionDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "ContinueAsNewWorkflowExecutionDecisionAttributes"}
 	if s.LambdaRole != nil && len(*s.LambdaRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LambdaRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LambdaRole", 1))
 	}
 	if s.WorkflowTypeVersion != nil && len(*s.WorkflowTypeVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowTypeVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowTypeVersion", 1))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5667,41 +5666,41 @@ func (s CountClosedWorkflowExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountClosedWorkflowExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CountClosedWorkflowExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CountClosedWorkflowExecutionsInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.CloseStatusFilter != nil {
 		if err := s.CloseStatusFilter.Validate(); err != nil {
-			invalidParams.AddNested("CloseStatusFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloseStatusFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CloseTimeFilter != nil {
 		if err := s.CloseTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("CloseTimeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloseTimeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ExecutionFilter != nil {
 		if err := s.ExecutionFilter.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExecutionFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StartTimeFilter != nil {
 		if err := s.StartTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StartTimeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TagFilter != nil {
 		if err := s.TagFilter.Validate(); err != nil {
-			invalidParams.AddNested("TagFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TagFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TypeFilter != nil {
 		if err := s.TypeFilter.Validate(); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5800,34 +5799,34 @@ func (s CountOpenWorkflowExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountOpenWorkflowExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CountOpenWorkflowExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CountOpenWorkflowExecutionsInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.StartTimeFilter == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTimeFilter"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTimeFilter"))
 	}
 	if s.ExecutionFilter != nil {
 		if err := s.ExecutionFilter.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExecutionFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StartTimeFilter != nil {
 		if err := s.StartTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StartTimeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TagFilter != nil {
 		if err := s.TagFilter.Validate(); err != nil {
-			invalidParams.AddNested("TagFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TagFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TypeFilter != nil {
 		if err := s.TypeFilter.Validate(); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5893,19 +5892,19 @@ func (s CountPendingActivityTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountPendingActivityTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CountPendingActivityTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CountPendingActivityTasksInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.TaskList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskList"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5953,19 +5952,19 @@ func (s CountPendingDecisionTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CountPendingDecisionTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CountPendingDecisionTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CountPendingDecisionTasksInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.TaskList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskList"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6227,58 +6226,58 @@ func (s Decision) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Decision) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Decision"}
+	invalidParams := aws.ErrInvalidParams{Context: "Decision"}
 	if s.DecisionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("DecisionType"))
+		invalidParams.Add(aws.NewErrParamRequired("DecisionType"))
 	}
 	if s.CancelTimerDecisionAttributes != nil {
 		if err := s.CancelTimerDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("CancelTimerDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CancelTimerDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ContinueAsNewWorkflowExecutionDecisionAttributes != nil {
 		if err := s.ContinueAsNewWorkflowExecutionDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("ContinueAsNewWorkflowExecutionDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ContinueAsNewWorkflowExecutionDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RecordMarkerDecisionAttributes != nil {
 		if err := s.RecordMarkerDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("RecordMarkerDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RecordMarkerDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RequestCancelActivityTaskDecisionAttributes != nil {
 		if err := s.RequestCancelActivityTaskDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("RequestCancelActivityTaskDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RequestCancelActivityTaskDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RequestCancelExternalWorkflowExecutionDecisionAttributes != nil {
 		if err := s.RequestCancelExternalWorkflowExecutionDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("RequestCancelExternalWorkflowExecutionDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RequestCancelExternalWorkflowExecutionDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ScheduleActivityTaskDecisionAttributes != nil {
 		if err := s.ScheduleActivityTaskDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("ScheduleActivityTaskDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ScheduleActivityTaskDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ScheduleLambdaFunctionDecisionAttributes != nil {
 		if err := s.ScheduleLambdaFunctionDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("ScheduleLambdaFunctionDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ScheduleLambdaFunctionDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SignalExternalWorkflowExecutionDecisionAttributes != nil {
 		if err := s.SignalExternalWorkflowExecutionDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("SignalExternalWorkflowExecutionDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SignalExternalWorkflowExecutionDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StartChildWorkflowExecutionDecisionAttributes != nil {
 		if err := s.StartChildWorkflowExecutionDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("StartChildWorkflowExecutionDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StartChildWorkflowExecutionDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StartTimerDecisionAttributes != nil {
 		if err := s.StartTimerDecisionAttributes.Validate(); err != nil {
-			invalidParams.AddNested("StartTimerDecisionAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StartTimerDecisionAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6592,19 +6591,19 @@ func (s DeprecateActivityTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateActivityTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeprecateActivityTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeprecateActivityTypeInput"}
 	if s.ActivityType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityType"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
 	}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.ActivityType != nil {
 		if err := s.ActivityType.Validate(); err != nil {
-			invalidParams.AddNested("ActivityType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ActivityType", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6661,12 +6660,12 @@ func (s DeprecateDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeprecateDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeprecateDomainInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6721,19 +6720,19 @@ func (s DeprecateWorkflowTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateWorkflowTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeprecateWorkflowTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeprecateWorkflowTypeInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.WorkflowType == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowType"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
 	if s.WorkflowType != nil {
 		if err := s.WorkflowType.Validate(); err != nil {
-			invalidParams.AddNested("WorkflowType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WorkflowType", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6796,19 +6795,19 @@ func (s DescribeActivityTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivityTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeActivityTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivityTypeInput"}
 	if s.ActivityType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityType"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
 	}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.ActivityType != nil {
 		if err := s.ActivityType.Validate(); err != nil {
-			invalidParams.AddNested("ActivityType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ActivityType", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6898,12 +6897,12 @@ func (s DescribeDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6982,19 +6981,19 @@ func (s DescribeWorkflowExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkflowExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkflowExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkflowExecutionInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.Execution == nil {
-		invalidParams.Add(request.NewErrParamRequired("Execution"))
+		invalidParams.Add(aws.NewErrParamRequired("Execution"))
 	}
 	if s.Execution != nil {
 		if err := s.Execution.Validate(); err != nil {
-			invalidParams.AddNested("Execution", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Execution", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7114,19 +7113,19 @@ func (s DescribeWorkflowTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeWorkflowTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeWorkflowTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeWorkflowTypeInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.WorkflowType == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowType"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
 	if s.WorkflowType != nil {
 		if err := s.WorkflowType.Validate(); err != nil {
-			invalidParams.AddNested("WorkflowType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WorkflowType", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7303,9 +7302,9 @@ func (s ExecutionTimeFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExecutionTimeFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExecutionTimeFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExecutionTimeFilter"}
 	if s.OldestDate == nil {
-		invalidParams.Add(request.NewErrParamRequired("OldestDate"))
+		invalidParams.Add(aws.NewErrParamRequired("OldestDate"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7551,19 +7550,19 @@ func (s GetWorkflowExecutionHistoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetWorkflowExecutionHistoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetWorkflowExecutionHistoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetWorkflowExecutionHistoryInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.Execution == nil {
-		invalidParams.Add(request.NewErrParamRequired("Execution"))
+		invalidParams.Add(aws.NewErrParamRequired("Execution"))
 	}
 	if s.Execution != nil {
 		if err := s.Execution.Validate(); err != nil {
-			invalidParams.AddNested("Execution", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Execution", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8729,18 +8728,18 @@ func (s ListActivityTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListActivityTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListActivityTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListActivityTypesInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RegistrationStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("RegistrationStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8912,41 +8911,41 @@ func (s ListClosedWorkflowExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListClosedWorkflowExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListClosedWorkflowExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListClosedWorkflowExecutionsInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.CloseStatusFilter != nil {
 		if err := s.CloseStatusFilter.Validate(); err != nil {
-			invalidParams.AddNested("CloseStatusFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloseStatusFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CloseTimeFilter != nil {
 		if err := s.CloseTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("CloseTimeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloseTimeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ExecutionFilter != nil {
 		if err := s.ExecutionFilter.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExecutionFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StartTimeFilter != nil {
 		if err := s.StartTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StartTimeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TagFilter != nil {
 		if err := s.TagFilter.Validate(); err != nil {
-			invalidParams.AddNested("TagFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TagFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TypeFilter != nil {
 		if err := s.TypeFilter.Validate(); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9058,9 +9057,9 @@ func (s ListDomainsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDomainsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDomainsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDomainsInput"}
 	if s.RegistrationStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("RegistrationStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9200,34 +9199,34 @@ func (s ListOpenWorkflowExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOpenWorkflowExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOpenWorkflowExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOpenWorkflowExecutionsInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.StartTimeFilter == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTimeFilter"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTimeFilter"))
 	}
 	if s.ExecutionFilter != nil {
 		if err := s.ExecutionFilter.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExecutionFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StartTimeFilter != nil {
 		if err := s.StartTimeFilter.Validate(); err != nil {
-			invalidParams.AddNested("StartTimeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StartTimeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TagFilter != nil {
 		if err := s.TagFilter.Validate(); err != nil {
-			invalidParams.AddNested("TagFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TagFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TypeFilter != nil {
 		if err := s.TypeFilter.Validate(); err != nil {
-			invalidParams.AddNested("TypeFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypeFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9336,18 +9335,18 @@ func (s ListWorkflowTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListWorkflowTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListWorkflowTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListWorkflowTypesInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RegistrationStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("RegistrationStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("RegistrationStatus"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9552,19 +9551,19 @@ func (s PollForActivityTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForActivityTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PollForActivityTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PollForActivityTaskInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.TaskList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskList"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9735,19 +9734,19 @@ func (s PollForDecisionTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PollForDecisionTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PollForDecisionTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PollForDecisionTaskInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.TaskList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskList"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskList"))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9921,12 +9920,12 @@ func (s RecordActivityTaskHeartbeatInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordActivityTaskHeartbeatInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RecordActivityTaskHeartbeatInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RecordActivityTaskHeartbeatInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10017,12 +10016,12 @@ func (s RecordMarkerDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordMarkerDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RecordMarkerDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "RecordMarkerDecisionAttributes"}
 	if s.MarkerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MarkerName"))
+		invalidParams.Add(aws.NewErrParamRequired("MarkerName"))
 	}
 	if s.MarkerName != nil && len(*s.MarkerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MarkerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MarkerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10197,28 +10196,28 @@ func (s RegisterActivityTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterActivityTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterActivityTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterActivityTypeInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 	if s.DefaultTaskList != nil {
 		if err := s.DefaultTaskList.Validate(); err != nil {
-			invalidParams.AddNested("DefaultTaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DefaultTaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10346,18 +10345,18 @@ func (s RegisterDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterDomainInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.WorkflowExecutionRetentionPeriodInDays == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowExecutionRetentionPeriodInDays"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowExecutionRetentionPeriodInDays"))
 	}
 	if s.WorkflowExecutionRetentionPeriodInDays != nil && len(*s.WorkflowExecutionRetentionPeriodInDays) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowExecutionRetentionPeriodInDays", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowExecutionRetentionPeriodInDays", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10506,31 +10505,31 @@ func (s RegisterWorkflowTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterWorkflowTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterWorkflowTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterWorkflowTypeInput"}
 	if s.DefaultLambdaRole != nil && len(*s.DefaultLambdaRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DefaultLambdaRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultLambdaRole", 1))
 	}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 	if s.DefaultTaskList != nil {
 		if err := s.DefaultTaskList.Validate(); err != nil {
-			invalidParams.AddNested("DefaultTaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DefaultTaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10655,12 +10654,12 @@ func (s RequestCancelActivityTaskDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCancelActivityTaskDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestCancelActivityTaskDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelActivityTaskDecisionAttributes"}
 	if s.ActivityId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityId"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityId"))
 	}
 	if s.ActivityId != nil && len(*s.ActivityId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActivityId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10780,12 +10779,12 @@ func (s RequestCancelExternalWorkflowExecutionDecisionAttributes) GoString() str
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCancelExternalWorkflowExecutionDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestCancelExternalWorkflowExecutionDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelExternalWorkflowExecutionDecisionAttributes"}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10993,18 +10992,18 @@ func (s RequestCancelWorkflowExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCancelWorkflowExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestCancelWorkflowExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestCancelWorkflowExecutionInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11073,12 +11072,12 @@ func (s RespondActivityTaskCanceledInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondActivityTaskCanceledInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RespondActivityTaskCanceledInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RespondActivityTaskCanceledInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11142,12 +11141,12 @@ func (s RespondActivityTaskCompletedInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondActivityTaskCompletedInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RespondActivityTaskCompletedInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RespondActivityTaskCompletedInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11213,12 +11212,12 @@ func (s RespondActivityTaskFailedInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondActivityTaskFailedInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RespondActivityTaskFailedInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RespondActivityTaskFailedInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11292,12 +11291,12 @@ func (s RespondDecisionTaskCompletedInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondDecisionTaskCompletedInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RespondDecisionTaskCompletedInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RespondDecisionTaskCompletedInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 	if s.Decisions != nil {
 		for i, v := range s.Decisions {
@@ -11305,7 +11304,7 @@ func (s *RespondDecisionTaskCompletedInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Decisions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Decisions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11485,24 +11484,24 @@ func (s ScheduleActivityTaskDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleActivityTaskDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScheduleActivityTaskDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleActivityTaskDecisionAttributes"}
 	if s.ActivityId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityId"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityId"))
 	}
 	if s.ActivityId != nil && len(*s.ActivityId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActivityId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityId", 1))
 	}
 	if s.ActivityType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityType"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityType"))
 	}
 	if s.ActivityType != nil {
 		if err := s.ActivityType.Validate(); err != nil {
-			invalidParams.AddNested("ActivityType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ActivityType", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11680,18 +11679,18 @@ func (s ScheduleLambdaFunctionDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleLambdaFunctionDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScheduleLambdaFunctionDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleLambdaFunctionDecisionAttributes"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11856,18 +11855,18 @@ func (s SignalExternalWorkflowExecutionDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignalExternalWorkflowExecutionDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SignalExternalWorkflowExecutionDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "SignalExternalWorkflowExecutionDecisionAttributes"}
 	if s.SignalName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SignalName"))
+		invalidParams.Add(aws.NewErrParamRequired("SignalName"))
 	}
 	if s.SignalName != nil && len(*s.SignalName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SignalName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SignalName", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12115,24 +12114,24 @@ func (s SignalWorkflowExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignalWorkflowExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SignalWorkflowExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SignalWorkflowExecutionInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.SignalName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SignalName"))
+		invalidParams.Add(aws.NewErrParamRequired("SignalName"))
 	}
 	if s.SignalName != nil && len(*s.SignalName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SignalName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SignalName", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12332,27 +12331,27 @@ func (s StartChildWorkflowExecutionDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartChildWorkflowExecutionDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartChildWorkflowExecutionDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartChildWorkflowExecutionDecisionAttributes"}
 	if s.LambdaRole != nil && len(*s.LambdaRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LambdaRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LambdaRole", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 	if s.WorkflowType == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowType"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.WorkflowType != nil {
 		if err := s.WorkflowType.Validate(); err != nil {
-			invalidParams.AddNested("WorkflowType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WorkflowType", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12796,18 +12795,18 @@ func (s StartTimerDecisionAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartTimerDecisionAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartTimerDecisionAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartTimerDecisionAttributes"}
 	if s.StartToFireTimeout == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartToFireTimeout"))
+		invalidParams.Add(aws.NewErrParamRequired("StartToFireTimeout"))
 	}
 	if s.StartToFireTimeout != nil && len(*s.StartToFireTimeout) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StartToFireTimeout", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StartToFireTimeout", 1))
 	}
 	if s.TimerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimerId"))
+		invalidParams.Add(aws.NewErrParamRequired("TimerId"))
 	}
 	if s.TimerId != nil && len(*s.TimerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TimerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TimerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13026,33 +13025,33 @@ func (s StartWorkflowExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartWorkflowExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartWorkflowExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartWorkflowExecutionInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.LambdaRole != nil && len(*s.LambdaRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LambdaRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LambdaRole", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 	if s.WorkflowType == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowType"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowType"))
 	}
 	if s.TaskList != nil {
 		if err := s.TaskList.Validate(); err != nil {
-			invalidParams.AddNested("TaskList", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskList", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.WorkflowType != nil {
 		if err := s.WorkflowType.Validate(); err != nil {
-			invalidParams.AddNested("WorkflowType", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WorkflowType", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13176,9 +13175,9 @@ func (s TagFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagFilter"}
 	if s.Tag == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tag"))
+		invalidParams.Add(aws.NewErrParamRequired("Tag"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13215,12 +13214,12 @@ func (s TaskList) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TaskList) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TaskList"}
+	invalidParams := aws.ErrInvalidParams{Context: "TaskList"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13292,18 +13291,18 @@ func (s TerminateWorkflowExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateWorkflowExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateWorkflowExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateWorkflowExecutionInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13545,18 +13544,18 @@ func (s WorkflowExecution) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowExecution) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WorkflowExecution"}
+	invalidParams := aws.ErrInvalidParams{Context: "WorkflowExecution"}
 	if s.RunId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RunId"))
+		invalidParams.Add(aws.NewErrParamRequired("RunId"))
 	}
 	if s.RunId != nil && len(*s.RunId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RunId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RunId", 1))
 	}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14059,12 +14058,12 @@ func (s WorkflowExecutionFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowExecutionFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WorkflowExecutionFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "WorkflowExecutionFilter"}
 	if s.WorkflowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkflowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkflowId"))
 	}
 	if s.WorkflowId != nil && len(*s.WorkflowId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkflowId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkflowId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14680,18 +14679,18 @@ func (s WorkflowType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WorkflowType"}
+	invalidParams := aws.ErrInvalidParams{Context: "WorkflowType"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14856,12 +14855,12 @@ func (s WorkflowTypeFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkflowTypeFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WorkflowTypeFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "WorkflowTypeFilter"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {

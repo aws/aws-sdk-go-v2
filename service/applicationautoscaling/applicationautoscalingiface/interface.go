@@ -10,7 +10,6 @@ package applicationautoscalingiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := applicationautoscaling.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := applicationautoscaling.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,41 +64,41 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type ApplicationAutoScalingAPI interface {
 	DeleteScalingPolicy(*applicationautoscaling.DeleteScalingPolicyInput) (*applicationautoscaling.DeleteScalingPolicyOutput, error)
-	DeleteScalingPolicyWithContext(aws.Context, *applicationautoscaling.DeleteScalingPolicyInput, ...request.Option) (*applicationautoscaling.DeleteScalingPolicyOutput, error)
-	DeleteScalingPolicyRequest(*applicationautoscaling.DeleteScalingPolicyInput) (*request.Request, *applicationautoscaling.DeleteScalingPolicyOutput)
+	DeleteScalingPolicyWithContext(aws.Context, *applicationautoscaling.DeleteScalingPolicyInput, ...aws.Option) (*applicationautoscaling.DeleteScalingPolicyOutput, error)
+	DeleteScalingPolicyRequest(*applicationautoscaling.DeleteScalingPolicyInput) (*aws.Request, *applicationautoscaling.DeleteScalingPolicyOutput)
 
 	DeregisterScalableTarget(*applicationautoscaling.DeregisterScalableTargetInput) (*applicationautoscaling.DeregisterScalableTargetOutput, error)
-	DeregisterScalableTargetWithContext(aws.Context, *applicationautoscaling.DeregisterScalableTargetInput, ...request.Option) (*applicationautoscaling.DeregisterScalableTargetOutput, error)
-	DeregisterScalableTargetRequest(*applicationautoscaling.DeregisterScalableTargetInput) (*request.Request, *applicationautoscaling.DeregisterScalableTargetOutput)
+	DeregisterScalableTargetWithContext(aws.Context, *applicationautoscaling.DeregisterScalableTargetInput, ...aws.Option) (*applicationautoscaling.DeregisterScalableTargetOutput, error)
+	DeregisterScalableTargetRequest(*applicationautoscaling.DeregisterScalableTargetInput) (*aws.Request, *applicationautoscaling.DeregisterScalableTargetOutput)
 
 	DescribeScalableTargets(*applicationautoscaling.DescribeScalableTargetsInput) (*applicationautoscaling.DescribeScalableTargetsOutput, error)
-	DescribeScalableTargetsWithContext(aws.Context, *applicationautoscaling.DescribeScalableTargetsInput, ...request.Option) (*applicationautoscaling.DescribeScalableTargetsOutput, error)
-	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) (*request.Request, *applicationautoscaling.DescribeScalableTargetsOutput)
+	DescribeScalableTargetsWithContext(aws.Context, *applicationautoscaling.DescribeScalableTargetsInput, ...aws.Option) (*applicationautoscaling.DescribeScalableTargetsOutput, error)
+	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) (*aws.Request, *applicationautoscaling.DescribeScalableTargetsOutput)
 
 	DescribeScalableTargetsPages(*applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool) error
-	DescribeScalableTargetsPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool, ...request.Option) error
+	DescribeScalableTargetsPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool, ...aws.Option) error
 
 	DescribeScalingActivities(*applicationautoscaling.DescribeScalingActivitiesInput) (*applicationautoscaling.DescribeScalingActivitiesOutput, error)
-	DescribeScalingActivitiesWithContext(aws.Context, *applicationautoscaling.DescribeScalingActivitiesInput, ...request.Option) (*applicationautoscaling.DescribeScalingActivitiesOutput, error)
-	DescribeScalingActivitiesRequest(*applicationautoscaling.DescribeScalingActivitiesInput) (*request.Request, *applicationautoscaling.DescribeScalingActivitiesOutput)
+	DescribeScalingActivitiesWithContext(aws.Context, *applicationautoscaling.DescribeScalingActivitiesInput, ...aws.Option) (*applicationautoscaling.DescribeScalingActivitiesOutput, error)
+	DescribeScalingActivitiesRequest(*applicationautoscaling.DescribeScalingActivitiesInput) (*aws.Request, *applicationautoscaling.DescribeScalingActivitiesOutput)
 
 	DescribeScalingActivitiesPages(*applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool) error
-	DescribeScalingActivitiesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool, ...request.Option) error
+	DescribeScalingActivitiesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool, ...aws.Option) error
 
 	DescribeScalingPolicies(*applicationautoscaling.DescribeScalingPoliciesInput) (*applicationautoscaling.DescribeScalingPoliciesOutput, error)
-	DescribeScalingPoliciesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, ...request.Option) (*applicationautoscaling.DescribeScalingPoliciesOutput, error)
-	DescribeScalingPoliciesRequest(*applicationautoscaling.DescribeScalingPoliciesInput) (*request.Request, *applicationautoscaling.DescribeScalingPoliciesOutput)
+	DescribeScalingPoliciesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, ...aws.Option) (*applicationautoscaling.DescribeScalingPoliciesOutput, error)
+	DescribeScalingPoliciesRequest(*applicationautoscaling.DescribeScalingPoliciesInput) (*aws.Request, *applicationautoscaling.DescribeScalingPoliciesOutput)
 
 	DescribeScalingPoliciesPages(*applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool) error
-	DescribeScalingPoliciesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool, ...request.Option) error
+	DescribeScalingPoliciesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool, ...aws.Option) error
 
 	PutScalingPolicy(*applicationautoscaling.PutScalingPolicyInput) (*applicationautoscaling.PutScalingPolicyOutput, error)
-	PutScalingPolicyWithContext(aws.Context, *applicationautoscaling.PutScalingPolicyInput, ...request.Option) (*applicationautoscaling.PutScalingPolicyOutput, error)
-	PutScalingPolicyRequest(*applicationautoscaling.PutScalingPolicyInput) (*request.Request, *applicationautoscaling.PutScalingPolicyOutput)
+	PutScalingPolicyWithContext(aws.Context, *applicationautoscaling.PutScalingPolicyInput, ...aws.Option) (*applicationautoscaling.PutScalingPolicyOutput, error)
+	PutScalingPolicyRequest(*applicationautoscaling.PutScalingPolicyInput) (*aws.Request, *applicationautoscaling.PutScalingPolicyOutput)
 
 	RegisterScalableTarget(*applicationautoscaling.RegisterScalableTargetInput) (*applicationautoscaling.RegisterScalableTargetOutput, error)
-	RegisterScalableTargetWithContext(aws.Context, *applicationautoscaling.RegisterScalableTargetInput, ...request.Option) (*applicationautoscaling.RegisterScalableTargetOutput, error)
-	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) (*request.Request, *applicationautoscaling.RegisterScalableTargetOutput)
+	RegisterScalableTargetWithContext(aws.Context, *applicationautoscaling.RegisterScalableTargetInput, ...aws.Option) (*applicationautoscaling.RegisterScalableTargetOutput, error)
+	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) (*aws.Request, *applicationautoscaling.RegisterScalableTargetOutput)
 }
 
 var _ ApplicationAutoScalingAPI = (*applicationautoscaling.ApplicationAutoScaling)(nil)

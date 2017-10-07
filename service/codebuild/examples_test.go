@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild"
 )
 
@@ -29,7 +29,12 @@ func parseTime(layout, value string) *time.Time {
 //
 // The following example gets information about builds with the specified build IDs.
 func ExampleCodeBuild_BatchGetBuilds_shared00() {
-	svc := codebuild.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := codebuild.New(cfg)
 	input := &codebuild.BatchGetBuildsInput{
 		Ids: []*string{
 			aws.String("codebuild-demo-project:9b0ac37f-d19e-4254-9079-f47e9a389eEX"),

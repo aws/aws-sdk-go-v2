@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opBatchGetRepositories = "BatchGetRepositories"
 
-// BatchGetRepositoriesRequest generates a "aws/request.Request" representing the
+// BatchGetRepositoriesRequest generates a "aws.Request" representing the
 // client's request for the BatchGetRepositories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opBatchGetRepositories = "BatchGetRepositories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories
-func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) (req *request.Request, output *BatchGetRepositoriesOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInput) (req *aws.Request, output *BatchGetRepositoriesOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetRepositories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -117,7 +116,7 @@ func (c *CodeCommit) BatchGetRepositories(input *BatchGetRepositoriesInput) (*Ba
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) BatchGetRepositoriesWithContext(ctx aws.Context, input *BatchGetRepositoriesInput, opts ...request.Option) (*BatchGetRepositoriesOutput, error) {
+func (c *CodeCommit) BatchGetRepositoriesWithContext(ctx aws.Context, input *BatchGetRepositoriesInput, opts ...aws.Option) (*BatchGetRepositoriesOutput, error) {
 	req, out := c.BatchGetRepositoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -126,7 +125,7 @@ func (c *CodeCommit) BatchGetRepositoriesWithContext(ctx aws.Context, input *Bat
 
 const opCreateBranch = "CreateBranch"
 
-// CreateBranchRequest generates a "aws/request.Request" representing the
+// CreateBranchRequest generates a "aws.Request" representing the
 // client's request for the CreateBranch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -150,8 +149,8 @@ const opCreateBranch = "CreateBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranch
-func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) (req *request.Request, output *CreateBranchOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) (req *aws.Request, output *CreateBranchOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBranch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -245,7 +244,7 @@ func (c *CodeCommit) CreateBranch(input *CreateBranchInput) (*CreateBranchOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) CreateBranchWithContext(ctx aws.Context, input *CreateBranchInput, opts ...request.Option) (*CreateBranchOutput, error) {
+func (c *CodeCommit) CreateBranchWithContext(ctx aws.Context, input *CreateBranchInput, opts ...aws.Option) (*CreateBranchOutput, error) {
 	req, out := c.CreateBranchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -254,7 +253,7 @@ func (c *CodeCommit) CreateBranchWithContext(ctx aws.Context, input *CreateBranc
 
 const opCreateRepository = "CreateRepository"
 
-// CreateRepositoryRequest generates a "aws/request.Request" representing the
+// CreateRepositoryRequest generates a "aws.Request" representing the
 // client's request for the CreateRepository operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -278,8 +277,8 @@ const opCreateRepository = "CreateRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository
-func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) (req *request.Request, output *CreateRepositoryOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) (req *aws.Request, output *CreateRepositoryOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRepository,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -355,7 +354,7 @@ func (c *CodeCommit) CreateRepository(input *CreateRepositoryInput) (*CreateRepo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) CreateRepositoryWithContext(ctx aws.Context, input *CreateRepositoryInput, opts ...request.Option) (*CreateRepositoryOutput, error) {
+func (c *CodeCommit) CreateRepositoryWithContext(ctx aws.Context, input *CreateRepositoryInput, opts ...aws.Option) (*CreateRepositoryOutput, error) {
 	req, out := c.CreateRepositoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -364,7 +363,7 @@ func (c *CodeCommit) CreateRepositoryWithContext(ctx aws.Context, input *CreateR
 
 const opDeleteRepository = "DeleteRepository"
 
-// DeleteRepositoryRequest generates a "aws/request.Request" representing the
+// DeleteRepositoryRequest generates a "aws.Request" representing the
 // client's request for the DeleteRepository operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -388,8 +387,8 @@ const opDeleteRepository = "DeleteRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepository
-func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *request.Request, output *DeleteRepositoryOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) (req *aws.Request, output *DeleteRepositoryOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRepository,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -461,7 +460,7 @@ func (c *CodeCommit) DeleteRepository(input *DeleteRepositoryInput) (*DeleteRepo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteRepositoryInput, opts ...request.Option) (*DeleteRepositoryOutput, error) {
+func (c *CodeCommit) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteRepositoryInput, opts ...aws.Option) (*DeleteRepositoryOutput, error) {
 	req, out := c.DeleteRepositoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -470,7 +469,7 @@ func (c *CodeCommit) DeleteRepositoryWithContext(ctx aws.Context, input *DeleteR
 
 const opGetBlob = "GetBlob"
 
-// GetBlobRequest generates a "aws/request.Request" representing the
+// GetBlobRequest generates a "aws.Request" representing the
 // client's request for the GetBlob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -494,8 +493,8 @@ const opGetBlob = "GetBlob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlob
-func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) (req *request.Request, output *GetBlobOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) (req *aws.Request, output *GetBlobOutput) {
+	op := &aws.Operation{
 		Name:       opGetBlob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -579,7 +578,7 @@ func (c *CodeCommit) GetBlob(input *GetBlobInput) (*GetBlobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetBlobWithContext(ctx aws.Context, input *GetBlobInput, opts ...request.Option) (*GetBlobOutput, error) {
+func (c *CodeCommit) GetBlobWithContext(ctx aws.Context, input *GetBlobInput, opts ...aws.Option) (*GetBlobOutput, error) {
 	req, out := c.GetBlobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -588,7 +587,7 @@ func (c *CodeCommit) GetBlobWithContext(ctx aws.Context, input *GetBlobInput, op
 
 const opGetBranch = "GetBranch"
 
-// GetBranchRequest generates a "aws/request.Request" representing the
+// GetBranchRequest generates a "aws.Request" representing the
 // client's request for the GetBranch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -612,8 +611,8 @@ const opGetBranch = "GetBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranch
-func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) (req *request.Request, output *GetBranchOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) (req *aws.Request, output *GetBranchOutput) {
+	op := &aws.Operation{
 		Name:       opGetBranch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -693,7 +692,7 @@ func (c *CodeCommit) GetBranch(input *GetBranchInput) (*GetBranchOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetBranchWithContext(ctx aws.Context, input *GetBranchInput, opts ...request.Option) (*GetBranchOutput, error) {
+func (c *CodeCommit) GetBranchWithContext(ctx aws.Context, input *GetBranchInput, opts ...aws.Option) (*GetBranchOutput, error) {
 	req, out := c.GetBranchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -702,7 +701,7 @@ func (c *CodeCommit) GetBranchWithContext(ctx aws.Context, input *GetBranchInput
 
 const opGetCommit = "GetCommit"
 
-// GetCommitRequest generates a "aws/request.Request" representing the
+// GetCommitRequest generates a "aws.Request" representing the
 // client's request for the GetCommit operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -726,8 +725,8 @@ const opGetCommit = "GetCommit"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommit
-func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) (req *request.Request, output *GetCommitOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) (req *aws.Request, output *GetCommitOutput) {
+	op := &aws.Operation{
 		Name:       opGetCommit,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -807,7 +806,7 @@ func (c *CodeCommit) GetCommit(input *GetCommitInput) (*GetCommitOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetCommitWithContext(ctx aws.Context, input *GetCommitInput, opts ...request.Option) (*GetCommitOutput, error) {
+func (c *CodeCommit) GetCommitWithContext(ctx aws.Context, input *GetCommitInput, opts ...aws.Option) (*GetCommitOutput, error) {
 	req, out := c.GetCommitRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -816,7 +815,7 @@ func (c *CodeCommit) GetCommitWithContext(ctx aws.Context, input *GetCommitInput
 
 const opGetDifferences = "GetDifferences"
 
-// GetDifferencesRequest generates a "aws/request.Request" representing the
+// GetDifferencesRequest generates a "aws.Request" representing the
 // client's request for the GetDifferences operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -840,12 +839,12 @@ const opGetDifferences = "GetDifferences"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferences
-func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) (req *request.Request, output *GetDifferencesOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) (req *aws.Request, output *GetDifferencesOutput) {
+	op := &aws.Operation{
 		Name:       opGetDifferences,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -944,7 +943,7 @@ func (c *CodeCommit) GetDifferences(input *GetDifferencesInput) (*GetDifferences
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetDifferencesWithContext(ctx aws.Context, input *GetDifferencesInput, opts ...request.Option) (*GetDifferencesOutput, error) {
+func (c *CodeCommit) GetDifferencesWithContext(ctx aws.Context, input *GetDifferencesInput, opts ...aws.Option) (*GetDifferencesOutput, error) {
 	req, out := c.GetDifferencesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -979,9 +978,9 @@ func (c *CodeCommit) GetDifferencesPages(input *GetDifferencesInput, fn func(*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetDifferencesPagesWithContext(ctx aws.Context, input *GetDifferencesInput, fn func(*GetDifferencesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeCommit) GetDifferencesPagesWithContext(ctx aws.Context, input *GetDifferencesInput, fn func(*GetDifferencesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDifferencesInput
 			if input != nil {
 				tmp := *input
@@ -1003,7 +1002,7 @@ func (c *CodeCommit) GetDifferencesPagesWithContext(ctx aws.Context, input *GetD
 
 const opGetRepository = "GetRepository"
 
-// GetRepositoryRequest generates a "aws/request.Request" representing the
+// GetRepositoryRequest generates a "aws.Request" representing the
 // client's request for the GetRepository operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1027,8 +1026,8 @@ const opGetRepository = "GetRepository"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepository
-func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) (req *request.Request, output *GetRepositoryOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) (req *aws.Request, output *GetRepositoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetRepository,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1104,7 +1103,7 @@ func (c *CodeCommit) GetRepository(input *GetRepositoryInput) (*GetRepositoryOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetRepositoryWithContext(ctx aws.Context, input *GetRepositoryInput, opts ...request.Option) (*GetRepositoryOutput, error) {
+func (c *CodeCommit) GetRepositoryWithContext(ctx aws.Context, input *GetRepositoryInput, opts ...aws.Option) (*GetRepositoryOutput, error) {
 	req, out := c.GetRepositoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1113,7 +1112,7 @@ func (c *CodeCommit) GetRepositoryWithContext(ctx aws.Context, input *GetReposit
 
 const opGetRepositoryTriggers = "GetRepositoryTriggers"
 
-// GetRepositoryTriggersRequest generates a "aws/request.Request" representing the
+// GetRepositoryTriggersRequest generates a "aws.Request" representing the
 // client's request for the GetRepositoryTriggers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1137,8 +1136,8 @@ const opGetRepositoryTriggers = "GetRepositoryTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggers
-func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput) (req *request.Request, output *GetRepositoryTriggersOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersInput) (req *aws.Request, output *GetRepositoryTriggersOutput) {
+	op := &aws.Operation{
 		Name:       opGetRepositoryTriggers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1208,7 +1207,7 @@ func (c *CodeCommit) GetRepositoryTriggers(input *GetRepositoryTriggersInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) GetRepositoryTriggersWithContext(ctx aws.Context, input *GetRepositoryTriggersInput, opts ...request.Option) (*GetRepositoryTriggersOutput, error) {
+func (c *CodeCommit) GetRepositoryTriggersWithContext(ctx aws.Context, input *GetRepositoryTriggersInput, opts ...aws.Option) (*GetRepositoryTriggersOutput, error) {
 	req, out := c.GetRepositoryTriggersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1217,7 +1216,7 @@ func (c *CodeCommit) GetRepositoryTriggersWithContext(ctx aws.Context, input *Ge
 
 const opListBranches = "ListBranches"
 
-// ListBranchesRequest generates a "aws/request.Request" representing the
+// ListBranchesRequest generates a "aws.Request" representing the
 // client's request for the ListBranches operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1241,12 +1240,12 @@ const opListBranches = "ListBranches"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranches
-func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) (req *request.Request, output *ListBranchesOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) (req *aws.Request, output *ListBranchesOutput) {
+	op := &aws.Operation{
 		Name:       opListBranches,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -1321,7 +1320,7 @@ func (c *CodeCommit) ListBranches(input *ListBranchesInput) (*ListBranchesOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) ListBranchesWithContext(ctx aws.Context, input *ListBranchesInput, opts ...request.Option) (*ListBranchesOutput, error) {
+func (c *CodeCommit) ListBranchesWithContext(ctx aws.Context, input *ListBranchesInput, opts ...aws.Option) (*ListBranchesOutput, error) {
 	req, out := c.ListBranchesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1356,9 +1355,9 @@ func (c *CodeCommit) ListBranchesPages(input *ListBranchesInput, fn func(*ListBr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) ListBranchesPagesWithContext(ctx aws.Context, input *ListBranchesInput, fn func(*ListBranchesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeCommit) ListBranchesPagesWithContext(ctx aws.Context, input *ListBranchesInput, fn func(*ListBranchesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListBranchesInput
 			if input != nil {
 				tmp := *input
@@ -1380,7 +1379,7 @@ func (c *CodeCommit) ListBranchesPagesWithContext(ctx aws.Context, input *ListBr
 
 const opListRepositories = "ListRepositories"
 
-// ListRepositoriesRequest generates a "aws/request.Request" representing the
+// ListRepositoriesRequest generates a "aws.Request" representing the
 // client's request for the ListRepositories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1404,12 +1403,12 @@ const opListRepositories = "ListRepositories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositories
-func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) (req *request.Request, output *ListRepositoriesOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) (req *aws.Request, output *ListRepositoriesOutput) {
+	op := &aws.Operation{
 		Name:       opListRepositories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -1462,7 +1461,7 @@ func (c *CodeCommit) ListRepositories(input *ListRepositoriesInput) (*ListReposi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) ListRepositoriesWithContext(ctx aws.Context, input *ListRepositoriesInput, opts ...request.Option) (*ListRepositoriesOutput, error) {
+func (c *CodeCommit) ListRepositoriesWithContext(ctx aws.Context, input *ListRepositoriesInput, opts ...aws.Option) (*ListRepositoriesOutput, error) {
 	req, out := c.ListRepositoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1497,9 +1496,9 @@ func (c *CodeCommit) ListRepositoriesPages(input *ListRepositoriesInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) ListRepositoriesPagesWithContext(ctx aws.Context, input *ListRepositoriesInput, fn func(*ListRepositoriesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CodeCommit) ListRepositoriesPagesWithContext(ctx aws.Context, input *ListRepositoriesInput, fn func(*ListRepositoriesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListRepositoriesInput
 			if input != nil {
 				tmp := *input
@@ -1521,7 +1520,7 @@ func (c *CodeCommit) ListRepositoriesPagesWithContext(ctx aws.Context, input *Li
 
 const opPutRepositoryTriggers = "PutRepositoryTriggers"
 
-// PutRepositoryTriggersRequest generates a "aws/request.Request" representing the
+// PutRepositoryTriggersRequest generates a "aws.Request" representing the
 // client's request for the PutRepositoryTriggers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1545,8 +1544,8 @@ const opPutRepositoryTriggers = "PutRepositoryTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggers
-func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersInput) (req *request.Request, output *PutRepositoryTriggersOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersInput) (req *aws.Request, output *PutRepositoryTriggersOutput) {
+	op := &aws.Operation{
 		Name:       opPutRepositoryTriggers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1662,7 +1661,7 @@ func (c *CodeCommit) PutRepositoryTriggers(input *PutRepositoryTriggersInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) PutRepositoryTriggersWithContext(ctx aws.Context, input *PutRepositoryTriggersInput, opts ...request.Option) (*PutRepositoryTriggersOutput, error) {
+func (c *CodeCommit) PutRepositoryTriggersWithContext(ctx aws.Context, input *PutRepositoryTriggersInput, opts ...aws.Option) (*PutRepositoryTriggersOutput, error) {
 	req, out := c.PutRepositoryTriggersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1671,7 +1670,7 @@ func (c *CodeCommit) PutRepositoryTriggersWithContext(ctx aws.Context, input *Pu
 
 const opTestRepositoryTriggers = "TestRepositoryTriggers"
 
-// TestRepositoryTriggersRequest generates a "aws/request.Request" representing the
+// TestRepositoryTriggersRequest generates a "aws.Request" representing the
 // client's request for the TestRepositoryTriggers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1695,8 +1694,8 @@ const opTestRepositoryTriggers = "TestRepositoryTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggers
-func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInput) (req *request.Request, output *TestRepositoryTriggersOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggersInput) (req *aws.Request, output *TestRepositoryTriggersOutput) {
+	op := &aws.Operation{
 		Name:       opTestRepositoryTriggers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1814,7 +1813,7 @@ func (c *CodeCommit) TestRepositoryTriggers(input *TestRepositoryTriggersInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) TestRepositoryTriggersWithContext(ctx aws.Context, input *TestRepositoryTriggersInput, opts ...request.Option) (*TestRepositoryTriggersOutput, error) {
+func (c *CodeCommit) TestRepositoryTriggersWithContext(ctx aws.Context, input *TestRepositoryTriggersInput, opts ...aws.Option) (*TestRepositoryTriggersOutput, error) {
 	req, out := c.TestRepositoryTriggersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1823,7 +1822,7 @@ func (c *CodeCommit) TestRepositoryTriggersWithContext(ctx aws.Context, input *T
 
 const opUpdateDefaultBranch = "UpdateDefaultBranch"
 
-// UpdateDefaultBranchRequest generates a "aws/request.Request" representing the
+// UpdateDefaultBranchRequest generates a "aws.Request" representing the
 // client's request for the UpdateDefaultBranch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1847,8 +1846,8 @@ const opUpdateDefaultBranch = "UpdateDefaultBranch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranch
-func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) (req *request.Request, output *UpdateDefaultBranchOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput) (req *aws.Request, output *UpdateDefaultBranchOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDefaultBranch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1933,7 +1932,7 @@ func (c *CodeCommit) UpdateDefaultBranch(input *UpdateDefaultBranchInput) (*Upda
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) UpdateDefaultBranchWithContext(ctx aws.Context, input *UpdateDefaultBranchInput, opts ...request.Option) (*UpdateDefaultBranchOutput, error) {
+func (c *CodeCommit) UpdateDefaultBranchWithContext(ctx aws.Context, input *UpdateDefaultBranchInput, opts ...aws.Option) (*UpdateDefaultBranchOutput, error) {
 	req, out := c.UpdateDefaultBranchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1942,7 +1941,7 @@ func (c *CodeCommit) UpdateDefaultBranchWithContext(ctx aws.Context, input *Upda
 
 const opUpdateRepositoryDescription = "UpdateRepositoryDescription"
 
-// UpdateRepositoryDescriptionRequest generates a "aws/request.Request" representing the
+// UpdateRepositoryDescriptionRequest generates a "aws.Request" representing the
 // client's request for the UpdateRepositoryDescription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1966,8 +1965,8 @@ const opUpdateRepositoryDescription = "UpdateRepositoryDescription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescription
-func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryDescriptionInput) (req *request.Request, output *UpdateRepositoryDescriptionOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryDescriptionInput) (req *aws.Request, output *UpdateRepositoryDescriptionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRepositoryDescription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2048,7 +2047,7 @@ func (c *CodeCommit) UpdateRepositoryDescription(input *UpdateRepositoryDescript
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) UpdateRepositoryDescriptionWithContext(ctx aws.Context, input *UpdateRepositoryDescriptionInput, opts ...request.Option) (*UpdateRepositoryDescriptionOutput, error) {
+func (c *CodeCommit) UpdateRepositoryDescriptionWithContext(ctx aws.Context, input *UpdateRepositoryDescriptionInput, opts ...aws.Option) (*UpdateRepositoryDescriptionOutput, error) {
 	req, out := c.UpdateRepositoryDescriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2057,7 +2056,7 @@ func (c *CodeCommit) UpdateRepositoryDescriptionWithContext(ctx aws.Context, inp
 
 const opUpdateRepositoryName = "UpdateRepositoryName"
 
-// UpdateRepositoryNameRequest generates a "aws/request.Request" representing the
+// UpdateRepositoryNameRequest generates a "aws.Request" representing the
 // client's request for the UpdateRepositoryName operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2081,8 +2080,8 @@ const opUpdateRepositoryName = "UpdateRepositoryName"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryName
-func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) (req *request.Request, output *UpdateRepositoryNameOutput) {
-	op := &request.Operation{
+func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInput) (req *aws.Request, output *UpdateRepositoryNameOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRepositoryName,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2147,7 +2146,7 @@ func (c *CodeCommit) UpdateRepositoryName(input *UpdateRepositoryNameInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeCommit) UpdateRepositoryNameWithContext(ctx aws.Context, input *UpdateRepositoryNameInput, opts ...request.Option) (*UpdateRepositoryNameOutput, error) {
+func (c *CodeCommit) UpdateRepositoryNameWithContext(ctx aws.Context, input *UpdateRepositoryNameInput, opts ...aws.Option) (*UpdateRepositoryNameOutput, error) {
 	req, out := c.UpdateRepositoryNameRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2177,9 +2176,9 @@ func (s BatchGetRepositoriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetRepositoriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetRepositoriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetRepositoriesInput"}
 	if s.RepositoryNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryNames"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2425,21 +2424,21 @@ func (s CreateBranchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBranchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBranchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBranchInput"}
 	if s.BranchName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BranchName"))
+		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
 	}
 	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BranchName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
 	}
 	if s.CommitId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommitId"))
+		invalidParams.Add(aws.NewErrParamRequired("CommitId"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2519,12 +2518,12 @@ func (s CreateRepositoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRepositoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRepositoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRepositoryInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2593,12 +2592,12 @@ func (s DeleteRepositoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRepositoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRepositoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRepositoryInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2712,15 +2711,15 @@ func (s GetBlobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBlobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBlobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBlobInput"}
 	if s.BlobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BlobId"))
+		invalidParams.Add(aws.NewErrParamRequired("BlobId"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2795,12 +2794,12 @@ func (s GetBranchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBranchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBranchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBranchInput"}
 	if s.BranchName != nil && len(*s.BranchName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BranchName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2874,15 +2873,15 @@ func (s GetCommitInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCommitInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCommitInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCommitInput"}
 	if s.CommitId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommitId"))
+		invalidParams.Add(aws.NewErrParamRequired("CommitId"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2983,15 +2982,15 @@ func (s GetDifferencesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDifferencesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDifferencesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDifferencesInput"}
 	if s.AfterCommitSpecifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("AfterCommitSpecifier"))
+		invalidParams.Add(aws.NewErrParamRequired("AfterCommitSpecifier"))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3100,12 +3099,12 @@ func (s GetRepositoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRepositoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRepositoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3168,12 +3167,12 @@ func (s GetRepositoryTriggersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRepositoryTriggersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRepositoryTriggersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRepositoryTriggersInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3248,12 +3247,12 @@ func (s ListBranchesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBranchesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBranchesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBranchesInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3419,15 +3418,15 @@ func (s PutRepositoryTriggersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRepositoryTriggersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRepositoryTriggersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRepositoryTriggersInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 	if s.Triggers == nil {
-		invalidParams.Add(request.NewErrParamRequired("Triggers"))
+		invalidParams.Add(aws.NewErrParamRequired("Triggers"))
 	}
 	if s.Triggers != nil {
 		for i, v := range s.Triggers {
@@ -3435,7 +3434,7 @@ func (s *PutRepositoryTriggersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3669,15 +3668,15 @@ func (s RepositoryTrigger) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RepositoryTrigger) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RepositoryTrigger"}
+	invalidParams := aws.ErrInvalidParams{Context: "RepositoryTrigger"}
 	if s.DestinationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationArn"))
 	}
 	if s.Events == nil {
-		invalidParams.Add(request.NewErrParamRequired("Events"))
+		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3778,15 +3777,15 @@ func (s TestRepositoryTriggersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestRepositoryTriggersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestRepositoryTriggersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestRepositoryTriggersInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 	if s.Triggers == nil {
-		invalidParams.Add(request.NewErrParamRequired("Triggers"))
+		invalidParams.Add(aws.NewErrParamRequired("Triggers"))
 	}
 	if s.Triggers != nil {
 		for i, v := range s.Triggers {
@@ -3794,7 +3793,7 @@ func (s *TestRepositoryTriggersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Triggers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3881,18 +3880,18 @@ func (s UpdateDefaultBranchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDefaultBranchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDefaultBranchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDefaultBranchInput"}
 	if s.DefaultBranchName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DefaultBranchName"))
+		invalidParams.Add(aws.NewErrParamRequired("DefaultBranchName"))
 	}
 	if s.DefaultBranchName != nil && len(*s.DefaultBranchName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DefaultBranchName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultBranchName", 1))
 	}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3955,12 +3954,12 @@ func (s UpdateRepositoryDescriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRepositoryDescriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRepositoryDescriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRepositoryDescriptionInput"}
 	if s.RepositoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RepositoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
 	}
 	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RepositoryName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4024,18 +4023,18 @@ func (s UpdateRepositoryNameInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRepositoryNameInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRepositoryNameInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRepositoryNameInput"}
 	if s.NewName == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewName"))
+		invalidParams.Add(aws.NewErrParamRequired("NewName"))
 	}
 	if s.NewName != nil && len(*s.NewName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NewName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NewName", 1))
 	}
 	if s.OldName == nil {
-		invalidParams.Add(request.NewErrParamRequired("OldName"))
+		invalidParams.Add(aws.NewErrParamRequired("OldName"))
 	}
 	if s.OldName != nil && len(*s.OldName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OldName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OldName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

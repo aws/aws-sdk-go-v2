@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws/request.Request" representing the
+// CreateClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateCluster = "CreateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateCluster
-func (c *DAX) CreateClusterRequest(input *CreateClusterInput) (req *request.Request, output *CreateClusterOutput) {
-	op := &request.Operation{
+func (c *DAX) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -121,7 +120,7 @@ func (c *DAX) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...request.Option) (*CreateClusterOutput, error) {
+func (c *DAX) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
 	req, out := c.CreateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -130,7 +129,7 @@ func (c *DAX) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInpu
 
 const opCreateParameterGroup = "CreateParameterGroup"
 
-// CreateParameterGroupRequest generates a "aws/request.Request" representing the
+// CreateParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -154,8 +153,8 @@ const opCreateParameterGroup = "CreateParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateParameterGroup
-func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) (req *request.Request, output *CreateParameterGroupOutput) {
-	op := &request.Operation{
+func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) (req *aws.Request, output *CreateParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -213,7 +212,7 @@ func (c *DAX) CreateParameterGroup(input *CreateParameterGroupInput) (*CreatePar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) CreateParameterGroupWithContext(ctx aws.Context, input *CreateParameterGroupInput, opts ...request.Option) (*CreateParameterGroupOutput, error) {
+func (c *DAX) CreateParameterGroupWithContext(ctx aws.Context, input *CreateParameterGroupInput, opts ...aws.Option) (*CreateParameterGroupOutput, error) {
 	req, out := c.CreateParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -222,7 +221,7 @@ func (c *DAX) CreateParameterGroupWithContext(ctx aws.Context, input *CreatePara
 
 const opCreateSubnetGroup = "CreateSubnetGroup"
 
-// CreateSubnetGroupRequest generates a "aws/request.Request" representing the
+// CreateSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -246,8 +245,8 @@ const opCreateSubnetGroup = "CreateSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroup
-func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) (req *request.Request, output *CreateSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) (req *aws.Request, output *CreateSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -303,7 +302,7 @@ func (c *DAX) CreateSubnetGroup(input *CreateSubnetGroupInput) (*CreateSubnetGro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) CreateSubnetGroupWithContext(ctx aws.Context, input *CreateSubnetGroupInput, opts ...request.Option) (*CreateSubnetGroupOutput, error) {
+func (c *DAX) CreateSubnetGroupWithContext(ctx aws.Context, input *CreateSubnetGroupInput, opts ...aws.Option) (*CreateSubnetGroupOutput, error) {
 	req, out := c.CreateSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -312,7 +311,7 @@ func (c *DAX) CreateSubnetGroupWithContext(ctx aws.Context, input *CreateSubnetG
 
 const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
 
-// DecreaseReplicationFactorRequest generates a "aws/request.Request" representing the
+// DecreaseReplicationFactorRequest generates a "aws.Request" representing the
 // client's request for the DecreaseReplicationFactor operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -336,8 +335,8 @@ const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactor
-func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorInput) (req *request.Request, output *DecreaseReplicationFactorOutput) {
-	op := &request.Operation{
+func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorInput) (req *aws.Request, output *DecreaseReplicationFactorOutput) {
+	op := &aws.Operation{
 		Name:       opDecreaseReplicationFactor,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -397,7 +396,7 @@ func (c *DAX) DecreaseReplicationFactor(input *DecreaseReplicationFactorInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DecreaseReplicationFactorWithContext(ctx aws.Context, input *DecreaseReplicationFactorInput, opts ...request.Option) (*DecreaseReplicationFactorOutput, error) {
+func (c *DAX) DecreaseReplicationFactorWithContext(ctx aws.Context, input *DecreaseReplicationFactorInput, opts ...aws.Option) (*DecreaseReplicationFactorOutput, error) {
 	req, out := c.DecreaseReplicationFactorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -406,7 +405,7 @@ func (c *DAX) DecreaseReplicationFactorWithContext(ctx aws.Context, input *Decre
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws/request.Request" representing the
+// DeleteClusterRequest generates a "aws.Request" representing the
 // client's request for the DeleteCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -430,8 +429,8 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteCluster
-func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) (req *request.Request, output *DeleteClusterOutput) {
-	op := &request.Operation{
+func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -488,7 +487,7 @@ func (c *DAX) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...request.Option) (*DeleteClusterOutput, error) {
+func (c *DAX) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
 	req, out := c.DeleteClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -497,7 +496,7 @@ func (c *DAX) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInpu
 
 const opDeleteParameterGroup = "DeleteParameterGroup"
 
-// DeleteParameterGroupRequest generates a "aws/request.Request" representing the
+// DeleteParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -521,8 +520,8 @@ const opDeleteParameterGroup = "DeleteParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteParameterGroup
-func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) (req *request.Request, output *DeleteParameterGroupOutput) {
-	op := &request.Operation{
+func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) (req *aws.Request, output *DeleteParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -577,7 +576,7 @@ func (c *DAX) DeleteParameterGroup(input *DeleteParameterGroupInput) (*DeletePar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DeleteParameterGroupWithContext(ctx aws.Context, input *DeleteParameterGroupInput, opts ...request.Option) (*DeleteParameterGroupOutput, error) {
+func (c *DAX) DeleteParameterGroupWithContext(ctx aws.Context, input *DeleteParameterGroupInput, opts ...aws.Option) (*DeleteParameterGroupOutput, error) {
 	req, out := c.DeleteParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -586,7 +585,7 @@ func (c *DAX) DeleteParameterGroupWithContext(ctx aws.Context, input *DeletePara
 
 const opDeleteSubnetGroup = "DeleteSubnetGroup"
 
-// DeleteSubnetGroupRequest generates a "aws/request.Request" representing the
+// DeleteSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -610,8 +609,8 @@ const opDeleteSubnetGroup = "DeleteSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteSubnetGroup
-func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) (req *request.Request, output *DeleteSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) (req *aws.Request, output *DeleteSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -661,7 +660,7 @@ func (c *DAX) DeleteSubnetGroup(input *DeleteSubnetGroupInput) (*DeleteSubnetGro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DeleteSubnetGroupWithContext(ctx aws.Context, input *DeleteSubnetGroupInput, opts ...request.Option) (*DeleteSubnetGroupOutput, error) {
+func (c *DAX) DeleteSubnetGroupWithContext(ctx aws.Context, input *DeleteSubnetGroupInput, opts ...aws.Option) (*DeleteSubnetGroupOutput, error) {
 	req, out := c.DeleteSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -670,7 +669,7 @@ func (c *DAX) DeleteSubnetGroupWithContext(ctx aws.Context, input *DeleteSubnetG
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws/request.Request" representing the
+// DescribeClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -694,8 +693,8 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClusters
-func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) (req *request.Request, output *DescribeClustersOutput) {
-	op := &request.Operation{
+func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -762,7 +761,7 @@ func (c *DAX) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.Option) (*DescribeClustersOutput, error) {
+func (c *DAX) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
 	req, out := c.DescribeClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -771,7 +770,7 @@ func (c *DAX) DescribeClustersWithContext(ctx aws.Context, input *DescribeCluste
 
 const opDescribeDefaultParameters = "DescribeDefaultParameters"
 
-// DescribeDefaultParametersRequest generates a "aws/request.Request" representing the
+// DescribeDefaultParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeDefaultParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -795,8 +794,8 @@ const opDescribeDefaultParameters = "DescribeDefaultParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeDefaultParameters
-func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersInput) (req *request.Request, output *DescribeDefaultParametersOutput) {
-	op := &request.Operation{
+func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersInput) (req *aws.Request, output *DescribeDefaultParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDefaultParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -844,7 +843,7 @@ func (c *DAX) DescribeDefaultParameters(input *DescribeDefaultParametersInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DescribeDefaultParametersWithContext(ctx aws.Context, input *DescribeDefaultParametersInput, opts ...request.Option) (*DescribeDefaultParametersOutput, error) {
+func (c *DAX) DescribeDefaultParametersWithContext(ctx aws.Context, input *DescribeDefaultParametersInput, opts ...aws.Option) (*DescribeDefaultParametersOutput, error) {
 	req, out := c.DescribeDefaultParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -853,7 +852,7 @@ func (c *DAX) DescribeDefaultParametersWithContext(ctx aws.Context, input *Descr
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -877,8 +876,8 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeEvents
-func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -931,7 +930,7 @@ func (c *DAX) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *DAX) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -940,7 +939,7 @@ func (c *DAX) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsIn
 
 const opDescribeParameterGroups = "DescribeParameterGroups"
 
-// DescribeParameterGroupsRequest generates a "aws/request.Request" representing the
+// DescribeParameterGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeParameterGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -964,8 +963,8 @@ const opDescribeParameterGroups = "DescribeParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroups
-func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput) (req *request.Request, output *DescribeParameterGroupsOutput) {
-	op := &request.Operation{
+func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput) (req *aws.Request, output *DescribeParameterGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1017,7 +1016,7 @@ func (c *DAX) DescribeParameterGroups(input *DescribeParameterGroupsInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DescribeParameterGroupsWithContext(ctx aws.Context, input *DescribeParameterGroupsInput, opts ...request.Option) (*DescribeParameterGroupsOutput, error) {
+func (c *DAX) DescribeParameterGroupsWithContext(ctx aws.Context, input *DescribeParameterGroupsInput, opts ...aws.Option) (*DescribeParameterGroupsOutput, error) {
 	req, out := c.DescribeParameterGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1026,7 +1025,7 @@ func (c *DAX) DescribeParameterGroupsWithContext(ctx aws.Context, input *Describ
 
 const opDescribeParameters = "DescribeParameters"
 
-// DescribeParametersRequest generates a "aws/request.Request" representing the
+// DescribeParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1050,8 +1049,8 @@ const opDescribeParameters = "DescribeParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameters
-func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) (req *request.Request, output *DescribeParametersOutput) {
-	op := &request.Operation{
+func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) (req *aws.Request, output *DescribeParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1102,7 +1101,7 @@ func (c *DAX) DescribeParameters(input *DescribeParametersInput) (*DescribeParam
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DescribeParametersWithContext(ctx aws.Context, input *DescribeParametersInput, opts ...request.Option) (*DescribeParametersOutput, error) {
+func (c *DAX) DescribeParametersWithContext(ctx aws.Context, input *DescribeParametersInput, opts ...aws.Option) (*DescribeParametersOutput, error) {
 	req, out := c.DescribeParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1111,7 +1110,7 @@ func (c *DAX) DescribeParametersWithContext(ctx aws.Context, input *DescribePara
 
 const opDescribeSubnetGroups = "DescribeSubnetGroups"
 
-// DescribeSubnetGroupsRequest generates a "aws/request.Request" representing the
+// DescribeSubnetGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSubnetGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1135,8 +1134,8 @@ const opDescribeSubnetGroups = "DescribeSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeSubnetGroups
-func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) (req *request.Request, output *DescribeSubnetGroupsOutput) {
-	op := &request.Operation{
+func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) (req *aws.Request, output *DescribeSubnetGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSubnetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1182,7 +1181,7 @@ func (c *DAX) DescribeSubnetGroups(input *DescribeSubnetGroupsInput) (*DescribeS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) DescribeSubnetGroupsWithContext(ctx aws.Context, input *DescribeSubnetGroupsInput, opts ...request.Option) (*DescribeSubnetGroupsOutput, error) {
+func (c *DAX) DescribeSubnetGroupsWithContext(ctx aws.Context, input *DescribeSubnetGroupsInput, opts ...aws.Option) (*DescribeSubnetGroupsOutput, error) {
 	req, out := c.DescribeSubnetGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1191,7 +1190,7 @@ func (c *DAX) DescribeSubnetGroupsWithContext(ctx aws.Context, input *DescribeSu
 
 const opIncreaseReplicationFactor = "IncreaseReplicationFactor"
 
-// IncreaseReplicationFactorRequest generates a "aws/request.Request" representing the
+// IncreaseReplicationFactorRequest generates a "aws.Request" representing the
 // client's request for the IncreaseReplicationFactor operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1215,8 +1214,8 @@ const opIncreaseReplicationFactor = "IncreaseReplicationFactor"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactor
-func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorInput) (req *request.Request, output *IncreaseReplicationFactorOutput) {
-	op := &request.Operation{
+func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorInput) (req *aws.Request, output *IncreaseReplicationFactorOutput) {
+	op := &aws.Operation{
 		Name:       opIncreaseReplicationFactor,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1283,7 +1282,7 @@ func (c *DAX) IncreaseReplicationFactor(input *IncreaseReplicationFactorInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) IncreaseReplicationFactorWithContext(ctx aws.Context, input *IncreaseReplicationFactorInput, opts ...request.Option) (*IncreaseReplicationFactorOutput, error) {
+func (c *DAX) IncreaseReplicationFactorWithContext(ctx aws.Context, input *IncreaseReplicationFactorInput, opts ...aws.Option) (*IncreaseReplicationFactorOutput, error) {
 	req, out := c.IncreaseReplicationFactorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1292,7 +1291,7 @@ func (c *DAX) IncreaseReplicationFactorWithContext(ctx aws.Context, input *Incre
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws/request.Request" representing the
+// ListTagsRequest generates a "aws.Request" representing the
 // client's request for the ListTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1316,8 +1315,8 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ListTags
-func (c *DAX) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
-	op := &request.Operation{
+func (c *DAX) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1375,7 +1374,7 @@ func (c *DAX) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
+func (c *DAX) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1384,7 +1383,7 @@ func (c *DAX) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ..
 
 const opRebootNode = "RebootNode"
 
-// RebootNodeRequest generates a "aws/request.Request" representing the
+// RebootNodeRequest generates a "aws.Request" representing the
 // client's request for the RebootNode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1408,8 +1407,8 @@ const opRebootNode = "RebootNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNode
-func (c *DAX) RebootNodeRequest(input *RebootNodeInput) (req *request.Request, output *RebootNodeOutput) {
-	op := &request.Operation{
+func (c *DAX) RebootNodeRequest(input *RebootNodeInput) (req *aws.Request, output *RebootNodeOutput) {
+	op := &aws.Operation{
 		Name:       opRebootNode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1467,7 +1466,7 @@ func (c *DAX) RebootNode(input *RebootNodeInput) (*RebootNodeOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) RebootNodeWithContext(ctx aws.Context, input *RebootNodeInput, opts ...request.Option) (*RebootNodeOutput, error) {
+func (c *DAX) RebootNodeWithContext(ctx aws.Context, input *RebootNodeInput, opts ...aws.Option) (*RebootNodeOutput, error) {
 	req, out := c.RebootNodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1476,7 +1475,7 @@ func (c *DAX) RebootNodeWithContext(ctx aws.Context, input *RebootNodeInput, opt
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1500,8 +1499,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagResource
-func (c *DAX) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *DAX) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1562,7 +1561,7 @@ func (c *DAX) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *DAX) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1571,7 +1570,7 @@ func (c *DAX) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, o
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1595,8 +1594,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UntagResource
-func (c *DAX) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *DAX) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1657,7 +1656,7 @@ func (c *DAX) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *DAX) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1666,7 +1665,7 @@ func (c *DAX) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInpu
 
 const opUpdateCluster = "UpdateCluster"
 
-// UpdateClusterRequest generates a "aws/request.Request" representing the
+// UpdateClusterRequest generates a "aws.Request" representing the
 // client's request for the UpdateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1690,8 +1689,8 @@ const opUpdateCluster = "UpdateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateCluster
-func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) (req *request.Request, output *UpdateClusterOutput) {
-	op := &request.Operation{
+func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) (req *aws.Request, output *UpdateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1753,7 +1752,7 @@ func (c *DAX) UpdateCluster(input *UpdateClusterInput) (*UpdateClusterOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInput, opts ...request.Option) (*UpdateClusterOutput, error) {
+func (c *DAX) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInput, opts ...aws.Option) (*UpdateClusterOutput, error) {
 	req, out := c.UpdateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1762,7 +1761,7 @@ func (c *DAX) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInpu
 
 const opUpdateParameterGroup = "UpdateParameterGroup"
 
-// UpdateParameterGroupRequest generates a "aws/request.Request" representing the
+// UpdateParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the UpdateParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1786,8 +1785,8 @@ const opUpdateParameterGroup = "UpdateParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroup
-func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) (req *request.Request, output *UpdateParameterGroupOutput) {
-	op := &request.Operation{
+func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) (req *aws.Request, output *UpdateParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1842,7 +1841,7 @@ func (c *DAX) UpdateParameterGroup(input *UpdateParameterGroupInput) (*UpdatePar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) UpdateParameterGroupWithContext(ctx aws.Context, input *UpdateParameterGroupInput, opts ...request.Option) (*UpdateParameterGroupOutput, error) {
+func (c *DAX) UpdateParameterGroupWithContext(ctx aws.Context, input *UpdateParameterGroupInput, opts ...aws.Option) (*UpdateParameterGroupOutput, error) {
 	req, out := c.UpdateParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1851,7 +1850,7 @@ func (c *DAX) UpdateParameterGroupWithContext(ctx aws.Context, input *UpdatePara
 
 const opUpdateSubnetGroup = "UpdateSubnetGroup"
 
-// UpdateSubnetGroupRequest generates a "aws/request.Request" representing the
+// UpdateSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the UpdateSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1875,8 +1874,8 @@ const opUpdateSubnetGroup = "UpdateSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroup
-func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) (req *request.Request, output *UpdateSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) (req *aws.Request, output *UpdateSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1931,7 +1930,7 @@ func (c *DAX) UpdateSubnetGroup(input *UpdateSubnetGroupInput) (*UpdateSubnetGro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DAX) UpdateSubnetGroupWithContext(ctx aws.Context, input *UpdateSubnetGroupInput, opts ...request.Option) (*UpdateSubnetGroupOutput, error) {
+func (c *DAX) UpdateSubnetGroupWithContext(ctx aws.Context, input *UpdateSubnetGroupInput, opts ...aws.Option) (*UpdateSubnetGroupOutput, error) {
 	req, out := c.UpdateSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2220,18 +2219,18 @@ func (s CreateClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
 	if s.ClusterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
 	if s.IamRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("IamRoleArn"))
 	}
 	if s.NodeType == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeType"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeType"))
 	}
 	if s.ReplicationFactor == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationFactor"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationFactor"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2362,9 +2361,9 @@ func (s CreateParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateParameterGroupInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2439,12 +2438,12 @@ func (s CreateSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSubnetGroupInput"}
 	if s.SubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2528,12 +2527,12 @@ func (s DecreaseReplicationFactorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecreaseReplicationFactorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DecreaseReplicationFactorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DecreaseReplicationFactorInput"}
 	if s.ClusterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
 	if s.NewReplicationFactor == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewReplicationFactor"))
+		invalidParams.Add(aws.NewErrParamRequired("NewReplicationFactor"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2613,9 +2612,9 @@ func (s DeleteClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
 	if s.ClusterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2676,9 +2675,9 @@ func (s DeleteParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteParameterGroupInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2740,9 +2739,9 @@ func (s DeleteSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubnetGroupInput"}
 	if s.SubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3177,9 +3176,9 @@ func (s DescribeParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeParametersInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3452,12 +3451,12 @@ func (s IncreaseReplicationFactorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IncreaseReplicationFactorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IncreaseReplicationFactorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "IncreaseReplicationFactorInput"}
 	if s.ClusterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
 	if s.NewReplicationFactor == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewReplicationFactor"))
+		invalidParams.Add(aws.NewErrParamRequired("NewReplicationFactor"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3535,9 +3534,9 @@ func (s ListTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3984,12 +3983,12 @@ func (s RebootNodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootNodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootNodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootNodeInput"}
 	if s.ClusterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
 	if s.NodeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeId"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4230,12 +4229,12 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4308,12 +4307,12 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4402,9 +4401,9 @@ func (s UpdateClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterInput"}
 	if s.ClusterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4507,12 +4506,12 @@ func (s UpdateParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateParameterGroupInput"}
 	if s.ParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterGroupName"))
 	}
 	if s.ParameterNameValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterNameValues"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterNameValues"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4585,9 +4584,9 @@ func (s UpdateSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubnetGroupInput"}
 	if s.SubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {

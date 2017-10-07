@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBatchMeterUsage = "BatchMeterUsage"
 
-// BatchMeterUsageRequest generates a "aws/request.Request" representing the
+// BatchMeterUsageRequest generates a "aws.Request" representing the
 // client's request for the BatchMeterUsage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opBatchMeterUsage = "BatchMeterUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage
-func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput) (req *request.Request, output *BatchMeterUsageOutput) {
-	op := &request.Operation{
+func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput) (req *aws.Request, output *BatchMeterUsageOutput) {
+	op := &aws.Operation{
 		Name:       opBatchMeterUsage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -110,7 +109,7 @@ func (c *MarketplaceMetering) BatchMeterUsage(input *BatchMeterUsageInput) (*Bat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MarketplaceMetering) BatchMeterUsageWithContext(ctx aws.Context, input *BatchMeterUsageInput, opts ...request.Option) (*BatchMeterUsageOutput, error) {
+func (c *MarketplaceMetering) BatchMeterUsageWithContext(ctx aws.Context, input *BatchMeterUsageInput, opts ...aws.Option) (*BatchMeterUsageOutput, error) {
 	req, out := c.BatchMeterUsageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -119,7 +118,7 @@ func (c *MarketplaceMetering) BatchMeterUsageWithContext(ctx aws.Context, input 
 
 const opMeterUsage = "MeterUsage"
 
-// MeterUsageRequest generates a "aws/request.Request" representing the
+// MeterUsageRequest generates a "aws.Request" representing the
 // client's request for the MeterUsage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -143,8 +142,8 @@ const opMeterUsage = "MeterUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsage
-func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *request.Request, output *MeterUsageOutput) {
-	op := &request.Operation{
+func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) (req *aws.Request, output *MeterUsageOutput) {
+	op := &aws.Operation{
 		Name:       opMeterUsage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -217,7 +216,7 @@ func (c *MarketplaceMetering) MeterUsage(input *MeterUsageInput) (*MeterUsageOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MarketplaceMetering) MeterUsageWithContext(ctx aws.Context, input *MeterUsageInput, opts ...request.Option) (*MeterUsageOutput, error) {
+func (c *MarketplaceMetering) MeterUsageWithContext(ctx aws.Context, input *MeterUsageInput, opts ...aws.Option) (*MeterUsageOutput, error) {
 	req, out := c.MeterUsageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -226,7 +225,7 @@ func (c *MarketplaceMetering) MeterUsageWithContext(ctx aws.Context, input *Mete
 
 const opResolveCustomer = "ResolveCustomer"
 
-// ResolveCustomerRequest generates a "aws/request.Request" representing the
+// ResolveCustomerRequest generates a "aws.Request" representing the
 // client's request for the ResolveCustomer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -250,8 +249,8 @@ const opResolveCustomer = "ResolveCustomer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer
-func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput) (req *request.Request, output *ResolveCustomerOutput) {
-	op := &request.Operation{
+func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput) (req *aws.Request, output *ResolveCustomerOutput) {
+	op := &aws.Operation{
 		Name:       opResolveCustomer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -312,7 +311,7 @@ func (c *MarketplaceMetering) ResolveCustomer(input *ResolveCustomerInput) (*Res
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MarketplaceMetering) ResolveCustomerWithContext(ctx aws.Context, input *ResolveCustomerInput, opts ...request.Option) (*ResolveCustomerOutput, error) {
+func (c *MarketplaceMetering) ResolveCustomerWithContext(ctx aws.Context, input *ResolveCustomerInput, opts ...aws.Option) (*ResolveCustomerOutput, error) {
 	req, out := c.ResolveCustomerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -351,15 +350,15 @@ func (s BatchMeterUsageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchMeterUsageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchMeterUsageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchMeterUsageInput"}
 	if s.ProductCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductCode"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
 	if s.ProductCode != nil && len(*s.ProductCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductCode", 1))
 	}
 	if s.UsageRecords == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsageRecords"))
+		invalidParams.Add(aws.NewErrParamRequired("UsageRecords"))
 	}
 	if s.UsageRecords != nil {
 		for i, v := range s.UsageRecords {
@@ -367,7 +366,7 @@ func (s *BatchMeterUsageInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UsageRecords", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UsageRecords", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -476,27 +475,27 @@ func (s MeterUsageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MeterUsageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MeterUsageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "MeterUsageInput"}
 	if s.DryRun == nil {
-		invalidParams.Add(request.NewErrParamRequired("DryRun"))
+		invalidParams.Add(aws.NewErrParamRequired("DryRun"))
 	}
 	if s.ProductCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductCode"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
 	if s.ProductCode != nil && len(*s.ProductCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductCode", 1))
 	}
 	if s.Timestamp == nil {
-		invalidParams.Add(request.NewErrParamRequired("Timestamp"))
+		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
 	if s.UsageDimension == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsageDimension"))
+		invalidParams.Add(aws.NewErrParamRequired("UsageDimension"))
 	}
 	if s.UsageDimension != nil && len(*s.UsageDimension) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UsageDimension", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UsageDimension", 1))
 	}
 	if s.UsageQuantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("UsageQuantity"))
+		invalidParams.Add(aws.NewErrParamRequired("UsageQuantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -583,9 +582,9 @@ func (s ResolveCustomerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResolveCustomerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResolveCustomerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResolveCustomerInput"}
 	if s.RegistrationToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("RegistrationToken"))
+		invalidParams.Add(aws.NewErrParamRequired("RegistrationToken"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -688,24 +687,24 @@ func (s UsageRecord) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UsageRecord) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UsageRecord"}
+	invalidParams := aws.ErrInvalidParams{Context: "UsageRecord"}
 	if s.CustomerIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("CustomerIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("CustomerIdentifier"))
 	}
 	if s.CustomerIdentifier != nil && len(*s.CustomerIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomerIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomerIdentifier", 1))
 	}
 	if s.Dimension == nil {
-		invalidParams.Add(request.NewErrParamRequired("Dimension"))
+		invalidParams.Add(aws.NewErrParamRequired("Dimension"))
 	}
 	if s.Dimension != nil && len(*s.Dimension) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Dimension", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Dimension", 1))
 	}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.Timestamp == nil {
-		invalidParams.Add(request.NewErrParamRequired("Timestamp"))
+		invalidParams.Add(aws.NewErrParamRequired("Timestamp"))
 	}
 
 	if invalidParams.Len() > 0 {

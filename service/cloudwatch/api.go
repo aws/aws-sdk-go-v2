@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opDeleteAlarms = "DeleteAlarms"
 
-// DeleteAlarmsRequest generates a "aws/request.Request" representing the
+// DeleteAlarmsRequest generates a "aws.Request" representing the
 // client's request for the DeleteAlarms operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opDeleteAlarms = "DeleteAlarms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarms
-func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) (req *request.Request, output *DeleteAlarmsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) (req *aws.Request, output *DeleteAlarmsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAlarms,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -87,7 +86,7 @@ func (c *CloudWatch) DeleteAlarms(input *DeleteAlarmsInput) (*DeleteAlarmsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DeleteAlarmsWithContext(ctx aws.Context, input *DeleteAlarmsInput, opts ...request.Option) (*DeleteAlarmsOutput, error) {
+func (c *CloudWatch) DeleteAlarmsWithContext(ctx aws.Context, input *DeleteAlarmsInput, opts ...aws.Option) (*DeleteAlarmsOutput, error) {
 	req, out := c.DeleteAlarmsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -96,7 +95,7 @@ func (c *CloudWatch) DeleteAlarmsWithContext(ctx aws.Context, input *DeleteAlarm
 
 const opDeleteDashboards = "DeleteDashboards"
 
-// DeleteDashboardsRequest generates a "aws/request.Request" representing the
+// DeleteDashboardsRequest generates a "aws.Request" representing the
 // client's request for the DeleteDashboards operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -120,8 +119,8 @@ const opDeleteDashboards = "DeleteDashboards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboards
-func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) (req *request.Request, output *DeleteDashboardsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) (req *aws.Request, output *DeleteDashboardsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDashboards,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -173,7 +172,7 @@ func (c *CloudWatch) DeleteDashboards(input *DeleteDashboardsInput) (*DeleteDash
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DeleteDashboardsWithContext(ctx aws.Context, input *DeleteDashboardsInput, opts ...request.Option) (*DeleteDashboardsOutput, error) {
+func (c *CloudWatch) DeleteDashboardsWithContext(ctx aws.Context, input *DeleteDashboardsInput, opts ...aws.Option) (*DeleteDashboardsOutput, error) {
 	req, out := c.DeleteDashboardsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -182,7 +181,7 @@ func (c *CloudWatch) DeleteDashboardsWithContext(ctx aws.Context, input *DeleteD
 
 const opDescribeAlarmHistory = "DescribeAlarmHistory"
 
-// DescribeAlarmHistoryRequest generates a "aws/request.Request" representing the
+// DescribeAlarmHistoryRequest generates a "aws.Request" representing the
 // client's request for the DescribeAlarmHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -206,12 +205,12 @@ const opDescribeAlarmHistory = "DescribeAlarmHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory
-func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) (req *request.Request, output *DescribeAlarmHistoryOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInput) (req *aws.Request, output *DescribeAlarmHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAlarmHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxRecords",
@@ -262,7 +261,7 @@ func (c *CloudWatch) DescribeAlarmHistory(input *DescribeAlarmHistoryInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmHistoryWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, opts ...request.Option) (*DescribeAlarmHistoryOutput, error) {
+func (c *CloudWatch) DescribeAlarmHistoryWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, opts ...aws.Option) (*DescribeAlarmHistoryOutput, error) {
 	req, out := c.DescribeAlarmHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -297,9 +296,9 @@ func (c *CloudWatch) DescribeAlarmHistoryPages(input *DescribeAlarmHistoryInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, fn func(*DescribeAlarmHistoryOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, fn func(*DescribeAlarmHistoryOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAlarmHistoryInput
 			if input != nil {
 				tmp := *input
@@ -321,7 +320,7 @@ func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input
 
 const opDescribeAlarms = "DescribeAlarms"
 
-// DescribeAlarmsRequest generates a "aws/request.Request" representing the
+// DescribeAlarmsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAlarms operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -345,12 +344,12 @@ const opDescribeAlarms = "DescribeAlarms"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms
-func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) (req *request.Request, output *DescribeAlarmsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) (req *aws.Request, output *DescribeAlarmsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAlarms,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxRecords",
@@ -399,7 +398,7 @@ func (c *CloudWatch) DescribeAlarms(input *DescribeAlarmsInput) (*DescribeAlarms
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsWithContext(ctx aws.Context, input *DescribeAlarmsInput, opts ...request.Option) (*DescribeAlarmsOutput, error) {
+func (c *CloudWatch) DescribeAlarmsWithContext(ctx aws.Context, input *DescribeAlarmsInput, opts ...aws.Option) (*DescribeAlarmsOutput, error) {
 	req, out := c.DescribeAlarmsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -434,9 +433,9 @@ func (c *CloudWatch) DescribeAlarmsPages(input *DescribeAlarmsInput, fn func(*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *DescribeAlarmsInput, fn func(*DescribeAlarmsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *DescribeAlarmsInput, fn func(*DescribeAlarmsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAlarmsInput
 			if input != nil {
 				tmp := *input
@@ -458,7 +457,7 @@ func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
 
-// DescribeAlarmsForMetricRequest generates a "aws/request.Request" representing the
+// DescribeAlarmsForMetricRequest generates a "aws.Request" representing the
 // client's request for the DescribeAlarmsForMetric operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -482,8 +481,8 @@ const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric
-func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricInput) (req *request.Request, output *DescribeAlarmsForMetricOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetricInput) (req *aws.Request, output *DescribeAlarmsForMetricOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAlarmsForMetric,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -524,7 +523,7 @@ func (c *CloudWatch) DescribeAlarmsForMetric(input *DescribeAlarmsForMetricInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsForMetricWithContext(ctx aws.Context, input *DescribeAlarmsForMetricInput, opts ...request.Option) (*DescribeAlarmsForMetricOutput, error) {
+func (c *CloudWatch) DescribeAlarmsForMetricWithContext(ctx aws.Context, input *DescribeAlarmsForMetricInput, opts ...aws.Option) (*DescribeAlarmsForMetricOutput, error) {
 	req, out := c.DescribeAlarmsForMetricRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -533,7 +532,7 @@ func (c *CloudWatch) DescribeAlarmsForMetricWithContext(ctx aws.Context, input *
 
 const opDisableAlarmActions = "DisableAlarmActions"
 
-// DisableAlarmActionsRequest generates a "aws/request.Request" representing the
+// DisableAlarmActionsRequest generates a "aws.Request" representing the
 // client's request for the DisableAlarmActions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -557,8 +556,8 @@ const opDisableAlarmActions = "DisableAlarmActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActions
-func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) (req *request.Request, output *DisableAlarmActionsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput) (req *aws.Request, output *DisableAlarmActionsOutput) {
+	op := &aws.Operation{
 		Name:       opDisableAlarmActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -601,7 +600,7 @@ func (c *CloudWatch) DisableAlarmActions(input *DisableAlarmActionsInput) (*Disa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) DisableAlarmActionsWithContext(ctx aws.Context, input *DisableAlarmActionsInput, opts ...request.Option) (*DisableAlarmActionsOutput, error) {
+func (c *CloudWatch) DisableAlarmActionsWithContext(ctx aws.Context, input *DisableAlarmActionsInput, opts ...aws.Option) (*DisableAlarmActionsOutput, error) {
 	req, out := c.DisableAlarmActionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -610,7 +609,7 @@ func (c *CloudWatch) DisableAlarmActionsWithContext(ctx aws.Context, input *Disa
 
 const opEnableAlarmActions = "EnableAlarmActions"
 
-// EnableAlarmActionsRequest generates a "aws/request.Request" representing the
+// EnableAlarmActionsRequest generates a "aws.Request" representing the
 // client's request for the EnableAlarmActions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -634,8 +633,8 @@ const opEnableAlarmActions = "EnableAlarmActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActions
-func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) (req *request.Request, output *EnableAlarmActionsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) (req *aws.Request, output *EnableAlarmActionsOutput) {
+	op := &aws.Operation{
 		Name:       opEnableAlarmActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -677,7 +676,7 @@ func (c *CloudWatch) EnableAlarmActions(input *EnableAlarmActionsInput) (*Enable
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) EnableAlarmActionsWithContext(ctx aws.Context, input *EnableAlarmActionsInput, opts ...request.Option) (*EnableAlarmActionsOutput, error) {
+func (c *CloudWatch) EnableAlarmActionsWithContext(ctx aws.Context, input *EnableAlarmActionsInput, opts ...aws.Option) (*EnableAlarmActionsOutput, error) {
 	req, out := c.EnableAlarmActionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -686,7 +685,7 @@ func (c *CloudWatch) EnableAlarmActionsWithContext(ctx aws.Context, input *Enabl
 
 const opGetDashboard = "GetDashboard"
 
-// GetDashboardRequest generates a "aws/request.Request" representing the
+// GetDashboardRequest generates a "aws.Request" representing the
 // client's request for the GetDashboard operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -710,8 +709,8 @@ const opGetDashboard = "GetDashboard"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetDashboard
-func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) (req *request.Request, output *GetDashboardOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) (req *aws.Request, output *GetDashboardOutput) {
+	op := &aws.Operation{
 		Name:       opGetDashboard,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -766,7 +765,7 @@ func (c *CloudWatch) GetDashboard(input *GetDashboardInput) (*GetDashboardOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) GetDashboardWithContext(ctx aws.Context, input *GetDashboardInput, opts ...request.Option) (*GetDashboardOutput, error) {
+func (c *CloudWatch) GetDashboardWithContext(ctx aws.Context, input *GetDashboardInput, opts ...aws.Option) (*GetDashboardOutput, error) {
 	req, out := c.GetDashboardRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -775,7 +774,7 @@ func (c *CloudWatch) GetDashboardWithContext(ctx aws.Context, input *GetDashboar
 
 const opGetMetricStatistics = "GetMetricStatistics"
 
-// GetMetricStatisticsRequest generates a "aws/request.Request" representing the
+// GetMetricStatisticsRequest generates a "aws.Request" representing the
 // client's request for the GetMetricStatistics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -799,8 +798,8 @@ const opGetMetricStatistics = "GetMetricStatistics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatistics
-func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput) (req *request.Request, output *GetMetricStatisticsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput) (req *aws.Request, output *GetMetricStatisticsOutput) {
+	op := &aws.Operation{
 		Name:       opGetMetricStatistics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -904,7 +903,7 @@ func (c *CloudWatch) GetMetricStatistics(input *GetMetricStatisticsInput) (*GetM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) GetMetricStatisticsWithContext(ctx aws.Context, input *GetMetricStatisticsInput, opts ...request.Option) (*GetMetricStatisticsOutput, error) {
+func (c *CloudWatch) GetMetricStatisticsWithContext(ctx aws.Context, input *GetMetricStatisticsInput, opts ...aws.Option) (*GetMetricStatisticsOutput, error) {
 	req, out := c.GetMetricStatisticsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -913,7 +912,7 @@ func (c *CloudWatch) GetMetricStatisticsWithContext(ctx aws.Context, input *GetM
 
 const opListDashboards = "ListDashboards"
 
-// ListDashboardsRequest generates a "aws/request.Request" representing the
+// ListDashboardsRequest generates a "aws.Request" representing the
 // client's request for the ListDashboards operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -937,8 +936,8 @@ const opListDashboards = "ListDashboards"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListDashboards
-func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) (req *request.Request, output *ListDashboardsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) (req *aws.Request, output *ListDashboardsOutput) {
+	op := &aws.Operation{
 		Name:       opListDashboards,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -988,7 +987,7 @@ func (c *CloudWatch) ListDashboards(input *ListDashboardsInput) (*ListDashboards
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) ListDashboardsWithContext(ctx aws.Context, input *ListDashboardsInput, opts ...request.Option) (*ListDashboardsOutput, error) {
+func (c *CloudWatch) ListDashboardsWithContext(ctx aws.Context, input *ListDashboardsInput, opts ...aws.Option) (*ListDashboardsOutput, error) {
 	req, out := c.ListDashboardsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -997,7 +996,7 @@ func (c *CloudWatch) ListDashboardsWithContext(ctx aws.Context, input *ListDashb
 
 const opListMetrics = "ListMetrics"
 
-// ListMetricsRequest generates a "aws/request.Request" representing the
+// ListMetricsRequest generates a "aws.Request" representing the
 // client's request for the ListMetrics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1021,12 +1020,12 @@ const opListMetrics = "ListMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics
-func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) (req *request.Request, output *ListMetricsOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) (req *aws.Request, output *ListMetricsOutput) {
+	op := &aws.Operation{
 		Name:       opListMetrics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1084,7 +1083,7 @@ func (c *CloudWatch) ListMetrics(input *ListMetricsInput) (*ListMetricsOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) ListMetricsWithContext(ctx aws.Context, input *ListMetricsInput, opts ...request.Option) (*ListMetricsOutput, error) {
+func (c *CloudWatch) ListMetricsWithContext(ctx aws.Context, input *ListMetricsInput, opts ...aws.Option) (*ListMetricsOutput, error) {
 	req, out := c.ListMetricsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1119,9 +1118,9 @@ func (c *CloudWatch) ListMetricsPages(input *ListMetricsInput, fn func(*ListMetr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMetricsInput, fn func(*ListMetricsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMetricsInput, fn func(*ListMetricsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListMetricsInput
 			if input != nil {
 				tmp := *input
@@ -1143,7 +1142,7 @@ func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMet
 
 const opPutDashboard = "PutDashboard"
 
-// PutDashboardRequest generates a "aws/request.Request" representing the
+// PutDashboardRequest generates a "aws.Request" representing the
 // client's request for the PutDashboard operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1167,8 +1166,8 @@ const opPutDashboard = "PutDashboard"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboard
-func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) (req *request.Request, output *PutDashboardOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) (req *aws.Request, output *PutDashboardOutput) {
+	op := &aws.Operation{
 		Name:       opPutDashboard,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1234,7 +1233,7 @@ func (c *CloudWatch) PutDashboard(input *PutDashboardInput) (*PutDashboardOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) PutDashboardWithContext(ctx aws.Context, input *PutDashboardInput, opts ...request.Option) (*PutDashboardOutput, error) {
+func (c *CloudWatch) PutDashboardWithContext(ctx aws.Context, input *PutDashboardInput, opts ...aws.Option) (*PutDashboardOutput, error) {
 	req, out := c.PutDashboardRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1243,7 +1242,7 @@ func (c *CloudWatch) PutDashboardWithContext(ctx aws.Context, input *PutDashboar
 
 const opPutMetricAlarm = "PutMetricAlarm"
 
-// PutMetricAlarmRequest generates a "aws/request.Request" representing the
+// PutMetricAlarmRequest generates a "aws.Request" representing the
 // client's request for the PutMetricAlarm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1267,8 +1266,8 @@ const opPutMetricAlarm = "PutMetricAlarm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm
-func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) (req *request.Request, output *PutMetricAlarmOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) (req *aws.Request, output *PutMetricAlarmOutput) {
+	op := &aws.Operation{
 		Name:       opPutMetricAlarm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1354,7 +1353,7 @@ func (c *CloudWatch) PutMetricAlarm(input *PutMetricAlarmInput) (*PutMetricAlarm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) PutMetricAlarmWithContext(ctx aws.Context, input *PutMetricAlarmInput, opts ...request.Option) (*PutMetricAlarmOutput, error) {
+func (c *CloudWatch) PutMetricAlarmWithContext(ctx aws.Context, input *PutMetricAlarmInput, opts ...aws.Option) (*PutMetricAlarmOutput, error) {
 	req, out := c.PutMetricAlarmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1363,7 +1362,7 @@ func (c *CloudWatch) PutMetricAlarmWithContext(ctx aws.Context, input *PutMetric
 
 const opPutMetricData = "PutMetricData"
 
-// PutMetricDataRequest generates a "aws/request.Request" representing the
+// PutMetricDataRequest generates a "aws.Request" representing the
 // client's request for the PutMetricData operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1387,8 +1386,8 @@ const opPutMetricData = "PutMetricData"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData
-func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) (req *request.Request, output *PutMetricDataOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) (req *aws.Request, output *PutMetricDataOutput) {
+	op := &aws.Operation{
 		Name:       opPutMetricData,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1472,7 +1471,7 @@ func (c *CloudWatch) PutMetricData(input *PutMetricDataInput) (*PutMetricDataOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) PutMetricDataWithContext(ctx aws.Context, input *PutMetricDataInput, opts ...request.Option) (*PutMetricDataOutput, error) {
+func (c *CloudWatch) PutMetricDataWithContext(ctx aws.Context, input *PutMetricDataInput, opts ...aws.Option) (*PutMetricDataOutput, error) {
 	req, out := c.PutMetricDataRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1481,7 +1480,7 @@ func (c *CloudWatch) PutMetricDataWithContext(ctx aws.Context, input *PutMetricD
 
 const opSetAlarmState = "SetAlarmState"
 
-// SetAlarmStateRequest generates a "aws/request.Request" representing the
+// SetAlarmStateRequest generates a "aws.Request" representing the
 // client's request for the SetAlarmState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1505,8 +1504,8 @@ const opSetAlarmState = "SetAlarmState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmState
-func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) (req *request.Request, output *SetAlarmStateOutput) {
-	op := &request.Operation{
+func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) (req *aws.Request, output *SetAlarmStateOutput) {
+	op := &aws.Operation{
 		Name:       opSetAlarmState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1563,7 +1562,7 @@ func (c *CloudWatch) SetAlarmState(input *SetAlarmStateInput) (*SetAlarmStateOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatch) SetAlarmStateWithContext(ctx aws.Context, input *SetAlarmStateInput, opts ...request.Option) (*SetAlarmStateOutput, error) {
+func (c *CloudWatch) SetAlarmStateWithContext(ctx aws.Context, input *SetAlarmStateInput, opts ...aws.Option) (*SetAlarmStateOutput, error) {
 	req, out := c.SetAlarmStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1830,9 +1829,9 @@ func (s DeleteAlarmsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAlarmsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAlarmsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAlarmsInput"}
 	if s.AlarmNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("AlarmNames"))
+		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1937,12 +1936,12 @@ func (s DescribeAlarmHistoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAlarmHistoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAlarmHistoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmHistoryInput"}
 	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AlarmName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
 	}
 	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2065,21 +2064,21 @@ func (s DescribeAlarmsForMetricInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAlarmsForMetricInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAlarmsForMetricInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmsForMetricInput"}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MetricName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 	if s.Namespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Namespace", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
 	if s.Period != nil && *s.Period < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Period", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
@@ -2087,7 +2086,7 @@ func (s *DescribeAlarmsForMetricInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2201,15 +2200,15 @@ func (s DescribeAlarmsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAlarmsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAlarmsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAlarmsInput"}
 	if s.ActionPrefix != nil && len(*s.ActionPrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActionPrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActionPrefix", 1))
 	}
 	if s.AlarmNamePrefix != nil && len(*s.AlarmNamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AlarmNamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AlarmNamePrefix", 1))
 	}
 	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2315,18 +2314,18 @@ func (s Dimension) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Dimension) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Dimension"}
+	invalidParams := aws.ErrInvalidParams{Context: "Dimension"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2373,15 +2372,15 @@ func (s DimensionFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DimensionFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DimensionFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "DimensionFilter"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2424,9 +2423,9 @@ func (s DisableAlarmActionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableAlarmActionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableAlarmActionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableAlarmActionsInput"}
 	if s.AlarmNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("AlarmNames"))
+		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2478,9 +2477,9 @@ func (s EnableAlarmActionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableAlarmActionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableAlarmActionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableAlarmActionsInput"}
 	if s.AlarmNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("AlarmNames"))
+		invalidParams.Add(aws.NewErrParamRequired("AlarmNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2690,36 +2689,36 @@ func (s GetMetricStatisticsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMetricStatisticsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMetricStatisticsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMetricStatisticsInput"}
 	if s.EndTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
 	if s.ExtendedStatistics != nil && len(s.ExtendedStatistics) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExtendedStatistics", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExtendedStatistics", 1))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MetricName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 	if s.Namespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Namespace", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
 	if s.Period == nil {
-		invalidParams.Add(request.NewErrParamRequired("Period"))
+		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Period != nil && *s.Period < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Period", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
 	}
 	if s.StartTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
 	if s.Statistics != nil && len(s.Statistics) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Statistics", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Statistics", 1))
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
@@ -2727,7 +2726,7 @@ func (s *GetMetricStatisticsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2924,12 +2923,12 @@ func (s ListMetricsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListMetricsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListMetricsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListMetricsInput"}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MetricName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Namespace", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
@@ -2937,7 +2936,7 @@ func (s *ListMetricsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3349,15 +3348,15 @@ func (s MetricDatum) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricDatum) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MetricDatum"}
+	invalidParams := aws.ErrInvalidParams{Context: "MetricDatum"}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MetricName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 	if s.StorageResolution != nil && *s.StorageResolution < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("StorageResolution", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("StorageResolution", 1))
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
@@ -3365,13 +3364,13 @@ func (s *MetricDatum) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.StatisticValues != nil {
 		if err := s.StatisticValues.Validate(); err != nil {
-			invalidParams.AddNested("StatisticValues", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StatisticValues", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3643,48 +3642,48 @@ func (s PutMetricAlarmInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMetricAlarmInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutMetricAlarmInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutMetricAlarmInput"}
 	if s.AlarmName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AlarmName"))
+		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
 	}
 	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AlarmName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
 	}
 	if s.ComparisonOperator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComparisonOperator"))
+		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 	if s.EvaluateLowSampleCountPercentile != nil && len(*s.EvaluateLowSampleCountPercentile) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EvaluateLowSampleCountPercentile", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EvaluateLowSampleCountPercentile", 1))
 	}
 	if s.EvaluationPeriods == nil {
-		invalidParams.Add(request.NewErrParamRequired("EvaluationPeriods"))
+		invalidParams.Add(aws.NewErrParamRequired("EvaluationPeriods"))
 	}
 	if s.EvaluationPeriods != nil && *s.EvaluationPeriods < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("EvaluationPeriods", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("EvaluationPeriods", 1))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricName != nil && len(*s.MetricName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MetricName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
 	}
 	if s.Namespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Namespace", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
 	if s.Period == nil {
-		invalidParams.Add(request.NewErrParamRequired("Period"))
+		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Period != nil && *s.Period < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Period", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
 	}
 	if s.Threshold == nil {
-		invalidParams.Add(request.NewErrParamRequired("Threshold"))
+		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
 	if s.TreatMissingData != nil && len(*s.TreatMissingData) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TreatMissingData", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TreatMissingData", 1))
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
@@ -3692,7 +3691,7 @@ func (s *PutMetricAlarmInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3856,15 +3855,15 @@ func (s PutMetricDataInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutMetricDataInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutMetricDataInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutMetricDataInput"}
 	if s.MetricData == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricData"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricData"))
 	}
 	if s.Namespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Namespace != nil && len(*s.Namespace) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Namespace", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
 	}
 	if s.MetricData != nil {
 		for i, v := range s.MetricData {
@@ -3872,7 +3871,7 @@ func (s *PutMetricDataInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricData", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricData", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3946,18 +3945,18 @@ func (s SetAlarmStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetAlarmStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetAlarmStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetAlarmStateInput"}
 	if s.AlarmName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AlarmName"))
+		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
 	}
 	if s.AlarmName != nil && len(*s.AlarmName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AlarmName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AlarmName", 1))
 	}
 	if s.StateReason == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateReason"))
+		invalidParams.Add(aws.NewErrParamRequired("StateReason"))
 	}
 	if s.StateValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateValue"))
+		invalidParams.Add(aws.NewErrParamRequired("StateValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4043,18 +4042,18 @@ func (s StatisticSet) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StatisticSet) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StatisticSet"}
+	invalidParams := aws.ErrInvalidParams{Context: "StatisticSet"}
 	if s.Maximum == nil {
-		invalidParams.Add(request.NewErrParamRequired("Maximum"))
+		invalidParams.Add(aws.NewErrParamRequired("Maximum"))
 	}
 	if s.Minimum == nil {
-		invalidParams.Add(request.NewErrParamRequired("Minimum"))
+		invalidParams.Add(aws.NewErrParamRequired("Minimum"))
 	}
 	if s.SampleCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("SampleCount"))
+		invalidParams.Add(aws.NewErrParamRequired("SampleCount"))
 	}
 	if s.Sum == nil {
-		invalidParams.Add(request.NewErrParamRequired("Sum"))
+		invalidParams.Add(aws.NewErrParamRequired("Sum"))
 	}
 
 	if invalidParams.Len() > 0 {

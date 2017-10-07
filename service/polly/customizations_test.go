@@ -10,7 +10,7 @@ import (
 )
 
 func TestRestGETStrategy(t *testing.T) {
-	svc := New(unit.Session, &aws.Config{Region: aws.String("us-west-2")})
+	svc := New(unit.Config, &aws.Config{Region: aws.String("us-west-2")})
 	r, _ := svc.SynthesizeSpeechRequest(nil)
 
 	if err := restGETPresignStrategy(r); err != nil {
@@ -25,7 +25,7 @@ func TestRestGETStrategy(t *testing.T) {
 }
 
 func TestPresign(t *testing.T) {
-	svc := New(unit.Session, &aws.Config{Region: aws.String("us-west-2")})
+	svc := New(unit.Config, &aws.Config{Region: aws.String("us-west-2")})
 	r, _ := svc.SynthesizeSpeechRequest(&SynthesizeSpeechInput{
 		Text:         aws.String("Moo"),
 		OutputFormat: aws.String("mp3"),

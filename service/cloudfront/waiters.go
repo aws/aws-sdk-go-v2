@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilDistributionDeployed uses the CloudFront API operation
@@ -25,20 +24,20 @@ func (c *CloudFront) WaitUntilDistributionDeployed(input *GetDistributionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) WaitUntilDistributionDeployedWithContext(ctx aws.Context, input *GetDistributionInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFront) WaitUntilDistributionDeployedWithContext(ctx aws.Context, input *GetDistributionInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilDistributionDeployed",
 		MaxAttempts: 25,
-		Delay:       request.ConstantWaiterDelay(60 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Distribution.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Distribution.Status",
 				Expected: "Deployed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetDistributionInput
 			if input != nil {
 				tmp := *input
@@ -71,20 +70,20 @@ func (c *CloudFront) WaitUntilInvalidationCompleted(input *GetInvalidationInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) WaitUntilInvalidationCompletedWithContext(ctx aws.Context, input *GetInvalidationInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFront) WaitUntilInvalidationCompletedWithContext(ctx aws.Context, input *GetInvalidationInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInvalidationCompleted",
 		MaxAttempts: 30,
-		Delay:       request.ConstantWaiterDelay(20 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(20 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Invalidation.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Invalidation.Status",
 				Expected: "Completed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetInvalidationInput
 			if input != nil {
 				tmp := *input
@@ -117,20 +116,20 @@ func (c *CloudFront) WaitUntilStreamingDistributionDeployed(input *GetStreamingD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) WaitUntilStreamingDistributionDeployedWithContext(ctx aws.Context, input *GetStreamingDistributionInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFront) WaitUntilStreamingDistributionDeployedWithContext(ctx aws.Context, input *GetStreamingDistributionInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStreamingDistributionDeployed",
 		MaxAttempts: 25,
-		Delay:       request.ConstantWaiterDelay(60 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "StreamingDistribution.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "StreamingDistribution.Status",
 				Expected: "Deployed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetStreamingDistributionInput
 			if input != nil {
 				tmp := *input

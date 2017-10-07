@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddListenerCertificates = "AddListenerCertificates"
 
-// AddListenerCertificatesRequest generates a "aws/request.Request" representing the
+// AddListenerCertificatesRequest generates a "aws.Request" representing the
 // client's request for the AddListenerCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddListenerCertificates = "AddListenerCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddListenerCertificates
-func (c *ELBV2) AddListenerCertificatesRequest(input *AddListenerCertificatesInput) (req *request.Request, output *AddListenerCertificatesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) AddListenerCertificatesRequest(input *AddListenerCertificatesInput) (req *aws.Request, output *AddListenerCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opAddListenerCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -95,7 +94,7 @@ func (c *ELBV2) AddListenerCertificates(input *AddListenerCertificatesInput) (*A
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) AddListenerCertificatesWithContext(ctx aws.Context, input *AddListenerCertificatesInput, opts ...request.Option) (*AddListenerCertificatesOutput, error) {
+func (c *ELBV2) AddListenerCertificatesWithContext(ctx aws.Context, input *AddListenerCertificatesInput, opts ...aws.Option) (*AddListenerCertificatesOutput, error) {
 	req, out := c.AddListenerCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -104,7 +103,7 @@ func (c *ELBV2) AddListenerCertificatesWithContext(ctx aws.Context, input *AddLi
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -128,8 +127,8 @@ const opAddTags = "AddTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTags
-func (c *ELBV2) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -191,7 +190,7 @@ func (c *ELBV2) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *ELBV2) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -200,7 +199,7 @@ func (c *ELBV2) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ..
 
 const opCreateListener = "CreateListener"
 
-// CreateListenerRequest generates a "aws/request.Request" representing the
+// CreateListenerRequest generates a "aws.Request" representing the
 // client's request for the CreateListener operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -224,8 +223,8 @@ const opCreateListener = "CreateListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener
-func (c *ELBV2) CreateListenerRequest(input *CreateListenerInput) (req *request.Request, output *CreateListenerOutput) {
-	op := &request.Operation{
+func (c *ELBV2) CreateListenerRequest(input *CreateListenerInput) (req *aws.Request, output *CreateListenerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateListener,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -319,7 +318,7 @@ func (c *ELBV2) CreateListener(input *CreateListenerInput) (*CreateListenerOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) CreateListenerWithContext(ctx aws.Context, input *CreateListenerInput, opts ...request.Option) (*CreateListenerOutput, error) {
+func (c *ELBV2) CreateListenerWithContext(ctx aws.Context, input *CreateListenerInput, opts ...aws.Option) (*CreateListenerOutput, error) {
 	req, out := c.CreateListenerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -328,7 +327,7 @@ func (c *ELBV2) CreateListenerWithContext(ctx aws.Context, input *CreateListener
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
 
-// CreateLoadBalancerRequest generates a "aws/request.Request" representing the
+// CreateLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the CreateLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -352,8 +351,8 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancer
-func (c *ELBV2) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) (req *request.Request, output *CreateLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELBV2) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) (req *aws.Request, output *CreateLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -450,7 +449,7 @@ func (c *ELBV2) CreateLoadBalancer(input *CreateLoadBalancerInput) (*CreateLoadB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoadBalancerInput, opts ...request.Option) (*CreateLoadBalancerOutput, error) {
+func (c *ELBV2) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoadBalancerInput, opts ...aws.Option) (*CreateLoadBalancerOutput, error) {
 	req, out := c.CreateLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -459,7 +458,7 @@ func (c *ELBV2) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoad
 
 const opCreateRule = "CreateRule"
 
-// CreateRuleRequest generates a "aws/request.Request" representing the
+// CreateRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -483,8 +482,8 @@ const opCreateRule = "CreateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule
-func (c *ELBV2) CreateRuleRequest(input *CreateRuleInput) (req *request.Request, output *CreateRuleOutput) {
-	op := &request.Operation{
+func (c *ELBV2) CreateRuleRequest(input *CreateRuleInput) (req *aws.Request, output *CreateRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -568,7 +567,7 @@ func (c *ELBV2) CreateRule(input *CreateRuleInput) (*CreateRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) CreateRuleWithContext(ctx aws.Context, input *CreateRuleInput, opts ...request.Option) (*CreateRuleOutput, error) {
+func (c *ELBV2) CreateRuleWithContext(ctx aws.Context, input *CreateRuleInput, opts ...aws.Option) (*CreateRuleOutput, error) {
 	req, out := c.CreateRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -577,7 +576,7 @@ func (c *ELBV2) CreateRuleWithContext(ctx aws.Context, input *CreateRuleInput, o
 
 const opCreateTargetGroup = "CreateTargetGroup"
 
-// CreateTargetGroupRequest generates a "aws/request.Request" representing the
+// CreateTargetGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateTargetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -601,8 +600,8 @@ const opCreateTargetGroup = "CreateTargetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup
-func (c *ELBV2) CreateTargetGroupRequest(input *CreateTargetGroupInput) (req *request.Request, output *CreateTargetGroupOutput) {
-	op := &request.Operation{
+func (c *ELBV2) CreateTargetGroupRequest(input *CreateTargetGroupInput) (req *aws.Request, output *CreateTargetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTargetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -668,7 +667,7 @@ func (c *ELBV2) CreateTargetGroup(input *CreateTargetGroupInput) (*CreateTargetG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) CreateTargetGroupWithContext(ctx aws.Context, input *CreateTargetGroupInput, opts ...request.Option) (*CreateTargetGroupOutput, error) {
+func (c *ELBV2) CreateTargetGroupWithContext(ctx aws.Context, input *CreateTargetGroupInput, opts ...aws.Option) (*CreateTargetGroupOutput, error) {
 	req, out := c.CreateTargetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -677,7 +676,7 @@ func (c *ELBV2) CreateTargetGroupWithContext(ctx aws.Context, input *CreateTarge
 
 const opDeleteListener = "DeleteListener"
 
-// DeleteListenerRequest generates a "aws/request.Request" representing the
+// DeleteListenerRequest generates a "aws.Request" representing the
 // client's request for the DeleteListener operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -701,8 +700,8 @@ const opDeleteListener = "DeleteListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteListener
-func (c *ELBV2) DeleteListenerRequest(input *DeleteListenerInput) (req *request.Request, output *DeleteListenerOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DeleteListenerRequest(input *DeleteListenerInput) (req *aws.Request, output *DeleteListenerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteListener,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -750,7 +749,7 @@ func (c *ELBV2) DeleteListener(input *DeleteListenerInput) (*DeleteListenerOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DeleteListenerWithContext(ctx aws.Context, input *DeleteListenerInput, opts ...request.Option) (*DeleteListenerOutput, error) {
+func (c *ELBV2) DeleteListenerWithContext(ctx aws.Context, input *DeleteListenerInput, opts ...aws.Option) (*DeleteListenerOutput, error) {
 	req, out := c.DeleteListenerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -759,7 +758,7 @@ func (c *ELBV2) DeleteListenerWithContext(ctx aws.Context, input *DeleteListener
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
 
-// DeleteLoadBalancerRequest generates a "aws/request.Request" representing the
+// DeleteLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the DeleteLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -783,8 +782,8 @@ const opDeleteLoadBalancer = "DeleteLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteLoadBalancer
-func (c *ELBV2) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) (req *request.Request, output *DeleteLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) (req *aws.Request, output *DeleteLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -841,7 +840,7 @@ func (c *ELBV2) DeleteLoadBalancer(input *DeleteLoadBalancerInput) (*DeleteLoadB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoadBalancerInput, opts ...request.Option) (*DeleteLoadBalancerOutput, error) {
+func (c *ELBV2) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoadBalancerInput, opts ...aws.Option) (*DeleteLoadBalancerOutput, error) {
 	req, out := c.DeleteLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -850,7 +849,7 @@ func (c *ELBV2) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoad
 
 const opDeleteRule = "DeleteRule"
 
-// DeleteRuleRequest generates a "aws/request.Request" representing the
+// DeleteRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -874,8 +873,8 @@ const opDeleteRule = "DeleteRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteRule
-func (c *ELBV2) DeleteRuleRequest(input *DeleteRuleInput) (req *request.Request, output *DeleteRuleOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DeleteRuleRequest(input *DeleteRuleInput) (req *aws.Request, output *DeleteRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -923,7 +922,7 @@ func (c *ELBV2) DeleteRule(input *DeleteRuleInput) (*DeleteRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...request.Option) (*DeleteRuleOutput, error) {
+func (c *ELBV2) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...aws.Option) (*DeleteRuleOutput, error) {
 	req, out := c.DeleteRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -932,7 +931,7 @@ func (c *ELBV2) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, o
 
 const opDeleteTargetGroup = "DeleteTargetGroup"
 
-// DeleteTargetGroupRequest generates a "aws/request.Request" representing the
+// DeleteTargetGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteTargetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -956,8 +955,8 @@ const opDeleteTargetGroup = "DeleteTargetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroup
-func (c *ELBV2) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) (req *request.Request, output *DeleteTargetGroupOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) (req *aws.Request, output *DeleteTargetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTargetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1005,7 +1004,7 @@ func (c *ELBV2) DeleteTargetGroup(input *DeleteTargetGroupInput) (*DeleteTargetG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DeleteTargetGroupWithContext(ctx aws.Context, input *DeleteTargetGroupInput, opts ...request.Option) (*DeleteTargetGroupOutput, error) {
+func (c *ELBV2) DeleteTargetGroupWithContext(ctx aws.Context, input *DeleteTargetGroupInput, opts ...aws.Option) (*DeleteTargetGroupOutput, error) {
 	req, out := c.DeleteTargetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1014,7 +1013,7 @@ func (c *ELBV2) DeleteTargetGroupWithContext(ctx aws.Context, input *DeleteTarge
 
 const opDeregisterTargets = "DeregisterTargets"
 
-// DeregisterTargetsRequest generates a "aws/request.Request" representing the
+// DeregisterTargetsRequest generates a "aws.Request" representing the
 // client's request for the DeregisterTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1038,8 +1037,8 @@ const opDeregisterTargets = "DeregisterTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeregisterTargets
-func (c *ELBV2) DeregisterTargetsRequest(input *DeregisterTargetsInput) (req *request.Request, output *DeregisterTargetsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DeregisterTargetsRequest(input *DeregisterTargetsInput) (req *aws.Request, output *DeregisterTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterTargets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1090,7 +1089,7 @@ func (c *ELBV2) DeregisterTargets(input *DeregisterTargetsInput) (*DeregisterTar
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DeregisterTargetsWithContext(ctx aws.Context, input *DeregisterTargetsInput, opts ...request.Option) (*DeregisterTargetsOutput, error) {
+func (c *ELBV2) DeregisterTargetsWithContext(ctx aws.Context, input *DeregisterTargetsInput, opts ...aws.Option) (*DeregisterTargetsOutput, error) {
 	req, out := c.DeregisterTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1099,7 +1098,7 @@ func (c *ELBV2) DeregisterTargetsWithContext(ctx aws.Context, input *DeregisterT
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
-// DescribeAccountLimitsRequest generates a "aws/request.Request" representing the
+// DescribeAccountLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccountLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1123,8 +1122,8 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeAccountLimits
-func (c *ELBV2) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *request.Request, output *DescribeAccountLimitsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *aws.Request, output *DescribeAccountLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1170,7 +1169,7 @@ func (c *ELBV2) DescribeAccountLimits(input *DescribeAccountLimitsInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...request.Option) (*DescribeAccountLimitsOutput, error) {
+func (c *ELBV2) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...aws.Option) (*DescribeAccountLimitsOutput, error) {
 	req, out := c.DescribeAccountLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1179,7 +1178,7 @@ func (c *ELBV2) DescribeAccountLimitsWithContext(ctx aws.Context, input *Describ
 
 const opDescribeListenerCertificates = "DescribeListenerCertificates"
 
-// DescribeListenerCertificatesRequest generates a "aws/request.Request" representing the
+// DescribeListenerCertificatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeListenerCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1203,8 +1202,8 @@ const opDescribeListenerCertificates = "DescribeListenerCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenerCertificates
-func (c *ELBV2) DescribeListenerCertificatesRequest(input *DescribeListenerCertificatesInput) (req *request.Request, output *DescribeListenerCertificatesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeListenerCertificatesRequest(input *DescribeListenerCertificatesInput) (req *aws.Request, output *DescribeListenerCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeListenerCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1249,7 +1248,7 @@ func (c *ELBV2) DescribeListenerCertificates(input *DescribeListenerCertificates
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeListenerCertificatesWithContext(ctx aws.Context, input *DescribeListenerCertificatesInput, opts ...request.Option) (*DescribeListenerCertificatesOutput, error) {
+func (c *ELBV2) DescribeListenerCertificatesWithContext(ctx aws.Context, input *DescribeListenerCertificatesInput, opts ...aws.Option) (*DescribeListenerCertificatesOutput, error) {
 	req, out := c.DescribeListenerCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1258,7 +1257,7 @@ func (c *ELBV2) DescribeListenerCertificatesWithContext(ctx aws.Context, input *
 
 const opDescribeListeners = "DescribeListeners"
 
-// DescribeListenersRequest generates a "aws/request.Request" representing the
+// DescribeListenersRequest generates a "aws.Request" representing the
 // client's request for the DescribeListeners operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1282,12 +1281,12 @@ const opDescribeListeners = "DescribeListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners
-func (c *ELBV2) DescribeListenersRequest(input *DescribeListenersInput) (req *request.Request, output *DescribeListenersOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeListenersRequest(input *DescribeListenersInput) (req *aws.Request, output *DescribeListenersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeListeners,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "",
@@ -1339,7 +1338,7 @@ func (c *ELBV2) DescribeListeners(input *DescribeListenersInput) (*DescribeListe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeListenersWithContext(ctx aws.Context, input *DescribeListenersInput, opts ...request.Option) (*DescribeListenersOutput, error) {
+func (c *ELBV2) DescribeListenersWithContext(ctx aws.Context, input *DescribeListenersInput, opts ...aws.Option) (*DescribeListenersOutput, error) {
 	req, out := c.DescribeListenersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1374,9 +1373,9 @@ func (c *ELBV2) DescribeListenersPages(input *DescribeListenersInput, fn func(*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeListenersPagesWithContext(ctx aws.Context, input *DescribeListenersInput, fn func(*DescribeListenersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ELBV2) DescribeListenersPagesWithContext(ctx aws.Context, input *DescribeListenersInput, fn func(*DescribeListenersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeListenersInput
 			if input != nil {
 				tmp := *input
@@ -1398,7 +1397,7 @@ func (c *ELBV2) DescribeListenersPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 
-// DescribeLoadBalancerAttributesRequest generates a "aws/request.Request" representing the
+// DescribeLoadBalancerAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBalancerAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1422,8 +1421,8 @@ const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancerAttributes
-func (c *ELBV2) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) (req *request.Request, output *DescribeLoadBalancerAttributesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) (req *aws.Request, output *DescribeLoadBalancerAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1469,7 +1468,7 @@ func (c *ELBV2) DescribeLoadBalancerAttributes(input *DescribeLoadBalancerAttrib
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input *DescribeLoadBalancerAttributesInput, opts ...request.Option) (*DescribeLoadBalancerAttributesOutput, error) {
+func (c *ELBV2) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input *DescribeLoadBalancerAttributesInput, opts ...aws.Option) (*DescribeLoadBalancerAttributesOutput, error) {
 	req, out := c.DescribeLoadBalancerAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1478,7 +1477,7 @@ func (c *ELBV2) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
 
-// DescribeLoadBalancersRequest generates a "aws/request.Request" representing the
+// DescribeLoadBalancersRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBalancers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1502,12 +1501,12 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers
-func (c *ELBV2) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (req *request.Request, output *DescribeLoadBalancersOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (req *aws.Request, output *DescribeLoadBalancersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBalancers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "",
@@ -1557,7 +1556,7 @@ func (c *ELBV2) DescribeLoadBalancers(input *DescribeLoadBalancersInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeLoadBalancersWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...request.Option) (*DescribeLoadBalancersOutput, error) {
+func (c *ELBV2) DescribeLoadBalancersWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.Option) (*DescribeLoadBalancersOutput, error) {
 	req, out := c.DescribeLoadBalancersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1592,9 +1591,9 @@ func (c *ELBV2) DescribeLoadBalancersPages(input *DescribeLoadBalancersInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ELBV2) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
@@ -1616,7 +1615,7 @@ func (c *ELBV2) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *De
 
 const opDescribeRules = "DescribeRules"
 
-// DescribeRulesRequest generates a "aws/request.Request" representing the
+// DescribeRulesRequest generates a "aws.Request" representing the
 // client's request for the DescribeRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1640,8 +1639,8 @@ const opDescribeRules = "DescribeRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRules
-func (c *ELBV2) DescribeRulesRequest(input *DescribeRulesInput) (req *request.Request, output *DescribeRulesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeRulesRequest(input *DescribeRulesInput) (req *aws.Request, output *DescribeRulesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1690,7 +1689,7 @@ func (c *ELBV2) DescribeRules(input *DescribeRulesInput) (*DescribeRulesOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeRulesWithContext(ctx aws.Context, input *DescribeRulesInput, opts ...request.Option) (*DescribeRulesOutput, error) {
+func (c *ELBV2) DescribeRulesWithContext(ctx aws.Context, input *DescribeRulesInput, opts ...aws.Option) (*DescribeRulesOutput, error) {
 	req, out := c.DescribeRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1699,7 +1698,7 @@ func (c *ELBV2) DescribeRulesWithContext(ctx aws.Context, input *DescribeRulesIn
 
 const opDescribeSSLPolicies = "DescribeSSLPolicies"
 
-// DescribeSSLPoliciesRequest generates a "aws/request.Request" representing the
+// DescribeSSLPoliciesRequest generates a "aws.Request" representing the
 // client's request for the DescribeSSLPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1723,8 +1722,8 @@ const opDescribeSSLPolicies = "DescribeSSLPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPolicies
-func (c *ELBV2) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) (req *request.Request, output *DescribeSSLPoliciesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) (req *aws.Request, output *DescribeSSLPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSSLPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1772,7 +1771,7 @@ func (c *ELBV2) DescribeSSLPolicies(input *DescribeSSLPoliciesInput) (*DescribeS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeSSLPoliciesWithContext(ctx aws.Context, input *DescribeSSLPoliciesInput, opts ...request.Option) (*DescribeSSLPoliciesOutput, error) {
+func (c *ELBV2) DescribeSSLPoliciesWithContext(ctx aws.Context, input *DescribeSSLPoliciesInput, opts ...aws.Option) (*DescribeSSLPoliciesOutput, error) {
 	req, out := c.DescribeSSLPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1781,7 +1780,7 @@ func (c *ELBV2) DescribeSSLPoliciesWithContext(ctx aws.Context, input *DescribeS
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1805,8 +1804,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTags
-func (c *ELBV2) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1862,7 +1861,7 @@ func (c *ELBV2) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *ELBV2) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1871,7 +1870,7 @@ func (c *ELBV2) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInpu
 
 const opDescribeTargetGroupAttributes = "DescribeTargetGroupAttributes"
 
-// DescribeTargetGroupAttributesRequest generates a "aws/request.Request" representing the
+// DescribeTargetGroupAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeTargetGroupAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1895,8 +1894,8 @@ const opDescribeTargetGroupAttributes = "DescribeTargetGroupAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupAttributes
-func (c *ELBV2) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroupAttributesInput) (req *request.Request, output *DescribeTargetGroupAttributesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroupAttributesInput) (req *aws.Request, output *DescribeTargetGroupAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTargetGroupAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1941,7 +1940,7 @@ func (c *ELBV2) DescribeTargetGroupAttributes(input *DescribeTargetGroupAttribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeTargetGroupAttributesWithContext(ctx aws.Context, input *DescribeTargetGroupAttributesInput, opts ...request.Option) (*DescribeTargetGroupAttributesOutput, error) {
+func (c *ELBV2) DescribeTargetGroupAttributesWithContext(ctx aws.Context, input *DescribeTargetGroupAttributesInput, opts ...aws.Option) (*DescribeTargetGroupAttributesOutput, error) {
 	req, out := c.DescribeTargetGroupAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1950,7 +1949,7 @@ func (c *ELBV2) DescribeTargetGroupAttributesWithContext(ctx aws.Context, input 
 
 const opDescribeTargetGroups = "DescribeTargetGroups"
 
-// DescribeTargetGroupsRequest generates a "aws/request.Request" representing the
+// DescribeTargetGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTargetGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1974,12 +1973,12 @@ const opDescribeTargetGroups = "DescribeTargetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups
-func (c *ELBV2) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) (req *request.Request, output *DescribeTargetGroupsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) (req *aws.Request, output *DescribeTargetGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTargetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "",
@@ -2035,7 +2034,7 @@ func (c *ELBV2) DescribeTargetGroups(input *DescribeTargetGroupsInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeTargetGroupsWithContext(ctx aws.Context, input *DescribeTargetGroupsInput, opts ...request.Option) (*DescribeTargetGroupsOutput, error) {
+func (c *ELBV2) DescribeTargetGroupsWithContext(ctx aws.Context, input *DescribeTargetGroupsInput, opts ...aws.Option) (*DescribeTargetGroupsOutput, error) {
 	req, out := c.DescribeTargetGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2070,9 +2069,9 @@ func (c *ELBV2) DescribeTargetGroupsPages(input *DescribeTargetGroupsInput, fn f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeTargetGroupsPagesWithContext(ctx aws.Context, input *DescribeTargetGroupsInput, fn func(*DescribeTargetGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ELBV2) DescribeTargetGroupsPagesWithContext(ctx aws.Context, input *DescribeTargetGroupsInput, fn func(*DescribeTargetGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTargetGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2094,7 +2093,7 @@ func (c *ELBV2) DescribeTargetGroupsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeTargetHealth = "DescribeTargetHealth"
 
-// DescribeTargetHealthRequest generates a "aws/request.Request" representing the
+// DescribeTargetHealthRequest generates a "aws.Request" representing the
 // client's request for the DescribeTargetHealth operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2118,8 +2117,8 @@ const opDescribeTargetHealth = "DescribeTargetHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth
-func (c *ELBV2) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) (req *request.Request, output *DescribeTargetHealthOutput) {
-	op := &request.Operation{
+func (c *ELBV2) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) (req *aws.Request, output *DescribeTargetHealthOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTargetHealth,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2172,7 +2171,7 @@ func (c *ELBV2) DescribeTargetHealth(input *DescribeTargetHealthInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) DescribeTargetHealthWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...request.Option) (*DescribeTargetHealthOutput, error) {
+func (c *ELBV2) DescribeTargetHealthWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...aws.Option) (*DescribeTargetHealthOutput, error) {
 	req, out := c.DescribeTargetHealthRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2181,7 +2180,7 @@ func (c *ELBV2) DescribeTargetHealthWithContext(ctx aws.Context, input *Describe
 
 const opModifyListener = "ModifyListener"
 
-// ModifyListenerRequest generates a "aws/request.Request" representing the
+// ModifyListenerRequest generates a "aws.Request" representing the
 // client's request for the ModifyListener operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2205,8 +2204,8 @@ const opModifyListener = "ModifyListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener
-func (c *ELBV2) ModifyListenerRequest(input *ModifyListenerInput) (req *request.Request, output *ModifyListenerOutput) {
-	op := &request.Operation{
+func (c *ELBV2) ModifyListenerRequest(input *ModifyListenerInput) (req *aws.Request, output *ModifyListenerOutput) {
+	op := &aws.Operation{
 		Name:       opModifyListener,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2293,7 +2292,7 @@ func (c *ELBV2) ModifyListener(input *ModifyListenerInput) (*ModifyListenerOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) ModifyListenerWithContext(ctx aws.Context, input *ModifyListenerInput, opts ...request.Option) (*ModifyListenerOutput, error) {
+func (c *ELBV2) ModifyListenerWithContext(ctx aws.Context, input *ModifyListenerInput, opts ...aws.Option) (*ModifyListenerOutput, error) {
 	req, out := c.ModifyListenerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2302,7 +2301,7 @@ func (c *ELBV2) ModifyListenerWithContext(ctx aws.Context, input *ModifyListener
 
 const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 
-// ModifyLoadBalancerAttributesRequest generates a "aws/request.Request" representing the
+// ModifyLoadBalancerAttributesRequest generates a "aws.Request" representing the
 // client's request for the ModifyLoadBalancerAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2326,8 +2325,8 @@ const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyLoadBalancerAttributes
-func (c *ELBV2) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) (req *request.Request, output *ModifyLoadBalancerAttributesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) (req *aws.Request, output *ModifyLoadBalancerAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opModifyLoadBalancerAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2380,7 +2379,7 @@ func (c *ELBV2) ModifyLoadBalancerAttributes(input *ModifyLoadBalancerAttributes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *ModifyLoadBalancerAttributesInput, opts ...request.Option) (*ModifyLoadBalancerAttributesOutput, error) {
+func (c *ELBV2) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *ModifyLoadBalancerAttributesInput, opts ...aws.Option) (*ModifyLoadBalancerAttributesOutput, error) {
 	req, out := c.ModifyLoadBalancerAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2389,7 +2388,7 @@ func (c *ELBV2) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *
 
 const opModifyRule = "ModifyRule"
 
-// ModifyRuleRequest generates a "aws/request.Request" representing the
+// ModifyRuleRequest generates a "aws.Request" representing the
 // client's request for the ModifyRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2413,8 +2412,8 @@ const opModifyRule = "ModifyRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule
-func (c *ELBV2) ModifyRuleRequest(input *ModifyRuleInput) (req *request.Request, output *ModifyRuleOutput) {
-	op := &request.Operation{
+func (c *ELBV2) ModifyRuleRequest(input *ModifyRuleInput) (req *aws.Request, output *ModifyRuleOutput) {
+	op := &aws.Operation{
 		Name:       opModifyRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2482,7 +2481,7 @@ func (c *ELBV2) ModifyRule(input *ModifyRuleInput) (*ModifyRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) ModifyRuleWithContext(ctx aws.Context, input *ModifyRuleInput, opts ...request.Option) (*ModifyRuleOutput, error) {
+func (c *ELBV2) ModifyRuleWithContext(ctx aws.Context, input *ModifyRuleInput, opts ...aws.Option) (*ModifyRuleOutput, error) {
 	req, out := c.ModifyRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2491,7 +2490,7 @@ func (c *ELBV2) ModifyRuleWithContext(ctx aws.Context, input *ModifyRuleInput, o
 
 const opModifyTargetGroup = "ModifyTargetGroup"
 
-// ModifyTargetGroupRequest generates a "aws/request.Request" representing the
+// ModifyTargetGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyTargetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2515,8 +2514,8 @@ const opModifyTargetGroup = "ModifyTargetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup
-func (c *ELBV2) ModifyTargetGroupRequest(input *ModifyTargetGroupInput) (req *request.Request, output *ModifyTargetGroupOutput) {
-	op := &request.Operation{
+func (c *ELBV2) ModifyTargetGroupRequest(input *ModifyTargetGroupInput) (req *aws.Request, output *ModifyTargetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyTargetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2567,7 +2566,7 @@ func (c *ELBV2) ModifyTargetGroup(input *ModifyTargetGroupInput) (*ModifyTargetG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) ModifyTargetGroupWithContext(ctx aws.Context, input *ModifyTargetGroupInput, opts ...request.Option) (*ModifyTargetGroupOutput, error) {
+func (c *ELBV2) ModifyTargetGroupWithContext(ctx aws.Context, input *ModifyTargetGroupInput, opts ...aws.Option) (*ModifyTargetGroupOutput, error) {
 	req, out := c.ModifyTargetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2576,7 +2575,7 @@ func (c *ELBV2) ModifyTargetGroupWithContext(ctx aws.Context, input *ModifyTarge
 
 const opModifyTargetGroupAttributes = "ModifyTargetGroupAttributes"
 
-// ModifyTargetGroupAttributesRequest generates a "aws/request.Request" representing the
+// ModifyTargetGroupAttributesRequest generates a "aws.Request" representing the
 // client's request for the ModifyTargetGroupAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2600,8 +2599,8 @@ const opModifyTargetGroupAttributes = "ModifyTargetGroupAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributes
-func (c *ELBV2) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttributesInput) (req *request.Request, output *ModifyTargetGroupAttributesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttributesInput) (req *aws.Request, output *ModifyTargetGroupAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opModifyTargetGroupAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2649,7 +2648,7 @@ func (c *ELBV2) ModifyTargetGroupAttributes(input *ModifyTargetGroupAttributesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) ModifyTargetGroupAttributesWithContext(ctx aws.Context, input *ModifyTargetGroupAttributesInput, opts ...request.Option) (*ModifyTargetGroupAttributesOutput, error) {
+func (c *ELBV2) ModifyTargetGroupAttributesWithContext(ctx aws.Context, input *ModifyTargetGroupAttributesInput, opts ...aws.Option) (*ModifyTargetGroupAttributesOutput, error) {
 	req, out := c.ModifyTargetGroupAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2658,7 +2657,7 @@ func (c *ELBV2) ModifyTargetGroupAttributesWithContext(ctx aws.Context, input *M
 
 const opRegisterTargets = "RegisterTargets"
 
-// RegisterTargetsRequest generates a "aws/request.Request" representing the
+// RegisterTargetsRequest generates a "aws.Request" representing the
 // client's request for the RegisterTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2682,8 +2681,8 @@ const opRegisterTargets = "RegisterTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargets
-func (c *ELBV2) RegisterTargetsRequest(input *RegisterTargetsInput) (req *request.Request, output *RegisterTargetsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) RegisterTargetsRequest(input *RegisterTargetsInput) (req *aws.Request, output *RegisterTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterTargets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2754,7 +2753,7 @@ func (c *ELBV2) RegisterTargets(input *RegisterTargetsInput) (*RegisterTargetsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) RegisterTargetsWithContext(ctx aws.Context, input *RegisterTargetsInput, opts ...request.Option) (*RegisterTargetsOutput, error) {
+func (c *ELBV2) RegisterTargetsWithContext(ctx aws.Context, input *RegisterTargetsInput, opts ...aws.Option) (*RegisterTargetsOutput, error) {
 	req, out := c.RegisterTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2763,7 +2762,7 @@ func (c *ELBV2) RegisterTargetsWithContext(ctx aws.Context, input *RegisterTarge
 
 const opRemoveListenerCertificates = "RemoveListenerCertificates"
 
-// RemoveListenerCertificatesRequest generates a "aws/request.Request" representing the
+// RemoveListenerCertificatesRequest generates a "aws.Request" representing the
 // client's request for the RemoveListenerCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2787,8 +2786,8 @@ const opRemoveListenerCertificates = "RemoveListenerCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveListenerCertificates
-func (c *ELBV2) RemoveListenerCertificatesRequest(input *RemoveListenerCertificatesInput) (req *request.Request, output *RemoveListenerCertificatesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) RemoveListenerCertificatesRequest(input *RemoveListenerCertificatesInput) (req *aws.Request, output *RemoveListenerCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveListenerCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2841,7 +2840,7 @@ func (c *ELBV2) RemoveListenerCertificates(input *RemoveListenerCertificatesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) RemoveListenerCertificatesWithContext(ctx aws.Context, input *RemoveListenerCertificatesInput, opts ...request.Option) (*RemoveListenerCertificatesOutput, error) {
+func (c *ELBV2) RemoveListenerCertificatesWithContext(ctx aws.Context, input *RemoveListenerCertificatesInput, opts ...aws.Option) (*RemoveListenerCertificatesOutput, error) {
 	req, out := c.RemoveListenerCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2850,7 +2849,7 @@ func (c *ELBV2) RemoveListenerCertificatesWithContext(ctx aws.Context, input *Re
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws/request.Request" representing the
+// RemoveTagsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2874,8 +2873,8 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTags
-func (c *ELBV2) RemoveTagsRequest(input *RemoveTagsInput) (req *request.Request, output *RemoveTagsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2934,7 +2933,7 @@ func (c *ELBV2) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...request.Option) (*RemoveTagsOutput, error) {
+func (c *ELBV2) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
 	req, out := c.RemoveTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2943,7 +2942,7 @@ func (c *ELBV2) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, o
 
 const opSetIpAddressType = "SetIpAddressType"
 
-// SetIpAddressTypeRequest generates a "aws/request.Request" representing the
+// SetIpAddressTypeRequest generates a "aws.Request" representing the
 // client's request for the SetIpAddressType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2967,8 +2966,8 @@ const opSetIpAddressType = "SetIpAddressType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressType
-func (c *ELBV2) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) (req *request.Request, output *SetIpAddressTypeOutput) {
-	op := &request.Operation{
+func (c *ELBV2) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) (req *aws.Request, output *SetIpAddressTypeOutput) {
+	op := &aws.Operation{
 		Name:       opSetIpAddressType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3022,7 +3021,7 @@ func (c *ELBV2) SetIpAddressType(input *SetIpAddressTypeInput) (*SetIpAddressTyp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) SetIpAddressTypeWithContext(ctx aws.Context, input *SetIpAddressTypeInput, opts ...request.Option) (*SetIpAddressTypeOutput, error) {
+func (c *ELBV2) SetIpAddressTypeWithContext(ctx aws.Context, input *SetIpAddressTypeInput, opts ...aws.Option) (*SetIpAddressTypeOutput, error) {
 	req, out := c.SetIpAddressTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3031,7 +3030,7 @@ func (c *ELBV2) SetIpAddressTypeWithContext(ctx aws.Context, input *SetIpAddress
 
 const opSetRulePriorities = "SetRulePriorities"
 
-// SetRulePrioritiesRequest generates a "aws/request.Request" representing the
+// SetRulePrioritiesRequest generates a "aws.Request" representing the
 // client's request for the SetRulePriorities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3055,8 +3054,8 @@ const opSetRulePriorities = "SetRulePriorities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities
-func (c *ELBV2) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) (req *request.Request, output *SetRulePrioritiesOutput) {
-	op := &request.Operation{
+func (c *ELBV2) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) (req *aws.Request, output *SetRulePrioritiesOutput) {
+	op := &aws.Operation{
 		Name:       opSetRulePriorities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3111,7 +3110,7 @@ func (c *ELBV2) SetRulePriorities(input *SetRulePrioritiesInput) (*SetRulePriori
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) SetRulePrioritiesWithContext(ctx aws.Context, input *SetRulePrioritiesInput, opts ...request.Option) (*SetRulePrioritiesOutput, error) {
+func (c *ELBV2) SetRulePrioritiesWithContext(ctx aws.Context, input *SetRulePrioritiesInput, opts ...aws.Option) (*SetRulePrioritiesOutput, error) {
 	req, out := c.SetRulePrioritiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3120,7 +3119,7 @@ func (c *ELBV2) SetRulePrioritiesWithContext(ctx aws.Context, input *SetRulePrio
 
 const opSetSecurityGroups = "SetSecurityGroups"
 
-// SetSecurityGroupsRequest generates a "aws/request.Request" representing the
+// SetSecurityGroupsRequest generates a "aws.Request" representing the
 // client's request for the SetSecurityGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3144,8 +3143,8 @@ const opSetSecurityGroups = "SetSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroups
-func (c *ELBV2) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) (req *request.Request, output *SetSecurityGroupsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) (req *aws.Request, output *SetSecurityGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opSetSecurityGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3200,7 +3199,7 @@ func (c *ELBV2) SetSecurityGroups(input *SetSecurityGroupsInput) (*SetSecurityGr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) SetSecurityGroupsWithContext(ctx aws.Context, input *SetSecurityGroupsInput, opts ...request.Option) (*SetSecurityGroupsOutput, error) {
+func (c *ELBV2) SetSecurityGroupsWithContext(ctx aws.Context, input *SetSecurityGroupsInput, opts ...aws.Option) (*SetSecurityGroupsOutput, error) {
 	req, out := c.SetSecurityGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3209,7 +3208,7 @@ func (c *ELBV2) SetSecurityGroupsWithContext(ctx aws.Context, input *SetSecurity
 
 const opSetSubnets = "SetSubnets"
 
-// SetSubnetsRequest generates a "aws/request.Request" representing the
+// SetSubnetsRequest generates a "aws.Request" representing the
 // client's request for the SetSubnets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3233,8 +3232,8 @@ const opSetSubnets = "SetSubnets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets
-func (c *ELBV2) SetSubnetsRequest(input *SetSubnetsInput) (req *request.Request, output *SetSubnetsOutput) {
-	op := &request.Operation{
+func (c *ELBV2) SetSubnetsRequest(input *SetSubnetsInput) (req *aws.Request, output *SetSubnetsOutput) {
+	op := &aws.Operation{
 		Name:       opSetSubnets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3298,7 +3297,7 @@ func (c *ELBV2) SetSubnets(input *SetSubnetsInput) (*SetSubnetsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) SetSubnetsWithContext(ctx aws.Context, input *SetSubnetsInput, opts ...request.Option) (*SetSubnetsOutput, error) {
+func (c *ELBV2) SetSubnetsWithContext(ctx aws.Context, input *SetSubnetsInput, opts ...aws.Option) (*SetSubnetsOutput, error) {
 	req, out := c.SetSubnetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3333,12 +3332,12 @@ func (s Action) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Action) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Action"}
+	invalidParams := aws.ErrInvalidParams{Context: "Action"}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3386,12 +3385,12 @@ func (s AddListenerCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddListenerCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddListenerCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddListenerCertificatesInput"}
 	if s.Certificates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Certificates"))
+		invalidParams.Add(aws.NewErrParamRequired("Certificates"))
 	}
 	if s.ListenerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ListenerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3463,15 +3462,15 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.ResourceArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArns"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -3479,7 +3478,7 @@ func (s *AddTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3677,21 +3676,21 @@ func (s CreateListenerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateListenerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateListenerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateListenerInput"}
 	if s.DefaultActions == nil {
-		invalidParams.Add(request.NewErrParamRequired("DefaultActions"))
+		invalidParams.Add(aws.NewErrParamRequired("DefaultActions"))
 	}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 	if s.Port == nil {
-		invalidParams.Add(request.NewErrParamRequired("Port"))
+		invalidParams.Add(aws.NewErrParamRequired("Port"))
 	}
 	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Port", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
 	if s.Protocol == nil {
-		invalidParams.Add(request.NewErrParamRequired("Protocol"))
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.DefaultActions != nil {
 		for i, v := range s.DefaultActions {
@@ -3699,7 +3698,7 @@ func (s *CreateListenerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3843,12 +3842,12 @@ func (s CreateLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -3856,7 +3855,7 @@ func (s *CreateLoadBalancerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4005,21 +4004,21 @@ func (s CreateRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleInput"}
 	if s.Actions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Actions"))
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
 	if s.Conditions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Conditions"))
+		invalidParams.Add(aws.NewErrParamRequired("Conditions"))
 	}
 	if s.ListenerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ListenerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
 	if s.Priority == nil {
-		invalidParams.Add(request.NewErrParamRequired("Priority"))
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
 	if s.Priority != nil && *s.Priority < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Priority", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
@@ -4027,7 +4026,7 @@ func (s *CreateRuleInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4185,40 +4184,40 @@ func (s CreateTargetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTargetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTargetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTargetGroupInput"}
 	if s.HealthCheckIntervalSeconds != nil && *s.HealthCheckIntervalSeconds < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthCheckIntervalSeconds", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthCheckIntervalSeconds", 5))
 	}
 	if s.HealthCheckPath != nil && len(*s.HealthCheckPath) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HealthCheckPath", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HealthCheckPath", 1))
 	}
 	if s.HealthCheckTimeoutSeconds != nil && *s.HealthCheckTimeoutSeconds < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthCheckTimeoutSeconds", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthCheckTimeoutSeconds", 2))
 	}
 	if s.HealthyThresholdCount != nil && *s.HealthyThresholdCount < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthyThresholdCount", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthyThresholdCount", 2))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Port == nil {
-		invalidParams.Add(request.NewErrParamRequired("Port"))
+		invalidParams.Add(aws.NewErrParamRequired("Port"))
 	}
 	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Port", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
 	if s.Protocol == nil {
-		invalidParams.Add(request.NewErrParamRequired("Protocol"))
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.UnhealthyThresholdCount != nil && *s.UnhealthyThresholdCount < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("UnhealthyThresholdCount", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("UnhealthyThresholdCount", 2))
 	}
 	if s.VpcId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VpcId"))
+		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
 	if s.Matcher != nil {
 		if err := s.Matcher.Validate(); err != nil {
-			invalidParams.AddNested("Matcher", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Matcher", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4352,9 +4351,9 @@ func (s DeleteListenerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteListenerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteListenerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteListenerInput"}
 	if s.ListenerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ListenerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4406,9 +4405,9 @@ func (s DeleteLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4460,9 +4459,9 @@ func (s DeleteRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
 	if s.RuleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4514,9 +4513,9 @@ func (s DeleteTargetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTargetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTargetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTargetGroupInput"}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4574,12 +4573,12 @@ func (s DeregisterTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTargetsInput"}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 	if s.Targets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Targets"))
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -4587,7 +4586,7 @@ func (s *DeregisterTargetsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4649,9 +4648,9 @@ func (s DescribeAccountLimitsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAccountLimitsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4735,12 +4734,12 @@ func (s DescribeListenerCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeListenerCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeListenerCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeListenerCertificatesInput"}
 	if s.ListenerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ListenerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4831,9 +4830,9 @@ func (s DescribeListenersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeListenersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeListenersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeListenersInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4922,9 +4921,9 @@ func (s DescribeLoadBalancerAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancerAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4994,9 +4993,9 @@ func (s DescribeLoadBalancersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5093,9 +5092,9 @@ func (s DescribeRulesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRulesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRulesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRulesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5189,9 +5188,9 @@ func (s DescribeSSLPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSSLPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSSLPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSSLPoliciesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5274,9 +5273,9 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.ResourceArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArns"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5337,9 +5336,9 @@ func (s DescribeTargetGroupAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTargetGroupAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTargetGroupAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetGroupAttributesInput"}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5411,9 +5410,9 @@ func (s DescribeTargetGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTargetGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTargetGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetGroupsInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5511,9 +5510,9 @@ func (s DescribeTargetHealthInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTargetHealthInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTargetHealthInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTargetHealthInput"}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -5521,7 +5520,7 @@ func (s *DescribeTargetHealthInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5984,9 +5983,9 @@ func (s Matcher) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Matcher) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Matcher"}
+	invalidParams := aws.ErrInvalidParams{Context: "Matcher"}
 	if s.HttpCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("HttpCode"))
+		invalidParams.Add(aws.NewErrParamRequired("HttpCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6044,12 +6043,12 @@ func (s ModifyListenerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyListenerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyListenerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyListenerInput"}
 	if s.ListenerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ListenerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
 	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Port", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
 	if s.DefaultActions != nil {
 		for i, v := range s.DefaultActions {
@@ -6057,7 +6056,7 @@ func (s *ModifyListenerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DefaultActions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6155,12 +6154,12 @@ func (s ModifyLoadBalancerAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyLoadBalancerAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6233,9 +6232,9 @@ func (s ModifyRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyRuleInput"}
 	if s.RuleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleArn"))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
@@ -6243,7 +6242,7 @@ func (s *ModifyRuleInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6323,12 +6322,12 @@ func (s ModifyTargetGroupAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyTargetGroupAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyTargetGroupAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyTargetGroupAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6429,28 +6428,28 @@ func (s ModifyTargetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyTargetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyTargetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyTargetGroupInput"}
 	if s.HealthCheckIntervalSeconds != nil && *s.HealthCheckIntervalSeconds < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthCheckIntervalSeconds", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthCheckIntervalSeconds", 5))
 	}
 	if s.HealthCheckPath != nil && len(*s.HealthCheckPath) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HealthCheckPath", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HealthCheckPath", 1))
 	}
 	if s.HealthCheckTimeoutSeconds != nil && *s.HealthCheckTimeoutSeconds < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthCheckTimeoutSeconds", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthCheckTimeoutSeconds", 2))
 	}
 	if s.HealthyThresholdCount != nil && *s.HealthyThresholdCount < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthyThresholdCount", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthyThresholdCount", 2))
 	}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 	if s.UnhealthyThresholdCount != nil && *s.UnhealthyThresholdCount < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("UnhealthyThresholdCount", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("UnhealthyThresholdCount", 2))
 	}
 	if s.Matcher != nil {
 		if err := s.Matcher.Validate(); err != nil {
-			invalidParams.AddNested("Matcher", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Matcher", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6565,12 +6564,12 @@ func (s RegisterTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterTargetsInput"}
 	if s.TargetGroupArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetGroupArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
 	}
 	if s.Targets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Targets"))
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -6578,7 +6577,7 @@ func (s *RegisterTargetsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6643,12 +6642,12 @@ func (s RemoveListenerCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveListenerCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveListenerCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveListenerCertificatesInput"}
 	if s.Certificates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Certificates"))
+		invalidParams.Add(aws.NewErrParamRequired("Certificates"))
 	}
 	if s.ListenerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ListenerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ListenerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6711,12 +6710,12 @@ func (s RemoveTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
 	if s.ResourceArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArns"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6899,9 +6898,9 @@ func (s RulePriorityPair) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RulePriorityPair) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RulePriorityPair"}
+	invalidParams := aws.ErrInvalidParams{Context: "RulePriorityPair"}
 	if s.Priority != nil && *s.Priority < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Priority", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Priority", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6951,12 +6950,12 @@ func (s SetIpAddressTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIpAddressTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetIpAddressTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetIpAddressTypeInput"}
 	if s.IpAddressType == nil {
-		invalidParams.Add(request.NewErrParamRequired("IpAddressType"))
+		invalidParams.Add(aws.NewErrParamRequired("IpAddressType"))
 	}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7023,9 +7022,9 @@ func (s SetRulePrioritiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetRulePrioritiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetRulePrioritiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetRulePrioritiesInput"}
 	if s.RulePriorities == nil {
-		invalidParams.Add(request.NewErrParamRequired("RulePriorities"))
+		invalidParams.Add(aws.NewErrParamRequired("RulePriorities"))
 	}
 	if s.RulePriorities != nil {
 		for i, v := range s.RulePriorities {
@@ -7033,7 +7032,7 @@ func (s *SetRulePrioritiesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RulePriorities", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RulePriorities", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7101,12 +7100,12 @@ func (s SetSecurityGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSecurityGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetSecurityGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetSecurityGroupsInput"}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 	if s.SecurityGroups == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecurityGroups"))
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroups"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7188,12 +7187,12 @@ func (s SetSubnetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetSubnetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetSubnetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetSubnetsInput"}
 	if s.LoadBalancerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
 	}
 	if s.Subnets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subnets"))
+		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7347,12 +7346,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7447,12 +7446,12 @@ func (s TargetDescription) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetDescription) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TargetDescription"}
+	invalidParams := aws.ErrInvalidParams{Context: "TargetDescription"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Port != nil && *s.Port < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Port", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
 	}
 
 	if invalidParams.Len() > 0 {

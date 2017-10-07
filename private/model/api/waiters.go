@@ -45,11 +45,11 @@ type Waiter struct {
 // this API.
 func (a *API) WaitersGoCode() string {
 	var buf bytes.Buffer
-	fmt.Fprintf(&buf, "import (\n%q\n\n%q\n%q\n)",
-		"time",
-		"github.com/aws/aws-sdk-go-v2/aws",
-		"github.com/aws/aws-sdk-go-v2/aws/request",
-	)
+	buf.WriteString(`import (
+		"time"
+
+		"github.com/aws/aws-sdk-go-v2/aws"
+	)`)
 
 	for _, w := range a.Waiters {
 		buf.WriteString(w.GoCode())
@@ -128,22 +128,22 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}(input {{ .Operati
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
 func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}WithContext(` +
-	`ctx aws.Context, input {{ .Operation.InputRef.GoType }}, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+	`ctx aws.Context, input {{ .Operation.InputRef.GoType }}, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:    "WaitUntil{{ .Name }}",
 		MaxAttempts: {{ .MaxAttempts }},
-		Delay: request.ConstantWaiterDelay({{ .Delay }} * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay: aws.ConstantWaiterDelay({{ .Delay }} * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{{ range $_, $a := .Acceptors }}{
-				State:    request.{{ titleCase .State }}WaiterState,
-				Matcher:  request.{{ titleCase .Matcher }}WaiterMatch,
+				State:    aws.{{ titleCase .State }}WaiterState,
+				Matcher:  aws.{{ titleCase .Matcher }}WaiterMatch,
 				{{- if .Argument }}Argument: "{{ .Argument }}",{{ end }}
 				Expected: {{ .ExpectedString }},
 			},
 			{{ end }}
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy {{ .Operation.InputRef.GoType }}
 			if input != nil  {
 				tmp := *input
@@ -163,7 +163,7 @@ func (c *{{ .Operation.API.StructName }}) WaitUntil{{ .Name }}WithContext(` +
 
 {{ define "waiter interface" }}
 WaitUntil{{ .Name }}({{ .Operation.InputRef.GoTypeWithPkgName }}) error
-WaitUntil{{ .Name }}WithContext(aws.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...request.WaiterOption) error
+WaitUntil{{ .Name }}WithContext(aws.Context, {{ .Operation.InputRef.GoTypeWithPkgName }}, ...aws.WaiterOption) error
 {{- end }}
 `))
 

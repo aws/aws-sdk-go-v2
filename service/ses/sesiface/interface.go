@@ -10,7 +10,6 @@ package sesiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := ses.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := ses.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,218 +64,218 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type SESAPI interface {
 	CloneReceiptRuleSet(*ses.CloneReceiptRuleSetInput) (*ses.CloneReceiptRuleSetOutput, error)
-	CloneReceiptRuleSetWithContext(aws.Context, *ses.CloneReceiptRuleSetInput, ...request.Option) (*ses.CloneReceiptRuleSetOutput, error)
-	CloneReceiptRuleSetRequest(*ses.CloneReceiptRuleSetInput) (*request.Request, *ses.CloneReceiptRuleSetOutput)
+	CloneReceiptRuleSetWithContext(aws.Context, *ses.CloneReceiptRuleSetInput, ...aws.Option) (*ses.CloneReceiptRuleSetOutput, error)
+	CloneReceiptRuleSetRequest(*ses.CloneReceiptRuleSetInput) (*aws.Request, *ses.CloneReceiptRuleSetOutput)
 
 	CreateConfigurationSet(*ses.CreateConfigurationSetInput) (*ses.CreateConfigurationSetOutput, error)
-	CreateConfigurationSetWithContext(aws.Context, *ses.CreateConfigurationSetInput, ...request.Option) (*ses.CreateConfigurationSetOutput, error)
-	CreateConfigurationSetRequest(*ses.CreateConfigurationSetInput) (*request.Request, *ses.CreateConfigurationSetOutput)
+	CreateConfigurationSetWithContext(aws.Context, *ses.CreateConfigurationSetInput, ...aws.Option) (*ses.CreateConfigurationSetOutput, error)
+	CreateConfigurationSetRequest(*ses.CreateConfigurationSetInput) (*aws.Request, *ses.CreateConfigurationSetOutput)
 
 	CreateConfigurationSetEventDestination(*ses.CreateConfigurationSetEventDestinationInput) (*ses.CreateConfigurationSetEventDestinationOutput, error)
-	CreateConfigurationSetEventDestinationWithContext(aws.Context, *ses.CreateConfigurationSetEventDestinationInput, ...request.Option) (*ses.CreateConfigurationSetEventDestinationOutput, error)
-	CreateConfigurationSetEventDestinationRequest(*ses.CreateConfigurationSetEventDestinationInput) (*request.Request, *ses.CreateConfigurationSetEventDestinationOutput)
+	CreateConfigurationSetEventDestinationWithContext(aws.Context, *ses.CreateConfigurationSetEventDestinationInput, ...aws.Option) (*ses.CreateConfigurationSetEventDestinationOutput, error)
+	CreateConfigurationSetEventDestinationRequest(*ses.CreateConfigurationSetEventDestinationInput) (*aws.Request, *ses.CreateConfigurationSetEventDestinationOutput)
 
 	CreateConfigurationSetTrackingOptions(*ses.CreateConfigurationSetTrackingOptionsInput) (*ses.CreateConfigurationSetTrackingOptionsOutput, error)
-	CreateConfigurationSetTrackingOptionsWithContext(aws.Context, *ses.CreateConfigurationSetTrackingOptionsInput, ...request.Option) (*ses.CreateConfigurationSetTrackingOptionsOutput, error)
-	CreateConfigurationSetTrackingOptionsRequest(*ses.CreateConfigurationSetTrackingOptionsInput) (*request.Request, *ses.CreateConfigurationSetTrackingOptionsOutput)
+	CreateConfigurationSetTrackingOptionsWithContext(aws.Context, *ses.CreateConfigurationSetTrackingOptionsInput, ...aws.Option) (*ses.CreateConfigurationSetTrackingOptionsOutput, error)
+	CreateConfigurationSetTrackingOptionsRequest(*ses.CreateConfigurationSetTrackingOptionsInput) (*aws.Request, *ses.CreateConfigurationSetTrackingOptionsOutput)
 
 	CreateReceiptFilter(*ses.CreateReceiptFilterInput) (*ses.CreateReceiptFilterOutput, error)
-	CreateReceiptFilterWithContext(aws.Context, *ses.CreateReceiptFilterInput, ...request.Option) (*ses.CreateReceiptFilterOutput, error)
-	CreateReceiptFilterRequest(*ses.CreateReceiptFilterInput) (*request.Request, *ses.CreateReceiptFilterOutput)
+	CreateReceiptFilterWithContext(aws.Context, *ses.CreateReceiptFilterInput, ...aws.Option) (*ses.CreateReceiptFilterOutput, error)
+	CreateReceiptFilterRequest(*ses.CreateReceiptFilterInput) (*aws.Request, *ses.CreateReceiptFilterOutput)
 
 	CreateReceiptRule(*ses.CreateReceiptRuleInput) (*ses.CreateReceiptRuleOutput, error)
-	CreateReceiptRuleWithContext(aws.Context, *ses.CreateReceiptRuleInput, ...request.Option) (*ses.CreateReceiptRuleOutput, error)
-	CreateReceiptRuleRequest(*ses.CreateReceiptRuleInput) (*request.Request, *ses.CreateReceiptRuleOutput)
+	CreateReceiptRuleWithContext(aws.Context, *ses.CreateReceiptRuleInput, ...aws.Option) (*ses.CreateReceiptRuleOutput, error)
+	CreateReceiptRuleRequest(*ses.CreateReceiptRuleInput) (*aws.Request, *ses.CreateReceiptRuleOutput)
 
 	CreateReceiptRuleSet(*ses.CreateReceiptRuleSetInput) (*ses.CreateReceiptRuleSetOutput, error)
-	CreateReceiptRuleSetWithContext(aws.Context, *ses.CreateReceiptRuleSetInput, ...request.Option) (*ses.CreateReceiptRuleSetOutput, error)
-	CreateReceiptRuleSetRequest(*ses.CreateReceiptRuleSetInput) (*request.Request, *ses.CreateReceiptRuleSetOutput)
+	CreateReceiptRuleSetWithContext(aws.Context, *ses.CreateReceiptRuleSetInput, ...aws.Option) (*ses.CreateReceiptRuleSetOutput, error)
+	CreateReceiptRuleSetRequest(*ses.CreateReceiptRuleSetInput) (*aws.Request, *ses.CreateReceiptRuleSetOutput)
 
 	DeleteConfigurationSet(*ses.DeleteConfigurationSetInput) (*ses.DeleteConfigurationSetOutput, error)
-	DeleteConfigurationSetWithContext(aws.Context, *ses.DeleteConfigurationSetInput, ...request.Option) (*ses.DeleteConfigurationSetOutput, error)
-	DeleteConfigurationSetRequest(*ses.DeleteConfigurationSetInput) (*request.Request, *ses.DeleteConfigurationSetOutput)
+	DeleteConfigurationSetWithContext(aws.Context, *ses.DeleteConfigurationSetInput, ...aws.Option) (*ses.DeleteConfigurationSetOutput, error)
+	DeleteConfigurationSetRequest(*ses.DeleteConfigurationSetInput) (*aws.Request, *ses.DeleteConfigurationSetOutput)
 
 	DeleteConfigurationSetEventDestination(*ses.DeleteConfigurationSetEventDestinationInput) (*ses.DeleteConfigurationSetEventDestinationOutput, error)
-	DeleteConfigurationSetEventDestinationWithContext(aws.Context, *ses.DeleteConfigurationSetEventDestinationInput, ...request.Option) (*ses.DeleteConfigurationSetEventDestinationOutput, error)
-	DeleteConfigurationSetEventDestinationRequest(*ses.DeleteConfigurationSetEventDestinationInput) (*request.Request, *ses.DeleteConfigurationSetEventDestinationOutput)
+	DeleteConfigurationSetEventDestinationWithContext(aws.Context, *ses.DeleteConfigurationSetEventDestinationInput, ...aws.Option) (*ses.DeleteConfigurationSetEventDestinationOutput, error)
+	DeleteConfigurationSetEventDestinationRequest(*ses.DeleteConfigurationSetEventDestinationInput) (*aws.Request, *ses.DeleteConfigurationSetEventDestinationOutput)
 
 	DeleteConfigurationSetTrackingOptions(*ses.DeleteConfigurationSetTrackingOptionsInput) (*ses.DeleteConfigurationSetTrackingOptionsOutput, error)
-	DeleteConfigurationSetTrackingOptionsWithContext(aws.Context, *ses.DeleteConfigurationSetTrackingOptionsInput, ...request.Option) (*ses.DeleteConfigurationSetTrackingOptionsOutput, error)
-	DeleteConfigurationSetTrackingOptionsRequest(*ses.DeleteConfigurationSetTrackingOptionsInput) (*request.Request, *ses.DeleteConfigurationSetTrackingOptionsOutput)
+	DeleteConfigurationSetTrackingOptionsWithContext(aws.Context, *ses.DeleteConfigurationSetTrackingOptionsInput, ...aws.Option) (*ses.DeleteConfigurationSetTrackingOptionsOutput, error)
+	DeleteConfigurationSetTrackingOptionsRequest(*ses.DeleteConfigurationSetTrackingOptionsInput) (*aws.Request, *ses.DeleteConfigurationSetTrackingOptionsOutput)
 
 	DeleteIdentity(*ses.DeleteIdentityInput) (*ses.DeleteIdentityOutput, error)
-	DeleteIdentityWithContext(aws.Context, *ses.DeleteIdentityInput, ...request.Option) (*ses.DeleteIdentityOutput, error)
-	DeleteIdentityRequest(*ses.DeleteIdentityInput) (*request.Request, *ses.DeleteIdentityOutput)
+	DeleteIdentityWithContext(aws.Context, *ses.DeleteIdentityInput, ...aws.Option) (*ses.DeleteIdentityOutput, error)
+	DeleteIdentityRequest(*ses.DeleteIdentityInput) (*aws.Request, *ses.DeleteIdentityOutput)
 
 	DeleteIdentityPolicy(*ses.DeleteIdentityPolicyInput) (*ses.DeleteIdentityPolicyOutput, error)
-	DeleteIdentityPolicyWithContext(aws.Context, *ses.DeleteIdentityPolicyInput, ...request.Option) (*ses.DeleteIdentityPolicyOutput, error)
-	DeleteIdentityPolicyRequest(*ses.DeleteIdentityPolicyInput) (*request.Request, *ses.DeleteIdentityPolicyOutput)
+	DeleteIdentityPolicyWithContext(aws.Context, *ses.DeleteIdentityPolicyInput, ...aws.Option) (*ses.DeleteIdentityPolicyOutput, error)
+	DeleteIdentityPolicyRequest(*ses.DeleteIdentityPolicyInput) (*aws.Request, *ses.DeleteIdentityPolicyOutput)
 
 	DeleteReceiptFilter(*ses.DeleteReceiptFilterInput) (*ses.DeleteReceiptFilterOutput, error)
-	DeleteReceiptFilterWithContext(aws.Context, *ses.DeleteReceiptFilterInput, ...request.Option) (*ses.DeleteReceiptFilterOutput, error)
-	DeleteReceiptFilterRequest(*ses.DeleteReceiptFilterInput) (*request.Request, *ses.DeleteReceiptFilterOutput)
+	DeleteReceiptFilterWithContext(aws.Context, *ses.DeleteReceiptFilterInput, ...aws.Option) (*ses.DeleteReceiptFilterOutput, error)
+	DeleteReceiptFilterRequest(*ses.DeleteReceiptFilterInput) (*aws.Request, *ses.DeleteReceiptFilterOutput)
 
 	DeleteReceiptRule(*ses.DeleteReceiptRuleInput) (*ses.DeleteReceiptRuleOutput, error)
-	DeleteReceiptRuleWithContext(aws.Context, *ses.DeleteReceiptRuleInput, ...request.Option) (*ses.DeleteReceiptRuleOutput, error)
-	DeleteReceiptRuleRequest(*ses.DeleteReceiptRuleInput) (*request.Request, *ses.DeleteReceiptRuleOutput)
+	DeleteReceiptRuleWithContext(aws.Context, *ses.DeleteReceiptRuleInput, ...aws.Option) (*ses.DeleteReceiptRuleOutput, error)
+	DeleteReceiptRuleRequest(*ses.DeleteReceiptRuleInput) (*aws.Request, *ses.DeleteReceiptRuleOutput)
 
 	DeleteReceiptRuleSet(*ses.DeleteReceiptRuleSetInput) (*ses.DeleteReceiptRuleSetOutput, error)
-	DeleteReceiptRuleSetWithContext(aws.Context, *ses.DeleteReceiptRuleSetInput, ...request.Option) (*ses.DeleteReceiptRuleSetOutput, error)
-	DeleteReceiptRuleSetRequest(*ses.DeleteReceiptRuleSetInput) (*request.Request, *ses.DeleteReceiptRuleSetOutput)
+	DeleteReceiptRuleSetWithContext(aws.Context, *ses.DeleteReceiptRuleSetInput, ...aws.Option) (*ses.DeleteReceiptRuleSetOutput, error)
+	DeleteReceiptRuleSetRequest(*ses.DeleteReceiptRuleSetInput) (*aws.Request, *ses.DeleteReceiptRuleSetOutput)
 
 	DeleteVerifiedEmailAddress(*ses.DeleteVerifiedEmailAddressInput) (*ses.DeleteVerifiedEmailAddressOutput, error)
-	DeleteVerifiedEmailAddressWithContext(aws.Context, *ses.DeleteVerifiedEmailAddressInput, ...request.Option) (*ses.DeleteVerifiedEmailAddressOutput, error)
-	DeleteVerifiedEmailAddressRequest(*ses.DeleteVerifiedEmailAddressInput) (*request.Request, *ses.DeleteVerifiedEmailAddressOutput)
+	DeleteVerifiedEmailAddressWithContext(aws.Context, *ses.DeleteVerifiedEmailAddressInput, ...aws.Option) (*ses.DeleteVerifiedEmailAddressOutput, error)
+	DeleteVerifiedEmailAddressRequest(*ses.DeleteVerifiedEmailAddressInput) (*aws.Request, *ses.DeleteVerifiedEmailAddressOutput)
 
 	DescribeActiveReceiptRuleSet(*ses.DescribeActiveReceiptRuleSetInput) (*ses.DescribeActiveReceiptRuleSetOutput, error)
-	DescribeActiveReceiptRuleSetWithContext(aws.Context, *ses.DescribeActiveReceiptRuleSetInput, ...request.Option) (*ses.DescribeActiveReceiptRuleSetOutput, error)
-	DescribeActiveReceiptRuleSetRequest(*ses.DescribeActiveReceiptRuleSetInput) (*request.Request, *ses.DescribeActiveReceiptRuleSetOutput)
+	DescribeActiveReceiptRuleSetWithContext(aws.Context, *ses.DescribeActiveReceiptRuleSetInput, ...aws.Option) (*ses.DescribeActiveReceiptRuleSetOutput, error)
+	DescribeActiveReceiptRuleSetRequest(*ses.DescribeActiveReceiptRuleSetInput) (*aws.Request, *ses.DescribeActiveReceiptRuleSetOutput)
 
 	DescribeConfigurationSet(*ses.DescribeConfigurationSetInput) (*ses.DescribeConfigurationSetOutput, error)
-	DescribeConfigurationSetWithContext(aws.Context, *ses.DescribeConfigurationSetInput, ...request.Option) (*ses.DescribeConfigurationSetOutput, error)
-	DescribeConfigurationSetRequest(*ses.DescribeConfigurationSetInput) (*request.Request, *ses.DescribeConfigurationSetOutput)
+	DescribeConfigurationSetWithContext(aws.Context, *ses.DescribeConfigurationSetInput, ...aws.Option) (*ses.DescribeConfigurationSetOutput, error)
+	DescribeConfigurationSetRequest(*ses.DescribeConfigurationSetInput) (*aws.Request, *ses.DescribeConfigurationSetOutput)
 
 	DescribeReceiptRule(*ses.DescribeReceiptRuleInput) (*ses.DescribeReceiptRuleOutput, error)
-	DescribeReceiptRuleWithContext(aws.Context, *ses.DescribeReceiptRuleInput, ...request.Option) (*ses.DescribeReceiptRuleOutput, error)
-	DescribeReceiptRuleRequest(*ses.DescribeReceiptRuleInput) (*request.Request, *ses.DescribeReceiptRuleOutput)
+	DescribeReceiptRuleWithContext(aws.Context, *ses.DescribeReceiptRuleInput, ...aws.Option) (*ses.DescribeReceiptRuleOutput, error)
+	DescribeReceiptRuleRequest(*ses.DescribeReceiptRuleInput) (*aws.Request, *ses.DescribeReceiptRuleOutput)
 
 	DescribeReceiptRuleSet(*ses.DescribeReceiptRuleSetInput) (*ses.DescribeReceiptRuleSetOutput, error)
-	DescribeReceiptRuleSetWithContext(aws.Context, *ses.DescribeReceiptRuleSetInput, ...request.Option) (*ses.DescribeReceiptRuleSetOutput, error)
-	DescribeReceiptRuleSetRequest(*ses.DescribeReceiptRuleSetInput) (*request.Request, *ses.DescribeReceiptRuleSetOutput)
+	DescribeReceiptRuleSetWithContext(aws.Context, *ses.DescribeReceiptRuleSetInput, ...aws.Option) (*ses.DescribeReceiptRuleSetOutput, error)
+	DescribeReceiptRuleSetRequest(*ses.DescribeReceiptRuleSetInput) (*aws.Request, *ses.DescribeReceiptRuleSetOutput)
 
 	GetIdentityDkimAttributes(*ses.GetIdentityDkimAttributesInput) (*ses.GetIdentityDkimAttributesOutput, error)
-	GetIdentityDkimAttributesWithContext(aws.Context, *ses.GetIdentityDkimAttributesInput, ...request.Option) (*ses.GetIdentityDkimAttributesOutput, error)
-	GetIdentityDkimAttributesRequest(*ses.GetIdentityDkimAttributesInput) (*request.Request, *ses.GetIdentityDkimAttributesOutput)
+	GetIdentityDkimAttributesWithContext(aws.Context, *ses.GetIdentityDkimAttributesInput, ...aws.Option) (*ses.GetIdentityDkimAttributesOutput, error)
+	GetIdentityDkimAttributesRequest(*ses.GetIdentityDkimAttributesInput) (*aws.Request, *ses.GetIdentityDkimAttributesOutput)
 
 	GetIdentityMailFromDomainAttributes(*ses.GetIdentityMailFromDomainAttributesInput) (*ses.GetIdentityMailFromDomainAttributesOutput, error)
-	GetIdentityMailFromDomainAttributesWithContext(aws.Context, *ses.GetIdentityMailFromDomainAttributesInput, ...request.Option) (*ses.GetIdentityMailFromDomainAttributesOutput, error)
-	GetIdentityMailFromDomainAttributesRequest(*ses.GetIdentityMailFromDomainAttributesInput) (*request.Request, *ses.GetIdentityMailFromDomainAttributesOutput)
+	GetIdentityMailFromDomainAttributesWithContext(aws.Context, *ses.GetIdentityMailFromDomainAttributesInput, ...aws.Option) (*ses.GetIdentityMailFromDomainAttributesOutput, error)
+	GetIdentityMailFromDomainAttributesRequest(*ses.GetIdentityMailFromDomainAttributesInput) (*aws.Request, *ses.GetIdentityMailFromDomainAttributesOutput)
 
 	GetIdentityNotificationAttributes(*ses.GetIdentityNotificationAttributesInput) (*ses.GetIdentityNotificationAttributesOutput, error)
-	GetIdentityNotificationAttributesWithContext(aws.Context, *ses.GetIdentityNotificationAttributesInput, ...request.Option) (*ses.GetIdentityNotificationAttributesOutput, error)
-	GetIdentityNotificationAttributesRequest(*ses.GetIdentityNotificationAttributesInput) (*request.Request, *ses.GetIdentityNotificationAttributesOutput)
+	GetIdentityNotificationAttributesWithContext(aws.Context, *ses.GetIdentityNotificationAttributesInput, ...aws.Option) (*ses.GetIdentityNotificationAttributesOutput, error)
+	GetIdentityNotificationAttributesRequest(*ses.GetIdentityNotificationAttributesInput) (*aws.Request, *ses.GetIdentityNotificationAttributesOutput)
 
 	GetIdentityPolicies(*ses.GetIdentityPoliciesInput) (*ses.GetIdentityPoliciesOutput, error)
-	GetIdentityPoliciesWithContext(aws.Context, *ses.GetIdentityPoliciesInput, ...request.Option) (*ses.GetIdentityPoliciesOutput, error)
-	GetIdentityPoliciesRequest(*ses.GetIdentityPoliciesInput) (*request.Request, *ses.GetIdentityPoliciesOutput)
+	GetIdentityPoliciesWithContext(aws.Context, *ses.GetIdentityPoliciesInput, ...aws.Option) (*ses.GetIdentityPoliciesOutput, error)
+	GetIdentityPoliciesRequest(*ses.GetIdentityPoliciesInput) (*aws.Request, *ses.GetIdentityPoliciesOutput)
 
 	GetIdentityVerificationAttributes(*ses.GetIdentityVerificationAttributesInput) (*ses.GetIdentityVerificationAttributesOutput, error)
-	GetIdentityVerificationAttributesWithContext(aws.Context, *ses.GetIdentityVerificationAttributesInput, ...request.Option) (*ses.GetIdentityVerificationAttributesOutput, error)
-	GetIdentityVerificationAttributesRequest(*ses.GetIdentityVerificationAttributesInput) (*request.Request, *ses.GetIdentityVerificationAttributesOutput)
+	GetIdentityVerificationAttributesWithContext(aws.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.Option) (*ses.GetIdentityVerificationAttributesOutput, error)
+	GetIdentityVerificationAttributesRequest(*ses.GetIdentityVerificationAttributesInput) (*aws.Request, *ses.GetIdentityVerificationAttributesOutput)
 
 	GetSendQuota(*ses.GetSendQuotaInput) (*ses.GetSendQuotaOutput, error)
-	GetSendQuotaWithContext(aws.Context, *ses.GetSendQuotaInput, ...request.Option) (*ses.GetSendQuotaOutput, error)
-	GetSendQuotaRequest(*ses.GetSendQuotaInput) (*request.Request, *ses.GetSendQuotaOutput)
+	GetSendQuotaWithContext(aws.Context, *ses.GetSendQuotaInput, ...aws.Option) (*ses.GetSendQuotaOutput, error)
+	GetSendQuotaRequest(*ses.GetSendQuotaInput) (*aws.Request, *ses.GetSendQuotaOutput)
 
 	GetSendStatistics(*ses.GetSendStatisticsInput) (*ses.GetSendStatisticsOutput, error)
-	GetSendStatisticsWithContext(aws.Context, *ses.GetSendStatisticsInput, ...request.Option) (*ses.GetSendStatisticsOutput, error)
-	GetSendStatisticsRequest(*ses.GetSendStatisticsInput) (*request.Request, *ses.GetSendStatisticsOutput)
+	GetSendStatisticsWithContext(aws.Context, *ses.GetSendStatisticsInput, ...aws.Option) (*ses.GetSendStatisticsOutput, error)
+	GetSendStatisticsRequest(*ses.GetSendStatisticsInput) (*aws.Request, *ses.GetSendStatisticsOutput)
 
 	ListConfigurationSets(*ses.ListConfigurationSetsInput) (*ses.ListConfigurationSetsOutput, error)
-	ListConfigurationSetsWithContext(aws.Context, *ses.ListConfigurationSetsInput, ...request.Option) (*ses.ListConfigurationSetsOutput, error)
-	ListConfigurationSetsRequest(*ses.ListConfigurationSetsInput) (*request.Request, *ses.ListConfigurationSetsOutput)
+	ListConfigurationSetsWithContext(aws.Context, *ses.ListConfigurationSetsInput, ...aws.Option) (*ses.ListConfigurationSetsOutput, error)
+	ListConfigurationSetsRequest(*ses.ListConfigurationSetsInput) (*aws.Request, *ses.ListConfigurationSetsOutput)
 
 	ListIdentities(*ses.ListIdentitiesInput) (*ses.ListIdentitiesOutput, error)
-	ListIdentitiesWithContext(aws.Context, *ses.ListIdentitiesInput, ...request.Option) (*ses.ListIdentitiesOutput, error)
-	ListIdentitiesRequest(*ses.ListIdentitiesInput) (*request.Request, *ses.ListIdentitiesOutput)
+	ListIdentitiesWithContext(aws.Context, *ses.ListIdentitiesInput, ...aws.Option) (*ses.ListIdentitiesOutput, error)
+	ListIdentitiesRequest(*ses.ListIdentitiesInput) (*aws.Request, *ses.ListIdentitiesOutput)
 
 	ListIdentitiesPages(*ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool) error
-	ListIdentitiesPagesWithContext(aws.Context, *ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool, ...request.Option) error
+	ListIdentitiesPagesWithContext(aws.Context, *ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool, ...aws.Option) error
 
 	ListIdentityPolicies(*ses.ListIdentityPoliciesInput) (*ses.ListIdentityPoliciesOutput, error)
-	ListIdentityPoliciesWithContext(aws.Context, *ses.ListIdentityPoliciesInput, ...request.Option) (*ses.ListIdentityPoliciesOutput, error)
-	ListIdentityPoliciesRequest(*ses.ListIdentityPoliciesInput) (*request.Request, *ses.ListIdentityPoliciesOutput)
+	ListIdentityPoliciesWithContext(aws.Context, *ses.ListIdentityPoliciesInput, ...aws.Option) (*ses.ListIdentityPoliciesOutput, error)
+	ListIdentityPoliciesRequest(*ses.ListIdentityPoliciesInput) (*aws.Request, *ses.ListIdentityPoliciesOutput)
 
 	ListReceiptFilters(*ses.ListReceiptFiltersInput) (*ses.ListReceiptFiltersOutput, error)
-	ListReceiptFiltersWithContext(aws.Context, *ses.ListReceiptFiltersInput, ...request.Option) (*ses.ListReceiptFiltersOutput, error)
-	ListReceiptFiltersRequest(*ses.ListReceiptFiltersInput) (*request.Request, *ses.ListReceiptFiltersOutput)
+	ListReceiptFiltersWithContext(aws.Context, *ses.ListReceiptFiltersInput, ...aws.Option) (*ses.ListReceiptFiltersOutput, error)
+	ListReceiptFiltersRequest(*ses.ListReceiptFiltersInput) (*aws.Request, *ses.ListReceiptFiltersOutput)
 
 	ListReceiptRuleSets(*ses.ListReceiptRuleSetsInput) (*ses.ListReceiptRuleSetsOutput, error)
-	ListReceiptRuleSetsWithContext(aws.Context, *ses.ListReceiptRuleSetsInput, ...request.Option) (*ses.ListReceiptRuleSetsOutput, error)
-	ListReceiptRuleSetsRequest(*ses.ListReceiptRuleSetsInput) (*request.Request, *ses.ListReceiptRuleSetsOutput)
+	ListReceiptRuleSetsWithContext(aws.Context, *ses.ListReceiptRuleSetsInput, ...aws.Option) (*ses.ListReceiptRuleSetsOutput, error)
+	ListReceiptRuleSetsRequest(*ses.ListReceiptRuleSetsInput) (*aws.Request, *ses.ListReceiptRuleSetsOutput)
 
 	ListVerifiedEmailAddresses(*ses.ListVerifiedEmailAddressesInput) (*ses.ListVerifiedEmailAddressesOutput, error)
-	ListVerifiedEmailAddressesWithContext(aws.Context, *ses.ListVerifiedEmailAddressesInput, ...request.Option) (*ses.ListVerifiedEmailAddressesOutput, error)
-	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) (*request.Request, *ses.ListVerifiedEmailAddressesOutput)
+	ListVerifiedEmailAddressesWithContext(aws.Context, *ses.ListVerifiedEmailAddressesInput, ...aws.Option) (*ses.ListVerifiedEmailAddressesOutput, error)
+	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) (*aws.Request, *ses.ListVerifiedEmailAddressesOutput)
 
 	PutIdentityPolicy(*ses.PutIdentityPolicyInput) (*ses.PutIdentityPolicyOutput, error)
-	PutIdentityPolicyWithContext(aws.Context, *ses.PutIdentityPolicyInput, ...request.Option) (*ses.PutIdentityPolicyOutput, error)
-	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) (*request.Request, *ses.PutIdentityPolicyOutput)
+	PutIdentityPolicyWithContext(aws.Context, *ses.PutIdentityPolicyInput, ...aws.Option) (*ses.PutIdentityPolicyOutput, error)
+	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) (*aws.Request, *ses.PutIdentityPolicyOutput)
 
 	ReorderReceiptRuleSet(*ses.ReorderReceiptRuleSetInput) (*ses.ReorderReceiptRuleSetOutput, error)
-	ReorderReceiptRuleSetWithContext(aws.Context, *ses.ReorderReceiptRuleSetInput, ...request.Option) (*ses.ReorderReceiptRuleSetOutput, error)
-	ReorderReceiptRuleSetRequest(*ses.ReorderReceiptRuleSetInput) (*request.Request, *ses.ReorderReceiptRuleSetOutput)
+	ReorderReceiptRuleSetWithContext(aws.Context, *ses.ReorderReceiptRuleSetInput, ...aws.Option) (*ses.ReorderReceiptRuleSetOutput, error)
+	ReorderReceiptRuleSetRequest(*ses.ReorderReceiptRuleSetInput) (*aws.Request, *ses.ReorderReceiptRuleSetOutput)
 
 	SendBounce(*ses.SendBounceInput) (*ses.SendBounceOutput, error)
-	SendBounceWithContext(aws.Context, *ses.SendBounceInput, ...request.Option) (*ses.SendBounceOutput, error)
-	SendBounceRequest(*ses.SendBounceInput) (*request.Request, *ses.SendBounceOutput)
+	SendBounceWithContext(aws.Context, *ses.SendBounceInput, ...aws.Option) (*ses.SendBounceOutput, error)
+	SendBounceRequest(*ses.SendBounceInput) (*aws.Request, *ses.SendBounceOutput)
 
 	SendEmail(*ses.SendEmailInput) (*ses.SendEmailOutput, error)
-	SendEmailWithContext(aws.Context, *ses.SendEmailInput, ...request.Option) (*ses.SendEmailOutput, error)
-	SendEmailRequest(*ses.SendEmailInput) (*request.Request, *ses.SendEmailOutput)
+	SendEmailWithContext(aws.Context, *ses.SendEmailInput, ...aws.Option) (*ses.SendEmailOutput, error)
+	SendEmailRequest(*ses.SendEmailInput) (*aws.Request, *ses.SendEmailOutput)
 
 	SendRawEmail(*ses.SendRawEmailInput) (*ses.SendRawEmailOutput, error)
-	SendRawEmailWithContext(aws.Context, *ses.SendRawEmailInput, ...request.Option) (*ses.SendRawEmailOutput, error)
-	SendRawEmailRequest(*ses.SendRawEmailInput) (*request.Request, *ses.SendRawEmailOutput)
+	SendRawEmailWithContext(aws.Context, *ses.SendRawEmailInput, ...aws.Option) (*ses.SendRawEmailOutput, error)
+	SendRawEmailRequest(*ses.SendRawEmailInput) (*aws.Request, *ses.SendRawEmailOutput)
 
 	SetActiveReceiptRuleSet(*ses.SetActiveReceiptRuleSetInput) (*ses.SetActiveReceiptRuleSetOutput, error)
-	SetActiveReceiptRuleSetWithContext(aws.Context, *ses.SetActiveReceiptRuleSetInput, ...request.Option) (*ses.SetActiveReceiptRuleSetOutput, error)
-	SetActiveReceiptRuleSetRequest(*ses.SetActiveReceiptRuleSetInput) (*request.Request, *ses.SetActiveReceiptRuleSetOutput)
+	SetActiveReceiptRuleSetWithContext(aws.Context, *ses.SetActiveReceiptRuleSetInput, ...aws.Option) (*ses.SetActiveReceiptRuleSetOutput, error)
+	SetActiveReceiptRuleSetRequest(*ses.SetActiveReceiptRuleSetInput) (*aws.Request, *ses.SetActiveReceiptRuleSetOutput)
 
 	SetIdentityDkimEnabled(*ses.SetIdentityDkimEnabledInput) (*ses.SetIdentityDkimEnabledOutput, error)
-	SetIdentityDkimEnabledWithContext(aws.Context, *ses.SetIdentityDkimEnabledInput, ...request.Option) (*ses.SetIdentityDkimEnabledOutput, error)
-	SetIdentityDkimEnabledRequest(*ses.SetIdentityDkimEnabledInput) (*request.Request, *ses.SetIdentityDkimEnabledOutput)
+	SetIdentityDkimEnabledWithContext(aws.Context, *ses.SetIdentityDkimEnabledInput, ...aws.Option) (*ses.SetIdentityDkimEnabledOutput, error)
+	SetIdentityDkimEnabledRequest(*ses.SetIdentityDkimEnabledInput) (*aws.Request, *ses.SetIdentityDkimEnabledOutput)
 
 	SetIdentityFeedbackForwardingEnabled(*ses.SetIdentityFeedbackForwardingEnabledInput) (*ses.SetIdentityFeedbackForwardingEnabledOutput, error)
-	SetIdentityFeedbackForwardingEnabledWithContext(aws.Context, *ses.SetIdentityFeedbackForwardingEnabledInput, ...request.Option) (*ses.SetIdentityFeedbackForwardingEnabledOutput, error)
-	SetIdentityFeedbackForwardingEnabledRequest(*ses.SetIdentityFeedbackForwardingEnabledInput) (*request.Request, *ses.SetIdentityFeedbackForwardingEnabledOutput)
+	SetIdentityFeedbackForwardingEnabledWithContext(aws.Context, *ses.SetIdentityFeedbackForwardingEnabledInput, ...aws.Option) (*ses.SetIdentityFeedbackForwardingEnabledOutput, error)
+	SetIdentityFeedbackForwardingEnabledRequest(*ses.SetIdentityFeedbackForwardingEnabledInput) (*aws.Request, *ses.SetIdentityFeedbackForwardingEnabledOutput)
 
 	SetIdentityHeadersInNotificationsEnabled(*ses.SetIdentityHeadersInNotificationsEnabledInput) (*ses.SetIdentityHeadersInNotificationsEnabledOutput, error)
-	SetIdentityHeadersInNotificationsEnabledWithContext(aws.Context, *ses.SetIdentityHeadersInNotificationsEnabledInput, ...request.Option) (*ses.SetIdentityHeadersInNotificationsEnabledOutput, error)
-	SetIdentityHeadersInNotificationsEnabledRequest(*ses.SetIdentityHeadersInNotificationsEnabledInput) (*request.Request, *ses.SetIdentityHeadersInNotificationsEnabledOutput)
+	SetIdentityHeadersInNotificationsEnabledWithContext(aws.Context, *ses.SetIdentityHeadersInNotificationsEnabledInput, ...aws.Option) (*ses.SetIdentityHeadersInNotificationsEnabledOutput, error)
+	SetIdentityHeadersInNotificationsEnabledRequest(*ses.SetIdentityHeadersInNotificationsEnabledInput) (*aws.Request, *ses.SetIdentityHeadersInNotificationsEnabledOutput)
 
 	SetIdentityMailFromDomain(*ses.SetIdentityMailFromDomainInput) (*ses.SetIdentityMailFromDomainOutput, error)
-	SetIdentityMailFromDomainWithContext(aws.Context, *ses.SetIdentityMailFromDomainInput, ...request.Option) (*ses.SetIdentityMailFromDomainOutput, error)
-	SetIdentityMailFromDomainRequest(*ses.SetIdentityMailFromDomainInput) (*request.Request, *ses.SetIdentityMailFromDomainOutput)
+	SetIdentityMailFromDomainWithContext(aws.Context, *ses.SetIdentityMailFromDomainInput, ...aws.Option) (*ses.SetIdentityMailFromDomainOutput, error)
+	SetIdentityMailFromDomainRequest(*ses.SetIdentityMailFromDomainInput) (*aws.Request, *ses.SetIdentityMailFromDomainOutput)
 
 	SetIdentityNotificationTopic(*ses.SetIdentityNotificationTopicInput) (*ses.SetIdentityNotificationTopicOutput, error)
-	SetIdentityNotificationTopicWithContext(aws.Context, *ses.SetIdentityNotificationTopicInput, ...request.Option) (*ses.SetIdentityNotificationTopicOutput, error)
-	SetIdentityNotificationTopicRequest(*ses.SetIdentityNotificationTopicInput) (*request.Request, *ses.SetIdentityNotificationTopicOutput)
+	SetIdentityNotificationTopicWithContext(aws.Context, *ses.SetIdentityNotificationTopicInput, ...aws.Option) (*ses.SetIdentityNotificationTopicOutput, error)
+	SetIdentityNotificationTopicRequest(*ses.SetIdentityNotificationTopicInput) (*aws.Request, *ses.SetIdentityNotificationTopicOutput)
 
 	SetReceiptRulePosition(*ses.SetReceiptRulePositionInput) (*ses.SetReceiptRulePositionOutput, error)
-	SetReceiptRulePositionWithContext(aws.Context, *ses.SetReceiptRulePositionInput, ...request.Option) (*ses.SetReceiptRulePositionOutput, error)
-	SetReceiptRulePositionRequest(*ses.SetReceiptRulePositionInput) (*request.Request, *ses.SetReceiptRulePositionOutput)
+	SetReceiptRulePositionWithContext(aws.Context, *ses.SetReceiptRulePositionInput, ...aws.Option) (*ses.SetReceiptRulePositionOutput, error)
+	SetReceiptRulePositionRequest(*ses.SetReceiptRulePositionInput) (*aws.Request, *ses.SetReceiptRulePositionOutput)
 
 	UpdateConfigurationSetEventDestination(*ses.UpdateConfigurationSetEventDestinationInput) (*ses.UpdateConfigurationSetEventDestinationOutput, error)
-	UpdateConfigurationSetEventDestinationWithContext(aws.Context, *ses.UpdateConfigurationSetEventDestinationInput, ...request.Option) (*ses.UpdateConfigurationSetEventDestinationOutput, error)
-	UpdateConfigurationSetEventDestinationRequest(*ses.UpdateConfigurationSetEventDestinationInput) (*request.Request, *ses.UpdateConfigurationSetEventDestinationOutput)
+	UpdateConfigurationSetEventDestinationWithContext(aws.Context, *ses.UpdateConfigurationSetEventDestinationInput, ...aws.Option) (*ses.UpdateConfigurationSetEventDestinationOutput, error)
+	UpdateConfigurationSetEventDestinationRequest(*ses.UpdateConfigurationSetEventDestinationInput) (*aws.Request, *ses.UpdateConfigurationSetEventDestinationOutput)
 
 	UpdateConfigurationSetTrackingOptions(*ses.UpdateConfigurationSetTrackingOptionsInput) (*ses.UpdateConfigurationSetTrackingOptionsOutput, error)
-	UpdateConfigurationSetTrackingOptionsWithContext(aws.Context, *ses.UpdateConfigurationSetTrackingOptionsInput, ...request.Option) (*ses.UpdateConfigurationSetTrackingOptionsOutput, error)
-	UpdateConfigurationSetTrackingOptionsRequest(*ses.UpdateConfigurationSetTrackingOptionsInput) (*request.Request, *ses.UpdateConfigurationSetTrackingOptionsOutput)
+	UpdateConfigurationSetTrackingOptionsWithContext(aws.Context, *ses.UpdateConfigurationSetTrackingOptionsInput, ...aws.Option) (*ses.UpdateConfigurationSetTrackingOptionsOutput, error)
+	UpdateConfigurationSetTrackingOptionsRequest(*ses.UpdateConfigurationSetTrackingOptionsInput) (*aws.Request, *ses.UpdateConfigurationSetTrackingOptionsOutput)
 
 	UpdateReceiptRule(*ses.UpdateReceiptRuleInput) (*ses.UpdateReceiptRuleOutput, error)
-	UpdateReceiptRuleWithContext(aws.Context, *ses.UpdateReceiptRuleInput, ...request.Option) (*ses.UpdateReceiptRuleOutput, error)
-	UpdateReceiptRuleRequest(*ses.UpdateReceiptRuleInput) (*request.Request, *ses.UpdateReceiptRuleOutput)
+	UpdateReceiptRuleWithContext(aws.Context, *ses.UpdateReceiptRuleInput, ...aws.Option) (*ses.UpdateReceiptRuleOutput, error)
+	UpdateReceiptRuleRequest(*ses.UpdateReceiptRuleInput) (*aws.Request, *ses.UpdateReceiptRuleOutput)
 
 	VerifyDomainDkim(*ses.VerifyDomainDkimInput) (*ses.VerifyDomainDkimOutput, error)
-	VerifyDomainDkimWithContext(aws.Context, *ses.VerifyDomainDkimInput, ...request.Option) (*ses.VerifyDomainDkimOutput, error)
-	VerifyDomainDkimRequest(*ses.VerifyDomainDkimInput) (*request.Request, *ses.VerifyDomainDkimOutput)
+	VerifyDomainDkimWithContext(aws.Context, *ses.VerifyDomainDkimInput, ...aws.Option) (*ses.VerifyDomainDkimOutput, error)
+	VerifyDomainDkimRequest(*ses.VerifyDomainDkimInput) (*aws.Request, *ses.VerifyDomainDkimOutput)
 
 	VerifyDomainIdentity(*ses.VerifyDomainIdentityInput) (*ses.VerifyDomainIdentityOutput, error)
-	VerifyDomainIdentityWithContext(aws.Context, *ses.VerifyDomainIdentityInput, ...request.Option) (*ses.VerifyDomainIdentityOutput, error)
-	VerifyDomainIdentityRequest(*ses.VerifyDomainIdentityInput) (*request.Request, *ses.VerifyDomainIdentityOutput)
+	VerifyDomainIdentityWithContext(aws.Context, *ses.VerifyDomainIdentityInput, ...aws.Option) (*ses.VerifyDomainIdentityOutput, error)
+	VerifyDomainIdentityRequest(*ses.VerifyDomainIdentityInput) (*aws.Request, *ses.VerifyDomainIdentityOutput)
 
 	VerifyEmailAddress(*ses.VerifyEmailAddressInput) (*ses.VerifyEmailAddressOutput, error)
-	VerifyEmailAddressWithContext(aws.Context, *ses.VerifyEmailAddressInput, ...request.Option) (*ses.VerifyEmailAddressOutput, error)
-	VerifyEmailAddressRequest(*ses.VerifyEmailAddressInput) (*request.Request, *ses.VerifyEmailAddressOutput)
+	VerifyEmailAddressWithContext(aws.Context, *ses.VerifyEmailAddressInput, ...aws.Option) (*ses.VerifyEmailAddressOutput, error)
+	VerifyEmailAddressRequest(*ses.VerifyEmailAddressInput) (*aws.Request, *ses.VerifyEmailAddressOutput)
 
 	VerifyEmailIdentity(*ses.VerifyEmailIdentityInput) (*ses.VerifyEmailIdentityOutput, error)
-	VerifyEmailIdentityWithContext(aws.Context, *ses.VerifyEmailIdentityInput, ...request.Option) (*ses.VerifyEmailIdentityOutput, error)
-	VerifyEmailIdentityRequest(*ses.VerifyEmailIdentityInput) (*request.Request, *ses.VerifyEmailIdentityOutput)
+	VerifyEmailIdentityWithContext(aws.Context, *ses.VerifyEmailIdentityInput, ...aws.Option) (*ses.VerifyEmailIdentityOutput, error)
+	VerifyEmailIdentityRequest(*ses.VerifyEmailIdentityInput) (*aws.Request, *ses.VerifyEmailIdentityOutput)
 
 	WaitUntilIdentityExists(*ses.GetIdentityVerificationAttributesInput) error
-	WaitUntilIdentityExistsWithContext(aws.Context, *ses.GetIdentityVerificationAttributesInput, ...request.WaiterOption) error
+	WaitUntilIdentityExistsWithContext(aws.Context, *ses.GetIdentityVerificationAttributesInput, ...aws.WaiterOption) error
 }
 
 var _ SESAPI = (*ses.SES)(nil)

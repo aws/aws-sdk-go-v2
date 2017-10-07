@@ -10,7 +10,6 @@ package healthiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/health"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := health.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := health.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,40 +64,40 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type HealthAPI interface {
 	DescribeAffectedEntities(*health.DescribeAffectedEntitiesInput) (*health.DescribeAffectedEntitiesOutput, error)
-	DescribeAffectedEntitiesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, ...request.Option) (*health.DescribeAffectedEntitiesOutput, error)
-	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) (*request.Request, *health.DescribeAffectedEntitiesOutput)
+	DescribeAffectedEntitiesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, ...aws.Option) (*health.DescribeAffectedEntitiesOutput, error)
+	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) (*aws.Request, *health.DescribeAffectedEntitiesOutput)
 
 	DescribeAffectedEntitiesPages(*health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool) error
-	DescribeAffectedEntitiesPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool, ...request.Option) error
+	DescribeAffectedEntitiesPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool, ...aws.Option) error
 
 	DescribeEntityAggregates(*health.DescribeEntityAggregatesInput) (*health.DescribeEntityAggregatesOutput, error)
-	DescribeEntityAggregatesWithContext(aws.Context, *health.DescribeEntityAggregatesInput, ...request.Option) (*health.DescribeEntityAggregatesOutput, error)
-	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) (*request.Request, *health.DescribeEntityAggregatesOutput)
+	DescribeEntityAggregatesWithContext(aws.Context, *health.DescribeEntityAggregatesInput, ...aws.Option) (*health.DescribeEntityAggregatesOutput, error)
+	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) (*aws.Request, *health.DescribeEntityAggregatesOutput)
 
 	DescribeEventAggregates(*health.DescribeEventAggregatesInput) (*health.DescribeEventAggregatesOutput, error)
-	DescribeEventAggregatesWithContext(aws.Context, *health.DescribeEventAggregatesInput, ...request.Option) (*health.DescribeEventAggregatesOutput, error)
-	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) (*request.Request, *health.DescribeEventAggregatesOutput)
+	DescribeEventAggregatesWithContext(aws.Context, *health.DescribeEventAggregatesInput, ...aws.Option) (*health.DescribeEventAggregatesOutput, error)
+	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) (*aws.Request, *health.DescribeEventAggregatesOutput)
 
 	DescribeEventAggregatesPages(*health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool) error
-	DescribeEventAggregatesPagesWithContext(aws.Context, *health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool, ...request.Option) error
+	DescribeEventAggregatesPagesWithContext(aws.Context, *health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool, ...aws.Option) error
 
 	DescribeEventDetails(*health.DescribeEventDetailsInput) (*health.DescribeEventDetailsOutput, error)
-	DescribeEventDetailsWithContext(aws.Context, *health.DescribeEventDetailsInput, ...request.Option) (*health.DescribeEventDetailsOutput, error)
-	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) (*request.Request, *health.DescribeEventDetailsOutput)
+	DescribeEventDetailsWithContext(aws.Context, *health.DescribeEventDetailsInput, ...aws.Option) (*health.DescribeEventDetailsOutput, error)
+	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) (*aws.Request, *health.DescribeEventDetailsOutput)
 
 	DescribeEventTypes(*health.DescribeEventTypesInput) (*health.DescribeEventTypesOutput, error)
-	DescribeEventTypesWithContext(aws.Context, *health.DescribeEventTypesInput, ...request.Option) (*health.DescribeEventTypesOutput, error)
-	DescribeEventTypesRequest(*health.DescribeEventTypesInput) (*request.Request, *health.DescribeEventTypesOutput)
+	DescribeEventTypesWithContext(aws.Context, *health.DescribeEventTypesInput, ...aws.Option) (*health.DescribeEventTypesOutput, error)
+	DescribeEventTypesRequest(*health.DescribeEventTypesInput) (*aws.Request, *health.DescribeEventTypesOutput)
 
 	DescribeEventTypesPages(*health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool) error
-	DescribeEventTypesPagesWithContext(aws.Context, *health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool, ...request.Option) error
+	DescribeEventTypesPagesWithContext(aws.Context, *health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool, ...aws.Option) error
 
 	DescribeEvents(*health.DescribeEventsInput) (*health.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *health.DescribeEventsInput, ...request.Option) (*health.DescribeEventsOutput, error)
-	DescribeEventsRequest(*health.DescribeEventsInput) (*request.Request, *health.DescribeEventsOutput)
+	DescribeEventsWithContext(aws.Context, *health.DescribeEventsInput, ...aws.Option) (*health.DescribeEventsOutput, error)
+	DescribeEventsRequest(*health.DescribeEventsInput) (*aws.Request, *health.DescribeEventsOutput)
 
 	DescribeEventsPages(*health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool, ...request.Option) error
+	DescribeEventsPagesWithContext(aws.Context, *health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool, ...aws.Option) error
 }
 
 var _ HealthAPI = (*health.Health)(nil)

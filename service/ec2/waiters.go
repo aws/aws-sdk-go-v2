@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilBundleTaskComplete uses the Amazon EC2 API operation
@@ -25,25 +24,25 @@ func (c *EC2) WaitUntilBundleTaskComplete(input *DescribeBundleTasksInput) error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilBundleTaskCompleteWithContext(ctx aws.Context, input *DescribeBundleTasksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilBundleTaskCompleteWithContext(ctx aws.Context, input *DescribeBundleTasksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilBundleTaskComplete",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "BundleTasks[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "BundleTasks[].State",
 				Expected: "complete",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "BundleTasks[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "BundleTasks[].State",
 				Expected: "failed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeBundleTasksInput
 			if input != nil {
 				tmp := *input
@@ -76,20 +75,20 @@ func (c *EC2) WaitUntilConversionTaskCancelled(input *DescribeConversionTasksInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilConversionTaskCancelledWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilConversionTaskCancelledWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskCancelled",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ConversionTasks[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ConversionTasks[].State",
 				Expected: "cancelled",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeConversionTasksInput
 			if input != nil {
 				tmp := *input
@@ -122,30 +121,30 @@ func (c *EC2) WaitUntilConversionTaskCompleted(input *DescribeConversionTasksInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilConversionTaskCompletedWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilConversionTaskCompletedWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskCompleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ConversionTasks[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ConversionTasks[].State",
 				Expected: "completed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "ConversionTasks[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "ConversionTasks[].State",
 				Expected: "cancelled",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "ConversionTasks[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "ConversionTasks[].State",
 				Expected: "cancelling",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeConversionTasksInput
 			if input != nil {
 				tmp := *input
@@ -178,20 +177,20 @@ func (c *EC2) WaitUntilConversionTaskDeleted(input *DescribeConversionTasksInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilConversionTaskDeletedWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilConversionTaskDeletedWithContext(ctx aws.Context, input *DescribeConversionTasksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilConversionTaskDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ConversionTasks[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ConversionTasks[].State",
 				Expected: "deleted",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeConversionTasksInput
 			if input != nil {
 				tmp := *input
@@ -224,30 +223,30 @@ func (c *EC2) WaitUntilCustomerGatewayAvailable(input *DescribeCustomerGatewaysI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilCustomerGatewayAvailableWithContext(ctx aws.Context, input *DescribeCustomerGatewaysInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilCustomerGatewayAvailableWithContext(ctx aws.Context, input *DescribeCustomerGatewaysInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilCustomerGatewayAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "CustomerGateways[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "CustomerGateways[].State",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CustomerGateways[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CustomerGateways[].State",
 				Expected: "deleted",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CustomerGateways[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CustomerGateways[].State",
 				Expected: "deleting",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeCustomerGatewaysInput
 			if input != nil {
 				tmp := *input
@@ -280,20 +279,20 @@ func (c *EC2) WaitUntilExportTaskCancelled(input *DescribeExportTasksInput) erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilExportTaskCancelledWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilExportTaskCancelledWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilExportTaskCancelled",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ExportTasks[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ExportTasks[].State",
 				Expected: "cancelled",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeExportTasksInput
 			if input != nil {
 				tmp := *input
@@ -326,20 +325,20 @@ func (c *EC2) WaitUntilExportTaskCompleted(input *DescribeExportTasksInput) erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilExportTaskCompletedWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilExportTaskCompletedWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilExportTaskCompleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ExportTasks[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ExportTasks[].State",
 				Expected: "completed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeExportTasksInput
 			if input != nil {
 				tmp := *input
@@ -372,25 +371,25 @@ func (c *EC2) WaitUntilImageAvailable(input *DescribeImagesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilImageAvailableWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilImageAvailableWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilImageAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Images[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Images[].State",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Images[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Images[].State",
 				Expected: "failed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeImagesInput
 			if input != nil {
 				tmp := *input
@@ -423,25 +422,25 @@ func (c *EC2) WaitUntilImageExists(input *DescribeImagesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilImageExistsWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilImageExistsWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilImageExists",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(Images[]) > `0`",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(Images[]) > `0`",
 				Expected: true,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidAMIID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeImagesInput
 			if input != nil {
 				tmp := *input
@@ -474,25 +473,25 @@ func (c *EC2) WaitUntilInstanceExists(input *DescribeInstancesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceExistsWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilInstanceExistsWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceExists",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(5 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(Reservations[]) > `0`",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(Reservations[]) > `0`",
 				Expected: true,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidInstanceID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstancesInput
 			if input != nil {
 				tmp := *input
@@ -525,40 +524,40 @@ func (c *EC2) WaitUntilInstanceRunning(input *DescribeInstancesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceRunningWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilInstanceRunningWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceRunning",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "running",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "shutting-down",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "terminated",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "stopping",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidInstanceID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstancesInput
 			if input != nil {
 				tmp := *input
@@ -591,25 +590,25 @@ func (c *EC2) WaitUntilInstanceStatusOk(input *DescribeInstanceStatusInput) erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceStatusOkWithContext(ctx aws.Context, input *DescribeInstanceStatusInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilInstanceStatusOkWithContext(ctx aws.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStatusOk",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "InstanceStatuses[].InstanceStatus.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "InstanceStatuses[].InstanceStatus.Status",
 				Expected: "ok",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidInstanceID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstanceStatusInput
 			if input != nil {
 				tmp := *input
@@ -642,30 +641,30 @@ func (c *EC2) WaitUntilInstanceStopped(input *DescribeInstancesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceStopped",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "stopped",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "pending",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "terminated",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstancesInput
 			if input != nil {
 				tmp := *input
@@ -698,30 +697,30 @@ func (c *EC2) WaitUntilInstanceTerminated(input *DescribeInstancesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilInstanceTerminatedWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilInstanceTerminated",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "terminated",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "pending",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Reservations[].Instances[].State.Name",
 				Expected: "stopping",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstancesInput
 			if input != nil {
 				tmp := *input
@@ -754,25 +753,25 @@ func (c *EC2) WaitUntilKeyPairExists(input *DescribeKeyPairsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilKeyPairExistsWithContext(ctx aws.Context, input *DescribeKeyPairsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilKeyPairExistsWithContext(ctx aws.Context, input *DescribeKeyPairsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilKeyPairExists",
 		MaxAttempts: 6,
-		Delay:       request.ConstantWaiterDelay(5 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(KeyPairs[].KeyName) > `0`",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(KeyPairs[].KeyName) > `0`",
 				Expected: true,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidKeyPair.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeKeyPairsInput
 			if input != nil {
 				tmp := *input
@@ -805,40 +804,40 @@ func (c *EC2) WaitUntilNatGatewayAvailable(input *DescribeNatGatewaysInput) erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilNatGatewayAvailableWithContext(ctx aws.Context, input *DescribeNatGatewaysInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilNatGatewayAvailableWithContext(ctx aws.Context, input *DescribeNatGatewaysInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilNatGatewayAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "NatGateways[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "NatGateways[].State",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "NatGateways[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "NatGateways[].State",
 				Expected: "failed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "NatGateways[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "NatGateways[].State",
 				Expected: "deleting",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "NatGateways[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "NatGateways[].State",
 				Expected: "deleted",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "NatGatewayNotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeNatGatewaysInput
 			if input != nil {
 				tmp := *input
@@ -871,25 +870,25 @@ func (c *EC2) WaitUntilNetworkInterfaceAvailable(input *DescribeNetworkInterface
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilNetworkInterfaceAvailableWithContext(ctx aws.Context, input *DescribeNetworkInterfacesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilNetworkInterfaceAvailableWithContext(ctx aws.Context, input *DescribeNetworkInterfacesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilNetworkInterfaceAvailable",
 		MaxAttempts: 10,
-		Delay:       request.ConstantWaiterDelay(20 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(20 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "NetworkInterfaces[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "NetworkInterfaces[].Status",
 				Expected: "available",
 			},
 			{
-				State:    request.FailureWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.FailureWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidNetworkInterfaceID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeNetworkInterfacesInput
 			if input != nil {
 				tmp := *input
@@ -922,20 +921,20 @@ func (c *EC2) WaitUntilPasswordDataAvailable(input *GetPasswordDataInput) error 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilPasswordDataAvailableWithContext(ctx aws.Context, input *GetPasswordDataInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilPasswordDataAvailableWithContext(ctx aws.Context, input *GetPasswordDataInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilPasswordDataAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(PasswordData) > `0`",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(PasswordData) > `0`",
 				Expected: true,
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetPasswordDataInput
 			if input != nil {
 				tmp := *input
@@ -968,20 +967,20 @@ func (c *EC2) WaitUntilSnapshotCompleted(input *DescribeSnapshotsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSnapshotCompletedWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilSnapshotCompletedWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilSnapshotCompleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Snapshots[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Snapshots[].State",
 				Expected: "completed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeSnapshotsInput
 			if input != nil {
 				tmp := *input
@@ -1014,50 +1013,50 @@ func (c *EC2) WaitUntilSpotInstanceRequestFulfilled(input *DescribeSpotInstanceR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSpotInstanceRequestFulfilledWithContext(ctx aws.Context, input *DescribeSpotInstanceRequestsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilSpotInstanceRequestFulfilledWithContext(ctx aws.Context, input *DescribeSpotInstanceRequestsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilSpotInstanceRequestFulfilled",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
 				Expected: "fulfilled",
 			},
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
 				Expected: "request-canceled-and-instance-running",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
 				Expected: "schedule-expired",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
 				Expected: "canceled-before-fulfillment",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
 				Expected: "bad-parameters",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "SpotInstanceRequests[].Status.Code",
 				Expected: "system-error",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidSpotInstanceRequestID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeSpotInstanceRequestsInput
 			if input != nil {
 				tmp := *input
@@ -1090,20 +1089,20 @@ func (c *EC2) WaitUntilSubnetAvailable(input *DescribeSubnetsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSubnetAvailableWithContext(ctx aws.Context, input *DescribeSubnetsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilSubnetAvailableWithContext(ctx aws.Context, input *DescribeSubnetsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilSubnetAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Subnets[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Subnets[].State",
 				Expected: "available",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeSubnetsInput
 			if input != nil {
 				tmp := *input
@@ -1136,20 +1135,20 @@ func (c *EC2) WaitUntilSystemStatusOk(input *DescribeInstanceStatusInput) error 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilSystemStatusOkWithContext(ctx aws.Context, input *DescribeInstanceStatusInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilSystemStatusOkWithContext(ctx aws.Context, input *DescribeInstanceStatusInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilSystemStatusOk",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "InstanceStatuses[].SystemStatus.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "InstanceStatuses[].SystemStatus.Status",
 				Expected: "ok",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeInstanceStatusInput
 			if input != nil {
 				tmp := *input
@@ -1182,25 +1181,25 @@ func (c *EC2) WaitUntilVolumeAvailable(input *DescribeVolumesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVolumeAvailableWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVolumeAvailableWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVolumeAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Volumes[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Volumes[].State",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Volumes[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Volumes[].State",
 				Expected: "deleted",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVolumesInput
 			if input != nil {
 				tmp := *input
@@ -1233,25 +1232,25 @@ func (c *EC2) WaitUntilVolumeDeleted(input *DescribeVolumesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVolumeDeletedWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVolumeDeletedWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVolumeDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Volumes[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Volumes[].State",
 				Expected: "deleted",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidVolume.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVolumesInput
 			if input != nil {
 				tmp := *input
@@ -1284,25 +1283,25 @@ func (c *EC2) WaitUntilVolumeInUse(input *DescribeVolumesInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVolumeInUseWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVolumeInUseWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVolumeInUse",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Volumes[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Volumes[].State",
 				Expected: "in-use",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Volumes[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Volumes[].State",
 				Expected: "deleted",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVolumesInput
 			if input != nil {
 				tmp := *input
@@ -1335,20 +1334,20 @@ func (c *EC2) WaitUntilVpcAvailable(input *DescribeVpcsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcAvailableWithContext(ctx aws.Context, input *DescribeVpcsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVpcAvailableWithContext(ctx aws.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVpcAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Vpcs[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Vpcs[].State",
 				Expected: "available",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVpcsInput
 			if input != nil {
 				tmp := *input
@@ -1381,25 +1380,25 @@ func (c *EC2) WaitUntilVpcExists(input *DescribeVpcsInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcExistsWithContext(ctx aws.Context, input *DescribeVpcsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVpcExistsWithContext(ctx aws.Context, input *DescribeVpcsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVpcExists",
 		MaxAttempts: 5,
-		Delay:       request.ConstantWaiterDelay(1 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(1 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidVpcID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVpcsInput
 			if input != nil {
 				tmp := *input
@@ -1432,25 +1431,25 @@ func (c *EC2) WaitUntilVpcPeeringConnectionDeleted(input *DescribeVpcPeeringConn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcPeeringConnectionDeletedWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVpcPeeringConnectionDeletedWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVpcPeeringConnectionDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "VpcPeeringConnections[].Status.Code",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "VpcPeeringConnections[].Status.Code",
 				Expected: "deleted",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidVpcPeeringConnectionID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVpcPeeringConnectionsInput
 			if input != nil {
 				tmp := *input
@@ -1483,25 +1482,25 @@ func (c *EC2) WaitUntilVpcPeeringConnectionExists(input *DescribeVpcPeeringConne
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpcPeeringConnectionExistsWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVpcPeeringConnectionExistsWithContext(ctx aws.Context, input *DescribeVpcPeeringConnectionsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVpcPeeringConnectionExists",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidVpcPeeringConnectionID.NotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVpcPeeringConnectionsInput
 			if input != nil {
 				tmp := *input
@@ -1534,30 +1533,30 @@ func (c *EC2) WaitUntilVpnConnectionAvailable(input *DescribeVpnConnectionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpnConnectionAvailableWithContext(ctx aws.Context, input *DescribeVpnConnectionsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVpnConnectionAvailableWithContext(ctx aws.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVpnConnectionAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "VpnConnections[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "VpnConnections[].State",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "VpnConnections[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "VpnConnections[].State",
 				Expected: "deleting",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "VpnConnections[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "VpnConnections[].State",
 				Expected: "deleted",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVpnConnectionsInput
 			if input != nil {
 				tmp := *input
@@ -1590,25 +1589,25 @@ func (c *EC2) WaitUntilVpnConnectionDeleted(input *DescribeVpnConnectionsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EC2) WaitUntilVpnConnectionDeletedWithContext(ctx aws.Context, input *DescribeVpnConnectionsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EC2) WaitUntilVpnConnectionDeletedWithContext(ctx aws.Context, input *DescribeVpnConnectionsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVpnConnectionDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "VpnConnections[].State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "VpnConnections[].State",
 				Expected: "deleted",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "VpnConnections[].State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "VpnConnections[].State",
 				Expected: "pending",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVpnConnectionsInput
 			if input != nil {
 				tmp := *input

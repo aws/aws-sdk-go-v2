@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAcceptPortfolioShare = "AcceptPortfolioShare"
 
-// AcceptPortfolioShareRequest generates a "aws/request.Request" representing the
+// AcceptPortfolioShareRequest generates a "aws.Request" representing the
 // client's request for the AcceptPortfolioShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAcceptPortfolioShare = "AcceptPortfolioShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShare
-func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShareInput) (req *request.Request, output *AcceptPortfolioShareOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShareInput) (req *aws.Request, output *AcceptPortfolioShareOutput) {
+	op := &aws.Operation{
 		Name:       opAcceptPortfolioShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -90,7 +89,7 @@ func (c *ServiceCatalog) AcceptPortfolioShare(input *AcceptPortfolioShareInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) AcceptPortfolioShareWithContext(ctx aws.Context, input *AcceptPortfolioShareInput, opts ...request.Option) (*AcceptPortfolioShareOutput, error) {
+func (c *ServiceCatalog) AcceptPortfolioShareWithContext(ctx aws.Context, input *AcceptPortfolioShareInput, opts ...aws.Option) (*AcceptPortfolioShareOutput, error) {
 	req, out := c.AcceptPortfolioShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -99,7 +98,7 @@ func (c *ServiceCatalog) AcceptPortfolioShareWithContext(ctx aws.Context, input 
 
 const opAssociatePrincipalWithPortfolio = "AssociatePrincipalWithPortfolio"
 
-// AssociatePrincipalWithPortfolioRequest generates a "aws/request.Request" representing the
+// AssociatePrincipalWithPortfolioRequest generates a "aws.Request" representing the
 // client's request for the AssociatePrincipalWithPortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -123,8 +122,8 @@ const opAssociatePrincipalWithPortfolio = "AssociatePrincipalWithPortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolio
-func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *AssociatePrincipalWithPortfolioInput) (req *request.Request, output *AssociatePrincipalWithPortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *AssociatePrincipalWithPortfolioInput) (req *aws.Request, output *AssociatePrincipalWithPortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opAssociatePrincipalWithPortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -176,7 +175,7 @@ func (c *ServiceCatalog) AssociatePrincipalWithPortfolio(input *AssociatePrincip
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) AssociatePrincipalWithPortfolioWithContext(ctx aws.Context, input *AssociatePrincipalWithPortfolioInput, opts ...request.Option) (*AssociatePrincipalWithPortfolioOutput, error) {
+func (c *ServiceCatalog) AssociatePrincipalWithPortfolioWithContext(ctx aws.Context, input *AssociatePrincipalWithPortfolioInput, opts ...aws.Option) (*AssociatePrincipalWithPortfolioOutput, error) {
 	req, out := c.AssociatePrincipalWithPortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -185,7 +184,7 @@ func (c *ServiceCatalog) AssociatePrincipalWithPortfolioWithContext(ctx aws.Cont
 
 const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 
-// AssociateProductWithPortfolioRequest generates a "aws/request.Request" representing the
+// AssociateProductWithPortfolioRequest generates a "aws.Request" representing the
 // client's request for the AssociateProductWithPortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -209,8 +208,8 @@ const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolio
-func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociateProductWithPortfolioInput) (req *request.Request, output *AssociateProductWithPortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociateProductWithPortfolioInput) (req *aws.Request, output *AssociateProductWithPortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateProductWithPortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -262,7 +261,7 @@ func (c *ServiceCatalog) AssociateProductWithPortfolio(input *AssociateProductWi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) AssociateProductWithPortfolioWithContext(ctx aws.Context, input *AssociateProductWithPortfolioInput, opts ...request.Option) (*AssociateProductWithPortfolioOutput, error) {
+func (c *ServiceCatalog) AssociateProductWithPortfolioWithContext(ctx aws.Context, input *AssociateProductWithPortfolioInput, opts ...aws.Option) (*AssociateProductWithPortfolioOutput, error) {
 	req, out := c.AssociateProductWithPortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -271,7 +270,7 @@ func (c *ServiceCatalog) AssociateProductWithPortfolioWithContext(ctx aws.Contex
 
 const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
 
-// AssociateTagOptionWithResourceRequest generates a "aws/request.Request" representing the
+// AssociateTagOptionWithResourceRequest generates a "aws.Request" representing the
 // client's request for the AssociateTagOptionWithResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -295,8 +294,8 @@ const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateTagOptionWithResource
-func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateTagOptionWithResourceInput) (req *request.Request, output *AssociateTagOptionWithResourceOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateTagOptionWithResourceInput) (req *aws.Request, output *AssociateTagOptionWithResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateTagOptionWithResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -361,7 +360,7 @@ func (c *ServiceCatalog) AssociateTagOptionWithResource(input *AssociateTagOptio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) AssociateTagOptionWithResourceWithContext(ctx aws.Context, input *AssociateTagOptionWithResourceInput, opts ...request.Option) (*AssociateTagOptionWithResourceOutput, error) {
+func (c *ServiceCatalog) AssociateTagOptionWithResourceWithContext(ctx aws.Context, input *AssociateTagOptionWithResourceInput, opts ...aws.Option) (*AssociateTagOptionWithResourceOutput, error) {
 	req, out := c.AssociateTagOptionWithResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -370,7 +369,7 @@ func (c *ServiceCatalog) AssociateTagOptionWithResourceWithContext(ctx aws.Conte
 
 const opCopyProduct = "CopyProduct"
 
-// CopyProductRequest generates a "aws/request.Request" representing the
+// CopyProductRequest generates a "aws.Request" representing the
 // client's request for the CopyProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -394,8 +393,8 @@ const opCopyProduct = "CopyProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProduct
-func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) (req *request.Request, output *CopyProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) (req *aws.Request, output *CopyProductOutput) {
+	op := &aws.Operation{
 		Name:       opCopyProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -450,7 +449,7 @@ func (c *ServiceCatalog) CopyProduct(input *CopyProductInput) (*CopyProductOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CopyProductWithContext(ctx aws.Context, input *CopyProductInput, opts ...request.Option) (*CopyProductOutput, error) {
+func (c *ServiceCatalog) CopyProductWithContext(ctx aws.Context, input *CopyProductInput, opts ...aws.Option) (*CopyProductOutput, error) {
 	req, out := c.CopyProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -459,7 +458,7 @@ func (c *ServiceCatalog) CopyProductWithContext(ctx aws.Context, input *CopyProd
 
 const opCreateConstraint = "CreateConstraint"
 
-// CreateConstraintRequest generates a "aws/request.Request" representing the
+// CreateConstraintRequest generates a "aws.Request" representing the
 // client's request for the CreateConstraint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -483,8 +482,8 @@ const opCreateConstraint = "CreateConstraint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraint
-func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) (req *request.Request, output *CreateConstraintOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) (req *aws.Request, output *CreateConstraintOutput) {
+	op := &aws.Operation{
 		Name:       opCreateConstraint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -539,7 +538,7 @@ func (c *ServiceCatalog) CreateConstraint(input *CreateConstraintInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CreateConstraintWithContext(ctx aws.Context, input *CreateConstraintInput, opts ...request.Option) (*CreateConstraintOutput, error) {
+func (c *ServiceCatalog) CreateConstraintWithContext(ctx aws.Context, input *CreateConstraintInput, opts ...aws.Option) (*CreateConstraintOutput, error) {
 	req, out := c.CreateConstraintRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -548,7 +547,7 @@ func (c *ServiceCatalog) CreateConstraintWithContext(ctx aws.Context, input *Cre
 
 const opCreatePortfolio = "CreatePortfolio"
 
-// CreatePortfolioRequest generates a "aws/request.Request" representing the
+// CreatePortfolioRequest generates a "aws.Request" representing the
 // client's request for the CreatePortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -572,8 +571,8 @@ const opCreatePortfolio = "CreatePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolio
-func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) (req *request.Request, output *CreatePortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) (req *aws.Request, output *CreatePortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -627,7 +626,7 @@ func (c *ServiceCatalog) CreatePortfolio(input *CreatePortfolioInput) (*CreatePo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CreatePortfolioWithContext(ctx aws.Context, input *CreatePortfolioInput, opts ...request.Option) (*CreatePortfolioOutput, error) {
+func (c *ServiceCatalog) CreatePortfolioWithContext(ctx aws.Context, input *CreatePortfolioInput, opts ...aws.Option) (*CreatePortfolioOutput, error) {
 	req, out := c.CreatePortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -636,7 +635,7 @@ func (c *ServiceCatalog) CreatePortfolioWithContext(ctx aws.Context, input *Crea
 
 const opCreatePortfolioShare = "CreatePortfolioShare"
 
-// CreatePortfolioShareRequest generates a "aws/request.Request" representing the
+// CreatePortfolioShareRequest generates a "aws.Request" representing the
 // client's request for the CreatePortfolioShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -660,8 +659,8 @@ const opCreatePortfolioShare = "CreatePortfolioShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShare
-func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShareInput) (req *request.Request, output *CreatePortfolioShareOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShareInput) (req *aws.Request, output *CreatePortfolioShareOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePortfolioShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -713,7 +712,7 @@ func (c *ServiceCatalog) CreatePortfolioShare(input *CreatePortfolioShareInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CreatePortfolioShareWithContext(ctx aws.Context, input *CreatePortfolioShareInput, opts ...request.Option) (*CreatePortfolioShareOutput, error) {
+func (c *ServiceCatalog) CreatePortfolioShareWithContext(ctx aws.Context, input *CreatePortfolioShareInput, opts ...aws.Option) (*CreatePortfolioShareOutput, error) {
 	req, out := c.CreatePortfolioShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -722,7 +721,7 @@ func (c *ServiceCatalog) CreatePortfolioShareWithContext(ctx aws.Context, input 
 
 const opCreateProduct = "CreateProduct"
 
-// CreateProductRequest generates a "aws/request.Request" representing the
+// CreateProductRequest generates a "aws.Request" representing the
 // client's request for the CreateProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -746,8 +745,8 @@ const opCreateProduct = "CreateProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProduct
-func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) (req *request.Request, output *CreateProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) (req *aws.Request, output *CreateProductOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -801,7 +800,7 @@ func (c *ServiceCatalog) CreateProduct(input *CreateProductInput) (*CreateProduc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CreateProductWithContext(ctx aws.Context, input *CreateProductInput, opts ...request.Option) (*CreateProductOutput, error) {
+func (c *ServiceCatalog) CreateProductWithContext(ctx aws.Context, input *CreateProductInput, opts ...aws.Option) (*CreateProductOutput, error) {
 	req, out := c.CreateProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -810,7 +809,7 @@ func (c *ServiceCatalog) CreateProductWithContext(ctx aws.Context, input *Create
 
 const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 
-// CreateProvisioningArtifactRequest generates a "aws/request.Request" representing the
+// CreateProvisioningArtifactRequest generates a "aws.Request" representing the
 // client's request for the CreateProvisioningArtifact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -834,8 +833,8 @@ const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifact
-func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisioningArtifactInput) (req *request.Request, output *CreateProvisioningArtifactOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisioningArtifactInput) (req *aws.Request, output *CreateProvisioningArtifactOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProvisioningArtifact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -888,7 +887,7 @@ func (c *ServiceCatalog) CreateProvisioningArtifact(input *CreateProvisioningArt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CreateProvisioningArtifactWithContext(ctx aws.Context, input *CreateProvisioningArtifactInput, opts ...request.Option) (*CreateProvisioningArtifactOutput, error) {
+func (c *ServiceCatalog) CreateProvisioningArtifactWithContext(ctx aws.Context, input *CreateProvisioningArtifactInput, opts ...aws.Option) (*CreateProvisioningArtifactOutput, error) {
 	req, out := c.CreateProvisioningArtifactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -897,7 +896,7 @@ func (c *ServiceCatalog) CreateProvisioningArtifactWithContext(ctx aws.Context, 
 
 const opCreateTagOption = "CreateTagOption"
 
-// CreateTagOptionRequest generates a "aws/request.Request" representing the
+// CreateTagOptionRequest generates a "aws.Request" representing the
 // client's request for the CreateTagOption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -921,8 +920,8 @@ const opCreateTagOption = "CreateTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOption
-func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) (req *request.Request, output *CreateTagOptionOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) (req *aws.Request, output *CreateTagOptionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTagOption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -976,7 +975,7 @@ func (c *ServiceCatalog) CreateTagOption(input *CreateTagOptionInput) (*CreateTa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) CreateTagOptionWithContext(ctx aws.Context, input *CreateTagOptionInput, opts ...request.Option) (*CreateTagOptionOutput, error) {
+func (c *ServiceCatalog) CreateTagOptionWithContext(ctx aws.Context, input *CreateTagOptionInput, opts ...aws.Option) (*CreateTagOptionOutput, error) {
 	req, out := c.CreateTagOptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,7 +984,7 @@ func (c *ServiceCatalog) CreateTagOptionWithContext(ctx aws.Context, input *Crea
 
 const opDeleteConstraint = "DeleteConstraint"
 
-// DeleteConstraintRequest generates a "aws/request.Request" representing the
+// DeleteConstraintRequest generates a "aws.Request" representing the
 // client's request for the DeleteConstraint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1009,8 +1008,8 @@ const opDeleteConstraint = "DeleteConstraint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraint
-func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) (req *request.Request, output *DeleteConstraintOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) (req *aws.Request, output *DeleteConstraintOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConstraint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1058,7 +1057,7 @@ func (c *ServiceCatalog) DeleteConstraint(input *DeleteConstraintInput) (*Delete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DeleteConstraintWithContext(ctx aws.Context, input *DeleteConstraintInput, opts ...request.Option) (*DeleteConstraintOutput, error) {
+func (c *ServiceCatalog) DeleteConstraintWithContext(ctx aws.Context, input *DeleteConstraintInput, opts ...aws.Option) (*DeleteConstraintOutput, error) {
 	req, out := c.DeleteConstraintRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1067,7 +1066,7 @@ func (c *ServiceCatalog) DeleteConstraintWithContext(ctx aws.Context, input *Del
 
 const opDeletePortfolio = "DeletePortfolio"
 
-// DeletePortfolioRequest generates a "aws/request.Request" representing the
+// DeletePortfolioRequest generates a "aws.Request" representing the
 // client's request for the DeletePortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1091,8 +1090,8 @@ const opDeletePortfolio = "DeletePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolio
-func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) (req *request.Request, output *DeletePortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) (req *aws.Request, output *DeletePortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1151,7 +1150,7 @@ func (c *ServiceCatalog) DeletePortfolio(input *DeletePortfolioInput) (*DeletePo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DeletePortfolioWithContext(ctx aws.Context, input *DeletePortfolioInput, opts ...request.Option) (*DeletePortfolioOutput, error) {
+func (c *ServiceCatalog) DeletePortfolioWithContext(ctx aws.Context, input *DeletePortfolioInput, opts ...aws.Option) (*DeletePortfolioOutput, error) {
 	req, out := c.DeletePortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1160,7 +1159,7 @@ func (c *ServiceCatalog) DeletePortfolioWithContext(ctx aws.Context, input *Dele
 
 const opDeletePortfolioShare = "DeletePortfolioShare"
 
-// DeletePortfolioShareRequest generates a "aws/request.Request" representing the
+// DeletePortfolioShareRequest generates a "aws.Request" representing the
 // client's request for the DeletePortfolioShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1184,8 +1183,8 @@ const opDeletePortfolioShare = "DeletePortfolioShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShare
-func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) (req *request.Request, output *DeletePortfolioShareOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShareInput) (req *aws.Request, output *DeletePortfolioShareOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePortfolioShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1230,7 +1229,7 @@ func (c *ServiceCatalog) DeletePortfolioShare(input *DeletePortfolioShareInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DeletePortfolioShareWithContext(ctx aws.Context, input *DeletePortfolioShareInput, opts ...request.Option) (*DeletePortfolioShareOutput, error) {
+func (c *ServiceCatalog) DeletePortfolioShareWithContext(ctx aws.Context, input *DeletePortfolioShareInput, opts ...aws.Option) (*DeletePortfolioShareOutput, error) {
 	req, out := c.DeletePortfolioShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1239,7 +1238,7 @@ func (c *ServiceCatalog) DeletePortfolioShareWithContext(ctx aws.Context, input 
 
 const opDeleteProduct = "DeleteProduct"
 
-// DeleteProductRequest generates a "aws/request.Request" representing the
+// DeleteProductRequest generates a "aws.Request" representing the
 // client's request for the DeleteProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1263,8 +1262,8 @@ const opDeleteProduct = "DeleteProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProduct
-func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) (req *request.Request, output *DeleteProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) (req *aws.Request, output *DeleteProductOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1322,7 +1321,7 @@ func (c *ServiceCatalog) DeleteProduct(input *DeleteProductInput) (*DeleteProduc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DeleteProductWithContext(ctx aws.Context, input *DeleteProductInput, opts ...request.Option) (*DeleteProductOutput, error) {
+func (c *ServiceCatalog) DeleteProductWithContext(ctx aws.Context, input *DeleteProductInput, opts ...aws.Option) (*DeleteProductOutput, error) {
 	req, out := c.DeleteProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1331,7 +1330,7 @@ func (c *ServiceCatalog) DeleteProductWithContext(ctx aws.Context, input *Delete
 
 const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 
-// DeleteProvisioningArtifactRequest generates a "aws/request.Request" representing the
+// DeleteProvisioningArtifactRequest generates a "aws.Request" representing the
 // client's request for the DeleteProvisioningArtifact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1355,8 +1354,8 @@ const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifact
-func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArtifactInput) (req *request.Request, output *DeleteProvisioningArtifactOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisioningArtifactInput) (req *aws.Request, output *DeleteProvisioningArtifactOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProvisioningArtifact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1411,7 +1410,7 @@ func (c *ServiceCatalog) DeleteProvisioningArtifact(input *DeleteProvisioningArt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DeleteProvisioningArtifactWithContext(ctx aws.Context, input *DeleteProvisioningArtifactInput, opts ...request.Option) (*DeleteProvisioningArtifactOutput, error) {
+func (c *ServiceCatalog) DeleteProvisioningArtifactWithContext(ctx aws.Context, input *DeleteProvisioningArtifactInput, opts ...aws.Option) (*DeleteProvisioningArtifactOutput, error) {
 	req, out := c.DeleteProvisioningArtifactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1420,7 +1419,7 @@ func (c *ServiceCatalog) DeleteProvisioningArtifactWithContext(ctx aws.Context, 
 
 const opDescribeConstraint = "DescribeConstraint"
 
-// DescribeConstraintRequest generates a "aws/request.Request" representing the
+// DescribeConstraintRequest generates a "aws.Request" representing the
 // client's request for the DescribeConstraint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1444,8 +1443,8 @@ const opDescribeConstraint = "DescribeConstraint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraint
-func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInput) (req *request.Request, output *DescribeConstraintOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInput) (req *aws.Request, output *DescribeConstraintOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConstraint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1490,7 +1489,7 @@ func (c *ServiceCatalog) DescribeConstraint(input *DescribeConstraintInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeConstraintWithContext(ctx aws.Context, input *DescribeConstraintInput, opts ...request.Option) (*DescribeConstraintOutput, error) {
+func (c *ServiceCatalog) DescribeConstraintWithContext(ctx aws.Context, input *DescribeConstraintInput, opts ...aws.Option) (*DescribeConstraintOutput, error) {
 	req, out := c.DescribeConstraintRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1499,7 +1498,7 @@ func (c *ServiceCatalog) DescribeConstraintWithContext(ctx aws.Context, input *D
 
 const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
 
-// DescribeCopyProductStatusRequest generates a "aws/request.Request" representing the
+// DescribeCopyProductStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeCopyProductStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1523,8 +1522,8 @@ const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatus
-func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyProductStatusInput) (req *request.Request, output *DescribeCopyProductStatusOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyProductStatusInput) (req *aws.Request, output *DescribeCopyProductStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCopyProductStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1569,7 +1568,7 @@ func (c *ServiceCatalog) DescribeCopyProductStatus(input *DescribeCopyProductSta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeCopyProductStatusWithContext(ctx aws.Context, input *DescribeCopyProductStatusInput, opts ...request.Option) (*DescribeCopyProductStatusOutput, error) {
+func (c *ServiceCatalog) DescribeCopyProductStatusWithContext(ctx aws.Context, input *DescribeCopyProductStatusInput, opts ...aws.Option) (*DescribeCopyProductStatusOutput, error) {
 	req, out := c.DescribeCopyProductStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1578,7 +1577,7 @@ func (c *ServiceCatalog) DescribeCopyProductStatusWithContext(ctx aws.Context, i
 
 const opDescribePortfolio = "DescribePortfolio"
 
-// DescribePortfolioRequest generates a "aws/request.Request" representing the
+// DescribePortfolioRequest generates a "aws.Request" representing the
 // client's request for the DescribePortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1602,8 +1601,8 @@ const opDescribePortfolio = "DescribePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio
-func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput) (req *request.Request, output *DescribePortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput) (req *aws.Request, output *DescribePortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1649,7 +1648,7 @@ func (c *ServiceCatalog) DescribePortfolio(input *DescribePortfolioInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribePortfolioWithContext(ctx aws.Context, input *DescribePortfolioInput, opts ...request.Option) (*DescribePortfolioOutput, error) {
+func (c *ServiceCatalog) DescribePortfolioWithContext(ctx aws.Context, input *DescribePortfolioInput, opts ...aws.Option) (*DescribePortfolioOutput, error) {
 	req, out := c.DescribePortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1658,7 +1657,7 @@ func (c *ServiceCatalog) DescribePortfolioWithContext(ctx aws.Context, input *De
 
 const opDescribeProduct = "DescribeProduct"
 
-// DescribeProductRequest generates a "aws/request.Request" representing the
+// DescribeProductRequest generates a "aws.Request" representing the
 // client's request for the DescribeProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1682,8 +1681,8 @@ const opDescribeProduct = "DescribeProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProduct
-func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) (req *request.Request, output *DescribeProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) (req *aws.Request, output *DescribeProductOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1734,7 +1733,7 @@ func (c *ServiceCatalog) DescribeProduct(input *DescribeProductInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProductWithContext(ctx aws.Context, input *DescribeProductInput, opts ...request.Option) (*DescribeProductOutput, error) {
+func (c *ServiceCatalog) DescribeProductWithContext(ctx aws.Context, input *DescribeProductInput, opts ...aws.Option) (*DescribeProductOutput, error) {
 	req, out := c.DescribeProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1743,7 +1742,7 @@ func (c *ServiceCatalog) DescribeProductWithContext(ctx aws.Context, input *Desc
 
 const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
 
-// DescribeProductAsAdminRequest generates a "aws/request.Request" representing the
+// DescribeProductAsAdminRequest generates a "aws.Request" representing the
 // client's request for the DescribeProductAsAdmin operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1767,8 +1766,8 @@ const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin
-func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInput) (req *request.Request, output *DescribeProductAsAdminOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsAdminInput) (req *aws.Request, output *DescribeProductAsAdminOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProductAsAdmin,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1813,7 +1812,7 @@ func (c *ServiceCatalog) DescribeProductAsAdmin(input *DescribeProductAsAdminInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProductAsAdminWithContext(ctx aws.Context, input *DescribeProductAsAdminInput, opts ...request.Option) (*DescribeProductAsAdminOutput, error) {
+func (c *ServiceCatalog) DescribeProductAsAdminWithContext(ctx aws.Context, input *DescribeProductAsAdminInput, opts ...aws.Option) (*DescribeProductAsAdminOutput, error) {
 	req, out := c.DescribeProductAsAdminRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1822,7 +1821,7 @@ func (c *ServiceCatalog) DescribeProductAsAdminWithContext(ctx aws.Context, inpu
 
 const opDescribeProductView = "DescribeProductView"
 
-// DescribeProductViewRequest generates a "aws/request.Request" representing the
+// DescribeProductViewRequest generates a "aws.Request" representing the
 // client's request for the DescribeProductView operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1846,8 +1845,8 @@ const opDescribeProductView = "DescribeProductView"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductView
-func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewInput) (req *request.Request, output *DescribeProductViewOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewInput) (req *aws.Request, output *DescribeProductViewOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProductView,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1898,7 +1897,7 @@ func (c *ServiceCatalog) DescribeProductView(input *DescribeProductViewInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProductViewWithContext(ctx aws.Context, input *DescribeProductViewInput, opts ...request.Option) (*DescribeProductViewOutput, error) {
+func (c *ServiceCatalog) DescribeProductViewWithContext(ctx aws.Context, input *DescribeProductViewInput, opts ...aws.Option) (*DescribeProductViewOutput, error) {
 	req, out := c.DescribeProductViewRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1907,7 +1906,7 @@ func (c *ServiceCatalog) DescribeProductViewWithContext(ctx aws.Context, input *
 
 const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
 
-// DescribeProvisionedProductRequest generates a "aws/request.Request" representing the
+// DescribeProvisionedProductRequest generates a "aws.Request" representing the
 // client's request for the DescribeProvisionedProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1931,8 +1930,8 @@ const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProduct
-func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvisionedProductInput) (req *request.Request, output *DescribeProvisionedProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvisionedProductInput) (req *aws.Request, output *DescribeProvisionedProductOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProvisionedProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1977,7 +1976,7 @@ func (c *ServiceCatalog) DescribeProvisionedProduct(input *DescribeProvisionedPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProvisionedProductWithContext(ctx aws.Context, input *DescribeProvisionedProductInput, opts ...request.Option) (*DescribeProvisionedProductOutput, error) {
+func (c *ServiceCatalog) DescribeProvisionedProductWithContext(ctx aws.Context, input *DescribeProvisionedProductInput, opts ...aws.Option) (*DescribeProvisionedProductOutput, error) {
 	req, out := c.DescribeProvisionedProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1986,7 +1985,7 @@ func (c *ServiceCatalog) DescribeProvisionedProductWithContext(ctx aws.Context, 
 
 const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 
-// DescribeProvisioningArtifactRequest generates a "aws/request.Request" representing the
+// DescribeProvisioningArtifactRequest generates a "aws.Request" representing the
 // client's request for the DescribeProvisioningArtifact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2010,8 +2009,8 @@ const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact
-func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProvisioningArtifactInput) (req *request.Request, output *DescribeProvisioningArtifactOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProvisioningArtifactInput) (req *aws.Request, output *DescribeProvisioningArtifactOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProvisioningArtifact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2056,7 +2055,7 @@ func (c *ServiceCatalog) DescribeProvisioningArtifact(input *DescribeProvisionin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProvisioningArtifactWithContext(ctx aws.Context, input *DescribeProvisioningArtifactInput, opts ...request.Option) (*DescribeProvisioningArtifactOutput, error) {
+func (c *ServiceCatalog) DescribeProvisioningArtifactWithContext(ctx aws.Context, input *DescribeProvisioningArtifactInput, opts ...aws.Option) (*DescribeProvisioningArtifactOutput, error) {
 	req, out := c.DescribeProvisioningArtifactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2065,7 +2064,7 @@ func (c *ServiceCatalog) DescribeProvisioningArtifactWithContext(ctx aws.Context
 
 const opDescribeProvisioningParameters = "DescribeProvisioningParameters"
 
-// DescribeProvisioningParametersRequest generates a "aws/request.Request" representing the
+// DescribeProvisioningParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeProvisioningParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2089,8 +2088,8 @@ const opDescribeProvisioningParameters = "DescribeProvisioningParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters
-func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribeProvisioningParametersInput) (req *request.Request, output *DescribeProvisioningParametersOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribeProvisioningParametersInput) (req *aws.Request, output *DescribeProvisioningParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProvisioningParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2150,7 +2149,7 @@ func (c *ServiceCatalog) DescribeProvisioningParameters(input *DescribeProvision
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeProvisioningParametersWithContext(ctx aws.Context, input *DescribeProvisioningParametersInput, opts ...request.Option) (*DescribeProvisioningParametersOutput, error) {
+func (c *ServiceCatalog) DescribeProvisioningParametersWithContext(ctx aws.Context, input *DescribeProvisioningParametersInput, opts ...aws.Option) (*DescribeProvisioningParametersOutput, error) {
 	req, out := c.DescribeProvisioningParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2159,7 +2158,7 @@ func (c *ServiceCatalog) DescribeProvisioningParametersWithContext(ctx aws.Conte
 
 const opDescribeRecord = "DescribeRecord"
 
-// DescribeRecordRequest generates a "aws/request.Request" representing the
+// DescribeRecordRequest generates a "aws.Request" representing the
 // client's request for the DescribeRecord operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2183,8 +2182,8 @@ const opDescribeRecord = "DescribeRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecord
-func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) (req *request.Request, output *DescribeRecordOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) (req *aws.Request, output *DescribeRecordOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRecord,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2231,7 +2230,7 @@ func (c *ServiceCatalog) DescribeRecord(input *DescribeRecordInput) (*DescribeRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeRecordWithContext(ctx aws.Context, input *DescribeRecordInput, opts ...request.Option) (*DescribeRecordOutput, error) {
+func (c *ServiceCatalog) DescribeRecordWithContext(ctx aws.Context, input *DescribeRecordInput, opts ...aws.Option) (*DescribeRecordOutput, error) {
 	req, out := c.DescribeRecordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2240,7 +2239,7 @@ func (c *ServiceCatalog) DescribeRecordWithContext(ctx aws.Context, input *Descr
 
 const opDescribeTagOption = "DescribeTagOption"
 
-// DescribeTagOptionRequest generates a "aws/request.Request" representing the
+// DescribeTagOptionRequest generates a "aws.Request" representing the
 // client's request for the DescribeTagOption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2264,8 +2263,8 @@ const opDescribeTagOption = "DescribeTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOption
-func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput) (req *request.Request, output *DescribeTagOptionOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput) (req *aws.Request, output *DescribeTagOptionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTagOption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2315,7 +2314,7 @@ func (c *ServiceCatalog) DescribeTagOption(input *DescribeTagOptionInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DescribeTagOptionWithContext(ctx aws.Context, input *DescribeTagOptionInput, opts ...request.Option) (*DescribeTagOptionOutput, error) {
+func (c *ServiceCatalog) DescribeTagOptionWithContext(ctx aws.Context, input *DescribeTagOptionInput, opts ...aws.Option) (*DescribeTagOptionOutput, error) {
 	req, out := c.DescribeTagOptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2324,7 +2323,7 @@ func (c *ServiceCatalog) DescribeTagOptionWithContext(ctx aws.Context, input *De
 
 const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio"
 
-// DisassociatePrincipalFromPortfolioRequest generates a "aws/request.Request" representing the
+// DisassociatePrincipalFromPortfolioRequest generates a "aws.Request" representing the
 // client's request for the DisassociatePrincipalFromPortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2348,8 +2347,8 @@ const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolio
-func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePrincipalFromPortfolioInput) (req *request.Request, output *DisassociatePrincipalFromPortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *DisassociatePrincipalFromPortfolioInput) (req *aws.Request, output *DisassociatePrincipalFromPortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociatePrincipalFromPortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2397,7 +2396,7 @@ func (c *ServiceCatalog) DisassociatePrincipalFromPortfolio(input *DisassociateP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioWithContext(ctx aws.Context, input *DisassociatePrincipalFromPortfolioInput, opts ...request.Option) (*DisassociatePrincipalFromPortfolioOutput, error) {
+func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioWithContext(ctx aws.Context, input *DisassociatePrincipalFromPortfolioInput, opts ...aws.Option) (*DisassociatePrincipalFromPortfolioOutput, error) {
 	req, out := c.DisassociatePrincipalFromPortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2406,7 +2405,7 @@ func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioWithContext(ctx aws.C
 
 const opDisassociateProductFromPortfolio = "DisassociateProductFromPortfolio"
 
-// DisassociateProductFromPortfolioRequest generates a "aws/request.Request" representing the
+// DisassociateProductFromPortfolioRequest generates a "aws.Request" representing the
 // client's request for the DisassociateProductFromPortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2430,8 +2429,8 @@ const opDisassociateProductFromPortfolio = "DisassociateProductFromPortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolio
-func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *DisassociateProductFromPortfolioInput) (req *request.Request, output *DisassociateProductFromPortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *DisassociateProductFromPortfolioInput) (req *aws.Request, output *DisassociateProductFromPortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateProductFromPortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2483,7 +2482,7 @@ func (c *ServiceCatalog) DisassociateProductFromPortfolio(input *DisassociatePro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DisassociateProductFromPortfolioWithContext(ctx aws.Context, input *DisassociateProductFromPortfolioInput, opts ...request.Option) (*DisassociateProductFromPortfolioOutput, error) {
+func (c *ServiceCatalog) DisassociateProductFromPortfolioWithContext(ctx aws.Context, input *DisassociateProductFromPortfolioInput, opts ...aws.Option) (*DisassociateProductFromPortfolioOutput, error) {
 	req, out := c.DisassociateProductFromPortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2492,7 +2491,7 @@ func (c *ServiceCatalog) DisassociateProductFromPortfolioWithContext(ctx aws.Con
 
 const opDisassociateTagOptionFromResource = "DisassociateTagOptionFromResource"
 
-// DisassociateTagOptionFromResourceRequest generates a "aws/request.Request" representing the
+// DisassociateTagOptionFromResourceRequest generates a "aws.Request" representing the
 // client's request for the DisassociateTagOptionFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2516,8 +2515,8 @@ const opDisassociateTagOptionFromResource = "DisassociateTagOptionFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResource
-func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *DisassociateTagOptionFromResourceInput) (req *request.Request, output *DisassociateTagOptionFromResourceOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *DisassociateTagOptionFromResourceInput) (req *aws.Request, output *DisassociateTagOptionFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateTagOptionFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2567,7 +2566,7 @@ func (c *ServiceCatalog) DisassociateTagOptionFromResource(input *DisassociateTa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) DisassociateTagOptionFromResourceWithContext(ctx aws.Context, input *DisassociateTagOptionFromResourceInput, opts ...request.Option) (*DisassociateTagOptionFromResourceOutput, error) {
+func (c *ServiceCatalog) DisassociateTagOptionFromResourceWithContext(ctx aws.Context, input *DisassociateTagOptionFromResourceInput, opts ...aws.Option) (*DisassociateTagOptionFromResourceOutput, error) {
 	req, out := c.DisassociateTagOptionFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2576,7 +2575,7 @@ func (c *ServiceCatalog) DisassociateTagOptionFromResourceWithContext(ctx aws.Co
 
 const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
 
-// ListAcceptedPortfolioSharesRequest generates a "aws/request.Request" representing the
+// ListAcceptedPortfolioSharesRequest generates a "aws.Request" representing the
 // client's request for the ListAcceptedPortfolioShares operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2600,12 +2599,12 @@ const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioShares
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolioSharesInput) (req *request.Request, output *ListAcceptedPortfolioSharesOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedPortfolioSharesInput) (req *aws.Request, output *ListAcceptedPortfolioSharesOutput) {
+	op := &aws.Operation{
 		Name:       opListAcceptedPortfolioShares,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -2652,7 +2651,7 @@ func (c *ServiceCatalog) ListAcceptedPortfolioShares(input *ListAcceptedPortfoli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, opts ...request.Option) (*ListAcceptedPortfolioSharesOutput, error) {
+func (c *ServiceCatalog) ListAcceptedPortfolioSharesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, opts ...aws.Option) (*ListAcceptedPortfolioSharesOutput, error) {
 	req, out := c.ListAcceptedPortfolioSharesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2687,9 +2686,9 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesPages(input *ListAcceptedPor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, fn func(*ListAcceptedPortfolioSharesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, fn func(*ListAcceptedPortfolioSharesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAcceptedPortfolioSharesInput
 			if input != nil {
 				tmp := *input
@@ -2711,7 +2710,7 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Con
 
 const opListConstraintsForPortfolio = "ListConstraintsForPortfolio"
 
-// ListConstraintsForPortfolioRequest generates a "aws/request.Request" representing the
+// ListConstraintsForPortfolioRequest generates a "aws.Request" representing the
 // client's request for the ListConstraintsForPortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2735,12 +2734,12 @@ const opListConstraintsForPortfolio = "ListConstraintsForPortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolio
-func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstraintsForPortfolioInput) (req *request.Request, output *ListConstraintsForPortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstraintsForPortfolioInput) (req *aws.Request, output *ListConstraintsForPortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opListConstraintsForPortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -2791,7 +2790,7 @@ func (c *ServiceCatalog) ListConstraintsForPortfolio(input *ListConstraintsForPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListConstraintsForPortfolioWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, opts ...request.Option) (*ListConstraintsForPortfolioOutput, error) {
+func (c *ServiceCatalog) ListConstraintsForPortfolioWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, opts ...aws.Option) (*ListConstraintsForPortfolioOutput, error) {
 	req, out := c.ListConstraintsForPortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2826,9 +2825,9 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioPages(input *ListConstraints
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, fn func(*ListConstraintsForPortfolioOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, fn func(*ListConstraintsForPortfolioOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListConstraintsForPortfolioInput
 			if input != nil {
 				tmp := *input
@@ -2850,7 +2849,7 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Con
 
 const opListLaunchPaths = "ListLaunchPaths"
 
-// ListLaunchPathsRequest generates a "aws/request.Request" representing the
+// ListLaunchPathsRequest generates a "aws.Request" representing the
 // client's request for the ListLaunchPaths operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2874,12 +2873,12 @@ const opListLaunchPaths = "ListLaunchPaths"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPaths
-func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) (req *request.Request, output *ListLaunchPathsOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) (req *aws.Request, output *ListLaunchPathsOutput) {
+	op := &aws.Operation{
 		Name:       opListLaunchPaths,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -2931,7 +2930,7 @@ func (c *ServiceCatalog) ListLaunchPaths(input *ListLaunchPathsInput) (*ListLaun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListLaunchPathsWithContext(ctx aws.Context, input *ListLaunchPathsInput, opts ...request.Option) (*ListLaunchPathsOutput, error) {
+func (c *ServiceCatalog) ListLaunchPathsWithContext(ctx aws.Context, input *ListLaunchPathsInput, opts ...aws.Option) (*ListLaunchPathsOutput, error) {
 	req, out := c.ListLaunchPathsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2966,9 +2965,9 @@ func (c *ServiceCatalog) ListLaunchPathsPages(input *ListLaunchPathsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input *ListLaunchPathsInput, fn func(*ListLaunchPathsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input *ListLaunchPathsInput, fn func(*ListLaunchPathsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListLaunchPathsInput
 			if input != nil {
 				tmp := *input
@@ -2990,7 +2989,7 @@ func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input 
 
 const opListPortfolioAccess = "ListPortfolioAccess"
 
-// ListPortfolioAccessRequest generates a "aws/request.Request" representing the
+// ListPortfolioAccessRequest generates a "aws.Request" representing the
 // client's request for the ListPortfolioAccess operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3014,8 +3013,8 @@ const opListPortfolioAccess = "ListPortfolioAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccess
-func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) (req *request.Request, output *ListPortfolioAccessOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessInput) (req *aws.Request, output *ListPortfolioAccessOutput) {
+	op := &aws.Operation{
 		Name:       opListPortfolioAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3061,7 +3060,7 @@ func (c *ServiceCatalog) ListPortfolioAccess(input *ListPortfolioAccessInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfolioAccessWithContext(ctx aws.Context, input *ListPortfolioAccessInput, opts ...request.Option) (*ListPortfolioAccessOutput, error) {
+func (c *ServiceCatalog) ListPortfolioAccessWithContext(ctx aws.Context, input *ListPortfolioAccessInput, opts ...aws.Option) (*ListPortfolioAccessOutput, error) {
 	req, out := c.ListPortfolioAccessRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3070,7 +3069,7 @@ func (c *ServiceCatalog) ListPortfolioAccessWithContext(ctx aws.Context, input *
 
 const opListPortfolios = "ListPortfolios"
 
-// ListPortfoliosRequest generates a "aws/request.Request" representing the
+// ListPortfoliosRequest generates a "aws.Request" representing the
 // client's request for the ListPortfolios operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3094,12 +3093,12 @@ const opListPortfolios = "ListPortfolios"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolios
-func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) (req *request.Request, output *ListPortfoliosOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) (req *aws.Request, output *ListPortfoliosOutput) {
+	op := &aws.Operation{
 		Name:       opListPortfolios,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -3146,7 +3145,7 @@ func (c *ServiceCatalog) ListPortfolios(input *ListPortfoliosInput) (*ListPortfo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosWithContext(ctx aws.Context, input *ListPortfoliosInput, opts ...request.Option) (*ListPortfoliosOutput, error) {
+func (c *ServiceCatalog) ListPortfoliosWithContext(ctx aws.Context, input *ListPortfoliosInput, opts ...aws.Option) (*ListPortfoliosOutput, error) {
 	req, out := c.ListPortfoliosRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3181,9 +3180,9 @@ func (c *ServiceCatalog) ListPortfoliosPages(input *ListPortfoliosInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *ListPortfoliosInput, fn func(*ListPortfoliosOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *ListPortfoliosInput, fn func(*ListPortfoliosOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPortfoliosInput
 			if input != nil {
 				tmp := *input
@@ -3205,7 +3204,7 @@ func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *
 
 const opListPortfoliosForProduct = "ListPortfoliosForProduct"
 
-// ListPortfoliosForProductRequest generates a "aws/request.Request" representing the
+// ListPortfoliosForProductRequest generates a "aws.Request" representing the
 // client's request for the ListPortfoliosForProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3229,12 +3228,12 @@ const opListPortfoliosForProduct = "ListPortfoliosForProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProduct
-func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosForProductInput) (req *request.Request, output *ListPortfoliosForProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosForProductInput) (req *aws.Request, output *ListPortfoliosForProductOutput) {
+	op := &aws.Operation{
 		Name:       opListPortfoliosForProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -3284,7 +3283,7 @@ func (c *ServiceCatalog) ListPortfoliosForProduct(input *ListPortfoliosForProduc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosForProductWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, opts ...request.Option) (*ListPortfoliosForProductOutput, error) {
+func (c *ServiceCatalog) ListPortfoliosForProductWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, opts ...aws.Option) (*ListPortfoliosForProductOutput, error) {
 	req, out := c.ListPortfoliosForProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3319,9 +3318,9 @@ func (c *ServiceCatalog) ListPortfoliosForProductPages(input *ListPortfoliosForP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, fn func(*ListPortfoliosForProductOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, fn func(*ListPortfoliosForProductOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPortfoliosForProductInput
 			if input != nil {
 				tmp := *input
@@ -3343,7 +3342,7 @@ func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Contex
 
 const opListPrincipalsForPortfolio = "ListPrincipalsForPortfolio"
 
-// ListPrincipalsForPortfolioRequest generates a "aws/request.Request" representing the
+// ListPrincipalsForPortfolioRequest generates a "aws.Request" representing the
 // client's request for the ListPrincipalsForPortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3367,12 +3366,12 @@ const opListPrincipalsForPortfolio = "ListPrincipalsForPortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolio
-func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipalsForPortfolioInput) (req *request.Request, output *ListPrincipalsForPortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipalsForPortfolioInput) (req *aws.Request, output *ListPrincipalsForPortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opListPrincipalsForPortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -3422,7 +3421,7 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolio(input *ListPrincipalsForPort
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPrincipalsForPortfolioWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, opts ...request.Option) (*ListPrincipalsForPortfolioOutput, error) {
+func (c *ServiceCatalog) ListPrincipalsForPortfolioWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, opts ...aws.Option) (*ListPrincipalsForPortfolioOutput, error) {
 	req, out := c.ListPrincipalsForPortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3457,9 +3456,9 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioPages(input *ListPrincipalsFo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, fn func(*ListPrincipalsForPortfolioOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, fn func(*ListPrincipalsForPortfolioOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPrincipalsForPortfolioInput
 			if input != nil {
 				tmp := *input
@@ -3481,7 +3480,7 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Cont
 
 const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 
-// ListProvisioningArtifactsRequest generates a "aws/request.Request" representing the
+// ListProvisioningArtifactsRequest generates a "aws.Request" representing the
 // client's request for the ListProvisioningArtifacts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3505,8 +3504,8 @@ const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts
-func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisioningArtifactsInput) (req *request.Request, output *ListProvisioningArtifactsOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisioningArtifactsInput) (req *aws.Request, output *ListProvisioningArtifactsOutput) {
+	op := &aws.Operation{
 		Name:       opListProvisioningArtifacts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3554,7 +3553,7 @@ func (c *ServiceCatalog) ListProvisioningArtifacts(input *ListProvisioningArtifa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListProvisioningArtifactsWithContext(ctx aws.Context, input *ListProvisioningArtifactsInput, opts ...request.Option) (*ListProvisioningArtifactsOutput, error) {
+func (c *ServiceCatalog) ListProvisioningArtifactsWithContext(ctx aws.Context, input *ListProvisioningArtifactsInput, opts ...aws.Option) (*ListProvisioningArtifactsOutput, error) {
 	req, out := c.ListProvisioningArtifactsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3563,7 +3562,7 @@ func (c *ServiceCatalog) ListProvisioningArtifactsWithContext(ctx aws.Context, i
 
 const opListRecordHistory = "ListRecordHistory"
 
-// ListRecordHistoryRequest generates a "aws/request.Request" representing the
+// ListRecordHistoryRequest generates a "aws.Request" representing the
 // client's request for the ListRecordHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3587,8 +3586,8 @@ const opListRecordHistory = "ListRecordHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory
-func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput) (req *request.Request, output *ListRecordHistoryOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput) (req *aws.Request, output *ListRecordHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opListRecordHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3634,7 +3633,7 @@ func (c *ServiceCatalog) ListRecordHistory(input *ListRecordHistoryInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListRecordHistoryWithContext(ctx aws.Context, input *ListRecordHistoryInput, opts ...request.Option) (*ListRecordHistoryOutput, error) {
+func (c *ServiceCatalog) ListRecordHistoryWithContext(ctx aws.Context, input *ListRecordHistoryInput, opts ...aws.Option) (*ListRecordHistoryOutput, error) {
 	req, out := c.ListRecordHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3643,7 +3642,7 @@ func (c *ServiceCatalog) ListRecordHistoryWithContext(ctx aws.Context, input *Li
 
 const opListResourcesForTagOption = "ListResourcesForTagOption"
 
-// ListResourcesForTagOptionRequest generates a "aws/request.Request" representing the
+// ListResourcesForTagOptionRequest generates a "aws.Request" representing the
 // client's request for the ListResourcesForTagOption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3667,12 +3666,12 @@ const opListResourcesForTagOption = "ListResourcesForTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOption
-func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesForTagOptionInput) (req *request.Request, output *ListResourcesForTagOptionOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesForTagOptionInput) (req *aws.Request, output *ListResourcesForTagOptionOutput) {
+	op := &aws.Operation{
 		Name:       opListResourcesForTagOption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"PageToken"},
 			LimitToken:      "PageSize",
@@ -3727,7 +3726,7 @@ func (c *ServiceCatalog) ListResourcesForTagOption(input *ListResourcesForTagOpt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListResourcesForTagOptionWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, opts ...request.Option) (*ListResourcesForTagOptionOutput, error) {
+func (c *ServiceCatalog) ListResourcesForTagOptionWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, opts ...aws.Option) (*ListResourcesForTagOptionOutput, error) {
 	req, out := c.ListResourcesForTagOptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3762,9 +3761,9 @@ func (c *ServiceCatalog) ListResourcesForTagOptionPages(input *ListResourcesForT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, fn func(*ListResourcesForTagOptionOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, fn func(*ListResourcesForTagOptionOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListResourcesForTagOptionInput
 			if input != nil {
 				tmp := *input
@@ -3786,7 +3785,7 @@ func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Conte
 
 const opListTagOptions = "ListTagOptions"
 
-// ListTagOptionsRequest generates a "aws/request.Request" representing the
+// ListTagOptionsRequest generates a "aws.Request" representing the
 // client's request for the ListTagOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3810,12 +3809,12 @@ const opListTagOptions = "ListTagOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptions
-func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) (req *request.Request, output *ListTagOptionsOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) (req *aws.Request, output *ListTagOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opListTagOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"PageToken"},
 			LimitToken:      "PageSize",
@@ -3867,7 +3866,7 @@ func (c *ServiceCatalog) ListTagOptions(input *ListTagOptionsInput) (*ListTagOpt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListTagOptionsWithContext(ctx aws.Context, input *ListTagOptionsInput, opts ...request.Option) (*ListTagOptionsOutput, error) {
+func (c *ServiceCatalog) ListTagOptionsWithContext(ctx aws.Context, input *ListTagOptionsInput, opts ...aws.Option) (*ListTagOptionsOutput, error) {
 	req, out := c.ListTagOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3902,9 +3901,9 @@ func (c *ServiceCatalog) ListTagOptionsPages(input *ListTagOptionsInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *ListTagOptionsInput, fn func(*ListTagOptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *ListTagOptionsInput, fn func(*ListTagOptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTagOptionsInput
 			if input != nil {
 				tmp := *input
@@ -3926,7 +3925,7 @@ func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *
 
 const opProvisionProduct = "ProvisionProduct"
 
-// ProvisionProductRequest generates a "aws/request.Request" representing the
+// ProvisionProductRequest generates a "aws.Request" representing the
 // client's request for the ProvisionProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3950,8 +3949,8 @@ const opProvisionProduct = "ProvisionProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct
-func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) (req *request.Request, output *ProvisionProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) (req *aws.Request, output *ProvisionProductOutput) {
+	op := &aws.Operation{
 		Name:       opProvisionProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4013,7 +4012,7 @@ func (c *ServiceCatalog) ProvisionProduct(input *ProvisionProductInput) (*Provis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ProvisionProductWithContext(ctx aws.Context, input *ProvisionProductInput, opts ...request.Option) (*ProvisionProductOutput, error) {
+func (c *ServiceCatalog) ProvisionProductWithContext(ctx aws.Context, input *ProvisionProductInput, opts ...aws.Option) (*ProvisionProductOutput, error) {
 	req, out := c.ProvisionProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4022,7 +4021,7 @@ func (c *ServiceCatalog) ProvisionProductWithContext(ctx aws.Context, input *Pro
 
 const opRejectPortfolioShare = "RejectPortfolioShare"
 
-// RejectPortfolioShareRequest generates a "aws/request.Request" representing the
+// RejectPortfolioShareRequest generates a "aws.Request" representing the
 // client's request for the RejectPortfolioShare operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4046,8 +4045,8 @@ const opRejectPortfolioShare = "RejectPortfolioShare"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShare
-func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) (req *request.Request, output *RejectPortfolioShareOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShareInput) (req *aws.Request, output *RejectPortfolioShareOutput) {
+	op := &aws.Operation{
 		Name:       opRejectPortfolioShare,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4092,7 +4091,7 @@ func (c *ServiceCatalog) RejectPortfolioShare(input *RejectPortfolioShareInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) RejectPortfolioShareWithContext(ctx aws.Context, input *RejectPortfolioShareInput, opts ...request.Option) (*RejectPortfolioShareOutput, error) {
+func (c *ServiceCatalog) RejectPortfolioShareWithContext(ctx aws.Context, input *RejectPortfolioShareInput, opts ...aws.Option) (*RejectPortfolioShareOutput, error) {
 	req, out := c.RejectPortfolioShareRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4101,7 +4100,7 @@ func (c *ServiceCatalog) RejectPortfolioShareWithContext(ctx aws.Context, input 
 
 const opScanProvisionedProducts = "ScanProvisionedProducts"
 
-// ScanProvisionedProductsRequest generates a "aws/request.Request" representing the
+// ScanProvisionedProductsRequest generates a "aws.Request" representing the
 // client's request for the ScanProvisionedProducts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4125,8 +4124,8 @@ const opScanProvisionedProducts = "ScanProvisionedProducts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts
-func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedProductsInput) (req *request.Request, output *ScanProvisionedProductsOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedProductsInput) (req *aws.Request, output *ScanProvisionedProductsOutput) {
+	op := &aws.Operation{
 		Name:       opScanProvisionedProducts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4172,7 +4171,7 @@ func (c *ServiceCatalog) ScanProvisionedProducts(input *ScanProvisionedProductsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) ScanProvisionedProductsWithContext(ctx aws.Context, input *ScanProvisionedProductsInput, opts ...request.Option) (*ScanProvisionedProductsOutput, error) {
+func (c *ServiceCatalog) ScanProvisionedProductsWithContext(ctx aws.Context, input *ScanProvisionedProductsInput, opts ...aws.Option) (*ScanProvisionedProductsOutput, error) {
 	req, out := c.ScanProvisionedProductsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4181,7 +4180,7 @@ func (c *ServiceCatalog) ScanProvisionedProductsWithContext(ctx aws.Context, inp
 
 const opSearchProducts = "SearchProducts"
 
-// SearchProductsRequest generates a "aws/request.Request" representing the
+// SearchProductsRequest generates a "aws.Request" representing the
 // client's request for the SearchProducts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4205,12 +4204,12 @@ const opSearchProducts = "SearchProducts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProducts
-func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) (req *request.Request, output *SearchProductsOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) (req *aws.Request, output *SearchProductsOutput) {
+	op := &aws.Operation{
 		Name:       opSearchProducts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -4261,7 +4260,7 @@ func (c *ServiceCatalog) SearchProducts(input *SearchProductsInput) (*SearchProd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsWithContext(ctx aws.Context, input *SearchProductsInput, opts ...request.Option) (*SearchProductsOutput, error) {
+func (c *ServiceCatalog) SearchProductsWithContext(ctx aws.Context, input *SearchProductsInput, opts ...aws.Option) (*SearchProductsOutput, error) {
 	req, out := c.SearchProductsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4296,9 +4295,9 @@ func (c *ServiceCatalog) SearchProductsPages(input *SearchProductsInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *SearchProductsInput, fn func(*SearchProductsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *SearchProductsInput, fn func(*SearchProductsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchProductsInput
 			if input != nil {
 				tmp := *input
@@ -4320,7 +4319,7 @@ func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *
 
 const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
 
-// SearchProductsAsAdminRequest generates a "aws/request.Request" representing the
+// SearchProductsAsAdminRequest generates a "aws.Request" representing the
 // client's request for the SearchProductsAsAdmin operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4344,12 +4343,12 @@ const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdmin
-func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput) (req *request.Request, output *SearchProductsAsAdminOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdminInput) (req *aws.Request, output *SearchProductsAsAdminOutput) {
+	op := &aws.Operation{
 		Name:       opSearchProductsAsAdmin,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PageToken"},
 			OutputTokens:    []string{"NextPageToken"},
 			LimitToken:      "PageSize",
@@ -4402,7 +4401,7 @@ func (c *ServiceCatalog) SearchProductsAsAdmin(input *SearchProductsAsAdminInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsAsAdminWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, opts ...request.Option) (*SearchProductsAsAdminOutput, error) {
+func (c *ServiceCatalog) SearchProductsAsAdminWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, opts ...aws.Option) (*SearchProductsAsAdminOutput, error) {
 	req, out := c.SearchProductsAsAdminRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4437,9 +4436,9 @@ func (c *ServiceCatalog) SearchProductsAsAdminPages(input *SearchProductsAsAdmin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, fn func(*SearchProductsAsAdminOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, fn func(*SearchProductsAsAdminOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchProductsAsAdminInput
 			if input != nil {
 				tmp := *input
@@ -4461,7 +4460,7 @@ func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, 
 
 const opTerminateProvisionedProduct = "TerminateProvisionedProduct"
 
-// TerminateProvisionedProductRequest generates a "aws/request.Request" representing the
+// TerminateProvisionedProductRequest generates a "aws.Request" representing the
 // client's request for the TerminateProvisionedProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4485,8 +4484,8 @@ const opTerminateProvisionedProduct = "TerminateProvisionedProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProduct
-func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProvisionedProductInput) (req *request.Request, output *TerminateProvisionedProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProvisionedProductInput) (req *aws.Request, output *TerminateProvisionedProductOutput) {
+	op := &aws.Operation{
 		Name:       opTerminateProvisionedProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4538,7 +4537,7 @@ func (c *ServiceCatalog) TerminateProvisionedProduct(input *TerminateProvisioned
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) TerminateProvisionedProductWithContext(ctx aws.Context, input *TerminateProvisionedProductInput, opts ...request.Option) (*TerminateProvisionedProductOutput, error) {
+func (c *ServiceCatalog) TerminateProvisionedProductWithContext(ctx aws.Context, input *TerminateProvisionedProductInput, opts ...aws.Option) (*TerminateProvisionedProductOutput, error) {
 	req, out := c.TerminateProvisionedProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4547,7 +4546,7 @@ func (c *ServiceCatalog) TerminateProvisionedProductWithContext(ctx aws.Context,
 
 const opUpdateConstraint = "UpdateConstraint"
 
-// UpdateConstraintRequest generates a "aws/request.Request" representing the
+// UpdateConstraintRequest generates a "aws.Request" representing the
 // client's request for the UpdateConstraint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4571,8 +4570,8 @@ const opUpdateConstraint = "UpdateConstraint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraint
-func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) (req *request.Request, output *UpdateConstraintOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) (req *aws.Request, output *UpdateConstraintOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateConstraint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4620,7 +4619,7 @@ func (c *ServiceCatalog) UpdateConstraint(input *UpdateConstraintInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) UpdateConstraintWithContext(ctx aws.Context, input *UpdateConstraintInput, opts ...request.Option) (*UpdateConstraintOutput, error) {
+func (c *ServiceCatalog) UpdateConstraintWithContext(ctx aws.Context, input *UpdateConstraintInput, opts ...aws.Option) (*UpdateConstraintOutput, error) {
 	req, out := c.UpdateConstraintRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4629,7 +4628,7 @@ func (c *ServiceCatalog) UpdateConstraintWithContext(ctx aws.Context, input *Upd
 
 const opUpdatePortfolio = "UpdatePortfolio"
 
-// UpdatePortfolioRequest generates a "aws/request.Request" representing the
+// UpdatePortfolioRequest generates a "aws.Request" representing the
 // client's request for the UpdatePortfolio operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4653,8 +4652,8 @@ const opUpdatePortfolio = "UpdatePortfolio"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolio
-func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) (req *request.Request, output *UpdatePortfolioOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) (req *aws.Request, output *UpdatePortfolioOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePortfolio,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4712,7 +4711,7 @@ func (c *ServiceCatalog) UpdatePortfolio(input *UpdatePortfolioInput) (*UpdatePo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) UpdatePortfolioWithContext(ctx aws.Context, input *UpdatePortfolioInput, opts ...request.Option) (*UpdatePortfolioOutput, error) {
+func (c *ServiceCatalog) UpdatePortfolioWithContext(ctx aws.Context, input *UpdatePortfolioInput, opts ...aws.Option) (*UpdatePortfolioOutput, error) {
 	req, out := c.UpdatePortfolioRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4721,7 +4720,7 @@ func (c *ServiceCatalog) UpdatePortfolioWithContext(ctx aws.Context, input *Upda
 
 const opUpdateProduct = "UpdateProduct"
 
-// UpdateProductRequest generates a "aws/request.Request" representing the
+// UpdateProductRequest generates a "aws.Request" representing the
 // client's request for the UpdateProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4745,8 +4744,8 @@ const opUpdateProduct = "UpdateProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProduct
-func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) (req *request.Request, output *UpdateProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) (req *aws.Request, output *UpdateProductOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4799,7 +4798,7 @@ func (c *ServiceCatalog) UpdateProduct(input *UpdateProductInput) (*UpdateProduc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) UpdateProductWithContext(ctx aws.Context, input *UpdateProductInput, opts ...request.Option) (*UpdateProductOutput, error) {
+func (c *ServiceCatalog) UpdateProductWithContext(ctx aws.Context, input *UpdateProductInput, opts ...aws.Option) (*UpdateProductOutput, error) {
 	req, out := c.UpdateProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4808,7 +4807,7 @@ func (c *ServiceCatalog) UpdateProductWithContext(ctx aws.Context, input *Update
 
 const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
 
-// UpdateProvisionedProductRequest generates a "aws/request.Request" representing the
+// UpdateProvisionedProductRequest generates a "aws.Request" representing the
 // client's request for the UpdateProvisionedProduct operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4832,8 +4831,8 @@ const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct
-func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisionedProductInput) (req *request.Request, output *UpdateProvisionedProductOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisionedProductInput) (req *aws.Request, output *UpdateProvisionedProductOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProvisionedProduct,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4887,7 +4886,7 @@ func (c *ServiceCatalog) UpdateProvisionedProduct(input *UpdateProvisionedProduc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) UpdateProvisionedProductWithContext(ctx aws.Context, input *UpdateProvisionedProductInput, opts ...request.Option) (*UpdateProvisionedProductOutput, error) {
+func (c *ServiceCatalog) UpdateProvisionedProductWithContext(ctx aws.Context, input *UpdateProvisionedProductInput, opts ...aws.Option) (*UpdateProvisionedProductOutput, error) {
 	req, out := c.UpdateProvisionedProductRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4896,7 +4895,7 @@ func (c *ServiceCatalog) UpdateProvisionedProductWithContext(ctx aws.Context, in
 
 const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
 
-// UpdateProvisioningArtifactRequest generates a "aws/request.Request" representing the
+// UpdateProvisioningArtifactRequest generates a "aws.Request" representing the
 // client's request for the UpdateProvisioningArtifact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4920,8 +4919,8 @@ const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifact
-func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArtifactInput) (req *request.Request, output *UpdateProvisioningArtifactOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisioningArtifactInput) (req *aws.Request, output *UpdateProvisioningArtifactOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProvisioningArtifact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4971,7 +4970,7 @@ func (c *ServiceCatalog) UpdateProvisioningArtifact(input *UpdateProvisioningArt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) UpdateProvisioningArtifactWithContext(ctx aws.Context, input *UpdateProvisioningArtifactInput, opts ...request.Option) (*UpdateProvisioningArtifactOutput, error) {
+func (c *ServiceCatalog) UpdateProvisioningArtifactWithContext(ctx aws.Context, input *UpdateProvisioningArtifactInput, opts ...aws.Option) (*UpdateProvisioningArtifactOutput, error) {
 	req, out := c.UpdateProvisioningArtifactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4980,7 +4979,7 @@ func (c *ServiceCatalog) UpdateProvisioningArtifactWithContext(ctx aws.Context, 
 
 const opUpdateTagOption = "UpdateTagOption"
 
-// UpdateTagOptionRequest generates a "aws/request.Request" representing the
+// UpdateTagOptionRequest generates a "aws.Request" representing the
 // client's request for the UpdateTagOption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5004,8 +5003,8 @@ const opUpdateTagOption = "UpdateTagOption"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOption
-func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) (req *request.Request, output *UpdateTagOptionOutput) {
-	op := &request.Operation{
+func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) (req *aws.Request, output *UpdateTagOptionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTagOption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5061,7 +5060,7 @@ func (c *ServiceCatalog) UpdateTagOption(input *UpdateTagOptionInput) (*UpdateTa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ServiceCatalog) UpdateTagOptionWithContext(ctx aws.Context, input *UpdateTagOptionInput, opts ...request.Option) (*UpdateTagOptionOutput, error) {
+func (c *ServiceCatalog) UpdateTagOptionWithContext(ctx aws.Context, input *UpdateTagOptionInput, opts ...aws.Option) (*UpdateTagOptionOutput, error) {
 	req, out := c.UpdateTagOptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5099,12 +5098,12 @@ func (s AcceptPortfolioShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptPortfolioShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AcceptPortfolioShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptPortfolioShareInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5222,21 +5221,21 @@ func (s AssociatePrincipalWithPortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociatePrincipalWithPortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociatePrincipalWithPortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociatePrincipalWithPortfolioInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 	if s.PrincipalARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrincipalARN"))
+		invalidParams.Add(aws.NewErrParamRequired("PrincipalARN"))
 	}
 	if s.PrincipalARN != nil && len(*s.PrincipalARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PrincipalARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PrincipalARN", 1))
 	}
 	if s.PrincipalType == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrincipalType"))
+		invalidParams.Add(aws.NewErrParamRequired("PrincipalType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5323,21 +5322,21 @@ func (s AssociateProductWithPortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateProductWithPortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateProductWithPortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateProductWithPortfolioInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.SourcePortfolioId != nil && len(*s.SourcePortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourcePortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourcePortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5412,15 +5411,15 @@ func (s AssociateTagOptionWithResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateTagOptionWithResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateTagOptionWithResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateTagOptionWithResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagOptionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagOptionId"))
+		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
 	}
 	if s.TagOptionId != nil && len(*s.TagOptionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagOptionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagOptionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5594,21 +5593,21 @@ func (s CopyProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyProductInput"}
 	if s.IdempotencyToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdempotencyToken"))
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.SourceProductArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceProductArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceProductArn"))
 	}
 	if s.SourceProductArn != nil && len(*s.SourceProductArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceProductArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceProductArn", 1))
 	}
 	if s.TargetProductId != nil && len(*s.TargetProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetProductId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5748,33 +5747,33 @@ func (s CreateConstraintInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConstraintInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConstraintInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConstraintInput"}
 	if s.IdempotencyToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdempotencyToken"))
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.Parameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("Parameters"))
+		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Type != nil && len(*s.Type) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Type", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Type", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5916,24 +5915,24 @@ func (s CreatePortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePortfolioInput"}
 	if s.DisplayName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DisplayName"))
+		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
 	}
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DisplayName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
 	if s.IdempotencyToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdempotencyToken"))
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.ProviderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -5941,7 +5940,7 @@ func (s *CreatePortfolioInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6057,15 +6056,15 @@ func (s CreatePortfolioShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePortfolioShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePortfolioShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePortfolioShareInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6178,28 +6177,28 @@ func (s CreateProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProductInput"}
 	if s.IdempotencyToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdempotencyToken"))
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Owner == nil {
-		invalidParams.Add(request.NewErrParamRequired("Owner"))
+		invalidParams.Add(aws.NewErrParamRequired("Owner"))
 	}
 	if s.ProductType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductType"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductType"))
 	}
 	if s.ProvisioningArtifactParameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisioningArtifactParameters"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactParameters"))
 	}
 	if s.ProvisioningArtifactParameters != nil {
 		if err := s.ProvisioningArtifactParameters.Validate(); err != nil {
-			invalidParams.AddNested("ProvisioningArtifactParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProvisioningArtifactParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -6208,7 +6207,7 @@ func (s *CreateProductInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6376,25 +6375,25 @@ func (s CreateProvisioningArtifactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProvisioningArtifactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProvisioningArtifactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProvisioningArtifactInput"}
 	if s.IdempotencyToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdempotencyToken"))
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.Parameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("Parameters"))
+		invalidParams.Add(aws.NewErrParamRequired("Parameters"))
 	}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.Parameters != nil {
 		if err := s.Parameters.Validate(); err != nil {
-			invalidParams.AddNested("Parameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Parameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6497,18 +6496,18 @@ func (s CreateTagOptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagOptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTagOptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTagOptionInput"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6584,12 +6583,12 @@ func (s DeleteConstraintInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConstraintInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConstraintInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConstraintInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6656,12 +6655,12 @@ func (s DeletePortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePortfolioInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6733,15 +6732,15 @@ func (s DeletePortfolioShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePortfolioShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePortfolioShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePortfolioShareInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6814,12 +6813,12 @@ func (s DeleteProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProductInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6892,18 +6891,18 @@ func (s DeleteProvisioningArtifactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProvisioningArtifactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProvisioningArtifactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProvisioningArtifactInput"}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisioningArtifactId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisioningArtifactId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6976,12 +6975,12 @@ func (s DescribeConstraintInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConstraintInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConstraintInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConstraintInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7075,12 +7074,12 @@ func (s DescribeCopyProductStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCopyProductStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCopyProductStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCopyProductStatusInput"}
 	if s.CopyProductToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("CopyProductToken"))
+		invalidParams.Add(aws.NewErrParamRequired("CopyProductToken"))
 	}
 	if s.CopyProductToken != nil && len(*s.CopyProductToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CopyProductToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CopyProductToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7174,12 +7173,12 @@ func (s DescribePortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePortfolioInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7273,12 +7272,12 @@ func (s DescribeProductAsAdminInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductAsAdminInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProductAsAdminInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductAsAdminInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7381,12 +7380,12 @@ func (s DescribeProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7472,12 +7471,12 @@ func (s DescribeProductViewInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductViewInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProductViewInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductViewInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7563,12 +7562,12 @@ func (s DescribeProvisionedProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProvisionedProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProvisionedProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisionedProductInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7653,18 +7652,18 @@ func (s DescribeProvisioningArtifactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProvisioningArtifactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProvisioningArtifactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisioningArtifactInput"}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisioningArtifactId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisioningArtifactId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7781,21 +7780,21 @@ func (s DescribeProvisioningParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProvisioningParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProvisioningParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisioningParametersInput"}
 	if s.PathId != nil && len(*s.PathId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PathId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
 	}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisioningArtifactId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisioningArtifactId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7923,12 +7922,12 @@ func (s DescribeRecordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRecordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRecordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRecordInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8028,12 +8027,12 @@ func (s DescribeTagOptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagOptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagOptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagOptionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8108,18 +8107,18 @@ func (s DisassociatePrincipalFromPortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociatePrincipalFromPortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociatePrincipalFromPortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePrincipalFromPortfolioInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 	if s.PrincipalARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrincipalARN"))
+		invalidParams.Add(aws.NewErrParamRequired("PrincipalARN"))
 	}
 	if s.PrincipalARN != nil && len(*s.PrincipalARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PrincipalARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PrincipalARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8197,18 +8196,18 @@ func (s DisassociateProductFromPortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateProductFromPortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateProductFromPortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateProductFromPortfolioInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8277,15 +8276,15 @@ func (s DisassociateTagOptionFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateTagOptionFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateTagOptionFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateTagOptionFromResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagOptionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagOptionId"))
+		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
 	}
 	if s.TagOptionId != nil && len(*s.TagOptionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagOptionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagOptionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8502,15 +8501,15 @@ func (s ListConstraintsForPortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListConstraintsForPortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListConstraintsForPortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListConstraintsForPortfolioInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8624,12 +8623,12 @@ func (s ListLaunchPathsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListLaunchPathsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListLaunchPathsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListLaunchPathsInput"}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8727,12 +8726,12 @@ func (s ListPortfolioAccessInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPortfolioAccessInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPortfolioAccessInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPortfolioAccessInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8827,12 +8826,12 @@ func (s ListPortfoliosForProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPortfoliosForProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPortfoliosForProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPortfoliosForProductInput"}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9024,12 +9023,12 @@ func (s ListPrincipalsForPortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPrincipalsForPortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPrincipalsForPortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPrincipalsForPortfolioInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9127,12 +9126,12 @@ func (s ListProvisioningArtifactsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProvisioningArtifactsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProvisioningArtifactsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProvisioningArtifactsInput"}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9359,12 +9358,12 @@ func (s ListResourcesForTagOptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourcesForTagOptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourcesForTagOptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesForTagOptionInput"}
 	if s.TagOptionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagOptionId"))
+		invalidParams.Add(aws.NewErrParamRequired("TagOptionId"))
 	}
 	if s.TagOptionId != nil && len(*s.TagOptionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagOptionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagOptionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9458,12 +9457,12 @@ func (s ListTagOptionsFilters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagOptionsFilters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagOptionsFilters"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagOptionsFilters"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9520,10 +9519,10 @@ func (s ListTagOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagOptionsInput"}
 	if s.Filters != nil {
 		if err := s.Filters.Validate(); err != nil {
-			invalidParams.AddNested("Filters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9995,33 +9994,33 @@ func (s ProvisionProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProvisionProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProvisionProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProvisionProductInput"}
 	if s.PathId != nil && len(*s.PathId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PathId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
 	}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.ProvisionToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisionToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionToken"))
 	}
 	if s.ProvisionToken != nil && len(*s.ProvisionToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisionToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionToken", 1))
 	}
 	if s.ProvisionedProductName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisionedProductName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductName"))
 	}
 	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisionedProductName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
 	}
 	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisioningArtifactId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisioningArtifactId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
 	if s.ProvisioningParameters != nil {
 		for i, v := range s.ProvisioningParameters {
@@ -10029,7 +10028,7 @@ func (s *ProvisionProductInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10039,7 +10038,7 @@ func (s *ProvisionProductInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10478,12 +10477,12 @@ func (s ProvisioningArtifactProperties) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProvisioningArtifactProperties) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProvisioningArtifactProperties"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProvisioningArtifactProperties"}
 	if s.Info == nil {
-		invalidParams.Add(request.NewErrParamRequired("Info"))
+		invalidParams.Add(aws.NewErrParamRequired("Info"))
 	}
 	if s.Info != nil && len(s.Info) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Info", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Info", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10603,9 +10602,9 @@ func (s ProvisioningParameter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProvisioningParameter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProvisioningParameter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProvisioningParameter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10916,12 +10915,12 @@ func (s RejectPortfolioShareInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectPortfolioShareInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RejectPortfolioShareInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RejectPortfolioShareInput"}
 	if s.PortfolioId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PortfolioId"))
+		invalidParams.Add(aws.NewErrParamRequired("PortfolioId"))
 	}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11165,9 +11164,9 @@ func (s SearchProductsAsAdminInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchProductsAsAdminInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SearchProductsAsAdminInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SearchProductsAsAdminInput"}
 	if s.PortfolioId != nil && len(*s.PortfolioId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PortfolioId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PortfolioId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11410,18 +11409,18 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11574,18 +11573,18 @@ func (s TerminateProvisionedProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateProvisionedProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateProvisionedProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateProvisionedProductInput"}
 	if s.ProvisionedProductId != nil && len(*s.ProvisionedProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisionedProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductId", 1))
 	}
 	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisionedProductName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
 	}
 	if s.TerminateToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TerminateToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TerminateToken"))
 	}
 	if s.TerminateToken != nil && len(*s.TerminateToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TerminateToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TerminateToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11685,12 +11684,12 @@ func (s UpdateConstraintInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConstraintInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConstraintInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConstraintInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11805,18 +11804,18 @@ func (s UpdatePortfolioInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePortfolioInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePortfolioInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePortfolioInput"}
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DisplayName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 	if s.AddTags != nil {
 		for i, v := range s.AddTags {
@@ -11824,7 +11823,7 @@ func (s *UpdatePortfolioInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11968,12 +11967,12 @@ func (s UpdateProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProductInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.AddTags != nil {
 		for i, v := range s.AddTags {
@@ -11981,7 +11980,7 @@ func (s *UpdateProductInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AddTags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12146,27 +12145,27 @@ func (s UpdateProvisionedProductInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProvisionedProductInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProvisionedProductInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProvisionedProductInput"}
 	if s.PathId != nil && len(*s.PathId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PathId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.ProvisionedProductId != nil && len(*s.ProvisionedProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisionedProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductId", 1))
 	}
 	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisionedProductName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisioningArtifactId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
 	if s.UpdateToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("UpdateToken"))
+		invalidParams.Add(aws.NewErrParamRequired("UpdateToken"))
 	}
 	if s.UpdateToken != nil && len(*s.UpdateToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UpdateToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UpdateToken", 1))
 	}
 	if s.ProvisioningParameters != nil {
 		for i, v := range s.ProvisioningParameters {
@@ -12174,7 +12173,7 @@ func (s *UpdateProvisionedProductInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12303,18 +12302,18 @@ func (s UpdateProvisioningArtifactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProvisioningArtifactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProvisioningArtifactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProvisioningArtifactInput"}
 	if s.ProductId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
 	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
 	}
 	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisioningArtifactId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProvisioningArtifactId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12426,9 +12425,9 @@ func (s UpdateProvisioningParameter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProvisioningParameter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProvisioningParameter"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProvisioningParameter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12483,15 +12482,15 @@ func (s UpdateTagOptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTagOptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTagOptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTagOptionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {

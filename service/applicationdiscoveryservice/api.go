@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsToApplication"
 
-// AssociateConfigurationItemsToApplicationRequest generates a "aws/request.Request" representing the
+// AssociateConfigurationItemsToApplicationRequest generates a "aws.Request" representing the
 // client's request for the AssociateConfigurationItemsToApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsT
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/AssociateConfigurationItemsToApplication
-func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRequest(input *AssociateConfigurationItemsToApplicationInput) (req *request.Request, output *AssociateConfigurationItemsToApplicationOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRequest(input *AssociateConfigurationItemsToApplicationInput) (req *aws.Request, output *AssociateConfigurationItemsToApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateConfigurationItemsToApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -94,7 +93,7 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplication(i
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationWithContext(ctx aws.Context, input *AssociateConfigurationItemsToApplicationInput, opts ...request.Option) (*AssociateConfigurationItemsToApplicationOutput, error) {
+func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationWithContext(ctx aws.Context, input *AssociateConfigurationItemsToApplicationInput, opts ...aws.Option) (*AssociateConfigurationItemsToApplicationOutput, error) {
 	req, out := c.AssociateConfigurationItemsToApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -103,7 +102,7 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationWi
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws/request.Request" representing the
+// CreateApplicationRequest generates a "aws.Request" representing the
 // client's request for the CreateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -127,8 +126,8 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateApplication
-func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *CreateApplicationOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *CreateApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -184,7 +183,7 @@ func (c *ApplicationDiscoveryService) CreateApplication(input *CreateApplication
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...request.Option) (*CreateApplicationOutput, error) {
+func (c *ApplicationDiscoveryService) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*CreateApplicationOutput, error) {
 	req, out := c.CreateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -193,7 +192,7 @@ func (c *ApplicationDiscoveryService) CreateApplicationWithContext(ctx aws.Conte
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws/request.Request" representing the
+// CreateTagsRequest generates a "aws.Request" representing the
 // client's request for the CreateTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -217,8 +216,8 @@ const opCreateTags = "CreateTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/CreateTags
-func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) (req *request.Request, output *CreateTagsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -280,7 +279,7 @@ func (c *ApplicationDiscoveryService) CreateTags(input *CreateTagsInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...request.Option) (*CreateTagsOutput, error) {
+func (c *ApplicationDiscoveryService) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
 	req, out := c.CreateTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -289,7 +288,7 @@ func (c *ApplicationDiscoveryService) CreateTagsWithContext(ctx aws.Context, inp
 
 const opDeleteApplications = "DeleteApplications"
 
-// DeleteApplicationsRequest generates a "aws/request.Request" representing the
+// DeleteApplicationsRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -313,8 +312,8 @@ const opDeleteApplications = "DeleteApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteApplications
-func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApplicationsInput) (req *request.Request, output *DeleteApplicationsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApplicationsInput) (req *aws.Request, output *DeleteApplicationsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -371,7 +370,7 @@ func (c *ApplicationDiscoveryService) DeleteApplications(input *DeleteApplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DeleteApplicationsWithContext(ctx aws.Context, input *DeleteApplicationsInput, opts ...request.Option) (*DeleteApplicationsOutput, error) {
+func (c *ApplicationDiscoveryService) DeleteApplicationsWithContext(ctx aws.Context, input *DeleteApplicationsInput, opts ...aws.Option) (*DeleteApplicationsOutput, error) {
 	req, out := c.DeleteApplicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -380,7 +379,7 @@ func (c *ApplicationDiscoveryService) DeleteApplicationsWithContext(ctx aws.Cont
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws/request.Request" representing the
+// DeleteTagsRequest generates a "aws.Request" representing the
 // client's request for the DeleteTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -404,8 +403,8 @@ const opDeleteTags = "DeleteTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DeleteTags
-func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -466,7 +465,7 @@ func (c *ApplicationDiscoveryService) DeleteTags(input *DeleteTagsInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...request.Option) (*DeleteTagsOutput, error) {
+func (c *ApplicationDiscoveryService) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -475,7 +474,7 @@ func (c *ApplicationDiscoveryService) DeleteTagsWithContext(ctx aws.Context, inp
 
 const opDescribeAgents = "DescribeAgents"
 
-// DescribeAgentsRequest generates a "aws/request.Request" representing the
+// DescribeAgentsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAgents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -499,8 +498,8 @@ const opDescribeAgents = "DescribeAgents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeAgents
-func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgentsInput) (req *request.Request, output *DescribeAgentsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgentsInput) (req *aws.Request, output *DescribeAgentsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAgents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -557,7 +556,7 @@ func (c *ApplicationDiscoveryService) DescribeAgents(input *DescribeAgentsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeAgentsWithContext(ctx aws.Context, input *DescribeAgentsInput, opts ...request.Option) (*DescribeAgentsOutput, error) {
+func (c *ApplicationDiscoveryService) DescribeAgentsWithContext(ctx aws.Context, input *DescribeAgentsInput, opts ...aws.Option) (*DescribeAgentsOutput, error) {
 	req, out := c.DescribeAgentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -566,7 +565,7 @@ func (c *ApplicationDiscoveryService) DescribeAgentsWithContext(ctx aws.Context,
 
 const opDescribeConfigurations = "DescribeConfigurations"
 
-// DescribeConfigurationsRequest generates a "aws/request.Request" representing the
+// DescribeConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -590,8 +589,8 @@ const opDescribeConfigurations = "DescribeConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeConfigurations
-func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *DescribeConfigurationsInput) (req *request.Request, output *DescribeConfigurationsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *DescribeConfigurationsInput) (req *aws.Request, output *DescribeConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -654,7 +653,7 @@ func (c *ApplicationDiscoveryService) DescribeConfigurations(input *DescribeConf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeConfigurationsWithContext(ctx aws.Context, input *DescribeConfigurationsInput, opts ...request.Option) (*DescribeConfigurationsOutput, error) {
+func (c *ApplicationDiscoveryService) DescribeConfigurationsWithContext(ctx aws.Context, input *DescribeConfigurationsInput, opts ...aws.Option) (*DescribeConfigurationsOutput, error) {
 	req, out := c.DescribeConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -663,7 +662,7 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsWithContext(ctx aws.
 
 const opDescribeExportConfigurations = "DescribeExportConfigurations"
 
-// DescribeExportConfigurationsRequest generates a "aws/request.Request" representing the
+// DescribeExportConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeExportConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -687,11 +686,11 @@ const opDescribeExportConfigurations = "DescribeExportConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportConfigurations
-func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input *DescribeExportConfigurationsInput) (req *request.Request, output *DescribeExportConfigurationsOutput) {
+func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input *DescribeExportConfigurationsInput) (req *aws.Request, output *DescribeExportConfigurationsOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeExportConfigurations, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opDescribeExportConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -754,7 +753,7 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurations(input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeExportConfigurationsWithContext(ctx aws.Context, input *DescribeExportConfigurationsInput, opts ...request.Option) (*DescribeExportConfigurationsOutput, error) {
+func (c *ApplicationDiscoveryService) DescribeExportConfigurationsWithContext(ctx aws.Context, input *DescribeExportConfigurationsInput, opts ...aws.Option) (*DescribeExportConfigurationsOutput, error) {
 	req, out := c.DescribeExportConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -763,7 +762,7 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsWithContext(ct
 
 const opDescribeExportTasks = "DescribeExportTasks"
 
-// DescribeExportTasksRequest generates a "aws/request.Request" representing the
+// DescribeExportTasksRequest generates a "aws.Request" representing the
 // client's request for the DescribeExportTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -787,8 +786,8 @@ const opDescribeExportTasks = "DescribeExportTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeExportTasks
-func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *request.Request, output *DescribeExportTasksOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *DescribeExportTasksInput) (req *aws.Request, output *DescribeExportTasksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeExportTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -845,7 +844,7 @@ func (c *ApplicationDiscoveryService) DescribeExportTasks(input *DescribeExportT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeExportTasksWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...request.Option) (*DescribeExportTasksOutput, error) {
+func (c *ApplicationDiscoveryService) DescribeExportTasksWithContext(ctx aws.Context, input *DescribeExportTasksInput, opts ...aws.Option) (*DescribeExportTasksOutput, error) {
 	req, out := c.DescribeExportTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -854,7 +853,7 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksWithContext(ctx aws.Con
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -878,8 +877,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DescribeTags
-func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -940,7 +939,7 @@ func (c *ApplicationDiscoveryService) DescribeTags(input *DescribeTagsInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *ApplicationDiscoveryService) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -949,7 +948,7 @@ func (c *ApplicationDiscoveryService) DescribeTagsWithContext(ctx aws.Context, i
 
 const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurationItemsFromApplication"
 
-// DisassociateConfigurationItemsFromApplicationRequest generates a "aws/request.Request" representing the
+// DisassociateConfigurationItemsFromApplicationRequest generates a "aws.Request" representing the
 // client's request for the DisassociateConfigurationItemsFromApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -973,8 +972,8 @@ const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/DisassociateConfigurationItemsFromApplication
-func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationRequest(input *DisassociateConfigurationItemsFromApplicationInput) (req *request.Request, output *DisassociateConfigurationItemsFromApplicationOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationRequest(input *DisassociateConfigurationItemsFromApplicationInput) (req *aws.Request, output *DisassociateConfigurationItemsFromApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateConfigurationItemsFromApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1030,7 +1029,7 @@ func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationWithContext(ctx aws.Context, input *DisassociateConfigurationItemsFromApplicationInput, opts ...request.Option) (*DisassociateConfigurationItemsFromApplicationOutput, error) {
+func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicationWithContext(ctx aws.Context, input *DisassociateConfigurationItemsFromApplicationInput, opts ...aws.Option) (*DisassociateConfigurationItemsFromApplicationOutput, error) {
 	req, out := c.DisassociateConfigurationItemsFromApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1039,7 +1038,7 @@ func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicat
 
 const opExportConfigurations = "ExportConfigurations"
 
-// ExportConfigurationsRequest generates a "aws/request.Request" representing the
+// ExportConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the ExportConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1063,11 +1062,11 @@ const opExportConfigurations = "ExportConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ExportConfigurations
-func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportConfigurationsInput) (req *request.Request, output *ExportConfigurationsOutput) {
+func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportConfigurationsInput) (req *aws.Request, output *ExportConfigurationsOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, ExportConfigurations, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opExportConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1132,7 +1131,7 @@ func (c *ApplicationDiscoveryService) ExportConfigurations(input *ExportConfigur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) ExportConfigurationsWithContext(ctx aws.Context, input *ExportConfigurationsInput, opts ...request.Option) (*ExportConfigurationsOutput, error) {
+func (c *ApplicationDiscoveryService) ExportConfigurationsWithContext(ctx aws.Context, input *ExportConfigurationsInput, opts ...aws.Option) (*ExportConfigurationsOutput, error) {
 	req, out := c.ExportConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1141,7 +1140,7 @@ func (c *ApplicationDiscoveryService) ExportConfigurationsWithContext(ctx aws.Co
 
 const opGetDiscoverySummary = "GetDiscoverySummary"
 
-// GetDiscoverySummaryRequest generates a "aws/request.Request" representing the
+// GetDiscoverySummaryRequest generates a "aws.Request" representing the
 // client's request for the GetDiscoverySummary operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1165,8 +1164,8 @@ const opGetDiscoverySummary = "GetDiscoverySummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/GetDiscoverySummary
-func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) (req *request.Request, output *GetDiscoverySummaryOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDiscoverySummaryInput) (req *aws.Request, output *GetDiscoverySummaryOutput) {
+	op := &aws.Operation{
 		Name:       opGetDiscoverySummary,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1222,7 +1221,7 @@ func (c *ApplicationDiscoveryService) GetDiscoverySummary(input *GetDiscoverySum
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) GetDiscoverySummaryWithContext(ctx aws.Context, input *GetDiscoverySummaryInput, opts ...request.Option) (*GetDiscoverySummaryOutput, error) {
+func (c *ApplicationDiscoveryService) GetDiscoverySummaryWithContext(ctx aws.Context, input *GetDiscoverySummaryInput, opts ...aws.Option) (*GetDiscoverySummaryOutput, error) {
 	req, out := c.GetDiscoverySummaryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1231,7 +1230,7 @@ func (c *ApplicationDiscoveryService) GetDiscoverySummaryWithContext(ctx aws.Con
 
 const opListConfigurations = "ListConfigurations"
 
-// ListConfigurationsRequest generates a "aws/request.Request" representing the
+// ListConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the ListConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1255,8 +1254,8 @@ const opListConfigurations = "ListConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListConfigurations
-func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfigurationsInput) (req *request.Request, output *ListConfigurationsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfigurationsInput) (req *aws.Request, output *ListConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opListConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1317,7 +1316,7 @@ func (c *ApplicationDiscoveryService) ListConfigurations(input *ListConfiguratio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) ListConfigurationsWithContext(ctx aws.Context, input *ListConfigurationsInput, opts ...request.Option) (*ListConfigurationsOutput, error) {
+func (c *ApplicationDiscoveryService) ListConfigurationsWithContext(ctx aws.Context, input *ListConfigurationsInput, opts ...aws.Option) (*ListConfigurationsOutput, error) {
 	req, out := c.ListConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1326,7 +1325,7 @@ func (c *ApplicationDiscoveryService) ListConfigurationsWithContext(ctx aws.Cont
 
 const opListServerNeighbors = "ListServerNeighbors"
 
-// ListServerNeighborsRequest generates a "aws/request.Request" representing the
+// ListServerNeighborsRequest generates a "aws.Request" representing the
 // client's request for the ListServerNeighbors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1350,8 +1349,8 @@ const opListServerNeighbors = "ListServerNeighbors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/ListServerNeighbors
-func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServerNeighborsInput) (req *request.Request, output *ListServerNeighborsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServerNeighborsInput) (req *aws.Request, output *ListServerNeighborsOutput) {
+	op := &aws.Operation{
 		Name:       opListServerNeighbors,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1408,7 +1407,7 @@ func (c *ApplicationDiscoveryService) ListServerNeighbors(input *ListServerNeigh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) ListServerNeighborsWithContext(ctx aws.Context, input *ListServerNeighborsInput, opts ...request.Option) (*ListServerNeighborsOutput, error) {
+func (c *ApplicationDiscoveryService) ListServerNeighborsWithContext(ctx aws.Context, input *ListServerNeighborsInput, opts ...aws.Option) (*ListServerNeighborsOutput, error) {
 	req, out := c.ListServerNeighborsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1417,7 +1416,7 @@ func (c *ApplicationDiscoveryService) ListServerNeighborsWithContext(ctx aws.Con
 
 const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 
-// StartDataCollectionByAgentIdsRequest generates a "aws/request.Request" representing the
+// StartDataCollectionByAgentIdsRequest generates a "aws.Request" representing the
 // client's request for the StartDataCollectionByAgentIds operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1441,8 +1440,8 @@ const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartDataCollectionByAgentIds
-func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input *StartDataCollectionByAgentIdsInput) (req *request.Request, output *StartDataCollectionByAgentIdsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input *StartDataCollectionByAgentIdsInput) (req *aws.Request, output *StartDataCollectionByAgentIdsOutput) {
+	op := &aws.Operation{
 		Name:       opStartDataCollectionByAgentIds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1498,7 +1497,7 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIds(input *Start
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsWithContext(ctx aws.Context, input *StartDataCollectionByAgentIdsInput, opts ...request.Option) (*StartDataCollectionByAgentIdsOutput, error) {
+func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsWithContext(ctx aws.Context, input *StartDataCollectionByAgentIdsInput, opts ...aws.Option) (*StartDataCollectionByAgentIdsOutput, error) {
 	req, out := c.StartDataCollectionByAgentIdsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1507,7 +1506,7 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsWithContext(c
 
 const opStartExportTask = "StartExportTask"
 
-// StartExportTaskRequest generates a "aws/request.Request" representing the
+// StartExportTaskRequest generates a "aws.Request" representing the
 // client's request for the StartExportTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1531,8 +1530,8 @@ const opStartExportTask = "StartExportTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StartExportTask
-func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportTaskInput) (req *request.Request, output *StartExportTaskOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportTaskInput) (req *aws.Request, output *StartExportTaskOutput) {
+	op := &aws.Operation{
 		Name:       opStartExportTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1601,7 +1600,7 @@ func (c *ApplicationDiscoveryService) StartExportTask(input *StartExportTaskInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) StartExportTaskWithContext(ctx aws.Context, input *StartExportTaskInput, opts ...request.Option) (*StartExportTaskOutput, error) {
+func (c *ApplicationDiscoveryService) StartExportTaskWithContext(ctx aws.Context, input *StartExportTaskInput, opts ...aws.Option) (*StartExportTaskOutput, error) {
 	req, out := c.StartExportTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1610,7 +1609,7 @@ func (c *ApplicationDiscoveryService) StartExportTaskWithContext(ctx aws.Context
 
 const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 
-// StopDataCollectionByAgentIdsRequest generates a "aws/request.Request" representing the
+// StopDataCollectionByAgentIdsRequest generates a "aws.Request" representing the
 // client's request for the StopDataCollectionByAgentIds operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1634,8 +1633,8 @@ const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/StopDataCollectionByAgentIds
-func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionByAgentIdsInput) (req *request.Request, output *StopDataCollectionByAgentIdsOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input *StopDataCollectionByAgentIdsInput) (req *aws.Request, output *StopDataCollectionByAgentIdsOutput) {
+	op := &aws.Operation{
 		Name:       opStopDataCollectionByAgentIds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1691,7 +1690,7 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIds(input *StopDa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsWithContext(ctx aws.Context, input *StopDataCollectionByAgentIdsInput, opts ...request.Option) (*StopDataCollectionByAgentIdsOutput, error) {
+func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsWithContext(ctx aws.Context, input *StopDataCollectionByAgentIdsInput, opts ...aws.Option) (*StopDataCollectionByAgentIdsOutput, error) {
 	req, out := c.StopDataCollectionByAgentIdsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1700,7 +1699,7 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsWithContext(ct
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws/request.Request" representing the
+// UpdateApplicationRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1724,8 +1723,8 @@ const opUpdateApplication = "UpdateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/discovery-2015-11-01/UpdateApplication
-func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *UpdateApplicationOutput) {
-	op := &request.Operation{
+func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *UpdateApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1781,7 +1780,7 @@ func (c *ApplicationDiscoveryService) UpdateApplication(input *UpdateApplication
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationDiscoveryService) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...request.Option) (*UpdateApplicationOutput, error) {
+func (c *ApplicationDiscoveryService) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*UpdateApplicationOutput, error) {
 	req, out := c.UpdateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2006,12 +2005,12 @@ func (s AssociateConfigurationItemsToApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateConfigurationItemsToApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateConfigurationItemsToApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateConfigurationItemsToApplicationInput"}
 	if s.ApplicationConfigurationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationConfigurationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationConfigurationId"))
 	}
 	if s.ConfigurationIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2137,9 +2136,9 @@ func (s CreateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2214,12 +2213,12 @@ func (s CreateTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
 	if s.ConfigurationIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2227,7 +2226,7 @@ func (s *CreateTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2473,9 +2472,9 @@ func (s DeleteApplicationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationsInput"}
 	if s.ConfigurationIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2533,9 +2532,9 @@ func (s DeleteTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
 	if s.ConfigurationIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2543,7 +2542,7 @@ func (s *DeleteTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2619,14 +2618,14 @@ func (s DescribeAgentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAgentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAgentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAgentsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2723,9 +2722,9 @@ func (s DescribeConfigurationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConfigurationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationsInput"}
 	if s.ConfigurationIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2883,14 +2882,14 @@ func (s DescribeExportTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeExportTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeExportTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeExportTasksInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2992,14 +2991,14 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3089,12 +3088,12 @@ func (s DisassociateConfigurationItemsFromApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateConfigurationItemsFromApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateConfigurationItemsFromApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConfigurationItemsFromApplicationInput"}
 	if s.ApplicationConfigurationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationConfigurationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationConfigurationId"))
 	}
 	if s.ConfigurationIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationIds"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3206,15 +3205,15 @@ func (s ExportFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExportFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExportFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExportFilter"}
 	if s.Condition == nil {
-		invalidParams.Add(request.NewErrParamRequired("Condition"))
+		invalidParams.Add(aws.NewErrParamRequired("Condition"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3386,15 +3385,15 @@ func (s Filter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Filter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Filter"}
+	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
 	if s.Condition == nil {
-		invalidParams.Add(request.NewErrParamRequired("Condition"))
+		invalidParams.Add(aws.NewErrParamRequired("Condition"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3550,9 +3549,9 @@ func (s ListConfigurationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListConfigurationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListConfigurationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListConfigurationsInput"}
 	if s.ConfigurationType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationType"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationType"))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -3560,7 +3559,7 @@ func (s *ListConfigurationsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3570,7 +3569,7 @@ func (s *ListConfigurationsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderBy", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderBy", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3687,9 +3686,9 @@ func (s ListServerNeighborsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListServerNeighborsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListServerNeighborsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListServerNeighborsInput"}
 	if s.ConfigurationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3868,9 +3867,9 @@ func (s OrderByElement) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OrderByElement) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OrderByElement"}
+	invalidParams := aws.ErrInvalidParams{Context: "OrderByElement"}
 	if s.FieldName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FieldName"))
+		invalidParams.Add(aws.NewErrParamRequired("FieldName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3919,9 +3918,9 @@ func (s StartDataCollectionByAgentIdsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartDataCollectionByAgentIdsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartDataCollectionByAgentIdsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartDataCollectionByAgentIdsInput"}
 	if s.AgentIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("AgentIds"))
+		invalidParams.Add(aws.NewErrParamRequired("AgentIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3999,14 +3998,14 @@ func (s StartExportTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartExportTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartExportTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartExportTaskInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4087,9 +4086,9 @@ func (s StopDataCollectionByAgentIdsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopDataCollectionByAgentIdsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopDataCollectionByAgentIdsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopDataCollectionByAgentIdsInput"}
 	if s.AgentIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("AgentIds"))
+		invalidParams.Add(aws.NewErrParamRequired("AgentIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4158,12 +4157,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4212,12 +4211,12 @@ func (s TagFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagFilter"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4266,9 +4265,9 @@ func (s UpdateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
 	if s.ConfigurationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
 
 	if invalidParams.Len() > 0 {

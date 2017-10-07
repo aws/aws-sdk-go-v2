@@ -6,14 +6,13 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
 const opDescribeStream = "DescribeStream"
 
-// DescribeStreamRequest generates a "aws/request.Request" representing the
+// DescribeStreamRequest generates a "aws.Request" representing the
 // client's request for the DescribeStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opDescribeStream = "DescribeStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream
-func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) (req *request.Request, output *DescribeStreamOutput) {
-	op := &request.Operation{
+func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) (req *aws.Request, output *DescribeStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -96,7 +95,7 @@ func (c *DynamoDBStreams) DescribeStream(input *DescribeStreamInput) (*DescribeS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDBStreams) DescribeStreamWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...request.Option) (*DescribeStreamOutput, error) {
+func (c *DynamoDBStreams) DescribeStreamWithContext(ctx aws.Context, input *DescribeStreamInput, opts ...aws.Option) (*DescribeStreamOutput, error) {
 	req, out := c.DescribeStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -105,7 +104,7 @@ func (c *DynamoDBStreams) DescribeStreamWithContext(ctx aws.Context, input *Desc
 
 const opGetRecords = "GetRecords"
 
-// GetRecordsRequest generates a "aws/request.Request" representing the
+// GetRecordsRequest generates a "aws.Request" representing the
 // client's request for the GetRecords operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -129,8 +128,8 @@ const opGetRecords = "GetRecords"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords
-func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) (req *request.Request, output *GetRecordsOutput) {
-	op := &request.Operation{
+func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) (req *aws.Request, output *GetRecordsOutput) {
+	op := &aws.Operation{
 		Name:       opGetRecords,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -215,7 +214,7 @@ func (c *DynamoDBStreams) GetRecords(input *GetRecordsInput) (*GetRecordsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDBStreams) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput, opts ...request.Option) (*GetRecordsOutput, error) {
+func (c *DynamoDBStreams) GetRecordsWithContext(ctx aws.Context, input *GetRecordsInput, opts ...aws.Option) (*GetRecordsOutput, error) {
 	req, out := c.GetRecordsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -224,7 +223,7 @@ func (c *DynamoDBStreams) GetRecordsWithContext(ctx aws.Context, input *GetRecor
 
 const opGetShardIterator = "GetShardIterator"
 
-// GetShardIteratorRequest generates a "aws/request.Request" representing the
+// GetShardIteratorRequest generates a "aws.Request" representing the
 // client's request for the GetShardIterator operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -248,8 +247,8 @@ const opGetShardIterator = "GetShardIterator"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIterator
-func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) (req *request.Request, output *GetShardIteratorOutput) {
-	op := &request.Operation{
+func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) (req *aws.Request, output *GetShardIteratorOutput) {
+	op := &aws.Operation{
 		Name:       opGetShardIterator,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -315,7 +314,7 @@ func (c *DynamoDBStreams) GetShardIterator(input *GetShardIteratorInput) (*GetSh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDBStreams) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIteratorInput, opts ...request.Option) (*GetShardIteratorOutput, error) {
+func (c *DynamoDBStreams) GetShardIteratorWithContext(ctx aws.Context, input *GetShardIteratorInput, opts ...aws.Option) (*GetShardIteratorOutput, error) {
 	req, out := c.GetShardIteratorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -324,7 +323,7 @@ func (c *DynamoDBStreams) GetShardIteratorWithContext(ctx aws.Context, input *Ge
 
 const opListStreams = "ListStreams"
 
-// ListStreamsRequest generates a "aws/request.Request" representing the
+// ListStreamsRequest generates a "aws.Request" representing the
 // client's request for the ListStreams operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -348,8 +347,8 @@ const opListStreams = "ListStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams
-func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) (req *request.Request, output *ListStreamsOutput) {
-	op := &request.Operation{
+func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) (req *aws.Request, output *ListStreamsOutput) {
+	op := &aws.Operation{
 		Name:       opListStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -401,7 +400,7 @@ func (c *DynamoDBStreams) ListStreams(input *ListStreamsInput) (*ListStreamsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDBStreams) ListStreamsWithContext(ctx aws.Context, input *ListStreamsInput, opts ...request.Option) (*ListStreamsOutput, error) {
+func (c *DynamoDBStreams) ListStreamsWithContext(ctx aws.Context, input *ListStreamsInput, opts ...aws.Option) (*ListStreamsOutput, error) {
 	req, out := c.ListStreamsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -438,18 +437,18 @@ func (s DescribeStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStreamInput"}
 	if s.ExclusiveStartShardId != nil && len(*s.ExclusiveStartShardId) < 28 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartShardId", 28))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartShardId", 28))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.StreamArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamArn"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamArn"))
 	}
 	if s.StreamArn != nil && len(*s.StreamArn) < 37 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamArn", 37))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamArn", 37))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -532,15 +531,15 @@ func (s GetRecordsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRecordsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRecordsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRecordsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.ShardIterator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardIterator"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardIterator"))
 	}
 	if s.ShardIterator != nil && len(*s.ShardIterator) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardIterator", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardIterator", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -649,24 +648,24 @@ func (s GetShardIteratorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetShardIteratorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetShardIteratorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetShardIteratorInput"}
 	if s.SequenceNumber != nil && len(*s.SequenceNumber) < 21 {
-		invalidParams.Add(request.NewErrParamMinLen("SequenceNumber", 21))
+		invalidParams.Add(aws.NewErrParamMinLen("SequenceNumber", 21))
 	}
 	if s.ShardId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardId"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardId"))
 	}
 	if s.ShardId != nil && len(*s.ShardId) < 28 {
-		invalidParams.Add(request.NewErrParamMinLen("ShardId", 28))
+		invalidParams.Add(aws.NewErrParamMinLen("ShardId", 28))
 	}
 	if s.ShardIteratorType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShardIteratorType"))
+		invalidParams.Add(aws.NewErrParamRequired("ShardIteratorType"))
 	}
 	if s.StreamArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamArn"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamArn"))
 	}
 	if s.StreamArn != nil && len(*s.StreamArn) < 37 {
-		invalidParams.Add(request.NewErrParamMinLen("StreamArn", 37))
+		invalidParams.Add(aws.NewErrParamMinLen("StreamArn", 37))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -791,15 +790,15 @@ func (s ListStreamsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStreamsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStreamsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStreamsInput"}
 	if s.ExclusiveStartStreamArn != nil && len(*s.ExclusiveStartStreamArn) < 37 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartStreamArn", 37))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartStreamArn", 37))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {

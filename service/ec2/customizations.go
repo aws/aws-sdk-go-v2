@@ -4,9 +4,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 func init() {
@@ -34,16 +34,16 @@ func fillPresignedURL(r *request.Request) {
 
 	// Create a new request based on the existing request. We will use this to
 	// presign the CopySnapshot request against the source region.
-	cfg := r.Config.Copy(aws.NewConfig().
-		WithEndpoint("").
-		WithRegion(aws.StringValue(origParams.SourceRegion)))
+	cfgCp := r.Config.Copy()
+	cfgCp.EndpointResolver = nil
+	cfgCp.Region = origParams.SourceRegion
 
 	clientInfo := r.ClientInfo
 	resolved, err := r.Config.EndpointResolver.EndpointFor(
-		clientInfo.ServiceName, aws.StringValue(cfg.Region),
+		clientInfo.ServiceName, aws.StringValue(cfgCp.Region),
 		func(opt *endpoints.Options) {
-			opt.DisableSSL = aws.BoolValue(cfg.DisableSSL)
-			opt.UseDualStack = aws.BoolValue(cfg.UseDualStack)
+			opt.DisableSSL = aws.BoolValue(cfgCp.DisableSSL)
+			opt.UseDualStack = aws.BoolValue(cfgCp.UseDualStack)
 		},
 	)
 	if err != nil {
@@ -51,11 +51,12 @@ func fillPresignedURL(r *request.Request) {
 		return
 	}
 
+	cfgCp.EndpointResolver = aws.ResolveWithEndpoint(resolved)
 	clientInfo.Endpoint = resolved.URL
 	clientInfo.SigningRegion = resolved.SigningRegion
 
 	// Presign a CopySnapshot request with modified params
-	req := request.New(*cfg, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
+	req := request.New(*cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
 	url, err := req.Presign(5 * time.Minute) // 5 minutes should be enough.
 	if err != nil {                          // bubble error back up to original request
 		r.Error = err

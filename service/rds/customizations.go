@@ -4,9 +4,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 func init() {
@@ -91,16 +91,16 @@ func createDBClusterPresign(r *request.Request) {
 // presignURL will presign the request by using SoureRegion to sign with. SourceRegion is not
 // sent to the service, and is only used to not have the SDKs parsing ARNs.
 func presignURL(r *request.Request, sourceRegion *string, newParams interface{}) *string {
-	cfg := r.Config.Copy(aws.NewConfig().
-		WithEndpoint("").
-		WithRegion(aws.StringValue(sourceRegion)))
+	cfgCp := r.Config.Copy()
+	cfgCp.EndpointResolver = nil
+	cfgCp.Region = sourceRegion
 
 	clientInfo := r.ClientInfo
 	resolved, err := r.Config.EndpointResolver.EndpointFor(
-		clientInfo.ServiceName, aws.StringValue(cfg.Region),
+		clientInfo.ServiceName, aws.StringValue(cfgCp.Region),
 		func(opt *endpoints.Options) {
-			opt.DisableSSL = aws.BoolValue(cfg.DisableSSL)
-			opt.UseDualStack = aws.BoolValue(cfg.UseDualStack)
+			opt.DisableSSL = aws.BoolValue(cfgCp.DisableSSL)
+			opt.UseDualStack = aws.BoolValue(cfgCp.UseDualStack)
 		},
 	)
 	if err != nil {
@@ -108,11 +108,12 @@ func presignURL(r *request.Request, sourceRegion *string, newParams interface{})
 		return nil
 	}
 
+	cfgCp.EndpointResolver = aws.ResolveWithEndpoint(resolved)
 	clientInfo.Endpoint = resolved.URL
 	clientInfo.SigningRegion = resolved.SigningRegion
 
 	// Presign a request with modified params
-	req := request.New(*cfg, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
+	req := request.New(*cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
 	req.Operation.HTTPMethod = "GET"
 	uri, err := req.Presign(5 * time.Minute) // 5 minutes should be enough.
 	if err != nil {                          // bubble error back up to original request

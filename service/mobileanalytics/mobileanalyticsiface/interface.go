@@ -10,7 +10,6 @@ package mobileanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := mobileanalytics.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := mobileanalytics.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,8 +64,8 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type MobileAnalyticsAPI interface {
 	PutEvents(*mobileanalytics.PutEventsInput) (*mobileanalytics.PutEventsOutput, error)
-	PutEventsWithContext(aws.Context, *mobileanalytics.PutEventsInput, ...request.Option) (*mobileanalytics.PutEventsOutput, error)
-	PutEventsRequest(*mobileanalytics.PutEventsInput) (*request.Request, *mobileanalytics.PutEventsOutput)
+	PutEventsWithContext(aws.Context, *mobileanalytics.PutEventsInput, ...aws.Option) (*mobileanalytics.PutEventsOutput, error)
+	PutEventsRequest(*mobileanalytics.PutEventsInput) (*aws.Request, *mobileanalytics.PutEventsOutput)
 }
 
 var _ MobileAnalyticsAPI = (*mobileanalytics.MobileAnalytics)(nil)

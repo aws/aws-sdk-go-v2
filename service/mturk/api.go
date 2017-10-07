@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAcceptQualificationRequest = "AcceptQualificationRequest"
 
-// AcceptQualificationRequestRequest generates a "aws/request.Request" representing the
+// AcceptQualificationRequestRequest generates a "aws.Request" representing the
 // client's request for the AcceptQualificationRequest operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAcceptQualificationRequest = "AcceptQualificationRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequest
-func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequestInput) (req *request.Request, output *AcceptQualificationRequestOutput) {
-	op := &request.Operation{
+func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequestInput) (req *aws.Request, output *AcceptQualificationRequestOutput) {
+	op := &aws.Operation{
 		Name:       opAcceptQualificationRequest,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -94,7 +93,7 @@ func (c *MTurk) AcceptQualificationRequest(input *AcceptQualificationRequestInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) AcceptQualificationRequestWithContext(ctx aws.Context, input *AcceptQualificationRequestInput, opts ...request.Option) (*AcceptQualificationRequestOutput, error) {
+func (c *MTurk) AcceptQualificationRequestWithContext(ctx aws.Context, input *AcceptQualificationRequestInput, opts ...aws.Option) (*AcceptQualificationRequestOutput, error) {
 	req, out := c.AcceptQualificationRequestRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -103,7 +102,7 @@ func (c *MTurk) AcceptQualificationRequestWithContext(ctx aws.Context, input *Ac
 
 const opApproveAssignment = "ApproveAssignment"
 
-// ApproveAssignmentRequest generates a "aws/request.Request" representing the
+// ApproveAssignmentRequest generates a "aws.Request" representing the
 // client's request for the ApproveAssignment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -127,8 +126,8 @@ const opApproveAssignment = "ApproveAssignment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ApproveAssignment
-func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *request.Request, output *ApproveAssignmentOutput) {
-	op := &request.Operation{
+func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) (req *aws.Request, output *ApproveAssignmentOutput) {
+	op := &aws.Operation{
 		Name:       opApproveAssignment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -195,7 +194,7 @@ func (c *MTurk) ApproveAssignment(input *ApproveAssignmentInput) (*ApproveAssign
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ApproveAssignmentWithContext(ctx aws.Context, input *ApproveAssignmentInput, opts ...request.Option) (*ApproveAssignmentOutput, error) {
+func (c *MTurk) ApproveAssignmentWithContext(ctx aws.Context, input *ApproveAssignmentInput, opts ...aws.Option) (*ApproveAssignmentOutput, error) {
 	req, out := c.ApproveAssignmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -204,7 +203,7 @@ func (c *MTurk) ApproveAssignmentWithContext(ctx aws.Context, input *ApproveAssi
 
 const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
 
-// AssociateQualificationWithWorkerRequest generates a "aws/request.Request" representing the
+// AssociateQualificationWithWorkerRequest generates a "aws.Request" representing the
 // client's request for the AssociateQualificationWithWorker operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -228,8 +227,8 @@ const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AssociateQualificationWithWorker
-func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualificationWithWorkerInput) (req *request.Request, output *AssociateQualificationWithWorkerOutput) {
-	op := &request.Operation{
+func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualificationWithWorkerInput) (req *aws.Request, output *AssociateQualificationWithWorkerOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateQualificationWithWorker,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -290,7 +289,7 @@ func (c *MTurk) AssociateQualificationWithWorker(input *AssociateQualificationWi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) AssociateQualificationWithWorkerWithContext(ctx aws.Context, input *AssociateQualificationWithWorkerInput, opts ...request.Option) (*AssociateQualificationWithWorkerOutput, error) {
+func (c *MTurk) AssociateQualificationWithWorkerWithContext(ctx aws.Context, input *AssociateQualificationWithWorkerInput, opts ...aws.Option) (*AssociateQualificationWithWorkerOutput, error) {
 	req, out := c.AssociateQualificationWithWorkerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -299,7 +298,7 @@ func (c *MTurk) AssociateQualificationWithWorkerWithContext(ctx aws.Context, inp
 
 const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
 
-// CreateAdditionalAssignmentsForHITRequest generates a "aws/request.Request" representing the
+// CreateAdditionalAssignmentsForHITRequest generates a "aws.Request" representing the
 // client's request for the CreateAdditionalAssignmentsForHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -323,8 +322,8 @@ const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateAdditionalAssignmentsForHIT
-func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditionalAssignmentsForHITInput) (req *request.Request, output *CreateAdditionalAssignmentsForHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditionalAssignmentsForHITInput) (req *aws.Request, output *CreateAdditionalAssignmentsForHITOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAdditionalAssignmentsForHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -387,7 +386,7 @@ func (c *MTurk) CreateAdditionalAssignmentsForHIT(input *CreateAdditionalAssignm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) CreateAdditionalAssignmentsForHITWithContext(ctx aws.Context, input *CreateAdditionalAssignmentsForHITInput, opts ...request.Option) (*CreateAdditionalAssignmentsForHITOutput, error) {
+func (c *MTurk) CreateAdditionalAssignmentsForHITWithContext(ctx aws.Context, input *CreateAdditionalAssignmentsForHITInput, opts ...aws.Option) (*CreateAdditionalAssignmentsForHITOutput, error) {
 	req, out := c.CreateAdditionalAssignmentsForHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -396,7 +395,7 @@ func (c *MTurk) CreateAdditionalAssignmentsForHITWithContext(ctx aws.Context, in
 
 const opCreateHIT = "CreateHIT"
 
-// CreateHITRequest generates a "aws/request.Request" representing the
+// CreateHITRequest generates a "aws.Request" representing the
 // client's request for the CreateHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -420,8 +419,8 @@ const opCreateHIT = "CreateHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHIT
-func (c *MTurk) CreateHITRequest(input *CreateHITInput) (req *request.Request, output *CreateHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) CreateHITRequest(input *CreateHITInput) (req *aws.Request, output *CreateHITOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -491,7 +490,7 @@ func (c *MTurk) CreateHIT(input *CreateHITInput) (*CreateHITOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) CreateHITWithContext(ctx aws.Context, input *CreateHITInput, opts ...request.Option) (*CreateHITOutput, error) {
+func (c *MTurk) CreateHITWithContext(ctx aws.Context, input *CreateHITInput, opts ...aws.Option) (*CreateHITOutput, error) {
 	req, out := c.CreateHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -500,7 +499,7 @@ func (c *MTurk) CreateHITWithContext(ctx aws.Context, input *CreateHITInput, opt
 
 const opCreateHITType = "CreateHITType"
 
-// CreateHITTypeRequest generates a "aws/request.Request" representing the
+// CreateHITTypeRequest generates a "aws.Request" representing the
 // client's request for the CreateHITType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -524,8 +523,8 @@ const opCreateHITType = "CreateHITType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITType
-func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) (req *request.Request, output *CreateHITTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) (req *aws.Request, output *CreateHITTypeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHITType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -577,7 +576,7 @@ func (c *MTurk) CreateHITType(input *CreateHITTypeInput) (*CreateHITTypeOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) CreateHITTypeWithContext(ctx aws.Context, input *CreateHITTypeInput, opts ...request.Option) (*CreateHITTypeOutput, error) {
+func (c *MTurk) CreateHITTypeWithContext(ctx aws.Context, input *CreateHITTypeInput, opts ...aws.Option) (*CreateHITTypeOutput, error) {
 	req, out := c.CreateHITTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -586,7 +585,7 @@ func (c *MTurk) CreateHITTypeWithContext(ctx aws.Context, input *CreateHITTypeIn
 
 const opCreateHITWithHITType = "CreateHITWithHITType"
 
-// CreateHITWithHITTypeRequest generates a "aws/request.Request" representing the
+// CreateHITWithHITTypeRequest generates a "aws.Request" representing the
 // client's request for the CreateHITWithHITType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -610,8 +609,8 @@ const opCreateHITWithHITType = "CreateHITWithHITType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITWithHITType
-func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) (req *request.Request, output *CreateHITWithHITTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) (req *aws.Request, output *CreateHITWithHITTypeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHITWithHITType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -672,7 +671,7 @@ func (c *MTurk) CreateHITWithHITType(input *CreateHITWithHITTypeInput) (*CreateH
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) CreateHITWithHITTypeWithContext(ctx aws.Context, input *CreateHITWithHITTypeInput, opts ...request.Option) (*CreateHITWithHITTypeOutput, error) {
+func (c *MTurk) CreateHITWithHITTypeWithContext(ctx aws.Context, input *CreateHITWithHITTypeInput, opts ...aws.Option) (*CreateHITWithHITTypeOutput, error) {
 	req, out := c.CreateHITWithHITTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -681,7 +680,7 @@ func (c *MTurk) CreateHITWithHITTypeWithContext(ctx aws.Context, input *CreateHI
 
 const opCreateQualificationType = "CreateQualificationType"
 
-// CreateQualificationTypeRequest generates a "aws/request.Request" representing the
+// CreateQualificationTypeRequest generates a "aws.Request" representing the
 // client's request for the CreateQualificationType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -705,8 +704,8 @@ const opCreateQualificationType = "CreateQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateQualificationType
-func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInput) (req *request.Request, output *CreateQualificationTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInput) (req *aws.Request, output *CreateQualificationTypeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateQualificationType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -756,7 +755,7 @@ func (c *MTurk) CreateQualificationType(input *CreateQualificationTypeInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) CreateQualificationTypeWithContext(ctx aws.Context, input *CreateQualificationTypeInput, opts ...request.Option) (*CreateQualificationTypeOutput, error) {
+func (c *MTurk) CreateQualificationTypeWithContext(ctx aws.Context, input *CreateQualificationTypeInput, opts ...aws.Option) (*CreateQualificationTypeOutput, error) {
 	req, out := c.CreateQualificationTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -765,7 +764,7 @@ func (c *MTurk) CreateQualificationTypeWithContext(ctx aws.Context, input *Creat
 
 const opCreateWorkerBlock = "CreateWorkerBlock"
 
-// CreateWorkerBlockRequest generates a "aws/request.Request" representing the
+// CreateWorkerBlockRequest generates a "aws.Request" representing the
 // client's request for the CreateWorkerBlock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -789,8 +788,8 @@ const opCreateWorkerBlock = "CreateWorkerBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateWorkerBlock
-func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) (req *request.Request, output *CreateWorkerBlockOutput) {
-	op := &request.Operation{
+func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) (req *aws.Request, output *CreateWorkerBlockOutput) {
+	op := &aws.Operation{
 		Name:       opCreateWorkerBlock,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -841,7 +840,7 @@ func (c *MTurk) CreateWorkerBlock(input *CreateWorkerBlockInput) (*CreateWorkerB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) CreateWorkerBlockWithContext(ctx aws.Context, input *CreateWorkerBlockInput, opts ...request.Option) (*CreateWorkerBlockOutput, error) {
+func (c *MTurk) CreateWorkerBlockWithContext(ctx aws.Context, input *CreateWorkerBlockInput, opts ...aws.Option) (*CreateWorkerBlockOutput, error) {
 	req, out := c.CreateWorkerBlockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -850,7 +849,7 @@ func (c *MTurk) CreateWorkerBlockWithContext(ctx aws.Context, input *CreateWorke
 
 const opDeleteHIT = "DeleteHIT"
 
-// DeleteHITRequest generates a "aws/request.Request" representing the
+// DeleteHITRequest generates a "aws.Request" representing the
 // client's request for the DeleteHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -874,8 +873,8 @@ const opDeleteHIT = "DeleteHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteHIT
-func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *request.Request, output *DeleteHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) (req *aws.Request, output *DeleteHITOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -942,7 +941,7 @@ func (c *MTurk) DeleteHIT(input *DeleteHITInput) (*DeleteHITOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) DeleteHITWithContext(ctx aws.Context, input *DeleteHITInput, opts ...request.Option) (*DeleteHITOutput, error) {
+func (c *MTurk) DeleteHITWithContext(ctx aws.Context, input *DeleteHITInput, opts ...aws.Option) (*DeleteHITOutput, error) {
 	req, out := c.DeleteHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -951,7 +950,7 @@ func (c *MTurk) DeleteHITWithContext(ctx aws.Context, input *DeleteHITInput, opt
 
 const opDeleteQualificationType = "DeleteQualificationType"
 
-// DeleteQualificationTypeRequest generates a "aws/request.Request" representing the
+// DeleteQualificationTypeRequest generates a "aws.Request" representing the
 // client's request for the DeleteQualificationType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -975,8 +974,8 @@ const opDeleteQualificationType = "DeleteQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteQualificationType
-func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInput) (req *request.Request, output *DeleteQualificationTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInput) (req *aws.Request, output *DeleteQualificationTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteQualificationType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1037,7 +1036,7 @@ func (c *MTurk) DeleteQualificationType(input *DeleteQualificationTypeInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) DeleteQualificationTypeWithContext(ctx aws.Context, input *DeleteQualificationTypeInput, opts ...request.Option) (*DeleteQualificationTypeOutput, error) {
+func (c *MTurk) DeleteQualificationTypeWithContext(ctx aws.Context, input *DeleteQualificationTypeInput, opts ...aws.Option) (*DeleteQualificationTypeOutput, error) {
 	req, out := c.DeleteQualificationTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1046,7 +1045,7 @@ func (c *MTurk) DeleteQualificationTypeWithContext(ctx aws.Context, input *Delet
 
 const opDeleteWorkerBlock = "DeleteWorkerBlock"
 
-// DeleteWorkerBlockRequest generates a "aws/request.Request" representing the
+// DeleteWorkerBlockRequest generates a "aws.Request" representing the
 // client's request for the DeleteWorkerBlock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1070,8 +1069,8 @@ const opDeleteWorkerBlock = "DeleteWorkerBlock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DeleteWorkerBlock
-func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) (req *request.Request, output *DeleteWorkerBlockOutput) {
-	op := &request.Operation{
+func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) (req *aws.Request, output *DeleteWorkerBlockOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteWorkerBlock,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1125,7 +1124,7 @@ func (c *MTurk) DeleteWorkerBlock(input *DeleteWorkerBlockInput) (*DeleteWorkerB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) DeleteWorkerBlockWithContext(ctx aws.Context, input *DeleteWorkerBlockInput, opts ...request.Option) (*DeleteWorkerBlockOutput, error) {
+func (c *MTurk) DeleteWorkerBlockWithContext(ctx aws.Context, input *DeleteWorkerBlockInput, opts ...aws.Option) (*DeleteWorkerBlockOutput, error) {
 	req, out := c.DeleteWorkerBlockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1134,7 +1133,7 @@ func (c *MTurk) DeleteWorkerBlockWithContext(ctx aws.Context, input *DeleteWorke
 
 const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWorker"
 
-// DisassociateQualificationFromWorkerRequest generates a "aws/request.Request" representing the
+// DisassociateQualificationFromWorkerRequest generates a "aws.Request" representing the
 // client's request for the DisassociateQualificationFromWorker operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1158,8 +1157,8 @@ const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWork
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/DisassociateQualificationFromWorker
-func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQualificationFromWorkerInput) (req *request.Request, output *DisassociateQualificationFromWorkerOutput) {
-	op := &request.Operation{
+func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQualificationFromWorkerInput) (req *aws.Request, output *DisassociateQualificationFromWorkerOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateQualificationFromWorker,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1212,7 +1211,7 @@ func (c *MTurk) DisassociateQualificationFromWorker(input *DisassociateQualifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) DisassociateQualificationFromWorkerWithContext(ctx aws.Context, input *DisassociateQualificationFromWorkerInput, opts ...request.Option) (*DisassociateQualificationFromWorkerOutput, error) {
+func (c *MTurk) DisassociateQualificationFromWorkerWithContext(ctx aws.Context, input *DisassociateQualificationFromWorkerInput, opts ...aws.Option) (*DisassociateQualificationFromWorkerOutput, error) {
 	req, out := c.DisassociateQualificationFromWorkerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1221,7 +1220,7 @@ func (c *MTurk) DisassociateQualificationFromWorkerWithContext(ctx aws.Context, 
 
 const opGetAccountBalance = "GetAccountBalance"
 
-// GetAccountBalanceRequest generates a "aws/request.Request" representing the
+// GetAccountBalanceRequest generates a "aws.Request" representing the
 // client's request for the GetAccountBalance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1245,8 +1244,8 @@ const opGetAccountBalance = "GetAccountBalance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAccountBalance
-func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *request.Request, output *GetAccountBalanceOutput) {
-	op := &request.Operation{
+func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) (req *aws.Request, output *GetAccountBalanceOutput) {
+	op := &aws.Operation{
 		Name:       opGetAccountBalance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1296,7 +1295,7 @@ func (c *MTurk) GetAccountBalance(input *GetAccountBalanceInput) (*GetAccountBal
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) GetAccountBalanceWithContext(ctx aws.Context, input *GetAccountBalanceInput, opts ...request.Option) (*GetAccountBalanceOutput, error) {
+func (c *MTurk) GetAccountBalanceWithContext(ctx aws.Context, input *GetAccountBalanceInput, opts ...aws.Option) (*GetAccountBalanceOutput, error) {
 	req, out := c.GetAccountBalanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1305,7 +1304,7 @@ func (c *MTurk) GetAccountBalanceWithContext(ctx aws.Context, input *GetAccountB
 
 const opGetAssignment = "GetAssignment"
 
-// GetAssignmentRequest generates a "aws/request.Request" representing the
+// GetAssignmentRequest generates a "aws.Request" representing the
 // client's request for the GetAssignment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1329,8 +1328,8 @@ const opGetAssignment = "GetAssignment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetAssignment
-func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) (req *request.Request, output *GetAssignmentOutput) {
-	op := &request.Operation{
+func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) (req *aws.Request, output *GetAssignmentOutput) {
+	op := &aws.Operation{
 		Name:       opGetAssignment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1379,7 +1378,7 @@ func (c *MTurk) GetAssignment(input *GetAssignmentInput) (*GetAssignmentOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) GetAssignmentWithContext(ctx aws.Context, input *GetAssignmentInput, opts ...request.Option) (*GetAssignmentOutput, error) {
+func (c *MTurk) GetAssignmentWithContext(ctx aws.Context, input *GetAssignmentInput, opts ...aws.Option) (*GetAssignmentOutput, error) {
 	req, out := c.GetAssignmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1388,7 +1387,7 @@ func (c *MTurk) GetAssignmentWithContext(ctx aws.Context, input *GetAssignmentIn
 
 const opGetFileUploadURL = "GetFileUploadURL"
 
-// GetFileUploadURLRequest generates a "aws/request.Request" representing the
+// GetFileUploadURLRequest generates a "aws.Request" representing the
 // client's request for the GetFileUploadURL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1412,8 +1411,8 @@ const opGetFileUploadURL = "GetFileUploadURL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetFileUploadURL
-func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) (req *request.Request, output *GetFileUploadURLOutput) {
-	op := &request.Operation{
+func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) (req *aws.Request, output *GetFileUploadURLOutput) {
+	op := &aws.Operation{
 		Name:       opGetFileUploadURL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1468,7 +1467,7 @@ func (c *MTurk) GetFileUploadURL(input *GetFileUploadURLInput) (*GetFileUploadUR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) GetFileUploadURLWithContext(ctx aws.Context, input *GetFileUploadURLInput, opts ...request.Option) (*GetFileUploadURLOutput, error) {
+func (c *MTurk) GetFileUploadURLWithContext(ctx aws.Context, input *GetFileUploadURLInput, opts ...aws.Option) (*GetFileUploadURLOutput, error) {
 	req, out := c.GetFileUploadURLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1477,7 +1476,7 @@ func (c *MTurk) GetFileUploadURLWithContext(ctx aws.Context, input *GetFileUploa
 
 const opGetHIT = "GetHIT"
 
-// GetHITRequest generates a "aws/request.Request" representing the
+// GetHITRequest generates a "aws.Request" representing the
 // client's request for the GetHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1501,8 +1500,8 @@ const opGetHIT = "GetHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetHIT
-func (c *MTurk) GetHITRequest(input *GetHITInput) (req *request.Request, output *GetHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) GetHITRequest(input *GetHITInput) (req *aws.Request, output *GetHITOutput) {
+	op := &aws.Operation{
 		Name:       opGetHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1551,7 +1550,7 @@ func (c *MTurk) GetHIT(input *GetHITInput) (*GetHITOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) GetHITWithContext(ctx aws.Context, input *GetHITInput, opts ...request.Option) (*GetHITOutput, error) {
+func (c *MTurk) GetHITWithContext(ctx aws.Context, input *GetHITInput, opts ...aws.Option) (*GetHITOutput, error) {
 	req, out := c.GetHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1560,7 +1559,7 @@ func (c *MTurk) GetHITWithContext(ctx aws.Context, input *GetHITInput, opts ...r
 
 const opGetQualificationScore = "GetQualificationScore"
 
-// GetQualificationScoreRequest generates a "aws/request.Request" representing the
+// GetQualificationScoreRequest generates a "aws.Request" representing the
 // client's request for the GetQualificationScore operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1584,8 +1583,8 @@ const opGetQualificationScore = "GetQualificationScore"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationScore
-func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) (req *request.Request, output *GetQualificationScoreOutput) {
-	op := &request.Operation{
+func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) (req *aws.Request, output *GetQualificationScoreOutput) {
+	op := &aws.Operation{
 		Name:       opGetQualificationScore,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1642,7 +1641,7 @@ func (c *MTurk) GetQualificationScore(input *GetQualificationScoreInput) (*GetQu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) GetQualificationScoreWithContext(ctx aws.Context, input *GetQualificationScoreInput, opts ...request.Option) (*GetQualificationScoreOutput, error) {
+func (c *MTurk) GetQualificationScoreWithContext(ctx aws.Context, input *GetQualificationScoreInput, opts ...aws.Option) (*GetQualificationScoreOutput, error) {
 	req, out := c.GetQualificationScoreRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1651,7 +1650,7 @@ func (c *MTurk) GetQualificationScoreWithContext(ctx aws.Context, input *GetQual
 
 const opGetQualificationType = "GetQualificationType"
 
-// GetQualificationTypeRequest generates a "aws/request.Request" representing the
+// GetQualificationTypeRequest generates a "aws.Request" representing the
 // client's request for the GetQualificationType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1675,8 +1674,8 @@ const opGetQualificationType = "GetQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/GetQualificationType
-func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) (req *request.Request, output *GetQualificationTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) (req *aws.Request, output *GetQualificationTypeOutput) {
+	op := &aws.Operation{
 		Name:       opGetQualificationType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1726,7 +1725,7 @@ func (c *MTurk) GetQualificationType(input *GetQualificationTypeInput) (*GetQual
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) GetQualificationTypeWithContext(ctx aws.Context, input *GetQualificationTypeInput, opts ...request.Option) (*GetQualificationTypeOutput, error) {
+func (c *MTurk) GetQualificationTypeWithContext(ctx aws.Context, input *GetQualificationTypeInput, opts ...aws.Option) (*GetQualificationTypeOutput, error) {
 	req, out := c.GetQualificationTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1735,7 +1734,7 @@ func (c *MTurk) GetQualificationTypeWithContext(ctx aws.Context, input *GetQuali
 
 const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 
-// ListAssignmentsForHITRequest generates a "aws/request.Request" representing the
+// ListAssignmentsForHITRequest generates a "aws.Request" representing the
 // client's request for the ListAssignmentsForHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1759,12 +1758,12 @@ const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListAssignmentsForHIT
-func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) (req *request.Request, output *ListAssignmentsForHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) (req *aws.Request, output *ListAssignmentsForHITOutput) {
+	op := &aws.Operation{
 		Name:       opListAssignmentsForHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -1835,7 +1834,7 @@ func (c *MTurk) ListAssignmentsForHIT(input *ListAssignmentsForHITInput) (*ListA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListAssignmentsForHITWithContext(ctx aws.Context, input *ListAssignmentsForHITInput, opts ...request.Option) (*ListAssignmentsForHITOutput, error) {
+func (c *MTurk) ListAssignmentsForHITWithContext(ctx aws.Context, input *ListAssignmentsForHITInput, opts ...aws.Option) (*ListAssignmentsForHITOutput, error) {
 	req, out := c.ListAssignmentsForHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1870,9 +1869,9 @@ func (c *MTurk) ListAssignmentsForHITPages(input *ListAssignmentsForHITInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *ListAssignmentsForHITInput, fn func(*ListAssignmentsForHITOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *ListAssignmentsForHITInput, fn func(*ListAssignmentsForHITOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAssignmentsForHITInput
 			if input != nil {
 				tmp := *input
@@ -1894,7 +1893,7 @@ func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *Li
 
 const opListBonusPayments = "ListBonusPayments"
 
-// ListBonusPaymentsRequest generates a "aws/request.Request" representing the
+// ListBonusPaymentsRequest generates a "aws.Request" representing the
 // client's request for the ListBonusPayments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1918,12 +1917,12 @@ const opListBonusPayments = "ListBonusPayments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListBonusPayments
-func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) (req *request.Request, output *ListBonusPaymentsOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) (req *aws.Request, output *ListBonusPaymentsOutput) {
+	op := &aws.Operation{
 		Name:       opListBonusPayments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -1975,7 +1974,7 @@ func (c *MTurk) ListBonusPayments(input *ListBonusPaymentsInput) (*ListBonusPaym
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListBonusPaymentsWithContext(ctx aws.Context, input *ListBonusPaymentsInput, opts ...request.Option) (*ListBonusPaymentsOutput, error) {
+func (c *MTurk) ListBonusPaymentsWithContext(ctx aws.Context, input *ListBonusPaymentsInput, opts ...aws.Option) (*ListBonusPaymentsOutput, error) {
 	req, out := c.ListBonusPaymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2010,9 +2009,9 @@ func (c *MTurk) ListBonusPaymentsPages(input *ListBonusPaymentsInput, fn func(*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBonusPaymentsInput, fn func(*ListBonusPaymentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBonusPaymentsInput, fn func(*ListBonusPaymentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListBonusPaymentsInput
 			if input != nil {
 				tmp := *input
@@ -2034,7 +2033,7 @@ func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBo
 
 const opListHITs = "ListHITs"
 
-// ListHITsRequest generates a "aws/request.Request" representing the
+// ListHITsRequest generates a "aws.Request" representing the
 // client's request for the ListHITs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2058,12 +2057,12 @@ const opListHITs = "ListHITs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs
-func (c *MTurk) ListHITsRequest(input *ListHITsInput) (req *request.Request, output *ListHITsOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListHITsRequest(input *ListHITsInput) (req *aws.Request, output *ListHITsOutput) {
+	op := &aws.Operation{
 		Name:       opListHITs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2116,7 +2115,7 @@ func (c *MTurk) ListHITs(input *ListHITsInput) (*ListHITsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListHITsWithContext(ctx aws.Context, input *ListHITsInput, opts ...request.Option) (*ListHITsOutput, error) {
+func (c *MTurk) ListHITsWithContext(ctx aws.Context, input *ListHITsInput, opts ...aws.Option) (*ListHITsOutput, error) {
 	req, out := c.ListHITsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2151,9 +2150,9 @@ func (c *MTurk) ListHITsPages(input *ListHITsInput, fn func(*ListHITsOutput, boo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, fn func(*ListHITsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, fn func(*ListHITsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListHITsInput
 			if input != nil {
 				tmp := *input
@@ -2175,7 +2174,7 @@ func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, 
 
 const opListHITsForQualificationType = "ListHITsForQualificationType"
 
-// ListHITsForQualificationTypeRequest generates a "aws/request.Request" representing the
+// ListHITsForQualificationTypeRequest generates a "aws.Request" representing the
 // client's request for the ListHITsForQualificationType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2199,12 +2198,12 @@ const opListHITsForQualificationType = "ListHITsForQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationType
-func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificationTypeInput) (req *request.Request, output *ListHITsForQualificationTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificationTypeInput) (req *aws.Request, output *ListHITsForQualificationTypeOutput) {
+	op := &aws.Operation{
 		Name:       opListHITsForQualificationType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2258,7 +2257,7 @@ func (c *MTurk) ListHITsForQualificationType(input *ListHITsForQualificationType
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListHITsForQualificationTypeWithContext(ctx aws.Context, input *ListHITsForQualificationTypeInput, opts ...request.Option) (*ListHITsForQualificationTypeOutput, error) {
+func (c *MTurk) ListHITsForQualificationTypeWithContext(ctx aws.Context, input *ListHITsForQualificationTypeInput, opts ...aws.Option) (*ListHITsForQualificationTypeOutput, error) {
 	req, out := c.ListHITsForQualificationTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2293,9 +2292,9 @@ func (c *MTurk) ListHITsForQualificationTypePages(input *ListHITsForQualificatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, input *ListHITsForQualificationTypeInput, fn func(*ListHITsForQualificationTypeOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, input *ListHITsForQualificationTypeInput, fn func(*ListHITsForQualificationTypeOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListHITsForQualificationTypeInput
 			if input != nil {
 				tmp := *input
@@ -2317,7 +2316,7 @@ func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, in
 
 const opListQualificationRequests = "ListQualificationRequests"
 
-// ListQualificationRequestsRequest generates a "aws/request.Request" representing the
+// ListQualificationRequestsRequest generates a "aws.Request" representing the
 // client's request for the ListQualificationRequests operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2341,12 +2340,12 @@ const opListQualificationRequests = "ListQualificationRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationRequests
-func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequestsInput) (req *request.Request, output *ListQualificationRequestsOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequestsInput) (req *aws.Request, output *ListQualificationRequestsOutput) {
+	op := &aws.Operation{
 		Name:       opListQualificationRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2400,7 +2399,7 @@ func (c *MTurk) ListQualificationRequests(input *ListQualificationRequestsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListQualificationRequestsWithContext(ctx aws.Context, input *ListQualificationRequestsInput, opts ...request.Option) (*ListQualificationRequestsOutput, error) {
+func (c *MTurk) ListQualificationRequestsWithContext(ctx aws.Context, input *ListQualificationRequestsInput, opts ...aws.Option) (*ListQualificationRequestsOutput, error) {
 	req, out := c.ListQualificationRequestsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2435,9 +2434,9 @@ func (c *MTurk) ListQualificationRequestsPages(input *ListQualificationRequestsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input *ListQualificationRequestsInput, fn func(*ListQualificationRequestsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input *ListQualificationRequestsInput, fn func(*ListQualificationRequestsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListQualificationRequestsInput
 			if input != nil {
 				tmp := *input
@@ -2459,7 +2458,7 @@ func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input
 
 const opListQualificationTypes = "ListQualificationTypes"
 
-// ListQualificationTypesRequest generates a "aws/request.Request" representing the
+// ListQualificationTypesRequest generates a "aws.Request" representing the
 // client's request for the ListQualificationTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2483,12 +2482,12 @@ const opListQualificationTypes = "ListQualificationTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListQualificationTypes
-func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput) (req *request.Request, output *ListQualificationTypesOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput) (req *aws.Request, output *ListQualificationTypesOutput) {
+	op := &aws.Operation{
 		Name:       opListQualificationTypes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2542,7 +2541,7 @@ func (c *MTurk) ListQualificationTypes(input *ListQualificationTypesInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListQualificationTypesWithContext(ctx aws.Context, input *ListQualificationTypesInput, opts ...request.Option) (*ListQualificationTypesOutput, error) {
+func (c *MTurk) ListQualificationTypesWithContext(ctx aws.Context, input *ListQualificationTypesInput, opts ...aws.Option) (*ListQualificationTypesOutput, error) {
 	req, out := c.ListQualificationTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2577,9 +2576,9 @@ func (c *MTurk) ListQualificationTypesPages(input *ListQualificationTypesInput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *ListQualificationTypesInput, fn func(*ListQualificationTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *ListQualificationTypesInput, fn func(*ListQualificationTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListQualificationTypesInput
 			if input != nil {
 				tmp := *input
@@ -2601,7 +2600,7 @@ func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *L
 
 const opListReviewPolicyResultsForHIT = "ListReviewPolicyResultsForHIT"
 
-// ListReviewPolicyResultsForHITRequest generates a "aws/request.Request" representing the
+// ListReviewPolicyResultsForHITRequest generates a "aws.Request" representing the
 // client's request for the ListReviewPolicyResultsForHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2625,12 +2624,12 @@ const opListReviewPolicyResultsForHIT = "ListReviewPolicyResultsForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewPolicyResultsForHIT
-func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResultsForHITInput) (req *request.Request, output *ListReviewPolicyResultsForHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResultsForHITInput) (req *aws.Request, output *ListReviewPolicyResultsForHITOutput) {
+	op := &aws.Operation{
 		Name:       opListReviewPolicyResultsForHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2685,7 +2684,7 @@ func (c *MTurk) ListReviewPolicyResultsForHIT(input *ListReviewPolicyResultsForH
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListReviewPolicyResultsForHITWithContext(ctx aws.Context, input *ListReviewPolicyResultsForHITInput, opts ...request.Option) (*ListReviewPolicyResultsForHITOutput, error) {
+func (c *MTurk) ListReviewPolicyResultsForHITWithContext(ctx aws.Context, input *ListReviewPolicyResultsForHITInput, opts ...aws.Option) (*ListReviewPolicyResultsForHITOutput, error) {
 	req, out := c.ListReviewPolicyResultsForHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2720,9 +2719,9 @@ func (c *MTurk) ListReviewPolicyResultsForHITPages(input *ListReviewPolicyResult
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, input *ListReviewPolicyResultsForHITInput, fn func(*ListReviewPolicyResultsForHITOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, input *ListReviewPolicyResultsForHITInput, fn func(*ListReviewPolicyResultsForHITOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListReviewPolicyResultsForHITInput
 			if input != nil {
 				tmp := *input
@@ -2744,7 +2743,7 @@ func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, i
 
 const opListReviewableHITs = "ListReviewableHITs"
 
-// ListReviewableHITsRequest generates a "aws/request.Request" representing the
+// ListReviewableHITsRequest generates a "aws.Request" representing the
 // client's request for the ListReviewableHITs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2768,12 +2767,12 @@ const opListReviewableHITs = "ListReviewableHITs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITs
-func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) (req *request.Request, output *ListReviewableHITsOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) (req *aws.Request, output *ListReviewableHITsOutput) {
+	op := &aws.Operation{
 		Name:       opListReviewableHITs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2826,7 +2825,7 @@ func (c *MTurk) ListReviewableHITs(input *ListReviewableHITsInput) (*ListReviewa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListReviewableHITsWithContext(ctx aws.Context, input *ListReviewableHITsInput, opts ...request.Option) (*ListReviewableHITsOutput, error) {
+func (c *MTurk) ListReviewableHITsWithContext(ctx aws.Context, input *ListReviewableHITsInput, opts ...aws.Option) (*ListReviewableHITsOutput, error) {
 	req, out := c.ListReviewableHITsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2861,9 +2860,9 @@ func (c *MTurk) ListReviewableHITsPages(input *ListReviewableHITsInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListReviewableHITsInput, fn func(*ListReviewableHITsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListReviewableHITsInput, fn func(*ListReviewableHITsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListReviewableHITsInput
 			if input != nil {
 				tmp := *input
@@ -2885,7 +2884,7 @@ func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListR
 
 const opListWorkerBlocks = "ListWorkerBlocks"
 
-// ListWorkerBlocksRequest generates a "aws/request.Request" representing the
+// ListWorkerBlocksRequest generates a "aws.Request" representing the
 // client's request for the ListWorkerBlocks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2909,12 +2908,12 @@ const opListWorkerBlocks = "ListWorkerBlocks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkerBlocks
-func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) (req *request.Request, output *ListWorkerBlocksOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) (req *aws.Request, output *ListWorkerBlocksOutput) {
+	op := &aws.Operation{
 		Name:       opListWorkerBlocks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2966,7 +2965,7 @@ func (c *MTurk) ListWorkerBlocks(input *ListWorkerBlocksInput) (*ListWorkerBlock
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListWorkerBlocksWithContext(ctx aws.Context, input *ListWorkerBlocksInput, opts ...request.Option) (*ListWorkerBlocksOutput, error) {
+func (c *MTurk) ListWorkerBlocksWithContext(ctx aws.Context, input *ListWorkerBlocksInput, opts ...aws.Option) (*ListWorkerBlocksOutput, error) {
 	req, out := c.ListWorkerBlocksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3001,9 +3000,9 @@ func (c *MTurk) ListWorkerBlocksPages(input *ListWorkerBlocksInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWorkerBlocksInput, fn func(*ListWorkerBlocksOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWorkerBlocksInput, fn func(*ListWorkerBlocksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListWorkerBlocksInput
 			if input != nil {
 				tmp := *input
@@ -3025,7 +3024,7 @@ func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWor
 
 const opListWorkersWithQualificationType = "ListWorkersWithQualificationType"
 
-// ListWorkersWithQualificationTypeRequest generates a "aws/request.Request" representing the
+// ListWorkersWithQualificationTypeRequest generates a "aws.Request" representing the
 // client's request for the ListWorkersWithQualificationType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3049,12 +3048,12 @@ const opListWorkersWithQualificationType = "ListWorkersWithQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListWorkersWithQualificationType
-func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQualificationTypeInput) (req *request.Request, output *ListWorkersWithQualificationTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQualificationTypeInput) (req *aws.Request, output *ListWorkersWithQualificationTypeOutput) {
+	op := &aws.Operation{
 		Name:       opListWorkersWithQualificationType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3106,7 +3105,7 @@ func (c *MTurk) ListWorkersWithQualificationType(input *ListWorkersWithQualifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListWorkersWithQualificationTypeWithContext(ctx aws.Context, input *ListWorkersWithQualificationTypeInput, opts ...request.Option) (*ListWorkersWithQualificationTypeOutput, error) {
+func (c *MTurk) ListWorkersWithQualificationTypeWithContext(ctx aws.Context, input *ListWorkersWithQualificationTypeInput, opts ...aws.Option) (*ListWorkersWithQualificationTypeOutput, error) {
 	req, out := c.ListWorkersWithQualificationTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3141,9 +3140,9 @@ func (c *MTurk) ListWorkersWithQualificationTypePages(input *ListWorkersWithQual
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context, input *ListWorkersWithQualificationTypeInput, fn func(*ListWorkersWithQualificationTypeOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context, input *ListWorkersWithQualificationTypeInput, fn func(*ListWorkersWithQualificationTypeOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListWorkersWithQualificationTypeInput
 			if input != nil {
 				tmp := *input
@@ -3165,7 +3164,7 @@ func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context
 
 const opNotifyWorkers = "NotifyWorkers"
 
-// NotifyWorkersRequest generates a "aws/request.Request" representing the
+// NotifyWorkersRequest generates a "aws.Request" representing the
 // client's request for the NotifyWorkers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3189,8 +3188,8 @@ const opNotifyWorkers = "NotifyWorkers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/NotifyWorkers
-func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) (req *request.Request, output *NotifyWorkersOutput) {
-	op := &request.Operation{
+func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) (req *aws.Request, output *NotifyWorkersOutput) {
+	op := &aws.Operation{
 		Name:       opNotifyWorkers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3243,7 +3242,7 @@ func (c *MTurk) NotifyWorkers(input *NotifyWorkersInput) (*NotifyWorkersOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) NotifyWorkersWithContext(ctx aws.Context, input *NotifyWorkersInput, opts ...request.Option) (*NotifyWorkersOutput, error) {
+func (c *MTurk) NotifyWorkersWithContext(ctx aws.Context, input *NotifyWorkersInput, opts ...aws.Option) (*NotifyWorkersOutput, error) {
 	req, out := c.NotifyWorkersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3252,7 +3251,7 @@ func (c *MTurk) NotifyWorkersWithContext(ctx aws.Context, input *NotifyWorkersIn
 
 const opRejectAssignment = "RejectAssignment"
 
-// RejectAssignmentRequest generates a "aws/request.Request" representing the
+// RejectAssignmentRequest generates a "aws.Request" representing the
 // client's request for the RejectAssignment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3276,8 +3275,8 @@ const opRejectAssignment = "RejectAssignment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectAssignment
-func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) (req *request.Request, output *RejectAssignmentOutput) {
-	op := &request.Operation{
+func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) (req *aws.Request, output *RejectAssignmentOutput) {
+	op := &aws.Operation{
 		Name:       opRejectAssignment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3334,7 +3333,7 @@ func (c *MTurk) RejectAssignment(input *RejectAssignmentInput) (*RejectAssignmen
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) RejectAssignmentWithContext(ctx aws.Context, input *RejectAssignmentInput, opts ...request.Option) (*RejectAssignmentOutput, error) {
+func (c *MTurk) RejectAssignmentWithContext(ctx aws.Context, input *RejectAssignmentInput, opts ...aws.Option) (*RejectAssignmentOutput, error) {
 	req, out := c.RejectAssignmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3343,7 +3342,7 @@ func (c *MTurk) RejectAssignmentWithContext(ctx aws.Context, input *RejectAssign
 
 const opRejectQualificationRequest = "RejectQualificationRequest"
 
-// RejectQualificationRequestRequest generates a "aws/request.Request" representing the
+// RejectQualificationRequestRequest generates a "aws.Request" representing the
 // client's request for the RejectQualificationRequest operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3367,8 +3366,8 @@ const opRejectQualificationRequest = "RejectQualificationRequest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/RejectQualificationRequest
-func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequestInput) (req *request.Request, output *RejectQualificationRequestOutput) {
-	op := &request.Operation{
+func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequestInput) (req *aws.Request, output *RejectQualificationRequestOutput) {
+	op := &aws.Operation{
 		Name:       opRejectQualificationRequest,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3420,7 +3419,7 @@ func (c *MTurk) RejectQualificationRequest(input *RejectQualificationRequestInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) RejectQualificationRequestWithContext(ctx aws.Context, input *RejectQualificationRequestInput, opts ...request.Option) (*RejectQualificationRequestOutput, error) {
+func (c *MTurk) RejectQualificationRequestWithContext(ctx aws.Context, input *RejectQualificationRequestInput, opts ...aws.Option) (*RejectQualificationRequestOutput, error) {
 	req, out := c.RejectQualificationRequestRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3429,7 +3428,7 @@ func (c *MTurk) RejectQualificationRequestWithContext(ctx aws.Context, input *Re
 
 const opSendBonus = "SendBonus"
 
-// SendBonusRequest generates a "aws/request.Request" representing the
+// SendBonusRequest generates a "aws.Request" representing the
 // client's request for the SendBonus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3453,8 +3452,8 @@ const opSendBonus = "SendBonus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendBonus
-func (c *MTurk) SendBonusRequest(input *SendBonusInput) (req *request.Request, output *SendBonusOutput) {
-	op := &request.Operation{
+func (c *MTurk) SendBonusRequest(input *SendBonusInput) (req *aws.Request, output *SendBonusOutput) {
+	op := &aws.Operation{
 		Name:       opSendBonus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3511,7 +3510,7 @@ func (c *MTurk) SendBonus(input *SendBonusInput) (*SendBonusOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) SendBonusWithContext(ctx aws.Context, input *SendBonusInput, opts ...request.Option) (*SendBonusOutput, error) {
+func (c *MTurk) SendBonusWithContext(ctx aws.Context, input *SendBonusInput, opts ...aws.Option) (*SendBonusOutput, error) {
 	req, out := c.SendBonusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3520,7 +3519,7 @@ func (c *MTurk) SendBonusWithContext(ctx aws.Context, input *SendBonusInput, opt
 
 const opSendTestEventNotification = "SendTestEventNotification"
 
-// SendTestEventNotificationRequest generates a "aws/request.Request" representing the
+// SendTestEventNotificationRequest generates a "aws.Request" representing the
 // client's request for the SendTestEventNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3544,8 +3543,8 @@ const opSendTestEventNotification = "SendTestEventNotification"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/SendTestEventNotification
-func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificationInput) (req *request.Request, output *SendTestEventNotificationOutput) {
-	op := &request.Operation{
+func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificationInput) (req *aws.Request, output *SendTestEventNotificationOutput) {
+	op := &aws.Operation{
 		Name:       opSendTestEventNotification,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3599,7 +3598,7 @@ func (c *MTurk) SendTestEventNotification(input *SendTestEventNotificationInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) SendTestEventNotificationWithContext(ctx aws.Context, input *SendTestEventNotificationInput, opts ...request.Option) (*SendTestEventNotificationOutput, error) {
+func (c *MTurk) SendTestEventNotificationWithContext(ctx aws.Context, input *SendTestEventNotificationInput, opts ...aws.Option) (*SendTestEventNotificationOutput, error) {
 	req, out := c.SendTestEventNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3608,7 +3607,7 @@ func (c *MTurk) SendTestEventNotificationWithContext(ctx aws.Context, input *Sen
 
 const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 
-// UpdateExpirationForHITRequest generates a "aws/request.Request" representing the
+// UpdateExpirationForHITRequest generates a "aws.Request" representing the
 // client's request for the UpdateExpirationForHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3632,8 +3631,8 @@ const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateExpirationForHIT
-func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput) (req *request.Request, output *UpdateExpirationForHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput) (req *aws.Request, output *UpdateExpirationForHITOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateExpirationForHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3684,7 +3683,7 @@ func (c *MTurk) UpdateExpirationForHIT(input *UpdateExpirationForHITInput) (*Upd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) UpdateExpirationForHITWithContext(ctx aws.Context, input *UpdateExpirationForHITInput, opts ...request.Option) (*UpdateExpirationForHITOutput, error) {
+func (c *MTurk) UpdateExpirationForHITWithContext(ctx aws.Context, input *UpdateExpirationForHITInput, opts ...aws.Option) (*UpdateExpirationForHITOutput, error) {
 	req, out := c.UpdateExpirationForHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3693,7 +3692,7 @@ func (c *MTurk) UpdateExpirationForHITWithContext(ctx aws.Context, input *Update
 
 const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 
-// UpdateHITReviewStatusRequest generates a "aws/request.Request" representing the
+// UpdateHITReviewStatusRequest generates a "aws.Request" representing the
 // client's request for the UpdateHITReviewStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3717,8 +3716,8 @@ const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITReviewStatus
-func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) (req *request.Request, output *UpdateHITReviewStatusOutput) {
-	op := &request.Operation{
+func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) (req *aws.Request, output *UpdateHITReviewStatusOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateHITReviewStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3769,7 +3768,7 @@ func (c *MTurk) UpdateHITReviewStatus(input *UpdateHITReviewStatusInput) (*Updat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) UpdateHITReviewStatusWithContext(ctx aws.Context, input *UpdateHITReviewStatusInput, opts ...request.Option) (*UpdateHITReviewStatusOutput, error) {
+func (c *MTurk) UpdateHITReviewStatusWithContext(ctx aws.Context, input *UpdateHITReviewStatusInput, opts ...aws.Option) (*UpdateHITReviewStatusOutput, error) {
 	req, out := c.UpdateHITReviewStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3778,7 +3777,7 @@ func (c *MTurk) UpdateHITReviewStatusWithContext(ctx aws.Context, input *UpdateH
 
 const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 
-// UpdateHITTypeOfHITRequest generates a "aws/request.Request" representing the
+// UpdateHITTypeOfHITRequest generates a "aws.Request" representing the
 // client's request for the UpdateHITTypeOfHIT operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3802,8 +3801,8 @@ const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateHITTypeOfHIT
-func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) (req *request.Request, output *UpdateHITTypeOfHITOutput) {
-	op := &request.Operation{
+func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) (req *aws.Request, output *UpdateHITTypeOfHITOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateHITTypeOfHIT,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3855,7 +3854,7 @@ func (c *MTurk) UpdateHITTypeOfHIT(input *UpdateHITTypeOfHITInput) (*UpdateHITTy
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) UpdateHITTypeOfHITWithContext(ctx aws.Context, input *UpdateHITTypeOfHITInput, opts ...request.Option) (*UpdateHITTypeOfHITOutput, error) {
+func (c *MTurk) UpdateHITTypeOfHITWithContext(ctx aws.Context, input *UpdateHITTypeOfHITInput, opts ...aws.Option) (*UpdateHITTypeOfHITOutput, error) {
 	req, out := c.UpdateHITTypeOfHITRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3864,7 +3863,7 @@ func (c *MTurk) UpdateHITTypeOfHITWithContext(ctx aws.Context, input *UpdateHITT
 
 const opUpdateNotificationSettings = "UpdateNotificationSettings"
 
-// UpdateNotificationSettingsRequest generates a "aws/request.Request" representing the
+// UpdateNotificationSettingsRequest generates a "aws.Request" representing the
 // client's request for the UpdateNotificationSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3888,8 +3887,8 @@ const opUpdateNotificationSettings = "UpdateNotificationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateNotificationSettings
-func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSettingsInput) (req *request.Request, output *UpdateNotificationSettingsOutput) {
-	op := &request.Operation{
+func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSettingsInput) (req *aws.Request, output *UpdateNotificationSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateNotificationSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3947,7 +3946,7 @@ func (c *MTurk) UpdateNotificationSettings(input *UpdateNotificationSettingsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) UpdateNotificationSettingsWithContext(ctx aws.Context, input *UpdateNotificationSettingsInput, opts ...request.Option) (*UpdateNotificationSettingsOutput, error) {
+func (c *MTurk) UpdateNotificationSettingsWithContext(ctx aws.Context, input *UpdateNotificationSettingsInput, opts ...aws.Option) (*UpdateNotificationSettingsOutput, error) {
 	req, out := c.UpdateNotificationSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3956,7 +3955,7 @@ func (c *MTurk) UpdateNotificationSettingsWithContext(ctx aws.Context, input *Up
 
 const opUpdateQualificationType = "UpdateQualificationType"
 
-// UpdateQualificationTypeRequest generates a "aws/request.Request" representing the
+// UpdateQualificationTypeRequest generates a "aws.Request" representing the
 // client's request for the UpdateQualificationType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3980,8 +3979,8 @@ const opUpdateQualificationType = "UpdateQualificationType"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/UpdateQualificationType
-func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInput) (req *request.Request, output *UpdateQualificationTypeOutput) {
-	op := &request.Operation{
+func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInput) (req *aws.Request, output *UpdateQualificationTypeOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateQualificationType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4060,7 +4059,7 @@ func (c *MTurk) UpdateQualificationType(input *UpdateQualificationTypeInput) (*U
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MTurk) UpdateQualificationTypeWithContext(ctx aws.Context, input *UpdateQualificationTypeInput, opts ...request.Option) (*UpdateQualificationTypeOutput, error) {
+func (c *MTurk) UpdateQualificationTypeWithContext(ctx aws.Context, input *UpdateQualificationTypeInput, opts ...aws.Option) (*UpdateQualificationTypeOutput, error) {
 	req, out := c.UpdateQualificationTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4094,9 +4093,9 @@ func (s AcceptQualificationRequestInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptQualificationRequestInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AcceptQualificationRequestInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptQualificationRequestInput"}
 	if s.QualificationRequestId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationRequestId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationRequestId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4163,12 +4162,12 @@ func (s ApproveAssignmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApproveAssignmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApproveAssignmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApproveAssignmentInput"}
 	if s.AssignmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssignmentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4390,18 +4389,18 @@ func (s AssociateQualificationWithWorkerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateQualificationWithWorkerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateQualificationWithWorkerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateQualificationWithWorkerInput"}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 	if s.WorkerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
 	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4545,18 +4544,18 @@ func (s CreateAdditionalAssignmentsForHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAdditionalAssignmentsForHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAdditionalAssignmentsForHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAdditionalAssignmentsForHITInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 	if s.NumberOfAdditionalAssignments == nil {
-		invalidParams.Add(request.NewErrParamRequired("NumberOfAdditionalAssignments"))
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfAdditionalAssignments"))
 	}
 	if s.UniqueRequestToken != nil && len(*s.UniqueRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UniqueRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UniqueRequestToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4725,31 +4724,31 @@ func (s CreateHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHITInput"}
 	if s.AssignmentDurationInSeconds == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentDurationInSeconds"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.HITLayoutId != nil && len(*s.HITLayoutId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITLayoutId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITLayoutId", 1))
 	}
 	if s.LifetimeInSeconds == nil {
-		invalidParams.Add(request.NewErrParamRequired("LifetimeInSeconds"))
+		invalidParams.Add(aws.NewErrParamRequired("LifetimeInSeconds"))
 	}
 	if s.Reward == nil {
-		invalidParams.Add(request.NewErrParamRequired("Reward"))
+		invalidParams.Add(aws.NewErrParamRequired("Reward"))
 	}
 	if s.Title == nil {
-		invalidParams.Add(request.NewErrParamRequired("Title"))
+		invalidParams.Add(aws.NewErrParamRequired("Title"))
 	}
 	if s.UniqueRequestToken != nil && len(*s.UniqueRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UniqueRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UniqueRequestToken", 1))
 	}
 	if s.AssignmentReviewPolicy != nil {
 		if err := s.AssignmentReviewPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AssignmentReviewPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AssignmentReviewPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.HITLayoutParameters != nil {
@@ -4758,13 +4757,13 @@ func (s *CreateHITInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HITLayoutParameters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HITLayoutParameters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.HITReviewPolicy != nil {
 		if err := s.HITReviewPolicy.Validate(); err != nil {
-			invalidParams.AddNested("HITReviewPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("HITReviewPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.QualificationRequirements != nil {
@@ -4773,7 +4772,7 @@ func (s *CreateHITInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QualificationRequirements", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QualificationRequirements", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4966,18 +4965,18 @@ func (s CreateHITTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHITTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHITTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHITTypeInput"}
 	if s.AssignmentDurationInSeconds == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentDurationInSeconds"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentDurationInSeconds"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.Reward == nil {
-		invalidParams.Add(request.NewErrParamRequired("Reward"))
+		invalidParams.Add(aws.NewErrParamRequired("Reward"))
 	}
 	if s.Title == nil {
-		invalidParams.Add(request.NewErrParamRequired("Title"))
+		invalidParams.Add(aws.NewErrParamRequired("Title"))
 	}
 	if s.QualificationRequirements != nil {
 		for i, v := range s.QualificationRequirements {
@@ -4985,7 +4984,7 @@ func (s *CreateHITTypeInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QualificationRequirements", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QualificationRequirements", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5150,25 +5149,25 @@ func (s CreateHITWithHITTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHITWithHITTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHITWithHITTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHITWithHITTypeInput"}
 	if s.HITLayoutId != nil && len(*s.HITLayoutId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITLayoutId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITLayoutId", 1))
 	}
 	if s.HITTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
 	}
 	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
 	}
 	if s.LifetimeInSeconds == nil {
-		invalidParams.Add(request.NewErrParamRequired("LifetimeInSeconds"))
+		invalidParams.Add(aws.NewErrParamRequired("LifetimeInSeconds"))
 	}
 	if s.UniqueRequestToken != nil && len(*s.UniqueRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UniqueRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UniqueRequestToken", 1))
 	}
 	if s.AssignmentReviewPolicy != nil {
 		if err := s.AssignmentReviewPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AssignmentReviewPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AssignmentReviewPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.HITLayoutParameters != nil {
@@ -5177,13 +5176,13 @@ func (s *CreateHITWithHITTypeInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HITLayoutParameters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HITLayoutParameters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.HITReviewPolicy != nil {
 		if err := s.HITReviewPolicy.Validate(); err != nil {
-			invalidParams.AddNested("HITReviewPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("HITReviewPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5366,15 +5365,15 @@ func (s CreateQualificationTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateQualificationTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateQualificationTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateQualificationTypeInput"}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.QualificationTypeStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeStatus"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5495,15 +5494,15 @@ func (s CreateWorkerBlockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWorkerBlockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateWorkerBlockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateWorkerBlockInput"}
 	if s.Reason == nil {
-		invalidParams.Add(request.NewErrParamRequired("Reason"))
+		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
 	if s.WorkerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
 	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5561,12 +5560,12 @@ func (s DeleteHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHITInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5618,12 +5617,12 @@ func (s DeleteQualificationTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteQualificationTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteQualificationTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteQualificationTypeInput"}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5679,12 +5678,12 @@ func (s DeleteWorkerBlockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteWorkerBlockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteWorkerBlockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteWorkerBlockInput"}
 	if s.WorkerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
 	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5751,18 +5750,18 @@ func (s DisassociateQualificationFromWorkerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateQualificationFromWorkerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateQualificationFromWorkerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateQualificationFromWorkerInput"}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 	if s.WorkerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
 	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5874,12 +5873,12 @@ func (s GetAssignmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAssignmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAssignmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAssignmentInput"}
 	if s.AssignmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssignmentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5955,15 +5954,15 @@ func (s GetFileUploadURLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFileUploadURLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFileUploadURLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFileUploadURLInput"}
 	if s.AssignmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssignmentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
 	if s.QuestionIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("QuestionIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("QuestionIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6030,12 +6029,12 @@ func (s GetHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetHITInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6101,18 +6100,18 @@ func (s GetQualificationScoreInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQualificationScoreInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQualificationScoreInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQualificationScoreInput"}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 	if s.WorkerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
 	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6180,12 +6179,12 @@ func (s GetQualificationTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetQualificationTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetQualificationTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetQualificationTypeInput"}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6477,12 +6476,12 @@ func (s HITLayoutParameter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HITLayoutParameter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HITLayoutParameter"}
+	invalidParams := aws.ErrInvalidParams{Context: "HITLayoutParameter"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6533,18 +6532,18 @@ func (s ListAssignmentsForHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssignmentsForHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAssignmentsForHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAssignmentsForHITInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6654,18 +6653,18 @@ func (s ListBonusPaymentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBonusPaymentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBonusPaymentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBonusPaymentsInput"}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssignmentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6772,18 +6771,18 @@ func (s ListHITsForQualificationTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListHITsForQualificationTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListHITsForQualificationTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListHITsForQualificationTypeInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6877,12 +6876,12 @@ func (s ListHITsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListHITsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListHITsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListHITsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6976,15 +6975,15 @@ func (s ListQualificationRequestsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListQualificationRequestsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListQualificationRequestsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListQualificationRequestsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7100,15 +7099,15 @@ func (s ListQualificationTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListQualificationTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListQualificationTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListQualificationTypesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.MustBeRequestable == nil {
-		invalidParams.Add(request.NewErrParamRequired("MustBeRequestable"))
+		invalidParams.Add(aws.NewErrParamRequired("MustBeRequestable"))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7233,18 +7232,18 @@ func (s ListReviewPolicyResultsForHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListReviewPolicyResultsForHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListReviewPolicyResultsForHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListReviewPolicyResultsForHITInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7392,15 +7391,15 @@ func (s ListReviewableHITsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListReviewableHITsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListReviewableHITsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListReviewableHITsInput"}
 	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7500,12 +7499,12 @@ func (s ListWorkerBlocksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListWorkerBlocksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListWorkerBlocksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListWorkerBlocksInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7603,18 +7602,18 @@ func (s ListWorkersWithQualificationTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListWorkersWithQualificationTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListWorkersWithQualificationTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListWorkersWithQualificationTypeInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7720,15 +7719,15 @@ func (s Locale) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Locale) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Locale"}
+	invalidParams := aws.ErrInvalidParams{Context: "Locale"}
 	if s.Country == nil {
-		invalidParams.Add(request.NewErrParamRequired("Country"))
+		invalidParams.Add(aws.NewErrParamRequired("Country"))
 	}
 	if s.Country != nil && len(*s.Country) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Country", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Country", 2))
 	}
 	if s.Subdivision != nil && len(*s.Subdivision) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Subdivision", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Subdivision", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7800,18 +7799,18 @@ func (s NotificationSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotificationSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NotificationSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "NotificationSpecification"}
 	if s.Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.EventTypes == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventTypes"))
+		invalidParams.Add(aws.NewErrParamRequired("EventTypes"))
 	}
 	if s.Transport == nil {
-		invalidParams.Add(request.NewErrParamRequired("Transport"))
+		invalidParams.Add(aws.NewErrParamRequired("Transport"))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7921,15 +7920,15 @@ func (s NotifyWorkersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotifyWorkersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NotifyWorkersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "NotifyWorkersInput"}
 	if s.MessageText == nil {
-		invalidParams.Add(request.NewErrParamRequired("MessageText"))
+		invalidParams.Add(aws.NewErrParamRequired("MessageText"))
 	}
 	if s.Subject == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subject"))
+		invalidParams.Add(aws.NewErrParamRequired("Subject"))
 	}
 	if s.WorkerIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerIds"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8284,12 +8283,12 @@ func (s QualificationRequirement) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QualificationRequirement) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "QualificationRequirement"}
+	invalidParams := aws.ErrInvalidParams{Context: "QualificationRequirement"}
 	if s.Comparator == nil {
-		invalidParams.Add(request.NewErrParamRequired("Comparator"))
+		invalidParams.Add(aws.NewErrParamRequired("Comparator"))
 	}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.LocaleValues != nil {
 		for i, v := range s.LocaleValues {
@@ -8297,7 +8296,7 @@ func (s *QualificationRequirement) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocaleValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocaleValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8525,15 +8524,15 @@ func (s RejectAssignmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectAssignmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RejectAssignmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RejectAssignmentInput"}
 	if s.AssignmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssignmentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
 	if s.RequesterFeedback == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequesterFeedback"))
+		invalidParams.Add(aws.NewErrParamRequired("RequesterFeedback"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8596,9 +8595,9 @@ func (s RejectQualificationRequestInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectQualificationRequestInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RejectQualificationRequestInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RejectQualificationRequestInput"}
 	if s.QualificationRequestId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationRequestId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationRequestId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8753,9 +8752,9 @@ func (s ReviewPolicy) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReviewPolicy) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReviewPolicy"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReviewPolicy"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8937,27 +8936,27 @@ func (s SendBonusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendBonusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendBonusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendBonusInput"}
 	if s.AssignmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssignmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssignmentId"))
 	}
 	if s.AssignmentId != nil && len(*s.AssignmentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssignmentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssignmentId", 1))
 	}
 	if s.BonusAmount == nil {
-		invalidParams.Add(request.NewErrParamRequired("BonusAmount"))
+		invalidParams.Add(aws.NewErrParamRequired("BonusAmount"))
 	}
 	if s.Reason == nil {
-		invalidParams.Add(request.NewErrParamRequired("Reason"))
+		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
 	if s.UniqueRequestToken != nil && len(*s.UniqueRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UniqueRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UniqueRequestToken", 1))
 	}
 	if s.WorkerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WorkerId"))
+		invalidParams.Add(aws.NewErrParamRequired("WorkerId"))
 	}
 	if s.WorkerId != nil && len(*s.WorkerId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9043,16 +9042,16 @@ func (s SendTestEventNotificationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTestEventNotificationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendTestEventNotificationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendTestEventNotificationInput"}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.TestEventType == nil {
-		invalidParams.Add(request.NewErrParamRequired("TestEventType"))
+		invalidParams.Add(aws.NewErrParamRequired("TestEventType"))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9116,15 +9115,15 @@ func (s UpdateExpirationForHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateExpirationForHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateExpirationForHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateExpirationForHITInput"}
 	if s.ExpireAt == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExpireAt"))
+		invalidParams.Add(aws.NewErrParamRequired("ExpireAt"))
 	}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9190,12 +9189,12 @@ func (s UpdateHITReviewStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHITReviewStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateHITReviewStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateHITReviewStatusInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9258,18 +9257,18 @@ func (s UpdateHITTypeOfHITInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateHITTypeOfHITInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateHITTypeOfHITInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateHITTypeOfHITInput"}
 	if s.HITId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITId"))
 	}
 	if s.HITId != nil && len(*s.HITId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITId", 1))
 	}
 	if s.HITTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
 	}
 	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9336,16 +9335,16 @@ func (s UpdateNotificationSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNotificationSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateNotificationSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotificationSettingsInput"}
 	if s.HITTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("HITTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("HITTypeId"))
 	}
 	if s.HITTypeId != nil && len(*s.HITTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("HITTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("HITTypeId", 1))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9455,12 +9454,12 @@ func (s UpdateQualificationTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateQualificationTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateQualificationTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateQualificationTypeInput"}
 	if s.QualificationTypeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("QualificationTypeId"))
+		invalidParams.Add(aws.NewErrParamRequired("QualificationTypeId"))
 	}
 	if s.QualificationTypeId != nil && len(*s.QualificationTypeId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("QualificationTypeId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("QualificationTypeId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

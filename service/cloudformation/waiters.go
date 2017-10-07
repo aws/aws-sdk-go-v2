@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilChangeSetCreateComplete uses the AWS CloudFormation API operation
@@ -25,30 +24,30 @@ func (c *CloudFormation) WaitUntilChangeSetCreateComplete(input *DescribeChangeS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilChangeSetCreateCompleteWithContext(ctx aws.Context, input *DescribeChangeSetInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFormation) WaitUntilChangeSetCreateCompleteWithContext(ctx aws.Context, input *DescribeChangeSetInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilChangeSetCreateComplete",
 		MaxAttempts: 120,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Status",
 				Expected: "CREATE_COMPLETE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Status",
 				Expected: "FAILED",
 			},
 			{
-				State:    request.FailureWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.FailureWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ValidationError",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeChangeSetInput
 			if input != nil {
 				tmp := *input
@@ -81,50 +80,50 @@ func (c *CloudFormation) WaitUntilStackCreateComplete(input *DescribeStacksInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackCreateCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFormation) WaitUntilStackCreateCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStackCreateComplete",
 		MaxAttempts: 120,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "CREATE_COMPLETE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "CREATE_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "DELETE_COMPLETE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "DELETE_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "ROLLBACK_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "ROLLBACK_COMPLETE",
 			},
 			{
-				State:    request.FailureWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.FailureWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ValidationError",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStacksInput
 			if input != nil {
 				tmp := *input
@@ -157,50 +156,50 @@ func (c *CloudFormation) WaitUntilStackDeleteComplete(input *DescribeStacksInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackDeleteCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFormation) WaitUntilStackDeleteCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStackDeleteComplete",
 		MaxAttempts: 120,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "DELETE_COMPLETE",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ValidationError",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "DELETE_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "CREATE_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "ROLLBACK_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_ROLLBACK_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_ROLLBACK_IN_PROGRESS",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStacksInput
 			if input != nil {
 				tmp := *input
@@ -233,25 +232,25 @@ func (c *CloudFormation) WaitUntilStackExists(input *DescribeStacksInput) error 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackExistsWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFormation) WaitUntilStackExistsWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStackExists",
 		MaxAttempts: 20,
-		Delay:       request.ConstantWaiterDelay(5 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ValidationError",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStacksInput
 			if input != nil {
 				tmp := *input
@@ -284,40 +283,40 @@ func (c *CloudFormation) WaitUntilStackUpdateComplete(input *DescribeStacksInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) WaitUntilStackUpdateCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CloudFormation) WaitUntilStackUpdateCompleteWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStackUpdateComplete",
 		MaxAttempts: 120,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_COMPLETE",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_ROLLBACK_FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Stacks[].StackStatus",
 				Expected: "UPDATE_ROLLBACK_COMPLETE",
 			},
 			{
-				State:    request.FailureWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.FailureWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ValidationError",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStacksInput
 			if input != nil {
 				tmp := *input

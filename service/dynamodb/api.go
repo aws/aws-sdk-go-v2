@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opBatchGetItem = "BatchGetItem"
 
-// BatchGetItemRequest generates a "aws/request.Request" representing the
+// BatchGetItemRequest generates a "aws.Request" representing the
 // client's request for the BatchGetItem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,12 +38,12 @@ const opBatchGetItem = "BatchGetItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem
-func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) (req *request.Request, output *BatchGetItemOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) (req *aws.Request, output *BatchGetItemOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"RequestItems"},
 			OutputTokens:    []string{"UnprocessedKeys"},
 			LimitToken:      "",
@@ -151,7 +150,7 @@ func (c *DynamoDB) BatchGetItem(input *BatchGetItemInput) (*BatchGetItemOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) BatchGetItemWithContext(ctx aws.Context, input *BatchGetItemInput, opts ...request.Option) (*BatchGetItemOutput, error) {
+func (c *DynamoDB) BatchGetItemWithContext(ctx aws.Context, input *BatchGetItemInput, opts ...aws.Option) (*BatchGetItemOutput, error) {
 	req, out := c.BatchGetItemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -186,9 +185,9 @@ func (c *DynamoDB) BatchGetItemPages(input *BatchGetItemInput, fn func(*BatchGet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) BatchGetItemPagesWithContext(ctx aws.Context, input *BatchGetItemInput, fn func(*BatchGetItemOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DynamoDB) BatchGetItemPagesWithContext(ctx aws.Context, input *BatchGetItemInput, fn func(*BatchGetItemOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *BatchGetItemInput
 			if input != nil {
 				tmp := *input
@@ -210,7 +209,7 @@ func (c *DynamoDB) BatchGetItemPagesWithContext(ctx aws.Context, input *BatchGet
 
 const opBatchWriteItem = "BatchWriteItem"
 
-// BatchWriteItemRequest generates a "aws/request.Request" representing the
+// BatchWriteItemRequest generates a "aws.Request" representing the
 // client's request for the BatchWriteItem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -234,8 +233,8 @@ const opBatchWriteItem = "BatchWriteItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem
-func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) (req *request.Request, output *BatchWriteItemOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) (req *aws.Request, output *BatchWriteItemOutput) {
+	op := &aws.Operation{
 		Name:       opBatchWriteItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -364,7 +363,7 @@ func (c *DynamoDB) BatchWriteItem(input *BatchWriteItemInput) (*BatchWriteItemOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) BatchWriteItemWithContext(ctx aws.Context, input *BatchWriteItemInput, opts ...request.Option) (*BatchWriteItemOutput, error) {
+func (c *DynamoDB) BatchWriteItemWithContext(ctx aws.Context, input *BatchWriteItemInput, opts ...aws.Option) (*BatchWriteItemOutput, error) {
 	req, out := c.BatchWriteItemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -373,7 +372,7 @@ func (c *DynamoDB) BatchWriteItemWithContext(ctx aws.Context, input *BatchWriteI
 
 const opCreateTable = "CreateTable"
 
-// CreateTableRequest generates a "aws/request.Request" representing the
+// CreateTableRequest generates a "aws.Request" representing the
 // client's request for the CreateTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -397,8 +396,8 @@ const opCreateTable = "CreateTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable
-func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) (req *request.Request, output *CreateTableOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) (req *aws.Request, output *CreateTableOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -472,7 +471,7 @@ func (c *DynamoDB) CreateTable(input *CreateTableInput) (*CreateTableOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, opts ...request.Option) (*CreateTableOutput, error) {
+func (c *DynamoDB) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, opts ...aws.Option) (*CreateTableOutput, error) {
 	req, out := c.CreateTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -481,7 +480,7 @@ func (c *DynamoDB) CreateTableWithContext(ctx aws.Context, input *CreateTableInp
 
 const opDeleteItem = "DeleteItem"
 
-// DeleteItemRequest generates a "aws/request.Request" representing the
+// DeleteItemRequest generates a "aws.Request" representing the
 // client's request for the DeleteItem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -505,8 +504,8 @@ const opDeleteItem = "DeleteItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItem
-func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) (req *request.Request, output *DeleteItemOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) (req *aws.Request, output *DeleteItemOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -583,7 +582,7 @@ func (c *DynamoDB) DeleteItem(input *DeleteItemInput) (*DeleteItemOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) DeleteItemWithContext(ctx aws.Context, input *DeleteItemInput, opts ...request.Option) (*DeleteItemOutput, error) {
+func (c *DynamoDB) DeleteItemWithContext(ctx aws.Context, input *DeleteItemInput, opts ...aws.Option) (*DeleteItemOutput, error) {
 	req, out := c.DeleteItemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -592,7 +591,7 @@ func (c *DynamoDB) DeleteItemWithContext(ctx aws.Context, input *DeleteItemInput
 
 const opDeleteTable = "DeleteTable"
 
-// DeleteTableRequest generates a "aws/request.Request" representing the
+// DeleteTableRequest generates a "aws.Request" representing the
 // client's request for the DeleteTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -616,8 +615,8 @@ const opDeleteTable = "DeleteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable
-func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) (req *request.Request, output *DeleteTableOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) (req *aws.Request, output *DeleteTableOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -698,7 +697,7 @@ func (c *DynamoDB) DeleteTable(input *DeleteTableInput) (*DeleteTableOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, opts ...request.Option) (*DeleteTableOutput, error) {
+func (c *DynamoDB) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, opts ...aws.Option) (*DeleteTableOutput, error) {
 	req, out := c.DeleteTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -707,7 +706,7 @@ func (c *DynamoDB) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInp
 
 const opDescribeLimits = "DescribeLimits"
 
-// DescribeLimitsRequest generates a "aws/request.Request" representing the
+// DescribeLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -731,8 +730,8 @@ const opDescribeLimits = "DescribeLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimits
-func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) (req *request.Request, output *DescribeLimitsOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) (req *aws.Request, output *DescribeLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -833,7 +832,7 @@ func (c *DynamoDB) DescribeLimits(input *DescribeLimitsInput) (*DescribeLimitsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimitsInput, opts ...request.Option) (*DescribeLimitsOutput, error) {
+func (c *DynamoDB) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLimitsInput, opts ...aws.Option) (*DescribeLimitsOutput, error) {
 	req, out := c.DescribeLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -842,7 +841,7 @@ func (c *DynamoDB) DescribeLimitsWithContext(ctx aws.Context, input *DescribeLim
 
 const opDescribeTable = "DescribeTable"
 
-// DescribeTableRequest generates a "aws/request.Request" representing the
+// DescribeTableRequest generates a "aws.Request" representing the
 // client's request for the DescribeTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -866,8 +865,8 @@ const opDescribeTable = "DescribeTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable
-func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) (req *request.Request, output *DescribeTableOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) (req *aws.Request, output *DescribeTableOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -924,7 +923,7 @@ func (c *DynamoDB) DescribeTable(input *DescribeTableInput) (*DescribeTableOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) DescribeTableWithContext(ctx aws.Context, input *DescribeTableInput, opts ...request.Option) (*DescribeTableOutput, error) {
+func (c *DynamoDB) DescribeTableWithContext(ctx aws.Context, input *DescribeTableInput, opts ...aws.Option) (*DescribeTableOutput, error) {
 	req, out := c.DescribeTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -933,7 +932,7 @@ func (c *DynamoDB) DescribeTableWithContext(ctx aws.Context, input *DescribeTabl
 
 const opDescribeTimeToLive = "DescribeTimeToLive"
 
-// DescribeTimeToLiveRequest generates a "aws/request.Request" representing the
+// DescribeTimeToLiveRequest generates a "aws.Request" representing the
 // client's request for the DescribeTimeToLive operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -957,8 +956,8 @@ const opDescribeTimeToLive = "DescribeTimeToLive"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLive
-func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) (req *request.Request, output *DescribeTimeToLiveOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) (req *aws.Request, output *DescribeTimeToLiveOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTimeToLive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1007,7 +1006,7 @@ func (c *DynamoDB) DescribeTimeToLive(input *DescribeTimeToLiveInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) DescribeTimeToLiveWithContext(ctx aws.Context, input *DescribeTimeToLiveInput, opts ...request.Option) (*DescribeTimeToLiveOutput, error) {
+func (c *DynamoDB) DescribeTimeToLiveWithContext(ctx aws.Context, input *DescribeTimeToLiveInput, opts ...aws.Option) (*DescribeTimeToLiveOutput, error) {
 	req, out := c.DescribeTimeToLiveRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1016,7 +1015,7 @@ func (c *DynamoDB) DescribeTimeToLiveWithContext(ctx aws.Context, input *Describ
 
 const opGetItem = "GetItem"
 
-// GetItemRequest generates a "aws/request.Request" representing the
+// GetItemRequest generates a "aws.Request" representing the
 // client's request for the GetItem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1040,8 +1039,8 @@ const opGetItem = "GetItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem
-func (c *DynamoDB) GetItemRequest(input *GetItemInput) (req *request.Request, output *GetItemOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) GetItemRequest(input *GetItemInput) (req *aws.Request, output *GetItemOutput) {
+	op := &aws.Operation{
 		Name:       opGetItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1105,7 +1104,7 @@ func (c *DynamoDB) GetItem(input *GetItemInput) (*GetItemOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) GetItemWithContext(ctx aws.Context, input *GetItemInput, opts ...request.Option) (*GetItemOutput, error) {
+func (c *DynamoDB) GetItemWithContext(ctx aws.Context, input *GetItemInput, opts ...aws.Option) (*GetItemOutput, error) {
 	req, out := c.GetItemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1114,7 +1113,7 @@ func (c *DynamoDB) GetItemWithContext(ctx aws.Context, input *GetItemInput, opts
 
 const opListTables = "ListTables"
 
-// ListTablesRequest generates a "aws/request.Request" representing the
+// ListTablesRequest generates a "aws.Request" representing the
 // client's request for the ListTables operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1138,12 +1137,12 @@ const opListTables = "ListTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables
-func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) (req *request.Request, output *ListTablesOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) (req *aws.Request, output *ListTablesOutput) {
+	op := &aws.Operation{
 		Name:       opListTables,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"ExclusiveStartTableName"},
 			OutputTokens:    []string{"LastEvaluatedTableName"},
 			LimitToken:      "Limit",
@@ -1192,7 +1191,7 @@ func (c *DynamoDB) ListTables(input *ListTablesInput) (*ListTablesOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) ListTablesWithContext(ctx aws.Context, input *ListTablesInput, opts ...request.Option) (*ListTablesOutput, error) {
+func (c *DynamoDB) ListTablesWithContext(ctx aws.Context, input *ListTablesInput, opts ...aws.Option) (*ListTablesOutput, error) {
 	req, out := c.ListTablesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1227,9 +1226,9 @@ func (c *DynamoDB) ListTablesPages(input *ListTablesInput, fn func(*ListTablesOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) ListTablesPagesWithContext(ctx aws.Context, input *ListTablesInput, fn func(*ListTablesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DynamoDB) ListTablesPagesWithContext(ctx aws.Context, input *ListTablesInput, fn func(*ListTablesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTablesInput
 			if input != nil {
 				tmp := *input
@@ -1251,7 +1250,7 @@ func (c *DynamoDB) ListTablesPagesWithContext(ctx aws.Context, input *ListTables
 
 const opListTagsOfResource = "ListTagsOfResource"
 
-// ListTagsOfResourceRequest generates a "aws/request.Request" representing the
+// ListTagsOfResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsOfResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1275,8 +1274,8 @@ const opListTagsOfResource = "ListTagsOfResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource
-func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) (req *request.Request, output *ListTagsOfResourceOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) (req *aws.Request, output *ListTagsOfResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsOfResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1329,7 +1328,7 @@ func (c *DynamoDB) ListTagsOfResource(input *ListTagsOfResourceInput) (*ListTags
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) ListTagsOfResourceWithContext(ctx aws.Context, input *ListTagsOfResourceInput, opts ...request.Option) (*ListTagsOfResourceOutput, error) {
+func (c *DynamoDB) ListTagsOfResourceWithContext(ctx aws.Context, input *ListTagsOfResourceInput, opts ...aws.Option) (*ListTagsOfResourceOutput, error) {
 	req, out := c.ListTagsOfResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1338,7 +1337,7 @@ func (c *DynamoDB) ListTagsOfResourceWithContext(ctx aws.Context, input *ListTag
 
 const opPutItem = "PutItem"
 
-// PutItemRequest generates a "aws/request.Request" representing the
+// PutItemRequest generates a "aws.Request" representing the
 // client's request for the PutItem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1362,8 +1361,8 @@ const opPutItem = "PutItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItem
-func (c *DynamoDB) PutItemRequest(input *PutItemInput) (req *request.Request, output *PutItemOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) PutItemRequest(input *PutItemInput) (req *aws.Request, output *PutItemOutput) {
+	op := &aws.Operation{
 		Name:       opPutItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1470,7 +1469,7 @@ func (c *DynamoDB) PutItem(input *PutItemInput) (*PutItemOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) PutItemWithContext(ctx aws.Context, input *PutItemInput, opts ...request.Option) (*PutItemOutput, error) {
+func (c *DynamoDB) PutItemWithContext(ctx aws.Context, input *PutItemInput, opts ...aws.Option) (*PutItemOutput, error) {
 	req, out := c.PutItemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1479,7 +1478,7 @@ func (c *DynamoDB) PutItemWithContext(ctx aws.Context, input *PutItemInput, opts
 
 const opQuery = "Query"
 
-// QueryRequest generates a "aws/request.Request" representing the
+// QueryRequest generates a "aws.Request" representing the
 // client's request for the Query operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1503,12 +1502,12 @@ const opQuery = "Query"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query
-func (c *DynamoDB) QueryRequest(input *QueryInput) (req *request.Request, output *QueryOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) QueryRequest(input *QueryInput) (req *aws.Request, output *QueryOutput) {
+	op := &aws.Operation{
 		Name:       opQuery,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"ExclusiveStartKey"},
 			OutputTokens:    []string{"LastEvaluatedKey"},
 			LimitToken:      "Limit",
@@ -1614,7 +1613,7 @@ func (c *DynamoDB) Query(input *QueryInput) (*QueryOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) QueryWithContext(ctx aws.Context, input *QueryInput, opts ...request.Option) (*QueryOutput, error) {
+func (c *DynamoDB) QueryWithContext(ctx aws.Context, input *QueryInput, opts ...aws.Option) (*QueryOutput, error) {
 	req, out := c.QueryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1649,9 +1648,9 @@ func (c *DynamoDB) QueryPages(input *QueryInput, fn func(*QueryOutput, bool) boo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn func(*QueryOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn func(*QueryOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *QueryInput
 			if input != nil {
 				tmp := *input
@@ -1673,7 +1672,7 @@ func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn 
 
 const opScan = "Scan"
 
-// ScanRequest generates a "aws/request.Request" representing the
+// ScanRequest generates a "aws.Request" representing the
 // client's request for the Scan operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1697,12 +1696,12 @@ const opScan = "Scan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan
-func (c *DynamoDB) ScanRequest(input *ScanInput) (req *request.Request, output *ScanOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) ScanRequest(input *ScanInput) (req *aws.Request, output *ScanOutput) {
+	op := &aws.Operation{
 		Name:       opScan,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"ExclusiveStartKey"},
 			OutputTokens:    []string{"LastEvaluatedKey"},
 			LimitToken:      "Limit",
@@ -1788,7 +1787,7 @@ func (c *DynamoDB) Scan(input *ScanInput) (*ScanOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) ScanWithContext(ctx aws.Context, input *ScanInput, opts ...request.Option) (*ScanOutput, error) {
+func (c *DynamoDB) ScanWithContext(ctx aws.Context, input *ScanInput, opts ...aws.Option) (*ScanOutput, error) {
 	req, out := c.ScanRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1823,9 +1822,9 @@ func (c *DynamoDB) ScanPages(input *ScanInput, fn func(*ScanOutput, bool) bool) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) ScanPagesWithContext(ctx aws.Context, input *ScanInput, fn func(*ScanOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DynamoDB) ScanPagesWithContext(ctx aws.Context, input *ScanInput, fn func(*ScanOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ScanInput
 			if input != nil {
 				tmp := *input
@@ -1847,7 +1846,7 @@ func (c *DynamoDB) ScanPagesWithContext(ctx aws.Context, input *ScanInput, fn fu
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1871,8 +1870,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResource
-func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1944,7 +1943,7 @@ func (c *DynamoDB) TagResource(input *TagResourceInput) (*TagResourceOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *DynamoDB) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1953,7 +1952,7 @@ func (c *DynamoDB) TagResourceWithContext(ctx aws.Context, input *TagResourceInp
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1977,8 +1976,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResource
-func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2048,7 +2047,7 @@ func (c *DynamoDB) UntagResource(input *UntagResourceInput) (*UntagResourceOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *DynamoDB) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2057,7 +2056,7 @@ func (c *DynamoDB) UntagResourceWithContext(ctx aws.Context, input *UntagResourc
 
 const opUpdateItem = "UpdateItem"
 
-// UpdateItemRequest generates a "aws/request.Request" representing the
+// UpdateItemRequest generates a "aws.Request" representing the
 // client's request for the UpdateItem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2081,8 +2080,8 @@ const opUpdateItem = "UpdateItem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem
-func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) (req *request.Request, output *UpdateItemOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) (req *aws.Request, output *UpdateItemOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateItem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2153,7 +2152,7 @@ func (c *DynamoDB) UpdateItem(input *UpdateItemInput) (*UpdateItemOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) UpdateItemWithContext(ctx aws.Context, input *UpdateItemInput, opts ...request.Option) (*UpdateItemOutput, error) {
+func (c *DynamoDB) UpdateItemWithContext(ctx aws.Context, input *UpdateItemInput, opts ...aws.Option) (*UpdateItemOutput, error) {
 	req, out := c.UpdateItemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2162,7 +2161,7 @@ func (c *DynamoDB) UpdateItemWithContext(ctx aws.Context, input *UpdateItemInput
 
 const opUpdateTable = "UpdateTable"
 
-// UpdateTableRequest generates a "aws/request.Request" representing the
+// UpdateTableRequest generates a "aws.Request" representing the
 // client's request for the UpdateTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2186,8 +2185,8 @@ const opUpdateTable = "UpdateTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable
-func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) (req *request.Request, output *UpdateTableOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) (req *aws.Request, output *UpdateTableOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2268,7 +2267,7 @@ func (c *DynamoDB) UpdateTable(input *UpdateTableInput) (*UpdateTableOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, opts ...request.Option) (*UpdateTableOutput, error) {
+func (c *DynamoDB) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, opts ...aws.Option) (*UpdateTableOutput, error) {
 	req, out := c.UpdateTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2277,7 +2276,7 @@ func (c *DynamoDB) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInp
 
 const opUpdateTimeToLive = "UpdateTimeToLive"
 
-// UpdateTimeToLiveRequest generates a "aws/request.Request" representing the
+// UpdateTimeToLiveRequest generates a "aws.Request" representing the
 // client's request for the UpdateTimeToLive operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2301,8 +2300,8 @@ const opUpdateTimeToLive = "UpdateTimeToLive"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLive
-func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) (req *request.Request, output *UpdateTimeToLiveOutput) {
-	op := &request.Operation{
+func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) (req *aws.Request, output *UpdateTimeToLiveOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTimeToLive,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2393,7 +2392,7 @@ func (c *DynamoDB) UpdateTimeToLive(input *UpdateTimeToLiveInput) (*UpdateTimeTo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) UpdateTimeToLiveWithContext(ctx aws.Context, input *UpdateTimeToLiveInput, opts ...request.Option) (*UpdateTimeToLiveOutput, error) {
+func (c *DynamoDB) UpdateTimeToLiveWithContext(ctx aws.Context, input *UpdateTimeToLiveInput, opts ...aws.Option) (*UpdateTimeToLiveOutput, error) {
 	req, out := c.UpdateTimeToLiveRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2434,15 +2433,15 @@ func (s AttributeDefinition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeDefinition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttributeDefinition"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttributeDefinition"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.AttributeType == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeType"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2821,12 +2820,12 @@ func (s BatchGetItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetItemInput"}
 	if s.RequestItems == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestItems"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestItems"))
 	}
 	if s.RequestItems != nil && len(s.RequestItems) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RequestItems", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RequestItems", 1))
 	}
 	if s.RequestItems != nil {
 		for i, v := range s.RequestItems {
@@ -2834,7 +2833,7 @@ func (s *BatchGetItemInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequestItems", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RequestItems", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2998,12 +2997,12 @@ func (s BatchWriteItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchWriteItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchWriteItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchWriteItemInput"}
 	if s.RequestItems == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestItems"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestItems"))
 	}
 	if s.RequestItems != nil && len(s.RequestItems) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RequestItems", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RequestItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3240,9 +3239,9 @@ func (s Condition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Condition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Condition"}
+	invalidParams := aws.ErrInvalidParams{Context: "Condition"}
 	if s.ComparisonOperator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComparisonOperator"))
+		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3374,24 +3373,24 @@ func (s CreateGlobalSecondaryIndexAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGlobalSecondaryIndexAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGlobalSecondaryIndexAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGlobalSecondaryIndexAction"}
 	if s.IndexName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 	if s.KeySchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeySchema"))
+		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeySchema", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
 	if s.Projection == nil {
-		invalidParams.Add(request.NewErrParamRequired("Projection"))
+		invalidParams.Add(aws.NewErrParamRequired("Projection"))
 	}
 	if s.ProvisionedThroughput == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisionedThroughput"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
@@ -3399,18 +3398,18 @@ func (s *CreateGlobalSecondaryIndexAction) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Projection != nil {
 		if err := s.Projection.Validate(); err != nil {
-			invalidParams.AddNested("Projection", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Projection", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3607,24 +3606,24 @@ func (s CreateTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTableInput"}
 	if s.AttributeDefinitions == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeDefinitions"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeDefinitions"))
 	}
 	if s.KeySchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeySchema"))
+		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeySchema", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
 	if s.ProvisionedThroughput == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisionedThroughput"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 	if s.AttributeDefinitions != nil {
 		for i, v := range s.AttributeDefinitions {
@@ -3632,7 +3631,7 @@ func (s *CreateTableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3642,7 +3641,7 @@ func (s *CreateTableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3652,7 +3651,7 @@ func (s *CreateTableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3662,13 +3661,13 @@ func (s *CreateTableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocalSecondaryIndexes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LocalSecondaryIndexes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3768,12 +3767,12 @@ func (s DeleteGlobalSecondaryIndexAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGlobalSecondaryIndexAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGlobalSecondaryIndexAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGlobalSecondaryIndexAction"}
 	if s.IndexName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3945,15 +3944,15 @@ func (s DeleteItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteItemInput"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4142,12 +4141,12 @@ func (s DeleteTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTableInput"}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4284,12 +4283,12 @@ func (s DescribeTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTableInput"}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4351,12 +4350,12 @@ func (s DescribeTimeToLiveInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTimeToLiveInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTimeToLiveInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTimeToLiveInput"}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4657,18 +4656,18 @@ func (s GetItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetItemInput"}
 	if s.AttributesToGet != nil && len(s.AttributesToGet) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributesToGet", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributesToGet", 1))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4818,24 +4817,24 @@ func (s GlobalSecondaryIndex) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlobalSecondaryIndex) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GlobalSecondaryIndex"}
+	invalidParams := aws.ErrInvalidParams{Context: "GlobalSecondaryIndex"}
 	if s.IndexName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 	if s.KeySchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeySchema"))
+		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeySchema", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
 	if s.Projection == nil {
-		invalidParams.Add(request.NewErrParamRequired("Projection"))
+		invalidParams.Add(aws.NewErrParamRequired("Projection"))
 	}
 	if s.ProvisionedThroughput == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisionedThroughput"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
@@ -4843,18 +4842,18 @@ func (s *GlobalSecondaryIndex) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Projection != nil {
 		if err := s.Projection.Validate(); err != nil {
-			invalidParams.AddNested("Projection", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Projection", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5071,20 +5070,20 @@ func (s GlobalSecondaryIndexUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlobalSecondaryIndexUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GlobalSecondaryIndexUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "GlobalSecondaryIndexUpdate"}
 	if s.Create != nil {
 		if err := s.Create.Validate(); err != nil {
-			invalidParams.AddNested("Create", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Create", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Delete != nil {
 		if err := s.Delete.Validate(); err != nil {
-			invalidParams.AddNested("Delete", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Delete", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Update != nil {
 		if err := s.Update.Validate(); err != nil {
-			invalidParams.AddNested("Update", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Update", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5209,15 +5208,15 @@ func (s KeySchemaElement) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KeySchemaElement) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KeySchemaElement"}
+	invalidParams := aws.ErrInvalidParams{Context: "KeySchemaElement"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.KeyType == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyType"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5326,15 +5325,15 @@ func (s KeysAndAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KeysAndAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KeysAndAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "KeysAndAttributes"}
 	if s.AttributesToGet != nil && len(s.AttributesToGet) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributesToGet", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributesToGet", 1))
 	}
 	if s.Keys == nil {
-		invalidParams.Add(request.NewErrParamRequired("Keys"))
+		invalidParams.Add(aws.NewErrParamRequired("Keys"))
 	}
 	if s.Keys != nil && len(s.Keys) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Keys", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Keys", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5400,12 +5399,12 @@ func (s ListTablesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTablesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTablesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTablesInput"}
 	if s.ExclusiveStartTableName != nil && len(*s.ExclusiveStartTableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartTableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartTableName", 3))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5498,12 +5497,12 @@ func (s ListTagsOfResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsOfResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsOfResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsOfResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5609,21 +5608,21 @@ func (s LocalSecondaryIndex) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LocalSecondaryIndex) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LocalSecondaryIndex"}
+	invalidParams := aws.ErrInvalidParams{Context: "LocalSecondaryIndex"}
 	if s.IndexName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 	if s.KeySchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeySchema"))
+		invalidParams.Add(aws.NewErrParamRequired("KeySchema"))
 	}
 	if s.KeySchema != nil && len(s.KeySchema) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeySchema", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeySchema", 1))
 	}
 	if s.Projection == nil {
-		invalidParams.Add(request.NewErrParamRequired("Projection"))
+		invalidParams.Add(aws.NewErrParamRequired("Projection"))
 	}
 	if s.KeySchema != nil {
 		for i, v := range s.KeySchema {
@@ -5631,13 +5630,13 @@ func (s *LocalSecondaryIndex) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeySchema", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Projection != nil {
 		if err := s.Projection.Validate(); err != nil {
-			invalidParams.AddNested("Projection", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Projection", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5792,9 +5791,9 @@ func (s Projection) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Projection) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Projection"}
+	invalidParams := aws.ErrInvalidParams{Context: "Projection"}
 	if s.NonKeyAttributes != nil && len(s.NonKeyAttributes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NonKeyAttributes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NonKeyAttributes", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5854,18 +5853,18 @@ func (s ProvisionedThroughput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProvisionedThroughput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProvisionedThroughput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProvisionedThroughput"}
 	if s.ReadCapacityUnits == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReadCapacityUnits"))
+		invalidParams.Add(aws.NewErrParamRequired("ReadCapacityUnits"))
 	}
 	if s.ReadCapacityUnits != nil && *s.ReadCapacityUnits < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("ReadCapacityUnits", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("ReadCapacityUnits", 1))
 	}
 	if s.WriteCapacityUnits == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteCapacityUnits"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteCapacityUnits"))
 	}
 	if s.WriteCapacityUnits != nil && *s.WriteCapacityUnits < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("WriteCapacityUnits", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("WriteCapacityUnits", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6124,15 +6123,15 @@ func (s PutItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutItemInput"}
 	if s.Item == nil {
-		invalidParams.Add(request.NewErrParamRequired("Item"))
+		invalidParams.Add(aws.NewErrParamRequired("Item"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6608,21 +6607,21 @@ func (s QueryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "QueryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "QueryInput"}
 	if s.AttributesToGet != nil && len(s.AttributesToGet) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributesToGet", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributesToGet", 1))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 	if s.KeyConditions != nil {
 		for i, v := range s.KeyConditions {
@@ -6630,7 +6629,7 @@ func (s *QueryInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeyConditions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "KeyConditions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6640,7 +6639,7 @@ func (s *QueryInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueryFilter", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueryFilter", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7101,24 +7100,24 @@ func (s ScanInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScanInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScanInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScanInput"}
 	if s.AttributesToGet != nil && len(s.AttributesToGet) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributesToGet", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributesToGet", 1))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 	if s.TotalSegments != nil && *s.TotalSegments < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TotalSegments", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TotalSegments", 1))
 	}
 	if s.ScanFilter != nil {
 		for i, v := range s.ScanFilter {
@@ -7126,7 +7125,7 @@ func (s *ScanInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScanFilter", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScanFilter", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7702,15 +7701,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7759,15 +7758,15 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -7775,7 +7774,7 @@ func (s *TagResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7878,15 +7877,15 @@ func (s TimeToLiveSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TimeToLiveSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TimeToLiveSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "TimeToLiveSpecification"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7936,15 +7935,15 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8014,19 +8013,19 @@ func (s UpdateGlobalSecondaryIndexAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGlobalSecondaryIndexAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGlobalSecondaryIndexAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalSecondaryIndexAction"}
 	if s.IndexName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 3))
 	}
 	if s.ProvisionedThroughput == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProvisionedThroughput"))
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionedThroughput"))
 	}
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8297,15 +8296,15 @@ func (s UpdateItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateItemInput"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8508,12 +8507,12 @@ func (s UpdateTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTableInput"}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 	if s.AttributeDefinitions != nil {
 		for i, v := range s.AttributeDefinitions {
@@ -8521,7 +8520,7 @@ func (s *UpdateTableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeDefinitions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8531,13 +8530,13 @@ func (s *UpdateTableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "GlobalSecondaryIndexUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8631,19 +8630,19 @@ func (s UpdateTimeToLiveInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTimeToLiveInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTimeToLiveInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTimeToLiveInput"}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
 	}
 	if s.TimeToLiveSpecification == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimeToLiveSpecification"))
+		invalidParams.Add(aws.NewErrParamRequired("TimeToLiveSpecification"))
 	}
 	if s.TimeToLiveSpecification != nil {
 		if err := s.TimeToLiveSpecification.Validate(); err != nil {
-			invalidParams.AddNested("TimeToLiveSpecification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TimeToLiveSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 

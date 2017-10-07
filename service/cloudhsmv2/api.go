@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws/request.Request" representing the
+// CreateClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCreateCluster = "CreateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateCluster
-func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) (req *request.Request, output *CreateClusterOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -97,7 +96,7 @@ func (c *CloudHSMV2) CreateCluster(input *CreateClusterInput) (*CreateClusterOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...request.Option) (*CreateClusterOutput, error) {
+func (c *CloudHSMV2) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
 	req, out := c.CreateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -106,7 +105,7 @@ func (c *CloudHSMV2) CreateClusterWithContext(ctx aws.Context, input *CreateClus
 
 const opCreateHsm = "CreateHsm"
 
-// CreateHsmRequest generates a "aws/request.Request" representing the
+// CreateHsmRequest generates a "aws.Request" representing the
 // client's request for the CreateHsm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -130,8 +129,8 @@ const opCreateHsm = "CreateHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateHsm
-func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) (req *request.Request, output *CreateHsmOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) (req *aws.Request, output *CreateHsmOutput) {
+	op := &aws.Operation{
 		Name:       opCreateHsm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -191,7 +190,7 @@ func (c *CloudHSMV2) CreateHsm(input *CreateHsmInput) (*CreateHsmOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...request.Option) (*CreateHsmOutput, error) {
+func (c *CloudHSMV2) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput, opts ...aws.Option) (*CreateHsmOutput, error) {
 	req, out := c.CreateHsmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -200,7 +199,7 @@ func (c *CloudHSMV2) CreateHsmWithContext(ctx aws.Context, input *CreateHsmInput
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws/request.Request" representing the
+// DeleteClusterRequest generates a "aws.Request" representing the
 // client's request for the DeleteCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -224,8 +223,8 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteCluster
-func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) (req *request.Request, output *DeleteClusterOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -286,7 +285,7 @@ func (c *CloudHSMV2) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...request.Option) (*DeleteClusterOutput, error) {
+func (c *CloudHSMV2) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
 	req, out := c.DeleteClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -295,7 +294,7 @@ func (c *CloudHSMV2) DeleteClusterWithContext(ctx aws.Context, input *DeleteClus
 
 const opDeleteHsm = "DeleteHsm"
 
-// DeleteHsmRequest generates a "aws/request.Request" representing the
+// DeleteHsmRequest generates a "aws.Request" representing the
 // client's request for the DeleteHsm operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -319,8 +318,8 @@ const opDeleteHsm = "DeleteHsm"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteHsm
-func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) (req *request.Request, output *DeleteHsmOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) (req *aws.Request, output *DeleteHsmOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteHsm,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -382,7 +381,7 @@ func (c *CloudHSMV2) DeleteHsm(input *DeleteHsmInput) (*DeleteHsmOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...request.Option) (*DeleteHsmOutput, error) {
+func (c *CloudHSMV2) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput, opts ...aws.Option) (*DeleteHsmOutput, error) {
 	req, out := c.DeleteHsmRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -391,7 +390,7 @@ func (c *CloudHSMV2) DeleteHsmWithContext(ctx aws.Context, input *DeleteHsmInput
 
 const opDescribeBackups = "DescribeBackups"
 
-// DescribeBackupsRequest generates a "aws/request.Request" representing the
+// DescribeBackupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeBackups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -415,12 +414,12 @@ const opDescribeBackups = "DescribeBackups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackups
-func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) (req *request.Request, output *DescribeBackupsOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) (req *aws.Request, output *DescribeBackupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBackups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -488,7 +487,7 @@ func (c *CloudHSMV2) DescribeBackups(input *DescribeBackupsInput) (*DescribeBack
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) DescribeBackupsWithContext(ctx aws.Context, input *DescribeBackupsInput, opts ...request.Option) (*DescribeBackupsOutput, error) {
+func (c *CloudHSMV2) DescribeBackupsWithContext(ctx aws.Context, input *DescribeBackupsInput, opts ...aws.Option) (*DescribeBackupsOutput, error) {
 	req, out := c.DescribeBackupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -523,9 +522,9 @@ func (c *CloudHSMV2) DescribeBackupsPages(input *DescribeBackupsInput, fn func(*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *DescribeBackupsInput, fn func(*DescribeBackupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *DescribeBackupsInput, fn func(*DescribeBackupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeBackupsInput
 			if input != nil {
 				tmp := *input
@@ -547,7 +546,7 @@ func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws/request.Request" representing the
+// DescribeClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -571,12 +570,12 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClusters
-func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) (req *request.Request, output *DescribeClustersOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -641,7 +640,7 @@ func (c *CloudHSMV2) DescribeClusters(input *DescribeClustersInput) (*DescribeCl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.Option) (*DescribeClustersOutput, error) {
+func (c *CloudHSMV2) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
 	req, out := c.DescribeClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -676,9 +675,9 @@ func (c *CloudHSMV2) DescribeClustersPages(input *DescribeClustersInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClustersInput
 			if input != nil {
 				tmp := *input
@@ -700,7 +699,7 @@ func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *De
 
 const opInitializeCluster = "InitializeCluster"
 
-// InitializeClusterRequest generates a "aws/request.Request" representing the
+// InitializeClusterRequest generates a "aws.Request" representing the
 // client's request for the InitializeCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -724,8 +723,8 @@ const opInitializeCluster = "InitializeCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeCluster
-func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) (req *request.Request, output *InitializeClusterOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) (req *aws.Request, output *InitializeClusterOutput) {
+	op := &aws.Operation{
 		Name:       opInitializeCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -787,7 +786,7 @@ func (c *CloudHSMV2) InitializeCluster(input *InitializeClusterInput) (*Initiali
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) InitializeClusterWithContext(ctx aws.Context, input *InitializeClusterInput, opts ...request.Option) (*InitializeClusterOutput, error) {
+func (c *CloudHSMV2) InitializeClusterWithContext(ctx aws.Context, input *InitializeClusterInput, opts ...aws.Option) (*InitializeClusterOutput, error) {
 	req, out := c.InitializeClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -796,7 +795,7 @@ func (c *CloudHSMV2) InitializeClusterWithContext(ctx aws.Context, input *Initia
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws/request.Request" representing the
+// ListTagsRequest generates a "aws.Request" representing the
 // client's request for the ListTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -820,12 +819,12 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ListTags
-func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -892,7 +891,7 @@ func (c *CloudHSMV2) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
+func (c *CloudHSMV2) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -927,9 +926,9 @@ func (c *CloudHSMV2) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTagsInput
 			if input != nil {
 				tmp := *input
@@ -951,7 +950,7 @@ func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsIn
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -975,8 +974,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/TagResource
-func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1035,7 +1034,7 @@ func (c *CloudHSMV2) TagResource(input *TagResourceInput) (*TagResourceOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *CloudHSMV2) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1044,7 +1043,7 @@ func (c *CloudHSMV2) TagResourceWithContext(ctx aws.Context, input *TagResourceI
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1068,8 +1067,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/UntagResource
-func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1128,7 +1127,7 @@ func (c *CloudHSMV2) UntagResource(input *UntagResourceInput) (*UntagResourceOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudHSMV2) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *CloudHSMV2) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1426,15 +1425,15 @@ func (s CreateClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
 	if s.HsmType == nil {
-		invalidParams.Add(request.NewErrParamRequired("HsmType"))
+		invalidParams.Add(aws.NewErrParamRequired("HsmType"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 	if s.SubnetIds != nil && len(s.SubnetIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubnetIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1519,12 +1518,12 @@ func (s CreateHsmInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateHsmInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateHsmInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateHsmInput"}
 	if s.AvailabilityZone == nil {
-		invalidParams.Add(request.NewErrParamRequired("AvailabilityZone"))
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZone"))
 	}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1598,9 +1597,9 @@ func (s DeleteClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1672,9 +1671,9 @@ func (s DeleteHsmInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteHsmInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteHsmInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteHsmInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1767,9 +1766,9 @@ func (s DescribeBackupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBackupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBackupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBackupsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1868,9 +1867,9 @@ func (s DescribeClustersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClustersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeClustersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeClustersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2061,15 +2060,15 @@ func (s InitializeClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitializeClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitializeClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitializeClusterInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.SignedCert == nil {
-		invalidParams.Add(request.NewErrParamRequired("SignedCert"))
+		invalidParams.Add(aws.NewErrParamRequired("SignedCert"))
 	}
 	if s.TrustAnchor == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustAnchor"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustAnchor"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2160,12 +2159,12 @@ func (s ListTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2256,15 +2255,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2313,15 +2312,15 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagList"))
+		invalidParams.Add(aws.NewErrParamRequired("TagList"))
 	}
 	if s.TagList != nil && len(s.TagList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagList", 1))
 	}
 	if s.TagList != nil {
 		for i, v := range s.TagList {
@@ -2329,7 +2328,7 @@ func (s *TagResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2396,15 +2395,15 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagKeyList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeyList"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeyList"))
 	}
 	if s.TagKeyList != nil && len(s.TagKeyList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagKeyList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeyList", 1))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilDeploymentSuccessful uses the CodeDeploy API operation
@@ -25,30 +24,30 @@ func (c *CodeDeploy) WaitUntilDeploymentSuccessful(input *GetDeploymentInput) er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeDeploy) WaitUntilDeploymentSuccessfulWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *CodeDeploy) WaitUntilDeploymentSuccessfulWithContext(ctx aws.Context, input *GetDeploymentInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilDeploymentSuccessful",
 		MaxAttempts: 120,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "deploymentInfo.status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "deploymentInfo.status",
 				Expected: "Succeeded",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "deploymentInfo.status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "deploymentInfo.status",
 				Expected: "Failed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "deploymentInfo.status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "deploymentInfo.status",
 				Expected: "Stopped",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetDeploymentInput
 			if input != nil {
 				tmp := *input

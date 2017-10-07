@@ -10,7 +10,6 @@ package codebuildiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := codebuild.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := codebuild.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,60 +64,60 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CodeBuildAPI interface {
 	BatchDeleteBuilds(*codebuild.BatchDeleteBuildsInput) (*codebuild.BatchDeleteBuildsOutput, error)
-	BatchDeleteBuildsWithContext(aws.Context, *codebuild.BatchDeleteBuildsInput, ...request.Option) (*codebuild.BatchDeleteBuildsOutput, error)
-	BatchDeleteBuildsRequest(*codebuild.BatchDeleteBuildsInput) (*request.Request, *codebuild.BatchDeleteBuildsOutput)
+	BatchDeleteBuildsWithContext(aws.Context, *codebuild.BatchDeleteBuildsInput, ...aws.Option) (*codebuild.BatchDeleteBuildsOutput, error)
+	BatchDeleteBuildsRequest(*codebuild.BatchDeleteBuildsInput) (*aws.Request, *codebuild.BatchDeleteBuildsOutput)
 
 	BatchGetBuilds(*codebuild.BatchGetBuildsInput) (*codebuild.BatchGetBuildsOutput, error)
-	BatchGetBuildsWithContext(aws.Context, *codebuild.BatchGetBuildsInput, ...request.Option) (*codebuild.BatchGetBuildsOutput, error)
-	BatchGetBuildsRequest(*codebuild.BatchGetBuildsInput) (*request.Request, *codebuild.BatchGetBuildsOutput)
+	BatchGetBuildsWithContext(aws.Context, *codebuild.BatchGetBuildsInput, ...aws.Option) (*codebuild.BatchGetBuildsOutput, error)
+	BatchGetBuildsRequest(*codebuild.BatchGetBuildsInput) (*aws.Request, *codebuild.BatchGetBuildsOutput)
 
 	BatchGetProjects(*codebuild.BatchGetProjectsInput) (*codebuild.BatchGetProjectsOutput, error)
-	BatchGetProjectsWithContext(aws.Context, *codebuild.BatchGetProjectsInput, ...request.Option) (*codebuild.BatchGetProjectsOutput, error)
-	BatchGetProjectsRequest(*codebuild.BatchGetProjectsInput) (*request.Request, *codebuild.BatchGetProjectsOutput)
+	BatchGetProjectsWithContext(aws.Context, *codebuild.BatchGetProjectsInput, ...aws.Option) (*codebuild.BatchGetProjectsOutput, error)
+	BatchGetProjectsRequest(*codebuild.BatchGetProjectsInput) (*aws.Request, *codebuild.BatchGetProjectsOutput)
 
 	CreateProject(*codebuild.CreateProjectInput) (*codebuild.CreateProjectOutput, error)
-	CreateProjectWithContext(aws.Context, *codebuild.CreateProjectInput, ...request.Option) (*codebuild.CreateProjectOutput, error)
-	CreateProjectRequest(*codebuild.CreateProjectInput) (*request.Request, *codebuild.CreateProjectOutput)
+	CreateProjectWithContext(aws.Context, *codebuild.CreateProjectInput, ...aws.Option) (*codebuild.CreateProjectOutput, error)
+	CreateProjectRequest(*codebuild.CreateProjectInput) (*aws.Request, *codebuild.CreateProjectOutput)
 
 	CreateWebhook(*codebuild.CreateWebhookInput) (*codebuild.CreateWebhookOutput, error)
-	CreateWebhookWithContext(aws.Context, *codebuild.CreateWebhookInput, ...request.Option) (*codebuild.CreateWebhookOutput, error)
-	CreateWebhookRequest(*codebuild.CreateWebhookInput) (*request.Request, *codebuild.CreateWebhookOutput)
+	CreateWebhookWithContext(aws.Context, *codebuild.CreateWebhookInput, ...aws.Option) (*codebuild.CreateWebhookOutput, error)
+	CreateWebhookRequest(*codebuild.CreateWebhookInput) (*aws.Request, *codebuild.CreateWebhookOutput)
 
 	DeleteProject(*codebuild.DeleteProjectInput) (*codebuild.DeleteProjectOutput, error)
-	DeleteProjectWithContext(aws.Context, *codebuild.DeleteProjectInput, ...request.Option) (*codebuild.DeleteProjectOutput, error)
-	DeleteProjectRequest(*codebuild.DeleteProjectInput) (*request.Request, *codebuild.DeleteProjectOutput)
+	DeleteProjectWithContext(aws.Context, *codebuild.DeleteProjectInput, ...aws.Option) (*codebuild.DeleteProjectOutput, error)
+	DeleteProjectRequest(*codebuild.DeleteProjectInput) (*aws.Request, *codebuild.DeleteProjectOutput)
 
 	DeleteWebhook(*codebuild.DeleteWebhookInput) (*codebuild.DeleteWebhookOutput, error)
-	DeleteWebhookWithContext(aws.Context, *codebuild.DeleteWebhookInput, ...request.Option) (*codebuild.DeleteWebhookOutput, error)
-	DeleteWebhookRequest(*codebuild.DeleteWebhookInput) (*request.Request, *codebuild.DeleteWebhookOutput)
+	DeleteWebhookWithContext(aws.Context, *codebuild.DeleteWebhookInput, ...aws.Option) (*codebuild.DeleteWebhookOutput, error)
+	DeleteWebhookRequest(*codebuild.DeleteWebhookInput) (*aws.Request, *codebuild.DeleteWebhookOutput)
 
 	ListBuilds(*codebuild.ListBuildsInput) (*codebuild.ListBuildsOutput, error)
-	ListBuildsWithContext(aws.Context, *codebuild.ListBuildsInput, ...request.Option) (*codebuild.ListBuildsOutput, error)
-	ListBuildsRequest(*codebuild.ListBuildsInput) (*request.Request, *codebuild.ListBuildsOutput)
+	ListBuildsWithContext(aws.Context, *codebuild.ListBuildsInput, ...aws.Option) (*codebuild.ListBuildsOutput, error)
+	ListBuildsRequest(*codebuild.ListBuildsInput) (*aws.Request, *codebuild.ListBuildsOutput)
 
 	ListBuildsForProject(*codebuild.ListBuildsForProjectInput) (*codebuild.ListBuildsForProjectOutput, error)
-	ListBuildsForProjectWithContext(aws.Context, *codebuild.ListBuildsForProjectInput, ...request.Option) (*codebuild.ListBuildsForProjectOutput, error)
-	ListBuildsForProjectRequest(*codebuild.ListBuildsForProjectInput) (*request.Request, *codebuild.ListBuildsForProjectOutput)
+	ListBuildsForProjectWithContext(aws.Context, *codebuild.ListBuildsForProjectInput, ...aws.Option) (*codebuild.ListBuildsForProjectOutput, error)
+	ListBuildsForProjectRequest(*codebuild.ListBuildsForProjectInput) (*aws.Request, *codebuild.ListBuildsForProjectOutput)
 
 	ListCuratedEnvironmentImages(*codebuild.ListCuratedEnvironmentImagesInput) (*codebuild.ListCuratedEnvironmentImagesOutput, error)
-	ListCuratedEnvironmentImagesWithContext(aws.Context, *codebuild.ListCuratedEnvironmentImagesInput, ...request.Option) (*codebuild.ListCuratedEnvironmentImagesOutput, error)
-	ListCuratedEnvironmentImagesRequest(*codebuild.ListCuratedEnvironmentImagesInput) (*request.Request, *codebuild.ListCuratedEnvironmentImagesOutput)
+	ListCuratedEnvironmentImagesWithContext(aws.Context, *codebuild.ListCuratedEnvironmentImagesInput, ...aws.Option) (*codebuild.ListCuratedEnvironmentImagesOutput, error)
+	ListCuratedEnvironmentImagesRequest(*codebuild.ListCuratedEnvironmentImagesInput) (*aws.Request, *codebuild.ListCuratedEnvironmentImagesOutput)
 
 	ListProjects(*codebuild.ListProjectsInput) (*codebuild.ListProjectsOutput, error)
-	ListProjectsWithContext(aws.Context, *codebuild.ListProjectsInput, ...request.Option) (*codebuild.ListProjectsOutput, error)
-	ListProjectsRequest(*codebuild.ListProjectsInput) (*request.Request, *codebuild.ListProjectsOutput)
+	ListProjectsWithContext(aws.Context, *codebuild.ListProjectsInput, ...aws.Option) (*codebuild.ListProjectsOutput, error)
+	ListProjectsRequest(*codebuild.ListProjectsInput) (*aws.Request, *codebuild.ListProjectsOutput)
 
 	StartBuild(*codebuild.StartBuildInput) (*codebuild.StartBuildOutput, error)
-	StartBuildWithContext(aws.Context, *codebuild.StartBuildInput, ...request.Option) (*codebuild.StartBuildOutput, error)
-	StartBuildRequest(*codebuild.StartBuildInput) (*request.Request, *codebuild.StartBuildOutput)
+	StartBuildWithContext(aws.Context, *codebuild.StartBuildInput, ...aws.Option) (*codebuild.StartBuildOutput, error)
+	StartBuildRequest(*codebuild.StartBuildInput) (*aws.Request, *codebuild.StartBuildOutput)
 
 	StopBuild(*codebuild.StopBuildInput) (*codebuild.StopBuildOutput, error)
-	StopBuildWithContext(aws.Context, *codebuild.StopBuildInput, ...request.Option) (*codebuild.StopBuildOutput, error)
-	StopBuildRequest(*codebuild.StopBuildInput) (*request.Request, *codebuild.StopBuildOutput)
+	StopBuildWithContext(aws.Context, *codebuild.StopBuildInput, ...aws.Option) (*codebuild.StopBuildOutput, error)
+	StopBuildRequest(*codebuild.StopBuildInput) (*aws.Request, *codebuild.StopBuildOutput)
 
 	UpdateProject(*codebuild.UpdateProjectInput) (*codebuild.UpdateProjectOutput, error)
-	UpdateProjectWithContext(aws.Context, *codebuild.UpdateProjectInput, ...request.Option) (*codebuild.UpdateProjectOutput, error)
-	UpdateProjectRequest(*codebuild.UpdateProjectInput) (*request.Request, *codebuild.UpdateProjectOutput)
+	UpdateProjectWithContext(aws.Context, *codebuild.UpdateProjectInput, ...aws.Option) (*codebuild.UpdateProjectOutput, error)
+	UpdateProjectRequest(*codebuild.UpdateProjectInput) (*aws.Request, *codebuild.UpdateProjectOutput)
 }
 
 var _ CodeBuildAPI = (*codebuild.CodeBuild)(nil)

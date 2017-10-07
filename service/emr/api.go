@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAddInstanceFleet = "AddInstanceFleet"
 
-// AddInstanceFleetRequest generates a "aws/request.Request" representing the
+// AddInstanceFleetRequest generates a "aws.Request" representing the
 // client's request for the AddInstanceFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAddInstanceFleet = "AddInstanceFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleet
-func (c *EMR) AddInstanceFleetRequest(input *AddInstanceFleetInput) (req *request.Request, output *AddInstanceFleetOutput) {
-	op := &request.Operation{
+func (c *EMR) AddInstanceFleetRequest(input *AddInstanceFleetInput) (req *aws.Request, output *AddInstanceFleetOutput) {
+	op := &aws.Operation{
 		Name:       opAddInstanceFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -91,7 +90,7 @@ func (c *EMR) AddInstanceFleet(input *AddInstanceFleetInput) (*AddInstanceFleetO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) AddInstanceFleetWithContext(ctx aws.Context, input *AddInstanceFleetInput, opts ...request.Option) (*AddInstanceFleetOutput, error) {
+func (c *EMR) AddInstanceFleetWithContext(ctx aws.Context, input *AddInstanceFleetInput, opts ...aws.Option) (*AddInstanceFleetOutput, error) {
 	req, out := c.AddInstanceFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -100,7 +99,7 @@ func (c *EMR) AddInstanceFleetWithContext(ctx aws.Context, input *AddInstanceFle
 
 const opAddInstanceGroups = "AddInstanceGroups"
 
-// AddInstanceGroupsRequest generates a "aws/request.Request" representing the
+// AddInstanceGroupsRequest generates a "aws.Request" representing the
 // client's request for the AddInstanceGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -124,8 +123,8 @@ const opAddInstanceGroups = "AddInstanceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroups
-func (c *EMR) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) (req *request.Request, output *AddInstanceGroupsOutput) {
-	op := &request.Operation{
+func (c *EMR) AddInstanceGroupsRequest(input *AddInstanceGroupsInput) (req *aws.Request, output *AddInstanceGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opAddInstanceGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -171,7 +170,7 @@ func (c *EMR) AddInstanceGroups(input *AddInstanceGroupsInput) (*AddInstanceGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) AddInstanceGroupsWithContext(ctx aws.Context, input *AddInstanceGroupsInput, opts ...request.Option) (*AddInstanceGroupsOutput, error) {
+func (c *EMR) AddInstanceGroupsWithContext(ctx aws.Context, input *AddInstanceGroupsInput, opts ...aws.Option) (*AddInstanceGroupsOutput, error) {
 	req, out := c.AddInstanceGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -180,7 +179,7 @@ func (c *EMR) AddInstanceGroupsWithContext(ctx aws.Context, input *AddInstanceGr
 
 const opAddJobFlowSteps = "AddJobFlowSteps"
 
-// AddJobFlowStepsRequest generates a "aws/request.Request" representing the
+// AddJobFlowStepsRequest generates a "aws.Request" representing the
 // client's request for the AddJobFlowSteps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -204,8 +203,8 @@ const opAddJobFlowSteps = "AddJobFlowSteps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowSteps
-func (c *EMR) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) (req *request.Request, output *AddJobFlowStepsOutput) {
-	op := &request.Operation{
+func (c *EMR) AddJobFlowStepsRequest(input *AddJobFlowStepsInput) (req *aws.Request, output *AddJobFlowStepsOutput) {
+	op := &aws.Operation{
 		Name:       opAddJobFlowSteps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -273,7 +272,7 @@ func (c *EMR) AddJobFlowSteps(input *AddJobFlowStepsInput) (*AddJobFlowStepsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) AddJobFlowStepsWithContext(ctx aws.Context, input *AddJobFlowStepsInput, opts ...request.Option) (*AddJobFlowStepsOutput, error) {
+func (c *EMR) AddJobFlowStepsWithContext(ctx aws.Context, input *AddJobFlowStepsInput, opts ...aws.Option) (*AddJobFlowStepsOutput, error) {
 	req, out := c.AddJobFlowStepsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -282,7 +281,7 @@ func (c *EMR) AddJobFlowStepsWithContext(ctx aws.Context, input *AddJobFlowSteps
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -306,8 +305,8 @@ const opAddTags = "AddTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTags
-func (c *EMR) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *EMR) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -358,7 +357,7 @@ func (c *EMR) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *EMR) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -367,7 +366,7 @@ func (c *EMR) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...r
 
 const opCancelSteps = "CancelSteps"
 
-// CancelStepsRequest generates a "aws/request.Request" representing the
+// CancelStepsRequest generates a "aws.Request" representing the
 // client's request for the CancelSteps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -391,8 +390,8 @@ const opCancelSteps = "CancelSteps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelSteps
-func (c *EMR) CancelStepsRequest(input *CancelStepsInput) (req *request.Request, output *CancelStepsOutput) {
-	op := &request.Operation{
+func (c *EMR) CancelStepsRequest(input *CancelStepsInput) (req *aws.Request, output *CancelStepsOutput) {
+	op := &aws.Operation{
 		Name:       opCancelSteps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -445,7 +444,7 @@ func (c *EMR) CancelSteps(input *CancelStepsInput) (*CancelStepsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) CancelStepsWithContext(ctx aws.Context, input *CancelStepsInput, opts ...request.Option) (*CancelStepsOutput, error) {
+func (c *EMR) CancelStepsWithContext(ctx aws.Context, input *CancelStepsInput, opts ...aws.Option) (*CancelStepsOutput, error) {
 	req, out := c.CancelStepsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -454,7 +453,7 @@ func (c *EMR) CancelStepsWithContext(ctx aws.Context, input *CancelStepsInput, o
 
 const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 
-// CreateSecurityConfigurationRequest generates a "aws/request.Request" representing the
+// CreateSecurityConfigurationRequest generates a "aws.Request" representing the
 // client's request for the CreateSecurityConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -478,8 +477,8 @@ const opCreateSecurityConfiguration = "CreateSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfiguration
-func (c *EMR) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurationInput) (req *request.Request, output *CreateSecurityConfigurationOutput) {
-	op := &request.Operation{
+func (c *EMR) CreateSecurityConfigurationRequest(input *CreateSecurityConfigurationInput) (req *aws.Request, output *CreateSecurityConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSecurityConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -528,7 +527,7 @@ func (c *EMR) CreateSecurityConfiguration(input *CreateSecurityConfigurationInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) CreateSecurityConfigurationWithContext(ctx aws.Context, input *CreateSecurityConfigurationInput, opts ...request.Option) (*CreateSecurityConfigurationOutput, error) {
+func (c *EMR) CreateSecurityConfigurationWithContext(ctx aws.Context, input *CreateSecurityConfigurationInput, opts ...aws.Option) (*CreateSecurityConfigurationOutput, error) {
 	req, out := c.CreateSecurityConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -537,7 +536,7 @@ func (c *EMR) CreateSecurityConfigurationWithContext(ctx aws.Context, input *Cre
 
 const opDeleteSecurityConfiguration = "DeleteSecurityConfiguration"
 
-// DeleteSecurityConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteSecurityConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteSecurityConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -561,8 +560,8 @@ const opDeleteSecurityConfiguration = "DeleteSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfiguration
-func (c *EMR) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurationInput) (req *request.Request, output *DeleteSecurityConfigurationOutput) {
-	op := &request.Operation{
+func (c *EMR) DeleteSecurityConfigurationRequest(input *DeleteSecurityConfigurationInput) (req *aws.Request, output *DeleteSecurityConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSecurityConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -610,7 +609,7 @@ func (c *EMR) DeleteSecurityConfiguration(input *DeleteSecurityConfigurationInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) DeleteSecurityConfigurationWithContext(ctx aws.Context, input *DeleteSecurityConfigurationInput, opts ...request.Option) (*DeleteSecurityConfigurationOutput, error) {
+func (c *EMR) DeleteSecurityConfigurationWithContext(ctx aws.Context, input *DeleteSecurityConfigurationInput, opts ...aws.Option) (*DeleteSecurityConfigurationOutput, error) {
 	req, out := c.DeleteSecurityConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -619,7 +618,7 @@ func (c *EMR) DeleteSecurityConfigurationWithContext(ctx aws.Context, input *Del
 
 const opDescribeCluster = "DescribeCluster"
 
-// DescribeClusterRequest generates a "aws/request.Request" representing the
+// DescribeClusterRequest generates a "aws.Request" representing the
 // client's request for the DescribeCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -643,8 +642,8 @@ const opDescribeCluster = "DescribeCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster
-func (c *EMR) DescribeClusterRequest(input *DescribeClusterInput) (req *request.Request, output *DescribeClusterOutput) {
-	op := &request.Operation{
+func (c *EMR) DescribeClusterRequest(input *DescribeClusterInput) (req *aws.Request, output *DescribeClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -693,7 +692,7 @@ func (c *EMR) DescribeCluster(input *DescribeClusterInput) (*DescribeClusterOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) DescribeClusterWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...request.Option) (*DescribeClusterOutput, error) {
+func (c *EMR) DescribeClusterWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.Option) (*DescribeClusterOutput, error) {
 	req, out := c.DescribeClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -702,7 +701,7 @@ func (c *EMR) DescribeClusterWithContext(ctx aws.Context, input *DescribeCluster
 
 const opDescribeJobFlows = "DescribeJobFlows"
 
-// DescribeJobFlowsRequest generates a "aws/request.Request" representing the
+// DescribeJobFlowsRequest generates a "aws.Request" representing the
 // client's request for the DescribeJobFlows operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -726,11 +725,11 @@ const opDescribeJobFlows = "DescribeJobFlows"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlows
-func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *request.Request, output *DescribeJobFlowsOutput) {
+func (c *EMR) DescribeJobFlowsRequest(input *DescribeJobFlowsInput) (req *aws.Request, output *DescribeJobFlowsOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeJobFlows, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opDescribeJobFlows,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -795,7 +794,7 @@ func (c *EMR) DescribeJobFlows(input *DescribeJobFlowsInput) (*DescribeJobFlowsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) DescribeJobFlowsWithContext(ctx aws.Context, input *DescribeJobFlowsInput, opts ...request.Option) (*DescribeJobFlowsOutput, error) {
+func (c *EMR) DescribeJobFlowsWithContext(ctx aws.Context, input *DescribeJobFlowsInput, opts ...aws.Option) (*DescribeJobFlowsOutput, error) {
 	req, out := c.DescribeJobFlowsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -804,7 +803,7 @@ func (c *EMR) DescribeJobFlowsWithContext(ctx aws.Context, input *DescribeJobFlo
 
 const opDescribeSecurityConfiguration = "DescribeSecurityConfiguration"
 
-// DescribeSecurityConfigurationRequest generates a "aws/request.Request" representing the
+// DescribeSecurityConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DescribeSecurityConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -828,8 +827,8 @@ const opDescribeSecurityConfiguration = "DescribeSecurityConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfiguration
-func (c *EMR) DescribeSecurityConfigurationRequest(input *DescribeSecurityConfigurationInput) (req *request.Request, output *DescribeSecurityConfigurationOutput) {
-	op := &request.Operation{
+func (c *EMR) DescribeSecurityConfigurationRequest(input *DescribeSecurityConfigurationInput) (req *aws.Request, output *DescribeSecurityConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSecurityConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -878,7 +877,7 @@ func (c *EMR) DescribeSecurityConfiguration(input *DescribeSecurityConfiguration
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) DescribeSecurityConfigurationWithContext(ctx aws.Context, input *DescribeSecurityConfigurationInput, opts ...request.Option) (*DescribeSecurityConfigurationOutput, error) {
+func (c *EMR) DescribeSecurityConfigurationWithContext(ctx aws.Context, input *DescribeSecurityConfigurationInput, opts ...aws.Option) (*DescribeSecurityConfigurationOutput, error) {
 	req, out := c.DescribeSecurityConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -887,7 +886,7 @@ func (c *EMR) DescribeSecurityConfigurationWithContext(ctx aws.Context, input *D
 
 const opDescribeStep = "DescribeStep"
 
-// DescribeStepRequest generates a "aws/request.Request" representing the
+// DescribeStepRequest generates a "aws.Request" representing the
 // client's request for the DescribeStep operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -911,8 +910,8 @@ const opDescribeStep = "DescribeStep"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep
-func (c *EMR) DescribeStepRequest(input *DescribeStepInput) (req *request.Request, output *DescribeStepOutput) {
-	op := &request.Operation{
+func (c *EMR) DescribeStepRequest(input *DescribeStepInput) (req *aws.Request, output *DescribeStepOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStep,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -960,7 +959,7 @@ func (c *EMR) DescribeStep(input *DescribeStepInput) (*DescribeStepOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) DescribeStepWithContext(ctx aws.Context, input *DescribeStepInput, opts ...request.Option) (*DescribeStepOutput, error) {
+func (c *EMR) DescribeStepWithContext(ctx aws.Context, input *DescribeStepInput, opts ...aws.Option) (*DescribeStepOutput, error) {
 	req, out := c.DescribeStepRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -969,7 +968,7 @@ func (c *EMR) DescribeStepWithContext(ctx aws.Context, input *DescribeStepInput,
 
 const opListBootstrapActions = "ListBootstrapActions"
 
-// ListBootstrapActionsRequest generates a "aws/request.Request" representing the
+// ListBootstrapActionsRequest generates a "aws.Request" representing the
 // client's request for the ListBootstrapActions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -993,12 +992,12 @@ const opListBootstrapActions = "ListBootstrapActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActions
-func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) (req *request.Request, output *ListBootstrapActionsOutput) {
-	op := &request.Operation{
+func (c *EMR) ListBootstrapActionsRequest(input *ListBootstrapActionsInput) (req *aws.Request, output *ListBootstrapActionsOutput) {
+	op := &aws.Operation{
 		Name:       opListBootstrapActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "",
@@ -1048,7 +1047,7 @@ func (c *EMR) ListBootstrapActions(input *ListBootstrapActionsInput) (*ListBoots
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListBootstrapActionsWithContext(ctx aws.Context, input *ListBootstrapActionsInput, opts ...request.Option) (*ListBootstrapActionsOutput, error) {
+func (c *EMR) ListBootstrapActionsWithContext(ctx aws.Context, input *ListBootstrapActionsInput, opts ...aws.Option) (*ListBootstrapActionsOutput, error) {
 	req, out := c.ListBootstrapActionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1083,9 +1082,9 @@ func (c *EMR) ListBootstrapActionsPages(input *ListBootstrapActionsInput, fn fun
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListBootstrapActionsPagesWithContext(ctx aws.Context, input *ListBootstrapActionsInput, fn func(*ListBootstrapActionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *EMR) ListBootstrapActionsPagesWithContext(ctx aws.Context, input *ListBootstrapActionsInput, fn func(*ListBootstrapActionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListBootstrapActionsInput
 			if input != nil {
 				tmp := *input
@@ -1107,7 +1106,7 @@ func (c *EMR) ListBootstrapActionsPagesWithContext(ctx aws.Context, input *ListB
 
 const opListClusters = "ListClusters"
 
-// ListClustersRequest generates a "aws/request.Request" representing the
+// ListClustersRequest generates a "aws.Request" representing the
 // client's request for the ListClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1131,12 +1130,12 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters
-func (c *EMR) ListClustersRequest(input *ListClustersInput) (req *request.Request, output *ListClustersOutput) {
-	op := &request.Operation{
+func (c *EMR) ListClustersRequest(input *ListClustersInput) (req *aws.Request, output *ListClustersOutput) {
+	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "",
@@ -1190,7 +1189,7 @@ func (c *EMR) ListClusters(input *ListClustersInput) (*ListClustersOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...request.Option) (*ListClustersOutput, error) {
+func (c *EMR) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...aws.Option) (*ListClustersOutput, error) {
 	req, out := c.ListClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1225,9 +1224,9 @@ func (c *EMR) ListClustersPages(input *ListClustersInput, fn func(*ListClustersO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersInput, fn func(*ListClustersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *EMR) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersInput, fn func(*ListClustersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListClustersInput
 			if input != nil {
 				tmp := *input
@@ -1249,7 +1248,7 @@ func (c *EMR) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersI
 
 const opListInstanceFleets = "ListInstanceFleets"
 
-// ListInstanceFleetsRequest generates a "aws/request.Request" representing the
+// ListInstanceFleetsRequest generates a "aws.Request" representing the
 // client's request for the ListInstanceFleets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1273,12 +1272,12 @@ const opListInstanceFleets = "ListInstanceFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets
-func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) (req *request.Request, output *ListInstanceFleetsOutput) {
-	op := &request.Operation{
+func (c *EMR) ListInstanceFleetsRequest(input *ListInstanceFleetsInput) (req *aws.Request, output *ListInstanceFleetsOutput) {
+	op := &aws.Operation{
 		Name:       opListInstanceFleets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "",
@@ -1331,7 +1330,7 @@ func (c *EMR) ListInstanceFleets(input *ListInstanceFleetsInput) (*ListInstanceF
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListInstanceFleetsWithContext(ctx aws.Context, input *ListInstanceFleetsInput, opts ...request.Option) (*ListInstanceFleetsOutput, error) {
+func (c *EMR) ListInstanceFleetsWithContext(ctx aws.Context, input *ListInstanceFleetsInput, opts ...aws.Option) (*ListInstanceFleetsOutput, error) {
 	req, out := c.ListInstanceFleetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1366,9 +1365,9 @@ func (c *EMR) ListInstanceFleetsPages(input *ListInstanceFleetsInput, fn func(*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListInstanceFleetsPagesWithContext(ctx aws.Context, input *ListInstanceFleetsInput, fn func(*ListInstanceFleetsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *EMR) ListInstanceFleetsPagesWithContext(ctx aws.Context, input *ListInstanceFleetsInput, fn func(*ListInstanceFleetsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInstanceFleetsInput
 			if input != nil {
 				tmp := *input
@@ -1390,7 +1389,7 @@ func (c *EMR) ListInstanceFleetsPagesWithContext(ctx aws.Context, input *ListIns
 
 const opListInstanceGroups = "ListInstanceGroups"
 
-// ListInstanceGroupsRequest generates a "aws/request.Request" representing the
+// ListInstanceGroupsRequest generates a "aws.Request" representing the
 // client's request for the ListInstanceGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1414,12 +1413,12 @@ const opListInstanceGroups = "ListInstanceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups
-func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) (req *request.Request, output *ListInstanceGroupsOutput) {
-	op := &request.Operation{
+func (c *EMR) ListInstanceGroupsRequest(input *ListInstanceGroupsInput) (req *aws.Request, output *ListInstanceGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opListInstanceGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "",
@@ -1469,7 +1468,7 @@ func (c *EMR) ListInstanceGroups(input *ListInstanceGroupsInput) (*ListInstanceG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListInstanceGroupsWithContext(ctx aws.Context, input *ListInstanceGroupsInput, opts ...request.Option) (*ListInstanceGroupsOutput, error) {
+func (c *EMR) ListInstanceGroupsWithContext(ctx aws.Context, input *ListInstanceGroupsInput, opts ...aws.Option) (*ListInstanceGroupsOutput, error) {
 	req, out := c.ListInstanceGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1504,9 +1503,9 @@ func (c *EMR) ListInstanceGroupsPages(input *ListInstanceGroupsInput, fn func(*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListInstanceGroupsPagesWithContext(ctx aws.Context, input *ListInstanceGroupsInput, fn func(*ListInstanceGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *EMR) ListInstanceGroupsPagesWithContext(ctx aws.Context, input *ListInstanceGroupsInput, fn func(*ListInstanceGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInstanceGroupsInput
 			if input != nil {
 				tmp := *input
@@ -1528,7 +1527,7 @@ func (c *EMR) ListInstanceGroupsPagesWithContext(ctx aws.Context, input *ListIns
 
 const opListInstances = "ListInstances"
 
-// ListInstancesRequest generates a "aws/request.Request" representing the
+// ListInstancesRequest generates a "aws.Request" representing the
 // client's request for the ListInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1552,12 +1551,12 @@ const opListInstances = "ListInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstances
-func (c *EMR) ListInstancesRequest(input *ListInstancesInput) (req *request.Request, output *ListInstancesOutput) {
-	op := &request.Operation{
+func (c *EMR) ListInstancesRequest(input *ListInstancesInput) (req *aws.Request, output *ListInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opListInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "",
@@ -1610,7 +1609,7 @@ func (c *EMR) ListInstances(input *ListInstancesInput) (*ListInstancesOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListInstancesWithContext(ctx aws.Context, input *ListInstancesInput, opts ...request.Option) (*ListInstancesOutput, error) {
+func (c *EMR) ListInstancesWithContext(ctx aws.Context, input *ListInstancesInput, opts ...aws.Option) (*ListInstancesOutput, error) {
 	req, out := c.ListInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1645,9 +1644,9 @@ func (c *EMR) ListInstancesPages(input *ListInstancesInput, fn func(*ListInstanc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListInstancesPagesWithContext(ctx aws.Context, input *ListInstancesInput, fn func(*ListInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *EMR) ListInstancesPagesWithContext(ctx aws.Context, input *ListInstancesInput, fn func(*ListInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInstancesInput
 			if input != nil {
 				tmp := *input
@@ -1669,7 +1668,7 @@ func (c *EMR) ListInstancesPagesWithContext(ctx aws.Context, input *ListInstance
 
 const opListSecurityConfigurations = "ListSecurityConfigurations"
 
-// ListSecurityConfigurationsRequest generates a "aws/request.Request" representing the
+// ListSecurityConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the ListSecurityConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1693,8 +1692,8 @@ const opListSecurityConfigurations = "ListSecurityConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurations
-func (c *EMR) ListSecurityConfigurationsRequest(input *ListSecurityConfigurationsInput) (req *request.Request, output *ListSecurityConfigurationsOutput) {
-	op := &request.Operation{
+func (c *EMR) ListSecurityConfigurationsRequest(input *ListSecurityConfigurationsInput) (req *aws.Request, output *ListSecurityConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opListSecurityConfigurations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1745,7 +1744,7 @@ func (c *EMR) ListSecurityConfigurations(input *ListSecurityConfigurationsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListSecurityConfigurationsWithContext(ctx aws.Context, input *ListSecurityConfigurationsInput, opts ...request.Option) (*ListSecurityConfigurationsOutput, error) {
+func (c *EMR) ListSecurityConfigurationsWithContext(ctx aws.Context, input *ListSecurityConfigurationsInput, opts ...aws.Option) (*ListSecurityConfigurationsOutput, error) {
 	req, out := c.ListSecurityConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1754,7 +1753,7 @@ func (c *EMR) ListSecurityConfigurationsWithContext(ctx aws.Context, input *List
 
 const opListSteps = "ListSteps"
 
-// ListStepsRequest generates a "aws/request.Request" representing the
+// ListStepsRequest generates a "aws.Request" representing the
 // client's request for the ListSteps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1778,12 +1777,12 @@ const opListSteps = "ListSteps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSteps
-func (c *EMR) ListStepsRequest(input *ListStepsInput) (req *request.Request, output *ListStepsOutput) {
-	op := &request.Operation{
+func (c *EMR) ListStepsRequest(input *ListStepsInput) (req *aws.Request, output *ListStepsOutput) {
+	op := &aws.Operation{
 		Name:       opListSteps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "",
@@ -1834,7 +1833,7 @@ func (c *EMR) ListSteps(input *ListStepsInput) (*ListStepsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListStepsWithContext(ctx aws.Context, input *ListStepsInput, opts ...request.Option) (*ListStepsOutput, error) {
+func (c *EMR) ListStepsWithContext(ctx aws.Context, input *ListStepsInput, opts ...aws.Option) (*ListStepsOutput, error) {
 	req, out := c.ListStepsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1869,9 +1868,9 @@ func (c *EMR) ListStepsPages(input *ListStepsInput, fn func(*ListStepsOutput, bo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ListStepsPagesWithContext(ctx aws.Context, input *ListStepsInput, fn func(*ListStepsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *EMR) ListStepsPagesWithContext(ctx aws.Context, input *ListStepsInput, fn func(*ListStepsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStepsInput
 			if input != nil {
 				tmp := *input
@@ -1893,7 +1892,7 @@ func (c *EMR) ListStepsPagesWithContext(ctx aws.Context, input *ListStepsInput, 
 
 const opModifyInstanceFleet = "ModifyInstanceFleet"
 
-// ModifyInstanceFleetRequest generates a "aws/request.Request" representing the
+// ModifyInstanceFleetRequest generates a "aws.Request" representing the
 // client's request for the ModifyInstanceFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1917,8 +1916,8 @@ const opModifyInstanceFleet = "ModifyInstanceFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleet
-func (c *EMR) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) (req *request.Request, output *ModifyInstanceFleetOutput) {
-	op := &request.Operation{
+func (c *EMR) ModifyInstanceFleetRequest(input *ModifyInstanceFleetInput) (req *aws.Request, output *ModifyInstanceFleetOutput) {
+	op := &aws.Operation{
 		Name:       opModifyInstanceFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1973,7 +1972,7 @@ func (c *EMR) ModifyInstanceFleet(input *ModifyInstanceFleetInput) (*ModifyInsta
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ModifyInstanceFleetWithContext(ctx aws.Context, input *ModifyInstanceFleetInput, opts ...request.Option) (*ModifyInstanceFleetOutput, error) {
+func (c *EMR) ModifyInstanceFleetWithContext(ctx aws.Context, input *ModifyInstanceFleetInput, opts ...aws.Option) (*ModifyInstanceFleetOutput, error) {
 	req, out := c.ModifyInstanceFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1982,7 +1981,7 @@ func (c *EMR) ModifyInstanceFleetWithContext(ctx aws.Context, input *ModifyInsta
 
 const opModifyInstanceGroups = "ModifyInstanceGroups"
 
-// ModifyInstanceGroupsRequest generates a "aws/request.Request" representing the
+// ModifyInstanceGroupsRequest generates a "aws.Request" representing the
 // client's request for the ModifyInstanceGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2006,8 +2005,8 @@ const opModifyInstanceGroups = "ModifyInstanceGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroups
-func (c *EMR) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) (req *request.Request, output *ModifyInstanceGroupsOutput) {
-	op := &request.Operation{
+func (c *EMR) ModifyInstanceGroupsRequest(input *ModifyInstanceGroupsInput) (req *aws.Request, output *ModifyInstanceGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opModifyInstanceGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2058,7 +2057,7 @@ func (c *EMR) ModifyInstanceGroups(input *ModifyInstanceGroupsInput) (*ModifyIns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) ModifyInstanceGroupsWithContext(ctx aws.Context, input *ModifyInstanceGroupsInput, opts ...request.Option) (*ModifyInstanceGroupsOutput, error) {
+func (c *EMR) ModifyInstanceGroupsWithContext(ctx aws.Context, input *ModifyInstanceGroupsInput, opts ...aws.Option) (*ModifyInstanceGroupsOutput, error) {
 	req, out := c.ModifyInstanceGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2067,7 +2066,7 @@ func (c *EMR) ModifyInstanceGroupsWithContext(ctx aws.Context, input *ModifyInst
 
 const opPutAutoScalingPolicy = "PutAutoScalingPolicy"
 
-// PutAutoScalingPolicyRequest generates a "aws/request.Request" representing the
+// PutAutoScalingPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutAutoScalingPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2091,8 +2090,8 @@ const opPutAutoScalingPolicy = "PutAutoScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicy
-func (c *EMR) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) (req *request.Request, output *PutAutoScalingPolicyOutput) {
-	op := &request.Operation{
+func (c *EMR) PutAutoScalingPolicyRequest(input *PutAutoScalingPolicyInput) (req *aws.Request, output *PutAutoScalingPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutAutoScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2135,7 +2134,7 @@ func (c *EMR) PutAutoScalingPolicy(input *PutAutoScalingPolicyInput) (*PutAutoSc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) PutAutoScalingPolicyWithContext(ctx aws.Context, input *PutAutoScalingPolicyInput, opts ...request.Option) (*PutAutoScalingPolicyOutput, error) {
+func (c *EMR) PutAutoScalingPolicyWithContext(ctx aws.Context, input *PutAutoScalingPolicyInput, opts ...aws.Option) (*PutAutoScalingPolicyOutput, error) {
 	req, out := c.PutAutoScalingPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2144,7 +2143,7 @@ func (c *EMR) PutAutoScalingPolicyWithContext(ctx aws.Context, input *PutAutoSca
 
 const opRemoveAutoScalingPolicy = "RemoveAutoScalingPolicy"
 
-// RemoveAutoScalingPolicyRequest generates a "aws/request.Request" representing the
+// RemoveAutoScalingPolicyRequest generates a "aws.Request" representing the
 // client's request for the RemoveAutoScalingPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2168,8 +2167,8 @@ const opRemoveAutoScalingPolicy = "RemoveAutoScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicy
-func (c *EMR) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyInput) (req *request.Request, output *RemoveAutoScalingPolicyOutput) {
-	op := &request.Operation{
+func (c *EMR) RemoveAutoScalingPolicyRequest(input *RemoveAutoScalingPolicyInput) (req *aws.Request, output *RemoveAutoScalingPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveAutoScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2210,7 +2209,7 @@ func (c *EMR) RemoveAutoScalingPolicy(input *RemoveAutoScalingPolicyInput) (*Rem
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) RemoveAutoScalingPolicyWithContext(ctx aws.Context, input *RemoveAutoScalingPolicyInput, opts ...request.Option) (*RemoveAutoScalingPolicyOutput, error) {
+func (c *EMR) RemoveAutoScalingPolicyWithContext(ctx aws.Context, input *RemoveAutoScalingPolicyInput, opts ...aws.Option) (*RemoveAutoScalingPolicyOutput, error) {
 	req, out := c.RemoveAutoScalingPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2219,7 +2218,7 @@ func (c *EMR) RemoveAutoScalingPolicyWithContext(ctx aws.Context, input *RemoveA
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws/request.Request" representing the
+// RemoveTagsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2243,8 +2242,8 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTags
-func (c *EMR) RemoveTagsRequest(input *RemoveTagsInput) (req *request.Request, output *RemoveTagsOutput) {
-	op := &request.Operation{
+func (c *EMR) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2297,7 +2296,7 @@ func (c *EMR) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...request.Option) (*RemoveTagsOutput, error) {
+func (c *EMR) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
 	req, out := c.RemoveTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2306,7 +2305,7 @@ func (c *EMR) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opt
 
 const opRunJobFlow = "RunJobFlow"
 
-// RunJobFlowRequest generates a "aws/request.Request" representing the
+// RunJobFlowRequest generates a "aws.Request" representing the
 // client's request for the RunJobFlow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2330,8 +2329,8 @@ const opRunJobFlow = "RunJobFlow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow
-func (c *EMR) RunJobFlowRequest(input *RunJobFlowInput) (req *request.Request, output *RunJobFlowOutput) {
-	op := &request.Operation{
+func (c *EMR) RunJobFlowRequest(input *RunJobFlowInput) (req *aws.Request, output *RunJobFlowOutput) {
+	op := &aws.Operation{
 		Name:       opRunJobFlow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2403,7 +2402,7 @@ func (c *EMR) RunJobFlow(input *RunJobFlowInput) (*RunJobFlowOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) RunJobFlowWithContext(ctx aws.Context, input *RunJobFlowInput, opts ...request.Option) (*RunJobFlowOutput, error) {
+func (c *EMR) RunJobFlowWithContext(ctx aws.Context, input *RunJobFlowInput, opts ...aws.Option) (*RunJobFlowOutput, error) {
 	req, out := c.RunJobFlowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2412,7 +2411,7 @@ func (c *EMR) RunJobFlowWithContext(ctx aws.Context, input *RunJobFlowInput, opt
 
 const opSetTerminationProtection = "SetTerminationProtection"
 
-// SetTerminationProtectionRequest generates a "aws/request.Request" representing the
+// SetTerminationProtectionRequest generates a "aws.Request" representing the
 // client's request for the SetTerminationProtection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2436,8 +2435,8 @@ const opSetTerminationProtection = "SetTerminationProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtection
-func (c *EMR) SetTerminationProtectionRequest(input *SetTerminationProtectionInput) (req *request.Request, output *SetTerminationProtectionOutput) {
-	op := &request.Operation{
+func (c *EMR) SetTerminationProtectionRequest(input *SetTerminationProtectionInput) (req *aws.Request, output *SetTerminationProtectionOutput) {
+	op := &aws.Operation{
 		Name:       opSetTerminationProtection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2501,7 +2500,7 @@ func (c *EMR) SetTerminationProtection(input *SetTerminationProtectionInput) (*S
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) SetTerminationProtectionWithContext(ctx aws.Context, input *SetTerminationProtectionInput, opts ...request.Option) (*SetTerminationProtectionOutput, error) {
+func (c *EMR) SetTerminationProtectionWithContext(ctx aws.Context, input *SetTerminationProtectionInput, opts ...aws.Option) (*SetTerminationProtectionOutput, error) {
 	req, out := c.SetTerminationProtectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2510,7 +2509,7 @@ func (c *EMR) SetTerminationProtectionWithContext(ctx aws.Context, input *SetTer
 
 const opSetVisibleToAllUsers = "SetVisibleToAllUsers"
 
-// SetVisibleToAllUsersRequest generates a "aws/request.Request" representing the
+// SetVisibleToAllUsersRequest generates a "aws.Request" representing the
 // client's request for the SetVisibleToAllUsers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2534,8 +2533,8 @@ const opSetVisibleToAllUsers = "SetVisibleToAllUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsers
-func (c *EMR) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) (req *request.Request, output *SetVisibleToAllUsersOutput) {
-	op := &request.Operation{
+func (c *EMR) SetVisibleToAllUsersRequest(input *SetVisibleToAllUsersInput) (req *aws.Request, output *SetVisibleToAllUsersOutput) {
+	op := &aws.Operation{
 		Name:       opSetVisibleToAllUsers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2588,7 +2587,7 @@ func (c *EMR) SetVisibleToAllUsers(input *SetVisibleToAllUsersInput) (*SetVisibl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) SetVisibleToAllUsersWithContext(ctx aws.Context, input *SetVisibleToAllUsersInput, opts ...request.Option) (*SetVisibleToAllUsersOutput, error) {
+func (c *EMR) SetVisibleToAllUsersWithContext(ctx aws.Context, input *SetVisibleToAllUsersInput, opts ...aws.Option) (*SetVisibleToAllUsersOutput, error) {
 	req, out := c.SetVisibleToAllUsersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2597,7 +2596,7 @@ func (c *EMR) SetVisibleToAllUsersWithContext(ctx aws.Context, input *SetVisible
 
 const opTerminateJobFlows = "TerminateJobFlows"
 
-// TerminateJobFlowsRequest generates a "aws/request.Request" representing the
+// TerminateJobFlowsRequest generates a "aws.Request" representing the
 // client's request for the TerminateJobFlows operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2621,8 +2620,8 @@ const opTerminateJobFlows = "TerminateJobFlows"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlows
-func (c *EMR) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) (req *request.Request, output *TerminateJobFlowsOutput) {
-	op := &request.Operation{
+func (c *EMR) TerminateJobFlowsRequest(input *TerminateJobFlowsInput) (req *aws.Request, output *TerminateJobFlowsOutput) {
+	op := &aws.Operation{
 		Name:       opTerminateJobFlows,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2679,7 +2678,7 @@ func (c *EMR) TerminateJobFlows(input *TerminateJobFlowsInput) (*TerminateJobFlo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) TerminateJobFlowsWithContext(ctx aws.Context, input *TerminateJobFlowsInput, opts ...request.Option) (*TerminateJobFlowsOutput, error) {
+func (c *EMR) TerminateJobFlowsWithContext(ctx aws.Context, input *TerminateJobFlowsInput, opts ...aws.Option) (*TerminateJobFlowsOutput, error) {
 	req, out := c.TerminateJobFlowsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2713,16 +2712,16 @@ func (s AddInstanceFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddInstanceFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddInstanceFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddInstanceFleetInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.InstanceFleet == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceFleet"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceFleet"))
 	}
 	if s.InstanceFleet != nil {
 		if err := s.InstanceFleet.Validate(); err != nil {
-			invalidParams.AddNested("InstanceFleet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InstanceFleet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2805,12 +2804,12 @@ func (s AddInstanceGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddInstanceGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddInstanceGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddInstanceGroupsInput"}
 	if s.InstanceGroups == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceGroups"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceGroups"))
 	}
 	if s.JobFlowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobFlowId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobFlowId"))
 	}
 	if s.InstanceGroups != nil {
 		for i, v := range s.InstanceGroups {
@@ -2818,7 +2817,7 @@ func (s *AddInstanceGroupsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2904,12 +2903,12 @@ func (s AddJobFlowStepsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddJobFlowStepsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddJobFlowStepsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddJobFlowStepsInput"}
 	if s.JobFlowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobFlowId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobFlowId"))
 	}
 	if s.Steps == nil {
-		invalidParams.Add(request.NewErrParamRequired("Steps"))
+		invalidParams.Add(aws.NewErrParamRequired("Steps"))
 	}
 	if s.Steps != nil {
 		for i, v := range s.Steps {
@@ -2917,7 +2916,7 @@ func (s *AddJobFlowStepsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Steps", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Steps", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2997,12 +2996,12 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3142,16 +3141,16 @@ func (s AutoScalingPolicy) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AutoScalingPolicy) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AutoScalingPolicy"}
+	invalidParams := aws.ErrInvalidParams{Context: "AutoScalingPolicy"}
 	if s.Constraints == nil {
-		invalidParams.Add(request.NewErrParamRequired("Constraints"))
+		invalidParams.Add(aws.NewErrParamRequired("Constraints"))
 	}
 	if s.Rules == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rules"))
+		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
 	if s.Constraints != nil {
 		if err := s.Constraints.Validate(); err != nil {
-			invalidParams.AddNested("Constraints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Constraints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Rules != nil {
@@ -3160,7 +3159,7 @@ func (s *AutoScalingPolicy) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3331,16 +3330,16 @@ func (s BootstrapActionConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BootstrapActionConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BootstrapActionConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "BootstrapActionConfig"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ScriptBootstrapAction == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScriptBootstrapAction"))
+		invalidParams.Add(aws.NewErrParamRequired("ScriptBootstrapAction"))
 	}
 	if s.ScriptBootstrapAction != nil {
 		if err := s.ScriptBootstrapAction.Validate(); err != nil {
-			invalidParams.AddNested("ScriptBootstrapAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ScriptBootstrapAction", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3556,18 +3555,18 @@ func (s CloudWatchAlarmDefinition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchAlarmDefinition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudWatchAlarmDefinition"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchAlarmDefinition"}
 	if s.ComparisonOperator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComparisonOperator"))
+		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Period == nil {
-		invalidParams.Add(request.NewErrParamRequired("Period"))
+		invalidParams.Add(aws.NewErrParamRequired("Period"))
 	}
 	if s.Threshold == nil {
-		invalidParams.Add(request.NewErrParamRequired("Threshold"))
+		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4197,12 +4196,12 @@ func (s CreateSecurityConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSecurityConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSecurityConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSecurityConfigurationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SecurityConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecurityConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("SecurityConfiguration"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4282,9 +4281,9 @@ func (s DeleteSecurityConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSecurityConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSecurityConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSecurityConfigurationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4337,9 +4336,9 @@ func (s DescribeClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4478,9 +4477,9 @@ func (s DescribeSecurityConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSecurityConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSecurityConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSecurityConfigurationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4565,12 +4564,12 @@ func (s DescribeStepInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStepInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStepInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStepInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.StepId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StepId"))
+		invalidParams.Add(aws.NewErrParamRequired("StepId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4681,13 +4680,13 @@ func (s EbsBlockDeviceConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EbsBlockDeviceConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EbsBlockDeviceConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "EbsBlockDeviceConfig"}
 	if s.VolumeSpecification == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeSpecification"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeSpecification"))
 	}
 	if s.VolumeSpecification != nil {
 		if err := s.VolumeSpecification.Validate(); err != nil {
-			invalidParams.AddNested("VolumeSpecification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VolumeSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4733,14 +4732,14 @@ func (s EbsConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EbsConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EbsConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "EbsConfiguration"}
 	if s.EbsBlockDeviceConfigs != nil {
 		for i, v := range s.EbsBlockDeviceConfigs {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EbsBlockDeviceConfigs", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EbsBlockDeviceConfigs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5025,9 +5024,9 @@ func (s HadoopJarStepConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HadoopJarStepConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HadoopJarStepConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "HadoopJarStepConfig"}
 	if s.Jar == nil {
-		invalidParams.Add(request.NewErrParamRequired("Jar"))
+		invalidParams.Add(aws.NewErrParamRequired("Jar"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5465,9 +5464,9 @@ func (s InstanceFleetConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceFleetConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetConfig"}
 	if s.InstanceFleetType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceFleetType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceFleetType"))
 	}
 	if s.InstanceTypeConfigs != nil {
 		for i, v := range s.InstanceTypeConfigs {
@@ -5475,13 +5474,13 @@ func (s *InstanceFleetConfig) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceTypeConfigs", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceTypeConfigs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.LaunchSpecifications != nil {
 		if err := s.LaunchSpecifications.Validate(); err != nil {
-			invalidParams.AddNested("LaunchSpecifications", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LaunchSpecifications", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5561,9 +5560,9 @@ func (s InstanceFleetModifyConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetModifyConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceFleetModifyConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetModifyConfig"}
 	if s.InstanceFleetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceFleetId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceFleetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5618,13 +5617,13 @@ func (s InstanceFleetProvisioningSpecifications) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetProvisioningSpecifications) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceFleetProvisioningSpecifications"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetProvisioningSpecifications"}
 	if s.SpotSpecification == nil {
-		invalidParams.Add(request.NewErrParamRequired("SpotSpecification"))
+		invalidParams.Add(aws.NewErrParamRequired("SpotSpecification"))
 	}
 	if s.SpotSpecification != nil {
 		if err := s.SpotSpecification.Validate(); err != nil {
-			invalidParams.AddNested("SpotSpecification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SpotSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5985,27 +5984,27 @@ func (s InstanceGroupConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceGroupConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceGroupConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceGroupConfig"}
 	if s.InstanceCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceCount"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceCount"))
 	}
 	if s.InstanceRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceRole"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceRole"))
 	}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
 	if s.AutoScalingPolicy != nil {
 		if err := s.AutoScalingPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AutoScalingPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AutoScalingPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EbsConfiguration != nil {
 		if err := s.EbsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EbsConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EbsConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6260,9 +6259,9 @@ func (s InstanceGroupModifyConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceGroupModifyConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceGroupModifyConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceGroupModifyConfig"}
 	if s.InstanceGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceGroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6635,16 +6634,16 @@ func (s InstanceTypeConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceTypeConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceTypeConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceTypeConfig"}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
 	if s.EbsConfiguration != nil {
 		if err := s.EbsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EbsConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EbsConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7133,12 +7132,12 @@ func (s JobFlowInstancesConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobFlowInstancesConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "JobFlowInstancesConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "JobFlowInstancesConfig"}
 	if s.MasterInstanceType != nil && len(*s.MasterInstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MasterInstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MasterInstanceType", 1))
 	}
 	if s.SlaveInstanceType != nil && len(*s.SlaveInstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SlaveInstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SlaveInstanceType", 1))
 	}
 	if s.InstanceFleets != nil {
 		for i, v := range s.InstanceFleets {
@@ -7146,7 +7145,7 @@ func (s *JobFlowInstancesConfig) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceFleets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceFleets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7156,7 +7155,7 @@ func (s *JobFlowInstancesConfig) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7481,9 +7480,9 @@ func (s ListBootstrapActionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBootstrapActionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBootstrapActionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBootstrapActionsInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7651,9 +7650,9 @@ func (s ListInstanceFleetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInstanceFleetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListInstanceFleetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceFleetsInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7733,9 +7732,9 @@ func (s ListInstanceGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInstanceGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListInstanceGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceGroupsInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7832,9 +7831,9 @@ func (s ListInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListInstancesInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8010,9 +8009,9 @@ func (s ListStepsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStepsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStepsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStepsInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8145,16 +8144,16 @@ func (s ModifyInstanceFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyInstanceFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyInstanceFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceFleetInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.InstanceFleet == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceFleet"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceFleet"))
 	}
 	if s.InstanceFleet != nil {
 		if err := s.InstanceFleet.Validate(); err != nil {
-			invalidParams.AddNested("InstanceFleet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InstanceFleet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8215,14 +8214,14 @@ func (s ModifyInstanceGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyInstanceGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyInstanceGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyInstanceGroupsInput"}
 	if s.InstanceGroups != nil {
 		for i, v := range s.InstanceGroups {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceGroups", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8336,19 +8335,19 @@ func (s PutAutoScalingPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutAutoScalingPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutAutoScalingPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutAutoScalingPolicyInput"}
 	if s.AutoScalingPolicy == nil {
-		invalidParams.Add(request.NewErrParamRequired("AutoScalingPolicy"))
+		invalidParams.Add(aws.NewErrParamRequired("AutoScalingPolicy"))
 	}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.InstanceGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceGroupId"))
 	}
 	if s.AutoScalingPolicy != nil {
 		if err := s.AutoScalingPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AutoScalingPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AutoScalingPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8447,12 +8446,12 @@ func (s RemoveAutoScalingPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveAutoScalingPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveAutoScalingPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveAutoScalingPolicyInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.InstanceGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceGroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8517,12 +8516,12 @@ func (s RemoveTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8738,12 +8737,12 @@ func (s RunJobFlowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunJobFlowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RunJobFlowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RunJobFlowInput"}
 	if s.Instances == nil {
-		invalidParams.Add(request.NewErrParamRequired("Instances"))
+		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.BootstrapActions != nil {
 		for i, v := range s.BootstrapActions {
@@ -8751,13 +8750,13 @@ func (s *RunJobFlowInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BootstrapActions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BootstrapActions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Instances != nil {
 		if err := s.Instances.Validate(); err != nil {
-			invalidParams.AddNested("Instances", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Instances", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Steps != nil {
@@ -8766,7 +8765,7 @@ func (s *RunJobFlowInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Steps", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Steps", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8963,13 +8962,13 @@ func (s ScalingAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScalingAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScalingAction"}
 	if s.SimpleScalingPolicyConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("SimpleScalingPolicyConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("SimpleScalingPolicyConfiguration"))
 	}
 	if s.SimpleScalingPolicyConfiguration != nil {
 		if err := s.SimpleScalingPolicyConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SimpleScalingPolicyConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SimpleScalingPolicyConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9025,12 +9024,12 @@ func (s ScalingConstraints) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingConstraints) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScalingConstraints"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScalingConstraints"}
 	if s.MaxCapacity == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxCapacity"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxCapacity"))
 	}
 	if s.MinCapacity == nil {
-		invalidParams.Add(request.NewErrParamRequired("MinCapacity"))
+		invalidParams.Add(aws.NewErrParamRequired("MinCapacity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9092,24 +9091,24 @@ func (s ScalingRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScalingRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScalingRule"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Trigger == nil {
-		invalidParams.Add(request.NewErrParamRequired("Trigger"))
+		invalidParams.Add(aws.NewErrParamRequired("Trigger"))
 	}
 	if s.Action != nil {
 		if err := s.Action.Validate(); err != nil {
-			invalidParams.AddNested("Action", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Trigger != nil {
 		if err := s.Trigger.Validate(); err != nil {
-			invalidParams.AddNested("Trigger", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Trigger", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9167,13 +9166,13 @@ func (s ScalingTrigger) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScalingTrigger) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScalingTrigger"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScalingTrigger"}
 	if s.CloudWatchAlarmDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudWatchAlarmDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchAlarmDefinition"))
 	}
 	if s.CloudWatchAlarmDefinition != nil {
 		if err := s.CloudWatchAlarmDefinition.Validate(); err != nil {
-			invalidParams.AddNested("CloudWatchAlarmDefinition", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudWatchAlarmDefinition", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9216,9 +9215,9 @@ func (s ScriptBootstrapActionConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScriptBootstrapActionConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScriptBootstrapActionConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScriptBootstrapActionConfig"}
 	if s.Path == nil {
-		invalidParams.Add(request.NewErrParamRequired("Path"))
+		invalidParams.Add(aws.NewErrParamRequired("Path"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9305,12 +9304,12 @@ func (s SetTerminationProtectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTerminationProtectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetTerminationProtectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetTerminationProtectionInput"}
 	if s.JobFlowIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobFlowIds"))
+		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
 	}
 	if s.TerminationProtected == nil {
-		invalidParams.Add(request.NewErrParamRequired("TerminationProtected"))
+		invalidParams.Add(aws.NewErrParamRequired("TerminationProtected"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9378,12 +9377,12 @@ func (s SetVisibleToAllUsersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetVisibleToAllUsersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetVisibleToAllUsersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetVisibleToAllUsersInput"}
 	if s.JobFlowIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobFlowIds"))
+		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
 	}
 	if s.VisibleToAllUsers == nil {
-		invalidParams.Add(request.NewErrParamRequired("VisibleToAllUsers"))
+		invalidParams.Add(aws.NewErrParamRequired("VisibleToAllUsers"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9505,9 +9504,9 @@ func (s SimpleScalingPolicyConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SimpleScalingPolicyConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SimpleScalingPolicyConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "SimpleScalingPolicyConfiguration"}
 	if s.ScalingAdjustment == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalingAdjustment"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9583,12 +9582,12 @@ func (s SpotProvisioningSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SpotProvisioningSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SpotProvisioningSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "SpotProvisioningSpecification"}
 	if s.TimeoutAction == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimeoutAction"))
+		invalidParams.Add(aws.NewErrParamRequired("TimeoutAction"))
 	}
 	if s.TimeoutDurationMinutes == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimeoutDurationMinutes"))
+		invalidParams.Add(aws.NewErrParamRequired("TimeoutDurationMinutes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9708,16 +9707,16 @@ func (s StepConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StepConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StepConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "StepConfig"}
 	if s.HadoopJarStep == nil {
-		invalidParams.Add(request.NewErrParamRequired("HadoopJarStep"))
+		invalidParams.Add(aws.NewErrParamRequired("HadoopJarStep"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.HadoopJarStep != nil {
 		if err := s.HadoopJarStep.Validate(); err != nil {
-			invalidParams.AddNested("HadoopJarStep", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("HadoopJarStep", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10140,9 +10139,9 @@ func (s TerminateJobFlowsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateJobFlowsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateJobFlowsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateJobFlowsInput"}
 	if s.JobFlowIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobFlowIds"))
+		invalidParams.Add(aws.NewErrParamRequired("JobFlowIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10205,12 +10204,12 @@ func (s VolumeSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VolumeSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VolumeSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "VolumeSpecification"}
 	if s.SizeInGB == nil {
-		invalidParams.Add(request.NewErrParamRequired("SizeInGB"))
+		invalidParams.Add(aws.NewErrParamRequired("SizeInGB"))
 	}
 	if s.VolumeType == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeType"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeType"))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -10,7 +10,6 @@ package rekognitioniface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := rekognition.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := rekognition.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,66 +64,66 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type RekognitionAPI interface {
 	CompareFaces(*rekognition.CompareFacesInput) (*rekognition.CompareFacesOutput, error)
-	CompareFacesWithContext(aws.Context, *rekognition.CompareFacesInput, ...request.Option) (*rekognition.CompareFacesOutput, error)
-	CompareFacesRequest(*rekognition.CompareFacesInput) (*request.Request, *rekognition.CompareFacesOutput)
+	CompareFacesWithContext(aws.Context, *rekognition.CompareFacesInput, ...aws.Option) (*rekognition.CompareFacesOutput, error)
+	CompareFacesRequest(*rekognition.CompareFacesInput) (*aws.Request, *rekognition.CompareFacesOutput)
 
 	CreateCollection(*rekognition.CreateCollectionInput) (*rekognition.CreateCollectionOutput, error)
-	CreateCollectionWithContext(aws.Context, *rekognition.CreateCollectionInput, ...request.Option) (*rekognition.CreateCollectionOutput, error)
-	CreateCollectionRequest(*rekognition.CreateCollectionInput) (*request.Request, *rekognition.CreateCollectionOutput)
+	CreateCollectionWithContext(aws.Context, *rekognition.CreateCollectionInput, ...aws.Option) (*rekognition.CreateCollectionOutput, error)
+	CreateCollectionRequest(*rekognition.CreateCollectionInput) (*aws.Request, *rekognition.CreateCollectionOutput)
 
 	DeleteCollection(*rekognition.DeleteCollectionInput) (*rekognition.DeleteCollectionOutput, error)
-	DeleteCollectionWithContext(aws.Context, *rekognition.DeleteCollectionInput, ...request.Option) (*rekognition.DeleteCollectionOutput, error)
-	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) (*request.Request, *rekognition.DeleteCollectionOutput)
+	DeleteCollectionWithContext(aws.Context, *rekognition.DeleteCollectionInput, ...aws.Option) (*rekognition.DeleteCollectionOutput, error)
+	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) (*aws.Request, *rekognition.DeleteCollectionOutput)
 
 	DeleteFaces(*rekognition.DeleteFacesInput) (*rekognition.DeleteFacesOutput, error)
-	DeleteFacesWithContext(aws.Context, *rekognition.DeleteFacesInput, ...request.Option) (*rekognition.DeleteFacesOutput, error)
-	DeleteFacesRequest(*rekognition.DeleteFacesInput) (*request.Request, *rekognition.DeleteFacesOutput)
+	DeleteFacesWithContext(aws.Context, *rekognition.DeleteFacesInput, ...aws.Option) (*rekognition.DeleteFacesOutput, error)
+	DeleteFacesRequest(*rekognition.DeleteFacesInput) (*aws.Request, *rekognition.DeleteFacesOutput)
 
 	DetectFaces(*rekognition.DetectFacesInput) (*rekognition.DetectFacesOutput, error)
-	DetectFacesWithContext(aws.Context, *rekognition.DetectFacesInput, ...request.Option) (*rekognition.DetectFacesOutput, error)
-	DetectFacesRequest(*rekognition.DetectFacesInput) (*request.Request, *rekognition.DetectFacesOutput)
+	DetectFacesWithContext(aws.Context, *rekognition.DetectFacesInput, ...aws.Option) (*rekognition.DetectFacesOutput, error)
+	DetectFacesRequest(*rekognition.DetectFacesInput) (*aws.Request, *rekognition.DetectFacesOutput)
 
 	DetectLabels(*rekognition.DetectLabelsInput) (*rekognition.DetectLabelsOutput, error)
-	DetectLabelsWithContext(aws.Context, *rekognition.DetectLabelsInput, ...request.Option) (*rekognition.DetectLabelsOutput, error)
-	DetectLabelsRequest(*rekognition.DetectLabelsInput) (*request.Request, *rekognition.DetectLabelsOutput)
+	DetectLabelsWithContext(aws.Context, *rekognition.DetectLabelsInput, ...aws.Option) (*rekognition.DetectLabelsOutput, error)
+	DetectLabelsRequest(*rekognition.DetectLabelsInput) (*aws.Request, *rekognition.DetectLabelsOutput)
 
 	DetectModerationLabels(*rekognition.DetectModerationLabelsInput) (*rekognition.DetectModerationLabelsOutput, error)
-	DetectModerationLabelsWithContext(aws.Context, *rekognition.DetectModerationLabelsInput, ...request.Option) (*rekognition.DetectModerationLabelsOutput, error)
-	DetectModerationLabelsRequest(*rekognition.DetectModerationLabelsInput) (*request.Request, *rekognition.DetectModerationLabelsOutput)
+	DetectModerationLabelsWithContext(aws.Context, *rekognition.DetectModerationLabelsInput, ...aws.Option) (*rekognition.DetectModerationLabelsOutput, error)
+	DetectModerationLabelsRequest(*rekognition.DetectModerationLabelsInput) (*aws.Request, *rekognition.DetectModerationLabelsOutput)
 
 	GetCelebrityInfo(*rekognition.GetCelebrityInfoInput) (*rekognition.GetCelebrityInfoOutput, error)
-	GetCelebrityInfoWithContext(aws.Context, *rekognition.GetCelebrityInfoInput, ...request.Option) (*rekognition.GetCelebrityInfoOutput, error)
-	GetCelebrityInfoRequest(*rekognition.GetCelebrityInfoInput) (*request.Request, *rekognition.GetCelebrityInfoOutput)
+	GetCelebrityInfoWithContext(aws.Context, *rekognition.GetCelebrityInfoInput, ...aws.Option) (*rekognition.GetCelebrityInfoOutput, error)
+	GetCelebrityInfoRequest(*rekognition.GetCelebrityInfoInput) (*aws.Request, *rekognition.GetCelebrityInfoOutput)
 
 	IndexFaces(*rekognition.IndexFacesInput) (*rekognition.IndexFacesOutput, error)
-	IndexFacesWithContext(aws.Context, *rekognition.IndexFacesInput, ...request.Option) (*rekognition.IndexFacesOutput, error)
-	IndexFacesRequest(*rekognition.IndexFacesInput) (*request.Request, *rekognition.IndexFacesOutput)
+	IndexFacesWithContext(aws.Context, *rekognition.IndexFacesInput, ...aws.Option) (*rekognition.IndexFacesOutput, error)
+	IndexFacesRequest(*rekognition.IndexFacesInput) (*aws.Request, *rekognition.IndexFacesOutput)
 
 	ListCollections(*rekognition.ListCollectionsInput) (*rekognition.ListCollectionsOutput, error)
-	ListCollectionsWithContext(aws.Context, *rekognition.ListCollectionsInput, ...request.Option) (*rekognition.ListCollectionsOutput, error)
-	ListCollectionsRequest(*rekognition.ListCollectionsInput) (*request.Request, *rekognition.ListCollectionsOutput)
+	ListCollectionsWithContext(aws.Context, *rekognition.ListCollectionsInput, ...aws.Option) (*rekognition.ListCollectionsOutput, error)
+	ListCollectionsRequest(*rekognition.ListCollectionsInput) (*aws.Request, *rekognition.ListCollectionsOutput)
 
 	ListCollectionsPages(*rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool) error
-	ListCollectionsPagesWithContext(aws.Context, *rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool, ...request.Option) error
+	ListCollectionsPagesWithContext(aws.Context, *rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool, ...aws.Option) error
 
 	ListFaces(*rekognition.ListFacesInput) (*rekognition.ListFacesOutput, error)
-	ListFacesWithContext(aws.Context, *rekognition.ListFacesInput, ...request.Option) (*rekognition.ListFacesOutput, error)
-	ListFacesRequest(*rekognition.ListFacesInput) (*request.Request, *rekognition.ListFacesOutput)
+	ListFacesWithContext(aws.Context, *rekognition.ListFacesInput, ...aws.Option) (*rekognition.ListFacesOutput, error)
+	ListFacesRequest(*rekognition.ListFacesInput) (*aws.Request, *rekognition.ListFacesOutput)
 
 	ListFacesPages(*rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool) error
-	ListFacesPagesWithContext(aws.Context, *rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool, ...request.Option) error
+	ListFacesPagesWithContext(aws.Context, *rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool, ...aws.Option) error
 
 	RecognizeCelebrities(*rekognition.RecognizeCelebritiesInput) (*rekognition.RecognizeCelebritiesOutput, error)
-	RecognizeCelebritiesWithContext(aws.Context, *rekognition.RecognizeCelebritiesInput, ...request.Option) (*rekognition.RecognizeCelebritiesOutput, error)
-	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) (*request.Request, *rekognition.RecognizeCelebritiesOutput)
+	RecognizeCelebritiesWithContext(aws.Context, *rekognition.RecognizeCelebritiesInput, ...aws.Option) (*rekognition.RecognizeCelebritiesOutput, error)
+	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) (*aws.Request, *rekognition.RecognizeCelebritiesOutput)
 
 	SearchFaces(*rekognition.SearchFacesInput) (*rekognition.SearchFacesOutput, error)
-	SearchFacesWithContext(aws.Context, *rekognition.SearchFacesInput, ...request.Option) (*rekognition.SearchFacesOutput, error)
-	SearchFacesRequest(*rekognition.SearchFacesInput) (*request.Request, *rekognition.SearchFacesOutput)
+	SearchFacesWithContext(aws.Context, *rekognition.SearchFacesInput, ...aws.Option) (*rekognition.SearchFacesOutput, error)
+	SearchFacesRequest(*rekognition.SearchFacesInput) (*aws.Request, *rekognition.SearchFacesOutput)
 
 	SearchFacesByImage(*rekognition.SearchFacesByImageInput) (*rekognition.SearchFacesByImageOutput, error)
-	SearchFacesByImageWithContext(aws.Context, *rekognition.SearchFacesByImageInput, ...request.Option) (*rekognition.SearchFacesByImageOutput, error)
-	SearchFacesByImageRequest(*rekognition.SearchFacesByImageInput) (*request.Request, *rekognition.SearchFacesByImageOutput)
+	SearchFacesByImageWithContext(aws.Context, *rekognition.SearchFacesByImageInput, ...aws.Option) (*rekognition.SearchFacesByImageOutput, error)
+	SearchFacesByImageRequest(*rekognition.SearchFacesByImageInput) (*aws.Request, *rekognition.SearchFacesByImageOutput)
 }
 
 var _ RekognitionAPI = (*rekognition.Rekognition)(nil)

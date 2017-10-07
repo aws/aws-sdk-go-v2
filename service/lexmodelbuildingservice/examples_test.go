@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 )
 
@@ -29,7 +29,12 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example shows how to get configuration information for a bot.
 func ExampleLexModelBuildingService_GetBot_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.GetBotInput{
 		Name:           aws.String("DocOrderPizza"),
 		VersionOrAlias: aws.String("$LATEST"),
@@ -65,7 +70,12 @@ func ExampleLexModelBuildingService_GetBot_shared00() {
 //
 // This example shows how to get a list of all of the bots in your account.
 func ExampleLexModelBuildingService_GetBots_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.GetBotsInput{
 		MaxResults: aws.Int64(5),
 		NextToken:  aws.String(""),
@@ -101,7 +111,12 @@ func ExampleLexModelBuildingService_GetBots_shared00() {
 //
 // This example shows how to get information about an intent.
 func ExampleLexModelBuildingService_GetIntent_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.GetIntentInput{
 		Name:    aws.String("DocOrderPizza"),
 		Version: aws.String("$LATEST"),
@@ -137,7 +152,12 @@ func ExampleLexModelBuildingService_GetIntent_shared00() {
 //
 // This example shows how to get a list of all of the intents in your account.
 func ExampleLexModelBuildingService_GetIntents_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.GetIntentsInput{
 		MaxResults: aws.Int64(10),
 		NextToken:  aws.String(""),
@@ -173,7 +193,12 @@ func ExampleLexModelBuildingService_GetIntents_shared00() {
 //
 // This example shows how to get information about a slot type.
 func ExampleLexModelBuildingService_GetSlotType_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.GetSlotTypeInput{
 		Name:    aws.String("DocPizzaCrustType"),
 		Version: aws.String("$LATEST"),
@@ -209,7 +234,12 @@ func ExampleLexModelBuildingService_GetSlotType_shared00() {
 //
 // This example shows how to get a list of all of the slot types in your account.
 func ExampleLexModelBuildingService_GetSlotTypes_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.GetSlotTypesInput{
 		MaxResults: aws.Int64(10),
 		NextToken:  aws.String(""),
@@ -245,7 +275,12 @@ func ExampleLexModelBuildingService_GetSlotTypes_shared00() {
 //
 // This example shows how to create a bot for ordering pizzas.
 func ExampleLexModelBuildingService_PutBot_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.PutBotInput{
 		AbortStatement: &lexmodelbuildingservice.Statement{
 			Messages: []*lexmodelbuildingservice.Message{
@@ -318,7 +353,12 @@ func ExampleLexModelBuildingService_PutBot_shared00() {
 //
 // This example shows how to create an intent for ordering pizzas.
 func ExampleLexModelBuildingService_PutIntent_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.PutIntentInput{
 		ConclusionStatement: &lexmodelbuildingservice.Statement{
 			Messages: []*lexmodelbuildingservice.Message{
@@ -438,7 +478,12 @@ func ExampleLexModelBuildingService_PutIntent_shared00() {
 //
 // This example shows how to create a slot type that describes pizza sauces.
 func ExampleLexModelBuildingService_PutSlotType_shared00() {
-	svc := lexmodelbuildingservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := lexmodelbuildingservice.New(cfg)
 	input := &lexmodelbuildingservice.PutSlotTypeInput{
 		Description: aws.String("Available pizza sauces"),
 		EnumerationValues: []*lexmodelbuildingservice.EnumerationValue{

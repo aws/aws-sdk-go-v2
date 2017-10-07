@@ -6,15 +6,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResource
-func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *TagListMessage) {
-	op := &request.Operation{
+func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *TagListMessage) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -105,7 +104,7 @@ func (c *ElastiCache) AddTagsToResource(input *AddTagsToResourceInput) (*TagList
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*TagListMessage, error) {
+func (c *ElastiCache) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*TagListMessage, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -114,7 +113,7 @@ func (c *ElastiCache) AddTagsToResourceWithContext(ctx aws.Context, input *AddTa
 
 const opAuthorizeCacheSecurityGroupIngress = "AuthorizeCacheSecurityGroupIngress"
 
-// AuthorizeCacheSecurityGroupIngressRequest generates a "aws/request.Request" representing the
+// AuthorizeCacheSecurityGroupIngressRequest generates a "aws.Request" representing the
 // client's request for the AuthorizeCacheSecurityGroupIngress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -138,8 +137,8 @@ const opAuthorizeCacheSecurityGroupIngress = "AuthorizeCacheSecurityGroupIngress
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngress
-func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *AuthorizeCacheSecurityGroupIngressInput) (req *request.Request, output *AuthorizeCacheSecurityGroupIngressOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *AuthorizeCacheSecurityGroupIngressInput) (req *aws.Request, output *AuthorizeCacheSecurityGroupIngressOutput) {
+	op := &aws.Operation{
 		Name:       opAuthorizeCacheSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -203,7 +202,7 @@ func (c *ElastiCache) AuthorizeCacheSecurityGroupIngress(input *AuthorizeCacheSe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeCacheSecurityGroupIngressInput, opts ...request.Option) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
+func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressWithContext(ctx aws.Context, input *AuthorizeCacheSecurityGroupIngressInput, opts ...aws.Option) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
 	req, out := c.AuthorizeCacheSecurityGroupIngressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -212,7 +211,7 @@ func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressWithContext(ctx aws.Cont
 
 const opCopySnapshot = "CopySnapshot"
 
-// CopySnapshotRequest generates a "aws/request.Request" representing the
+// CopySnapshotRequest generates a "aws.Request" representing the
 // client's request for the CopySnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -236,8 +235,8 @@ const opCopySnapshot = "CopySnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot
-func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) (req *request.Request, output *CopySnapshotOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) (req *aws.Request, output *CopySnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCopySnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -363,7 +362,7 @@ func (c *ElastiCache) CopySnapshot(input *CopySnapshotInput) (*CopySnapshotOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CopySnapshotWithContext(ctx aws.Context, input *CopySnapshotInput, opts ...request.Option) (*CopySnapshotOutput, error) {
+func (c *ElastiCache) CopySnapshotWithContext(ctx aws.Context, input *CopySnapshotInput, opts ...aws.Option) (*CopySnapshotOutput, error) {
 	req, out := c.CopySnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -372,7 +371,7 @@ func (c *ElastiCache) CopySnapshotWithContext(ctx aws.Context, input *CopySnapsh
 
 const opCreateCacheCluster = "CreateCacheCluster"
 
-// CreateCacheClusterRequest generates a "aws/request.Request" representing the
+// CreateCacheClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateCacheCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -396,8 +395,8 @@ const opCreateCacheCluster = "CreateCacheCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster
-func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) (req *request.Request, output *CreateCacheClusterOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) (req *aws.Request, output *CreateCacheClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCacheCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -495,7 +494,7 @@ func (c *ElastiCache) CreateCacheCluster(input *CreateCacheClusterInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CreateCacheClusterWithContext(ctx aws.Context, input *CreateCacheClusterInput, opts ...request.Option) (*CreateCacheClusterOutput, error) {
+func (c *ElastiCache) CreateCacheClusterWithContext(ctx aws.Context, input *CreateCacheClusterInput, opts ...aws.Option) (*CreateCacheClusterOutput, error) {
 	req, out := c.CreateCacheClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -504,7 +503,7 @@ func (c *ElastiCache) CreateCacheClusterWithContext(ctx aws.Context, input *Crea
 
 const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 
-// CreateCacheParameterGroupRequest generates a "aws/request.Request" representing the
+// CreateCacheParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateCacheParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -528,8 +527,8 @@ const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup
-func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParameterGroupInput) (req *request.Request, output *CreateCacheParameterGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParameterGroupInput) (req *aws.Request, output *CreateCacheParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCacheParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -601,7 +600,7 @@ func (c *ElastiCache) CreateCacheParameterGroup(input *CreateCacheParameterGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CreateCacheParameterGroupWithContext(ctx aws.Context, input *CreateCacheParameterGroupInput, opts ...request.Option) (*CreateCacheParameterGroupOutput, error) {
+func (c *ElastiCache) CreateCacheParameterGroupWithContext(ctx aws.Context, input *CreateCacheParameterGroupInput, opts ...aws.Option) (*CreateCacheParameterGroupOutput, error) {
 	req, out := c.CreateCacheParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -610,7 +609,7 @@ func (c *ElastiCache) CreateCacheParameterGroupWithContext(ctx aws.Context, inpu
 
 const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 
-// CreateCacheSecurityGroupRequest generates a "aws/request.Request" representing the
+// CreateCacheSecurityGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateCacheSecurityGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -634,8 +633,8 @@ const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroup
-func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroupInput) (req *request.Request, output *CreateCacheSecurityGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurityGroupInput) (req *aws.Request, output *CreateCacheSecurityGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCacheSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -696,7 +695,7 @@ func (c *ElastiCache) CreateCacheSecurityGroup(input *CreateCacheSecurityGroupIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CreateCacheSecurityGroupWithContext(ctx aws.Context, input *CreateCacheSecurityGroupInput, opts ...request.Option) (*CreateCacheSecurityGroupOutput, error) {
+func (c *ElastiCache) CreateCacheSecurityGroupWithContext(ctx aws.Context, input *CreateCacheSecurityGroupInput, opts ...aws.Option) (*CreateCacheSecurityGroupOutput, error) {
 	req, out := c.CreateCacheSecurityGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -705,7 +704,7 @@ func (c *ElastiCache) CreateCacheSecurityGroupWithContext(ctx aws.Context, input
 
 const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
 
-// CreateCacheSubnetGroupRequest generates a "aws/request.Request" representing the
+// CreateCacheSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateCacheSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -729,8 +728,8 @@ const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup
-func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInput) (req *request.Request, output *CreateCacheSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGroupInput) (req *aws.Request, output *CreateCacheSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCacheSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -790,7 +789,7 @@ func (c *ElastiCache) CreateCacheSubnetGroup(input *CreateCacheSubnetGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CreateCacheSubnetGroupWithContext(ctx aws.Context, input *CreateCacheSubnetGroupInput, opts ...request.Option) (*CreateCacheSubnetGroupOutput, error) {
+func (c *ElastiCache) CreateCacheSubnetGroupWithContext(ctx aws.Context, input *CreateCacheSubnetGroupInput, opts ...aws.Option) (*CreateCacheSubnetGroupOutput, error) {
 	req, out := c.CreateCacheSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -799,7 +798,7 @@ func (c *ElastiCache) CreateCacheSubnetGroupWithContext(ctx aws.Context, input *
 
 const opCreateReplicationGroup = "CreateReplicationGroup"
 
-// CreateReplicationGroupRequest generates a "aws/request.Request" representing the
+// CreateReplicationGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateReplicationGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -823,8 +822,8 @@ const opCreateReplicationGroup = "CreateReplicationGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup
-func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGroupInput) (req *request.Request, output *CreateReplicationGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGroupInput) (req *aws.Request, output *CreateReplicationGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReplicationGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -944,7 +943,7 @@ func (c *ElastiCache) CreateReplicationGroup(input *CreateReplicationGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CreateReplicationGroupWithContext(ctx aws.Context, input *CreateReplicationGroupInput, opts ...request.Option) (*CreateReplicationGroupOutput, error) {
+func (c *ElastiCache) CreateReplicationGroupWithContext(ctx aws.Context, input *CreateReplicationGroupInput, opts ...aws.Option) (*CreateReplicationGroupOutput, error) {
 	req, out := c.CreateReplicationGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -953,7 +952,7 @@ func (c *ElastiCache) CreateReplicationGroupWithContext(ctx aws.Context, input *
 
 const opCreateSnapshot = "CreateSnapshot"
 
-// CreateSnapshotRequest generates a "aws/request.Request" representing the
+// CreateSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -977,8 +976,8 @@ const opCreateSnapshot = "CreateSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot
-func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) (req *request.Request, output *CreateSnapshotOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *CreateSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1059,7 +1058,7 @@ func (c *ElastiCache) CreateSnapshot(input *CreateSnapshotInput) (*CreateSnapsho
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...request.Option) (*CreateSnapshotOutput, error) {
+func (c *ElastiCache) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...aws.Option) (*CreateSnapshotOutput, error) {
 	req, out := c.CreateSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1068,7 +1067,7 @@ func (c *ElastiCache) CreateSnapshotWithContext(ctx aws.Context, input *CreateSn
 
 const opDeleteCacheCluster = "DeleteCacheCluster"
 
-// DeleteCacheClusterRequest generates a "aws/request.Request" representing the
+// DeleteCacheClusterRequest generates a "aws.Request" representing the
 // client's request for the DeleteCacheCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1092,8 +1091,8 @@ const opDeleteCacheCluster = "DeleteCacheCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster
-func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) (req *request.Request, output *DeleteCacheClusterOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) (req *aws.Request, output *DeleteCacheClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCacheCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1178,7 +1177,7 @@ func (c *ElastiCache) DeleteCacheCluster(input *DeleteCacheClusterInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheClusterWithContext(ctx aws.Context, input *DeleteCacheClusterInput, opts ...request.Option) (*DeleteCacheClusterOutput, error) {
+func (c *ElastiCache) DeleteCacheClusterWithContext(ctx aws.Context, input *DeleteCacheClusterInput, opts ...aws.Option) (*DeleteCacheClusterOutput, error) {
 	req, out := c.DeleteCacheClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,7 +1186,7 @@ func (c *ElastiCache) DeleteCacheClusterWithContext(ctx aws.Context, input *Dele
 
 const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
 
-// DeleteCacheParameterGroupRequest generates a "aws/request.Request" representing the
+// DeleteCacheParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteCacheParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1211,8 +1210,8 @@ const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroup
-func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGroupInput) (req *request.Request, output *DeleteCacheParameterGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParameterGroupInput) (req *aws.Request, output *DeleteCacheParameterGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCacheParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1271,7 +1270,7 @@ func (c *ElastiCache) DeleteCacheParameterGroup(input *DeleteCacheParameterGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheParameterGroupWithContext(ctx aws.Context, input *DeleteCacheParameterGroupInput, opts ...request.Option) (*DeleteCacheParameterGroupOutput, error) {
+func (c *ElastiCache) DeleteCacheParameterGroupWithContext(ctx aws.Context, input *DeleteCacheParameterGroupInput, opts ...aws.Option) (*DeleteCacheParameterGroupOutput, error) {
 	req, out := c.DeleteCacheParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1280,7 +1279,7 @@ func (c *ElastiCache) DeleteCacheParameterGroupWithContext(ctx aws.Context, inpu
 
 const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
 
-// DeleteCacheSecurityGroupRequest generates a "aws/request.Request" representing the
+// DeleteCacheSecurityGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteCacheSecurityGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1304,8 +1303,8 @@ const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroup
-func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroupInput) (req *request.Request, output *DeleteCacheSecurityGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurityGroupInput) (req *aws.Request, output *DeleteCacheSecurityGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCacheSecurityGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1365,7 +1364,7 @@ func (c *ElastiCache) DeleteCacheSecurityGroup(input *DeleteCacheSecurityGroupIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheSecurityGroupWithContext(ctx aws.Context, input *DeleteCacheSecurityGroupInput, opts ...request.Option) (*DeleteCacheSecurityGroupOutput, error) {
+func (c *ElastiCache) DeleteCacheSecurityGroupWithContext(ctx aws.Context, input *DeleteCacheSecurityGroupInput, opts ...aws.Option) (*DeleteCacheSecurityGroupOutput, error) {
 	req, out := c.DeleteCacheSecurityGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1374,7 +1373,7 @@ func (c *ElastiCache) DeleteCacheSecurityGroupWithContext(ctx aws.Context, input
 
 const opDeleteCacheSubnetGroup = "DeleteCacheSubnetGroup"
 
-// DeleteCacheSubnetGroupRequest generates a "aws/request.Request" representing the
+// DeleteCacheSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteCacheSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1398,8 +1397,8 @@ const opDeleteCacheSubnetGroup = "DeleteCacheSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroup
-func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGroupInput) (req *request.Request, output *DeleteCacheSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGroupInput) (req *aws.Request, output *DeleteCacheSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCacheSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1453,7 +1452,7 @@ func (c *ElastiCache) DeleteCacheSubnetGroup(input *DeleteCacheSubnetGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DeleteCacheSubnetGroupWithContext(ctx aws.Context, input *DeleteCacheSubnetGroupInput, opts ...request.Option) (*DeleteCacheSubnetGroupOutput, error) {
+func (c *ElastiCache) DeleteCacheSubnetGroupWithContext(ctx aws.Context, input *DeleteCacheSubnetGroupInput, opts ...aws.Option) (*DeleteCacheSubnetGroupOutput, error) {
 	req, out := c.DeleteCacheSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1462,7 +1461,7 @@ func (c *ElastiCache) DeleteCacheSubnetGroupWithContext(ctx aws.Context, input *
 
 const opDeleteReplicationGroup = "DeleteReplicationGroup"
 
-// DeleteReplicationGroupRequest generates a "aws/request.Request" representing the
+// DeleteReplicationGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteReplicationGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1486,8 +1485,8 @@ const opDeleteReplicationGroup = "DeleteReplicationGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup
-func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInput) (req *request.Request, output *DeleteReplicationGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGroupInput) (req *aws.Request, output *DeleteReplicationGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReplicationGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1569,7 +1568,7 @@ func (c *ElastiCache) DeleteReplicationGroup(input *DeleteReplicationGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DeleteReplicationGroupWithContext(ctx aws.Context, input *DeleteReplicationGroupInput, opts ...request.Option) (*DeleteReplicationGroupOutput, error) {
+func (c *ElastiCache) DeleteReplicationGroupWithContext(ctx aws.Context, input *DeleteReplicationGroupInput, opts ...aws.Option) (*DeleteReplicationGroupOutput, error) {
 	req, out := c.DeleteReplicationGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1578,7 +1577,7 @@ func (c *ElastiCache) DeleteReplicationGroupWithContext(ctx aws.Context, input *
 
 const opDeleteSnapshot = "DeleteSnapshot"
 
-// DeleteSnapshotRequest generates a "aws/request.Request" representing the
+// DeleteSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeleteSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1602,8 +1601,8 @@ const opDeleteSnapshot = "DeleteSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot
-func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *request.Request, output *DeleteSnapshotOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *aws.Request, output *DeleteSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1662,7 +1661,7 @@ func (c *ElastiCache) DeleteSnapshot(input *DeleteSnapshotInput) (*DeleteSnapsho
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DeleteSnapshotWithContext(ctx aws.Context, input *DeleteSnapshotInput, opts ...request.Option) (*DeleteSnapshotOutput, error) {
+func (c *ElastiCache) DeleteSnapshotWithContext(ctx aws.Context, input *DeleteSnapshotInput, opts ...aws.Option) (*DeleteSnapshotOutput, error) {
 	req, out := c.DeleteSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1671,7 +1670,7 @@ func (c *ElastiCache) DeleteSnapshotWithContext(ctx aws.Context, input *DeleteSn
 
 const opDescribeCacheClusters = "DescribeCacheClusters"
 
-// DescribeCacheClustersRequest generates a "aws/request.Request" representing the
+// DescribeCacheClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeCacheClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1695,12 +1694,12 @@ const opDescribeCacheClusters = "DescribeCacheClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters
-func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersInput) (req *request.Request, output *DescribeCacheClustersOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersInput) (req *aws.Request, output *DescribeCacheClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCacheClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1774,7 +1773,7 @@ func (c *ElastiCache) DescribeCacheClusters(input *DescribeCacheClustersInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheClustersWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...request.Option) (*DescribeCacheClustersOutput, error) {
+func (c *ElastiCache) DescribeCacheClustersWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...aws.Option) (*DescribeCacheClustersOutput, error) {
 	req, out := c.DescribeCacheClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1809,9 +1808,9 @@ func (c *ElastiCache) DescribeCacheClustersPages(input *DescribeCacheClustersInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheClustersPagesWithContext(ctx aws.Context, input *DescribeCacheClustersInput, fn func(*DescribeCacheClustersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeCacheClustersPagesWithContext(ctx aws.Context, input *DescribeCacheClustersInput, fn func(*DescribeCacheClustersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCacheClustersInput
 			if input != nil {
 				tmp := *input
@@ -1833,7 +1832,7 @@ func (c *ElastiCache) DescribeCacheClustersPagesWithContext(ctx aws.Context, inp
 
 const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
 
-// DescribeCacheEngineVersionsRequest generates a "aws/request.Request" representing the
+// DescribeCacheEngineVersionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeCacheEngineVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1857,12 +1856,12 @@ const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersions
-func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVersionsInput) (req *request.Request, output *DescribeCacheEngineVersionsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEngineVersionsInput) (req *aws.Request, output *DescribeCacheEngineVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCacheEngineVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1904,7 +1903,7 @@ func (c *ElastiCache) DescribeCacheEngineVersions(input *DescribeCacheEngineVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheEngineVersionsWithContext(ctx aws.Context, input *DescribeCacheEngineVersionsInput, opts ...request.Option) (*DescribeCacheEngineVersionsOutput, error) {
+func (c *ElastiCache) DescribeCacheEngineVersionsWithContext(ctx aws.Context, input *DescribeCacheEngineVersionsInput, opts ...aws.Option) (*DescribeCacheEngineVersionsOutput, error) {
 	req, out := c.DescribeCacheEngineVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1939,9 +1938,9 @@ func (c *ElastiCache) DescribeCacheEngineVersionsPages(input *DescribeCacheEngin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheEngineVersionsPagesWithContext(ctx aws.Context, input *DescribeCacheEngineVersionsInput, fn func(*DescribeCacheEngineVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeCacheEngineVersionsPagesWithContext(ctx aws.Context, input *DescribeCacheEngineVersionsInput, fn func(*DescribeCacheEngineVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCacheEngineVersionsInput
 			if input != nil {
 				tmp := *input
@@ -1963,7 +1962,7 @@ func (c *ElastiCache) DescribeCacheEngineVersionsPagesWithContext(ctx aws.Contex
 
 const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
 
-// DescribeCacheParameterGroupsRequest generates a "aws/request.Request" representing the
+// DescribeCacheParameterGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeCacheParameterGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1987,12 +1986,12 @@ const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups
-func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCacheParameterGroupsInput) (req *request.Request, output *DescribeCacheParameterGroupsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCacheParameterGroupsInput) (req *aws.Request, output *DescribeCacheParameterGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCacheParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2048,7 +2047,7 @@ func (c *ElastiCache) DescribeCacheParameterGroups(input *DescribeCacheParameter
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParameterGroupsWithContext(ctx aws.Context, input *DescribeCacheParameterGroupsInput, opts ...request.Option) (*DescribeCacheParameterGroupsOutput, error) {
+func (c *ElastiCache) DescribeCacheParameterGroupsWithContext(ctx aws.Context, input *DescribeCacheParameterGroupsInput, opts ...aws.Option) (*DescribeCacheParameterGroupsOutput, error) {
 	req, out := c.DescribeCacheParameterGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2083,9 +2082,9 @@ func (c *ElastiCache) DescribeCacheParameterGroupsPages(input *DescribeCachePara
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheParameterGroupsInput, fn func(*DescribeCacheParameterGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeCacheParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheParameterGroupsInput, fn func(*DescribeCacheParameterGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCacheParameterGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2107,7 +2106,7 @@ func (c *ElastiCache) DescribeCacheParameterGroupsPagesWithContext(ctx aws.Conte
 
 const opDescribeCacheParameters = "DescribeCacheParameters"
 
-// DescribeCacheParametersRequest generates a "aws/request.Request" representing the
+// DescribeCacheParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeCacheParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2131,12 +2130,12 @@ const opDescribeCacheParameters = "DescribeCacheParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameters
-func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParametersInput) (req *request.Request, output *DescribeCacheParametersOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParametersInput) (req *aws.Request, output *DescribeCacheParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCacheParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2190,7 +2189,7 @@ func (c *ElastiCache) DescribeCacheParameters(input *DescribeCacheParametersInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParametersWithContext(ctx aws.Context, input *DescribeCacheParametersInput, opts ...request.Option) (*DescribeCacheParametersOutput, error) {
+func (c *ElastiCache) DescribeCacheParametersWithContext(ctx aws.Context, input *DescribeCacheParametersInput, opts ...aws.Option) (*DescribeCacheParametersOutput, error) {
 	req, out := c.DescribeCacheParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2225,9 +2224,9 @@ func (c *ElastiCache) DescribeCacheParametersPages(input *DescribeCacheParameter
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParametersPagesWithContext(ctx aws.Context, input *DescribeCacheParametersInput, fn func(*DescribeCacheParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeCacheParametersPagesWithContext(ctx aws.Context, input *DescribeCacheParametersInput, fn func(*DescribeCacheParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCacheParametersInput
 			if input != nil {
 				tmp := *input
@@ -2249,7 +2248,7 @@ func (c *ElastiCache) DescribeCacheParametersPagesWithContext(ctx aws.Context, i
 
 const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 
-// DescribeCacheSecurityGroupsRequest generates a "aws/request.Request" representing the
+// DescribeCacheSecurityGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeCacheSecurityGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2273,12 +2272,12 @@ const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroups
-func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurityGroupsInput) (req *request.Request, output *DescribeCacheSecurityGroupsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSecurityGroupsInput) (req *aws.Request, output *DescribeCacheSecurityGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCacheSecurityGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2333,7 +2332,7 @@ func (c *ElastiCache) DescribeCacheSecurityGroups(input *DescribeCacheSecurityGr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSecurityGroupsWithContext(ctx aws.Context, input *DescribeCacheSecurityGroupsInput, opts ...request.Option) (*DescribeCacheSecurityGroupsOutput, error) {
+func (c *ElastiCache) DescribeCacheSecurityGroupsWithContext(ctx aws.Context, input *DescribeCacheSecurityGroupsInput, opts ...aws.Option) (*DescribeCacheSecurityGroupsOutput, error) {
 	req, out := c.DescribeCacheSecurityGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2368,9 +2367,9 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsPages(input *DescribeCacheSecur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheSecurityGroupsInput, fn func(*DescribeCacheSecurityGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeCacheSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheSecurityGroupsInput, fn func(*DescribeCacheSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCacheSecurityGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2392,7 +2391,7 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsPagesWithContext(ctx aws.Contex
 
 const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 
-// DescribeCacheSubnetGroupsRequest generates a "aws/request.Request" representing the
+// DescribeCacheSubnetGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeCacheSubnetGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2416,12 +2415,12 @@ const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups
-func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGroupsInput) (req *request.Request, output *DescribeCacheSubnetGroupsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubnetGroupsInput) (req *aws.Request, output *DescribeCacheSubnetGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCacheSubnetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2470,7 +2469,7 @@ func (c *ElastiCache) DescribeCacheSubnetGroups(input *DescribeCacheSubnetGroups
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSubnetGroupsWithContext(ctx aws.Context, input *DescribeCacheSubnetGroupsInput, opts ...request.Option) (*DescribeCacheSubnetGroupsOutput, error) {
+func (c *ElastiCache) DescribeCacheSubnetGroupsWithContext(ctx aws.Context, input *DescribeCacheSubnetGroupsInput, opts ...aws.Option) (*DescribeCacheSubnetGroupsOutput, error) {
 	req, out := c.DescribeCacheSubnetGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2505,9 +2504,9 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsPages(input *DescribeCacheSubnetG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheSubnetGroupsInput, fn func(*DescribeCacheSubnetGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeCacheSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheSubnetGroupsInput, fn func(*DescribeCacheSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCacheSubnetGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2529,7 +2528,7 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsPagesWithContext(ctx aws.Context,
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 
-// DescribeEngineDefaultParametersRequest generates a "aws/request.Request" representing the
+// DescribeEngineDefaultParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeEngineDefaultParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2553,12 +2552,12 @@ const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParameters
-func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) (req *request.Request, output *DescribeEngineDefaultParametersOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaultParametersInput) (req *aws.Request, output *DescribeEngineDefaultParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEngineDefaultParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"EngineDefaults.Marker"},
 			LimitToken:      "MaxRecords",
@@ -2609,7 +2608,7 @@ func (c *ElastiCache) DescribeEngineDefaultParameters(input *DescribeEngineDefau
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeEngineDefaultParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, opts ...request.Option) (*DescribeEngineDefaultParametersOutput, error) {
+func (c *ElastiCache) DescribeEngineDefaultParametersWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, opts ...aws.Option) (*DescribeEngineDefaultParametersOutput, error) {
 	req, out := c.DescribeEngineDefaultParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2644,9 +2643,9 @@ func (c *ElastiCache) DescribeEngineDefaultParametersPages(input *DescribeEngine
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEngineDefaultParametersInput
 			if input != nil {
 				tmp := *input
@@ -2668,7 +2667,7 @@ func (c *ElastiCache) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Co
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2692,12 +2691,12 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEvents
-func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2753,7 +2752,7 @@ func (c *ElastiCache) DescribeEvents(input *DescribeEventsInput) (*DescribeEvent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *ElastiCache) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2788,9 +2787,9 @@ func (c *ElastiCache) DescribeEventsPages(input *DescribeEventsInput, fn func(*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
 			if input != nil {
 				tmp := *input
@@ -2812,7 +2811,7 @@ func (c *ElastiCache) DescribeEventsPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeReplicationGroups = "DescribeReplicationGroups"
 
-// DescribeReplicationGroupsRequest generates a "aws/request.Request" representing the
+// DescribeReplicationGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeReplicationGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2836,12 +2835,12 @@ const opDescribeReplicationGroups = "DescribeReplicationGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups
-func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicationGroupsInput) (req *request.Request, output *DescribeReplicationGroupsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicationGroupsInput) (req *aws.Request, output *DescribeReplicationGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReplicationGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2898,7 +2897,7 @@ func (c *ElastiCache) DescribeReplicationGroups(input *DescribeReplicationGroups
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeReplicationGroupsWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...request.Option) (*DescribeReplicationGroupsOutput, error) {
+func (c *ElastiCache) DescribeReplicationGroupsWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...aws.Option) (*DescribeReplicationGroupsOutput, error) {
 	req, out := c.DescribeReplicationGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2933,9 +2932,9 @@ func (c *ElastiCache) DescribeReplicationGroupsPages(input *DescribeReplicationG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeReplicationGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, fn func(*DescribeReplicationGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeReplicationGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, fn func(*DescribeReplicationGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2957,7 +2956,7 @@ func (c *ElastiCache) DescribeReplicationGroupsPagesWithContext(ctx aws.Context,
 
 const opDescribeReservedCacheNodes = "DescribeReservedCacheNodes"
 
-// DescribeReservedCacheNodesRequest generates a "aws/request.Request" representing the
+// DescribeReservedCacheNodesRequest generates a "aws.Request" representing the
 // client's request for the DescribeReservedCacheNodes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2981,12 +2980,12 @@ const opDescribeReservedCacheNodes = "DescribeReservedCacheNodes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodes
-func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedCacheNodesInput) (req *request.Request, output *DescribeReservedCacheNodesOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedCacheNodesInput) (req *aws.Request, output *DescribeReservedCacheNodesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReservedCacheNodes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3040,7 +3039,7 @@ func (c *ElastiCache) DescribeReservedCacheNodes(input *DescribeReservedCacheNod
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesInput, opts ...request.Option) (*DescribeReservedCacheNodesOutput, error) {
+func (c *ElastiCache) DescribeReservedCacheNodesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesInput, opts ...aws.Option) (*DescribeReservedCacheNodesOutput, error) {
 	req, out := c.DescribeReservedCacheNodesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3075,9 +3074,9 @@ func (c *ElastiCache) DescribeReservedCacheNodesPages(input *DescribeReservedCac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesPagesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesInput, fn func(*DescribeReservedCacheNodesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeReservedCacheNodesPagesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesInput, fn func(*DescribeReservedCacheNodesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedCacheNodesInput
 			if input != nil {
 				tmp := *input
@@ -3099,7 +3098,7 @@ func (c *ElastiCache) DescribeReservedCacheNodesPagesWithContext(ctx aws.Context
 
 const opDescribeReservedCacheNodesOfferings = "DescribeReservedCacheNodesOfferings"
 
-// DescribeReservedCacheNodesOfferingsRequest generates a "aws/request.Request" representing the
+// DescribeReservedCacheNodesOfferingsRequest generates a "aws.Request" representing the
 // client's request for the DescribeReservedCacheNodesOfferings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3123,12 +3122,12 @@ const opDescribeReservedCacheNodesOfferings = "DescribeReservedCacheNodesOfferin
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesOfferings
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *DescribeReservedCacheNodesOfferingsInput) (req *request.Request, output *DescribeReservedCacheNodesOfferingsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *DescribeReservedCacheNodesOfferingsInput) (req *aws.Request, output *DescribeReservedCacheNodesOfferingsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReservedCacheNodesOfferings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3181,7 +3180,7 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferings(input *DescribeReserve
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsWithContext(ctx aws.Context, input *DescribeReservedCacheNodesOfferingsInput, opts ...request.Option) (*DescribeReservedCacheNodesOfferingsOutput, error) {
+func (c *ElastiCache) DescribeReservedCacheNodesOfferingsWithContext(ctx aws.Context, input *DescribeReservedCacheNodesOfferingsInput, opts ...aws.Option) (*DescribeReservedCacheNodesOfferingsOutput, error) {
 	req, out := c.DescribeReservedCacheNodesOfferingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3216,9 +3215,9 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPages(input *DescribeRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesOfferingsInput, fn func(*DescribeReservedCacheNodesOfferingsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesOfferingsInput, fn func(*DescribeReservedCacheNodesOfferingsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedCacheNodesOfferingsInput
 			if input != nil {
 				tmp := *input
@@ -3240,7 +3239,7 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPagesWithContext(ctx aw
 
 const opDescribeSnapshots = "DescribeSnapshots"
 
-// DescribeSnapshotsRequest generates a "aws/request.Request" representing the
+// DescribeSnapshotsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSnapshots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3264,12 +3263,12 @@ const opDescribeSnapshots = "DescribeSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots
-func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *request.Request, output *DescribeSnapshotsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *aws.Request, output *DescribeSnapshotsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -3330,7 +3329,7 @@ func (c *ElastiCache) DescribeSnapshots(input *DescribeSnapshotsInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeSnapshotsWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...request.Option) (*DescribeSnapshotsOutput, error) {
+func (c *ElastiCache) DescribeSnapshotsWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...aws.Option) (*DescribeSnapshotsOutput, error) {
 	req, out := c.DescribeSnapshotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3365,9 +3364,9 @@ func (c *ElastiCache) DescribeSnapshotsPages(input *DescribeSnapshotsInput, fn f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *DescribeSnapshotsInput, fn func(*DescribeSnapshotsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElastiCache) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *DescribeSnapshotsInput, fn func(*DescribeSnapshotsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeSnapshotsInput
 			if input != nil {
 				tmp := *input
@@ -3389,7 +3388,7 @@ func (c *ElastiCache) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *
 
 const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 
-// ListAllowedNodeTypeModificationsRequest generates a "aws/request.Request" representing the
+// ListAllowedNodeTypeModificationsRequest generates a "aws.Request" representing the
 // client's request for the ListAllowedNodeTypeModifications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3413,8 +3412,8 @@ const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications
-func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeTypeModificationsInput) (req *request.Request, output *ListAllowedNodeTypeModificationsOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowedNodeTypeModificationsInput) (req *aws.Request, output *ListAllowedNodeTypeModificationsOutput) {
+	op := &aws.Operation{
 		Name:       opListAllowedNodeTypeModifications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3473,7 +3472,7 @@ func (c *ElastiCache) ListAllowedNodeTypeModifications(input *ListAllowedNodeTyp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ListAllowedNodeTypeModificationsWithContext(ctx aws.Context, input *ListAllowedNodeTypeModificationsInput, opts ...request.Option) (*ListAllowedNodeTypeModificationsOutput, error) {
+func (c *ElastiCache) ListAllowedNodeTypeModificationsWithContext(ctx aws.Context, input *ListAllowedNodeTypeModificationsInput, opts ...aws.Option) (*ListAllowedNodeTypeModificationsOutput, error) {
 	req, out := c.ListAllowedNodeTypeModificationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3482,7 +3481,7 @@ func (c *ElastiCache) ListAllowedNodeTypeModificationsWithContext(ctx aws.Contex
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3506,8 +3505,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResource
-func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *TagListMessage) {
-	op := &request.Operation{
+func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *TagListMessage) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3565,7 +3564,7 @@ func (c *ElastiCache) ListTagsForResource(input *ListTagsForResourceInput) (*Tag
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*TagListMessage, error) {
+func (c *ElastiCache) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*TagListMessage, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3574,7 +3573,7 @@ func (c *ElastiCache) ListTagsForResourceWithContext(ctx aws.Context, input *Lis
 
 const opModifyCacheCluster = "ModifyCacheCluster"
 
-// ModifyCacheClusterRequest generates a "aws/request.Request" representing the
+// ModifyCacheClusterRequest generates a "aws.Request" representing the
 // client's request for the ModifyCacheCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3598,8 +3597,8 @@ const opModifyCacheCluster = "ModifyCacheCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster
-func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) (req *request.Request, output *ModifyCacheClusterOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) (req *aws.Request, output *ModifyCacheClusterOutput) {
+	op := &aws.Operation{
 		Name:       opModifyCacheCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3681,7 +3680,7 @@ func (c *ElastiCache) ModifyCacheCluster(input *ModifyCacheClusterInput) (*Modif
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ModifyCacheClusterWithContext(ctx aws.Context, input *ModifyCacheClusterInput, opts ...request.Option) (*ModifyCacheClusterOutput, error) {
+func (c *ElastiCache) ModifyCacheClusterWithContext(ctx aws.Context, input *ModifyCacheClusterInput, opts ...aws.Option) (*ModifyCacheClusterOutput, error) {
 	req, out := c.ModifyCacheClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3690,7 +3689,7 @@ func (c *ElastiCache) ModifyCacheClusterWithContext(ctx aws.Context, input *Modi
 
 const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
 
-// ModifyCacheParameterGroupRequest generates a "aws/request.Request" representing the
+// ModifyCacheParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyCacheParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3714,8 +3713,8 @@ const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroup
-func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGroupInput) (req *request.Request, output *CacheParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParameterGroupInput) (req *aws.Request, output *CacheParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opModifyCacheParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3773,7 +3772,7 @@ func (c *ElastiCache) ModifyCacheParameterGroup(input *ModifyCacheParameterGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ModifyCacheParameterGroupWithContext(ctx aws.Context, input *ModifyCacheParameterGroupInput, opts ...request.Option) (*CacheParameterGroupNameMessage, error) {
+func (c *ElastiCache) ModifyCacheParameterGroupWithContext(ctx aws.Context, input *ModifyCacheParameterGroupInput, opts ...aws.Option) (*CacheParameterGroupNameMessage, error) {
 	req, out := c.ModifyCacheParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3782,7 +3781,7 @@ func (c *ElastiCache) ModifyCacheParameterGroupWithContext(ctx aws.Context, inpu
 
 const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
 
-// ModifyCacheSubnetGroupRequest generates a "aws/request.Request" representing the
+// ModifyCacheSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyCacheSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3806,8 +3805,8 @@ const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup
-func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInput) (req *request.Request, output *ModifyCacheSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGroupInput) (req *aws.Request, output *ModifyCacheSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyCacheSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3863,7 +3862,7 @@ func (c *ElastiCache) ModifyCacheSubnetGroup(input *ModifyCacheSubnetGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ModifyCacheSubnetGroupWithContext(ctx aws.Context, input *ModifyCacheSubnetGroupInput, opts ...request.Option) (*ModifyCacheSubnetGroupOutput, error) {
+func (c *ElastiCache) ModifyCacheSubnetGroupWithContext(ctx aws.Context, input *ModifyCacheSubnetGroupInput, opts ...aws.Option) (*ModifyCacheSubnetGroupOutput, error) {
 	req, out := c.ModifyCacheSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3872,7 +3871,7 @@ func (c *ElastiCache) ModifyCacheSubnetGroupWithContext(ctx aws.Context, input *
 
 const opModifyReplicationGroup = "ModifyReplicationGroup"
 
-// ModifyReplicationGroupRequest generates a "aws/request.Request" representing the
+// ModifyReplicationGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyReplicationGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3896,8 +3895,8 @@ const opModifyReplicationGroup = "ModifyReplicationGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup
-func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGroupInput) (req *request.Request, output *ModifyReplicationGroupOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGroupInput) (req *aws.Request, output *ModifyReplicationGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyReplicationGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3989,7 +3988,7 @@ func (c *ElastiCache) ModifyReplicationGroup(input *ModifyReplicationGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ModifyReplicationGroupWithContext(ctx aws.Context, input *ModifyReplicationGroupInput, opts ...request.Option) (*ModifyReplicationGroupOutput, error) {
+func (c *ElastiCache) ModifyReplicationGroupWithContext(ctx aws.Context, input *ModifyReplicationGroupInput, opts ...aws.Option) (*ModifyReplicationGroupOutput, error) {
 	req, out := c.ModifyReplicationGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3998,7 +3997,7 @@ func (c *ElastiCache) ModifyReplicationGroupWithContext(ctx aws.Context, input *
 
 const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering"
 
-// PurchaseReservedCacheNodesOfferingRequest generates a "aws/request.Request" representing the
+// PurchaseReservedCacheNodesOfferingRequest generates a "aws.Request" representing the
 // client's request for the PurchaseReservedCacheNodesOffering operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4022,8 +4021,8 @@ const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering
-func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReservedCacheNodesOfferingInput) (req *request.Request, output *PurchaseReservedCacheNodesOfferingOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseReservedCacheNodesOfferingInput) (req *aws.Request, output *PurchaseReservedCacheNodesOfferingOutput) {
+	op := &aws.Operation{
 		Name:       opPurchaseReservedCacheNodesOffering,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4081,7 +4080,7 @@ func (c *ElastiCache) PurchaseReservedCacheNodesOffering(input *PurchaseReserved
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) PurchaseReservedCacheNodesOfferingWithContext(ctx aws.Context, input *PurchaseReservedCacheNodesOfferingInput, opts ...request.Option) (*PurchaseReservedCacheNodesOfferingOutput, error) {
+func (c *ElastiCache) PurchaseReservedCacheNodesOfferingWithContext(ctx aws.Context, input *PurchaseReservedCacheNodesOfferingInput, opts ...aws.Option) (*PurchaseReservedCacheNodesOfferingOutput, error) {
 	req, out := c.PurchaseReservedCacheNodesOfferingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4090,7 +4089,7 @@ func (c *ElastiCache) PurchaseReservedCacheNodesOfferingWithContext(ctx aws.Cont
 
 const opRebootCacheCluster = "RebootCacheCluster"
 
-// RebootCacheClusterRequest generates a "aws/request.Request" representing the
+// RebootCacheClusterRequest generates a "aws.Request" representing the
 // client's request for the RebootCacheCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4114,8 +4113,8 @@ const opRebootCacheCluster = "RebootCacheCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster
-func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) (req *request.Request, output *RebootCacheClusterOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) (req *aws.Request, output *RebootCacheClusterOutput) {
+	op := &aws.Operation{
 		Name:       opRebootCacheCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4172,7 +4171,7 @@ func (c *ElastiCache) RebootCacheCluster(input *RebootCacheClusterInput) (*Reboo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) RebootCacheClusterWithContext(ctx aws.Context, input *RebootCacheClusterInput, opts ...request.Option) (*RebootCacheClusterOutput, error) {
+func (c *ElastiCache) RebootCacheClusterWithContext(ctx aws.Context, input *RebootCacheClusterInput, opts ...aws.Option) (*RebootCacheClusterOutput, error) {
 	req, out := c.RebootCacheClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4181,7 +4180,7 @@ func (c *ElastiCache) RebootCacheClusterWithContext(ctx aws.Context, input *Rebo
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4205,8 +4204,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResource
-func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *TagListMessage) {
-	op := &request.Operation{
+func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *TagListMessage) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4260,7 +4259,7 @@ func (c *ElastiCache) RemoveTagsFromResource(input *RemoveTagsFromResourceInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*TagListMessage, error) {
+func (c *ElastiCache) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*TagListMessage, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4269,7 +4268,7 @@ func (c *ElastiCache) RemoveTagsFromResourceWithContext(ctx aws.Context, input *
 
 const opResetCacheParameterGroup = "ResetCacheParameterGroup"
 
-// ResetCacheParameterGroupRequest generates a "aws/request.Request" representing the
+// ResetCacheParameterGroupRequest generates a "aws.Request" representing the
 // client's request for the ResetCacheParameterGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4293,8 +4292,8 @@ const opResetCacheParameterGroup = "ResetCacheParameterGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroup
-func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroupInput) (req *request.Request, output *CacheParameterGroupNameMessage) {
-	op := &request.Operation{
+func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameterGroupInput) (req *aws.Request, output *CacheParameterGroupNameMessage) {
+	op := &aws.Operation{
 		Name:       opResetCacheParameterGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4353,7 +4352,7 @@ func (c *ElastiCache) ResetCacheParameterGroup(input *ResetCacheParameterGroupIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) ResetCacheParameterGroupWithContext(ctx aws.Context, input *ResetCacheParameterGroupInput, opts ...request.Option) (*CacheParameterGroupNameMessage, error) {
+func (c *ElastiCache) ResetCacheParameterGroupWithContext(ctx aws.Context, input *ResetCacheParameterGroupInput, opts ...aws.Option) (*CacheParameterGroupNameMessage, error) {
 	req, out := c.ResetCacheParameterGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4362,7 +4361,7 @@ func (c *ElastiCache) ResetCacheParameterGroupWithContext(ctx aws.Context, input
 
 const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
 
-// RevokeCacheSecurityGroupIngressRequest generates a "aws/request.Request" representing the
+// RevokeCacheSecurityGroupIngressRequest generates a "aws.Request" representing the
 // client's request for the RevokeCacheSecurityGroupIngress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4386,8 +4385,8 @@ const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngress
-func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecurityGroupIngressInput) (req *request.Request, output *RevokeCacheSecurityGroupIngressOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheSecurityGroupIngressInput) (req *aws.Request, output *RevokeCacheSecurityGroupIngressOutput) {
+	op := &aws.Operation{
 		Name:       opRevokeCacheSecurityGroupIngress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4447,7 +4446,7 @@ func (c *ElastiCache) RevokeCacheSecurityGroupIngress(input *RevokeCacheSecurity
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) RevokeCacheSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeCacheSecurityGroupIngressInput, opts ...request.Option) (*RevokeCacheSecurityGroupIngressOutput, error) {
+func (c *ElastiCache) RevokeCacheSecurityGroupIngressWithContext(ctx aws.Context, input *RevokeCacheSecurityGroupIngressInput, opts ...aws.Option) (*RevokeCacheSecurityGroupIngressOutput, error) {
 	req, out := c.RevokeCacheSecurityGroupIngressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4456,7 +4455,7 @@ func (c *ElastiCache) RevokeCacheSecurityGroupIngressWithContext(ctx aws.Context
 
 const opTestFailover = "TestFailover"
 
-// TestFailoverRequest generates a "aws/request.Request" representing the
+// TestFailoverRequest generates a "aws.Request" representing the
 // client's request for the TestFailover operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4480,8 +4479,8 @@ const opTestFailover = "TestFailover"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover
-func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) (req *request.Request, output *TestFailoverOutput) {
-	op := &request.Operation{
+func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) (req *aws.Request, output *TestFailoverOutput) {
+	op := &aws.Operation{
 		Name:       opTestFailover,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4591,7 +4590,7 @@ func (c *ElastiCache) TestFailover(input *TestFailoverInput) (*TestFailoverOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) TestFailoverWithContext(ctx aws.Context, input *TestFailoverInput, opts ...request.Option) (*TestFailoverOutput, error) {
+func (c *ElastiCache) TestFailoverWithContext(ctx aws.Context, input *TestFailoverInput, opts ...aws.Option) (*TestFailoverOutput, error) {
 	req, out := c.TestFailoverRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4632,12 +4631,12 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4694,15 +4693,15 @@ func (s AuthorizeCacheSecurityGroupIngressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AuthorizeCacheSecurityGroupIngressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AuthorizeCacheSecurityGroupIngressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeCacheSecurityGroupIngressInput"}
 	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
 	if s.EC2SecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EC2SecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupName"))
 	}
 	if s.EC2SecurityGroupOwnerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EC2SecurityGroupOwnerId"))
+		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupOwnerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5717,12 +5716,12 @@ func (s CopySnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopySnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopySnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopySnapshotInput"}
 	if s.SourceSnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceSnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceSnapshotName"))
 	}
 	if s.TargetSnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetSnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetSnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6047,9 +6046,9 @@ func (s CreateCacheClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCacheClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheClusterInput"}
 	if s.CacheClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6256,15 +6255,15 @@ func (s CreateCacheParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCacheParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheParameterGroupInput"}
 	if s.CacheParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupFamily"))
 	}
 	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6349,12 +6348,12 @@ func (s CreateCacheSecurityGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheSecurityGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCacheSecurityGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheSecurityGroupInput"}
 	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6442,15 +6441,15 @@ func (s CreateCacheSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCacheSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCacheSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCacheSubnetGroupInput"}
 	if s.CacheSubnetGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSubnetGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupDescription"))
 	}
 	if s.CacheSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6802,12 +6801,12 @@ func (s CreateReplicationGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReplicationGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationGroupInput"}
 	if s.ReplicationGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupDescription"))
 	}
 	if s.ReplicationGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7027,9 +7026,9 @@ func (s CreateSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
 	if s.SnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7110,9 +7109,9 @@ func (s DeleteCacheClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCacheClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheClusterInput"}
 	if s.CacheClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7183,9 +7182,9 @@ func (s DeleteCacheParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCacheParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheParameterGroupInput"}
 	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7240,9 +7239,9 @@ func (s DeleteCacheSecurityGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheSecurityGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCacheSecurityGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheSecurityGroupInput"}
 	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7297,9 +7296,9 @@ func (s DeleteCacheSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCacheSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCacheSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCacheSubnetGroupInput"}
 	if s.CacheSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7363,9 +7362,9 @@ func (s DeleteReplicationGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReplicationGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationGroupInput"}
 	if s.ReplicationGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7439,9 +7438,9 @@ func (s DeleteSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotInput"}
 	if s.SnapshotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotName"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7844,9 +7843,9 @@ func (s DescribeCacheParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCacheParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCacheParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCacheParametersInput"}
 	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8134,9 +8133,9 @@ func (s DescribeEngineDefaultParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEngineDefaultParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEngineDefaultParametersInput"}
 	if s.CacheParameterGroupFamily == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupFamily"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupFamily"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9180,9 +9179,9 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9453,9 +9452,9 @@ func (s ModifyCacheClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyCacheClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyCacheClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheClusterInput"}
 	if s.CacheClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9620,12 +9619,12 @@ func (s ModifyCacheParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyCacheParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyCacheParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheParameterGroupInput"}
 	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
 	if s.ParameterNameValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterNameValues"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterNameValues"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9680,9 +9679,9 @@ func (s ModifyCacheSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyCacheSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyCacheSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyCacheSubnetGroupInput"}
 	if s.CacheSubnetGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSubnetGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSubnetGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9896,9 +9895,9 @@ func (s ModifyReplicationGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyReplicationGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationGroupInput"}
 	if s.ReplicationGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10579,9 +10578,9 @@ func (s PurchaseReservedCacheNodesOfferingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseReservedCacheNodesOfferingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PurchaseReservedCacheNodesOfferingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedCacheNodesOfferingInput"}
 	if s.ReservedCacheNodesOfferingId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReservedCacheNodesOfferingId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReservedCacheNodesOfferingId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10662,12 +10661,12 @@ func (s RebootCacheClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootCacheClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootCacheClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootCacheClusterInput"}
 	if s.CacheClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheClusterId"))
 	}
 	if s.CacheNodeIdsToReboot == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheNodeIdsToReboot"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheNodeIdsToReboot"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10780,12 +10779,12 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceName"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11336,9 +11335,9 @@ func (s ResetCacheParameterGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetCacheParameterGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetCacheParameterGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetCacheParameterGroupInput"}
 	if s.CacheParameterGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheParameterGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheParameterGroupName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11400,15 +11399,15 @@ func (s RevokeCacheSecurityGroupIngressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeCacheSecurityGroupIngressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RevokeCacheSecurityGroupIngressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RevokeCacheSecurityGroupIngressInput"}
 	if s.CacheSecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CacheSecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("CacheSecurityGroupName"))
 	}
 	if s.EC2SecurityGroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EC2SecurityGroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupName"))
 	}
 	if s.EC2SecurityGroupOwnerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EC2SecurityGroupOwnerId"))
+		invalidParams.Add(aws.NewErrParamRequired("EC2SecurityGroupOwnerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11950,12 +11949,12 @@ func (s TestFailoverInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestFailoverInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestFailoverInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestFailoverInput"}
 	if s.NodeGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeGroupId"))
 	}
 	if s.ReplicationGroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationGroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroupId"))
 	}
 
 	if invalidParams.Len() > 0 {

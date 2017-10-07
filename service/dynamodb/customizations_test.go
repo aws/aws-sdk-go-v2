@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	client "github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
@@ -18,8 +18,8 @@ import (
 var db *dynamodb.DynamoDB
 
 func TestMain(m *testing.M) {
-	db = dynamodb.New(unit.Session, &aws.Config{
-		MaxRetries: aws.Int(2),
+	db = dynamodb.New(unit.Config, &aws.Config{
+		Retryer: aws.DefaultRetryer{NumMaxRetries: 2},
 	})
 	db.Handlers.Send.Clear() // mock sending
 
@@ -44,14 +44,18 @@ func mockCRCResponse(svc *dynamodb.DynamoDB, status int, body, crc string) (req 
 }
 
 func TestDefaultRetryRules(t *testing.T) {
-	d := dynamodb.New(unit.Session, &aws.Config{MaxRetries: aws.Int(-1)})
+	cfg := unit.Config.Copy()
+	cfg.Retryer = nil
+	d := dynamodb.New(unit.Config)
 	if e, a := 10, d.MaxRetries(); e != a {
 		t.Errorf("expect %d max retries, got %d", e, a)
 	}
 }
 
 func TestCustomRetryRules(t *testing.T) {
-	d := dynamodb.New(unit.Session, &aws.Config{MaxRetries: aws.Int(2)})
+	d := dynamodb.New(unit.Config, &aws.Config{
+		Retryer: aws.DefaultRetryer{NumMaxRetries: 2},
+	})
 	if e, a := 2, d.MaxRetries(); e != a {
 		t.Errorf("expect %d max retries, got %d", e, a)
 	}
@@ -62,7 +66,7 @@ type testCustomRetryer struct {
 }
 
 func TestCustomRetry_FromConfig(t *testing.T) {
-	d := dynamodb.New(unit.Session, &aws.Config{
+	d := dynamodb.New(unit.Config, &aws.Config{
 		Retryer: testCustomRetryer{client.DefaultRetryer{NumMaxRetries: 9}},
 	})
 
@@ -130,8 +134,8 @@ func TestValidateCRC32DoesNotMatch(t *testing.T) {
 }
 
 func TestValidateCRC32DoesNotMatchNoComputeChecksum(t *testing.T) {
-	svc := dynamodb.New(unit.Session, &aws.Config{
-		MaxRetries:              aws.Int(2),
+	svc := dynamodb.New(unit.Config, &aws.Config{
+		Retryer:                 aws.DefaultRetryer{NumMaxRetries: 2},
 		DisableComputeChecksums: aws.Bool(true),
 	})
 	svc.Handlers.Send.Clear() // mock sending

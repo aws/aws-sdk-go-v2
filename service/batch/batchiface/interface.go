@@ -10,7 +10,6 @@ package batchiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/batch"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := batch.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := batch.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,68 +64,68 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type BatchAPI interface {
 	CancelJob(*batch.CancelJobInput) (*batch.CancelJobOutput, error)
-	CancelJobWithContext(aws.Context, *batch.CancelJobInput, ...request.Option) (*batch.CancelJobOutput, error)
-	CancelJobRequest(*batch.CancelJobInput) (*request.Request, *batch.CancelJobOutput)
+	CancelJobWithContext(aws.Context, *batch.CancelJobInput, ...aws.Option) (*batch.CancelJobOutput, error)
+	CancelJobRequest(*batch.CancelJobInput) (*aws.Request, *batch.CancelJobOutput)
 
 	CreateComputeEnvironment(*batch.CreateComputeEnvironmentInput) (*batch.CreateComputeEnvironmentOutput, error)
-	CreateComputeEnvironmentWithContext(aws.Context, *batch.CreateComputeEnvironmentInput, ...request.Option) (*batch.CreateComputeEnvironmentOutput, error)
-	CreateComputeEnvironmentRequest(*batch.CreateComputeEnvironmentInput) (*request.Request, *batch.CreateComputeEnvironmentOutput)
+	CreateComputeEnvironmentWithContext(aws.Context, *batch.CreateComputeEnvironmentInput, ...aws.Option) (*batch.CreateComputeEnvironmentOutput, error)
+	CreateComputeEnvironmentRequest(*batch.CreateComputeEnvironmentInput) (*aws.Request, *batch.CreateComputeEnvironmentOutput)
 
 	CreateJobQueue(*batch.CreateJobQueueInput) (*batch.CreateJobQueueOutput, error)
-	CreateJobQueueWithContext(aws.Context, *batch.CreateJobQueueInput, ...request.Option) (*batch.CreateJobQueueOutput, error)
-	CreateJobQueueRequest(*batch.CreateJobQueueInput) (*request.Request, *batch.CreateJobQueueOutput)
+	CreateJobQueueWithContext(aws.Context, *batch.CreateJobQueueInput, ...aws.Option) (*batch.CreateJobQueueOutput, error)
+	CreateJobQueueRequest(*batch.CreateJobQueueInput) (*aws.Request, *batch.CreateJobQueueOutput)
 
 	DeleteComputeEnvironment(*batch.DeleteComputeEnvironmentInput) (*batch.DeleteComputeEnvironmentOutput, error)
-	DeleteComputeEnvironmentWithContext(aws.Context, *batch.DeleteComputeEnvironmentInput, ...request.Option) (*batch.DeleteComputeEnvironmentOutput, error)
-	DeleteComputeEnvironmentRequest(*batch.DeleteComputeEnvironmentInput) (*request.Request, *batch.DeleteComputeEnvironmentOutput)
+	DeleteComputeEnvironmentWithContext(aws.Context, *batch.DeleteComputeEnvironmentInput, ...aws.Option) (*batch.DeleteComputeEnvironmentOutput, error)
+	DeleteComputeEnvironmentRequest(*batch.DeleteComputeEnvironmentInput) (*aws.Request, *batch.DeleteComputeEnvironmentOutput)
 
 	DeleteJobQueue(*batch.DeleteJobQueueInput) (*batch.DeleteJobQueueOutput, error)
-	DeleteJobQueueWithContext(aws.Context, *batch.DeleteJobQueueInput, ...request.Option) (*batch.DeleteJobQueueOutput, error)
-	DeleteJobQueueRequest(*batch.DeleteJobQueueInput) (*request.Request, *batch.DeleteJobQueueOutput)
+	DeleteJobQueueWithContext(aws.Context, *batch.DeleteJobQueueInput, ...aws.Option) (*batch.DeleteJobQueueOutput, error)
+	DeleteJobQueueRequest(*batch.DeleteJobQueueInput) (*aws.Request, *batch.DeleteJobQueueOutput)
 
 	DeregisterJobDefinition(*batch.DeregisterJobDefinitionInput) (*batch.DeregisterJobDefinitionOutput, error)
-	DeregisterJobDefinitionWithContext(aws.Context, *batch.DeregisterJobDefinitionInput, ...request.Option) (*batch.DeregisterJobDefinitionOutput, error)
-	DeregisterJobDefinitionRequest(*batch.DeregisterJobDefinitionInput) (*request.Request, *batch.DeregisterJobDefinitionOutput)
+	DeregisterJobDefinitionWithContext(aws.Context, *batch.DeregisterJobDefinitionInput, ...aws.Option) (*batch.DeregisterJobDefinitionOutput, error)
+	DeregisterJobDefinitionRequest(*batch.DeregisterJobDefinitionInput) (*aws.Request, *batch.DeregisterJobDefinitionOutput)
 
 	DescribeComputeEnvironments(*batch.DescribeComputeEnvironmentsInput) (*batch.DescribeComputeEnvironmentsOutput, error)
-	DescribeComputeEnvironmentsWithContext(aws.Context, *batch.DescribeComputeEnvironmentsInput, ...request.Option) (*batch.DescribeComputeEnvironmentsOutput, error)
-	DescribeComputeEnvironmentsRequest(*batch.DescribeComputeEnvironmentsInput) (*request.Request, *batch.DescribeComputeEnvironmentsOutput)
+	DescribeComputeEnvironmentsWithContext(aws.Context, *batch.DescribeComputeEnvironmentsInput, ...aws.Option) (*batch.DescribeComputeEnvironmentsOutput, error)
+	DescribeComputeEnvironmentsRequest(*batch.DescribeComputeEnvironmentsInput) (*aws.Request, *batch.DescribeComputeEnvironmentsOutput)
 
 	DescribeJobDefinitions(*batch.DescribeJobDefinitionsInput) (*batch.DescribeJobDefinitionsOutput, error)
-	DescribeJobDefinitionsWithContext(aws.Context, *batch.DescribeJobDefinitionsInput, ...request.Option) (*batch.DescribeJobDefinitionsOutput, error)
-	DescribeJobDefinitionsRequest(*batch.DescribeJobDefinitionsInput) (*request.Request, *batch.DescribeJobDefinitionsOutput)
+	DescribeJobDefinitionsWithContext(aws.Context, *batch.DescribeJobDefinitionsInput, ...aws.Option) (*batch.DescribeJobDefinitionsOutput, error)
+	DescribeJobDefinitionsRequest(*batch.DescribeJobDefinitionsInput) (*aws.Request, *batch.DescribeJobDefinitionsOutput)
 
 	DescribeJobQueues(*batch.DescribeJobQueuesInput) (*batch.DescribeJobQueuesOutput, error)
-	DescribeJobQueuesWithContext(aws.Context, *batch.DescribeJobQueuesInput, ...request.Option) (*batch.DescribeJobQueuesOutput, error)
-	DescribeJobQueuesRequest(*batch.DescribeJobQueuesInput) (*request.Request, *batch.DescribeJobQueuesOutput)
+	DescribeJobQueuesWithContext(aws.Context, *batch.DescribeJobQueuesInput, ...aws.Option) (*batch.DescribeJobQueuesOutput, error)
+	DescribeJobQueuesRequest(*batch.DescribeJobQueuesInput) (*aws.Request, *batch.DescribeJobQueuesOutput)
 
 	DescribeJobs(*batch.DescribeJobsInput) (*batch.DescribeJobsOutput, error)
-	DescribeJobsWithContext(aws.Context, *batch.DescribeJobsInput, ...request.Option) (*batch.DescribeJobsOutput, error)
-	DescribeJobsRequest(*batch.DescribeJobsInput) (*request.Request, *batch.DescribeJobsOutput)
+	DescribeJobsWithContext(aws.Context, *batch.DescribeJobsInput, ...aws.Option) (*batch.DescribeJobsOutput, error)
+	DescribeJobsRequest(*batch.DescribeJobsInput) (*aws.Request, *batch.DescribeJobsOutput)
 
 	ListJobs(*batch.ListJobsInput) (*batch.ListJobsOutput, error)
-	ListJobsWithContext(aws.Context, *batch.ListJobsInput, ...request.Option) (*batch.ListJobsOutput, error)
-	ListJobsRequest(*batch.ListJobsInput) (*request.Request, *batch.ListJobsOutput)
+	ListJobsWithContext(aws.Context, *batch.ListJobsInput, ...aws.Option) (*batch.ListJobsOutput, error)
+	ListJobsRequest(*batch.ListJobsInput) (*aws.Request, *batch.ListJobsOutput)
 
 	RegisterJobDefinition(*batch.RegisterJobDefinitionInput) (*batch.RegisterJobDefinitionOutput, error)
-	RegisterJobDefinitionWithContext(aws.Context, *batch.RegisterJobDefinitionInput, ...request.Option) (*batch.RegisterJobDefinitionOutput, error)
-	RegisterJobDefinitionRequest(*batch.RegisterJobDefinitionInput) (*request.Request, *batch.RegisterJobDefinitionOutput)
+	RegisterJobDefinitionWithContext(aws.Context, *batch.RegisterJobDefinitionInput, ...aws.Option) (*batch.RegisterJobDefinitionOutput, error)
+	RegisterJobDefinitionRequest(*batch.RegisterJobDefinitionInput) (*aws.Request, *batch.RegisterJobDefinitionOutput)
 
 	SubmitJob(*batch.SubmitJobInput) (*batch.SubmitJobOutput, error)
-	SubmitJobWithContext(aws.Context, *batch.SubmitJobInput, ...request.Option) (*batch.SubmitJobOutput, error)
-	SubmitJobRequest(*batch.SubmitJobInput) (*request.Request, *batch.SubmitJobOutput)
+	SubmitJobWithContext(aws.Context, *batch.SubmitJobInput, ...aws.Option) (*batch.SubmitJobOutput, error)
+	SubmitJobRequest(*batch.SubmitJobInput) (*aws.Request, *batch.SubmitJobOutput)
 
 	TerminateJob(*batch.TerminateJobInput) (*batch.TerminateJobOutput, error)
-	TerminateJobWithContext(aws.Context, *batch.TerminateJobInput, ...request.Option) (*batch.TerminateJobOutput, error)
-	TerminateJobRequest(*batch.TerminateJobInput) (*request.Request, *batch.TerminateJobOutput)
+	TerminateJobWithContext(aws.Context, *batch.TerminateJobInput, ...aws.Option) (*batch.TerminateJobOutput, error)
+	TerminateJobRequest(*batch.TerminateJobInput) (*aws.Request, *batch.TerminateJobOutput)
 
 	UpdateComputeEnvironment(*batch.UpdateComputeEnvironmentInput) (*batch.UpdateComputeEnvironmentOutput, error)
-	UpdateComputeEnvironmentWithContext(aws.Context, *batch.UpdateComputeEnvironmentInput, ...request.Option) (*batch.UpdateComputeEnvironmentOutput, error)
-	UpdateComputeEnvironmentRequest(*batch.UpdateComputeEnvironmentInput) (*request.Request, *batch.UpdateComputeEnvironmentOutput)
+	UpdateComputeEnvironmentWithContext(aws.Context, *batch.UpdateComputeEnvironmentInput, ...aws.Option) (*batch.UpdateComputeEnvironmentOutput, error)
+	UpdateComputeEnvironmentRequest(*batch.UpdateComputeEnvironmentInput) (*aws.Request, *batch.UpdateComputeEnvironmentOutput)
 
 	UpdateJobQueue(*batch.UpdateJobQueueInput) (*batch.UpdateJobQueueOutput, error)
-	UpdateJobQueueWithContext(aws.Context, *batch.UpdateJobQueueInput, ...request.Option) (*batch.UpdateJobQueueOutput, error)
-	UpdateJobQueueRequest(*batch.UpdateJobQueueInput) (*request.Request, *batch.UpdateJobQueueOutput)
+	UpdateJobQueueWithContext(aws.Context, *batch.UpdateJobQueueInput, ...aws.Option) (*batch.UpdateJobQueueOutput, error)
+	UpdateJobQueueRequest(*batch.UpdateJobQueueInput) (*aws.Request, *batch.UpdateJobQueueOutput)
 }
 
 var _ BatchAPI = (*batch.Batch)(nil)

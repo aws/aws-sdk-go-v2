@@ -10,7 +10,6 @@ package devicefarmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := devicefarm.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := devicefarm.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,242 +64,242 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type DeviceFarmAPI interface {
 	CreateDevicePool(*devicefarm.CreateDevicePoolInput) (*devicefarm.CreateDevicePoolOutput, error)
-	CreateDevicePoolWithContext(aws.Context, *devicefarm.CreateDevicePoolInput, ...request.Option) (*devicefarm.CreateDevicePoolOutput, error)
-	CreateDevicePoolRequest(*devicefarm.CreateDevicePoolInput) (*request.Request, *devicefarm.CreateDevicePoolOutput)
+	CreateDevicePoolWithContext(aws.Context, *devicefarm.CreateDevicePoolInput, ...aws.Option) (*devicefarm.CreateDevicePoolOutput, error)
+	CreateDevicePoolRequest(*devicefarm.CreateDevicePoolInput) (*aws.Request, *devicefarm.CreateDevicePoolOutput)
 
 	CreateNetworkProfile(*devicefarm.CreateNetworkProfileInput) (*devicefarm.CreateNetworkProfileOutput, error)
-	CreateNetworkProfileWithContext(aws.Context, *devicefarm.CreateNetworkProfileInput, ...request.Option) (*devicefarm.CreateNetworkProfileOutput, error)
-	CreateNetworkProfileRequest(*devicefarm.CreateNetworkProfileInput) (*request.Request, *devicefarm.CreateNetworkProfileOutput)
+	CreateNetworkProfileWithContext(aws.Context, *devicefarm.CreateNetworkProfileInput, ...aws.Option) (*devicefarm.CreateNetworkProfileOutput, error)
+	CreateNetworkProfileRequest(*devicefarm.CreateNetworkProfileInput) (*aws.Request, *devicefarm.CreateNetworkProfileOutput)
 
 	CreateProject(*devicefarm.CreateProjectInput) (*devicefarm.CreateProjectOutput, error)
-	CreateProjectWithContext(aws.Context, *devicefarm.CreateProjectInput, ...request.Option) (*devicefarm.CreateProjectOutput, error)
-	CreateProjectRequest(*devicefarm.CreateProjectInput) (*request.Request, *devicefarm.CreateProjectOutput)
+	CreateProjectWithContext(aws.Context, *devicefarm.CreateProjectInput, ...aws.Option) (*devicefarm.CreateProjectOutput, error)
+	CreateProjectRequest(*devicefarm.CreateProjectInput) (*aws.Request, *devicefarm.CreateProjectOutput)
 
 	CreateRemoteAccessSession(*devicefarm.CreateRemoteAccessSessionInput) (*devicefarm.CreateRemoteAccessSessionOutput, error)
-	CreateRemoteAccessSessionWithContext(aws.Context, *devicefarm.CreateRemoteAccessSessionInput, ...request.Option) (*devicefarm.CreateRemoteAccessSessionOutput, error)
-	CreateRemoteAccessSessionRequest(*devicefarm.CreateRemoteAccessSessionInput) (*request.Request, *devicefarm.CreateRemoteAccessSessionOutput)
+	CreateRemoteAccessSessionWithContext(aws.Context, *devicefarm.CreateRemoteAccessSessionInput, ...aws.Option) (*devicefarm.CreateRemoteAccessSessionOutput, error)
+	CreateRemoteAccessSessionRequest(*devicefarm.CreateRemoteAccessSessionInput) (*aws.Request, *devicefarm.CreateRemoteAccessSessionOutput)
 
 	CreateUpload(*devicefarm.CreateUploadInput) (*devicefarm.CreateUploadOutput, error)
-	CreateUploadWithContext(aws.Context, *devicefarm.CreateUploadInput, ...request.Option) (*devicefarm.CreateUploadOutput, error)
-	CreateUploadRequest(*devicefarm.CreateUploadInput) (*request.Request, *devicefarm.CreateUploadOutput)
+	CreateUploadWithContext(aws.Context, *devicefarm.CreateUploadInput, ...aws.Option) (*devicefarm.CreateUploadOutput, error)
+	CreateUploadRequest(*devicefarm.CreateUploadInput) (*aws.Request, *devicefarm.CreateUploadOutput)
 
 	DeleteDevicePool(*devicefarm.DeleteDevicePoolInput) (*devicefarm.DeleteDevicePoolOutput, error)
-	DeleteDevicePoolWithContext(aws.Context, *devicefarm.DeleteDevicePoolInput, ...request.Option) (*devicefarm.DeleteDevicePoolOutput, error)
-	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) (*request.Request, *devicefarm.DeleteDevicePoolOutput)
+	DeleteDevicePoolWithContext(aws.Context, *devicefarm.DeleteDevicePoolInput, ...aws.Option) (*devicefarm.DeleteDevicePoolOutput, error)
+	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) (*aws.Request, *devicefarm.DeleteDevicePoolOutput)
 
 	DeleteNetworkProfile(*devicefarm.DeleteNetworkProfileInput) (*devicefarm.DeleteNetworkProfileOutput, error)
-	DeleteNetworkProfileWithContext(aws.Context, *devicefarm.DeleteNetworkProfileInput, ...request.Option) (*devicefarm.DeleteNetworkProfileOutput, error)
-	DeleteNetworkProfileRequest(*devicefarm.DeleteNetworkProfileInput) (*request.Request, *devicefarm.DeleteNetworkProfileOutput)
+	DeleteNetworkProfileWithContext(aws.Context, *devicefarm.DeleteNetworkProfileInput, ...aws.Option) (*devicefarm.DeleteNetworkProfileOutput, error)
+	DeleteNetworkProfileRequest(*devicefarm.DeleteNetworkProfileInput) (*aws.Request, *devicefarm.DeleteNetworkProfileOutput)
 
 	DeleteProject(*devicefarm.DeleteProjectInput) (*devicefarm.DeleteProjectOutput, error)
-	DeleteProjectWithContext(aws.Context, *devicefarm.DeleteProjectInput, ...request.Option) (*devicefarm.DeleteProjectOutput, error)
-	DeleteProjectRequest(*devicefarm.DeleteProjectInput) (*request.Request, *devicefarm.DeleteProjectOutput)
+	DeleteProjectWithContext(aws.Context, *devicefarm.DeleteProjectInput, ...aws.Option) (*devicefarm.DeleteProjectOutput, error)
+	DeleteProjectRequest(*devicefarm.DeleteProjectInput) (*aws.Request, *devicefarm.DeleteProjectOutput)
 
 	DeleteRemoteAccessSession(*devicefarm.DeleteRemoteAccessSessionInput) (*devicefarm.DeleteRemoteAccessSessionOutput, error)
-	DeleteRemoteAccessSessionWithContext(aws.Context, *devicefarm.DeleteRemoteAccessSessionInput, ...request.Option) (*devicefarm.DeleteRemoteAccessSessionOutput, error)
-	DeleteRemoteAccessSessionRequest(*devicefarm.DeleteRemoteAccessSessionInput) (*request.Request, *devicefarm.DeleteRemoteAccessSessionOutput)
+	DeleteRemoteAccessSessionWithContext(aws.Context, *devicefarm.DeleteRemoteAccessSessionInput, ...aws.Option) (*devicefarm.DeleteRemoteAccessSessionOutput, error)
+	DeleteRemoteAccessSessionRequest(*devicefarm.DeleteRemoteAccessSessionInput) (*aws.Request, *devicefarm.DeleteRemoteAccessSessionOutput)
 
 	DeleteRun(*devicefarm.DeleteRunInput) (*devicefarm.DeleteRunOutput, error)
-	DeleteRunWithContext(aws.Context, *devicefarm.DeleteRunInput, ...request.Option) (*devicefarm.DeleteRunOutput, error)
-	DeleteRunRequest(*devicefarm.DeleteRunInput) (*request.Request, *devicefarm.DeleteRunOutput)
+	DeleteRunWithContext(aws.Context, *devicefarm.DeleteRunInput, ...aws.Option) (*devicefarm.DeleteRunOutput, error)
+	DeleteRunRequest(*devicefarm.DeleteRunInput) (*aws.Request, *devicefarm.DeleteRunOutput)
 
 	DeleteUpload(*devicefarm.DeleteUploadInput) (*devicefarm.DeleteUploadOutput, error)
-	DeleteUploadWithContext(aws.Context, *devicefarm.DeleteUploadInput, ...request.Option) (*devicefarm.DeleteUploadOutput, error)
-	DeleteUploadRequest(*devicefarm.DeleteUploadInput) (*request.Request, *devicefarm.DeleteUploadOutput)
+	DeleteUploadWithContext(aws.Context, *devicefarm.DeleteUploadInput, ...aws.Option) (*devicefarm.DeleteUploadOutput, error)
+	DeleteUploadRequest(*devicefarm.DeleteUploadInput) (*aws.Request, *devicefarm.DeleteUploadOutput)
 
 	GetAccountSettings(*devicefarm.GetAccountSettingsInput) (*devicefarm.GetAccountSettingsOutput, error)
-	GetAccountSettingsWithContext(aws.Context, *devicefarm.GetAccountSettingsInput, ...request.Option) (*devicefarm.GetAccountSettingsOutput, error)
-	GetAccountSettingsRequest(*devicefarm.GetAccountSettingsInput) (*request.Request, *devicefarm.GetAccountSettingsOutput)
+	GetAccountSettingsWithContext(aws.Context, *devicefarm.GetAccountSettingsInput, ...aws.Option) (*devicefarm.GetAccountSettingsOutput, error)
+	GetAccountSettingsRequest(*devicefarm.GetAccountSettingsInput) (*aws.Request, *devicefarm.GetAccountSettingsOutput)
 
 	GetDevice(*devicefarm.GetDeviceInput) (*devicefarm.GetDeviceOutput, error)
-	GetDeviceWithContext(aws.Context, *devicefarm.GetDeviceInput, ...request.Option) (*devicefarm.GetDeviceOutput, error)
-	GetDeviceRequest(*devicefarm.GetDeviceInput) (*request.Request, *devicefarm.GetDeviceOutput)
+	GetDeviceWithContext(aws.Context, *devicefarm.GetDeviceInput, ...aws.Option) (*devicefarm.GetDeviceOutput, error)
+	GetDeviceRequest(*devicefarm.GetDeviceInput) (*aws.Request, *devicefarm.GetDeviceOutput)
 
 	GetDevicePool(*devicefarm.GetDevicePoolInput) (*devicefarm.GetDevicePoolOutput, error)
-	GetDevicePoolWithContext(aws.Context, *devicefarm.GetDevicePoolInput, ...request.Option) (*devicefarm.GetDevicePoolOutput, error)
-	GetDevicePoolRequest(*devicefarm.GetDevicePoolInput) (*request.Request, *devicefarm.GetDevicePoolOutput)
+	GetDevicePoolWithContext(aws.Context, *devicefarm.GetDevicePoolInput, ...aws.Option) (*devicefarm.GetDevicePoolOutput, error)
+	GetDevicePoolRequest(*devicefarm.GetDevicePoolInput) (*aws.Request, *devicefarm.GetDevicePoolOutput)
 
 	GetDevicePoolCompatibility(*devicefarm.GetDevicePoolCompatibilityInput) (*devicefarm.GetDevicePoolCompatibilityOutput, error)
-	GetDevicePoolCompatibilityWithContext(aws.Context, *devicefarm.GetDevicePoolCompatibilityInput, ...request.Option) (*devicefarm.GetDevicePoolCompatibilityOutput, error)
-	GetDevicePoolCompatibilityRequest(*devicefarm.GetDevicePoolCompatibilityInput) (*request.Request, *devicefarm.GetDevicePoolCompatibilityOutput)
+	GetDevicePoolCompatibilityWithContext(aws.Context, *devicefarm.GetDevicePoolCompatibilityInput, ...aws.Option) (*devicefarm.GetDevicePoolCompatibilityOutput, error)
+	GetDevicePoolCompatibilityRequest(*devicefarm.GetDevicePoolCompatibilityInput) (*aws.Request, *devicefarm.GetDevicePoolCompatibilityOutput)
 
 	GetJob(*devicefarm.GetJobInput) (*devicefarm.GetJobOutput, error)
-	GetJobWithContext(aws.Context, *devicefarm.GetJobInput, ...request.Option) (*devicefarm.GetJobOutput, error)
-	GetJobRequest(*devicefarm.GetJobInput) (*request.Request, *devicefarm.GetJobOutput)
+	GetJobWithContext(aws.Context, *devicefarm.GetJobInput, ...aws.Option) (*devicefarm.GetJobOutput, error)
+	GetJobRequest(*devicefarm.GetJobInput) (*aws.Request, *devicefarm.GetJobOutput)
 
 	GetNetworkProfile(*devicefarm.GetNetworkProfileInput) (*devicefarm.GetNetworkProfileOutput, error)
-	GetNetworkProfileWithContext(aws.Context, *devicefarm.GetNetworkProfileInput, ...request.Option) (*devicefarm.GetNetworkProfileOutput, error)
-	GetNetworkProfileRequest(*devicefarm.GetNetworkProfileInput) (*request.Request, *devicefarm.GetNetworkProfileOutput)
+	GetNetworkProfileWithContext(aws.Context, *devicefarm.GetNetworkProfileInput, ...aws.Option) (*devicefarm.GetNetworkProfileOutput, error)
+	GetNetworkProfileRequest(*devicefarm.GetNetworkProfileInput) (*aws.Request, *devicefarm.GetNetworkProfileOutput)
 
 	GetOfferingStatus(*devicefarm.GetOfferingStatusInput) (*devicefarm.GetOfferingStatusOutput, error)
-	GetOfferingStatusWithContext(aws.Context, *devicefarm.GetOfferingStatusInput, ...request.Option) (*devicefarm.GetOfferingStatusOutput, error)
-	GetOfferingStatusRequest(*devicefarm.GetOfferingStatusInput) (*request.Request, *devicefarm.GetOfferingStatusOutput)
+	GetOfferingStatusWithContext(aws.Context, *devicefarm.GetOfferingStatusInput, ...aws.Option) (*devicefarm.GetOfferingStatusOutput, error)
+	GetOfferingStatusRequest(*devicefarm.GetOfferingStatusInput) (*aws.Request, *devicefarm.GetOfferingStatusOutput)
 
 	GetOfferingStatusPages(*devicefarm.GetOfferingStatusInput, func(*devicefarm.GetOfferingStatusOutput, bool) bool) error
-	GetOfferingStatusPagesWithContext(aws.Context, *devicefarm.GetOfferingStatusInput, func(*devicefarm.GetOfferingStatusOutput, bool) bool, ...request.Option) error
+	GetOfferingStatusPagesWithContext(aws.Context, *devicefarm.GetOfferingStatusInput, func(*devicefarm.GetOfferingStatusOutput, bool) bool, ...aws.Option) error
 
 	GetProject(*devicefarm.GetProjectInput) (*devicefarm.GetProjectOutput, error)
-	GetProjectWithContext(aws.Context, *devicefarm.GetProjectInput, ...request.Option) (*devicefarm.GetProjectOutput, error)
-	GetProjectRequest(*devicefarm.GetProjectInput) (*request.Request, *devicefarm.GetProjectOutput)
+	GetProjectWithContext(aws.Context, *devicefarm.GetProjectInput, ...aws.Option) (*devicefarm.GetProjectOutput, error)
+	GetProjectRequest(*devicefarm.GetProjectInput) (*aws.Request, *devicefarm.GetProjectOutput)
 
 	GetRemoteAccessSession(*devicefarm.GetRemoteAccessSessionInput) (*devicefarm.GetRemoteAccessSessionOutput, error)
-	GetRemoteAccessSessionWithContext(aws.Context, *devicefarm.GetRemoteAccessSessionInput, ...request.Option) (*devicefarm.GetRemoteAccessSessionOutput, error)
-	GetRemoteAccessSessionRequest(*devicefarm.GetRemoteAccessSessionInput) (*request.Request, *devicefarm.GetRemoteAccessSessionOutput)
+	GetRemoteAccessSessionWithContext(aws.Context, *devicefarm.GetRemoteAccessSessionInput, ...aws.Option) (*devicefarm.GetRemoteAccessSessionOutput, error)
+	GetRemoteAccessSessionRequest(*devicefarm.GetRemoteAccessSessionInput) (*aws.Request, *devicefarm.GetRemoteAccessSessionOutput)
 
 	GetRun(*devicefarm.GetRunInput) (*devicefarm.GetRunOutput, error)
-	GetRunWithContext(aws.Context, *devicefarm.GetRunInput, ...request.Option) (*devicefarm.GetRunOutput, error)
-	GetRunRequest(*devicefarm.GetRunInput) (*request.Request, *devicefarm.GetRunOutput)
+	GetRunWithContext(aws.Context, *devicefarm.GetRunInput, ...aws.Option) (*devicefarm.GetRunOutput, error)
+	GetRunRequest(*devicefarm.GetRunInput) (*aws.Request, *devicefarm.GetRunOutput)
 
 	GetSuite(*devicefarm.GetSuiteInput) (*devicefarm.GetSuiteOutput, error)
-	GetSuiteWithContext(aws.Context, *devicefarm.GetSuiteInput, ...request.Option) (*devicefarm.GetSuiteOutput, error)
-	GetSuiteRequest(*devicefarm.GetSuiteInput) (*request.Request, *devicefarm.GetSuiteOutput)
+	GetSuiteWithContext(aws.Context, *devicefarm.GetSuiteInput, ...aws.Option) (*devicefarm.GetSuiteOutput, error)
+	GetSuiteRequest(*devicefarm.GetSuiteInput) (*aws.Request, *devicefarm.GetSuiteOutput)
 
 	GetTest(*devicefarm.GetTestInput) (*devicefarm.GetTestOutput, error)
-	GetTestWithContext(aws.Context, *devicefarm.GetTestInput, ...request.Option) (*devicefarm.GetTestOutput, error)
-	GetTestRequest(*devicefarm.GetTestInput) (*request.Request, *devicefarm.GetTestOutput)
+	GetTestWithContext(aws.Context, *devicefarm.GetTestInput, ...aws.Option) (*devicefarm.GetTestOutput, error)
+	GetTestRequest(*devicefarm.GetTestInput) (*aws.Request, *devicefarm.GetTestOutput)
 
 	GetUpload(*devicefarm.GetUploadInput) (*devicefarm.GetUploadOutput, error)
-	GetUploadWithContext(aws.Context, *devicefarm.GetUploadInput, ...request.Option) (*devicefarm.GetUploadOutput, error)
-	GetUploadRequest(*devicefarm.GetUploadInput) (*request.Request, *devicefarm.GetUploadOutput)
+	GetUploadWithContext(aws.Context, *devicefarm.GetUploadInput, ...aws.Option) (*devicefarm.GetUploadOutput, error)
+	GetUploadRequest(*devicefarm.GetUploadInput) (*aws.Request, *devicefarm.GetUploadOutput)
 
 	InstallToRemoteAccessSession(*devicefarm.InstallToRemoteAccessSessionInput) (*devicefarm.InstallToRemoteAccessSessionOutput, error)
-	InstallToRemoteAccessSessionWithContext(aws.Context, *devicefarm.InstallToRemoteAccessSessionInput, ...request.Option) (*devicefarm.InstallToRemoteAccessSessionOutput, error)
-	InstallToRemoteAccessSessionRequest(*devicefarm.InstallToRemoteAccessSessionInput) (*request.Request, *devicefarm.InstallToRemoteAccessSessionOutput)
+	InstallToRemoteAccessSessionWithContext(aws.Context, *devicefarm.InstallToRemoteAccessSessionInput, ...aws.Option) (*devicefarm.InstallToRemoteAccessSessionOutput, error)
+	InstallToRemoteAccessSessionRequest(*devicefarm.InstallToRemoteAccessSessionInput) (*aws.Request, *devicefarm.InstallToRemoteAccessSessionOutput)
 
 	ListArtifacts(*devicefarm.ListArtifactsInput) (*devicefarm.ListArtifactsOutput, error)
-	ListArtifactsWithContext(aws.Context, *devicefarm.ListArtifactsInput, ...request.Option) (*devicefarm.ListArtifactsOutput, error)
-	ListArtifactsRequest(*devicefarm.ListArtifactsInput) (*request.Request, *devicefarm.ListArtifactsOutput)
+	ListArtifactsWithContext(aws.Context, *devicefarm.ListArtifactsInput, ...aws.Option) (*devicefarm.ListArtifactsOutput, error)
+	ListArtifactsRequest(*devicefarm.ListArtifactsInput) (*aws.Request, *devicefarm.ListArtifactsOutput)
 
 	ListArtifactsPages(*devicefarm.ListArtifactsInput, func(*devicefarm.ListArtifactsOutput, bool) bool) error
-	ListArtifactsPagesWithContext(aws.Context, *devicefarm.ListArtifactsInput, func(*devicefarm.ListArtifactsOutput, bool) bool, ...request.Option) error
+	ListArtifactsPagesWithContext(aws.Context, *devicefarm.ListArtifactsInput, func(*devicefarm.ListArtifactsOutput, bool) bool, ...aws.Option) error
 
 	ListDevicePools(*devicefarm.ListDevicePoolsInput) (*devicefarm.ListDevicePoolsOutput, error)
-	ListDevicePoolsWithContext(aws.Context, *devicefarm.ListDevicePoolsInput, ...request.Option) (*devicefarm.ListDevicePoolsOutput, error)
-	ListDevicePoolsRequest(*devicefarm.ListDevicePoolsInput) (*request.Request, *devicefarm.ListDevicePoolsOutput)
+	ListDevicePoolsWithContext(aws.Context, *devicefarm.ListDevicePoolsInput, ...aws.Option) (*devicefarm.ListDevicePoolsOutput, error)
+	ListDevicePoolsRequest(*devicefarm.ListDevicePoolsInput) (*aws.Request, *devicefarm.ListDevicePoolsOutput)
 
 	ListDevicePoolsPages(*devicefarm.ListDevicePoolsInput, func(*devicefarm.ListDevicePoolsOutput, bool) bool) error
-	ListDevicePoolsPagesWithContext(aws.Context, *devicefarm.ListDevicePoolsInput, func(*devicefarm.ListDevicePoolsOutput, bool) bool, ...request.Option) error
+	ListDevicePoolsPagesWithContext(aws.Context, *devicefarm.ListDevicePoolsInput, func(*devicefarm.ListDevicePoolsOutput, bool) bool, ...aws.Option) error
 
 	ListDevices(*devicefarm.ListDevicesInput) (*devicefarm.ListDevicesOutput, error)
-	ListDevicesWithContext(aws.Context, *devicefarm.ListDevicesInput, ...request.Option) (*devicefarm.ListDevicesOutput, error)
-	ListDevicesRequest(*devicefarm.ListDevicesInput) (*request.Request, *devicefarm.ListDevicesOutput)
+	ListDevicesWithContext(aws.Context, *devicefarm.ListDevicesInput, ...aws.Option) (*devicefarm.ListDevicesOutput, error)
+	ListDevicesRequest(*devicefarm.ListDevicesInput) (*aws.Request, *devicefarm.ListDevicesOutput)
 
 	ListDevicesPages(*devicefarm.ListDevicesInput, func(*devicefarm.ListDevicesOutput, bool) bool) error
-	ListDevicesPagesWithContext(aws.Context, *devicefarm.ListDevicesInput, func(*devicefarm.ListDevicesOutput, bool) bool, ...request.Option) error
+	ListDevicesPagesWithContext(aws.Context, *devicefarm.ListDevicesInput, func(*devicefarm.ListDevicesOutput, bool) bool, ...aws.Option) error
 
 	ListJobs(*devicefarm.ListJobsInput) (*devicefarm.ListJobsOutput, error)
-	ListJobsWithContext(aws.Context, *devicefarm.ListJobsInput, ...request.Option) (*devicefarm.ListJobsOutput, error)
-	ListJobsRequest(*devicefarm.ListJobsInput) (*request.Request, *devicefarm.ListJobsOutput)
+	ListJobsWithContext(aws.Context, *devicefarm.ListJobsInput, ...aws.Option) (*devicefarm.ListJobsOutput, error)
+	ListJobsRequest(*devicefarm.ListJobsInput) (*aws.Request, *devicefarm.ListJobsOutput)
 
 	ListJobsPages(*devicefarm.ListJobsInput, func(*devicefarm.ListJobsOutput, bool) bool) error
-	ListJobsPagesWithContext(aws.Context, *devicefarm.ListJobsInput, func(*devicefarm.ListJobsOutput, bool) bool, ...request.Option) error
+	ListJobsPagesWithContext(aws.Context, *devicefarm.ListJobsInput, func(*devicefarm.ListJobsOutput, bool) bool, ...aws.Option) error
 
 	ListNetworkProfiles(*devicefarm.ListNetworkProfilesInput) (*devicefarm.ListNetworkProfilesOutput, error)
-	ListNetworkProfilesWithContext(aws.Context, *devicefarm.ListNetworkProfilesInput, ...request.Option) (*devicefarm.ListNetworkProfilesOutput, error)
-	ListNetworkProfilesRequest(*devicefarm.ListNetworkProfilesInput) (*request.Request, *devicefarm.ListNetworkProfilesOutput)
+	ListNetworkProfilesWithContext(aws.Context, *devicefarm.ListNetworkProfilesInput, ...aws.Option) (*devicefarm.ListNetworkProfilesOutput, error)
+	ListNetworkProfilesRequest(*devicefarm.ListNetworkProfilesInput) (*aws.Request, *devicefarm.ListNetworkProfilesOutput)
 
 	ListOfferingPromotions(*devicefarm.ListOfferingPromotionsInput) (*devicefarm.ListOfferingPromotionsOutput, error)
-	ListOfferingPromotionsWithContext(aws.Context, *devicefarm.ListOfferingPromotionsInput, ...request.Option) (*devicefarm.ListOfferingPromotionsOutput, error)
-	ListOfferingPromotionsRequest(*devicefarm.ListOfferingPromotionsInput) (*request.Request, *devicefarm.ListOfferingPromotionsOutput)
+	ListOfferingPromotionsWithContext(aws.Context, *devicefarm.ListOfferingPromotionsInput, ...aws.Option) (*devicefarm.ListOfferingPromotionsOutput, error)
+	ListOfferingPromotionsRequest(*devicefarm.ListOfferingPromotionsInput) (*aws.Request, *devicefarm.ListOfferingPromotionsOutput)
 
 	ListOfferingTransactions(*devicefarm.ListOfferingTransactionsInput) (*devicefarm.ListOfferingTransactionsOutput, error)
-	ListOfferingTransactionsWithContext(aws.Context, *devicefarm.ListOfferingTransactionsInput, ...request.Option) (*devicefarm.ListOfferingTransactionsOutput, error)
-	ListOfferingTransactionsRequest(*devicefarm.ListOfferingTransactionsInput) (*request.Request, *devicefarm.ListOfferingTransactionsOutput)
+	ListOfferingTransactionsWithContext(aws.Context, *devicefarm.ListOfferingTransactionsInput, ...aws.Option) (*devicefarm.ListOfferingTransactionsOutput, error)
+	ListOfferingTransactionsRequest(*devicefarm.ListOfferingTransactionsInput) (*aws.Request, *devicefarm.ListOfferingTransactionsOutput)
 
 	ListOfferingTransactionsPages(*devicefarm.ListOfferingTransactionsInput, func(*devicefarm.ListOfferingTransactionsOutput, bool) bool) error
-	ListOfferingTransactionsPagesWithContext(aws.Context, *devicefarm.ListOfferingTransactionsInput, func(*devicefarm.ListOfferingTransactionsOutput, bool) bool, ...request.Option) error
+	ListOfferingTransactionsPagesWithContext(aws.Context, *devicefarm.ListOfferingTransactionsInput, func(*devicefarm.ListOfferingTransactionsOutput, bool) bool, ...aws.Option) error
 
 	ListOfferings(*devicefarm.ListOfferingsInput) (*devicefarm.ListOfferingsOutput, error)
-	ListOfferingsWithContext(aws.Context, *devicefarm.ListOfferingsInput, ...request.Option) (*devicefarm.ListOfferingsOutput, error)
-	ListOfferingsRequest(*devicefarm.ListOfferingsInput) (*request.Request, *devicefarm.ListOfferingsOutput)
+	ListOfferingsWithContext(aws.Context, *devicefarm.ListOfferingsInput, ...aws.Option) (*devicefarm.ListOfferingsOutput, error)
+	ListOfferingsRequest(*devicefarm.ListOfferingsInput) (*aws.Request, *devicefarm.ListOfferingsOutput)
 
 	ListOfferingsPages(*devicefarm.ListOfferingsInput, func(*devicefarm.ListOfferingsOutput, bool) bool) error
-	ListOfferingsPagesWithContext(aws.Context, *devicefarm.ListOfferingsInput, func(*devicefarm.ListOfferingsOutput, bool) bool, ...request.Option) error
+	ListOfferingsPagesWithContext(aws.Context, *devicefarm.ListOfferingsInput, func(*devicefarm.ListOfferingsOutput, bool) bool, ...aws.Option) error
 
 	ListProjects(*devicefarm.ListProjectsInput) (*devicefarm.ListProjectsOutput, error)
-	ListProjectsWithContext(aws.Context, *devicefarm.ListProjectsInput, ...request.Option) (*devicefarm.ListProjectsOutput, error)
-	ListProjectsRequest(*devicefarm.ListProjectsInput) (*request.Request, *devicefarm.ListProjectsOutput)
+	ListProjectsWithContext(aws.Context, *devicefarm.ListProjectsInput, ...aws.Option) (*devicefarm.ListProjectsOutput, error)
+	ListProjectsRequest(*devicefarm.ListProjectsInput) (*aws.Request, *devicefarm.ListProjectsOutput)
 
 	ListProjectsPages(*devicefarm.ListProjectsInput, func(*devicefarm.ListProjectsOutput, bool) bool) error
-	ListProjectsPagesWithContext(aws.Context, *devicefarm.ListProjectsInput, func(*devicefarm.ListProjectsOutput, bool) bool, ...request.Option) error
+	ListProjectsPagesWithContext(aws.Context, *devicefarm.ListProjectsInput, func(*devicefarm.ListProjectsOutput, bool) bool, ...aws.Option) error
 
 	ListRemoteAccessSessions(*devicefarm.ListRemoteAccessSessionsInput) (*devicefarm.ListRemoteAccessSessionsOutput, error)
-	ListRemoteAccessSessionsWithContext(aws.Context, *devicefarm.ListRemoteAccessSessionsInput, ...request.Option) (*devicefarm.ListRemoteAccessSessionsOutput, error)
-	ListRemoteAccessSessionsRequest(*devicefarm.ListRemoteAccessSessionsInput) (*request.Request, *devicefarm.ListRemoteAccessSessionsOutput)
+	ListRemoteAccessSessionsWithContext(aws.Context, *devicefarm.ListRemoteAccessSessionsInput, ...aws.Option) (*devicefarm.ListRemoteAccessSessionsOutput, error)
+	ListRemoteAccessSessionsRequest(*devicefarm.ListRemoteAccessSessionsInput) (*aws.Request, *devicefarm.ListRemoteAccessSessionsOutput)
 
 	ListRuns(*devicefarm.ListRunsInput) (*devicefarm.ListRunsOutput, error)
-	ListRunsWithContext(aws.Context, *devicefarm.ListRunsInput, ...request.Option) (*devicefarm.ListRunsOutput, error)
-	ListRunsRequest(*devicefarm.ListRunsInput) (*request.Request, *devicefarm.ListRunsOutput)
+	ListRunsWithContext(aws.Context, *devicefarm.ListRunsInput, ...aws.Option) (*devicefarm.ListRunsOutput, error)
+	ListRunsRequest(*devicefarm.ListRunsInput) (*aws.Request, *devicefarm.ListRunsOutput)
 
 	ListRunsPages(*devicefarm.ListRunsInput, func(*devicefarm.ListRunsOutput, bool) bool) error
-	ListRunsPagesWithContext(aws.Context, *devicefarm.ListRunsInput, func(*devicefarm.ListRunsOutput, bool) bool, ...request.Option) error
+	ListRunsPagesWithContext(aws.Context, *devicefarm.ListRunsInput, func(*devicefarm.ListRunsOutput, bool) bool, ...aws.Option) error
 
 	ListSamples(*devicefarm.ListSamplesInput) (*devicefarm.ListSamplesOutput, error)
-	ListSamplesWithContext(aws.Context, *devicefarm.ListSamplesInput, ...request.Option) (*devicefarm.ListSamplesOutput, error)
-	ListSamplesRequest(*devicefarm.ListSamplesInput) (*request.Request, *devicefarm.ListSamplesOutput)
+	ListSamplesWithContext(aws.Context, *devicefarm.ListSamplesInput, ...aws.Option) (*devicefarm.ListSamplesOutput, error)
+	ListSamplesRequest(*devicefarm.ListSamplesInput) (*aws.Request, *devicefarm.ListSamplesOutput)
 
 	ListSamplesPages(*devicefarm.ListSamplesInput, func(*devicefarm.ListSamplesOutput, bool) bool) error
-	ListSamplesPagesWithContext(aws.Context, *devicefarm.ListSamplesInput, func(*devicefarm.ListSamplesOutput, bool) bool, ...request.Option) error
+	ListSamplesPagesWithContext(aws.Context, *devicefarm.ListSamplesInput, func(*devicefarm.ListSamplesOutput, bool) bool, ...aws.Option) error
 
 	ListSuites(*devicefarm.ListSuitesInput) (*devicefarm.ListSuitesOutput, error)
-	ListSuitesWithContext(aws.Context, *devicefarm.ListSuitesInput, ...request.Option) (*devicefarm.ListSuitesOutput, error)
-	ListSuitesRequest(*devicefarm.ListSuitesInput) (*request.Request, *devicefarm.ListSuitesOutput)
+	ListSuitesWithContext(aws.Context, *devicefarm.ListSuitesInput, ...aws.Option) (*devicefarm.ListSuitesOutput, error)
+	ListSuitesRequest(*devicefarm.ListSuitesInput) (*aws.Request, *devicefarm.ListSuitesOutput)
 
 	ListSuitesPages(*devicefarm.ListSuitesInput, func(*devicefarm.ListSuitesOutput, bool) bool) error
-	ListSuitesPagesWithContext(aws.Context, *devicefarm.ListSuitesInput, func(*devicefarm.ListSuitesOutput, bool) bool, ...request.Option) error
+	ListSuitesPagesWithContext(aws.Context, *devicefarm.ListSuitesInput, func(*devicefarm.ListSuitesOutput, bool) bool, ...aws.Option) error
 
 	ListTests(*devicefarm.ListTestsInput) (*devicefarm.ListTestsOutput, error)
-	ListTestsWithContext(aws.Context, *devicefarm.ListTestsInput, ...request.Option) (*devicefarm.ListTestsOutput, error)
-	ListTestsRequest(*devicefarm.ListTestsInput) (*request.Request, *devicefarm.ListTestsOutput)
+	ListTestsWithContext(aws.Context, *devicefarm.ListTestsInput, ...aws.Option) (*devicefarm.ListTestsOutput, error)
+	ListTestsRequest(*devicefarm.ListTestsInput) (*aws.Request, *devicefarm.ListTestsOutput)
 
 	ListTestsPages(*devicefarm.ListTestsInput, func(*devicefarm.ListTestsOutput, bool) bool) error
-	ListTestsPagesWithContext(aws.Context, *devicefarm.ListTestsInput, func(*devicefarm.ListTestsOutput, bool) bool, ...request.Option) error
+	ListTestsPagesWithContext(aws.Context, *devicefarm.ListTestsInput, func(*devicefarm.ListTestsOutput, bool) bool, ...aws.Option) error
 
 	ListUniqueProblems(*devicefarm.ListUniqueProblemsInput) (*devicefarm.ListUniqueProblemsOutput, error)
-	ListUniqueProblemsWithContext(aws.Context, *devicefarm.ListUniqueProblemsInput, ...request.Option) (*devicefarm.ListUniqueProblemsOutput, error)
-	ListUniqueProblemsRequest(*devicefarm.ListUniqueProblemsInput) (*request.Request, *devicefarm.ListUniqueProblemsOutput)
+	ListUniqueProblemsWithContext(aws.Context, *devicefarm.ListUniqueProblemsInput, ...aws.Option) (*devicefarm.ListUniqueProblemsOutput, error)
+	ListUniqueProblemsRequest(*devicefarm.ListUniqueProblemsInput) (*aws.Request, *devicefarm.ListUniqueProblemsOutput)
 
 	ListUniqueProblemsPages(*devicefarm.ListUniqueProblemsInput, func(*devicefarm.ListUniqueProblemsOutput, bool) bool) error
-	ListUniqueProblemsPagesWithContext(aws.Context, *devicefarm.ListUniqueProblemsInput, func(*devicefarm.ListUniqueProblemsOutput, bool) bool, ...request.Option) error
+	ListUniqueProblemsPagesWithContext(aws.Context, *devicefarm.ListUniqueProblemsInput, func(*devicefarm.ListUniqueProblemsOutput, bool) bool, ...aws.Option) error
 
 	ListUploads(*devicefarm.ListUploadsInput) (*devicefarm.ListUploadsOutput, error)
-	ListUploadsWithContext(aws.Context, *devicefarm.ListUploadsInput, ...request.Option) (*devicefarm.ListUploadsOutput, error)
-	ListUploadsRequest(*devicefarm.ListUploadsInput) (*request.Request, *devicefarm.ListUploadsOutput)
+	ListUploadsWithContext(aws.Context, *devicefarm.ListUploadsInput, ...aws.Option) (*devicefarm.ListUploadsOutput, error)
+	ListUploadsRequest(*devicefarm.ListUploadsInput) (*aws.Request, *devicefarm.ListUploadsOutput)
 
 	ListUploadsPages(*devicefarm.ListUploadsInput, func(*devicefarm.ListUploadsOutput, bool) bool) error
-	ListUploadsPagesWithContext(aws.Context, *devicefarm.ListUploadsInput, func(*devicefarm.ListUploadsOutput, bool) bool, ...request.Option) error
+	ListUploadsPagesWithContext(aws.Context, *devicefarm.ListUploadsInput, func(*devicefarm.ListUploadsOutput, bool) bool, ...aws.Option) error
 
 	PurchaseOffering(*devicefarm.PurchaseOfferingInput) (*devicefarm.PurchaseOfferingOutput, error)
-	PurchaseOfferingWithContext(aws.Context, *devicefarm.PurchaseOfferingInput, ...request.Option) (*devicefarm.PurchaseOfferingOutput, error)
-	PurchaseOfferingRequest(*devicefarm.PurchaseOfferingInput) (*request.Request, *devicefarm.PurchaseOfferingOutput)
+	PurchaseOfferingWithContext(aws.Context, *devicefarm.PurchaseOfferingInput, ...aws.Option) (*devicefarm.PurchaseOfferingOutput, error)
+	PurchaseOfferingRequest(*devicefarm.PurchaseOfferingInput) (*aws.Request, *devicefarm.PurchaseOfferingOutput)
 
 	RenewOffering(*devicefarm.RenewOfferingInput) (*devicefarm.RenewOfferingOutput, error)
-	RenewOfferingWithContext(aws.Context, *devicefarm.RenewOfferingInput, ...request.Option) (*devicefarm.RenewOfferingOutput, error)
-	RenewOfferingRequest(*devicefarm.RenewOfferingInput) (*request.Request, *devicefarm.RenewOfferingOutput)
+	RenewOfferingWithContext(aws.Context, *devicefarm.RenewOfferingInput, ...aws.Option) (*devicefarm.RenewOfferingOutput, error)
+	RenewOfferingRequest(*devicefarm.RenewOfferingInput) (*aws.Request, *devicefarm.RenewOfferingOutput)
 
 	ScheduleRun(*devicefarm.ScheduleRunInput) (*devicefarm.ScheduleRunOutput, error)
-	ScheduleRunWithContext(aws.Context, *devicefarm.ScheduleRunInput, ...request.Option) (*devicefarm.ScheduleRunOutput, error)
-	ScheduleRunRequest(*devicefarm.ScheduleRunInput) (*request.Request, *devicefarm.ScheduleRunOutput)
+	ScheduleRunWithContext(aws.Context, *devicefarm.ScheduleRunInput, ...aws.Option) (*devicefarm.ScheduleRunOutput, error)
+	ScheduleRunRequest(*devicefarm.ScheduleRunInput) (*aws.Request, *devicefarm.ScheduleRunOutput)
 
 	StopRemoteAccessSession(*devicefarm.StopRemoteAccessSessionInput) (*devicefarm.StopRemoteAccessSessionOutput, error)
-	StopRemoteAccessSessionWithContext(aws.Context, *devicefarm.StopRemoteAccessSessionInput, ...request.Option) (*devicefarm.StopRemoteAccessSessionOutput, error)
-	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) (*request.Request, *devicefarm.StopRemoteAccessSessionOutput)
+	StopRemoteAccessSessionWithContext(aws.Context, *devicefarm.StopRemoteAccessSessionInput, ...aws.Option) (*devicefarm.StopRemoteAccessSessionOutput, error)
+	StopRemoteAccessSessionRequest(*devicefarm.StopRemoteAccessSessionInput) (*aws.Request, *devicefarm.StopRemoteAccessSessionOutput)
 
 	StopRun(*devicefarm.StopRunInput) (*devicefarm.StopRunOutput, error)
-	StopRunWithContext(aws.Context, *devicefarm.StopRunInput, ...request.Option) (*devicefarm.StopRunOutput, error)
-	StopRunRequest(*devicefarm.StopRunInput) (*request.Request, *devicefarm.StopRunOutput)
+	StopRunWithContext(aws.Context, *devicefarm.StopRunInput, ...aws.Option) (*devicefarm.StopRunOutput, error)
+	StopRunRequest(*devicefarm.StopRunInput) (*aws.Request, *devicefarm.StopRunOutput)
 
 	UpdateDevicePool(*devicefarm.UpdateDevicePoolInput) (*devicefarm.UpdateDevicePoolOutput, error)
-	UpdateDevicePoolWithContext(aws.Context, *devicefarm.UpdateDevicePoolInput, ...request.Option) (*devicefarm.UpdateDevicePoolOutput, error)
-	UpdateDevicePoolRequest(*devicefarm.UpdateDevicePoolInput) (*request.Request, *devicefarm.UpdateDevicePoolOutput)
+	UpdateDevicePoolWithContext(aws.Context, *devicefarm.UpdateDevicePoolInput, ...aws.Option) (*devicefarm.UpdateDevicePoolOutput, error)
+	UpdateDevicePoolRequest(*devicefarm.UpdateDevicePoolInput) (*aws.Request, *devicefarm.UpdateDevicePoolOutput)
 
 	UpdateNetworkProfile(*devicefarm.UpdateNetworkProfileInput) (*devicefarm.UpdateNetworkProfileOutput, error)
-	UpdateNetworkProfileWithContext(aws.Context, *devicefarm.UpdateNetworkProfileInput, ...request.Option) (*devicefarm.UpdateNetworkProfileOutput, error)
-	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) (*request.Request, *devicefarm.UpdateNetworkProfileOutput)
+	UpdateNetworkProfileWithContext(aws.Context, *devicefarm.UpdateNetworkProfileInput, ...aws.Option) (*devicefarm.UpdateNetworkProfileOutput, error)
+	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) (*aws.Request, *devicefarm.UpdateNetworkProfileOutput)
 
 	UpdateProject(*devicefarm.UpdateProjectInput) (*devicefarm.UpdateProjectOutput, error)
-	UpdateProjectWithContext(aws.Context, *devicefarm.UpdateProjectInput, ...request.Option) (*devicefarm.UpdateProjectOutput, error)
-	UpdateProjectRequest(*devicefarm.UpdateProjectInput) (*request.Request, *devicefarm.UpdateProjectOutput)
+	UpdateProjectWithContext(aws.Context, *devicefarm.UpdateProjectInput, ...aws.Option) (*devicefarm.UpdateProjectOutput, error)
+	UpdateProjectRequest(*devicefarm.UpdateProjectInput) (*aws.Request, *devicefarm.UpdateProjectOutput)
 }
 
 var _ DeviceFarmAPI = (*devicefarm.DeviceFarm)(nil)

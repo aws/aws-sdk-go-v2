@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilResourceRecordSetsChanged uses the Route 53 API operation
@@ -25,20 +24,20 @@ func (c *Route53) WaitUntilResourceRecordSetsChanged(input *GetChangeInput) erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53) WaitUntilResourceRecordSetsChangedWithContext(ctx aws.Context, input *GetChangeInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Route53) WaitUntilResourceRecordSetsChangedWithContext(ctx aws.Context, input *GetChangeInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilResourceRecordSetsChanged",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "ChangeInfo.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "ChangeInfo.Status",
 				Expected: "INSYNC",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetChangeInput
 			if input != nil {
 				tmp := *input

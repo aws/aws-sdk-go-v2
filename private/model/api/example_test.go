@@ -126,7 +126,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
 	"github.com/aws/aws-sdk-go-v2/service/fooservice"
 )
 
@@ -146,7 +145,12 @@ func parseTime(layout, value string) *time.Time {
 //
 // Foo bar baz qux
 func ExampleFooService_Foo_shared00() {
-	svc := fooservice.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := fooservice.New(cfg)
 	input := &fooservice.FooInput{
 		BarShape: aws.String("Hello world"),
 	}

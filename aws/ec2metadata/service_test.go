@@ -5,7 +5,6 @@ import (
 	"net/http/httptest"
 	"sync"
 	"testing"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
@@ -14,32 +13,35 @@ import (
 )
 
 func TestClientOverrideDefaultHTTPClientTimeout(t *testing.T) {
-	svc := ec2metadata.New(unit.Session)
-
-	assert.NotEqual(t, http.DefaultClient, svc.Config.HTTPClient)
-	assert.Equal(t, 5*time.Second, svc.Config.HTTPClient.Timeout)
+	t.Fatalf("pending HTTP Client builder")
+	//	svc := ec2metadata.New(unit.Config)
+	//
+	//	assert.NotEqual(t, http.DefaultClient, svc.Config.HTTPClient)
+	//	assert.Equal(t, 5*time.Second, svc.Config.HTTPClient.Timeout)
 }
 
 func TestClientNotOverrideDefaultHTTPClientTimeout(t *testing.T) {
-	http.DefaultClient.Transport = &http.Transport{}
-	defer func() {
-		http.DefaultClient.Transport = nil
-	}()
-
-	svc := ec2metadata.New(unit.Session)
-
-	assert.Equal(t, http.DefaultClient, svc.Config.HTTPClient)
-
-	tr, ok := svc.Config.HTTPClient.Transport.(*http.Transport)
-	assert.True(t, ok)
-	assert.NotNil(t, tr)
-	assert.Nil(t, tr.Dial)
+	t.Fatalf("pending HTTP Client builder")
+	//	http.DefaultClient.Transport = &http.Transport{}
+	//	defer func() {
+	//		http.DefaultClient.Transport = nil
+	//	}()
+	//
+	//	svc := ec2metadata.New(unit.Config)
+	//
+	//	assert.Equal(t, http.DefaultClient, svc.Config.HTTPClient)
+	//
+	//	tr, ok := svc.Config.HTTPClient.Transport.(*http.Transport)
+	//	assert.True(t, ok)
+	//	assert.NotNil(t, tr)
+	//	assert.Nil(t, tr.Dial)
 }
 
 func TestClientDisableOverrideDefaultHTTPClientTimeout(t *testing.T) {
-	svc := ec2metadata.New(unit.Session, aws.NewConfig().WithEC2MetadataDisableTimeoutOverride(true))
-
-	assert.Equal(t, http.DefaultClient, svc.Config.HTTPClient)
+	t.Fatalf("pending HTTP Client builder")
+	//	svc := ec2metadata.New(unit.Config, aws.NewConfig().WithEC2MetadataDisableTimeoutOverride(true))
+	//
+	//	assert.Equal(t, http.DefaultClient, svc.Config.HTTPClient)
 }
 
 func TestClientOverrideDefaultHTTPClientTimeoutRace(t *testing.T) {
@@ -47,7 +49,9 @@ func TestClientOverrideDefaultHTTPClientTimeoutRace(t *testing.T) {
 		w.Write([]byte("us-east-1a"))
 	}))
 
-	cfg := aws.NewConfig().WithEndpoint(server.URL)
+	cfg := &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
+	}
 	runEC2MetadataClients(t, cfg, 100)
 }
 
@@ -56,9 +60,12 @@ func TestClientOverrideDefaultHTTPClientTimeoutRaceWithTransport(t *testing.T) {
 		w.Write([]byte("us-east-1a"))
 	}))
 
-	cfg := aws.NewConfig().WithEndpoint(server.URL).WithHTTPClient(&http.Client{
-		Transport: http.DefaultTransport,
-	})
+	cfg := &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
+		HTTPClient: &http.Client{
+			Transport: http.DefaultTransport,
+		},
+	}
 
 	runEC2MetadataClients(t, cfg, 100)
 }
@@ -68,7 +75,7 @@ func runEC2MetadataClients(t *testing.T, cfg *aws.Config, atOnce int) {
 	wg.Add(atOnce)
 	for i := 0; i < atOnce; i++ {
 		go func() {
-			svc := ec2metadata.New(unit.Session, cfg)
+			svc := ec2metadata.New(unit.Config, cfg)
 			_, err := svc.Region()
 			assert.NoError(t, err)
 			wg.Done()

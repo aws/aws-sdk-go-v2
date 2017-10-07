@@ -8,15 +8,15 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // GetMetadata uses the path provided to request information from the EC2
 // instance metdata service. The content will be returned as a string, or
 // error if the request failed.
 func (c *EC2Metadata) GetMetadata(p string) (string, error) {
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       "GetMetadata",
 		HTTPMethod: "GET",
 		HTTPPath:   path.Join("/", "meta-data", p),
@@ -32,7 +32,7 @@ func (c *EC2Metadata) GetMetadata(p string) (string, error) {
 // there is no user-data setup for the EC2 instance a "NotFoundError" error
 // code will be returned.
 func (c *EC2Metadata) GetUserData() (string, error) {
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       "GetUserData",
 		HTTPMethod: "GET",
 		HTTPPath:   path.Join("/", "user-data"),
@@ -40,7 +40,7 @@ func (c *EC2Metadata) GetUserData() (string, error) {
 
 	output := &metadataOutput{}
 	req := c.NewRequest(op, nil, output)
-	req.Handlers.UnmarshalError.PushBack(func(r *request.Request) {
+	req.Handlers.UnmarshalError.PushBack(func(r *aws.Request) {
 		if r.HTTPResponse.StatusCode == http.StatusNotFound {
 			r.Error = awserr.New("NotFoundError", "user-data not found", r.Error)
 		}
@@ -53,7 +53,7 @@ func (c *EC2Metadata) GetUserData() (string, error) {
 // instance metadata service for dynamic data. The content will be returned
 // as a string, or error if the request failed.
 func (c *EC2Metadata) GetDynamicData(p string) (string, error) {
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       "GetDynamicData",
 		HTTPMethod: "GET",
 		HTTPPath:   path.Join("/", "dynamic", p),

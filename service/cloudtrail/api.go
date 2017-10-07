@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddTags = "AddTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTags
-func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -128,7 +127,7 @@ func (c *CloudTrail) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *CloudTrail) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -137,7 +136,7 @@ func (c *CloudTrail) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, op
 
 const opCreateTrail = "CreateTrail"
 
-// CreateTrailRequest generates a "aws/request.Request" representing the
+// CreateTrailRequest generates a "aws.Request" representing the
 // client's request for the CreateTrail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -161,8 +160,8 @@ const opCreateTrail = "CreateTrail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrail
-func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) (req *request.Request, output *CreateTrailOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) (req *aws.Request, output *CreateTrailOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTrail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -286,7 +285,7 @@ func (c *CloudTrail) CreateTrail(input *CreateTrailInput) (*CreateTrailOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) CreateTrailWithContext(ctx aws.Context, input *CreateTrailInput, opts ...request.Option) (*CreateTrailOutput, error) {
+func (c *CloudTrail) CreateTrailWithContext(ctx aws.Context, input *CreateTrailInput, opts ...aws.Option) (*CreateTrailOutput, error) {
 	req, out := c.CreateTrailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -295,7 +294,7 @@ func (c *CloudTrail) CreateTrailWithContext(ctx aws.Context, input *CreateTrailI
 
 const opDeleteTrail = "DeleteTrail"
 
-// DeleteTrailRequest generates a "aws/request.Request" representing the
+// DeleteTrailRequest generates a "aws.Request" representing the
 // client's request for the DeleteTrail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -319,8 +318,8 @@ const opDeleteTrail = "DeleteTrail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrail
-func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) (req *request.Request, output *DeleteTrailOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) (req *aws.Request, output *DeleteTrailOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTrail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -387,7 +386,7 @@ func (c *CloudTrail) DeleteTrail(input *DeleteTrailInput) (*DeleteTrailOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) DeleteTrailWithContext(ctx aws.Context, input *DeleteTrailInput, opts ...request.Option) (*DeleteTrailOutput, error) {
+func (c *CloudTrail) DeleteTrailWithContext(ctx aws.Context, input *DeleteTrailInput, opts ...aws.Option) (*DeleteTrailOutput, error) {
 	req, out := c.DeleteTrailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -396,7 +395,7 @@ func (c *CloudTrail) DeleteTrailWithContext(ctx aws.Context, input *DeleteTrailI
 
 const opDescribeTrails = "DescribeTrails"
 
-// DescribeTrailsRequest generates a "aws/request.Request" representing the
+// DescribeTrailsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTrails operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -420,8 +419,8 @@ const opDescribeTrails = "DescribeTrails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails
-func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *request.Request, output *DescribeTrailsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) (req *aws.Request, output *DescribeTrailsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTrails,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -470,7 +469,7 @@ func (c *CloudTrail) DescribeTrails(input *DescribeTrailsInput) (*DescribeTrails
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) DescribeTrailsWithContext(ctx aws.Context, input *DescribeTrailsInput, opts ...request.Option) (*DescribeTrailsOutput, error) {
+func (c *CloudTrail) DescribeTrailsWithContext(ctx aws.Context, input *DescribeTrailsInput, opts ...aws.Option) (*DescribeTrailsOutput, error) {
 	req, out := c.DescribeTrailsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -479,7 +478,7 @@ func (c *CloudTrail) DescribeTrailsWithContext(ctx aws.Context, input *DescribeT
 
 const opGetEventSelectors = "GetEventSelectors"
 
-// GetEventSelectorsRequest generates a "aws/request.Request" representing the
+// GetEventSelectorsRequest generates a "aws.Request" representing the
 // client's request for the GetEventSelectors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -503,8 +502,8 @@ const opGetEventSelectors = "GetEventSelectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors
-func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) (req *request.Request, output *GetEventSelectorsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) (req *aws.Request, output *GetEventSelectorsOutput) {
+	op := &aws.Operation{
 		Name:       opGetEventSelectors,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -583,7 +582,7 @@ func (c *CloudTrail) GetEventSelectors(input *GetEventSelectorsInput) (*GetEvent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) GetEventSelectorsWithContext(ctx aws.Context, input *GetEventSelectorsInput, opts ...request.Option) (*GetEventSelectorsOutput, error) {
+func (c *CloudTrail) GetEventSelectorsWithContext(ctx aws.Context, input *GetEventSelectorsInput, opts ...aws.Option) (*GetEventSelectorsOutput, error) {
 	req, out := c.GetEventSelectorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -592,7 +591,7 @@ func (c *CloudTrail) GetEventSelectorsWithContext(ctx aws.Context, input *GetEve
 
 const opGetTrailStatus = "GetTrailStatus"
 
-// GetTrailStatusRequest generates a "aws/request.Request" representing the
+// GetTrailStatusRequest generates a "aws.Request" representing the
 // client's request for the GetTrailStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -616,8 +615,8 @@ const opGetTrailStatus = "GetTrailStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatus
-func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) (req *request.Request, output *GetTrailStatusOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) (req *aws.Request, output *GetTrailStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetTrailStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -682,7 +681,7 @@ func (c *CloudTrail) GetTrailStatus(input *GetTrailStatusInput) (*GetTrailStatus
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) GetTrailStatusWithContext(ctx aws.Context, input *GetTrailStatusInput, opts ...request.Option) (*GetTrailStatusOutput, error) {
+func (c *CloudTrail) GetTrailStatusWithContext(ctx aws.Context, input *GetTrailStatusInput, opts ...aws.Option) (*GetTrailStatusOutput, error) {
 	req, out := c.GetTrailStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -691,7 +690,7 @@ func (c *CloudTrail) GetTrailStatusWithContext(ctx aws.Context, input *GetTrailS
 
 const opListPublicKeys = "ListPublicKeys"
 
-// ListPublicKeysRequest generates a "aws/request.Request" representing the
+// ListPublicKeysRequest generates a "aws.Request" representing the
 // client's request for the ListPublicKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -715,8 +714,8 @@ const opListPublicKeys = "ListPublicKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListPublicKeys
-func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) (req *request.Request, output *ListPublicKeysOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) (req *aws.Request, output *ListPublicKeysOutput) {
+	op := &aws.Operation{
 		Name:       opListPublicKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -778,7 +777,7 @@ func (c *CloudTrail) ListPublicKeys(input *ListPublicKeysInput) (*ListPublicKeys
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) ListPublicKeysWithContext(ctx aws.Context, input *ListPublicKeysInput, opts ...request.Option) (*ListPublicKeysOutput, error) {
+func (c *CloudTrail) ListPublicKeysWithContext(ctx aws.Context, input *ListPublicKeysInput, opts ...aws.Option) (*ListPublicKeysOutput, error) {
 	req, out := c.ListPublicKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -787,7 +786,7 @@ func (c *CloudTrail) ListPublicKeysWithContext(ctx aws.Context, input *ListPubli
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws/request.Request" representing the
+// ListTagsRequest generates a "aws.Request" representing the
 // client's request for the ListTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -811,8 +810,8 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTags
-func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -892,7 +891,7 @@ func (c *CloudTrail) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
+func (c *CloudTrail) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -901,7 +900,7 @@ func (c *CloudTrail) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, 
 
 const opLookupEvents = "LookupEvents"
 
-// LookupEventsRequest generates a "aws/request.Request" representing the
+// LookupEventsRequest generates a "aws.Request" representing the
 // client's request for the LookupEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -925,12 +924,12 @@ const opLookupEvents = "LookupEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEvents
-func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) (req *request.Request, output *LookupEventsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) (req *aws.Request, output *LookupEventsOutput) {
+	op := &aws.Operation{
 		Name:       opLookupEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -1013,7 +1012,7 @@ func (c *CloudTrail) LookupEvents(input *LookupEventsInput) (*LookupEventsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) LookupEventsWithContext(ctx aws.Context, input *LookupEventsInput, opts ...request.Option) (*LookupEventsOutput, error) {
+func (c *CloudTrail) LookupEventsWithContext(ctx aws.Context, input *LookupEventsInput, opts ...aws.Option) (*LookupEventsOutput, error) {
 	req, out := c.LookupEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1048,9 +1047,9 @@ func (c *CloudTrail) LookupEventsPages(input *LookupEventsInput, fn func(*Lookup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *LookupEventsInput, fn func(*LookupEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *LookupEventsInput, fn func(*LookupEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *LookupEventsInput
 			if input != nil {
 				tmp := *input
@@ -1072,7 +1071,7 @@ func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *Lookup
 
 const opPutEventSelectors = "PutEventSelectors"
 
-// PutEventSelectorsRequest generates a "aws/request.Request" representing the
+// PutEventSelectorsRequest generates a "aws.Request" representing the
 // client's request for the PutEventSelectors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1096,8 +1095,8 @@ const opPutEventSelectors = "PutEventSelectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors
-func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) (req *request.Request, output *PutEventSelectorsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) (req *aws.Request, output *PutEventSelectorsOutput) {
+	op := &aws.Operation{
 		Name:       opPutEventSelectors,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1207,7 +1206,7 @@ func (c *CloudTrail) PutEventSelectors(input *PutEventSelectorsInput) (*PutEvent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) PutEventSelectorsWithContext(ctx aws.Context, input *PutEventSelectorsInput, opts ...request.Option) (*PutEventSelectorsOutput, error) {
+func (c *CloudTrail) PutEventSelectorsWithContext(ctx aws.Context, input *PutEventSelectorsInput, opts ...aws.Option) (*PutEventSelectorsOutput, error) {
 	req, out := c.PutEventSelectorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1216,7 +1215,7 @@ func (c *CloudTrail) PutEventSelectorsWithContext(ctx aws.Context, input *PutEve
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws/request.Request" representing the
+// RemoveTagsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1240,8 +1239,8 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTags
-func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) (req *request.Request, output *RemoveTagsOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1322,7 +1321,7 @@ func (c *CloudTrail) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...request.Option) (*RemoveTagsOutput, error) {
+func (c *CloudTrail) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
 	req, out := c.RemoveTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1331,7 +1330,7 @@ func (c *CloudTrail) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInp
 
 const opStartLogging = "StartLogging"
 
-// StartLoggingRequest generates a "aws/request.Request" representing the
+// StartLoggingRequest generates a "aws.Request" representing the
 // client's request for the StartLogging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1355,8 +1354,8 @@ const opStartLogging = "StartLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLogging
-func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) (req *request.Request, output *StartLoggingOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) (req *aws.Request, output *StartLoggingOutput) {
+	op := &aws.Operation{
 		Name:       opStartLogging,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1425,7 +1424,7 @@ func (c *CloudTrail) StartLogging(input *StartLoggingInput) (*StartLoggingOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) StartLoggingWithContext(ctx aws.Context, input *StartLoggingInput, opts ...request.Option) (*StartLoggingOutput, error) {
+func (c *CloudTrail) StartLoggingWithContext(ctx aws.Context, input *StartLoggingInput, opts ...aws.Option) (*StartLoggingOutput, error) {
 	req, out := c.StartLoggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1434,7 +1433,7 @@ func (c *CloudTrail) StartLoggingWithContext(ctx aws.Context, input *StartLoggin
 
 const opStopLogging = "StopLogging"
 
-// StopLoggingRequest generates a "aws/request.Request" representing the
+// StopLoggingRequest generates a "aws.Request" representing the
 // client's request for the StopLogging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1458,8 +1457,8 @@ const opStopLogging = "StopLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLogging
-func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) (req *request.Request, output *StopLoggingOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) (req *aws.Request, output *StopLoggingOutput) {
+	op := &aws.Operation{
 		Name:       opStopLogging,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1530,7 +1529,7 @@ func (c *CloudTrail) StopLogging(input *StopLoggingInput) (*StopLoggingOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) StopLoggingWithContext(ctx aws.Context, input *StopLoggingInput, opts ...request.Option) (*StopLoggingOutput, error) {
+func (c *CloudTrail) StopLoggingWithContext(ctx aws.Context, input *StopLoggingInput, opts ...aws.Option) (*StopLoggingOutput, error) {
 	req, out := c.StopLoggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1539,7 +1538,7 @@ func (c *CloudTrail) StopLoggingWithContext(ctx aws.Context, input *StopLoggingI
 
 const opUpdateTrail = "UpdateTrail"
 
-// UpdateTrailRequest generates a "aws/request.Request" representing the
+// UpdateTrailRequest generates a "aws.Request" representing the
 // client's request for the UpdateTrail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1563,8 +1562,8 @@ const opUpdateTrail = "UpdateTrail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrail
-func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) (req *request.Request, output *UpdateTrailOutput) {
-	op := &request.Operation{
+func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) (req *aws.Request, output *UpdateTrailOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTrail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1692,7 +1691,7 @@ func (c *CloudTrail) UpdateTrail(input *UpdateTrailInput) (*UpdateTrailOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudTrail) UpdateTrailWithContext(ctx aws.Context, input *UpdateTrailInput, opts ...request.Option) (*UpdateTrailOutput, error) {
+func (c *CloudTrail) UpdateTrailWithContext(ctx aws.Context, input *UpdateTrailInput, opts ...aws.Option) (*UpdateTrailOutput, error) {
 	req, out := c.UpdateTrailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1728,9 +1727,9 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagsList != nil {
 		for i, v := range s.TagsList {
@@ -1738,7 +1737,7 @@ func (s *AddTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1874,12 +1873,12 @@ func (s CreateTrailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTrailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTrailInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.S3BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2173,9 +2172,9 @@ func (s DeleteTrailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTrailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrailInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2470,9 +2469,9 @@ func (s GetEventSelectorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEventSelectorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEventSelectorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEventSelectorsInput"}
 	if s.TrailName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrailName"))
+		invalidParams.Add(aws.NewErrParamRequired("TrailName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2547,9 +2546,9 @@ func (s GetTrailStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTrailStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTrailStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTrailStatusInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2871,9 +2870,9 @@ func (s ListTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
 	if s.ResourceIdList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceIdList"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceIdList"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2957,12 +2956,12 @@ func (s LookupAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LookupAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LookupAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "LookupAttribute"}
 	if s.AttributeKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeKey"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeKey"))
 	}
 	if s.AttributeValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeValue"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3026,9 +3025,9 @@ func (s LookupEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LookupEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LookupEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "LookupEventsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.LookupAttributes != nil {
 		for i, v := range s.LookupAttributes {
@@ -3036,7 +3035,7 @@ func (s *LookupEventsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LookupAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LookupAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3216,12 +3215,12 @@ func (s PutEventSelectorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventSelectorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutEventSelectorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutEventSelectorsInput"}
 	if s.EventSelectors == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventSelectors"))
+		invalidParams.Add(aws.NewErrParamRequired("EventSelectors"))
 	}
 	if s.TrailName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrailName"))
+		invalidParams.Add(aws.NewErrParamRequired("TrailName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3307,9 +3306,9 @@ func (s RemoveTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagsList != nil {
 		for i, v := range s.TagsList {
@@ -3317,7 +3316,7 @@ func (s *RemoveTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagsList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3458,9 +3457,9 @@ func (s StartLoggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartLoggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartLoggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartLoggingInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3519,9 +3518,9 @@ func (s StopLoggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopLoggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopLoggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopLoggingInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3581,9 +3580,9 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3863,9 +3862,9 @@ func (s UpdateTrailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTrailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTrailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTrailInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {

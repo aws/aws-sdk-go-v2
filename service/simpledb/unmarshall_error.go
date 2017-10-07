@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"strings"
 
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 type xmlErrorDetail struct {

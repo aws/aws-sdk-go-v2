@@ -58,7 +58,12 @@ var exampleTmpls = template.Must(template.New("example").Funcs(exampleFuncMap).P
 //
 {{ commentify (wrap .Description 80 false) }}
 func Example{{ .API.StructName }}_{{ .MethodName }}() {
-	svc := {{ .API.PackageName }}.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := {{ .API.PackageName }}.New(cfg)
 	input := &{{ .Operation.InputRef.Shape.GoTypeWithPkgNameElem  }} {
 		{{ generateExampleInput . -}}
 	}

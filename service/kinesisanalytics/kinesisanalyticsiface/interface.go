@@ -10,7 +10,6 @@ package kinesisanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := kinesisanalytics.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := kinesisanalytics.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,72 +64,72 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type KinesisAnalyticsAPI interface {
 	AddApplicationCloudWatchLoggingOption(*kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error)
-	AddApplicationCloudWatchLoggingOptionWithContext(aws.Context, *kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput, ...request.Option) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error)
-	AddApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*request.Request, *kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput)
+	AddApplicationCloudWatchLoggingOptionWithContext(aws.Context, *kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput, ...aws.Option) (*kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput, error)
+	AddApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.AddApplicationCloudWatchLoggingOptionInput) (*aws.Request, *kinesisanalytics.AddApplicationCloudWatchLoggingOptionOutput)
 
 	AddApplicationInput(*kinesisanalytics.AddApplicationInputInput) (*kinesisanalytics.AddApplicationInputOutput, error)
-	AddApplicationInputWithContext(aws.Context, *kinesisanalytics.AddApplicationInputInput, ...request.Option) (*kinesisanalytics.AddApplicationInputOutput, error)
-	AddApplicationInputRequest(*kinesisanalytics.AddApplicationInputInput) (*request.Request, *kinesisanalytics.AddApplicationInputOutput)
+	AddApplicationInputWithContext(aws.Context, *kinesisanalytics.AddApplicationInputInput, ...aws.Option) (*kinesisanalytics.AddApplicationInputOutput, error)
+	AddApplicationInputRequest(*kinesisanalytics.AddApplicationInputInput) (*aws.Request, *kinesisanalytics.AddApplicationInputOutput)
 
 	AddApplicationInputProcessingConfiguration(*kinesisanalytics.AddApplicationInputProcessingConfigurationInput) (*kinesisanalytics.AddApplicationInputProcessingConfigurationOutput, error)
-	AddApplicationInputProcessingConfigurationWithContext(aws.Context, *kinesisanalytics.AddApplicationInputProcessingConfigurationInput, ...request.Option) (*kinesisanalytics.AddApplicationInputProcessingConfigurationOutput, error)
-	AddApplicationInputProcessingConfigurationRequest(*kinesisanalytics.AddApplicationInputProcessingConfigurationInput) (*request.Request, *kinesisanalytics.AddApplicationInputProcessingConfigurationOutput)
+	AddApplicationInputProcessingConfigurationWithContext(aws.Context, *kinesisanalytics.AddApplicationInputProcessingConfigurationInput, ...aws.Option) (*kinesisanalytics.AddApplicationInputProcessingConfigurationOutput, error)
+	AddApplicationInputProcessingConfigurationRequest(*kinesisanalytics.AddApplicationInputProcessingConfigurationInput) (*aws.Request, *kinesisanalytics.AddApplicationInputProcessingConfigurationOutput)
 
 	AddApplicationOutput(*kinesisanalytics.AddApplicationOutputInput) (*kinesisanalytics.AddApplicationOutputOutput, error)
-	AddApplicationOutputWithContext(aws.Context, *kinesisanalytics.AddApplicationOutputInput, ...request.Option) (*kinesisanalytics.AddApplicationOutputOutput, error)
-	AddApplicationOutputRequest(*kinesisanalytics.AddApplicationOutputInput) (*request.Request, *kinesisanalytics.AddApplicationOutputOutput)
+	AddApplicationOutputWithContext(aws.Context, *kinesisanalytics.AddApplicationOutputInput, ...aws.Option) (*kinesisanalytics.AddApplicationOutputOutput, error)
+	AddApplicationOutputRequest(*kinesisanalytics.AddApplicationOutputInput) (*aws.Request, *kinesisanalytics.AddApplicationOutputOutput)
 
 	AddApplicationReferenceDataSource(*kinesisanalytics.AddApplicationReferenceDataSourceInput) (*kinesisanalytics.AddApplicationReferenceDataSourceOutput, error)
-	AddApplicationReferenceDataSourceWithContext(aws.Context, *kinesisanalytics.AddApplicationReferenceDataSourceInput, ...request.Option) (*kinesisanalytics.AddApplicationReferenceDataSourceOutput, error)
-	AddApplicationReferenceDataSourceRequest(*kinesisanalytics.AddApplicationReferenceDataSourceInput) (*request.Request, *kinesisanalytics.AddApplicationReferenceDataSourceOutput)
+	AddApplicationReferenceDataSourceWithContext(aws.Context, *kinesisanalytics.AddApplicationReferenceDataSourceInput, ...aws.Option) (*kinesisanalytics.AddApplicationReferenceDataSourceOutput, error)
+	AddApplicationReferenceDataSourceRequest(*kinesisanalytics.AddApplicationReferenceDataSourceInput) (*aws.Request, *kinesisanalytics.AddApplicationReferenceDataSourceOutput)
 
 	CreateApplication(*kinesisanalytics.CreateApplicationInput) (*kinesisanalytics.CreateApplicationOutput, error)
-	CreateApplicationWithContext(aws.Context, *kinesisanalytics.CreateApplicationInput, ...request.Option) (*kinesisanalytics.CreateApplicationOutput, error)
-	CreateApplicationRequest(*kinesisanalytics.CreateApplicationInput) (*request.Request, *kinesisanalytics.CreateApplicationOutput)
+	CreateApplicationWithContext(aws.Context, *kinesisanalytics.CreateApplicationInput, ...aws.Option) (*kinesisanalytics.CreateApplicationOutput, error)
+	CreateApplicationRequest(*kinesisanalytics.CreateApplicationInput) (*aws.Request, *kinesisanalytics.CreateApplicationOutput)
 
 	DeleteApplication(*kinesisanalytics.DeleteApplicationInput) (*kinesisanalytics.DeleteApplicationOutput, error)
-	DeleteApplicationWithContext(aws.Context, *kinesisanalytics.DeleteApplicationInput, ...request.Option) (*kinesisanalytics.DeleteApplicationOutput, error)
-	DeleteApplicationRequest(*kinesisanalytics.DeleteApplicationInput) (*request.Request, *kinesisanalytics.DeleteApplicationOutput)
+	DeleteApplicationWithContext(aws.Context, *kinesisanalytics.DeleteApplicationInput, ...aws.Option) (*kinesisanalytics.DeleteApplicationOutput, error)
+	DeleteApplicationRequest(*kinesisanalytics.DeleteApplicationInput) (*aws.Request, *kinesisanalytics.DeleteApplicationOutput)
 
 	DeleteApplicationCloudWatchLoggingOption(*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput) (*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionOutput, error)
-	DeleteApplicationCloudWatchLoggingOptionWithContext(aws.Context, *kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput, ...request.Option) (*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionOutput, error)
-	DeleteApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput) (*request.Request, *kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionOutput)
+	DeleteApplicationCloudWatchLoggingOptionWithContext(aws.Context, *kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput, ...aws.Option) (*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionOutput, error)
+	DeleteApplicationCloudWatchLoggingOptionRequest(*kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionInput) (*aws.Request, *kinesisanalytics.DeleteApplicationCloudWatchLoggingOptionOutput)
 
 	DeleteApplicationInputProcessingConfiguration(*kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput) (*kinesisanalytics.DeleteApplicationInputProcessingConfigurationOutput, error)
-	DeleteApplicationInputProcessingConfigurationWithContext(aws.Context, *kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput, ...request.Option) (*kinesisanalytics.DeleteApplicationInputProcessingConfigurationOutput, error)
-	DeleteApplicationInputProcessingConfigurationRequest(*kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput) (*request.Request, *kinesisanalytics.DeleteApplicationInputProcessingConfigurationOutput)
+	DeleteApplicationInputProcessingConfigurationWithContext(aws.Context, *kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput, ...aws.Option) (*kinesisanalytics.DeleteApplicationInputProcessingConfigurationOutput, error)
+	DeleteApplicationInputProcessingConfigurationRequest(*kinesisanalytics.DeleteApplicationInputProcessingConfigurationInput) (*aws.Request, *kinesisanalytics.DeleteApplicationInputProcessingConfigurationOutput)
 
 	DeleteApplicationOutput(*kinesisanalytics.DeleteApplicationOutputInput) (*kinesisanalytics.DeleteApplicationOutputOutput, error)
-	DeleteApplicationOutputWithContext(aws.Context, *kinesisanalytics.DeleteApplicationOutputInput, ...request.Option) (*kinesisanalytics.DeleteApplicationOutputOutput, error)
-	DeleteApplicationOutputRequest(*kinesisanalytics.DeleteApplicationOutputInput) (*request.Request, *kinesisanalytics.DeleteApplicationOutputOutput)
+	DeleteApplicationOutputWithContext(aws.Context, *kinesisanalytics.DeleteApplicationOutputInput, ...aws.Option) (*kinesisanalytics.DeleteApplicationOutputOutput, error)
+	DeleteApplicationOutputRequest(*kinesisanalytics.DeleteApplicationOutputInput) (*aws.Request, *kinesisanalytics.DeleteApplicationOutputOutput)
 
 	DeleteApplicationReferenceDataSource(*kinesisanalytics.DeleteApplicationReferenceDataSourceInput) (*kinesisanalytics.DeleteApplicationReferenceDataSourceOutput, error)
-	DeleteApplicationReferenceDataSourceWithContext(aws.Context, *kinesisanalytics.DeleteApplicationReferenceDataSourceInput, ...request.Option) (*kinesisanalytics.DeleteApplicationReferenceDataSourceOutput, error)
-	DeleteApplicationReferenceDataSourceRequest(*kinesisanalytics.DeleteApplicationReferenceDataSourceInput) (*request.Request, *kinesisanalytics.DeleteApplicationReferenceDataSourceOutput)
+	DeleteApplicationReferenceDataSourceWithContext(aws.Context, *kinesisanalytics.DeleteApplicationReferenceDataSourceInput, ...aws.Option) (*kinesisanalytics.DeleteApplicationReferenceDataSourceOutput, error)
+	DeleteApplicationReferenceDataSourceRequest(*kinesisanalytics.DeleteApplicationReferenceDataSourceInput) (*aws.Request, *kinesisanalytics.DeleteApplicationReferenceDataSourceOutput)
 
 	DescribeApplication(*kinesisanalytics.DescribeApplicationInput) (*kinesisanalytics.DescribeApplicationOutput, error)
-	DescribeApplicationWithContext(aws.Context, *kinesisanalytics.DescribeApplicationInput, ...request.Option) (*kinesisanalytics.DescribeApplicationOutput, error)
-	DescribeApplicationRequest(*kinesisanalytics.DescribeApplicationInput) (*request.Request, *kinesisanalytics.DescribeApplicationOutput)
+	DescribeApplicationWithContext(aws.Context, *kinesisanalytics.DescribeApplicationInput, ...aws.Option) (*kinesisanalytics.DescribeApplicationOutput, error)
+	DescribeApplicationRequest(*kinesisanalytics.DescribeApplicationInput) (*aws.Request, *kinesisanalytics.DescribeApplicationOutput)
 
 	DiscoverInputSchema(*kinesisanalytics.DiscoverInputSchemaInput) (*kinesisanalytics.DiscoverInputSchemaOutput, error)
-	DiscoverInputSchemaWithContext(aws.Context, *kinesisanalytics.DiscoverInputSchemaInput, ...request.Option) (*kinesisanalytics.DiscoverInputSchemaOutput, error)
-	DiscoverInputSchemaRequest(*kinesisanalytics.DiscoverInputSchemaInput) (*request.Request, *kinesisanalytics.DiscoverInputSchemaOutput)
+	DiscoverInputSchemaWithContext(aws.Context, *kinesisanalytics.DiscoverInputSchemaInput, ...aws.Option) (*kinesisanalytics.DiscoverInputSchemaOutput, error)
+	DiscoverInputSchemaRequest(*kinesisanalytics.DiscoverInputSchemaInput) (*aws.Request, *kinesisanalytics.DiscoverInputSchemaOutput)
 
 	ListApplications(*kinesisanalytics.ListApplicationsInput) (*kinesisanalytics.ListApplicationsOutput, error)
-	ListApplicationsWithContext(aws.Context, *kinesisanalytics.ListApplicationsInput, ...request.Option) (*kinesisanalytics.ListApplicationsOutput, error)
-	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) (*request.Request, *kinesisanalytics.ListApplicationsOutput)
+	ListApplicationsWithContext(aws.Context, *kinesisanalytics.ListApplicationsInput, ...aws.Option) (*kinesisanalytics.ListApplicationsOutput, error)
+	ListApplicationsRequest(*kinesisanalytics.ListApplicationsInput) (*aws.Request, *kinesisanalytics.ListApplicationsOutput)
 
 	StartApplication(*kinesisanalytics.StartApplicationInput) (*kinesisanalytics.StartApplicationOutput, error)
-	StartApplicationWithContext(aws.Context, *kinesisanalytics.StartApplicationInput, ...request.Option) (*kinesisanalytics.StartApplicationOutput, error)
-	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) (*request.Request, *kinesisanalytics.StartApplicationOutput)
+	StartApplicationWithContext(aws.Context, *kinesisanalytics.StartApplicationInput, ...aws.Option) (*kinesisanalytics.StartApplicationOutput, error)
+	StartApplicationRequest(*kinesisanalytics.StartApplicationInput) (*aws.Request, *kinesisanalytics.StartApplicationOutput)
 
 	StopApplication(*kinesisanalytics.StopApplicationInput) (*kinesisanalytics.StopApplicationOutput, error)
-	StopApplicationWithContext(aws.Context, *kinesisanalytics.StopApplicationInput, ...request.Option) (*kinesisanalytics.StopApplicationOutput, error)
-	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) (*request.Request, *kinesisanalytics.StopApplicationOutput)
+	StopApplicationWithContext(aws.Context, *kinesisanalytics.StopApplicationInput, ...aws.Option) (*kinesisanalytics.StopApplicationOutput, error)
+	StopApplicationRequest(*kinesisanalytics.StopApplicationInput) (*aws.Request, *kinesisanalytics.StopApplicationOutput)
 
 	UpdateApplication(*kinesisanalytics.UpdateApplicationInput) (*kinesisanalytics.UpdateApplicationOutput, error)
-	UpdateApplicationWithContext(aws.Context, *kinesisanalytics.UpdateApplicationInput, ...request.Option) (*kinesisanalytics.UpdateApplicationOutput, error)
-	UpdateApplicationRequest(*kinesisanalytics.UpdateApplicationInput) (*request.Request, *kinesisanalytics.UpdateApplicationOutput)
+	UpdateApplicationWithContext(aws.Context, *kinesisanalytics.UpdateApplicationInput, ...aws.Option) (*kinesisanalytics.UpdateApplicationOutput, error)
+	UpdateApplicationRequest(*kinesisanalytics.UpdateApplicationInput) (*aws.Request, *kinesisanalytics.UpdateApplicationOutput)
 }
 
 var _ KinesisAnalyticsAPI = (*kinesisanalytics.KinesisAnalytics)(nil)

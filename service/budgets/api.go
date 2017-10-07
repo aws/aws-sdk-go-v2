@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateBudget = "CreateBudget"
 
-// CreateBudgetRequest generates a "aws/request.Request" representing the
+// CreateBudgetRequest generates a "aws.Request" representing the
 // client's request for the CreateBudget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -35,8 +34,8 @@ const opCreateBudget = "CreateBudget"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *request.Request, output *CreateBudgetOutput) {
-	op := &request.Operation{
+func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) (req *aws.Request, output *CreateBudgetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBudget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -92,7 +91,7 @@ func (c *Budgets) CreateBudget(input *CreateBudgetInput) (*CreateBudgetOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) CreateBudgetWithContext(ctx aws.Context, input *CreateBudgetInput, opts ...request.Option) (*CreateBudgetOutput, error) {
+func (c *Budgets) CreateBudgetWithContext(ctx aws.Context, input *CreateBudgetInput, opts ...aws.Option) (*CreateBudgetOutput, error) {
 	req, out := c.CreateBudgetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -101,7 +100,7 @@ func (c *Budgets) CreateBudgetWithContext(ctx aws.Context, input *CreateBudgetIn
 
 const opCreateNotification = "CreateNotification"
 
-// CreateNotificationRequest generates a "aws/request.Request" representing the
+// CreateNotificationRequest generates a "aws.Request" representing the
 // client's request for the CreateNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -123,8 +122,8 @@ const opCreateNotification = "CreateNotification"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) (req *request.Request, output *CreateNotificationOutput) {
-	op := &request.Operation{
+func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) (req *aws.Request, output *CreateNotificationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateNotification,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -184,7 +183,7 @@ func (c *Budgets) CreateNotification(input *CreateNotificationInput) (*CreateNot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) CreateNotificationWithContext(ctx aws.Context, input *CreateNotificationInput, opts ...request.Option) (*CreateNotificationOutput, error) {
+func (c *Budgets) CreateNotificationWithContext(ctx aws.Context, input *CreateNotificationInput, opts ...aws.Option) (*CreateNotificationOutput, error) {
 	req, out := c.CreateNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -193,7 +192,7 @@ func (c *Budgets) CreateNotificationWithContext(ctx aws.Context, input *CreateNo
 
 const opCreateSubscriber = "CreateSubscriber"
 
-// CreateSubscriberRequest generates a "aws/request.Request" representing the
+// CreateSubscriberRequest generates a "aws.Request" representing the
 // client's request for the CreateSubscriber operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -215,8 +214,8 @@ const opCreateSubscriber = "CreateSubscriber"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) (req *request.Request, output *CreateSubscriberOutput) {
-	op := &request.Operation{
+func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) (req *aws.Request, output *CreateSubscriberOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSubscriber,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -276,7 +275,7 @@ func (c *Budgets) CreateSubscriber(input *CreateSubscriberInput) (*CreateSubscri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) CreateSubscriberWithContext(ctx aws.Context, input *CreateSubscriberInput, opts ...request.Option) (*CreateSubscriberOutput, error) {
+func (c *Budgets) CreateSubscriberWithContext(ctx aws.Context, input *CreateSubscriberInput, opts ...aws.Option) (*CreateSubscriberOutput, error) {
 	req, out := c.CreateSubscriberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -285,7 +284,7 @@ func (c *Budgets) CreateSubscriberWithContext(ctx aws.Context, input *CreateSubs
 
 const opDeleteBudget = "DeleteBudget"
 
-// DeleteBudgetRequest generates a "aws/request.Request" representing the
+// DeleteBudgetRequest generates a "aws.Request" representing the
 // client's request for the DeleteBudget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -307,8 +306,8 @@ const opDeleteBudget = "DeleteBudget"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) (req *request.Request, output *DeleteBudgetOutput) {
-	op := &request.Operation{
+func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) (req *aws.Request, output *DeleteBudgetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBudget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -360,7 +359,7 @@ func (c *Budgets) DeleteBudget(input *DeleteBudgetInput) (*DeleteBudgetOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DeleteBudgetWithContext(ctx aws.Context, input *DeleteBudgetInput, opts ...request.Option) (*DeleteBudgetOutput, error) {
+func (c *Budgets) DeleteBudgetWithContext(ctx aws.Context, input *DeleteBudgetInput, opts ...aws.Option) (*DeleteBudgetOutput, error) {
 	req, out := c.DeleteBudgetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -369,7 +368,7 @@ func (c *Budgets) DeleteBudgetWithContext(ctx aws.Context, input *DeleteBudgetIn
 
 const opDeleteNotification = "DeleteNotification"
 
-// DeleteNotificationRequest generates a "aws/request.Request" representing the
+// DeleteNotificationRequest generates a "aws.Request" representing the
 // client's request for the DeleteNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -391,8 +390,8 @@ const opDeleteNotification = "DeleteNotification"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) (req *request.Request, output *DeleteNotificationOutput) {
-	op := &request.Operation{
+func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) (req *aws.Request, output *DeleteNotificationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteNotification,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -444,7 +443,7 @@ func (c *Budgets) DeleteNotification(input *DeleteNotificationInput) (*DeleteNot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DeleteNotificationWithContext(ctx aws.Context, input *DeleteNotificationInput, opts ...request.Option) (*DeleteNotificationOutput, error) {
+func (c *Budgets) DeleteNotificationWithContext(ctx aws.Context, input *DeleteNotificationInput, opts ...aws.Option) (*DeleteNotificationOutput, error) {
 	req, out := c.DeleteNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -453,7 +452,7 @@ func (c *Budgets) DeleteNotificationWithContext(ctx aws.Context, input *DeleteNo
 
 const opDeleteSubscriber = "DeleteSubscriber"
 
-// DeleteSubscriberRequest generates a "aws/request.Request" representing the
+// DeleteSubscriberRequest generates a "aws.Request" representing the
 // client's request for the DeleteSubscriber operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -475,8 +474,8 @@ const opDeleteSubscriber = "DeleteSubscriber"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) (req *request.Request, output *DeleteSubscriberOutput) {
-	op := &request.Operation{
+func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) (req *aws.Request, output *DeleteSubscriberOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSubscriber,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -528,7 +527,7 @@ func (c *Budgets) DeleteSubscriber(input *DeleteSubscriberInput) (*DeleteSubscri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DeleteSubscriberWithContext(ctx aws.Context, input *DeleteSubscriberInput, opts ...request.Option) (*DeleteSubscriberOutput, error) {
+func (c *Budgets) DeleteSubscriberWithContext(ctx aws.Context, input *DeleteSubscriberInput, opts ...aws.Option) (*DeleteSubscriberOutput, error) {
 	req, out := c.DeleteSubscriberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -537,7 +536,7 @@ func (c *Budgets) DeleteSubscriberWithContext(ctx aws.Context, input *DeleteSubs
 
 const opDescribeBudget = "DescribeBudget"
 
-// DescribeBudgetRequest generates a "aws/request.Request" representing the
+// DescribeBudgetRequest generates a "aws.Request" representing the
 // client's request for the DescribeBudget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -559,8 +558,8 @@ const opDescribeBudget = "DescribeBudget"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *request.Request, output *DescribeBudgetOutput) {
-	op := &request.Operation{
+func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) (req *aws.Request, output *DescribeBudgetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBudget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -612,7 +611,7 @@ func (c *Budgets) DescribeBudget(input *DescribeBudgetInput) (*DescribeBudgetOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DescribeBudgetWithContext(ctx aws.Context, input *DescribeBudgetInput, opts ...request.Option) (*DescribeBudgetOutput, error) {
+func (c *Budgets) DescribeBudgetWithContext(ctx aws.Context, input *DescribeBudgetInput, opts ...aws.Option) (*DescribeBudgetOutput, error) {
 	req, out := c.DescribeBudgetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -621,7 +620,7 @@ func (c *Budgets) DescribeBudgetWithContext(ctx aws.Context, input *DescribeBudg
 
 const opDescribeBudgets = "DescribeBudgets"
 
-// DescribeBudgetsRequest generates a "aws/request.Request" representing the
+// DescribeBudgetsRequest generates a "aws.Request" representing the
 // client's request for the DescribeBudgets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -643,8 +642,8 @@ const opDescribeBudgets = "DescribeBudgets"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *request.Request, output *DescribeBudgetsOutput) {
-	op := &request.Operation{
+func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) (req *aws.Request, output *DescribeBudgetsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBudgets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -703,7 +702,7 @@ func (c *Budgets) DescribeBudgets(input *DescribeBudgetsInput) (*DescribeBudgets
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DescribeBudgetsWithContext(ctx aws.Context, input *DescribeBudgetsInput, opts ...request.Option) (*DescribeBudgetsOutput, error) {
+func (c *Budgets) DescribeBudgetsWithContext(ctx aws.Context, input *DescribeBudgetsInput, opts ...aws.Option) (*DescribeBudgetsOutput, error) {
 	req, out := c.DescribeBudgetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -712,7 +711,7 @@ func (c *Budgets) DescribeBudgetsWithContext(ctx aws.Context, input *DescribeBud
 
 const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 
-// DescribeNotificationsForBudgetRequest generates a "aws/request.Request" representing the
+// DescribeNotificationsForBudgetRequest generates a "aws.Request" representing the
 // client's request for the DescribeNotificationsForBudget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -734,8 +733,8 @@ const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificationsForBudgetInput) (req *request.Request, output *DescribeNotificationsForBudgetOutput) {
-	op := &request.Operation{
+func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificationsForBudgetInput) (req *aws.Request, output *DescribeNotificationsForBudgetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeNotificationsForBudget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -794,7 +793,7 @@ func (c *Budgets) DescribeNotificationsForBudget(input *DescribeNotificationsFor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DescribeNotificationsForBudgetWithContext(ctx aws.Context, input *DescribeNotificationsForBudgetInput, opts ...request.Option) (*DescribeNotificationsForBudgetOutput, error) {
+func (c *Budgets) DescribeNotificationsForBudgetWithContext(ctx aws.Context, input *DescribeNotificationsForBudgetInput, opts ...aws.Option) (*DescribeNotificationsForBudgetOutput, error) {
 	req, out := c.DescribeNotificationsForBudgetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -803,7 +802,7 @@ func (c *Budgets) DescribeNotificationsForBudgetWithContext(ctx aws.Context, inp
 
 const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification"
 
-// DescribeSubscribersForNotificationRequest generates a "aws/request.Request" representing the
+// DescribeSubscribersForNotificationRequest generates a "aws.Request" representing the
 // client's request for the DescribeSubscribersForNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -825,8 +824,8 @@ const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubscribersForNotificationInput) (req *request.Request, output *DescribeSubscribersForNotificationOutput) {
-	op := &request.Operation{
+func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubscribersForNotificationInput) (req *aws.Request, output *DescribeSubscribersForNotificationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSubscribersForNotification,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -885,7 +884,7 @@ func (c *Budgets) DescribeSubscribersForNotification(input *DescribeSubscribersF
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) DescribeSubscribersForNotificationWithContext(ctx aws.Context, input *DescribeSubscribersForNotificationInput, opts ...request.Option) (*DescribeSubscribersForNotificationOutput, error) {
+func (c *Budgets) DescribeSubscribersForNotificationWithContext(ctx aws.Context, input *DescribeSubscribersForNotificationInput, opts ...aws.Option) (*DescribeSubscribersForNotificationOutput, error) {
 	req, out := c.DescribeSubscribersForNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -894,7 +893,7 @@ func (c *Budgets) DescribeSubscribersForNotificationWithContext(ctx aws.Context,
 
 const opUpdateBudget = "UpdateBudget"
 
-// UpdateBudgetRequest generates a "aws/request.Request" representing the
+// UpdateBudgetRequest generates a "aws.Request" representing the
 // client's request for the UpdateBudget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -916,8 +915,8 @@ const opUpdateBudget = "UpdateBudget"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *request.Request, output *UpdateBudgetOutput) {
-	op := &request.Operation{
+func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) (req *aws.Request, output *UpdateBudgetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateBudget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -969,7 +968,7 @@ func (c *Budgets) UpdateBudget(input *UpdateBudgetInput) (*UpdateBudgetOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) UpdateBudgetWithContext(ctx aws.Context, input *UpdateBudgetInput, opts ...request.Option) (*UpdateBudgetOutput, error) {
+func (c *Budgets) UpdateBudgetWithContext(ctx aws.Context, input *UpdateBudgetInput, opts ...aws.Option) (*UpdateBudgetOutput, error) {
 	req, out := c.UpdateBudgetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -978,7 +977,7 @@ func (c *Budgets) UpdateBudgetWithContext(ctx aws.Context, input *UpdateBudgetIn
 
 const opUpdateNotification = "UpdateNotification"
 
-// UpdateNotificationRequest generates a "aws/request.Request" representing the
+// UpdateNotificationRequest generates a "aws.Request" representing the
 // client's request for the UpdateNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1000,8 +999,8 @@ const opUpdateNotification = "UpdateNotification"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) (req *request.Request, output *UpdateNotificationOutput) {
-	op := &request.Operation{
+func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) (req *aws.Request, output *UpdateNotificationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateNotification,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1057,7 +1056,7 @@ func (c *Budgets) UpdateNotification(input *UpdateNotificationInput) (*UpdateNot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) UpdateNotificationWithContext(ctx aws.Context, input *UpdateNotificationInput, opts ...request.Option) (*UpdateNotificationOutput, error) {
+func (c *Budgets) UpdateNotificationWithContext(ctx aws.Context, input *UpdateNotificationInput, opts ...aws.Option) (*UpdateNotificationOutput, error) {
 	req, out := c.UpdateNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1066,7 +1065,7 @@ func (c *Budgets) UpdateNotificationWithContext(ctx aws.Context, input *UpdateNo
 
 const opUpdateSubscriber = "UpdateSubscriber"
 
-// UpdateSubscriberRequest generates a "aws/request.Request" representing the
+// UpdateSubscriberRequest generates a "aws.Request" representing the
 // client's request for the UpdateSubscriber operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1088,8 +1087,8 @@ const opUpdateSubscriber = "UpdateSubscriber"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) (req *request.Request, output *UpdateSubscriberOutput) {
-	op := &request.Operation{
+func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) (req *aws.Request, output *UpdateSubscriberOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSubscriber,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1145,7 +1144,7 @@ func (c *Budgets) UpdateSubscriber(input *UpdateSubscriberInput) (*UpdateSubscri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Budgets) UpdateSubscriberWithContext(ctx aws.Context, input *UpdateSubscriberInput, opts ...request.Option) (*UpdateSubscriberOutput, error) {
+func (c *Budgets) UpdateSubscriberWithContext(ctx aws.Context, input *UpdateSubscriberInput, opts ...aws.Option) (*UpdateSubscriberOutput, error) {
 	req, out := c.UpdateSubscriberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1206,43 +1205,43 @@ func (s Budget) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Budget) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Budget"}
+	invalidParams := aws.ErrInvalidParams{Context: "Budget"}
 	if s.BudgetLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetLimit"))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.BudgetType == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetType"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetType"))
 	}
 	if s.CostTypes == nil {
-		invalidParams.Add(request.NewErrParamRequired("CostTypes"))
+		invalidParams.Add(aws.NewErrParamRequired("CostTypes"))
 	}
 	if s.TimePeriod == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimePeriod"))
+		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
 	}
 	if s.TimeUnit == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimeUnit"))
+		invalidParams.Add(aws.NewErrParamRequired("TimeUnit"))
 	}
 	if s.BudgetLimit != nil {
 		if err := s.BudgetLimit.Validate(); err != nil {
-			invalidParams.AddNested("BudgetLimit", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BudgetLimit", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CalculatedSpend != nil {
 		if err := s.CalculatedSpend.Validate(); err != nil {
-			invalidParams.AddNested("CalculatedSpend", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CalculatedSpend", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CostTypes != nil {
 		if err := s.CostTypes.Validate(); err != nil {
-			invalidParams.AddNested("CostTypes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CostTypes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TimePeriod != nil {
 		if err := s.TimePeriod.Validate(); err != nil {
-			invalidParams.AddNested("TimePeriod", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TimePeriod", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1327,18 +1326,18 @@ func (s CalculatedSpend) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CalculatedSpend) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CalculatedSpend"}
+	invalidParams := aws.ErrInvalidParams{Context: "CalculatedSpend"}
 	if s.ActualSpend == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActualSpend"))
+		invalidParams.Add(aws.NewErrParamRequired("ActualSpend"))
 	}
 	if s.ActualSpend != nil {
 		if err := s.ActualSpend.Validate(); err != nil {
-			invalidParams.AddNested("ActualSpend", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ActualSpend", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ForecastedSpend != nil {
 		if err := s.ForecastedSpend.Validate(); err != nil {
-			invalidParams.AddNested("ForecastedSpend", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ForecastedSpend", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1392,15 +1391,15 @@ func (s CostTypes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CostTypes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CostTypes"}
+	invalidParams := aws.ErrInvalidParams{Context: "CostTypes"}
 	if s.IncludeSubscription == nil {
-		invalidParams.Add(request.NewErrParamRequired("IncludeSubscription"))
+		invalidParams.Add(aws.NewErrParamRequired("IncludeSubscription"))
 	}
 	if s.IncludeTax == nil {
-		invalidParams.Add(request.NewErrParamRequired("IncludeTax"))
+		invalidParams.Add(aws.NewErrParamRequired("IncludeTax"))
 	}
 	if s.UseBlended == nil {
-		invalidParams.Add(request.NewErrParamRequired("UseBlended"))
+		invalidParams.Add(aws.NewErrParamRequired("UseBlended"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1457,19 +1456,19 @@ func (s CreateBudgetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBudgetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBudgetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBudgetInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.Budget == nil {
-		invalidParams.Add(request.NewErrParamRequired("Budget"))
+		invalidParams.Add(aws.NewErrParamRequired("Budget"))
 	}
 	if s.Budget != nil {
 		if err := s.Budget.Validate(); err != nil {
-			invalidParams.AddNested("Budget", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Budget", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.NotificationsWithSubscribers != nil {
@@ -1478,7 +1477,7 @@ func (s *CreateBudgetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NotificationsWithSubscribers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "NotificationsWithSubscribers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1560,28 +1559,28 @@ func (s CreateNotificationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNotificationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateNotificationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateNotificationInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.Subscribers == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subscribers"))
+		invalidParams.Add(aws.NewErrParamRequired("Subscribers"))
 	}
 	if s.Subscribers != nil && len(s.Subscribers) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Subscribers", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Subscribers", 1))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Subscribers != nil {
@@ -1590,7 +1589,7 @@ func (s *CreateNotificationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1679,30 +1678,30 @@ func (s CreateSubscriberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubscriberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSubscriberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSubscriberInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.Subscriber == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subscriber"))
+		invalidParams.Add(aws.NewErrParamRequired("Subscriber"))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Subscriber != nil {
 		if err := s.Subscriber.Validate(); err != nil {
-			invalidParams.AddNested("Subscriber", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Subscriber", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1778,15 +1777,15 @@ func (s DeleteBudgetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBudgetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBudgetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBudgetInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1855,22 +1854,22 @@ func (s DeleteNotificationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNotificationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteNotificationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1952,30 +1951,30 @@ func (s DeleteSubscriberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubscriberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSubscriberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriberInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.Subscriber == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subscriber"))
+		invalidParams.Add(aws.NewErrParamRequired("Subscriber"))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Subscriber != nil {
 		if err := s.Subscriber.Validate(); err != nil {
-			invalidParams.AddNested("Subscriber", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Subscriber", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2051,15 +2050,15 @@ func (s DescribeBudgetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBudgetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2133,15 +2132,15 @@ func (s DescribeBudgetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBudgetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBudgetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBudgetsInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2235,18 +2234,18 @@ func (s DescribeNotificationsForBudgetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNotificationsForBudgetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeNotificationsForBudgetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNotificationsForBudgetInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2352,25 +2351,25 @@ func (s DescribeSubscribersForNotificationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSubscribersForNotificationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSubscribersForNotificationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSubscribersForNotificationInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2480,18 +2479,18 @@ func (s Notification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Notification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Notification"}
+	invalidParams := aws.ErrInvalidParams{Context: "Notification"}
 	if s.ComparisonOperator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComparisonOperator"))
+		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 	if s.NotificationType == nil {
-		invalidParams.Add(request.NewErrParamRequired("NotificationType"))
+		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
 	}
 	if s.Threshold == nil {
-		invalidParams.Add(request.NewErrParamRequired("Threshold"))
+		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
 	}
 	if s.Threshold != nil && *s.Threshold < 0.1 {
-		invalidParams.Add(request.NewErrParamMinValue("Threshold", 0.1))
+		invalidParams.Add(aws.NewErrParamMinValue("Threshold", 0.1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2553,19 +2552,19 @@ func (s NotificationWithSubscribers) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotificationWithSubscribers) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NotificationWithSubscribers"}
+	invalidParams := aws.ErrInvalidParams{Context: "NotificationWithSubscribers"}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.Subscribers == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subscribers"))
+		invalidParams.Add(aws.NewErrParamRequired("Subscribers"))
 	}
 	if s.Subscribers != nil && len(s.Subscribers) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Subscribers", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Subscribers", 1))
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Subscribers != nil {
@@ -2574,7 +2573,7 @@ func (s *NotificationWithSubscribers) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Subscribers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2625,15 +2624,15 @@ func (s Spend) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Spend) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Spend"}
+	invalidParams := aws.ErrInvalidParams{Context: "Spend"}
 	if s.Amount == nil {
-		invalidParams.Add(request.NewErrParamRequired("Amount"))
+		invalidParams.Add(aws.NewErrParamRequired("Amount"))
 	}
 	if s.Unit == nil {
-		invalidParams.Add(request.NewErrParamRequired("Unit"))
+		invalidParams.Add(aws.NewErrParamRequired("Unit"))
 	}
 	if s.Unit != nil && len(*s.Unit) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Unit", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Unit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2682,12 +2681,12 @@ func (s Subscriber) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Subscriber) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Subscriber"}
+	invalidParams := aws.ErrInvalidParams{Context: "Subscriber"}
 	if s.Address == nil {
-		invalidParams.Add(request.NewErrParamRequired("Address"))
+		invalidParams.Add(aws.NewErrParamRequired("Address"))
 	}
 	if s.SubscriptionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionType"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2735,12 +2734,12 @@ func (s TimePeriod) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TimePeriod) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TimePeriod"}
+	invalidParams := aws.ErrInvalidParams{Context: "TimePeriod"}
 	if s.End == nil {
-		invalidParams.Add(request.NewErrParamRequired("End"))
+		invalidParams.Add(aws.NewErrParamRequired("End"))
 	}
 	if s.Start == nil {
-		invalidParams.Add(request.NewErrParamRequired("Start"))
+		invalidParams.Add(aws.NewErrParamRequired("Start"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2788,19 +2787,19 @@ func (s UpdateBudgetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBudgetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateBudgetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBudgetInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.NewBudget == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewBudget"))
+		invalidParams.Add(aws.NewErrParamRequired("NewBudget"))
 	}
 	if s.NewBudget != nil {
 		if err := s.NewBudget.Validate(); err != nil {
-			invalidParams.AddNested("NewBudget", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewBudget", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2876,30 +2875,30 @@ func (s UpdateNotificationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNotificationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateNotificationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotificationInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.NewNotification == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewNotification"))
+		invalidParams.Add(aws.NewErrParamRequired("NewNotification"))
 	}
 	if s.OldNotification == nil {
-		invalidParams.Add(request.NewErrParamRequired("OldNotification"))
+		invalidParams.Add(aws.NewErrParamRequired("OldNotification"))
 	}
 	if s.NewNotification != nil {
 		if err := s.NewNotification.Validate(); err != nil {
-			invalidParams.AddNested("NewNotification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewNotification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.OldNotification != nil {
 		if err := s.OldNotification.Validate(); err != nil {
-			invalidParams.AddNested("OldNotification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OldNotification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2993,38 +2992,38 @@ func (s UpdateSubscriberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSubscriberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSubscriberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubscriberInput"}
 	if s.AccountId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountId"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
 	}
 	if s.AccountId != nil && len(*s.AccountId) < 12 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountId", 12))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountId", 12))
 	}
 	if s.BudgetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BudgetName"))
+		invalidParams.Add(aws.NewErrParamRequired("BudgetName"))
 	}
 	if s.NewSubscriber == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewSubscriber"))
+		invalidParams.Add(aws.NewErrParamRequired("NewSubscriber"))
 	}
 	if s.Notification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Notification"))
+		invalidParams.Add(aws.NewErrParamRequired("Notification"))
 	}
 	if s.OldSubscriber == nil {
-		invalidParams.Add(request.NewErrParamRequired("OldSubscriber"))
+		invalidParams.Add(aws.NewErrParamRequired("OldSubscriber"))
 	}
 	if s.NewSubscriber != nil {
 		if err := s.NewSubscriber.Validate(); err != nil {
-			invalidParams.AddNested("NewSubscriber", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewSubscriber", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Notification != nil {
 		if err := s.Notification.Validate(); err != nil {
-			invalidParams.AddNested("Notification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Notification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.OldSubscriber != nil {
 		if err := s.OldSubscriber.Validate(); err != nil {
-			invalidParams.AddNested("OldSubscriber", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OldSubscriber", err.(aws.ErrInvalidParams))
 		}
 	}
 

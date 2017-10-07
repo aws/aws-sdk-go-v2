@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
@@ -29,7 +29,12 @@ func parseTime(layout, value string) *time.Time {
 //
 
 func ExampleSTS_AssumeRole_shared00() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.AssumeRoleInput{
 		DurationSeconds: aws.Int64(3600),
 		ExternalId:      aws.String("123ABC"),
@@ -66,7 +71,12 @@ func ExampleSTS_AssumeRole_shared00() {
 //
 
 func ExampleSTS_AssumeRoleWithWebIdentity_shared00() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.AssumeRoleWithWebIdentityInput{
 		DurationSeconds:  aws.Int64(3600),
 		ProviderId:       aws.String("www.amazon.com"),
@@ -111,7 +121,12 @@ func ExampleSTS_AssumeRoleWithWebIdentity_shared00() {
 //
 
 func ExampleSTS_DecodeAuthorizationMessage_shared00() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.DecodeAuthorizationMessageInput{
 		EncodedMessage: aws.String("<encoded-message>"),
 	}
@@ -141,7 +156,12 @@ func ExampleSTS_DecodeAuthorizationMessage_shared00() {
 // This example shows a request and response made with the credentials for a user named
 // Alice in the AWS account 123456789012.
 func ExampleSTS_GetCallerIdentity_shared00() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.GetCallerIdentityInput{}
 
 	result, err := svc.GetCallerIdentity(input)
@@ -168,7 +188,12 @@ func ExampleSTS_GetCallerIdentity_shared00() {
 // by AssumeRole. The name of the assumed role is my-role-name, and the RoleSessionName
 // is set to my-role-session-name.
 func ExampleSTS_GetCallerIdentity_shared01() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.GetCallerIdentityInput{}
 
 	result, err := svc.GetCallerIdentity(input)
@@ -194,7 +219,12 @@ func ExampleSTS_GetCallerIdentity_shared01() {
 // This example shows a request and response made with temporary credentials created
 // by using GetFederationToken. The Name parameter is set to my-federated-user-name.
 func ExampleSTS_GetCallerIdentity_shared02() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.GetCallerIdentityInput{}
 
 	result, err := svc.GetCallerIdentity(input)
@@ -219,7 +249,12 @@ func ExampleSTS_GetCallerIdentity_shared02() {
 //
 
 func ExampleSTS_GetFederationToken_shared00() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.GetFederationTokenInput{
 		DurationSeconds: aws.Int64(3600),
 		Name:            aws.String("Bob"),
@@ -254,7 +289,12 @@ func ExampleSTS_GetFederationToken_shared00() {
 //
 
 func ExampleSTS_GetSessionToken_shared00() {
-	svc := sts.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := sts.New(cfg)
 	input := &sts.GetSessionTokenInput{
 		DurationSeconds: aws.Int64(3600),
 		SerialNumber:    aws.String("YourMFASerialNumber"),
