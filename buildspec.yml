@@ -12,10 +12,6 @@ phases:
       - cd $SDK_GO_ROOT
       - make unit
       - cd $SDK_CB_ROOT
-      - #echo Compiling the Go code...
   post_build:
     commands:
       - echo Build completed on `date`
-#artifacts:
-#  files:
-#    - hello
