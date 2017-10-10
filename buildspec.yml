@@ -6,7 +6,7 @@ phases:
       - echo Build started on `date`
       - export GOPATH=/go
       - export SDK_CB_ROOT=`pwd`
-      - export SDK_GO_ROOT=/go/src/github.com/aws/aws-sdk-go
+      - export SDK_GO_ROOT=/go/src/github.com/aws/aws-sdk-go-v2
       - mkdir -p /go/src/github.com/aws
       - ln -s $SDK_CB_ROOT $SDK_GO_ROOT
       - cd $SDK_GO_ROOT
