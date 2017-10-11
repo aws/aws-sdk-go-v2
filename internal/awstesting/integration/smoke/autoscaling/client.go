@@ -4,8 +4,8 @@
 package autoscaling
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/autoscaling"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 	"github.com/gucumber/gucumber"
 )
 

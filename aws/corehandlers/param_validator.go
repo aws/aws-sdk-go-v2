@@ -1,6 +1,6 @@
 package corehandlers
 
-import "github.com/aws/aws-sdk-go/aws/request"
+import "github.com/aws/aws-sdk-go-v2/aws/request"
 
 // ValidateParametersHandler is a request handler to validate the input parameters.
 // Validating parameters only has meaning if done prior to the request being sent.

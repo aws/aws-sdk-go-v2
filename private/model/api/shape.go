@@ -199,7 +199,7 @@ func (s *Shape) GoStructType(name string, ref *ShapeRef) string {
 	}
 
 	if ref.JSONValue {
-		s.API.imports["github.com/aws/aws-sdk-go/aws"] = true
+		s.API.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
 		return "aws.JSONValue"
 	}
 

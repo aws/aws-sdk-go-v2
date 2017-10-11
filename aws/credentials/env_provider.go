@@ -3,7 +3,7 @@ package credentials
 import (
 	"os"
 
-	"github.com/aws/aws-sdk-go/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
 // EnvProviderName provides a name of Env provider

@@ -5,9 +5,9 @@ package s3manager
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/awstesting/integration"
-	"github.com/aws/aws-sdk-go/service/s3/s3manager"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
+	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 func TestGetBucketRegion(t *testing.T) {

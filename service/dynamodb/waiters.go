@@ -5,8 +5,8 @@ package dynamodb
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilTableExists uses the DynamoDB API operation

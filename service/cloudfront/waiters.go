@@ -5,8 +5,8 @@ package cloudfront
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilDistributionDeployed uses the CloudFront API operation

@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"net/http/httputil"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 const logReqMsg = `DEBUG: Request %s/%s Details:
