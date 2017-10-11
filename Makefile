@@ -147,7 +147,7 @@ else
 	GO_VET_CMD=go tool vet --all -shadow
 endif
 
-vetinternal/:
+vet:
 	${GO_VET_CMD} ${SDK_BASE_FOLDERS}
 
 get-deps: get-deps-tests get-deps-verify
