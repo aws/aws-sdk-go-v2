@@ -17,7 +17,7 @@ var (
 // A StaticProvider is a set of credentials which are set programmatically,
 // and will never expire.
 type StaticProvider struct {
-	Value
+	Value Value
 }
 
 // NewStaticCredentials returns a pointer to a new Credentials object
@@ -38,13 +38,14 @@ func NewStaticCredentialsFromCreds(creds Value) *Credentials {
 }
 
 // Retrieve returns the credentials or error if the credentials are invalid.
-func (s *StaticProvider) Retrieve() (Value, error) {
-	if s.AccessKeyID == "" || s.SecretAccessKey == "" {
+func (s StaticProvider) Retrieve() (Value, error) {
+	v := s.Value
+	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
 		return Value{ProviderName: StaticProviderName}, ErrStaticCredentialsEmpty
 	}
 
-	if len(s.Value.ProviderName) == 0 {
-		s.Value.ProviderName = StaticProviderName
+	if len(v.ProviderName) == 0 {
+		v.ProviderName = StaticProviderName
 	}
 	return s.Value, nil
 }
@@ -52,6 +53,6 @@ func (s *StaticProvider) Retrieve() (Value, error) {
 // IsExpired returns if the credentials are expired.
 //
 // For StaticProvider, the credentials never expired.
-func (s *StaticProvider) IsExpired() bool {
+func (s StaticProvider) IsExpired() bool {
 	return false
 }

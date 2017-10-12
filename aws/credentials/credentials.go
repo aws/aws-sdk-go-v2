@@ -80,7 +80,14 @@ type Value struct {
 	SessionToken string
 
 	// Provider used to get credentials
+	// TODO this should be named: Source
 	ProviderName string
+}
+
+// Valid returns if the credentials are valid and can be used to sign
+// a AWS v4 request.
+func (v Value) Valid() bool {
+	return len(v.AccessKeyID) > 0 && len(v.SecretAccessKey) > 0
 }
 
 // A Provider is the interface for any component which will provide credentials
