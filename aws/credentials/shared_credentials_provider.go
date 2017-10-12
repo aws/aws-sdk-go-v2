@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-ini/ini"
 
-	"github.com/aws/aws-sdk-go/aws/awserr"
-	"github.com/aws/aws-sdk-go/internal/shareddefaults"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/shareddefaults"
 )
 
 // SharedCredsProviderName provides a name of SharedCreds provider

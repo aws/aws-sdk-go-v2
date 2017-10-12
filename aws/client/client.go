@@ -3,9 +3,9 @@ package client
 import (
 	"fmt"
 
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/client/metadata"
-	"github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
+	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // A Config provides configuration to a service client instance.

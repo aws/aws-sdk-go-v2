@@ -4,8 +4,8 @@
 package cloudwatchlogs
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/cloudwatchlogs"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 	"github.com/gucumber/gucumber"
 )
 

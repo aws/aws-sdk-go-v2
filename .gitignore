@@ -5,7 +5,5 @@ dist
 Gemfile.lock
 awstesting/integration/smoke/**/importmarker__.go
 awstesting/integration/smoke/_test/
-/vendor/bin/
-/vendor/pkg/
-/vendor/src/
+/vendor
 /private/model/cli/gen-api/gen-api

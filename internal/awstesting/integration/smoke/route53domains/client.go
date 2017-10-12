@@ -4,8 +4,8 @@
 package route53domains
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/route53domains"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 	"github.com/gucumber/gucumber"
 )
 

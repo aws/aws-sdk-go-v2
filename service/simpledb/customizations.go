@@ -1,6 +1,6 @@
 package simpledb
 
-import "github.com/aws/aws-sdk-go/aws/client"
+import "github.com/aws/aws-sdk-go-v2/aws/client"
 
 func init() {
 	initClient = func(c *client.Client) {

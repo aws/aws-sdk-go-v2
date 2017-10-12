@@ -1,6 +1,6 @@
 package cognitoidentity
 
-import "github.com/aws/aws-sdk-go/aws/request"
+import "github.com/aws/aws-sdk-go-v2/aws/request"
 
 func init() {
 	initRequest = func(r *request.Request) {

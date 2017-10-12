@@ -1,6 +1,6 @@
 package aws
 
-import "github.com/aws/aws-sdk-go/aws/awserr"
+import "github.com/aws/aws-sdk-go-v2/aws/awserr"
 
 var (
 	// ErrMissingRegion is an error that is returned if region configuration is

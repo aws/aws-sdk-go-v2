@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/aws/aws-sdk-go/service/s3/s3crypto"
+	"github.com/aws/aws-sdk-go-v2/service/s3/s3crypto"
 )
 
 func TestCryptoReadCloserRead(t *testing.T) {

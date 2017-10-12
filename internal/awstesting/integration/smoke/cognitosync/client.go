@@ -4,8 +4,8 @@
 package cognitosync
 
 import (
-	"github.com/aws/aws-sdk-go/awstesting/integration/smoke"
-	"github.com/aws/aws-sdk-go/service/cognitosync"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
 	"github.com/gucumber/gucumber"
 )
 
