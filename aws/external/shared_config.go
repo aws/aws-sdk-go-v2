@@ -33,11 +33,15 @@ const (
 // is not provided.
 const DefaultSharedConfigProfile = `default`
 
+// DefaultSharedConfigFiles is a slice of the default shared config files that
+// the will be used in order to load the SharedConfig.
 var DefaultSharedConfigFiles = []string{
 	DefaultSharedCredentialsFilename(),
 	DefaultSharedConfigFilename(),
 }
 
+// AssumeRoleConfig provides the values defining the configuration for an IAM
+// assume role.
 type AssumeRoleConfig struct {
 	RoleARN         string
 	SourceProfile   string
@@ -61,6 +65,7 @@ type SharedConfig struct {
 	//	aws_session_token
 	Creds credentials.Value
 
+	// TODO need good way to expose these in Provider interface
 	AssumeRole       AssumeRoleConfig
 	AssumeRoleSource *SharedConfig
 
@@ -71,11 +76,38 @@ type SharedConfig struct {
 	Region string
 }
 
-type sharedConfigFile struct {
-	Filename string
-	IniData  *ini.File
+// StaticSharedConfigProfile wraps a strings to satisfy the SharedConfigProfileProvider
+// interface so a slice of custom shared config files ared used when loading the
+// SharedConfig.
+type StaticSharedConfigProfile string
+
+// GetSharedConfigProfile returns the shared config profile.
+func (c StaticSharedConfigProfile) GetSharedConfigProfile() (string, error) {
+	return string(c), nil
 }
 
+// StaticSharedConfigFiles wraps a slice of strings to satisfy the
+// SharedConfigFilesProvider interface so a slice of custom shared config files
+// ared used when loading the SharedConfig.
+type StaticSharedConfigFiles []string
+
+// GetSharedConfigFiles returns the slice of shared config files.
+func (c StaticSharedConfigFiles) GetSharedConfigFiles() ([]string, error) {
+	return []string(c), nil
+}
+
+// LoadSharedConfig uses the Configs passed in to load the SharedConfig from file
+// The file names and profile name are sourced from the Configs.
+//
+// If profile name is not provided DefaultSharedConfigProfile (default) will
+// be used.
+//
+// If shared config filenames are not provided DefaultSharedConfigFiles will
+// be used.
+//
+// Config providers used:
+// * SharedConfigProfileProvider
+// * SharedConfigFilesProvider
 func LoadSharedConfig(cfgs Configs) (Config, error) {
 	var profile string
 	var files []string
@@ -103,18 +135,6 @@ func LoadSharedConfig(cfgs Configs) (Config, error) {
 	}
 
 	return NewSharedConfig(profile, files)
-}
-
-type StaticSharedConfigProfile string
-
-func (c StaticSharedConfigProfile) GetSharedConfigProfile() (string, error) {
-	return string(c), nil
-}
-
-type StaticSharedConfigFiles []string
-
-func (c StaticSharedConfigFiles) GetSharedConfigFiles() ([]string, error) {
-	return []string(c), nil
 }
 
 // NewSharedConfig retrieves the configuration from the list of files
@@ -149,6 +169,11 @@ func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
 	}
 
 	return cfg, nil
+}
+
+type sharedConfigFile struct {
+	Filename string
+	IniData  *ini.File
 }
 
 func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {

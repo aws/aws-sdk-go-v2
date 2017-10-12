@@ -6,8 +6,56 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 )
 
-// EnvProviderName provides a name of the provider when config is loaded from environment.
-const EnvProviderName = "EnvConfigCredentials"
+// CredentialsSourceName provides a name of the provider when config is
+// loaded from environment.
+const CredentialsSourceName = "EnvConfigCredentials"
+
+// Environment variables that will be read for configuration values.
+const (
+	AWSAccessKeyIDEnvVar = "AWS_ACCESS_KEY_ID"
+	AWSAccessKeyEnvVar   = "AWS_ACCESS_KEY"
+
+	AWSSecreteAccessKeyEnvVar = "AWS_ACCESS_KEY_ID"
+	AWSSecreteKeyEnvVar       = "AWS_ACCESS_KEY"
+
+	AWSSessionTokenEnvVar = "AWS_SESSION_TOKEN"
+
+	AWSCredentialsEndpointEnvVar = "AWS_CONTAINER_CREDENTIALS_FULL_URI"
+
+	// TODO shorter name?
+	AWSContainerCredentialsRelativeEndpointEnvVar = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
+
+	AWSRegionEnvVar        = "AWS_REGION"
+	AWSDefaultRegionEnvVar = "AWS_DEFAULT_REGION"
+
+	AWSProfileEnvVar        = "AWS_PROFILE"
+	AWSDefaultProfileEnvVar = "AWS_DEFAULT_PROFILE"
+
+	AWSSharedCredentialsFileEnvVar = "AWS_SHARED_CREDENTIALS_FILE"
+
+	AWSConfigFileEnvVar = "AWS_CONFIG_FILE"
+
+	AWSCustomCABundleEnvVar = "AWS_CA_BUNDLE"
+)
+
+var (
+	credAccessEnvKeys = []string{
+		AWSAccessKeyIDEnvVar,
+		AWSAccessKeyEnvVar,
+	}
+	credSecretEnvKeys = []string{
+		AWSSecreteAccessKeyEnvVar,
+		AWSSecreteKeyEnvVar,
+	}
+	regionEnvKeys = []string{
+		AWSRegionEnvVar,
+		AWSDefaultRegionEnvVar,
+	}
+	profileEnvKeys = []string{
+		AWSProfileEnvVar,
+		AWSDefaultProfileEnvVar,
+	}
+)
 
 // EnvConfig is a collection of environment values the SDK will read
 // setup config from. All environment values are optional. But some values
@@ -28,14 +76,20 @@ type EnvConfig struct {
 	//
 	//	# Session Token
 	//	AWS_SESSION_TOKEN=TOKEN
-	Creds credentials.Value
+	Credentials credentials.Value
+
+	// TODO doc
+	CredentialsHTTPEndpoint string
+
+	// TODO doc, shorter name?
+	CredentialsContainerRelativeHTTPEndpoint string
 
 	// Region value will instruct the SDK where to make service API requests to. If is
 	// not provided in the environment the region must be provided before a service
 	// client request is made.
 	//
-	//	AWS_REGION=us-east-1
-	//	AWS_DEFAULT_REGION=us-east-1
+	//	AWS_REGION=us-west-2
+	//	AWS_DEFAULT_REGION=us-west-2
 	Region string
 
 	// Profile name the SDK should load use when loading shared configuration from the
@@ -44,16 +98,7 @@ type EnvConfig struct {
 	//
 	//	AWS_PROFILE=my_profile
 	//	AWS_DEFAULT_PROFILE=my_profile
-	Profile string
-
-	// SDK load config instructs the SDK to load the shared config in addition to
-	// shared credentials. This also expands the configuration loaded from the shared
-	// credentials to have parity with the shared config file. This also enables
-	// Region and Profile support for the AWS_DEFAULT_REGION and AWS_DEFAULT_PROFILE
-	// env values as well.
-	//
-	//	AWS_SDK_LOAD_CONFIG=1
-	EnableSharedConfig bool
+	SharedConfigProfile string
 
 	// Shared credentials file path can be set to instruct the SDK to use an alternate
 	// file for the shared credentials. If not set the file will be loaded from
@@ -90,68 +135,82 @@ type EnvConfig struct {
 	CustomCABundle string
 }
 
-var (
-	credAccessEnvKey = []string{
-		"AWS_ACCESS_KEY_ID",
-		"AWS_ACCESS_KEY",
-	}
-	credSecretEnvKey = []string{
-		"AWS_SECRET_ACCESS_KEY",
-		"AWS_SECRET_KEY",
-	}
-	credSessionEnvKey = []string{
-		"AWS_SESSION_TOKEN",
-	}
-
-	regionEnvKeys = []string{
-		"AWS_REGION",
-		"AWS_DEFAULT_REGION", // Only read if AWS_SDK_LOAD_CONFIG is also set
-	}
-	profileEnvKeys = []string{
-		"AWS_PROFILE",
-		"AWS_DEFAULT_PROFILE", // Only read if AWS_SDK_LOAD_CONFIG is also set
-	}
-	sharedCredsFileEnvKey = []string{
-		"AWS_SHARED_CREDENTIALS_FILE",
-	}
-	sharedConfigFileEnvKey = []string{
-		"AWS_CONFIG_FILE",
-	}
-)
-
+// LoadEnvConfig reads configuration values from the OS's environment variables.
+// Returning the a Config typed EnvConfig to satisfy the ConfigLoader func type.
 func LoadEnvConfig(cfgs Configs) (Config, error) {
 	return NewEnvConfig()
 }
 
 // NewEnvConfig retrieves the SDK's environment configuration.
-// See `envConfig` for the values that will be retrieved.
-//
-// If the environment variable `AWS_SDK_LOAD_CONFIG` is set to a truthy value
-// the shared SDK config will be loaded in addition to the SDK's specific
-// configuration values.
+// See `EnvConfig` for the values that will be retrieved.
 func NewEnvConfig() (EnvConfig, error) {
 	var cfg EnvConfig
 
-	setFromEnvVal(&cfg.Creds.AccessKeyID, credAccessEnvKey)
-	setFromEnvVal(&cfg.Creds.SecretAccessKey, credSecretEnvKey)
-	setFromEnvVal(&cfg.Creds.SessionToken, credSessionEnvKey)
+	creds := credentials.Value{
+		ProviderName: CredentialsSourceName,
+	}
+	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
+	setFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
+	if creds.Valid() {
+		creds.SessionToken = AWSSessionTokenEnvVar
+		creds.ProviderName = CredentialsSourceName
 
-	// Require logical grouping of credentials
-	if len(cfg.Creds.AccessKeyID) == 0 || len(cfg.Creds.SecretAccessKey) == 0 {
-		cfg.Creds = credentials.Value{}
-	} else {
-		cfg.Creds.ProviderName = EnvProviderName
+		cfg.Credentials = creds
 	}
 
+	cfg.CredentialsHTTPEndpoint = os.Getenv(AWSCredentialsEndpointEnvVar)
+	cfg.CredentialsContainerRelativeHTTPEndpoint = os.Getenv(AWSContainerCredentialsRelativeEndpointEnvVar)
+
 	setFromEnvVal(&cfg.Region, regionEnvKeys)
-	setFromEnvVal(&cfg.Profile, profileEnvKeys)
+	setFromEnvVal(&cfg.SharedConfigProfile, profileEnvKeys)
 
-	setFromEnvVal(&cfg.SharedCredentialsFile, sharedCredsFileEnvKey)
-	setFromEnvVal(&cfg.SharedConfigFile, sharedConfigFileEnvKey)
+	cfg.SharedCredentialsFile = os.Getenv(AWSSharedCredentialsFileEnvVar)
+	cfg.SharedConfigFile = os.Getenv(AWSConfigFileEnvVar)
 
-	cfg.CustomCABundle = os.Getenv("AWS_CA_BUNDLE")
+	cfg.CustomCABundle = os.Getenv(AWSCustomCABundleEnvVar)
 
 	return cfg, nil
+}
+
+// GetRegion returns the AWS Region if set in the environment. Returns an empty
+// string if not set.
+func (c EnvConfig) GetRegion() (string, error) {
+	return c.Region, nil
+}
+
+// GetCredentialsValue returns the AWS Credentials if both AccessKey and ScreteAccessKey
+// are set in the environment. Returns a zero value Credentials if not set.
+func (c EnvConfig) GetCredentialsValue() (credentials.Value, error) {
+	return c.Credentials, nil
+}
+
+// GetSharedConfigProfile returns the shared config profile if set in the
+// environment. Returns an empty string if not set.
+func (c EnvConfig) GetSharedConfigProfile() (string, error) {
+	return c.SharedConfigProfile, nil
+}
+
+// GetSharedConfigFiles returns a slice of filenames set in the environment.
+//
+// Will return the filenames in the order of:
+// * Shared Credentials
+// * Shared Config
+func (c EnvConfig) GetSharedConfigFiles() ([]string, error) {
+	files := make([]string, 0, 2)
+	if v := c.SharedCredentialsFile; len(v) > 0 {
+		files = append(files, v)
+	}
+	if v := c.SharedConfigFile; len(v) > 0 {
+		files = append(files, v)
+	}
+
+	return files, nil
+}
+
+// GetCustomCABundleFile returns the custom CA bundle filename if it was sent
+// with the environment. Empty string will be returned if unset.
+func (c EnvConfig) GetCustomCABundleFile() (string, error) {
+	return c.CustomCABundle, nil
 }
 
 func setFromEnvVal(dst *string, keys []string) {
