@@ -14,6 +14,7 @@ SDK_UNIT_TEST_ONLY_PKGS=$(shell go list -tags ${UNIT_TEST_TAGS} ./... | grep -v 
 SDK_GO_1_4=$(shell go version | grep "go1.4")
 SDK_GO_1_5=$(shell go version | grep "go1.5")
 SDK_GO_VERSION=$(shell go version | awk '''{print $$3}''' | tr -d '''\n''')
+SDK_V1_USAGE=$(shell go list -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end }}''' ./... | sort -u | grep '''/aws-sdk-go/''')
 
 all: get-deps generate unit
 
@@ -50,6 +51,7 @@ gen-endpoints:
 
 build:
 	@echo "go build SDK and vendor packages"
+	@if [ ! -z "${SDK_V1_USAGE}" ]; then echo "Using of V1 SDK packages"; echo "${SDK_V1_USAGE}"; exit 1; fi
 	@go build ${SDK_ONLY_PKGS}
 
 unit: get-deps-tests build verify
