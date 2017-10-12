@@ -2,37 +2,39 @@ package external
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go/service/s3"
 )
 
-var _ s3.S3
-
-type CustomCABundleFileProvider interface {
-	GetCustomCABundleFile() (string, error)
-}
-type RegionProvider interface {
-	GetRegion() (string, error)
-}
-type CredentialsValueProvider interface {
-	GetCredentialsValue() (credentials.Value, error)
-}
-type CredentialsEndpointProvider interface {
-	GetCredentialsEndpoint() (string, error)
-}
-type SharedConfigProfileProvider interface {
-	GetSharedConfigProfile() (string, error)
-}
-type SharedConfigFilesProvider interface {
-	GetSharedConfigFiles() ([]string, error)
-}
-
+// A Config represents a generic configuration value or set of values. This type
+// will be used by the AWSConfigResolvers to extract
+//
+// General the Config type will use type assertion against the Provider interfaces
+// to extract specific data from the Config.
 type Config interface{}
 
+// A ConfigLoader is used to load external configuration data and returns it as
+// a generic Config type.
+//
+// The loader should return an error if it fails to load the external configuration
+// or the configuration data is malformed, or required components missing.
 type ConfigLoader func(Configs) (Config, error)
 
+// An AWSConfigResolver will extract configuraiton data from the Configs slice
+// using the provider interfaces to extract specific functionality. The extracted
+// configuration values will be written to the AWS Config value.
+//
+// The resolver should return an error if it it fails to extract the data, the
+// data is malformed, or incomplete.
 type AWSConfigResolver func(cfg *aws.Config, configs Configs) error
 
+// Configs is a slice of Config values. These values will be used by the
+// AWSConfigResolvers to extract external configuration values to populate the
+// AWS Config type.
+//
+// Use AppendFromLoaders to add additional external Config values that are
+// loaded from external sources.
+//
+// Use ResolveAWSConfig after external Config values have been added or loaded
+// to extract the loaded configuration values into the AWS Config.
 type Configs []Config
 
 // AppendFromLoaders iterates over the slice of loaders passed in calling each
@@ -96,7 +98,7 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 }
 
 // LoadDefaultAWSConfig reads the SDK's default external configurations, and
-// popultes an AWS Config with the values from the external configurations.
+// populates an AWS Config with the values from the external configurations.
 //
 // The default configuration sources are:
 // * Environment Variables
