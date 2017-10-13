@@ -69,8 +69,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
 )
 
@@ -151,7 +149,7 @@ var allowedQueryHoisting = inclusiveRules{
 type Signer struct {
 	// The authentication credentials the request will be signed against.
 	// This value must be set to sign requests.
-	Credentials *credentials.Credentials
+	Credentials *aws.Credentials
 
 	// Sets the log level the signer should use when reporting information to
 	// the logger. If the logger is nil nothing will be logged. See
@@ -202,7 +200,7 @@ type Signer struct {
 // NewSigner returns a Signer pointer configured with the credentials and optional
 // option values provided. If not options are provided the Signer will use its
 // default configuration.
-func NewSigner(credentials *credentials.Credentials, options ...func(*Signer)) *Signer {
+func NewSigner(credentials *aws.Credentials, options ...func(*Signer)) *Signer {
 	v4 := &Signer{
 		Credentials: credentials,
 	}
@@ -226,7 +224,7 @@ type signingCtx struct {
 
 	DisableURIPathEscaping bool
 
-	credValues         credentials.Value
+	credValues         aws.Value
 	isPresign          bool
 	formattedTime      string
 	formattedShortTime string
@@ -396,7 +394,7 @@ func (ctx *signingCtx) assignAmzQueryValues() {
 
 // SignRequestHandler is a named request handler the SDK will use to sign
 // service client request with using the V4 signature.
-var SignRequestHandler = request.NamedHandler{
+var SignRequestHandler = aws.NamedHandler{
 	Name: "v4.SignRequestHandler", Fn: SignSDKRequest,
 }
 
@@ -410,25 +408,25 @@ var SignRequestHandler = request.NamedHandler{
 // "Presign" functions of the "Signer" type.
 //
 // If the credentials of the request's config are set to
-// credentials.AnonymousCredentials the request will not be signed.
-func SignSDKRequest(req *request.Request) {
+// aws.AnonymousCredentials the request will not be signed.
+func SignSDKRequest(req *aws.Request) {
 	signSDKRequestWithCurrTime(req, time.Now)
 }
 
 // BuildNamedHandler will build a generic handler for signing.
-func BuildNamedHandler(name string, opts ...func(*Signer)) request.NamedHandler {
-	return request.NamedHandler{
+func BuildNamedHandler(name string, opts ...func(*Signer)) aws.NamedHandler {
+	return aws.NamedHandler{
 		Name: name,
-		Fn: func(req *request.Request) {
+		Fn: func(req *aws.Request) {
 			signSDKRequestWithCurrTime(req, time.Now, opts...)
 		},
 	}
 }
 
-func signSDKRequestWithCurrTime(req *request.Request, curTimeFn func() time.Time, opts ...func(*Signer)) {
+func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, opts ...func(*Signer)) {
 	// If the request does not need to be signed ignore the signing of the
 	// request if the AnonymousCredentials object is used.
-	if req.Config.Credentials == credentials.AnonymousCredentials {
+	if req.Config.Credentials == aws.AnonymousCredentials {
 		return
 	}
 

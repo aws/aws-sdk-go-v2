@@ -15,8 +15,8 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -28,7 +28,7 @@ func dlLoggingSvc(data []byte) (*s3.S3, *[]string, *[]string) {
 	names := []string{}
 	ranges := []string{}
 
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -65,7 +65,7 @@ func dlLoggingSvcNoChunk(data []byte) (*s3.S3, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -89,7 +89,7 @@ func dlLoggingSvcNoContentRangeLength(data []byte, states []int) (*s3.S3, *[]str
 	names := []string{}
 	var index int = 0
 
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -114,7 +114,7 @@ func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.S3, *[]str
 	ranges := []string{}
 	var index int = 0
 
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -160,8 +160,8 @@ func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.S3, *[]string) {
 	names := []string{}
 	var index int = 0
 
-	svc := s3.New(unit.Session, &aws.Config{
-		MaxRetries: aws.Int(len(cases) - 1),
+	svc := s3.New(unit.Config, &aws.Config{
+		Retryer: aws.DefaultRetryer{NumMaxRetries: len(cases) - 1},
 	})
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
@@ -517,7 +517,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 }
 
 func TestDownloadWithContextCanceled(t *testing.T) {
-	d := s3manager.NewDownloader(unit.Session)
+	d := s3manager.NewDownloader(unit.Config)
 
 	params := s3.GetObjectInput{
 		Bucket: aws.String("Bucket"),
@@ -579,7 +579,7 @@ func TestDownload_WithRange(t *testing.T) {
 }
 
 func TestDownload_WithFailure(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Send.Clear()
 
 	first := true

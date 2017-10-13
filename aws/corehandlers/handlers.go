@@ -14,8 +14,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // Interface for matching types which also have a Len method.
@@ -30,7 +28,7 @@ type lener interface {
 // The Content-Length will only be added to the request if the length of the body
 // is greater than 0. If the body is empty or the current `Content-Length`
 // header is <= 0, the header will also be stripped.
-var BuildContentLengthHandler = request.NamedHandler{Name: "core.BuildContentLengthHandler", Fn: func(r *request.Request) {
+var BuildContentLengthHandler = aws.NamedHandler{Name: "core.BuildContentLengthHandler", Fn: func(r *aws.Request) {
 	var length int64
 
 	if slength := r.HTTPRequest.Header.Get("Content-Length"); slength != "" {
@@ -61,9 +59,9 @@ var BuildContentLengthHandler = request.NamedHandler{Name: "core.BuildContentLen
 }}
 
 // SDKVersionUserAgentHandler is a request handler for adding the SDK Version to the user agent.
-var SDKVersionUserAgentHandler = request.NamedHandler{
+var SDKVersionUserAgentHandler = aws.NamedHandler{
 	Name: "core.SDKVersionUserAgentHandler",
-	Fn: request.MakeAddToUserAgentHandler(aws.SDKName, aws.SDKVersion,
+	Fn: aws.MakeAddToUserAgentHandler(aws.SDKName, aws.SDKVersion,
 		runtime.Version(), runtime.GOOS, runtime.GOARCH),
 }
 
@@ -73,11 +71,11 @@ var reStatusCode = regexp.MustCompile(`^(\d{3})`)
 // signature doesn't expire before it is sent. This can happen when a request
 // is built and signed significantly before it is sent. Or significant delays
 // occur when retrying requests that would cause the signature to expire.
-var ValidateReqSigHandler = request.NamedHandler{
+var ValidateReqSigHandler = aws.NamedHandler{
 	Name: "core.ValidateReqSigHandler",
-	Fn: func(r *request.Request) {
+	Fn: func(r *aws.Request) {
 		// Unsigned requests are not signed
-		if r.Config.Credentials == credentials.AnonymousCredentials {
+		if r.Config.Credentials == aws.AnonymousCredentials {
 			return
 		}
 
@@ -98,15 +96,15 @@ var ValidateReqSigHandler = request.NamedHandler{
 }
 
 // SendHandler is a request handler to send service request using HTTP client.
-var SendHandler = request.NamedHandler{
+var SendHandler = aws.NamedHandler{
 	Name: "core.SendHandler",
-	Fn: func(r *request.Request) {
+	Fn: func(r *aws.Request) {
 		sender := sendFollowRedirects
 		if r.DisableFollowRedirects {
 			sender = sendWithoutFollowRedirects
 		}
 
-		if request.NoBody == r.HTTPRequest.Body {
+		if aws.NoBody == r.HTTPRequest.Body {
 			// Strip off the request body if the NoBody reader was used as a
 			// place holder for a request body. This prevents the SDK from
 			// making requests with a request body when it would be invalid
@@ -130,11 +128,11 @@ var SendHandler = request.NamedHandler{
 	},
 }
 
-func sendFollowRedirects(r *request.Request) (*http.Response, error) {
+func sendFollowRedirects(r *aws.Request) (*http.Response, error) {
 	return r.Config.HTTPClient.Do(r.HTTPRequest)
 }
 
-func sendWithoutFollowRedirects(r *request.Request) (*http.Response, error) {
+func sendWithoutFollowRedirects(r *aws.Request) (*http.Response, error) {
 	transport := r.Config.HTTPClient.Transport
 	if transport == nil {
 		transport = http.DefaultTransport
@@ -143,7 +141,7 @@ func sendWithoutFollowRedirects(r *request.Request) (*http.Response, error) {
 	return transport.RoundTrip(r.HTTPRequest)
 }
 
-func handleSendError(r *request.Request, err error) {
+func handleSendError(r *aws.Request, err error) {
 	// Prevent leaking if an HTTPResponse was returned. Clean up
 	// the body.
 	if r.HTTPResponse != nil {
@@ -181,7 +179,7 @@ func handleSendError(r *request.Request, err error) {
 	ctx := r.Context()
 	select {
 	case <-ctx.Done():
-		r.Error = awserr.New(request.CanceledErrorCode,
+		r.Error = awserr.New(aws.CanceledErrorCode,
 			"request context canceled", ctx.Err())
 		r.Retryable = aws.Bool(false)
 	default:
@@ -189,7 +187,7 @@ func handleSendError(r *request.Request, err error) {
 }
 
 // ValidateResponseHandler is a request handler to validate service response.
-var ValidateResponseHandler = request.NamedHandler{Name: "core.ValidateResponseHandler", Fn: func(r *request.Request) {
+var ValidateResponseHandler = aws.NamedHandler{Name: "core.ValidateResponseHandler", Fn: func(r *aws.Request) {
 	if r.HTTPResponse.StatusCode == 0 || r.HTTPResponse.StatusCode >= 300 {
 		// this may be replaced by an UnmarshalError handler
 		r.Error = awserr.New("UnknownError", "unknown error", nil)
@@ -198,7 +196,7 @@ var ValidateResponseHandler = request.NamedHandler{Name: "core.ValidateResponseH
 
 // AfterRetryHandler performs final checks to determine if the request should
 // be retried and how long to delay.
-var AfterRetryHandler = request.NamedHandler{Name: "core.AfterRetryHandler", Fn: func(r *request.Request) {
+var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: func(r *aws.Request) {
 	// If one of the other handlers already set the retry state
 	// we don't want to override it based on the service's state
 	if r.Retryable == nil || aws.BoolValue(r.Config.EnforceShouldRetryCheck) {
@@ -212,7 +210,7 @@ var AfterRetryHandler = request.NamedHandler{Name: "core.AfterRetryHandler", Fn:
 			// Support SleepDelay for backwards compatibility and testing
 			sleepFn(r.RetryDelay)
 		} else if err := aws.SleepWithContext(r.Context(), r.RetryDelay); err != nil {
-			r.Error = awserr.New(request.CanceledErrorCode,
+			r.Error = awserr.New(aws.CanceledErrorCode,
 				"request context canceled", err)
 			r.Retryable = aws.Bool(false)
 			return
@@ -233,7 +231,7 @@ var AfterRetryHandler = request.NamedHandler{Name: "core.AfterRetryHandler", Fn:
 // ValidateEndpointHandler is a request handler to validate a request had the
 // appropriate Region and Endpoint set. Will set r.Error if the endpoint or
 // region is not valid.
-var ValidateEndpointHandler = request.NamedHandler{Name: "core.ValidateEndpointHandler", Fn: func(r *request.Request) {
+var ValidateEndpointHandler = aws.NamedHandler{Name: "core.ValidateEndpointHandler", Fn: func(r *aws.Request) {
 	if r.ClientInfo.SigningRegion == "" && aws.StringValue(r.Config.Region) == "" {
 		r.Error = aws.ErrMissingRegion
 	} else if r.ClientInfo.Endpoint == "" {

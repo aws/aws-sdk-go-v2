@@ -4,18 +4,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
-
-// UseServiceDefaultRetries instructs the config to use the service's own
-// default number of retries. This will be the default action if
-// Config.MaxRetries is nil also.
-const UseServiceDefaultRetries = -1
-
-// RequestRetryer is an alias for a type that implements the request.Retryer
-// interface.
-type RequestRetryer interface{}
 
 // A Config provides service configuration for service clients. By default,
 // all clients will use the defaults.DefaultConfig tructure.
@@ -31,6 +21,8 @@ type RequestRetryer interface{}
 //         Region: aws.String("us-west-2"),
 //     })
 type Config struct {
+	Handlers Handlers
+
 	// Enables verbose error printing of all credential chain errors.
 	// Should be used when wanting to see all errors while attempting to
 	// retrieve credentials.
@@ -39,7 +31,7 @@ type Config struct {
 	// The credentials object to use when signing requests. Defaults to a
 	// chain of credential providers to search for credentials in environment
 	// variables, shared credential file, and EC2 Instance Roles.
-	Credentials *credentials.Credentials
+	Credentials *Credentials
 
 	// An optional endpoint URL (hostname only or fully qualified URI)
 	// that overrides the default generated endpoint for a client. Set this
@@ -51,7 +43,7 @@ type Config struct {
 
 	// The resolver to use for looking up endpoints for AWS service clients
 	// to use based on region.
-	EndpointResolver endpoints.Resolver
+	EndpointResolver EndpointResolver
 
 	// EnforceShouldRetryCheck is used in the AfterRetryHandler to always call
 	// ShouldRetry regardless of whether or not if request.Retryable is set.
@@ -86,11 +78,6 @@ type Config struct {
 	// standard out.
 	Logger Logger
 
-	// The maximum number of times that a request will be retried for failures.
-	// Defaults to -1, which defers the max retry setting to the service
-	// specific configuration.
-	MaxRetries *int
-
 	// Retryer guides how HTTP requests should be retried in case of
 	// recoverable failures.
 	//
@@ -105,7 +92,7 @@ type Config struct {
 	//
 	//   cfg := request.WithRetryer(aws.NewConfig(), myRetryer)
 	//
-	Retryer RequestRetryer
+	Retryer Retryer
 
 	// Disables semantic parameter validation, which validates input for
 	// missing required fields and/or other semantic request input errors.
@@ -218,19 +205,40 @@ type Config struct {
 
 // NewConfig returns a new Config pointer that can be chained with builder
 // methods to set multiple configuration values inline without using pointers.
-//
-//     // Create Session with MaxRetry configuration to be shared by multiple
-//     // service clients.
-//     sess := session.Must(session.NewSession(aws.NewConfig().
-//         WithMaxRetries(3),
-//     ))
-//
-//     // Create S3 service client with a specific Region.
-//     svc := s3.New(sess, aws.NewConfig().
-//         WithRegion("us-west-2"),
-//     )
 func NewConfig() *Config {
 	return &Config{}
+}
+
+// ClientConfig is a temporary mock for session until full trasition to Config.
+func (c Config) ClientConfig(serviceName string, cfgs ...*Config) ClientConfig {
+	cfg := c.Copy(cfgs...)
+
+	// TODO better handling of error
+	endpoint, _ := cfg.EndpointResolver.EndpointFor(
+		serviceName, StringValue(cfg.Region),
+		func(opt *endpoints.Options) {
+			// TODO Where should these options go?
+			opt.DisableSSL = BoolValue(cfg.DisableSSL)
+			opt.UseDualStack = BoolValue(cfg.UseDualStack)
+
+			// Support the condition where the service is modeled but its
+			// endpoint metadata is not available.
+			opt.ResolveUnknownService = true
+		},
+	)
+
+	// TODO need to simplify Endpoint
+	cfg.Endpoint = String(endpoint.URL)
+
+	clientCfg := ClientConfig{
+		Config:        cfg,
+		Handlers:      cfg.Handlers,
+		Endpoint:      endpoint.URL,
+		SigningRegion: endpoint.SigningRegion,
+		SigningName:   endpoint.SigningName,
+	}
+
+	return clientCfg
 }
 
 // WithCredentialsChainVerboseErrors sets a config verbose errors boolean and returning
@@ -242,7 +250,7 @@ func (c *Config) WithCredentialsChainVerboseErrors(verboseErrs bool) *Config {
 
 // WithCredentials sets a config Credentials value returning a Config pointer
 // for chaining.
-func (c *Config) WithCredentials(creds *credentials.Credentials) *Config {
+func (c *Config) WithCredentials(creds *Credentials) *Config {
 	c.Credentials = creds
 	return c
 }
@@ -256,7 +264,7 @@ func (c *Config) WithEndpoint(endpoint string) *Config {
 
 // WithEndpointResolver sets a config EndpointResolver value returning a
 // Config pointer for chaining.
-func (c *Config) WithEndpointResolver(resolver endpoints.Resolver) *Config {
+func (c *Config) WithEndpointResolver(resolver EndpointResolver) *Config {
 	c.EndpointResolver = resolver
 	return c
 }
@@ -279,13 +287,6 @@ func (c *Config) WithDisableSSL(disable bool) *Config {
 // for chaining.
 func (c *Config) WithHTTPClient(client *http.Client) *Config {
 	c.HTTPClient = client
-	return c
-}
-
-// WithMaxRetries sets a config MaxRetries value returning a Config pointer
-// for chaining.
-func (c *Config) WithMaxRetries(max int) *Config {
-	c.MaxRetries = &max
 	return c
 }
 
@@ -380,6 +381,8 @@ func mergeInConfig(dst *Config, other *Config) {
 	}
 
 	if other.Endpoint != nil {
+		// TODO remove endpoint and replace with endpoint resolver
+		dst.EndpointResolver = ResolveStaticEndpointURL(StringValue(other.Endpoint))
 		dst.Endpoint = other.Endpoint
 	}
 
@@ -405,10 +408,6 @@ func mergeInConfig(dst *Config, other *Config) {
 
 	if other.Logger != nil {
 		dst.Logger = other.Logger
-	}
-
-	if other.MaxRetries != nil {
-		dst.MaxRetries = other.MaxRetries
 	}
 
 	if other.Retryer != nil {
@@ -459,12 +458,12 @@ func mergeInConfig(dst *Config, other *Config) {
 // Copy will return a shallow copy of the Config object. If any additional
 // configurations are provided they will be merged into the new config returned.
 func (c *Config) Copy(cfgs ...*Config) *Config {
-	dst := &Config{}
-	dst.MergeIn(c)
+	dst := *c
+	dst.Handlers = dst.Handlers.Copy()
 
 	for _, cfg := range cfgs {
 		dst.MergeIn(cfg)
 	}
 
-	return dst
+	return &dst
 }

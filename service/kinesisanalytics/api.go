@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddApplicationCloudWatchLoggingOption = "AddApplicationCloudWatchLoggingOption"
 
-// AddApplicationCloudWatchLoggingOptionRequest generates a "aws/request.Request" representing the
+// AddApplicationCloudWatchLoggingOptionRequest generates a "aws.Request" representing the
 // client's request for the AddApplicationCloudWatchLoggingOption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddApplicationCloudWatchLoggingOption = "AddApplicationCloudWatchLogging
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOption
-func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *AddApplicationCloudWatchLoggingOptionInput) (req *request.Request, output *AddApplicationCloudWatchLoggingOptionOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *AddApplicationCloudWatchLoggingOptionInput) (req *aws.Request, output *AddApplicationCloudWatchLoggingOptionOutput) {
+	op := &aws.Operation{
 		Name:       opAddApplicationCloudWatchLoggingOption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -96,7 +95,7 @@ func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOption(input *AddAppli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionWithContext(ctx aws.Context, input *AddApplicationCloudWatchLoggingOptionInput, opts ...request.Option) (*AddApplicationCloudWatchLoggingOptionOutput, error) {
+func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionWithContext(ctx aws.Context, input *AddApplicationCloudWatchLoggingOptionInput, opts ...aws.Option) (*AddApplicationCloudWatchLoggingOptionOutput, error) {
 	req, out := c.AddApplicationCloudWatchLoggingOptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -105,7 +104,7 @@ func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionWithContext(ctx 
 
 const opAddApplicationInput = "AddApplicationInput"
 
-// AddApplicationInputRequest generates a "aws/request.Request" representing the
+// AddApplicationInputRequest generates a "aws.Request" representing the
 // client's request for the AddApplicationInput operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -129,8 +128,8 @@ const opAddApplicationInput = "AddApplicationInput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInput
-func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInputInput) (req *request.Request, output *AddApplicationInputOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInputInput) (req *aws.Request, output *AddApplicationInputOutput) {
+	op := &aws.Operation{
 		Name:       opAddApplicationInput,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -202,7 +201,7 @@ func (c *KinesisAnalytics) AddApplicationInput(input *AddApplicationInputInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationInputWithContext(ctx aws.Context, input *AddApplicationInputInput, opts ...request.Option) (*AddApplicationInputOutput, error) {
+func (c *KinesisAnalytics) AddApplicationInputWithContext(ctx aws.Context, input *AddApplicationInputInput, opts ...aws.Option) (*AddApplicationInputOutput, error) {
 	req, out := c.AddApplicationInputRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -211,7 +210,7 @@ func (c *KinesisAnalytics) AddApplicationInputWithContext(ctx aws.Context, input
 
 const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcessingConfiguration"
 
-// AddApplicationInputProcessingConfigurationRequest generates a "aws/request.Request" representing the
+// AddApplicationInputProcessingConfigurationRequest generates a "aws.Request" representing the
 // client's request for the AddApplicationInputProcessingConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -235,8 +234,8 @@ const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcess
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputProcessingConfiguration
-func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(input *AddApplicationInputProcessingConfigurationInput) (req *request.Request, output *AddApplicationInputProcessingConfigurationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(input *AddApplicationInputProcessingConfigurationInput) (req *aws.Request, output *AddApplicationInputProcessingConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opAddApplicationInputProcessingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -294,7 +293,7 @@ func (c *KinesisAnalytics) AddApplicationInputProcessingConfiguration(input *Add
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationWithContext(ctx aws.Context, input *AddApplicationInputProcessingConfigurationInput, opts ...request.Option) (*AddApplicationInputProcessingConfigurationOutput, error) {
+func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationWithContext(ctx aws.Context, input *AddApplicationInputProcessingConfigurationInput, opts ...aws.Option) (*AddApplicationInputProcessingConfigurationOutput, error) {
 	req, out := c.AddApplicationInputProcessingConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -303,7 +302,7 @@ func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationWithContext
 
 const opAddApplicationOutput = "AddApplicationOutput"
 
-// AddApplicationOutputRequest generates a "aws/request.Request" representing the
+// AddApplicationOutputRequest generates a "aws.Request" representing the
 // client's request for the AddApplicationOutput operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -327,8 +326,8 @@ const opAddApplicationOutput = "AddApplicationOutput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutput
-func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutputInput) (req *request.Request, output *AddApplicationOutputOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutputInput) (req *aws.Request, output *AddApplicationOutputOutput) {
+	op := &aws.Operation{
 		Name:       opAddApplicationOutput,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -406,7 +405,7 @@ func (c *KinesisAnalytics) AddApplicationOutput(input *AddApplicationOutputInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationOutputWithContext(ctx aws.Context, input *AddApplicationOutputInput, opts ...request.Option) (*AddApplicationOutputOutput, error) {
+func (c *KinesisAnalytics) AddApplicationOutputWithContext(ctx aws.Context, input *AddApplicationOutputInput, opts ...aws.Option) (*AddApplicationOutputOutput, error) {
 	req, out := c.AddApplicationOutputRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -415,7 +414,7 @@ func (c *KinesisAnalytics) AddApplicationOutputWithContext(ctx aws.Context, inpu
 
 const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
 
-// AddApplicationReferenceDataSourceRequest generates a "aws/request.Request" representing the
+// AddApplicationReferenceDataSourceRequest generates a "aws.Request" representing the
 // client's request for the AddApplicationReferenceDataSource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -439,8 +438,8 @@ const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSource
-func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddApplicationReferenceDataSourceInput) (req *request.Request, output *AddApplicationReferenceDataSourceOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddApplicationReferenceDataSourceInput) (req *aws.Request, output *AddApplicationReferenceDataSourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddApplicationReferenceDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -510,7 +509,7 @@ func (c *KinesisAnalytics) AddApplicationReferenceDataSource(input *AddApplicati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) AddApplicationReferenceDataSourceWithContext(ctx aws.Context, input *AddApplicationReferenceDataSourceInput, opts ...request.Option) (*AddApplicationReferenceDataSourceOutput, error) {
+func (c *KinesisAnalytics) AddApplicationReferenceDataSourceWithContext(ctx aws.Context, input *AddApplicationReferenceDataSourceInput, opts ...aws.Option) (*AddApplicationReferenceDataSourceOutput, error) {
 	req, out := c.AddApplicationReferenceDataSourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -519,7 +518,7 @@ func (c *KinesisAnalytics) AddApplicationReferenceDataSourceWithContext(ctx aws.
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws/request.Request" representing the
+// CreateApplicationRequest generates a "aws.Request" representing the
 // client's request for the CreateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -543,8 +542,8 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplication
-func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *CreateApplicationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *CreateApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -624,7 +623,7 @@ func (c *KinesisAnalytics) CreateApplication(input *CreateApplicationInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...request.Option) (*CreateApplicationOutput, error) {
+func (c *KinesisAnalytics) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*CreateApplicationOutput, error) {
 	req, out := c.CreateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -633,7 +632,7 @@ func (c *KinesisAnalytics) CreateApplicationWithContext(ctx aws.Context, input *
 
 const opDeleteApplication = "DeleteApplication"
 
-// DeleteApplicationRequest generates a "aws/request.Request" representing the
+// DeleteApplicationRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -657,8 +656,8 @@ const opDeleteApplication = "DeleteApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplication
-func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInput) (req *request.Request, output *DeleteApplicationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInput) (req *aws.Request, output *DeleteApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -716,7 +715,7 @@ func (c *KinesisAnalytics) DeleteApplication(input *DeleteApplicationInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...request.Option) (*DeleteApplicationOutput, error) {
+func (c *KinesisAnalytics) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...aws.Option) (*DeleteApplicationOutput, error) {
 	req, out := c.DeleteApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -725,7 +724,7 @@ func (c *KinesisAnalytics) DeleteApplicationWithContext(ctx aws.Context, input *
 
 const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchLoggingOption"
 
-// DeleteApplicationCloudWatchLoggingOptionRequest generates a "aws/request.Request" representing the
+// DeleteApplicationCloudWatchLoggingOptionRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplicationCloudWatchLoggingOption operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -749,8 +748,8 @@ const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchL
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOption
-func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteApplicationCloudWatchLoggingOptionInput) (req *request.Request, output *DeleteApplicationCloudWatchLoggingOptionOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input *DeleteApplicationCloudWatchLoggingOptionInput) (req *aws.Request, output *DeleteApplicationCloudWatchLoggingOptionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplicationCloudWatchLoggingOption,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -808,7 +807,7 @@ func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOption(input *Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionWithContext(ctx aws.Context, input *DeleteApplicationCloudWatchLoggingOptionInput, opts ...request.Option) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
+func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionWithContext(ctx aws.Context, input *DeleteApplicationCloudWatchLoggingOptionInput, opts ...aws.Option) (*DeleteApplicationCloudWatchLoggingOptionOutput, error) {
 	req, out := c.DeleteApplicationCloudWatchLoggingOptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -817,7 +816,7 @@ func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionWithContext(c
 
 const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputProcessingConfiguration"
 
-// DeleteApplicationInputProcessingConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteApplicationInputProcessingConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplicationInputProcessingConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -841,8 +840,8 @@ const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputP
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfiguration
-func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(input *DeleteApplicationInputProcessingConfigurationInput) (req *request.Request, output *DeleteApplicationInputProcessingConfigurationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(input *DeleteApplicationInputProcessingConfigurationInput) (req *aws.Request, output *DeleteApplicationInputProcessingConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplicationInputProcessingConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -898,7 +897,7 @@ func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfiguration(input *
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationWithContext(ctx aws.Context, input *DeleteApplicationInputProcessingConfigurationInput, opts ...request.Option) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
+func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationWithContext(ctx aws.Context, input *DeleteApplicationInputProcessingConfigurationInput, opts ...aws.Option) (*DeleteApplicationInputProcessingConfigurationOutput, error) {
 	req, out := c.DeleteApplicationInputProcessingConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -907,7 +906,7 @@ func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationWithCont
 
 const opDeleteApplicationOutput = "DeleteApplicationOutput"
 
-// DeleteApplicationOutputRequest generates a "aws/request.Request" representing the
+// DeleteApplicationOutputRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplicationOutput operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -931,8 +930,8 @@ const opDeleteApplicationOutput = "DeleteApplicationOutput"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutput
-func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicationOutputInput) (req *request.Request, output *DeleteApplicationOutputOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicationOutputInput) (req *aws.Request, output *DeleteApplicationOutputOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplicationOutput,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -993,7 +992,7 @@ func (c *KinesisAnalytics) DeleteApplicationOutput(input *DeleteApplicationOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationOutputWithContext(ctx aws.Context, input *DeleteApplicationOutputInput, opts ...request.Option) (*DeleteApplicationOutputOutput, error) {
+func (c *KinesisAnalytics) DeleteApplicationOutputWithContext(ctx aws.Context, input *DeleteApplicationOutputInput, opts ...aws.Option) (*DeleteApplicationOutputOutput, error) {
 	req, out := c.DeleteApplicationOutputRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1002,7 +1001,7 @@ func (c *KinesisAnalytics) DeleteApplicationOutputWithContext(ctx aws.Context, i
 
 const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSource"
 
-// DeleteApplicationReferenceDataSourceRequest generates a "aws/request.Request" representing the
+// DeleteApplicationReferenceDataSourceRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplicationReferenceDataSource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1026,8 +1025,8 @@ const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSource
-func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *DeleteApplicationReferenceDataSourceInput) (req *request.Request, output *DeleteApplicationReferenceDataSourceOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *DeleteApplicationReferenceDataSourceInput) (req *aws.Request, output *DeleteApplicationReferenceDataSourceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplicationReferenceDataSource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1091,7 +1090,7 @@ func (c *KinesisAnalytics) DeleteApplicationReferenceDataSource(input *DeleteApp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceWithContext(ctx aws.Context, input *DeleteApplicationReferenceDataSourceInput, opts ...request.Option) (*DeleteApplicationReferenceDataSourceOutput, error) {
+func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceWithContext(ctx aws.Context, input *DeleteApplicationReferenceDataSourceInput, opts ...aws.Option) (*DeleteApplicationReferenceDataSourceOutput, error) {
 	req, out := c.DeleteApplicationReferenceDataSourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1100,7 +1099,7 @@ func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceWithContext(ctx a
 
 const opDescribeApplication = "DescribeApplication"
 
-// DescribeApplicationRequest generates a "aws/request.Request" representing the
+// DescribeApplicationRequest generates a "aws.Request" representing the
 // client's request for the DescribeApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1124,8 +1123,8 @@ const opDescribeApplication = "DescribeApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplication
-func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplicationInput) (req *request.Request, output *DescribeApplicationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplicationInput) (req *aws.Request, output *DescribeApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1177,7 +1176,7 @@ func (c *KinesisAnalytics) DescribeApplication(input *DescribeApplicationInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DescribeApplicationWithContext(ctx aws.Context, input *DescribeApplicationInput, opts ...request.Option) (*DescribeApplicationOutput, error) {
+func (c *KinesisAnalytics) DescribeApplicationWithContext(ctx aws.Context, input *DescribeApplicationInput, opts ...aws.Option) (*DescribeApplicationOutput, error) {
 	req, out := c.DescribeApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1186,7 +1185,7 @@ func (c *KinesisAnalytics) DescribeApplicationWithContext(ctx aws.Context, input
 
 const opDiscoverInputSchema = "DiscoverInputSchema"
 
-// DiscoverInputSchemaRequest generates a "aws/request.Request" representing the
+// DiscoverInputSchemaRequest generates a "aws.Request" representing the
 // client's request for the DiscoverInputSchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1210,8 +1209,8 @@ const opDiscoverInputSchema = "DiscoverInputSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchema
-func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) (req *request.Request, output *DiscoverInputSchemaOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchemaInput) (req *aws.Request, output *DiscoverInputSchemaOutput) {
+	op := &aws.Operation{
 		Name:       opDiscoverInputSchema,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1282,7 +1281,7 @@ func (c *KinesisAnalytics) DiscoverInputSchema(input *DiscoverInputSchemaInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) DiscoverInputSchemaWithContext(ctx aws.Context, input *DiscoverInputSchemaInput, opts ...request.Option) (*DiscoverInputSchemaOutput, error) {
+func (c *KinesisAnalytics) DiscoverInputSchemaWithContext(ctx aws.Context, input *DiscoverInputSchemaInput, opts ...aws.Option) (*DiscoverInputSchemaOutput, error) {
 	req, out := c.DiscoverInputSchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1291,7 +1290,7 @@ func (c *KinesisAnalytics) DiscoverInputSchemaWithContext(ctx aws.Context, input
 
 const opListApplications = "ListApplications"
 
-// ListApplicationsRequest generates a "aws/request.Request" representing the
+// ListApplicationsRequest generates a "aws.Request" representing the
 // client's request for the ListApplications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1315,8 +1314,8 @@ const opListApplications = "ListApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplications
-func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput) (req *request.Request, output *ListApplicationsOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput) (req *aws.Request, output *ListApplicationsOutput) {
+	op := &aws.Operation{
 		Name:       opListApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1366,7 +1365,7 @@ func (c *KinesisAnalytics) ListApplications(input *ListApplicationsInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) ListApplicationsWithContext(ctx aws.Context, input *ListApplicationsInput, opts ...request.Option) (*ListApplicationsOutput, error) {
+func (c *KinesisAnalytics) ListApplicationsWithContext(ctx aws.Context, input *ListApplicationsInput, opts ...aws.Option) (*ListApplicationsOutput, error) {
 	req, out := c.ListApplicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1375,7 +1374,7 @@ func (c *KinesisAnalytics) ListApplicationsWithContext(ctx aws.Context, input *L
 
 const opStartApplication = "StartApplication"
 
-// StartApplicationRequest generates a "aws/request.Request" representing the
+// StartApplicationRequest generates a "aws.Request" representing the
 // client's request for the StartApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1399,8 +1398,8 @@ const opStartApplication = "StartApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplication
-func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput) (req *request.Request, output *StartApplicationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput) (req *aws.Request, output *StartApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opStartApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1468,7 +1467,7 @@ func (c *KinesisAnalytics) StartApplication(input *StartApplicationInput) (*Star
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) StartApplicationWithContext(ctx aws.Context, input *StartApplicationInput, opts ...request.Option) (*StartApplicationOutput, error) {
+func (c *KinesisAnalytics) StartApplicationWithContext(ctx aws.Context, input *StartApplicationInput, opts ...aws.Option) (*StartApplicationOutput, error) {
 	req, out := c.StartApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1477,7 +1476,7 @@ func (c *KinesisAnalytics) StartApplicationWithContext(ctx aws.Context, input *S
 
 const opStopApplication = "StopApplication"
 
-// StopApplicationRequest generates a "aws/request.Request" representing the
+// StopApplicationRequest generates a "aws.Request" representing the
 // client's request for the StopApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1501,8 +1500,8 @@ const opStopApplication = "StopApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplication
-func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) (req *request.Request, output *StopApplicationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) (req *aws.Request, output *StopApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opStopApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1557,7 +1556,7 @@ func (c *KinesisAnalytics) StopApplication(input *StopApplicationInput) (*StopAp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) StopApplicationWithContext(ctx aws.Context, input *StopApplicationInput, opts ...request.Option) (*StopApplicationOutput, error) {
+func (c *KinesisAnalytics) StopApplicationWithContext(ctx aws.Context, input *StopApplicationInput, opts ...aws.Option) (*StopApplicationOutput, error) {
 	req, out := c.StopApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1566,7 +1565,7 @@ func (c *KinesisAnalytics) StopApplicationWithContext(ctx aws.Context, input *St
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws/request.Request" representing the
+// UpdateApplicationRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1590,8 +1589,8 @@ const opUpdateApplication = "UpdateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplication
-func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *UpdateApplicationOutput) {
-	op := &request.Operation{
+func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *UpdateApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1658,7 +1657,7 @@ func (c *KinesisAnalytics) UpdateApplication(input *UpdateApplicationInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KinesisAnalytics) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...request.Option) (*UpdateApplicationOutput, error) {
+func (c *KinesisAnalytics) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*UpdateApplicationOutput, error) {
 	req, out := c.UpdateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1699,25 +1698,25 @@ func (s AddApplicationCloudWatchLoggingOptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationCloudWatchLoggingOptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddApplicationCloudWatchLoggingOptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationCloudWatchLoggingOptionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CloudWatchLoggingOption == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudWatchLoggingOption"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOption"))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.CloudWatchLoggingOption != nil {
 		if err := s.CloudWatchLoggingOption.Validate(); err != nil {
-			invalidParams.AddNested("CloudWatchLoggingOption", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudWatchLoggingOption", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1794,25 +1793,25 @@ func (s AddApplicationInputInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationInputInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddApplicationInputInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationInputInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.Input == nil {
-		invalidParams.Add(request.NewErrParamRequired("Input"))
+		invalidParams.Add(aws.NewErrParamRequired("Input"))
 	}
 	if s.Input != nil {
 		if err := s.Input.Validate(); err != nil {
-			invalidParams.AddNested("Input", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Input", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1897,31 +1896,31 @@ func (s AddApplicationInputProcessingConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationInputProcessingConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddApplicationInputProcessingConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationInputProcessingConfigurationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.InputId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputId"))
+		invalidParams.Add(aws.NewErrParamRequired("InputId"))
 	}
 	if s.InputId != nil && len(*s.InputId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputId", 1))
 	}
 	if s.InputProcessingConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputProcessingConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("InputProcessingConfiguration"))
 	}
 	if s.InputProcessingConfiguration != nil {
 		if err := s.InputProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("InputProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2008,25 +2007,25 @@ func (s AddApplicationOutputInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationOutputInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddApplicationOutputInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationOutputInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.Output == nil {
-		invalidParams.Add(request.NewErrParamRequired("Output"))
+		invalidParams.Add(aws.NewErrParamRequired("Output"))
 	}
 	if s.Output != nil {
 		if err := s.Output.Validate(); err != nil {
-			invalidParams.AddNested("Output", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Output", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2109,25 +2108,25 @@ func (s AddApplicationReferenceDataSourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddApplicationReferenceDataSourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddApplicationReferenceDataSourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddApplicationReferenceDataSourceInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.ReferenceDataSource == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReferenceDataSource"))
+		invalidParams.Add(aws.NewErrParamRequired("ReferenceDataSource"))
 	}
 	if s.ReferenceDataSource != nil {
 		if err := s.ReferenceDataSource.Validate(); err != nil {
-			invalidParams.AddNested("ReferenceDataSource", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ReferenceDataSource", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2392,14 +2391,14 @@ func (s ApplicationUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplicationUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplicationUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplicationUpdate"}
 	if s.CloudWatchLoggingOptionUpdates != nil {
 		for i, v := range s.CloudWatchLoggingOptionUpdates {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptionUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptionUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2409,7 +2408,7 @@ func (s *ApplicationUpdate) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2419,7 +2418,7 @@ func (s *ApplicationUpdate) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OutputUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2429,7 +2428,7 @@ func (s *ApplicationUpdate) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReferenceDataSourceUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReferenceDataSourceUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2506,18 +2505,18 @@ func (s CSVMappingParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CSVMappingParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CSVMappingParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "CSVMappingParameters"}
 	if s.RecordColumnDelimiter == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordColumnDelimiter"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordColumnDelimiter"))
 	}
 	if s.RecordColumnDelimiter != nil && len(*s.RecordColumnDelimiter) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RecordColumnDelimiter", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RecordColumnDelimiter", 1))
 	}
 	if s.RecordRowDelimiter == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordRowDelimiter"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordRowDelimiter"))
 	}
 	if s.RecordRowDelimiter != nil && len(*s.RecordRowDelimiter) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RecordRowDelimiter", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RecordRowDelimiter", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2569,18 +2568,18 @@ func (s CloudWatchLoggingOption) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchLoggingOption) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudWatchLoggingOption"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchLoggingOption"}
 	if s.LogStreamARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogStreamARN"))
+		invalidParams.Add(aws.NewErrParamRequired("LogStreamARN"))
 	}
 	if s.LogStreamARN != nil && len(*s.LogStreamARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2681,18 +2680,18 @@ func (s CloudWatchLoggingOptionUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchLoggingOptionUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudWatchLoggingOptionUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchLoggingOptionUpdate"}
 	if s.CloudWatchLoggingOptionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudWatchLoggingOptionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOptionId"))
 	}
 	if s.CloudWatchLoggingOptionId != nil && len(*s.CloudWatchLoggingOptionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
 	}
 	if s.LogStreamARNUpdate != nil && len(*s.LogStreamARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LogStreamARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LogStreamARNUpdate", 1))
 	}
 	if s.RoleARNUpdate != nil && len(*s.RoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2802,12 +2801,12 @@ func (s CreateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CloudWatchLoggingOptions != nil {
 		for i, v := range s.CloudWatchLoggingOptions {
@@ -2815,7 +2814,7 @@ func (s *CreateApplicationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CloudWatchLoggingOptions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2825,7 +2824,7 @@ func (s *CreateApplicationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Inputs", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Inputs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2835,7 +2834,7 @@ func (s *CreateApplicationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Outputs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2944,24 +2943,24 @@ func (s DeleteApplicationCloudWatchLoggingOptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationCloudWatchLoggingOptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationCloudWatchLoggingOptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationCloudWatchLoggingOptionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CloudWatchLoggingOptionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudWatchLoggingOptionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLoggingOptionId"))
 	}
 	if s.CloudWatchLoggingOptionId != nil && len(*s.CloudWatchLoggingOptionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLoggingOptionId", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3030,15 +3029,15 @@ func (s DeleteApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CreateTimestamp == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreateTimestamp"))
+		invalidParams.Add(aws.NewErrParamRequired("CreateTimestamp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3093,24 +3092,24 @@ func (s DeleteApplicationInputProcessingConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInputProcessingConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationInputProcessingConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInputProcessingConfigurationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.InputId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputId"))
+		invalidParams.Add(aws.NewErrParamRequired("InputId"))
 	}
 	if s.InputId != nil && len(*s.InputId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3206,24 +3205,24 @@ func (s DeleteApplicationOutputInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationOutputInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationOutputInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationOutputInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.OutputId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputId"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputId"))
 	}
 	if s.OutputId != nil && len(*s.OutputId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3302,24 +3301,24 @@ func (s DeleteApplicationReferenceDataSourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationReferenceDataSourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationReferenceDataSourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationReferenceDataSourceInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.ReferenceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReferenceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReferenceId"))
 	}
 	if s.ReferenceId != nil && len(*s.ReferenceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ReferenceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ReferenceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3383,12 +3382,12 @@ func (s DescribeApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3491,21 +3490,21 @@ func (s DiscoverInputSchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DiscoverInputSchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DiscoverInputSchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DiscoverInputSchemaInput"}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.InputProcessingConfiguration != nil {
 		if err := s.InputProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("InputProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Configuration != nil {
 		if err := s.S3Configuration.Validate(); err != nil {
-			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Configuration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3665,39 +3664,39 @@ func (s Input) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Input) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Input"}
+	invalidParams := aws.ErrInvalidParams{Context: "Input"}
 	if s.InputSchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputSchema"))
+		invalidParams.Add(aws.NewErrParamRequired("InputSchema"))
 	}
 	if s.NamePrefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("NamePrefix"))
+		invalidParams.Add(aws.NewErrParamRequired("NamePrefix"))
 	}
 	if s.NamePrefix != nil && len(*s.NamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NamePrefix", 1))
 	}
 	if s.InputParallelism != nil {
 		if err := s.InputParallelism.Validate(); err != nil {
-			invalidParams.AddNested("InputParallelism", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputParallelism", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputProcessingConfiguration != nil {
 		if err := s.InputProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("InputProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputSchema != nil {
 		if err := s.InputSchema.Validate(); err != nil {
-			invalidParams.AddNested("InputSchema", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputSchema", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisFirehoseInput != nil {
 		if err := s.KinesisFirehoseInput.Validate(); err != nil {
-			invalidParams.AddNested("KinesisFirehoseInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisFirehoseInput", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisStreamsInput != nil {
 		if err := s.KinesisStreamsInput.Validate(); err != nil {
-			invalidParams.AddNested("KinesisStreamsInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisStreamsInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3774,15 +3773,15 @@ func (s InputConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputConfiguration"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.InputStartingPositionConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputStartingPositionConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("InputStartingPositionConfiguration"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3942,18 +3941,18 @@ func (s InputLambdaProcessor) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputLambdaProcessor) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputLambdaProcessor"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputLambdaProcessor"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4037,12 +4036,12 @@ func (s InputLambdaProcessorUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputLambdaProcessorUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputLambdaProcessorUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputLambdaProcessorUpdate"}
 	if s.ResourceARNUpdate != nil && len(*s.ResourceARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNUpdate", 1))
 	}
 	if s.RoleARNUpdate != nil && len(*s.RoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4087,9 +4086,9 @@ func (s InputParallelism) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputParallelism) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputParallelism"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputParallelism"}
 	if s.Count != nil && *s.Count < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Count", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Count", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4125,9 +4124,9 @@ func (s InputParallelismUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputParallelismUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputParallelismUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputParallelismUpdate"}
 	if s.CountUpdate != nil && *s.CountUpdate < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CountUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CountUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4168,13 +4167,13 @@ func (s InputProcessingConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputProcessingConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputProcessingConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputProcessingConfiguration"}
 	if s.InputLambdaProcessor == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputLambdaProcessor"))
+		invalidParams.Add(aws.NewErrParamRequired("InputLambdaProcessor"))
 	}
 	if s.InputLambdaProcessor != nil {
 		if err := s.InputLambdaProcessor.Validate(); err != nil {
-			invalidParams.AddNested("InputLambdaProcessor", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputLambdaProcessor", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4239,13 +4238,13 @@ func (s InputProcessingConfigurationUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputProcessingConfigurationUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputProcessingConfigurationUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputProcessingConfigurationUpdate"}
 	if s.InputLambdaProcessorUpdate == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputLambdaProcessorUpdate"))
+		invalidParams.Add(aws.NewErrParamRequired("InputLambdaProcessorUpdate"))
 	}
 	if s.InputLambdaProcessorUpdate != nil {
 		if err := s.InputLambdaProcessorUpdate.Validate(); err != nil {
-			invalidParams.AddNested("InputLambdaProcessorUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputLambdaProcessorUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4291,9 +4290,9 @@ func (s InputSchemaUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputSchemaUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputSchemaUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputSchemaUpdate"}
 	if s.RecordColumnUpdates != nil && len(s.RecordColumnUpdates) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RecordColumnUpdates", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RecordColumnUpdates", 1))
 	}
 	if s.RecordColumnUpdates != nil {
 		for i, v := range s.RecordColumnUpdates {
@@ -4301,13 +4300,13 @@ func (s *InputSchemaUpdate) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordColumnUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordColumnUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.RecordFormatUpdate != nil {
 		if err := s.RecordFormatUpdate.Validate(); err != nil {
-			invalidParams.AddNested("RecordFormatUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RecordFormatUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4419,39 +4418,39 @@ func (s InputUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputUpdate"}
 	if s.InputId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputId"))
+		invalidParams.Add(aws.NewErrParamRequired("InputId"))
 	}
 	if s.InputId != nil && len(*s.InputId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputId", 1))
 	}
 	if s.NamePrefixUpdate != nil && len(*s.NamePrefixUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NamePrefixUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NamePrefixUpdate", 1))
 	}
 	if s.InputParallelismUpdate != nil {
 		if err := s.InputParallelismUpdate.Validate(); err != nil {
-			invalidParams.AddNested("InputParallelismUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputParallelismUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputProcessingConfigurationUpdate != nil {
 		if err := s.InputProcessingConfigurationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("InputProcessingConfigurationUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputProcessingConfigurationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputSchemaUpdate != nil {
 		if err := s.InputSchemaUpdate.Validate(); err != nil {
-			invalidParams.AddNested("InputSchemaUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputSchemaUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisFirehoseInputUpdate != nil {
 		if err := s.KinesisFirehoseInputUpdate.Validate(); err != nil {
-			invalidParams.AddNested("KinesisFirehoseInputUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisFirehoseInputUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisStreamsInputUpdate != nil {
 		if err := s.KinesisStreamsInputUpdate.Validate(); err != nil {
-			invalidParams.AddNested("KinesisStreamsInputUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisStreamsInputUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4527,12 +4526,12 @@ func (s JSONMappingParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JSONMappingParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "JSONMappingParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "JSONMappingParameters"}
 	if s.RecordRowPath == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordRowPath"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordRowPath"))
 	}
 	if s.RecordRowPath != nil && len(*s.RecordRowPath) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RecordRowPath", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RecordRowPath", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4580,18 +4579,18 @@ func (s KinesisFirehoseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisFirehoseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseInput"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4674,12 +4673,12 @@ func (s KinesisFirehoseInputUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseInputUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisFirehoseInputUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseInputUpdate"}
 	if s.ResourceARNUpdate != nil && len(*s.ResourceARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNUpdate", 1))
 	}
 	if s.RoleARNUpdate != nil && len(*s.RoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4733,18 +4732,18 @@ func (s KinesisFirehoseOutput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseOutput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisFirehoseOutput"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseOutput"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4829,12 +4828,12 @@ func (s KinesisFirehoseOutputUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseOutputUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisFirehoseOutputUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseOutputUpdate"}
 	if s.ResourceARNUpdate != nil && len(*s.ResourceARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNUpdate", 1))
 	}
 	if s.RoleARNUpdate != nil && len(*s.RoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4887,18 +4886,18 @@ func (s KinesisStreamsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisStreamsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamsInput"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4982,12 +4981,12 @@ func (s KinesisStreamsInputUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamsInputUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisStreamsInputUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamsInputUpdate"}
 	if s.ResourceARNUpdate != nil && len(*s.ResourceARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNUpdate", 1))
 	}
 	if s.RoleARNUpdate != nil && len(*s.RoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5041,18 +5040,18 @@ func (s KinesisStreamsOutput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamsOutput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisStreamsOutput"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamsOutput"}
 	if s.ResourceARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARN"))
 	}
 	if s.ResourceARN != nil && len(*s.ResourceARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5137,12 +5136,12 @@ func (s KinesisStreamsOutputUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamsOutputUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisStreamsOutputUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamsOutputUpdate"}
 	if s.ResourceARNUpdate != nil && len(*s.ResourceARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNUpdate", 1))
 	}
 	if s.RoleARNUpdate != nil && len(*s.RoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5189,12 +5188,12 @@ func (s ListApplicationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListApplicationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListApplicationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListApplicationsInput"}
 	if s.ExclusiveStartApplicationName != nil && len(*s.ExclusiveStartApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartApplicationName", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5281,15 +5280,15 @@ func (s MappingParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MappingParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MappingParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "MappingParameters"}
 	if s.CSVMappingParameters != nil {
 		if err := s.CSVMappingParameters.Validate(); err != nil {
-			invalidParams.AddNested("CSVMappingParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CSVMappingParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.JSONMappingParameters != nil {
 		if err := s.JSONMappingParameters.Validate(); err != nil {
-			invalidParams.AddNested("JSONMappingParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("JSONMappingParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5352,24 +5351,24 @@ func (s Output) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Output) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Output"}
+	invalidParams := aws.ErrInvalidParams{Context: "Output"}
 	if s.DestinationSchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationSchema"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationSchema"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.KinesisFirehoseOutput != nil {
 		if err := s.KinesisFirehoseOutput.Validate(); err != nil {
-			invalidParams.AddNested("KinesisFirehoseOutput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisFirehoseOutput", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisStreamsOutput != nil {
 		if err := s.KinesisStreamsOutput.Validate(); err != nil {
-			invalidParams.AddNested("KinesisStreamsOutput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisStreamsOutput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5506,24 +5505,24 @@ func (s OutputUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OutputUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OutputUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "OutputUpdate"}
 	if s.NameUpdate != nil && len(*s.NameUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NameUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NameUpdate", 1))
 	}
 	if s.OutputId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputId"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputId"))
 	}
 	if s.OutputId != nil && len(*s.OutputId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputId", 1))
 	}
 	if s.KinesisFirehoseOutputUpdate != nil {
 		if err := s.KinesisFirehoseOutputUpdate.Validate(); err != nil {
-			invalidParams.AddNested("KinesisFirehoseOutputUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisFirehoseOutputUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisStreamsOutputUpdate != nil {
 		if err := s.KinesisStreamsOutputUpdate.Validate(); err != nil {
-			invalidParams.AddNested("KinesisStreamsOutputUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisStreamsOutputUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5599,15 +5598,15 @@ func (s RecordColumn) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordColumn) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RecordColumn"}
+	invalidParams := aws.ErrInvalidParams{Context: "RecordColumn"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SqlType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SqlType"))
+		invalidParams.Add(aws.NewErrParamRequired("SqlType"))
 	}
 	if s.SqlType != nil && len(*s.SqlType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SqlType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SqlType", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5664,13 +5663,13 @@ func (s RecordFormat) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecordFormat) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RecordFormat"}
+	invalidParams := aws.ErrInvalidParams{Context: "RecordFormat"}
 	if s.RecordFormatType == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordFormatType"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordFormatType"))
 	}
 	if s.MappingParameters != nil {
 		if err := s.MappingParameters.Validate(); err != nil {
-			invalidParams.AddNested("MappingParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("MappingParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5733,24 +5732,24 @@ func (s ReferenceDataSource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReferenceDataSource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReferenceDataSource"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReferenceDataSource"}
 	if s.ReferenceSchema == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReferenceSchema"))
+		invalidParams.Add(aws.NewErrParamRequired("ReferenceSchema"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.ReferenceSchema != nil {
 		if err := s.ReferenceSchema.Validate(); err != nil {
-			invalidParams.AddNested("ReferenceSchema", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ReferenceSchema", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3ReferenceDataSource != nil {
 		if err := s.S3ReferenceDataSource.Validate(); err != nil {
-			invalidParams.AddNested("S3ReferenceDataSource", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3ReferenceDataSource", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5883,24 +5882,24 @@ func (s ReferenceDataSourceUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReferenceDataSourceUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReferenceDataSourceUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReferenceDataSourceUpdate"}
 	if s.ReferenceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReferenceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReferenceId"))
 	}
 	if s.ReferenceId != nil && len(*s.ReferenceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ReferenceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ReferenceId", 1))
 	}
 	if s.TableNameUpdate != nil && len(*s.TableNameUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableNameUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableNameUpdate", 1))
 	}
 	if s.ReferenceSchemaUpdate != nil {
 		if err := s.ReferenceSchemaUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ReferenceSchemaUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ReferenceSchemaUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3ReferenceDataSourceUpdate != nil {
 		if err := s.S3ReferenceDataSourceUpdate.Validate(); err != nil {
-			invalidParams.AddNested("S3ReferenceDataSourceUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3ReferenceDataSourceUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5960,24 +5959,24 @@ func (s S3Configuration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Configuration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Configuration"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Configuration"}
 	if s.BucketARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketARN"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
 	if s.FileKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileKey"))
+		invalidParams.Add(aws.NewErrParamRequired("FileKey"))
 	}
 	if s.FileKey != nil && len(*s.FileKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FileKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FileKey", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6046,24 +6045,24 @@ func (s S3ReferenceDataSource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3ReferenceDataSource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3ReferenceDataSource"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3ReferenceDataSource"}
 	if s.BucketARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketARN"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
 	if s.FileKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileKey"))
+		invalidParams.Add(aws.NewErrParamRequired("FileKey"))
 	}
 	if s.FileKey != nil && len(*s.FileKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FileKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FileKey", 1))
 	}
 	if s.ReferenceRoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReferenceRoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ReferenceRoleARN"))
 	}
 	if s.ReferenceRoleARN != nil && len(*s.ReferenceRoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ReferenceRoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ReferenceRoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6171,15 +6170,15 @@ func (s S3ReferenceDataSourceUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3ReferenceDataSourceUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3ReferenceDataSourceUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3ReferenceDataSourceUpdate"}
 	if s.BucketARNUpdate != nil && len(*s.BucketARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARNUpdate", 1))
 	}
 	if s.FileKeyUpdate != nil && len(*s.FileKeyUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FileKeyUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FileKeyUpdate", 1))
 	}
 	if s.ReferenceRoleARNUpdate != nil && len(*s.ReferenceRoleARNUpdate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ReferenceRoleARNUpdate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ReferenceRoleARNUpdate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6239,15 +6238,15 @@ func (s SourceSchema) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceSchema) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SourceSchema"}
+	invalidParams := aws.ErrInvalidParams{Context: "SourceSchema"}
 	if s.RecordColumns == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordColumns"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordColumns"))
 	}
 	if s.RecordColumns != nil && len(s.RecordColumns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RecordColumns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RecordColumns", 1))
 	}
 	if s.RecordFormat == nil {
-		invalidParams.Add(request.NewErrParamRequired("RecordFormat"))
+		invalidParams.Add(aws.NewErrParamRequired("RecordFormat"))
 	}
 	if s.RecordColumns != nil {
 		for i, v := range s.RecordColumns {
@@ -6255,13 +6254,13 @@ func (s *SourceSchema) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordColumns", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RecordColumns", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.RecordFormat != nil {
 		if err := s.RecordFormat.Validate(); err != nil {
-			invalidParams.AddNested("RecordFormat", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RecordFormat", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6319,15 +6318,15 @@ func (s StartApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.InputConfigurations == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputConfigurations"))
+		invalidParams.Add(aws.NewErrParamRequired("InputConfigurations"))
 	}
 	if s.InputConfigurations != nil {
 		for i, v := range s.InputConfigurations {
@@ -6335,7 +6334,7 @@ func (s *StartApplicationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InputConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6395,12 +6394,12 @@ func (s StopApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6463,25 +6462,25 @@ func (s UpdateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.ApplicationUpdate == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationUpdate"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationUpdate"))
 	}
 	if s.CurrentApplicationVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentApplicationVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if s.CurrentApplicationVersionId != nil && *s.CurrentApplicationVersionId < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("CurrentApplicationVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("CurrentApplicationVersionId", 1))
 	}
 	if s.ApplicationUpdate != nil {
 		if err := s.ApplicationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ApplicationUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ApplicationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 

@@ -8,14 +8,14 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
 var svc = func() *sqs.SQS {
-	s := sqs.New(unit.Session, &aws.Config{
+	s := sqs.New(unit.Config, &aws.Config{
 		DisableParamValidation: aws.Bool(true),
 	})
 	s.Handlers.Send.Clear()
@@ -66,7 +66,7 @@ func TestSendMessageChecksumInvalid(t *testing.T) {
 }
 
 func TestSendMessageChecksumInvalidNoValidation(t *testing.T) {
-	s := sqs.New(unit.Session, &aws.Config{
+	s := sqs.New(unit.Config, &aws.Config{
 		DisableParamValidation:  aws.Bool(true),
 		DisableComputeChecksums: aws.Bool(true),
 	})

@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opAbortEnvironmentUpdate = "AbortEnvironmentUpdate"
 
-// AbortEnvironmentUpdateRequest generates a "aws/request.Request" representing the
+// AbortEnvironmentUpdateRequest generates a "aws.Request" representing the
 // client's request for the AbortEnvironmentUpdate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAbortEnvironmentUpdate = "AbortEnvironmentUpdate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdate
-func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironmentUpdateInput) (req *request.Request, output *AbortEnvironmentUpdateOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironmentUpdateInput) (req *aws.Request, output *AbortEnvironmentUpdateOutput) {
+	op := &aws.Operation{
 		Name:       opAbortEnvironmentUpdate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -89,7 +88,7 @@ func (c *ElasticBeanstalk) AbortEnvironmentUpdate(input *AbortEnvironmentUpdateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) AbortEnvironmentUpdateWithContext(ctx aws.Context, input *AbortEnvironmentUpdateInput, opts ...request.Option) (*AbortEnvironmentUpdateOutput, error) {
+func (c *ElasticBeanstalk) AbortEnvironmentUpdateWithContext(ctx aws.Context, input *AbortEnvironmentUpdateInput, opts ...aws.Option) (*AbortEnvironmentUpdateOutput, error) {
 	req, out := c.AbortEnvironmentUpdateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -98,7 +97,7 @@ func (c *ElasticBeanstalk) AbortEnvironmentUpdateWithContext(ctx aws.Context, in
 
 const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
 
-// ApplyEnvironmentManagedActionRequest generates a "aws/request.Request" representing the
+// ApplyEnvironmentManagedActionRequest generates a "aws.Request" representing the
 // client's request for the ApplyEnvironmentManagedAction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -122,8 +121,8 @@ const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedAction
-func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentManagedActionInput) (req *request.Request, output *ApplyEnvironmentManagedActionOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvironmentManagedActionInput) (req *aws.Request, output *ApplyEnvironmentManagedActionOutput) {
+	op := &aws.Operation{
 		Name:       opApplyEnvironmentManagedAction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -173,7 +172,7 @@ func (c *ElasticBeanstalk) ApplyEnvironmentManagedAction(input *ApplyEnvironment
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionWithContext(ctx aws.Context, input *ApplyEnvironmentManagedActionInput, opts ...request.Option) (*ApplyEnvironmentManagedActionOutput, error) {
+func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionWithContext(ctx aws.Context, input *ApplyEnvironmentManagedActionInput, opts ...aws.Option) (*ApplyEnvironmentManagedActionOutput, error) {
 	req, out := c.ApplyEnvironmentManagedActionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -182,7 +181,7 @@ func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionWithContext(ctx aws.Cont
 
 const opCheckDNSAvailability = "CheckDNSAvailability"
 
-// CheckDNSAvailabilityRequest generates a "aws/request.Request" representing the
+// CheckDNSAvailabilityRequest generates a "aws.Request" representing the
 // client's request for the CheckDNSAvailability operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -206,8 +205,8 @@ const opCheckDNSAvailability = "CheckDNSAvailability"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailability
-func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) (req *request.Request, output *CheckDNSAvailabilityOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabilityInput) (req *aws.Request, output *CheckDNSAvailabilityOutput) {
+	op := &aws.Operation{
 		Name:       opCheckDNSAvailability,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -247,7 +246,7 @@ func (c *ElasticBeanstalk) CheckDNSAvailability(input *CheckDNSAvailabilityInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CheckDNSAvailabilityWithContext(ctx aws.Context, input *CheckDNSAvailabilityInput, opts ...request.Option) (*CheckDNSAvailabilityOutput, error) {
+func (c *ElasticBeanstalk) CheckDNSAvailabilityWithContext(ctx aws.Context, input *CheckDNSAvailabilityInput, opts ...aws.Option) (*CheckDNSAvailabilityOutput, error) {
 	req, out := c.CheckDNSAvailabilityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -256,7 +255,7 @@ func (c *ElasticBeanstalk) CheckDNSAvailabilityWithContext(ctx aws.Context, inpu
 
 const opComposeEnvironments = "ComposeEnvironments"
 
-// ComposeEnvironmentsRequest generates a "aws/request.Request" representing the
+// ComposeEnvironmentsRequest generates a "aws.Request" representing the
 // client's request for the ComposeEnvironments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -280,8 +279,8 @@ const opComposeEnvironments = "ComposeEnvironments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments
-func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironmentsInput) (req *request.Request, output *EnvironmentDescriptionsMessage) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironmentsInput) (req *aws.Request, output *EnvironmentDescriptionsMessage) {
+	op := &aws.Operation{
 		Name:       opComposeEnvironments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -336,7 +335,7 @@ func (c *ElasticBeanstalk) ComposeEnvironments(input *ComposeEnvironmentsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) ComposeEnvironmentsWithContext(ctx aws.Context, input *ComposeEnvironmentsInput, opts ...request.Option) (*EnvironmentDescriptionsMessage, error) {
+func (c *ElasticBeanstalk) ComposeEnvironmentsWithContext(ctx aws.Context, input *ComposeEnvironmentsInput, opts ...aws.Option) (*EnvironmentDescriptionsMessage, error) {
 	req, out := c.ComposeEnvironmentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -345,7 +344,7 @@ func (c *ElasticBeanstalk) ComposeEnvironmentsWithContext(ctx aws.Context, input
 
 const opCreateApplication = "CreateApplication"
 
-// CreateApplicationRequest generates a "aws/request.Request" representing the
+// CreateApplicationRequest generates a "aws.Request" representing the
 // client's request for the CreateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -369,8 +368,8 @@ const opCreateApplication = "CreateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplication
-func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInput) (req *request.Request, output *ApplicationDescriptionMessage) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInput) (req *aws.Request, output *ApplicationDescriptionMessage) {
+	op := &aws.Operation{
 		Name:       opCreateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -416,7 +415,7 @@ func (c *ElasticBeanstalk) CreateApplication(input *CreateApplicationInput) (*Ap
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...request.Option) (*ApplicationDescriptionMessage, error) {
+func (c *ElasticBeanstalk) CreateApplicationWithContext(ctx aws.Context, input *CreateApplicationInput, opts ...aws.Option) (*ApplicationDescriptionMessage, error) {
 	req, out := c.CreateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -425,7 +424,7 @@ func (c *ElasticBeanstalk) CreateApplicationWithContext(ctx aws.Context, input *
 
 const opCreateApplicationVersion = "CreateApplicationVersion"
 
-// CreateApplicationVersionRequest generates a "aws/request.Request" representing the
+// CreateApplicationVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateApplicationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -449,8 +448,8 @@ const opCreateApplicationVersion = "CreateApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersion
-func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicationVersionInput) (req *request.Request, output *ApplicationVersionDescriptionMessage) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicationVersionInput) (req *aws.Request, output *ApplicationVersionDescriptionMessage) {
+	op := &aws.Operation{
 		Name:       opCreateApplicationVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -531,7 +530,7 @@ func (c *ElasticBeanstalk) CreateApplicationVersion(input *CreateApplicationVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateApplicationVersionWithContext(ctx aws.Context, input *CreateApplicationVersionInput, opts ...request.Option) (*ApplicationVersionDescriptionMessage, error) {
+func (c *ElasticBeanstalk) CreateApplicationVersionWithContext(ctx aws.Context, input *CreateApplicationVersionInput, opts ...aws.Option) (*ApplicationVersionDescriptionMessage, error) {
 	req, out := c.CreateApplicationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -540,7 +539,7 @@ func (c *ElasticBeanstalk) CreateApplicationVersionWithContext(ctx aws.Context, 
 
 const opCreateConfigurationTemplate = "CreateConfigurationTemplate"
 
-// CreateConfigurationTemplateRequest generates a "aws/request.Request" representing the
+// CreateConfigurationTemplateRequest generates a "aws.Request" representing the
 // client's request for the CreateConfigurationTemplate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -564,8 +563,8 @@ const opCreateConfigurationTemplate = "CreateConfigurationTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplate
-func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfigurationTemplateInput) (req *request.Request, output *ConfigurationSettingsDescription) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfigurationTemplateInput) (req *aws.Request, output *ConfigurationSettingsDescription) {
+	op := &aws.Operation{
 		Name:       opCreateConfigurationTemplate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -627,7 +626,7 @@ func (c *ElasticBeanstalk) CreateConfigurationTemplate(input *CreateConfiguratio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateConfigurationTemplateWithContext(ctx aws.Context, input *CreateConfigurationTemplateInput, opts ...request.Option) (*ConfigurationSettingsDescription, error) {
+func (c *ElasticBeanstalk) CreateConfigurationTemplateWithContext(ctx aws.Context, input *CreateConfigurationTemplateInput, opts ...aws.Option) (*ConfigurationSettingsDescription, error) {
 	req, out := c.CreateConfigurationTemplateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -636,7 +635,7 @@ func (c *ElasticBeanstalk) CreateConfigurationTemplateWithContext(ctx aws.Contex
 
 const opCreateEnvironment = "CreateEnvironment"
 
-// CreateEnvironmentRequest generates a "aws/request.Request" representing the
+// CreateEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the CreateEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -660,8 +659,8 @@ const opCreateEnvironment = "CreateEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment
-func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInput) (req *request.Request, output *EnvironmentDescription) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInput) (req *aws.Request, output *EnvironmentDescription) {
+	op := &aws.Operation{
 		Name:       opCreateEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -711,7 +710,7 @@ func (c *ElasticBeanstalk) CreateEnvironment(input *CreateEnvironmentInput) (*En
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateEnvironmentWithContext(ctx aws.Context, input *CreateEnvironmentInput, opts ...request.Option) (*EnvironmentDescription, error) {
+func (c *ElasticBeanstalk) CreateEnvironmentWithContext(ctx aws.Context, input *CreateEnvironmentInput, opts ...aws.Option) (*EnvironmentDescription, error) {
 	req, out := c.CreateEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -720,7 +719,7 @@ func (c *ElasticBeanstalk) CreateEnvironmentWithContext(ctx aws.Context, input *
 
 const opCreatePlatformVersion = "CreatePlatformVersion"
 
-// CreatePlatformVersionRequest generates a "aws/request.Request" representing the
+// CreatePlatformVersionRequest generates a "aws.Request" representing the
 // client's request for the CreatePlatformVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -744,8 +743,8 @@ const opCreatePlatformVersion = "CreatePlatformVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersion
-func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVersionInput) (req *request.Request, output *CreatePlatformVersionOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVersionInput) (req *aws.Request, output *CreatePlatformVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePlatformVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -798,7 +797,7 @@ func (c *ElasticBeanstalk) CreatePlatformVersion(input *CreatePlatformVersionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CreatePlatformVersionWithContext(ctx aws.Context, input *CreatePlatformVersionInput, opts ...request.Option) (*CreatePlatformVersionOutput, error) {
+func (c *ElasticBeanstalk) CreatePlatformVersionWithContext(ctx aws.Context, input *CreatePlatformVersionInput, opts ...aws.Option) (*CreatePlatformVersionOutput, error) {
 	req, out := c.CreatePlatformVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -807,7 +806,7 @@ func (c *ElasticBeanstalk) CreatePlatformVersionWithContext(ctx aws.Context, inp
 
 const opCreateStorageLocation = "CreateStorageLocation"
 
-// CreateStorageLocationRequest generates a "aws/request.Request" representing the
+// CreateStorageLocationRequest generates a "aws.Request" representing the
 // client's request for the CreateStorageLocation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -831,8 +830,8 @@ const opCreateStorageLocation = "CreateStorageLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocation
-func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLocationInput) (req *request.Request, output *CreateStorageLocationOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLocationInput) (req *aws.Request, output *CreateStorageLocationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStorageLocation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -886,7 +885,7 @@ func (c *ElasticBeanstalk) CreateStorageLocation(input *CreateStorageLocationInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) CreateStorageLocationWithContext(ctx aws.Context, input *CreateStorageLocationInput, opts ...request.Option) (*CreateStorageLocationOutput, error) {
+func (c *ElasticBeanstalk) CreateStorageLocationWithContext(ctx aws.Context, input *CreateStorageLocationInput, opts ...aws.Option) (*CreateStorageLocationOutput, error) {
 	req, out := c.CreateStorageLocationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -895,7 +894,7 @@ func (c *ElasticBeanstalk) CreateStorageLocationWithContext(ctx aws.Context, inp
 
 const opDeleteApplication = "DeleteApplication"
 
-// DeleteApplicationRequest generates a "aws/request.Request" representing the
+// DeleteApplicationRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -919,8 +918,8 @@ const opDeleteApplication = "DeleteApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplication
-func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInput) (req *request.Request, output *DeleteApplicationOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInput) (req *aws.Request, output *DeleteApplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -972,7 +971,7 @@ func (c *ElasticBeanstalk) DeleteApplication(input *DeleteApplicationInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...request.Option) (*DeleteApplicationOutput, error) {
+func (c *ElasticBeanstalk) DeleteApplicationWithContext(ctx aws.Context, input *DeleteApplicationInput, opts ...aws.Option) (*DeleteApplicationOutput, error) {
 	req, out := c.DeleteApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -981,7 +980,7 @@ func (c *ElasticBeanstalk) DeleteApplicationWithContext(ctx aws.Context, input *
 
 const opDeleteApplicationVersion = "DeleteApplicationVersion"
 
-// DeleteApplicationVersionRequest generates a "aws/request.Request" representing the
+// DeleteApplicationVersionRequest generates a "aws.Request" representing the
 // client's request for the DeleteApplicationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1005,8 +1004,8 @@ const opDeleteApplicationVersion = "DeleteApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersion
-func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicationVersionInput) (req *request.Request, output *DeleteApplicationVersionOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicationVersionInput) (req *aws.Request, output *DeleteApplicationVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApplicationVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1075,7 +1074,7 @@ func (c *ElasticBeanstalk) DeleteApplicationVersion(input *DeleteApplicationVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteApplicationVersionWithContext(ctx aws.Context, input *DeleteApplicationVersionInput, opts ...request.Option) (*DeleteApplicationVersionOutput, error) {
+func (c *ElasticBeanstalk) DeleteApplicationVersionWithContext(ctx aws.Context, input *DeleteApplicationVersionInput, opts ...aws.Option) (*DeleteApplicationVersionOutput, error) {
 	req, out := c.DeleteApplicationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1084,7 +1083,7 @@ func (c *ElasticBeanstalk) DeleteApplicationVersionWithContext(ctx aws.Context, 
 
 const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
 
-// DeleteConfigurationTemplateRequest generates a "aws/request.Request" representing the
+// DeleteConfigurationTemplateRequest generates a "aws.Request" representing the
 // client's request for the DeleteConfigurationTemplate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1108,8 +1107,8 @@ const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplate
-func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTemplateInput) (req *request.Request, output *DeleteConfigurationTemplateOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfigurationTemplateInput) (req *aws.Request, output *DeleteConfigurationTemplateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConfigurationTemplate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1161,7 +1160,7 @@ func (c *ElasticBeanstalk) DeleteConfigurationTemplate(input *DeleteConfiguratio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteConfigurationTemplateWithContext(ctx aws.Context, input *DeleteConfigurationTemplateInput, opts ...request.Option) (*DeleteConfigurationTemplateOutput, error) {
+func (c *ElasticBeanstalk) DeleteConfigurationTemplateWithContext(ctx aws.Context, input *DeleteConfigurationTemplateInput, opts ...aws.Option) (*DeleteConfigurationTemplateOutput, error) {
 	req, out := c.DeleteConfigurationTemplateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1170,7 +1169,7 @@ func (c *ElasticBeanstalk) DeleteConfigurationTemplateWithContext(ctx aws.Contex
 
 const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
 
-// DeleteEnvironmentConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteEnvironmentConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteEnvironmentConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1194,8 +1193,8 @@ const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfiguration
-func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentConfigurationInput) (req *request.Request, output *DeleteEnvironmentConfigurationOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEnvironmentConfigurationInput) (req *aws.Request, output *DeleteEnvironmentConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEnvironmentConfiguration,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1244,7 +1243,7 @@ func (c *ElasticBeanstalk) DeleteEnvironmentConfiguration(input *DeleteEnvironme
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationWithContext(ctx aws.Context, input *DeleteEnvironmentConfigurationInput, opts ...request.Option) (*DeleteEnvironmentConfigurationOutput, error) {
+func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationWithContext(ctx aws.Context, input *DeleteEnvironmentConfigurationInput, opts ...aws.Option) (*DeleteEnvironmentConfigurationOutput, error) {
 	req, out := c.DeleteEnvironmentConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1253,7 +1252,7 @@ func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationWithContext(ctx aws.Con
 
 const opDeletePlatformVersion = "DeletePlatformVersion"
 
-// DeletePlatformVersionRequest generates a "aws/request.Request" representing the
+// DeletePlatformVersionRequest generates a "aws.Request" representing the
 // client's request for the DeletePlatformVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1277,8 +1276,8 @@ const opDeletePlatformVersion = "DeletePlatformVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersion
-func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVersionInput) (req *request.Request, output *DeletePlatformVersionOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVersionInput) (req *aws.Request, output *DeletePlatformVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePlatformVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1335,7 +1334,7 @@ func (c *ElasticBeanstalk) DeletePlatformVersion(input *DeletePlatformVersionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DeletePlatformVersionWithContext(ctx aws.Context, input *DeletePlatformVersionInput, opts ...request.Option) (*DeletePlatformVersionOutput, error) {
+func (c *ElasticBeanstalk) DeletePlatformVersionWithContext(ctx aws.Context, input *DeletePlatformVersionInput, opts ...aws.Option) (*DeletePlatformVersionOutput, error) {
 	req, out := c.DeletePlatformVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1344,7 +1343,7 @@ func (c *ElasticBeanstalk) DeletePlatformVersionWithContext(ctx aws.Context, inp
 
 const opDescribeApplicationVersions = "DescribeApplicationVersions"
 
-// DescribeApplicationVersionsRequest generates a "aws/request.Request" representing the
+// DescribeApplicationVersionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeApplicationVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1368,8 +1367,8 @@ const opDescribeApplicationVersions = "DescribeApplicationVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersions
-func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApplicationVersionsInput) (req *request.Request, output *DescribeApplicationVersionsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApplicationVersionsInput) (req *aws.Request, output *DescribeApplicationVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeApplicationVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1409,7 +1408,7 @@ func (c *ElasticBeanstalk) DescribeApplicationVersions(input *DescribeApplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeApplicationVersionsWithContext(ctx aws.Context, input *DescribeApplicationVersionsInput, opts ...request.Option) (*DescribeApplicationVersionsOutput, error) {
+func (c *ElasticBeanstalk) DescribeApplicationVersionsWithContext(ctx aws.Context, input *DescribeApplicationVersionsInput, opts ...aws.Option) (*DescribeApplicationVersionsOutput, error) {
 	req, out := c.DescribeApplicationVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1418,7 +1417,7 @@ func (c *ElasticBeanstalk) DescribeApplicationVersionsWithContext(ctx aws.Contex
 
 const opDescribeApplications = "DescribeApplications"
 
-// DescribeApplicationsRequest generates a "aws/request.Request" representing the
+// DescribeApplicationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeApplications operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1442,8 +1441,8 @@ const opDescribeApplications = "DescribeApplications"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplications
-func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicationsInput) (req *request.Request, output *DescribeApplicationsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicationsInput) (req *aws.Request, output *DescribeApplicationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeApplications,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1483,7 +1482,7 @@ func (c *ElasticBeanstalk) DescribeApplications(input *DescribeApplicationsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeApplicationsWithContext(ctx aws.Context, input *DescribeApplicationsInput, opts ...request.Option) (*DescribeApplicationsOutput, error) {
+func (c *ElasticBeanstalk) DescribeApplicationsWithContext(ctx aws.Context, input *DescribeApplicationsInput, opts ...aws.Option) (*DescribeApplicationsOutput, error) {
 	req, out := c.DescribeApplicationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1492,7 +1491,7 @@ func (c *ElasticBeanstalk) DescribeApplicationsWithContext(ctx aws.Context, inpu
 
 const opDescribeConfigurationOptions = "DescribeConfigurationOptions"
 
-// DescribeConfigurationOptionsRequest generates a "aws/request.Request" representing the
+// DescribeConfigurationOptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigurationOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1516,8 +1515,8 @@ const opDescribeConfigurationOptions = "DescribeConfigurationOptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptions
-func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeConfigurationOptionsInput) (req *request.Request, output *DescribeConfigurationOptionsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeConfigurationOptionsInput) (req *aws.Request, output *DescribeConfigurationOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigurationOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1566,7 +1565,7 @@ func (c *ElasticBeanstalk) DescribeConfigurationOptions(input *DescribeConfigura
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeConfigurationOptionsWithContext(ctx aws.Context, input *DescribeConfigurationOptionsInput, opts ...request.Option) (*DescribeConfigurationOptionsOutput, error) {
+func (c *ElasticBeanstalk) DescribeConfigurationOptionsWithContext(ctx aws.Context, input *DescribeConfigurationOptionsInput, opts ...aws.Option) (*DescribeConfigurationOptionsOutput, error) {
 	req, out := c.DescribeConfigurationOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1575,7 +1574,7 @@ func (c *ElasticBeanstalk) DescribeConfigurationOptionsWithContext(ctx aws.Conte
 
 const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
 
-// DescribeConfigurationSettingsRequest generates a "aws/request.Request" representing the
+// DescribeConfigurationSettingsRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigurationSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1599,8 +1598,8 @@ const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettings
-func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeConfigurationSettingsInput) (req *request.Request, output *DescribeConfigurationSettingsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeConfigurationSettingsInput) (req *aws.Request, output *DescribeConfigurationSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigurationSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1657,7 +1656,7 @@ func (c *ElasticBeanstalk) DescribeConfigurationSettings(input *DescribeConfigur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeConfigurationSettingsWithContext(ctx aws.Context, input *DescribeConfigurationSettingsInput, opts ...request.Option) (*DescribeConfigurationSettingsOutput, error) {
+func (c *ElasticBeanstalk) DescribeConfigurationSettingsWithContext(ctx aws.Context, input *DescribeConfigurationSettingsInput, opts ...aws.Option) (*DescribeConfigurationSettingsOutput, error) {
 	req, out := c.DescribeConfigurationSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1666,7 +1665,7 @@ func (c *ElasticBeanstalk) DescribeConfigurationSettingsWithContext(ctx aws.Cont
 
 const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
 
-// DescribeEnvironmentHealthRequest generates a "aws/request.Request" representing the
+// DescribeEnvironmentHealthRequest generates a "aws.Request" representing the
 // client's request for the DescribeEnvironmentHealth operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1690,8 +1689,8 @@ const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealth
-func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHealthInput) (req *request.Request, output *DescribeEnvironmentHealthOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvironmentHealthInput) (req *aws.Request, output *DescribeEnvironmentHealthOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEnvironmentHealth,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1742,7 +1741,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentHealth(input *DescribeEnvironmentH
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentHealthWithContext(ctx aws.Context, input *DescribeEnvironmentHealthInput, opts ...request.Option) (*DescribeEnvironmentHealthOutput, error) {
+func (c *ElasticBeanstalk) DescribeEnvironmentHealthWithContext(ctx aws.Context, input *DescribeEnvironmentHealthInput, opts ...aws.Option) (*DescribeEnvironmentHealthOutput, error) {
 	req, out := c.DescribeEnvironmentHealthRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1751,7 +1750,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentHealthWithContext(ctx aws.Context,
 
 const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedActionHistory"
 
-// DescribeEnvironmentManagedActionHistoryRequest generates a "aws/request.Request" representing the
+// DescribeEnvironmentManagedActionHistoryRequest generates a "aws.Request" representing the
 // client's request for the DescribeEnvironmentManagedActionHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1775,8 +1774,8 @@ const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedAct
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistory
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeEnvironmentManagedActionHistoryInput) (req *request.Request, output *DescribeEnvironmentManagedActionHistoryOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input *DescribeEnvironmentManagedActionHistoryInput) (req *aws.Request, output *DescribeEnvironmentManagedActionHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEnvironmentManagedActionHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1821,7 +1820,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistory(input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryWithContext(ctx aws.Context, input *DescribeEnvironmentManagedActionHistoryInput, opts ...request.Option) (*DescribeEnvironmentManagedActionHistoryOutput, error) {
+func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryWithContext(ctx aws.Context, input *DescribeEnvironmentManagedActionHistoryInput, opts ...aws.Option) (*DescribeEnvironmentManagedActionHistoryOutput, error) {
 	req, out := c.DescribeEnvironmentManagedActionHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1830,7 +1829,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryWithContext(ct
 
 const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
 
-// DescribeEnvironmentManagedActionsRequest generates a "aws/request.Request" representing the
+// DescribeEnvironmentManagedActionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEnvironmentManagedActions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1854,8 +1853,8 @@ const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActions
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *DescribeEnvironmentManagedActionsInput) (req *request.Request, output *DescribeEnvironmentManagedActionsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *DescribeEnvironmentManagedActionsInput) (req *aws.Request, output *DescribeEnvironmentManagedActionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEnvironmentManagedActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1900,7 +1899,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActions(input *DescribeEnvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsWithContext(ctx aws.Context, input *DescribeEnvironmentManagedActionsInput, opts ...request.Option) (*DescribeEnvironmentManagedActionsOutput, error) {
+func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsWithContext(ctx aws.Context, input *DescribeEnvironmentManagedActionsInput, opts ...aws.Option) (*DescribeEnvironmentManagedActionsOutput, error) {
 	req, out := c.DescribeEnvironmentManagedActionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1909,7 +1908,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsWithContext(ctx aws.
 
 const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
 
-// DescribeEnvironmentResourcesRequest generates a "aws/request.Request" representing the
+// DescribeEnvironmentResourcesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEnvironmentResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1933,8 +1932,8 @@ const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentResources
-func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentResourcesInput) (req *request.Request, output *DescribeEnvironmentResourcesOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEnvironmentResourcesInput) (req *aws.Request, output *DescribeEnvironmentResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEnvironmentResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1980,7 +1979,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentResources(input *DescribeEnvironme
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentResourcesWithContext(ctx aws.Context, input *DescribeEnvironmentResourcesInput, opts ...request.Option) (*DescribeEnvironmentResourcesOutput, error) {
+func (c *ElasticBeanstalk) DescribeEnvironmentResourcesWithContext(ctx aws.Context, input *DescribeEnvironmentResourcesInput, opts ...aws.Option) (*DescribeEnvironmentResourcesOutput, error) {
 	req, out := c.DescribeEnvironmentResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1989,7 +1988,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentResourcesWithContext(ctx aws.Conte
 
 const opDescribeEnvironments = "DescribeEnvironments"
 
-// DescribeEnvironmentsRequest generates a "aws/request.Request" representing the
+// DescribeEnvironmentsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEnvironments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2013,8 +2012,8 @@ const opDescribeEnvironments = "DescribeEnvironments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments
-func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) (req *request.Request, output *EnvironmentDescriptionsMessage) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) (req *aws.Request, output *EnvironmentDescriptionsMessage) {
+	op := &aws.Operation{
 		Name:       opDescribeEnvironments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2054,7 +2053,7 @@ func (c *ElasticBeanstalk) DescribeEnvironments(input *DescribeEnvironmentsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEnvironmentsWithContext(ctx aws.Context, input *DescribeEnvironmentsInput, opts ...request.Option) (*EnvironmentDescriptionsMessage, error) {
+func (c *ElasticBeanstalk) DescribeEnvironmentsWithContext(ctx aws.Context, input *DescribeEnvironmentsInput, opts ...aws.Option) (*EnvironmentDescriptionsMessage, error) {
 	req, out := c.DescribeEnvironmentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2063,7 +2062,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentsWithContext(ctx aws.Context, inpu
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2087,12 +2086,12 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEvents
-func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxRecords",
@@ -2136,7 +2135,7 @@ func (c *ElasticBeanstalk) DescribeEvents(input *DescribeEventsInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *ElasticBeanstalk) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2171,9 +2170,9 @@ func (c *ElasticBeanstalk) DescribeEventsPages(input *DescribeEventsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticBeanstalk) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
 			if input != nil {
 				tmp := *input
@@ -2195,7 +2194,7 @@ func (c *ElasticBeanstalk) DescribeEventsPagesWithContext(ctx aws.Context, input
 
 const opDescribeInstancesHealth = "DescribeInstancesHealth"
 
-// DescribeInstancesHealthRequest generates a "aws/request.Request" representing the
+// DescribeInstancesHealthRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstancesHealth operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2219,8 +2218,8 @@ const opDescribeInstancesHealth = "DescribeInstancesHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealth
-func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstancesHealthInput) (req *request.Request, output *DescribeInstancesHealthOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstancesHealthInput) (req *aws.Request, output *DescribeInstancesHealthOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstancesHealth,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2270,7 +2269,7 @@ func (c *ElasticBeanstalk) DescribeInstancesHealth(input *DescribeInstancesHealt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribeInstancesHealthWithContext(ctx aws.Context, input *DescribeInstancesHealthInput, opts ...request.Option) (*DescribeInstancesHealthOutput, error) {
+func (c *ElasticBeanstalk) DescribeInstancesHealthWithContext(ctx aws.Context, input *DescribeInstancesHealthInput, opts ...aws.Option) (*DescribeInstancesHealthOutput, error) {
 	req, out := c.DescribeInstancesHealthRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2279,7 +2278,7 @@ func (c *ElasticBeanstalk) DescribeInstancesHealthWithContext(ctx aws.Context, i
 
 const opDescribePlatformVersion = "DescribePlatformVersion"
 
-// DescribePlatformVersionRequest generates a "aws/request.Request" representing the
+// DescribePlatformVersionRequest generates a "aws.Request" representing the
 // client's request for the DescribePlatformVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2303,8 +2302,8 @@ const opDescribePlatformVersion = "DescribePlatformVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersion
-func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatformVersionInput) (req *request.Request, output *DescribePlatformVersionOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatformVersionInput) (req *aws.Request, output *DescribePlatformVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePlatformVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2353,7 +2352,7 @@ func (c *ElasticBeanstalk) DescribePlatformVersion(input *DescribePlatformVersio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) DescribePlatformVersionWithContext(ctx aws.Context, input *DescribePlatformVersionInput, opts ...request.Option) (*DescribePlatformVersionOutput, error) {
+func (c *ElasticBeanstalk) DescribePlatformVersionWithContext(ctx aws.Context, input *DescribePlatformVersionInput, opts ...aws.Option) (*DescribePlatformVersionOutput, error) {
 	req, out := c.DescribePlatformVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2362,7 +2361,7 @@ func (c *ElasticBeanstalk) DescribePlatformVersionWithContext(ctx aws.Context, i
 
 const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
 
-// ListAvailableSolutionStacksRequest generates a "aws/request.Request" representing the
+// ListAvailableSolutionStacksRequest generates a "aws.Request" representing the
 // client's request for the ListAvailableSolutionStacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2386,8 +2385,8 @@ const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacks
-func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailableSolutionStacksInput) (req *request.Request, output *ListAvailableSolutionStacksOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailableSolutionStacksInput) (req *aws.Request, output *ListAvailableSolutionStacksOutput) {
+	op := &aws.Operation{
 		Name:       opListAvailableSolutionStacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2428,7 +2427,7 @@ func (c *ElasticBeanstalk) ListAvailableSolutionStacks(input *ListAvailableSolut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) ListAvailableSolutionStacksWithContext(ctx aws.Context, input *ListAvailableSolutionStacksInput, opts ...request.Option) (*ListAvailableSolutionStacksOutput, error) {
+func (c *ElasticBeanstalk) ListAvailableSolutionStacksWithContext(ctx aws.Context, input *ListAvailableSolutionStacksInput, opts ...aws.Option) (*ListAvailableSolutionStacksOutput, error) {
 	req, out := c.ListAvailableSolutionStacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2437,7 +2436,7 @@ func (c *ElasticBeanstalk) ListAvailableSolutionStacksWithContext(ctx aws.Contex
 
 const opListPlatformVersions = "ListPlatformVersions"
 
-// ListPlatformVersionsRequest generates a "aws/request.Request" representing the
+// ListPlatformVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListPlatformVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2461,8 +2460,8 @@ const opListPlatformVersions = "ListPlatformVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersions
-func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) (req *request.Request, output *ListPlatformVersionsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) (req *aws.Request, output *ListPlatformVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListPlatformVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2511,7 +2510,7 @@ func (c *ElasticBeanstalk) ListPlatformVersions(input *ListPlatformVersionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) ListPlatformVersionsWithContext(ctx aws.Context, input *ListPlatformVersionsInput, opts ...request.Option) (*ListPlatformVersionsOutput, error) {
+func (c *ElasticBeanstalk) ListPlatformVersionsWithContext(ctx aws.Context, input *ListPlatformVersionsInput, opts ...aws.Option) (*ListPlatformVersionsOutput, error) {
 	req, out := c.ListPlatformVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2520,7 +2519,7 @@ func (c *ElasticBeanstalk) ListPlatformVersionsWithContext(ctx aws.Context, inpu
 
 const opRebuildEnvironment = "RebuildEnvironment"
 
-// RebuildEnvironmentRequest generates a "aws/request.Request" representing the
+// RebuildEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the RebuildEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2544,8 +2543,8 @@ const opRebuildEnvironment = "RebuildEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironment
-func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) (req *request.Request, output *RebuildEnvironmentOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentInput) (req *aws.Request, output *RebuildEnvironmentOutput) {
+	op := &aws.Operation{
 		Name:       opRebuildEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2594,7 +2593,7 @@ func (c *ElasticBeanstalk) RebuildEnvironment(input *RebuildEnvironmentInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) RebuildEnvironmentWithContext(ctx aws.Context, input *RebuildEnvironmentInput, opts ...request.Option) (*RebuildEnvironmentOutput, error) {
+func (c *ElasticBeanstalk) RebuildEnvironmentWithContext(ctx aws.Context, input *RebuildEnvironmentInput, opts ...aws.Option) (*RebuildEnvironmentOutput, error) {
 	req, out := c.RebuildEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2603,7 +2602,7 @@ func (c *ElasticBeanstalk) RebuildEnvironmentWithContext(ctx aws.Context, input 
 
 const opRequestEnvironmentInfo = "RequestEnvironmentInfo"
 
-// RequestEnvironmentInfoRequest generates a "aws/request.Request" representing the
+// RequestEnvironmentInfoRequest generates a "aws.Request" representing the
 // client's request for the RequestEnvironmentInfo operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2627,8 +2626,8 @@ const opRequestEnvironmentInfo = "RequestEnvironmentInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfo
-func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironmentInfoInput) (req *request.Request, output *RequestEnvironmentInfoOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironmentInfoInput) (req *aws.Request, output *RequestEnvironmentInfoOutput) {
+	op := &aws.Operation{
 		Name:       opRequestEnvironmentInfo,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2684,7 +2683,7 @@ func (c *ElasticBeanstalk) RequestEnvironmentInfo(input *RequestEnvironmentInfoI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) RequestEnvironmentInfoWithContext(ctx aws.Context, input *RequestEnvironmentInfoInput, opts ...request.Option) (*RequestEnvironmentInfoOutput, error) {
+func (c *ElasticBeanstalk) RequestEnvironmentInfoWithContext(ctx aws.Context, input *RequestEnvironmentInfoInput, opts ...aws.Option) (*RequestEnvironmentInfoOutput, error) {
 	req, out := c.RequestEnvironmentInfoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2693,7 +2692,7 @@ func (c *ElasticBeanstalk) RequestEnvironmentInfoWithContext(ctx aws.Context, in
 
 const opRestartAppServer = "RestartAppServer"
 
-// RestartAppServerRequest generates a "aws/request.Request" representing the
+// RestartAppServerRequest generates a "aws.Request" representing the
 // client's request for the RestartAppServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2717,8 +2716,8 @@ const opRestartAppServer = "RestartAppServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServer
-func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput) (req *request.Request, output *RestartAppServerOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput) (req *aws.Request, output *RestartAppServerOutput) {
+	op := &aws.Operation{
 		Name:       opRestartAppServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2761,7 +2760,7 @@ func (c *ElasticBeanstalk) RestartAppServer(input *RestartAppServerInput) (*Rest
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) RestartAppServerWithContext(ctx aws.Context, input *RestartAppServerInput, opts ...request.Option) (*RestartAppServerOutput, error) {
+func (c *ElasticBeanstalk) RestartAppServerWithContext(ctx aws.Context, input *RestartAppServerInput, opts ...aws.Option) (*RestartAppServerOutput, error) {
 	req, out := c.RestartAppServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2770,7 +2769,7 @@ func (c *ElasticBeanstalk) RestartAppServerWithContext(ctx aws.Context, input *R
 
 const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
 
-// RetrieveEnvironmentInfoRequest generates a "aws/request.Request" representing the
+// RetrieveEnvironmentInfoRequest generates a "aws.Request" representing the
 // client's request for the RetrieveEnvironmentInfo operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2794,8 +2793,8 @@ const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfo
-func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoInput) (req *request.Request, output *RetrieveEnvironmentInfoOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnvironmentInfoInput) (req *aws.Request, output *RetrieveEnvironmentInfoOutput) {
+	op := &aws.Operation{
 		Name:       opRetrieveEnvironmentInfo,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2839,7 +2838,7 @@ func (c *ElasticBeanstalk) RetrieveEnvironmentInfo(input *RetrieveEnvironmentInf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) RetrieveEnvironmentInfoWithContext(ctx aws.Context, input *RetrieveEnvironmentInfoInput, opts ...request.Option) (*RetrieveEnvironmentInfoOutput, error) {
+func (c *ElasticBeanstalk) RetrieveEnvironmentInfoWithContext(ctx aws.Context, input *RetrieveEnvironmentInfoInput, opts ...aws.Option) (*RetrieveEnvironmentInfoOutput, error) {
 	req, out := c.RetrieveEnvironmentInfoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2848,7 +2847,7 @@ func (c *ElasticBeanstalk) RetrieveEnvironmentInfoWithContext(ctx aws.Context, i
 
 const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
 
-// SwapEnvironmentCNAMEsRequest generates a "aws/request.Request" representing the
+// SwapEnvironmentCNAMEsRequest generates a "aws.Request" representing the
 // client's request for the SwapEnvironmentCNAMEs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2872,8 +2871,8 @@ const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEs
-func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput) (req *request.Request, output *SwapEnvironmentCNAMEsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCNAMEsInput) (req *aws.Request, output *SwapEnvironmentCNAMEsOutput) {
+	op := &aws.Operation{
 		Name:       opSwapEnvironmentCNAMEs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2915,7 +2914,7 @@ func (c *ElasticBeanstalk) SwapEnvironmentCNAMEs(input *SwapEnvironmentCNAMEsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsWithContext(ctx aws.Context, input *SwapEnvironmentCNAMEsInput, opts ...request.Option) (*SwapEnvironmentCNAMEsOutput, error) {
+func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsWithContext(ctx aws.Context, input *SwapEnvironmentCNAMEsInput, opts ...aws.Option) (*SwapEnvironmentCNAMEsOutput, error) {
 	req, out := c.SwapEnvironmentCNAMEsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2924,7 +2923,7 @@ func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsWithContext(ctx aws.Context, inp
 
 const opTerminateEnvironment = "TerminateEnvironment"
 
-// TerminateEnvironmentRequest generates a "aws/request.Request" representing the
+// TerminateEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the TerminateEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2948,8 +2947,8 @@ const opTerminateEnvironment = "TerminateEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment
-func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) (req *request.Request, output *EnvironmentDescription) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironmentInput) (req *aws.Request, output *EnvironmentDescription) {
+	op := &aws.Operation{
 		Name:       opTerminateEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2995,7 +2994,7 @@ func (c *ElasticBeanstalk) TerminateEnvironment(input *TerminateEnvironmentInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) TerminateEnvironmentWithContext(ctx aws.Context, input *TerminateEnvironmentInput, opts ...request.Option) (*EnvironmentDescription, error) {
+func (c *ElasticBeanstalk) TerminateEnvironmentWithContext(ctx aws.Context, input *TerminateEnvironmentInput, opts ...aws.Option) (*EnvironmentDescription, error) {
 	req, out := c.TerminateEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3004,7 +3003,7 @@ func (c *ElasticBeanstalk) TerminateEnvironmentWithContext(ctx aws.Context, inpu
 
 const opUpdateApplication = "UpdateApplication"
 
-// UpdateApplicationRequest generates a "aws/request.Request" representing the
+// UpdateApplicationRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3028,8 +3027,8 @@ const opUpdateApplication = "UpdateApplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplication
-func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInput) (req *request.Request, output *ApplicationDescriptionMessage) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInput) (req *aws.Request, output *ApplicationDescriptionMessage) {
+	op := &aws.Operation{
 		Name:       opUpdateApplication,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3072,7 +3071,7 @@ func (c *ElasticBeanstalk) UpdateApplication(input *UpdateApplicationInput) (*Ap
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...request.Option) (*ApplicationDescriptionMessage, error) {
+func (c *ElasticBeanstalk) UpdateApplicationWithContext(ctx aws.Context, input *UpdateApplicationInput, opts ...aws.Option) (*ApplicationDescriptionMessage, error) {
 	req, out := c.UpdateApplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3081,7 +3080,7 @@ func (c *ElasticBeanstalk) UpdateApplicationWithContext(ctx aws.Context, input *
 
 const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle"
 
-// UpdateApplicationResourceLifecycleRequest generates a "aws/request.Request" representing the
+// UpdateApplicationResourceLifecycleRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplicationResourceLifecycle operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3105,8 +3104,8 @@ const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycle
-func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicationResourceLifecycleInput) (req *request.Request, output *UpdateApplicationResourceLifecycleOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *UpdateApplicationResourceLifecycleInput) (req *aws.Request, output *UpdateApplicationResourceLifecycleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApplicationResourceLifecycle,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3152,7 +3151,7 @@ func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycle(input *UpdateAppli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleWithContext(ctx aws.Context, input *UpdateApplicationResourceLifecycleInput, opts ...request.Option) (*UpdateApplicationResourceLifecycleOutput, error) {
+func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleWithContext(ctx aws.Context, input *UpdateApplicationResourceLifecycleInput, opts ...aws.Option) (*UpdateApplicationResourceLifecycleOutput, error) {
 	req, out := c.UpdateApplicationResourceLifecycleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3161,7 +3160,7 @@ func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleWithContext(ctx aws
 
 const opUpdateApplicationVersion = "UpdateApplicationVersion"
 
-// UpdateApplicationVersionRequest generates a "aws/request.Request" representing the
+// UpdateApplicationVersionRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplicationVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3185,8 +3184,8 @@ const opUpdateApplicationVersion = "UpdateApplicationVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersion
-func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicationVersionInput) (req *request.Request, output *ApplicationVersionDescriptionMessage) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicationVersionInput) (req *aws.Request, output *ApplicationVersionDescriptionMessage) {
+	op := &aws.Operation{
 		Name:       opUpdateApplicationVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3229,7 +3228,7 @@ func (c *ElasticBeanstalk) UpdateApplicationVersion(input *UpdateApplicationVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateApplicationVersionWithContext(ctx aws.Context, input *UpdateApplicationVersionInput, opts ...request.Option) (*ApplicationVersionDescriptionMessage, error) {
+func (c *ElasticBeanstalk) UpdateApplicationVersionWithContext(ctx aws.Context, input *UpdateApplicationVersionInput, opts ...aws.Option) (*ApplicationVersionDescriptionMessage, error) {
 	req, out := c.UpdateApplicationVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3238,7 +3237,7 @@ func (c *ElasticBeanstalk) UpdateApplicationVersionWithContext(ctx aws.Context, 
 
 const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
 
-// UpdateConfigurationTemplateRequest generates a "aws/request.Request" representing the
+// UpdateConfigurationTemplateRequest generates a "aws.Request" representing the
 // client's request for the UpdateConfigurationTemplate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3262,8 +3261,8 @@ const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate
-func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTemplateInput) (req *request.Request, output *ConfigurationSettingsDescription) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfigurationTemplateInput) (req *aws.Request, output *ConfigurationSettingsDescription) {
+	op := &aws.Operation{
 		Name:       opUpdateConfigurationTemplate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3320,7 +3319,7 @@ func (c *ElasticBeanstalk) UpdateConfigurationTemplate(input *UpdateConfiguratio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateConfigurationTemplateWithContext(ctx aws.Context, input *UpdateConfigurationTemplateInput, opts ...request.Option) (*ConfigurationSettingsDescription, error) {
+func (c *ElasticBeanstalk) UpdateConfigurationTemplateWithContext(ctx aws.Context, input *UpdateConfigurationTemplateInput, opts ...aws.Option) (*ConfigurationSettingsDescription, error) {
 	req, out := c.UpdateConfigurationTemplateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3329,7 +3328,7 @@ func (c *ElasticBeanstalk) UpdateConfigurationTemplateWithContext(ctx aws.Contex
 
 const opUpdateEnvironment = "UpdateEnvironment"
 
-// UpdateEnvironmentRequest generates a "aws/request.Request" representing the
+// UpdateEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the UpdateEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3353,8 +3352,8 @@ const opUpdateEnvironment = "UpdateEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment
-func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) (req *request.Request, output *EnvironmentDescription) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) (req *aws.Request, output *EnvironmentDescription) {
+	op := &aws.Operation{
 		Name:       opUpdateEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3413,7 +3412,7 @@ func (c *ElasticBeanstalk) UpdateEnvironment(input *UpdateEnvironmentInput) (*En
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) UpdateEnvironmentWithContext(ctx aws.Context, input *UpdateEnvironmentInput, opts ...request.Option) (*EnvironmentDescription, error) {
+func (c *ElasticBeanstalk) UpdateEnvironmentWithContext(ctx aws.Context, input *UpdateEnvironmentInput, opts ...aws.Option) (*EnvironmentDescription, error) {
 	req, out := c.UpdateEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3422,7 +3421,7 @@ func (c *ElasticBeanstalk) UpdateEnvironmentWithContext(ctx aws.Context, input *
 
 const opValidateConfigurationSettings = "ValidateConfigurationSettings"
 
-// ValidateConfigurationSettingsRequest generates a "aws/request.Request" representing the
+// ValidateConfigurationSettingsRequest generates a "aws.Request" representing the
 // client's request for the ValidateConfigurationSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3446,8 +3445,8 @@ const opValidateConfigurationSettings = "ValidateConfigurationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettings
-func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateConfigurationSettingsInput) (req *request.Request, output *ValidateConfigurationSettingsOutput) {
-	op := &request.Operation{
+func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateConfigurationSettingsInput) (req *aws.Request, output *ValidateConfigurationSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opValidateConfigurationSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3500,7 +3499,7 @@ func (c *ElasticBeanstalk) ValidateConfigurationSettings(input *ValidateConfigur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticBeanstalk) ValidateConfigurationSettingsWithContext(ctx aws.Context, input *ValidateConfigurationSettingsInput, opts ...request.Option) (*ValidateConfigurationSettingsOutput, error) {
+func (c *ElasticBeanstalk) ValidateConfigurationSettingsWithContext(ctx aws.Context, input *ValidateConfigurationSettingsInput, opts ...aws.Option) (*ValidateConfigurationSettingsOutput, error) {
 	req, out := c.ValidateConfigurationSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3532,9 +3531,9 @@ func (s AbortEnvironmentUpdateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortEnvironmentUpdateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AbortEnvironmentUpdateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AbortEnvironmentUpdateInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3759,10 +3758,10 @@ func (s ApplicationResourceLifecycleConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplicationResourceLifecycleConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplicationResourceLifecycleConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplicationResourceLifecycleConfig"}
 	if s.VersionLifecycleConfig != nil {
 		if err := s.VersionLifecycleConfig.Validate(); err != nil {
-			invalidParams.AddNested("VersionLifecycleConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VersionLifecycleConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3940,15 +3939,15 @@ func (s ApplicationVersionLifecycleConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplicationVersionLifecycleConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplicationVersionLifecycleConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplicationVersionLifecycleConfig"}
 	if s.MaxAgeRule != nil {
 		if err := s.MaxAgeRule.Validate(); err != nil {
-			invalidParams.AddNested("MaxAgeRule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("MaxAgeRule", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.MaxCountRule != nil {
 		if err := s.MaxCountRule.Validate(); err != nil {
-			invalidParams.AddNested("MaxCountRule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("MaxCountRule", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3999,9 +3998,9 @@ func (s ApplyEnvironmentManagedActionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplyEnvironmentManagedActionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplyEnvironmentManagedActionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplyEnvironmentManagedActionInput"}
 	if s.ActionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ActionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4155,12 +4154,12 @@ func (s BuildConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BuildConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BuildConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "BuildConfiguration"}
 	if s.CodeBuildServiceRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("CodeBuildServiceRole"))
+		invalidParams.Add(aws.NewErrParamRequired("CodeBuildServiceRole"))
 	}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4333,12 +4332,12 @@ func (s CheckDNSAvailabilityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckDNSAvailabilityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CheckDNSAvailabilityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CheckDNSAvailabilityInput"}
 	if s.CNAMEPrefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("CNAMEPrefix"))
+		invalidParams.Add(aws.NewErrParamRequired("CNAMEPrefix"))
 	}
 	if s.CNAMEPrefix != nil && len(*s.CNAMEPrefix) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("CNAMEPrefix", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("CNAMEPrefix", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4427,12 +4426,12 @@ func (s ComposeEnvironmentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComposeEnvironmentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComposeEnvironmentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComposeEnvironmentsInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4646,9 +4645,9 @@ func (s ConfigurationOptionSetting) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigurationOptionSetting) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfigurationOptionSetting"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfigurationOptionSetting"}
 	if s.ResourceName != nil && len(*s.ResourceName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4833,16 +4832,16 @@ func (s CreateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.ResourceLifecycleConfig != nil {
 		if err := s.ResourceLifecycleConfig.Validate(); err != nil {
-			invalidParams.AddNested("ResourceLifecycleConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ResourceLifecycleConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4931,27 +4930,27 @@ func (s CreateApplicationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateApplicationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateApplicationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateApplicationVersionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.VersionLabel == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionLabel"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 	if s.BuildConfiguration != nil {
 		if err := s.BuildConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("BuildConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BuildConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SourceBuildInformation != nil {
 		if err := s.SourceBuildInformation.Validate(); err != nil {
-			invalidParams.AddNested("SourceBuildInformation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SourceBuildInformation", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5087,18 +5086,18 @@ func (s CreateConfigurationTemplateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationTemplateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConfigurationTemplateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationTemplateInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.TemplateName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TemplateName"))
+		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
@@ -5106,13 +5105,13 @@ func (s *CreateConfigurationTemplateInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SourceConfiguration != nil {
 		if err := s.SourceConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SourceConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SourceConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5260,27 +5259,27 @@ func (s CreateEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEnvironmentInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.CNAMEPrefix != nil && len(*s.CNAMEPrefix) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("CNAMEPrefix", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("CNAMEPrefix", 4))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
@@ -5288,7 +5287,7 @@ func (s *CreateEnvironmentInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5298,7 +5297,7 @@ func (s *CreateEnvironmentInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5308,7 +5307,7 @@ func (s *CreateEnvironmentInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5436,18 +5435,18 @@ func (s CreatePlatformVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePlatformVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePlatformVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePlatformVersionInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.PlatformDefinitionBundle == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformDefinitionBundle"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformDefinitionBundle"))
 	}
 	if s.PlatformName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformName"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformName"))
 	}
 	if s.PlatformVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("PlatformVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("PlatformVersion"))
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
@@ -5455,7 +5454,7 @@ func (s *CreatePlatformVersionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5630,12 +5629,12 @@ func (s DeleteApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5704,18 +5703,18 @@ func (s DeleteApplicationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApplicationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApplicationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationVersionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.VersionLabel == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionLabel"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5785,18 +5784,18 @@ func (s DeleteConfigurationTemplateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationTemplateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConfigurationTemplateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationTemplateInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.TemplateName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TemplateName"))
+		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5860,18 +5859,18 @@ func (s DeleteEnvironmentConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEnvironmentConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEnvironmentConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEnvironmentConfigurationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.EnvironmentName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EnvironmentName"))
+		invalidParams.Add(aws.NewErrParamRequired("EnvironmentName"))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6054,12 +6053,12 @@ func (s DescribeApplicationVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeApplicationVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeApplicationVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationVersionsInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6217,15 +6216,15 @@ func (s DescribeConfigurationOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConfigurationOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationOptionsInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.Options != nil {
 		for i, v := range s.Options {
@@ -6233,7 +6232,7 @@ func (s *DescribeConfigurationOptionsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Options", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Options", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6363,18 +6362,18 @@ func (s DescribeConfigurationSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConfigurationSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationSettingsInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6458,9 +6457,9 @@ func (s DescribeEnvironmentHealthInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEnvironmentHealthInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEnvironmentHealthInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentHealthInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6609,9 +6608,9 @@ func (s DescribeEnvironmentManagedActionHistoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEnvironmentManagedActionHistoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEnvironmentManagedActionHistoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentManagedActionHistoryInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6779,9 +6778,9 @@ func (s DescribeEnvironmentResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEnvironmentResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEnvironmentResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentResourcesInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6887,15 +6886,15 @@ func (s DescribeEnvironmentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEnvironmentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEnvironmentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEnvironmentsInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7016,21 +7015,21 @@ func (s DescribeEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7177,12 +7176,12 @@ func (s DescribeInstancesHealthInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancesHealthInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstancesHealthInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancesHealthInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8227,9 +8226,9 @@ func (s ListPlatformVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPlatformVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPlatformVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPlatformVersionsInput"}
 	if s.MaxRecords != nil && *s.MaxRecords < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxRecords", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxRecords", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8574,9 +8573,9 @@ func (s MaxAgeRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaxAgeRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaxAgeRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaxAgeRule"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8634,9 +8633,9 @@ func (s MaxCountRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaxCountRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaxCountRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaxCountRule"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8726,9 +8725,9 @@ func (s OptionSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OptionSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OptionSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "OptionSpecification"}
 	if s.ResourceName != nil && len(*s.ResourceName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9208,9 +9207,9 @@ func (s RebuildEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebuildEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebuildEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebuildEnvironmentInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9290,12 +9289,12 @@ func (s RequestEnvironmentInfoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestEnvironmentInfoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestEnvironmentInfoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestEnvironmentInfoInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.InfoType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InfoType"))
+		invalidParams.Add(aws.NewErrParamRequired("InfoType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9368,9 +9367,9 @@ func (s RestartAppServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestartAppServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestartAppServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestartAppServerInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9447,12 +9446,12 @@ func (s RetrieveEnvironmentInfoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveEnvironmentInfoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RetrieveEnvironmentInfoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RetrieveEnvironmentInfoInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.InfoType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InfoType"))
+		invalidParams.Add(aws.NewErrParamRequired("InfoType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9731,18 +9730,18 @@ func (s SourceBuildInformation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceBuildInformation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SourceBuildInformation"}
+	invalidParams := aws.ErrInvalidParams{Context: "SourceBuildInformation"}
 	if s.SourceLocation == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceLocation"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceLocation"))
 	}
 	if s.SourceLocation != nil && len(*s.SourceLocation) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceLocation", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceLocation", 3))
 	}
 	if s.SourceRepository == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceRepository"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceRepository"))
 	}
 	if s.SourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9793,12 +9792,12 @@ func (s SourceConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SourceConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "SourceConfiguration"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9923,12 +9922,12 @@ func (s SwapEnvironmentCNAMEsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SwapEnvironmentCNAMEsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SwapEnvironmentCNAMEsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SwapEnvironmentCNAMEsInput"}
 	if s.DestinationEnvironmentName != nil && len(*s.DestinationEnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationEnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationEnvironmentName", 4))
 	}
 	if s.SourceEnvironmentName != nil && len(*s.SourceEnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceEnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceEnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10035,12 +10034,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10113,9 +10112,9 @@ func (s TerminateEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateEnvironmentInput"}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10202,12 +10201,12 @@ func (s UpdateApplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10255,19 +10254,19 @@ func (s UpdateApplicationResourceLifecycleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationResourceLifecycleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationResourceLifecycleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationResourceLifecycleInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.ResourceLifecycleConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceLifecycleConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceLifecycleConfig"))
 	}
 	if s.ResourceLifecycleConfig != nil {
 		if err := s.ResourceLifecycleConfig.Validate(); err != nil {
-			invalidParams.AddNested("ResourceLifecycleConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ResourceLifecycleConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10358,18 +10357,18 @@ func (s UpdateApplicationVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationVersionInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.VersionLabel == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionLabel"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionLabel"))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10443,18 +10442,18 @@ func (s UpdateConfigurationTemplateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConfigurationTemplateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConfigurationTemplateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationTemplateInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.TemplateName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TemplateName"))
+		invalidParams.Add(aws.NewErrParamRequired("TemplateName"))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
@@ -10462,7 +10461,7 @@ func (s *UpdateConfigurationTemplateInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10472,7 +10471,7 @@ func (s *UpdateConfigurationTemplateInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10595,21 +10594,21 @@ func (s UpdateEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEnvironmentInput"}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.VersionLabel != nil && len(*s.VersionLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionLabel", 1))
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
@@ -10617,7 +10616,7 @@ func (s *UpdateEnvironmentInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10627,7 +10626,7 @@ func (s *UpdateEnvironmentInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionsToRemove", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10749,21 +10748,21 @@ func (s ValidateConfigurationSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidateConfigurationSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ValidateConfigurationSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ValidateConfigurationSettingsInput"}
 	if s.ApplicationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationName"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationName"))
 	}
 	if s.ApplicationName != nil && len(*s.ApplicationName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationName", 1))
 	}
 	if s.EnvironmentName != nil && len(*s.EnvironmentName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("EnvironmentName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("EnvironmentName", 4))
 	}
 	if s.OptionSettings == nil {
-		invalidParams.Add(request.NewErrParamRequired("OptionSettings"))
+		invalidParams.Add(aws.NewErrParamRequired("OptionSettings"))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
 	}
 	if s.OptionSettings != nil {
 		for i, v := range s.OptionSettings {
@@ -10771,7 +10770,7 @@ func (s *ValidateConfigurationSettingsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OptionSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

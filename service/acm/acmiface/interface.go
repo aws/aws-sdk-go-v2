@@ -10,7 +10,6 @@ package acmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/acm"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := acm.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := acm.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,47 +64,47 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type ACMAPI interface {
 	AddTagsToCertificate(*acm.AddTagsToCertificateInput) (*acm.AddTagsToCertificateOutput, error)
-	AddTagsToCertificateWithContext(aws.Context, *acm.AddTagsToCertificateInput, ...request.Option) (*acm.AddTagsToCertificateOutput, error)
-	AddTagsToCertificateRequest(*acm.AddTagsToCertificateInput) (*request.Request, *acm.AddTagsToCertificateOutput)
+	AddTagsToCertificateWithContext(aws.Context, *acm.AddTagsToCertificateInput, ...aws.Option) (*acm.AddTagsToCertificateOutput, error)
+	AddTagsToCertificateRequest(*acm.AddTagsToCertificateInput) (*aws.Request, *acm.AddTagsToCertificateOutput)
 
 	DeleteCertificate(*acm.DeleteCertificateInput) (*acm.DeleteCertificateOutput, error)
-	DeleteCertificateWithContext(aws.Context, *acm.DeleteCertificateInput, ...request.Option) (*acm.DeleteCertificateOutput, error)
-	DeleteCertificateRequest(*acm.DeleteCertificateInput) (*request.Request, *acm.DeleteCertificateOutput)
+	DeleteCertificateWithContext(aws.Context, *acm.DeleteCertificateInput, ...aws.Option) (*acm.DeleteCertificateOutput, error)
+	DeleteCertificateRequest(*acm.DeleteCertificateInput) (*aws.Request, *acm.DeleteCertificateOutput)
 
 	DescribeCertificate(*acm.DescribeCertificateInput) (*acm.DescribeCertificateOutput, error)
-	DescribeCertificateWithContext(aws.Context, *acm.DescribeCertificateInput, ...request.Option) (*acm.DescribeCertificateOutput, error)
-	DescribeCertificateRequest(*acm.DescribeCertificateInput) (*request.Request, *acm.DescribeCertificateOutput)
+	DescribeCertificateWithContext(aws.Context, *acm.DescribeCertificateInput, ...aws.Option) (*acm.DescribeCertificateOutput, error)
+	DescribeCertificateRequest(*acm.DescribeCertificateInput) (*aws.Request, *acm.DescribeCertificateOutput)
 
 	GetCertificate(*acm.GetCertificateInput) (*acm.GetCertificateOutput, error)
-	GetCertificateWithContext(aws.Context, *acm.GetCertificateInput, ...request.Option) (*acm.GetCertificateOutput, error)
-	GetCertificateRequest(*acm.GetCertificateInput) (*request.Request, *acm.GetCertificateOutput)
+	GetCertificateWithContext(aws.Context, *acm.GetCertificateInput, ...aws.Option) (*acm.GetCertificateOutput, error)
+	GetCertificateRequest(*acm.GetCertificateInput) (*aws.Request, *acm.GetCertificateOutput)
 
 	ImportCertificate(*acm.ImportCertificateInput) (*acm.ImportCertificateOutput, error)
-	ImportCertificateWithContext(aws.Context, *acm.ImportCertificateInput, ...request.Option) (*acm.ImportCertificateOutput, error)
-	ImportCertificateRequest(*acm.ImportCertificateInput) (*request.Request, *acm.ImportCertificateOutput)
+	ImportCertificateWithContext(aws.Context, *acm.ImportCertificateInput, ...aws.Option) (*acm.ImportCertificateOutput, error)
+	ImportCertificateRequest(*acm.ImportCertificateInput) (*aws.Request, *acm.ImportCertificateOutput)
 
 	ListCertificates(*acm.ListCertificatesInput) (*acm.ListCertificatesOutput, error)
-	ListCertificatesWithContext(aws.Context, *acm.ListCertificatesInput, ...request.Option) (*acm.ListCertificatesOutput, error)
-	ListCertificatesRequest(*acm.ListCertificatesInput) (*request.Request, *acm.ListCertificatesOutput)
+	ListCertificatesWithContext(aws.Context, *acm.ListCertificatesInput, ...aws.Option) (*acm.ListCertificatesOutput, error)
+	ListCertificatesRequest(*acm.ListCertificatesInput) (*aws.Request, *acm.ListCertificatesOutput)
 
 	ListCertificatesPages(*acm.ListCertificatesInput, func(*acm.ListCertificatesOutput, bool) bool) error
-	ListCertificatesPagesWithContext(aws.Context, *acm.ListCertificatesInput, func(*acm.ListCertificatesOutput, bool) bool, ...request.Option) error
+	ListCertificatesPagesWithContext(aws.Context, *acm.ListCertificatesInput, func(*acm.ListCertificatesOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForCertificate(*acm.ListTagsForCertificateInput) (*acm.ListTagsForCertificateOutput, error)
-	ListTagsForCertificateWithContext(aws.Context, *acm.ListTagsForCertificateInput, ...request.Option) (*acm.ListTagsForCertificateOutput, error)
-	ListTagsForCertificateRequest(*acm.ListTagsForCertificateInput) (*request.Request, *acm.ListTagsForCertificateOutput)
+	ListTagsForCertificateWithContext(aws.Context, *acm.ListTagsForCertificateInput, ...aws.Option) (*acm.ListTagsForCertificateOutput, error)
+	ListTagsForCertificateRequest(*acm.ListTagsForCertificateInput) (*aws.Request, *acm.ListTagsForCertificateOutput)
 
 	RemoveTagsFromCertificate(*acm.RemoveTagsFromCertificateInput) (*acm.RemoveTagsFromCertificateOutput, error)
-	RemoveTagsFromCertificateWithContext(aws.Context, *acm.RemoveTagsFromCertificateInput, ...request.Option) (*acm.RemoveTagsFromCertificateOutput, error)
-	RemoveTagsFromCertificateRequest(*acm.RemoveTagsFromCertificateInput) (*request.Request, *acm.RemoveTagsFromCertificateOutput)
+	RemoveTagsFromCertificateWithContext(aws.Context, *acm.RemoveTagsFromCertificateInput, ...aws.Option) (*acm.RemoveTagsFromCertificateOutput, error)
+	RemoveTagsFromCertificateRequest(*acm.RemoveTagsFromCertificateInput) (*aws.Request, *acm.RemoveTagsFromCertificateOutput)
 
 	RequestCertificate(*acm.RequestCertificateInput) (*acm.RequestCertificateOutput, error)
-	RequestCertificateWithContext(aws.Context, *acm.RequestCertificateInput, ...request.Option) (*acm.RequestCertificateOutput, error)
-	RequestCertificateRequest(*acm.RequestCertificateInput) (*request.Request, *acm.RequestCertificateOutput)
+	RequestCertificateWithContext(aws.Context, *acm.RequestCertificateInput, ...aws.Option) (*acm.RequestCertificateOutput, error)
+	RequestCertificateRequest(*acm.RequestCertificateInput) (*aws.Request, *acm.RequestCertificateOutput)
 
 	ResendValidationEmail(*acm.ResendValidationEmailInput) (*acm.ResendValidationEmailOutput, error)
-	ResendValidationEmailWithContext(aws.Context, *acm.ResendValidationEmailInput, ...request.Option) (*acm.ResendValidationEmailOutput, error)
-	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) (*request.Request, *acm.ResendValidationEmailOutput)
+	ResendValidationEmailWithContext(aws.Context, *acm.ResendValidationEmailInput, ...aws.Option) (*acm.ResendValidationEmailOutput, error)
+	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) (*aws.Request, *acm.ResendValidationEmailOutput)
 }
 
 var _ ACMAPI = (*acm.ACM)(nil)

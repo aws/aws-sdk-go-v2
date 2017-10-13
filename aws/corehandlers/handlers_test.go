@@ -14,8 +14,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -28,7 +26,7 @@ func TestValidateEndpointHandler(t *testing.T) {
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
 
-	req := svc.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	err := req.Build()
 
 	if err != nil {
@@ -43,7 +41,7 @@ func TestValidateEndpointHandlerErrorRegion(t *testing.T) {
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
 
-	req := svc.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	err := req.Build()
 
 	if err == nil {
@@ -59,9 +57,9 @@ type mockCredsProvider struct {
 	retrieveCalled bool
 }
 
-func (m *mockCredsProvider) Retrieve() (credentials.Value, error) {
+func (m *mockCredsProvider) Retrieve() (aws.Value, error) {
 	m.retrieveCalled = true
-	return credentials.Value{ProviderName: "mockCredsProvider"}, nil
+	return aws.Value{ProviderName: "mockCredsProvider"}, nil
 }
 
 func (m *mockCredsProvider) IsExpired() bool {
@@ -73,16 +71,16 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 	credProvider := &mockCredsProvider{}
 
 	svc := awstesting.NewClient(&aws.Config{
-		Credentials: credentials.NewCredentials(credProvider),
-		MaxRetries:  aws.Int(1),
+		Credentials: aws.NewCredentials(credProvider),
+		Retryer:     aws.DefaultRetryer{NumMaxRetries: 1},
 	})
 
 	svc.Handlers.Clear()
-	svc.Handlers.ValidateResponse.PushBack(func(r *request.Request) {
+	svc.Handlers.ValidateResponse.PushBack(func(r *aws.Request) {
 		r.Error = awserr.New("UnknownError", "", nil)
 		r.HTTPResponse = &http.Response{StatusCode: 400, Body: ioutil.NopCloser(bytes.NewBuffer([]byte{}))}
 	})
-	svc.Handlers.UnmarshalError.PushBack(func(r *request.Request) {
+	svc.Handlers.UnmarshalError.PushBack(func(r *aws.Request) {
 		r.Error = awserr.New("ExpiredTokenException", "", nil)
 	})
 	svc.Handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
@@ -94,7 +92,7 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 		t.Errorf("expect not called")
 	}
 
-	req := svc.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	req.Send()
 
 	if !svc.Config.Credentials.IsExpired() {
@@ -116,7 +114,7 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 func TestAfterRetryWithContextCanceled(t *testing.T) {
 	c := awstesting.NewClient()
 
-	req := c.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
@@ -138,7 +136,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 
 	aerr := req.Error.(awserr.Error)
 
-	if e, a := request.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
 		t.Errorf("expect %q, error code got %q", e, a)
 	}
 }
@@ -146,7 +144,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 func TestAfterRetryWithContext(t *testing.T) {
 	c := awstesting.NewClient()
 
-	req := c.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
@@ -174,7 +172,7 @@ func TestSendWithContextCanceled(t *testing.T) {
 		},
 	})
 
-	req := c.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	req := c.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{}, 0)}
 	req.SetContext(ctx)
@@ -196,7 +194,7 @@ func TestSendWithContextCanceled(t *testing.T) {
 
 	aerr := req.Error.(awserr.Error)
 
-	if e, a := request.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
 		t.Errorf("expect %q, error code got %q", e, a)
 	}
 }
@@ -215,7 +213,7 @@ func TestSendHandlerError(t *testing.T) {
 	})
 	svc.Handlers.Clear()
 	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
-	r := svc.NewRequest(&request.Operation{Name: "Operation"}, nil, nil)
+	r := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 
 	r.Send()
 
@@ -245,7 +243,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 	svc.Handlers.Clear()
 	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
 
-	r := svc.NewRequest(&request.Operation{
+	r := svc.NewRequest(&aws.Operation{
 		Name:     "Operation",
 		HTTPPath: "/original",
 	}, nil, nil)
@@ -262,24 +260,24 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 
 func TestValidateReqSigHandler(t *testing.T) {
 	cases := []struct {
-		Req    *request.Request
+		Req    *aws.Request
 		Resign bool
 	}{
 		{
-			Req: &request.Request{
-				Config: aws.Config{Credentials: credentials.AnonymousCredentials},
+			Req: &aws.Request{
+				Config: aws.Config{Credentials: aws.AnonymousCredentials},
 				Time:   time.Now().Add(-15 * time.Minute),
 			},
 			Resign: false,
 		},
 		{
-			Req: &request.Request{
+			Req: &aws.Request{
 				Time: time.Now().Add(-15 * time.Minute),
 			},
 			Resign: true,
 		},
 		{
-			Req: &request.Request{
+			Req: &aws.Request{
 				Time: time.Now().Add(-1 * time.Minute),
 			},
 			Resign: false,
@@ -288,7 +286,7 @@ func TestValidateReqSigHandler(t *testing.T) {
 
 	for i, c := range cases {
 		resigned := false
-		c.Req.Handlers.Sign.PushBack(func(r *request.Request) {
+		c.Req.Handlers.Sign.PushBack(func(r *aws.Request) {
 			resigned = true
 		})
 
@@ -343,7 +341,7 @@ func setupContentLengthTestServer(t *testing.T, hasContentLength bool, contentLe
 func TestBuildContentLength_ZeroBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
 
-	svc := s3.New(unit.Session, &aws.Config{
+	svc := s3.New(unit.Config, &aws.Config{
 		Endpoint:         aws.String(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
@@ -361,7 +359,8 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 func TestBuildContentLength_NegativeBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
 
-	svc := s3.New(unit.Session, &aws.Config{
+	fmt.Println("unit.Config", unit.Config.EndpointResolver)
+	svc := s3.New(unit.Config, &aws.Config{
 		Endpoint:         aws.String(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
@@ -381,7 +380,7 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 func TestBuildContentLength_WithBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, true, 1024)
 
-	svc := s3.New(unit.Session, &aws.Config{
+	svc := s3.New(unit.Config, &aws.Config{
 		Endpoint:         aws.String(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),

@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
@@ -30,8 +30,8 @@ func (r *testReader) Close() error {
 func TestKinesisGetRecordsCustomization(t *testing.T) {
 	readDuration = time.Millisecond
 	retryCount := 0
-	svc := New(unit.Session, &aws.Config{
-		MaxRetries: aws.Int(4),
+	svc := New(unit.Config, &aws.Config{
+		Retryer: aws.DefaultRetryer{NumMaxRetries: 4},
 	})
 	req, _ := svc.GetRecordsRequest(&GetRecordsInput{
 		ShardIterator: aws.String("foo"),
@@ -65,7 +65,7 @@ func TestKinesisGetRecordsCustomization(t *testing.T) {
 
 func TestKinesisGetRecordsNoTimeout(t *testing.T) {
 	readDuration = time.Second
-	svc := New(unit.Session)
+	svc := New(unit.Config)
 	req, _ := svc.GetRecordsRequest(&GetRecordsInput{
 		ShardIterator: aws.String("foo"),
 	})

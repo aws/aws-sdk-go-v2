@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/go-ini/ini"
 )
 
@@ -32,6 +32,28 @@ const (
 // loading configuration from the config files if another profile name
 // is not provided.
 const DefaultSharedConfigProfile = `default`
+
+// DefaultSharedCredentialsFilename returns the SDK's default file path
+// for the shared credentials file.
+//
+// Builds the shared config file path based on the OS's platform.
+//
+//   - Linux/Unix: $HOME/.aws/credentials
+//   - Windows: %USERPROFILE%\.aws\credentials
+func DefaultSharedCredentialsFilename() string {
+	return filepath.Join(userHomeDir(), ".aws", "credentials")
+}
+
+// DefaultSharedConfigFilename returns the SDK's default file path for
+// the shared config file.
+//
+// Builds the shared config file path based on the OS's platform.
+//
+//   - Linux/Unix: $HOME/.aws/config
+//   - Windows: %USERPROFILE%\.aws\config
+func DefaultSharedConfigFilename() string {
+	return filepath.Join(userHomeDir(), ".aws", "config")
+}
 
 // DefaultSharedConfigFiles is a slice of the default shared config files that
 // the will be used in order to load the SharedConfig.
@@ -63,7 +85,7 @@ type SharedConfig struct {
 	//	aws_access_key_id
 	//	aws_secret_access_key
 	//	aws_session_token
-	Creds credentials.Value
+	Creds aws.Value
 
 	// TODO need good way to expose these in Provider interface
 	AssumeRole       AssumeRoleConfig
@@ -261,7 +283,7 @@ func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) e
 	akid := section.Key(accessKeyIDKey).String()
 	secret := section.Key(secretAccessKey).String()
 	if len(akid) > 0 && len(secret) > 0 {
-		cfg.Creds = credentials.Value{
+		cfg.Creds = aws.Value{
 			AccessKeyID:     akid,
 			SecretAccessKey: secret,
 			SessionToken:    section.Key(sessionTokenKey).String(),
@@ -326,28 +348,6 @@ type SharedConfigAssumeRoleError struct {
 func (e SharedConfigAssumeRoleError) Error() string {
 	return fmt.Sprintf("failed to load assume role for %s, source profile has no shared credentials",
 		e.RoleARN)
-}
-
-// DefaultSharedCredentialsFilename returns the SDK's default file path
-// for the shared credentials file.
-//
-// Builds the shared config file path based on the OS's platform.
-//
-//   - Linux/Unix: $HOME/.aws/credentials
-//   - Windows: %USERPROFILE%\.aws\credentials
-func DefaultSharedCredentialsFilename() string {
-	return filepath.Join(userHomeDir(), ".aws", "credentials")
-}
-
-// DefaultSharedConfigFilename returns the SDK's default file path for
-// the shared config file.
-//
-// Builds the shared config file path based on the OS's platform.
-//
-//   - Linux/Unix: $HOME/.aws/config
-//   - Windows: %USERPROFILE%\.aws\config
-func DefaultSharedConfigFilename() string {
-	return filepath.Join(userHomeDir(), ".aws", "config")
 }
 
 func userHomeDir() string {

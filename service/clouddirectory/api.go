@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opAddFacetToObject = "AddFacetToObject"
 
-// AddFacetToObjectRequest generates a "aws/request.Request" representing the
+// AddFacetToObjectRequest generates a "aws.Request" representing the
 // client's request for the AddFacetToObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAddFacetToObject = "AddFacetToObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObject
-func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) (req *request.Request, output *AddFacetToObjectOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) (req *aws.Request, output *AddFacetToObjectOutput) {
+	op := &aws.Operation{
 		Name:       opAddFacetToObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/facets",
@@ -120,7 +119,7 @@ func (c *CloudDirectory) AddFacetToObject(input *AddFacetToObjectInput) (*AddFac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) AddFacetToObjectWithContext(ctx aws.Context, input *AddFacetToObjectInput, opts ...request.Option) (*AddFacetToObjectOutput, error) {
+func (c *CloudDirectory) AddFacetToObjectWithContext(ctx aws.Context, input *AddFacetToObjectInput, opts ...aws.Option) (*AddFacetToObjectOutput, error) {
 	req, out := c.AddFacetToObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -129,7 +128,7 @@ func (c *CloudDirectory) AddFacetToObjectWithContext(ctx aws.Context, input *Add
 
 const opApplySchema = "ApplySchema"
 
-// ApplySchemaRequest generates a "aws/request.Request" representing the
+// ApplySchemaRequest generates a "aws.Request" representing the
 // client's request for the ApplySchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -153,8 +152,8 @@ const opApplySchema = "ApplySchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ApplySchema
-func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) (req *request.Request, output *ApplySchemaOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) (req *aws.Request, output *ApplySchemaOutput) {
+	op := &aws.Operation{
 		Name:       opApplySchema,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/apply",
@@ -233,7 +232,7 @@ func (c *CloudDirectory) ApplySchema(input *ApplySchemaInput) (*ApplySchemaOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ApplySchemaWithContext(ctx aws.Context, input *ApplySchemaInput, opts ...request.Option) (*ApplySchemaOutput, error) {
+func (c *CloudDirectory) ApplySchemaWithContext(ctx aws.Context, input *ApplySchemaInput, opts ...aws.Option) (*ApplySchemaOutput, error) {
 	req, out := c.ApplySchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -242,7 +241,7 @@ func (c *CloudDirectory) ApplySchemaWithContext(ctx aws.Context, input *ApplySch
 
 const opAttachObject = "AttachObject"
 
-// AttachObjectRequest generates a "aws/request.Request" representing the
+// AttachObjectRequest generates a "aws.Request" representing the
 // client's request for the AttachObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -266,8 +265,8 @@ const opAttachObject = "AttachObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObject
-func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *request.Request, output *AttachObjectOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) (req *aws.Request, output *AttachObjectOutput) {
+	op := &aws.Operation{
 		Name:       opAttachObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/attach",
@@ -365,7 +364,7 @@ func (c *CloudDirectory) AttachObject(input *AttachObjectInput) (*AttachObjectOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) AttachObjectWithContext(ctx aws.Context, input *AttachObjectInput, opts ...request.Option) (*AttachObjectOutput, error) {
+func (c *CloudDirectory) AttachObjectWithContext(ctx aws.Context, input *AttachObjectInput, opts ...aws.Option) (*AttachObjectOutput, error) {
 	req, out := c.AttachObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -374,7 +373,7 @@ func (c *CloudDirectory) AttachObjectWithContext(ctx aws.Context, input *AttachO
 
 const opAttachPolicy = "AttachPolicy"
 
-// AttachPolicyRequest generates a "aws/request.Request" representing the
+// AttachPolicyRequest generates a "aws.Request" representing the
 // client's request for the AttachPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -398,8 +397,8 @@ const opAttachPolicy = "AttachPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachPolicy
-func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) (req *request.Request, output *AttachPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) (req *aws.Request, output *AttachPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opAttachPolicy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/policy/attach",
@@ -482,7 +481,7 @@ func (c *CloudDirectory) AttachPolicy(input *AttachPolicyInput) (*AttachPolicyOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) AttachPolicyWithContext(ctx aws.Context, input *AttachPolicyInput, opts ...request.Option) (*AttachPolicyOutput, error) {
+func (c *CloudDirectory) AttachPolicyWithContext(ctx aws.Context, input *AttachPolicyInput, opts ...aws.Option) (*AttachPolicyOutput, error) {
 	req, out := c.AttachPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -491,7 +490,7 @@ func (c *CloudDirectory) AttachPolicyWithContext(ctx aws.Context, input *AttachP
 
 const opAttachToIndex = "AttachToIndex"
 
-// AttachToIndexRequest generates a "aws/request.Request" representing the
+// AttachToIndexRequest generates a "aws.Request" representing the
 // client's request for the AttachToIndex operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -515,8 +514,8 @@ const opAttachToIndex = "AttachToIndex"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndex
-func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) (req *request.Request, output *AttachToIndexOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) (req *aws.Request, output *AttachToIndexOutput) {
+	op := &aws.Operation{
 		Name:       opAttachToIndex,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/index/attach",
@@ -603,7 +602,7 @@ func (c *CloudDirectory) AttachToIndex(input *AttachToIndexInput) (*AttachToInde
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) AttachToIndexWithContext(ctx aws.Context, input *AttachToIndexInput, opts ...request.Option) (*AttachToIndexOutput, error) {
+func (c *CloudDirectory) AttachToIndexWithContext(ctx aws.Context, input *AttachToIndexInput, opts ...aws.Option) (*AttachToIndexOutput, error) {
 	req, out := c.AttachToIndexRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -612,7 +611,7 @@ func (c *CloudDirectory) AttachToIndexWithContext(ctx aws.Context, input *Attach
 
 const opAttachTypedLink = "AttachTypedLink"
 
-// AttachTypedLinkRequest generates a "aws/request.Request" representing the
+// AttachTypedLinkRequest generates a "aws.Request" representing the
 // client's request for the AttachTypedLink operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -636,8 +635,8 @@ const opAttachTypedLink = "AttachTypedLink"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachTypedLink
-func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) (req *request.Request, output *AttachTypedLinkOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) (req *aws.Request, output *AttachTypedLinkOutput) {
+	op := &aws.Operation{
 		Name:       opAttachTypedLink,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/attach",
@@ -727,7 +726,7 @@ func (c *CloudDirectory) AttachTypedLink(input *AttachTypedLinkInput) (*AttachTy
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) AttachTypedLinkWithContext(ctx aws.Context, input *AttachTypedLinkInput, opts ...request.Option) (*AttachTypedLinkOutput, error) {
+func (c *CloudDirectory) AttachTypedLinkWithContext(ctx aws.Context, input *AttachTypedLinkInput, opts ...aws.Option) (*AttachTypedLinkOutput, error) {
 	req, out := c.AttachTypedLinkRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -736,7 +735,7 @@ func (c *CloudDirectory) AttachTypedLinkWithContext(ctx aws.Context, input *Atta
 
 const opBatchRead = "BatchRead"
 
-// BatchReadRequest generates a "aws/request.Request" representing the
+// BatchReadRequest generates a "aws.Request" representing the
 // client's request for the BatchRead operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -760,8 +759,8 @@ const opBatchRead = "BatchRead"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRead
-func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) (req *request.Request, output *BatchReadOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) (req *aws.Request, output *BatchReadOutput) {
+	op := &aws.Operation{
 		Name:       opBatchRead,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/batchread",
@@ -834,7 +833,7 @@ func (c *CloudDirectory) BatchRead(input *BatchReadInput) (*BatchReadOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) BatchReadWithContext(ctx aws.Context, input *BatchReadInput, opts ...request.Option) (*BatchReadOutput, error) {
+func (c *CloudDirectory) BatchReadWithContext(ctx aws.Context, input *BatchReadInput, opts ...aws.Option) (*BatchReadOutput, error) {
 	req, out := c.BatchReadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -843,7 +842,7 @@ func (c *CloudDirectory) BatchReadWithContext(ctx aws.Context, input *BatchReadI
 
 const opBatchWrite = "BatchWrite"
 
-// BatchWriteRequest generates a "aws/request.Request" representing the
+// BatchWriteRequest generates a "aws.Request" representing the
 // client's request for the BatchWrite operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -867,8 +866,8 @@ const opBatchWrite = "BatchWrite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWrite
-func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) (req *request.Request, output *BatchWriteOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) (req *aws.Request, output *BatchWriteOutput) {
+	op := &aws.Operation{
 		Name:       opBatchWrite,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/batchwrite",
@@ -945,7 +944,7 @@ func (c *CloudDirectory) BatchWrite(input *BatchWriteInput) (*BatchWriteOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) BatchWriteWithContext(ctx aws.Context, input *BatchWriteInput, opts ...request.Option) (*BatchWriteOutput, error) {
+func (c *CloudDirectory) BatchWriteWithContext(ctx aws.Context, input *BatchWriteInput, opts ...aws.Option) (*BatchWriteOutput, error) {
 	req, out := c.BatchWriteRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -954,7 +953,7 @@ func (c *CloudDirectory) BatchWriteWithContext(ctx aws.Context, input *BatchWrit
 
 const opCreateDirectory = "CreateDirectory"
 
-// CreateDirectoryRequest generates a "aws/request.Request" representing the
+// CreateDirectoryRequest generates a "aws.Request" representing the
 // client's request for the CreateDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -978,8 +977,8 @@ const opCreateDirectory = "CreateDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateDirectory
-func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) (req *request.Request, output *CreateDirectoryOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) (req *aws.Request, output *CreateDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDirectory,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/directory/create",
@@ -1060,7 +1059,7 @@ func (c *CloudDirectory) CreateDirectory(input *CreateDirectoryInput) (*CreateDi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) CreateDirectoryWithContext(ctx aws.Context, input *CreateDirectoryInput, opts ...request.Option) (*CreateDirectoryOutput, error) {
+func (c *CloudDirectory) CreateDirectoryWithContext(ctx aws.Context, input *CreateDirectoryInput, opts ...aws.Option) (*CreateDirectoryOutput, error) {
 	req, out := c.CreateDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1069,7 +1068,7 @@ func (c *CloudDirectory) CreateDirectoryWithContext(ctx aws.Context, input *Crea
 
 const opCreateFacet = "CreateFacet"
 
-// CreateFacetRequest generates a "aws/request.Request" representing the
+// CreateFacetRequest generates a "aws.Request" representing the
 // client's request for the CreateFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1093,8 +1092,8 @@ const opCreateFacet = "CreateFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateFacet
-func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) (req *request.Request, output *CreateFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) (req *aws.Request, output *CreateFacetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateFacet,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/facet/create",
@@ -1178,7 +1177,7 @@ func (c *CloudDirectory) CreateFacet(input *CreateFacetInput) (*CreateFacetOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) CreateFacetWithContext(ctx aws.Context, input *CreateFacetInput, opts ...request.Option) (*CreateFacetOutput, error) {
+func (c *CloudDirectory) CreateFacetWithContext(ctx aws.Context, input *CreateFacetInput, opts ...aws.Option) (*CreateFacetOutput, error) {
 	req, out := c.CreateFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,7 +1186,7 @@ func (c *CloudDirectory) CreateFacetWithContext(ctx aws.Context, input *CreateFa
 
 const opCreateIndex = "CreateIndex"
 
-// CreateIndexRequest generates a "aws/request.Request" representing the
+// CreateIndexRequest generates a "aws.Request" representing the
 // client's request for the CreateIndex operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1211,8 +1210,8 @@ const opCreateIndex = "CreateIndex"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndex
-func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) (req *request.Request, output *CreateIndexOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) (req *aws.Request, output *CreateIndexOutput) {
+	op := &aws.Operation{
 		Name:       opCreateIndex,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/index",
@@ -1300,7 +1299,7 @@ func (c *CloudDirectory) CreateIndex(input *CreateIndexInput) (*CreateIndexOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) CreateIndexWithContext(ctx aws.Context, input *CreateIndexInput, opts ...request.Option) (*CreateIndexOutput, error) {
+func (c *CloudDirectory) CreateIndexWithContext(ctx aws.Context, input *CreateIndexInput, opts ...aws.Option) (*CreateIndexOutput, error) {
 	req, out := c.CreateIndexRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1309,7 +1308,7 @@ func (c *CloudDirectory) CreateIndexWithContext(ctx aws.Context, input *CreateIn
 
 const opCreateObject = "CreateObject"
 
-// CreateObjectRequest generates a "aws/request.Request" representing the
+// CreateObjectRequest generates a "aws.Request" representing the
 // client's request for the CreateObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1333,8 +1332,8 @@ const opCreateObject = "CreateObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateObject
-func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) (req *request.Request, output *CreateObjectOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) (req *aws.Request, output *CreateObjectOutput) {
+	op := &aws.Operation{
 		Name:       opCreateObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object",
@@ -1427,7 +1426,7 @@ func (c *CloudDirectory) CreateObject(input *CreateObjectInput) (*CreateObjectOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) CreateObjectWithContext(ctx aws.Context, input *CreateObjectInput, opts ...request.Option) (*CreateObjectOutput, error) {
+func (c *CloudDirectory) CreateObjectWithContext(ctx aws.Context, input *CreateObjectInput, opts ...aws.Option) (*CreateObjectOutput, error) {
 	req, out := c.CreateObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1436,7 +1435,7 @@ func (c *CloudDirectory) CreateObjectWithContext(ctx aws.Context, input *CreateO
 
 const opCreateSchema = "CreateSchema"
 
-// CreateSchemaRequest generates a "aws/request.Request" representing the
+// CreateSchemaRequest generates a "aws.Request" representing the
 // client's request for the CreateSchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1460,8 +1459,8 @@ const opCreateSchema = "CreateSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateSchema
-func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *request.Request, output *CreateSchemaOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) (req *aws.Request, output *CreateSchemaOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSchema,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/create",
@@ -1550,7 +1549,7 @@ func (c *CloudDirectory) CreateSchema(input *CreateSchemaInput) (*CreateSchemaOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) CreateSchemaWithContext(ctx aws.Context, input *CreateSchemaInput, opts ...request.Option) (*CreateSchemaOutput, error) {
+func (c *CloudDirectory) CreateSchemaWithContext(ctx aws.Context, input *CreateSchemaInput, opts ...aws.Option) (*CreateSchemaOutput, error) {
 	req, out := c.CreateSchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1559,7 +1558,7 @@ func (c *CloudDirectory) CreateSchemaWithContext(ctx aws.Context, input *CreateS
 
 const opCreateTypedLinkFacet = "CreateTypedLinkFacet"
 
-// CreateTypedLinkFacetRequest generates a "aws/request.Request" representing the
+// CreateTypedLinkFacetRequest generates a "aws.Request" representing the
 // client's request for the CreateTypedLinkFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1583,8 +1582,8 @@ const opCreateTypedLinkFacet = "CreateTypedLinkFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateTypedLinkFacet
-func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) (req *request.Request, output *CreateTypedLinkFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacetInput) (req *aws.Request, output *CreateTypedLinkFacetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTypedLinkFacet,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/facet/create",
@@ -1667,7 +1666,7 @@ func (c *CloudDirectory) CreateTypedLinkFacet(input *CreateTypedLinkFacetInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) CreateTypedLinkFacetWithContext(ctx aws.Context, input *CreateTypedLinkFacetInput, opts ...request.Option) (*CreateTypedLinkFacetOutput, error) {
+func (c *CloudDirectory) CreateTypedLinkFacetWithContext(ctx aws.Context, input *CreateTypedLinkFacetInput, opts ...aws.Option) (*CreateTypedLinkFacetOutput, error) {
 	req, out := c.CreateTypedLinkFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1676,7 +1675,7 @@ func (c *CloudDirectory) CreateTypedLinkFacetWithContext(ctx aws.Context, input 
 
 const opDeleteDirectory = "DeleteDirectory"
 
-// DeleteDirectoryRequest generates a "aws/request.Request" representing the
+// DeleteDirectoryRequest generates a "aws.Request" representing the
 // client's request for the DeleteDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1700,8 +1699,8 @@ const opDeleteDirectory = "DeleteDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteDirectory
-func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *request.Request, output *DeleteDirectoryOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *aws.Request, output *DeleteDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDirectory,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/directory",
@@ -1782,7 +1781,7 @@ func (c *CloudDirectory) DeleteDirectory(input *DeleteDirectoryInput) (*DeleteDi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DeleteDirectoryWithContext(ctx aws.Context, input *DeleteDirectoryInput, opts ...request.Option) (*DeleteDirectoryOutput, error) {
+func (c *CloudDirectory) DeleteDirectoryWithContext(ctx aws.Context, input *DeleteDirectoryInput, opts ...aws.Option) (*DeleteDirectoryOutput, error) {
 	req, out := c.DeleteDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1791,7 +1790,7 @@ func (c *CloudDirectory) DeleteDirectoryWithContext(ctx aws.Context, input *Dele
 
 const opDeleteFacet = "DeleteFacet"
 
-// DeleteFacetRequest generates a "aws/request.Request" representing the
+// DeleteFacetRequest generates a "aws.Request" representing the
 // client's request for the DeleteFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1815,8 +1814,8 @@ const opDeleteFacet = "DeleteFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteFacet
-func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) (req *request.Request, output *DeleteFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) (req *aws.Request, output *DeleteFacetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFacet,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/facet/delete",
@@ -1897,7 +1896,7 @@ func (c *CloudDirectory) DeleteFacet(input *DeleteFacetInput) (*DeleteFacetOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DeleteFacetWithContext(ctx aws.Context, input *DeleteFacetInput, opts ...request.Option) (*DeleteFacetOutput, error) {
+func (c *CloudDirectory) DeleteFacetWithContext(ctx aws.Context, input *DeleteFacetInput, opts ...aws.Option) (*DeleteFacetOutput, error) {
 	req, out := c.DeleteFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1906,7 +1905,7 @@ func (c *CloudDirectory) DeleteFacetWithContext(ctx aws.Context, input *DeleteFa
 
 const opDeleteObject = "DeleteObject"
 
-// DeleteObjectRequest generates a "aws/request.Request" representing the
+// DeleteObjectRequest generates a "aws.Request" representing the
 // client's request for the DeleteObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1930,8 +1929,8 @@ const opDeleteObject = "DeleteObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteObject
-func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) (req *request.Request, output *DeleteObjectOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) (req *aws.Request, output *DeleteObjectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/delete",
@@ -2012,7 +2011,7 @@ func (c *CloudDirectory) DeleteObject(input *DeleteObjectInput) (*DeleteObjectOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, opts ...request.Option) (*DeleteObjectOutput, error) {
+func (c *CloudDirectory) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, opts ...aws.Option) (*DeleteObjectOutput, error) {
 	req, out := c.DeleteObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2021,7 +2020,7 @@ func (c *CloudDirectory) DeleteObjectWithContext(ctx aws.Context, input *DeleteO
 
 const opDeleteSchema = "DeleteSchema"
 
-// DeleteSchemaRequest generates a "aws/request.Request" representing the
+// DeleteSchemaRequest generates a "aws.Request" representing the
 // client's request for the DeleteSchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2045,8 +2044,8 @@ const opDeleteSchema = "DeleteSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteSchema
-func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) (req *request.Request, output *DeleteSchemaOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) (req *aws.Request, output *DeleteSchemaOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSchema,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema",
@@ -2124,7 +2123,7 @@ func (c *CloudDirectory) DeleteSchema(input *DeleteSchemaInput) (*DeleteSchemaOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DeleteSchemaWithContext(ctx aws.Context, input *DeleteSchemaInput, opts ...request.Option) (*DeleteSchemaOutput, error) {
+func (c *CloudDirectory) DeleteSchemaWithContext(ctx aws.Context, input *DeleteSchemaInput, opts ...aws.Option) (*DeleteSchemaOutput, error) {
 	req, out := c.DeleteSchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2133,7 +2132,7 @@ func (c *CloudDirectory) DeleteSchemaWithContext(ctx aws.Context, input *DeleteS
 
 const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 
-// DeleteTypedLinkFacetRequest generates a "aws/request.Request" representing the
+// DeleteTypedLinkFacetRequest generates a "aws.Request" representing the
 // client's request for the DeleteTypedLinkFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2157,8 +2156,8 @@ const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DeleteTypedLinkFacet
-func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) (req *request.Request, output *DeleteTypedLinkFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacetInput) (req *aws.Request, output *DeleteTypedLinkFacetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTypedLinkFacet,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/facet/delete",
@@ -2234,7 +2233,7 @@ func (c *CloudDirectory) DeleteTypedLinkFacet(input *DeleteTypedLinkFacetInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DeleteTypedLinkFacetWithContext(ctx aws.Context, input *DeleteTypedLinkFacetInput, opts ...request.Option) (*DeleteTypedLinkFacetOutput, error) {
+func (c *CloudDirectory) DeleteTypedLinkFacetWithContext(ctx aws.Context, input *DeleteTypedLinkFacetInput, opts ...aws.Option) (*DeleteTypedLinkFacetOutput, error) {
 	req, out := c.DeleteTypedLinkFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2243,7 +2242,7 @@ func (c *CloudDirectory) DeleteTypedLinkFacetWithContext(ctx aws.Context, input 
 
 const opDetachFromIndex = "DetachFromIndex"
 
-// DetachFromIndexRequest generates a "aws/request.Request" representing the
+// DetachFromIndexRequest generates a "aws.Request" representing the
 // client's request for the DetachFromIndex operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2267,8 +2266,8 @@ const opDetachFromIndex = "DetachFromIndex"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndex
-func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) (req *request.Request, output *DetachFromIndexOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) (req *aws.Request, output *DetachFromIndexOutput) {
+	op := &aws.Operation{
 		Name:       opDetachFromIndex,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/index/detach",
@@ -2350,7 +2349,7 @@ func (c *CloudDirectory) DetachFromIndex(input *DetachFromIndexInput) (*DetachFr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DetachFromIndexWithContext(ctx aws.Context, input *DetachFromIndexInput, opts ...request.Option) (*DetachFromIndexOutput, error) {
+func (c *CloudDirectory) DetachFromIndexWithContext(ctx aws.Context, input *DetachFromIndexInput, opts ...aws.Option) (*DetachFromIndexOutput, error) {
 	req, out := c.DetachFromIndexRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2359,7 +2358,7 @@ func (c *CloudDirectory) DetachFromIndexWithContext(ctx aws.Context, input *Deta
 
 const opDetachObject = "DetachObject"
 
-// DetachObjectRequest generates a "aws/request.Request" representing the
+// DetachObjectRequest generates a "aws.Request" representing the
 // client's request for the DetachObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2383,8 +2382,8 @@ const opDetachObject = "DetachObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObject
-func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) (req *request.Request, output *DetachObjectOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) (req *aws.Request, output *DetachObjectOutput) {
+	op := &aws.Operation{
 		Name:       opDetachObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/detach",
@@ -2461,7 +2460,7 @@ func (c *CloudDirectory) DetachObject(input *DetachObjectInput) (*DetachObjectOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DetachObjectWithContext(ctx aws.Context, input *DetachObjectInput, opts ...request.Option) (*DetachObjectOutput, error) {
+func (c *CloudDirectory) DetachObjectWithContext(ctx aws.Context, input *DetachObjectInput, opts ...aws.Option) (*DetachObjectOutput, error) {
 	req, out := c.DetachObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2470,7 +2469,7 @@ func (c *CloudDirectory) DetachObjectWithContext(ctx aws.Context, input *DetachO
 
 const opDetachPolicy = "DetachPolicy"
 
-// DetachPolicyRequest generates a "aws/request.Request" representing the
+// DetachPolicyRequest generates a "aws.Request" representing the
 // client's request for the DetachPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2494,8 +2493,8 @@ const opDetachPolicy = "DetachPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachPolicy
-func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) (req *request.Request, output *DetachPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) (req *aws.Request, output *DetachPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDetachPolicy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/policy/detach",
@@ -2577,7 +2576,7 @@ func (c *CloudDirectory) DetachPolicy(input *DetachPolicyInput) (*DetachPolicyOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DetachPolicyWithContext(ctx aws.Context, input *DetachPolicyInput, opts ...request.Option) (*DetachPolicyOutput, error) {
+func (c *CloudDirectory) DetachPolicyWithContext(ctx aws.Context, input *DetachPolicyInput, opts ...aws.Option) (*DetachPolicyOutput, error) {
 	req, out := c.DetachPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2586,7 +2585,7 @@ func (c *CloudDirectory) DetachPolicyWithContext(ctx aws.Context, input *DetachP
 
 const opDetachTypedLink = "DetachTypedLink"
 
-// DetachTypedLinkRequest generates a "aws/request.Request" representing the
+// DetachTypedLinkRequest generates a "aws.Request" representing the
 // client's request for the DetachTypedLink operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2610,8 +2609,8 @@ const opDetachTypedLink = "DetachTypedLink"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachTypedLink
-func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) (req *request.Request, output *DetachTypedLinkOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) (req *aws.Request, output *DetachTypedLinkOutput) {
+	op := &aws.Operation{
 		Name:       opDetachTypedLink,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/detach",
@@ -2694,7 +2693,7 @@ func (c *CloudDirectory) DetachTypedLink(input *DetachTypedLinkInput) (*DetachTy
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DetachTypedLinkWithContext(ctx aws.Context, input *DetachTypedLinkInput, opts ...request.Option) (*DetachTypedLinkOutput, error) {
+func (c *CloudDirectory) DetachTypedLinkWithContext(ctx aws.Context, input *DetachTypedLinkInput, opts ...aws.Option) (*DetachTypedLinkOutput, error) {
 	req, out := c.DetachTypedLinkRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2703,7 +2702,7 @@ func (c *CloudDirectory) DetachTypedLinkWithContext(ctx aws.Context, input *Deta
 
 const opDisableDirectory = "DisableDirectory"
 
-// DisableDirectoryRequest generates a "aws/request.Request" representing the
+// DisableDirectoryRequest generates a "aws.Request" representing the
 // client's request for the DisableDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2727,8 +2726,8 @@ const opDisableDirectory = "DisableDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DisableDirectory
-func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) (req *request.Request, output *DisableDirectoryOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) (req *aws.Request, output *DisableDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opDisableDirectory,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/directory/disable",
@@ -2807,7 +2806,7 @@ func (c *CloudDirectory) DisableDirectory(input *DisableDirectoryInput) (*Disabl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) DisableDirectoryWithContext(ctx aws.Context, input *DisableDirectoryInput, opts ...request.Option) (*DisableDirectoryOutput, error) {
+func (c *CloudDirectory) DisableDirectoryWithContext(ctx aws.Context, input *DisableDirectoryInput, opts ...aws.Option) (*DisableDirectoryOutput, error) {
 	req, out := c.DisableDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2816,7 +2815,7 @@ func (c *CloudDirectory) DisableDirectoryWithContext(ctx aws.Context, input *Dis
 
 const opEnableDirectory = "EnableDirectory"
 
-// EnableDirectoryRequest generates a "aws/request.Request" representing the
+// EnableDirectoryRequest generates a "aws.Request" representing the
 // client's request for the EnableDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2840,8 +2839,8 @@ const opEnableDirectory = "EnableDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/EnableDirectory
-func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) (req *request.Request, output *EnableDirectoryOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) (req *aws.Request, output *EnableDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opEnableDirectory,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/directory/enable",
@@ -2919,7 +2918,7 @@ func (c *CloudDirectory) EnableDirectory(input *EnableDirectoryInput) (*EnableDi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) EnableDirectoryWithContext(ctx aws.Context, input *EnableDirectoryInput, opts ...request.Option) (*EnableDirectoryOutput, error) {
+func (c *CloudDirectory) EnableDirectoryWithContext(ctx aws.Context, input *EnableDirectoryInput, opts ...aws.Option) (*EnableDirectoryOutput, error) {
 	req, out := c.EnableDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2928,7 +2927,7 @@ func (c *CloudDirectory) EnableDirectoryWithContext(ctx aws.Context, input *Enab
 
 const opGetDirectory = "GetDirectory"
 
-// GetDirectoryRequest generates a "aws/request.Request" representing the
+// GetDirectoryRequest generates a "aws.Request" representing the
 // client's request for the GetDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2952,8 +2951,8 @@ const opGetDirectory = "GetDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetDirectory
-func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) (req *request.Request, output *GetDirectoryOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) (req *aws.Request, output *GetDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetDirectory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/directory/get",
@@ -3023,7 +3022,7 @@ func (c *CloudDirectory) GetDirectory(input *GetDirectoryInput) (*GetDirectoryOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) GetDirectoryWithContext(ctx aws.Context, input *GetDirectoryInput, opts ...request.Option) (*GetDirectoryOutput, error) {
+func (c *CloudDirectory) GetDirectoryWithContext(ctx aws.Context, input *GetDirectoryInput, opts ...aws.Option) (*GetDirectoryOutput, error) {
 	req, out := c.GetDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3032,7 +3031,7 @@ func (c *CloudDirectory) GetDirectoryWithContext(ctx aws.Context, input *GetDire
 
 const opGetFacet = "GetFacet"
 
-// GetFacetRequest generates a "aws/request.Request" representing the
+// GetFacetRequest generates a "aws.Request" representing the
 // client's request for the GetFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3056,8 +3055,8 @@ const opGetFacet = "GetFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetFacet
-func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) (req *request.Request, output *GetFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) (req *aws.Request, output *GetFacetOutput) {
+	op := &aws.Operation{
 		Name:       opGetFacet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/facet",
@@ -3135,7 +3134,7 @@ func (c *CloudDirectory) GetFacet(input *GetFacetInput) (*GetFacetOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) GetFacetWithContext(ctx aws.Context, input *GetFacetInput, opts ...request.Option) (*GetFacetOutput, error) {
+func (c *CloudDirectory) GetFacetWithContext(ctx aws.Context, input *GetFacetInput, opts ...aws.Option) (*GetFacetOutput, error) {
 	req, out := c.GetFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3144,7 +3143,7 @@ func (c *CloudDirectory) GetFacetWithContext(ctx aws.Context, input *GetFacetInp
 
 const opGetObjectInformation = "GetObjectInformation"
 
-// GetObjectInformationRequest generates a "aws/request.Request" representing the
+// GetObjectInformationRequest generates a "aws.Request" representing the
 // client's request for the GetObjectInformation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3168,8 +3167,8 @@ const opGetObjectInformation = "GetObjectInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformation
-func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformationInput) (req *request.Request, output *GetObjectInformationOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformationInput) (req *aws.Request, output *GetObjectInformationOutput) {
+	op := &aws.Operation{
 		Name:       opGetObjectInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/information",
@@ -3245,7 +3244,7 @@ func (c *CloudDirectory) GetObjectInformation(input *GetObjectInformationInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) GetObjectInformationWithContext(ctx aws.Context, input *GetObjectInformationInput, opts ...request.Option) (*GetObjectInformationOutput, error) {
+func (c *CloudDirectory) GetObjectInformationWithContext(ctx aws.Context, input *GetObjectInformationInput, opts ...aws.Option) (*GetObjectInformationOutput, error) {
 	req, out := c.GetObjectInformationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3254,7 +3253,7 @@ func (c *CloudDirectory) GetObjectInformationWithContext(ctx aws.Context, input 
 
 const opGetSchemaAsJson = "GetSchemaAsJson"
 
-// GetSchemaAsJsonRequest generates a "aws/request.Request" representing the
+// GetSchemaAsJsonRequest generates a "aws.Request" representing the
 // client's request for the GetSchemaAsJson operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3278,8 +3277,8 @@ const opGetSchemaAsJson = "GetSchemaAsJson"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetSchemaAsJson
-func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) (req *request.Request, output *GetSchemaAsJsonOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) (req *aws.Request, output *GetSchemaAsJsonOutput) {
+	op := &aws.Operation{
 		Name:       opGetSchemaAsJson,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/json",
@@ -3357,7 +3356,7 @@ func (c *CloudDirectory) GetSchemaAsJson(input *GetSchemaAsJsonInput) (*GetSchem
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) GetSchemaAsJsonWithContext(ctx aws.Context, input *GetSchemaAsJsonInput, opts ...request.Option) (*GetSchemaAsJsonOutput, error) {
+func (c *CloudDirectory) GetSchemaAsJsonWithContext(ctx aws.Context, input *GetSchemaAsJsonInput, opts ...aws.Option) (*GetSchemaAsJsonOutput, error) {
 	req, out := c.GetSchemaAsJsonRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3366,7 +3365,7 @@ func (c *CloudDirectory) GetSchemaAsJsonWithContext(ctx aws.Context, input *GetS
 
 const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 
-// GetTypedLinkFacetInformationRequest generates a "aws/request.Request" representing the
+// GetTypedLinkFacetInformationRequest generates a "aws.Request" representing the
 // client's request for the GetTypedLinkFacetInformation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3390,8 +3389,8 @@ const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetTypedLinkFacetInformation
-func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) (req *request.Request, output *GetTypedLinkFacetInformationOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLinkFacetInformationInput) (req *aws.Request, output *GetTypedLinkFacetInformationOutput) {
+	op := &aws.Operation{
 		Name:       opGetTypedLinkFacetInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/facet/get",
@@ -3471,7 +3470,7 @@ func (c *CloudDirectory) GetTypedLinkFacetInformation(input *GetTypedLinkFacetIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) GetTypedLinkFacetInformationWithContext(ctx aws.Context, input *GetTypedLinkFacetInformationInput, opts ...request.Option) (*GetTypedLinkFacetInformationOutput, error) {
+func (c *CloudDirectory) GetTypedLinkFacetInformationWithContext(ctx aws.Context, input *GetTypedLinkFacetInformationInput, opts ...aws.Option) (*GetTypedLinkFacetInformationOutput, error) {
 	req, out := c.GetTypedLinkFacetInformationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3480,7 +3479,7 @@ func (c *CloudDirectory) GetTypedLinkFacetInformationWithContext(ctx aws.Context
 
 const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 
-// ListAppliedSchemaArnsRequest generates a "aws/request.Request" representing the
+// ListAppliedSchemaArnsRequest generates a "aws.Request" representing the
 // client's request for the ListAppliedSchemaArns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3504,12 +3503,12 @@ const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAppliedSchemaArns
-func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) (req *request.Request, output *ListAppliedSchemaArnsOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaArnsInput) (req *aws.Request, output *ListAppliedSchemaArnsOutput) {
+	op := &aws.Operation{
 		Name:       opListAppliedSchemaArns,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/applied",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3587,7 +3586,7 @@ func (c *CloudDirectory) ListAppliedSchemaArns(input *ListAppliedSchemaArnsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListAppliedSchemaArnsWithContext(ctx aws.Context, input *ListAppliedSchemaArnsInput, opts ...request.Option) (*ListAppliedSchemaArnsOutput, error) {
+func (c *CloudDirectory) ListAppliedSchemaArnsWithContext(ctx aws.Context, input *ListAppliedSchemaArnsInput, opts ...aws.Option) (*ListAppliedSchemaArnsOutput, error) {
 	req, out := c.ListAppliedSchemaArnsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3622,9 +3621,9 @@ func (c *CloudDirectory) ListAppliedSchemaArnsPages(input *ListAppliedSchemaArns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, input *ListAppliedSchemaArnsInput, fn func(*ListAppliedSchemaArnsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, input *ListAppliedSchemaArnsInput, fn func(*ListAppliedSchemaArnsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAppliedSchemaArnsInput
 			if input != nil {
 				tmp := *input
@@ -3646,7 +3645,7 @@ func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, 
 
 const opListAttachedIndices = "ListAttachedIndices"
 
-// ListAttachedIndicesRequest generates a "aws/request.Request" representing the
+// ListAttachedIndicesRequest generates a "aws.Request" representing the
 // client's request for the ListAttachedIndices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3670,12 +3669,12 @@ const opListAttachedIndices = "ListAttachedIndices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListAttachedIndices
-func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) (req *request.Request, output *ListAttachedIndicesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesInput) (req *aws.Request, output *ListAttachedIndicesOutput) {
+	op := &aws.Operation{
 		Name:       opListAttachedIndices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/indices",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3753,7 +3752,7 @@ func (c *CloudDirectory) ListAttachedIndices(input *ListAttachedIndicesInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListAttachedIndicesWithContext(ctx aws.Context, input *ListAttachedIndicesInput, opts ...request.Option) (*ListAttachedIndicesOutput, error) {
+func (c *CloudDirectory) ListAttachedIndicesWithContext(ctx aws.Context, input *ListAttachedIndicesInput, opts ...aws.Option) (*ListAttachedIndicesOutput, error) {
 	req, out := c.ListAttachedIndicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3788,9 +3787,9 @@ func (c *CloudDirectory) ListAttachedIndicesPages(input *ListAttachedIndicesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, input *ListAttachedIndicesInput, fn func(*ListAttachedIndicesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, input *ListAttachedIndicesInput, fn func(*ListAttachedIndicesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAttachedIndicesInput
 			if input != nil {
 				tmp := *input
@@ -3812,7 +3811,7 @@ func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, in
 
 const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 
-// ListDevelopmentSchemaArnsRequest generates a "aws/request.Request" representing the
+// ListDevelopmentSchemaArnsRequest generates a "aws.Request" representing the
 // client's request for the ListDevelopmentSchemaArns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3836,12 +3835,12 @@ const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDevelopmentSchemaArns
-func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) (req *request.Request, output *ListDevelopmentSchemaArnsOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopmentSchemaArnsInput) (req *aws.Request, output *ListDevelopmentSchemaArnsOutput) {
+	op := &aws.Operation{
 		Name:       opListDevelopmentSchemaArns,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/development",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3919,7 +3918,7 @@ func (c *CloudDirectory) ListDevelopmentSchemaArns(input *ListDevelopmentSchemaA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListDevelopmentSchemaArnsWithContext(ctx aws.Context, input *ListDevelopmentSchemaArnsInput, opts ...request.Option) (*ListDevelopmentSchemaArnsOutput, error) {
+func (c *CloudDirectory) ListDevelopmentSchemaArnsWithContext(ctx aws.Context, input *ListDevelopmentSchemaArnsInput, opts ...aws.Option) (*ListDevelopmentSchemaArnsOutput, error) {
 	req, out := c.ListDevelopmentSchemaArnsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3954,9 +3953,9 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsPages(input *ListDevelopmentSc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Context, input *ListDevelopmentSchemaArnsInput, fn func(*ListDevelopmentSchemaArnsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Context, input *ListDevelopmentSchemaArnsInput, fn func(*ListDevelopmentSchemaArnsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDevelopmentSchemaArnsInput
 			if input != nil {
 				tmp := *input
@@ -3978,7 +3977,7 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Conte
 
 const opListDirectories = "ListDirectories"
 
-// ListDirectoriesRequest generates a "aws/request.Request" representing the
+// ListDirectoriesRequest generates a "aws.Request" representing the
 // client's request for the ListDirectories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4002,12 +4001,12 @@ const opListDirectories = "ListDirectories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListDirectories
-func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) (req *request.Request, output *ListDirectoriesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) (req *aws.Request, output *ListDirectoriesOutput) {
+	op := &aws.Operation{
 		Name:       opListDirectories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/directory/list",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4082,7 +4081,7 @@ func (c *CloudDirectory) ListDirectories(input *ListDirectoriesInput) (*ListDire
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListDirectoriesWithContext(ctx aws.Context, input *ListDirectoriesInput, opts ...request.Option) (*ListDirectoriesOutput, error) {
+func (c *CloudDirectory) ListDirectoriesWithContext(ctx aws.Context, input *ListDirectoriesInput, opts ...aws.Option) (*ListDirectoriesOutput, error) {
 	req, out := c.ListDirectoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4117,9 +4116,9 @@ func (c *CloudDirectory) ListDirectoriesPages(input *ListDirectoriesInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input *ListDirectoriesInput, fn func(*ListDirectoriesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input *ListDirectoriesInput, fn func(*ListDirectoriesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDirectoriesInput
 			if input != nil {
 				tmp := *input
@@ -4141,7 +4140,7 @@ func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input 
 
 const opListFacetAttributes = "ListFacetAttributes"
 
-// ListFacetAttributesRequest generates a "aws/request.Request" representing the
+// ListFacetAttributesRequest generates a "aws.Request" representing the
 // client's request for the ListFacetAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4165,12 +4164,12 @@ const opListFacetAttributes = "ListFacetAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetAttributes
-func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesInput) (req *request.Request, output *ListFacetAttributesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesInput) (req *aws.Request, output *ListFacetAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opListFacetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/facet/attributes",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4251,7 +4250,7 @@ func (c *CloudDirectory) ListFacetAttributes(input *ListFacetAttributesInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListFacetAttributesWithContext(ctx aws.Context, input *ListFacetAttributesInput, opts ...request.Option) (*ListFacetAttributesOutput, error) {
+func (c *CloudDirectory) ListFacetAttributesWithContext(ctx aws.Context, input *ListFacetAttributesInput, opts ...aws.Option) (*ListFacetAttributesOutput, error) {
 	req, out := c.ListFacetAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4286,9 +4285,9 @@ func (c *CloudDirectory) ListFacetAttributesPages(input *ListFacetAttributesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, input *ListFacetAttributesInput, fn func(*ListFacetAttributesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, input *ListFacetAttributesInput, fn func(*ListFacetAttributesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListFacetAttributesInput
 			if input != nil {
 				tmp := *input
@@ -4310,7 +4309,7 @@ func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, in
 
 const opListFacetNames = "ListFacetNames"
 
-// ListFacetNamesRequest generates a "aws/request.Request" representing the
+// ListFacetNamesRequest generates a "aws.Request" representing the
 // client's request for the ListFacetNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4334,12 +4333,12 @@ const opListFacetNames = "ListFacetNames"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListFacetNames
-func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) (req *request.Request, output *ListFacetNamesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) (req *aws.Request, output *ListFacetNamesOutput) {
+	op := &aws.Operation{
 		Name:       opListFacetNames,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/facet/list",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4417,7 +4416,7 @@ func (c *CloudDirectory) ListFacetNames(input *ListFacetNamesInput) (*ListFacetN
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListFacetNamesWithContext(ctx aws.Context, input *ListFacetNamesInput, opts ...request.Option) (*ListFacetNamesOutput, error) {
+func (c *CloudDirectory) ListFacetNamesWithContext(ctx aws.Context, input *ListFacetNamesInput, opts ...aws.Option) (*ListFacetNamesOutput, error) {
 	req, out := c.ListFacetNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4452,9 +4451,9 @@ func (c *CloudDirectory) ListFacetNamesPages(input *ListFacetNamesInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *ListFacetNamesInput, fn func(*ListFacetNamesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *ListFacetNamesInput, fn func(*ListFacetNamesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListFacetNamesInput
 			if input != nil {
 				tmp := *input
@@ -4476,7 +4475,7 @@ func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *
 
 const opListIncomingTypedLinks = "ListIncomingTypedLinks"
 
-// ListIncomingTypedLinksRequest generates a "aws/request.Request" representing the
+// ListIncomingTypedLinksRequest generates a "aws.Request" representing the
 // client's request for the ListIncomingTypedLinks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4500,8 +4499,8 @@ const opListIncomingTypedLinks = "ListIncomingTypedLinks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIncomingTypedLinks
-func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedLinksInput) (req *request.Request, output *ListIncomingTypedLinksOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedLinksInput) (req *aws.Request, output *ListIncomingTypedLinksOutput) {
+	op := &aws.Operation{
 		Name:       opListIncomingTypedLinks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/incoming",
@@ -4586,7 +4585,7 @@ func (c *CloudDirectory) ListIncomingTypedLinks(input *ListIncomingTypedLinksInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListIncomingTypedLinksWithContext(ctx aws.Context, input *ListIncomingTypedLinksInput, opts ...request.Option) (*ListIncomingTypedLinksOutput, error) {
+func (c *CloudDirectory) ListIncomingTypedLinksWithContext(ctx aws.Context, input *ListIncomingTypedLinksInput, opts ...aws.Option) (*ListIncomingTypedLinksOutput, error) {
 	req, out := c.ListIncomingTypedLinksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4595,7 +4594,7 @@ func (c *CloudDirectory) ListIncomingTypedLinksWithContext(ctx aws.Context, inpu
 
 const opListIndex = "ListIndex"
 
-// ListIndexRequest generates a "aws/request.Request" representing the
+// ListIndexRequest generates a "aws.Request" representing the
 // client's request for the ListIndex operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4619,12 +4618,12 @@ const opListIndex = "ListIndex"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListIndex
-func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) (req *request.Request, output *ListIndexOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) (req *aws.Request, output *ListIndexOutput) {
+	op := &aws.Operation{
 		Name:       opListIndex,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/index/targets",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4705,7 +4704,7 @@ func (c *CloudDirectory) ListIndex(input *ListIndexInput) (*ListIndexOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListIndexWithContext(ctx aws.Context, input *ListIndexInput, opts ...request.Option) (*ListIndexOutput, error) {
+func (c *CloudDirectory) ListIndexWithContext(ctx aws.Context, input *ListIndexInput, opts ...aws.Option) (*ListIndexOutput, error) {
 	req, out := c.ListIndexRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4740,9 +4739,9 @@ func (c *CloudDirectory) ListIndexPages(input *ListIndexInput, fn func(*ListInde
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListIndexInput, fn func(*ListIndexOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListIndexInput, fn func(*ListIndexOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListIndexInput
 			if input != nil {
 				tmp := *input
@@ -4764,7 +4763,7 @@ func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListI
 
 const opListObjectAttributes = "ListObjectAttributes"
 
-// ListObjectAttributesRequest generates a "aws/request.Request" representing the
+// ListObjectAttributesRequest generates a "aws.Request" representing the
 // client's request for the ListObjectAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4788,12 +4787,12 @@ const opListObjectAttributes = "ListObjectAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributes
-func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributesInput) (req *request.Request, output *ListObjectAttributesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributesInput) (req *aws.Request, output *ListObjectAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opListObjectAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/attributes",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4881,7 +4880,7 @@ func (c *CloudDirectory) ListObjectAttributes(input *ListObjectAttributesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectAttributesWithContext(ctx aws.Context, input *ListObjectAttributesInput, opts ...request.Option) (*ListObjectAttributesOutput, error) {
+func (c *CloudDirectory) ListObjectAttributesWithContext(ctx aws.Context, input *ListObjectAttributesInput, opts ...aws.Option) (*ListObjectAttributesOutput, error) {
 	req, out := c.ListObjectAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4916,9 +4915,9 @@ func (c *CloudDirectory) ListObjectAttributesPages(input *ListObjectAttributesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, input *ListObjectAttributesInput, fn func(*ListObjectAttributesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, input *ListObjectAttributesInput, fn func(*ListObjectAttributesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectAttributesInput
 			if input != nil {
 				tmp := *input
@@ -4940,7 +4939,7 @@ func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, i
 
 const opListObjectChildren = "ListObjectChildren"
 
-// ListObjectChildrenRequest generates a "aws/request.Request" representing the
+// ListObjectChildrenRequest generates a "aws.Request" representing the
 // client's request for the ListObjectChildren operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4964,12 +4963,12 @@ const opListObjectChildren = "ListObjectChildren"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildren
-func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInput) (req *request.Request, output *ListObjectChildrenOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInput) (req *aws.Request, output *ListObjectChildrenOutput) {
+	op := &aws.Operation{
 		Name:       opListObjectChildren,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/children",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5058,7 +5057,7 @@ func (c *CloudDirectory) ListObjectChildren(input *ListObjectChildrenInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectChildrenWithContext(ctx aws.Context, input *ListObjectChildrenInput, opts ...request.Option) (*ListObjectChildrenOutput, error) {
+func (c *CloudDirectory) ListObjectChildrenWithContext(ctx aws.Context, input *ListObjectChildrenInput, opts ...aws.Option) (*ListObjectChildrenOutput, error) {
 	req, out := c.ListObjectChildrenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5093,9 +5092,9 @@ func (c *CloudDirectory) ListObjectChildrenPages(input *ListObjectChildrenInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, input *ListObjectChildrenInput, fn func(*ListObjectChildrenOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, input *ListObjectChildrenInput, fn func(*ListObjectChildrenOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectChildrenInput
 			if input != nil {
 				tmp := *input
@@ -5117,7 +5116,7 @@ func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, inp
 
 const opListObjectParentPaths = "ListObjectParentPaths"
 
-// ListObjectParentPathsRequest generates a "aws/request.Request" representing the
+// ListObjectParentPathsRequest generates a "aws.Request" representing the
 // client's request for the ListObjectParentPaths operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5141,12 +5140,12 @@ const opListObjectParentPaths = "ListObjectParentPaths"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPaths
-func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPathsInput) (req *request.Request, output *ListObjectParentPathsOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPathsInput) (req *aws.Request, output *ListObjectParentPathsOutput) {
+	op := &aws.Operation{
 		Name:       opListObjectParentPaths,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/parentpaths",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5237,7 +5236,7 @@ func (c *CloudDirectory) ListObjectParentPaths(input *ListObjectParentPathsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentPathsWithContext(ctx aws.Context, input *ListObjectParentPathsInput, opts ...request.Option) (*ListObjectParentPathsOutput, error) {
+func (c *CloudDirectory) ListObjectParentPathsWithContext(ctx aws.Context, input *ListObjectParentPathsInput, opts ...aws.Option) (*ListObjectParentPathsOutput, error) {
 	req, out := c.ListObjectParentPathsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5272,9 +5271,9 @@ func (c *CloudDirectory) ListObjectParentPathsPages(input *ListObjectParentPaths
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, input *ListObjectParentPathsInput, fn func(*ListObjectParentPathsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, input *ListObjectParentPathsInput, fn func(*ListObjectParentPathsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectParentPathsInput
 			if input != nil {
 				tmp := *input
@@ -5296,7 +5295,7 @@ func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, 
 
 const opListObjectParents = "ListObjectParents"
 
-// ListObjectParentsRequest generates a "aws/request.Request" representing the
+// ListObjectParentsRequest generates a "aws.Request" representing the
 // client's request for the ListObjectParents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5320,12 +5319,12 @@ const opListObjectParents = "ListObjectParents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParents
-func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput) (req *request.Request, output *ListObjectParentsOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput) (req *aws.Request, output *ListObjectParentsOutput) {
+	op := &aws.Operation{
 		Name:       opListObjectParents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/parent",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5413,7 +5412,7 @@ func (c *CloudDirectory) ListObjectParents(input *ListObjectParentsInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentsWithContext(ctx aws.Context, input *ListObjectParentsInput, opts ...request.Option) (*ListObjectParentsOutput, error) {
+func (c *CloudDirectory) ListObjectParentsWithContext(ctx aws.Context, input *ListObjectParentsInput, opts ...aws.Option) (*ListObjectParentsOutput, error) {
 	req, out := c.ListObjectParentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5448,9 +5447,9 @@ func (c *CloudDirectory) ListObjectParentsPages(input *ListObjectParentsInput, f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, input *ListObjectParentsInput, fn func(*ListObjectParentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, input *ListObjectParentsInput, fn func(*ListObjectParentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectParentsInput
 			if input != nil {
 				tmp := *input
@@ -5472,7 +5471,7 @@ func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, inpu
 
 const opListObjectPolicies = "ListObjectPolicies"
 
-// ListObjectPoliciesRequest generates a "aws/request.Request" representing the
+// ListObjectPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListObjectPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5496,12 +5495,12 @@ const opListObjectPolicies = "ListObjectPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPolicies
-func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) (req *request.Request, output *ListObjectPoliciesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInput) (req *aws.Request, output *ListObjectPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListObjectPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/policy",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5582,7 +5581,7 @@ func (c *CloudDirectory) ListObjectPolicies(input *ListObjectPoliciesInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectPoliciesWithContext(ctx aws.Context, input *ListObjectPoliciesInput, opts ...request.Option) (*ListObjectPoliciesOutput, error) {
+func (c *CloudDirectory) ListObjectPoliciesWithContext(ctx aws.Context, input *ListObjectPoliciesInput, opts ...aws.Option) (*ListObjectPoliciesOutput, error) {
 	req, out := c.ListObjectPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5617,9 +5616,9 @@ func (c *CloudDirectory) ListObjectPoliciesPages(input *ListObjectPoliciesInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, input *ListObjectPoliciesInput, fn func(*ListObjectPoliciesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, input *ListObjectPoliciesInput, fn func(*ListObjectPoliciesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectPoliciesInput
 			if input != nil {
 				tmp := *input
@@ -5641,7 +5640,7 @@ func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, inp
 
 const opListOutgoingTypedLinks = "ListOutgoingTypedLinks"
 
-// ListOutgoingTypedLinksRequest generates a "aws/request.Request" representing the
+// ListOutgoingTypedLinksRequest generates a "aws.Request" representing the
 // client's request for the ListOutgoingTypedLinks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5665,8 +5664,8 @@ const opListOutgoingTypedLinks = "ListOutgoingTypedLinks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListOutgoingTypedLinks
-func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInput) (req *request.Request, output *ListOutgoingTypedLinksOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedLinksInput) (req *aws.Request, output *ListOutgoingTypedLinksOutput) {
+	op := &aws.Operation{
 		Name:       opListOutgoingTypedLinks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/outgoing",
@@ -5751,7 +5750,7 @@ func (c *CloudDirectory) ListOutgoingTypedLinks(input *ListOutgoingTypedLinksInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListOutgoingTypedLinksWithContext(ctx aws.Context, input *ListOutgoingTypedLinksInput, opts ...request.Option) (*ListOutgoingTypedLinksOutput, error) {
+func (c *CloudDirectory) ListOutgoingTypedLinksWithContext(ctx aws.Context, input *ListOutgoingTypedLinksInput, opts ...aws.Option) (*ListOutgoingTypedLinksOutput, error) {
 	req, out := c.ListOutgoingTypedLinksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5760,7 +5759,7 @@ func (c *CloudDirectory) ListOutgoingTypedLinksWithContext(ctx aws.Context, inpu
 
 const opListPolicyAttachments = "ListPolicyAttachments"
 
-// ListPolicyAttachmentsRequest generates a "aws/request.Request" representing the
+// ListPolicyAttachmentsRequest generates a "aws.Request" representing the
 // client's request for the ListPolicyAttachments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5784,12 +5783,12 @@ const opListPolicyAttachments = "ListPolicyAttachments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachments
-func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmentsInput) (req *request.Request, output *ListPolicyAttachmentsOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmentsInput) (req *aws.Request, output *ListPolicyAttachmentsOutput) {
+	op := &aws.Operation{
 		Name:       opListPolicyAttachments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/policy/attachment",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5876,7 +5875,7 @@ func (c *CloudDirectory) ListPolicyAttachments(input *ListPolicyAttachmentsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListPolicyAttachmentsWithContext(ctx aws.Context, input *ListPolicyAttachmentsInput, opts ...request.Option) (*ListPolicyAttachmentsOutput, error) {
+func (c *CloudDirectory) ListPolicyAttachmentsWithContext(ctx aws.Context, input *ListPolicyAttachmentsInput, opts ...aws.Option) (*ListPolicyAttachmentsOutput, error) {
 	req, out := c.ListPolicyAttachmentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5911,9 +5910,9 @@ func (c *CloudDirectory) ListPolicyAttachmentsPages(input *ListPolicyAttachments
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, input *ListPolicyAttachmentsInput, fn func(*ListPolicyAttachmentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, input *ListPolicyAttachmentsInput, fn func(*ListPolicyAttachmentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPolicyAttachmentsInput
 			if input != nil {
 				tmp := *input
@@ -5935,7 +5934,7 @@ func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, 
 
 const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 
-// ListPublishedSchemaArnsRequest generates a "aws/request.Request" representing the
+// ListPublishedSchemaArnsRequest generates a "aws.Request" representing the
 // client's request for the ListPublishedSchemaArns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5959,12 +5958,12 @@ const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArns
-func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) (req *request.Request, output *ListPublishedSchemaArnsOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSchemaArnsInput) (req *aws.Request, output *ListPublishedSchemaArnsOutput) {
+	op := &aws.Operation{
 		Name:       opListPublishedSchemaArns,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/published",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6042,7 +6041,7 @@ func (c *CloudDirectory) ListPublishedSchemaArns(input *ListPublishedSchemaArnsI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListPublishedSchemaArnsWithContext(ctx aws.Context, input *ListPublishedSchemaArnsInput, opts ...request.Option) (*ListPublishedSchemaArnsOutput, error) {
+func (c *CloudDirectory) ListPublishedSchemaArnsWithContext(ctx aws.Context, input *ListPublishedSchemaArnsInput, opts ...aws.Option) (*ListPublishedSchemaArnsOutput, error) {
 	req, out := c.ListPublishedSchemaArnsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6077,9 +6076,9 @@ func (c *CloudDirectory) ListPublishedSchemaArnsPages(input *ListPublishedSchema
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context, input *ListPublishedSchemaArnsInput, fn func(*ListPublishedSchemaArnsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context, input *ListPublishedSchemaArnsInput, fn func(*ListPublishedSchemaArnsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPublishedSchemaArnsInput
 			if input != nil {
 				tmp := *input
@@ -6101,7 +6100,7 @@ func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6125,12 +6124,12 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTagsForResource
-func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/tags",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6212,7 +6211,7 @@ func (c *CloudDirectory) ListTagsForResource(input *ListTagsForResourceInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *CloudDirectory) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6247,9 +6246,9 @@ func (c *CloudDirectory) ListTagsForResourcePages(input *ListTagsForResourceInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTagsForResourceInput
 			if input != nil {
 				tmp := *input
@@ -6271,7 +6270,7 @@ func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, in
 
 const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 
-// ListTypedLinkFacetAttributesRequest generates a "aws/request.Request" representing the
+// ListTypedLinkFacetAttributesRequest generates a "aws.Request" representing the
 // client's request for the ListTypedLinkFacetAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6295,12 +6294,12 @@ const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetAttributes
-func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) (req *request.Request, output *ListTypedLinkFacetAttributesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLinkFacetAttributesInput) (req *aws.Request, output *ListTypedLinkFacetAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opListTypedLinkFacetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/facet/attributes",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6382,7 +6381,7 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributes(input *ListTypedLinkFacetA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetAttributesWithContext(ctx aws.Context, input *ListTypedLinkFacetAttributesInput, opts ...request.Option) (*ListTypedLinkFacetAttributesOutput, error) {
+func (c *CloudDirectory) ListTypedLinkFacetAttributesWithContext(ctx aws.Context, input *ListTypedLinkFacetAttributesInput, opts ...aws.Option) (*ListTypedLinkFacetAttributesOutput, error) {
 	req, out := c.ListTypedLinkFacetAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6417,9 +6416,9 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesPages(input *ListTypedLinkF
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Context, input *ListTypedLinkFacetAttributesInput, fn func(*ListTypedLinkFacetAttributesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Context, input *ListTypedLinkFacetAttributesInput, fn func(*ListTypedLinkFacetAttributesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTypedLinkFacetAttributesInput
 			if input != nil {
 				tmp := *input
@@ -6441,7 +6440,7 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Co
 
 const opListTypedLinkFacetNames = "ListTypedLinkFacetNames"
 
-// ListTypedLinkFacetNamesRequest generates a "aws/request.Request" representing the
+// ListTypedLinkFacetNamesRequest generates a "aws.Request" representing the
 // client's request for the ListTypedLinkFacetNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6465,12 +6464,12 @@ const opListTypedLinkFacetNames = "ListTypedLinkFacetNames"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListTypedLinkFacetNames
-func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesInput) (req *request.Request, output *ListTypedLinkFacetNamesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFacetNamesInput) (req *aws.Request, output *ListTypedLinkFacetNamesOutput) {
+	op := &aws.Operation{
 		Name:       opListTypedLinkFacetNames,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/facet/list",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6549,7 +6548,7 @@ func (c *CloudDirectory) ListTypedLinkFacetNames(input *ListTypedLinkFacetNamesI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetNamesWithContext(ctx aws.Context, input *ListTypedLinkFacetNamesInput, opts ...request.Option) (*ListTypedLinkFacetNamesOutput, error) {
+func (c *CloudDirectory) ListTypedLinkFacetNamesWithContext(ctx aws.Context, input *ListTypedLinkFacetNamesInput, opts ...aws.Option) (*ListTypedLinkFacetNamesOutput, error) {
 	req, out := c.ListTypedLinkFacetNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6584,9 +6583,9 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesPages(input *ListTypedLinkFacetN
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context, input *ListTypedLinkFacetNamesInput, fn func(*ListTypedLinkFacetNamesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context, input *ListTypedLinkFacetNamesInput, fn func(*ListTypedLinkFacetNamesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTypedLinkFacetNamesInput
 			if input != nil {
 				tmp := *input
@@ -6608,7 +6607,7 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context
 
 const opLookupPolicy = "LookupPolicy"
 
-// LookupPolicyRequest generates a "aws/request.Request" representing the
+// LookupPolicyRequest generates a "aws.Request" representing the
 // client's request for the LookupPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6632,12 +6631,12 @@ const opLookupPolicy = "LookupPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicy
-func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) (req *request.Request, output *LookupPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) (req *aws.Request, output *LookupPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opLookupPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/policy/lookup",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6727,7 +6726,7 @@ func (c *CloudDirectory) LookupPolicy(input *LookupPolicyInput) (*LookupPolicyOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) LookupPolicyWithContext(ctx aws.Context, input *LookupPolicyInput, opts ...request.Option) (*LookupPolicyOutput, error) {
+func (c *CloudDirectory) LookupPolicyWithContext(ctx aws.Context, input *LookupPolicyInput, opts ...aws.Option) (*LookupPolicyOutput, error) {
 	req, out := c.LookupPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6762,9 +6761,9 @@ func (c *CloudDirectory) LookupPolicyPages(input *LookupPolicyInput, fn func(*Lo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *LookupPolicyInput, fn func(*LookupPolicyOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *LookupPolicyInput, fn func(*LookupPolicyOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *LookupPolicyInput
 			if input != nil {
 				tmp := *input
@@ -6786,7 +6785,7 @@ func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *Lo
 
 const opPublishSchema = "PublishSchema"
 
-// PublishSchemaRequest generates a "aws/request.Request" representing the
+// PublishSchemaRequest generates a "aws.Request" representing the
 // client's request for the PublishSchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6810,8 +6809,8 @@ const opPublishSchema = "PublishSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PublishSchema
-func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) (req *request.Request, output *PublishSchemaOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) (req *aws.Request, output *PublishSchemaOutput) {
+	op := &aws.Operation{
 		Name:       opPublishSchema,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/publish",
@@ -6890,7 +6889,7 @@ func (c *CloudDirectory) PublishSchema(input *PublishSchemaInput) (*PublishSchem
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) PublishSchemaWithContext(ctx aws.Context, input *PublishSchemaInput, opts ...request.Option) (*PublishSchemaOutput, error) {
+func (c *CloudDirectory) PublishSchemaWithContext(ctx aws.Context, input *PublishSchemaInput, opts ...aws.Option) (*PublishSchemaOutput, error) {
 	req, out := c.PublishSchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6899,7 +6898,7 @@ func (c *CloudDirectory) PublishSchemaWithContext(ctx aws.Context, input *Publis
 
 const opPutSchemaFromJson = "PutSchemaFromJson"
 
-// PutSchemaFromJsonRequest generates a "aws/request.Request" representing the
+// PutSchemaFromJsonRequest generates a "aws.Request" representing the
 // client's request for the PutSchemaFromJson operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6923,8 +6922,8 @@ const opPutSchemaFromJson = "PutSchemaFromJson"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PutSchemaFromJson
-func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) (req *request.Request, output *PutSchemaFromJsonOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput) (req *aws.Request, output *PutSchemaFromJsonOutput) {
+	op := &aws.Operation{
 		Name:       opPutSchemaFromJson,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/json",
@@ -7002,7 +7001,7 @@ func (c *CloudDirectory) PutSchemaFromJson(input *PutSchemaFromJsonInput) (*PutS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) PutSchemaFromJsonWithContext(ctx aws.Context, input *PutSchemaFromJsonInput, opts ...request.Option) (*PutSchemaFromJsonOutput, error) {
+func (c *CloudDirectory) PutSchemaFromJsonWithContext(ctx aws.Context, input *PutSchemaFromJsonInput, opts ...aws.Option) (*PutSchemaFromJsonOutput, error) {
 	req, out := c.PutSchemaFromJsonRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7011,7 +7010,7 @@ func (c *CloudDirectory) PutSchemaFromJsonWithContext(ctx aws.Context, input *Pu
 
 const opRemoveFacetFromObject = "RemoveFacetFromObject"
 
-// RemoveFacetFromObjectRequest generates a "aws/request.Request" representing the
+// RemoveFacetFromObjectRequest generates a "aws.Request" representing the
 // client's request for the RemoveFacetFromObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7035,8 +7034,8 @@ const opRemoveFacetFromObject = "RemoveFacetFromObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/RemoveFacetFromObject
-func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput) (req *request.Request, output *RemoveFacetFromObjectOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObjectInput) (req *aws.Request, output *RemoveFacetFromObjectOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveFacetFromObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/facets/delete",
@@ -7116,7 +7115,7 @@ func (c *CloudDirectory) RemoveFacetFromObject(input *RemoveFacetFromObjectInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) RemoveFacetFromObjectWithContext(ctx aws.Context, input *RemoveFacetFromObjectInput, opts ...request.Option) (*RemoveFacetFromObjectOutput, error) {
+func (c *CloudDirectory) RemoveFacetFromObjectWithContext(ctx aws.Context, input *RemoveFacetFromObjectInput, opts ...aws.Option) (*RemoveFacetFromObjectOutput, error) {
 	req, out := c.RemoveFacetFromObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7125,7 +7124,7 @@ func (c *CloudDirectory) RemoveFacetFromObjectWithContext(ctx aws.Context, input
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7149,8 +7148,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TagResource
-func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/tags/add",
@@ -7228,7 +7227,7 @@ func (c *CloudDirectory) TagResource(input *TagResourceInput) (*TagResourceOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *CloudDirectory) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7237,7 +7236,7 @@ func (c *CloudDirectory) TagResourceWithContext(ctx aws.Context, input *TagResou
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7261,8 +7260,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UntagResource
-func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/tags/remove",
@@ -7340,7 +7339,7 @@ func (c *CloudDirectory) UntagResource(input *UntagResourceInput) (*UntagResourc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *CloudDirectory) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7349,7 +7348,7 @@ func (c *CloudDirectory) UntagResourceWithContext(ctx aws.Context, input *UntagR
 
 const opUpdateFacet = "UpdateFacet"
 
-// UpdateFacetRequest generates a "aws/request.Request" representing the
+// UpdateFacetRequest generates a "aws.Request" representing the
 // client's request for the UpdateFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7373,8 +7372,8 @@ const opUpdateFacet = "UpdateFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacet
-func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) (req *request.Request, output *UpdateFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) (req *aws.Request, output *UpdateFacetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFacet,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/facet",
@@ -7462,7 +7461,7 @@ func (c *CloudDirectory) UpdateFacet(input *UpdateFacetInput) (*UpdateFacetOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) UpdateFacetWithContext(ctx aws.Context, input *UpdateFacetInput, opts ...request.Option) (*UpdateFacetOutput, error) {
+func (c *CloudDirectory) UpdateFacetWithContext(ctx aws.Context, input *UpdateFacetInput, opts ...aws.Option) (*UpdateFacetOutput, error) {
 	req, out := c.UpdateFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7471,7 +7470,7 @@ func (c *CloudDirectory) UpdateFacetWithContext(ctx aws.Context, input *UpdateFa
 
 const opUpdateObjectAttributes = "UpdateObjectAttributes"
 
-// UpdateObjectAttributesRequest generates a "aws/request.Request" representing the
+// UpdateObjectAttributesRequest generates a "aws.Request" representing the
 // client's request for the UpdateObjectAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7495,8 +7494,8 @@ const opUpdateObjectAttributes = "UpdateObjectAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributes
-func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) (req *request.Request, output *UpdateObjectAttributesOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttributesInput) (req *aws.Request, output *UpdateObjectAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateObjectAttributes,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/update",
@@ -7576,7 +7575,7 @@ func (c *CloudDirectory) UpdateObjectAttributes(input *UpdateObjectAttributesInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) UpdateObjectAttributesWithContext(ctx aws.Context, input *UpdateObjectAttributesInput, opts ...request.Option) (*UpdateObjectAttributesOutput, error) {
+func (c *CloudDirectory) UpdateObjectAttributesWithContext(ctx aws.Context, input *UpdateObjectAttributesInput, opts ...aws.Option) (*UpdateObjectAttributesOutput, error) {
 	req, out := c.UpdateObjectAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7585,7 +7584,7 @@ func (c *CloudDirectory) UpdateObjectAttributesWithContext(ctx aws.Context, inpu
 
 const opUpdateSchema = "UpdateSchema"
 
-// UpdateSchemaRequest generates a "aws/request.Request" representing the
+// UpdateSchemaRequest generates a "aws.Request" representing the
 // client's request for the UpdateSchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7609,8 +7608,8 @@ const opUpdateSchema = "UpdateSchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateSchema
-func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) (req *request.Request, output *UpdateSchemaOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) (req *aws.Request, output *UpdateSchemaOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSchema,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/schema/update",
@@ -7684,7 +7683,7 @@ func (c *CloudDirectory) UpdateSchema(input *UpdateSchemaInput) (*UpdateSchemaOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) UpdateSchemaWithContext(ctx aws.Context, input *UpdateSchemaInput, opts ...request.Option) (*UpdateSchemaOutput, error) {
+func (c *CloudDirectory) UpdateSchemaWithContext(ctx aws.Context, input *UpdateSchemaInput, opts ...aws.Option) (*UpdateSchemaOutput, error) {
 	req, out := c.UpdateSchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7693,7 +7692,7 @@ func (c *CloudDirectory) UpdateSchemaWithContext(ctx aws.Context, input *UpdateS
 
 const opUpdateTypedLinkFacet = "UpdateTypedLinkFacet"
 
-// UpdateTypedLinkFacetRequest generates a "aws/request.Request" representing the
+// UpdateTypedLinkFacetRequest generates a "aws.Request" representing the
 // client's request for the UpdateTypedLinkFacet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7717,8 +7716,8 @@ const opUpdateTypedLinkFacet = "UpdateTypedLinkFacet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacet
-func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) (req *request.Request, output *UpdateTypedLinkFacetOutput) {
-	op := &request.Operation{
+func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacetInput) (req *aws.Request, output *UpdateTypedLinkFacetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTypedLinkFacet,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/amazonclouddirectory/2017-01-11/typedlink/facet",
@@ -7804,7 +7803,7 @@ func (c *CloudDirectory) UpdateTypedLinkFacet(input *UpdateTypedLinkFacetInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudDirectory) UpdateTypedLinkFacetWithContext(ctx aws.Context, input *UpdateTypedLinkFacetInput, opts ...request.Option) (*UpdateTypedLinkFacetOutput, error) {
+func (c *CloudDirectory) UpdateTypedLinkFacetWithContext(ctx aws.Context, input *UpdateTypedLinkFacetInput, opts ...aws.Option) (*UpdateTypedLinkFacetOutput, error) {
 	req, out := c.UpdateTypedLinkFacetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7847,15 +7846,15 @@ func (s AddFacetToObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddFacetToObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddFacetToObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddFacetToObjectInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.SchemaFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
@@ -7863,13 +7862,13 @@ func (s *AddFacetToObjectInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SchemaFacet != nil {
 		if err := s.SchemaFacet.Validate(); err != nil {
-			invalidParams.AddNested("SchemaFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SchemaFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7947,12 +7946,12 @@ func (s ApplySchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplySchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplySchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplySchemaInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.PublishedSchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("PublishedSchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("PublishedSchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8047,21 +8046,21 @@ func (s AttachObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachObjectInput"}
 	if s.ChildReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChildReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ChildReference"))
 	}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.LinkName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LinkName"))
+		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.ParentReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8149,12 +8148,12 @@ func (s AttachPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.PolicyReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyReference"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8229,15 +8228,15 @@ func (s AttachToIndexInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachToIndexInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachToIndexInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachToIndexInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.IndexReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexReference"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
 	if s.TargetReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8331,21 +8330,21 @@ func (s AttachTypedLinkInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachTypedLinkInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachTypedLinkInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachTypedLinkInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.SourceObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
 	}
 	if s.TargetObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
 	}
 	if s.TypedLinkFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypedLinkFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -8353,13 +8352,13 @@ func (s *AttachTypedLinkInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.TypedLinkFacet != nil {
 		if err := s.TypedLinkFacet.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypedLinkFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8457,21 +8456,21 @@ func (s AttributeKey) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeKey) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttributeKey"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttributeKey"}
 	if s.FacetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FacetName"))
+		invalidParams.Add(aws.NewErrParamRequired("FacetName"))
 	}
 	if s.FacetName != nil && len(*s.FacetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FacetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FacetName", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8526,16 +8525,16 @@ func (s AttributeKeyAndValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeKeyAndValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttributeKeyAndValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttributeKeyAndValue"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Key != nil {
 		if err := s.Key.Validate(); err != nil {
-			invalidParams.AddNested("Key", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Key", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8585,15 +8584,15 @@ func (s AttributeNameAndValue) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeNameAndValue) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttributeNameAndValue"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttributeNameAndValue"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8647,15 +8646,15 @@ func (s BatchAddFacetToObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAddFacetToObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchAddFacetToObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchAddFacetToObject"}
 	if s.ObjectAttributeList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectAttributeList"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectAttributeList"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.SchemaFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
@@ -8663,13 +8662,13 @@ func (s *BatchAddFacetToObject) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SchemaFacet != nil {
 		if err := s.SchemaFacet.Validate(); err != nil {
-			invalidParams.AddNested("SchemaFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SchemaFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8746,18 +8745,18 @@ func (s BatchAttachObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchAttachObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachObject"}
 	if s.ChildReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChildReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ChildReference"))
 	}
 	if s.LinkName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LinkName"))
+		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.ParentReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8838,12 +8837,12 @@ func (s BatchAttachPolicy) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachPolicy) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchAttachPolicy"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachPolicy"}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.PolicyReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyReference"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8909,12 +8908,12 @@ func (s BatchAttachToIndex) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachToIndex) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchAttachToIndex"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachToIndex"}
 	if s.IndexReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexReference"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
 	if s.TargetReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8999,18 +8998,18 @@ func (s BatchAttachTypedLink) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchAttachTypedLink) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchAttachTypedLink"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchAttachTypedLink"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.SourceObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
 	}
 	if s.TargetObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
 	}
 	if s.TypedLinkFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypedLinkFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -9018,13 +9017,13 @@ func (s *BatchAttachTypedLink) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.TypedLinkFacet != nil {
 		if err := s.TypedLinkFacet.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypedLinkFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9124,15 +9123,15 @@ func (s BatchCreateIndex) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCreateIndex) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchCreateIndex"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchCreateIndex"}
 	if s.IsUnique == nil {
-		invalidParams.Add(request.NewErrParamRequired("IsUnique"))
+		invalidParams.Add(aws.NewErrParamRequired("IsUnique"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.OrderedIndexedAttributeList == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrderedIndexedAttributeList"))
+		invalidParams.Add(aws.NewErrParamRequired("OrderedIndexedAttributeList"))
 	}
 	if s.OrderedIndexedAttributeList != nil {
 		for i, v := range s.OrderedIndexedAttributeList {
@@ -9140,7 +9139,7 @@ func (s *BatchCreateIndex) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9252,24 +9251,24 @@ func (s BatchCreateObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCreateObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchCreateObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchCreateObject"}
 	if s.BatchReferenceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchReferenceName"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchReferenceName"))
 	}
 	if s.LinkName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LinkName"))
+		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.ObjectAttributeList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectAttributeList"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectAttributeList"))
 	}
 	if s.ParentReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
 	if s.SchemaFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
@@ -9277,7 +9276,7 @@ func (s *BatchCreateObject) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9287,7 +9286,7 @@ func (s *BatchCreateObject) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SchemaFacet", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SchemaFacet", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9376,9 +9375,9 @@ func (s BatchDeleteObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteObject"}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9438,12 +9437,12 @@ func (s BatchDetachFromIndex) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachFromIndex) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDetachFromIndex"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachFromIndex"}
 	if s.IndexReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexReference"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
 	if s.TargetReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9523,18 +9522,18 @@ func (s BatchDetachObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDetachObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachObject"}
 	if s.BatchReferenceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BatchReferenceName"))
+		invalidParams.Add(aws.NewErrParamRequired("BatchReferenceName"))
 	}
 	if s.LinkName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LinkName"))
+		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.ParentReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9615,12 +9614,12 @@ func (s BatchDetachPolicy) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachPolicy) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDetachPolicy"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachPolicy"}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.PolicyReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyReference"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9681,13 +9680,13 @@ func (s BatchDetachTypedLink) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachTypedLink) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDetachTypedLink"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachTypedLink"}
 	if s.TypedLinkSpecifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypedLinkSpecifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
 	}
 	if s.TypedLinkSpecifier != nil {
 		if err := s.TypedLinkSpecifier.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkSpecifier", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9743,9 +9742,9 @@ func (s BatchGetObjectInformation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetObjectInformation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetObjectInformation"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetObjectInformation"}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9824,12 +9823,12 @@ func (s BatchListAttachedIndices) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListAttachedIndices) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListAttachedIndices"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListAttachedIndices"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.TargetReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9931,12 +9930,12 @@ func (s BatchListIncomingTypedLinks) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListIncomingTypedLinks) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListIncomingTypedLinks"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListIncomingTypedLinks"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
@@ -9944,13 +9943,13 @@ func (s *BatchListIncomingTypedLinks) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.FilterTypedLink != nil {
 		if err := s.FilterTypedLink.Validate(); err != nil {
-			invalidParams.AddNested("FilterTypedLink", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FilterTypedLink", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10057,12 +10056,12 @@ func (s BatchListIndex) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListIndex) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListIndex"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListIndex"}
 	if s.IndexReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexReference"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.RangesOnIndexedValues != nil {
 		for i, v := range s.RangesOnIndexedValues {
@@ -10070,7 +10069,7 @@ func (s *BatchListIndex) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RangesOnIndexedValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RangesOnIndexedValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10173,16 +10172,16 @@ func (s BatchListObjectAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListObjectAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListObjectAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListObjectAttributes"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.FacetFilter != nil {
 		if err := s.FacetFilter.Validate(); err != nil {
-			invalidParams.AddNested("FacetFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FacetFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10281,12 +10280,12 @@ func (s BatchListObjectChildren) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListObjectChildren) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListObjectChildren"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListObjectChildren"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10379,12 +10378,12 @@ func (s BatchListObjectParentPaths) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListObjectParentPaths) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListObjectParentPaths"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListObjectParentPaths"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10475,12 +10474,12 @@ func (s BatchListObjectPolicies) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListObjectPolicies) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListObjectPolicies"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListObjectPolicies"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10582,12 +10581,12 @@ func (s BatchListOutgoingTypedLinks) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListOutgoingTypedLinks) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListOutgoingTypedLinks"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListOutgoingTypedLinks"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
@@ -10595,13 +10594,13 @@ func (s *BatchListOutgoingTypedLinks) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.FilterTypedLink != nil {
 		if err := s.FilterTypedLink.Validate(); err != nil {
-			invalidParams.AddNested("FilterTypedLink", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FilterTypedLink", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10706,12 +10705,12 @@ func (s BatchListPolicyAttachments) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchListPolicyAttachments) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchListPolicyAttachments"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchListPolicyAttachments"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.PolicyReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyReference"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10803,12 +10802,12 @@ func (s BatchLookupPolicy) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchLookupPolicy) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchLookupPolicy"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchLookupPolicy"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10937,12 +10936,12 @@ func (s BatchReadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchReadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchReadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchReadInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.Operations == nil {
-		invalidParams.Add(request.NewErrParamRequired("Operations"))
+		invalidParams.Add(aws.NewErrParamRequired("Operations"))
 	}
 	if s.Operations != nil {
 		for i, v := range s.Operations {
@@ -10950,7 +10949,7 @@ func (s *BatchReadInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11043,60 +11042,60 @@ func (s BatchReadOperation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchReadOperation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchReadOperation"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchReadOperation"}
 	if s.GetObjectInformation != nil {
 		if err := s.GetObjectInformation.Validate(); err != nil {
-			invalidParams.AddNested("GetObjectInformation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GetObjectInformation", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListAttachedIndices != nil {
 		if err := s.ListAttachedIndices.Validate(); err != nil {
-			invalidParams.AddNested("ListAttachedIndices", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListAttachedIndices", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListIncomingTypedLinks != nil {
 		if err := s.ListIncomingTypedLinks.Validate(); err != nil {
-			invalidParams.AddNested("ListIncomingTypedLinks", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListIncomingTypedLinks", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListIndex != nil {
 		if err := s.ListIndex.Validate(); err != nil {
-			invalidParams.AddNested("ListIndex", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListIndex", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListObjectAttributes != nil {
 		if err := s.ListObjectAttributes.Validate(); err != nil {
-			invalidParams.AddNested("ListObjectAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListObjectAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListObjectChildren != nil {
 		if err := s.ListObjectChildren.Validate(); err != nil {
-			invalidParams.AddNested("ListObjectChildren", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListObjectChildren", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListObjectParentPaths != nil {
 		if err := s.ListObjectParentPaths.Validate(); err != nil {
-			invalidParams.AddNested("ListObjectParentPaths", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListObjectParentPaths", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListObjectPolicies != nil {
 		if err := s.ListObjectPolicies.Validate(); err != nil {
-			invalidParams.AddNested("ListObjectPolicies", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListObjectPolicies", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListOutgoingTypedLinks != nil {
 		if err := s.ListOutgoingTypedLinks.Validate(); err != nil {
-			invalidParams.AddNested("ListOutgoingTypedLinks", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListOutgoingTypedLinks", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ListPolicyAttachments != nil {
 		if err := s.ListPolicyAttachments.Validate(); err != nil {
-			invalidParams.AddNested("ListPolicyAttachments", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ListPolicyAttachments", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LookupPolicy != nil {
 		if err := s.LookupPolicy.Validate(); err != nil {
-			invalidParams.AddNested("LookupPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LookupPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11386,16 +11385,16 @@ func (s BatchRemoveFacetFromObject) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchRemoveFacetFromObject) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchRemoveFacetFromObject"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchRemoveFacetFromObject"}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.SchemaFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
 	if s.SchemaFacet != nil {
 		if err := s.SchemaFacet.Validate(); err != nil {
-			invalidParams.AddNested("SchemaFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SchemaFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11461,12 +11460,12 @@ func (s BatchUpdateObjectAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchUpdateObjectAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchUpdateObjectAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchUpdateObjectAttributes"}
 	if s.AttributeUpdates == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeUpdates"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
@@ -11474,7 +11473,7 @@ func (s *BatchUpdateObjectAttributes) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11550,12 +11549,12 @@ func (s BatchWriteInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchWriteInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchWriteInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchWriteInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.Operations == nil {
-		invalidParams.Add(request.NewErrParamRequired("Operations"))
+		invalidParams.Add(aws.NewErrParamRequired("Operations"))
 	}
 	if s.Operations != nil {
 		for i, v := range s.Operations {
@@ -11563,7 +11562,7 @@ func (s *BatchWriteInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Operations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11650,75 +11649,75 @@ func (s BatchWriteOperation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchWriteOperation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchWriteOperation"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchWriteOperation"}
 	if s.AddFacetToObject != nil {
 		if err := s.AddFacetToObject.Validate(); err != nil {
-			invalidParams.AddNested("AddFacetToObject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AddFacetToObject", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.AttachObject != nil {
 		if err := s.AttachObject.Validate(); err != nil {
-			invalidParams.AddNested("AttachObject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttachObject", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.AttachPolicy != nil {
 		if err := s.AttachPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AttachPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttachPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.AttachToIndex != nil {
 		if err := s.AttachToIndex.Validate(); err != nil {
-			invalidParams.AddNested("AttachToIndex", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttachToIndex", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.AttachTypedLink != nil {
 		if err := s.AttachTypedLink.Validate(); err != nil {
-			invalidParams.AddNested("AttachTypedLink", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttachTypedLink", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CreateIndex != nil {
 		if err := s.CreateIndex.Validate(); err != nil {
-			invalidParams.AddNested("CreateIndex", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CreateIndex", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CreateObject != nil {
 		if err := s.CreateObject.Validate(); err != nil {
-			invalidParams.AddNested("CreateObject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CreateObject", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DeleteObject != nil {
 		if err := s.DeleteObject.Validate(); err != nil {
-			invalidParams.AddNested("DeleteObject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DeleteObject", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DetachFromIndex != nil {
 		if err := s.DetachFromIndex.Validate(); err != nil {
-			invalidParams.AddNested("DetachFromIndex", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DetachFromIndex", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DetachObject != nil {
 		if err := s.DetachObject.Validate(); err != nil {
-			invalidParams.AddNested("DetachObject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DetachObject", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DetachPolicy != nil {
 		if err := s.DetachPolicy.Validate(); err != nil {
-			invalidParams.AddNested("DetachPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DetachPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DetachTypedLink != nil {
 		if err := s.DetachTypedLink.Validate(); err != nil {
-			invalidParams.AddNested("DetachTypedLink", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DetachTypedLink", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RemoveFacetFromObject != nil {
 		if err := s.RemoveFacetFromObject.Validate(); err != nil {
-			invalidParams.AddNested("RemoveFacetFromObject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RemoveFacetFromObject", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.UpdateObjectAttributes != nil {
 		if err := s.UpdateObjectAttributes.Validate(); err != nil {
-			invalidParams.AddNested("UpdateObjectAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("UpdateObjectAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12010,15 +12009,15 @@ func (s CreateDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12147,18 +12146,18 @@ func (s CreateFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFacetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ObjectType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectType"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectType"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -12166,7 +12165,7 @@ func (s *CreateFacetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12256,18 +12255,18 @@ func (s CreateIndexInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIndexInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateIndexInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateIndexInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.IsUnique == nil {
-		invalidParams.Add(request.NewErrParamRequired("IsUnique"))
+		invalidParams.Add(aws.NewErrParamRequired("IsUnique"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.OrderedIndexedAttributeList == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrderedIndexedAttributeList"))
+		invalidParams.Add(aws.NewErrParamRequired("OrderedIndexedAttributeList"))
 	}
 	if s.OrderedIndexedAttributeList != nil {
 		for i, v := range s.OrderedIndexedAttributeList {
@@ -12275,7 +12274,7 @@ func (s *CreateIndexInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OrderedIndexedAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12379,15 +12378,15 @@ func (s CreateObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateObjectInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.SchemaFacets == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaFacets"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacets"))
 	}
 	if s.ObjectAttributeList != nil {
 		for i, v := range s.ObjectAttributeList {
@@ -12395,7 +12394,7 @@ func (s *CreateObjectInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ObjectAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12405,7 +12404,7 @@ func (s *CreateObjectInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SchemaFacets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SchemaFacets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12493,12 +12492,12 @@ func (s CreateSchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSchemaInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12566,16 +12565,16 @@ func (s CreateTypedLinkFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTypedLinkFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTypedLinkFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTypedLinkFacetInput"}
 	if s.Facet == nil {
-		invalidParams.Add(request.NewErrParamRequired("Facet"))
+		invalidParams.Add(aws.NewErrParamRequired("Facet"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 	if s.Facet != nil {
 		if err := s.Facet.Validate(); err != nil {
-			invalidParams.AddNested("Facet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Facet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12634,9 +12633,9 @@ func (s DeleteDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12705,15 +12704,15 @@ func (s DeleteFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFacetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12777,12 +12776,12 @@ func (s DeleteObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12841,9 +12840,9 @@ func (s DeleteSchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSchemaInput"}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12911,12 +12910,12 @@ func (s DeleteTypedLinkFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTypedLinkFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTypedLinkFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTypedLinkFacetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12985,15 +12984,15 @@ func (s DetachFromIndexInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachFromIndexInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachFromIndexInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachFromIndexInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.IndexReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexReference"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
 	if s.TargetReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13078,18 +13077,18 @@ func (s DetachObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachObjectInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.LinkName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LinkName"))
+		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
 	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LinkName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 	if s.ParentReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13173,15 +13172,15 @@ func (s DetachPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachPolicyInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.PolicyReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyReference"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13251,16 +13250,16 @@ func (s DetachTypedLinkInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachTypedLinkInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachTypedLinkInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachTypedLinkInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.TypedLinkSpecifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypedLinkSpecifier"))
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkSpecifier"))
 	}
 	if s.TypedLinkSpecifier != nil {
 		if err := s.TypedLinkSpecifier.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkSpecifier", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypedLinkSpecifier", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13372,9 +13371,9 @@ func (s DisableDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableDirectoryInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13437,9 +13436,9 @@ func (s EnableDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableDirectoryInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13551,21 +13550,21 @@ func (s FacetAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FacetAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "FacetAttribute"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.AttributeDefinition != nil {
 		if err := s.AttributeDefinition.Validate(); err != nil {
-			invalidParams.AddNested("AttributeDefinition", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttributeDefinition", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.AttributeReference != nil {
 		if err := s.AttributeReference.Validate(); err != nil {
-			invalidParams.AddNested("AttributeReference", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttributeReference", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13632,9 +13631,9 @@ func (s FacetAttributeDefinition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttributeDefinition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FacetAttributeDefinition"}
+	invalidParams := aws.ErrInvalidParams{Context: "FacetAttributeDefinition"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13700,18 +13699,18 @@ func (s FacetAttributeReference) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttributeReference) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FacetAttributeReference"}
+	invalidParams := aws.ErrInvalidParams{Context: "FacetAttributeReference"}
 	if s.TargetAttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetAttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetAttributeName"))
 	}
 	if s.TargetAttributeName != nil && len(*s.TargetAttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetAttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetAttributeName", 1))
 	}
 	if s.TargetFacetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetFacetName"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetFacetName"))
 	}
 	if s.TargetFacetName != nil && len(*s.TargetFacetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetFacetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetFacetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13756,10 +13755,10 @@ func (s FacetAttributeUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FacetAttributeUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FacetAttributeUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "FacetAttributeUpdate"}
 	if s.Attribute != nil {
 		if err := s.Attribute.Validate(); err != nil {
-			invalidParams.AddNested("Attribute", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Attribute", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13803,9 +13802,9 @@ func (s GetDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDirectoryInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13874,15 +13873,15 @@ func (s GetFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFacetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13957,12 +13956,12 @@ func (s GetObjectInformationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectInformationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetObjectInformationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetObjectInformationInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14044,9 +14043,9 @@ func (s GetSchemaAsJsonInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSchemaAsJsonInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSchemaAsJsonInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSchemaAsJsonInput"}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14122,12 +14121,12 @@ func (s GetTypedLinkFacetInformationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTypedLinkFacetInformationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTypedLinkFacetInformationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTypedLinkFacetInformationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14241,12 +14240,12 @@ func (s ListAppliedSchemaArnsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAppliedSchemaArnsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAppliedSchemaArnsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAppliedSchemaArnsInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14342,15 +14341,15 @@ func (s ListAttachedIndicesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAttachedIndicesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAttachedIndicesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAttachedIndicesInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.TargetReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14445,9 +14444,9 @@ func (s ListDevelopmentSchemaArnsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDevelopmentSchemaArnsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDevelopmentSchemaArnsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDevelopmentSchemaArnsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14528,9 +14527,9 @@ func (s ListDirectoriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDirectoriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDirectoriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDirectoriesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14626,18 +14625,18 @@ func (s ListFacetAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFacetAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFacetAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFacetAttributesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14731,12 +14730,12 @@ func (s ListFacetNamesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFacetNamesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFacetNamesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFacetNamesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14843,15 +14842,15 @@ func (s ListIncomingTypedLinksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIncomingTypedLinksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListIncomingTypedLinksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListIncomingTypedLinksInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
@@ -14859,13 +14858,13 @@ func (s *ListIncomingTypedLinksInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.FilterTypedLink != nil {
 		if err := s.FilterTypedLink.Validate(); err != nil {
-			invalidParams.AddNested("FilterTypedLink", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FilterTypedLink", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -14989,15 +14988,15 @@ func (s ListIndexInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIndexInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListIndexInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListIndexInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.IndexReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexReference"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexReference"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.RangesOnIndexedValues != nil {
 		for i, v := range s.RangesOnIndexedValues {
@@ -15005,7 +15004,7 @@ func (s *ListIndexInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RangesOnIndexedValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RangesOnIndexedValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15128,19 +15127,19 @@ func (s ListObjectAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectAttributesInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.FacetFilter != nil {
 		if err := s.FacetFilter.Validate(); err != nil {
-			invalidParams.AddNested("FacetFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FacetFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15260,15 +15259,15 @@ func (s ListObjectChildrenInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectChildrenInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectChildrenInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectChildrenInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15375,15 +15374,15 @@ func (s ListObjectParentPathsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectParentPathsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectParentPathsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectParentPathsInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15489,15 +15488,15 @@ func (s ListObjectParentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectParentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectParentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectParentsInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15609,15 +15608,15 @@ func (s ListObjectPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectPoliciesInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15736,15 +15735,15 @@ func (s ListOutgoingTypedLinksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOutgoingTypedLinksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOutgoingTypedLinksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOutgoingTypedLinksInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.FilterAttributeRanges != nil {
 		for i, v := range s.FilterAttributeRanges {
@@ -15752,13 +15751,13 @@ func (s *ListOutgoingTypedLinksInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FilterAttributeRanges", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.FilterTypedLink != nil {
 		if err := s.FilterTypedLink.Validate(); err != nil {
-			invalidParams.AddNested("FilterTypedLink", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FilterTypedLink", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15882,15 +15881,15 @@ func (s ListPolicyAttachmentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPolicyAttachmentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPolicyAttachmentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyAttachmentsInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.PolicyReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyReference"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15985,9 +15984,9 @@ func (s ListPublishedSchemaArnsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPublishedSchemaArnsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPublishedSchemaArnsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPublishedSchemaArnsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16072,12 +16071,12 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.MaxResults != nil && *s.MaxResults < 50 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 50))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 50))
 	}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16172,15 +16171,15 @@ func (s ListTypedLinkFacetAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTypedLinkFacetAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTypedLinkFacetAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTypedLinkFacetAttributesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16275,12 +16274,12 @@ func (s ListTypedLinkFacetNamesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTypedLinkFacetNamesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTypedLinkFacetNamesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTypedLinkFacetNamesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16375,15 +16374,15 @@ func (s LookupPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LookupPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LookupPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "LookupPolicyInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16508,15 +16507,15 @@ func (s ObjectAttributeRange) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ObjectAttributeRange) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ObjectAttributeRange"}
+	invalidParams := aws.ErrInvalidParams{Context: "ObjectAttributeRange"}
 	if s.AttributeKey != nil {
 		if err := s.AttributeKey.Validate(); err != nil {
-			invalidParams.AddNested("AttributeKey", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AttributeKey", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Range != nil {
 		if err := s.Range.Validate(); err != nil {
-			invalidParams.AddNested("Range", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Range", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16562,10 +16561,10 @@ func (s ObjectAttributeUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ObjectAttributeUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ObjectAttributeUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "ObjectAttributeUpdate"}
 	if s.ObjectAttributeKey != nil {
 		if err := s.ObjectAttributeKey.Validate(); err != nil {
-			invalidParams.AddNested("ObjectAttributeKey", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ObjectAttributeKey", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16773,18 +16772,18 @@ func (s PublishSchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishSchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PublishSchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PublishSchemaInput"}
 	if s.DevelopmentSchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DevelopmentSchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DevelopmentSchemaArn"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16863,12 +16862,12 @@ func (s PutSchemaFromJsonInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutSchemaFromJsonInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutSchemaFromJsonInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutSchemaFromJsonInput"}
 	if s.Document == nil {
-		invalidParams.Add(request.NewErrParamRequired("Document"))
+		invalidParams.Add(aws.NewErrParamRequired("Document"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16945,19 +16944,19 @@ func (s RemoveFacetFromObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveFacetFromObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveFacetFromObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveFacetFromObjectInput"}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.SchemaFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
 	}
 	if s.SchemaFacet != nil {
 		if err := s.SchemaFacet.Validate(); err != nil {
-			invalidParams.AddNested("SchemaFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SchemaFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17059,9 +17058,9 @@ func (s SchemaFacet) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SchemaFacet) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SchemaFacet"}
+	invalidParams := aws.ErrInvalidParams{Context: "SchemaFacet"}
 	if s.FacetName != nil && len(*s.FacetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FacetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FacetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17144,12 +17143,12 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17284,12 +17283,12 @@ func (s TypedAttributeValueRange) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedAttributeValueRange) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedAttributeValueRange"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedAttributeValueRange"}
 	if s.EndMode == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndMode"))
+		invalidParams.Add(aws.NewErrParamRequired("EndMode"))
 	}
 	if s.StartMode == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartMode"))
+		invalidParams.Add(aws.NewErrParamRequired("StartMode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17364,18 +17363,18 @@ func (s TypedLinkAttributeDefinition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkAttributeDefinition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedLinkAttributeDefinition"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkAttributeDefinition"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RequiredBehavior == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequiredBehavior"))
+		invalidParams.Add(aws.NewErrParamRequired("RequiredBehavior"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17446,16 +17445,16 @@ func (s TypedLinkAttributeRange) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkAttributeRange) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedLinkAttributeRange"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkAttributeRange"}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.Range == nil {
-		invalidParams.Add(request.NewErrParamRequired("Range"))
+		invalidParams.Add(aws.NewErrParamRequired("Range"))
 	}
 	if s.Range != nil {
 		if err := s.Range.Validate(); err != nil {
-			invalidParams.AddNested("Range", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Range", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17517,15 +17516,15 @@ func (s TypedLinkFacet) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkFacet) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedLinkFacet"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkFacet"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.IdentityAttributeOrder == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdentityAttributeOrder"))
+		invalidParams.Add(aws.NewErrParamRequired("IdentityAttributeOrder"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -17533,7 +17532,7 @@ func (s *TypedLinkFacet) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17590,16 +17589,16 @@ func (s TypedLinkFacetAttributeUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkFacetAttributeUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedLinkFacetAttributeUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkFacetAttributeUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Attribute == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attribute"))
+		invalidParams.Add(aws.NewErrParamRequired("Attribute"))
 	}
 	if s.Attribute != nil {
 		if err := s.Attribute.Validate(); err != nil {
-			invalidParams.AddNested("Attribute", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Attribute", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17651,12 +17650,12 @@ func (s TypedLinkSchemaAndFacetName) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkSchemaAndFacetName) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedLinkSchemaAndFacetName"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkSchemaAndFacetName"}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 	if s.TypedLinkName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypedLinkName"))
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17720,18 +17719,18 @@ func (s TypedLinkSpecifier) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TypedLinkSpecifier) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TypedLinkSpecifier"}
+	invalidParams := aws.ErrInvalidParams{Context: "TypedLinkSpecifier"}
 	if s.IdentityAttributeValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdentityAttributeValues"))
+		invalidParams.Add(aws.NewErrParamRequired("IdentityAttributeValues"))
 	}
 	if s.SourceObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceObjectReference"))
 	}
 	if s.TargetObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetObjectReference"))
 	}
 	if s.TypedLinkFacet == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypedLinkFacet"))
+		invalidParams.Add(aws.NewErrParamRequired("TypedLinkFacet"))
 	}
 	if s.IdentityAttributeValues != nil {
 		for i, v := range s.IdentityAttributeValues {
@@ -17739,13 +17738,13 @@ func (s *TypedLinkSpecifier) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "IdentityAttributeValues", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "IdentityAttributeValues", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.TypedLinkFacet != nil {
 		if err := s.TypedLinkFacet.Validate(); err != nil {
-			invalidParams.AddNested("TypedLinkFacet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TypedLinkFacet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17807,12 +17806,12 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17885,15 +17884,15 @@ func (s UpdateFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFacetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
@@ -17901,7 +17900,7 @@ func (s *UpdateFacetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17984,15 +17983,15 @@ func (s UpdateObjectAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateObjectAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateObjectAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateObjectAttributesInput"}
 	if s.AttributeUpdates == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeUpdates"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
 	}
 	if s.DirectoryArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
 	}
 	if s.ObjectReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("ObjectReference"))
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
@@ -18000,7 +17999,7 @@ func (s *UpdateObjectAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18081,15 +18080,15 @@ func (s UpdateSchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSchemaInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18180,18 +18179,18 @@ func (s UpdateTypedLinkFacetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTypedLinkFacetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTypedLinkFacetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTypedLinkFacetInput"}
 	if s.AttributeUpdates == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeUpdates"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeUpdates"))
 	}
 	if s.IdentityAttributeOrder == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdentityAttributeOrder"))
+		invalidParams.Add(aws.NewErrParamRequired("IdentityAttributeOrder"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SchemaArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaArn"))
 	}
 	if s.AttributeUpdates != nil {
 		for i, v := range s.AttributeUpdates {
@@ -18199,7 +18198,7 @@ func (s *UpdateTypedLinkFacetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AttributeUpdates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

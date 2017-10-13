@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilTableExists uses the DynamoDB API operation
@@ -25,25 +24,25 @@ func (c *DynamoDB) WaitUntilTableExists(input *DescribeTableInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) WaitUntilTableExistsWithContext(ctx aws.Context, input *DescribeTableInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *DynamoDB) WaitUntilTableExistsWithContext(ctx aws.Context, input *DescribeTableInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilTableExists",
 		MaxAttempts: 25,
-		Delay:       request.ConstantWaiterDelay(20 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(20 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Table.TableStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Table.TableStatus",
 				Expected: "ACTIVE",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ResourceNotFoundException",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeTableInput
 			if input != nil {
 				tmp := *input
@@ -76,20 +75,20 @@ func (c *DynamoDB) WaitUntilTableNotExists(input *DescribeTableInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DynamoDB) WaitUntilTableNotExistsWithContext(ctx aws.Context, input *DescribeTableInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *DynamoDB) WaitUntilTableNotExistsWithContext(ctx aws.Context, input *DescribeTableInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilTableNotExists",
 		MaxAttempts: 25,
-		Delay:       request.ConstantWaiterDelay(20 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(20 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ResourceNotFoundException",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeTableInput
 			if input != nil {
 				tmp := *input

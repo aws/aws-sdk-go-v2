@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResource
-func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -86,7 +85,7 @@ func (c *DatabaseMigrationService) AddTagsToResource(input *AddTagsToResourceInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
+func (c *DatabaseMigrationService) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -95,7 +94,7 @@ func (c *DatabaseMigrationService) AddTagsToResourceWithContext(ctx aws.Context,
 
 const opCreateEndpoint = "CreateEndpoint"
 
-// CreateEndpointRequest generates a "aws/request.Request" representing the
+// CreateEndpointRequest generates a "aws.Request" representing the
 // client's request for the CreateEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -119,8 +118,8 @@ const opCreateEndpoint = "CreateEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint
-func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointInput) (req *request.Request, output *CreateEndpointOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointInput) (req *aws.Request, output *CreateEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opCreateEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -181,7 +180,7 @@ func (c *DatabaseMigrationService) CreateEndpoint(input *CreateEndpointInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateEndpointWithContext(ctx aws.Context, input *CreateEndpointInput, opts ...request.Option) (*CreateEndpointOutput, error) {
+func (c *DatabaseMigrationService) CreateEndpointWithContext(ctx aws.Context, input *CreateEndpointInput, opts ...aws.Option) (*CreateEndpointOutput, error) {
 	req, out := c.CreateEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -190,7 +189,7 @@ func (c *DatabaseMigrationService) CreateEndpointWithContext(ctx aws.Context, in
 
 const opCreateEventSubscription = "CreateEventSubscription"
 
-// CreateEventSubscriptionRequest generates a "aws/request.Request" representing the
+// CreateEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the CreateEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -214,8 +213,8 @@ const opCreateEventSubscription = "CreateEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEventSubscription
-func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *request.Request, output *CreateEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput) (req *aws.Request, output *CreateEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -288,7 +287,7 @@ func (c *DatabaseMigrationService) CreateEventSubscription(input *CreateEventSub
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...request.Option) (*CreateEventSubscriptionOutput, error) {
+func (c *DatabaseMigrationService) CreateEventSubscriptionWithContext(ctx aws.Context, input *CreateEventSubscriptionInput, opts ...aws.Option) (*CreateEventSubscriptionOutput, error) {
 	req, out := c.CreateEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -297,7 +296,7 @@ func (c *DatabaseMigrationService) CreateEventSubscriptionWithContext(ctx aws.Co
 
 const opCreateReplicationInstance = "CreateReplicationInstance"
 
-// CreateReplicationInstanceRequest generates a "aws/request.Request" representing the
+// CreateReplicationInstanceRequest generates a "aws.Request" representing the
 // client's request for the CreateReplicationInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -321,8 +320,8 @@ const opCreateReplicationInstance = "CreateReplicationInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance
-func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *CreateReplicationInstanceInput) (req *request.Request, output *CreateReplicationInstanceOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *CreateReplicationInstanceInput) (req *aws.Request, output *CreateReplicationInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReplicationInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -396,7 +395,7 @@ func (c *DatabaseMigrationService) CreateReplicationInstance(input *CreateReplic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateReplicationInstanceWithContext(ctx aws.Context, input *CreateReplicationInstanceInput, opts ...request.Option) (*CreateReplicationInstanceOutput, error) {
+func (c *DatabaseMigrationService) CreateReplicationInstanceWithContext(ctx aws.Context, input *CreateReplicationInstanceInput, opts ...aws.Option) (*CreateReplicationInstanceOutput, error) {
 	req, out := c.CreateReplicationInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -405,7 +404,7 @@ func (c *DatabaseMigrationService) CreateReplicationInstanceWithContext(ctx aws.
 
 const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
 
-// CreateReplicationSubnetGroupRequest generates a "aws/request.Request" representing the
+// CreateReplicationSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateReplicationSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -429,8 +428,8 @@ const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup
-func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *CreateReplicationSubnetGroupInput) (req *request.Request, output *CreateReplicationSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *CreateReplicationSubnetGroupInput) (req *aws.Request, output *CreateReplicationSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReplicationSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -491,7 +490,7 @@ func (c *DatabaseMigrationService) CreateReplicationSubnetGroup(input *CreateRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateReplicationSubnetGroupWithContext(ctx aws.Context, input *CreateReplicationSubnetGroupInput, opts ...request.Option) (*CreateReplicationSubnetGroupOutput, error) {
+func (c *DatabaseMigrationService) CreateReplicationSubnetGroupWithContext(ctx aws.Context, input *CreateReplicationSubnetGroupInput, opts ...aws.Option) (*CreateReplicationSubnetGroupOutput, error) {
 	req, out := c.CreateReplicationSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -500,7 +499,7 @@ func (c *DatabaseMigrationService) CreateReplicationSubnetGroupWithContext(ctx a
 
 const opCreateReplicationTask = "CreateReplicationTask"
 
-// CreateReplicationTaskRequest generates a "aws/request.Request" representing the
+// CreateReplicationTaskRequest generates a "aws.Request" representing the
 // client's request for the CreateReplicationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -524,8 +523,8 @@ const opCreateReplicationTask = "CreateReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask
-func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateReplicationTaskInput) (req *request.Request, output *CreateReplicationTaskOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateReplicationTaskInput) (req *aws.Request, output *CreateReplicationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReplicationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -586,7 +585,7 @@ func (c *DatabaseMigrationService) CreateReplicationTask(input *CreateReplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) CreateReplicationTaskWithContext(ctx aws.Context, input *CreateReplicationTaskInput, opts ...request.Option) (*CreateReplicationTaskOutput, error) {
+func (c *DatabaseMigrationService) CreateReplicationTaskWithContext(ctx aws.Context, input *CreateReplicationTaskInput, opts ...aws.Option) (*CreateReplicationTaskOutput, error) {
 	req, out := c.CreateReplicationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -595,7 +594,7 @@ func (c *DatabaseMigrationService) CreateReplicationTaskWithContext(ctx aws.Cont
 
 const opDeleteCertificate = "DeleteCertificate"
 
-// DeleteCertificateRequest generates a "aws/request.Request" representing the
+// DeleteCertificateRequest generates a "aws.Request" representing the
 // client's request for the DeleteCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -619,8 +618,8 @@ const opDeleteCertificate = "DeleteCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificate
-func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertificateInput) (req *request.Request, output *DeleteCertificateOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertificateInput) (req *aws.Request, output *DeleteCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -669,7 +668,7 @@ func (c *DatabaseMigrationService) DeleteCertificate(input *DeleteCertificateInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...request.Option) (*DeleteCertificateOutput, error) {
+func (c *DatabaseMigrationService) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...aws.Option) (*DeleteCertificateOutput, error) {
 	req, out := c.DeleteCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -678,7 +677,7 @@ func (c *DatabaseMigrationService) DeleteCertificateWithContext(ctx aws.Context,
 
 const opDeleteEndpoint = "DeleteEndpoint"
 
-// DeleteEndpointRequest generates a "aws/request.Request" representing the
+// DeleteEndpointRequest generates a "aws.Request" representing the
 // client's request for the DeleteEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -702,8 +701,8 @@ const opDeleteEndpoint = "DeleteEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint
-func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointInput) (req *request.Request, output *DeleteEndpointOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointInput) (req *aws.Request, output *DeleteEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -755,7 +754,7 @@ func (c *DatabaseMigrationService) DeleteEndpoint(input *DeleteEndpointInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointInput, opts ...request.Option) (*DeleteEndpointOutput, error) {
+func (c *DatabaseMigrationService) DeleteEndpointWithContext(ctx aws.Context, input *DeleteEndpointInput, opts ...aws.Option) (*DeleteEndpointOutput, error) {
 	req, out := c.DeleteEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -764,7 +763,7 @@ func (c *DatabaseMigrationService) DeleteEndpointWithContext(ctx aws.Context, in
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
 
-// DeleteEventSubscriptionRequest generates a "aws/request.Request" representing the
+// DeleteEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the DeleteEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -788,8 +787,8 @@ const opDeleteEventSubscription = "DeleteEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEventSubscription
-func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *request.Request, output *DeleteEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput) (req *aws.Request, output *DeleteEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -838,7 +837,7 @@ func (c *DatabaseMigrationService) DeleteEventSubscription(input *DeleteEventSub
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...request.Option) (*DeleteEventSubscriptionOutput, error) {
+func (c *DatabaseMigrationService) DeleteEventSubscriptionWithContext(ctx aws.Context, input *DeleteEventSubscriptionInput, opts ...aws.Option) (*DeleteEventSubscriptionOutput, error) {
 	req, out := c.DeleteEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -847,7 +846,7 @@ func (c *DatabaseMigrationService) DeleteEventSubscriptionWithContext(ctx aws.Co
 
 const opDeleteReplicationInstance = "DeleteReplicationInstance"
 
-// DeleteReplicationInstanceRequest generates a "aws/request.Request" representing the
+// DeleteReplicationInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeleteReplicationInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -871,8 +870,8 @@ const opDeleteReplicationInstance = "DeleteReplicationInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance
-func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *DeleteReplicationInstanceInput) (req *request.Request, output *DeleteReplicationInstanceOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *DeleteReplicationInstanceInput) (req *aws.Request, output *DeleteReplicationInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReplicationInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -924,7 +923,7 @@ func (c *DatabaseMigrationService) DeleteReplicationInstance(input *DeleteReplic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteReplicationInstanceWithContext(ctx aws.Context, input *DeleteReplicationInstanceInput, opts ...request.Option) (*DeleteReplicationInstanceOutput, error) {
+func (c *DatabaseMigrationService) DeleteReplicationInstanceWithContext(ctx aws.Context, input *DeleteReplicationInstanceInput, opts ...aws.Option) (*DeleteReplicationInstanceOutput, error) {
 	req, out := c.DeleteReplicationInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -933,7 +932,7 @@ func (c *DatabaseMigrationService) DeleteReplicationInstanceWithContext(ctx aws.
 
 const opDeleteReplicationSubnetGroup = "DeleteReplicationSubnetGroup"
 
-// DeleteReplicationSubnetGroupRequest generates a "aws/request.Request" representing the
+// DeleteReplicationSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteReplicationSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -957,8 +956,8 @@ const opDeleteReplicationSubnetGroup = "DeleteReplicationSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroup
-func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *DeleteReplicationSubnetGroupInput) (req *request.Request, output *DeleteReplicationSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *DeleteReplicationSubnetGroupInput) (req *aws.Request, output *DeleteReplicationSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReplicationSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1007,7 +1006,7 @@ func (c *DatabaseMigrationService) DeleteReplicationSubnetGroup(input *DeleteRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupWithContext(ctx aws.Context, input *DeleteReplicationSubnetGroupInput, opts ...request.Option) (*DeleteReplicationSubnetGroupOutput, error) {
+func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupWithContext(ctx aws.Context, input *DeleteReplicationSubnetGroupInput, opts ...aws.Option) (*DeleteReplicationSubnetGroupOutput, error) {
 	req, out := c.DeleteReplicationSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1016,7 +1015,7 @@ func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupWithContext(ctx a
 
 const opDeleteReplicationTask = "DeleteReplicationTask"
 
-// DeleteReplicationTaskRequest generates a "aws/request.Request" representing the
+// DeleteReplicationTaskRequest generates a "aws.Request" representing the
 // client's request for the DeleteReplicationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1040,8 +1039,8 @@ const opDeleteReplicationTask = "DeleteReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask
-func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteReplicationTaskInput) (req *request.Request, output *DeleteReplicationTaskOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteReplicationTaskInput) (req *aws.Request, output *DeleteReplicationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReplicationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1090,7 +1089,7 @@ func (c *DatabaseMigrationService) DeleteReplicationTask(input *DeleteReplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DeleteReplicationTaskWithContext(ctx aws.Context, input *DeleteReplicationTaskInput, opts ...request.Option) (*DeleteReplicationTaskOutput, error) {
+func (c *DatabaseMigrationService) DeleteReplicationTaskWithContext(ctx aws.Context, input *DeleteReplicationTaskInput, opts ...aws.Option) (*DeleteReplicationTaskOutput, error) {
 	req, out := c.DeleteReplicationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1099,7 +1098,7 @@ func (c *DatabaseMigrationService) DeleteReplicationTaskWithContext(ctx aws.Cont
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
-// DescribeAccountAttributesRequest generates a "aws/request.Request" representing the
+// DescribeAccountAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccountAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1123,8 +1122,8 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributes
-func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *request.Request, output *DescribeAccountAttributesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1169,7 +1168,7 @@ func (c *DatabaseMigrationService) DescribeAccountAttributes(input *DescribeAcco
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...request.Option) (*DescribeAccountAttributesOutput, error) {
+func (c *DatabaseMigrationService) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...aws.Option) (*DescribeAccountAttributesOutput, error) {
 	req, out := c.DescribeAccountAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1178,7 +1177,7 @@ func (c *DatabaseMigrationService) DescribeAccountAttributesWithContext(ctx aws.
 
 const opDescribeCertificates = "DescribeCertificates"
 
-// DescribeCertificatesRequest generates a "aws/request.Request" representing the
+// DescribeCertificatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1202,12 +1201,12 @@ const opDescribeCertificates = "DescribeCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificates
-func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *request.Request, output *DescribeCertificatesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCertificatesInput) (req *aws.Request, output *DescribeCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1254,7 +1253,7 @@ func (c *DatabaseMigrationService) DescribeCertificates(input *DescribeCertifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...request.Option) (*DescribeCertificatesOutput, error) {
+func (c *DatabaseMigrationService) DescribeCertificatesWithContext(ctx aws.Context, input *DescribeCertificatesInput, opts ...aws.Option) (*DescribeCertificatesOutput, error) {
 	req, out := c.DescribeCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1289,9 +1288,9 @@ func (c *DatabaseMigrationService) DescribeCertificatesPages(input *DescribeCert
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.Context, input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.Context, input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCertificatesInput
 			if input != nil {
 				tmp := *input
@@ -1313,7 +1312,7 @@ func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.
 
 const opDescribeConnections = "DescribeConnections"
 
-// DescribeConnectionsRequest generates a "aws/request.Request" representing the
+// DescribeConnectionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeConnections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1337,12 +1336,12 @@ const opDescribeConnections = "DescribeConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections
-func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeConnectionsInput) (req *request.Request, output *DescribeConnectionsOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeConnectionsInput) (req *aws.Request, output *DescribeConnectionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConnections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1390,7 +1389,7 @@ func (c *DatabaseMigrationService) DescribeConnections(input *DescribeConnection
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeConnectionsWithContext(ctx aws.Context, input *DescribeConnectionsInput, opts ...request.Option) (*DescribeConnectionsOutput, error) {
+func (c *DatabaseMigrationService) DescribeConnectionsWithContext(ctx aws.Context, input *DescribeConnectionsInput, opts ...aws.Option) (*DescribeConnectionsOutput, error) {
 	req, out := c.DescribeConnectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1425,9 +1424,9 @@ func (c *DatabaseMigrationService) DescribeConnectionsPages(input *DescribeConne
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.Context, input *DescribeConnectionsInput, fn func(*DescribeConnectionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.Context, input *DescribeConnectionsInput, fn func(*DescribeConnectionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeConnectionsInput
 			if input != nil {
 				tmp := *input
@@ -1449,7 +1448,7 @@ func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.C
 
 const opDescribeEndpointTypes = "DescribeEndpointTypes"
 
-// DescribeEndpointTypesRequest generates a "aws/request.Request" representing the
+// DescribeEndpointTypesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEndpointTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1473,12 +1472,12 @@ const opDescribeEndpointTypes = "DescribeEndpointTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes
-func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput) (req *request.Request, output *DescribeEndpointTypesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeEndpointTypesInput) (req *aws.Request, output *DescribeEndpointTypesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEndpointTypes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1520,7 +1519,7 @@ func (c *DatabaseMigrationService) DescribeEndpointTypes(input *DescribeEndpoint
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointTypesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, opts ...request.Option) (*DescribeEndpointTypesOutput, error) {
+func (c *DatabaseMigrationService) DescribeEndpointTypesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, opts ...aws.Option) (*DescribeEndpointTypesOutput, error) {
 	req, out := c.DescribeEndpointTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1555,9 +1554,9 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesPages(input *DescribeEnd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, fn func(*DescribeEndpointTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, fn func(*DescribeEndpointTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEndpointTypesInput
 			if input != nil {
 				tmp := *input
@@ -1579,7 +1578,7 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws
 
 const opDescribeEndpoints = "DescribeEndpoints"
 
-// DescribeEndpointsRequest generates a "aws/request.Request" representing the
+// DescribeEndpointsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEndpoints operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1603,12 +1602,12 @@ const opDescribeEndpoints = "DescribeEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints
-func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpointsInput) (req *request.Request, output *DescribeEndpointsOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpointsInput) (req *aws.Request, output *DescribeEndpointsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEndpoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1655,7 +1654,7 @@ func (c *DatabaseMigrationService) DescribeEndpoints(input *DescribeEndpointsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointsWithContext(ctx aws.Context, input *DescribeEndpointsInput, opts ...request.Option) (*DescribeEndpointsOutput, error) {
+func (c *DatabaseMigrationService) DescribeEndpointsWithContext(ctx aws.Context, input *DescribeEndpointsInput, opts ...aws.Option) (*DescribeEndpointsOutput, error) {
 	req, out := c.DescribeEndpointsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1690,9 +1689,9 @@ func (c *DatabaseMigrationService) DescribeEndpointsPages(input *DescribeEndpoin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Context, input *DescribeEndpointsInput, fn func(*DescribeEndpointsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Context, input *DescribeEndpointsInput, fn func(*DescribeEndpointsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEndpointsInput
 			if input != nil {
 				tmp := *input
@@ -1714,7 +1713,7 @@ func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Con
 
 const opDescribeEventCategories = "DescribeEventCategories"
 
-// DescribeEventCategoriesRequest generates a "aws/request.Request" representing the
+// DescribeEventCategoriesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventCategories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1738,8 +1737,8 @@ const opDescribeEventCategories = "DescribeEventCategories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventCategories
-func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *request.Request, output *DescribeEventCategoriesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput) (req *aws.Request, output *DescribeEventCategoriesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventCategories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1782,7 +1781,7 @@ func (c *DatabaseMigrationService) DescribeEventCategories(input *DescribeEventC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...request.Option) (*DescribeEventCategoriesOutput, error) {
+func (c *DatabaseMigrationService) DescribeEventCategoriesWithContext(ctx aws.Context, input *DescribeEventCategoriesInput, opts ...aws.Option) (*DescribeEventCategoriesOutput, error) {
 	req, out := c.DescribeEventCategoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1791,7 +1790,7 @@ func (c *DatabaseMigrationService) DescribeEventCategoriesWithContext(ctx aws.Co
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 
-// DescribeEventSubscriptionsRequest generates a "aws/request.Request" representing the
+// DescribeEventSubscriptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventSubscriptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1815,12 +1814,12 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEventSubscriptions
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *request.Request, output *DescribeEventSubscriptionsOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *DescribeEventSubscriptionsInput) (req *aws.Request, output *DescribeEventSubscriptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventSubscriptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -1872,7 +1871,7 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptions(input *DescribeEve
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...request.Option) (*DescribeEventSubscriptionsOutput, error) {
+func (c *DatabaseMigrationService) DescribeEventSubscriptionsWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, opts ...aws.Option) (*DescribeEventSubscriptionsOutput, error) {
 	req, out := c.DescribeEventSubscriptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1907,9 +1906,9 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsPages(input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventSubscriptionsInput
 			if input != nil {
 				tmp := *input
@@ -1931,7 +1930,7 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ct
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1955,12 +1954,12 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEvents
-func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2004,7 +2003,7 @@ func (c *DatabaseMigrationService) DescribeEvents(input *DescribeEventsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *DatabaseMigrationService) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2039,9 +2038,9 @@ func (c *DatabaseMigrationService) DescribeEventsPages(input *DescribeEventsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
 			if input != nil {
 				tmp := *input
@@ -2063,7 +2062,7 @@ func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Contex
 
 const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationInstances"
 
-// DescribeOrderableReplicationInstancesRequest generates a "aws/request.Request" representing the
+// DescribeOrderableReplicationInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeOrderableReplicationInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2087,12 +2086,12 @@ const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationIns
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(input *DescribeOrderableReplicationInstancesInput) (req *request.Request, output *DescribeOrderableReplicationInstancesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(input *DescribeOrderableReplicationInstancesInput) (req *aws.Request, output *DescribeOrderableReplicationInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeOrderableReplicationInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2135,7 +2134,7 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstances(input *
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, opts ...request.Option) (*DescribeOrderableReplicationInstancesOutput, error) {
+func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, opts ...aws.Option) (*DescribeOrderableReplicationInstancesOutput, error) {
 	req, out := c.DescribeOrderableReplicationInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2170,9 +2169,9 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPages(in
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, fn func(*DescribeOrderableReplicationInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, fn func(*DescribeOrderableReplicationInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOrderableReplicationInstancesInput
 			if input != nil {
 				tmp := *input
@@ -2194,7 +2193,7 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWit
 
 const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
 
-// DescribeRefreshSchemasStatusRequest generates a "aws/request.Request" representing the
+// DescribeRefreshSchemasStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeRefreshSchemasStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2218,8 +2217,8 @@ const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatus
-func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchemasStatusInput) (req *request.Request, output *DescribeRefreshSchemasStatusOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *DescribeRefreshSchemasStatusInput) (req *aws.Request, output *DescribeRefreshSchemasStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRefreshSchemasStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2268,7 +2267,7 @@ func (c *DatabaseMigrationService) DescribeRefreshSchemasStatus(input *DescribeR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusWithContext(ctx aws.Context, input *DescribeRefreshSchemasStatusInput, opts ...request.Option) (*DescribeRefreshSchemasStatusOutput, error) {
+func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusWithContext(ctx aws.Context, input *DescribeRefreshSchemasStatusInput, opts ...aws.Option) (*DescribeRefreshSchemasStatusOutput, error) {
 	req, out := c.DescribeRefreshSchemasStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2277,7 +2276,7 @@ func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusWithContext(ctx a
 
 const opDescribeReplicationInstances = "DescribeReplicationInstances"
 
-// DescribeReplicationInstancesRequest generates a "aws/request.Request" representing the
+// DescribeReplicationInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeReplicationInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2301,12 +2300,12 @@ const opDescribeReplicationInstances = "DescribeReplicationInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances
-func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *DescribeReplicationInstancesInput) (req *request.Request, output *DescribeReplicationInstancesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *DescribeReplicationInstancesInput) (req *aws.Request, output *DescribeReplicationInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReplicationInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2354,7 +2353,7 @@ func (c *DatabaseMigrationService) DescribeReplicationInstances(input *DescribeR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationInstancesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, opts ...request.Option) (*DescribeReplicationInstancesOutput, error) {
+func (c *DatabaseMigrationService) DescribeReplicationInstancesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, opts ...aws.Option) (*DescribeReplicationInstancesOutput, error) {
 	req, out := c.DescribeReplicationInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2389,9 +2388,9 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesPages(input *Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, fn func(*DescribeReplicationInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, fn func(*DescribeReplicationInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationInstancesInput
 			if input != nil {
 				tmp := *input
@@ -2413,7 +2412,7 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(
 
 const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
 
-// DescribeReplicationSubnetGroupsRequest generates a "aws/request.Request" representing the
+// DescribeReplicationSubnetGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeReplicationSubnetGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2437,12 +2436,12 @@ const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicationSubnetGroupsInput) (req *request.Request, output *DescribeReplicationSubnetGroupsOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input *DescribeReplicationSubnetGroupsInput) (req *aws.Request, output *DescribeReplicationSubnetGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReplicationSubnetGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2489,7 +2488,7 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroups(input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, opts ...request.Option) (*DescribeReplicationSubnetGroupsOutput, error) {
+func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, opts ...aws.Option) (*DescribeReplicationSubnetGroupsOutput, error) {
 	req, out := c.DescribeReplicationSubnetGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2524,9 +2523,9 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPages(input *D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, fn func(*DescribeReplicationSubnetGroupsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, fn func(*DescribeReplicationSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationSubnetGroupsInput
 			if input != nil {
 				tmp := *input
@@ -2548,7 +2547,7 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithConte
 
 const opDescribeReplicationTasks = "DescribeReplicationTasks"
 
-// DescribeReplicationTasksRequest generates a "aws/request.Request" representing the
+// DescribeReplicationTasksRequest generates a "aws.Request" representing the
 // client's request for the DescribeReplicationTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2572,12 +2571,12 @@ const opDescribeReplicationTasks = "DescribeReplicationTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks
-func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *DescribeReplicationTasksInput) (req *request.Request, output *DescribeReplicationTasksOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *DescribeReplicationTasksInput) (req *aws.Request, output *DescribeReplicationTasksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReplicationTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2625,7 +2624,7 @@ func (c *DatabaseMigrationService) DescribeReplicationTasks(input *DescribeRepli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTasksWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...request.Option) (*DescribeReplicationTasksOutput, error) {
+func (c *DatabaseMigrationService) DescribeReplicationTasksWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, opts ...aws.Option) (*DescribeReplicationTasksOutput, error) {
 	req, out := c.DescribeReplicationTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2660,9 +2659,9 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksPages(input *Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, fn func(*DescribeReplicationTasksOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, fn func(*DescribeReplicationTasksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationTasksInput
 			if input != nil {
 				tmp := *input
@@ -2684,7 +2683,7 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx 
 
 const opDescribeSchemas = "DescribeSchemas"
 
-// DescribeSchemasRequest generates a "aws/request.Request" representing the
+// DescribeSchemasRequest generates a "aws.Request" representing the
 // client's request for the DescribeSchemas operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2708,12 +2707,12 @@ const opDescribeSchemas = "DescribeSchemas"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemas
-func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemasInput) (req *request.Request, output *DescribeSchemasOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemasInput) (req *aws.Request, output *DescribeSchemasOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSchemas,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2764,7 +2763,7 @@ func (c *DatabaseMigrationService) DescribeSchemas(input *DescribeSchemasInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeSchemasWithContext(ctx aws.Context, input *DescribeSchemasInput, opts ...request.Option) (*DescribeSchemasOutput, error) {
+func (c *DatabaseMigrationService) DescribeSchemasWithContext(ctx aws.Context, input *DescribeSchemasInput, opts ...aws.Option) (*DescribeSchemasOutput, error) {
 	req, out := c.DescribeSchemasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2799,9 +2798,9 @@ func (c *DatabaseMigrationService) DescribeSchemasPages(input *DescribeSchemasIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Context, input *DescribeSchemasInput, fn func(*DescribeSchemasOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Context, input *DescribeSchemasInput, fn func(*DescribeSchemasOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeSchemasInput
 			if input != nil {
 				tmp := *input
@@ -2823,7 +2822,7 @@ func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Conte
 
 const opDescribeTableStatistics = "DescribeTableStatistics"
 
-// DescribeTableStatisticsRequest generates a "aws/request.Request" representing the
+// DescribeTableStatisticsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTableStatistics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2847,12 +2846,12 @@ const opDescribeTableStatistics = "DescribeTableStatistics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics
-func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *DescribeTableStatisticsInput) (req *request.Request, output *DescribeTableStatisticsOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *DescribeTableStatisticsInput) (req *aws.Request, output *DescribeTableStatisticsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTableStatistics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "MaxRecords",
@@ -2904,7 +2903,7 @@ func (c *DatabaseMigrationService) DescribeTableStatistics(input *DescribeTableS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeTableStatisticsWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, opts ...request.Option) (*DescribeTableStatisticsOutput, error) {
+func (c *DatabaseMigrationService) DescribeTableStatisticsWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, opts ...aws.Option) (*DescribeTableStatisticsOutput, error) {
 	req, out := c.DescribeTableStatisticsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2939,9 +2938,9 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsPages(input *DescribeT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, fn func(*DescribeTableStatisticsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, fn func(*DescribeTableStatisticsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTableStatisticsInput
 			if input != nil {
 				tmp := *input
@@ -2963,7 +2962,7 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx a
 
 const opImportCertificate = "ImportCertificate"
 
-// ImportCertificateRequest generates a "aws/request.Request" representing the
+// ImportCertificateRequest generates a "aws.Request" representing the
 // client's request for the ImportCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2987,8 +2986,8 @@ const opImportCertificate = "ImportCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificate
-func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertificateInput) (req *request.Request, output *ImportCertificateOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertificateInput) (req *aws.Request, output *ImportCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opImportCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3036,7 +3035,7 @@ func (c *DatabaseMigrationService) ImportCertificate(input *ImportCertificateInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ImportCertificateWithContext(ctx aws.Context, input *ImportCertificateInput, opts ...request.Option) (*ImportCertificateOutput, error) {
+func (c *DatabaseMigrationService) ImportCertificateWithContext(ctx aws.Context, input *ImportCertificateInput, opts ...aws.Option) (*ImportCertificateOutput, error) {
 	req, out := c.ImportCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3045,7 +3044,7 @@ func (c *DatabaseMigrationService) ImportCertificateWithContext(ctx aws.Context,
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3069,8 +3068,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResource
-func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3115,7 +3114,7 @@ func (c *DatabaseMigrationService) ListTagsForResource(input *ListTagsForResourc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *DatabaseMigrationService) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3124,7 +3123,7 @@ func (c *DatabaseMigrationService) ListTagsForResourceWithContext(ctx aws.Contex
 
 const opModifyEndpoint = "ModifyEndpoint"
 
-// ModifyEndpointRequest generates a "aws/request.Request" representing the
+// ModifyEndpointRequest generates a "aws.Request" representing the
 // client's request for the ModifyEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3148,8 +3147,8 @@ const opModifyEndpoint = "ModifyEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint
-func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointInput) (req *request.Request, output *ModifyEndpointOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointInput) (req *aws.Request, output *ModifyEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opModifyEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3207,7 +3206,7 @@ func (c *DatabaseMigrationService) ModifyEndpoint(input *ModifyEndpointInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyEndpointWithContext(ctx aws.Context, input *ModifyEndpointInput, opts ...request.Option) (*ModifyEndpointOutput, error) {
+func (c *DatabaseMigrationService) ModifyEndpointWithContext(ctx aws.Context, input *ModifyEndpointInput, opts ...aws.Option) (*ModifyEndpointOutput, error) {
 	req, out := c.ModifyEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3216,7 +3215,7 @@ func (c *DatabaseMigrationService) ModifyEndpointWithContext(ctx aws.Context, in
 
 const opModifyEventSubscription = "ModifyEventSubscription"
 
-// ModifyEventSubscriptionRequest generates a "aws/request.Request" representing the
+// ModifyEventSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the ModifyEventSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3240,8 +3239,8 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEventSubscription
-func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *request.Request, output *ModifyEventSubscriptionOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput) (req *aws.Request, output *ModifyEventSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opModifyEventSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3295,7 +3294,7 @@ func (c *DatabaseMigrationService) ModifyEventSubscription(input *ModifyEventSub
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...request.Option) (*ModifyEventSubscriptionOutput, error) {
+func (c *DatabaseMigrationService) ModifyEventSubscriptionWithContext(ctx aws.Context, input *ModifyEventSubscriptionInput, opts ...aws.Option) (*ModifyEventSubscriptionOutput, error) {
 	req, out := c.ModifyEventSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3304,7 +3303,7 @@ func (c *DatabaseMigrationService) ModifyEventSubscriptionWithContext(ctx aws.Co
 
 const opModifyReplicationInstance = "ModifyReplicationInstance"
 
-// ModifyReplicationInstanceRequest generates a "aws/request.Request" representing the
+// ModifyReplicationInstanceRequest generates a "aws.Request" representing the
 // client's request for the ModifyReplicationInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3328,8 +3327,8 @@ const opModifyReplicationInstance = "ModifyReplicationInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance
-func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *ModifyReplicationInstanceInput) (req *request.Request, output *ModifyReplicationInstanceOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *ModifyReplicationInstanceInput) (req *aws.Request, output *ModifyReplicationInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opModifyReplicationInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3394,7 +3393,7 @@ func (c *DatabaseMigrationService) ModifyReplicationInstance(input *ModifyReplic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyReplicationInstanceWithContext(ctx aws.Context, input *ModifyReplicationInstanceInput, opts ...request.Option) (*ModifyReplicationInstanceOutput, error) {
+func (c *DatabaseMigrationService) ModifyReplicationInstanceWithContext(ctx aws.Context, input *ModifyReplicationInstanceInput, opts ...aws.Option) (*ModifyReplicationInstanceOutput, error) {
 	req, out := c.ModifyReplicationInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3403,7 +3402,7 @@ func (c *DatabaseMigrationService) ModifyReplicationInstanceWithContext(ctx aws.
 
 const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
 
-// ModifyReplicationSubnetGroupRequest generates a "aws/request.Request" representing the
+// ModifyReplicationSubnetGroupRequest generates a "aws.Request" representing the
 // client's request for the ModifyReplicationSubnetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3427,8 +3426,8 @@ const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup
-func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSubnetGroupInput) (req *request.Request, output *ModifyReplicationSubnetGroupOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *ModifyReplicationSubnetGroupInput) (req *aws.Request, output *ModifyReplicationSubnetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opModifyReplicationSubnetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3489,7 +3488,7 @@ func (c *DatabaseMigrationService) ModifyReplicationSubnetGroup(input *ModifyRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupWithContext(ctx aws.Context, input *ModifyReplicationSubnetGroupInput, opts ...request.Option) (*ModifyReplicationSubnetGroupOutput, error) {
+func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupWithContext(ctx aws.Context, input *ModifyReplicationSubnetGroupInput, opts ...aws.Option) (*ModifyReplicationSubnetGroupOutput, error) {
 	req, out := c.ModifyReplicationSubnetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3498,7 +3497,7 @@ func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupWithContext(ctx a
 
 const opModifyReplicationTask = "ModifyReplicationTask"
 
-// ModifyReplicationTaskRequest generates a "aws/request.Request" representing the
+// ModifyReplicationTaskRequest generates a "aws.Request" representing the
 // client's request for the ModifyReplicationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3522,8 +3521,8 @@ const opModifyReplicationTask = "ModifyReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask
-func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyReplicationTaskInput) (req *request.Request, output *ModifyReplicationTaskOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyReplicationTaskInput) (req *aws.Request, output *ModifyReplicationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opModifyReplicationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3584,7 +3583,7 @@ func (c *DatabaseMigrationService) ModifyReplicationTask(input *ModifyReplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ModifyReplicationTaskWithContext(ctx aws.Context, input *ModifyReplicationTaskInput, opts ...request.Option) (*ModifyReplicationTaskOutput, error) {
+func (c *DatabaseMigrationService) ModifyReplicationTaskWithContext(ctx aws.Context, input *ModifyReplicationTaskInput, opts ...aws.Option) (*ModifyReplicationTaskOutput, error) {
 	req, out := c.ModifyReplicationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3593,7 +3592,7 @@ func (c *DatabaseMigrationService) ModifyReplicationTaskWithContext(ctx aws.Cont
 
 const opRefreshSchemas = "RefreshSchemas"
 
-// RefreshSchemasRequest generates a "aws/request.Request" representing the
+// RefreshSchemasRequest generates a "aws.Request" representing the
 // client's request for the RefreshSchemas operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3617,8 +3616,8 @@ const opRefreshSchemas = "RefreshSchemas"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemas
-func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasInput) (req *request.Request, output *RefreshSchemasOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasInput) (req *aws.Request, output *RefreshSchemasOutput) {
+	op := &aws.Operation{
 		Name:       opRefreshSchemas,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3675,7 +3674,7 @@ func (c *DatabaseMigrationService) RefreshSchemas(input *RefreshSchemasInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) RefreshSchemasWithContext(ctx aws.Context, input *RefreshSchemasInput, opts ...request.Option) (*RefreshSchemasOutput, error) {
+func (c *DatabaseMigrationService) RefreshSchemasWithContext(ctx aws.Context, input *RefreshSchemasInput, opts ...aws.Option) (*RefreshSchemasOutput, error) {
 	req, out := c.RefreshSchemasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3684,7 +3683,7 @@ func (c *DatabaseMigrationService) RefreshSchemasWithContext(ctx aws.Context, in
 
 const opReloadTables = "ReloadTables"
 
-// ReloadTablesRequest generates a "aws/request.Request" representing the
+// ReloadTablesRequest generates a "aws.Request" representing the
 // client's request for the ReloadTables operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3708,8 +3707,8 @@ const opReloadTables = "ReloadTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReloadTables
-func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput) (req *request.Request, output *ReloadTablesOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput) (req *aws.Request, output *ReloadTablesOutput) {
+	op := &aws.Operation{
 		Name:       opReloadTables,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3758,7 +3757,7 @@ func (c *DatabaseMigrationService) ReloadTables(input *ReloadTablesInput) (*Relo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) ReloadTablesWithContext(ctx aws.Context, input *ReloadTablesInput, opts ...request.Option) (*ReloadTablesOutput, error) {
+func (c *DatabaseMigrationService) ReloadTablesWithContext(ctx aws.Context, input *ReloadTablesInput, opts ...aws.Option) (*ReloadTablesOutput, error) {
 	req, out := c.ReloadTablesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3767,7 +3766,7 @@ func (c *DatabaseMigrationService) ReloadTablesWithContext(ctx aws.Context, inpu
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3791,8 +3790,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResource
-func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3837,7 +3836,7 @@ func (c *DatabaseMigrationService) RemoveTagsFromResource(input *RemoveTagsFromR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
+func (c *DatabaseMigrationService) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3846,7 +3845,7 @@ func (c *DatabaseMigrationService) RemoveTagsFromResourceWithContext(ctx aws.Con
 
 const opStartReplicationTask = "StartReplicationTask"
 
-// StartReplicationTaskRequest generates a "aws/request.Request" representing the
+// StartReplicationTaskRequest generates a "aws.Request" representing the
 // client's request for the StartReplicationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3870,8 +3869,8 @@ const opStartReplicationTask = "StartReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask
-func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartReplicationTaskInput) (req *request.Request, output *StartReplicationTaskOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartReplicationTaskInput) (req *aws.Request, output *StartReplicationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opStartReplicationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3923,7 +3922,7 @@ func (c *DatabaseMigrationService) StartReplicationTask(input *StartReplicationT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) StartReplicationTaskWithContext(ctx aws.Context, input *StartReplicationTaskInput, opts ...request.Option) (*StartReplicationTaskOutput, error) {
+func (c *DatabaseMigrationService) StartReplicationTaskWithContext(ctx aws.Context, input *StartReplicationTaskInput, opts ...aws.Option) (*StartReplicationTaskOutput, error) {
 	req, out := c.StartReplicationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3932,7 +3931,7 @@ func (c *DatabaseMigrationService) StartReplicationTaskWithContext(ctx aws.Conte
 
 const opStopReplicationTask = "StopReplicationTask"
 
-// StopReplicationTaskRequest generates a "aws/request.Request" representing the
+// StopReplicationTaskRequest generates a "aws.Request" representing the
 // client's request for the StopReplicationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3956,8 +3955,8 @@ const opStopReplicationTask = "StopReplicationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask
-func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplicationTaskInput) (req *request.Request, output *StopReplicationTaskOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplicationTaskInput) (req *aws.Request, output *StopReplicationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opStopReplicationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4006,7 +4005,7 @@ func (c *DatabaseMigrationService) StopReplicationTask(input *StopReplicationTas
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) StopReplicationTaskWithContext(ctx aws.Context, input *StopReplicationTaskInput, opts ...request.Option) (*StopReplicationTaskOutput, error) {
+func (c *DatabaseMigrationService) StopReplicationTaskWithContext(ctx aws.Context, input *StopReplicationTaskInput, opts ...aws.Option) (*StopReplicationTaskOutput, error) {
 	req, out := c.StopReplicationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4015,7 +4014,7 @@ func (c *DatabaseMigrationService) StopReplicationTaskWithContext(ctx aws.Contex
 
 const opTestConnection = "TestConnection"
 
-// TestConnectionRequest generates a "aws/request.Request" representing the
+// TestConnectionRequest generates a "aws.Request" representing the
 // client's request for the TestConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4039,8 +4038,8 @@ const opTestConnection = "TestConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnection
-func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionInput) (req *request.Request, output *TestConnectionOutput) {
-	op := &request.Operation{
+func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionInput) (req *aws.Request, output *TestConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opTestConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4095,7 +4094,7 @@ func (c *DatabaseMigrationService) TestConnection(input *TestConnectionInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DatabaseMigrationService) TestConnectionWithContext(ctx aws.Context, input *TestConnectionInput, opts ...request.Option) (*TestConnectionOutput, error) {
+func (c *DatabaseMigrationService) TestConnectionWithContext(ctx aws.Context, input *TestConnectionInput, opts ...aws.Option) (*TestConnectionOutput, error) {
 	req, out := c.TestConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4175,12 +4174,12 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4513,19 +4512,19 @@ func (s CreateEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEndpointInput"}
 	if s.EndpointIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointIdentifier"))
 	}
 	if s.EndpointType == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointType"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointType"))
 	}
 	if s.EngineName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EngineName"))
+		invalidParams.Add(aws.NewErrParamRequired("EngineName"))
 	}
 	if s.DynamoDbSettings != nil {
 		if err := s.DynamoDbSettings.Validate(); err != nil {
-			invalidParams.AddNested("DynamoDbSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DynamoDbSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4714,12 +4713,12 @@ func (s CreateEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSubscriptionInput"}
 	if s.SnsTopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnsTopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4896,12 +4895,12 @@ func (s CreateReplicationInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReplicationInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationInstanceInput"}
 	if s.ReplicationInstanceClass == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceClass"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceClass"))
 	}
 	if s.ReplicationInstanceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5053,15 +5052,15 @@ func (s CreateReplicationSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReplicationSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationSubnetGroupInput"}
 	if s.ReplicationSubnetGroupDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationSubnetGroupDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupDescription"))
 	}
 	if s.ReplicationSubnetGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5188,24 +5187,24 @@ func (s CreateReplicationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReplicationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationTaskInput"}
 	if s.MigrationType == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationType"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationType"))
 	}
 	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 	if s.ReplicationTaskIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskIdentifier"))
 	}
 	if s.SourceEndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceEndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceEndpointArn"))
 	}
 	if s.TableMappings == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableMappings"))
+		invalidParams.Add(aws.NewErrParamRequired("TableMappings"))
 	}
 	if s.TargetEndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetEndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetEndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5314,9 +5313,9 @@ func (s DeleteCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5377,9 +5376,9 @@ func (s DeleteEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5440,9 +5439,9 @@ func (s DeleteEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSubscriptionInput"}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5503,9 +5502,9 @@ func (s DeleteReplicationInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReplicationInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationInstanceInput"}
 	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5566,9 +5565,9 @@ func (s DeleteReplicationSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReplicationSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationSubnetGroupInput"}
 	if s.ReplicationSubnetGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5620,9 +5619,9 @@ func (s DeleteReplicationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReplicationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationTaskInput"}
 	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5732,14 +5731,14 @@ func (s DescribeCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificatesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5838,14 +5837,14 @@ func (s DescribeConnectionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConnectionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConnectionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5945,14 +5944,14 @@ func (s DescribeEndpointTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEndpointTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEndpointTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEndpointTypesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6052,14 +6051,14 @@ func (s DescribeEndpointsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEndpointsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEndpointsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEndpointsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6148,14 +6147,14 @@ func (s DescribeEventCategoriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventCategoriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventCategoriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventCategoriesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6239,14 +6238,14 @@ func (s DescribeEventSubscriptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventSubscriptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventSubscriptionsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6372,14 +6371,14 @@ func (s DescribeEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6577,9 +6576,9 @@ func (s DescribeRefreshSchemasStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRefreshSchemasStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRefreshSchemasStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRefreshSchemasStatusInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6655,14 +6654,14 @@ func (s DescribeReplicationInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReplicationInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReplicationInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationInstancesInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6760,14 +6759,14 @@ func (s DescribeReplicationSubnetGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReplicationSubnetGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReplicationSubnetGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationSubnetGroupsInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6868,14 +6867,14 @@ func (s DescribeReplicationTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReplicationTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReplicationTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationTasksInput"}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6975,9 +6974,9 @@ func (s DescribeSchemasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSchemasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSchemasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSchemasInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7075,9 +7074,9 @@ func (s DescribeTableStatisticsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTableStatisticsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTableStatisticsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTableStatisticsInput"}
 	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7170,9 +7169,9 @@ func (s DynamoDbSettings) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DynamoDbSettings) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DynamoDbSettings"}
+	invalidParams := aws.ErrInvalidParams{Context: "DynamoDbSettings"}
 	if s.ServiceAccessRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceAccessRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceAccessRoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7609,12 +7608,12 @@ func (s Filter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Filter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Filter"}
+	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7669,9 +7668,9 @@ func (s ImportCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportCertificateInput"}
 	if s.CertificateIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateIdentifier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7751,9 +7750,9 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7872,13 +7871,13 @@ func (s ModifyEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyEndpointInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 	if s.DynamoDbSettings != nil {
 		if err := s.DynamoDbSettings.Validate(); err != nil {
-			invalidParams.AddNested("DynamoDbSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DynamoDbSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8042,9 +8041,9 @@ func (s ModifyEventSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyEventSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyEventSubscriptionInput"}
 	if s.SubscriptionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionName"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8193,9 +8192,9 @@ func (s ModifyReplicationInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyReplicationInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationInstanceInput"}
 	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8324,12 +8323,12 @@ func (s ModifyReplicationSubnetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationSubnetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyReplicationSubnetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationSubnetGroupInput"}
 	if s.ReplicationSubnetGroupIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationSubnetGroupIdentifier"))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8431,9 +8430,9 @@ func (s ModifyReplicationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyReplicationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyReplicationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyReplicationTaskInput"}
 	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8751,12 +8750,12 @@ func (s RefreshSchemasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RefreshSchemasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RefreshSchemasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RefreshSchemasInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8888,12 +8887,12 @@ func (s ReloadTablesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReloadTablesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReloadTablesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReloadTablesInput"}
 	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
 	if s.TablesToReload == nil {
-		invalidParams.Add(request.NewErrParamRequired("TablesToReload"))
+		invalidParams.Add(aws.NewErrParamRequired("TablesToReload"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8966,12 +8965,12 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9682,12 +9681,12 @@ func (s StartReplicationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartReplicationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartReplicationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartReplicationTaskInput"}
 	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
 	if s.StartReplicationTaskType == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartReplicationTaskType"))
+		invalidParams.Add(aws.NewErrParamRequired("StartReplicationTaskType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9760,9 +9759,9 @@ func (s StopReplicationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopReplicationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopReplicationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopReplicationTaskInput"}
 	if s.ReplicationTaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationTaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationTaskArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10103,12 +10102,12 @@ func (s TestConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestConnectionInput"}
 	if s.EndpointArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointArn"))
 	}
 	if s.ReplicationInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
 	}
 
 	if invalidParams.Len() > 0 {

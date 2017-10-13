@@ -7,16 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAddCustomAttributes = "AddCustomAttributes"
 
-// AddCustomAttributesRequest generates a "aws/request.Request" representing the
+// AddCustomAttributesRequest generates a "aws.Request" representing the
 // client's request for the AddCustomAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -40,8 +38,8 @@ const opAddCustomAttributes = "AddCustomAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddCustomAttributes
-func (c *CognitoIdentityProvider) AddCustomAttributesRequest(input *AddCustomAttributesInput) (req *request.Request, output *AddCustomAttributesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AddCustomAttributesRequest(input *AddCustomAttributesInput) (req *aws.Request, output *AddCustomAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opAddCustomAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -105,7 +103,7 @@ func (c *CognitoIdentityProvider) AddCustomAttributes(input *AddCustomAttributes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AddCustomAttributesWithContext(ctx aws.Context, input *AddCustomAttributesInput, opts ...request.Option) (*AddCustomAttributesOutput, error) {
+func (c *CognitoIdentityProvider) AddCustomAttributesWithContext(ctx aws.Context, input *AddCustomAttributesInput, opts ...aws.Option) (*AddCustomAttributesOutput, error) {
 	req, out := c.AddCustomAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -114,7 +112,7 @@ func (c *CognitoIdentityProvider) AddCustomAttributesWithContext(ctx aws.Context
 
 const opAdminAddUserToGroup = "AdminAddUserToGroup"
 
-// AdminAddUserToGroupRequest generates a "aws/request.Request" representing the
+// AdminAddUserToGroupRequest generates a "aws.Request" representing the
 // client's request for the AdminAddUserToGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -138,8 +136,8 @@ const opAdminAddUserToGroup = "AdminAddUserToGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroup
-func (c *CognitoIdentityProvider) AdminAddUserToGroupRequest(input *AdminAddUserToGroupInput) (req *request.Request, output *AdminAddUserToGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminAddUserToGroupRequest(input *AdminAddUserToGroupInput) (req *aws.Request, output *AdminAddUserToGroupOutput) {
+	op := &aws.Operation{
 		Name:       opAdminAddUserToGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -206,7 +204,7 @@ func (c *CognitoIdentityProvider) AdminAddUserToGroup(input *AdminAddUserToGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminAddUserToGroupWithContext(ctx aws.Context, input *AdminAddUserToGroupInput, opts ...request.Option) (*AdminAddUserToGroupOutput, error) {
+func (c *CognitoIdentityProvider) AdminAddUserToGroupWithContext(ctx aws.Context, input *AdminAddUserToGroupInput, opts ...aws.Option) (*AdminAddUserToGroupOutput, error) {
 	req, out := c.AdminAddUserToGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -215,7 +213,7 @@ func (c *CognitoIdentityProvider) AdminAddUserToGroupWithContext(ctx aws.Context
 
 const opAdminConfirmSignUp = "AdminConfirmSignUp"
 
-// AdminConfirmSignUpRequest generates a "aws/request.Request" representing the
+// AdminConfirmSignUpRequest generates a "aws.Request" representing the
 // client's request for the AdminConfirmSignUp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -239,8 +237,8 @@ const opAdminConfirmSignUp = "AdminConfirmSignUp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUp
-func (c *CognitoIdentityProvider) AdminConfirmSignUpRequest(input *AdminConfirmSignUpInput) (req *request.Request, output *AdminConfirmSignUpOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminConfirmSignUpRequest(input *AdminConfirmSignUpInput) (req *aws.Request, output *AdminConfirmSignUpOutput) {
+	op := &aws.Operation{
 		Name:       opAdminConfirmSignUp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -326,7 +324,7 @@ func (c *CognitoIdentityProvider) AdminConfirmSignUp(input *AdminConfirmSignUpIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminConfirmSignUpWithContext(ctx aws.Context, input *AdminConfirmSignUpInput, opts ...request.Option) (*AdminConfirmSignUpOutput, error) {
+func (c *CognitoIdentityProvider) AdminConfirmSignUpWithContext(ctx aws.Context, input *AdminConfirmSignUpInput, opts ...aws.Option) (*AdminConfirmSignUpOutput, error) {
 	req, out := c.AdminConfirmSignUpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -335,7 +333,7 @@ func (c *CognitoIdentityProvider) AdminConfirmSignUpWithContext(ctx aws.Context,
 
 const opAdminCreateUser = "AdminCreateUser"
 
-// AdminCreateUserRequest generates a "aws/request.Request" representing the
+// AdminCreateUserRequest generates a "aws.Request" representing the
 // client's request for the AdminCreateUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -359,8 +357,8 @@ const opAdminCreateUser = "AdminCreateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUser
-func (c *CognitoIdentityProvider) AdminCreateUserRequest(input *AdminCreateUserInput) (req *request.Request, output *AdminCreateUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminCreateUserRequest(input *AdminCreateUserInput) (req *aws.Request, output *AdminCreateUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminCreateUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -468,7 +466,7 @@ func (c *CognitoIdentityProvider) AdminCreateUser(input *AdminCreateUserInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminCreateUserWithContext(ctx aws.Context, input *AdminCreateUserInput, opts ...request.Option) (*AdminCreateUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminCreateUserWithContext(ctx aws.Context, input *AdminCreateUserInput, opts ...aws.Option) (*AdminCreateUserOutput, error) {
 	req, out := c.AdminCreateUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -477,7 +475,7 @@ func (c *CognitoIdentityProvider) AdminCreateUserWithContext(ctx aws.Context, in
 
 const opAdminDeleteUser = "AdminDeleteUser"
 
-// AdminDeleteUserRequest generates a "aws/request.Request" representing the
+// AdminDeleteUserRequest generates a "aws.Request" representing the
 // client's request for the AdminDeleteUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -501,8 +499,8 @@ const opAdminDeleteUser = "AdminDeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUser
-func (c *CognitoIdentityProvider) AdminDeleteUserRequest(input *AdminDeleteUserInput) (req *request.Request, output *AdminDeleteUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminDeleteUserRequest(input *AdminDeleteUserInput) (req *aws.Request, output *AdminDeleteUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminDeleteUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -569,7 +567,7 @@ func (c *CognitoIdentityProvider) AdminDeleteUser(input *AdminDeleteUserInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminDeleteUserWithContext(ctx aws.Context, input *AdminDeleteUserInput, opts ...request.Option) (*AdminDeleteUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminDeleteUserWithContext(ctx aws.Context, input *AdminDeleteUserInput, opts ...aws.Option) (*AdminDeleteUserOutput, error) {
 	req, out := c.AdminDeleteUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -578,7 +576,7 @@ func (c *CognitoIdentityProvider) AdminDeleteUserWithContext(ctx aws.Context, in
 
 const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
 
-// AdminDeleteUserAttributesRequest generates a "aws/request.Request" representing the
+// AdminDeleteUserAttributesRequest generates a "aws.Request" representing the
 // client's request for the AdminDeleteUserAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -602,8 +600,8 @@ const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserAttributes
-func (c *CognitoIdentityProvider) AdminDeleteUserAttributesRequest(input *AdminDeleteUserAttributesInput) (req *request.Request, output *AdminDeleteUserAttributesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminDeleteUserAttributesRequest(input *AdminDeleteUserAttributesInput) (req *aws.Request, output *AdminDeleteUserAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opAdminDeleteUserAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -669,7 +667,7 @@ func (c *CognitoIdentityProvider) AdminDeleteUserAttributes(input *AdminDeleteUs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminDeleteUserAttributesWithContext(ctx aws.Context, input *AdminDeleteUserAttributesInput, opts ...request.Option) (*AdminDeleteUserAttributesOutput, error) {
+func (c *CognitoIdentityProvider) AdminDeleteUserAttributesWithContext(ctx aws.Context, input *AdminDeleteUserAttributesInput, opts ...aws.Option) (*AdminDeleteUserAttributesOutput, error) {
 	req, out := c.AdminDeleteUserAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -678,7 +676,7 @@ func (c *CognitoIdentityProvider) AdminDeleteUserAttributesWithContext(ctx aws.C
 
 const opAdminDisableProviderForUser = "AdminDisableProviderForUser"
 
-// AdminDisableProviderForUserRequest generates a "aws/request.Request" representing the
+// AdminDisableProviderForUserRequest generates a "aws.Request" representing the
 // client's request for the AdminDisableProviderForUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -702,8 +700,8 @@ const opAdminDisableProviderForUser = "AdminDisableProviderForUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableProviderForUser
-func (c *CognitoIdentityProvider) AdminDisableProviderForUserRequest(input *AdminDisableProviderForUserInput) (req *request.Request, output *AdminDisableProviderForUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminDisableProviderForUserRequest(input *AdminDisableProviderForUserInput) (req *aws.Request, output *AdminDisableProviderForUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminDisableProviderForUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -801,7 +799,7 @@ func (c *CognitoIdentityProvider) AdminDisableProviderForUser(input *AdminDisabl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminDisableProviderForUserWithContext(ctx aws.Context, input *AdminDisableProviderForUserInput, opts ...request.Option) (*AdminDisableProviderForUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminDisableProviderForUserWithContext(ctx aws.Context, input *AdminDisableProviderForUserInput, opts ...aws.Option) (*AdminDisableProviderForUserOutput, error) {
 	req, out := c.AdminDisableProviderForUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -810,7 +808,7 @@ func (c *CognitoIdentityProvider) AdminDisableProviderForUserWithContext(ctx aws
 
 const opAdminDisableUser = "AdminDisableUser"
 
-// AdminDisableUserRequest generates a "aws/request.Request" representing the
+// AdminDisableUserRequest generates a "aws.Request" representing the
 // client's request for the AdminDisableUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -834,8 +832,8 @@ const opAdminDisableUser = "AdminDisableUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUser
-func (c *CognitoIdentityProvider) AdminDisableUserRequest(input *AdminDisableUserInput) (req *request.Request, output *AdminDisableUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminDisableUserRequest(input *AdminDisableUserInput) (req *aws.Request, output *AdminDisableUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminDisableUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -900,7 +898,7 @@ func (c *CognitoIdentityProvider) AdminDisableUser(input *AdminDisableUserInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminDisableUserWithContext(ctx aws.Context, input *AdminDisableUserInput, opts ...request.Option) (*AdminDisableUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminDisableUserWithContext(ctx aws.Context, input *AdminDisableUserInput, opts ...aws.Option) (*AdminDisableUserOutput, error) {
 	req, out := c.AdminDisableUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -909,7 +907,7 @@ func (c *CognitoIdentityProvider) AdminDisableUserWithContext(ctx aws.Context, i
 
 const opAdminEnableUser = "AdminEnableUser"
 
-// AdminEnableUserRequest generates a "aws/request.Request" representing the
+// AdminEnableUserRequest generates a "aws.Request" representing the
 // client's request for the AdminEnableUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -933,8 +931,8 @@ const opAdminEnableUser = "AdminEnableUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUser
-func (c *CognitoIdentityProvider) AdminEnableUserRequest(input *AdminEnableUserInput) (req *request.Request, output *AdminEnableUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminEnableUserRequest(input *AdminEnableUserInput) (req *aws.Request, output *AdminEnableUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminEnableUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -999,7 +997,7 @@ func (c *CognitoIdentityProvider) AdminEnableUser(input *AdminEnableUserInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminEnableUserWithContext(ctx aws.Context, input *AdminEnableUserInput, opts ...request.Option) (*AdminEnableUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminEnableUserWithContext(ctx aws.Context, input *AdminEnableUserInput, opts ...aws.Option) (*AdminEnableUserOutput, error) {
 	req, out := c.AdminEnableUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1008,7 +1006,7 @@ func (c *CognitoIdentityProvider) AdminEnableUserWithContext(ctx aws.Context, in
 
 const opAdminForgetDevice = "AdminForgetDevice"
 
-// AdminForgetDeviceRequest generates a "aws/request.Request" representing the
+// AdminForgetDeviceRequest generates a "aws.Request" representing the
 // client's request for the AdminForgetDevice operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1032,8 +1030,8 @@ const opAdminForgetDevice = "AdminForgetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminForgetDevice
-func (c *CognitoIdentityProvider) AdminForgetDeviceRequest(input *AdminForgetDeviceInput) (req *request.Request, output *AdminForgetDeviceOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminForgetDeviceRequest(input *AdminForgetDeviceInput) (req *aws.Request, output *AdminForgetDeviceOutput) {
+	op := &aws.Operation{
 		Name:       opAdminForgetDevice,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1103,7 +1101,7 @@ func (c *CognitoIdentityProvider) AdminForgetDevice(input *AdminForgetDeviceInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminForgetDeviceWithContext(ctx aws.Context, input *AdminForgetDeviceInput, opts ...request.Option) (*AdminForgetDeviceOutput, error) {
+func (c *CognitoIdentityProvider) AdminForgetDeviceWithContext(ctx aws.Context, input *AdminForgetDeviceInput, opts ...aws.Option) (*AdminForgetDeviceOutput, error) {
 	req, out := c.AdminForgetDeviceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1112,7 +1110,7 @@ func (c *CognitoIdentityProvider) AdminForgetDeviceWithContext(ctx aws.Context, 
 
 const opAdminGetDevice = "AdminGetDevice"
 
-// AdminGetDeviceRequest generates a "aws/request.Request" representing the
+// AdminGetDeviceRequest generates a "aws.Request" representing the
 // client's request for the AdminGetDevice operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1136,8 +1134,8 @@ const opAdminGetDevice = "AdminGetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDevice
-func (c *CognitoIdentityProvider) AdminGetDeviceRequest(input *AdminGetDeviceInput) (req *request.Request, output *AdminGetDeviceOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminGetDeviceRequest(input *AdminGetDeviceInput) (req *aws.Request, output *AdminGetDeviceOutput) {
+	op := &aws.Operation{
 		Name:       opAdminGetDevice,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1202,7 +1200,7 @@ func (c *CognitoIdentityProvider) AdminGetDevice(input *AdminGetDeviceInput) (*A
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminGetDeviceWithContext(ctx aws.Context, input *AdminGetDeviceInput, opts ...request.Option) (*AdminGetDeviceOutput, error) {
+func (c *CognitoIdentityProvider) AdminGetDeviceWithContext(ctx aws.Context, input *AdminGetDeviceInput, opts ...aws.Option) (*AdminGetDeviceOutput, error) {
 	req, out := c.AdminGetDeviceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1211,7 +1209,7 @@ func (c *CognitoIdentityProvider) AdminGetDeviceWithContext(ctx aws.Context, inp
 
 const opAdminGetUser = "AdminGetUser"
 
-// AdminGetUserRequest generates a "aws/request.Request" representing the
+// AdminGetUserRequest generates a "aws.Request" representing the
 // client's request for the AdminGetUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1235,8 +1233,8 @@ const opAdminGetUser = "AdminGetUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUser
-func (c *CognitoIdentityProvider) AdminGetUserRequest(input *AdminGetUserInput) (req *request.Request, output *AdminGetUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminGetUserRequest(input *AdminGetUserInput) (req *aws.Request, output *AdminGetUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminGetUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1302,7 +1300,7 @@ func (c *CognitoIdentityProvider) AdminGetUser(input *AdminGetUserInput) (*Admin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminGetUserWithContext(ctx aws.Context, input *AdminGetUserInput, opts ...request.Option) (*AdminGetUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminGetUserWithContext(ctx aws.Context, input *AdminGetUserInput, opts ...aws.Option) (*AdminGetUserOutput, error) {
 	req, out := c.AdminGetUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1311,7 +1309,7 @@ func (c *CognitoIdentityProvider) AdminGetUserWithContext(ctx aws.Context, input
 
 const opAdminInitiateAuth = "AdminInitiateAuth"
 
-// AdminInitiateAuthRequest generates a "aws/request.Request" representing the
+// AdminInitiateAuthRequest generates a "aws.Request" representing the
 // client's request for the AdminInitiateAuth operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1335,8 +1333,8 @@ const opAdminInitiateAuth = "AdminInitiateAuth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuth
-func (c *CognitoIdentityProvider) AdminInitiateAuthRequest(input *AdminInitiateAuthInput) (req *request.Request, output *AdminInitiateAuthOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminInitiateAuthRequest(input *AdminInitiateAuthInput) (req *aws.Request, output *AdminInitiateAuthOutput) {
+	op := &aws.Operation{
 		Name:       opAdminInitiateAuth,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1436,7 +1434,7 @@ func (c *CognitoIdentityProvider) AdminInitiateAuth(input *AdminInitiateAuthInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminInitiateAuthWithContext(ctx aws.Context, input *AdminInitiateAuthInput, opts ...request.Option) (*AdminInitiateAuthOutput, error) {
+func (c *CognitoIdentityProvider) AdminInitiateAuthWithContext(ctx aws.Context, input *AdminInitiateAuthInput, opts ...aws.Option) (*AdminInitiateAuthOutput, error) {
 	req, out := c.AdminInitiateAuthRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1445,7 +1443,7 @@ func (c *CognitoIdentityProvider) AdminInitiateAuthWithContext(ctx aws.Context, 
 
 const opAdminLinkProviderForUser = "AdminLinkProviderForUser"
 
-// AdminLinkProviderForUserRequest generates a "aws/request.Request" representing the
+// AdminLinkProviderForUserRequest generates a "aws.Request" representing the
 // client's request for the AdminLinkProviderForUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1469,8 +1467,8 @@ const opAdminLinkProviderForUser = "AdminLinkProviderForUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminLinkProviderForUser
-func (c *CognitoIdentityProvider) AdminLinkProviderForUserRequest(input *AdminLinkProviderForUserInput) (req *request.Request, output *AdminLinkProviderForUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminLinkProviderForUserRequest(input *AdminLinkProviderForUserInput) (req *aws.Request, output *AdminLinkProviderForUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminLinkProviderForUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1557,7 +1555,7 @@ func (c *CognitoIdentityProvider) AdminLinkProviderForUser(input *AdminLinkProvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminLinkProviderForUserWithContext(ctx aws.Context, input *AdminLinkProviderForUserInput, opts ...request.Option) (*AdminLinkProviderForUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminLinkProviderForUserWithContext(ctx aws.Context, input *AdminLinkProviderForUserInput, opts ...aws.Option) (*AdminLinkProviderForUserOutput, error) {
 	req, out := c.AdminLinkProviderForUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1566,7 +1564,7 @@ func (c *CognitoIdentityProvider) AdminLinkProviderForUserWithContext(ctx aws.Co
 
 const opAdminListDevices = "AdminListDevices"
 
-// AdminListDevicesRequest generates a "aws/request.Request" representing the
+// AdminListDevicesRequest generates a "aws.Request" representing the
 // client's request for the AdminListDevices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1590,8 +1588,8 @@ const opAdminListDevices = "AdminListDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevices
-func (c *CognitoIdentityProvider) AdminListDevicesRequest(input *AdminListDevicesInput) (req *request.Request, output *AdminListDevicesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminListDevicesRequest(input *AdminListDevicesInput) (req *aws.Request, output *AdminListDevicesOutput) {
+	op := &aws.Operation{
 		Name:       opAdminListDevices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1656,7 +1654,7 @@ func (c *CognitoIdentityProvider) AdminListDevices(input *AdminListDevicesInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminListDevicesWithContext(ctx aws.Context, input *AdminListDevicesInput, opts ...request.Option) (*AdminListDevicesOutput, error) {
+func (c *CognitoIdentityProvider) AdminListDevicesWithContext(ctx aws.Context, input *AdminListDevicesInput, opts ...aws.Option) (*AdminListDevicesOutput, error) {
 	req, out := c.AdminListDevicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1665,7 +1663,7 @@ func (c *CognitoIdentityProvider) AdminListDevicesWithContext(ctx aws.Context, i
 
 const opAdminListGroupsForUser = "AdminListGroupsForUser"
 
-// AdminListGroupsForUserRequest generates a "aws/request.Request" representing the
+// AdminListGroupsForUserRequest generates a "aws.Request" representing the
 // client's request for the AdminListGroupsForUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1689,8 +1687,8 @@ const opAdminListGroupsForUser = "AdminListGroupsForUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUser
-func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminListGroupsForUserInput) (req *request.Request, output *AdminListGroupsForUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminListGroupsForUserInput) (req *aws.Request, output *AdminListGroupsForUserOutput) {
+	op := &aws.Operation{
 		Name:       opAdminListGroupsForUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1755,7 +1753,7 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUser(input *AdminListGroupsF
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminListGroupsForUserWithContext(ctx aws.Context, input *AdminListGroupsForUserInput, opts ...request.Option) (*AdminListGroupsForUserOutput, error) {
+func (c *CognitoIdentityProvider) AdminListGroupsForUserWithContext(ctx aws.Context, input *AdminListGroupsForUserInput, opts ...aws.Option) (*AdminListGroupsForUserOutput, error) {
 	req, out := c.AdminListGroupsForUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1764,7 +1762,7 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUserWithContext(ctx aws.Cont
 
 const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
 
-// AdminRemoveUserFromGroupRequest generates a "aws/request.Request" representing the
+// AdminRemoveUserFromGroupRequest generates a "aws.Request" representing the
 // client's request for the AdminRemoveUserFromGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1788,8 +1786,8 @@ const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroup
-func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupRequest(input *AdminRemoveUserFromGroupInput) (req *request.Request, output *AdminRemoveUserFromGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupRequest(input *AdminRemoveUserFromGroupInput) (req *aws.Request, output *AdminRemoveUserFromGroupOutput) {
+	op := &aws.Operation{
 		Name:       opAdminRemoveUserFromGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1856,7 +1854,7 @@ func (c *CognitoIdentityProvider) AdminRemoveUserFromGroup(input *AdminRemoveUse
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupWithContext(ctx aws.Context, input *AdminRemoveUserFromGroupInput, opts ...request.Option) (*AdminRemoveUserFromGroupOutput, error) {
+func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupWithContext(ctx aws.Context, input *AdminRemoveUserFromGroupInput, opts ...aws.Option) (*AdminRemoveUserFromGroupOutput, error) {
 	req, out := c.AdminRemoveUserFromGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1865,7 +1863,7 @@ func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupWithContext(ctx aws.Co
 
 const opAdminResetUserPassword = "AdminResetUserPassword"
 
-// AdminResetUserPasswordRequest generates a "aws/request.Request" representing the
+// AdminResetUserPasswordRequest generates a "aws.Request" representing the
 // client's request for the AdminResetUserPassword operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1889,8 +1887,8 @@ const opAdminResetUserPassword = "AdminResetUserPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPassword
-func (c *CognitoIdentityProvider) AdminResetUserPasswordRequest(input *AdminResetUserPasswordInput) (req *request.Request, output *AdminResetUserPasswordOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminResetUserPasswordRequest(input *AdminResetUserPasswordInput) (req *aws.Request, output *AdminResetUserPasswordOutput) {
+	op := &aws.Operation{
 		Name:       opAdminResetUserPassword,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1996,7 +1994,7 @@ func (c *CognitoIdentityProvider) AdminResetUserPassword(input *AdminResetUserPa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminResetUserPasswordWithContext(ctx aws.Context, input *AdminResetUserPasswordInput, opts ...request.Option) (*AdminResetUserPasswordOutput, error) {
+func (c *CognitoIdentityProvider) AdminResetUserPasswordWithContext(ctx aws.Context, input *AdminResetUserPasswordInput, opts ...aws.Option) (*AdminResetUserPasswordOutput, error) {
 	req, out := c.AdminResetUserPasswordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2005,7 +2003,7 @@ func (c *CognitoIdentityProvider) AdminResetUserPasswordWithContext(ctx aws.Cont
 
 const opAdminRespondToAuthChallenge = "AdminRespondToAuthChallenge"
 
-// AdminRespondToAuthChallengeRequest generates a "aws/request.Request" representing the
+// AdminRespondToAuthChallengeRequest generates a "aws.Request" representing the
 // client's request for the AdminRespondToAuthChallenge operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2029,8 +2027,8 @@ const opAdminRespondToAuthChallenge = "AdminRespondToAuthChallenge"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallenge
-func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeRequest(input *AdminRespondToAuthChallengeInput) (req *request.Request, output *AdminRespondToAuthChallengeOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeRequest(input *AdminRespondToAuthChallengeInput) (req *aws.Request, output *AdminRespondToAuthChallengeOutput) {
+	op := &aws.Operation{
 		Name:       opAdminRespondToAuthChallenge,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2147,7 +2145,7 @@ func (c *CognitoIdentityProvider) AdminRespondToAuthChallenge(input *AdminRespon
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeWithContext(ctx aws.Context, input *AdminRespondToAuthChallengeInput, opts ...request.Option) (*AdminRespondToAuthChallengeOutput, error) {
+func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeWithContext(ctx aws.Context, input *AdminRespondToAuthChallengeInput, opts ...aws.Option) (*AdminRespondToAuthChallengeOutput, error) {
 	req, out := c.AdminRespondToAuthChallengeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2156,7 +2154,7 @@ func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeWithContext(ctx aws
 
 const opAdminSetUserSettings = "AdminSetUserSettings"
 
-// AdminSetUserSettingsRequest generates a "aws/request.Request" representing the
+// AdminSetUserSettingsRequest generates a "aws.Request" representing the
 // client's request for the AdminSetUserSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2180,8 +2178,8 @@ const opAdminSetUserSettings = "AdminSetUserSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettings
-func (c *CognitoIdentityProvider) AdminSetUserSettingsRequest(input *AdminSetUserSettingsInput) (req *request.Request, output *AdminSetUserSettingsOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminSetUserSettingsRequest(input *AdminSetUserSettingsInput) (req *aws.Request, output *AdminSetUserSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opAdminSetUserSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2242,7 +2240,7 @@ func (c *CognitoIdentityProvider) AdminSetUserSettings(input *AdminSetUserSettin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminSetUserSettingsWithContext(ctx aws.Context, input *AdminSetUserSettingsInput, opts ...request.Option) (*AdminSetUserSettingsOutput, error) {
+func (c *CognitoIdentityProvider) AdminSetUserSettingsWithContext(ctx aws.Context, input *AdminSetUserSettingsInput, opts ...aws.Option) (*AdminSetUserSettingsOutput, error) {
 	req, out := c.AdminSetUserSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2251,7 +2249,7 @@ func (c *CognitoIdentityProvider) AdminSetUserSettingsWithContext(ctx aws.Contex
 
 const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
 
-// AdminUpdateDeviceStatusRequest generates a "aws/request.Request" representing the
+// AdminUpdateDeviceStatusRequest generates a "aws.Request" representing the
 // client's request for the AdminUpdateDeviceStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2275,8 +2273,8 @@ const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateDeviceStatus
-func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusRequest(input *AdminUpdateDeviceStatusInput) (req *request.Request, output *AdminUpdateDeviceStatusOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusRequest(input *AdminUpdateDeviceStatusInput) (req *aws.Request, output *AdminUpdateDeviceStatusOutput) {
+	op := &aws.Operation{
 		Name:       opAdminUpdateDeviceStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2344,7 +2342,7 @@ func (c *CognitoIdentityProvider) AdminUpdateDeviceStatus(input *AdminUpdateDevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusWithContext(ctx aws.Context, input *AdminUpdateDeviceStatusInput, opts ...request.Option) (*AdminUpdateDeviceStatusOutput, error) {
+func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusWithContext(ctx aws.Context, input *AdminUpdateDeviceStatusInput, opts ...aws.Option) (*AdminUpdateDeviceStatusOutput, error) {
 	req, out := c.AdminUpdateDeviceStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2353,7 +2351,7 @@ func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusWithContext(ctx aws.Con
 
 const opAdminUpdateUserAttributes = "AdminUpdateUserAttributes"
 
-// AdminUpdateUserAttributesRequest generates a "aws/request.Request" representing the
+// AdminUpdateUserAttributesRequest generates a "aws.Request" representing the
 // client's request for the AdminUpdateUserAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2377,8 +2375,8 @@ const opAdminUpdateUserAttributes = "AdminUpdateUserAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributes
-func (c *CognitoIdentityProvider) AdminUpdateUserAttributesRequest(input *AdminUpdateUserAttributesInput) (req *request.Request, output *AdminUpdateUserAttributesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminUpdateUserAttributesRequest(input *AdminUpdateUserAttributesInput) (req *aws.Request, output *AdminUpdateUserAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opAdminUpdateUserAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2468,7 +2466,7 @@ func (c *CognitoIdentityProvider) AdminUpdateUserAttributes(input *AdminUpdateUs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminUpdateUserAttributesWithContext(ctx aws.Context, input *AdminUpdateUserAttributesInput, opts ...request.Option) (*AdminUpdateUserAttributesOutput, error) {
+func (c *CognitoIdentityProvider) AdminUpdateUserAttributesWithContext(ctx aws.Context, input *AdminUpdateUserAttributesInput, opts ...aws.Option) (*AdminUpdateUserAttributesOutput, error) {
 	req, out := c.AdminUpdateUserAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2477,7 +2475,7 @@ func (c *CognitoIdentityProvider) AdminUpdateUserAttributesWithContext(ctx aws.C
 
 const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
 
-// AdminUserGlobalSignOutRequest generates a "aws/request.Request" representing the
+// AdminUserGlobalSignOutRequest generates a "aws.Request" representing the
 // client's request for the AdminUserGlobalSignOut operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2501,8 +2499,8 @@ const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOut
-func (c *CognitoIdentityProvider) AdminUserGlobalSignOutRequest(input *AdminUserGlobalSignOutInput) (req *request.Request, output *AdminUserGlobalSignOutOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) AdminUserGlobalSignOutRequest(input *AdminUserGlobalSignOutInput) (req *aws.Request, output *AdminUserGlobalSignOutOutput) {
+	op := &aws.Operation{
 		Name:       opAdminUserGlobalSignOut,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2567,7 +2565,7 @@ func (c *CognitoIdentityProvider) AdminUserGlobalSignOut(input *AdminUserGlobalS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) AdminUserGlobalSignOutWithContext(ctx aws.Context, input *AdminUserGlobalSignOutInput, opts ...request.Option) (*AdminUserGlobalSignOutOutput, error) {
+func (c *CognitoIdentityProvider) AdminUserGlobalSignOutWithContext(ctx aws.Context, input *AdminUserGlobalSignOutInput, opts ...aws.Option) (*AdminUserGlobalSignOutOutput, error) {
 	req, out := c.AdminUserGlobalSignOutRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2576,7 +2574,7 @@ func (c *CognitoIdentityProvider) AdminUserGlobalSignOutWithContext(ctx aws.Cont
 
 const opChangePassword = "ChangePassword"
 
-// ChangePasswordRequest generates a "aws/request.Request" representing the
+// ChangePasswordRequest generates a "aws.Request" representing the
 // client's request for the ChangePassword operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2600,8 +2598,8 @@ const opChangePassword = "ChangePassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePassword
-func (c *CognitoIdentityProvider) ChangePasswordRequest(input *ChangePasswordInput) (req *request.Request, output *ChangePasswordOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ChangePasswordRequest(input *ChangePasswordInput) (req *aws.Request, output *ChangePasswordOutput) {
+	op := &aws.Operation{
 		Name:       opChangePassword,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2613,7 +2611,7 @@ func (c *CognitoIdentityProvider) ChangePasswordRequest(input *ChangePasswordInp
 
 	output = &ChangePasswordOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -2679,7 +2677,7 @@ func (c *CognitoIdentityProvider) ChangePassword(input *ChangePasswordInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ChangePasswordWithContext(ctx aws.Context, input *ChangePasswordInput, opts ...request.Option) (*ChangePasswordOutput, error) {
+func (c *CognitoIdentityProvider) ChangePasswordWithContext(ctx aws.Context, input *ChangePasswordInput, opts ...aws.Option) (*ChangePasswordOutput, error) {
 	req, out := c.ChangePasswordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2688,7 +2686,7 @@ func (c *CognitoIdentityProvider) ChangePasswordWithContext(ctx aws.Context, inp
 
 const opConfirmDevice = "ConfirmDevice"
 
-// ConfirmDeviceRequest generates a "aws/request.Request" representing the
+// ConfirmDeviceRequest generates a "aws.Request" representing the
 // client's request for the ConfirmDevice operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2712,8 +2710,8 @@ const opConfirmDevice = "ConfirmDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmDevice
-func (c *CognitoIdentityProvider) ConfirmDeviceRequest(input *ConfirmDeviceInput) (req *request.Request, output *ConfirmDeviceOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ConfirmDeviceRequest(input *ConfirmDeviceInput) (req *aws.Request, output *ConfirmDeviceOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmDevice,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2798,7 +2796,7 @@ func (c *CognitoIdentityProvider) ConfirmDevice(input *ConfirmDeviceInput) (*Con
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ConfirmDeviceWithContext(ctx aws.Context, input *ConfirmDeviceInput, opts ...request.Option) (*ConfirmDeviceOutput, error) {
+func (c *CognitoIdentityProvider) ConfirmDeviceWithContext(ctx aws.Context, input *ConfirmDeviceInput, opts ...aws.Option) (*ConfirmDeviceOutput, error) {
 	req, out := c.ConfirmDeviceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2807,7 +2805,7 @@ func (c *CognitoIdentityProvider) ConfirmDeviceWithContext(ctx aws.Context, inpu
 
 const opConfirmForgotPassword = "ConfirmForgotPassword"
 
-// ConfirmForgotPasswordRequest generates a "aws/request.Request" representing the
+// ConfirmForgotPasswordRequest generates a "aws.Request" representing the
 // client's request for the ConfirmForgotPassword operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2831,8 +2829,8 @@ const opConfirmForgotPassword = "ConfirmForgotPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPassword
-func (c *CognitoIdentityProvider) ConfirmForgotPasswordRequest(input *ConfirmForgotPasswordInput) (req *request.Request, output *ConfirmForgotPasswordOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ConfirmForgotPasswordRequest(input *ConfirmForgotPasswordInput) (req *aws.Request, output *ConfirmForgotPasswordOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmForgotPassword,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2844,7 +2842,7 @@ func (c *CognitoIdentityProvider) ConfirmForgotPasswordRequest(input *ConfirmFor
 
 	output = &ConfirmForgotPasswordOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -2930,7 +2928,7 @@ func (c *CognitoIdentityProvider) ConfirmForgotPassword(input *ConfirmForgotPass
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ConfirmForgotPasswordWithContext(ctx aws.Context, input *ConfirmForgotPasswordInput, opts ...request.Option) (*ConfirmForgotPasswordOutput, error) {
+func (c *CognitoIdentityProvider) ConfirmForgotPasswordWithContext(ctx aws.Context, input *ConfirmForgotPasswordInput, opts ...aws.Option) (*ConfirmForgotPasswordOutput, error) {
 	req, out := c.ConfirmForgotPasswordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2939,7 +2937,7 @@ func (c *CognitoIdentityProvider) ConfirmForgotPasswordWithContext(ctx aws.Conte
 
 const opConfirmSignUp = "ConfirmSignUp"
 
-// ConfirmSignUpRequest generates a "aws/request.Request" representing the
+// ConfirmSignUpRequest generates a "aws.Request" representing the
 // client's request for the ConfirmSignUp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2963,8 +2961,8 @@ const opConfirmSignUp = "ConfirmSignUp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUp
-func (c *CognitoIdentityProvider) ConfirmSignUpRequest(input *ConfirmSignUpInput) (req *request.Request, output *ConfirmSignUpOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ConfirmSignUpRequest(input *ConfirmSignUpInput) (req *aws.Request, output *ConfirmSignUpOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmSignUp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2976,7 +2974,7 @@ func (c *CognitoIdentityProvider) ConfirmSignUpRequest(input *ConfirmSignUpInput
 
 	output = &ConfirmSignUpOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -3062,7 +3060,7 @@ func (c *CognitoIdentityProvider) ConfirmSignUp(input *ConfirmSignUpInput) (*Con
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ConfirmSignUpWithContext(ctx aws.Context, input *ConfirmSignUpInput, opts ...request.Option) (*ConfirmSignUpOutput, error) {
+func (c *CognitoIdentityProvider) ConfirmSignUpWithContext(ctx aws.Context, input *ConfirmSignUpInput, opts ...aws.Option) (*ConfirmSignUpOutput, error) {
 	req, out := c.ConfirmSignUpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3071,7 +3069,7 @@ func (c *CognitoIdentityProvider) ConfirmSignUpWithContext(ctx aws.Context, inpu
 
 const opCreateGroup = "CreateGroup"
 
-// CreateGroupRequest generates a "aws/request.Request" representing the
+// CreateGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3095,8 +3093,8 @@ const opCreateGroup = "CreateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroup
-func (c *CognitoIdentityProvider) CreateGroupRequest(input *CreateGroupInput) (req *request.Request, output *CreateGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateGroupRequest(input *CreateGroupInput) (req *aws.Request, output *CreateGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3166,7 +3164,7 @@ func (c *CognitoIdentityProvider) CreateGroup(input *CreateGroupInput) (*CreateG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateGroupWithContext(ctx aws.Context, input *CreateGroupInput, opts ...request.Option) (*CreateGroupOutput, error) {
+func (c *CognitoIdentityProvider) CreateGroupWithContext(ctx aws.Context, input *CreateGroupInput, opts ...aws.Option) (*CreateGroupOutput, error) {
 	req, out := c.CreateGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3175,7 +3173,7 @@ func (c *CognitoIdentityProvider) CreateGroupWithContext(ctx aws.Context, input 
 
 const opCreateIdentityProvider = "CreateIdentityProvider"
 
-// CreateIdentityProviderRequest generates a "aws/request.Request" representing the
+// CreateIdentityProviderRequest generates a "aws.Request" representing the
 // client's request for the CreateIdentityProvider operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3199,8 +3197,8 @@ const opCreateIdentityProvider = "CreateIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateIdentityProvider
-func (c *CognitoIdentityProvider) CreateIdentityProviderRequest(input *CreateIdentityProviderInput) (req *request.Request, output *CreateIdentityProviderOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateIdentityProviderRequest(input *CreateIdentityProviderInput) (req *aws.Request, output *CreateIdentityProviderOutput) {
+	op := &aws.Operation{
 		Name:       opCreateIdentityProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3268,7 +3266,7 @@ func (c *CognitoIdentityProvider) CreateIdentityProvider(input *CreateIdentityPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateIdentityProviderWithContext(ctx aws.Context, input *CreateIdentityProviderInput, opts ...request.Option) (*CreateIdentityProviderOutput, error) {
+func (c *CognitoIdentityProvider) CreateIdentityProviderWithContext(ctx aws.Context, input *CreateIdentityProviderInput, opts ...aws.Option) (*CreateIdentityProviderOutput, error) {
 	req, out := c.CreateIdentityProviderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3277,7 +3275,7 @@ func (c *CognitoIdentityProvider) CreateIdentityProviderWithContext(ctx aws.Cont
 
 const opCreateResourceServer = "CreateResourceServer"
 
-// CreateResourceServerRequest generates a "aws/request.Request" representing the
+// CreateResourceServerRequest generates a "aws.Request" representing the
 // client's request for the CreateResourceServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3301,8 +3299,8 @@ const opCreateResourceServer = "CreateResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateResourceServer
-func (c *CognitoIdentityProvider) CreateResourceServerRequest(input *CreateResourceServerInput) (req *request.Request, output *CreateResourceServerOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateResourceServerRequest(input *CreateResourceServerInput) (req *aws.Request, output *CreateResourceServerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateResourceServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3366,7 +3364,7 @@ func (c *CognitoIdentityProvider) CreateResourceServer(input *CreateResourceServ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateResourceServerWithContext(ctx aws.Context, input *CreateResourceServerInput, opts ...request.Option) (*CreateResourceServerOutput, error) {
+func (c *CognitoIdentityProvider) CreateResourceServerWithContext(ctx aws.Context, input *CreateResourceServerInput, opts ...aws.Option) (*CreateResourceServerOutput, error) {
 	req, out := c.CreateResourceServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3375,7 +3373,7 @@ func (c *CognitoIdentityProvider) CreateResourceServerWithContext(ctx aws.Contex
 
 const opCreateUserImportJob = "CreateUserImportJob"
 
-// CreateUserImportJobRequest generates a "aws/request.Request" representing the
+// CreateUserImportJobRequest generates a "aws.Request" representing the
 // client's request for the CreateUserImportJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3399,8 +3397,8 @@ const opCreateUserImportJob = "CreateUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJob
-func (c *CognitoIdentityProvider) CreateUserImportJobRequest(input *CreateUserImportJobInput) (req *request.Request, output *CreateUserImportJobOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateUserImportJobRequest(input *CreateUserImportJobInput) (req *aws.Request, output *CreateUserImportJobOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserImportJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3467,7 +3465,7 @@ func (c *CognitoIdentityProvider) CreateUserImportJob(input *CreateUserImportJob
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateUserImportJobWithContext(ctx aws.Context, input *CreateUserImportJobInput, opts ...request.Option) (*CreateUserImportJobOutput, error) {
+func (c *CognitoIdentityProvider) CreateUserImportJobWithContext(ctx aws.Context, input *CreateUserImportJobInput, opts ...aws.Option) (*CreateUserImportJobOutput, error) {
 	req, out := c.CreateUserImportJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3476,7 +3474,7 @@ func (c *CognitoIdentityProvider) CreateUserImportJobWithContext(ctx aws.Context
 
 const opCreateUserPool = "CreateUserPool"
 
-// CreateUserPoolRequest generates a "aws/request.Request" representing the
+// CreateUserPoolRequest generates a "aws.Request" representing the
 // client's request for the CreateUserPool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3500,8 +3498,8 @@ const opCreateUserPool = "CreateUserPool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPool
-func (c *CognitoIdentityProvider) CreateUserPoolRequest(input *CreateUserPoolInput) (req *request.Request, output *CreateUserPoolOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateUserPoolRequest(input *CreateUserPoolInput) (req *aws.Request, output *CreateUserPoolOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserPool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3579,7 +3577,7 @@ func (c *CognitoIdentityProvider) CreateUserPool(input *CreateUserPoolInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateUserPoolWithContext(ctx aws.Context, input *CreateUserPoolInput, opts ...request.Option) (*CreateUserPoolOutput, error) {
+func (c *CognitoIdentityProvider) CreateUserPoolWithContext(ctx aws.Context, input *CreateUserPoolInput, opts ...aws.Option) (*CreateUserPoolOutput, error) {
 	req, out := c.CreateUserPoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3588,7 +3586,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolWithContext(ctx aws.Context, inp
 
 const opCreateUserPoolClient = "CreateUserPoolClient"
 
-// CreateUserPoolClientRequest generates a "aws/request.Request" representing the
+// CreateUserPoolClientRequest generates a "aws.Request" representing the
 // client's request for the CreateUserPoolClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3612,8 +3610,8 @@ const opCreateUserPoolClient = "CreateUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient
-func (c *CognitoIdentityProvider) CreateUserPoolClientRequest(input *CreateUserPoolClientInput) (req *request.Request, output *CreateUserPoolClientOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateUserPoolClientRequest(input *CreateUserPoolClientInput) (req *aws.Request, output *CreateUserPoolClientOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserPoolClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3683,7 +3681,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolClient(input *CreateUserPoolClie
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateUserPoolClientWithContext(ctx aws.Context, input *CreateUserPoolClientInput, opts ...request.Option) (*CreateUserPoolClientOutput, error) {
+func (c *CognitoIdentityProvider) CreateUserPoolClientWithContext(ctx aws.Context, input *CreateUserPoolClientInput, opts ...aws.Option) (*CreateUserPoolClientOutput, error) {
 	req, out := c.CreateUserPoolClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3692,7 +3690,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolClientWithContext(ctx aws.Contex
 
 const opCreateUserPoolDomain = "CreateUserPoolDomain"
 
-// CreateUserPoolDomainRequest generates a "aws/request.Request" representing the
+// CreateUserPoolDomainRequest generates a "aws.Request" representing the
 // client's request for the CreateUserPoolDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3716,8 +3714,8 @@ const opCreateUserPoolDomain = "CreateUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomain
-func (c *CognitoIdentityProvider) CreateUserPoolDomainRequest(input *CreateUserPoolDomainInput) (req *request.Request, output *CreateUserPoolDomainOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) CreateUserPoolDomainRequest(input *CreateUserPoolDomainInput) (req *aws.Request, output *CreateUserPoolDomainOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserPoolDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3773,7 +3771,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolDomain(input *CreateUserPoolDoma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) CreateUserPoolDomainWithContext(ctx aws.Context, input *CreateUserPoolDomainInput, opts ...request.Option) (*CreateUserPoolDomainOutput, error) {
+func (c *CognitoIdentityProvider) CreateUserPoolDomainWithContext(ctx aws.Context, input *CreateUserPoolDomainInput, opts ...aws.Option) (*CreateUserPoolDomainOutput, error) {
 	req, out := c.CreateUserPoolDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3782,7 +3780,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolDomainWithContext(ctx aws.Contex
 
 const opDeleteGroup = "DeleteGroup"
 
-// DeleteGroupRequest generates a "aws/request.Request" representing the
+// DeleteGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3806,8 +3804,8 @@ const opDeleteGroup = "DeleteGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroup
-func (c *CognitoIdentityProvider) DeleteGroupRequest(input *DeleteGroupInput) (req *request.Request, output *DeleteGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteGroupRequest(input *DeleteGroupInput) (req *aws.Request, output *DeleteGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3871,7 +3869,7 @@ func (c *CognitoIdentityProvider) DeleteGroup(input *DeleteGroupInput) (*DeleteG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, opts ...request.Option) (*DeleteGroupOutput, error) {
+func (c *CognitoIdentityProvider) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, opts ...aws.Option) (*DeleteGroupOutput, error) {
 	req, out := c.DeleteGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3880,7 +3878,7 @@ func (c *CognitoIdentityProvider) DeleteGroupWithContext(ctx aws.Context, input 
 
 const opDeleteIdentityProvider = "DeleteIdentityProvider"
 
-// DeleteIdentityProviderRequest generates a "aws/request.Request" representing the
+// DeleteIdentityProviderRequest generates a "aws.Request" representing the
 // client's request for the DeleteIdentityProvider operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3904,8 +3902,8 @@ const opDeleteIdentityProvider = "DeleteIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteIdentityProvider
-func (c *CognitoIdentityProvider) DeleteIdentityProviderRequest(input *DeleteIdentityProviderInput) (req *request.Request, output *DeleteIdentityProviderOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteIdentityProviderRequest(input *DeleteIdentityProviderInput) (req *aws.Request, output *DeleteIdentityProviderOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIdentityProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3970,7 +3968,7 @@ func (c *CognitoIdentityProvider) DeleteIdentityProvider(input *DeleteIdentityPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteIdentityProviderWithContext(ctx aws.Context, input *DeleteIdentityProviderInput, opts ...request.Option) (*DeleteIdentityProviderOutput, error) {
+func (c *CognitoIdentityProvider) DeleteIdentityProviderWithContext(ctx aws.Context, input *DeleteIdentityProviderInput, opts ...aws.Option) (*DeleteIdentityProviderOutput, error) {
 	req, out := c.DeleteIdentityProviderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3979,7 +3977,7 @@ func (c *CognitoIdentityProvider) DeleteIdentityProviderWithContext(ctx aws.Cont
 
 const opDeleteResourceServer = "DeleteResourceServer"
 
-// DeleteResourceServerRequest generates a "aws/request.Request" representing the
+// DeleteResourceServerRequest generates a "aws.Request" representing the
 // client's request for the DeleteResourceServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4003,8 +4001,8 @@ const opDeleteResourceServer = "DeleteResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteResourceServer
-func (c *CognitoIdentityProvider) DeleteResourceServerRequest(input *DeleteResourceServerInput) (req *request.Request, output *DeleteResourceServerOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteResourceServerRequest(input *DeleteResourceServerInput) (req *aws.Request, output *DeleteResourceServerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteResourceServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4066,7 +4064,7 @@ func (c *CognitoIdentityProvider) DeleteResourceServer(input *DeleteResourceServ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteResourceServerWithContext(ctx aws.Context, input *DeleteResourceServerInput, opts ...request.Option) (*DeleteResourceServerOutput, error) {
+func (c *CognitoIdentityProvider) DeleteResourceServerWithContext(ctx aws.Context, input *DeleteResourceServerInput, opts ...aws.Option) (*DeleteResourceServerOutput, error) {
 	req, out := c.DeleteResourceServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4075,7 +4073,7 @@ func (c *CognitoIdentityProvider) DeleteResourceServerWithContext(ctx aws.Contex
 
 const opDeleteUser = "DeleteUser"
 
-// DeleteUserRequest generates a "aws/request.Request" representing the
+// DeleteUserRequest generates a "aws.Request" representing the
 // client's request for the DeleteUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4099,8 +4097,8 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUser
-func (c *CognitoIdentityProvider) DeleteUserRequest(input *DeleteUserInput) (req *request.Request, output *DeleteUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteUserRequest(input *DeleteUserInput) (req *aws.Request, output *DeleteUserOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4114,7 +4112,7 @@ func (c *CognitoIdentityProvider) DeleteUserRequest(input *DeleteUserInput) (req
 	req = c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -4172,7 +4170,7 @@ func (c *CognitoIdentityProvider) DeleteUser(input *DeleteUserInput) (*DeleteUse
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput, opts ...request.Option) (*DeleteUserOutput, error) {
+func (c *CognitoIdentityProvider) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput, opts ...aws.Option) (*DeleteUserOutput, error) {
 	req, out := c.DeleteUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4181,7 +4179,7 @@ func (c *CognitoIdentityProvider) DeleteUserWithContext(ctx aws.Context, input *
 
 const opDeleteUserAttributes = "DeleteUserAttributes"
 
-// DeleteUserAttributesRequest generates a "aws/request.Request" representing the
+// DeleteUserAttributesRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4205,8 +4203,8 @@ const opDeleteUserAttributes = "DeleteUserAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributes
-func (c *CognitoIdentityProvider) DeleteUserAttributesRequest(input *DeleteUserAttributesInput) (req *request.Request, output *DeleteUserAttributesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteUserAttributesRequest(input *DeleteUserAttributesInput) (req *aws.Request, output *DeleteUserAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4218,7 +4216,7 @@ func (c *CognitoIdentityProvider) DeleteUserAttributesRequest(input *DeleteUserA
 
 	output = &DeleteUserAttributesOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -4276,7 +4274,7 @@ func (c *CognitoIdentityProvider) DeleteUserAttributes(input *DeleteUserAttribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteUserAttributesWithContext(ctx aws.Context, input *DeleteUserAttributesInput, opts ...request.Option) (*DeleteUserAttributesOutput, error) {
+func (c *CognitoIdentityProvider) DeleteUserAttributesWithContext(ctx aws.Context, input *DeleteUserAttributesInput, opts ...aws.Option) (*DeleteUserAttributesOutput, error) {
 	req, out := c.DeleteUserAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4285,7 +4283,7 @@ func (c *CognitoIdentityProvider) DeleteUserAttributesWithContext(ctx aws.Contex
 
 const opDeleteUserPool = "DeleteUserPool"
 
-// DeleteUserPoolRequest generates a "aws/request.Request" representing the
+// DeleteUserPoolRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserPool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4309,8 +4307,8 @@ const opDeleteUserPool = "DeleteUserPool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPool
-func (c *CognitoIdentityProvider) DeleteUserPoolRequest(input *DeleteUserPoolInput) (req *request.Request, output *DeleteUserPoolOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteUserPoolRequest(input *DeleteUserPoolInput) (req *aws.Request, output *DeleteUserPoolOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserPool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4376,7 +4374,7 @@ func (c *CognitoIdentityProvider) DeleteUserPool(input *DeleteUserPoolInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteUserPoolWithContext(ctx aws.Context, input *DeleteUserPoolInput, opts ...request.Option) (*DeleteUserPoolOutput, error) {
+func (c *CognitoIdentityProvider) DeleteUserPoolWithContext(ctx aws.Context, input *DeleteUserPoolInput, opts ...aws.Option) (*DeleteUserPoolOutput, error) {
 	req, out := c.DeleteUserPoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4385,7 +4383,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolWithContext(ctx aws.Context, inp
 
 const opDeleteUserPoolClient = "DeleteUserPoolClient"
 
-// DeleteUserPoolClientRequest generates a "aws/request.Request" representing the
+// DeleteUserPoolClientRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserPoolClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4409,8 +4407,8 @@ const opDeleteUserPoolClient = "DeleteUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClient
-func (c *CognitoIdentityProvider) DeleteUserPoolClientRequest(input *DeleteUserPoolClientInput) (req *request.Request, output *DeleteUserPoolClientOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteUserPoolClientRequest(input *DeleteUserPoolClientInput) (req *aws.Request, output *DeleteUserPoolClientOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserPoolClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4472,7 +4470,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolClient(input *DeleteUserPoolClie
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteUserPoolClientWithContext(ctx aws.Context, input *DeleteUserPoolClientInput, opts ...request.Option) (*DeleteUserPoolClientOutput, error) {
+func (c *CognitoIdentityProvider) DeleteUserPoolClientWithContext(ctx aws.Context, input *DeleteUserPoolClientInput, opts ...aws.Option) (*DeleteUserPoolClientOutput, error) {
 	req, out := c.DeleteUserPoolClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4481,7 +4479,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolClientWithContext(ctx aws.Contex
 
 const opDeleteUserPoolDomain = "DeleteUserPoolDomain"
 
-// DeleteUserPoolDomainRequest generates a "aws/request.Request" representing the
+// DeleteUserPoolDomainRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserPoolDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4505,8 +4503,8 @@ const opDeleteUserPoolDomain = "DeleteUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolDomain
-func (c *CognitoIdentityProvider) DeleteUserPoolDomainRequest(input *DeleteUserPoolDomainInput) (req *request.Request, output *DeleteUserPoolDomainOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DeleteUserPoolDomainRequest(input *DeleteUserPoolDomainInput) (req *aws.Request, output *DeleteUserPoolDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserPoolDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4562,7 +4560,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolDomain(input *DeleteUserPoolDoma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DeleteUserPoolDomainWithContext(ctx aws.Context, input *DeleteUserPoolDomainInput, opts ...request.Option) (*DeleteUserPoolDomainOutput, error) {
+func (c *CognitoIdentityProvider) DeleteUserPoolDomainWithContext(ctx aws.Context, input *DeleteUserPoolDomainInput, opts ...aws.Option) (*DeleteUserPoolDomainOutput, error) {
 	req, out := c.DeleteUserPoolDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4571,7 +4569,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolDomainWithContext(ctx aws.Contex
 
 const opDescribeIdentityProvider = "DescribeIdentityProvider"
 
-// DescribeIdentityProviderRequest generates a "aws/request.Request" representing the
+// DescribeIdentityProviderRequest generates a "aws.Request" representing the
 // client's request for the DescribeIdentityProvider operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4595,8 +4593,8 @@ const opDescribeIdentityProvider = "DescribeIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeIdentityProvider
-func (c *CognitoIdentityProvider) DescribeIdentityProviderRequest(input *DescribeIdentityProviderInput) (req *request.Request, output *DescribeIdentityProviderOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DescribeIdentityProviderRequest(input *DescribeIdentityProviderInput) (req *aws.Request, output *DescribeIdentityProviderOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeIdentityProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4656,7 +4654,7 @@ func (c *CognitoIdentityProvider) DescribeIdentityProvider(input *DescribeIdenti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DescribeIdentityProviderWithContext(ctx aws.Context, input *DescribeIdentityProviderInput, opts ...request.Option) (*DescribeIdentityProviderOutput, error) {
+func (c *CognitoIdentityProvider) DescribeIdentityProviderWithContext(ctx aws.Context, input *DescribeIdentityProviderInput, opts ...aws.Option) (*DescribeIdentityProviderOutput, error) {
 	req, out := c.DescribeIdentityProviderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4665,7 +4663,7 @@ func (c *CognitoIdentityProvider) DescribeIdentityProviderWithContext(ctx aws.Co
 
 const opDescribeResourceServer = "DescribeResourceServer"
 
-// DescribeResourceServerRequest generates a "aws/request.Request" representing the
+// DescribeResourceServerRequest generates a "aws.Request" representing the
 // client's request for the DescribeResourceServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4689,8 +4687,8 @@ const opDescribeResourceServer = "DescribeResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServer
-func (c *CognitoIdentityProvider) DescribeResourceServerRequest(input *DescribeResourceServerInput) (req *request.Request, output *DescribeResourceServerOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DescribeResourceServerRequest(input *DescribeResourceServerInput) (req *aws.Request, output *DescribeResourceServerOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeResourceServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4750,7 +4748,7 @@ func (c *CognitoIdentityProvider) DescribeResourceServer(input *DescribeResource
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DescribeResourceServerWithContext(ctx aws.Context, input *DescribeResourceServerInput, opts ...request.Option) (*DescribeResourceServerOutput, error) {
+func (c *CognitoIdentityProvider) DescribeResourceServerWithContext(ctx aws.Context, input *DescribeResourceServerInput, opts ...aws.Option) (*DescribeResourceServerOutput, error) {
 	req, out := c.DescribeResourceServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4759,7 +4757,7 @@ func (c *CognitoIdentityProvider) DescribeResourceServerWithContext(ctx aws.Cont
 
 const opDescribeUserImportJob = "DescribeUserImportJob"
 
-// DescribeUserImportJobRequest generates a "aws/request.Request" representing the
+// DescribeUserImportJobRequest generates a "aws.Request" representing the
 // client's request for the DescribeUserImportJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4783,8 +4781,8 @@ const opDescribeUserImportJob = "DescribeUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJob
-func (c *CognitoIdentityProvider) DescribeUserImportJobRequest(input *DescribeUserImportJobInput) (req *request.Request, output *DescribeUserImportJobOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DescribeUserImportJobRequest(input *DescribeUserImportJobInput) (req *aws.Request, output *DescribeUserImportJobOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUserImportJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4844,7 +4842,7 @@ func (c *CognitoIdentityProvider) DescribeUserImportJob(input *DescribeUserImpor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DescribeUserImportJobWithContext(ctx aws.Context, input *DescribeUserImportJobInput, opts ...request.Option) (*DescribeUserImportJobOutput, error) {
+func (c *CognitoIdentityProvider) DescribeUserImportJobWithContext(ctx aws.Context, input *DescribeUserImportJobInput, opts ...aws.Option) (*DescribeUserImportJobOutput, error) {
 	req, out := c.DescribeUserImportJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4853,7 +4851,7 @@ func (c *CognitoIdentityProvider) DescribeUserImportJobWithContext(ctx aws.Conte
 
 const opDescribeUserPool = "DescribeUserPool"
 
-// DescribeUserPoolRequest generates a "aws/request.Request" representing the
+// DescribeUserPoolRequest generates a "aws.Request" representing the
 // client's request for the DescribeUserPool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4877,8 +4875,8 @@ const opDescribeUserPool = "DescribeUserPool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPool
-func (c *CognitoIdentityProvider) DescribeUserPoolRequest(input *DescribeUserPoolInput) (req *request.Request, output *DescribeUserPoolOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DescribeUserPoolRequest(input *DescribeUserPoolInput) (req *aws.Request, output *DescribeUserPoolOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUserPool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4942,7 +4940,7 @@ func (c *CognitoIdentityProvider) DescribeUserPool(input *DescribeUserPoolInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DescribeUserPoolWithContext(ctx aws.Context, input *DescribeUserPoolInput, opts ...request.Option) (*DescribeUserPoolOutput, error) {
+func (c *CognitoIdentityProvider) DescribeUserPoolWithContext(ctx aws.Context, input *DescribeUserPoolInput, opts ...aws.Option) (*DescribeUserPoolOutput, error) {
 	req, out := c.DescribeUserPoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4951,7 +4949,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolWithContext(ctx aws.Context, i
 
 const opDescribeUserPoolClient = "DescribeUserPoolClient"
 
-// DescribeUserPoolClientRequest generates a "aws/request.Request" representing the
+// DescribeUserPoolClientRequest generates a "aws.Request" representing the
 // client's request for the DescribeUserPoolClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4975,8 +4973,8 @@ const opDescribeUserPoolClient = "DescribeUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient
-func (c *CognitoIdentityProvider) DescribeUserPoolClientRequest(input *DescribeUserPoolClientInput) (req *request.Request, output *DescribeUserPoolClientOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DescribeUserPoolClientRequest(input *DescribeUserPoolClientInput) (req *aws.Request, output *DescribeUserPoolClientOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUserPoolClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5037,7 +5035,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolClient(input *DescribeUserPool
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DescribeUserPoolClientWithContext(ctx aws.Context, input *DescribeUserPoolClientInput, opts ...request.Option) (*DescribeUserPoolClientOutput, error) {
+func (c *CognitoIdentityProvider) DescribeUserPoolClientWithContext(ctx aws.Context, input *DescribeUserPoolClientInput, opts ...aws.Option) (*DescribeUserPoolClientOutput, error) {
 	req, out := c.DescribeUserPoolClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5046,7 +5044,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolClientWithContext(ctx aws.Cont
 
 const opDescribeUserPoolDomain = "DescribeUserPoolDomain"
 
-// DescribeUserPoolDomainRequest generates a "aws/request.Request" representing the
+// DescribeUserPoolDomainRequest generates a "aws.Request" representing the
 // client's request for the DescribeUserPoolDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5070,8 +5068,8 @@ const opDescribeUserPoolDomain = "DescribeUserPoolDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolDomain
-func (c *CognitoIdentityProvider) DescribeUserPoolDomainRequest(input *DescribeUserPoolDomainInput) (req *request.Request, output *DescribeUserPoolDomainOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) DescribeUserPoolDomainRequest(input *DescribeUserPoolDomainInput) (req *aws.Request, output *DescribeUserPoolDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUserPoolDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5127,7 +5125,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolDomain(input *DescribeUserPool
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) DescribeUserPoolDomainWithContext(ctx aws.Context, input *DescribeUserPoolDomainInput, opts ...request.Option) (*DescribeUserPoolDomainOutput, error) {
+func (c *CognitoIdentityProvider) DescribeUserPoolDomainWithContext(ctx aws.Context, input *DescribeUserPoolDomainInput, opts ...aws.Option) (*DescribeUserPoolDomainOutput, error) {
 	req, out := c.DescribeUserPoolDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5136,7 +5134,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolDomainWithContext(ctx aws.Cont
 
 const opForgetDevice = "ForgetDevice"
 
-// ForgetDeviceRequest generates a "aws/request.Request" representing the
+// ForgetDeviceRequest generates a "aws.Request" representing the
 // client's request for the ForgetDevice operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5160,8 +5158,8 @@ const opForgetDevice = "ForgetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgetDevice
-func (c *CognitoIdentityProvider) ForgetDeviceRequest(input *ForgetDeviceInput) (req *request.Request, output *ForgetDeviceOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ForgetDeviceRequest(input *ForgetDeviceInput) (req *aws.Request, output *ForgetDeviceOutput) {
+	op := &aws.Operation{
 		Name:       opForgetDevice,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5235,7 +5233,7 @@ func (c *CognitoIdentityProvider) ForgetDevice(input *ForgetDeviceInput) (*Forge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ForgetDeviceWithContext(ctx aws.Context, input *ForgetDeviceInput, opts ...request.Option) (*ForgetDeviceOutput, error) {
+func (c *CognitoIdentityProvider) ForgetDeviceWithContext(ctx aws.Context, input *ForgetDeviceInput, opts ...aws.Option) (*ForgetDeviceOutput, error) {
 	req, out := c.ForgetDeviceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5244,7 +5242,7 @@ func (c *CognitoIdentityProvider) ForgetDeviceWithContext(ctx aws.Context, input
 
 const opForgotPassword = "ForgotPassword"
 
-// ForgotPasswordRequest generates a "aws/request.Request" representing the
+// ForgotPasswordRequest generates a "aws.Request" representing the
 // client's request for the ForgotPassword operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5268,8 +5266,8 @@ const opForgotPassword = "ForgotPassword"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPassword
-func (c *CognitoIdentityProvider) ForgotPasswordRequest(input *ForgotPasswordInput) (req *request.Request, output *ForgotPasswordOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ForgotPasswordRequest(input *ForgotPasswordInput) (req *aws.Request, output *ForgotPasswordOutput) {
+	op := &aws.Operation{
 		Name:       opForgotPassword,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5281,7 +5279,7 @@ func (c *CognitoIdentityProvider) ForgotPasswordRequest(input *ForgotPasswordInp
 
 	output = &ForgotPasswordOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -5376,7 +5374,7 @@ func (c *CognitoIdentityProvider) ForgotPassword(input *ForgotPasswordInput) (*F
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ForgotPasswordWithContext(ctx aws.Context, input *ForgotPasswordInput, opts ...request.Option) (*ForgotPasswordOutput, error) {
+func (c *CognitoIdentityProvider) ForgotPasswordWithContext(ctx aws.Context, input *ForgotPasswordInput, opts ...aws.Option) (*ForgotPasswordOutput, error) {
 	req, out := c.ForgotPasswordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5385,7 +5383,7 @@ func (c *CognitoIdentityProvider) ForgotPasswordWithContext(ctx aws.Context, inp
 
 const opGetCSVHeader = "GetCSVHeader"
 
-// GetCSVHeaderRequest generates a "aws/request.Request" representing the
+// GetCSVHeaderRequest generates a "aws.Request" representing the
 // client's request for the GetCSVHeader operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5409,8 +5407,8 @@ const opGetCSVHeader = "GetCSVHeader"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeader
-func (c *CognitoIdentityProvider) GetCSVHeaderRequest(input *GetCSVHeaderInput) (req *request.Request, output *GetCSVHeaderOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetCSVHeaderRequest(input *GetCSVHeaderInput) (req *aws.Request, output *GetCSVHeaderOutput) {
+	op := &aws.Operation{
 		Name:       opGetCSVHeader,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5471,7 +5469,7 @@ func (c *CognitoIdentityProvider) GetCSVHeader(input *GetCSVHeaderInput) (*GetCS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetCSVHeaderWithContext(ctx aws.Context, input *GetCSVHeaderInput, opts ...request.Option) (*GetCSVHeaderOutput, error) {
+func (c *CognitoIdentityProvider) GetCSVHeaderWithContext(ctx aws.Context, input *GetCSVHeaderInput, opts ...aws.Option) (*GetCSVHeaderOutput, error) {
 	req, out := c.GetCSVHeaderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5480,7 +5478,7 @@ func (c *CognitoIdentityProvider) GetCSVHeaderWithContext(ctx aws.Context, input
 
 const opGetDevice = "GetDevice"
 
-// GetDeviceRequest generates a "aws/request.Request" representing the
+// GetDeviceRequest generates a "aws.Request" representing the
 // client's request for the GetDevice operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5504,8 +5502,8 @@ const opGetDevice = "GetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDevice
-func (c *CognitoIdentityProvider) GetDeviceRequest(input *GetDeviceInput) (req *request.Request, output *GetDeviceOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetDeviceRequest(input *GetDeviceInput) (req *aws.Request, output *GetDeviceOutput) {
+	op := &aws.Operation{
 		Name:       opGetDevice,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5577,7 +5575,7 @@ func (c *CognitoIdentityProvider) GetDevice(input *GetDeviceInput) (*GetDeviceOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput, opts ...request.Option) (*GetDeviceOutput, error) {
+func (c *CognitoIdentityProvider) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput, opts ...aws.Option) (*GetDeviceOutput, error) {
 	req, out := c.GetDeviceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5586,7 +5584,7 @@ func (c *CognitoIdentityProvider) GetDeviceWithContext(ctx aws.Context, input *G
 
 const opGetGroup = "GetGroup"
 
-// GetGroupRequest generates a "aws/request.Request" representing the
+// GetGroupRequest generates a "aws.Request" representing the
 // client's request for the GetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5610,8 +5608,8 @@ const opGetGroup = "GetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetGroup
-func (c *CognitoIdentityProvider) GetGroupRequest(input *GetGroupInput) (req *request.Request, output *GetGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetGroupRequest(input *GetGroupInput) (req *aws.Request, output *GetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opGetGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5673,7 +5671,7 @@ func (c *CognitoIdentityProvider) GetGroup(input *GetGroupInput) (*GetGroupOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, opts ...request.Option) (*GetGroupOutput, error) {
+func (c *CognitoIdentityProvider) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, opts ...aws.Option) (*GetGroupOutput, error) {
 	req, out := c.GetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5682,7 +5680,7 @@ func (c *CognitoIdentityProvider) GetGroupWithContext(ctx aws.Context, input *Ge
 
 const opGetIdentityProviderByIdentifier = "GetIdentityProviderByIdentifier"
 
-// GetIdentityProviderByIdentifierRequest generates a "aws/request.Request" representing the
+// GetIdentityProviderByIdentifierRequest generates a "aws.Request" representing the
 // client's request for the GetIdentityProviderByIdentifier operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5706,8 +5704,8 @@ const opGetIdentityProviderByIdentifier = "GetIdentityProviderByIdentifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetIdentityProviderByIdentifier
-func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierRequest(input *GetIdentityProviderByIdentifierInput) (req *request.Request, output *GetIdentityProviderByIdentifierOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierRequest(input *GetIdentityProviderByIdentifierInput) (req *aws.Request, output *GetIdentityProviderByIdentifierOutput) {
+	op := &aws.Operation{
 		Name:       opGetIdentityProviderByIdentifier,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5767,7 +5765,7 @@ func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifier(input *GetIden
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierWithContext(ctx aws.Context, input *GetIdentityProviderByIdentifierInput, opts ...request.Option) (*GetIdentityProviderByIdentifierOutput, error) {
+func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierWithContext(ctx aws.Context, input *GetIdentityProviderByIdentifierInput, opts ...aws.Option) (*GetIdentityProviderByIdentifierOutput, error) {
 	req, out := c.GetIdentityProviderByIdentifierRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5776,7 +5774,7 @@ func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierWithContext(ctx
 
 const opGetUICustomization = "GetUICustomization"
 
-// GetUICustomizationRequest generates a "aws/request.Request" representing the
+// GetUICustomizationRequest generates a "aws.Request" representing the
 // client's request for the GetUICustomization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5800,8 +5798,8 @@ const opGetUICustomization = "GetUICustomization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomization
-func (c *CognitoIdentityProvider) GetUICustomizationRequest(input *GetUICustomizationInput) (req *request.Request, output *GetUICustomizationOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetUICustomizationRequest(input *GetUICustomizationInput) (req *aws.Request, output *GetUICustomizationOutput) {
+	op := &aws.Operation{
 		Name:       opGetUICustomization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5864,7 +5862,7 @@ func (c *CognitoIdentityProvider) GetUICustomization(input *GetUICustomizationIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetUICustomizationWithContext(ctx aws.Context, input *GetUICustomizationInput, opts ...request.Option) (*GetUICustomizationOutput, error) {
+func (c *CognitoIdentityProvider) GetUICustomizationWithContext(ctx aws.Context, input *GetUICustomizationInput, opts ...aws.Option) (*GetUICustomizationOutput, error) {
 	req, out := c.GetUICustomizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5873,7 +5871,7 @@ func (c *CognitoIdentityProvider) GetUICustomizationWithContext(ctx aws.Context,
 
 const opGetUser = "GetUser"
 
-// GetUserRequest generates a "aws/request.Request" representing the
+// GetUserRequest generates a "aws.Request" representing the
 // client's request for the GetUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5897,8 +5895,8 @@ const opGetUser = "GetUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUser
-func (c *CognitoIdentityProvider) GetUserRequest(input *GetUserInput) (req *request.Request, output *GetUserOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetUserRequest(input *GetUserInput) (req *aws.Request, output *GetUserOutput) {
+	op := &aws.Operation{
 		Name:       opGetUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5910,7 +5908,7 @@ func (c *CognitoIdentityProvider) GetUserRequest(input *GetUserInput) (req *requ
 
 	output = &GetUserOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -5968,7 +5966,7 @@ func (c *CognitoIdentityProvider) GetUser(input *GetUserInput) (*GetUserOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetUserWithContext(ctx aws.Context, input *GetUserInput, opts ...request.Option) (*GetUserOutput, error) {
+func (c *CognitoIdentityProvider) GetUserWithContext(ctx aws.Context, input *GetUserInput, opts ...aws.Option) (*GetUserOutput, error) {
 	req, out := c.GetUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5977,7 +5975,7 @@ func (c *CognitoIdentityProvider) GetUserWithContext(ctx aws.Context, input *Get
 
 const opGetUserAttributeVerificationCode = "GetUserAttributeVerificationCode"
 
-// GetUserAttributeVerificationCodeRequest generates a "aws/request.Request" representing the
+// GetUserAttributeVerificationCodeRequest generates a "aws.Request" representing the
 // client's request for the GetUserAttributeVerificationCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6001,8 +5999,8 @@ const opGetUserAttributeVerificationCode = "GetUserAttributeVerificationCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCode
-func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input *GetUserAttributeVerificationCodeInput) (req *request.Request, output *GetUserAttributeVerificationCodeOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input *GetUserAttributeVerificationCodeInput) (req *aws.Request, output *GetUserAttributeVerificationCodeOutput) {
+	op := &aws.Operation{
 		Name:       opGetUserAttributeVerificationCode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6014,7 +6012,7 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input 
 
 	output = &GetUserAttributeVerificationCodeOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -6105,7 +6103,7 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCode(input *GetUse
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeWithContext(ctx aws.Context, input *GetUserAttributeVerificationCodeInput, opts ...request.Option) (*GetUserAttributeVerificationCodeOutput, error) {
+func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeWithContext(ctx aws.Context, input *GetUserAttributeVerificationCodeInput, opts ...aws.Option) (*GetUserAttributeVerificationCodeOutput, error) {
 	req, out := c.GetUserAttributeVerificationCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6114,7 +6112,7 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeWithContext(ct
 
 const opGlobalSignOut = "GlobalSignOut"
 
-// GlobalSignOutRequest generates a "aws/request.Request" representing the
+// GlobalSignOutRequest generates a "aws.Request" representing the
 // client's request for the GlobalSignOut operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6138,8 +6136,8 @@ const opGlobalSignOut = "GlobalSignOut"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOut
-func (c *CognitoIdentityProvider) GlobalSignOutRequest(input *GlobalSignOutInput) (req *request.Request, output *GlobalSignOutOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) GlobalSignOutRequest(input *GlobalSignOutInput) (req *aws.Request, output *GlobalSignOutOutput) {
+	op := &aws.Operation{
 		Name:       opGlobalSignOut,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6205,7 +6203,7 @@ func (c *CognitoIdentityProvider) GlobalSignOut(input *GlobalSignOutInput) (*Glo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) GlobalSignOutWithContext(ctx aws.Context, input *GlobalSignOutInput, opts ...request.Option) (*GlobalSignOutOutput, error) {
+func (c *CognitoIdentityProvider) GlobalSignOutWithContext(ctx aws.Context, input *GlobalSignOutInput, opts ...aws.Option) (*GlobalSignOutOutput, error) {
 	req, out := c.GlobalSignOutRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6214,7 +6212,7 @@ func (c *CognitoIdentityProvider) GlobalSignOutWithContext(ctx aws.Context, inpu
 
 const opInitiateAuth = "InitiateAuth"
 
-// InitiateAuthRequest generates a "aws/request.Request" representing the
+// InitiateAuthRequest generates a "aws.Request" representing the
 // client's request for the InitiateAuth operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6238,8 +6236,8 @@ const opInitiateAuth = "InitiateAuth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuth
-func (c *CognitoIdentityProvider) InitiateAuthRequest(input *InitiateAuthInput) (req *request.Request, output *InitiateAuthOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) InitiateAuthRequest(input *InitiateAuthInput) (req *aws.Request, output *InitiateAuthOutput) {
+	op := &aws.Operation{
 		Name:       opInitiateAuth,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6323,7 +6321,7 @@ func (c *CognitoIdentityProvider) InitiateAuth(input *InitiateAuthInput) (*Initi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) InitiateAuthWithContext(ctx aws.Context, input *InitiateAuthInput, opts ...request.Option) (*InitiateAuthOutput, error) {
+func (c *CognitoIdentityProvider) InitiateAuthWithContext(ctx aws.Context, input *InitiateAuthInput, opts ...aws.Option) (*InitiateAuthOutput, error) {
 	req, out := c.InitiateAuthRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6332,7 +6330,7 @@ func (c *CognitoIdentityProvider) InitiateAuthWithContext(ctx aws.Context, input
 
 const opListDevices = "ListDevices"
 
-// ListDevicesRequest generates a "aws/request.Request" representing the
+// ListDevicesRequest generates a "aws.Request" representing the
 // client's request for the ListDevices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6356,8 +6354,8 @@ const opListDevices = "ListDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevices
-func (c *CognitoIdentityProvider) ListDevicesRequest(input *ListDevicesInput) (req *request.Request, output *ListDevicesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListDevicesRequest(input *ListDevicesInput) (req *aws.Request, output *ListDevicesOutput) {
+	op := &aws.Operation{
 		Name:       opListDevices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6429,7 +6427,7 @@ func (c *CognitoIdentityProvider) ListDevices(input *ListDevicesInput) (*ListDev
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListDevicesWithContext(ctx aws.Context, input *ListDevicesInput, opts ...request.Option) (*ListDevicesOutput, error) {
+func (c *CognitoIdentityProvider) ListDevicesWithContext(ctx aws.Context, input *ListDevicesInput, opts ...aws.Option) (*ListDevicesOutput, error) {
 	req, out := c.ListDevicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6438,7 +6436,7 @@ func (c *CognitoIdentityProvider) ListDevicesWithContext(ctx aws.Context, input 
 
 const opListGroups = "ListGroups"
 
-// ListGroupsRequest generates a "aws/request.Request" representing the
+// ListGroupsRequest generates a "aws.Request" representing the
 // client's request for the ListGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6462,8 +6460,8 @@ const opListGroups = "ListGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroups
-func (c *CognitoIdentityProvider) ListGroupsRequest(input *ListGroupsInput) (req *request.Request, output *ListGroupsOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request, output *ListGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6525,7 +6523,7 @@ func (c *CognitoIdentityProvider) ListGroups(input *ListGroupsInput) (*ListGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInput, opts ...request.Option) (*ListGroupsOutput, error) {
+func (c *CognitoIdentityProvider) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInput, opts ...aws.Option) (*ListGroupsOutput, error) {
 	req, out := c.ListGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6534,7 +6532,7 @@ func (c *CognitoIdentityProvider) ListGroupsWithContext(ctx aws.Context, input *
 
 const opListIdentityProviders = "ListIdentityProviders"
 
-// ListIdentityProvidersRequest generates a "aws/request.Request" representing the
+// ListIdentityProvidersRequest generates a "aws.Request" representing the
 // client's request for the ListIdentityProviders operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6558,8 +6556,8 @@ const opListIdentityProviders = "ListIdentityProviders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListIdentityProviders
-func (c *CognitoIdentityProvider) ListIdentityProvidersRequest(input *ListIdentityProvidersInput) (req *request.Request, output *ListIdentityProvidersOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListIdentityProvidersRequest(input *ListIdentityProvidersInput) (req *aws.Request, output *ListIdentityProvidersOutput) {
+	op := &aws.Operation{
 		Name:       opListIdentityProviders,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6619,7 +6617,7 @@ func (c *CognitoIdentityProvider) ListIdentityProviders(input *ListIdentityProvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListIdentityProvidersWithContext(ctx aws.Context, input *ListIdentityProvidersInput, opts ...request.Option) (*ListIdentityProvidersOutput, error) {
+func (c *CognitoIdentityProvider) ListIdentityProvidersWithContext(ctx aws.Context, input *ListIdentityProvidersInput, opts ...aws.Option) (*ListIdentityProvidersOutput, error) {
 	req, out := c.ListIdentityProvidersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6628,7 +6626,7 @@ func (c *CognitoIdentityProvider) ListIdentityProvidersWithContext(ctx aws.Conte
 
 const opListResourceServers = "ListResourceServers"
 
-// ListResourceServersRequest generates a "aws/request.Request" representing the
+// ListResourceServersRequest generates a "aws.Request" representing the
 // client's request for the ListResourceServers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6652,8 +6650,8 @@ const opListResourceServers = "ListResourceServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListResourceServers
-func (c *CognitoIdentityProvider) ListResourceServersRequest(input *ListResourceServersInput) (req *request.Request, output *ListResourceServersOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListResourceServersRequest(input *ListResourceServersInput) (req *aws.Request, output *ListResourceServersOutput) {
+	op := &aws.Operation{
 		Name:       opListResourceServers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6713,7 +6711,7 @@ func (c *CognitoIdentityProvider) ListResourceServers(input *ListResourceServers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListResourceServersWithContext(ctx aws.Context, input *ListResourceServersInput, opts ...request.Option) (*ListResourceServersOutput, error) {
+func (c *CognitoIdentityProvider) ListResourceServersWithContext(ctx aws.Context, input *ListResourceServersInput, opts ...aws.Option) (*ListResourceServersOutput, error) {
 	req, out := c.ListResourceServersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6722,7 +6720,7 @@ func (c *CognitoIdentityProvider) ListResourceServersWithContext(ctx aws.Context
 
 const opListUserImportJobs = "ListUserImportJobs"
 
-// ListUserImportJobsRequest generates a "aws/request.Request" representing the
+// ListUserImportJobsRequest generates a "aws.Request" representing the
 // client's request for the ListUserImportJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6746,8 +6744,8 @@ const opListUserImportJobs = "ListUserImportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobs
-func (c *CognitoIdentityProvider) ListUserImportJobsRequest(input *ListUserImportJobsInput) (req *request.Request, output *ListUserImportJobsOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListUserImportJobsRequest(input *ListUserImportJobsInput) (req *aws.Request, output *ListUserImportJobsOutput) {
+	op := &aws.Operation{
 		Name:       opListUserImportJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6807,7 +6805,7 @@ func (c *CognitoIdentityProvider) ListUserImportJobs(input *ListUserImportJobsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListUserImportJobsWithContext(ctx aws.Context, input *ListUserImportJobsInput, opts ...request.Option) (*ListUserImportJobsOutput, error) {
+func (c *CognitoIdentityProvider) ListUserImportJobsWithContext(ctx aws.Context, input *ListUserImportJobsInput, opts ...aws.Option) (*ListUserImportJobsOutput, error) {
 	req, out := c.ListUserImportJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6816,7 +6814,7 @@ func (c *CognitoIdentityProvider) ListUserImportJobsWithContext(ctx aws.Context,
 
 const opListUserPoolClients = "ListUserPoolClients"
 
-// ListUserPoolClientsRequest generates a "aws/request.Request" representing the
+// ListUserPoolClientsRequest generates a "aws.Request" representing the
 // client's request for the ListUserPoolClients operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6840,8 +6838,8 @@ const opListUserPoolClients = "ListUserPoolClients"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClients
-func (c *CognitoIdentityProvider) ListUserPoolClientsRequest(input *ListUserPoolClientsInput) (req *request.Request, output *ListUserPoolClientsOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListUserPoolClientsRequest(input *ListUserPoolClientsInput) (req *aws.Request, output *ListUserPoolClientsOutput) {
+	op := &aws.Operation{
 		Name:       opListUserPoolClients,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6901,7 +6899,7 @@ func (c *CognitoIdentityProvider) ListUserPoolClients(input *ListUserPoolClients
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListUserPoolClientsWithContext(ctx aws.Context, input *ListUserPoolClientsInput, opts ...request.Option) (*ListUserPoolClientsOutput, error) {
+func (c *CognitoIdentityProvider) ListUserPoolClientsWithContext(ctx aws.Context, input *ListUserPoolClientsInput, opts ...aws.Option) (*ListUserPoolClientsOutput, error) {
 	req, out := c.ListUserPoolClientsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6910,7 +6908,7 @@ func (c *CognitoIdentityProvider) ListUserPoolClientsWithContext(ctx aws.Context
 
 const opListUserPools = "ListUserPools"
 
-// ListUserPoolsRequest generates a "aws/request.Request" representing the
+// ListUserPoolsRequest generates a "aws.Request" representing the
 // client's request for the ListUserPools operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6934,8 +6932,8 @@ const opListUserPools = "ListUserPools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPools
-func (c *CognitoIdentityProvider) ListUserPoolsRequest(input *ListUserPoolsInput) (req *request.Request, output *ListUserPoolsOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListUserPoolsRequest(input *ListUserPoolsInput) (req *aws.Request, output *ListUserPoolsOutput) {
+	op := &aws.Operation{
 		Name:       opListUserPools,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6991,7 +6989,7 @@ func (c *CognitoIdentityProvider) ListUserPools(input *ListUserPoolsInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListUserPoolsWithContext(ctx aws.Context, input *ListUserPoolsInput, opts ...request.Option) (*ListUserPoolsOutput, error) {
+func (c *CognitoIdentityProvider) ListUserPoolsWithContext(ctx aws.Context, input *ListUserPoolsInput, opts ...aws.Option) (*ListUserPoolsOutput, error) {
 	req, out := c.ListUserPoolsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7000,7 +6998,7 @@ func (c *CognitoIdentityProvider) ListUserPoolsWithContext(ctx aws.Context, inpu
 
 const opListUsers = "ListUsers"
 
-// ListUsersRequest generates a "aws/request.Request" representing the
+// ListUsersRequest generates a "aws.Request" representing the
 // client's request for the ListUsers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7024,8 +7022,8 @@ const opListUsers = "ListUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsers
-func (c *CognitoIdentityProvider) ListUsersRequest(input *ListUsersInput) (req *request.Request, output *ListUsersOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListUsersRequest(input *ListUsersInput) (req *aws.Request, output *ListUsersOutput) {
+	op := &aws.Operation{
 		Name:       opListUsers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7085,7 +7083,7 @@ func (c *CognitoIdentityProvider) ListUsers(input *ListUsersInput) (*ListUsersOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListUsersWithContext(ctx aws.Context, input *ListUsersInput, opts ...request.Option) (*ListUsersOutput, error) {
+func (c *CognitoIdentityProvider) ListUsersWithContext(ctx aws.Context, input *ListUsersInput, opts ...aws.Option) (*ListUsersOutput, error) {
 	req, out := c.ListUsersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7094,7 +7092,7 @@ func (c *CognitoIdentityProvider) ListUsersWithContext(ctx aws.Context, input *L
 
 const opListUsersInGroup = "ListUsersInGroup"
 
-// ListUsersInGroupRequest generates a "aws/request.Request" representing the
+// ListUsersInGroupRequest generates a "aws.Request" representing the
 // client's request for the ListUsersInGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7118,8 +7116,8 @@ const opListUsersInGroup = "ListUsersInGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroup
-func (c *CognitoIdentityProvider) ListUsersInGroupRequest(input *ListUsersInGroupInput) (req *request.Request, output *ListUsersInGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ListUsersInGroupRequest(input *ListUsersInGroupInput) (req *aws.Request, output *ListUsersInGroupOutput) {
+	op := &aws.Operation{
 		Name:       opListUsersInGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7181,7 +7179,7 @@ func (c *CognitoIdentityProvider) ListUsersInGroup(input *ListUsersInGroupInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ListUsersInGroupWithContext(ctx aws.Context, input *ListUsersInGroupInput, opts ...request.Option) (*ListUsersInGroupOutput, error) {
+func (c *CognitoIdentityProvider) ListUsersInGroupWithContext(ctx aws.Context, input *ListUsersInGroupInput, opts ...aws.Option) (*ListUsersInGroupOutput, error) {
 	req, out := c.ListUsersInGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7190,7 +7188,7 @@ func (c *CognitoIdentityProvider) ListUsersInGroupWithContext(ctx aws.Context, i
 
 const opResendConfirmationCode = "ResendConfirmationCode"
 
-// ResendConfirmationCodeRequest generates a "aws/request.Request" representing the
+// ResendConfirmationCodeRequest generates a "aws.Request" representing the
 // client's request for the ResendConfirmationCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7214,8 +7212,8 @@ const opResendConfirmationCode = "ResendConfirmationCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCode
-func (c *CognitoIdentityProvider) ResendConfirmationCodeRequest(input *ResendConfirmationCodeInput) (req *request.Request, output *ResendConfirmationCodeOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) ResendConfirmationCodeRequest(input *ResendConfirmationCodeInput) (req *aws.Request, output *ResendConfirmationCodeOutput) {
+	op := &aws.Operation{
 		Name:       opResendConfirmationCode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7227,7 +7225,7 @@ func (c *CognitoIdentityProvider) ResendConfirmationCodeRequest(input *ResendCon
 
 	output = &ResendConfirmationCodeOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -7313,7 +7311,7 @@ func (c *CognitoIdentityProvider) ResendConfirmationCode(input *ResendConfirmati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) ResendConfirmationCodeWithContext(ctx aws.Context, input *ResendConfirmationCodeInput, opts ...request.Option) (*ResendConfirmationCodeOutput, error) {
+func (c *CognitoIdentityProvider) ResendConfirmationCodeWithContext(ctx aws.Context, input *ResendConfirmationCodeInput, opts ...aws.Option) (*ResendConfirmationCodeOutput, error) {
 	req, out := c.ResendConfirmationCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7322,7 +7320,7 @@ func (c *CognitoIdentityProvider) ResendConfirmationCodeWithContext(ctx aws.Cont
 
 const opRespondToAuthChallenge = "RespondToAuthChallenge"
 
-// RespondToAuthChallengeRequest generates a "aws/request.Request" representing the
+// RespondToAuthChallengeRequest generates a "aws.Request" representing the
 // client's request for the RespondToAuthChallenge operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7346,8 +7344,8 @@ const opRespondToAuthChallenge = "RespondToAuthChallenge"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallenge
-func (c *CognitoIdentityProvider) RespondToAuthChallengeRequest(input *RespondToAuthChallengeInput) (req *request.Request, output *RespondToAuthChallengeOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) RespondToAuthChallengeRequest(input *RespondToAuthChallengeInput) (req *aws.Request, output *RespondToAuthChallengeOutput) {
+	op := &aws.Operation{
 		Name:       opRespondToAuthChallenge,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7462,7 +7460,7 @@ func (c *CognitoIdentityProvider) RespondToAuthChallenge(input *RespondToAuthCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) RespondToAuthChallengeWithContext(ctx aws.Context, input *RespondToAuthChallengeInput, opts ...request.Option) (*RespondToAuthChallengeOutput, error) {
+func (c *CognitoIdentityProvider) RespondToAuthChallengeWithContext(ctx aws.Context, input *RespondToAuthChallengeInput, opts ...aws.Option) (*RespondToAuthChallengeOutput, error) {
 	req, out := c.RespondToAuthChallengeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7471,7 +7469,7 @@ func (c *CognitoIdentityProvider) RespondToAuthChallengeWithContext(ctx aws.Cont
 
 const opSetUICustomization = "SetUICustomization"
 
-// SetUICustomizationRequest generates a "aws/request.Request" representing the
+// SetUICustomizationRequest generates a "aws.Request" representing the
 // client's request for the SetUICustomization operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7495,8 +7493,8 @@ const opSetUICustomization = "SetUICustomization"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUICustomization
-func (c *CognitoIdentityProvider) SetUICustomizationRequest(input *SetUICustomizationInput) (req *request.Request, output *SetUICustomizationOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) SetUICustomizationRequest(input *SetUICustomizationInput) (req *aws.Request, output *SetUICustomizationOutput) {
+	op := &aws.Operation{
 		Name:       opSetUICustomization,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7567,7 +7565,7 @@ func (c *CognitoIdentityProvider) SetUICustomization(input *SetUICustomizationIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) SetUICustomizationWithContext(ctx aws.Context, input *SetUICustomizationInput, opts ...request.Option) (*SetUICustomizationOutput, error) {
+func (c *CognitoIdentityProvider) SetUICustomizationWithContext(ctx aws.Context, input *SetUICustomizationInput, opts ...aws.Option) (*SetUICustomizationOutput, error) {
 	req, out := c.SetUICustomizationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7576,7 +7574,7 @@ func (c *CognitoIdentityProvider) SetUICustomizationWithContext(ctx aws.Context,
 
 const opSetUserSettings = "SetUserSettings"
 
-// SetUserSettingsRequest generates a "aws/request.Request" representing the
+// SetUserSettingsRequest generates a "aws.Request" representing the
 // client's request for the SetUserSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7600,8 +7598,8 @@ const opSetUserSettings = "SetUserSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettings
-func (c *CognitoIdentityProvider) SetUserSettingsRequest(input *SetUserSettingsInput) (req *request.Request, output *SetUserSettingsOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) SetUserSettingsRequest(input *SetUserSettingsInput) (req *aws.Request, output *SetUserSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opSetUserSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7613,7 +7611,7 @@ func (c *CognitoIdentityProvider) SetUserSettingsRequest(input *SetUserSettingsI
 
 	output = &SetUserSettingsOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -7669,7 +7667,7 @@ func (c *CognitoIdentityProvider) SetUserSettings(input *SetUserSettingsInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) SetUserSettingsWithContext(ctx aws.Context, input *SetUserSettingsInput, opts ...request.Option) (*SetUserSettingsOutput, error) {
+func (c *CognitoIdentityProvider) SetUserSettingsWithContext(ctx aws.Context, input *SetUserSettingsInput, opts ...aws.Option) (*SetUserSettingsOutput, error) {
 	req, out := c.SetUserSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7678,7 +7676,7 @@ func (c *CognitoIdentityProvider) SetUserSettingsWithContext(ctx aws.Context, in
 
 const opSignUp = "SignUp"
 
-// SignUpRequest generates a "aws/request.Request" representing the
+// SignUpRequest generates a "aws.Request" representing the
 // client's request for the SignUp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7702,8 +7700,8 @@ const opSignUp = "SignUp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUp
-func (c *CognitoIdentityProvider) SignUpRequest(input *SignUpInput) (req *request.Request, output *SignUpOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) SignUpRequest(input *SignUpInput) (req *aws.Request, output *SignUpOutput) {
+	op := &aws.Operation{
 		Name:       opSignUp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7715,7 +7713,7 @@ func (c *CognitoIdentityProvider) SignUpRequest(input *SignUpInput) (req *reques
 
 	output = &SignUpOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -7802,7 +7800,7 @@ func (c *CognitoIdentityProvider) SignUp(input *SignUpInput) (*SignUpOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) SignUpWithContext(ctx aws.Context, input *SignUpInput, opts ...request.Option) (*SignUpOutput, error) {
+func (c *CognitoIdentityProvider) SignUpWithContext(ctx aws.Context, input *SignUpInput, opts ...aws.Option) (*SignUpOutput, error) {
 	req, out := c.SignUpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7811,7 +7809,7 @@ func (c *CognitoIdentityProvider) SignUpWithContext(ctx aws.Context, input *Sign
 
 const opStartUserImportJob = "StartUserImportJob"
 
-// StartUserImportJobRequest generates a "aws/request.Request" representing the
+// StartUserImportJobRequest generates a "aws.Request" representing the
 // client's request for the StartUserImportJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7835,8 +7833,8 @@ const opStartUserImportJob = "StartUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJob
-func (c *CognitoIdentityProvider) StartUserImportJobRequest(input *StartUserImportJobInput) (req *request.Request, output *StartUserImportJobOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) StartUserImportJobRequest(input *StartUserImportJobInput) (req *aws.Request, output *StartUserImportJobOutput) {
+	op := &aws.Operation{
 		Name:       opStartUserImportJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7899,7 +7897,7 @@ func (c *CognitoIdentityProvider) StartUserImportJob(input *StartUserImportJobIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) StartUserImportJobWithContext(ctx aws.Context, input *StartUserImportJobInput, opts ...request.Option) (*StartUserImportJobOutput, error) {
+func (c *CognitoIdentityProvider) StartUserImportJobWithContext(ctx aws.Context, input *StartUserImportJobInput, opts ...aws.Option) (*StartUserImportJobOutput, error) {
 	req, out := c.StartUserImportJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7908,7 +7906,7 @@ func (c *CognitoIdentityProvider) StartUserImportJobWithContext(ctx aws.Context,
 
 const opStopUserImportJob = "StopUserImportJob"
 
-// StopUserImportJobRequest generates a "aws/request.Request" representing the
+// StopUserImportJobRequest generates a "aws.Request" representing the
 // client's request for the StopUserImportJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7932,8 +7930,8 @@ const opStopUserImportJob = "StopUserImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJob
-func (c *CognitoIdentityProvider) StopUserImportJobRequest(input *StopUserImportJobInput) (req *request.Request, output *StopUserImportJobOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) StopUserImportJobRequest(input *StopUserImportJobInput) (req *aws.Request, output *StopUserImportJobOutput) {
+	op := &aws.Operation{
 		Name:       opStopUserImportJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7996,7 +7994,7 @@ func (c *CognitoIdentityProvider) StopUserImportJob(input *StopUserImportJobInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) StopUserImportJobWithContext(ctx aws.Context, input *StopUserImportJobInput, opts ...request.Option) (*StopUserImportJobOutput, error) {
+func (c *CognitoIdentityProvider) StopUserImportJobWithContext(ctx aws.Context, input *StopUserImportJobInput, opts ...aws.Option) (*StopUserImportJobOutput, error) {
 	req, out := c.StopUserImportJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8005,7 +8003,7 @@ func (c *CognitoIdentityProvider) StopUserImportJobWithContext(ctx aws.Context, 
 
 const opUpdateDeviceStatus = "UpdateDeviceStatus"
 
-// UpdateDeviceStatusRequest generates a "aws/request.Request" representing the
+// UpdateDeviceStatusRequest generates a "aws.Request" representing the
 // client's request for the UpdateDeviceStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8029,8 +8027,8 @@ const opUpdateDeviceStatus = "UpdateDeviceStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatus
-func (c *CognitoIdentityProvider) UpdateDeviceStatusRequest(input *UpdateDeviceStatusInput) (req *request.Request, output *UpdateDeviceStatusOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateDeviceStatusRequest(input *UpdateDeviceStatusInput) (req *aws.Request, output *UpdateDeviceStatusOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDeviceStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8102,7 +8100,7 @@ func (c *CognitoIdentityProvider) UpdateDeviceStatus(input *UpdateDeviceStatusIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateDeviceStatusWithContext(ctx aws.Context, input *UpdateDeviceStatusInput, opts ...request.Option) (*UpdateDeviceStatusOutput, error) {
+func (c *CognitoIdentityProvider) UpdateDeviceStatusWithContext(ctx aws.Context, input *UpdateDeviceStatusInput, opts ...aws.Option) (*UpdateDeviceStatusOutput, error) {
 	req, out := c.UpdateDeviceStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8111,7 +8109,7 @@ func (c *CognitoIdentityProvider) UpdateDeviceStatusWithContext(ctx aws.Context,
 
 const opUpdateGroup = "UpdateGroup"
 
-// UpdateGroupRequest generates a "aws/request.Request" representing the
+// UpdateGroupRequest generates a "aws.Request" representing the
 // client's request for the UpdateGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8135,8 +8133,8 @@ const opUpdateGroup = "UpdateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroup
-func (c *CognitoIdentityProvider) UpdateGroupRequest(input *UpdateGroupInput) (req *request.Request, output *UpdateGroupOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateGroupRequest(input *UpdateGroupInput) (req *aws.Request, output *UpdateGroupOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8198,7 +8196,7 @@ func (c *CognitoIdentityProvider) UpdateGroup(input *UpdateGroupInput) (*UpdateG
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupInput, opts ...request.Option) (*UpdateGroupOutput, error) {
+func (c *CognitoIdentityProvider) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupInput, opts ...aws.Option) (*UpdateGroupOutput, error) {
 	req, out := c.UpdateGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8207,7 +8205,7 @@ func (c *CognitoIdentityProvider) UpdateGroupWithContext(ctx aws.Context, input 
 
 const opUpdateIdentityProvider = "UpdateIdentityProvider"
 
-// UpdateIdentityProviderRequest generates a "aws/request.Request" representing the
+// UpdateIdentityProviderRequest generates a "aws.Request" representing the
 // client's request for the UpdateIdentityProvider operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8231,8 +8229,8 @@ const opUpdateIdentityProvider = "UpdateIdentityProvider"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateIdentityProvider
-func (c *CognitoIdentityProvider) UpdateIdentityProviderRequest(input *UpdateIdentityProviderInput) (req *request.Request, output *UpdateIdentityProviderOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateIdentityProviderRequest(input *UpdateIdentityProviderInput) (req *aws.Request, output *UpdateIdentityProviderOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateIdentityProvider,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8295,7 +8293,7 @@ func (c *CognitoIdentityProvider) UpdateIdentityProvider(input *UpdateIdentityPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateIdentityProviderWithContext(ctx aws.Context, input *UpdateIdentityProviderInput, opts ...request.Option) (*UpdateIdentityProviderOutput, error) {
+func (c *CognitoIdentityProvider) UpdateIdentityProviderWithContext(ctx aws.Context, input *UpdateIdentityProviderInput, opts ...aws.Option) (*UpdateIdentityProviderOutput, error) {
 	req, out := c.UpdateIdentityProviderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8304,7 +8302,7 @@ func (c *CognitoIdentityProvider) UpdateIdentityProviderWithContext(ctx aws.Cont
 
 const opUpdateResourceServer = "UpdateResourceServer"
 
-// UpdateResourceServerRequest generates a "aws/request.Request" representing the
+// UpdateResourceServerRequest generates a "aws.Request" representing the
 // client's request for the UpdateResourceServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8328,8 +8326,8 @@ const opUpdateResourceServer = "UpdateResourceServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateResourceServer
-func (c *CognitoIdentityProvider) UpdateResourceServerRequest(input *UpdateResourceServerInput) (req *request.Request, output *UpdateResourceServerOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateResourceServerRequest(input *UpdateResourceServerInput) (req *aws.Request, output *UpdateResourceServerOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateResourceServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8389,7 +8387,7 @@ func (c *CognitoIdentityProvider) UpdateResourceServer(input *UpdateResourceServ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateResourceServerWithContext(ctx aws.Context, input *UpdateResourceServerInput, opts ...request.Option) (*UpdateResourceServerOutput, error) {
+func (c *CognitoIdentityProvider) UpdateResourceServerWithContext(ctx aws.Context, input *UpdateResourceServerInput, opts ...aws.Option) (*UpdateResourceServerOutput, error) {
 	req, out := c.UpdateResourceServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8398,7 +8396,7 @@ func (c *CognitoIdentityProvider) UpdateResourceServerWithContext(ctx aws.Contex
 
 const opUpdateUserAttributes = "UpdateUserAttributes"
 
-// UpdateUserAttributesRequest generates a "aws/request.Request" representing the
+// UpdateUserAttributesRequest generates a "aws.Request" representing the
 // client's request for the UpdateUserAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8422,8 +8420,8 @@ const opUpdateUserAttributes = "UpdateUserAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserAttributes
-func (c *CognitoIdentityProvider) UpdateUserAttributesRequest(input *UpdateUserAttributesInput) (req *request.Request, output *UpdateUserAttributesOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateUserAttributesRequest(input *UpdateUserAttributesInput) (req *aws.Request, output *UpdateUserAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUserAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8435,7 +8433,7 @@ func (c *CognitoIdentityProvider) UpdateUserAttributesRequest(input *UpdateUserA
 
 	output = &UpdateUserAttributesOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -8535,7 +8533,7 @@ func (c *CognitoIdentityProvider) UpdateUserAttributes(input *UpdateUserAttribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateUserAttributesWithContext(ctx aws.Context, input *UpdateUserAttributesInput, opts ...request.Option) (*UpdateUserAttributesOutput, error) {
+func (c *CognitoIdentityProvider) UpdateUserAttributesWithContext(ctx aws.Context, input *UpdateUserAttributesInput, opts ...aws.Option) (*UpdateUserAttributesOutput, error) {
 	req, out := c.UpdateUserAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8544,7 +8542,7 @@ func (c *CognitoIdentityProvider) UpdateUserAttributesWithContext(ctx aws.Contex
 
 const opUpdateUserPool = "UpdateUserPool"
 
-// UpdateUserPoolRequest generates a "aws/request.Request" representing the
+// UpdateUserPoolRequest generates a "aws.Request" representing the
 // client's request for the UpdateUserPool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8568,8 +8566,8 @@ const opUpdateUserPool = "UpdateUserPool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPool
-func (c *CognitoIdentityProvider) UpdateUserPoolRequest(input *UpdateUserPoolInput) (req *request.Request, output *UpdateUserPoolOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateUserPoolRequest(input *UpdateUserPoolInput) (req *aws.Request, output *UpdateUserPoolOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUserPool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8653,7 +8651,7 @@ func (c *CognitoIdentityProvider) UpdateUserPool(input *UpdateUserPoolInput) (*U
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateUserPoolWithContext(ctx aws.Context, input *UpdateUserPoolInput, opts ...request.Option) (*UpdateUserPoolOutput, error) {
+func (c *CognitoIdentityProvider) UpdateUserPoolWithContext(ctx aws.Context, input *UpdateUserPoolInput, opts ...aws.Option) (*UpdateUserPoolOutput, error) {
 	req, out := c.UpdateUserPoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8662,7 +8660,7 @@ func (c *CognitoIdentityProvider) UpdateUserPoolWithContext(ctx aws.Context, inp
 
 const opUpdateUserPoolClient = "UpdateUserPoolClient"
 
-// UpdateUserPoolClientRequest generates a "aws/request.Request" representing the
+// UpdateUserPoolClientRequest generates a "aws.Request" representing the
 // client's request for the UpdateUserPoolClient operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8686,8 +8684,8 @@ const opUpdateUserPoolClient = "UpdateUserPoolClient"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient
-func (c *CognitoIdentityProvider) UpdateUserPoolClientRequest(input *UpdateUserPoolClientInput) (req *request.Request, output *UpdateUserPoolClientOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) UpdateUserPoolClientRequest(input *UpdateUserPoolClientInput) (req *aws.Request, output *UpdateUserPoolClientOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUserPoolClient,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8754,7 +8752,7 @@ func (c *CognitoIdentityProvider) UpdateUserPoolClient(input *UpdateUserPoolClie
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) UpdateUserPoolClientWithContext(ctx aws.Context, input *UpdateUserPoolClientInput, opts ...request.Option) (*UpdateUserPoolClientOutput, error) {
+func (c *CognitoIdentityProvider) UpdateUserPoolClientWithContext(ctx aws.Context, input *UpdateUserPoolClientInput, opts ...aws.Option) (*UpdateUserPoolClientOutput, error) {
 	req, out := c.UpdateUserPoolClientRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8763,7 +8761,7 @@ func (c *CognitoIdentityProvider) UpdateUserPoolClientWithContext(ctx aws.Contex
 
 const opVerifyUserAttribute = "VerifyUserAttribute"
 
-// VerifyUserAttributeRequest generates a "aws/request.Request" representing the
+// VerifyUserAttributeRequest generates a "aws.Request" representing the
 // client's request for the VerifyUserAttribute operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8787,8 +8785,8 @@ const opVerifyUserAttribute = "VerifyUserAttribute"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttribute
-func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAttributeInput) (req *request.Request, output *VerifyUserAttributeOutput) {
-	op := &request.Operation{
+func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAttributeInput) (req *aws.Request, output *VerifyUserAttributeOutput) {
+	op := &aws.Operation{
 		Name:       opVerifyUserAttribute,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8800,7 +8798,7 @@ func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAt
 
 	output = &VerifyUserAttributeOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.Credentials = aws.AnonymousCredentials
 	return
 }
 
@@ -8869,7 +8867,7 @@ func (c *CognitoIdentityProvider) VerifyUserAttribute(input *VerifyUserAttribute
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CognitoIdentityProvider) VerifyUserAttributeWithContext(ctx aws.Context, input *VerifyUserAttributeInput, opts ...request.Option) (*VerifyUserAttributeOutput, error) {
+func (c *CognitoIdentityProvider) VerifyUserAttributeWithContext(ctx aws.Context, input *VerifyUserAttributeInput, opts ...aws.Option) (*VerifyUserAttributeOutput, error) {
 	req, out := c.VerifyUserAttributeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8904,18 +8902,18 @@ func (s AddCustomAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddCustomAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddCustomAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddCustomAttributesInput"}
 	if s.CustomAttributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("CustomAttributes"))
+		invalidParams.Add(aws.NewErrParamRequired("CustomAttributes"))
 	}
 	if s.CustomAttributes != nil && len(s.CustomAttributes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomAttributes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomAttributes", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.CustomAttributes != nil {
 		for i, v := range s.CustomAttributes {
@@ -8923,7 +8921,7 @@ func (s *AddCustomAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CustomAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CustomAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8994,24 +8992,24 @@ func (s AdminAddUserToGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminAddUserToGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminAddUserToGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminAddUserToGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9081,18 +9079,18 @@ func (s AdminConfirmSignUpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminConfirmSignUpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminConfirmSignUpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminConfirmSignUpInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9160,10 +9158,10 @@ func (s AdminCreateUserConfigType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminCreateUserConfigType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminCreateUserConfigType"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminCreateUserConfigType"}
 	if s.InviteMessageTemplate != nil {
 		if err := s.InviteMessageTemplate.Validate(); err != nil {
-			invalidParams.AddNested("InviteMessageTemplate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InviteMessageTemplate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9304,21 +9302,21 @@ func (s AdminCreateUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminCreateUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminCreateUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminCreateUserInput"}
 	if s.TemporaryPassword != nil && len(*s.TemporaryPassword) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("TemporaryPassword", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("TemporaryPassword", 6))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
@@ -9326,7 +9324,7 @@ func (s *AdminCreateUserInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9336,7 +9334,7 @@ func (s *AdminCreateUserInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9456,21 +9454,21 @@ func (s AdminDeleteUserAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDeleteUserAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminDeleteUserAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminDeleteUserAttributesInput"}
 	if s.UserAttributeNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserAttributeNames"))
+		invalidParams.Add(aws.NewErrParamRequired("UserAttributeNames"))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9542,18 +9540,18 @@ func (s AdminDeleteUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDeleteUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminDeleteUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminDeleteUserInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9616,16 +9614,16 @@ func (s AdminDisableProviderForUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDisableProviderForUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminDisableProviderForUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminDisableProviderForUserInput"}
 	if s.User == nil {
-		invalidParams.Add(request.NewErrParamRequired("User"))
+		invalidParams.Add(aws.NewErrParamRequired("User"))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.User != nil {
 		if err := s.User.Validate(); err != nil {
-			invalidParams.AddNested("User", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("User", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9690,18 +9688,18 @@ func (s AdminDisableUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminDisableUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminDisableUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminDisableUserInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9767,18 +9765,18 @@ func (s AdminEnableUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminEnableUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminEnableUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminEnableUserInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9849,24 +9847,24 @@ func (s AdminForgetDeviceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminForgetDeviceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminForgetDeviceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminForgetDeviceInput"}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9941,24 +9939,24 @@ func (s AdminGetDeviceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminGetDeviceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminGetDeviceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminGetDeviceInput"}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10041,18 +10039,18 @@ func (s AdminGetUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminGetUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminGetUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminGetUserInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10241,21 +10239,21 @@ func (s AdminInitiateAuthInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminInitiateAuthInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminInitiateAuthInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminInitiateAuthInput"}
 	if s.AuthFlow == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthFlow"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthFlow"))
 	}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10444,24 +10442,24 @@ func (s AdminLinkProviderForUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminLinkProviderForUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminLinkProviderForUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminLinkProviderForUserInput"}
 	if s.DestinationUser == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationUser"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationUser"))
 	}
 	if s.SourceUser == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceUser"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceUser"))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.DestinationUser != nil {
 		if err := s.DestinationUser.Validate(); err != nil {
-			invalidParams.AddNested("DestinationUser", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DestinationUser", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SourceUser != nil {
 		if err := s.SourceUser.Validate(); err != nil {
-			invalidParams.AddNested("SourceUser", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SourceUser", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10538,21 +10536,21 @@ func (s AdminListDevicesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminListDevicesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminListDevicesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminListDevicesInput"}
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PaginationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10653,21 +10651,21 @@ func (s AdminListGroupsForUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminListGroupsForUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminListGroupsForUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminListGroupsForUserInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10766,24 +10764,24 @@ func (s AdminRemoveUserFromGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminRemoveUserFromGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminRemoveUserFromGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminRemoveUserFromGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10853,18 +10851,18 @@ func (s AdminResetUserPasswordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminResetUserPasswordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminResetUserPasswordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminResetUserPasswordInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10964,24 +10962,24 @@ func (s AdminRespondToAuthChallengeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminRespondToAuthChallengeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminRespondToAuthChallengeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminRespondToAuthChallengeInput"}
 	if s.ChallengeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChallengeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ChallengeName"))
 	}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.Session != nil && len(*s.Session) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("Session", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("Session", 20))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11111,21 +11109,21 @@ func (s AdminSetUserSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminSetUserSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminSetUserSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminSetUserSettingsInput"}
 	if s.MFAOptions == nil {
-		invalidParams.Add(request.NewErrParamRequired("MFAOptions"))
+		invalidParams.Add(aws.NewErrParamRequired("MFAOptions"))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 	if s.MFAOptions != nil {
 		for i, v := range s.MFAOptions {
@@ -11133,7 +11131,7 @@ func (s *AdminSetUserSettingsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11214,24 +11212,24 @@ func (s AdminUpdateDeviceStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminUpdateDeviceStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminUpdateDeviceStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateDeviceStatusInput"}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11316,21 +11314,21 @@ func (s AdminUpdateUserAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminUpdateUserAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminUpdateUserAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminUpdateUserAttributesInput"}
 	if s.UserAttributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserAttributes"))
+		invalidParams.Add(aws.NewErrParamRequired("UserAttributes"))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
@@ -11338,7 +11336,7 @@ func (s *AdminUpdateUserAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11412,18 +11410,18 @@ func (s AdminUserGlobalSignOutInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AdminUserGlobalSignOutInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AdminUserGlobalSignOutInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AdminUserGlobalSignOutInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11486,12 +11484,12 @@ func (s AttributeType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttributeType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttributeType"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttributeType"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11615,21 +11613,21 @@ func (s ChangePasswordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ChangePasswordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ChangePasswordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ChangePasswordInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.PreviousPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("PreviousPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("PreviousPassword"))
 	}
 	if s.PreviousPassword != nil && len(*s.PreviousPassword) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("PreviousPassword", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("PreviousPassword", 6))
 	}
 	if s.ProposedPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProposedPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("ProposedPassword"))
 	}
 	if s.ProposedPassword != nil && len(*s.ProposedPassword) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("ProposedPassword", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("ProposedPassword", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11749,18 +11747,18 @@ func (s ConfirmDeviceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmDeviceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmDeviceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmDeviceInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 	if s.DeviceName != nil && len(*s.DeviceName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11863,33 +11861,33 @@ func (s ConfirmForgotPasswordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmForgotPasswordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmForgotPasswordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmForgotPasswordInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.ConfirmationCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfirmationCode"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfirmationCode"))
 	}
 	if s.ConfirmationCode != nil && len(*s.ConfirmationCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfirmationCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfirmationCode", 1))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
 	}
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretHash", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11990,27 +11988,27 @@ func (s ConfirmSignUpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmSignUpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmSignUpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmSignUpInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.ConfirmationCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfirmationCode"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfirmationCode"))
 	}
 	if s.ConfirmationCode != nil && len(*s.ConfirmationCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfirmationCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfirmationCode", 1))
 	}
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretHash", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12115,21 +12113,21 @@ func (s CreateGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12236,24 +12234,24 @@ func (s CreateIdentityProviderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIdentityProviderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateIdentityProviderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateIdentityProviderInput"}
 	if s.ProviderDetails == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderDetails"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderDetails"))
 	}
 	if s.ProviderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 	if s.ProviderType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderType"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderType"))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12360,24 +12358,24 @@ func (s CreateResourceServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateResourceServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceServerInput"}
 	if s.Identifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identifier"))
+		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Identifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Scopes != nil {
 		for i, v := range s.Scopes {
@@ -12385,7 +12383,7 @@ func (s *CreateResourceServerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12479,24 +12477,24 @@ func (s CreateUserImportJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserImportJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserImportJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserImportJobInput"}
 	if s.CloudWatchLogsRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudWatchLogsRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsRoleArn"))
 	}
 	if s.CloudWatchLogsRoleArn != nil && len(*s.CloudWatchLogsRoleArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CloudWatchLogsRoleArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CloudWatchLogsRoleArn", 20))
 	}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12623,21 +12621,21 @@ func (s CreateUserPoolClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserPoolClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserPoolClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolClientInput"}
 	if s.ClientName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientName"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientName"))
 	}
 	if s.ClientName != nil && len(*s.ClientName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientName", 1))
 	}
 	if s.DefaultRedirectURI != nil && len(*s.DefaultRedirectURI) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DefaultRedirectURI", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultRedirectURI", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12782,18 +12780,18 @@ func (s CreateUserPoolDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserPoolDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserPoolDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolDomainInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12908,46 +12906,46 @@ func (s CreateUserPoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserPoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserPoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserPoolInput"}
 	if s.EmailVerificationMessage != nil && len(*s.EmailVerificationMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailVerificationMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailVerificationMessage", 6))
 	}
 	if s.EmailVerificationSubject != nil && len(*s.EmailVerificationSubject) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailVerificationSubject", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailVerificationSubject", 1))
 	}
 	if s.PoolName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PoolName"))
+		invalidParams.Add(aws.NewErrParamRequired("PoolName"))
 	}
 	if s.PoolName != nil && len(*s.PoolName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PoolName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PoolName", 1))
 	}
 	if s.Schema != nil && len(s.Schema) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Schema", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Schema", 1))
 	}
 	if s.SmsAuthenticationMessage != nil && len(*s.SmsAuthenticationMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("SmsAuthenticationMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("SmsAuthenticationMessage", 6))
 	}
 	if s.SmsVerificationMessage != nil && len(*s.SmsVerificationMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("SmsVerificationMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("SmsVerificationMessage", 6))
 	}
 	if s.AdminCreateUserConfig != nil {
 		if err := s.AdminCreateUserConfig.Validate(); err != nil {
-			invalidParams.AddNested("AdminCreateUserConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AdminCreateUserConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EmailConfiguration != nil {
 		if err := s.EmailConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EmailConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EmailConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaConfig != nil {
 		if err := s.LambdaConfig.Validate(); err != nil {
-			invalidParams.AddNested("LambdaConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LambdaConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Policies != nil {
 		if err := s.Policies.Validate(); err != nil {
-			invalidParams.AddNested("Policies", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Policies", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Schema != nil {
@@ -12956,18 +12954,18 @@ func (s *CreateUserPoolInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Schema", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Schema", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SmsConfiguration != nil {
 		if err := s.SmsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SmsConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SmsConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VerificationMessageTemplate != nil {
 		if err := s.VerificationMessageTemplate.Validate(); err != nil {
-			invalidParams.AddNested("VerificationMessageTemplate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VerificationMessageTemplate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13138,18 +13136,18 @@ func (s DeleteGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13212,18 +13210,18 @@ func (s DeleteIdentityProviderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityProviderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIdentityProviderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityProviderInput"}
 	if s.ProviderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13286,18 +13284,18 @@ func (s DeleteResourceServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteResourceServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteResourceServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceServerInput"}
 	if s.Identifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identifier"))
+		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Identifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13364,12 +13362,12 @@ func (s DeleteUserAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserAttributesInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.UserAttributeNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserAttributeNames"))
+		invalidParams.Add(aws.NewErrParamRequired("UserAttributeNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13429,9 +13427,9 @@ func (s DeleteUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13489,18 +13487,18 @@ func (s DeleteUserPoolClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPoolClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserPoolClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolClientInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13563,18 +13561,18 @@ func (s DeleteUserPoolDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPoolDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserPoolDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolDomainInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13633,12 +13631,12 @@ func (s DeleteUserPoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserPoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserPoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserPoolInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13695,18 +13693,18 @@ func (s DescribeIdentityProviderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIdentityProviderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeIdentityProviderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeIdentityProviderInput"}
 	if s.ProviderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13780,18 +13778,18 @@ func (s DescribeResourceServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResourceServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeResourceServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourceServerInput"}
 	if s.Identifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identifier"))
+		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Identifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13866,18 +13864,18 @@ func (s DescribeUserImportJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserImportJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUserImportJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserImportJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13952,18 +13950,18 @@ func (s DescribeUserPoolClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserPoolClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUserPoolClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolClientInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14032,12 +14030,12 @@ func (s DescribeUserPoolDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserPoolDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUserPoolDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolDomainInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14099,12 +14097,12 @@ func (s DescribeUserPoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserPoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUserPoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserPoolInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14377,9 +14375,9 @@ func (s EmailConfigurationType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EmailConfigurationType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EmailConfigurationType"}
+	invalidParams := aws.ErrInvalidParams{Context: "EmailConfigurationType"}
 	if s.SourceArn != nil && len(*s.SourceArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceArn", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14426,12 +14424,12 @@ func (s ForgetDeviceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ForgetDeviceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ForgetDeviceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ForgetDeviceInput"}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14500,21 +14498,21 @@ func (s ForgotPasswordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ForgotPasswordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ForgotPasswordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ForgotPasswordInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretHash", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14592,12 +14590,12 @@ func (s GetCSVHeaderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCSVHeaderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCSVHeaderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCSVHeaderInput"}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14673,12 +14671,12 @@ func (s GetDeviceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeviceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceInput"}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14753,18 +14751,18 @@ func (s GetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14836,18 +14834,18 @@ func (s GetIdentityProviderByIdentifierInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityProviderByIdentifierInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIdentityProviderByIdentifierInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityProviderByIdentifierInput"}
 	if s.IdpIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdpIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("IdpIdentifier"))
 	}
 	if s.IdpIdentifier != nil && len(*s.IdpIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdpIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdpIdentifier", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14919,15 +14917,15 @@ func (s GetUICustomizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUICustomizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUICustomizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUICustomizationInput"}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15004,15 +15002,15 @@ func (s GetUserAttributeVerificationCodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserAttributeVerificationCodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUserAttributeVerificationCodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUserAttributeVerificationCodeInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15084,9 +15082,9 @@ func (s GetUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUserInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15175,9 +15173,9 @@ func (s GlobalSignOutInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlobalSignOutInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GlobalSignOutInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GlobalSignOutInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15455,15 +15453,15 @@ func (s InitiateAuthInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateAuthInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitiateAuthInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitiateAuthInput"}
 	if s.AuthFlow == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthFlow"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthFlow"))
 	}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15628,30 +15626,30 @@ func (s LambdaConfigType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaConfigType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LambdaConfigType"}
+	invalidParams := aws.ErrInvalidParams{Context: "LambdaConfigType"}
 	if s.CreateAuthChallenge != nil && len(*s.CreateAuthChallenge) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CreateAuthChallenge", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CreateAuthChallenge", 20))
 	}
 	if s.CustomMessage != nil && len(*s.CustomMessage) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomMessage", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomMessage", 20))
 	}
 	if s.DefineAuthChallenge != nil && len(*s.DefineAuthChallenge) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("DefineAuthChallenge", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("DefineAuthChallenge", 20))
 	}
 	if s.PostAuthentication != nil && len(*s.PostAuthentication) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("PostAuthentication", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("PostAuthentication", 20))
 	}
 	if s.PostConfirmation != nil && len(*s.PostConfirmation) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("PostConfirmation", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("PostConfirmation", 20))
 	}
 	if s.PreAuthentication != nil && len(*s.PreAuthentication) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("PreAuthentication", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("PreAuthentication", 20))
 	}
 	if s.PreSignUp != nil && len(*s.PreSignUp) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("PreSignUp", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("PreSignUp", 20))
 	}
 	if s.VerifyAuthChallengeResponse != nil && len(*s.VerifyAuthChallengeResponse) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("VerifyAuthChallengeResponse", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("VerifyAuthChallengeResponse", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15737,12 +15735,12 @@ func (s ListDevicesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDevicesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDevicesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDevicesInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PaginationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15832,15 +15830,15 @@ func (s ListGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListGroupsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15929,18 +15927,18 @@ func (s ListIdentityProvidersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIdentityProvidersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListIdentityProvidersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityProvidersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16030,18 +16028,18 @@ func (s ListResourceServersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceServersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourceServersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourceServersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16135,21 +16133,21 @@ func (s ListUserImportJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUserImportJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUserImportJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUserImportJobsInput"}
 	if s.MaxResults == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxResults"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PaginationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16243,18 +16241,18 @@ func (s ListUserPoolClientsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUserPoolClientsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUserPoolClientsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUserPoolClientsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16344,15 +16342,15 @@ func (s ListUserPoolsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUserPoolsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUserPoolsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUserPoolsInput"}
 	if s.MaxResults == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxResults"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxResults"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16442,21 +16440,21 @@ func (s ListUsersInGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUsersInGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUsersInGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16600,15 +16598,15 @@ func (s ListUsersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUsersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUsersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUsersInput"}
 	if s.PaginationToken != nil && len(*s.PaginationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PaginationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PaginationToken", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16706,9 +16704,9 @@ func (s MFAOptionType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MFAOptionType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MFAOptionType"}
+	invalidParams := aws.ErrInvalidParams{Context: "MFAOptionType"}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16756,15 +16754,15 @@ func (s MessageTemplateType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageTemplateType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MessageTemplateType"}
+	invalidParams := aws.ErrInvalidParams{Context: "MessageTemplateType"}
 	if s.EmailMessage != nil && len(*s.EmailMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailMessage", 6))
 	}
 	if s.EmailSubject != nil && len(*s.EmailSubject) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailSubject", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailSubject", 1))
 	}
 	if s.SMSMessage != nil && len(*s.SMSMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("SMSMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("SMSMessage", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16898,9 +16896,9 @@ func (s PasswordPolicyType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PasswordPolicyType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PasswordPolicyType"}
+	invalidParams := aws.ErrInvalidParams{Context: "PasswordPolicyType"}
 	if s.MinimumLength != nil && *s.MinimumLength < 6 {
-		invalidParams.Add(request.NewErrParamMinValue("MinimumLength", 6))
+		invalidParams.Add(aws.NewErrParamMinValue("MinimumLength", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17018,9 +17016,9 @@ func (s ProviderUserIdentifierType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProviderUserIdentifierType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProviderUserIdentifierType"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProviderUserIdentifierType"}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17079,21 +17077,21 @@ func (s ResendConfirmationCodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResendConfirmationCodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResendConfirmationCodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResendConfirmationCodeInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretHash", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17175,18 +17173,18 @@ func (s ResourceServerScopeType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceServerScopeType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResourceServerScopeType"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceServerScopeType"}
 	if s.ScopeDescription == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScopeDescription"))
+		invalidParams.Add(aws.NewErrParamRequired("ScopeDescription"))
 	}
 	if s.ScopeDescription != nil && len(*s.ScopeDescription) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ScopeDescription", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ScopeDescription", 1))
 	}
 	if s.ScopeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScopeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ScopeName"))
 	}
 	if s.ScopeName != nil && len(*s.ScopeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ScopeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ScopeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17310,18 +17308,18 @@ func (s RespondToAuthChallengeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RespondToAuthChallengeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RespondToAuthChallengeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RespondToAuthChallengeInput"}
 	if s.ChallengeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChallengeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ChallengeName"))
 	}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.Session != nil && len(*s.Session) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("Session", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("Session", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17453,9 +17451,9 @@ func (s SchemaAttributeType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SchemaAttributeType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SchemaAttributeType"}
+	invalidParams := aws.ErrInvalidParams{Context: "SchemaAttributeType"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17539,15 +17537,15 @@ func (s SetUICustomizationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetUICustomizationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetUICustomizationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetUICustomizationInput"}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17634,12 +17632,12 @@ func (s SetUserSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetUserSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetUserSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetUserSettingsInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.MFAOptions == nil {
-		invalidParams.Add(request.NewErrParamRequired("MFAOptions"))
+		invalidParams.Add(aws.NewErrParamRequired("MFAOptions"))
 	}
 	if s.MFAOptions != nil {
 		for i, v := range s.MFAOptions {
@@ -17647,7 +17645,7 @@ func (s *SetUserSettingsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MFAOptions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17732,27 +17730,27 @@ func (s SignUpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignUpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SignUpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SignUpInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
 	}
 	if s.SecretHash != nil && len(*s.SecretHash) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SecretHash", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SecretHash", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
@@ -17760,7 +17758,7 @@ func (s *SignUpInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17770,7 +17768,7 @@ func (s *SignUpInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ValidationData", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17892,12 +17890,12 @@ func (s SmsConfigurationType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SmsConfigurationType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SmsConfigurationType"}
+	invalidParams := aws.ErrInvalidParams{Context: "SmsConfigurationType"}
 	if s.SnsCallerArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnsCallerArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SnsCallerArn"))
 	}
 	if s.SnsCallerArn != nil && len(*s.SnsCallerArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("SnsCallerArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("SnsCallerArn", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17946,18 +17944,18 @@ func (s StartUserImportJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartUserImportJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartUserImportJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartUserImportJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18032,18 +18030,18 @@ func (s StopUserImportJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopUserImportJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopUserImportJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopUserImportJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18235,15 +18233,15 @@ func (s UpdateDeviceStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeviceStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDeviceStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceStatusInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.DeviceKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceKey"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceKey"))
 	}
 	if s.DeviceKey != nil && len(*s.DeviceKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18324,21 +18322,21 @@ func (s UpdateGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
 	if s.GroupName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupName"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GroupName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18437,18 +18435,18 @@ func (s UpdateIdentityProviderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIdentityProviderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateIdentityProviderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateIdentityProviderInput"}
 	if s.ProviderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProviderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProviderName"))
 	}
 	if s.ProviderName != nil && len(*s.ProviderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProviderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProviderName", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18548,24 +18546,24 @@ func (s UpdateResourceServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateResourceServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateResourceServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceServerInput"}
 	if s.Identifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identifier"))
+		invalidParams.Add(aws.NewErrParamRequired("Identifier"))
 	}
 	if s.Identifier != nil && len(*s.Identifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Identifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Identifier", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.Scopes != nil {
 		for i, v := range s.Scopes {
@@ -18573,7 +18571,7 @@ func (s *UpdateResourceServerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Scopes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18665,12 +18663,12 @@ func (s UpdateUserAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserAttributesInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.UserAttributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserAttributes"))
+		invalidParams.Add(aws.NewErrParamRequired("UserAttributes"))
 	}
 	if s.UserAttributes != nil {
 		for i, v := range s.UserAttributes {
@@ -18678,7 +18676,7 @@ func (s *UpdateUserAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18801,24 +18799,24 @@ func (s UpdateUserPoolClientInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserPoolClientInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserPoolClientInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserPoolClientInput"}
 	if s.ClientId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClientId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
 	}
 	if s.ClientId != nil && len(*s.ClientId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientId", 1))
 	}
 	if s.ClientName != nil && len(*s.ClientName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientName", 1))
 	}
 	if s.DefaultRedirectURI != nil && len(*s.DefaultRedirectURI) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DefaultRedirectURI", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DefaultRedirectURI", 1))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19014,53 +19012,53 @@ func (s UpdateUserPoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserPoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserPoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserPoolInput"}
 	if s.EmailVerificationMessage != nil && len(*s.EmailVerificationMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailVerificationMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailVerificationMessage", 6))
 	}
 	if s.EmailVerificationSubject != nil && len(*s.EmailVerificationSubject) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailVerificationSubject", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailVerificationSubject", 1))
 	}
 	if s.SmsAuthenticationMessage != nil && len(*s.SmsAuthenticationMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("SmsAuthenticationMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("SmsAuthenticationMessage", 6))
 	}
 	if s.SmsVerificationMessage != nil && len(*s.SmsVerificationMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("SmsVerificationMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("SmsVerificationMessage", 6))
 	}
 	if s.UserPoolId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserPoolId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
 	}
 	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserPoolId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
 	}
 	if s.AdminCreateUserConfig != nil {
 		if err := s.AdminCreateUserConfig.Validate(); err != nil {
-			invalidParams.AddNested("AdminCreateUserConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AdminCreateUserConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EmailConfiguration != nil {
 		if err := s.EmailConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EmailConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EmailConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaConfig != nil {
 		if err := s.LambdaConfig.Validate(); err != nil {
-			invalidParams.AddNested("LambdaConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LambdaConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Policies != nil {
 		if err := s.Policies.Validate(); err != nil {
-			invalidParams.AddNested("Policies", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Policies", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SmsConfiguration != nil {
 		if err := s.SmsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SmsConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SmsConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.VerificationMessageTemplate != nil {
 		if err := s.VerificationMessageTemplate.Validate(); err != nil {
-			invalidParams.AddNested("VerificationMessageTemplate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VerificationMessageTemplate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -19646,10 +19644,10 @@ func (s UserPoolPolicyType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UserPoolPolicyType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UserPoolPolicyType"}
+	invalidParams := aws.ErrInvalidParams{Context: "UserPoolPolicyType"}
 	if s.PasswordPolicy != nil {
 		if err := s.PasswordPolicy.Validate(); err != nil {
-			invalidParams.AddNested("PasswordPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PasswordPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -20042,21 +20040,21 @@ func (s VerificationMessageTemplateType) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerificationMessageTemplateType) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerificationMessageTemplateType"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerificationMessageTemplateType"}
 	if s.EmailMessage != nil && len(*s.EmailMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailMessage", 6))
 	}
 	if s.EmailMessageByLink != nil && len(*s.EmailMessageByLink) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailMessageByLink", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailMessageByLink", 6))
 	}
 	if s.EmailSubject != nil && len(*s.EmailSubject) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailSubject", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailSubject", 1))
 	}
 	if s.EmailSubjectByLink != nil && len(*s.EmailSubjectByLink) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailSubjectByLink", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailSubjectByLink", 1))
 	}
 	if s.SmsMessage != nil && len(*s.SmsMessage) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("SmsMessage", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("SmsMessage", 6))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20134,21 +20132,21 @@ func (s VerifyUserAttributeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyUserAttributeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerifyUserAttributeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerifyUserAttributeInput"}
 	if s.AccessToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessToken"))
 	}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.Code == nil {
-		invalidParams.Add(request.NewErrParamRequired("Code"))
+		invalidParams.Add(aws.NewErrParamRequired("Code"))
 	}
 	if s.Code != nil && len(*s.Code) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Code", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Code", 1))
 	}
 
 	if invalidParams.Len() > 0 {

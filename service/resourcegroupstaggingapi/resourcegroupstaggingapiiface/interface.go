@@ -10,7 +10,6 @@ package resourcegroupstaggingapiiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := resourcegroupstaggingapi.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := resourcegroupstaggingapi.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,33 +64,33 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type ResourceGroupsTaggingAPIAPI interface {
 	GetResources(*resourcegroupstaggingapi.GetResourcesInput) (*resourcegroupstaggingapi.GetResourcesOutput, error)
-	GetResourcesWithContext(aws.Context, *resourcegroupstaggingapi.GetResourcesInput, ...request.Option) (*resourcegroupstaggingapi.GetResourcesOutput, error)
-	GetResourcesRequest(*resourcegroupstaggingapi.GetResourcesInput) (*request.Request, *resourcegroupstaggingapi.GetResourcesOutput)
+	GetResourcesWithContext(aws.Context, *resourcegroupstaggingapi.GetResourcesInput, ...aws.Option) (*resourcegroupstaggingapi.GetResourcesOutput, error)
+	GetResourcesRequest(*resourcegroupstaggingapi.GetResourcesInput) (*aws.Request, *resourcegroupstaggingapi.GetResourcesOutput)
 
 	GetResourcesPages(*resourcegroupstaggingapi.GetResourcesInput, func(*resourcegroupstaggingapi.GetResourcesOutput, bool) bool) error
-	GetResourcesPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetResourcesInput, func(*resourcegroupstaggingapi.GetResourcesOutput, bool) bool, ...request.Option) error
+	GetResourcesPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetResourcesInput, func(*resourcegroupstaggingapi.GetResourcesOutput, bool) bool, ...aws.Option) error
 
 	GetTagKeys(*resourcegroupstaggingapi.GetTagKeysInput) (*resourcegroupstaggingapi.GetTagKeysOutput, error)
-	GetTagKeysWithContext(aws.Context, *resourcegroupstaggingapi.GetTagKeysInput, ...request.Option) (*resourcegroupstaggingapi.GetTagKeysOutput, error)
-	GetTagKeysRequest(*resourcegroupstaggingapi.GetTagKeysInput) (*request.Request, *resourcegroupstaggingapi.GetTagKeysOutput)
+	GetTagKeysWithContext(aws.Context, *resourcegroupstaggingapi.GetTagKeysInput, ...aws.Option) (*resourcegroupstaggingapi.GetTagKeysOutput, error)
+	GetTagKeysRequest(*resourcegroupstaggingapi.GetTagKeysInput) (*aws.Request, *resourcegroupstaggingapi.GetTagKeysOutput)
 
 	GetTagKeysPages(*resourcegroupstaggingapi.GetTagKeysInput, func(*resourcegroupstaggingapi.GetTagKeysOutput, bool) bool) error
-	GetTagKeysPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagKeysInput, func(*resourcegroupstaggingapi.GetTagKeysOutput, bool) bool, ...request.Option) error
+	GetTagKeysPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagKeysInput, func(*resourcegroupstaggingapi.GetTagKeysOutput, bool) bool, ...aws.Option) error
 
 	GetTagValues(*resourcegroupstaggingapi.GetTagValuesInput) (*resourcegroupstaggingapi.GetTagValuesOutput, error)
-	GetTagValuesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagValuesInput, ...request.Option) (*resourcegroupstaggingapi.GetTagValuesOutput, error)
-	GetTagValuesRequest(*resourcegroupstaggingapi.GetTagValuesInput) (*request.Request, *resourcegroupstaggingapi.GetTagValuesOutput)
+	GetTagValuesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagValuesInput, ...aws.Option) (*resourcegroupstaggingapi.GetTagValuesOutput, error)
+	GetTagValuesRequest(*resourcegroupstaggingapi.GetTagValuesInput) (*aws.Request, *resourcegroupstaggingapi.GetTagValuesOutput)
 
 	GetTagValuesPages(*resourcegroupstaggingapi.GetTagValuesInput, func(*resourcegroupstaggingapi.GetTagValuesOutput, bool) bool) error
-	GetTagValuesPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagValuesInput, func(*resourcegroupstaggingapi.GetTagValuesOutput, bool) bool, ...request.Option) error
+	GetTagValuesPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagValuesInput, func(*resourcegroupstaggingapi.GetTagValuesOutput, bool) bool, ...aws.Option) error
 
 	TagResources(*resourcegroupstaggingapi.TagResourcesInput) (*resourcegroupstaggingapi.TagResourcesOutput, error)
-	TagResourcesWithContext(aws.Context, *resourcegroupstaggingapi.TagResourcesInput, ...request.Option) (*resourcegroupstaggingapi.TagResourcesOutput, error)
-	TagResourcesRequest(*resourcegroupstaggingapi.TagResourcesInput) (*request.Request, *resourcegroupstaggingapi.TagResourcesOutput)
+	TagResourcesWithContext(aws.Context, *resourcegroupstaggingapi.TagResourcesInput, ...aws.Option) (*resourcegroupstaggingapi.TagResourcesOutput, error)
+	TagResourcesRequest(*resourcegroupstaggingapi.TagResourcesInput) (*aws.Request, *resourcegroupstaggingapi.TagResourcesOutput)
 
 	UntagResources(*resourcegroupstaggingapi.UntagResourcesInput) (*resourcegroupstaggingapi.UntagResourcesOutput, error)
-	UntagResourcesWithContext(aws.Context, *resourcegroupstaggingapi.UntagResourcesInput, ...request.Option) (*resourcegroupstaggingapi.UntagResourcesOutput, error)
-	UntagResourcesRequest(*resourcegroupstaggingapi.UntagResourcesInput) (*request.Request, *resourcegroupstaggingapi.UntagResourcesOutput)
+	UntagResourcesWithContext(aws.Context, *resourcegroupstaggingapi.UntagResourcesInput, ...aws.Option) (*resourcegroupstaggingapi.UntagResourcesOutput, error)
+	UntagResourcesRequest(*resourcegroupstaggingapi.UntagResourcesInput) (*aws.Request, *resourcegroupstaggingapi.UntagResourcesOutput)
 }
 
 var _ ResourceGroupsTaggingAPIAPI = (*resourcegroupstaggingapi.ResourceGroupsTaggingAPI)(nil)

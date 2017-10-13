@@ -2,14 +2,12 @@ package external
 
 import (
 	"fmt"
-	"net/http"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
+	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 )
 
 // ResolveDefaultAWSConfig will write default configuration values into the cfg
@@ -18,11 +16,7 @@ import (
 // This should be used as the first resolver in the slice of resolvers when
 // resolving external configuration.
 func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
-	cfg.EndpointResolver = endpoints.DefaultResolver()
-	cfg.HTTPClient = &http.Client{} // TODO replace with a Sender not HTTP specific
-	cfg.Logger = aws.NewDefaultLogger()
-	cfg.Retryer = nil // TODO need expose defaulte retrier
-	//	TODO cfg.Handlers = defaults.Handlers()
+	*cfg = defaults.Config()
 	return nil
 }
 
@@ -76,10 +70,10 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 	for _, extCfg := range configs {
 		if p, ok := extCfg.(CredentialsValueProvider); ok {
 			if v, err := p.GetCredentialsValue(); err == nil && v.Valid() {
-				provider := credentials.StaticProvider{
+				provider := aws.StaticProvider{
 					Value: v,
 				}
-				cfg.Credentials = credentials.NewCredentials(provider)
+				cfg.Credentials = aws.NewCredentials(provider)
 				break
 			}
 			// TODO error handling, What is the best way to handle this?
@@ -104,7 +98,7 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 					//					Endpoint:     v,
 					ExpiryWindow: 5 * time.Minute,
 				}
-				cfg.Credentials = credentials.NewCredentials(provider)
+				cfg.Credentials = aws.NewCredentials(provider)
 
 				break
 			}
@@ -136,7 +130,7 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 		//		AWSConfig:    *cfg,
 		ExpiryWindow: 5 * time.Minute,
 	}
-	cfg.Credentials = credentials.NewCredentials(provider)
+	cfg.Credentials = aws.NewCredentials(provider)
 
 	return nil
 }

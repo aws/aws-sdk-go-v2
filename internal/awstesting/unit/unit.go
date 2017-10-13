@@ -3,11 +3,15 @@ package unit
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 )
 
-// Session is a shared session for unit tests to use.
-var Session = session.Must(session.NewSession(aws.NewConfig().
-	WithCredentials(credentials.NewStaticCredentials("AKID", "SECRET", "SESSION")).
-	WithRegion("mock-region")))
+func init() {
+	// TODO getting a default populated config should be in the "defaults" package
+	*Config = defaults.Config()
+	Config.Region = aws.String("mock-region")
+	Config.Credentials = aws.NewStaticCredentials("AKID", "SECRET", "SESSION")
+}
+
+// Config is a shared config for unit tests to use.
+var Config = &aws.Config{}

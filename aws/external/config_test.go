@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 )
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
@@ -78,7 +77,7 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	cfg, err := Configs{
 		WithRegion("mock-region"),
-		WithCredentialsValue(credentials.Value{
+		WithCredentialsValue(aws.Value{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 			ProviderName: "provider",
 		}),

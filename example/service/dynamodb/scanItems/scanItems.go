@@ -8,35 +8,37 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
 )
 
-func exitWithError(err error) {
-	fmt.Fprintln(os.Stderr, err)
+func exitErrorf(msg string, args...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
 
 func main() {
 	cfg := Config{}
 	if err := cfg.Load(); err != nil {
-		exitWithError(fmt.Errorf("failed to load config, %v", err))
+		exitErrorf("failed to load config, %v", err)
 	}
 
-	// Create the config specifying the Region for the DynamoDB table.
-	// If Config.Region is not set the region must come from the shared
-	// config or AWS_REGION environment variable.
-	awscfg := &aws.Config{}
+
+	// Create the config that the DynamoDB service will use.
+	awscfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 	if len(cfg.Region) > 0 {
-		awscfg.WithRegion(cfg.Region)
+		// The Region for the DynamoDB table. If Config.Region is not set
+		// the region must come from the shared config or AWS_REGION
+		// environment variable.
+		awscfg.Region = aws.String(cfg.Region)
 	}
-
-	// Create the session that the DynamoDB service will use.
-	sess := session.Must(session.NewSession(awscfg))
 
 	// Create the DynamoDB service client to make the query request with.
-	svc := dynamodb.New(sess)
+	svc := dynamodb.New(awscfg)
 
 	// Build the query input parameters
 	params := &dynamodb.ScanInput{
@@ -49,7 +51,7 @@ func main() {
 	// Make the DynamoDB Query API call
 	result, err := svc.Scan(params)
 	if err != nil {
-		exitWithError(fmt.Errorf("failed to make Query API call, %v", err))
+		exitErrorf("failed to make Query API call, %v", err)
 	}
 
 	items := []Item{}
@@ -57,7 +59,7 @@ func main() {
 	// Unmarshal the Items field in the result value to the Item Go type.
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &items)
 	if err != nil {
-		exitWithError(fmt.Errorf("failed to unmarshal Query result items, %v", err))
+		exitErrorf("failed to unmarshal Query result items, %v", err)
 	}
 
 	// Print out the items returned

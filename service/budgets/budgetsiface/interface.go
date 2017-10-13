@@ -10,7 +10,6 @@ package budgetsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := budgets.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := budgets.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,56 +64,56 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type BudgetsAPI interface {
 	CreateBudget(*budgets.CreateBudgetInput) (*budgets.CreateBudgetOutput, error)
-	CreateBudgetWithContext(aws.Context, *budgets.CreateBudgetInput, ...request.Option) (*budgets.CreateBudgetOutput, error)
-	CreateBudgetRequest(*budgets.CreateBudgetInput) (*request.Request, *budgets.CreateBudgetOutput)
+	CreateBudgetWithContext(aws.Context, *budgets.CreateBudgetInput, ...aws.Option) (*budgets.CreateBudgetOutput, error)
+	CreateBudgetRequest(*budgets.CreateBudgetInput) (*aws.Request, *budgets.CreateBudgetOutput)
 
 	CreateNotification(*budgets.CreateNotificationInput) (*budgets.CreateNotificationOutput, error)
-	CreateNotificationWithContext(aws.Context, *budgets.CreateNotificationInput, ...request.Option) (*budgets.CreateNotificationOutput, error)
-	CreateNotificationRequest(*budgets.CreateNotificationInput) (*request.Request, *budgets.CreateNotificationOutput)
+	CreateNotificationWithContext(aws.Context, *budgets.CreateNotificationInput, ...aws.Option) (*budgets.CreateNotificationOutput, error)
+	CreateNotificationRequest(*budgets.CreateNotificationInput) (*aws.Request, *budgets.CreateNotificationOutput)
 
 	CreateSubscriber(*budgets.CreateSubscriberInput) (*budgets.CreateSubscriberOutput, error)
-	CreateSubscriberWithContext(aws.Context, *budgets.CreateSubscriberInput, ...request.Option) (*budgets.CreateSubscriberOutput, error)
-	CreateSubscriberRequest(*budgets.CreateSubscriberInput) (*request.Request, *budgets.CreateSubscriberOutput)
+	CreateSubscriberWithContext(aws.Context, *budgets.CreateSubscriberInput, ...aws.Option) (*budgets.CreateSubscriberOutput, error)
+	CreateSubscriberRequest(*budgets.CreateSubscriberInput) (*aws.Request, *budgets.CreateSubscriberOutput)
 
 	DeleteBudget(*budgets.DeleteBudgetInput) (*budgets.DeleteBudgetOutput, error)
-	DeleteBudgetWithContext(aws.Context, *budgets.DeleteBudgetInput, ...request.Option) (*budgets.DeleteBudgetOutput, error)
-	DeleteBudgetRequest(*budgets.DeleteBudgetInput) (*request.Request, *budgets.DeleteBudgetOutput)
+	DeleteBudgetWithContext(aws.Context, *budgets.DeleteBudgetInput, ...aws.Option) (*budgets.DeleteBudgetOutput, error)
+	DeleteBudgetRequest(*budgets.DeleteBudgetInput) (*aws.Request, *budgets.DeleteBudgetOutput)
 
 	DeleteNotification(*budgets.DeleteNotificationInput) (*budgets.DeleteNotificationOutput, error)
-	DeleteNotificationWithContext(aws.Context, *budgets.DeleteNotificationInput, ...request.Option) (*budgets.DeleteNotificationOutput, error)
-	DeleteNotificationRequest(*budgets.DeleteNotificationInput) (*request.Request, *budgets.DeleteNotificationOutput)
+	DeleteNotificationWithContext(aws.Context, *budgets.DeleteNotificationInput, ...aws.Option) (*budgets.DeleteNotificationOutput, error)
+	DeleteNotificationRequest(*budgets.DeleteNotificationInput) (*aws.Request, *budgets.DeleteNotificationOutput)
 
 	DeleteSubscriber(*budgets.DeleteSubscriberInput) (*budgets.DeleteSubscriberOutput, error)
-	DeleteSubscriberWithContext(aws.Context, *budgets.DeleteSubscriberInput, ...request.Option) (*budgets.DeleteSubscriberOutput, error)
-	DeleteSubscriberRequest(*budgets.DeleteSubscriberInput) (*request.Request, *budgets.DeleteSubscriberOutput)
+	DeleteSubscriberWithContext(aws.Context, *budgets.DeleteSubscriberInput, ...aws.Option) (*budgets.DeleteSubscriberOutput, error)
+	DeleteSubscriberRequest(*budgets.DeleteSubscriberInput) (*aws.Request, *budgets.DeleteSubscriberOutput)
 
 	DescribeBudget(*budgets.DescribeBudgetInput) (*budgets.DescribeBudgetOutput, error)
-	DescribeBudgetWithContext(aws.Context, *budgets.DescribeBudgetInput, ...request.Option) (*budgets.DescribeBudgetOutput, error)
-	DescribeBudgetRequest(*budgets.DescribeBudgetInput) (*request.Request, *budgets.DescribeBudgetOutput)
+	DescribeBudgetWithContext(aws.Context, *budgets.DescribeBudgetInput, ...aws.Option) (*budgets.DescribeBudgetOutput, error)
+	DescribeBudgetRequest(*budgets.DescribeBudgetInput) (*aws.Request, *budgets.DescribeBudgetOutput)
 
 	DescribeBudgets(*budgets.DescribeBudgetsInput) (*budgets.DescribeBudgetsOutput, error)
-	DescribeBudgetsWithContext(aws.Context, *budgets.DescribeBudgetsInput, ...request.Option) (*budgets.DescribeBudgetsOutput, error)
-	DescribeBudgetsRequest(*budgets.DescribeBudgetsInput) (*request.Request, *budgets.DescribeBudgetsOutput)
+	DescribeBudgetsWithContext(aws.Context, *budgets.DescribeBudgetsInput, ...aws.Option) (*budgets.DescribeBudgetsOutput, error)
+	DescribeBudgetsRequest(*budgets.DescribeBudgetsInput) (*aws.Request, *budgets.DescribeBudgetsOutput)
 
 	DescribeNotificationsForBudget(*budgets.DescribeNotificationsForBudgetInput) (*budgets.DescribeNotificationsForBudgetOutput, error)
-	DescribeNotificationsForBudgetWithContext(aws.Context, *budgets.DescribeNotificationsForBudgetInput, ...request.Option) (*budgets.DescribeNotificationsForBudgetOutput, error)
-	DescribeNotificationsForBudgetRequest(*budgets.DescribeNotificationsForBudgetInput) (*request.Request, *budgets.DescribeNotificationsForBudgetOutput)
+	DescribeNotificationsForBudgetWithContext(aws.Context, *budgets.DescribeNotificationsForBudgetInput, ...aws.Option) (*budgets.DescribeNotificationsForBudgetOutput, error)
+	DescribeNotificationsForBudgetRequest(*budgets.DescribeNotificationsForBudgetInput) (*aws.Request, *budgets.DescribeNotificationsForBudgetOutput)
 
 	DescribeSubscribersForNotification(*budgets.DescribeSubscribersForNotificationInput) (*budgets.DescribeSubscribersForNotificationOutput, error)
-	DescribeSubscribersForNotificationWithContext(aws.Context, *budgets.DescribeSubscribersForNotificationInput, ...request.Option) (*budgets.DescribeSubscribersForNotificationOutput, error)
-	DescribeSubscribersForNotificationRequest(*budgets.DescribeSubscribersForNotificationInput) (*request.Request, *budgets.DescribeSubscribersForNotificationOutput)
+	DescribeSubscribersForNotificationWithContext(aws.Context, *budgets.DescribeSubscribersForNotificationInput, ...aws.Option) (*budgets.DescribeSubscribersForNotificationOutput, error)
+	DescribeSubscribersForNotificationRequest(*budgets.DescribeSubscribersForNotificationInput) (*aws.Request, *budgets.DescribeSubscribersForNotificationOutput)
 
 	UpdateBudget(*budgets.UpdateBudgetInput) (*budgets.UpdateBudgetOutput, error)
-	UpdateBudgetWithContext(aws.Context, *budgets.UpdateBudgetInput, ...request.Option) (*budgets.UpdateBudgetOutput, error)
-	UpdateBudgetRequest(*budgets.UpdateBudgetInput) (*request.Request, *budgets.UpdateBudgetOutput)
+	UpdateBudgetWithContext(aws.Context, *budgets.UpdateBudgetInput, ...aws.Option) (*budgets.UpdateBudgetOutput, error)
+	UpdateBudgetRequest(*budgets.UpdateBudgetInput) (*aws.Request, *budgets.UpdateBudgetOutput)
 
 	UpdateNotification(*budgets.UpdateNotificationInput) (*budgets.UpdateNotificationOutput, error)
-	UpdateNotificationWithContext(aws.Context, *budgets.UpdateNotificationInput, ...request.Option) (*budgets.UpdateNotificationOutput, error)
-	UpdateNotificationRequest(*budgets.UpdateNotificationInput) (*request.Request, *budgets.UpdateNotificationOutput)
+	UpdateNotificationWithContext(aws.Context, *budgets.UpdateNotificationInput, ...aws.Option) (*budgets.UpdateNotificationOutput, error)
+	UpdateNotificationRequest(*budgets.UpdateNotificationInput) (*aws.Request, *budgets.UpdateNotificationOutput)
 
 	UpdateSubscriber(*budgets.UpdateSubscriberInput) (*budgets.UpdateSubscriberOutput, error)
-	UpdateSubscriberWithContext(aws.Context, *budgets.UpdateSubscriberInput, ...request.Option) (*budgets.UpdateSubscriberOutput, error)
-	UpdateSubscriberRequest(*budgets.UpdateSubscriberInput) (*request.Request, *budgets.UpdateSubscriberOutput)
+	UpdateSubscriberWithContext(aws.Context, *budgets.UpdateSubscriberInput, ...aws.Option) (*budgets.UpdateSubscriberOutput, error)
+	UpdateSubscriberRequest(*budgets.UpdateSubscriberInput) (*aws.Request, *budgets.UpdateSubscriberOutput)
 }
 
 var _ BudgetsAPI = (*budgets.Budgets)(nil)

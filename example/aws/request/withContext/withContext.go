@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -35,8 +35,12 @@ func main() {
 	flag.DurationVar(&timeout, "d", 0, "Upload timeout.")
 	flag.Parse()
 
-	sess := session.Must(session.NewSession())
-	svc := s3.New(sess)
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, "+ err.Error())
+	}
+
+	svc := s3.New(cfg)
 
 	// Create a context with a timeout that will abort the upload if it takes
 	// more than the passed in timeout.
@@ -51,7 +55,7 @@ func main() {
 
 	// Uploads the object to S3. The Context will interrupt the request if the
 	// timeout expires.
-	_, err := svc.PutObjectWithContext(ctx, &s3.PutObjectInput{
+	_, err = svc.PutObjectWithContext(ctx, &s3.PutObjectInput{
 		Bucket: aws.String(bucket),
 		Key:    aws.String(key),
 		Body:   os.Stdin,

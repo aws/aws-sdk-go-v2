@@ -8,15 +8,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
 const opAbortMultipartUpload = "AbortMultipartUpload"
 
-// AbortMultipartUploadRequest generates a "aws/request.Request" representing the
+// AbortMultipartUploadRequest generates a "aws.Request" representing the
 // client's request for the AbortMultipartUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -40,8 +39,8 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUpload
-func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req *request.Request, output *AbortMultipartUploadOutput) {
-	op := &request.Operation{
+func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) (req *aws.Request, output *AbortMultipartUploadOutput) {
+	op := &aws.Operation{
 		Name:       opAbortMultipartUpload,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -90,7 +89,7 @@ func (c *S3) AbortMultipartUpload(input *AbortMultipartUploadInput) (*AbortMulti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultipartUploadInput, opts ...request.Option) (*AbortMultipartUploadOutput, error) {
+func (c *S3) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultipartUploadInput, opts ...aws.Option) (*AbortMultipartUploadOutput, error) {
 	req, out := c.AbortMultipartUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -99,7 +98,7 @@ func (c *S3) AbortMultipartUploadWithContext(ctx aws.Context, input *AbortMultip
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
 
-// CompleteMultipartUploadRequest generates a "aws/request.Request" representing the
+// CompleteMultipartUploadRequest generates a "aws.Request" representing the
 // client's request for the CompleteMultipartUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -123,8 +122,8 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload
-func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) (req *request.Request, output *CompleteMultipartUploadOutput) {
-	op := &request.Operation{
+func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput) (req *aws.Request, output *CompleteMultipartUploadOutput) {
+	op := &aws.Operation{
 		Name:       opCompleteMultipartUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -164,7 +163,7 @@ func (c *S3) CompleteMultipartUpload(input *CompleteMultipartUploadInput) (*Comp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) CompleteMultipartUploadWithContext(ctx aws.Context, input *CompleteMultipartUploadInput, opts ...request.Option) (*CompleteMultipartUploadOutput, error) {
+func (c *S3) CompleteMultipartUploadWithContext(ctx aws.Context, input *CompleteMultipartUploadInput, opts ...aws.Option) (*CompleteMultipartUploadOutput, error) {
 	req, out := c.CompleteMultipartUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -173,7 +172,7 @@ func (c *S3) CompleteMultipartUploadWithContext(ctx aws.Context, input *Complete
 
 const opCopyObject = "CopyObject"
 
-// CopyObjectRequest generates a "aws/request.Request" representing the
+// CopyObjectRequest generates a "aws.Request" representing the
 // client's request for the CopyObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -197,8 +196,8 @@ const opCopyObject = "CopyObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject
-func (c *S3) CopyObjectRequest(input *CopyObjectInput) (req *request.Request, output *CopyObjectOutput) {
-	op := &request.Operation{
+func (c *S3) CopyObjectRequest(input *CopyObjectInput) (req *aws.Request, output *CopyObjectOutput) {
+	op := &aws.Operation{
 		Name:       opCopyObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -244,7 +243,7 @@ func (c *S3) CopyObject(input *CopyObjectInput) (*CopyObjectOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) CopyObjectWithContext(ctx aws.Context, input *CopyObjectInput, opts ...request.Option) (*CopyObjectOutput, error) {
+func (c *S3) CopyObjectWithContext(ctx aws.Context, input *CopyObjectInput, opts ...aws.Option) (*CopyObjectOutput, error) {
 	req, out := c.CopyObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -253,7 +252,7 @@ func (c *S3) CopyObjectWithContext(ctx aws.Context, input *CopyObjectInput, opts
 
 const opCreateBucket = "CreateBucket"
 
-// CreateBucketRequest generates a "aws/request.Request" representing the
+// CreateBucketRequest generates a "aws.Request" representing the
 // client's request for the CreateBucket operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -277,8 +276,8 @@ const opCreateBucket = "CreateBucket"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucket
-func (c *S3) CreateBucketRequest(input *CreateBucketInput) (req *request.Request, output *CreateBucketOutput) {
-	op := &request.Operation{
+func (c *S3) CreateBucketRequest(input *CreateBucketInput) (req *aws.Request, output *CreateBucketOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBucket,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}",
@@ -326,7 +325,7 @@ func (c *S3) CreateBucket(input *CreateBucketInput) (*CreateBucketOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) CreateBucketWithContext(ctx aws.Context, input *CreateBucketInput, opts ...request.Option) (*CreateBucketOutput, error) {
+func (c *S3) CreateBucketWithContext(ctx aws.Context, input *CreateBucketInput, opts ...aws.Option) (*CreateBucketOutput, error) {
 	req, out := c.CreateBucketRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -335,7 +334,7 @@ func (c *S3) CreateBucketWithContext(ctx aws.Context, input *CreateBucketInput, 
 
 const opCreateMultipartUpload = "CreateMultipartUpload"
 
-// CreateMultipartUploadRequest generates a "aws/request.Request" representing the
+// CreateMultipartUploadRequest generates a "aws.Request" representing the
 // client's request for the CreateMultipartUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -359,8 +358,8 @@ const opCreateMultipartUpload = "CreateMultipartUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload
-func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) (req *request.Request, output *CreateMultipartUploadOutput) {
-	op := &request.Operation{
+func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) (req *aws.Request, output *CreateMultipartUploadOutput) {
+	op := &aws.Operation{
 		Name:       opCreateMultipartUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{Bucket}/{Key+}?uploads",
@@ -406,7 +405,7 @@ func (c *S3) CreateMultipartUpload(input *CreateMultipartUploadInput) (*CreateMu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) CreateMultipartUploadWithContext(ctx aws.Context, input *CreateMultipartUploadInput, opts ...request.Option) (*CreateMultipartUploadOutput, error) {
+func (c *S3) CreateMultipartUploadWithContext(ctx aws.Context, input *CreateMultipartUploadInput, opts ...aws.Option) (*CreateMultipartUploadOutput, error) {
 	req, out := c.CreateMultipartUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -415,7 +414,7 @@ func (c *S3) CreateMultipartUploadWithContext(ctx aws.Context, input *CreateMult
 
 const opDeleteBucket = "DeleteBucket"
 
-// DeleteBucketRequest generates a "aws/request.Request" representing the
+// DeleteBucketRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucket operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -439,8 +438,8 @@ const opDeleteBucket = "DeleteBucket"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucket
-func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) (req *request.Request, output *DeleteBucketOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) (req *aws.Request, output *DeleteBucketOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucket,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}",
@@ -483,7 +482,7 @@ func (c *S3) DeleteBucket(input *DeleteBucketInput) (*DeleteBucketOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketWithContext(ctx aws.Context, input *DeleteBucketInput, opts ...request.Option) (*DeleteBucketOutput, error) {
+func (c *S3) DeleteBucketWithContext(ctx aws.Context, input *DeleteBucketInput, opts ...aws.Option) (*DeleteBucketOutput, error) {
 	req, out := c.DeleteBucketRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -492,7 +491,7 @@ func (c *S3) DeleteBucketWithContext(ctx aws.Context, input *DeleteBucketInput, 
 
 const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration"
 
-// DeleteBucketAnalyticsConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteBucketAnalyticsConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketAnalyticsConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -516,8 +515,8 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfiguration
-func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyticsConfigurationInput) (req *request.Request, output *DeleteBucketAnalyticsConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyticsConfigurationInput) (req *aws.Request, output *DeleteBucketAnalyticsConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketAnalyticsConfiguration,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?analytics",
@@ -560,7 +559,7 @@ func (c *S3) DeleteBucketAnalyticsConfiguration(input *DeleteBucketAnalyticsConf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *DeleteBucketAnalyticsConfigurationInput, opts ...request.Option) (*DeleteBucketAnalyticsConfigurationOutput, error) {
+func (c *S3) DeleteBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *DeleteBucketAnalyticsConfigurationInput, opts ...aws.Option) (*DeleteBucketAnalyticsConfigurationOutput, error) {
 	req, out := c.DeleteBucketAnalyticsConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -569,7 +568,7 @@ func (c *S3) DeleteBucketAnalyticsConfigurationWithContext(ctx aws.Context, inpu
 
 const opDeleteBucketCors = "DeleteBucketCors"
 
-// DeleteBucketCorsRequest generates a "aws/request.Request" representing the
+// DeleteBucketCorsRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketCors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -593,8 +592,8 @@ const opDeleteBucketCors = "DeleteBucketCors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCors
-func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) (req *request.Request, output *DeleteBucketCorsOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) (req *aws.Request, output *DeleteBucketCorsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketCors,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?cors",
@@ -636,7 +635,7 @@ func (c *S3) DeleteBucketCors(input *DeleteBucketCorsInput) (*DeleteBucketCorsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketCorsWithContext(ctx aws.Context, input *DeleteBucketCorsInput, opts ...request.Option) (*DeleteBucketCorsOutput, error) {
+func (c *S3) DeleteBucketCorsWithContext(ctx aws.Context, input *DeleteBucketCorsInput, opts ...aws.Option) (*DeleteBucketCorsOutput, error) {
 	req, out := c.DeleteBucketCorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -645,7 +644,7 @@ func (c *S3) DeleteBucketCorsWithContext(ctx aws.Context, input *DeleteBucketCor
 
 const opDeleteBucketInventoryConfiguration = "DeleteBucketInventoryConfiguration"
 
-// DeleteBucketInventoryConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteBucketInventoryConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketInventoryConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -669,8 +668,8 @@ const opDeleteBucketInventoryConfiguration = "DeleteBucketInventoryConfiguration
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfiguration
-func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInventoryConfigurationInput) (req *request.Request, output *DeleteBucketInventoryConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInventoryConfigurationInput) (req *aws.Request, output *DeleteBucketInventoryConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketInventoryConfiguration,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?inventory",
@@ -713,7 +712,7 @@ func (c *S3) DeleteBucketInventoryConfiguration(input *DeleteBucketInventoryConf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketInventoryConfigurationWithContext(ctx aws.Context, input *DeleteBucketInventoryConfigurationInput, opts ...request.Option) (*DeleteBucketInventoryConfigurationOutput, error) {
+func (c *S3) DeleteBucketInventoryConfigurationWithContext(ctx aws.Context, input *DeleteBucketInventoryConfigurationInput, opts ...aws.Option) (*DeleteBucketInventoryConfigurationOutput, error) {
 	req, out := c.DeleteBucketInventoryConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -722,7 +721,7 @@ func (c *S3) DeleteBucketInventoryConfigurationWithContext(ctx aws.Context, inpu
 
 const opDeleteBucketLifecycle = "DeleteBucketLifecycle"
 
-// DeleteBucketLifecycleRequest generates a "aws/request.Request" representing the
+// DeleteBucketLifecycleRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketLifecycle operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -746,8 +745,8 @@ const opDeleteBucketLifecycle = "DeleteBucketLifecycle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycle
-func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) (req *request.Request, output *DeleteBucketLifecycleOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) (req *aws.Request, output *DeleteBucketLifecycleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketLifecycle,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?lifecycle",
@@ -789,7 +788,7 @@ func (c *S3) DeleteBucketLifecycle(input *DeleteBucketLifecycleInput) (*DeleteBu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketLifecycleWithContext(ctx aws.Context, input *DeleteBucketLifecycleInput, opts ...request.Option) (*DeleteBucketLifecycleOutput, error) {
+func (c *S3) DeleteBucketLifecycleWithContext(ctx aws.Context, input *DeleteBucketLifecycleInput, opts ...aws.Option) (*DeleteBucketLifecycleOutput, error) {
 	req, out := c.DeleteBucketLifecycleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -798,7 +797,7 @@ func (c *S3) DeleteBucketLifecycleWithContext(ctx aws.Context, input *DeleteBuck
 
 const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 
-// DeleteBucketMetricsConfigurationRequest generates a "aws/request.Request" representing the
+// DeleteBucketMetricsConfigurationRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketMetricsConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -822,8 +821,8 @@ const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfiguration
-func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsConfigurationInput) (req *request.Request, output *DeleteBucketMetricsConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsConfigurationInput) (req *aws.Request, output *DeleteBucketMetricsConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketMetricsConfiguration,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?metrics",
@@ -866,7 +865,7 @@ func (c *S3) DeleteBucketMetricsConfiguration(input *DeleteBucketMetricsConfigur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketMetricsConfigurationWithContext(ctx aws.Context, input *DeleteBucketMetricsConfigurationInput, opts ...request.Option) (*DeleteBucketMetricsConfigurationOutput, error) {
+func (c *S3) DeleteBucketMetricsConfigurationWithContext(ctx aws.Context, input *DeleteBucketMetricsConfigurationInput, opts ...aws.Option) (*DeleteBucketMetricsConfigurationOutput, error) {
 	req, out := c.DeleteBucketMetricsConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -875,7 +874,7 @@ func (c *S3) DeleteBucketMetricsConfigurationWithContext(ctx aws.Context, input 
 
 const opDeleteBucketPolicy = "DeleteBucketPolicy"
 
-// DeleteBucketPolicyRequest generates a "aws/request.Request" representing the
+// DeleteBucketPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -899,8 +898,8 @@ const opDeleteBucketPolicy = "DeleteBucketPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicy
-func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) (req *request.Request, output *DeleteBucketPolicyOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) (req *aws.Request, output *DeleteBucketPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketPolicy,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?policy",
@@ -942,7 +941,7 @@ func (c *S3) DeleteBucketPolicy(input *DeleteBucketPolicyInput) (*DeleteBucketPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketPolicyWithContext(ctx aws.Context, input *DeleteBucketPolicyInput, opts ...request.Option) (*DeleteBucketPolicyOutput, error) {
+func (c *S3) DeleteBucketPolicyWithContext(ctx aws.Context, input *DeleteBucketPolicyInput, opts ...aws.Option) (*DeleteBucketPolicyOutput, error) {
 	req, out := c.DeleteBucketPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -951,7 +950,7 @@ func (c *S3) DeleteBucketPolicyWithContext(ctx aws.Context, input *DeleteBucketP
 
 const opDeleteBucketReplication = "DeleteBucketReplication"
 
-// DeleteBucketReplicationRequest generates a "aws/request.Request" representing the
+// DeleteBucketReplicationRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketReplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -975,8 +974,8 @@ const opDeleteBucketReplication = "DeleteBucketReplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplication
-func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput) (req *request.Request, output *DeleteBucketReplicationOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput) (req *aws.Request, output *DeleteBucketReplicationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketReplication,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?replication",
@@ -1018,7 +1017,7 @@ func (c *S3) DeleteBucketReplication(input *DeleteBucketReplicationInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketReplicationWithContext(ctx aws.Context, input *DeleteBucketReplicationInput, opts ...request.Option) (*DeleteBucketReplicationOutput, error) {
+func (c *S3) DeleteBucketReplicationWithContext(ctx aws.Context, input *DeleteBucketReplicationInput, opts ...aws.Option) (*DeleteBucketReplicationOutput, error) {
 	req, out := c.DeleteBucketReplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1027,7 +1026,7 @@ func (c *S3) DeleteBucketReplicationWithContext(ctx aws.Context, input *DeleteBu
 
 const opDeleteBucketTagging = "DeleteBucketTagging"
 
-// DeleteBucketTaggingRequest generates a "aws/request.Request" representing the
+// DeleteBucketTaggingRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketTagging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1051,8 +1050,8 @@ const opDeleteBucketTagging = "DeleteBucketTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTagging
-func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) (req *request.Request, output *DeleteBucketTaggingOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) (req *aws.Request, output *DeleteBucketTaggingOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketTagging,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?tagging",
@@ -1094,7 +1093,7 @@ func (c *S3) DeleteBucketTagging(input *DeleteBucketTaggingInput) (*DeleteBucket
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketTaggingWithContext(ctx aws.Context, input *DeleteBucketTaggingInput, opts ...request.Option) (*DeleteBucketTaggingOutput, error) {
+func (c *S3) DeleteBucketTaggingWithContext(ctx aws.Context, input *DeleteBucketTaggingInput, opts ...aws.Option) (*DeleteBucketTaggingOutput, error) {
 	req, out := c.DeleteBucketTaggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1103,7 +1102,7 @@ func (c *S3) DeleteBucketTaggingWithContext(ctx aws.Context, input *DeleteBucket
 
 const opDeleteBucketWebsite = "DeleteBucketWebsite"
 
-// DeleteBucketWebsiteRequest generates a "aws/request.Request" representing the
+// DeleteBucketWebsiteRequest generates a "aws.Request" representing the
 // client's request for the DeleteBucketWebsite operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1127,8 +1126,8 @@ const opDeleteBucketWebsite = "DeleteBucketWebsite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsite
-func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) (req *request.Request, output *DeleteBucketWebsiteOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) (req *aws.Request, output *DeleteBucketWebsiteOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBucketWebsite,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}?website",
@@ -1170,7 +1169,7 @@ func (c *S3) DeleteBucketWebsite(input *DeleteBucketWebsiteInput) (*DeleteBucket
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteBucketWebsiteWithContext(ctx aws.Context, input *DeleteBucketWebsiteInput, opts ...request.Option) (*DeleteBucketWebsiteOutput, error) {
+func (c *S3) DeleteBucketWebsiteWithContext(ctx aws.Context, input *DeleteBucketWebsiteInput, opts ...aws.Option) (*DeleteBucketWebsiteOutput, error) {
 	req, out := c.DeleteBucketWebsiteRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1179,7 +1178,7 @@ func (c *S3) DeleteBucketWebsiteWithContext(ctx aws.Context, input *DeleteBucket
 
 const opDeleteObject = "DeleteObject"
 
-// DeleteObjectRequest generates a "aws/request.Request" representing the
+// DeleteObjectRequest generates a "aws.Request" representing the
 // client's request for the DeleteObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1203,8 +1202,8 @@ const opDeleteObject = "DeleteObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObject
-func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) (req *request.Request, output *DeleteObjectOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) (req *aws.Request, output *DeleteObjectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteObject,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -1246,7 +1245,7 @@ func (c *S3) DeleteObject(input *DeleteObjectInput) (*DeleteObjectOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, opts ...request.Option) (*DeleteObjectOutput, error) {
+func (c *S3) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, opts ...aws.Option) (*DeleteObjectOutput, error) {
 	req, out := c.DeleteObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1255,7 +1254,7 @@ func (c *S3) DeleteObjectWithContext(ctx aws.Context, input *DeleteObjectInput, 
 
 const opDeleteObjectTagging = "DeleteObjectTagging"
 
-// DeleteObjectTaggingRequest generates a "aws/request.Request" representing the
+// DeleteObjectTaggingRequest generates a "aws.Request" representing the
 // client's request for the DeleteObjectTagging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1279,8 +1278,8 @@ const opDeleteObjectTagging = "DeleteObjectTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTagging
-func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) (req *request.Request, output *DeleteObjectTaggingOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) (req *aws.Request, output *DeleteObjectTaggingOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteObjectTagging,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/{Bucket}/{Key+}?tagging",
@@ -1320,7 +1319,7 @@ func (c *S3) DeleteObjectTagging(input *DeleteObjectTaggingInput) (*DeleteObject
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteObjectTaggingWithContext(ctx aws.Context, input *DeleteObjectTaggingInput, opts ...request.Option) (*DeleteObjectTaggingOutput, error) {
+func (c *S3) DeleteObjectTaggingWithContext(ctx aws.Context, input *DeleteObjectTaggingInput, opts ...aws.Option) (*DeleteObjectTaggingOutput, error) {
 	req, out := c.DeleteObjectTaggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1329,7 +1328,7 @@ func (c *S3) DeleteObjectTaggingWithContext(ctx aws.Context, input *DeleteObject
 
 const opDeleteObjects = "DeleteObjects"
 
-// DeleteObjectsRequest generates a "aws/request.Request" representing the
+// DeleteObjectsRequest generates a "aws.Request" representing the
 // client's request for the DeleteObjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1353,8 +1352,8 @@ const opDeleteObjects = "DeleteObjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjects
-func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) (req *request.Request, output *DeleteObjectsOutput) {
-	op := &request.Operation{
+func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) (req *aws.Request, output *DeleteObjectsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteObjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{Bucket}?delete",
@@ -1395,7 +1394,7 @@ func (c *S3) DeleteObjects(input *DeleteObjectsInput) (*DeleteObjectsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) DeleteObjectsWithContext(ctx aws.Context, input *DeleteObjectsInput, opts ...request.Option) (*DeleteObjectsOutput, error) {
+func (c *S3) DeleteObjectsWithContext(ctx aws.Context, input *DeleteObjectsInput, opts ...aws.Option) (*DeleteObjectsOutput, error) {
 	req, out := c.DeleteObjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1404,7 +1403,7 @@ func (c *S3) DeleteObjectsWithContext(ctx aws.Context, input *DeleteObjectsInput
 
 const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 
-// GetBucketAccelerateConfigurationRequest generates a "aws/request.Request" representing the
+// GetBucketAccelerateConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketAccelerateConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1428,8 +1427,8 @@ const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfiguration
-func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateConfigurationInput) (req *request.Request, output *GetBucketAccelerateConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateConfigurationInput) (req *aws.Request, output *GetBucketAccelerateConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketAccelerateConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?accelerate",
@@ -1469,7 +1468,7 @@ func (c *S3) GetBucketAccelerateConfiguration(input *GetBucketAccelerateConfigur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketAccelerateConfigurationWithContext(ctx aws.Context, input *GetBucketAccelerateConfigurationInput, opts ...request.Option) (*GetBucketAccelerateConfigurationOutput, error) {
+func (c *S3) GetBucketAccelerateConfigurationWithContext(ctx aws.Context, input *GetBucketAccelerateConfigurationInput, opts ...aws.Option) (*GetBucketAccelerateConfigurationOutput, error) {
 	req, out := c.GetBucketAccelerateConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1478,7 +1477,7 @@ func (c *S3) GetBucketAccelerateConfigurationWithContext(ctx aws.Context, input 
 
 const opGetBucketAcl = "GetBucketAcl"
 
-// GetBucketAclRequest generates a "aws/request.Request" representing the
+// GetBucketAclRequest generates a "aws.Request" representing the
 // client's request for the GetBucketAcl operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1502,8 +1501,8 @@ const opGetBucketAcl = "GetBucketAcl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAcl
-func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) (req *request.Request, output *GetBucketAclOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) (req *aws.Request, output *GetBucketAclOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketAcl,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?acl",
@@ -1543,7 +1542,7 @@ func (c *S3) GetBucketAcl(input *GetBucketAclInput) (*GetBucketAclOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketAclWithContext(ctx aws.Context, input *GetBucketAclInput, opts ...request.Option) (*GetBucketAclOutput, error) {
+func (c *S3) GetBucketAclWithContext(ctx aws.Context, input *GetBucketAclInput, opts ...aws.Option) (*GetBucketAclOutput, error) {
 	req, out := c.GetBucketAclRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1552,7 +1551,7 @@ func (c *S3) GetBucketAclWithContext(ctx aws.Context, input *GetBucketAclInput, 
 
 const opGetBucketAnalyticsConfiguration = "GetBucketAnalyticsConfiguration"
 
-// GetBucketAnalyticsConfigurationRequest generates a "aws/request.Request" representing the
+// GetBucketAnalyticsConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketAnalyticsConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1576,8 +1575,8 @@ const opGetBucketAnalyticsConfiguration = "GetBucketAnalyticsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfiguration
-func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsConfigurationInput) (req *request.Request, output *GetBucketAnalyticsConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsConfigurationInput) (req *aws.Request, output *GetBucketAnalyticsConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketAnalyticsConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?analytics",
@@ -1618,7 +1617,7 @@ func (c *S3) GetBucketAnalyticsConfiguration(input *GetBucketAnalyticsConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *GetBucketAnalyticsConfigurationInput, opts ...request.Option) (*GetBucketAnalyticsConfigurationOutput, error) {
+func (c *S3) GetBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *GetBucketAnalyticsConfigurationInput, opts ...aws.Option) (*GetBucketAnalyticsConfigurationOutput, error) {
 	req, out := c.GetBucketAnalyticsConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1627,7 +1626,7 @@ func (c *S3) GetBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *
 
 const opGetBucketCors = "GetBucketCors"
 
-// GetBucketCorsRequest generates a "aws/request.Request" representing the
+// GetBucketCorsRequest generates a "aws.Request" representing the
 // client's request for the GetBucketCors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1651,8 +1650,8 @@ const opGetBucketCors = "GetBucketCors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCors
-func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) (req *request.Request, output *GetBucketCorsOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) (req *aws.Request, output *GetBucketCorsOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketCors,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?cors",
@@ -1692,7 +1691,7 @@ func (c *S3) GetBucketCors(input *GetBucketCorsInput) (*GetBucketCorsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketCorsWithContext(ctx aws.Context, input *GetBucketCorsInput, opts ...request.Option) (*GetBucketCorsOutput, error) {
+func (c *S3) GetBucketCorsWithContext(ctx aws.Context, input *GetBucketCorsInput, opts ...aws.Option) (*GetBucketCorsOutput, error) {
 	req, out := c.GetBucketCorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1701,7 +1700,7 @@ func (c *S3) GetBucketCorsWithContext(ctx aws.Context, input *GetBucketCorsInput
 
 const opGetBucketInventoryConfiguration = "GetBucketInventoryConfiguration"
 
-// GetBucketInventoryConfigurationRequest generates a "aws/request.Request" representing the
+// GetBucketInventoryConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketInventoryConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1725,8 +1724,8 @@ const opGetBucketInventoryConfiguration = "GetBucketInventoryConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration
-func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryConfigurationInput) (req *request.Request, output *GetBucketInventoryConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryConfigurationInput) (req *aws.Request, output *GetBucketInventoryConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketInventoryConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?inventory",
@@ -1767,7 +1766,7 @@ func (c *S3) GetBucketInventoryConfiguration(input *GetBucketInventoryConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketInventoryConfigurationWithContext(ctx aws.Context, input *GetBucketInventoryConfigurationInput, opts ...request.Option) (*GetBucketInventoryConfigurationOutput, error) {
+func (c *S3) GetBucketInventoryConfigurationWithContext(ctx aws.Context, input *GetBucketInventoryConfigurationInput, opts ...aws.Option) (*GetBucketInventoryConfigurationOutput, error) {
 	req, out := c.GetBucketInventoryConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1776,7 +1775,7 @@ func (c *S3) GetBucketInventoryConfigurationWithContext(ctx aws.Context, input *
 
 const opGetBucketLifecycle = "GetBucketLifecycle"
 
-// GetBucketLifecycleRequest generates a "aws/request.Request" representing the
+// GetBucketLifecycleRequest generates a "aws.Request" representing the
 // client's request for the GetBucketLifecycle operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1800,11 +1799,11 @@ const opGetBucketLifecycle = "GetBucketLifecycle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycle
-func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) (req *request.Request, output *GetBucketLifecycleOutput) {
+func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) (req *aws.Request, output *GetBucketLifecycleOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, GetBucketLifecycle, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opGetBucketLifecycle,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?lifecycle",
@@ -1844,7 +1843,7 @@ func (c *S3) GetBucketLifecycle(input *GetBucketLifecycleInput) (*GetBucketLifec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketLifecycleWithContext(ctx aws.Context, input *GetBucketLifecycleInput, opts ...request.Option) (*GetBucketLifecycleOutput, error) {
+func (c *S3) GetBucketLifecycleWithContext(ctx aws.Context, input *GetBucketLifecycleInput, opts ...aws.Option) (*GetBucketLifecycleOutput, error) {
 	req, out := c.GetBucketLifecycleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1853,7 +1852,7 @@ func (c *S3) GetBucketLifecycleWithContext(ctx aws.Context, input *GetBucketLife
 
 const opGetBucketLifecycleConfiguration = "GetBucketLifecycleConfiguration"
 
-// GetBucketLifecycleConfigurationRequest generates a "aws/request.Request" representing the
+// GetBucketLifecycleConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketLifecycleConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1877,8 +1876,8 @@ const opGetBucketLifecycleConfiguration = "GetBucketLifecycleConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfiguration
-func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleConfigurationInput) (req *request.Request, output *GetBucketLifecycleConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleConfigurationInput) (req *aws.Request, output *GetBucketLifecycleConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketLifecycleConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?lifecycle",
@@ -1918,7 +1917,7 @@ func (c *S3) GetBucketLifecycleConfiguration(input *GetBucketLifecycleConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketLifecycleConfigurationWithContext(ctx aws.Context, input *GetBucketLifecycleConfigurationInput, opts ...request.Option) (*GetBucketLifecycleConfigurationOutput, error) {
+func (c *S3) GetBucketLifecycleConfigurationWithContext(ctx aws.Context, input *GetBucketLifecycleConfigurationInput, opts ...aws.Option) (*GetBucketLifecycleConfigurationOutput, error) {
 	req, out := c.GetBucketLifecycleConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1927,7 +1926,7 @@ func (c *S3) GetBucketLifecycleConfigurationWithContext(ctx aws.Context, input *
 
 const opGetBucketLocation = "GetBucketLocation"
 
-// GetBucketLocationRequest generates a "aws/request.Request" representing the
+// GetBucketLocationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketLocation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1951,8 +1950,8 @@ const opGetBucketLocation = "GetBucketLocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocation
-func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) (req *request.Request, output *GetBucketLocationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) (req *aws.Request, output *GetBucketLocationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketLocation,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?location",
@@ -1992,7 +1991,7 @@ func (c *S3) GetBucketLocation(input *GetBucketLocationInput) (*GetBucketLocatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketLocationWithContext(ctx aws.Context, input *GetBucketLocationInput, opts ...request.Option) (*GetBucketLocationOutput, error) {
+func (c *S3) GetBucketLocationWithContext(ctx aws.Context, input *GetBucketLocationInput, opts ...aws.Option) (*GetBucketLocationOutput, error) {
 	req, out := c.GetBucketLocationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2001,7 +2000,7 @@ func (c *S3) GetBucketLocationWithContext(ctx aws.Context, input *GetBucketLocat
 
 const opGetBucketLogging = "GetBucketLogging"
 
-// GetBucketLoggingRequest generates a "aws/request.Request" representing the
+// GetBucketLoggingRequest generates a "aws.Request" representing the
 // client's request for the GetBucketLogging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2025,8 +2024,8 @@ const opGetBucketLogging = "GetBucketLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLogging
-func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) (req *request.Request, output *GetBucketLoggingOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) (req *aws.Request, output *GetBucketLoggingOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketLogging,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?logging",
@@ -2067,7 +2066,7 @@ func (c *S3) GetBucketLogging(input *GetBucketLoggingInput) (*GetBucketLoggingOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketLoggingWithContext(ctx aws.Context, input *GetBucketLoggingInput, opts ...request.Option) (*GetBucketLoggingOutput, error) {
+func (c *S3) GetBucketLoggingWithContext(ctx aws.Context, input *GetBucketLoggingInput, opts ...aws.Option) (*GetBucketLoggingOutput, error) {
 	req, out := c.GetBucketLoggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2076,7 +2075,7 @@ func (c *S3) GetBucketLoggingWithContext(ctx aws.Context, input *GetBucketLoggin
 
 const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 
-// GetBucketMetricsConfigurationRequest generates a "aws/request.Request" representing the
+// GetBucketMetricsConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketMetricsConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2100,8 +2099,8 @@ const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfiguration
-func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigurationInput) (req *request.Request, output *GetBucketMetricsConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigurationInput) (req *aws.Request, output *GetBucketMetricsConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketMetricsConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?metrics",
@@ -2142,7 +2141,7 @@ func (c *S3) GetBucketMetricsConfiguration(input *GetBucketMetricsConfigurationI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketMetricsConfigurationWithContext(ctx aws.Context, input *GetBucketMetricsConfigurationInput, opts ...request.Option) (*GetBucketMetricsConfigurationOutput, error) {
+func (c *S3) GetBucketMetricsConfigurationWithContext(ctx aws.Context, input *GetBucketMetricsConfigurationInput, opts ...aws.Option) (*GetBucketMetricsConfigurationOutput, error) {
 	req, out := c.GetBucketMetricsConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2151,7 +2150,7 @@ func (c *S3) GetBucketMetricsConfigurationWithContext(ctx aws.Context, input *Ge
 
 const opGetBucketNotification = "GetBucketNotification"
 
-// GetBucketNotificationRequest generates a "aws/request.Request" representing the
+// GetBucketNotificationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2175,11 +2174,11 @@ const opGetBucketNotification = "GetBucketNotification"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotification
-func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurationRequest) (req *request.Request, output *NotificationConfigurationDeprecated) {
+func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurationRequest) (req *aws.Request, output *NotificationConfigurationDeprecated) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, GetBucketNotification, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opGetBucketNotification,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?notification",
@@ -2219,7 +2218,7 @@ func (c *S3) GetBucketNotification(input *GetBucketNotificationConfigurationRequ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketNotificationWithContext(ctx aws.Context, input *GetBucketNotificationConfigurationRequest, opts ...request.Option) (*NotificationConfigurationDeprecated, error) {
+func (c *S3) GetBucketNotificationWithContext(ctx aws.Context, input *GetBucketNotificationConfigurationRequest, opts ...aws.Option) (*NotificationConfigurationDeprecated, error) {
 	req, out := c.GetBucketNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2228,7 +2227,7 @@ func (c *S3) GetBucketNotificationWithContext(ctx aws.Context, input *GetBucketN
 
 const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration"
 
-// GetBucketNotificationConfigurationRequest generates a "aws/request.Request" representing the
+// GetBucketNotificationConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketNotificationConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2252,8 +2251,8 @@ const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfiguration
-func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificationConfigurationRequest) (req *request.Request, output *NotificationConfiguration) {
-	op := &request.Operation{
+func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificationConfigurationRequest) (req *aws.Request, output *NotificationConfiguration) {
+	op := &aws.Operation{
 		Name:       opGetBucketNotificationConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?notification",
@@ -2293,7 +2292,7 @@ func (c *S3) GetBucketNotificationConfiguration(input *GetBucketNotificationConf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketNotificationConfigurationWithContext(ctx aws.Context, input *GetBucketNotificationConfigurationRequest, opts ...request.Option) (*NotificationConfiguration, error) {
+func (c *S3) GetBucketNotificationConfigurationWithContext(ctx aws.Context, input *GetBucketNotificationConfigurationRequest, opts ...aws.Option) (*NotificationConfiguration, error) {
 	req, out := c.GetBucketNotificationConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2302,7 +2301,7 @@ func (c *S3) GetBucketNotificationConfigurationWithContext(ctx aws.Context, inpu
 
 const opGetBucketPolicy = "GetBucketPolicy"
 
-// GetBucketPolicyRequest generates a "aws/request.Request" representing the
+// GetBucketPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetBucketPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2326,8 +2325,8 @@ const opGetBucketPolicy = "GetBucketPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicy
-func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) (req *request.Request, output *GetBucketPolicyOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) (req *aws.Request, output *GetBucketPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?policy",
@@ -2367,7 +2366,7 @@ func (c *S3) GetBucketPolicy(input *GetBucketPolicyInput) (*GetBucketPolicyOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketPolicyWithContext(ctx aws.Context, input *GetBucketPolicyInput, opts ...request.Option) (*GetBucketPolicyOutput, error) {
+func (c *S3) GetBucketPolicyWithContext(ctx aws.Context, input *GetBucketPolicyInput, opts ...aws.Option) (*GetBucketPolicyOutput, error) {
 	req, out := c.GetBucketPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2376,7 +2375,7 @@ func (c *S3) GetBucketPolicyWithContext(ctx aws.Context, input *GetBucketPolicyI
 
 const opGetBucketReplication = "GetBucketReplication"
 
-// GetBucketReplicationRequest generates a "aws/request.Request" representing the
+// GetBucketReplicationRequest generates a "aws.Request" representing the
 // client's request for the GetBucketReplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2400,8 +2399,8 @@ const opGetBucketReplication = "GetBucketReplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication
-func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) (req *request.Request, output *GetBucketReplicationOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) (req *aws.Request, output *GetBucketReplicationOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketReplication,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?replication",
@@ -2441,7 +2440,7 @@ func (c *S3) GetBucketReplication(input *GetBucketReplicationInput) (*GetBucketR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketReplicationWithContext(ctx aws.Context, input *GetBucketReplicationInput, opts ...request.Option) (*GetBucketReplicationOutput, error) {
+func (c *S3) GetBucketReplicationWithContext(ctx aws.Context, input *GetBucketReplicationInput, opts ...aws.Option) (*GetBucketReplicationOutput, error) {
 	req, out := c.GetBucketReplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2450,7 +2449,7 @@ func (c *S3) GetBucketReplicationWithContext(ctx aws.Context, input *GetBucketRe
 
 const opGetBucketRequestPayment = "GetBucketRequestPayment"
 
-// GetBucketRequestPaymentRequest generates a "aws/request.Request" representing the
+// GetBucketRequestPaymentRequest generates a "aws.Request" representing the
 // client's request for the GetBucketRequestPayment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2474,8 +2473,8 @@ const opGetBucketRequestPayment = "GetBucketRequestPayment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPayment
-func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput) (req *request.Request, output *GetBucketRequestPaymentOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput) (req *aws.Request, output *GetBucketRequestPaymentOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketRequestPayment,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?requestPayment",
@@ -2515,7 +2514,7 @@ func (c *S3) GetBucketRequestPayment(input *GetBucketRequestPaymentInput) (*GetB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketRequestPaymentWithContext(ctx aws.Context, input *GetBucketRequestPaymentInput, opts ...request.Option) (*GetBucketRequestPaymentOutput, error) {
+func (c *S3) GetBucketRequestPaymentWithContext(ctx aws.Context, input *GetBucketRequestPaymentInput, opts ...aws.Option) (*GetBucketRequestPaymentOutput, error) {
 	req, out := c.GetBucketRequestPaymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2524,7 +2523,7 @@ func (c *S3) GetBucketRequestPaymentWithContext(ctx aws.Context, input *GetBucke
 
 const opGetBucketTagging = "GetBucketTagging"
 
-// GetBucketTaggingRequest generates a "aws/request.Request" representing the
+// GetBucketTaggingRequest generates a "aws.Request" representing the
 // client's request for the GetBucketTagging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2548,8 +2547,8 @@ const opGetBucketTagging = "GetBucketTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTagging
-func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) (req *request.Request, output *GetBucketTaggingOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) (req *aws.Request, output *GetBucketTaggingOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketTagging,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?tagging",
@@ -2589,7 +2588,7 @@ func (c *S3) GetBucketTagging(input *GetBucketTaggingInput) (*GetBucketTaggingOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketTaggingWithContext(ctx aws.Context, input *GetBucketTaggingInput, opts ...request.Option) (*GetBucketTaggingOutput, error) {
+func (c *S3) GetBucketTaggingWithContext(ctx aws.Context, input *GetBucketTaggingInput, opts ...aws.Option) (*GetBucketTaggingOutput, error) {
 	req, out := c.GetBucketTaggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2598,7 +2597,7 @@ func (c *S3) GetBucketTaggingWithContext(ctx aws.Context, input *GetBucketTaggin
 
 const opGetBucketVersioning = "GetBucketVersioning"
 
-// GetBucketVersioningRequest generates a "aws/request.Request" representing the
+// GetBucketVersioningRequest generates a "aws.Request" representing the
 // client's request for the GetBucketVersioning operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2622,8 +2621,8 @@ const opGetBucketVersioning = "GetBucketVersioning"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioning
-func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) (req *request.Request, output *GetBucketVersioningOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) (req *aws.Request, output *GetBucketVersioningOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketVersioning,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?versioning",
@@ -2663,7 +2662,7 @@ func (c *S3) GetBucketVersioning(input *GetBucketVersioningInput) (*GetBucketVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketVersioningWithContext(ctx aws.Context, input *GetBucketVersioningInput, opts ...request.Option) (*GetBucketVersioningOutput, error) {
+func (c *S3) GetBucketVersioningWithContext(ctx aws.Context, input *GetBucketVersioningInput, opts ...aws.Option) (*GetBucketVersioningOutput, error) {
 	req, out := c.GetBucketVersioningRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2672,7 +2671,7 @@ func (c *S3) GetBucketVersioningWithContext(ctx aws.Context, input *GetBucketVer
 
 const opGetBucketWebsite = "GetBucketWebsite"
 
-// GetBucketWebsiteRequest generates a "aws/request.Request" representing the
+// GetBucketWebsiteRequest generates a "aws.Request" representing the
 // client's request for the GetBucketWebsite operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2696,8 +2695,8 @@ const opGetBucketWebsite = "GetBucketWebsite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsite
-func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) (req *request.Request, output *GetBucketWebsiteOutput) {
-	op := &request.Operation{
+func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) (req *aws.Request, output *GetBucketWebsiteOutput) {
+	op := &aws.Operation{
 		Name:       opGetBucketWebsite,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?website",
@@ -2737,7 +2736,7 @@ func (c *S3) GetBucketWebsite(input *GetBucketWebsiteInput) (*GetBucketWebsiteOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetBucketWebsiteWithContext(ctx aws.Context, input *GetBucketWebsiteInput, opts ...request.Option) (*GetBucketWebsiteOutput, error) {
+func (c *S3) GetBucketWebsiteWithContext(ctx aws.Context, input *GetBucketWebsiteInput, opts ...aws.Option) (*GetBucketWebsiteOutput, error) {
 	req, out := c.GetBucketWebsiteRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2746,7 +2745,7 @@ func (c *S3) GetBucketWebsiteWithContext(ctx aws.Context, input *GetBucketWebsit
 
 const opGetObject = "GetObject"
 
-// GetObjectRequest generates a "aws/request.Request" representing the
+// GetObjectRequest generates a "aws.Request" representing the
 // client's request for the GetObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2770,8 +2769,8 @@ const opGetObject = "GetObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject
-func (c *S3) GetObjectRequest(input *GetObjectInput) (req *request.Request, output *GetObjectOutput) {
-	op := &request.Operation{
+func (c *S3) GetObjectRequest(input *GetObjectInput) (req *aws.Request, output *GetObjectOutput) {
+	op := &aws.Operation{
 		Name:       opGetObject,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -2816,7 +2815,7 @@ func (c *S3) GetObject(input *GetObjectInput) (*GetObjectOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetObjectWithContext(ctx aws.Context, input *GetObjectInput, opts ...request.Option) (*GetObjectOutput, error) {
+func (c *S3) GetObjectWithContext(ctx aws.Context, input *GetObjectInput, opts ...aws.Option) (*GetObjectOutput, error) {
 	req, out := c.GetObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2825,7 +2824,7 @@ func (c *S3) GetObjectWithContext(ctx aws.Context, input *GetObjectInput, opts .
 
 const opGetObjectAcl = "GetObjectAcl"
 
-// GetObjectAclRequest generates a "aws/request.Request" representing the
+// GetObjectAclRequest generates a "aws.Request" representing the
 // client's request for the GetObjectAcl operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2849,8 +2848,8 @@ const opGetObjectAcl = "GetObjectAcl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAcl
-func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) (req *request.Request, output *GetObjectAclOutput) {
-	op := &request.Operation{
+func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) (req *aws.Request, output *GetObjectAclOutput) {
+	op := &aws.Operation{
 		Name:       opGetObjectAcl,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}/{Key+}?acl",
@@ -2895,7 +2894,7 @@ func (c *S3) GetObjectAcl(input *GetObjectAclInput) (*GetObjectAclOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetObjectAclWithContext(ctx aws.Context, input *GetObjectAclInput, opts ...request.Option) (*GetObjectAclOutput, error) {
+func (c *S3) GetObjectAclWithContext(ctx aws.Context, input *GetObjectAclInput, opts ...aws.Option) (*GetObjectAclOutput, error) {
 	req, out := c.GetObjectAclRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2904,7 +2903,7 @@ func (c *S3) GetObjectAclWithContext(ctx aws.Context, input *GetObjectAclInput, 
 
 const opGetObjectTagging = "GetObjectTagging"
 
-// GetObjectTaggingRequest generates a "aws/request.Request" representing the
+// GetObjectTaggingRequest generates a "aws.Request" representing the
 // client's request for the GetObjectTagging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2928,8 +2927,8 @@ const opGetObjectTagging = "GetObjectTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTagging
-func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) (req *request.Request, output *GetObjectTaggingOutput) {
-	op := &request.Operation{
+func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) (req *aws.Request, output *GetObjectTaggingOutput) {
+	op := &aws.Operation{
 		Name:       opGetObjectTagging,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}/{Key+}?tagging",
@@ -2969,7 +2968,7 @@ func (c *S3) GetObjectTagging(input *GetObjectTaggingInput) (*GetObjectTaggingOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetObjectTaggingWithContext(ctx aws.Context, input *GetObjectTaggingInput, opts ...request.Option) (*GetObjectTaggingOutput, error) {
+func (c *S3) GetObjectTaggingWithContext(ctx aws.Context, input *GetObjectTaggingInput, opts ...aws.Option) (*GetObjectTaggingOutput, error) {
 	req, out := c.GetObjectTaggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2978,7 +2977,7 @@ func (c *S3) GetObjectTaggingWithContext(ctx aws.Context, input *GetObjectTaggin
 
 const opGetObjectTorrent = "GetObjectTorrent"
 
-// GetObjectTorrentRequest generates a "aws/request.Request" representing the
+// GetObjectTorrentRequest generates a "aws.Request" representing the
 // client's request for the GetObjectTorrent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3002,8 +3001,8 @@ const opGetObjectTorrent = "GetObjectTorrent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrent
-func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) (req *request.Request, output *GetObjectTorrentOutput) {
-	op := &request.Operation{
+func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) (req *aws.Request, output *GetObjectTorrentOutput) {
+	op := &aws.Operation{
 		Name:       opGetObjectTorrent,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}/{Key+}?torrent",
@@ -3043,7 +3042,7 @@ func (c *S3) GetObjectTorrent(input *GetObjectTorrentInput) (*GetObjectTorrentOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) GetObjectTorrentWithContext(ctx aws.Context, input *GetObjectTorrentInput, opts ...request.Option) (*GetObjectTorrentOutput, error) {
+func (c *S3) GetObjectTorrentWithContext(ctx aws.Context, input *GetObjectTorrentInput, opts ...aws.Option) (*GetObjectTorrentOutput, error) {
 	req, out := c.GetObjectTorrentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3052,7 +3051,7 @@ func (c *S3) GetObjectTorrentWithContext(ctx aws.Context, input *GetObjectTorren
 
 const opHeadBucket = "HeadBucket"
 
-// HeadBucketRequest generates a "aws/request.Request" representing the
+// HeadBucketRequest generates a "aws.Request" representing the
 // client's request for the HeadBucket operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3076,8 +3075,8 @@ const opHeadBucket = "HeadBucket"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucket
-func (c *S3) HeadBucketRequest(input *HeadBucketInput) (req *request.Request, output *HeadBucketOutput) {
-	op := &request.Operation{
+func (c *S3) HeadBucketRequest(input *HeadBucketInput) (req *aws.Request, output *HeadBucketOutput) {
+	op := &aws.Operation{
 		Name:       opHeadBucket,
 		HTTPMethod: "HEAD",
 		HTTPPath:   "/{Bucket}",
@@ -3125,7 +3124,7 @@ func (c *S3) HeadBucket(input *HeadBucketInput) (*HeadBucketOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) HeadBucketWithContext(ctx aws.Context, input *HeadBucketInput, opts ...request.Option) (*HeadBucketOutput, error) {
+func (c *S3) HeadBucketWithContext(ctx aws.Context, input *HeadBucketInput, opts ...aws.Option) (*HeadBucketOutput, error) {
 	req, out := c.HeadBucketRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3134,7 +3133,7 @@ func (c *S3) HeadBucketWithContext(ctx aws.Context, input *HeadBucketInput, opts
 
 const opHeadObject = "HeadObject"
 
-// HeadObjectRequest generates a "aws/request.Request" representing the
+// HeadObjectRequest generates a "aws.Request" representing the
 // client's request for the HeadObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3158,8 +3157,8 @@ const opHeadObject = "HeadObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject
-func (c *S3) HeadObjectRequest(input *HeadObjectInput) (req *request.Request, output *HeadObjectOutput) {
-	op := &request.Operation{
+func (c *S3) HeadObjectRequest(input *HeadObjectInput) (req *aws.Request, output *HeadObjectOutput) {
+	op := &aws.Operation{
 		Name:       opHeadObject,
 		HTTPMethod: "HEAD",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -3204,7 +3203,7 @@ func (c *S3) HeadObject(input *HeadObjectInput) (*HeadObjectOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) HeadObjectWithContext(ctx aws.Context, input *HeadObjectInput, opts ...request.Option) (*HeadObjectOutput, error) {
+func (c *S3) HeadObjectWithContext(ctx aws.Context, input *HeadObjectInput, opts ...aws.Option) (*HeadObjectOutput, error) {
 	req, out := c.HeadObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3213,7 +3212,7 @@ func (c *S3) HeadObjectWithContext(ctx aws.Context, input *HeadObjectInput, opts
 
 const opListBucketAnalyticsConfigurations = "ListBucketAnalyticsConfigurations"
 
-// ListBucketAnalyticsConfigurationsRequest generates a "aws/request.Request" representing the
+// ListBucketAnalyticsConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the ListBucketAnalyticsConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3237,8 +3236,8 @@ const opListBucketAnalyticsConfigurations = "ListBucketAnalyticsConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurations
-func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalyticsConfigurationsInput) (req *request.Request, output *ListBucketAnalyticsConfigurationsOutput) {
-	op := &request.Operation{
+func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalyticsConfigurationsInput) (req *aws.Request, output *ListBucketAnalyticsConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opListBucketAnalyticsConfigurations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?analytics",
@@ -3278,7 +3277,7 @@ func (c *S3) ListBucketAnalyticsConfigurations(input *ListBucketAnalyticsConfigu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListBucketAnalyticsConfigurationsWithContext(ctx aws.Context, input *ListBucketAnalyticsConfigurationsInput, opts ...request.Option) (*ListBucketAnalyticsConfigurationsOutput, error) {
+func (c *S3) ListBucketAnalyticsConfigurationsWithContext(ctx aws.Context, input *ListBucketAnalyticsConfigurationsInput, opts ...aws.Option) (*ListBucketAnalyticsConfigurationsOutput, error) {
 	req, out := c.ListBucketAnalyticsConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3287,7 +3286,7 @@ func (c *S3) ListBucketAnalyticsConfigurationsWithContext(ctx aws.Context, input
 
 const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
 
-// ListBucketInventoryConfigurationsRequest generates a "aws/request.Request" representing the
+// ListBucketInventoryConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the ListBucketInventoryConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3311,8 +3310,8 @@ const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurations
-func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventoryConfigurationsInput) (req *request.Request, output *ListBucketInventoryConfigurationsOutput) {
-	op := &request.Operation{
+func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventoryConfigurationsInput) (req *aws.Request, output *ListBucketInventoryConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opListBucketInventoryConfigurations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?inventory",
@@ -3352,7 +3351,7 @@ func (c *S3) ListBucketInventoryConfigurations(input *ListBucketInventoryConfigu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListBucketInventoryConfigurationsWithContext(ctx aws.Context, input *ListBucketInventoryConfigurationsInput, opts ...request.Option) (*ListBucketInventoryConfigurationsOutput, error) {
+func (c *S3) ListBucketInventoryConfigurationsWithContext(ctx aws.Context, input *ListBucketInventoryConfigurationsInput, opts ...aws.Option) (*ListBucketInventoryConfigurationsOutput, error) {
 	req, out := c.ListBucketInventoryConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3361,7 +3360,7 @@ func (c *S3) ListBucketInventoryConfigurationsWithContext(ctx aws.Context, input
 
 const opListBucketMetricsConfigurations = "ListBucketMetricsConfigurations"
 
-// ListBucketMetricsConfigurationsRequest generates a "aws/request.Request" representing the
+// ListBucketMetricsConfigurationsRequest generates a "aws.Request" representing the
 // client's request for the ListBucketMetricsConfigurations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3385,8 +3384,8 @@ const opListBucketMetricsConfigurations = "ListBucketMetricsConfigurations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurations
-func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConfigurationsInput) (req *request.Request, output *ListBucketMetricsConfigurationsOutput) {
-	op := &request.Operation{
+func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConfigurationsInput) (req *aws.Request, output *ListBucketMetricsConfigurationsOutput) {
+	op := &aws.Operation{
 		Name:       opListBucketMetricsConfigurations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?metrics",
@@ -3426,7 +3425,7 @@ func (c *S3) ListBucketMetricsConfigurations(input *ListBucketMetricsConfigurati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListBucketMetricsConfigurationsWithContext(ctx aws.Context, input *ListBucketMetricsConfigurationsInput, opts ...request.Option) (*ListBucketMetricsConfigurationsOutput, error) {
+func (c *S3) ListBucketMetricsConfigurationsWithContext(ctx aws.Context, input *ListBucketMetricsConfigurationsInput, opts ...aws.Option) (*ListBucketMetricsConfigurationsOutput, error) {
 	req, out := c.ListBucketMetricsConfigurationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3435,7 +3434,7 @@ func (c *S3) ListBucketMetricsConfigurationsWithContext(ctx aws.Context, input *
 
 const opListBuckets = "ListBuckets"
 
-// ListBucketsRequest generates a "aws/request.Request" representing the
+// ListBucketsRequest generates a "aws.Request" representing the
 // client's request for the ListBuckets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3459,8 +3458,8 @@ const opListBuckets = "ListBuckets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets
-func (c *S3) ListBucketsRequest(input *ListBucketsInput) (req *request.Request, output *ListBucketsOutput) {
-	op := &request.Operation{
+func (c *S3) ListBucketsRequest(input *ListBucketsInput) (req *aws.Request, output *ListBucketsOutput) {
+	op := &aws.Operation{
 		Name:       opListBuckets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/",
@@ -3500,7 +3499,7 @@ func (c *S3) ListBuckets(input *ListBucketsInput) (*ListBucketsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListBucketsWithContext(ctx aws.Context, input *ListBucketsInput, opts ...request.Option) (*ListBucketsOutput, error) {
+func (c *S3) ListBucketsWithContext(ctx aws.Context, input *ListBucketsInput, opts ...aws.Option) (*ListBucketsOutput, error) {
 	req, out := c.ListBucketsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3509,7 +3508,7 @@ func (c *S3) ListBucketsWithContext(ctx aws.Context, input *ListBucketsInput, op
 
 const opListMultipartUploads = "ListMultipartUploads"
 
-// ListMultipartUploadsRequest generates a "aws/request.Request" representing the
+// ListMultipartUploadsRequest generates a "aws.Request" representing the
 // client's request for the ListMultipartUploads operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3533,12 +3532,12 @@ const opListMultipartUploads = "ListMultipartUploads"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploads
-func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req *request.Request, output *ListMultipartUploadsOutput) {
-	op := &request.Operation{
+func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) (req *aws.Request, output *ListMultipartUploadsOutput) {
+	op := &aws.Operation{
 		Name:       opListMultipartUploads,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?uploads",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"KeyMarker", "UploadIdMarker"},
 			OutputTokens:    []string{"NextKeyMarker", "NextUploadIdMarker"},
 			LimitToken:      "MaxUploads",
@@ -3580,7 +3579,7 @@ func (c *S3) ListMultipartUploads(input *ListMultipartUploadsInput) (*ListMultip
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListMultipartUploadsWithContext(ctx aws.Context, input *ListMultipartUploadsInput, opts ...request.Option) (*ListMultipartUploadsOutput, error) {
+func (c *S3) ListMultipartUploadsWithContext(ctx aws.Context, input *ListMultipartUploadsInput, opts ...aws.Option) (*ListMultipartUploadsOutput, error) {
 	req, out := c.ListMultipartUploadsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3615,9 +3614,9 @@ func (c *S3) ListMultipartUploadsPages(input *ListMultipartUploadsInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListMultipartUploadsInput
 			if input != nil {
 				tmp := *input
@@ -3639,7 +3638,7 @@ func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMu
 
 const opListObjectVersions = "ListObjectVersions"
 
-// ListObjectVersionsRequest generates a "aws/request.Request" representing the
+// ListObjectVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListObjectVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3663,12 +3662,12 @@ const opListObjectVersions = "ListObjectVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersions
-func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) (req *request.Request, output *ListObjectVersionsOutput) {
-	op := &request.Operation{
+func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) (req *aws.Request, output *ListObjectVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListObjectVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?versions",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"KeyMarker", "VersionIdMarker"},
 			OutputTokens:    []string{"NextKeyMarker", "NextVersionIdMarker"},
 			LimitToken:      "MaxKeys",
@@ -3710,7 +3709,7 @@ func (c *S3) ListObjectVersions(input *ListObjectVersionsInput) (*ListObjectVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListObjectVersionsWithContext(ctx aws.Context, input *ListObjectVersionsInput, opts ...request.Option) (*ListObjectVersionsOutput, error) {
+func (c *S3) ListObjectVersionsWithContext(ctx aws.Context, input *ListObjectVersionsInput, opts ...aws.Option) (*ListObjectVersionsOutput, error) {
 	req, out := c.ListObjectVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3745,9 +3744,9 @@ func (c *S3) ListObjectVersionsPages(input *ListObjectVersionsInput, fn func(*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObjectVersionsInput, fn func(*ListObjectVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObjectVersionsInput, fn func(*ListObjectVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectVersionsInput
 			if input != nil {
 				tmp := *input
@@ -3769,7 +3768,7 @@ func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObje
 
 const opListObjects = "ListObjects"
 
-// ListObjectsRequest generates a "aws/request.Request" representing the
+// ListObjectsRequest generates a "aws.Request" representing the
 // client's request for the ListObjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3793,12 +3792,12 @@ const opListObjects = "ListObjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjects
-func (c *S3) ListObjectsRequest(input *ListObjectsInput) (req *request.Request, output *ListObjectsOutput) {
-	op := &request.Operation{
+func (c *S3) ListObjectsRequest(input *ListObjectsInput) (req *aws.Request, output *ListObjectsOutput) {
+	op := &aws.Operation{
 		Name:       opListObjects,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker || Contents[-1].Key"},
 			LimitToken:      "MaxKeys",
@@ -3847,7 +3846,7 @@ func (c *S3) ListObjects(input *ListObjectsInput) (*ListObjectsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListObjectsWithContext(ctx aws.Context, input *ListObjectsInput, opts ...request.Option) (*ListObjectsOutput, error) {
+func (c *S3) ListObjectsWithContext(ctx aws.Context, input *ListObjectsInput, opts ...aws.Option) (*ListObjectsOutput, error) {
 	req, out := c.ListObjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3882,9 +3881,9 @@ func (c *S3) ListObjectsPages(input *ListObjectsInput, fn func(*ListObjectsOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInput, fn func(*ListObjectsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInput, fn func(*ListObjectsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectsInput
 			if input != nil {
 				tmp := *input
@@ -3906,7 +3905,7 @@ func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInpu
 
 const opListObjectsV2 = "ListObjectsV2"
 
-// ListObjectsV2Request generates a "aws/request.Request" representing the
+// ListObjectsV2Request generates a "aws.Request" representing the
 // client's request for the ListObjectsV2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3930,12 +3929,12 @@ const opListObjectsV2 = "ListObjectsV2"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2
-func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) (req *request.Request, output *ListObjectsV2Output) {
-	op := &request.Operation{
+func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) (req *aws.Request, output *ListObjectsV2Output) {
+	op := &aws.Operation{
 		Name:       opListObjectsV2,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}?list-type=2",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"ContinuationToken"},
 			OutputTokens:    []string{"NextContinuationToken"},
 			LimitToken:      "MaxKeys",
@@ -3985,7 +3984,7 @@ func (c *S3) ListObjectsV2(input *ListObjectsV2Input) (*ListObjectsV2Output, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListObjectsV2WithContext(ctx aws.Context, input *ListObjectsV2Input, opts ...request.Option) (*ListObjectsV2Output, error) {
+func (c *S3) ListObjectsV2WithContext(ctx aws.Context, input *ListObjectsV2Input, opts ...aws.Option) (*ListObjectsV2Output, error) {
 	req, out := c.ListObjectsV2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4020,9 +4019,9 @@ func (c *S3) ListObjectsV2Pages(input *ListObjectsV2Input, fn func(*ListObjectsV
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2Input, fn func(*ListObjectsV2Output, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2Input, fn func(*ListObjectsV2Output, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectsV2Input
 			if input != nil {
 				tmp := *input
@@ -4044,7 +4043,7 @@ func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2
 
 const opListParts = "ListParts"
 
-// ListPartsRequest generates a "aws/request.Request" representing the
+// ListPartsRequest generates a "aws.Request" representing the
 // client's request for the ListParts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4068,12 +4067,12 @@ const opListParts = "ListParts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts
-func (c *S3) ListPartsRequest(input *ListPartsInput) (req *request.Request, output *ListPartsOutput) {
-	op := &request.Operation{
+func (c *S3) ListPartsRequest(input *ListPartsInput) (req *aws.Request, output *ListPartsOutput) {
+	op := &aws.Operation{
 		Name:       opListParts,
 		HTTPMethod: "GET",
 		HTTPPath:   "/{Bucket}/{Key+}",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PartNumberMarker"},
 			OutputTokens:    []string{"NextPartNumberMarker"},
 			LimitToken:      "MaxParts",
@@ -4115,7 +4114,7 @@ func (c *S3) ListParts(input *ListPartsInput) (*ListPartsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListPartsWithContext(ctx aws.Context, input *ListPartsInput, opts ...request.Option) (*ListPartsOutput, error) {
+func (c *S3) ListPartsWithContext(ctx aws.Context, input *ListPartsInput, opts ...aws.Option) (*ListPartsOutput, error) {
 	req, out := c.ListPartsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4150,9 +4149,9 @@ func (c *S3) ListPartsPages(input *ListPartsInput, fn func(*ListPartsOutput, boo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPartsInput
 			if input != nil {
 				tmp := *input
@@ -4174,7 +4173,7 @@ func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, f
 
 const opPutBucketAccelerateConfiguration = "PutBucketAccelerateConfiguration"
 
-// PutBucketAccelerateConfigurationRequest generates a "aws/request.Request" representing the
+// PutBucketAccelerateConfigurationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketAccelerateConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4198,8 +4197,8 @@ const opPutBucketAccelerateConfiguration = "PutBucketAccelerateConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfiguration
-func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateConfigurationInput) (req *request.Request, output *PutBucketAccelerateConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateConfigurationInput) (req *aws.Request, output *PutBucketAccelerateConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketAccelerateConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?accelerate",
@@ -4241,7 +4240,7 @@ func (c *S3) PutBucketAccelerateConfiguration(input *PutBucketAccelerateConfigur
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketAccelerateConfigurationWithContext(ctx aws.Context, input *PutBucketAccelerateConfigurationInput, opts ...request.Option) (*PutBucketAccelerateConfigurationOutput, error) {
+func (c *S3) PutBucketAccelerateConfigurationWithContext(ctx aws.Context, input *PutBucketAccelerateConfigurationInput, opts ...aws.Option) (*PutBucketAccelerateConfigurationOutput, error) {
 	req, out := c.PutBucketAccelerateConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4250,7 +4249,7 @@ func (c *S3) PutBucketAccelerateConfigurationWithContext(ctx aws.Context, input 
 
 const opPutBucketAcl = "PutBucketAcl"
 
-// PutBucketAclRequest generates a "aws/request.Request" representing the
+// PutBucketAclRequest generates a "aws.Request" representing the
 // client's request for the PutBucketAcl operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4274,8 +4273,8 @@ const opPutBucketAcl = "PutBucketAcl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAcl
-func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) (req *request.Request, output *PutBucketAclOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) (req *aws.Request, output *PutBucketAclOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketAcl,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?acl",
@@ -4317,7 +4316,7 @@ func (c *S3) PutBucketAcl(input *PutBucketAclInput) (*PutBucketAclOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketAclWithContext(ctx aws.Context, input *PutBucketAclInput, opts ...request.Option) (*PutBucketAclOutput, error) {
+func (c *S3) PutBucketAclWithContext(ctx aws.Context, input *PutBucketAclInput, opts ...aws.Option) (*PutBucketAclOutput, error) {
 	req, out := c.PutBucketAclRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4326,7 +4325,7 @@ func (c *S3) PutBucketAclWithContext(ctx aws.Context, input *PutBucketAclInput, 
 
 const opPutBucketAnalyticsConfiguration = "PutBucketAnalyticsConfiguration"
 
-// PutBucketAnalyticsConfigurationRequest generates a "aws/request.Request" representing the
+// PutBucketAnalyticsConfigurationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketAnalyticsConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4350,8 +4349,8 @@ const opPutBucketAnalyticsConfiguration = "PutBucketAnalyticsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfiguration
-func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsConfigurationInput) (req *request.Request, output *PutBucketAnalyticsConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsConfigurationInput) (req *aws.Request, output *PutBucketAnalyticsConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketAnalyticsConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?analytics",
@@ -4394,7 +4393,7 @@ func (c *S3) PutBucketAnalyticsConfiguration(input *PutBucketAnalyticsConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *PutBucketAnalyticsConfigurationInput, opts ...request.Option) (*PutBucketAnalyticsConfigurationOutput, error) {
+func (c *S3) PutBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *PutBucketAnalyticsConfigurationInput, opts ...aws.Option) (*PutBucketAnalyticsConfigurationOutput, error) {
 	req, out := c.PutBucketAnalyticsConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4403,7 +4402,7 @@ func (c *S3) PutBucketAnalyticsConfigurationWithContext(ctx aws.Context, input *
 
 const opPutBucketCors = "PutBucketCors"
 
-// PutBucketCorsRequest generates a "aws/request.Request" representing the
+// PutBucketCorsRequest generates a "aws.Request" representing the
 // client's request for the PutBucketCors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4427,8 +4426,8 @@ const opPutBucketCors = "PutBucketCors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCors
-func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) (req *request.Request, output *PutBucketCorsOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) (req *aws.Request, output *PutBucketCorsOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketCors,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?cors",
@@ -4470,7 +4469,7 @@ func (c *S3) PutBucketCors(input *PutBucketCorsInput) (*PutBucketCorsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketCorsWithContext(ctx aws.Context, input *PutBucketCorsInput, opts ...request.Option) (*PutBucketCorsOutput, error) {
+func (c *S3) PutBucketCorsWithContext(ctx aws.Context, input *PutBucketCorsInput, opts ...aws.Option) (*PutBucketCorsOutput, error) {
 	req, out := c.PutBucketCorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4479,7 +4478,7 @@ func (c *S3) PutBucketCorsWithContext(ctx aws.Context, input *PutBucketCorsInput
 
 const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"
 
-// PutBucketInventoryConfigurationRequest generates a "aws/request.Request" representing the
+// PutBucketInventoryConfigurationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketInventoryConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4503,8 +4502,8 @@ const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfiguration
-func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryConfigurationInput) (req *request.Request, output *PutBucketInventoryConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryConfigurationInput) (req *aws.Request, output *PutBucketInventoryConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketInventoryConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?inventory",
@@ -4547,7 +4546,7 @@ func (c *S3) PutBucketInventoryConfiguration(input *PutBucketInventoryConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketInventoryConfigurationWithContext(ctx aws.Context, input *PutBucketInventoryConfigurationInput, opts ...request.Option) (*PutBucketInventoryConfigurationOutput, error) {
+func (c *S3) PutBucketInventoryConfigurationWithContext(ctx aws.Context, input *PutBucketInventoryConfigurationInput, opts ...aws.Option) (*PutBucketInventoryConfigurationOutput, error) {
 	req, out := c.PutBucketInventoryConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4556,7 +4555,7 @@ func (c *S3) PutBucketInventoryConfigurationWithContext(ctx aws.Context, input *
 
 const opPutBucketLifecycle = "PutBucketLifecycle"
 
-// PutBucketLifecycleRequest generates a "aws/request.Request" representing the
+// PutBucketLifecycleRequest generates a "aws.Request" representing the
 // client's request for the PutBucketLifecycle operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4580,11 +4579,11 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycle
-func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) (req *request.Request, output *PutBucketLifecycleOutput) {
+func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) (req *aws.Request, output *PutBucketLifecycleOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, PutBucketLifecycle, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opPutBucketLifecycle,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?lifecycle",
@@ -4626,7 +4625,7 @@ func (c *S3) PutBucketLifecycle(input *PutBucketLifecycleInput) (*PutBucketLifec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketLifecycleWithContext(ctx aws.Context, input *PutBucketLifecycleInput, opts ...request.Option) (*PutBucketLifecycleOutput, error) {
+func (c *S3) PutBucketLifecycleWithContext(ctx aws.Context, input *PutBucketLifecycleInput, opts ...aws.Option) (*PutBucketLifecycleOutput, error) {
 	req, out := c.PutBucketLifecycleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4635,7 +4634,7 @@ func (c *S3) PutBucketLifecycleWithContext(ctx aws.Context, input *PutBucketLife
 
 const opPutBucketLifecycleConfiguration = "PutBucketLifecycleConfiguration"
 
-// PutBucketLifecycleConfigurationRequest generates a "aws/request.Request" representing the
+// PutBucketLifecycleConfigurationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketLifecycleConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4659,8 +4658,8 @@ const opPutBucketLifecycleConfiguration = "PutBucketLifecycleConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfiguration
-func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleConfigurationInput) (req *request.Request, output *PutBucketLifecycleConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleConfigurationInput) (req *aws.Request, output *PutBucketLifecycleConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketLifecycleConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?lifecycle",
@@ -4703,7 +4702,7 @@ func (c *S3) PutBucketLifecycleConfiguration(input *PutBucketLifecycleConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketLifecycleConfigurationWithContext(ctx aws.Context, input *PutBucketLifecycleConfigurationInput, opts ...request.Option) (*PutBucketLifecycleConfigurationOutput, error) {
+func (c *S3) PutBucketLifecycleConfigurationWithContext(ctx aws.Context, input *PutBucketLifecycleConfigurationInput, opts ...aws.Option) (*PutBucketLifecycleConfigurationOutput, error) {
 	req, out := c.PutBucketLifecycleConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4712,7 +4711,7 @@ func (c *S3) PutBucketLifecycleConfigurationWithContext(ctx aws.Context, input *
 
 const opPutBucketLogging = "PutBucketLogging"
 
-// PutBucketLoggingRequest generates a "aws/request.Request" representing the
+// PutBucketLoggingRequest generates a "aws.Request" representing the
 // client's request for the PutBucketLogging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4736,8 +4735,8 @@ const opPutBucketLogging = "PutBucketLogging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLogging
-func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) (req *request.Request, output *PutBucketLoggingOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) (req *aws.Request, output *PutBucketLoggingOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketLogging,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?logging",
@@ -4781,7 +4780,7 @@ func (c *S3) PutBucketLogging(input *PutBucketLoggingInput) (*PutBucketLoggingOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketLoggingWithContext(ctx aws.Context, input *PutBucketLoggingInput, opts ...request.Option) (*PutBucketLoggingOutput, error) {
+func (c *S3) PutBucketLoggingWithContext(ctx aws.Context, input *PutBucketLoggingInput, opts ...aws.Option) (*PutBucketLoggingOutput, error) {
 	req, out := c.PutBucketLoggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4790,7 +4789,7 @@ func (c *S3) PutBucketLoggingWithContext(ctx aws.Context, input *PutBucketLoggin
 
 const opPutBucketMetricsConfiguration = "PutBucketMetricsConfiguration"
 
-// PutBucketMetricsConfigurationRequest generates a "aws/request.Request" representing the
+// PutBucketMetricsConfigurationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketMetricsConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4814,8 +4813,8 @@ const opPutBucketMetricsConfiguration = "PutBucketMetricsConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfiguration
-func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigurationInput) (req *request.Request, output *PutBucketMetricsConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigurationInput) (req *aws.Request, output *PutBucketMetricsConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketMetricsConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?metrics",
@@ -4858,7 +4857,7 @@ func (c *S3) PutBucketMetricsConfiguration(input *PutBucketMetricsConfigurationI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketMetricsConfigurationWithContext(ctx aws.Context, input *PutBucketMetricsConfigurationInput, opts ...request.Option) (*PutBucketMetricsConfigurationOutput, error) {
+func (c *S3) PutBucketMetricsConfigurationWithContext(ctx aws.Context, input *PutBucketMetricsConfigurationInput, opts ...aws.Option) (*PutBucketMetricsConfigurationOutput, error) {
 	req, out := c.PutBucketMetricsConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4867,7 +4866,7 @@ func (c *S3) PutBucketMetricsConfigurationWithContext(ctx aws.Context, input *Pu
 
 const opPutBucketNotification = "PutBucketNotification"
 
-// PutBucketNotificationRequest generates a "aws/request.Request" representing the
+// PutBucketNotificationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketNotification operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4891,11 +4890,11 @@ const opPutBucketNotification = "PutBucketNotification"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotification
-func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) (req *request.Request, output *PutBucketNotificationOutput) {
+func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) (req *aws.Request, output *PutBucketNotificationOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, PutBucketNotification, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opPutBucketNotification,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?notification",
@@ -4937,7 +4936,7 @@ func (c *S3) PutBucketNotification(input *PutBucketNotificationInput) (*PutBucke
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketNotificationWithContext(ctx aws.Context, input *PutBucketNotificationInput, opts ...request.Option) (*PutBucketNotificationOutput, error) {
+func (c *S3) PutBucketNotificationWithContext(ctx aws.Context, input *PutBucketNotificationInput, opts ...aws.Option) (*PutBucketNotificationOutput, error) {
 	req, out := c.PutBucketNotificationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4946,7 +4945,7 @@ func (c *S3) PutBucketNotificationWithContext(ctx aws.Context, input *PutBucketN
 
 const opPutBucketNotificationConfiguration = "PutBucketNotificationConfiguration"
 
-// PutBucketNotificationConfigurationRequest generates a "aws/request.Request" representing the
+// PutBucketNotificationConfigurationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketNotificationConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4970,8 +4969,8 @@ const opPutBucketNotificationConfiguration = "PutBucketNotificationConfiguration
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfiguration
-func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificationConfigurationInput) (req *request.Request, output *PutBucketNotificationConfigurationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificationConfigurationInput) (req *aws.Request, output *PutBucketNotificationConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketNotificationConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?notification",
@@ -5013,7 +5012,7 @@ func (c *S3) PutBucketNotificationConfiguration(input *PutBucketNotificationConf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketNotificationConfigurationWithContext(ctx aws.Context, input *PutBucketNotificationConfigurationInput, opts ...request.Option) (*PutBucketNotificationConfigurationOutput, error) {
+func (c *S3) PutBucketNotificationConfigurationWithContext(ctx aws.Context, input *PutBucketNotificationConfigurationInput, opts ...aws.Option) (*PutBucketNotificationConfigurationOutput, error) {
 	req, out := c.PutBucketNotificationConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5022,7 +5021,7 @@ func (c *S3) PutBucketNotificationConfigurationWithContext(ctx aws.Context, inpu
 
 const opPutBucketPolicy = "PutBucketPolicy"
 
-// PutBucketPolicyRequest generates a "aws/request.Request" representing the
+// PutBucketPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutBucketPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5046,8 +5045,8 @@ const opPutBucketPolicy = "PutBucketPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicy
-func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) (req *request.Request, output *PutBucketPolicyOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) (req *aws.Request, output *PutBucketPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketPolicy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?policy",
@@ -5090,7 +5089,7 @@ func (c *S3) PutBucketPolicy(input *PutBucketPolicyInput) (*PutBucketPolicyOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketPolicyWithContext(ctx aws.Context, input *PutBucketPolicyInput, opts ...request.Option) (*PutBucketPolicyOutput, error) {
+func (c *S3) PutBucketPolicyWithContext(ctx aws.Context, input *PutBucketPolicyInput, opts ...aws.Option) (*PutBucketPolicyOutput, error) {
 	req, out := c.PutBucketPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5099,7 +5098,7 @@ func (c *S3) PutBucketPolicyWithContext(ctx aws.Context, input *PutBucketPolicyI
 
 const opPutBucketReplication = "PutBucketReplication"
 
-// PutBucketReplicationRequest generates a "aws/request.Request" representing the
+// PutBucketReplicationRequest generates a "aws.Request" representing the
 // client's request for the PutBucketReplication operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5123,8 +5122,8 @@ const opPutBucketReplication = "PutBucketReplication"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplication
-func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) (req *request.Request, output *PutBucketReplicationOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) (req *aws.Request, output *PutBucketReplicationOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketReplication,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?replication",
@@ -5167,7 +5166,7 @@ func (c *S3) PutBucketReplication(input *PutBucketReplicationInput) (*PutBucketR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketReplicationWithContext(ctx aws.Context, input *PutBucketReplicationInput, opts ...request.Option) (*PutBucketReplicationOutput, error) {
+func (c *S3) PutBucketReplicationWithContext(ctx aws.Context, input *PutBucketReplicationInput, opts ...aws.Option) (*PutBucketReplicationOutput, error) {
 	req, out := c.PutBucketReplicationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5176,7 +5175,7 @@ func (c *S3) PutBucketReplicationWithContext(ctx aws.Context, input *PutBucketRe
 
 const opPutBucketRequestPayment = "PutBucketRequestPayment"
 
-// PutBucketRequestPaymentRequest generates a "aws/request.Request" representing the
+// PutBucketRequestPaymentRequest generates a "aws.Request" representing the
 // client's request for the PutBucketRequestPayment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5200,8 +5199,8 @@ const opPutBucketRequestPayment = "PutBucketRequestPayment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPayment
-func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput) (req *request.Request, output *PutBucketRequestPaymentOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput) (req *aws.Request, output *PutBucketRequestPaymentOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketRequestPayment,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?requestPayment",
@@ -5247,7 +5246,7 @@ func (c *S3) PutBucketRequestPayment(input *PutBucketRequestPaymentInput) (*PutB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketRequestPaymentWithContext(ctx aws.Context, input *PutBucketRequestPaymentInput, opts ...request.Option) (*PutBucketRequestPaymentOutput, error) {
+func (c *S3) PutBucketRequestPaymentWithContext(ctx aws.Context, input *PutBucketRequestPaymentInput, opts ...aws.Option) (*PutBucketRequestPaymentOutput, error) {
 	req, out := c.PutBucketRequestPaymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5256,7 +5255,7 @@ func (c *S3) PutBucketRequestPaymentWithContext(ctx aws.Context, input *PutBucke
 
 const opPutBucketTagging = "PutBucketTagging"
 
-// PutBucketTaggingRequest generates a "aws/request.Request" representing the
+// PutBucketTaggingRequest generates a "aws.Request" representing the
 // client's request for the PutBucketTagging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5280,8 +5279,8 @@ const opPutBucketTagging = "PutBucketTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTagging
-func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) (req *request.Request, output *PutBucketTaggingOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) (req *aws.Request, output *PutBucketTaggingOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketTagging,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?tagging",
@@ -5323,7 +5322,7 @@ func (c *S3) PutBucketTagging(input *PutBucketTaggingInput) (*PutBucketTaggingOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketTaggingWithContext(ctx aws.Context, input *PutBucketTaggingInput, opts ...request.Option) (*PutBucketTaggingOutput, error) {
+func (c *S3) PutBucketTaggingWithContext(ctx aws.Context, input *PutBucketTaggingInput, opts ...aws.Option) (*PutBucketTaggingOutput, error) {
 	req, out := c.PutBucketTaggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5332,7 +5331,7 @@ func (c *S3) PutBucketTaggingWithContext(ctx aws.Context, input *PutBucketTaggin
 
 const opPutBucketVersioning = "PutBucketVersioning"
 
-// PutBucketVersioningRequest generates a "aws/request.Request" representing the
+// PutBucketVersioningRequest generates a "aws.Request" representing the
 // client's request for the PutBucketVersioning operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5356,8 +5355,8 @@ const opPutBucketVersioning = "PutBucketVersioning"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioning
-func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) (req *request.Request, output *PutBucketVersioningOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) (req *aws.Request, output *PutBucketVersioningOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketVersioning,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?versioning",
@@ -5400,7 +5399,7 @@ func (c *S3) PutBucketVersioning(input *PutBucketVersioningInput) (*PutBucketVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketVersioningWithContext(ctx aws.Context, input *PutBucketVersioningInput, opts ...request.Option) (*PutBucketVersioningOutput, error) {
+func (c *S3) PutBucketVersioningWithContext(ctx aws.Context, input *PutBucketVersioningInput, opts ...aws.Option) (*PutBucketVersioningOutput, error) {
 	req, out := c.PutBucketVersioningRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5409,7 +5408,7 @@ func (c *S3) PutBucketVersioningWithContext(ctx aws.Context, input *PutBucketVer
 
 const opPutBucketWebsite = "PutBucketWebsite"
 
-// PutBucketWebsiteRequest generates a "aws/request.Request" representing the
+// PutBucketWebsiteRequest generates a "aws.Request" representing the
 // client's request for the PutBucketWebsite operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5433,8 +5432,8 @@ const opPutBucketWebsite = "PutBucketWebsite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite
-func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) (req *request.Request, output *PutBucketWebsiteOutput) {
-	op := &request.Operation{
+func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) (req *aws.Request, output *PutBucketWebsiteOutput) {
+	op := &aws.Operation{
 		Name:       opPutBucketWebsite,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}?website",
@@ -5476,7 +5475,7 @@ func (c *S3) PutBucketWebsite(input *PutBucketWebsiteInput) (*PutBucketWebsiteOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutBucketWebsiteWithContext(ctx aws.Context, input *PutBucketWebsiteInput, opts ...request.Option) (*PutBucketWebsiteOutput, error) {
+func (c *S3) PutBucketWebsiteWithContext(ctx aws.Context, input *PutBucketWebsiteInput, opts ...aws.Option) (*PutBucketWebsiteOutput, error) {
 	req, out := c.PutBucketWebsiteRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5485,7 +5484,7 @@ func (c *S3) PutBucketWebsiteWithContext(ctx aws.Context, input *PutBucketWebsit
 
 const opPutObject = "PutObject"
 
-// PutObjectRequest generates a "aws/request.Request" representing the
+// PutObjectRequest generates a "aws.Request" representing the
 // client's request for the PutObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5509,8 +5508,8 @@ const opPutObject = "PutObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject
-func (c *S3) PutObjectRequest(input *PutObjectInput) (req *request.Request, output *PutObjectOutput) {
-	op := &request.Operation{
+func (c *S3) PutObjectRequest(input *PutObjectInput) (req *aws.Request, output *PutObjectOutput) {
+	op := &aws.Operation{
 		Name:       opPutObject,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -5550,7 +5549,7 @@ func (c *S3) PutObject(input *PutObjectInput) (*PutObjectOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutObjectWithContext(ctx aws.Context, input *PutObjectInput, opts ...request.Option) (*PutObjectOutput, error) {
+func (c *S3) PutObjectWithContext(ctx aws.Context, input *PutObjectInput, opts ...aws.Option) (*PutObjectOutput, error) {
 	req, out := c.PutObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5559,7 +5558,7 @@ func (c *S3) PutObjectWithContext(ctx aws.Context, input *PutObjectInput, opts .
 
 const opPutObjectAcl = "PutObjectAcl"
 
-// PutObjectAclRequest generates a "aws/request.Request" representing the
+// PutObjectAclRequest generates a "aws.Request" representing the
 // client's request for the PutObjectAcl operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5583,8 +5582,8 @@ const opPutObjectAcl = "PutObjectAcl"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAcl
-func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) (req *request.Request, output *PutObjectAclOutput) {
-	op := &request.Operation{
+func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) (req *aws.Request, output *PutObjectAclOutput) {
+	op := &aws.Operation{
 		Name:       opPutObjectAcl,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}/{Key+}?acl",
@@ -5630,7 +5629,7 @@ func (c *S3) PutObjectAcl(input *PutObjectAclInput) (*PutObjectAclOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutObjectAclWithContext(ctx aws.Context, input *PutObjectAclInput, opts ...request.Option) (*PutObjectAclOutput, error) {
+func (c *S3) PutObjectAclWithContext(ctx aws.Context, input *PutObjectAclInput, opts ...aws.Option) (*PutObjectAclOutput, error) {
 	req, out := c.PutObjectAclRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5639,7 +5638,7 @@ func (c *S3) PutObjectAclWithContext(ctx aws.Context, input *PutObjectAclInput, 
 
 const opPutObjectTagging = "PutObjectTagging"
 
-// PutObjectTaggingRequest generates a "aws/request.Request" representing the
+// PutObjectTaggingRequest generates a "aws.Request" representing the
 // client's request for the PutObjectTagging operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5663,8 +5662,8 @@ const opPutObjectTagging = "PutObjectTagging"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTagging
-func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) (req *request.Request, output *PutObjectTaggingOutput) {
-	op := &request.Operation{
+func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) (req *aws.Request, output *PutObjectTaggingOutput) {
+	op := &aws.Operation{
 		Name:       opPutObjectTagging,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}/{Key+}?tagging",
@@ -5704,7 +5703,7 @@ func (c *S3) PutObjectTagging(input *PutObjectTaggingInput) (*PutObjectTaggingOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) PutObjectTaggingWithContext(ctx aws.Context, input *PutObjectTaggingInput, opts ...request.Option) (*PutObjectTaggingOutput, error) {
+func (c *S3) PutObjectTaggingWithContext(ctx aws.Context, input *PutObjectTaggingInput, opts ...aws.Option) (*PutObjectTaggingOutput, error) {
 	req, out := c.PutObjectTaggingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5713,7 +5712,7 @@ func (c *S3) PutObjectTaggingWithContext(ctx aws.Context, input *PutObjectTaggin
 
 const opRestoreObject = "RestoreObject"
 
-// RestoreObjectRequest generates a "aws/request.Request" representing the
+// RestoreObjectRequest generates a "aws.Request" representing the
 // client's request for the RestoreObject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5737,8 +5736,8 @@ const opRestoreObject = "RestoreObject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObject
-func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) (req *request.Request, output *RestoreObjectOutput) {
-	op := &request.Operation{
+func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) (req *aws.Request, output *RestoreObjectOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreObject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/{Bucket}/{Key+}?restore",
@@ -5783,7 +5782,7 @@ func (c *S3) RestoreObject(input *RestoreObjectInput) (*RestoreObjectOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) RestoreObjectWithContext(ctx aws.Context, input *RestoreObjectInput, opts ...request.Option) (*RestoreObjectOutput, error) {
+func (c *S3) RestoreObjectWithContext(ctx aws.Context, input *RestoreObjectInput, opts ...aws.Option) (*RestoreObjectOutput, error) {
 	req, out := c.RestoreObjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5792,7 +5791,7 @@ func (c *S3) RestoreObjectWithContext(ctx aws.Context, input *RestoreObjectInput
 
 const opUploadPart = "UploadPart"
 
-// UploadPartRequest generates a "aws/request.Request" representing the
+// UploadPartRequest generates a "aws.Request" representing the
 // client's request for the UploadPart operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5816,8 +5815,8 @@ const opUploadPart = "UploadPart"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart
-func (c *S3) UploadPartRequest(input *UploadPartInput) (req *request.Request, output *UploadPartOutput) {
-	op := &request.Operation{
+func (c *S3) UploadPartRequest(input *UploadPartInput) (req *aws.Request, output *UploadPartOutput) {
+	op := &aws.Operation{
 		Name:       opUploadPart,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -5863,7 +5862,7 @@ func (c *S3) UploadPart(input *UploadPartInput) (*UploadPartOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) UploadPartWithContext(ctx aws.Context, input *UploadPartInput, opts ...request.Option) (*UploadPartOutput, error) {
+func (c *S3) UploadPartWithContext(ctx aws.Context, input *UploadPartInput, opts ...aws.Option) (*UploadPartOutput, error) {
 	req, out := c.UploadPartRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5872,7 +5871,7 @@ func (c *S3) UploadPartWithContext(ctx aws.Context, input *UploadPartInput, opts
 
 const opUploadPartCopy = "UploadPartCopy"
 
-// UploadPartCopyRequest generates a "aws/request.Request" representing the
+// UploadPartCopyRequest generates a "aws.Request" representing the
 // client's request for the UploadPartCopy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5896,8 +5895,8 @@ const opUploadPartCopy = "UploadPartCopy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy
-func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) (req *request.Request, output *UploadPartCopyOutput) {
-	op := &request.Operation{
+func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) (req *aws.Request, output *UploadPartCopyOutput) {
+	op := &aws.Operation{
 		Name:       opUploadPartCopy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/{Bucket}/{Key+}",
@@ -5937,7 +5936,7 @@ func (c *S3) UploadPartCopy(input *UploadPartCopyInput) (*UploadPartCopyOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *S3) UploadPartCopyWithContext(ctx aws.Context, input *UploadPartCopyInput, opts ...request.Option) (*UploadPartCopyOutput, error) {
+func (c *S3) UploadPartCopyWithContext(ctx aws.Context, input *UploadPartCopyInput, opts ...aws.Option) (*UploadPartCopyOutput, error) {
 	req, out := c.UploadPartCopyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6003,18 +6002,18 @@ func (s AbortMultipartUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortMultipartUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AbortMultipartUploadInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6125,14 +6124,14 @@ func (s AccessControlPolicy) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AccessControlPolicy) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AccessControlPolicy"}
+	invalidParams := aws.ErrInvalidParams{Context: "AccessControlPolicy"}
 	if s.Grants != nil {
 		for i, v := range s.Grants {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Grants", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Grants", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6178,14 +6177,14 @@ func (s AnalyticsAndOperator) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsAndOperator) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AnalyticsAndOperator"}
+	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsAndOperator"}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6241,21 +6240,21 @@ func (s AnalyticsConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AnalyticsConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsConfiguration"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.StorageClassAnalysis == nil {
-		invalidParams.Add(request.NewErrParamRequired("StorageClassAnalysis"))
+		invalidParams.Add(aws.NewErrParamRequired("StorageClassAnalysis"))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StorageClassAnalysis != nil {
 		if err := s.StorageClassAnalysis.Validate(); err != nil {
-			invalidParams.AddNested("StorageClassAnalysis", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StorageClassAnalysis", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6305,13 +6304,13 @@ func (s AnalyticsExportDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsExportDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AnalyticsExportDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsExportDestination"}
 	if s.S3BucketDestination == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3BucketDestination"))
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketDestination"))
 	}
 	if s.S3BucketDestination != nil {
 		if err := s.S3BucketDestination.Validate(); err != nil {
-			invalidParams.AddNested("S3BucketDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3BucketDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6354,15 +6353,15 @@ func (s AnalyticsFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AnalyticsFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsFilter"}
 	if s.And != nil {
 		if err := s.And.Validate(); err != nil {
-			invalidParams.AddNested("And", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("And", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tag != nil {
 		if err := s.Tag.Validate(); err != nil {
-			invalidParams.AddNested("Tag", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tag", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6425,12 +6424,12 @@ func (s AnalyticsS3BucketDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalyticsS3BucketDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AnalyticsS3BucketDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "AnalyticsS3BucketDestination"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Format == nil {
-		invalidParams.Add(request.NewErrParamRequired("Format"))
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6523,9 +6522,9 @@ func (s BucketLifecycleConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BucketLifecycleConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BucketLifecycleConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "BucketLifecycleConfiguration"}
 	if s.Rules == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rules"))
+		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
@@ -6533,7 +6532,7 @@ func (s *BucketLifecycleConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6569,10 +6568,10 @@ func (s BucketLoggingStatus) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BucketLoggingStatus) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BucketLoggingStatus"}
+	invalidParams := aws.ErrInvalidParams{Context: "BucketLoggingStatus"}
 	if s.LoggingEnabled != nil {
 		if err := s.LoggingEnabled.Validate(); err != nil {
-			invalidParams.AddNested("LoggingEnabled", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LoggingEnabled", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6608,9 +6607,9 @@ func (s CORSConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CORSConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CORSConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "CORSConfiguration"}
 	if s.CORSRules == nil {
-		invalidParams.Add(request.NewErrParamRequired("CORSRules"))
+		invalidParams.Add(aws.NewErrParamRequired("CORSRules"))
 	}
 	if s.CORSRules != nil {
 		for i, v := range s.CORSRules {
@@ -6618,7 +6617,7 @@ func (s *CORSConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CORSRules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CORSRules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6675,12 +6674,12 @@ func (s CORSRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CORSRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CORSRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "CORSRule"}
 	if s.AllowedMethods == nil {
-		invalidParams.Add(request.NewErrParamRequired("AllowedMethods"))
+		invalidParams.Add(aws.NewErrParamRequired("AllowedMethods"))
 	}
 	if s.AllowedOrigins == nil {
-		invalidParams.Add(request.NewErrParamRequired("AllowedOrigins"))
+		invalidParams.Add(aws.NewErrParamRequired("AllowedOrigins"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6834,18 +6833,18 @@ func (s CompleteMultipartUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompleteMultipartUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CompleteMultipartUploadInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7240,18 +7239,18 @@ func (s CopyObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyObjectInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.CopySource == nil {
-		invalidParams.Add(request.NewErrParamRequired("CopySource"))
+		invalidParams.Add(aws.NewErrParamRequired("CopySource"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7710,9 +7709,9 @@ func (s CreateBucketInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBucketInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBucketInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBucketInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7902,15 +7901,15 @@ func (s CreateMultipartUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMultipartUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMultipartUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMultipartUploadInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8215,9 +8214,9 @@ func (s Delete) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Delete) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Delete"}
+	invalidParams := aws.ErrInvalidParams{Context: "Delete"}
 	if s.Objects == nil {
-		invalidParams.Add(request.NewErrParamRequired("Objects"))
+		invalidParams.Add(aws.NewErrParamRequired("Objects"))
 	}
 	if s.Objects != nil {
 		for i, v := range s.Objects {
@@ -8225,7 +8224,7 @@ func (s *Delete) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Objects", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Objects", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8275,12 +8274,12 @@ func (s DeleteBucketAnalyticsConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketAnalyticsConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketAnalyticsConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketAnalyticsConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8343,9 +8342,9 @@ func (s DeleteBucketCorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketCorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketCorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketCorsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8402,9 +8401,9 @@ func (s DeleteBucketInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8453,12 +8452,12 @@ func (s DeleteBucketInventoryConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketInventoryConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketInventoryConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketInventoryConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8521,9 +8520,9 @@ func (s DeleteBucketLifecycleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketLifecycleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketLifecycleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketLifecycleInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8587,12 +8586,12 @@ func (s DeleteBucketMetricsConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketMetricsConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketMetricsConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketMetricsConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8670,9 +8669,9 @@ func (s DeleteBucketPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketPolicyInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8729,9 +8728,9 @@ func (s DeleteBucketReplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketReplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketReplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketReplicationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8788,9 +8787,9 @@ func (s DeleteBucketTaggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketTaggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketTaggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketTaggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8847,9 +8846,9 @@ func (s DeleteBucketWebsiteInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBucketWebsiteInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBucketWebsiteInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBucketWebsiteInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8982,15 +8981,15 @@ func (s DeleteObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9107,15 +9106,15 @@ func (s DeleteObjectTaggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectTaggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteObjectTaggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectTaggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9206,16 +9205,16 @@ func (s DeleteObjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteObjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteObjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteObjectsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Delete == nil {
-		invalidParams.Add(request.NewErrParamRequired("Delete"))
+		invalidParams.Add(aws.NewErrParamRequired("Delete"))
 	}
 	if s.Delete != nil {
 		if err := s.Delete.Validate(); err != nil {
-			invalidParams.AddNested("Delete", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Delete", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9370,9 +9369,9 @@ func (s Destination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Destination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Destination"}
+	invalidParams := aws.ErrInvalidParams{Context: "Destination"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9469,12 +9468,12 @@ func (s ErrorDocument) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ErrorDocument) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ErrorDocument"}
+	invalidParams := aws.ErrInvalidParams{Context: "ErrorDocument"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9547,9 +9546,9 @@ func (s GetBucketAccelerateConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketAccelerateConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketAccelerateConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAccelerateConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9615,9 +9614,9 @@ func (s GetBucketAclInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketAclInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketAclInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAclInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9698,12 +9697,12 @@ func (s GetBucketAnalyticsConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketAnalyticsConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketAnalyticsConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketAnalyticsConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9775,9 +9774,9 @@ func (s GetBucketCorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketCorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketCorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketCorsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9849,12 +9848,12 @@ func (s GetBucketInventoryConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketInventoryConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketInventoryConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketInventoryConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9926,9 +9925,9 @@ func (s GetBucketLifecycleConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLifecycleConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketLifecycleConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLifecycleConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9993,9 +9992,9 @@ func (s GetBucketLifecycleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLifecycleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketLifecycleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLifecycleInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10060,9 +10059,9 @@ func (s GetBucketLocationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLocationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketLocationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLocationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10127,9 +10126,9 @@ func (s GetBucketLoggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketLoggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketLoggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketLoggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10201,12 +10200,12 @@ func (s GetBucketMetricsConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketMetricsConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketMetricsConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketMetricsConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10280,9 +10279,9 @@ func (s GetBucketNotificationConfigurationRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketNotificationConfigurationRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketNotificationConfigurationRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketNotificationConfigurationRequest"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10324,9 +10323,9 @@ func (s GetBucketPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketPolicyInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10392,9 +10391,9 @@ func (s GetBucketReplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketReplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketReplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketReplicationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10461,9 +10460,9 @@ func (s GetBucketRequestPaymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketRequestPaymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketRequestPaymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketRequestPaymentInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10529,9 +10528,9 @@ func (s GetBucketTaggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketTaggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketTaggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketTaggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10597,9 +10596,9 @@ func (s GetBucketVersioningInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketVersioningInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketVersioningInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketVersioningInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10676,9 +10675,9 @@ func (s GetBucketWebsiteInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBucketWebsiteInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBucketWebsiteInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBucketWebsiteInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10779,15 +10778,15 @@ func (s GetObjectAclInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectAclInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetObjectAclInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetObjectAclInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10959,15 +10958,15 @@ func (s GetObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetObjectInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11413,15 +11412,15 @@ func (s GetObjectTaggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectTaggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetObjectTaggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetObjectTaggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11516,15 +11515,15 @@ func (s GetObjectTorrentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetObjectTorrentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetObjectTorrentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetObjectTorrentInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11613,9 +11612,9 @@ func (s GlacierJobParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GlacierJobParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GlacierJobParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "GlacierJobParameters"}
 	if s.Tier == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tier"))
+		invalidParams.Add(aws.NewErrParamRequired("Tier"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11652,10 +11651,10 @@ func (s Grant) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Grant) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Grant"}
+	invalidParams := aws.ErrInvalidParams{Context: "Grant"}
 	if s.Grantee != nil {
 		if err := s.Grantee.Validate(); err != nil {
-			invalidParams.AddNested("Grantee", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Grantee", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11711,9 +11710,9 @@ func (s Grantee) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Grantee) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Grantee"}
+	invalidParams := aws.ErrInvalidParams{Context: "Grantee"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11772,9 +11771,9 @@ func (s HeadBucketInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HeadBucketInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HeadBucketInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "HeadBucketInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11884,15 +11883,15 @@ func (s HeadObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HeadObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HeadObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "HeadObjectInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12275,9 +12274,9 @@ func (s IndexDocument) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexDocument) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IndexDocument"}
+	invalidParams := aws.ErrInvalidParams{Context: "IndexDocument"}
 	if s.Suffix == nil {
-		invalidParams.Add(request.NewErrParamRequired("Suffix"))
+		invalidParams.Add(aws.NewErrParamRequired("Suffix"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12375,35 +12374,35 @@ func (s InventoryConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventoryConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryConfiguration"}
 	if s.Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.IncludedObjectVersions == nil {
-		invalidParams.Add(request.NewErrParamRequired("IncludedObjectVersions"))
+		invalidParams.Add(aws.NewErrParamRequired("IncludedObjectVersions"))
 	}
 	if s.IsEnabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("IsEnabled"))
+		invalidParams.Add(aws.NewErrParamRequired("IsEnabled"))
 	}
 	if s.Schedule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Schedule"))
+		invalidParams.Add(aws.NewErrParamRequired("Schedule"))
 	}
 	if s.Destination != nil {
 		if err := s.Destination.Validate(); err != nil {
-			invalidParams.AddNested("Destination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Schedule != nil {
 		if err := s.Schedule.Validate(); err != nil {
-			invalidParams.AddNested("Schedule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Schedule", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12478,13 +12477,13 @@ func (s InventoryDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventoryDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryDestination"}
 	if s.S3BucketDestination == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3BucketDestination"))
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketDestination"))
 	}
 	if s.S3BucketDestination != nil {
 		if err := s.S3BucketDestination.Validate(); err != nil {
-			invalidParams.AddNested("S3BucketDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3BucketDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12522,9 +12521,9 @@ func (s InventoryFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventoryFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryFilter"}
 	if s.Prefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("Prefix"))
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12573,12 +12572,12 @@ func (s InventoryS3BucketDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryS3BucketDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventoryS3BucketDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryS3BucketDestination"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Format == nil {
-		invalidParams.Add(request.NewErrParamRequired("Format"))
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12640,9 +12639,9 @@ func (s InventorySchedule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventorySchedule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventorySchedule"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventorySchedule"}
 	if s.Frequency == nil {
-		invalidParams.Add(request.NewErrParamRequired("Frequency"))
+		invalidParams.Add(aws.NewErrParamRequired("Frequency"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12718,12 +12717,12 @@ func (s LambdaFunctionConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaFunctionConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LambdaFunctionConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "LambdaFunctionConfiguration"}
 	if s.Events == nil {
-		invalidParams.Add(request.NewErrParamRequired("Events"))
+		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
 	if s.LambdaFunctionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("LambdaFunctionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("LambdaFunctionArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12776,9 +12775,9 @@ func (s LifecycleConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LifecycleConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "LifecycleConfiguration"}
 	if s.Rules == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rules"))
+		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
@@ -12786,7 +12785,7 @@ func (s *LifecycleConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12901,13 +12900,13 @@ func (s LifecycleRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LifecycleRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "LifecycleRule"}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12997,14 +12996,14 @@ func (s LifecycleRuleAndOperator) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleRuleAndOperator) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LifecycleRuleAndOperator"}
+	invalidParams := aws.ErrInvalidParams{Context: "LifecycleRuleAndOperator"}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -13057,15 +13056,15 @@ func (s LifecycleRuleFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LifecycleRuleFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LifecycleRuleFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "LifecycleRuleFilter"}
 	if s.And != nil {
 		if err := s.And.Validate(); err != nil {
-			invalidParams.AddNested("And", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("And", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tag != nil {
 		if err := s.Tag.Validate(); err != nil {
-			invalidParams.AddNested("Tag", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tag", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13119,9 +13118,9 @@ func (s ListBucketAnalyticsConfigurationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBucketAnalyticsConfigurationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBucketAnalyticsConfigurationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBucketAnalyticsConfigurationsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13232,9 +13231,9 @@ func (s ListBucketInventoryConfigurationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBucketInventoryConfigurationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBucketInventoryConfigurationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBucketInventoryConfigurationsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13345,9 +13344,9 @@ func (s ListBucketMetricsConfigurationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBucketMetricsConfigurationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBucketMetricsConfigurationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBucketMetricsConfigurationsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13527,9 +13526,9 @@ func (s ListMultipartUploadsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListMultipartUploadsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListMultipartUploadsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13765,9 +13764,9 @@ func (s ListObjectVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectVersionsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13999,9 +13998,9 @@ func (s ListObjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14218,9 +14217,9 @@ func (s ListObjectsV2Input) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListObjectsV2Input) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListObjectsV2Input"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListObjectsV2Input"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14465,18 +14464,18 @@ func (s ListPartsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPartsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPartsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPartsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14709,14 +14708,14 @@ func (s LoggingEnabled) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingEnabled) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LoggingEnabled"}
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingEnabled"}
 	if s.TargetGrants != nil {
 		for i, v := range s.TargetGrants {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetGrants", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TargetGrants", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14768,14 +14767,14 @@ func (s MetricsAndOperator) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricsAndOperator) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MetricsAndOperator"}
+	invalidParams := aws.ErrInvalidParams{Context: "MetricsAndOperator"}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14825,13 +14824,13 @@ func (s MetricsConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricsConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MetricsConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "MetricsConfiguration"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -14881,15 +14880,15 @@ func (s MetricsFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricsFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MetricsFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "MetricsFilter"}
 	if s.And != nil {
 		if err := s.And.Validate(); err != nil {
-			invalidParams.AddNested("And", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("And", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tag != nil {
 		if err := s.Tag.Validate(); err != nil {
-			invalidParams.AddNested("Tag", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tag", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15083,14 +15082,14 @@ func (s NotificationConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotificationConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NotificationConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "NotificationConfiguration"}
 	if s.LambdaFunctionConfigurations != nil {
 		for i, v := range s.LambdaFunctionConfigurations {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LambdaFunctionConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LambdaFunctionConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15100,7 +15099,7 @@ func (s *NotificationConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueueConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "QueueConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15110,7 +15109,7 @@ func (s *NotificationConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TopicConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TopicConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15293,12 +15292,12 @@ func (s ObjectIdentifier) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ObjectIdentifier) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ObjectIdentifier"}
+	invalidParams := aws.ErrInvalidParams{Context: "ObjectIdentifier"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15515,12 +15514,12 @@ func (s PutBucketAccelerateConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketAccelerateConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketAccelerateConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketAccelerateConfigurationInput"}
 	if s.AccelerateConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccelerateConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("AccelerateConfiguration"))
 	}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15604,13 +15603,13 @@ func (s PutBucketAclInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketAclInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketAclInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketAclInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.AccessControlPolicy != nil {
 		if err := s.AccessControlPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AccessControlPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AccessControlPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15722,19 +15721,19 @@ func (s PutBucketAnalyticsConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketAnalyticsConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketAnalyticsConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketAnalyticsConfigurationInput"}
 	if s.AnalyticsConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("AnalyticsConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("AnalyticsConfiguration"))
 	}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.AnalyticsConfiguration != nil {
 		if err := s.AnalyticsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("AnalyticsConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AnalyticsConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15807,16 +15806,16 @@ func (s PutBucketCorsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketCorsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketCorsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketCorsInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.CORSConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("CORSConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("CORSConfiguration"))
 	}
 	if s.CORSConfiguration != nil {
 		if err := s.CORSConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("CORSConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CORSConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15892,19 +15891,19 @@ func (s PutBucketInventoryConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketInventoryConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketInventoryConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketInventoryConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.InventoryConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("InventoryConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("InventoryConfiguration"))
 	}
 	if s.InventoryConfiguration != nil {
 		if err := s.InventoryConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("InventoryConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InventoryConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15976,13 +15975,13 @@ func (s PutBucketLifecycleConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketLifecycleConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketLifecycleConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketLifecycleConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.LifecycleConfiguration != nil {
 		if err := s.LifecycleConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("LifecycleConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LifecycleConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16048,13 +16047,13 @@ func (s PutBucketLifecycleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketLifecycleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketLifecycleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketLifecycleInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.LifecycleConfiguration != nil {
 		if err := s.LifecycleConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("LifecycleConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LifecycleConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16121,16 +16120,16 @@ func (s PutBucketLoggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketLoggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketLoggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketLoggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.BucketLoggingStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketLoggingStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketLoggingStatus"))
 	}
 	if s.BucketLoggingStatus != nil {
 		if err := s.BucketLoggingStatus.Validate(); err != nil {
-			invalidParams.AddNested("BucketLoggingStatus", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BucketLoggingStatus", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16206,19 +16205,19 @@ func (s PutBucketMetricsConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketMetricsConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketMetricsConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketMetricsConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.MetricsConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricsConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricsConfiguration"))
 	}
 	if s.MetricsConfiguration != nil {
 		if err := s.MetricsConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("MetricsConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("MetricsConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16294,16 +16293,16 @@ func (s PutBucketNotificationConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketNotificationConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketNotificationConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketNotificationConfigurationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.NotificationConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("NotificationConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("NotificationConfiguration"))
 	}
 	if s.NotificationConfiguration != nil {
 		if err := s.NotificationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("NotificationConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NotificationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16370,12 +16369,12 @@ func (s PutBucketNotificationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketNotificationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketNotificationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketNotificationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.NotificationConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("NotificationConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("NotificationConfiguration"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16443,12 +16442,12 @@ func (s PutBucketPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketPolicyInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Policy == nil {
-		invalidParams.Add(request.NewErrParamRequired("Policy"))
+		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16517,16 +16516,16 @@ func (s PutBucketReplicationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketReplicationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketReplicationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketReplicationInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.ReplicationConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationConfiguration"))
 	}
 	if s.ReplicationConfiguration != nil {
 		if err := s.ReplicationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ReplicationConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ReplicationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16593,16 +16592,16 @@ func (s PutBucketRequestPaymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketRequestPaymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketRequestPaymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketRequestPaymentInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.RequestPaymentConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("RequestPaymentConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("RequestPaymentConfiguration"))
 	}
 	if s.RequestPaymentConfiguration != nil {
 		if err := s.RequestPaymentConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RequestPaymentConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RequestPaymentConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16669,16 +16668,16 @@ func (s PutBucketTaggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketTaggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketTaggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketTaggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Tagging == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tagging"))
+		invalidParams.Add(aws.NewErrParamRequired("Tagging"))
 	}
 	if s.Tagging != nil {
 		if err := s.Tagging.Validate(); err != nil {
-			invalidParams.AddNested("Tagging", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tagging", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16749,12 +16748,12 @@ func (s PutBucketVersioningInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketVersioningInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketVersioningInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketVersioningInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.VersioningConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersioningConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("VersioningConfiguration"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16826,16 +16825,16 @@ func (s PutBucketWebsiteInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutBucketWebsiteInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutBucketWebsiteInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutBucketWebsiteInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.WebsiteConfiguration == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebsiteConfiguration"))
+		invalidParams.Add(aws.NewErrParamRequired("WebsiteConfiguration"))
 	}
 	if s.WebsiteConfiguration != nil {
 		if err := s.WebsiteConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("WebsiteConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WebsiteConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16932,19 +16931,19 @@ func (s PutObjectAclInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutObjectAclInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutObjectAclInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutObjectAclInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.AccessControlPolicy != nil {
 		if err := s.AccessControlPolicy.Validate(); err != nil {
-			invalidParams.AddNested("AccessControlPolicy", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AccessControlPolicy", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17169,15 +17168,15 @@ func (s PutObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutObjectInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17479,22 +17478,22 @@ func (s PutObjectTaggingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutObjectTaggingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutObjectTaggingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutObjectTaggingInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Tagging == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tagging"))
+		invalidParams.Add(aws.NewErrParamRequired("Tagging"))
 	}
 	if s.Tagging != nil {
 		if err := s.Tagging.Validate(); err != nil {
-			invalidParams.AddNested("Tagging", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tagging", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17594,12 +17593,12 @@ func (s QueueConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueueConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "QueueConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "QueueConfiguration"}
 	if s.Events == nil {
-		invalidParams.Add(request.NewErrParamRequired("Events"))
+		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
 	if s.QueueArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueArn"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17777,9 +17776,9 @@ func (s RedirectAllRequestsTo) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedirectAllRequestsTo) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RedirectAllRequestsTo"}
+	invalidParams := aws.ErrInvalidParams{Context: "RedirectAllRequestsTo"}
 	if s.HostName == nil {
-		invalidParams.Add(request.NewErrParamRequired("HostName"))
+		invalidParams.Add(aws.NewErrParamRequired("HostName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17831,12 +17830,12 @@ func (s ReplicationConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplicationConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReplicationConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReplicationConfiguration"}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.Rules == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rules"))
+		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
 	if s.Rules != nil {
 		for i, v := range s.Rules {
@@ -17844,7 +17843,7 @@ func (s *ReplicationConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17902,19 +17901,19 @@ func (s ReplicationRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplicationRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReplicationRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReplicationRule"}
 	if s.Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.Prefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("Prefix"))
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.Destination != nil {
 		if err := s.Destination.Validate(); err != nil {
-			invalidParams.AddNested("Destination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17970,9 +17969,9 @@ func (s RequestPaymentConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestPaymentConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestPaymentConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestPaymentConfiguration"}
 	if s.Payer == nil {
-		invalidParams.Add(request.NewErrParamRequired("Payer"))
+		invalidParams.Add(aws.NewErrParamRequired("Payer"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18020,19 +18019,19 @@ func (s RestoreObjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreObjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreObjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreObjectInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.RestoreRequest != nil {
 		if err := s.RestoreRequest.Validate(); err != nil {
-			invalidParams.AddNested("RestoreRequest", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RestoreRequest", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -18129,13 +18128,13 @@ func (s RestoreRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreRequest"}
 	if s.Days == nil {
-		invalidParams.Add(request.NewErrParamRequired("Days"))
+		invalidParams.Add(aws.NewErrParamRequired("Days"))
 	}
 	if s.GlacierJobParameters != nil {
 		if err := s.GlacierJobParameters.Validate(); err != nil {
-			invalidParams.AddNested("GlacierJobParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GlacierJobParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -18187,9 +18186,9 @@ func (s RoutingRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RoutingRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RoutingRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "RoutingRule"}
 	if s.Redirect == nil {
-		invalidParams.Add(request.NewErrParamRequired("Redirect"))
+		invalidParams.Add(aws.NewErrParamRequired("Redirect"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18263,12 +18262,12 @@ func (s Rule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Rule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Rule"}
+	invalidParams := aws.ErrInvalidParams{Context: "Rule"}
 	if s.Prefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("Prefix"))
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18346,10 +18345,10 @@ func (s StorageClassAnalysis) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StorageClassAnalysis) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StorageClassAnalysis"}
+	invalidParams := aws.ErrInvalidParams{Context: "StorageClassAnalysis"}
 	if s.DataExport != nil {
 		if err := s.DataExport.Validate(); err != nil {
-			invalidParams.AddNested("DataExport", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DataExport", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -18392,16 +18391,16 @@ func (s StorageClassAnalysisDataExport) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StorageClassAnalysisDataExport) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StorageClassAnalysisDataExport"}
+	invalidParams := aws.ErrInvalidParams{Context: "StorageClassAnalysisDataExport"}
 	if s.Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.OutputSchemaVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("OutputSchemaVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("OutputSchemaVersion"))
 	}
 	if s.Destination != nil {
 		if err := s.Destination.Validate(); err != nil {
-			invalidParams.AddNested("Destination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Destination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -18450,15 +18449,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18499,9 +18498,9 @@ func (s Tagging) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tagging) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tagging"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tagging"}
 	if s.TagSet == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagSet"))
+		invalidParams.Add(aws.NewErrParamRequired("TagSet"))
 	}
 	if s.TagSet != nil {
 		for i, v := range s.TagSet {
@@ -18509,7 +18508,7 @@ func (s *Tagging) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagSet", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagSet", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18548,10 +18547,10 @@ func (s TargetGrant) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetGrant) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TargetGrant"}
+	invalidParams := aws.ErrInvalidParams{Context: "TargetGrant"}
 	if s.Grantee != nil {
 		if err := s.Grantee.Validate(); err != nil {
-			invalidParams.AddNested("Grantee", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Grantee", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -18609,12 +18608,12 @@ func (s TopicConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TopicConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TopicConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "TopicConfiguration"}
 	if s.Events == nil {
-		invalidParams.Add(request.NewErrParamRequired("Events"))
+		invalidParams.Add(aws.NewErrParamRequired("Events"))
 	}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18838,24 +18837,24 @@ func (s UploadPartCopyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadPartCopyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UploadPartCopyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UploadPartCopyInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.CopySource == nil {
-		invalidParams.Add(request.NewErrParamRequired("CopySource"))
+		invalidParams.Add(aws.NewErrParamRequired("CopySource"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.PartNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartNumber"))
+		invalidParams.Add(aws.NewErrParamRequired("PartNumber"))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19142,21 +19141,21 @@ func (s UploadPartInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadPartInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UploadPartInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UploadPartInput"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.PartNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartNumber"))
+		invalidParams.Add(aws.NewErrParamRequired("PartNumber"))
 	}
 	if s.UploadId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UploadId"))
+		invalidParams.Add(aws.NewErrParamRequired("UploadId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19381,20 +19380,20 @@ func (s WebsiteConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WebsiteConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WebsiteConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "WebsiteConfiguration"}
 	if s.ErrorDocument != nil {
 		if err := s.ErrorDocument.Validate(); err != nil {
-			invalidParams.AddNested("ErrorDocument", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ErrorDocument", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.IndexDocument != nil {
 		if err := s.IndexDocument.Validate(); err != nil {
-			invalidParams.AddNested("IndexDocument", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("IndexDocument", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RedirectAllRequestsTo != nil {
 		if err := s.RedirectAllRequestsTo.Validate(); err != nil {
-			invalidParams.AddNested("RedirectAllRequestsTo", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RedirectAllRequestsTo", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RoutingRules != nil {
@@ -19403,7 +19402,7 @@ func (s *WebsiteConfiguration) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RoutingRules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RoutingRules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

@@ -33,11 +33,6 @@ func (a *API) customizationPasses() {
 		"s3":         s3Customizations,
 		"cloudfront": cloudfrontCustomizations,
 		"rds":        rdsCustomizations,
-
-		// Disable endpoint resolving for services that require customer
-		// to provide endpoint them selves.
-		"cloudsearchdomain": disableEndpointResolving,
-		"iotdataplane":      disableEndpointResolving,
 	}
 
 	for k := range mergeServices {
@@ -54,8 +49,8 @@ func s3Customizations(a *API) {
 	var strExpires *Shape
 
 	var keepContentMD5Ref = map[string]struct{}{
-		"PutObjectInput":  struct{}{},
-		"UploadPartInput": struct{}{},
+		"PutObjectInput":  {},
+		"UploadPartInput": {},
 	}
 
 	for name, s := range a.Shapes {
@@ -173,8 +168,4 @@ func rdsCustomizations(a *API) {
 			}
 		}
 	}
-}
-
-func disableEndpointResolving(a *API) {
-	a.Metadata.NoResolveEndpoint = true
 }

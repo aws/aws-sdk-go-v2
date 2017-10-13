@@ -6,14 +6,13 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opPostContent = "PostContent"
 
-// PostContentRequest generates a "aws/request.Request" representing the
+// PostContentRequest generates a "aws.Request" representing the
 // client's request for the PostContent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opPostContent = "PostContent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContent
-func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *request.Request, output *PostContentOutput) {
-	op := &request.Operation{
+func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) (req *aws.Request, output *PostContentOutput) {
+	op := &aws.Operation{
 		Name:       opPostContent,
 		HTTPMethod: "POST",
 		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
@@ -182,7 +181,7 @@ func (c *LexRuntimeService) PostContent(input *PostContentInput) (*PostContentOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexRuntimeService) PostContentWithContext(ctx aws.Context, input *PostContentInput, opts ...request.Option) (*PostContentOutput, error) {
+func (c *LexRuntimeService) PostContentWithContext(ctx aws.Context, input *PostContentInput, opts ...aws.Option) (*PostContentOutput, error) {
 	req, out := c.PostContentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -191,7 +190,7 @@ func (c *LexRuntimeService) PostContentWithContext(ctx aws.Context, input *PostC
 
 const opPostText = "PostText"
 
-// PostTextRequest generates a "aws/request.Request" representing the
+// PostTextRequest generates a "aws.Request" representing the
 // client's request for the PostText operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -215,8 +214,8 @@ const opPostText = "PostText"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostText
-func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *request.Request, output *PostTextOutput) {
-	op := &request.Operation{
+func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) (req *aws.Request, output *PostTextOutput) {
+	op := &aws.Operation{
 		Name:       opPostText,
 		HTTPMethod: "POST",
 		HTTPPath:   "/bot/{botName}/alias/{botAlias}/user/{userId}/text",
@@ -342,7 +341,7 @@ func (c *LexRuntimeService) PostText(input *PostTextInput) (*PostTextOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *LexRuntimeService) PostTextWithContext(ctx aws.Context, input *PostTextInput, opts ...request.Option) (*PostTextOutput, error) {
+func (c *LexRuntimeService) PostTextWithContext(ctx aws.Context, input *PostTextInput, opts ...aws.Option) (*PostTextOutput, error) {
 	req, out := c.PostTextRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -590,24 +589,24 @@ func (s PostContentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PostContentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PostContentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PostContentInput"}
 	if s.BotAlias == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.ContentType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContentType"))
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
 	if s.InputStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputStream"))
+		invalidParams.Add(aws.NewErrParamRequired("InputStream"))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -905,24 +904,24 @@ func (s PostTextInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PostTextInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PostTextInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PostTextInput"}
 	if s.BotAlias == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotAlias"))
+		invalidParams.Add(aws.NewErrParamRequired("BotAlias"))
 	}
 	if s.BotName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BotName"))
+		invalidParams.Add(aws.NewErrParamRequired("BotName"))
 	}
 	if s.InputText == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputText"))
+		invalidParams.Add(aws.NewErrParamRequired("InputText"))
 	}
 	if s.InputText != nil && len(*s.InputText) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputText", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputText", 1))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 2))
 	}
 
 	if invalidParams.Len() > 0 {

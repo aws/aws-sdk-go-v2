@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 )
 
@@ -30,7 +30,12 @@ func parseTime(layout, value string) *time.Time {
 // This example reads multiple items from the Music table using a batch of three GetItem
 // requests.  Only the AlbumTitle attribute is returned.
 func ExampleDynamoDB_BatchGetItem_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.BatchGetItemInput{
 		RequestItems: map[string]*dynamodb.KeysAndAttributes{
 			"Music": {
@@ -94,7 +99,12 @@ func ExampleDynamoDB_BatchGetItem_shared00() {
 // This example adds three new items to the Music table using a batch of three PutItem
 // requests.
 func ExampleDynamoDB_BatchWriteItem_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.BatchWriteItemInput{
 		RequestItems: map[string][]*dynamodb.WriteRequest{
 			"Music": {
@@ -177,7 +187,12 @@ func ExampleDynamoDB_BatchWriteItem_shared00() {
 //
 // This example creates a table named Music.
 func ExampleDynamoDB_CreateTable_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.CreateTableInput{
 		AttributeDefinitions: []*dynamodb.AttributeDefinition{
 			{
@@ -234,7 +249,12 @@ func ExampleDynamoDB_CreateTable_shared00() {
 //
 // This example deletes an item from the Music table.
 func ExampleDynamoDB_DeleteItem_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.DeleteItemInput{
 		Key: map[string]*dynamodb.AttributeValue{
 			"Artist": {
@@ -279,7 +299,12 @@ func ExampleDynamoDB_DeleteItem_shared00() {
 //
 // This example deletes the Music table.
 func ExampleDynamoDB_DeleteTable_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.DeleteTableInput{
 		TableName: aws.String("Music"),
 	}
@@ -315,7 +340,12 @@ func ExampleDynamoDB_DeleteTable_shared00() {
 // The following example returns the maximum read and write capacity units per table,
 // and for the AWS account, in the current AWS region.
 func ExampleDynamoDB_DescribeLimits_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.DescribeLimitsInput{}
 
 	result, err := svc.DescribeLimits(input)
@@ -342,7 +372,12 @@ func ExampleDynamoDB_DescribeLimits_shared00() {
 //
 // This example describes the Music table.
 func ExampleDynamoDB_DescribeTable_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.DescribeTableInput{
 		TableName: aws.String("Music"),
 	}
@@ -374,7 +409,12 @@ func ExampleDynamoDB_DescribeTable_shared00() {
 // This example retrieves an item from the Music table. The table has a partition key
 // and a sort key (Artist and SongTitle), so you must specify both of these attributes.
 func ExampleDynamoDB_GetItem_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.GetItemInput{
 		Key: map[string]*dynamodb.AttributeValue{
 			"Artist": {
@@ -416,7 +456,12 @@ func ExampleDynamoDB_GetItem_shared00() {
 // This example lists all of the tables associated with the current AWS account and
 // endpoint.
 func ExampleDynamoDB_ListTables_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.ListTablesInput{}
 
 	result, err := svc.ListTables(input)
@@ -443,7 +488,12 @@ func ExampleDynamoDB_ListTables_shared00() {
 //
 // This example adds a new item to the Music table.
 func ExampleDynamoDB_PutItem_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.PutItemInput{
 		Item: map[string]*dynamodb.AttributeValue{
 			"AlbumTitle": {
@@ -494,7 +544,12 @@ func ExampleDynamoDB_PutItem_shared00() {
 // sort key (Artist and SongTitle), but this query only specifies the partition key
 // value. It returns song titles by the artist named "No One You Know".
 func ExampleDynamoDB_Query_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.QueryInput{
 		ExpressionAttributeValues: map[string]*dynamodb.AttributeValue{
 			":v1": {
@@ -536,7 +591,12 @@ func ExampleDynamoDB_Query_shared00() {
 // by the artist "No One You Know". For each item, only the album title and song title
 // are returned.
 func ExampleDynamoDB_Scan_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.ScanInput{
 		ExpressionAttributeNames: map[string]*string{
 			"AT": aws.String("AlbumTitle"),
@@ -582,7 +642,12 @@ func ExampleDynamoDB_Scan_shared00() {
 // modifies the AlbumTitle attribute.  All of the attributes in the item, as they appear
 // after the update, are returned in the response.
 func ExampleDynamoDB_UpdateItem_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.UpdateItemInput{
 		ExpressionAttributeNames: map[string]*string{
 			"#AT": aws.String("AlbumTitle"),
@@ -641,7 +706,12 @@ func ExampleDynamoDB_UpdateItem_shared00() {
 //
 // This example increases the provisioned read and write capacity on the Music table.
 func ExampleDynamoDB_UpdateTable_shared00() {
-	svc := dynamodb.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := dynamodb.New(cfg)
 	input := &dynamodb.UpdateTableInput{
 		ProvisionedThroughput: &dynamodb.ProvisionedThroughput{
 			ReadCapacityUnits:  aws.Int64(10),

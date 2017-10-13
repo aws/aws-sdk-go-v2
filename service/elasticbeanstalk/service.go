@@ -4,9 +4,6 @@ package elasticbeanstalk
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
@@ -18,14 +15,14 @@ import (
 // ElasticBeanstalk methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type ElasticBeanstalk struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,27 +30,27 @@ const (
 	EndpointsID = ServiceName        // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the ElasticBeanstalk client with a session.
+// New creates a new instance of the ElasticBeanstalk client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a ElasticBeanstalk client from just a session.
-//     svc := elasticbeanstalk.New(mySession)
+//     // Create a ElasticBeanstalk client from just a config.
+//     svc := elasticbeanstalk.New(myConfig)
 //
 //     // Create a ElasticBeanstalk client with additional configuration
-//     svc := elasticbeanstalk.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *ElasticBeanstalk {
+//     svc := elasticbeanstalk.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(p aws.ConfigProvider, cfgs ...*aws.Config) *ElasticBeanstalk {
 	c := p.ClientConfig(EndpointsID, cfgs...)
 	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *ElasticBeanstalk {
+func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *ElasticBeanstalk {
 	svc := &ElasticBeanstalk{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -81,7 +78,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a ElasticBeanstalk operation and runs any
 // custom request initialization.
-func (c *ElasticBeanstalk) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *ElasticBeanstalk) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCancelCluster = "CancelCluster"
 
-// CancelClusterRequest generates a "aws/request.Request" representing the
+// CancelClusterRequest generates a "aws.Request" representing the
 // client's request for the CancelCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCancelCluster = "CancelCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelCluster
-func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) (req *request.Request, output *CancelClusterOutput) {
-	op := &request.Operation{
+func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) (req *aws.Request, output *CancelClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCancelCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -94,7 +93,7 @@ func (c *Snowball) CancelCluster(input *CancelClusterInput) (*CancelClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) CancelClusterWithContext(ctx aws.Context, input *CancelClusterInput, opts ...request.Option) (*CancelClusterOutput, error) {
+func (c *Snowball) CancelClusterWithContext(ctx aws.Context, input *CancelClusterInput, opts ...aws.Option) (*CancelClusterOutput, error) {
 	req, out := c.CancelClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -103,7 +102,7 @@ func (c *Snowball) CancelClusterWithContext(ctx aws.Context, input *CancelCluste
 
 const opCancelJob = "CancelJob"
 
-// CancelJobRequest generates a "aws/request.Request" representing the
+// CancelJobRequest generates a "aws.Request" representing the
 // client's request for the CancelJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -127,8 +126,8 @@ const opCancelJob = "CancelJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJob
-func (c *Snowball) CancelJobRequest(input *CancelJobInput) (req *request.Request, output *CancelJobOutput) {
-	op := &request.Operation{
+func (c *Snowball) CancelJobRequest(input *CancelJobInput) (req *aws.Request, output *CancelJobOutput) {
+	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -185,7 +184,7 @@ func (c *Snowball) CancelJob(input *CancelJobInput) (*CancelJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...request.Option) (*CancelJobOutput, error) {
+func (c *Snowball) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...aws.Option) (*CancelJobOutput, error) {
 	req, out := c.CancelJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -194,7 +193,7 @@ func (c *Snowball) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, 
 
 const opCreateAddress = "CreateAddress"
 
-// CreateAddressRequest generates a "aws/request.Request" representing the
+// CreateAddressRequest generates a "aws.Request" representing the
 // client's request for the CreateAddress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -218,8 +217,8 @@ const opCreateAddress = "CreateAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddress
-func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) (req *request.Request, output *CreateAddressOutput) {
-	op := &request.Operation{
+func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) (req *aws.Request, output *CreateAddressOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -273,7 +272,7 @@ func (c *Snowball) CreateAddress(input *CreateAddressInput) (*CreateAddressOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) CreateAddressWithContext(ctx aws.Context, input *CreateAddressInput, opts ...request.Option) (*CreateAddressOutput, error) {
+func (c *Snowball) CreateAddressWithContext(ctx aws.Context, input *CreateAddressInput, opts ...aws.Option) (*CreateAddressOutput, error) {
 	req, out := c.CreateAddressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -282,7 +281,7 @@ func (c *Snowball) CreateAddressWithContext(ctx aws.Context, input *CreateAddres
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws/request.Request" representing the
+// CreateClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -306,8 +305,8 @@ const opCreateCluster = "CreateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateCluster
-func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) (req *request.Request, output *CreateClusterOutput) {
-	op := &request.Operation{
+func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -364,7 +363,7 @@ func (c *Snowball) CreateCluster(input *CreateClusterInput) (*CreateClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...request.Option) (*CreateClusterOutput, error) {
+func (c *Snowball) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
 	req, out := c.CreateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -373,7 +372,7 @@ func (c *Snowball) CreateClusterWithContext(ctx aws.Context, input *CreateCluste
 
 const opCreateJob = "CreateJob"
 
-// CreateJobRequest generates a "aws/request.Request" representing the
+// CreateJobRequest generates a "aws.Request" representing the
 // client's request for the CreateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -397,8 +396,8 @@ const opCreateJob = "CreateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJob
-func (c *Snowball) CreateJobRequest(input *CreateJobInput) (req *request.Request, output *CreateJobOutput) {
-	op := &request.Operation{
+func (c *Snowball) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output *CreateJobOutput) {
+	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -463,7 +462,7 @@ func (c *Snowball) CreateJob(input *CreateJobInput) (*CreateJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...request.Option) (*CreateJobOutput, error) {
+func (c *Snowball) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...aws.Option) (*CreateJobOutput, error) {
 	req, out := c.CreateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -472,7 +471,7 @@ func (c *Snowball) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, 
 
 const opDescribeAddress = "DescribeAddress"
 
-// DescribeAddressRequest generates a "aws/request.Request" representing the
+// DescribeAddressRequest generates a "aws.Request" representing the
 // client's request for the DescribeAddress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -496,8 +495,8 @@ const opDescribeAddress = "DescribeAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress
-func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) (req *request.Request, output *DescribeAddressOutput) {
-	op := &request.Operation{
+func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) (req *aws.Request, output *DescribeAddressOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -544,7 +543,7 @@ func (c *Snowball) DescribeAddress(input *DescribeAddressInput) (*DescribeAddres
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) DescribeAddressWithContext(ctx aws.Context, input *DescribeAddressInput, opts ...request.Option) (*DescribeAddressOutput, error) {
+func (c *Snowball) DescribeAddressWithContext(ctx aws.Context, input *DescribeAddressInput, opts ...aws.Option) (*DescribeAddressOutput, error) {
 	req, out := c.DescribeAddressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -553,7 +552,7 @@ func (c *Snowball) DescribeAddressWithContext(ctx aws.Context, input *DescribeAd
 
 const opDescribeAddresses = "DescribeAddresses"
 
-// DescribeAddressesRequest generates a "aws/request.Request" representing the
+// DescribeAddressesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAddresses operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -577,12 +576,12 @@ const opDescribeAddresses = "DescribeAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses
-func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) (req *request.Request, output *DescribeAddressesOutput) {
-	op := &request.Operation{
+func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) (req *aws.Request, output *DescribeAddressesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -636,7 +635,7 @@ func (c *Snowball) DescribeAddresses(input *DescribeAddressesInput) (*DescribeAd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) DescribeAddressesWithContext(ctx aws.Context, input *DescribeAddressesInput, opts ...request.Option) (*DescribeAddressesOutput, error) {
+func (c *Snowball) DescribeAddressesWithContext(ctx aws.Context, input *DescribeAddressesInput, opts ...aws.Option) (*DescribeAddressesOutput, error) {
 	req, out := c.DescribeAddressesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -671,9 +670,9 @@ func (c *Snowball) DescribeAddressesPages(input *DescribeAddressesInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) DescribeAddressesPagesWithContext(ctx aws.Context, input *DescribeAddressesInput, fn func(*DescribeAddressesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Snowball) DescribeAddressesPagesWithContext(ctx aws.Context, input *DescribeAddressesInput, fn func(*DescribeAddressesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAddressesInput
 			if input != nil {
 				tmp := *input
@@ -695,7 +694,7 @@ func (c *Snowball) DescribeAddressesPagesWithContext(ctx aws.Context, input *Des
 
 const opDescribeCluster = "DescribeCluster"
 
-// DescribeClusterRequest generates a "aws/request.Request" representing the
+// DescribeClusterRequest generates a "aws.Request" representing the
 // client's request for the DescribeCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -719,8 +718,8 @@ const opDescribeCluster = "DescribeCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster
-func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) (req *request.Request, output *DescribeClusterOutput) {
-	op := &request.Operation{
+func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) (req *aws.Request, output *DescribeClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -767,7 +766,7 @@ func (c *Snowball) DescribeCluster(input *DescribeClusterInput) (*DescribeCluste
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) DescribeClusterWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...request.Option) (*DescribeClusterOutput, error) {
+func (c *Snowball) DescribeClusterWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.Option) (*DescribeClusterOutput, error) {
 	req, out := c.DescribeClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -776,7 +775,7 @@ func (c *Snowball) DescribeClusterWithContext(ctx aws.Context, input *DescribeCl
 
 const opDescribeJob = "DescribeJob"
 
-// DescribeJobRequest generates a "aws/request.Request" representing the
+// DescribeJobRequest generates a "aws.Request" representing the
 // client's request for the DescribeJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -800,8 +799,8 @@ const opDescribeJob = "DescribeJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob
-func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) (req *request.Request, output *DescribeJobOutput) {
-	op := &request.Operation{
+func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) (req *aws.Request, output *DescribeJobOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -848,7 +847,7 @@ func (c *Snowball) DescribeJob(input *DescribeJobInput) (*DescribeJobOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInput, opts ...request.Option) (*DescribeJobOutput, error) {
+func (c *Snowball) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInput, opts ...aws.Option) (*DescribeJobOutput, error) {
 	req, out := c.DescribeJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -857,7 +856,7 @@ func (c *Snowball) DescribeJobWithContext(ctx aws.Context, input *DescribeJobInp
 
 const opGetJobManifest = "GetJobManifest"
 
-// GetJobManifestRequest generates a "aws/request.Request" representing the
+// GetJobManifestRequest generates a "aws.Request" representing the
 // client's request for the GetJobManifest operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -881,8 +880,8 @@ const opGetJobManifest = "GetJobManifest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifest
-func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) (req *request.Request, output *GetJobManifestOutput) {
-	op := &request.Operation{
+func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) (req *aws.Request, output *GetJobManifestOutput) {
+	op := &aws.Operation{
 		Name:       opGetJobManifest,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -949,7 +948,7 @@ func (c *Snowball) GetJobManifest(input *GetJobManifestInput) (*GetJobManifestOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) GetJobManifestWithContext(ctx aws.Context, input *GetJobManifestInput, opts ...request.Option) (*GetJobManifestOutput, error) {
+func (c *Snowball) GetJobManifestWithContext(ctx aws.Context, input *GetJobManifestInput, opts ...aws.Option) (*GetJobManifestOutput, error) {
 	req, out := c.GetJobManifestRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -958,7 +957,7 @@ func (c *Snowball) GetJobManifestWithContext(ctx aws.Context, input *GetJobManif
 
 const opGetJobUnlockCode = "GetJobUnlockCode"
 
-// GetJobUnlockCodeRequest generates a "aws/request.Request" representing the
+// GetJobUnlockCodeRequest generates a "aws.Request" representing the
 // client's request for the GetJobUnlockCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -982,8 +981,8 @@ const opGetJobUnlockCode = "GetJobUnlockCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCode
-func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) (req *request.Request, output *GetJobUnlockCodeOutput) {
-	op := &request.Operation{
+func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) (req *aws.Request, output *GetJobUnlockCodeOutput) {
+	op := &aws.Operation{
 		Name:       opGetJobUnlockCode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1045,7 +1044,7 @@ func (c *Snowball) GetJobUnlockCode(input *GetJobUnlockCodeInput) (*GetJobUnlock
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) GetJobUnlockCodeWithContext(ctx aws.Context, input *GetJobUnlockCodeInput, opts ...request.Option) (*GetJobUnlockCodeOutput, error) {
+func (c *Snowball) GetJobUnlockCodeWithContext(ctx aws.Context, input *GetJobUnlockCodeInput, opts ...aws.Option) (*GetJobUnlockCodeOutput, error) {
 	req, out := c.GetJobUnlockCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1054,7 +1053,7 @@ func (c *Snowball) GetJobUnlockCodeWithContext(ctx aws.Context, input *GetJobUnl
 
 const opGetSnowballUsage = "GetSnowballUsage"
 
-// GetSnowballUsageRequest generates a "aws/request.Request" representing the
+// GetSnowballUsageRequest generates a "aws.Request" representing the
 // client's request for the GetSnowballUsage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1078,8 +1077,8 @@ const opGetSnowballUsage = "GetSnowballUsage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsage
-func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) (req *request.Request, output *GetSnowballUsageOutput) {
-	op := &request.Operation{
+func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) (req *aws.Request, output *GetSnowballUsageOutput) {
+	op := &aws.Operation{
 		Name:       opGetSnowballUsage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1123,7 +1122,7 @@ func (c *Snowball) GetSnowballUsage(input *GetSnowballUsageInput) (*GetSnowballU
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) GetSnowballUsageWithContext(ctx aws.Context, input *GetSnowballUsageInput, opts ...request.Option) (*GetSnowballUsageOutput, error) {
+func (c *Snowball) GetSnowballUsageWithContext(ctx aws.Context, input *GetSnowballUsageInput, opts ...aws.Option) (*GetSnowballUsageOutput, error) {
 	req, out := c.GetSnowballUsageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1132,7 +1131,7 @@ func (c *Snowball) GetSnowballUsageWithContext(ctx aws.Context, input *GetSnowba
 
 const opListClusterJobs = "ListClusterJobs"
 
-// ListClusterJobsRequest generates a "aws/request.Request" representing the
+// ListClusterJobsRequest generates a "aws.Request" representing the
 // client's request for the ListClusterJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1156,8 +1155,8 @@ const opListClusterJobs = "ListClusterJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobs
-func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) (req *request.Request, output *ListClusterJobsOutput) {
-	op := &request.Operation{
+func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) (req *aws.Request, output *ListClusterJobsOutput) {
+	op := &aws.Operation{
 		Name:       opListClusterJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1209,7 +1208,7 @@ func (c *Snowball) ListClusterJobs(input *ListClusterJobsInput) (*ListClusterJob
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) ListClusterJobsWithContext(ctx aws.Context, input *ListClusterJobsInput, opts ...request.Option) (*ListClusterJobsOutput, error) {
+func (c *Snowball) ListClusterJobsWithContext(ctx aws.Context, input *ListClusterJobsInput, opts ...aws.Option) (*ListClusterJobsOutput, error) {
 	req, out := c.ListClusterJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1218,7 +1217,7 @@ func (c *Snowball) ListClusterJobsWithContext(ctx aws.Context, input *ListCluste
 
 const opListClusters = "ListClusters"
 
-// ListClustersRequest generates a "aws/request.Request" representing the
+// ListClustersRequest generates a "aws.Request" representing the
 // client's request for the ListClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1242,8 +1241,8 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusters
-func (c *Snowball) ListClustersRequest(input *ListClustersInput) (req *request.Request, output *ListClustersOutput) {
-	op := &request.Operation{
+func (c *Snowball) ListClustersRequest(input *ListClustersInput) (req *aws.Request, output *ListClustersOutput) {
+	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1291,7 +1290,7 @@ func (c *Snowball) ListClusters(input *ListClustersInput) (*ListClustersOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...request.Option) (*ListClustersOutput, error) {
+func (c *Snowball) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...aws.Option) (*ListClustersOutput, error) {
 	req, out := c.ListClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1300,7 +1299,7 @@ func (c *Snowball) ListClustersWithContext(ctx aws.Context, input *ListClustersI
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws/request.Request" representing the
+// ListJobsRequest generates a "aws.Request" representing the
 // client's request for the ListJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1324,12 +1323,12 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobs
-func (c *Snowball) ListJobsRequest(input *ListJobsInput) (req *request.Request, output *ListJobsOutput) {
-	op := &request.Operation{
+func (c *Snowball) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -1381,7 +1380,7 @@ func (c *Snowball) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...request.Option) (*ListJobsOutput, error) {
+func (c *Snowball) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
 	req, out := c.ListJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1416,9 +1415,9 @@ func (c *Snowball) ListJobsPages(input *ListJobsInput, fn func(*ListJobsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Snowball) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsInput
 			if input != nil {
 				tmp := *input
@@ -1440,7 +1439,7 @@ func (c *Snowball) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInpu
 
 const opUpdateCluster = "UpdateCluster"
 
-// UpdateClusterRequest generates a "aws/request.Request" representing the
+// UpdateClusterRequest generates a "aws.Request" representing the
 // client's request for the UpdateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1464,8 +1463,8 @@ const opUpdateCluster = "UpdateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateCluster
-func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) (req *request.Request, output *UpdateClusterOutput) {
-	op := &request.Operation{
+func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) (req *aws.Request, output *UpdateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1527,7 +1526,7 @@ func (c *Snowball) UpdateCluster(input *UpdateClusterInput) (*UpdateClusterOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInput, opts ...request.Option) (*UpdateClusterOutput, error) {
+func (c *Snowball) UpdateClusterWithContext(ctx aws.Context, input *UpdateClusterInput, opts ...aws.Option) (*UpdateClusterOutput, error) {
 	req, out := c.UpdateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1536,7 +1535,7 @@ func (c *Snowball) UpdateClusterWithContext(ctx aws.Context, input *UpdateCluste
 
 const opUpdateJob = "UpdateJob"
 
-// UpdateJobRequest generates a "aws/request.Request" representing the
+// UpdateJobRequest generates a "aws.Request" representing the
 // client's request for the UpdateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1560,8 +1559,8 @@ const opUpdateJob = "UpdateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob
-func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) (req *request.Request, output *UpdateJobOutput) {
-	op := &request.Operation{
+func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) (req *aws.Request, output *UpdateJobOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1628,7 +1627,7 @@ func (c *Snowball) UpdateJob(input *UpdateJobInput) (*UpdateJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Snowball) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts ...request.Option) (*UpdateJobOutput, error) {
+func (c *Snowball) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts ...aws.Option) (*UpdateJobOutput, error) {
 	req, out := c.UpdateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1701,45 +1700,45 @@ func (s Address) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Address) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Address"}
+	invalidParams := aws.ErrInvalidParams{Context: "Address"}
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("AddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
 	if s.City != nil && len(*s.City) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("City", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("City", 1))
 	}
 	if s.Company != nil && len(*s.Company) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Company", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Company", 1))
 	}
 	if s.Country != nil && len(*s.Country) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Country", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Country", 1))
 	}
 	if s.Landmark != nil && len(*s.Landmark) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Landmark", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Landmark", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.PhoneNumber != nil && len(*s.PhoneNumber) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PhoneNumber", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PhoneNumber", 1))
 	}
 	if s.PostalCode != nil && len(*s.PostalCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PostalCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PostalCode", 1))
 	}
 	if s.PrefectureOrDistrict != nil && len(*s.PrefectureOrDistrict) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PrefectureOrDistrict", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PrefectureOrDistrict", 1))
 	}
 	if s.StateOrProvince != nil && len(*s.StateOrProvince) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StateOrProvince", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StateOrProvince", 1))
 	}
 	if s.Street1 != nil && len(*s.Street1) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Street1", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Street1", 1))
 	}
 	if s.Street2 != nil && len(*s.Street2) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Street2", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Street2", 1))
 	}
 	if s.Street3 != nil && len(*s.Street3) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Street3", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Street3", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1855,12 +1854,12 @@ func (s CancelClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelClusterInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1913,12 +1912,12 @@ func (s CancelJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2181,13 +2180,13 @@ func (s CreateAddressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAddressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAddressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAddressInput"}
 	if s.Address == nil {
-		invalidParams.Add(request.NewErrParamRequired("Address"))
+		invalidParams.Add(aws.NewErrParamRequired("Address"))
 	}
 	if s.Address != nil {
 		if err := s.Address.Validate(); err != nil {
-			invalidParams.AddNested("Address", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Address", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2311,34 +2310,34 @@ func (s CreateClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClusterInput"}
 	if s.AddressId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AddressId"))
+		invalidParams.Add(aws.NewErrParamRequired("AddressId"))
 	}
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("AddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("ForwardingAddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
 	}
 	if s.JobType == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobType"))
+		invalidParams.Add(aws.NewErrParamRequired("JobType"))
 	}
 	if s.Resources == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resources"))
+		invalidParams.Add(aws.NewErrParamRequired("Resources"))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.ShippingOption == nil {
-		invalidParams.Add(request.NewErrParamRequired("ShippingOption"))
+		invalidParams.Add(aws.NewErrParamRequired("ShippingOption"))
 	}
 	if s.Resources != nil {
 		if err := s.Resources.Validate(); err != nil {
-			invalidParams.AddNested("Resources", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Resources", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2520,22 +2519,22 @@ func (s CreateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("AddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
 	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("ForwardingAddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
 	}
 	if s.Resources != nil {
 		if err := s.Resources.Validate(); err != nil {
-			invalidParams.AddNested("Resources", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Resources", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2721,12 +2720,12 @@ func (s DescribeAddressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAddressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAddressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAddressInput"}
 	if s.AddressId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AddressId"))
+		invalidParams.Add(aws.NewErrParamRequired("AddressId"))
 	}
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("AddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2791,9 +2790,9 @@ func (s DescribeAddressesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAddressesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAddressesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAddressesInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2871,12 +2870,12 @@ func (s DescribeClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeClusterInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2938,12 +2937,12 @@ func (s DescribeJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3042,12 +3041,12 @@ func (s GetJobManifestInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobManifestInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobManifestInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobManifestInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3110,12 +3109,12 @@ func (s GetJobUnlockCodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobUnlockCodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobUnlockCodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobUnlockCodeInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3566,14 +3565,14 @@ func (s JobResource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *JobResource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "JobResource"}
+	invalidParams := aws.ErrInvalidParams{Context: "JobResource"}
 	if s.S3Resources != nil {
 		for i, v := range s.S3Resources {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3Resources", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3Resources", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3625,12 +3624,12 @@ func (s KeyRange) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KeyRange) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KeyRange"}
+	invalidParams := aws.ErrInvalidParams{Context: "KeyRange"}
 	if s.BeginMarker != nil && len(*s.BeginMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BeginMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BeginMarker", 1))
 	}
 	if s.EndMarker != nil && len(*s.EndMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EndMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EndMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3717,15 +3716,15 @@ func (s ListClusterJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListClusterJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListClusterJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListClusterJobsInput"}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3813,9 +3812,9 @@ func (s ListClustersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListClustersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListClustersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListClustersInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3897,9 +3896,9 @@ func (s ListJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4044,10 +4043,10 @@ func (s S3Resource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Resource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Resource"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Resource"}
 	if s.KeyRange != nil {
 		if err := s.KeyRange.Validate(); err != nil {
-			invalidParams.AddNested("KeyRange", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KeyRange", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4216,25 +4215,25 @@ func (s UpdateClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateClusterInput"}
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("AddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
 	if s.ClusterId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterId"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterId"))
 	}
 	if s.ClusterId != nil && len(*s.ClusterId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterId", 39))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("ForwardingAddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
 	}
 	if s.Resources != nil {
 		if err := s.Resources.Validate(); err != nil {
-			invalidParams.AddNested("Resources", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Resources", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4358,25 +4357,25 @@ func (s UpdateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobInput"}
 	if s.AddressId != nil && len(*s.AddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("AddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("AddressId", 40))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.ForwardingAddressId != nil && len(*s.ForwardingAddressId) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("ForwardingAddressId", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("ForwardingAddressId", 40))
 	}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.JobId != nil && len(*s.JobId) < 39 {
-		invalidParams.Add(request.NewErrParamMinLen("JobId", 39))
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 39))
 	}
 	if s.Resources != nil {
 		if err := s.Resources.Validate(); err != nil {
-			invalidParams.AddNested("Resources", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Resources", err.(aws.ErrInvalidParams))
 		}
 	}
 

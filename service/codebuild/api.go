@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBatchDeleteBuilds = "BatchDeleteBuilds"
 
-// BatchDeleteBuildsRequest generates a "aws/request.Request" representing the
+// BatchDeleteBuildsRequest generates a "aws.Request" representing the
 // client's request for the BatchDeleteBuilds operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opBatchDeleteBuilds = "BatchDeleteBuilds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuilds
-func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) (req *request.Request, output *BatchDeleteBuildsOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) (req *aws.Request, output *BatchDeleteBuildsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchDeleteBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -83,7 +82,7 @@ func (c *CodeBuild) BatchDeleteBuilds(input *BatchDeleteBuildsInput) (*BatchDele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) BatchDeleteBuildsWithContext(ctx aws.Context, input *BatchDeleteBuildsInput, opts ...request.Option) (*BatchDeleteBuildsOutput, error) {
+func (c *CodeBuild) BatchDeleteBuildsWithContext(ctx aws.Context, input *BatchDeleteBuildsInput, opts ...aws.Option) (*BatchDeleteBuildsOutput, error) {
 	req, out := c.BatchDeleteBuildsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -92,7 +91,7 @@ func (c *CodeBuild) BatchDeleteBuildsWithContext(ctx aws.Context, input *BatchDe
 
 const opBatchGetBuilds = "BatchGetBuilds"
 
-// BatchGetBuildsRequest generates a "aws/request.Request" representing the
+// BatchGetBuildsRequest generates a "aws.Request" representing the
 // client's request for the BatchGetBuilds operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -116,8 +115,8 @@ const opBatchGetBuilds = "BatchGetBuilds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds
-func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *request.Request, output *BatchGetBuildsOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) (req *aws.Request, output *BatchGetBuildsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -162,7 +161,7 @@ func (c *CodeBuild) BatchGetBuilds(input *BatchGetBuildsInput) (*BatchGetBuildsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) BatchGetBuildsWithContext(ctx aws.Context, input *BatchGetBuildsInput, opts ...request.Option) (*BatchGetBuildsOutput, error) {
+func (c *CodeBuild) BatchGetBuildsWithContext(ctx aws.Context, input *BatchGetBuildsInput, opts ...aws.Option) (*BatchGetBuildsOutput, error) {
 	req, out := c.BatchGetBuildsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -171,7 +170,7 @@ func (c *CodeBuild) BatchGetBuildsWithContext(ctx aws.Context, input *BatchGetBu
 
 const opBatchGetProjects = "BatchGetProjects"
 
-// BatchGetProjectsRequest generates a "aws/request.Request" representing the
+// BatchGetProjectsRequest generates a "aws.Request" representing the
 // client's request for the BatchGetProjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -195,8 +194,8 @@ const opBatchGetProjects = "BatchGetProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjects
-func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *request.Request, output *BatchGetProjectsOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) (req *aws.Request, output *BatchGetProjectsOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetProjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -241,7 +240,7 @@ func (c *CodeBuild) BatchGetProjects(input *BatchGetProjectsInput) (*BatchGetPro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) BatchGetProjectsWithContext(ctx aws.Context, input *BatchGetProjectsInput, opts ...request.Option) (*BatchGetProjectsOutput, error) {
+func (c *CodeBuild) BatchGetProjectsWithContext(ctx aws.Context, input *BatchGetProjectsInput, opts ...aws.Option) (*BatchGetProjectsOutput, error) {
 	req, out := c.BatchGetProjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -250,7 +249,7 @@ func (c *CodeBuild) BatchGetProjectsWithContext(ctx aws.Context, input *BatchGet
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws/request.Request" representing the
+// CreateProjectRequest generates a "aws.Request" representing the
 // client's request for the CreateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -274,8 +273,8 @@ const opCreateProject = "CreateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject
-func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) (req *request.Request, output *CreateProjectOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -327,7 +326,7 @@ func (c *CodeBuild) CreateProject(input *CreateProjectInput) (*CreateProjectOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...request.Option) (*CreateProjectOutput, error) {
+func (c *CodeBuild) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
 	req, out := c.CreateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -336,7 +335,7 @@ func (c *CodeBuild) CreateProjectWithContext(ctx aws.Context, input *CreateProje
 
 const opCreateWebhook = "CreateWebhook"
 
-// CreateWebhookRequest generates a "aws/request.Request" representing the
+// CreateWebhookRequest generates a "aws.Request" representing the
 // client's request for the CreateWebhook operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -360,8 +359,8 @@ const opCreateWebhook = "CreateWebhook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook
-func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *request.Request, output *CreateWebhookOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) (req *aws.Request, output *CreateWebhookOutput) {
+	op := &aws.Operation{
 		Name:       opCreateWebhook,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -427,7 +426,7 @@ func (c *CodeBuild) CreateWebhook(input *CreateWebhookInput) (*CreateWebhookOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) CreateWebhookWithContext(ctx aws.Context, input *CreateWebhookInput, opts ...request.Option) (*CreateWebhookOutput, error) {
+func (c *CodeBuild) CreateWebhookWithContext(ctx aws.Context, input *CreateWebhookInput, opts ...aws.Option) (*CreateWebhookOutput, error) {
 	req, out := c.CreateWebhookRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -436,7 +435,7 @@ func (c *CodeBuild) CreateWebhookWithContext(ctx aws.Context, input *CreateWebho
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws/request.Request" representing the
+// DeleteProjectRequest generates a "aws.Request" representing the
 // client's request for the DeleteProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -460,8 +459,8 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProject
-func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *request.Request, output *DeleteProjectOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -506,7 +505,7 @@ func (c *CodeBuild) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...request.Option) (*DeleteProjectOutput, error) {
+func (c *CodeBuild) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
 	req, out := c.DeleteProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -515,7 +514,7 @@ func (c *CodeBuild) DeleteProjectWithContext(ctx aws.Context, input *DeleteProje
 
 const opDeleteWebhook = "DeleteWebhook"
 
-// DeleteWebhookRequest generates a "aws/request.Request" representing the
+// DeleteWebhookRequest generates a "aws.Request" representing the
 // client's request for the DeleteWebhook operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -539,8 +538,8 @@ const opDeleteWebhook = "DeleteWebhook"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhook
-func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *request.Request, output *DeleteWebhookOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) (req *aws.Request, output *DeleteWebhookOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteWebhook,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -593,7 +592,7 @@ func (c *CodeBuild) DeleteWebhook(input *DeleteWebhookInput) (*DeleteWebhookOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) DeleteWebhookWithContext(ctx aws.Context, input *DeleteWebhookInput, opts ...request.Option) (*DeleteWebhookOutput, error) {
+func (c *CodeBuild) DeleteWebhookWithContext(ctx aws.Context, input *DeleteWebhookInput, opts ...aws.Option) (*DeleteWebhookOutput, error) {
 	req, out := c.DeleteWebhookRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -602,7 +601,7 @@ func (c *CodeBuild) DeleteWebhookWithContext(ctx aws.Context, input *DeleteWebho
 
 const opListBuilds = "ListBuilds"
 
-// ListBuildsRequest generates a "aws/request.Request" representing the
+// ListBuildsRequest generates a "aws.Request" representing the
 // client's request for the ListBuilds operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -626,8 +625,8 @@ const opListBuilds = "ListBuilds"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds
-func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *request.Request, output *ListBuildsOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) (req *aws.Request, output *ListBuildsOutput) {
+	op := &aws.Operation{
 		Name:       opListBuilds,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -672,7 +671,7 @@ func (c *CodeBuild) ListBuilds(input *ListBuildsInput) (*ListBuildsOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput, opts ...request.Option) (*ListBuildsOutput, error) {
+func (c *CodeBuild) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInput, opts ...aws.Option) (*ListBuildsOutput, error) {
 	req, out := c.ListBuildsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -681,7 +680,7 @@ func (c *CodeBuild) ListBuildsWithContext(ctx aws.Context, input *ListBuildsInpu
 
 const opListBuildsForProject = "ListBuildsForProject"
 
-// ListBuildsForProjectRequest generates a "aws/request.Request" representing the
+// ListBuildsForProjectRequest generates a "aws.Request" representing the
 // client's request for the ListBuildsForProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -705,8 +704,8 @@ const opListBuildsForProject = "ListBuildsForProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject
-func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) (req *request.Request, output *ListBuildsForProjectOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput) (req *aws.Request, output *ListBuildsForProjectOutput) {
+	op := &aws.Operation{
 		Name:       opListBuildsForProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -755,7 +754,7 @@ func (c *CodeBuild) ListBuildsForProject(input *ListBuildsForProjectInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) ListBuildsForProjectWithContext(ctx aws.Context, input *ListBuildsForProjectInput, opts ...request.Option) (*ListBuildsForProjectOutput, error) {
+func (c *CodeBuild) ListBuildsForProjectWithContext(ctx aws.Context, input *ListBuildsForProjectInput, opts ...aws.Option) (*ListBuildsForProjectOutput, error) {
 	req, out := c.ListBuildsForProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -764,7 +763,7 @@ func (c *CodeBuild) ListBuildsForProjectWithContext(ctx aws.Context, input *List
 
 const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 
-// ListCuratedEnvironmentImagesRequest generates a "aws/request.Request" representing the
+// ListCuratedEnvironmentImagesRequest generates a "aws.Request" representing the
 // client's request for the ListCuratedEnvironmentImages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -788,8 +787,8 @@ const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages
-func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironmentImagesInput) (req *request.Request, output *ListCuratedEnvironmentImagesOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnvironmentImagesInput) (req *aws.Request, output *ListCuratedEnvironmentImagesOutput) {
+	op := &aws.Operation{
 		Name:       opListCuratedEnvironmentImages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -829,7 +828,7 @@ func (c *CodeBuild) ListCuratedEnvironmentImages(input *ListCuratedEnvironmentIm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) ListCuratedEnvironmentImagesWithContext(ctx aws.Context, input *ListCuratedEnvironmentImagesInput, opts ...request.Option) (*ListCuratedEnvironmentImagesOutput, error) {
+func (c *CodeBuild) ListCuratedEnvironmentImagesWithContext(ctx aws.Context, input *ListCuratedEnvironmentImagesInput, opts ...aws.Option) (*ListCuratedEnvironmentImagesOutput, error) {
 	req, out := c.ListCuratedEnvironmentImagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -838,7 +837,7 @@ func (c *CodeBuild) ListCuratedEnvironmentImagesWithContext(ctx aws.Context, inp
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws/request.Request" representing the
+// ListProjectsRequest generates a "aws.Request" representing the
 // client's request for the ListProjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -862,8 +861,8 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects
-func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *request.Request, output *ListProjectsOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -909,7 +908,7 @@ func (c *CodeBuild) ListProjects(input *ListProjectsInput) (*ListProjectsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...request.Option) (*ListProjectsOutput, error) {
+func (c *CodeBuild) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
 	req, out := c.ListProjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -918,7 +917,7 @@ func (c *CodeBuild) ListProjectsWithContext(ctx aws.Context, input *ListProjects
 
 const opStartBuild = "StartBuild"
 
-// StartBuildRequest generates a "aws/request.Request" representing the
+// StartBuildRequest generates a "aws.Request" representing the
 // client's request for the StartBuild operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -942,8 +941,8 @@ const opStartBuild = "StartBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild
-func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) (req *request.Request, output *StartBuildOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) (req *aws.Request, output *StartBuildOutput) {
+	op := &aws.Operation{
 		Name:       opStartBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -994,7 +993,7 @@ func (c *CodeBuild) StartBuild(input *StartBuildInput) (*StartBuildOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) StartBuildWithContext(ctx aws.Context, input *StartBuildInput, opts ...request.Option) (*StartBuildOutput, error) {
+func (c *CodeBuild) StartBuildWithContext(ctx aws.Context, input *StartBuildInput, opts ...aws.Option) (*StartBuildOutput, error) {
 	req, out := c.StartBuildRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1003,7 +1002,7 @@ func (c *CodeBuild) StartBuildWithContext(ctx aws.Context, input *StartBuildInpu
 
 const opStopBuild = "StopBuild"
 
-// StopBuildRequest generates a "aws/request.Request" representing the
+// StopBuildRequest generates a "aws.Request" representing the
 // client's request for the StopBuild operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1027,8 +1026,8 @@ const opStopBuild = "StopBuild"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild
-func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) (req *request.Request, output *StopBuildOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) (req *aws.Request, output *StopBuildOutput) {
+	op := &aws.Operation{
 		Name:       opStopBuild,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1076,7 +1075,7 @@ func (c *CodeBuild) StopBuild(input *StopBuildInput) (*StopBuildOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) StopBuildWithContext(ctx aws.Context, input *StopBuildInput, opts ...request.Option) (*StopBuildOutput, error) {
+func (c *CodeBuild) StopBuildWithContext(ctx aws.Context, input *StopBuildInput, opts ...aws.Option) (*StopBuildOutput, error) {
 	req, out := c.StopBuildRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1085,7 +1084,7 @@ func (c *CodeBuild) StopBuildWithContext(ctx aws.Context, input *StopBuildInput,
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws/request.Request" representing the
+// UpdateProjectRequest generates a "aws.Request" representing the
 // client's request for the UpdateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1109,8 +1108,8 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject
-func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) (req *request.Request, output *UpdateProjectOutput) {
-	op := &request.Operation{
+func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1158,7 +1157,7 @@ func (c *CodeBuild) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeBuild) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...request.Option) (*UpdateProjectOutput, error) {
+func (c *CodeBuild) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
 	req, out := c.UpdateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,12 +1186,12 @@ func (s BatchDeleteBuildsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteBuildsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteBuildsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteBuildsInput"}
 	if s.Ids == nil {
-		invalidParams.Add(request.NewErrParamRequired("Ids"))
+		invalidParams.Add(aws.NewErrParamRequired("Ids"))
 	}
 	if s.Ids != nil && len(s.Ids) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Ids", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Ids", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1262,12 +1261,12 @@ func (s BatchGetBuildsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetBuildsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetBuildsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetBuildsInput"}
 	if s.Ids == nil {
-		invalidParams.Add(request.NewErrParamRequired("Ids"))
+		invalidParams.Add(aws.NewErrParamRequired("Ids"))
 	}
 	if s.Ids != nil && len(s.Ids) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Ids", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Ids", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1337,12 +1336,12 @@ func (s BatchGetProjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetProjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetProjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetProjectsInput"}
 	if s.Names == nil {
-		invalidParams.Add(request.NewErrParamRequired("Names"))
+		invalidParams.Add(aws.NewErrParamRequired("Names"))
 	}
 	if s.Names != nil && len(s.Names) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Names", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Names", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1830,44 +1829,44 @@ func (s CreateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProjectInput"}
 	if s.Artifacts == nil {
-		invalidParams.Add(request.NewErrParamRequired("Artifacts"))
+		invalidParams.Add(aws.NewErrParamRequired("Artifacts"))
 	}
 	if s.EncryptionKey != nil && len(*s.EncryptionKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EncryptionKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EncryptionKey", 1))
 	}
 	if s.Environment == nil {
-		invalidParams.Add(request.NewErrParamRequired("Environment"))
+		invalidParams.Add(aws.NewErrParamRequired("Environment"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 2))
 	}
 	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServiceRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceRole", 1))
 	}
 	if s.Source == nil {
-		invalidParams.Add(request.NewErrParamRequired("Source"))
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.TimeoutInMinutes != nil && *s.TimeoutInMinutes < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("TimeoutInMinutes", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutInMinutes", 5))
 	}
 	if s.Artifacts != nil {
 		if err := s.Artifacts.Validate(); err != nil {
-			invalidParams.AddNested("Artifacts", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Artifacts", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Environment != nil {
 		if err := s.Environment.Validate(); err != nil {
-			invalidParams.AddNested("Environment", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Environment", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Source != nil {
 		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -1876,7 +1875,7 @@ func (s *CreateProjectInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1987,12 +1986,12 @@ func (s CreateWebhookInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWebhookInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateWebhookInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateWebhookInput"}
 	if s.ProjectName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
 	if s.ProjectName != nil && len(*s.ProjectName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2054,12 +2053,12 @@ func (s DeleteProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2111,12 +2110,12 @@ func (s DeleteWebhookInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteWebhookInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteWebhookInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebhookInput"}
 	if s.ProjectName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
 	if s.ProjectName != nil && len(*s.ProjectName) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectName", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2291,15 +2290,15 @@ func (s EnvironmentVariable) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnvironmentVariable) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnvironmentVariable"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnvironmentVariable"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2363,12 +2362,12 @@ func (s ListBuildsForProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListBuildsForProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListBuildsForProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListBuildsForProjectInput"}
 	if s.ProjectName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
 	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2598,9 +2597,9 @@ func (s ListProjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProjectsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3007,9 +3006,9 @@ func (s ProjectArtifacts) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProjectArtifacts) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProjectArtifacts"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProjectArtifacts"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3115,18 +3114,18 @@ func (s ProjectEnvironment) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProjectEnvironment) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProjectEnvironment"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProjectEnvironment"}
 	if s.ComputeType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeType"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeType"))
 	}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil && len(*s.Image) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Image", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Image", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.EnvironmentVariables != nil {
 		for i, v := range s.EnvironmentVariables {
@@ -3134,7 +3133,7 @@ func (s *ProjectEnvironment) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariables", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariables", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3266,13 +3265,13 @@ func (s ProjectSource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProjectSource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProjectSource"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProjectSource"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Auth != nil {
 		if err := s.Auth.Validate(); err != nil {
-			invalidParams.AddNested("Auth", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Auth", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3338,9 +3337,9 @@ func (s SourceAuth) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SourceAuth) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SourceAuth"}
+	invalidParams := aws.ErrInvalidParams{Context: "SourceAuth"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3420,19 +3419,19 @@ func (s StartBuildInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartBuildInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartBuildInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartBuildInput"}
 	if s.ProjectName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
 	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
 	}
 	if s.TimeoutInMinutesOverride != nil && *s.TimeoutInMinutesOverride < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("TimeoutInMinutesOverride", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutInMinutesOverride", 5))
 	}
 	if s.ArtifactsOverride != nil {
 		if err := s.ArtifactsOverride.Validate(); err != nil {
-			invalidParams.AddNested("ArtifactsOverride", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ArtifactsOverride", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EnvironmentVariablesOverride != nil {
@@ -3441,7 +3440,7 @@ func (s *StartBuildInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3534,12 +3533,12 @@ func (s StopBuildInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopBuildInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopBuildInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopBuildInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3604,12 +3603,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3690,35 +3689,35 @@ func (s UpdateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
 	if s.EncryptionKey != nil && len(*s.EncryptionKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EncryptionKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EncryptionKey", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ServiceRole != nil && len(*s.ServiceRole) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServiceRole", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceRole", 1))
 	}
 	if s.TimeoutInMinutes != nil && *s.TimeoutInMinutes < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("TimeoutInMinutes", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutInMinutes", 5))
 	}
 	if s.Artifacts != nil {
 		if err := s.Artifacts.Validate(); err != nil {
-			invalidParams.AddNested("Artifacts", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Artifacts", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Environment != nil {
 		if err := s.Environment.Validate(); err != nil {
-			invalidParams.AddNested("Environment", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Environment", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Source != nil {
 		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -3727,7 +3726,7 @@ func (s *UpdateProjectInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

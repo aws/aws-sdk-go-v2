@@ -5,35 +5,40 @@ import (
 	"net/http/httptest"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
-// Session is a mock session which is used to hit the mock server
-var Session = func() *session.Session {
+func init() {
 	// server is the mock server that simply writes a 200 status back to the client
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	return session.Must(session.NewSession(&aws.Config{
-		DisableSSL: aws.Bool(true),
-		Endpoint:   aws.String(server.URL),
-	}))
-}()
+	// TODO getting a default populated config should be in the "defaults" package
+	*Config = defaults.Config()
+	Config.Region = aws.String("mock-region")
+	Config.EndpointResolver = aws.ResolveStaticEndpoint(endpoints.ResolvedEndpoint{
+		URL:           server.URL,
+		SigningRegion: aws.StringValue(Config.Region),
+	})
+}
+
+// Config is a mock configuration for a localhost mock server returning 200 status.
+var Config = &aws.Config{}
 
 // NewMockClient creates and initializes a client that will connect to the
 // mock server
-func NewMockClient(cfgs ...*aws.Config) *client.Client {
-	c := Session.ClientConfig("Mock", cfgs...)
+func NewMockClient(cfgs ...*aws.Config) *aws.Client {
+	c := Config.Copy(cfgs...)
 
-	svc := client.New(
-		*c.Config,
-		metadata.ClientInfo{
+	endpoint, _ := c.EndpointResolver.EndpointFor("Mock", aws.StringValue(c.Region))
+	svc := aws.NewClient(
+		*c,
+		aws.ClientInfo{
 			ServiceName:   "Mock",
-			SigningRegion: c.SigningRegion,
-			Endpoint:      c.Endpoint,
+			SigningRegion: endpoint.SigningRegion,
+			Endpoint:      endpoint.URL,
 			APIVersion:    "2015-12-08",
 			JSONVersion:   "1.1",
 			TargetPrefix:  "MockServer",

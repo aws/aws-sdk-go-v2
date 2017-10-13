@@ -17,7 +17,7 @@ func TestWrapFactory(t *testing.T) {
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
 			KMSWrap: (kmsKeyHandler{
-				kms: kms.New(unit.Session),
+				kms: kms.New(unit.Config),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{
@@ -45,7 +45,7 @@ func TestWrapFactoryErrorNoWrap(t *testing.T) {
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
 			KMSWrap: (kmsKeyHandler{
-				kms: kms.New(unit.Session),
+				kms: kms.New(unit.Config),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{
@@ -70,7 +70,7 @@ func TestWrapFactoryCustomEntry(t *testing.T) {
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
 			"custom": (kmsKeyHandler{
-				kms: kms.New(unit.Session),
+				kms: kms.New(unit.Config),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{
@@ -99,8 +99,8 @@ func TestCEKFactory(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		Endpoint:         aws.String(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
@@ -110,7 +110,7 @@ func TestCEKFactory(t *testing.T) {
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
 			KMSWrap: (kmsKeyHandler{
-				kms: kms.New(sess),
+				kms: kms.New(cfg),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{
@@ -158,8 +158,8 @@ func TestCEKFactoryNoCEK(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		Endpoint:         aws.String(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
@@ -169,7 +169,7 @@ func TestCEKFactoryNoCEK(t *testing.T) {
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
 			KMSWrap: (kmsKeyHandler{
-				kms: kms.New(sess),
+				kms: kms.New(cfg),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{
@@ -217,8 +217,8 @@ func TestCEKFactoryCustomEntry(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		Endpoint:         aws.String(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
@@ -228,7 +228,7 @@ func TestCEKFactoryCustomEntry(t *testing.T) {
 	c := DecryptionClient{
 		WrapRegistry: map[string]WrapEntry{
 			KMSWrap: (kmsKeyHandler{
-				kms: kms.New(sess),
+				kms: kms.New(cfg),
 			}).decryptHandler,
 		},
 		CEKRegistry: map[string]CEKEntry{

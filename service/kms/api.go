@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opCancelKeyDeletion = "CancelKeyDeletion"
 
-// CancelKeyDeletionRequest generates a "aws/request.Request" representing the
+// CancelKeyDeletionRequest generates a "aws.Request" representing the
 // client's request for the CancelKeyDeletion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opCancelKeyDeletion = "CancelKeyDeletion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletion
-func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) (req *request.Request, output *CancelKeyDeletionOutput) {
-	op := &request.Operation{
+func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) (req *aws.Request, output *CancelKeyDeletionOutput) {
+	op := &aws.Operation{
 		Name:       opCancelKeyDeletion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -111,7 +110,7 @@ func (c *KMS) CancelKeyDeletion(input *CancelKeyDeletionInput) (*CancelKeyDeleti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) CancelKeyDeletionWithContext(ctx aws.Context, input *CancelKeyDeletionInput, opts ...request.Option) (*CancelKeyDeletionOutput, error) {
+func (c *KMS) CancelKeyDeletionWithContext(ctx aws.Context, input *CancelKeyDeletionInput, opts ...aws.Option) (*CancelKeyDeletionOutput, error) {
 	req, out := c.CancelKeyDeletionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -120,7 +119,7 @@ func (c *KMS) CancelKeyDeletionWithContext(ctx aws.Context, input *CancelKeyDele
 
 const opCreateAlias = "CreateAlias"
 
-// CreateAliasRequest generates a "aws/request.Request" representing the
+// CreateAliasRequest generates a "aws.Request" representing the
 // client's request for the CreateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -144,8 +143,8 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAlias
-func (c *KMS) CreateAliasRequest(input *CreateAliasInput) (req *request.Request, output *CreateAliasOutput) {
-	op := &request.Operation{
+func (c *KMS) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *CreateAliasOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -232,7 +231,7 @@ func (c *KMS) CreateAlias(input *CreateAliasInput) (*CreateAliasOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...request.Option) (*CreateAliasOutput, error) {
+func (c *KMS) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*CreateAliasOutput, error) {
 	req, out := c.CreateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -241,7 +240,7 @@ func (c *KMS) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, o
 
 const opCreateGrant = "CreateGrant"
 
-// CreateGrantRequest generates a "aws/request.Request" representing the
+// CreateGrantRequest generates a "aws.Request" representing the
 // client's request for the CreateGrant operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -265,8 +264,8 @@ const opCreateGrant = "CreateGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrant
-func (c *KMS) CreateGrantRequest(input *CreateGrantInput) (req *request.Request, output *CreateGrantOutput) {
-	op := &request.Operation{
+func (c *KMS) CreateGrantRequest(input *CreateGrantInput) (req *aws.Request, output *CreateGrantOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGrant,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -346,7 +345,7 @@ func (c *KMS) CreateGrant(input *CreateGrantInput) (*CreateGrantOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) CreateGrantWithContext(ctx aws.Context, input *CreateGrantInput, opts ...request.Option) (*CreateGrantOutput, error) {
+func (c *KMS) CreateGrantWithContext(ctx aws.Context, input *CreateGrantInput, opts ...aws.Option) (*CreateGrantOutput, error) {
 	req, out := c.CreateGrantRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -355,7 +354,7 @@ func (c *KMS) CreateGrantWithContext(ctx aws.Context, input *CreateGrantInput, o
 
 const opCreateKey = "CreateKey"
 
-// CreateKeyRequest generates a "aws/request.Request" representing the
+// CreateKeyRequest generates a "aws.Request" representing the
 // client's request for the CreateKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -379,8 +378,8 @@ const opCreateKey = "CreateKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey
-func (c *KMS) CreateKeyRequest(input *CreateKeyInput) (req *request.Request, output *CreateKeyOutput) {
-	op := &request.Operation{
+func (c *KMS) CreateKeyRequest(input *CreateKeyInput) (req *aws.Request, output *CreateKeyOutput) {
+	op := &aws.Operation{
 		Name:       opCreateKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -459,7 +458,7 @@ func (c *KMS) CreateKey(input *CreateKeyInput) (*CreateKeyOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) CreateKeyWithContext(ctx aws.Context, input *CreateKeyInput, opts ...request.Option) (*CreateKeyOutput, error) {
+func (c *KMS) CreateKeyWithContext(ctx aws.Context, input *CreateKeyInput, opts ...aws.Option) (*CreateKeyOutput, error) {
 	req, out := c.CreateKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -468,7 +467,7 @@ func (c *KMS) CreateKeyWithContext(ctx aws.Context, input *CreateKeyInput, opts 
 
 const opDecrypt = "Decrypt"
 
-// DecryptRequest generates a "aws/request.Request" representing the
+// DecryptRequest generates a "aws.Request" representing the
 // client's request for the Decrypt operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -492,8 +491,8 @@ const opDecrypt = "Decrypt"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decrypt
-func (c *KMS) DecryptRequest(input *DecryptInput) (req *request.Request, output *DecryptOutput) {
-	op := &request.Operation{
+func (c *KMS) DecryptRequest(input *DecryptInput) (req *aws.Request, output *DecryptOutput) {
+	op := &aws.Operation{
 		Name:       opDecrypt,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -585,7 +584,7 @@ func (c *KMS) Decrypt(input *DecryptInput) (*DecryptOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) DecryptWithContext(ctx aws.Context, input *DecryptInput, opts ...request.Option) (*DecryptOutput, error) {
+func (c *KMS) DecryptWithContext(ctx aws.Context, input *DecryptInput, opts ...aws.Option) (*DecryptOutput, error) {
 	req, out := c.DecryptRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -594,7 +593,7 @@ func (c *KMS) DecryptWithContext(ctx aws.Context, input *DecryptInput, opts ...r
 
 const opDeleteAlias = "DeleteAlias"
 
-// DeleteAliasRequest generates a "aws/request.Request" representing the
+// DeleteAliasRequest generates a "aws.Request" representing the
 // client's request for the DeleteAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -618,8 +617,8 @@ const opDeleteAlias = "DeleteAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAlias
-func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) (req *request.Request, output *DeleteAliasOutput) {
-	op := &request.Operation{
+func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, output *DeleteAliasOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -683,7 +682,7 @@ func (c *KMS) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...request.Option) (*DeleteAliasOutput, error) {
+func (c *KMS) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...aws.Option) (*DeleteAliasOutput, error) {
 	req, out := c.DeleteAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -692,7 +691,7 @@ func (c *KMS) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, o
 
 const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 
-// DeleteImportedKeyMaterialRequest generates a "aws/request.Request" representing the
+// DeleteImportedKeyMaterialRequest generates a "aws.Request" representing the
 // client's request for the DeleteImportedKeyMaterial operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -716,8 +715,8 @@ const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterial
-func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialInput) (req *request.Request, output *DeleteImportedKeyMaterialOutput) {
-	op := &request.Operation{
+func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialInput) (req *aws.Request, output *DeleteImportedKeyMaterialOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteImportedKeyMaterial,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -797,7 +796,7 @@ func (c *KMS) DeleteImportedKeyMaterial(input *DeleteImportedKeyMaterialInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) DeleteImportedKeyMaterialWithContext(ctx aws.Context, input *DeleteImportedKeyMaterialInput, opts ...request.Option) (*DeleteImportedKeyMaterialOutput, error) {
+func (c *KMS) DeleteImportedKeyMaterialWithContext(ctx aws.Context, input *DeleteImportedKeyMaterialInput, opts ...aws.Option) (*DeleteImportedKeyMaterialOutput, error) {
 	req, out := c.DeleteImportedKeyMaterialRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -806,7 +805,7 @@ func (c *KMS) DeleteImportedKeyMaterialWithContext(ctx aws.Context, input *Delet
 
 const opDescribeKey = "DescribeKey"
 
-// DescribeKeyRequest generates a "aws/request.Request" representing the
+// DescribeKeyRequest generates a "aws.Request" representing the
 // client's request for the DescribeKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -830,8 +829,8 @@ const opDescribeKey = "DescribeKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey
-func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) (req *request.Request, output *DescribeKeyOutput) {
-	op := &request.Operation{
+func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) (req *aws.Request, output *DescribeKeyOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -888,7 +887,7 @@ func (c *KMS) DescribeKey(input *DescribeKeyInput) (*DescribeKeyOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) DescribeKeyWithContext(ctx aws.Context, input *DescribeKeyInput, opts ...request.Option) (*DescribeKeyOutput, error) {
+func (c *KMS) DescribeKeyWithContext(ctx aws.Context, input *DescribeKeyInput, opts ...aws.Option) (*DescribeKeyOutput, error) {
 	req, out := c.DescribeKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -897,7 +896,7 @@ func (c *KMS) DescribeKeyWithContext(ctx aws.Context, input *DescribeKeyInput, o
 
 const opDisableKey = "DisableKey"
 
-// DisableKeyRequest generates a "aws/request.Request" representing the
+// DisableKeyRequest generates a "aws.Request" representing the
 // client's request for the DisableKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -921,8 +920,8 @@ const opDisableKey = "DisableKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKey
-func (c *KMS) DisableKeyRequest(input *DisableKeyInput) (req *request.Request, output *DisableKeyOutput) {
-	op := &request.Operation{
+func (c *KMS) DisableKeyRequest(input *DisableKeyInput) (req *aws.Request, output *DisableKeyOutput) {
+	op := &aws.Operation{
 		Name:       opDisableKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -993,7 +992,7 @@ func (c *KMS) DisableKey(input *DisableKeyInput) (*DisableKeyOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) DisableKeyWithContext(ctx aws.Context, input *DisableKeyInput, opts ...request.Option) (*DisableKeyOutput, error) {
+func (c *KMS) DisableKeyWithContext(ctx aws.Context, input *DisableKeyInput, opts ...aws.Option) (*DisableKeyOutput, error) {
 	req, out := c.DisableKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1002,7 +1001,7 @@ func (c *KMS) DisableKeyWithContext(ctx aws.Context, input *DisableKeyInput, opt
 
 const opDisableKeyRotation = "DisableKeyRotation"
 
-// DisableKeyRotationRequest generates a "aws/request.Request" representing the
+// DisableKeyRotationRequest generates a "aws.Request" representing the
 // client's request for the DisableKeyRotation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1026,8 +1025,8 @@ const opDisableKeyRotation = "DisableKeyRotation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotation
-func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) (req *request.Request, output *DisableKeyRotationOutput) {
-	op := &request.Operation{
+func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) (req *aws.Request, output *DisableKeyRotationOutput) {
+	op := &aws.Operation{
 		Name:       opDisableKeyRotation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1101,7 +1100,7 @@ func (c *KMS) DisableKeyRotation(input *DisableKeyRotationInput) (*DisableKeyRot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) DisableKeyRotationWithContext(ctx aws.Context, input *DisableKeyRotationInput, opts ...request.Option) (*DisableKeyRotationOutput, error) {
+func (c *KMS) DisableKeyRotationWithContext(ctx aws.Context, input *DisableKeyRotationInput, opts ...aws.Option) (*DisableKeyRotationOutput, error) {
 	req, out := c.DisableKeyRotationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1110,7 +1109,7 @@ func (c *KMS) DisableKeyRotationWithContext(ctx aws.Context, input *DisableKeyRo
 
 const opEnableKey = "EnableKey"
 
-// EnableKeyRequest generates a "aws/request.Request" representing the
+// EnableKeyRequest generates a "aws.Request" representing the
 // client's request for the EnableKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1134,8 +1133,8 @@ const opEnableKey = "EnableKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKey
-func (c *KMS) EnableKeyRequest(input *EnableKeyInput) (req *request.Request, output *EnableKeyOutput) {
-	op := &request.Operation{
+func (c *KMS) EnableKeyRequest(input *EnableKeyInput) (req *aws.Request, output *EnableKeyOutput) {
+	op := &aws.Operation{
 		Name:       opEnableKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1207,7 +1206,7 @@ func (c *KMS) EnableKey(input *EnableKeyInput) (*EnableKeyOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) EnableKeyWithContext(ctx aws.Context, input *EnableKeyInput, opts ...request.Option) (*EnableKeyOutput, error) {
+func (c *KMS) EnableKeyWithContext(ctx aws.Context, input *EnableKeyInput, opts ...aws.Option) (*EnableKeyOutput, error) {
 	req, out := c.EnableKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1216,7 +1215,7 @@ func (c *KMS) EnableKeyWithContext(ctx aws.Context, input *EnableKeyInput, opts 
 
 const opEnableKeyRotation = "EnableKeyRotation"
 
-// EnableKeyRotationRequest generates a "aws/request.Request" representing the
+// EnableKeyRotationRequest generates a "aws.Request" representing the
 // client's request for the EnableKeyRotation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1240,8 +1239,8 @@ const opEnableKeyRotation = "EnableKeyRotation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotation
-func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) (req *request.Request, output *EnableKeyRotationOutput) {
-	op := &request.Operation{
+func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) (req *aws.Request, output *EnableKeyRotationOutput) {
+	op := &aws.Operation{
 		Name:       opEnableKeyRotation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1315,7 +1314,7 @@ func (c *KMS) EnableKeyRotation(input *EnableKeyRotationInput) (*EnableKeyRotati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) EnableKeyRotationWithContext(ctx aws.Context, input *EnableKeyRotationInput, opts ...request.Option) (*EnableKeyRotationOutput, error) {
+func (c *KMS) EnableKeyRotationWithContext(ctx aws.Context, input *EnableKeyRotationInput, opts ...aws.Option) (*EnableKeyRotationOutput, error) {
 	req, out := c.EnableKeyRotationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1324,7 +1323,7 @@ func (c *KMS) EnableKeyRotationWithContext(ctx aws.Context, input *EnableKeyRota
 
 const opEncrypt = "Encrypt"
 
-// EncryptRequest generates a "aws/request.Request" representing the
+// EncryptRequest generates a "aws.Request" representing the
 // client's request for the Encrypt operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1348,8 +1347,8 @@ const opEncrypt = "Encrypt"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Encrypt
-func (c *KMS) EncryptRequest(input *EncryptInput) (req *request.Request, output *EncryptOutput) {
-	op := &request.Operation{
+func (c *KMS) EncryptRequest(input *EncryptInput) (req *aws.Request, output *EncryptOutput) {
+	op := &aws.Operation{
 		Name:       opEncrypt,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1443,7 +1442,7 @@ func (c *KMS) Encrypt(input *EncryptInput) (*EncryptOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) EncryptWithContext(ctx aws.Context, input *EncryptInput, opts ...request.Option) (*EncryptOutput, error) {
+func (c *KMS) EncryptWithContext(ctx aws.Context, input *EncryptInput, opts ...aws.Option) (*EncryptOutput, error) {
 	req, out := c.EncryptRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1452,7 +1451,7 @@ func (c *KMS) EncryptWithContext(ctx aws.Context, input *EncryptInput, opts ...r
 
 const opGenerateDataKey = "GenerateDataKey"
 
-// GenerateDataKeyRequest generates a "aws/request.Request" representing the
+// GenerateDataKeyRequest generates a "aws.Request" representing the
 // client's request for the GenerateDataKey operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1476,8 +1475,8 @@ const opGenerateDataKey = "GenerateDataKey"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey
-func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) (req *request.Request, output *GenerateDataKeyOutput) {
-	op := &request.Operation{
+func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) (req *aws.Request, output *GenerateDataKeyOutput) {
+	op := &aws.Operation{
 		Name:       opGenerateDataKey,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1595,7 +1594,7 @@ func (c *KMS) GenerateDataKey(input *GenerateDataKeyInput) (*GenerateDataKeyOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) GenerateDataKeyWithContext(ctx aws.Context, input *GenerateDataKeyInput, opts ...request.Option) (*GenerateDataKeyOutput, error) {
+func (c *KMS) GenerateDataKeyWithContext(ctx aws.Context, input *GenerateDataKeyInput, opts ...aws.Option) (*GenerateDataKeyOutput, error) {
 	req, out := c.GenerateDataKeyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1604,7 +1603,7 @@ func (c *KMS) GenerateDataKeyWithContext(ctx aws.Context, input *GenerateDataKey
 
 const opGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
 
-// GenerateDataKeyWithoutPlaintextRequest generates a "aws/request.Request" representing the
+// GenerateDataKeyWithoutPlaintextRequest generates a "aws.Request" representing the
 // client's request for the GenerateDataKeyWithoutPlaintext operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1628,8 +1627,8 @@ const opGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintext
-func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWithoutPlaintextInput) (req *request.Request, output *GenerateDataKeyWithoutPlaintextOutput) {
-	op := &request.Operation{
+func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWithoutPlaintextInput) (req *aws.Request, output *GenerateDataKeyWithoutPlaintextOutput) {
+	op := &aws.Operation{
 		Name:       opGenerateDataKeyWithoutPlaintext,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1718,7 +1717,7 @@ func (c *KMS) GenerateDataKeyWithoutPlaintext(input *GenerateDataKeyWithoutPlain
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) GenerateDataKeyWithoutPlaintextWithContext(ctx aws.Context, input *GenerateDataKeyWithoutPlaintextInput, opts ...request.Option) (*GenerateDataKeyWithoutPlaintextOutput, error) {
+func (c *KMS) GenerateDataKeyWithoutPlaintextWithContext(ctx aws.Context, input *GenerateDataKeyWithoutPlaintextInput, opts ...aws.Option) (*GenerateDataKeyWithoutPlaintextOutput, error) {
 	req, out := c.GenerateDataKeyWithoutPlaintextRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1727,7 +1726,7 @@ func (c *KMS) GenerateDataKeyWithoutPlaintextWithContext(ctx aws.Context, input 
 
 const opGenerateRandom = "GenerateRandom"
 
-// GenerateRandomRequest generates a "aws/request.Request" representing the
+// GenerateRandomRequest generates a "aws.Request" representing the
 // client's request for the GenerateRandom operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1751,8 +1750,8 @@ const opGenerateRandom = "GenerateRandom"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandom
-func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) (req *request.Request, output *GenerateRandomOutput) {
-	op := &request.Operation{
+func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) (req *aws.Request, output *GenerateRandomOutput) {
+	op := &aws.Operation{
 		Name:       opGenerateRandom,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1806,7 +1805,7 @@ func (c *KMS) GenerateRandom(input *GenerateRandomInput) (*GenerateRandomOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) GenerateRandomWithContext(ctx aws.Context, input *GenerateRandomInput, opts ...request.Option) (*GenerateRandomOutput, error) {
+func (c *KMS) GenerateRandomWithContext(ctx aws.Context, input *GenerateRandomInput, opts ...aws.Option) (*GenerateRandomOutput, error) {
 	req, out := c.GenerateRandomRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1815,7 +1814,7 @@ func (c *KMS) GenerateRandomWithContext(ctx aws.Context, input *GenerateRandomIn
 
 const opGetKeyPolicy = "GetKeyPolicy"
 
-// GetKeyPolicyRequest generates a "aws/request.Request" representing the
+// GetKeyPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetKeyPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1839,8 +1838,8 @@ const opGetKeyPolicy = "GetKeyPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicy
-func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) (req *request.Request, output *GetKeyPolicyOutput) {
-	op := &request.Operation{
+func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) (req *aws.Request, output *GetKeyPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetKeyPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1905,7 +1904,7 @@ func (c *KMS) GetKeyPolicy(input *GetKeyPolicyInput) (*GetKeyPolicyOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) GetKeyPolicyWithContext(ctx aws.Context, input *GetKeyPolicyInput, opts ...request.Option) (*GetKeyPolicyOutput, error) {
+func (c *KMS) GetKeyPolicyWithContext(ctx aws.Context, input *GetKeyPolicyInput, opts ...aws.Option) (*GetKeyPolicyOutput, error) {
 	req, out := c.GetKeyPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1914,7 +1913,7 @@ func (c *KMS) GetKeyPolicyWithContext(ctx aws.Context, input *GetKeyPolicyInput,
 
 const opGetKeyRotationStatus = "GetKeyRotationStatus"
 
-// GetKeyRotationStatusRequest generates a "aws/request.Request" representing the
+// GetKeyRotationStatusRequest generates a "aws.Request" representing the
 // client's request for the GetKeyRotationStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1938,8 +1937,8 @@ const opGetKeyRotationStatus = "GetKeyRotationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatus
-func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) (req *request.Request, output *GetKeyRotationStatusOutput) {
-	op := &request.Operation{
+func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) (req *aws.Request, output *GetKeyRotationStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetKeyRotationStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2009,7 +2008,7 @@ func (c *KMS) GetKeyRotationStatus(input *GetKeyRotationStatusInput) (*GetKeyRot
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) GetKeyRotationStatusWithContext(ctx aws.Context, input *GetKeyRotationStatusInput, opts ...request.Option) (*GetKeyRotationStatusOutput, error) {
+func (c *KMS) GetKeyRotationStatusWithContext(ctx aws.Context, input *GetKeyRotationStatusInput, opts ...aws.Option) (*GetKeyRotationStatusOutput, error) {
 	req, out := c.GetKeyRotationStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2018,7 +2017,7 @@ func (c *KMS) GetKeyRotationStatusWithContext(ctx aws.Context, input *GetKeyRota
 
 const opGetParametersForImport = "GetParametersForImport"
 
-// GetParametersForImportRequest generates a "aws/request.Request" representing the
+// GetParametersForImportRequest generates a "aws.Request" representing the
 // client's request for the GetParametersForImport operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2042,8 +2041,8 @@ const opGetParametersForImport = "GetParametersForImport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImport
-func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) (req *request.Request, output *GetParametersForImportOutput) {
-	op := &request.Operation{
+func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) (req *aws.Request, output *GetParametersForImportOutput) {
+	op := &aws.Operation{
 		Name:       opGetParametersForImport,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2127,7 +2126,7 @@ func (c *KMS) GetParametersForImport(input *GetParametersForImportInput) (*GetPa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) GetParametersForImportWithContext(ctx aws.Context, input *GetParametersForImportInput, opts ...request.Option) (*GetParametersForImportOutput, error) {
+func (c *KMS) GetParametersForImportWithContext(ctx aws.Context, input *GetParametersForImportInput, opts ...aws.Option) (*GetParametersForImportOutput, error) {
 	req, out := c.GetParametersForImportRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2136,7 +2135,7 @@ func (c *KMS) GetParametersForImportWithContext(ctx aws.Context, input *GetParam
 
 const opImportKeyMaterial = "ImportKeyMaterial"
 
-// ImportKeyMaterialRequest generates a "aws/request.Request" representing the
+// ImportKeyMaterialRequest generates a "aws.Request" representing the
 // client's request for the ImportKeyMaterial operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2160,8 +2159,8 @@ const opImportKeyMaterial = "ImportKeyMaterial"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterial
-func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) (req *request.Request, output *ImportKeyMaterialOutput) {
-	op := &request.Operation{
+func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) (req *aws.Request, output *ImportKeyMaterialOutput) {
+	op := &aws.Operation{
 		Name:       opImportKeyMaterial,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2269,7 +2268,7 @@ func (c *KMS) ImportKeyMaterial(input *ImportKeyMaterialInput) (*ImportKeyMateri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ImportKeyMaterialWithContext(ctx aws.Context, input *ImportKeyMaterialInput, opts ...request.Option) (*ImportKeyMaterialOutput, error) {
+func (c *KMS) ImportKeyMaterialWithContext(ctx aws.Context, input *ImportKeyMaterialInput, opts ...aws.Option) (*ImportKeyMaterialOutput, error) {
 	req, out := c.ImportKeyMaterialRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2278,7 +2277,7 @@ func (c *KMS) ImportKeyMaterialWithContext(ctx aws.Context, input *ImportKeyMate
 
 const opListAliases = "ListAliases"
 
-// ListAliasesRequest generates a "aws/request.Request" representing the
+// ListAliasesRequest generates a "aws.Request" representing the
 // client's request for the ListAliases operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2302,12 +2301,12 @@ const opListAliases = "ListAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliases
-func (c *KMS) ListAliasesRequest(input *ListAliasesInput) (req *request.Request, output *ListAliasesOutput) {
-	op := &request.Operation{
+func (c *KMS) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, output *ListAliasesOutput) {
+	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "Limit",
@@ -2363,7 +2362,7 @@ func (c *KMS) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...request.Option) (*ListAliasesOutput, error) {
+func (c *KMS) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...aws.Option) (*ListAliasesOutput, error) {
 	req, out := c.ListAliasesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2398,9 +2397,9 @@ func (c *KMS) ListAliasesPages(input *ListAliasesInput, fn func(*ListAliasesOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListAliasesPagesWithContext(ctx aws.Context, input *ListAliasesInput, fn func(*ListAliasesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *KMS) ListAliasesPagesWithContext(ctx aws.Context, input *ListAliasesInput, fn func(*ListAliasesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAliasesInput
 			if input != nil {
 				tmp := *input
@@ -2422,7 +2421,7 @@ func (c *KMS) ListAliasesPagesWithContext(ctx aws.Context, input *ListAliasesInp
 
 const opListGrants = "ListGrants"
 
-// ListGrantsRequest generates a "aws/request.Request" representing the
+// ListGrantsRequest generates a "aws.Request" representing the
 // client's request for the ListGrants operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2446,12 +2445,12 @@ const opListGrants = "ListGrants"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrants
-func (c *KMS) ListGrantsRequest(input *ListGrantsInput) (req *request.Request, output *ListGrantsResponse) {
-	op := &request.Operation{
+func (c *KMS) ListGrantsRequest(input *ListGrantsInput) (req *aws.Request, output *ListGrantsResponse) {
+	op := &aws.Operation{
 		Name:       opListGrants,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "Limit",
@@ -2522,7 +2521,7 @@ func (c *KMS) ListGrants(input *ListGrantsInput) (*ListGrantsResponse, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListGrantsWithContext(ctx aws.Context, input *ListGrantsInput, opts ...request.Option) (*ListGrantsResponse, error) {
+func (c *KMS) ListGrantsWithContext(ctx aws.Context, input *ListGrantsInput, opts ...aws.Option) (*ListGrantsResponse, error) {
 	req, out := c.ListGrantsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2557,9 +2556,9 @@ func (c *KMS) ListGrantsPages(input *ListGrantsInput, fn func(*ListGrantsRespons
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListGrantsPagesWithContext(ctx aws.Context, input *ListGrantsInput, fn func(*ListGrantsResponse, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *KMS) ListGrantsPagesWithContext(ctx aws.Context, input *ListGrantsInput, fn func(*ListGrantsResponse, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGrantsInput
 			if input != nil {
 				tmp := *input
@@ -2581,7 +2580,7 @@ func (c *KMS) ListGrantsPagesWithContext(ctx aws.Context, input *ListGrantsInput
 
 const opListKeyPolicies = "ListKeyPolicies"
 
-// ListKeyPoliciesRequest generates a "aws/request.Request" representing the
+// ListKeyPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListKeyPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2605,12 +2604,12 @@ const opListKeyPolicies = "ListKeyPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPolicies
-func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) (req *request.Request, output *ListKeyPoliciesOutput) {
-	op := &request.Operation{
+func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) (req *aws.Request, output *ListKeyPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListKeyPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "Limit",
@@ -2677,7 +2676,7 @@ func (c *KMS) ListKeyPolicies(input *ListKeyPoliciesInput) (*ListKeyPoliciesOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListKeyPoliciesWithContext(ctx aws.Context, input *ListKeyPoliciesInput, opts ...request.Option) (*ListKeyPoliciesOutput, error) {
+func (c *KMS) ListKeyPoliciesWithContext(ctx aws.Context, input *ListKeyPoliciesInput, opts ...aws.Option) (*ListKeyPoliciesOutput, error) {
 	req, out := c.ListKeyPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2712,9 +2711,9 @@ func (c *KMS) ListKeyPoliciesPages(input *ListKeyPoliciesInput, fn func(*ListKey
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListKeyPoliciesPagesWithContext(ctx aws.Context, input *ListKeyPoliciesInput, fn func(*ListKeyPoliciesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *KMS) ListKeyPoliciesPagesWithContext(ctx aws.Context, input *ListKeyPoliciesInput, fn func(*ListKeyPoliciesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListKeyPoliciesInput
 			if input != nil {
 				tmp := *input
@@ -2736,7 +2735,7 @@ func (c *KMS) ListKeyPoliciesPagesWithContext(ctx aws.Context, input *ListKeyPol
 
 const opListKeys = "ListKeys"
 
-// ListKeysRequest generates a "aws/request.Request" representing the
+// ListKeysRequest generates a "aws.Request" representing the
 // client's request for the ListKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2760,12 +2759,12 @@ const opListKeys = "ListKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeys
-func (c *KMS) ListKeysRequest(input *ListKeysInput) (req *request.Request, output *ListKeysOutput) {
-	op := &request.Operation{
+func (c *KMS) ListKeysRequest(input *ListKeysInput) (req *aws.Request, output *ListKeysOutput) {
+	op := &aws.Operation{
 		Name:       opListKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "Limit",
@@ -2821,7 +2820,7 @@ func (c *KMS) ListKeys(input *ListKeysInput) (*ListKeysOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListKeysWithContext(ctx aws.Context, input *ListKeysInput, opts ...request.Option) (*ListKeysOutput, error) {
+func (c *KMS) ListKeysWithContext(ctx aws.Context, input *ListKeysInput, opts ...aws.Option) (*ListKeysOutput, error) {
 	req, out := c.ListKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2856,9 +2855,9 @@ func (c *KMS) ListKeysPages(input *ListKeysInput, fn func(*ListKeysOutput, bool)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListKeysPagesWithContext(ctx aws.Context, input *ListKeysInput, fn func(*ListKeysOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *KMS) ListKeysPagesWithContext(ctx aws.Context, input *ListKeysInput, fn func(*ListKeysOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListKeysInput
 			if input != nil {
 				tmp := *input
@@ -2880,7 +2879,7 @@ func (c *KMS) ListKeysPagesWithContext(ctx aws.Context, input *ListKeysInput, fn
 
 const opListResourceTags = "ListResourceTags"
 
-// ListResourceTagsRequest generates a "aws/request.Request" representing the
+// ListResourceTagsRequest generates a "aws.Request" representing the
 // client's request for the ListResourceTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2904,8 +2903,8 @@ const opListResourceTags = "ListResourceTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTags
-func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) (req *request.Request, output *ListResourceTagsOutput) {
-	op := &request.Operation{
+func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) (req *aws.Request, output *ListResourceTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListResourceTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2962,7 +2961,7 @@ func (c *KMS) ListResourceTags(input *ListResourceTagsInput) (*ListResourceTagsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListResourceTagsWithContext(ctx aws.Context, input *ListResourceTagsInput, opts ...request.Option) (*ListResourceTagsOutput, error) {
+func (c *KMS) ListResourceTagsWithContext(ctx aws.Context, input *ListResourceTagsInput, opts ...aws.Option) (*ListResourceTagsOutput, error) {
 	req, out := c.ListResourceTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2971,7 +2970,7 @@ func (c *KMS) ListResourceTagsWithContext(ctx aws.Context, input *ListResourceTa
 
 const opListRetirableGrants = "ListRetirableGrants"
 
-// ListRetirableGrantsRequest generates a "aws/request.Request" representing the
+// ListRetirableGrantsRequest generates a "aws.Request" representing the
 // client's request for the ListRetirableGrants operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2995,8 +2994,8 @@ const opListRetirableGrants = "ListRetirableGrants"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrants
-func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) (req *request.Request, output *ListGrantsResponse) {
-	op := &request.Operation{
+func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) (req *aws.Request, output *ListGrantsResponse) {
+	op := &aws.Operation{
 		Name:       opListRetirableGrants,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3061,7 +3060,7 @@ func (c *KMS) ListRetirableGrants(input *ListRetirableGrantsInput) (*ListGrantsR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ListRetirableGrantsWithContext(ctx aws.Context, input *ListRetirableGrantsInput, opts ...request.Option) (*ListGrantsResponse, error) {
+func (c *KMS) ListRetirableGrantsWithContext(ctx aws.Context, input *ListRetirableGrantsInput, opts ...aws.Option) (*ListGrantsResponse, error) {
 	req, out := c.ListRetirableGrantsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3070,7 +3069,7 @@ func (c *KMS) ListRetirableGrantsWithContext(ctx aws.Context, input *ListRetirab
 
 const opPutKeyPolicy = "PutKeyPolicy"
 
-// PutKeyPolicyRequest generates a "aws/request.Request" representing the
+// PutKeyPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutKeyPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3094,8 +3093,8 @@ const opPutKeyPolicy = "PutKeyPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicy
-func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) (req *request.Request, output *PutKeyPolicyOutput) {
-	op := &request.Operation{
+func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) (req *aws.Request, output *PutKeyPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutKeyPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3178,7 +3177,7 @@ func (c *KMS) PutKeyPolicy(input *PutKeyPolicyInput) (*PutKeyPolicyOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) PutKeyPolicyWithContext(ctx aws.Context, input *PutKeyPolicyInput, opts ...request.Option) (*PutKeyPolicyOutput, error) {
+func (c *KMS) PutKeyPolicyWithContext(ctx aws.Context, input *PutKeyPolicyInput, opts ...aws.Option) (*PutKeyPolicyOutput, error) {
 	req, out := c.PutKeyPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3187,7 +3186,7 @@ func (c *KMS) PutKeyPolicyWithContext(ctx aws.Context, input *PutKeyPolicyInput,
 
 const opReEncrypt = "ReEncrypt"
 
-// ReEncryptRequest generates a "aws/request.Request" representing the
+// ReEncryptRequest generates a "aws.Request" representing the
 // client's request for the ReEncrypt operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3211,8 +3210,8 @@ const opReEncrypt = "ReEncrypt"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncrypt
-func (c *KMS) ReEncryptRequest(input *ReEncryptInput) (req *request.Request, output *ReEncryptOutput) {
-	op := &request.Operation{
+func (c *KMS) ReEncryptRequest(input *ReEncryptInput) (req *aws.Request, output *ReEncryptOutput) {
+	op := &aws.Operation{
 		Name:       opReEncrypt,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3302,7 +3301,7 @@ func (c *KMS) ReEncrypt(input *ReEncryptInput) (*ReEncryptOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ReEncryptWithContext(ctx aws.Context, input *ReEncryptInput, opts ...request.Option) (*ReEncryptOutput, error) {
+func (c *KMS) ReEncryptWithContext(ctx aws.Context, input *ReEncryptInput, opts ...aws.Option) (*ReEncryptOutput, error) {
 	req, out := c.ReEncryptRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3311,7 +3310,7 @@ func (c *KMS) ReEncryptWithContext(ctx aws.Context, input *ReEncryptInput, opts 
 
 const opRetireGrant = "RetireGrant"
 
-// RetireGrantRequest generates a "aws/request.Request" representing the
+// RetireGrantRequest generates a "aws.Request" representing the
 // client's request for the RetireGrant operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3335,8 +3334,8 @@ const opRetireGrant = "RetireGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrant
-func (c *KMS) RetireGrantRequest(input *RetireGrantInput) (req *request.Request, output *RetireGrantOutput) {
-	op := &request.Operation{
+func (c *KMS) RetireGrantRequest(input *RetireGrantInput) (req *aws.Request, output *RetireGrantOutput) {
+	op := &aws.Operation{
 		Name:       opRetireGrant,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3421,7 +3420,7 @@ func (c *KMS) RetireGrant(input *RetireGrantInput) (*RetireGrantOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) RetireGrantWithContext(ctx aws.Context, input *RetireGrantInput, opts ...request.Option) (*RetireGrantOutput, error) {
+func (c *KMS) RetireGrantWithContext(ctx aws.Context, input *RetireGrantInput, opts ...aws.Option) (*RetireGrantOutput, error) {
 	req, out := c.RetireGrantRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3430,7 +3429,7 @@ func (c *KMS) RetireGrantWithContext(ctx aws.Context, input *RetireGrantInput, o
 
 const opRevokeGrant = "RevokeGrant"
 
-// RevokeGrantRequest generates a "aws/request.Request" representing the
+// RevokeGrantRequest generates a "aws.Request" representing the
 // client's request for the RevokeGrant operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3454,8 +3453,8 @@ const opRevokeGrant = "RevokeGrant"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrant
-func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) (req *request.Request, output *RevokeGrantOutput) {
-	op := &request.Operation{
+func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) (req *aws.Request, output *RevokeGrantOutput) {
+	op := &aws.Operation{
 		Name:       opRevokeGrant,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3526,7 +3525,7 @@ func (c *KMS) RevokeGrant(input *RevokeGrantInput) (*RevokeGrantOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) RevokeGrantWithContext(ctx aws.Context, input *RevokeGrantInput, opts ...request.Option) (*RevokeGrantOutput, error) {
+func (c *KMS) RevokeGrantWithContext(ctx aws.Context, input *RevokeGrantInput, opts ...aws.Option) (*RevokeGrantOutput, error) {
 	req, out := c.RevokeGrantRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3535,7 +3534,7 @@ func (c *KMS) RevokeGrantWithContext(ctx aws.Context, input *RevokeGrantInput, o
 
 const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 
-// ScheduleKeyDeletionRequest generates a "aws/request.Request" representing the
+// ScheduleKeyDeletionRequest generates a "aws.Request" representing the
 // client's request for the ScheduleKeyDeletion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3559,8 +3558,8 @@ const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion
-func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) (req *request.Request, output *ScheduleKeyDeletionOutput) {
-	op := &request.Operation{
+func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) (req *aws.Request, output *ScheduleKeyDeletionOutput) {
+	op := &aws.Operation{
 		Name:       opScheduleKeyDeletion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3640,7 +3639,7 @@ func (c *KMS) ScheduleKeyDeletion(input *ScheduleKeyDeletionInput) (*ScheduleKey
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) ScheduleKeyDeletionWithContext(ctx aws.Context, input *ScheduleKeyDeletionInput, opts ...request.Option) (*ScheduleKeyDeletionOutput, error) {
+func (c *KMS) ScheduleKeyDeletionWithContext(ctx aws.Context, input *ScheduleKeyDeletionInput, opts ...aws.Option) (*ScheduleKeyDeletionOutput, error) {
 	req, out := c.ScheduleKeyDeletionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3649,7 +3648,7 @@ func (c *KMS) ScheduleKeyDeletionWithContext(ctx aws.Context, input *ScheduleKey
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3673,8 +3672,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResource
-func (c *KMS) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *KMS) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3755,7 +3754,7 @@ func (c *KMS) TagResource(input *TagResourceInput) (*TagResourceOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *KMS) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3764,7 +3763,7 @@ func (c *KMS) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, o
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3788,8 +3787,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResource
-func (c *KMS) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *KMS) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3860,7 +3859,7 @@ func (c *KMS) UntagResource(input *UntagResourceInput) (*UntagResourceOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *KMS) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3869,7 +3868,7 @@ func (c *KMS) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInpu
 
 const opUpdateAlias = "UpdateAlias"
 
-// UpdateAliasRequest generates a "aws/request.Request" representing the
+// UpdateAliasRequest generates a "aws.Request" representing the
 // client's request for the UpdateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3893,8 +3892,8 @@ const opUpdateAlias = "UpdateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAlias
-func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) (req *request.Request, output *UpdateAliasOutput) {
-	op := &request.Operation{
+func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, output *UpdateAliasOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3970,7 +3969,7 @@ func (c *KMS) UpdateAlias(input *UpdateAliasInput) (*UpdateAliasOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...request.Option) (*UpdateAliasOutput, error) {
+func (c *KMS) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...aws.Option) (*UpdateAliasOutput, error) {
 	req, out := c.UpdateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3979,7 +3978,7 @@ func (c *KMS) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, o
 
 const opUpdateKeyDescription = "UpdateKeyDescription"
 
-// UpdateKeyDescriptionRequest generates a "aws/request.Request" representing the
+// UpdateKeyDescriptionRequest generates a "aws.Request" representing the
 // client's request for the UpdateKeyDescription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4003,8 +4002,8 @@ const opUpdateKeyDescription = "UpdateKeyDescription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescription
-func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) (req *request.Request, output *UpdateKeyDescriptionOutput) {
-	op := &request.Operation{
+func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) (req *aws.Request, output *UpdateKeyDescriptionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateKeyDescription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4071,7 +4070,7 @@ func (c *KMS) UpdateKeyDescription(input *UpdateKeyDescriptionInput) (*UpdateKey
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *KMS) UpdateKeyDescriptionWithContext(ctx aws.Context, input *UpdateKeyDescriptionInput, opts ...request.Option) (*UpdateKeyDescriptionOutput, error) {
+func (c *KMS) UpdateKeyDescriptionWithContext(ctx aws.Context, input *UpdateKeyDescriptionInput, opts ...aws.Option) (*UpdateKeyDescriptionOutput, error) {
 	req, out := c.UpdateKeyDescriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4154,12 +4153,12 @@ func (s CancelKeyDeletionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelKeyDeletionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelKeyDeletionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelKeyDeletionInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4233,18 +4232,18 @@ func (s CreateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
 	if s.AliasName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasName"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
 	}
 	if s.AliasName != nil && len(*s.AliasName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AliasName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
 	}
 	if s.TargetKeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetKeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetKeyId"))
 	}
 	if s.TargetKeyId != nil && len(*s.TargetKeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetKeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetKeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4363,24 +4362,24 @@ func (s CreateGrantInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGrantInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGrantInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGrantInput"}
 	if s.GranteePrincipal == nil {
-		invalidParams.Add(request.NewErrParamRequired("GranteePrincipal"))
+		invalidParams.Add(aws.NewErrParamRequired("GranteePrincipal"))
 	}
 	if s.GranteePrincipal != nil && len(*s.GranteePrincipal) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GranteePrincipal", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GranteePrincipal", 1))
 	}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RetiringPrincipal != nil && len(*s.RetiringPrincipal) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RetiringPrincipal", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RetiringPrincipal", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4557,9 +4556,9 @@ func (s CreateKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateKeyInput"}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -4567,7 +4566,7 @@ func (s *CreateKeyInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4673,12 +4672,12 @@ func (s DecryptInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DecryptInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DecryptInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DecryptInput"}
 	if s.CiphertextBlob == nil {
-		invalidParams.Add(request.NewErrParamRequired("CiphertextBlob"))
+		invalidParams.Add(aws.NewErrParamRequired("CiphertextBlob"))
 	}
 	if s.CiphertextBlob != nil && len(s.CiphertextBlob) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CiphertextBlob", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CiphertextBlob", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4765,12 +4764,12 @@ func (s DeleteAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
 	if s.AliasName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasName"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
 	}
 	if s.AliasName != nil && len(*s.AliasName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AliasName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4830,12 +4829,12 @@ func (s DeleteImportedKeyMaterialInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteImportedKeyMaterialInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteImportedKeyMaterialInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteImportedKeyMaterialInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4903,12 +4902,12 @@ func (s DescribeKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4981,12 +4980,12 @@ func (s DisableKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5043,12 +5042,12 @@ func (s DisableKeyRotationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableKeyRotationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableKeyRotationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableKeyRotationInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5105,12 +5104,12 @@ func (s EnableKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5167,12 +5166,12 @@ func (s EnableKeyRotationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableKeyRotationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableKeyRotationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableKeyRotationInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5253,18 +5252,18 @@ func (s EncryptInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EncryptInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EncryptInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Plaintext == nil {
-		invalidParams.Add(request.NewErrParamRequired("Plaintext"))
+		invalidParams.Add(aws.NewErrParamRequired("Plaintext"))
 	}
 	if s.Plaintext != nil && len(s.Plaintext) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Plaintext", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Plaintext", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5390,15 +5389,15 @@ func (s GenerateDataKeyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GenerateDataKeyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GenerateDataKeyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GenerateDataKeyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.NumberOfBytes != nil && *s.NumberOfBytes < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("NumberOfBytes", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfBytes", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5542,15 +5541,15 @@ func (s GenerateDataKeyWithoutPlaintextInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GenerateDataKeyWithoutPlaintextInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GenerateDataKeyWithoutPlaintextInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GenerateDataKeyWithoutPlaintextInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.NumberOfBytes != nil && *s.NumberOfBytes < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("NumberOfBytes", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfBytes", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5645,9 +5644,9 @@ func (s GenerateRandomInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GenerateRandomInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GenerateRandomInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GenerateRandomInput"}
 	if s.NumberOfBytes != nil && *s.NumberOfBytes < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("NumberOfBytes", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfBytes", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5721,18 +5720,18 @@ func (s GetKeyPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKeyPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetKeyPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetKeyPolicyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5804,12 +5803,12 @@ func (s GetKeyRotationStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKeyRotationStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetKeyRotationStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetKeyRotationStatusInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5892,18 +5891,18 @@ func (s GetParametersForImportInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParametersForImportInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetParametersForImportInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetParametersForImportInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.WrappingAlgorithm == nil {
-		invalidParams.Add(request.NewErrParamRequired("WrappingAlgorithm"))
+		invalidParams.Add(aws.NewErrParamRequired("WrappingAlgorithm"))
 	}
 	if s.WrappingKeySpec == nil {
-		invalidParams.Add(request.NewErrParamRequired("WrappingKeySpec"))
+		invalidParams.Add(aws.NewErrParamRequired("WrappingKeySpec"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6201,24 +6200,24 @@ func (s ImportKeyMaterialInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportKeyMaterialInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportKeyMaterialInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportKeyMaterialInput"}
 	if s.EncryptedKeyMaterial == nil {
-		invalidParams.Add(request.NewErrParamRequired("EncryptedKeyMaterial"))
+		invalidParams.Add(aws.NewErrParamRequired("EncryptedKeyMaterial"))
 	}
 	if s.EncryptedKeyMaterial != nil && len(s.EncryptedKeyMaterial) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EncryptedKeyMaterial", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EncryptedKeyMaterial", 1))
 	}
 	if s.ImportToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImportToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ImportToken"))
 	}
 	if s.ImportToken != nil && len(s.ImportToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImportToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImportToken", 1))
 	}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6493,12 +6492,12 @@ func (s ListAliasesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAliasesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAliasesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6605,18 +6604,18 @@ func (s ListGrantsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGrantsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListGrantsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListGrantsInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6731,18 +6730,18 @@ func (s ListKeyPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListKeyPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListKeyPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListKeyPoliciesInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6846,12 +6845,12 @@ func (s ListKeysInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListKeysInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListKeysInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListKeysInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6961,18 +6960,18 @@ func (s ListResourceTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourceTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourceTagsInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7089,18 +7088,18 @@ func (s ListRetirableGrantsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRetirableGrantsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRetirableGrantsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRetirableGrantsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.RetiringPrincipal == nil {
-		invalidParams.Add(request.NewErrParamRequired("RetiringPrincipal"))
+		invalidParams.Add(aws.NewErrParamRequired("RetiringPrincipal"))
 	}
 	if s.RetiringPrincipal != nil && len(*s.RetiringPrincipal) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RetiringPrincipal", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RetiringPrincipal", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7200,24 +7199,24 @@ func (s PutKeyPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutKeyPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutKeyPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutKeyPolicyInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Policy == nil {
-		invalidParams.Add(request.NewErrParamRequired("Policy"))
+		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7317,18 +7316,18 @@ func (s ReEncryptInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReEncryptInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReEncryptInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReEncryptInput"}
 	if s.CiphertextBlob == nil {
-		invalidParams.Add(request.NewErrParamRequired("CiphertextBlob"))
+		invalidParams.Add(aws.NewErrParamRequired("CiphertextBlob"))
 	}
 	if s.CiphertextBlob != nil && len(s.CiphertextBlob) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CiphertextBlob", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CiphertextBlob", 1))
 	}
 	if s.DestinationKeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationKeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationKeyId"))
 	}
 	if s.DestinationKeyId != nil && len(*s.DestinationKeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationKeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationKeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7442,15 +7441,15 @@ func (s RetireGrantInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetireGrantInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RetireGrantInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RetireGrantInput"}
 	if s.GrantId != nil && len(*s.GrantId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GrantId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GrantId", 1))
 	}
 	if s.GrantToken != nil && len(*s.GrantToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GrantToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GrantToken", 1))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7525,18 +7524,18 @@ func (s RevokeGrantInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RevokeGrantInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RevokeGrantInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RevokeGrantInput"}
 	if s.GrantId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GrantId"))
+		invalidParams.Add(aws.NewErrParamRequired("GrantId"))
 	}
 	if s.GrantId != nil && len(*s.GrantId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GrantId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GrantId", 1))
 	}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7611,15 +7610,15 @@ func (s ScheduleKeyDeletionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleKeyDeletionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScheduleKeyDeletionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleKeyDeletionInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.PendingWindowInDays != nil && *s.PendingWindowInDays < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PendingWindowInDays", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PendingWindowInDays", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7703,15 +7702,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.TagKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKey"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKey"))
 	}
 	if s.TagKey != nil && len(*s.TagKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagKey", 1))
 	}
 	if s.TagValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagValue"))
+		invalidParams.Add(aws.NewErrParamRequired("TagValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7764,15 +7763,15 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -7780,7 +7779,7 @@ func (s *TagResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7850,15 +7849,15 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7932,18 +7931,18 @@ func (s UpdateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
 	if s.AliasName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AliasName"))
+		invalidParams.Add(aws.NewErrParamRequired("AliasName"))
 	}
 	if s.AliasName != nil && len(*s.AliasName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AliasName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AliasName", 1))
 	}
 	if s.TargetKeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetKeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetKeyId"))
 	}
 	if s.TargetKeyId != nil && len(*s.TargetKeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetKeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetKeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8011,15 +8010,15 @@ func (s UpdateKeyDescriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateKeyDescriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateKeyDescriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateKeyDescriptionInput"}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.KeyId == nil {
-		invalidParams.Add(request.NewErrParamRequired("KeyId"))
+		invalidParams.Add(aws.NewErrParamRequired("KeyId"))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

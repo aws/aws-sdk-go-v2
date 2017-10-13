@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilLoadBalancerAvailable uses the Elastic Load Balancing v2 API operation
@@ -25,30 +24,30 @@ func (c *ELBV2) WaitUntilLoadBalancerAvailable(input *DescribeLoadBalancersInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilLoadBalancerAvailableWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELBV2) WaitUntilLoadBalancerAvailableWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancerAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "LoadBalancers[].State.Code",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "LoadBalancers[].State.Code",
 				Expected: "active",
 			},
 			{
-				State:   request.RetryWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "LoadBalancers[].State.Code",
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "LoadBalancers[].State.Code",
 				Expected: "provisioning",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "LoadBalancerNotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
@@ -81,25 +80,25 @@ func (c *ELBV2) WaitUntilLoadBalancerExists(input *DescribeLoadBalancersInput) e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilLoadBalancerExistsWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELBV2) WaitUntilLoadBalancerExistsWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancerExists",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "LoadBalancerNotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
@@ -132,25 +131,25 @@ func (c *ELBV2) WaitUntilLoadBalancersDeleted(input *DescribeLoadBalancersInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilLoadBalancersDeletedWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELBV2) WaitUntilLoadBalancersDeletedWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilLoadBalancersDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.RetryWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "LoadBalancers[].State.Code",
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "LoadBalancers[].State.Code",
 				Expected: "active",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "LoadBalancerNotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
@@ -183,25 +182,25 @@ func (c *ELBV2) WaitUntilTargetDeregistered(input *DescribeTargetHealthInput) er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilTargetDeregisteredWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELBV2) WaitUntilTargetDeregisteredWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilTargetDeregistered",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidTarget",
 			},
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "TargetHealthDescriptions[].TargetHealth.State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "TargetHealthDescriptions[].TargetHealth.State",
 				Expected: "unused",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeTargetHealthInput
 			if input != nil {
 				tmp := *input
@@ -234,25 +233,25 @@ func (c *ELBV2) WaitUntilTargetInService(input *DescribeTargetHealthInput) error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELBV2) WaitUntilTargetInServiceWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ELBV2) WaitUntilTargetInServiceWithContext(ctx aws.Context, input *DescribeTargetHealthInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilTargetInService",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "TargetHealthDescriptions[].TargetHealth.State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "TargetHealthDescriptions[].TargetHealth.State",
 				Expected: "healthy",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "InvalidInstance",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeTargetHealthInput
 			if input != nil {
 				tmp := *input

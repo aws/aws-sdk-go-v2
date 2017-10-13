@@ -15,11 +15,11 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
@@ -56,7 +56,7 @@ func loggingSvc(ignoreOps []string) (*s3.S3, *[]string, *[]interface{}) {
 	partNum := 0
 	names := []string{}
 	params := []interface{}{}
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
@@ -250,7 +250,7 @@ func TestUploadIncreasePartSize(t *testing.T) {
 }
 
 func TestUploadFailIfPartSizeTooSmall(t *testing.T) {
-	mgr := s3manager.NewUploader(unit.Session, func(u *s3manager.Uploader) {
+	mgr := s3manager.NewUploader(unit.Config, func(u *s3manager.Uploader) {
 		u.PartSize = 5
 	})
 	resp, err := mgr.Upload(&s3manager.UploadInput{
@@ -736,7 +736,7 @@ func TestUploadZeroLenObject(t *testing.T) {
 		requestMade = true
 		w.WriteHeader(http.StatusOK)
 	}))
-	mgr := s3manager.NewUploaderWithClient(s3.New(unit.Session, &aws.Config{
+	mgr := s3manager.NewUploaderWithClient(s3.New(unit.Config, &aws.Config{
 		Endpoint: aws.String(server.URL),
 	}))
 	resp, err := mgr.Upload(&s3manager.UploadInput{
@@ -886,7 +886,7 @@ func (r *fooReaderAt) ReadAt(p []byte, off int64) (n int, err error) {
 }
 
 func TestReaderAt(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
@@ -921,7 +921,7 @@ func TestReaderAt(t *testing.T) {
 }
 
 func TestSSE(t *testing.T) {
-	svc := s3.New(unit.Session)
+	svc := s3.New(unit.Config)
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
 	svc.Handlers.UnmarshalError.Clear()
@@ -977,7 +977,7 @@ func TestSSE(t *testing.T) {
 }
 
 func TestUploadWithContextCanceled(t *testing.T) {
-	u := s3manager.NewUploader(unit.Session)
+	u := s3manager.NewUploader(unit.Config)
 
 	params := s3manager.UploadInput{
 		Bucket: aws.String("Bucket"),

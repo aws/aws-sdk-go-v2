@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBuildSuggesters = "BuildSuggesters"
 
-// BuildSuggestersRequest generates a "aws/request.Request" representing the
+// BuildSuggestersRequest generates a "aws.Request" representing the
 // client's request for the BuildSuggesters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opBuildSuggesters = "BuildSuggesters"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) (req *request.Request, output *BuildSuggestersOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) (req *aws.Request, output *BuildSuggestersOutput) {
+	op := &aws.Operation{
 		Name:       opBuildSuggesters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -89,7 +88,7 @@ func (c *CloudSearch) BuildSuggesters(input *BuildSuggestersInput) (*BuildSugges
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) BuildSuggestersWithContext(ctx aws.Context, input *BuildSuggestersInput, opts ...request.Option) (*BuildSuggestersOutput, error) {
+func (c *CloudSearch) BuildSuggestersWithContext(ctx aws.Context, input *BuildSuggestersInput, opts ...aws.Option) (*BuildSuggestersOutput, error) {
 	req, out := c.BuildSuggestersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -98,7 +97,7 @@ func (c *CloudSearch) BuildSuggestersWithContext(ctx aws.Context, input *BuildSu
 
 const opCreateDomain = "CreateDomain"
 
-// CreateDomainRequest generates a "aws/request.Request" representing the
+// CreateDomainRequest generates a "aws.Request" representing the
 // client's request for the CreateDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -120,8 +119,8 @@ const opCreateDomain = "CreateDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) (req *request.Request, output *CreateDomainOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) (req *aws.Request, output *CreateDomainOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -174,7 +173,7 @@ func (c *CloudSearch) CreateDomain(input *CreateDomainInput) (*CreateDomainOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...request.Option) (*CreateDomainOutput, error) {
+func (c *CloudSearch) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...aws.Option) (*CreateDomainOutput, error) {
 	req, out := c.CreateDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -183,7 +182,7 @@ func (c *CloudSearch) CreateDomainWithContext(ctx aws.Context, input *CreateDoma
 
 const opDefineAnalysisScheme = "DefineAnalysisScheme"
 
-// DefineAnalysisSchemeRequest generates a "aws/request.Request" representing the
+// DefineAnalysisSchemeRequest generates a "aws.Request" representing the
 // client's request for the DefineAnalysisScheme operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -205,8 +204,8 @@ const opDefineAnalysisScheme = "DefineAnalysisScheme"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInput) (req *request.Request, output *DefineAnalysisSchemeOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInput) (req *aws.Request, output *DefineAnalysisSchemeOutput) {
+	op := &aws.Operation{
 		Name:       opDefineAnalysisScheme,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -267,7 +266,7 @@ func (c *CloudSearch) DefineAnalysisScheme(input *DefineAnalysisSchemeInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DefineAnalysisSchemeWithContext(ctx aws.Context, input *DefineAnalysisSchemeInput, opts ...request.Option) (*DefineAnalysisSchemeOutput, error) {
+func (c *CloudSearch) DefineAnalysisSchemeWithContext(ctx aws.Context, input *DefineAnalysisSchemeInput, opts ...aws.Option) (*DefineAnalysisSchemeOutput, error) {
 	req, out := c.DefineAnalysisSchemeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -276,7 +275,7 @@ func (c *CloudSearch) DefineAnalysisSchemeWithContext(ctx aws.Context, input *De
 
 const opDefineExpression = "DefineExpression"
 
-// DefineExpressionRequest generates a "aws/request.Request" representing the
+// DefineExpressionRequest generates a "aws.Request" representing the
 // client's request for the DefineExpression operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -298,8 +297,8 @@ const opDefineExpression = "DefineExpression"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) (req *request.Request, output *DefineExpressionOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) (req *aws.Request, output *DefineExpressionOutput) {
+	op := &aws.Operation{
 		Name:       opDefineExpression,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -360,7 +359,7 @@ func (c *CloudSearch) DefineExpression(input *DefineExpressionInput) (*DefineExp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DefineExpressionWithContext(ctx aws.Context, input *DefineExpressionInput, opts ...request.Option) (*DefineExpressionOutput, error) {
+func (c *CloudSearch) DefineExpressionWithContext(ctx aws.Context, input *DefineExpressionInput, opts ...aws.Option) (*DefineExpressionOutput, error) {
 	req, out := c.DefineExpressionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -369,7 +368,7 @@ func (c *CloudSearch) DefineExpressionWithContext(ctx aws.Context, input *Define
 
 const opDefineIndexField = "DefineIndexField"
 
-// DefineIndexFieldRequest generates a "aws/request.Request" representing the
+// DefineIndexFieldRequest generates a "aws.Request" representing the
 // client's request for the DefineIndexField operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -391,8 +390,8 @@ const opDefineIndexField = "DefineIndexField"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) (req *request.Request, output *DefineIndexFieldOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) (req *aws.Request, output *DefineIndexFieldOutput) {
+	op := &aws.Operation{
 		Name:       opDefineIndexField,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -457,7 +456,7 @@ func (c *CloudSearch) DefineIndexField(input *DefineIndexFieldInput) (*DefineInd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DefineIndexFieldWithContext(ctx aws.Context, input *DefineIndexFieldInput, opts ...request.Option) (*DefineIndexFieldOutput, error) {
+func (c *CloudSearch) DefineIndexFieldWithContext(ctx aws.Context, input *DefineIndexFieldInput, opts ...aws.Option) (*DefineIndexFieldOutput, error) {
 	req, out := c.DefineIndexFieldRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -466,7 +465,7 @@ func (c *CloudSearch) DefineIndexFieldWithContext(ctx aws.Context, input *Define
 
 const opDefineSuggester = "DefineSuggester"
 
-// DefineSuggesterRequest generates a "aws/request.Request" representing the
+// DefineSuggesterRequest generates a "aws.Request" representing the
 // client's request for the DefineSuggester operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -488,8 +487,8 @@ const opDefineSuggester = "DefineSuggester"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) (req *request.Request, output *DefineSuggesterOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) (req *aws.Request, output *DefineSuggesterOutput) {
+	op := &aws.Operation{
 		Name:       opDefineSuggester,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -552,7 +551,7 @@ func (c *CloudSearch) DefineSuggester(input *DefineSuggesterInput) (*DefineSugge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DefineSuggesterWithContext(ctx aws.Context, input *DefineSuggesterInput, opts ...request.Option) (*DefineSuggesterOutput, error) {
+func (c *CloudSearch) DefineSuggesterWithContext(ctx aws.Context, input *DefineSuggesterInput, opts ...aws.Option) (*DefineSuggesterOutput, error) {
 	req, out := c.DefineSuggesterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -561,7 +560,7 @@ func (c *CloudSearch) DefineSuggesterWithContext(ctx aws.Context, input *DefineS
 
 const opDeleteAnalysisScheme = "DeleteAnalysisScheme"
 
-// DeleteAnalysisSchemeRequest generates a "aws/request.Request" representing the
+// DeleteAnalysisSchemeRequest generates a "aws.Request" representing the
 // client's request for the DeleteAnalysisScheme operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -583,8 +582,8 @@ const opDeleteAnalysisScheme = "DeleteAnalysisScheme"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInput) (req *request.Request, output *DeleteAnalysisSchemeOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInput) (req *aws.Request, output *DeleteAnalysisSchemeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAnalysisScheme,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -641,7 +640,7 @@ func (c *CloudSearch) DeleteAnalysisScheme(input *DeleteAnalysisSchemeInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DeleteAnalysisSchemeWithContext(ctx aws.Context, input *DeleteAnalysisSchemeInput, opts ...request.Option) (*DeleteAnalysisSchemeOutput, error) {
+func (c *CloudSearch) DeleteAnalysisSchemeWithContext(ctx aws.Context, input *DeleteAnalysisSchemeInput, opts ...aws.Option) (*DeleteAnalysisSchemeOutput, error) {
 	req, out := c.DeleteAnalysisSchemeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -650,7 +649,7 @@ func (c *CloudSearch) DeleteAnalysisSchemeWithContext(ctx aws.Context, input *De
 
 const opDeleteDomain = "DeleteDomain"
 
-// DeleteDomainRequest generates a "aws/request.Request" representing the
+// DeleteDomainRequest generates a "aws.Request" representing the
 // client's request for the DeleteDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -672,8 +671,8 @@ const opDeleteDomain = "DeleteDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) (req *request.Request, output *DeleteDomainOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Request, output *DeleteDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -724,7 +723,7 @@ func (c *CloudSearch) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...request.Option) (*DeleteDomainOutput, error) {
+func (c *CloudSearch) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...aws.Option) (*DeleteDomainOutput, error) {
 	req, out := c.DeleteDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -733,7 +732,7 @@ func (c *CloudSearch) DeleteDomainWithContext(ctx aws.Context, input *DeleteDoma
 
 const opDeleteExpression = "DeleteExpression"
 
-// DeleteExpressionRequest generates a "aws/request.Request" representing the
+// DeleteExpressionRequest generates a "aws.Request" representing the
 // client's request for the DeleteExpression operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -755,8 +754,8 @@ const opDeleteExpression = "DeleteExpression"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) (req *request.Request, output *DeleteExpressionOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) (req *aws.Request, output *DeleteExpressionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteExpression,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -813,7 +812,7 @@ func (c *CloudSearch) DeleteExpression(input *DeleteExpressionInput) (*DeleteExp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DeleteExpressionWithContext(ctx aws.Context, input *DeleteExpressionInput, opts ...request.Option) (*DeleteExpressionOutput, error) {
+func (c *CloudSearch) DeleteExpressionWithContext(ctx aws.Context, input *DeleteExpressionInput, opts ...aws.Option) (*DeleteExpressionOutput, error) {
 	req, out := c.DeleteExpressionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -822,7 +821,7 @@ func (c *CloudSearch) DeleteExpressionWithContext(ctx aws.Context, input *Delete
 
 const opDeleteIndexField = "DeleteIndexField"
 
-// DeleteIndexFieldRequest generates a "aws/request.Request" representing the
+// DeleteIndexFieldRequest generates a "aws.Request" representing the
 // client's request for the DeleteIndexField operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -844,8 +843,8 @@ const opDeleteIndexField = "DeleteIndexField"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) (req *request.Request, output *DeleteIndexFieldOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) (req *aws.Request, output *DeleteIndexFieldOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIndexField,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -902,7 +901,7 @@ func (c *CloudSearch) DeleteIndexField(input *DeleteIndexFieldInput) (*DeleteInd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DeleteIndexFieldWithContext(ctx aws.Context, input *DeleteIndexFieldInput, opts ...request.Option) (*DeleteIndexFieldOutput, error) {
+func (c *CloudSearch) DeleteIndexFieldWithContext(ctx aws.Context, input *DeleteIndexFieldInput, opts ...aws.Option) (*DeleteIndexFieldOutput, error) {
 	req, out := c.DeleteIndexFieldRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -911,7 +910,7 @@ func (c *CloudSearch) DeleteIndexFieldWithContext(ctx aws.Context, input *Delete
 
 const opDeleteSuggester = "DeleteSuggester"
 
-// DeleteSuggesterRequest generates a "aws/request.Request" representing the
+// DeleteSuggesterRequest generates a "aws.Request" representing the
 // client's request for the DeleteSuggester operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -933,8 +932,8 @@ const opDeleteSuggester = "DeleteSuggester"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) (req *request.Request, output *DeleteSuggesterOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) (req *aws.Request, output *DeleteSuggesterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSuggester,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -991,7 +990,7 @@ func (c *CloudSearch) DeleteSuggester(input *DeleteSuggesterInput) (*DeleteSugge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DeleteSuggesterWithContext(ctx aws.Context, input *DeleteSuggesterInput, opts ...request.Option) (*DeleteSuggesterOutput, error) {
+func (c *CloudSearch) DeleteSuggesterWithContext(ctx aws.Context, input *DeleteSuggesterInput, opts ...aws.Option) (*DeleteSuggesterOutput, error) {
 	req, out := c.DeleteSuggesterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1000,7 +999,7 @@ func (c *CloudSearch) DeleteSuggesterWithContext(ctx aws.Context, input *DeleteS
 
 const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 
-// DescribeAnalysisSchemesRequest generates a "aws/request.Request" representing the
+// DescribeAnalysisSchemesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAnalysisSchemes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1022,8 +1021,8 @@ const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesInput) (req *request.Request, output *DescribeAnalysisSchemesOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSchemesInput) (req *aws.Request, output *DescribeAnalysisSchemesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAnalysisSchemes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1081,7 +1080,7 @@ func (c *CloudSearch) DescribeAnalysisSchemes(input *DescribeAnalysisSchemesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeAnalysisSchemesWithContext(ctx aws.Context, input *DescribeAnalysisSchemesInput, opts ...request.Option) (*DescribeAnalysisSchemesOutput, error) {
+func (c *CloudSearch) DescribeAnalysisSchemesWithContext(ctx aws.Context, input *DescribeAnalysisSchemesInput, opts ...aws.Option) (*DescribeAnalysisSchemesOutput, error) {
 	req, out := c.DescribeAnalysisSchemesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1090,7 +1089,7 @@ func (c *CloudSearch) DescribeAnalysisSchemesWithContext(ctx aws.Context, input 
 
 const opDescribeAvailabilityOptions = "DescribeAvailabilityOptions"
 
-// DescribeAvailabilityOptionsRequest generates a "aws/request.Request" representing the
+// DescribeAvailabilityOptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAvailabilityOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1112,8 +1111,8 @@ const opDescribeAvailabilityOptions = "DescribeAvailabilityOptions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabilityOptionsInput) (req *request.Request, output *DescribeAvailabilityOptionsOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabilityOptionsInput) (req *aws.Request, output *DescribeAvailabilityOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAvailabilityOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1178,7 +1177,7 @@ func (c *CloudSearch) DescribeAvailabilityOptions(input *DescribeAvailabilityOpt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeAvailabilityOptionsWithContext(ctx aws.Context, input *DescribeAvailabilityOptionsInput, opts ...request.Option) (*DescribeAvailabilityOptionsOutput, error) {
+func (c *CloudSearch) DescribeAvailabilityOptionsWithContext(ctx aws.Context, input *DescribeAvailabilityOptionsInput, opts ...aws.Option) (*DescribeAvailabilityOptionsOutput, error) {
 	req, out := c.DescribeAvailabilityOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,7 +1186,7 @@ func (c *CloudSearch) DescribeAvailabilityOptionsWithContext(ctx aws.Context, in
 
 const opDescribeDomains = "DescribeDomains"
 
-// DescribeDomainsRequest generates a "aws/request.Request" representing the
+// DescribeDomainsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDomains operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1209,8 +1208,8 @@ const opDescribeDomains = "DescribeDomains"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *request.Request, output *DescribeDomainsOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) (req *aws.Request, output *DescribeDomainsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDomains,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1263,7 +1262,7 @@ func (c *CloudSearch) DescribeDomains(input *DescribeDomainsInput) (*DescribeDom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeDomainsWithContext(ctx aws.Context, input *DescribeDomainsInput, opts ...request.Option) (*DescribeDomainsOutput, error) {
+func (c *CloudSearch) DescribeDomainsWithContext(ctx aws.Context, input *DescribeDomainsInput, opts ...aws.Option) (*DescribeDomainsOutput, error) {
 	req, out := c.DescribeDomainsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1272,7 +1271,7 @@ func (c *CloudSearch) DescribeDomainsWithContext(ctx aws.Context, input *Describ
 
 const opDescribeExpressions = "DescribeExpressions"
 
-// DescribeExpressionsRequest generates a "aws/request.Request" representing the
+// DescribeExpressionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeExpressions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1294,8 +1293,8 @@ const opDescribeExpressions = "DescribeExpressions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput) (req *request.Request, output *DescribeExpressionsOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput) (req *aws.Request, output *DescribeExpressionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeExpressions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1352,7 +1351,7 @@ func (c *CloudSearch) DescribeExpressions(input *DescribeExpressionsInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeExpressionsWithContext(ctx aws.Context, input *DescribeExpressionsInput, opts ...request.Option) (*DescribeExpressionsOutput, error) {
+func (c *CloudSearch) DescribeExpressionsWithContext(ctx aws.Context, input *DescribeExpressionsInput, opts ...aws.Option) (*DescribeExpressionsOutput, error) {
 	req, out := c.DescribeExpressionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1361,7 +1360,7 @@ func (c *CloudSearch) DescribeExpressionsWithContext(ctx aws.Context, input *Des
 
 const opDescribeIndexFields = "DescribeIndexFields"
 
-// DescribeIndexFieldsRequest generates a "aws/request.Request" representing the
+// DescribeIndexFieldsRequest generates a "aws.Request" representing the
 // client's request for the DescribeIndexFields operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1383,8 +1382,8 @@ const opDescribeIndexFields = "DescribeIndexFields"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) (req *request.Request, output *DescribeIndexFieldsOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput) (req *aws.Request, output *DescribeIndexFieldsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeIndexFields,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1441,7 +1440,7 @@ func (c *CloudSearch) DescribeIndexFields(input *DescribeIndexFieldsInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeIndexFieldsWithContext(ctx aws.Context, input *DescribeIndexFieldsInput, opts ...request.Option) (*DescribeIndexFieldsOutput, error) {
+func (c *CloudSearch) DescribeIndexFieldsWithContext(ctx aws.Context, input *DescribeIndexFieldsInput, opts ...aws.Option) (*DescribeIndexFieldsOutput, error) {
 	req, out := c.DescribeIndexFieldsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1450,7 +1449,7 @@ func (c *CloudSearch) DescribeIndexFieldsWithContext(ctx aws.Context, input *Des
 
 const opDescribeScalingParameters = "DescribeScalingParameters"
 
-// DescribeScalingParametersRequest generates a "aws/request.Request" representing the
+// DescribeScalingParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeScalingParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1472,8 +1471,8 @@ const opDescribeScalingParameters = "DescribeScalingParameters"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingParametersInput) (req *request.Request, output *DescribeScalingParametersOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingParametersInput) (req *aws.Request, output *DescribeScalingParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeScalingParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1528,7 +1527,7 @@ func (c *CloudSearch) DescribeScalingParameters(input *DescribeScalingParameters
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeScalingParametersWithContext(ctx aws.Context, input *DescribeScalingParametersInput, opts ...request.Option) (*DescribeScalingParametersOutput, error) {
+func (c *CloudSearch) DescribeScalingParametersWithContext(ctx aws.Context, input *DescribeScalingParametersInput, opts ...aws.Option) (*DescribeScalingParametersOutput, error) {
 	req, out := c.DescribeScalingParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1537,7 +1536,7 @@ func (c *CloudSearch) DescribeScalingParametersWithContext(ctx aws.Context, inpu
 
 const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 
-// DescribeServiceAccessPoliciesRequest generates a "aws/request.Request" representing the
+// DescribeServiceAccessPoliciesRequest generates a "aws.Request" representing the
 // client's request for the DescribeServiceAccessPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1559,8 +1558,8 @@ const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAccessPoliciesInput) (req *request.Request, output *DescribeServiceAccessPoliciesOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServiceAccessPoliciesInput) (req *aws.Request, output *DescribeServiceAccessPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeServiceAccessPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1617,7 +1616,7 @@ func (c *CloudSearch) DescribeServiceAccessPolicies(input *DescribeServiceAccess
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeServiceAccessPoliciesWithContext(ctx aws.Context, input *DescribeServiceAccessPoliciesInput, opts ...request.Option) (*DescribeServiceAccessPoliciesOutput, error) {
+func (c *CloudSearch) DescribeServiceAccessPoliciesWithContext(ctx aws.Context, input *DescribeServiceAccessPoliciesInput, opts ...aws.Option) (*DescribeServiceAccessPoliciesOutput, error) {
 	req, out := c.DescribeServiceAccessPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1626,7 +1625,7 @@ func (c *CloudSearch) DescribeServiceAccessPoliciesWithContext(ctx aws.Context, 
 
 const opDescribeSuggesters = "DescribeSuggesters"
 
-// DescribeSuggestersRequest generates a "aws/request.Request" representing the
+// DescribeSuggestersRequest generates a "aws.Request" representing the
 // client's request for the DescribeSuggesters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1648,8 +1647,8 @@ const opDescribeSuggesters = "DescribeSuggesters"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) (req *request.Request, output *DescribeSuggestersOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) (req *aws.Request, output *DescribeSuggestersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSuggesters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1707,7 +1706,7 @@ func (c *CloudSearch) DescribeSuggesters(input *DescribeSuggestersInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) DescribeSuggestersWithContext(ctx aws.Context, input *DescribeSuggestersInput, opts ...request.Option) (*DescribeSuggestersOutput, error) {
+func (c *CloudSearch) DescribeSuggestersWithContext(ctx aws.Context, input *DescribeSuggestersInput, opts ...aws.Option) (*DescribeSuggestersOutput, error) {
 	req, out := c.DescribeSuggestersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1716,7 +1715,7 @@ func (c *CloudSearch) DescribeSuggestersWithContext(ctx aws.Context, input *Desc
 
 const opIndexDocuments = "IndexDocuments"
 
-// IndexDocumentsRequest generates a "aws/request.Request" representing the
+// IndexDocumentsRequest generates a "aws.Request" representing the
 // client's request for the IndexDocuments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1738,8 +1737,8 @@ const opIndexDocuments = "IndexDocuments"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) (req *request.Request, output *IndexDocumentsOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) (req *aws.Request, output *IndexDocumentsOutput) {
+	op := &aws.Operation{
 		Name:       opIndexDocuments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1793,7 +1792,7 @@ func (c *CloudSearch) IndexDocuments(input *IndexDocumentsInput) (*IndexDocument
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) IndexDocumentsWithContext(ctx aws.Context, input *IndexDocumentsInput, opts ...request.Option) (*IndexDocumentsOutput, error) {
+func (c *CloudSearch) IndexDocumentsWithContext(ctx aws.Context, input *IndexDocumentsInput, opts ...aws.Option) (*IndexDocumentsOutput, error) {
 	req, out := c.IndexDocumentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1802,7 +1801,7 @@ func (c *CloudSearch) IndexDocumentsWithContext(ctx aws.Context, input *IndexDoc
 
 const opListDomainNames = "ListDomainNames"
 
-// ListDomainNamesRequest generates a "aws/request.Request" representing the
+// ListDomainNamesRequest generates a "aws.Request" representing the
 // client's request for the ListDomainNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1824,8 +1823,8 @@ const opListDomainNames = "ListDomainNames"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) (req *request.Request, output *ListDomainNamesOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) (req *aws.Request, output *ListDomainNamesOutput) {
+	op := &aws.Operation{
 		Name:       opListDomainNames,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1869,7 +1868,7 @@ func (c *CloudSearch) ListDomainNames(input *ListDomainNamesInput) (*ListDomainN
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) ListDomainNamesWithContext(ctx aws.Context, input *ListDomainNamesInput, opts ...request.Option) (*ListDomainNamesOutput, error) {
+func (c *CloudSearch) ListDomainNamesWithContext(ctx aws.Context, input *ListDomainNamesInput, opts ...aws.Option) (*ListDomainNamesOutput, error) {
 	req, out := c.ListDomainNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1878,7 +1877,7 @@ func (c *CloudSearch) ListDomainNamesWithContext(ctx aws.Context, input *ListDom
 
 const opUpdateAvailabilityOptions = "UpdateAvailabilityOptions"
 
-// UpdateAvailabilityOptionsRequest generates a "aws/request.Request" representing the
+// UpdateAvailabilityOptionsRequest generates a "aws.Request" representing the
 // client's request for the UpdateAvailabilityOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1900,8 +1899,8 @@ const opUpdateAvailabilityOptions = "UpdateAvailabilityOptions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailabilityOptionsInput) (req *request.Request, output *UpdateAvailabilityOptionsOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailabilityOptionsInput) (req *aws.Request, output *UpdateAvailabilityOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateAvailabilityOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1967,7 +1966,7 @@ func (c *CloudSearch) UpdateAvailabilityOptions(input *UpdateAvailabilityOptions
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) UpdateAvailabilityOptionsWithContext(ctx aws.Context, input *UpdateAvailabilityOptionsInput, opts ...request.Option) (*UpdateAvailabilityOptionsOutput, error) {
+func (c *CloudSearch) UpdateAvailabilityOptionsWithContext(ctx aws.Context, input *UpdateAvailabilityOptionsInput, opts ...aws.Option) (*UpdateAvailabilityOptionsOutput, error) {
 	req, out := c.UpdateAvailabilityOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1976,7 +1975,7 @@ func (c *CloudSearch) UpdateAvailabilityOptionsWithContext(ctx aws.Context, inpu
 
 const opUpdateScalingParameters = "UpdateScalingParameters"
 
-// UpdateScalingParametersRequest generates a "aws/request.Request" representing the
+// UpdateScalingParametersRequest generates a "aws.Request" representing the
 // client's request for the UpdateScalingParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1998,8 +1997,8 @@ const opUpdateScalingParameters = "UpdateScalingParameters"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParametersInput) (req *request.Request, output *UpdateScalingParametersOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParametersInput) (req *aws.Request, output *UpdateScalingParametersOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateScalingParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2064,7 +2063,7 @@ func (c *CloudSearch) UpdateScalingParameters(input *UpdateScalingParametersInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) UpdateScalingParametersWithContext(ctx aws.Context, input *UpdateScalingParametersInput, opts ...request.Option) (*UpdateScalingParametersOutput, error) {
+func (c *CloudSearch) UpdateScalingParametersWithContext(ctx aws.Context, input *UpdateScalingParametersInput, opts ...aws.Option) (*UpdateScalingParametersOutput, error) {
 	req, out := c.UpdateScalingParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2073,7 +2072,7 @@ func (c *CloudSearch) UpdateScalingParametersWithContext(ctx aws.Context, input 
 
 const opUpdateServiceAccessPolicies = "UpdateServiceAccessPolicies"
 
-// UpdateServiceAccessPoliciesRequest generates a "aws/request.Request" representing the
+// UpdateServiceAccessPoliciesRequest generates a "aws.Request" representing the
 // client's request for the UpdateServiceAccessPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2095,8 +2094,8 @@ const opUpdateServiceAccessPolicies = "UpdateServiceAccessPolicies"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAccessPoliciesInput) (req *request.Request, output *UpdateServiceAccessPoliciesOutput) {
-	op := &request.Operation{
+func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAccessPoliciesInput) (req *aws.Request, output *UpdateServiceAccessPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateServiceAccessPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2156,7 +2155,7 @@ func (c *CloudSearch) UpdateServiceAccessPolicies(input *UpdateServiceAccessPoli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearch) UpdateServiceAccessPoliciesWithContext(ctx aws.Context, input *UpdateServiceAccessPoliciesInput, opts ...request.Option) (*UpdateServiceAccessPoliciesOutput, error) {
+func (c *CloudSearch) UpdateServiceAccessPoliciesWithContext(ctx aws.Context, input *UpdateServiceAccessPoliciesInput, opts ...aws.Option) (*UpdateServiceAccessPoliciesOutput, error) {
 	req, out := c.UpdateServiceAccessPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2322,15 +2321,15 @@ func (s AnalysisScheme) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AnalysisScheme) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AnalysisScheme"}
+	invalidParams := aws.ErrInvalidParams{Context: "AnalysisScheme"}
 	if s.AnalysisSchemeLanguage == nil {
-		invalidParams.Add(request.NewErrParamRequired("AnalysisSchemeLanguage"))
+		invalidParams.Add(aws.NewErrParamRequired("AnalysisSchemeLanguage"))
 	}
 	if s.AnalysisSchemeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AnalysisSchemeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AnalysisSchemeName"))
 	}
 	if s.AnalysisSchemeName != nil && len(*s.AnalysisSchemeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AnalysisSchemeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AnalysisSchemeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2460,12 +2459,12 @@ func (s BuildSuggestersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BuildSuggestersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BuildSuggestersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BuildSuggestersInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2530,12 +2529,12 @@ func (s CreateDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2687,9 +2686,9 @@ func (s DateOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DateOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DateOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "DateOptions"}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2768,19 +2767,19 @@ func (s DefineAnalysisSchemeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineAnalysisSchemeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DefineAnalysisSchemeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DefineAnalysisSchemeInput"}
 	if s.AnalysisScheme == nil {
-		invalidParams.Add(request.NewErrParamRequired("AnalysisScheme"))
+		invalidParams.Add(aws.NewErrParamRequired("AnalysisScheme"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.AnalysisScheme != nil {
 		if err := s.AnalysisScheme.Validate(); err != nil {
-			invalidParams.AddNested("AnalysisScheme", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AnalysisScheme", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2863,19 +2862,19 @@ func (s DefineExpressionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineExpressionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DefineExpressionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DefineExpressionInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.Expression == nil {
-		invalidParams.Add(request.NewErrParamRequired("Expression"))
+		invalidParams.Add(aws.NewErrParamRequired("Expression"))
 	}
 	if s.Expression != nil {
 		if err := s.Expression.Validate(); err != nil {
-			invalidParams.AddNested("Expression", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Expression", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2955,19 +2954,19 @@ func (s DefineIndexFieldInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineIndexFieldInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DefineIndexFieldInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DefineIndexFieldInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.IndexField == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexField"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexField"))
 	}
 	if s.IndexField != nil {
 		if err := s.IndexField.Validate(); err != nil {
-			invalidParams.AddNested("IndexField", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("IndexField", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3049,19 +3048,19 @@ func (s DefineSuggesterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefineSuggesterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DefineSuggesterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DefineSuggesterInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.Suggester == nil {
-		invalidParams.Add(request.NewErrParamRequired("Suggester"))
+		invalidParams.Add(aws.NewErrParamRequired("Suggester"))
 	}
 	if s.Suggester != nil {
 		if err := s.Suggester.Validate(); err != nil {
-			invalidParams.AddNested("Suggester", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Suggester", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3142,18 +3141,18 @@ func (s DeleteAnalysisSchemeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAnalysisSchemeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAnalysisSchemeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAnalysisSchemeInput"}
 	if s.AnalysisSchemeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AnalysisSchemeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AnalysisSchemeName"))
 	}
 	if s.AnalysisSchemeName != nil && len(*s.AnalysisSchemeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AnalysisSchemeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AnalysisSchemeName", 1))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3224,12 +3223,12 @@ func (s DeleteDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3301,18 +3300,18 @@ func (s DeleteExpressionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteExpressionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteExpressionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteExpressionInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.ExpressionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExpressionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ExpressionName"))
 	}
 	if s.ExpressionName != nil && len(*s.ExpressionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExpressionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExpressionName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3393,18 +3392,18 @@ func (s DeleteIndexFieldInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIndexFieldInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIndexFieldInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIndexFieldInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.IndexFieldName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexFieldName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexFieldName"))
 	}
 	if s.IndexFieldName != nil && len(*s.IndexFieldName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexFieldName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexFieldName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3483,18 +3482,18 @@ func (s DeleteSuggesterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSuggesterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSuggesterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSuggesterInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.SuggesterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SuggesterName"))
+		invalidParams.Add(aws.NewErrParamRequired("SuggesterName"))
 	}
 	if s.SuggesterName != nil && len(*s.SuggesterName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SuggesterName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SuggesterName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3575,12 +3574,12 @@ func (s DescribeAnalysisSchemesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAnalysisSchemesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAnalysisSchemesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAnalysisSchemesInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3663,12 +3662,12 @@ func (s DescribeAvailabilityOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAvailabilityOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAvailabilityOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAvailabilityOptionsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3802,12 +3801,12 @@ func (s DescribeExpressionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeExpressionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeExpressionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeExpressionsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3895,12 +3894,12 @@ func (s DescribeIndexFieldsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeIndexFieldsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeIndexFieldsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeIndexFieldsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3980,12 +3979,12 @@ func (s DescribeScalingParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalingParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeScalingParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingParametersInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4056,12 +4055,12 @@ func (s DescribeServiceAccessPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeServiceAccessPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeServiceAccessPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeServiceAccessPoliciesInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4141,12 +4140,12 @@ func (s DescribeSuggestersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSuggestersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSuggestersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSuggestersInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4237,12 +4236,12 @@ func (s DocumentSuggesterOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentSuggesterOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DocumentSuggesterOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "DocumentSuggesterOptions"}
 	if s.SourceField == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceField"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceField"))
 	}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4518,9 +4517,9 @@ func (s DoubleOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DoubleOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DoubleOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "DoubleOptions"}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4598,18 +4597,18 @@ func (s Expression) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Expression) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Expression"}
+	invalidParams := aws.ErrInvalidParams{Context: "Expression"}
 	if s.ExpressionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExpressionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ExpressionName"))
 	}
 	if s.ExpressionName != nil && len(*s.ExpressionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExpressionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExpressionName", 1))
 	}
 	if s.ExpressionValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExpressionValue"))
+		invalidParams.Add(aws.NewErrParamRequired("ExpressionValue"))
 	}
 	if s.ExpressionValue != nil && len(*s.ExpressionValue) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExpressionValue", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExpressionValue", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4693,12 +4692,12 @@ func (s IndexDocumentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexDocumentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IndexDocumentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "IndexDocumentsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4834,44 +4833,44 @@ func (s IndexField) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexField) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IndexField"}
+	invalidParams := aws.ErrInvalidParams{Context: "IndexField"}
 	if s.IndexFieldName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexFieldName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexFieldName"))
 	}
 	if s.IndexFieldName != nil && len(*s.IndexFieldName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexFieldName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexFieldName", 1))
 	}
 	if s.IndexFieldType == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexFieldType"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexFieldType"))
 	}
 	if s.DateOptions != nil {
 		if err := s.DateOptions.Validate(); err != nil {
-			invalidParams.AddNested("DateOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DateOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DoubleOptions != nil {
 		if err := s.DoubleOptions.Validate(); err != nil {
-			invalidParams.AddNested("DoubleOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DoubleOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.IntOptions != nil {
 		if err := s.IntOptions.Validate(); err != nil {
-			invalidParams.AddNested("IntOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("IntOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LatLonOptions != nil {
 		if err := s.LatLonOptions.Validate(); err != nil {
-			invalidParams.AddNested("LatLonOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LatLonOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LiteralOptions != nil {
 		if err := s.LiteralOptions.Validate(); err != nil {
-			invalidParams.AddNested("LiteralOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LiteralOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TextOptions != nil {
 		if err := s.TextOptions.Validate(); err != nil {
-			invalidParams.AddNested("TextOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TextOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5097,9 +5096,9 @@ func (s IntOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IntOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IntOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "IntOptions"}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5194,9 +5193,9 @@ func (s LatLonOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LatLonOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LatLonOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "LatLonOptions"}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5423,9 +5422,9 @@ func (s LiteralOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LiteralOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LiteralOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "LiteralOptions"}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5681,19 +5680,19 @@ func (s Suggester) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Suggester) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Suggester"}
+	invalidParams := aws.ErrInvalidParams{Context: "Suggester"}
 	if s.DocumentSuggesterOptions == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentSuggesterOptions"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentSuggesterOptions"))
 	}
 	if s.SuggesterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SuggesterName"))
+		invalidParams.Add(aws.NewErrParamRequired("SuggesterName"))
 	}
 	if s.SuggesterName != nil && len(*s.SuggesterName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SuggesterName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SuggesterName", 1))
 	}
 	if s.DocumentSuggesterOptions != nil {
 		if err := s.DocumentSuggesterOptions.Validate(); err != nil {
-			invalidParams.AddNested("DocumentSuggesterOptions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DocumentSuggesterOptions", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5866,9 +5865,9 @@ func (s TextOptions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TextOptions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TextOptions"}
+	invalidParams := aws.ErrInvalidParams{Context: "TextOptions"}
 	if s.SourceField != nil && len(*s.SourceField) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceField", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceField", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5948,15 +5947,15 @@ func (s UpdateAvailabilityOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAvailabilityOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAvailabilityOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAvailabilityOptionsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.MultiAZ == nil {
-		invalidParams.Add(request.NewErrParamRequired("MultiAZ"))
+		invalidParams.Add(aws.NewErrParamRequired("MultiAZ"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6035,15 +6034,15 @@ func (s UpdateScalingParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateScalingParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateScalingParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateScalingParametersInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.ScalingParameters == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalingParameters"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalingParameters"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6124,15 +6123,15 @@ func (s UpdateServiceAccessPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServiceAccessPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateServiceAccessPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceAccessPoliciesInput"}
 	if s.AccessPolicies == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccessPolicies"))
+		invalidParams.Add(aws.NewErrParamRequired("AccessPolicies"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {

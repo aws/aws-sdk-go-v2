@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 )
 
@@ -30,7 +30,12 @@ func parseTime(layout, value string) *time.Time {
 // This example deletes a scaling policy for the Amazon ECS service called web-app,
 // which is running in the default cluster.
 func ExampleApplicationAutoScaling_DeleteScalingPolicy_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DeleteScalingPolicyInput{
 		PolicyName:        aws.String("web-app-cpu-lt-25"),
 		ResourceId:        aws.String("service/default/web-app"),
@@ -69,7 +74,12 @@ func ExampleApplicationAutoScaling_DeleteScalingPolicy_shared00() {
 // This example deregisters a scalable target for an Amazon ECS service called web-app
 // that is running in the default cluster.
 func ExampleApplicationAutoScaling_DeregisterScalableTarget_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DeregisterScalableTargetInput{
 		ResourceId:        aws.String("service/default/web-app"),
 		ScalableDimension: aws.String("ecs:service:DesiredCount"),
@@ -106,7 +116,12 @@ func ExampleApplicationAutoScaling_DeregisterScalableTarget_shared00() {
 //
 // This example describes the scalable targets for the ecs service namespace.
 func ExampleApplicationAutoScaling_DescribeScalableTargets_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DescribeScalableTargetsInput{
 		ServiceNamespace: aws.String("ecs"),
 	}
@@ -142,7 +157,12 @@ func ExampleApplicationAutoScaling_DescribeScalableTargets_shared00() {
 // This example describes the scaling activities for an Amazon ECS service called web-app
 // that is running in the default cluster.
 func ExampleApplicationAutoScaling_DescribeScalingActivities_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DescribeScalingActivitiesInput{
 		ResourceId:        aws.String("service/default/web-app"),
 		ScalableDimension: aws.String("ecs:service:DesiredCount"),
@@ -179,7 +199,12 @@ func ExampleApplicationAutoScaling_DescribeScalingActivities_shared00() {
 //
 // This example describes the scaling policies for the ecs service namespace.
 func ExampleApplicationAutoScaling_DescribeScalingPolicies_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.DescribeScalingPoliciesInput{
 		ServiceNamespace: aws.String("ecs"),
 	}
@@ -218,7 +243,12 @@ func ExampleApplicationAutoScaling_DescribeScalingPolicies_shared00() {
 // the default cluster. The policy increases the desired count of the service by 200%,
 // with a cool down period of 60 seconds.
 func ExampleApplicationAutoScaling_PutScalingPolicy_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.PutScalingPolicyInput{
 		PolicyName:        aws.String("web-app-cpu-gt-75"),
 		PolicyType:        aws.String("StepScaling"),
@@ -274,7 +304,12 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared00() {
 //
 //
 func ExampleApplicationAutoScaling_PutScalingPolicy_shared01() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.PutScalingPolicyInput{
 		PolicyName:        aws.String("fleet-cpu-gt-75"),
 		PolicyType:        aws.String("StepScaling"),
@@ -329,7 +364,12 @@ func ExampleApplicationAutoScaling_PutScalingPolicy_shared01() {
 // that is running on the default cluster, with a minimum desired count of 1 task and
 // a maximum desired count of 10 tasks.
 func ExampleApplicationAutoScaling_RegisterScalableTarget_shared00() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.RegisterScalableTargetInput{
 		MaxCapacity:       aws.Int64(10),
 		MinCapacity:       aws.Int64(1),
@@ -370,7 +410,12 @@ func ExampleApplicationAutoScaling_RegisterScalableTarget_shared00() {
 // This example registers a scalable target from an Amazon EC2 Spot fleet with a minimum
 // target capacity of 1 and a maximum of 10.
 func ExampleApplicationAutoScaling_RegisterScalableTarget_shared01() {
-	svc := applicationautoscaling.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := applicationautoscaling.New(cfg)
 	input := &applicationautoscaling.RegisterScalableTargetInput{
 		MaxCapacity:       aws.Int64(10),
 		MinCapacity:       aws.Int64(1),

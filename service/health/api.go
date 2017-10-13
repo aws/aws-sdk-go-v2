@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opDescribeAffectedEntities = "DescribeAffectedEntities"
 
-// DescribeAffectedEntitiesRequest generates a "aws/request.Request" representing the
+// DescribeAffectedEntitiesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAffectedEntities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,12 +35,12 @@ const opDescribeAffectedEntities = "DescribeAffectedEntities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntities
-func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntitiesInput) (req *request.Request, output *DescribeAffectedEntitiesOutput) {
-	op := &request.Operation{
+func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntitiesInput) (req *aws.Request, output *DescribeAffectedEntitiesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAffectedEntities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -99,7 +98,7 @@ func (c *Health) DescribeAffectedEntities(input *DescribeAffectedEntitiesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeAffectedEntitiesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, opts ...request.Option) (*DescribeAffectedEntitiesOutput, error) {
+func (c *Health) DescribeAffectedEntitiesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, opts ...aws.Option) (*DescribeAffectedEntitiesOutput, error) {
 	req, out := c.DescribeAffectedEntitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -134,9 +133,9 @@ func (c *Health) DescribeAffectedEntitiesPages(input *DescribeAffectedEntitiesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, fn func(*DescribeAffectedEntitiesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, fn func(*DescribeAffectedEntitiesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAffectedEntitiesInput
 			if input != nil {
 				tmp := *input
@@ -158,7 +157,7 @@ func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input
 
 const opDescribeEntityAggregates = "DescribeEntityAggregates"
 
-// DescribeEntityAggregatesRequest generates a "aws/request.Request" representing the
+// DescribeEntityAggregatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEntityAggregates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -182,8 +181,8 @@ const opDescribeEntityAggregates = "DescribeEntityAggregates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregates
-func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregatesInput) (req *request.Request, output *DescribeEntityAggregatesOutput) {
-	op := &request.Operation{
+func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregatesInput) (req *aws.Request, output *DescribeEntityAggregatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEntityAggregates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -225,7 +224,7 @@ func (c *Health) DescribeEntityAggregates(input *DescribeEntityAggregatesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEntityAggregatesWithContext(ctx aws.Context, input *DescribeEntityAggregatesInput, opts ...request.Option) (*DescribeEntityAggregatesOutput, error) {
+func (c *Health) DescribeEntityAggregatesWithContext(ctx aws.Context, input *DescribeEntityAggregatesInput, opts ...aws.Option) (*DescribeEntityAggregatesOutput, error) {
 	req, out := c.DescribeEntityAggregatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -234,7 +233,7 @@ func (c *Health) DescribeEntityAggregatesWithContext(ctx aws.Context, input *Des
 
 const opDescribeEventAggregates = "DescribeEventAggregates"
 
-// DescribeEventAggregatesRequest generates a "aws/request.Request" representing the
+// DescribeEventAggregatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventAggregates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -258,12 +257,12 @@ const opDescribeEventAggregates = "DescribeEventAggregates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregates
-func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesInput) (req *request.Request, output *DescribeEventAggregatesOutput) {
-	op := &request.Operation{
+func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesInput) (req *aws.Request, output *DescribeEventAggregatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventAggregates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -312,7 +311,7 @@ func (c *Health) DescribeEventAggregates(input *DescribeEventAggregatesInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventAggregatesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, opts ...request.Option) (*DescribeEventAggregatesOutput, error) {
+func (c *Health) DescribeEventAggregatesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, opts ...aws.Option) (*DescribeEventAggregatesOutput, error) {
 	req, out := c.DescribeEventAggregatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -347,9 +346,9 @@ func (c *Health) DescribeEventAggregatesPages(input *DescribeEventAggregatesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, fn func(*DescribeEventAggregatesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, fn func(*DescribeEventAggregatesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventAggregatesInput
 			if input != nil {
 				tmp := *input
@@ -371,7 +370,7 @@ func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input 
 
 const opDescribeEventDetails = "DescribeEventDetails"
 
-// DescribeEventDetailsRequest generates a "aws/request.Request" representing the
+// DescribeEventDetailsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventDetails operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -395,8 +394,8 @@ const opDescribeEventDetails = "DescribeEventDetails"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetails
-func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) (req *request.Request, output *DescribeEventDetailsOutput) {
-	op := &request.Operation{
+func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) (req *aws.Request, output *DescribeEventDetailsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventDetails,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -448,7 +447,7 @@ func (c *Health) DescribeEventDetails(input *DescribeEventDetailsInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventDetailsWithContext(ctx aws.Context, input *DescribeEventDetailsInput, opts ...request.Option) (*DescribeEventDetailsOutput, error) {
+func (c *Health) DescribeEventDetailsWithContext(ctx aws.Context, input *DescribeEventDetailsInput, opts ...aws.Option) (*DescribeEventDetailsOutput, error) {
 	req, out := c.DescribeEventDetailsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -457,7 +456,7 @@ func (c *Health) DescribeEventDetailsWithContext(ctx aws.Context, input *Describ
 
 const opDescribeEventTypes = "DescribeEventTypes"
 
-// DescribeEventTypesRequest generates a "aws/request.Request" representing the
+// DescribeEventTypesRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -481,12 +480,12 @@ const opDescribeEventTypes = "DescribeEventTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes
-func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) (req *request.Request, output *DescribeEventTypesOutput) {
-	op := &request.Operation{
+func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) (req *aws.Request, output *DescribeEventTypesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventTypes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -537,7 +536,7 @@ func (c *Health) DescribeEventTypes(input *DescribeEventTypesInput) (*DescribeEv
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventTypesWithContext(ctx aws.Context, input *DescribeEventTypesInput, opts ...request.Option) (*DescribeEventTypesOutput, error) {
+func (c *Health) DescribeEventTypesWithContext(ctx aws.Context, input *DescribeEventTypesInput, opts ...aws.Option) (*DescribeEventTypesOutput, error) {
 	req, out := c.DescribeEventTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -572,9 +571,9 @@ func (c *Health) DescribeEventTypesPages(input *DescribeEventTypesInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *DescribeEventTypesInput, fn func(*DescribeEventTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *DescribeEventTypesInput, fn func(*DescribeEventTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventTypesInput
 			if input != nil {
 				tmp := *input
@@ -596,7 +595,7 @@ func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -620,12 +619,12 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents
-func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -682,7 +681,7 @@ func (c *Health) DescribeEvents(input *DescribeEventsInput) (*DescribeEventsOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *Health) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -717,9 +716,9 @@ func (c *Health) DescribeEventsPages(input *DescribeEventsInput, fn func(*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Health) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Health) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
 			if input != nil {
 				tmp := *input
@@ -896,19 +895,19 @@ func (s DescribeAffectedEntitiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAffectedEntitiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAffectedEntitiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAffectedEntitiesInput"}
 	if s.Filter == nil {
-		invalidParams.Add(request.NewErrParamRequired("Filter"))
+		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
 	if s.Locale != nil && len(*s.Locale) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Locale", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Locale", 2))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1000,9 +999,9 @@ func (s DescribeEntityAggregatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEntityAggregatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEntityAggregatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEntityAggregatesInput"}
 	if s.EventArns != nil && len(s.EventArns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventArns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventArns", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1076,16 +1075,16 @@ func (s DescribeEventAggregatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventAggregatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventAggregatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventAggregatesInput"}
 	if s.AggregateField == nil {
-		invalidParams.Add(request.NewErrParamRequired("AggregateField"))
+		invalidParams.Add(aws.NewErrParamRequired("AggregateField"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1183,15 +1182,15 @@ func (s DescribeEventDetailsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventDetailsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventDetailsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventDetailsInput"}
 	if s.EventArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventArns"))
+		invalidParams.Add(aws.NewErrParamRequired("EventArns"))
 	}
 	if s.EventArns != nil && len(s.EventArns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventArns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventArns", 1))
 	}
 	if s.Locale != nil && len(*s.Locale) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Locale", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Locale", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1279,16 +1278,16 @@ func (s DescribeEventTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventTypesInput"}
 	if s.Locale != nil && len(*s.Locale) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Locale", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Locale", 2))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1396,16 +1395,16 @@ func (s DescribeEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
 	if s.Locale != nil && len(*s.Locale) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Locale", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Locale", 2))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1551,24 +1550,24 @@ func (s EntityFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EntityFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EntityFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "EntityFilter"}
 	if s.EntityArns != nil && len(s.EntityArns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EntityArns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EntityArns", 1))
 	}
 	if s.EntityValues != nil && len(s.EntityValues) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EntityValues", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EntityValues", 1))
 	}
 	if s.EventArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventArns"))
+		invalidParams.Add(aws.NewErrParamRequired("EventArns"))
 	}
 	if s.EventArns != nil && len(s.EventArns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventArns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventArns", 1))
 	}
 	if s.LastUpdatedTimes != nil && len(s.LastUpdatedTimes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LastUpdatedTimes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LastUpdatedTimes", 1))
 	}
 	if s.StatusCodes != nil && len(s.StatusCodes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatusCodes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatusCodes", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1935,39 +1934,39 @@ func (s EventFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EventFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EventFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "EventFilter"}
 	if s.EndTimes != nil && len(s.EndTimes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EndTimes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EndTimes", 1))
 	}
 	if s.EntityArns != nil && len(s.EntityArns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EntityArns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EntityArns", 1))
 	}
 	if s.EntityValues != nil && len(s.EntityValues) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EntityValues", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EntityValues", 1))
 	}
 	if s.EventArns != nil && len(s.EventArns) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventArns", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventArns", 1))
 	}
 	if s.EventStatusCodes != nil && len(s.EventStatusCodes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventStatusCodes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventStatusCodes", 1))
 	}
 	if s.EventTypeCategories != nil && len(s.EventTypeCategories) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventTypeCategories", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCategories", 1))
 	}
 	if s.EventTypeCodes != nil && len(s.EventTypeCodes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventTypeCodes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCodes", 1))
 	}
 	if s.LastUpdatedTimes != nil && len(s.LastUpdatedTimes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LastUpdatedTimes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LastUpdatedTimes", 1))
 	}
 	if s.Regions != nil && len(s.Regions) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Regions", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Regions", 1))
 	}
 	if s.Services != nil && len(s.Services) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Services", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Services", 1))
 	}
 	if s.StartTimes != nil && len(s.StartTimes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StartTimes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StartTimes", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2127,15 +2126,15 @@ func (s EventTypeFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EventTypeFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EventTypeFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "EventTypeFilter"}
 	if s.EventTypeCategories != nil && len(s.EventTypeCategories) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventTypeCategories", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCategories", 1))
 	}
 	if s.EventTypeCodes != nil && len(s.EventTypeCodes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EventTypeCodes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeCodes", 1))
 	}
 	if s.Services != nil && len(s.Services) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Services", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Services", 1))
 	}
 
 	if invalidParams.Len() > 0 {

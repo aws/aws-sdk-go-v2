@@ -6,13 +6,12 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCancelJob = "CancelJob"
 
-// CancelJobRequest generates a "aws/request.Request" representing the
+// CancelJobRequest generates a "aws.Request" representing the
 // client's request for the CancelJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCancelJob = "CancelJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJob
-func (c *Batch) CancelJobRequest(input *CancelJobInput) (req *request.Request, output *CancelJobOutput) {
-	op := &request.Operation{
+func (c *Batch) CancelJobRequest(input *CancelJobInput) (req *aws.Request, output *CancelJobOutput) {
+	op := &aws.Operation{
 		Name:       opCancelJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/canceljob",
@@ -91,7 +90,7 @@ func (c *Batch) CancelJob(input *CancelJobInput) (*CancelJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...request.Option) (*CancelJobOutput, error) {
+func (c *Batch) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opts ...aws.Option) (*CancelJobOutput, error) {
 	req, out := c.CancelJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -100,7 +99,7 @@ func (c *Batch) CancelJobWithContext(ctx aws.Context, input *CancelJobInput, opt
 
 const opCreateComputeEnvironment = "CreateComputeEnvironment"
 
-// CreateComputeEnvironmentRequest generates a "aws/request.Request" representing the
+// CreateComputeEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the CreateComputeEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -124,8 +123,8 @@ const opCreateComputeEnvironment = "CreateComputeEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironment
-func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentInput) (req *request.Request, output *CreateComputeEnvironmentOutput) {
-	op := &request.Operation{
+func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentInput) (req *aws.Request, output *CreateComputeEnvironmentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateComputeEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/createcomputeenvironment",
@@ -196,7 +195,7 @@ func (c *Batch) CreateComputeEnvironment(input *CreateComputeEnvironmentInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) CreateComputeEnvironmentWithContext(ctx aws.Context, input *CreateComputeEnvironmentInput, opts ...request.Option) (*CreateComputeEnvironmentOutput, error) {
+func (c *Batch) CreateComputeEnvironmentWithContext(ctx aws.Context, input *CreateComputeEnvironmentInput, opts ...aws.Option) (*CreateComputeEnvironmentOutput, error) {
 	req, out := c.CreateComputeEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -205,7 +204,7 @@ func (c *Batch) CreateComputeEnvironmentWithContext(ctx aws.Context, input *Crea
 
 const opCreateJobQueue = "CreateJobQueue"
 
-// CreateJobQueueRequest generates a "aws/request.Request" representing the
+// CreateJobQueueRequest generates a "aws.Request" representing the
 // client's request for the CreateJobQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -229,8 +228,8 @@ const opCreateJobQueue = "CreateJobQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueue
-func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) (req *request.Request, output *CreateJobQueueOutput) {
-	op := &request.Operation{
+func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) (req *aws.Request, output *CreateJobQueueOutput) {
+	op := &aws.Operation{
 		Name:       opCreateJobQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/createjobqueue",
@@ -288,7 +287,7 @@ func (c *Batch) CreateJobQueue(input *CreateJobQueueInput) (*CreateJobQueueOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) CreateJobQueueWithContext(ctx aws.Context, input *CreateJobQueueInput, opts ...request.Option) (*CreateJobQueueOutput, error) {
+func (c *Batch) CreateJobQueueWithContext(ctx aws.Context, input *CreateJobQueueInput, opts ...aws.Option) (*CreateJobQueueOutput, error) {
 	req, out := c.CreateJobQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -297,7 +296,7 @@ func (c *Batch) CreateJobQueueWithContext(ctx aws.Context, input *CreateJobQueue
 
 const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
 
-// DeleteComputeEnvironmentRequest generates a "aws/request.Request" representing the
+// DeleteComputeEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the DeleteComputeEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -321,8 +320,8 @@ const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironment
-func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentInput) (req *request.Request, output *DeleteComputeEnvironmentOutput) {
-	op := &request.Operation{
+func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentInput) (req *aws.Request, output *DeleteComputeEnvironmentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteComputeEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/deletecomputeenvironment",
@@ -376,7 +375,7 @@ func (c *Batch) DeleteComputeEnvironment(input *DeleteComputeEnvironmentInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DeleteComputeEnvironmentWithContext(ctx aws.Context, input *DeleteComputeEnvironmentInput, opts ...request.Option) (*DeleteComputeEnvironmentOutput, error) {
+func (c *Batch) DeleteComputeEnvironmentWithContext(ctx aws.Context, input *DeleteComputeEnvironmentInput, opts ...aws.Option) (*DeleteComputeEnvironmentOutput, error) {
 	req, out := c.DeleteComputeEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -385,7 +384,7 @@ func (c *Batch) DeleteComputeEnvironmentWithContext(ctx aws.Context, input *Dele
 
 const opDeleteJobQueue = "DeleteJobQueue"
 
-// DeleteJobQueueRequest generates a "aws/request.Request" representing the
+// DeleteJobQueueRequest generates a "aws.Request" representing the
 // client's request for the DeleteJobQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -409,8 +408,8 @@ const opDeleteJobQueue = "DeleteJobQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueue
-func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) (req *request.Request, output *DeleteJobQueueOutput) {
-	op := &request.Operation{
+func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) (req *aws.Request, output *DeleteJobQueueOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteJobQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/deletejobqueue",
@@ -465,7 +464,7 @@ func (c *Batch) DeleteJobQueue(input *DeleteJobQueueInput) (*DeleteJobQueueOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DeleteJobQueueWithContext(ctx aws.Context, input *DeleteJobQueueInput, opts ...request.Option) (*DeleteJobQueueOutput, error) {
+func (c *Batch) DeleteJobQueueWithContext(ctx aws.Context, input *DeleteJobQueueInput, opts ...aws.Option) (*DeleteJobQueueOutput, error) {
 	req, out := c.DeleteJobQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -474,7 +473,7 @@ func (c *Batch) DeleteJobQueueWithContext(ctx aws.Context, input *DeleteJobQueue
 
 const opDeregisterJobDefinition = "DeregisterJobDefinition"
 
-// DeregisterJobDefinitionRequest generates a "aws/request.Request" representing the
+// DeregisterJobDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeregisterJobDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -498,8 +497,8 @@ const opDeregisterJobDefinition = "DeregisterJobDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinition
-func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInput) (req *request.Request, output *DeregisterJobDefinitionOutput) {
-	op := &request.Operation{
+func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInput) (req *aws.Request, output *DeregisterJobDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterJobDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/deregisterjobdefinition",
@@ -549,7 +548,7 @@ func (c *Batch) DeregisterJobDefinition(input *DeregisterJobDefinitionInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DeregisterJobDefinitionWithContext(ctx aws.Context, input *DeregisterJobDefinitionInput, opts ...request.Option) (*DeregisterJobDefinitionOutput, error) {
+func (c *Batch) DeregisterJobDefinitionWithContext(ctx aws.Context, input *DeregisterJobDefinitionInput, opts ...aws.Option) (*DeregisterJobDefinitionOutput, error) {
 	req, out := c.DeregisterJobDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -558,7 +557,7 @@ func (c *Batch) DeregisterJobDefinitionWithContext(ctx aws.Context, input *Dereg
 
 const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
 
-// DescribeComputeEnvironmentsRequest generates a "aws/request.Request" representing the
+// DescribeComputeEnvironmentsRequest generates a "aws.Request" representing the
 // client's request for the DescribeComputeEnvironments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -582,8 +581,8 @@ const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments
-func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnvironmentsInput) (req *request.Request, output *DescribeComputeEnvironmentsOutput) {
-	op := &request.Operation{
+func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnvironmentsInput) (req *aws.Request, output *DescribeComputeEnvironmentsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeComputeEnvironments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/describecomputeenvironments",
@@ -637,7 +636,7 @@ func (c *Batch) DescribeComputeEnvironments(input *DescribeComputeEnvironmentsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DescribeComputeEnvironmentsWithContext(ctx aws.Context, input *DescribeComputeEnvironmentsInput, opts ...request.Option) (*DescribeComputeEnvironmentsOutput, error) {
+func (c *Batch) DescribeComputeEnvironmentsWithContext(ctx aws.Context, input *DescribeComputeEnvironmentsInput, opts ...aws.Option) (*DescribeComputeEnvironmentsOutput, error) {
 	req, out := c.DescribeComputeEnvironmentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -646,7 +645,7 @@ func (c *Batch) DescribeComputeEnvironmentsWithContext(ctx aws.Context, input *D
 
 const opDescribeJobDefinitions = "DescribeJobDefinitions"
 
-// DescribeJobDefinitionsRequest generates a "aws/request.Request" representing the
+// DescribeJobDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeJobDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -670,8 +669,8 @@ const opDescribeJobDefinitions = "DescribeJobDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions
-func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput) (req *request.Request, output *DescribeJobDefinitionsOutput) {
-	op := &request.Operation{
+func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput) (req *aws.Request, output *DescribeJobDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeJobDefinitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/describejobdefinitions",
@@ -722,7 +721,7 @@ func (c *Batch) DescribeJobDefinitions(input *DescribeJobDefinitionsInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DescribeJobDefinitionsWithContext(ctx aws.Context, input *DescribeJobDefinitionsInput, opts ...request.Option) (*DescribeJobDefinitionsOutput, error) {
+func (c *Batch) DescribeJobDefinitionsWithContext(ctx aws.Context, input *DescribeJobDefinitionsInput, opts ...aws.Option) (*DescribeJobDefinitionsOutput, error) {
 	req, out := c.DescribeJobDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -731,7 +730,7 @@ func (c *Batch) DescribeJobDefinitionsWithContext(ctx aws.Context, input *Descri
 
 const opDescribeJobQueues = "DescribeJobQueues"
 
-// DescribeJobQueuesRequest generates a "aws/request.Request" representing the
+// DescribeJobQueuesRequest generates a "aws.Request" representing the
 // client's request for the DescribeJobQueues operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -755,8 +754,8 @@ const opDescribeJobQueues = "DescribeJobQueues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues
-func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) (req *request.Request, output *DescribeJobQueuesOutput) {
-	op := &request.Operation{
+func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) (req *aws.Request, output *DescribeJobQueuesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeJobQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/describejobqueues",
@@ -806,7 +805,7 @@ func (c *Batch) DescribeJobQueues(input *DescribeJobQueuesInput) (*DescribeJobQu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DescribeJobQueuesWithContext(ctx aws.Context, input *DescribeJobQueuesInput, opts ...request.Option) (*DescribeJobQueuesOutput, error) {
+func (c *Batch) DescribeJobQueuesWithContext(ctx aws.Context, input *DescribeJobQueuesInput, opts ...aws.Option) (*DescribeJobQueuesOutput, error) {
 	req, out := c.DescribeJobQueuesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -815,7 +814,7 @@ func (c *Batch) DescribeJobQueuesWithContext(ctx aws.Context, input *DescribeJob
 
 const opDescribeJobs = "DescribeJobs"
 
-// DescribeJobsRequest generates a "aws/request.Request" representing the
+// DescribeJobsRequest generates a "aws.Request" representing the
 // client's request for the DescribeJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -839,8 +838,8 @@ const opDescribeJobs = "DescribeJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs
-func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) (req *request.Request, output *DescribeJobsOutput) {
-	op := &request.Operation{
+func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) (req *aws.Request, output *DescribeJobsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/describejobs",
@@ -890,7 +889,7 @@ func (c *Batch) DescribeJobs(input *DescribeJobsInput) (*DescribeJobsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) DescribeJobsWithContext(ctx aws.Context, input *DescribeJobsInput, opts ...request.Option) (*DescribeJobsOutput, error) {
+func (c *Batch) DescribeJobsWithContext(ctx aws.Context, input *DescribeJobsInput, opts ...aws.Option) (*DescribeJobsOutput, error) {
 	req, out := c.DescribeJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -899,7 +898,7 @@ func (c *Batch) DescribeJobsWithContext(ctx aws.Context, input *DescribeJobsInpu
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws/request.Request" representing the
+// ListJobsRequest generates a "aws.Request" representing the
 // client's request for the ListJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -923,8 +922,8 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs
-func (c *Batch) ListJobsRequest(input *ListJobsInput) (req *request.Request, output *ListJobsOutput) {
-	op := &request.Operation{
+func (c *Batch) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/listjobs",
@@ -976,7 +975,7 @@ func (c *Batch) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...request.Option) (*ListJobsOutput, error) {
+func (c *Batch) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
 	req, out := c.ListJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,7 +984,7 @@ func (c *Batch) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts 
 
 const opRegisterJobDefinition = "RegisterJobDefinition"
 
-// RegisterJobDefinitionRequest generates a "aws/request.Request" representing the
+// RegisterJobDefinitionRequest generates a "aws.Request" representing the
 // client's request for the RegisterJobDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1009,8 +1008,8 @@ const opRegisterJobDefinition = "RegisterJobDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinition
-func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) (req *request.Request, output *RegisterJobDefinitionOutput) {
-	op := &request.Operation{
+func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) (req *aws.Request, output *RegisterJobDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterJobDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/registerjobdefinition",
@@ -1060,7 +1059,7 @@ func (c *Batch) RegisterJobDefinition(input *RegisterJobDefinitionInput) (*Regis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) RegisterJobDefinitionWithContext(ctx aws.Context, input *RegisterJobDefinitionInput, opts ...request.Option) (*RegisterJobDefinitionOutput, error) {
+func (c *Batch) RegisterJobDefinitionWithContext(ctx aws.Context, input *RegisterJobDefinitionInput, opts ...aws.Option) (*RegisterJobDefinitionOutput, error) {
 	req, out := c.RegisterJobDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1069,7 +1068,7 @@ func (c *Batch) RegisterJobDefinitionWithContext(ctx aws.Context, input *Registe
 
 const opSubmitJob = "SubmitJob"
 
-// SubmitJobRequest generates a "aws/request.Request" representing the
+// SubmitJobRequest generates a "aws.Request" representing the
 // client's request for the SubmitJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1093,8 +1092,8 @@ const opSubmitJob = "SubmitJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJob
-func (c *Batch) SubmitJobRequest(input *SubmitJobInput) (req *request.Request, output *SubmitJobOutput) {
-	op := &request.Operation{
+func (c *Batch) SubmitJobRequest(input *SubmitJobInput) (req *aws.Request, output *SubmitJobOutput) {
+	op := &aws.Operation{
 		Name:       opSubmitJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/submitjob",
@@ -1145,7 +1144,7 @@ func (c *Batch) SubmitJob(input *SubmitJobInput) (*SubmitJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) SubmitJobWithContext(ctx aws.Context, input *SubmitJobInput, opts ...request.Option) (*SubmitJobOutput, error) {
+func (c *Batch) SubmitJobWithContext(ctx aws.Context, input *SubmitJobInput, opts ...aws.Option) (*SubmitJobOutput, error) {
 	req, out := c.SubmitJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1154,7 +1153,7 @@ func (c *Batch) SubmitJobWithContext(ctx aws.Context, input *SubmitJobInput, opt
 
 const opTerminateJob = "TerminateJob"
 
-// TerminateJobRequest generates a "aws/request.Request" representing the
+// TerminateJobRequest generates a "aws.Request" representing the
 // client's request for the TerminateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1178,8 +1177,8 @@ const opTerminateJob = "TerminateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJob
-func (c *Batch) TerminateJobRequest(input *TerminateJobInput) (req *request.Request, output *TerminateJobOutput) {
-	op := &request.Operation{
+func (c *Batch) TerminateJobRequest(input *TerminateJobInput) (req *aws.Request, output *TerminateJobOutput) {
+	op := &aws.Operation{
 		Name:       opTerminateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/terminatejob",
@@ -1231,7 +1230,7 @@ func (c *Batch) TerminateJob(input *TerminateJobInput) (*TerminateJobOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) TerminateJobWithContext(ctx aws.Context, input *TerminateJobInput, opts ...request.Option) (*TerminateJobOutput, error) {
+func (c *Batch) TerminateJobWithContext(ctx aws.Context, input *TerminateJobInput, opts ...aws.Option) (*TerminateJobOutput, error) {
 	req, out := c.TerminateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1240,7 +1239,7 @@ func (c *Batch) TerminateJobWithContext(ctx aws.Context, input *TerminateJobInpu
 
 const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
 
-// UpdateComputeEnvironmentRequest generates a "aws/request.Request" representing the
+// UpdateComputeEnvironmentRequest generates a "aws.Request" representing the
 // client's request for the UpdateComputeEnvironment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1264,8 +1263,8 @@ const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironment
-func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentInput) (req *request.Request, output *UpdateComputeEnvironmentOutput) {
-	op := &request.Operation{
+func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentInput) (req *aws.Request, output *UpdateComputeEnvironmentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateComputeEnvironment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/updatecomputeenvironment",
@@ -1315,7 +1314,7 @@ func (c *Batch) UpdateComputeEnvironment(input *UpdateComputeEnvironmentInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) UpdateComputeEnvironmentWithContext(ctx aws.Context, input *UpdateComputeEnvironmentInput, opts ...request.Option) (*UpdateComputeEnvironmentOutput, error) {
+func (c *Batch) UpdateComputeEnvironmentWithContext(ctx aws.Context, input *UpdateComputeEnvironmentInput, opts ...aws.Option) (*UpdateComputeEnvironmentOutput, error) {
 	req, out := c.UpdateComputeEnvironmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1324,7 +1323,7 @@ func (c *Batch) UpdateComputeEnvironmentWithContext(ctx aws.Context, input *Upda
 
 const opUpdateJobQueue = "UpdateJobQueue"
 
-// UpdateJobQueueRequest generates a "aws/request.Request" representing the
+// UpdateJobQueueRequest generates a "aws.Request" representing the
 // client's request for the UpdateJobQueue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1348,8 +1347,8 @@ const opUpdateJobQueue = "UpdateJobQueue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueue
-func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) (req *request.Request, output *UpdateJobQueueOutput) {
-	op := &request.Operation{
+func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) (req *aws.Request, output *UpdateJobQueueOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateJobQueue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/updatejobqueue",
@@ -1399,7 +1398,7 @@ func (c *Batch) UpdateJobQueue(input *UpdateJobQueueInput) (*UpdateJobQueueOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Batch) UpdateJobQueueWithContext(ctx aws.Context, input *UpdateJobQueueInput, opts ...request.Option) (*UpdateJobQueueOutput, error) {
+func (c *Batch) UpdateJobQueueWithContext(ctx aws.Context, input *UpdateJobQueueInput, opts ...aws.Option) (*UpdateJobQueueOutput, error) {
 	req, out := c.UpdateJobQueueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1556,12 +1555,12 @@ func (s CancelJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.Reason == nil {
-		invalidParams.Add(request.NewErrParamRequired("Reason"))
+		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1736,12 +1735,12 @@ func (s ComputeEnvironmentOrder) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComputeEnvironmentOrder) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComputeEnvironmentOrder"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComputeEnvironmentOrder"}
 	if s.ComputeEnvironment == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeEnvironment"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
 	}
 	if s.Order == nil {
-		invalidParams.Add(request.NewErrParamRequired("Order"))
+		invalidParams.Add(aws.NewErrParamRequired("Order"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1844,27 +1843,27 @@ func (s ComputeResource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComputeResource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComputeResource"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComputeResource"}
 	if s.InstanceRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceRole"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceRole"))
 	}
 	if s.InstanceTypes == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceTypes"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceTypes"))
 	}
 	if s.MaxvCpus == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxvCpus"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxvCpus"))
 	}
 	if s.MinvCpus == nil {
-		invalidParams.Add(request.NewErrParamRequired("MinvCpus"))
+		invalidParams.Add(aws.NewErrParamRequired("MinvCpus"))
 	}
 	if s.SecurityGroupIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecurityGroupIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
 	if s.Subnets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subnets"))
+		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2348,15 +2347,15 @@ func (s ContainerProperties) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerProperties) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ContainerProperties"}
+	invalidParams := aws.ErrInvalidParams{Context: "ContainerProperties"}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Memory == nil {
-		invalidParams.Add(request.NewErrParamRequired("Memory"))
+		invalidParams.Add(aws.NewErrParamRequired("Memory"))
 	}
 	if s.Vcpus == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vcpus"))
+		invalidParams.Add(aws.NewErrParamRequired("Vcpus"))
 	}
 	if s.Ulimits != nil {
 		for i, v := range s.Ulimits {
@@ -2364,7 +2363,7 @@ func (s *ContainerProperties) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ulimits", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ulimits", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2500,19 +2499,19 @@ func (s CreateComputeEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateComputeEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateComputeEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateComputeEnvironmentInput"}
 	if s.ComputeEnvironmentName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeEnvironmentName"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironmentName"))
 	}
 	if s.ServiceRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRole"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRole"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.ComputeResources != nil {
 		if err := s.ComputeResources.Validate(); err != nil {
-			invalidParams.AddNested("ComputeResources", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ComputeResources", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2629,15 +2628,15 @@ func (s CreateJobQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateJobQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateJobQueueInput"}
 	if s.ComputeEnvironmentOrder == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeEnvironmentOrder"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironmentOrder"))
 	}
 	if s.JobQueueName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobQueueName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobQueueName"))
 	}
 	if s.Priority == nil {
-		invalidParams.Add(request.NewErrParamRequired("Priority"))
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
 	if s.ComputeEnvironmentOrder != nil {
 		for i, v := range s.ComputeEnvironmentOrder {
@@ -2645,7 +2644,7 @@ func (s *CreateJobQueueInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2739,9 +2738,9 @@ func (s DeleteComputeEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteComputeEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteComputeEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteComputeEnvironmentInput"}
 	if s.ComputeEnvironment == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeEnvironment"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2793,9 +2792,9 @@ func (s DeleteJobQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteJobQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteJobQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobQueueInput"}
 	if s.JobQueue == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobQueue"))
+		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2848,9 +2847,9 @@ func (s DeregisterJobDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterJobDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterJobDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterJobDefinitionInput"}
 	if s.JobDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("JobDefinition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3197,9 +3196,9 @@ func (s DescribeJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeJobsInput"}
 	if s.Jobs == nil {
-		invalidParams.Add(request.NewErrParamRequired("Jobs"))
+		invalidParams.Add(aws.NewErrParamRequired("Jobs"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3770,9 +3769,9 @@ func (s ListJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
 	if s.JobQueue == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobQueue"))
+		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3930,16 +3929,16 @@ func (s RegisterJobDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterJobDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterJobDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterJobDefinitionInput"}
 	if s.JobDefinitionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobDefinitionName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobDefinitionName"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.ContainerProperties != nil {
 		if err := s.ContainerProperties.Validate(); err != nil {
-			invalidParams.AddNested("ContainerProperties", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ContainerProperties", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4114,15 +4113,15 @@ func (s SubmitJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SubmitJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SubmitJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SubmitJobInput"}
 	if s.JobDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("JobDefinition"))
 	}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobQueue == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobQueue"))
+		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4239,12 +4238,12 @@ func (s TerminateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TerminateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TerminateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TerminateJobInput"}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 	if s.Reason == nil {
-		invalidParams.Add(request.NewErrParamRequired("Reason"))
+		invalidParams.Add(aws.NewErrParamRequired("Reason"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4313,15 +4312,15 @@ func (s Ulimit) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Ulimit) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Ulimit"}
+	invalidParams := aws.ErrInvalidParams{Context: "Ulimit"}
 	if s.HardLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("HardLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("HardLimit"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SoftLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("SoftLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("SoftLimit"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4394,9 +4393,9 @@ func (s UpdateComputeEnvironmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateComputeEnvironmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateComputeEnvironmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateComputeEnvironmentInput"}
 	if s.ComputeEnvironment == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeEnvironment"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeEnvironment"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4499,9 +4498,9 @@ func (s UpdateJobQueueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateJobQueueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateJobQueueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobQueueInput"}
 	if s.JobQueue == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobQueue"))
+		invalidParams.Add(aws.NewErrParamRequired("JobQueue"))
 	}
 	if s.ComputeEnvironmentOrder != nil {
 		for i, v := range s.ComputeEnvironmentOrder {
@@ -4509,7 +4508,7 @@ func (s *UpdateJobQueueInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputeEnvironmentOrder", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

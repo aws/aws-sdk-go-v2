@@ -8,28 +8,33 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/sqsiface"
 )
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
+	os.Exit(1)	
+}
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Fprintln(os.Stderr, "Queue URL required.")
-		os.Exit(1)
+		exitErrorf("Queue URL required.")
 	}
 
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 
 	q := Queue{
-		Client: sqs.New(sess),
+		Client: sqs.New(cfg),
 		URL:    os.Args[1],
 	}
 
 	msgs, err := q.GetMessages(20)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err.Error())
-		os.Exit(1)
+		exitErrorf("failed to get messages, %v", err.Error())
 	}
 
 	fmt.Println("Messages:")

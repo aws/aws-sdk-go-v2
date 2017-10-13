@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 
-// AllocateConnectionOnInterconnectRequest generates a "aws/request.Request" representing the
+// AllocateConnectionOnInterconnectRequest generates a "aws.Request" representing the
 // client's request for the AllocateConnectionOnInterconnect operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,11 +36,11 @@ const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect
-func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateConnectionOnInterconnectInput) (req *request.Request, output *Connection) {
+func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateConnectionOnInterconnectInput) (req *aws.Request, output *Connection) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, AllocateConnectionOnInterconnect, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opAllocateConnectionOnInterconnect,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -98,7 +97,7 @@ func (c *DirectConnect) AllocateConnectionOnInterconnect(input *AllocateConnecti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AllocateConnectionOnInterconnectWithContext(ctx aws.Context, input *AllocateConnectionOnInterconnectInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) AllocateConnectionOnInterconnectWithContext(ctx aws.Context, input *AllocateConnectionOnInterconnectInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.AllocateConnectionOnInterconnectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -107,7 +106,7 @@ func (c *DirectConnect) AllocateConnectionOnInterconnectWithContext(ctx aws.Cont
 
 const opAllocateHostedConnection = "AllocateHostedConnection"
 
-// AllocateHostedConnectionRequest generates a "aws/request.Request" representing the
+// AllocateHostedConnectionRequest generates a "aws.Request" representing the
 // client's request for the AllocateHostedConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -131,8 +130,8 @@ const opAllocateHostedConnection = "AllocateHostedConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection
-func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedConnectionInput) (req *request.Request, output *Connection) {
-	op := &request.Operation{
+func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedConnectionInput) (req *aws.Request, output *Connection) {
+	op := &aws.Operation{
 		Name:       opAllocateHostedConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -188,7 +187,7 @@ func (c *DirectConnect) AllocateHostedConnection(input *AllocateHostedConnection
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AllocateHostedConnectionWithContext(ctx aws.Context, input *AllocateHostedConnectionInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) AllocateHostedConnectionWithContext(ctx aws.Context, input *AllocateHostedConnectionInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.AllocateHostedConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -197,7 +196,7 @@ func (c *DirectConnect) AllocateHostedConnectionWithContext(ctx aws.Context, inp
 
 const opAllocatePrivateVirtualInterface = "AllocatePrivateVirtualInterface"
 
-// AllocatePrivateVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// AllocatePrivateVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the AllocatePrivateVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -221,8 +220,8 @@ const opAllocatePrivateVirtualInterface = "AllocatePrivateVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface
-func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePrivateVirtualInterfaceInput) (req *request.Request, output *VirtualInterface) {
-	op := &request.Operation{
+func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePrivateVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+	op := &aws.Operation{
 		Name:       opAllocatePrivateVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -277,7 +276,7 @@ func (c *DirectConnect) AllocatePrivateVirtualInterface(input *AllocatePrivateVi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AllocatePrivateVirtualInterfaceWithContext(ctx aws.Context, input *AllocatePrivateVirtualInterfaceInput, opts ...request.Option) (*VirtualInterface, error) {
+func (c *DirectConnect) AllocatePrivateVirtualInterfaceWithContext(ctx aws.Context, input *AllocatePrivateVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
 	req, out := c.AllocatePrivateVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -286,7 +285,7 @@ func (c *DirectConnect) AllocatePrivateVirtualInterfaceWithContext(ctx aws.Conte
 
 const opAllocatePublicVirtualInterface = "AllocatePublicVirtualInterface"
 
-// AllocatePublicVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// AllocatePublicVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the AllocatePublicVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -310,8 +309,8 @@ const opAllocatePublicVirtualInterface = "AllocatePublicVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface
-func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePublicVirtualInterfaceInput) (req *request.Request, output *VirtualInterface) {
-	op := &request.Operation{
+func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePublicVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+	op := &aws.Operation{
 		Name:       opAllocatePublicVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -373,7 +372,7 @@ func (c *DirectConnect) AllocatePublicVirtualInterface(input *AllocatePublicVirt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AllocatePublicVirtualInterfaceWithContext(ctx aws.Context, input *AllocatePublicVirtualInterfaceInput, opts ...request.Option) (*VirtualInterface, error) {
+func (c *DirectConnect) AllocatePublicVirtualInterfaceWithContext(ctx aws.Context, input *AllocatePublicVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
 	req, out := c.AllocatePublicVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -382,7 +381,7 @@ func (c *DirectConnect) AllocatePublicVirtualInterfaceWithContext(ctx aws.Contex
 
 const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
 
-// AssociateConnectionWithLagRequest generates a "aws/request.Request" representing the
+// AssociateConnectionWithLagRequest generates a "aws.Request" representing the
 // client's request for the AssociateConnectionWithLag operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -406,8 +405,8 @@ const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag
-func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnectionWithLagInput) (req *request.Request, output *Connection) {
-	op := &request.Operation{
+func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnectionWithLagInput) (req *aws.Request, output *Connection) {
+	op := &aws.Operation{
 		Name:       opAssociateConnectionWithLag,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -473,7 +472,7 @@ func (c *DirectConnect) AssociateConnectionWithLag(input *AssociateConnectionWit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AssociateConnectionWithLagWithContext(ctx aws.Context, input *AssociateConnectionWithLagInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) AssociateConnectionWithLagWithContext(ctx aws.Context, input *AssociateConnectionWithLagInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.AssociateConnectionWithLagRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -482,7 +481,7 @@ func (c *DirectConnect) AssociateConnectionWithLagWithContext(ctx aws.Context, i
 
 const opAssociateHostedConnection = "AssociateHostedConnection"
 
-// AssociateHostedConnectionRequest generates a "aws/request.Request" representing the
+// AssociateHostedConnectionRequest generates a "aws.Request" representing the
 // client's request for the AssociateHostedConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -506,8 +505,8 @@ const opAssociateHostedConnection = "AssociateHostedConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection
-func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedConnectionInput) (req *request.Request, output *Connection) {
-	op := &request.Operation{
+func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedConnectionInput) (req *aws.Request, output *Connection) {
+	op := &aws.Operation{
 		Name:       opAssociateHostedConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -563,7 +562,7 @@ func (c *DirectConnect) AssociateHostedConnection(input *AssociateHostedConnecti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AssociateHostedConnectionWithContext(ctx aws.Context, input *AssociateHostedConnectionInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) AssociateHostedConnectionWithContext(ctx aws.Context, input *AssociateHostedConnectionInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.AssociateHostedConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -572,7 +571,7 @@ func (c *DirectConnect) AssociateHostedConnectionWithContext(ctx aws.Context, in
 
 const opAssociateVirtualInterface = "AssociateVirtualInterface"
 
-// AssociateVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// AssociateVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the AssociateVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -596,8 +595,8 @@ const opAssociateVirtualInterface = "AssociateVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface
-func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtualInterfaceInput) (req *request.Request, output *VirtualInterface) {
-	op := &request.Operation{
+func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+	op := &aws.Operation{
 		Name:       opAssociateVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -659,7 +658,7 @@ func (c *DirectConnect) AssociateVirtualInterface(input *AssociateVirtualInterfa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) AssociateVirtualInterfaceWithContext(ctx aws.Context, input *AssociateVirtualInterfaceInput, opts ...request.Option) (*VirtualInterface, error) {
+func (c *DirectConnect) AssociateVirtualInterfaceWithContext(ctx aws.Context, input *AssociateVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
 	req, out := c.AssociateVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -668,7 +667,7 @@ func (c *DirectConnect) AssociateVirtualInterfaceWithContext(ctx aws.Context, in
 
 const opConfirmConnection = "ConfirmConnection"
 
-// ConfirmConnectionRequest generates a "aws/request.Request" representing the
+// ConfirmConnectionRequest generates a "aws.Request" representing the
 // client's request for the ConfirmConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -692,8 +691,8 @@ const opConfirmConnection = "ConfirmConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection
-func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) (req *request.Request, output *ConfirmConnectionOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) (req *aws.Request, output *ConfirmConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -747,7 +746,7 @@ func (c *DirectConnect) ConfirmConnection(input *ConfirmConnectionInput) (*Confi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) ConfirmConnectionWithContext(ctx aws.Context, input *ConfirmConnectionInput, opts ...request.Option) (*ConfirmConnectionOutput, error) {
+func (c *DirectConnect) ConfirmConnectionWithContext(ctx aws.Context, input *ConfirmConnectionInput, opts ...aws.Option) (*ConfirmConnectionOutput, error) {
 	req, out := c.ConfirmConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -756,7 +755,7 @@ func (c *DirectConnect) ConfirmConnectionWithContext(ctx aws.Context, input *Con
 
 const opConfirmPrivateVirtualInterface = "ConfirmPrivateVirtualInterface"
 
-// ConfirmPrivateVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// ConfirmPrivateVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the ConfirmPrivateVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -780,8 +779,8 @@ const opConfirmPrivateVirtualInterface = "ConfirmPrivateVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterface
-func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPrivateVirtualInterfaceInput) (req *request.Request, output *ConfirmPrivateVirtualInterfaceOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPrivateVirtualInterfaceInput) (req *aws.Request, output *ConfirmPrivateVirtualInterfaceOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmPrivateVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -835,7 +834,7 @@ func (c *DirectConnect) ConfirmPrivateVirtualInterface(input *ConfirmPrivateVirt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) ConfirmPrivateVirtualInterfaceWithContext(ctx aws.Context, input *ConfirmPrivateVirtualInterfaceInput, opts ...request.Option) (*ConfirmPrivateVirtualInterfaceOutput, error) {
+func (c *DirectConnect) ConfirmPrivateVirtualInterfaceWithContext(ctx aws.Context, input *ConfirmPrivateVirtualInterfaceInput, opts ...aws.Option) (*ConfirmPrivateVirtualInterfaceOutput, error) {
 	req, out := c.ConfirmPrivateVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -844,7 +843,7 @@ func (c *DirectConnect) ConfirmPrivateVirtualInterfaceWithContext(ctx aws.Contex
 
 const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
 
-// ConfirmPublicVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// ConfirmPublicVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the ConfirmPublicVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -868,8 +867,8 @@ const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface
-func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtualInterfaceInput) (req *request.Request, output *ConfirmPublicVirtualInterfaceOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPublicVirtualInterfaceInput) (req *aws.Request, output *ConfirmPublicVirtualInterfaceOutput) {
+	op := &aws.Operation{
 		Name:       opConfirmPublicVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -922,7 +921,7 @@ func (c *DirectConnect) ConfirmPublicVirtualInterface(input *ConfirmPublicVirtua
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) ConfirmPublicVirtualInterfaceWithContext(ctx aws.Context, input *ConfirmPublicVirtualInterfaceInput, opts ...request.Option) (*ConfirmPublicVirtualInterfaceOutput, error) {
+func (c *DirectConnect) ConfirmPublicVirtualInterfaceWithContext(ctx aws.Context, input *ConfirmPublicVirtualInterfaceInput, opts ...aws.Option) (*ConfirmPublicVirtualInterfaceOutput, error) {
 	req, out := c.ConfirmPublicVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -931,7 +930,7 @@ func (c *DirectConnect) ConfirmPublicVirtualInterfaceWithContext(ctx aws.Context
 
 const opCreateBGPPeer = "CreateBGPPeer"
 
-// CreateBGPPeerRequest generates a "aws/request.Request" representing the
+// CreateBGPPeerRequest generates a "aws.Request" representing the
 // client's request for the CreateBGPPeer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -955,8 +954,8 @@ const opCreateBGPPeer = "CreateBGPPeer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer
-func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) (req *request.Request, output *CreateBGPPeerOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) (req *aws.Request, output *CreateBGPPeerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBGPPeer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1018,7 +1017,7 @@ func (c *DirectConnect) CreateBGPPeer(input *CreateBGPPeerInput) (*CreateBGPPeer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) CreateBGPPeerWithContext(ctx aws.Context, input *CreateBGPPeerInput, opts ...request.Option) (*CreateBGPPeerOutput, error) {
+func (c *DirectConnect) CreateBGPPeerWithContext(ctx aws.Context, input *CreateBGPPeerInput, opts ...aws.Option) (*CreateBGPPeerOutput, error) {
 	req, out := c.CreateBGPPeerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1027,7 +1026,7 @@ func (c *DirectConnect) CreateBGPPeerWithContext(ctx aws.Context, input *CreateB
 
 const opCreateConnection = "CreateConnection"
 
-// CreateConnectionRequest generates a "aws/request.Request" representing the
+// CreateConnectionRequest generates a "aws.Request" representing the
 // client's request for the CreateConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1051,8 +1050,8 @@ const opCreateConnection = "CreateConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection
-func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) (req *request.Request, output *Connection) {
-	op := &request.Operation{
+func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) (req *aws.Request, output *Connection) {
+	op := &aws.Operation{
 		Name:       opCreateConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1117,7 +1116,7 @@ func (c *DirectConnect) CreateConnection(input *CreateConnectionInput) (*Connect
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) CreateConnectionWithContext(ctx aws.Context, input *CreateConnectionInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) CreateConnectionWithContext(ctx aws.Context, input *CreateConnectionInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.CreateConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1126,7 +1125,7 @@ func (c *DirectConnect) CreateConnectionWithContext(ctx aws.Context, input *Crea
 
 const opCreateInterconnect = "CreateInterconnect"
 
-// CreateInterconnectRequest generates a "aws/request.Request" representing the
+// CreateInterconnectRequest generates a "aws.Request" representing the
 // client's request for the CreateInterconnect operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1150,8 +1149,8 @@ const opCreateInterconnect = "CreateInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect
-func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput) (req *request.Request, output *Interconnect) {
-	op := &request.Operation{
+func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput) (req *aws.Request, output *Interconnect) {
+	op := &aws.Operation{
 		Name:       opCreateInterconnect,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1224,7 +1223,7 @@ func (c *DirectConnect) CreateInterconnect(input *CreateInterconnectInput) (*Int
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) CreateInterconnectWithContext(ctx aws.Context, input *CreateInterconnectInput, opts ...request.Option) (*Interconnect, error) {
+func (c *DirectConnect) CreateInterconnectWithContext(ctx aws.Context, input *CreateInterconnectInput, opts ...aws.Option) (*Interconnect, error) {
 	req, out := c.CreateInterconnectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1233,7 +1232,7 @@ func (c *DirectConnect) CreateInterconnectWithContext(ctx aws.Context, input *Cr
 
 const opCreateLag = "CreateLag"
 
-// CreateLagRequest generates a "aws/request.Request" representing the
+// CreateLagRequest generates a "aws.Request" representing the
 // client's request for the CreateLag operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1257,8 +1256,8 @@ const opCreateLag = "CreateLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag
-func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) (req *request.Request, output *Lag) {
-	op := &request.Operation{
+func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) (req *aws.Request, output *Lag) {
+	op := &aws.Operation{
 		Name:       opCreateLag,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1332,7 +1331,7 @@ func (c *DirectConnect) CreateLag(input *CreateLagInput) (*Lag, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) CreateLagWithContext(ctx aws.Context, input *CreateLagInput, opts ...request.Option) (*Lag, error) {
+func (c *DirectConnect) CreateLagWithContext(ctx aws.Context, input *CreateLagInput, opts ...aws.Option) (*Lag, error) {
 	req, out := c.CreateLagRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1341,7 +1340,7 @@ func (c *DirectConnect) CreateLagWithContext(ctx aws.Context, input *CreateLagIn
 
 const opCreatePrivateVirtualInterface = "CreatePrivateVirtualInterface"
 
-// CreatePrivateVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// CreatePrivateVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the CreatePrivateVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1365,8 +1364,8 @@ const opCreatePrivateVirtualInterface = "CreatePrivateVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface
-func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivateVirtualInterfaceInput) (req *request.Request, output *VirtualInterface) {
-	op := &request.Operation{
+func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivateVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+	op := &aws.Operation{
 		Name:       opCreatePrivateVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1418,7 +1417,7 @@ func (c *DirectConnect) CreatePrivateVirtualInterface(input *CreatePrivateVirtua
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) CreatePrivateVirtualInterfaceWithContext(ctx aws.Context, input *CreatePrivateVirtualInterfaceInput, opts ...request.Option) (*VirtualInterface, error) {
+func (c *DirectConnect) CreatePrivateVirtualInterfaceWithContext(ctx aws.Context, input *CreatePrivateVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
 	req, out := c.CreatePrivateVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1427,7 +1426,7 @@ func (c *DirectConnect) CreatePrivateVirtualInterfaceWithContext(ctx aws.Context
 
 const opCreatePublicVirtualInterface = "CreatePublicVirtualInterface"
 
-// CreatePublicVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// CreatePublicVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the CreatePublicVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1451,8 +1450,8 @@ const opCreatePublicVirtualInterface = "CreatePublicVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface
-func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicVirtualInterfaceInput) (req *request.Request, output *VirtualInterface) {
-	op := &request.Operation{
+func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicVirtualInterfaceInput) (req *aws.Request, output *VirtualInterface) {
+	op := &aws.Operation{
 		Name:       opCreatePublicVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1509,7 +1508,7 @@ func (c *DirectConnect) CreatePublicVirtualInterface(input *CreatePublicVirtualI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) CreatePublicVirtualInterfaceWithContext(ctx aws.Context, input *CreatePublicVirtualInterfaceInput, opts ...request.Option) (*VirtualInterface, error) {
+func (c *DirectConnect) CreatePublicVirtualInterfaceWithContext(ctx aws.Context, input *CreatePublicVirtualInterfaceInput, opts ...aws.Option) (*VirtualInterface, error) {
 	req, out := c.CreatePublicVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1518,7 +1517,7 @@ func (c *DirectConnect) CreatePublicVirtualInterfaceWithContext(ctx aws.Context,
 
 const opDeleteBGPPeer = "DeleteBGPPeer"
 
-// DeleteBGPPeerRequest generates a "aws/request.Request" representing the
+// DeleteBGPPeerRequest generates a "aws.Request" representing the
 // client's request for the DeleteBGPPeer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1542,8 +1541,8 @@ const opDeleteBGPPeer = "DeleteBGPPeer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer
-func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) (req *request.Request, output *DeleteBGPPeerOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) (req *aws.Request, output *DeleteBGPPeerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBGPPeer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1595,7 +1594,7 @@ func (c *DirectConnect) DeleteBGPPeer(input *DeleteBGPPeerInput) (*DeleteBGPPeer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DeleteBGPPeerWithContext(ctx aws.Context, input *DeleteBGPPeerInput, opts ...request.Option) (*DeleteBGPPeerOutput, error) {
+func (c *DirectConnect) DeleteBGPPeerWithContext(ctx aws.Context, input *DeleteBGPPeerInput, opts ...aws.Option) (*DeleteBGPPeerOutput, error) {
 	req, out := c.DeleteBGPPeerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1604,7 +1603,7 @@ func (c *DirectConnect) DeleteBGPPeerWithContext(ctx aws.Context, input *DeleteB
 
 const opDeleteConnection = "DeleteConnection"
 
-// DeleteConnectionRequest generates a "aws/request.Request" representing the
+// DeleteConnectionRequest generates a "aws.Request" representing the
 // client's request for the DeleteConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1628,8 +1627,8 @@ const opDeleteConnection = "DeleteConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection
-func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) (req *request.Request, output *Connection) {
-	op := &request.Operation{
+func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) (req *aws.Request, output *Connection) {
+	op := &aws.Operation{
 		Name:       opDeleteConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1684,7 +1683,7 @@ func (c *DirectConnect) DeleteConnection(input *DeleteConnectionInput) (*Connect
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnectionInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnectionInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.DeleteConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1693,7 +1692,7 @@ func (c *DirectConnect) DeleteConnectionWithContext(ctx aws.Context, input *Dele
 
 const opDeleteInterconnect = "DeleteInterconnect"
 
-// DeleteInterconnectRequest generates a "aws/request.Request" representing the
+// DeleteInterconnectRequest generates a "aws.Request" representing the
 // client's request for the DeleteInterconnect operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1717,8 +1716,8 @@ const opDeleteInterconnect = "DeleteInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect
-func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput) (req *request.Request, output *DeleteInterconnectOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput) (req *aws.Request, output *DeleteInterconnectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteInterconnect,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1770,7 +1769,7 @@ func (c *DirectConnect) DeleteInterconnect(input *DeleteInterconnectInput) (*Del
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DeleteInterconnectWithContext(ctx aws.Context, input *DeleteInterconnectInput, opts ...request.Option) (*DeleteInterconnectOutput, error) {
+func (c *DirectConnect) DeleteInterconnectWithContext(ctx aws.Context, input *DeleteInterconnectInput, opts ...aws.Option) (*DeleteInterconnectOutput, error) {
 	req, out := c.DeleteInterconnectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1779,7 +1778,7 @@ func (c *DirectConnect) DeleteInterconnectWithContext(ctx aws.Context, input *De
 
 const opDeleteLag = "DeleteLag"
 
-// DeleteLagRequest generates a "aws/request.Request" representing the
+// DeleteLagRequest generates a "aws.Request" representing the
 // client's request for the DeleteLag operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1803,8 +1802,8 @@ const opDeleteLag = "DeleteLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag
-func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) (req *request.Request, output *Lag) {
-	op := &request.Operation{
+func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) (req *aws.Request, output *Lag) {
+	op := &aws.Operation{
 		Name:       opDeleteLag,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1855,7 +1854,7 @@ func (c *DirectConnect) DeleteLag(input *DeleteLagInput) (*Lag, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DeleteLagWithContext(ctx aws.Context, input *DeleteLagInput, opts ...request.Option) (*Lag, error) {
+func (c *DirectConnect) DeleteLagWithContext(ctx aws.Context, input *DeleteLagInput, opts ...aws.Option) (*Lag, error) {
 	req, out := c.DeleteLagRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1864,7 +1863,7 @@ func (c *DirectConnect) DeleteLagWithContext(ctx aws.Context, input *DeleteLagIn
 
 const opDeleteVirtualInterface = "DeleteVirtualInterface"
 
-// DeleteVirtualInterfaceRequest generates a "aws/request.Request" representing the
+// DeleteVirtualInterfaceRequest generates a "aws.Request" representing the
 // client's request for the DeleteVirtualInterface operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1888,8 +1887,8 @@ const opDeleteVirtualInterface = "DeleteVirtualInterface"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface
-func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInput) (req *request.Request, output *DeleteVirtualInterfaceOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterfaceInput) (req *aws.Request, output *DeleteVirtualInterfaceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVirtualInterface,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1939,7 +1938,7 @@ func (c *DirectConnect) DeleteVirtualInterface(input *DeleteVirtualInterfaceInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DeleteVirtualInterfaceWithContext(ctx aws.Context, input *DeleteVirtualInterfaceInput, opts ...request.Option) (*DeleteVirtualInterfaceOutput, error) {
+func (c *DirectConnect) DeleteVirtualInterfaceWithContext(ctx aws.Context, input *DeleteVirtualInterfaceInput, opts ...aws.Option) (*DeleteVirtualInterfaceOutput, error) {
 	req, out := c.DeleteVirtualInterfaceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1948,7 +1947,7 @@ func (c *DirectConnect) DeleteVirtualInterfaceWithContext(ctx aws.Context, input
 
 const opDescribeConnectionLoa = "DescribeConnectionLoa"
 
-// DescribeConnectionLoaRequest generates a "aws/request.Request" representing the
+// DescribeConnectionLoaRequest generates a "aws.Request" representing the
 // client's request for the DescribeConnectionLoa operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1972,11 +1971,11 @@ const opDescribeConnectionLoa = "DescribeConnectionLoa"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoa
-func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput) (req *request.Request, output *DescribeConnectionLoaOutput) {
+func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLoaInput) (req *aws.Request, output *DescribeConnectionLoaOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeConnectionLoa, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opDescribeConnectionLoa,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2034,7 +2033,7 @@ func (c *DirectConnect) DescribeConnectionLoa(input *DescribeConnectionLoaInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeConnectionLoaWithContext(ctx aws.Context, input *DescribeConnectionLoaInput, opts ...request.Option) (*DescribeConnectionLoaOutput, error) {
+func (c *DirectConnect) DescribeConnectionLoaWithContext(ctx aws.Context, input *DescribeConnectionLoaInput, opts ...aws.Option) (*DescribeConnectionLoaOutput, error) {
 	req, out := c.DescribeConnectionLoaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2043,7 +2042,7 @@ func (c *DirectConnect) DescribeConnectionLoaWithContext(ctx aws.Context, input 
 
 const opDescribeConnections = "DescribeConnections"
 
-// DescribeConnectionsRequest generates a "aws/request.Request" representing the
+// DescribeConnectionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeConnections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2067,8 +2066,8 @@ const opDescribeConnections = "DescribeConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections
-func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInput) (req *request.Request, output *Connections) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInput) (req *aws.Request, output *Connections) {
+	op := &aws.Operation{
 		Name:       opDescribeConnections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2120,7 +2119,7 @@ func (c *DirectConnect) DescribeConnections(input *DescribeConnectionsInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeConnectionsWithContext(ctx aws.Context, input *DescribeConnectionsInput, opts ...request.Option) (*Connections, error) {
+func (c *DirectConnect) DescribeConnectionsWithContext(ctx aws.Context, input *DescribeConnectionsInput, opts ...aws.Option) (*Connections, error) {
 	req, out := c.DescribeConnectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2129,7 +2128,7 @@ func (c *DirectConnect) DescribeConnectionsWithContext(ctx aws.Context, input *D
 
 const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 
-// DescribeConnectionsOnInterconnectRequest generates a "aws/request.Request" representing the
+// DescribeConnectionsOnInterconnectRequest generates a "aws.Request" representing the
 // client's request for the DescribeConnectionsOnInterconnect operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2153,11 +2152,11 @@ const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect
-func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *DescribeConnectionsOnInterconnectInput) (req *request.Request, output *Connections) {
+func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *DescribeConnectionsOnInterconnectInput) (req *aws.Request, output *Connections) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeConnectionsOnInterconnect, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opDescribeConnectionsOnInterconnect,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2211,7 +2210,7 @@ func (c *DirectConnect) DescribeConnectionsOnInterconnect(input *DescribeConnect
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeConnectionsOnInterconnectWithContext(ctx aws.Context, input *DescribeConnectionsOnInterconnectInput, opts ...request.Option) (*Connections, error) {
+func (c *DirectConnect) DescribeConnectionsOnInterconnectWithContext(ctx aws.Context, input *DescribeConnectionsOnInterconnectInput, opts ...aws.Option) (*Connections, error) {
 	req, out := c.DescribeConnectionsOnInterconnectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2220,7 +2219,7 @@ func (c *DirectConnect) DescribeConnectionsOnInterconnectWithContext(ctx aws.Con
 
 const opDescribeHostedConnections = "DescribeHostedConnections"
 
-// DescribeHostedConnectionsRequest generates a "aws/request.Request" representing the
+// DescribeHostedConnectionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeHostedConnections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2244,8 +2243,8 @@ const opDescribeHostedConnections = "DescribeHostedConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections
-func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedConnectionsInput) (req *request.Request, output *Connections) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedConnectionsInput) (req *aws.Request, output *Connections) {
+	op := &aws.Operation{
 		Name:       opDescribeHostedConnections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2298,7 +2297,7 @@ func (c *DirectConnect) DescribeHostedConnections(input *DescribeHostedConnectio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeHostedConnectionsWithContext(ctx aws.Context, input *DescribeHostedConnectionsInput, opts ...request.Option) (*Connections, error) {
+func (c *DirectConnect) DescribeHostedConnectionsWithContext(ctx aws.Context, input *DescribeHostedConnectionsInput, opts ...aws.Option) (*Connections, error) {
 	req, out := c.DescribeHostedConnectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2307,7 +2306,7 @@ func (c *DirectConnect) DescribeHostedConnectionsWithContext(ctx aws.Context, in
 
 const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 
-// DescribeInterconnectLoaRequest generates a "aws/request.Request" representing the
+// DescribeInterconnectLoaRequest generates a "aws.Request" representing the
 // client's request for the DescribeInterconnectLoa operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2331,11 +2330,11 @@ const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoa
-func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaInput) (req *request.Request, output *DescribeInterconnectLoaOutput) {
+func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconnectLoaInput) (req *aws.Request, output *DescribeInterconnectLoaOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, DescribeInterconnectLoa, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opDescribeInterconnectLoa,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2393,7 +2392,7 @@ func (c *DirectConnect) DescribeInterconnectLoa(input *DescribeInterconnectLoaIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeInterconnectLoaWithContext(ctx aws.Context, input *DescribeInterconnectLoaInput, opts ...request.Option) (*DescribeInterconnectLoaOutput, error) {
+func (c *DirectConnect) DescribeInterconnectLoaWithContext(ctx aws.Context, input *DescribeInterconnectLoaInput, opts ...aws.Option) (*DescribeInterconnectLoaOutput, error) {
 	req, out := c.DescribeInterconnectLoaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2402,7 +2401,7 @@ func (c *DirectConnect) DescribeInterconnectLoaWithContext(ctx aws.Context, inpu
 
 const opDescribeInterconnects = "DescribeInterconnects"
 
-// DescribeInterconnectsRequest generates a "aws/request.Request" representing the
+// DescribeInterconnectsRequest generates a "aws.Request" representing the
 // client's request for the DescribeInterconnects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2426,8 +2425,8 @@ const opDescribeInterconnects = "DescribeInterconnects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects
-func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnectsInput) (req *request.Request, output *DescribeInterconnectsOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnectsInput) (req *aws.Request, output *DescribeInterconnectsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInterconnects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2479,7 +2478,7 @@ func (c *DirectConnect) DescribeInterconnects(input *DescribeInterconnectsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeInterconnectsWithContext(ctx aws.Context, input *DescribeInterconnectsInput, opts ...request.Option) (*DescribeInterconnectsOutput, error) {
+func (c *DirectConnect) DescribeInterconnectsWithContext(ctx aws.Context, input *DescribeInterconnectsInput, opts ...aws.Option) (*DescribeInterconnectsOutput, error) {
 	req, out := c.DescribeInterconnectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2488,7 +2487,7 @@ func (c *DirectConnect) DescribeInterconnectsWithContext(ctx aws.Context, input 
 
 const opDescribeLags = "DescribeLags"
 
-// DescribeLagsRequest generates a "aws/request.Request" representing the
+// DescribeLagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeLags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2512,8 +2511,8 @@ const opDescribeLags = "DescribeLags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags
-func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) (req *request.Request, output *DescribeLagsOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) (req *aws.Request, output *DescribeLagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2565,7 +2564,7 @@ func (c *DirectConnect) DescribeLags(input *DescribeLagsInput) (*DescribeLagsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeLagsWithContext(ctx aws.Context, input *DescribeLagsInput, opts ...request.Option) (*DescribeLagsOutput, error) {
+func (c *DirectConnect) DescribeLagsWithContext(ctx aws.Context, input *DescribeLagsInput, opts ...aws.Option) (*DescribeLagsOutput, error) {
 	req, out := c.DescribeLagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2574,7 +2573,7 @@ func (c *DirectConnect) DescribeLagsWithContext(ctx aws.Context, input *Describe
 
 const opDescribeLoa = "DescribeLoa"
 
-// DescribeLoaRequest generates a "aws/request.Request" representing the
+// DescribeLoaRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoa operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2598,8 +2597,8 @@ const opDescribeLoa = "DescribeLoa"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoa
-func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) (req *request.Request, output *Loa) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) (req *aws.Request, output *Loa) {
+	op := &aws.Operation{
 		Name:       opDescribeLoa,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2656,7 +2655,7 @@ func (c *DirectConnect) DescribeLoa(input *DescribeLoaInput) (*Loa, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeLoaWithContext(ctx aws.Context, input *DescribeLoaInput, opts ...request.Option) (*Loa, error) {
+func (c *DirectConnect) DescribeLoaWithContext(ctx aws.Context, input *DescribeLoaInput, opts ...aws.Option) (*Loa, error) {
 	req, out := c.DescribeLoaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2665,7 +2664,7 @@ func (c *DirectConnect) DescribeLoaWithContext(ctx aws.Context, input *DescribeL
 
 const opDescribeLocations = "DescribeLocations"
 
-// DescribeLocationsRequest generates a "aws/request.Request" representing the
+// DescribeLocationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeLocations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2689,8 +2688,8 @@ const opDescribeLocations = "DescribeLocations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations
-func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) (req *request.Request, output *DescribeLocationsOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) (req *aws.Request, output *DescribeLocationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLocations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2742,7 +2741,7 @@ func (c *DirectConnect) DescribeLocations(input *DescribeLocationsInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeLocationsWithContext(ctx aws.Context, input *DescribeLocationsInput, opts ...request.Option) (*DescribeLocationsOutput, error) {
+func (c *DirectConnect) DescribeLocationsWithContext(ctx aws.Context, input *DescribeLocationsInput, opts ...aws.Option) (*DescribeLocationsOutput, error) {
 	req, out := c.DescribeLocationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2751,7 +2750,7 @@ func (c *DirectConnect) DescribeLocationsWithContext(ctx aws.Context, input *Des
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2775,8 +2774,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTags
-func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2826,7 +2825,7 @@ func (c *DirectConnect) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *DirectConnect) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2835,7 +2834,7 @@ func (c *DirectConnect) DescribeTagsWithContext(ctx aws.Context, input *Describe
 
 const opDescribeVirtualGateways = "DescribeVirtualGateways"
 
-// DescribeVirtualGatewaysRequest generates a "aws/request.Request" representing the
+// DescribeVirtualGatewaysRequest generates a "aws.Request" representing the
 // client's request for the DescribeVirtualGateways operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2859,8 +2858,8 @@ const opDescribeVirtualGateways = "DescribeVirtualGateways"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualGateways
-func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysInput) (req *request.Request, output *DescribeVirtualGatewaysOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGatewaysInput) (req *aws.Request, output *DescribeVirtualGatewaysOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVirtualGateways,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2916,7 +2915,7 @@ func (c *DirectConnect) DescribeVirtualGateways(input *DescribeVirtualGatewaysIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeVirtualGatewaysWithContext(ctx aws.Context, input *DescribeVirtualGatewaysInput, opts ...request.Option) (*DescribeVirtualGatewaysOutput, error) {
+func (c *DirectConnect) DescribeVirtualGatewaysWithContext(ctx aws.Context, input *DescribeVirtualGatewaysInput, opts ...aws.Option) (*DescribeVirtualGatewaysOutput, error) {
 	req, out := c.DescribeVirtualGatewaysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2925,7 +2924,7 @@ func (c *DirectConnect) DescribeVirtualGatewaysWithContext(ctx aws.Context, inpu
 
 const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
 
-// DescribeVirtualInterfacesRequest generates a "aws/request.Request" representing the
+// DescribeVirtualInterfacesRequest generates a "aws.Request" representing the
 // client's request for the DescribeVirtualInterfaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2949,8 +2948,8 @@ const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces
-func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfacesInput) (req *request.Request, output *DescribeVirtualInterfacesOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualInterfacesInput) (req *aws.Request, output *DescribeVirtualInterfacesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVirtualInterfaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3007,7 +3006,7 @@ func (c *DirectConnect) DescribeVirtualInterfaces(input *DescribeVirtualInterfac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DescribeVirtualInterfacesWithContext(ctx aws.Context, input *DescribeVirtualInterfacesInput, opts ...request.Option) (*DescribeVirtualInterfacesOutput, error) {
+func (c *DirectConnect) DescribeVirtualInterfacesWithContext(ctx aws.Context, input *DescribeVirtualInterfacesInput, opts ...aws.Option) (*DescribeVirtualInterfacesOutput, error) {
 	req, out := c.DescribeVirtualInterfacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3016,7 +3015,7 @@ func (c *DirectConnect) DescribeVirtualInterfacesWithContext(ctx aws.Context, in
 
 const opDisassociateConnectionFromLag = "DisassociateConnectionFromLag"
 
-// DisassociateConnectionFromLagRequest generates a "aws/request.Request" representing the
+// DisassociateConnectionFromLagRequest generates a "aws.Request" representing the
 // client's request for the DisassociateConnectionFromLag operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3040,8 +3039,8 @@ const opDisassociateConnectionFromLag = "DisassociateConnectionFromLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag
-func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *DisassociateConnectionFromLagInput) (req *request.Request, output *Connection) {
-	op := &request.Operation{
+func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *DisassociateConnectionFromLagInput) (req *aws.Request, output *Connection) {
+	op := &aws.Operation{
 		Name:       opDisassociateConnectionFromLag,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3101,7 +3100,7 @@ func (c *DirectConnect) DisassociateConnectionFromLag(input *DisassociateConnect
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) DisassociateConnectionFromLagWithContext(ctx aws.Context, input *DisassociateConnectionFromLagInput, opts ...request.Option) (*Connection, error) {
+func (c *DirectConnect) DisassociateConnectionFromLagWithContext(ctx aws.Context, input *DisassociateConnectionFromLagInput, opts ...aws.Option) (*Connection, error) {
 	req, out := c.DisassociateConnectionFromLagRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3110,7 +3109,7 @@ func (c *DirectConnect) DisassociateConnectionFromLagWithContext(ctx aws.Context
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3134,8 +3133,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResource
-func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3197,7 +3196,7 @@ func (c *DirectConnect) TagResource(input *TagResourceInput) (*TagResourceOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *DirectConnect) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3206,7 +3205,7 @@ func (c *DirectConnect) TagResourceWithContext(ctx aws.Context, input *TagResour
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3230,8 +3229,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResource
-func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3281,7 +3280,7 @@ func (c *DirectConnect) UntagResource(input *UntagResourceInput) (*UntagResource
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *DirectConnect) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3290,7 +3289,7 @@ func (c *DirectConnect) UntagResourceWithContext(ctx aws.Context, input *UntagRe
 
 const opUpdateLag = "UpdateLag"
 
-// UpdateLagRequest generates a "aws/request.Request" representing the
+// UpdateLagRequest generates a "aws.Request" representing the
 // client's request for the UpdateLag operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3314,8 +3313,8 @@ const opUpdateLag = "UpdateLag"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag
-func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) (req *request.Request, output *Lag) {
-	op := &request.Operation{
+func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) (req *aws.Request, output *Lag) {
+	op := &aws.Operation{
 		Name:       opUpdateLag,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3379,7 +3378,7 @@ func (c *DirectConnect) UpdateLag(input *UpdateLagInput) (*Lag, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectConnect) UpdateLagWithContext(ctx aws.Context, input *UpdateLagInput, opts ...request.Option) (*Lag, error) {
+func (c *DirectConnect) UpdateLagWithContext(ctx aws.Context, input *UpdateLagInput, opts ...aws.Option) (*Lag, error) {
 	req, out := c.UpdateLagRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3451,21 +3450,21 @@ func (s AllocateConnectionOnInterconnectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateConnectionOnInterconnectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AllocateConnectionOnInterconnectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AllocateConnectionOnInterconnectInput"}
 	if s.Bandwidth == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bandwidth"))
+		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
 	if s.ConnectionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
 	if s.InterconnectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InterconnectId"))
+		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
 	if s.OwnerAccount == nil {
-		invalidParams.Add(request.NewErrParamRequired("OwnerAccount"))
+		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
 	if s.Vlan == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vlan"))
+		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3569,21 +3568,21 @@ func (s AllocateHostedConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocateHostedConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AllocateHostedConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AllocateHostedConnectionInput"}
 	if s.Bandwidth == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bandwidth"))
+		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.ConnectionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
 	if s.OwnerAccount == nil {
-		invalidParams.Add(request.NewErrParamRequired("OwnerAccount"))
+		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
 	if s.Vlan == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vlan"))
+		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3661,19 +3660,19 @@ func (s AllocatePrivateVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocatePrivateVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AllocatePrivateVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AllocatePrivateVirtualInterfaceInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.NewPrivateVirtualInterfaceAllocation == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewPrivateVirtualInterfaceAllocation"))
+		invalidParams.Add(aws.NewErrParamRequired("NewPrivateVirtualInterfaceAllocation"))
 	}
 	if s.OwnerAccount == nil {
-		invalidParams.Add(request.NewErrParamRequired("OwnerAccount"))
+		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
 	if s.NewPrivateVirtualInterfaceAllocation != nil {
 		if err := s.NewPrivateVirtualInterfaceAllocation.Validate(); err != nil {
-			invalidParams.AddNested("NewPrivateVirtualInterfaceAllocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewPrivateVirtualInterfaceAllocation", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3740,19 +3739,19 @@ func (s AllocatePublicVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllocatePublicVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AllocatePublicVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AllocatePublicVirtualInterfaceInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.NewPublicVirtualInterfaceAllocation == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewPublicVirtualInterfaceAllocation"))
+		invalidParams.Add(aws.NewErrParamRequired("NewPublicVirtualInterfaceAllocation"))
 	}
 	if s.OwnerAccount == nil {
-		invalidParams.Add(request.NewErrParamRequired("OwnerAccount"))
+		invalidParams.Add(aws.NewErrParamRequired("OwnerAccount"))
 	}
 	if s.NewPublicVirtualInterfaceAllocation != nil {
 		if err := s.NewPublicVirtualInterfaceAllocation.Validate(); err != nil {
-			invalidParams.AddNested("NewPublicVirtualInterfaceAllocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewPublicVirtualInterfaceAllocation", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3816,12 +3815,12 @@ func (s AssociateConnectionWithLagInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateConnectionWithLagInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateConnectionWithLagInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateConnectionWithLagInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.LagId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LagId"))
+		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3878,12 +3877,12 @@ func (s AssociateHostedConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateHostedConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateHostedConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateHostedConnectionInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.ParentConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentConnectionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3940,12 +3939,12 @@ func (s AssociateVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateVirtualInterfaceInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4102,9 +4101,9 @@ func (s ConfirmConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmConnectionInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4203,12 +4202,12 @@ func (s ConfirmPrivateVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmPrivateVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmPrivateVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmPrivateVirtualInterfaceInput"}
 	if s.VirtualGatewayId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualGatewayId"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualGatewayId"))
 	}
 	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4308,9 +4307,9 @@ func (s ConfirmPublicVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfirmPublicVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfirmPublicVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfirmPublicVirtualInterfaceInput"}
 	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4689,15 +4688,15 @@ func (s CreateConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectionInput"}
 	if s.Bandwidth == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bandwidth"))
+		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
 	if s.ConnectionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
 	if s.Location == nil {
-		invalidParams.Add(request.NewErrParamRequired("Location"))
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4782,15 +4781,15 @@ func (s CreateInterconnectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInterconnectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateInterconnectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInterconnectInput"}
 	if s.Bandwidth == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bandwidth"))
+		invalidParams.Add(aws.NewErrParamRequired("Bandwidth"))
 	}
 	if s.InterconnectName == nil {
-		invalidParams.Add(request.NewErrParamRequired("InterconnectName"))
+		invalidParams.Add(aws.NewErrParamRequired("InterconnectName"))
 	}
 	if s.Location == nil {
-		invalidParams.Add(request.NewErrParamRequired("Location"))
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4881,18 +4880,18 @@ func (s CreateLagInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLagInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLagInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLagInput"}
 	if s.ConnectionsBandwidth == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionsBandwidth"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionsBandwidth"))
 	}
 	if s.LagName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LagName"))
+		invalidParams.Add(aws.NewErrParamRequired("LagName"))
 	}
 	if s.Location == nil {
-		invalidParams.Add(request.NewErrParamRequired("Location"))
+		invalidParams.Add(aws.NewErrParamRequired("Location"))
 	}
 	if s.NumberOfConnections == nil {
-		invalidParams.Add(request.NewErrParamRequired("NumberOfConnections"))
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfConnections"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4966,16 +4965,16 @@ func (s CreatePrivateVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePrivateVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePrivateVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePrivateVirtualInterfaceInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.NewPrivateVirtualInterface == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewPrivateVirtualInterface"))
+		invalidParams.Add(aws.NewErrParamRequired("NewPrivateVirtualInterface"))
 	}
 	if s.NewPrivateVirtualInterface != nil {
 		if err := s.NewPrivateVirtualInterface.Validate(); err != nil {
-			invalidParams.AddNested("NewPrivateVirtualInterface", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewPrivateVirtualInterface", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5032,16 +5031,16 @@ func (s CreatePublicVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePublicVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePublicVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePublicVirtualInterfaceInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.NewPublicVirtualInterface == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewPublicVirtualInterface"))
+		invalidParams.Add(aws.NewErrParamRequired("NewPublicVirtualInterface"))
 	}
 	if s.NewPublicVirtualInterface != nil {
 		if err := s.NewPublicVirtualInterface.Validate(); err != nil {
-			invalidParams.AddNested("NewPublicVirtualInterface", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("NewPublicVirtualInterface", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5168,9 +5167,9 @@ func (s DeleteConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConnectionInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5210,9 +5209,9 @@ func (s DeleteInterconnectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInterconnectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteInterconnectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInterconnectInput"}
 	if s.InterconnectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InterconnectId"))
+		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5294,9 +5293,9 @@ func (s DeleteLagInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLagInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLagInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLagInput"}
 	if s.LagId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LagId"))
+		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5338,9 +5337,9 @@ func (s DeleteVirtualInterfaceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVirtualInterfaceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVirtualInterfaceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVirtualInterfaceInput"}
 	if s.VirtualInterfaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5448,9 +5447,9 @@ func (s DescribeConnectionLoaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConnectionLoaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConnectionLoaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionLoaInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5560,9 +5559,9 @@ func (s DescribeConnectionsOnInterconnectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConnectionsOnInterconnectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConnectionsOnInterconnectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConnectionsOnInterconnectInput"}
 	if s.InterconnectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InterconnectId"))
+		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5604,9 +5603,9 @@ func (s DescribeHostedConnectionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeHostedConnectionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeHostedConnectionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeHostedConnectionsInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5659,9 +5658,9 @@ func (s DescribeInterconnectLoaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInterconnectLoaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInterconnectLoaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInterconnectLoaInput"}
 	if s.InterconnectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InterconnectId"))
+		invalidParams.Add(aws.NewErrParamRequired("InterconnectId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5861,9 +5860,9 @@ func (s DescribeLoaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoaInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5957,9 +5956,9 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.ResourceArns == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArns"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArns"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6143,12 +6142,12 @@ func (s DisassociateConnectionFromLagInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateConnectionFromLagInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateConnectionFromLagInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConnectionFromLagInput"}
 	if s.ConnectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionId"))
 	}
 	if s.LagId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LagId"))
+		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6689,18 +6688,18 @@ func (s NewPrivateVirtualInterface) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPrivateVirtualInterface) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NewPrivateVirtualInterface"}
+	invalidParams := aws.ErrInvalidParams{Context: "NewPrivateVirtualInterface"}
 	if s.Asn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Asn"))
+		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
 	if s.VirtualGatewayId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualGatewayId"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualGatewayId"))
 	}
 	if s.VirtualInterfaceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceName"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
 	if s.Vlan == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vlan"))
+		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6819,15 +6818,15 @@ func (s NewPrivateVirtualInterfaceAllocation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPrivateVirtualInterfaceAllocation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NewPrivateVirtualInterfaceAllocation"}
+	invalidParams := aws.ErrInvalidParams{Context: "NewPrivateVirtualInterfaceAllocation"}
 	if s.Asn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Asn"))
+		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
 	if s.VirtualInterfaceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceName"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
 	if s.Vlan == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vlan"))
+		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6943,15 +6942,15 @@ func (s NewPublicVirtualInterface) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPublicVirtualInterface) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NewPublicVirtualInterface"}
+	invalidParams := aws.ErrInvalidParams{Context: "NewPublicVirtualInterface"}
 	if s.Asn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Asn"))
+		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
 	if s.VirtualInterfaceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceName"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
 	if s.Vlan == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vlan"))
+		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7074,15 +7073,15 @@ func (s NewPublicVirtualInterfaceAllocation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NewPublicVirtualInterfaceAllocation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NewPublicVirtualInterfaceAllocation"}
+	invalidParams := aws.ErrInvalidParams{Context: "NewPublicVirtualInterfaceAllocation"}
 	if s.Asn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Asn"))
+		invalidParams.Add(aws.NewErrParamRequired("Asn"))
 	}
 	if s.VirtualInterfaceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VirtualInterfaceName"))
+		invalidParams.Add(aws.NewErrParamRequired("VirtualInterfaceName"))
 	}
 	if s.Vlan == nil {
-		invalidParams.Add(request.NewErrParamRequired("Vlan"))
+		invalidParams.Add(aws.NewErrParamRequired("Vlan"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7230,12 +7229,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7286,15 +7285,15 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -7302,7 +7301,7 @@ func (s *TagResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7369,12 +7368,12 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7451,9 +7450,9 @@ func (s UpdateLagInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateLagInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateLagInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateLagInput"}
 	if s.LagId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LagId"))
+		invalidParams.Add(aws.NewErrParamRequired("LagId"))
 	}
 
 	if invalidParams.Len() > 0 {

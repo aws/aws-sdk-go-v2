@@ -10,7 +10,6 @@ package glueiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/glue"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := glue.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := glue.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,339 +64,339 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type GlueAPI interface {
 	BatchCreatePartition(*glue.BatchCreatePartitionInput) (*glue.BatchCreatePartitionOutput, error)
-	BatchCreatePartitionWithContext(aws.Context, *glue.BatchCreatePartitionInput, ...request.Option) (*glue.BatchCreatePartitionOutput, error)
-	BatchCreatePartitionRequest(*glue.BatchCreatePartitionInput) (*request.Request, *glue.BatchCreatePartitionOutput)
+	BatchCreatePartitionWithContext(aws.Context, *glue.BatchCreatePartitionInput, ...aws.Option) (*glue.BatchCreatePartitionOutput, error)
+	BatchCreatePartitionRequest(*glue.BatchCreatePartitionInput) (*aws.Request, *glue.BatchCreatePartitionOutput)
 
 	BatchDeleteConnection(*glue.BatchDeleteConnectionInput) (*glue.BatchDeleteConnectionOutput, error)
-	BatchDeleteConnectionWithContext(aws.Context, *glue.BatchDeleteConnectionInput, ...request.Option) (*glue.BatchDeleteConnectionOutput, error)
-	BatchDeleteConnectionRequest(*glue.BatchDeleteConnectionInput) (*request.Request, *glue.BatchDeleteConnectionOutput)
+	BatchDeleteConnectionWithContext(aws.Context, *glue.BatchDeleteConnectionInput, ...aws.Option) (*glue.BatchDeleteConnectionOutput, error)
+	BatchDeleteConnectionRequest(*glue.BatchDeleteConnectionInput) (*aws.Request, *glue.BatchDeleteConnectionOutput)
 
 	BatchDeletePartition(*glue.BatchDeletePartitionInput) (*glue.BatchDeletePartitionOutput, error)
-	BatchDeletePartitionWithContext(aws.Context, *glue.BatchDeletePartitionInput, ...request.Option) (*glue.BatchDeletePartitionOutput, error)
-	BatchDeletePartitionRequest(*glue.BatchDeletePartitionInput) (*request.Request, *glue.BatchDeletePartitionOutput)
+	BatchDeletePartitionWithContext(aws.Context, *glue.BatchDeletePartitionInput, ...aws.Option) (*glue.BatchDeletePartitionOutput, error)
+	BatchDeletePartitionRequest(*glue.BatchDeletePartitionInput) (*aws.Request, *glue.BatchDeletePartitionOutput)
 
 	BatchDeleteTable(*glue.BatchDeleteTableInput) (*glue.BatchDeleteTableOutput, error)
-	BatchDeleteTableWithContext(aws.Context, *glue.BatchDeleteTableInput, ...request.Option) (*glue.BatchDeleteTableOutput, error)
-	BatchDeleteTableRequest(*glue.BatchDeleteTableInput) (*request.Request, *glue.BatchDeleteTableOutput)
+	BatchDeleteTableWithContext(aws.Context, *glue.BatchDeleteTableInput, ...aws.Option) (*glue.BatchDeleteTableOutput, error)
+	BatchDeleteTableRequest(*glue.BatchDeleteTableInput) (*aws.Request, *glue.BatchDeleteTableOutput)
 
 	BatchGetPartition(*glue.BatchGetPartitionInput) (*glue.BatchGetPartitionOutput, error)
-	BatchGetPartitionWithContext(aws.Context, *glue.BatchGetPartitionInput, ...request.Option) (*glue.BatchGetPartitionOutput, error)
-	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) (*request.Request, *glue.BatchGetPartitionOutput)
+	BatchGetPartitionWithContext(aws.Context, *glue.BatchGetPartitionInput, ...aws.Option) (*glue.BatchGetPartitionOutput, error)
+	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) (*aws.Request, *glue.BatchGetPartitionOutput)
 
 	CreateClassifier(*glue.CreateClassifierInput) (*glue.CreateClassifierOutput, error)
-	CreateClassifierWithContext(aws.Context, *glue.CreateClassifierInput, ...request.Option) (*glue.CreateClassifierOutput, error)
-	CreateClassifierRequest(*glue.CreateClassifierInput) (*request.Request, *glue.CreateClassifierOutput)
+	CreateClassifierWithContext(aws.Context, *glue.CreateClassifierInput, ...aws.Option) (*glue.CreateClassifierOutput, error)
+	CreateClassifierRequest(*glue.CreateClassifierInput) (*aws.Request, *glue.CreateClassifierOutput)
 
 	CreateConnection(*glue.CreateConnectionInput) (*glue.CreateConnectionOutput, error)
-	CreateConnectionWithContext(aws.Context, *glue.CreateConnectionInput, ...request.Option) (*glue.CreateConnectionOutput, error)
-	CreateConnectionRequest(*glue.CreateConnectionInput) (*request.Request, *glue.CreateConnectionOutput)
+	CreateConnectionWithContext(aws.Context, *glue.CreateConnectionInput, ...aws.Option) (*glue.CreateConnectionOutput, error)
+	CreateConnectionRequest(*glue.CreateConnectionInput) (*aws.Request, *glue.CreateConnectionOutput)
 
 	CreateCrawler(*glue.CreateCrawlerInput) (*glue.CreateCrawlerOutput, error)
-	CreateCrawlerWithContext(aws.Context, *glue.CreateCrawlerInput, ...request.Option) (*glue.CreateCrawlerOutput, error)
-	CreateCrawlerRequest(*glue.CreateCrawlerInput) (*request.Request, *glue.CreateCrawlerOutput)
+	CreateCrawlerWithContext(aws.Context, *glue.CreateCrawlerInput, ...aws.Option) (*glue.CreateCrawlerOutput, error)
+	CreateCrawlerRequest(*glue.CreateCrawlerInput) (*aws.Request, *glue.CreateCrawlerOutput)
 
 	CreateDatabase(*glue.CreateDatabaseInput) (*glue.CreateDatabaseOutput, error)
-	CreateDatabaseWithContext(aws.Context, *glue.CreateDatabaseInput, ...request.Option) (*glue.CreateDatabaseOutput, error)
-	CreateDatabaseRequest(*glue.CreateDatabaseInput) (*request.Request, *glue.CreateDatabaseOutput)
+	CreateDatabaseWithContext(aws.Context, *glue.CreateDatabaseInput, ...aws.Option) (*glue.CreateDatabaseOutput, error)
+	CreateDatabaseRequest(*glue.CreateDatabaseInput) (*aws.Request, *glue.CreateDatabaseOutput)
 
 	CreateDevEndpoint(*glue.CreateDevEndpointInput) (*glue.CreateDevEndpointOutput, error)
-	CreateDevEndpointWithContext(aws.Context, *glue.CreateDevEndpointInput, ...request.Option) (*glue.CreateDevEndpointOutput, error)
-	CreateDevEndpointRequest(*glue.CreateDevEndpointInput) (*request.Request, *glue.CreateDevEndpointOutput)
+	CreateDevEndpointWithContext(aws.Context, *glue.CreateDevEndpointInput, ...aws.Option) (*glue.CreateDevEndpointOutput, error)
+	CreateDevEndpointRequest(*glue.CreateDevEndpointInput) (*aws.Request, *glue.CreateDevEndpointOutput)
 
 	CreateJob(*glue.CreateJobInput) (*glue.CreateJobOutput, error)
-	CreateJobWithContext(aws.Context, *glue.CreateJobInput, ...request.Option) (*glue.CreateJobOutput, error)
-	CreateJobRequest(*glue.CreateJobInput) (*request.Request, *glue.CreateJobOutput)
+	CreateJobWithContext(aws.Context, *glue.CreateJobInput, ...aws.Option) (*glue.CreateJobOutput, error)
+	CreateJobRequest(*glue.CreateJobInput) (*aws.Request, *glue.CreateJobOutput)
 
 	CreatePartition(*glue.CreatePartitionInput) (*glue.CreatePartitionOutput, error)
-	CreatePartitionWithContext(aws.Context, *glue.CreatePartitionInput, ...request.Option) (*glue.CreatePartitionOutput, error)
-	CreatePartitionRequest(*glue.CreatePartitionInput) (*request.Request, *glue.CreatePartitionOutput)
+	CreatePartitionWithContext(aws.Context, *glue.CreatePartitionInput, ...aws.Option) (*glue.CreatePartitionOutput, error)
+	CreatePartitionRequest(*glue.CreatePartitionInput) (*aws.Request, *glue.CreatePartitionOutput)
 
 	CreateScript(*glue.CreateScriptInput) (*glue.CreateScriptOutput, error)
-	CreateScriptWithContext(aws.Context, *glue.CreateScriptInput, ...request.Option) (*glue.CreateScriptOutput, error)
-	CreateScriptRequest(*glue.CreateScriptInput) (*request.Request, *glue.CreateScriptOutput)
+	CreateScriptWithContext(aws.Context, *glue.CreateScriptInput, ...aws.Option) (*glue.CreateScriptOutput, error)
+	CreateScriptRequest(*glue.CreateScriptInput) (*aws.Request, *glue.CreateScriptOutput)
 
 	CreateTable(*glue.CreateTableInput) (*glue.CreateTableOutput, error)
-	CreateTableWithContext(aws.Context, *glue.CreateTableInput, ...request.Option) (*glue.CreateTableOutput, error)
-	CreateTableRequest(*glue.CreateTableInput) (*request.Request, *glue.CreateTableOutput)
+	CreateTableWithContext(aws.Context, *glue.CreateTableInput, ...aws.Option) (*glue.CreateTableOutput, error)
+	CreateTableRequest(*glue.CreateTableInput) (*aws.Request, *glue.CreateTableOutput)
 
 	CreateTrigger(*glue.CreateTriggerInput) (*glue.CreateTriggerOutput, error)
-	CreateTriggerWithContext(aws.Context, *glue.CreateTriggerInput, ...request.Option) (*glue.CreateTriggerOutput, error)
-	CreateTriggerRequest(*glue.CreateTriggerInput) (*request.Request, *glue.CreateTriggerOutput)
+	CreateTriggerWithContext(aws.Context, *glue.CreateTriggerInput, ...aws.Option) (*glue.CreateTriggerOutput, error)
+	CreateTriggerRequest(*glue.CreateTriggerInput) (*aws.Request, *glue.CreateTriggerOutput)
 
 	CreateUserDefinedFunction(*glue.CreateUserDefinedFunctionInput) (*glue.CreateUserDefinedFunctionOutput, error)
-	CreateUserDefinedFunctionWithContext(aws.Context, *glue.CreateUserDefinedFunctionInput, ...request.Option) (*glue.CreateUserDefinedFunctionOutput, error)
-	CreateUserDefinedFunctionRequest(*glue.CreateUserDefinedFunctionInput) (*request.Request, *glue.CreateUserDefinedFunctionOutput)
+	CreateUserDefinedFunctionWithContext(aws.Context, *glue.CreateUserDefinedFunctionInput, ...aws.Option) (*glue.CreateUserDefinedFunctionOutput, error)
+	CreateUserDefinedFunctionRequest(*glue.CreateUserDefinedFunctionInput) (*aws.Request, *glue.CreateUserDefinedFunctionOutput)
 
 	DeleteClassifier(*glue.DeleteClassifierInput) (*glue.DeleteClassifierOutput, error)
-	DeleteClassifierWithContext(aws.Context, *glue.DeleteClassifierInput, ...request.Option) (*glue.DeleteClassifierOutput, error)
-	DeleteClassifierRequest(*glue.DeleteClassifierInput) (*request.Request, *glue.DeleteClassifierOutput)
+	DeleteClassifierWithContext(aws.Context, *glue.DeleteClassifierInput, ...aws.Option) (*glue.DeleteClassifierOutput, error)
+	DeleteClassifierRequest(*glue.DeleteClassifierInput) (*aws.Request, *glue.DeleteClassifierOutput)
 
 	DeleteConnection(*glue.DeleteConnectionInput) (*glue.DeleteConnectionOutput, error)
-	DeleteConnectionWithContext(aws.Context, *glue.DeleteConnectionInput, ...request.Option) (*glue.DeleteConnectionOutput, error)
-	DeleteConnectionRequest(*glue.DeleteConnectionInput) (*request.Request, *glue.DeleteConnectionOutput)
+	DeleteConnectionWithContext(aws.Context, *glue.DeleteConnectionInput, ...aws.Option) (*glue.DeleteConnectionOutput, error)
+	DeleteConnectionRequest(*glue.DeleteConnectionInput) (*aws.Request, *glue.DeleteConnectionOutput)
 
 	DeleteCrawler(*glue.DeleteCrawlerInput) (*glue.DeleteCrawlerOutput, error)
-	DeleteCrawlerWithContext(aws.Context, *glue.DeleteCrawlerInput, ...request.Option) (*glue.DeleteCrawlerOutput, error)
-	DeleteCrawlerRequest(*glue.DeleteCrawlerInput) (*request.Request, *glue.DeleteCrawlerOutput)
+	DeleteCrawlerWithContext(aws.Context, *glue.DeleteCrawlerInput, ...aws.Option) (*glue.DeleteCrawlerOutput, error)
+	DeleteCrawlerRequest(*glue.DeleteCrawlerInput) (*aws.Request, *glue.DeleteCrawlerOutput)
 
 	DeleteDatabase(*glue.DeleteDatabaseInput) (*glue.DeleteDatabaseOutput, error)
-	DeleteDatabaseWithContext(aws.Context, *glue.DeleteDatabaseInput, ...request.Option) (*glue.DeleteDatabaseOutput, error)
-	DeleteDatabaseRequest(*glue.DeleteDatabaseInput) (*request.Request, *glue.DeleteDatabaseOutput)
+	DeleteDatabaseWithContext(aws.Context, *glue.DeleteDatabaseInput, ...aws.Option) (*glue.DeleteDatabaseOutput, error)
+	DeleteDatabaseRequest(*glue.DeleteDatabaseInput) (*aws.Request, *glue.DeleteDatabaseOutput)
 
 	DeleteDevEndpoint(*glue.DeleteDevEndpointInput) (*glue.DeleteDevEndpointOutput, error)
-	DeleteDevEndpointWithContext(aws.Context, *glue.DeleteDevEndpointInput, ...request.Option) (*glue.DeleteDevEndpointOutput, error)
-	DeleteDevEndpointRequest(*glue.DeleteDevEndpointInput) (*request.Request, *glue.DeleteDevEndpointOutput)
+	DeleteDevEndpointWithContext(aws.Context, *glue.DeleteDevEndpointInput, ...aws.Option) (*glue.DeleteDevEndpointOutput, error)
+	DeleteDevEndpointRequest(*glue.DeleteDevEndpointInput) (*aws.Request, *glue.DeleteDevEndpointOutput)
 
 	DeleteJob(*glue.DeleteJobInput) (*glue.DeleteJobOutput, error)
-	DeleteJobWithContext(aws.Context, *glue.DeleteJobInput, ...request.Option) (*glue.DeleteJobOutput, error)
-	DeleteJobRequest(*glue.DeleteJobInput) (*request.Request, *glue.DeleteJobOutput)
+	DeleteJobWithContext(aws.Context, *glue.DeleteJobInput, ...aws.Option) (*glue.DeleteJobOutput, error)
+	DeleteJobRequest(*glue.DeleteJobInput) (*aws.Request, *glue.DeleteJobOutput)
 
 	DeletePartition(*glue.DeletePartitionInput) (*glue.DeletePartitionOutput, error)
-	DeletePartitionWithContext(aws.Context, *glue.DeletePartitionInput, ...request.Option) (*glue.DeletePartitionOutput, error)
-	DeletePartitionRequest(*glue.DeletePartitionInput) (*request.Request, *glue.DeletePartitionOutput)
+	DeletePartitionWithContext(aws.Context, *glue.DeletePartitionInput, ...aws.Option) (*glue.DeletePartitionOutput, error)
+	DeletePartitionRequest(*glue.DeletePartitionInput) (*aws.Request, *glue.DeletePartitionOutput)
 
 	DeleteTable(*glue.DeleteTableInput) (*glue.DeleteTableOutput, error)
-	DeleteTableWithContext(aws.Context, *glue.DeleteTableInput, ...request.Option) (*glue.DeleteTableOutput, error)
-	DeleteTableRequest(*glue.DeleteTableInput) (*request.Request, *glue.DeleteTableOutput)
+	DeleteTableWithContext(aws.Context, *glue.DeleteTableInput, ...aws.Option) (*glue.DeleteTableOutput, error)
+	DeleteTableRequest(*glue.DeleteTableInput) (*aws.Request, *glue.DeleteTableOutput)
 
 	DeleteTrigger(*glue.DeleteTriggerInput) (*glue.DeleteTriggerOutput, error)
-	DeleteTriggerWithContext(aws.Context, *glue.DeleteTriggerInput, ...request.Option) (*glue.DeleteTriggerOutput, error)
-	DeleteTriggerRequest(*glue.DeleteTriggerInput) (*request.Request, *glue.DeleteTriggerOutput)
+	DeleteTriggerWithContext(aws.Context, *glue.DeleteTriggerInput, ...aws.Option) (*glue.DeleteTriggerOutput, error)
+	DeleteTriggerRequest(*glue.DeleteTriggerInput) (*aws.Request, *glue.DeleteTriggerOutput)
 
 	DeleteUserDefinedFunction(*glue.DeleteUserDefinedFunctionInput) (*glue.DeleteUserDefinedFunctionOutput, error)
-	DeleteUserDefinedFunctionWithContext(aws.Context, *glue.DeleteUserDefinedFunctionInput, ...request.Option) (*glue.DeleteUserDefinedFunctionOutput, error)
-	DeleteUserDefinedFunctionRequest(*glue.DeleteUserDefinedFunctionInput) (*request.Request, *glue.DeleteUserDefinedFunctionOutput)
+	DeleteUserDefinedFunctionWithContext(aws.Context, *glue.DeleteUserDefinedFunctionInput, ...aws.Option) (*glue.DeleteUserDefinedFunctionOutput, error)
+	DeleteUserDefinedFunctionRequest(*glue.DeleteUserDefinedFunctionInput) (*aws.Request, *glue.DeleteUserDefinedFunctionOutput)
 
 	GetCatalogImportStatus(*glue.GetCatalogImportStatusInput) (*glue.GetCatalogImportStatusOutput, error)
-	GetCatalogImportStatusWithContext(aws.Context, *glue.GetCatalogImportStatusInput, ...request.Option) (*glue.GetCatalogImportStatusOutput, error)
-	GetCatalogImportStatusRequest(*glue.GetCatalogImportStatusInput) (*request.Request, *glue.GetCatalogImportStatusOutput)
+	GetCatalogImportStatusWithContext(aws.Context, *glue.GetCatalogImportStatusInput, ...aws.Option) (*glue.GetCatalogImportStatusOutput, error)
+	GetCatalogImportStatusRequest(*glue.GetCatalogImportStatusInput) (*aws.Request, *glue.GetCatalogImportStatusOutput)
 
 	GetClassifier(*glue.GetClassifierInput) (*glue.GetClassifierOutput, error)
-	GetClassifierWithContext(aws.Context, *glue.GetClassifierInput, ...request.Option) (*glue.GetClassifierOutput, error)
-	GetClassifierRequest(*glue.GetClassifierInput) (*request.Request, *glue.GetClassifierOutput)
+	GetClassifierWithContext(aws.Context, *glue.GetClassifierInput, ...aws.Option) (*glue.GetClassifierOutput, error)
+	GetClassifierRequest(*glue.GetClassifierInput) (*aws.Request, *glue.GetClassifierOutput)
 
 	GetClassifiers(*glue.GetClassifiersInput) (*glue.GetClassifiersOutput, error)
-	GetClassifiersWithContext(aws.Context, *glue.GetClassifiersInput, ...request.Option) (*glue.GetClassifiersOutput, error)
-	GetClassifiersRequest(*glue.GetClassifiersInput) (*request.Request, *glue.GetClassifiersOutput)
+	GetClassifiersWithContext(aws.Context, *glue.GetClassifiersInput, ...aws.Option) (*glue.GetClassifiersOutput, error)
+	GetClassifiersRequest(*glue.GetClassifiersInput) (*aws.Request, *glue.GetClassifiersOutput)
 
 	GetClassifiersPages(*glue.GetClassifiersInput, func(*glue.GetClassifiersOutput, bool) bool) error
-	GetClassifiersPagesWithContext(aws.Context, *glue.GetClassifiersInput, func(*glue.GetClassifiersOutput, bool) bool, ...request.Option) error
+	GetClassifiersPagesWithContext(aws.Context, *glue.GetClassifiersInput, func(*glue.GetClassifiersOutput, bool) bool, ...aws.Option) error
 
 	GetConnection(*glue.GetConnectionInput) (*glue.GetConnectionOutput, error)
-	GetConnectionWithContext(aws.Context, *glue.GetConnectionInput, ...request.Option) (*glue.GetConnectionOutput, error)
-	GetConnectionRequest(*glue.GetConnectionInput) (*request.Request, *glue.GetConnectionOutput)
+	GetConnectionWithContext(aws.Context, *glue.GetConnectionInput, ...aws.Option) (*glue.GetConnectionOutput, error)
+	GetConnectionRequest(*glue.GetConnectionInput) (*aws.Request, *glue.GetConnectionOutput)
 
 	GetConnections(*glue.GetConnectionsInput) (*glue.GetConnectionsOutput, error)
-	GetConnectionsWithContext(aws.Context, *glue.GetConnectionsInput, ...request.Option) (*glue.GetConnectionsOutput, error)
-	GetConnectionsRequest(*glue.GetConnectionsInput) (*request.Request, *glue.GetConnectionsOutput)
+	GetConnectionsWithContext(aws.Context, *glue.GetConnectionsInput, ...aws.Option) (*glue.GetConnectionsOutput, error)
+	GetConnectionsRequest(*glue.GetConnectionsInput) (*aws.Request, *glue.GetConnectionsOutput)
 
 	GetConnectionsPages(*glue.GetConnectionsInput, func(*glue.GetConnectionsOutput, bool) bool) error
-	GetConnectionsPagesWithContext(aws.Context, *glue.GetConnectionsInput, func(*glue.GetConnectionsOutput, bool) bool, ...request.Option) error
+	GetConnectionsPagesWithContext(aws.Context, *glue.GetConnectionsInput, func(*glue.GetConnectionsOutput, bool) bool, ...aws.Option) error
 
 	GetCrawler(*glue.GetCrawlerInput) (*glue.GetCrawlerOutput, error)
-	GetCrawlerWithContext(aws.Context, *glue.GetCrawlerInput, ...request.Option) (*glue.GetCrawlerOutput, error)
-	GetCrawlerRequest(*glue.GetCrawlerInput) (*request.Request, *glue.GetCrawlerOutput)
+	GetCrawlerWithContext(aws.Context, *glue.GetCrawlerInput, ...aws.Option) (*glue.GetCrawlerOutput, error)
+	GetCrawlerRequest(*glue.GetCrawlerInput) (*aws.Request, *glue.GetCrawlerOutput)
 
 	GetCrawlerMetrics(*glue.GetCrawlerMetricsInput) (*glue.GetCrawlerMetricsOutput, error)
-	GetCrawlerMetricsWithContext(aws.Context, *glue.GetCrawlerMetricsInput, ...request.Option) (*glue.GetCrawlerMetricsOutput, error)
-	GetCrawlerMetricsRequest(*glue.GetCrawlerMetricsInput) (*request.Request, *glue.GetCrawlerMetricsOutput)
+	GetCrawlerMetricsWithContext(aws.Context, *glue.GetCrawlerMetricsInput, ...aws.Option) (*glue.GetCrawlerMetricsOutput, error)
+	GetCrawlerMetricsRequest(*glue.GetCrawlerMetricsInput) (*aws.Request, *glue.GetCrawlerMetricsOutput)
 
 	GetCrawlerMetricsPages(*glue.GetCrawlerMetricsInput, func(*glue.GetCrawlerMetricsOutput, bool) bool) error
-	GetCrawlerMetricsPagesWithContext(aws.Context, *glue.GetCrawlerMetricsInput, func(*glue.GetCrawlerMetricsOutput, bool) bool, ...request.Option) error
+	GetCrawlerMetricsPagesWithContext(aws.Context, *glue.GetCrawlerMetricsInput, func(*glue.GetCrawlerMetricsOutput, bool) bool, ...aws.Option) error
 
 	GetCrawlers(*glue.GetCrawlersInput) (*glue.GetCrawlersOutput, error)
-	GetCrawlersWithContext(aws.Context, *glue.GetCrawlersInput, ...request.Option) (*glue.GetCrawlersOutput, error)
-	GetCrawlersRequest(*glue.GetCrawlersInput) (*request.Request, *glue.GetCrawlersOutput)
+	GetCrawlersWithContext(aws.Context, *glue.GetCrawlersInput, ...aws.Option) (*glue.GetCrawlersOutput, error)
+	GetCrawlersRequest(*glue.GetCrawlersInput) (*aws.Request, *glue.GetCrawlersOutput)
 
 	GetCrawlersPages(*glue.GetCrawlersInput, func(*glue.GetCrawlersOutput, bool) bool) error
-	GetCrawlersPagesWithContext(aws.Context, *glue.GetCrawlersInput, func(*glue.GetCrawlersOutput, bool) bool, ...request.Option) error
+	GetCrawlersPagesWithContext(aws.Context, *glue.GetCrawlersInput, func(*glue.GetCrawlersOutput, bool) bool, ...aws.Option) error
 
 	GetDatabase(*glue.GetDatabaseInput) (*glue.GetDatabaseOutput, error)
-	GetDatabaseWithContext(aws.Context, *glue.GetDatabaseInput, ...request.Option) (*glue.GetDatabaseOutput, error)
-	GetDatabaseRequest(*glue.GetDatabaseInput) (*request.Request, *glue.GetDatabaseOutput)
+	GetDatabaseWithContext(aws.Context, *glue.GetDatabaseInput, ...aws.Option) (*glue.GetDatabaseOutput, error)
+	GetDatabaseRequest(*glue.GetDatabaseInput) (*aws.Request, *glue.GetDatabaseOutput)
 
 	GetDatabases(*glue.GetDatabasesInput) (*glue.GetDatabasesOutput, error)
-	GetDatabasesWithContext(aws.Context, *glue.GetDatabasesInput, ...request.Option) (*glue.GetDatabasesOutput, error)
-	GetDatabasesRequest(*glue.GetDatabasesInput) (*request.Request, *glue.GetDatabasesOutput)
+	GetDatabasesWithContext(aws.Context, *glue.GetDatabasesInput, ...aws.Option) (*glue.GetDatabasesOutput, error)
+	GetDatabasesRequest(*glue.GetDatabasesInput) (*aws.Request, *glue.GetDatabasesOutput)
 
 	GetDatabasesPages(*glue.GetDatabasesInput, func(*glue.GetDatabasesOutput, bool) bool) error
-	GetDatabasesPagesWithContext(aws.Context, *glue.GetDatabasesInput, func(*glue.GetDatabasesOutput, bool) bool, ...request.Option) error
+	GetDatabasesPagesWithContext(aws.Context, *glue.GetDatabasesInput, func(*glue.GetDatabasesOutput, bool) bool, ...aws.Option) error
 
 	GetDataflowGraph(*glue.GetDataflowGraphInput) (*glue.GetDataflowGraphOutput, error)
-	GetDataflowGraphWithContext(aws.Context, *glue.GetDataflowGraphInput, ...request.Option) (*glue.GetDataflowGraphOutput, error)
-	GetDataflowGraphRequest(*glue.GetDataflowGraphInput) (*request.Request, *glue.GetDataflowGraphOutput)
+	GetDataflowGraphWithContext(aws.Context, *glue.GetDataflowGraphInput, ...aws.Option) (*glue.GetDataflowGraphOutput, error)
+	GetDataflowGraphRequest(*glue.GetDataflowGraphInput) (*aws.Request, *glue.GetDataflowGraphOutput)
 
 	GetDevEndpoint(*glue.GetDevEndpointInput) (*glue.GetDevEndpointOutput, error)
-	GetDevEndpointWithContext(aws.Context, *glue.GetDevEndpointInput, ...request.Option) (*glue.GetDevEndpointOutput, error)
-	GetDevEndpointRequest(*glue.GetDevEndpointInput) (*request.Request, *glue.GetDevEndpointOutput)
+	GetDevEndpointWithContext(aws.Context, *glue.GetDevEndpointInput, ...aws.Option) (*glue.GetDevEndpointOutput, error)
+	GetDevEndpointRequest(*glue.GetDevEndpointInput) (*aws.Request, *glue.GetDevEndpointOutput)
 
 	GetDevEndpoints(*glue.GetDevEndpointsInput) (*glue.GetDevEndpointsOutput, error)
-	GetDevEndpointsWithContext(aws.Context, *glue.GetDevEndpointsInput, ...request.Option) (*glue.GetDevEndpointsOutput, error)
-	GetDevEndpointsRequest(*glue.GetDevEndpointsInput) (*request.Request, *glue.GetDevEndpointsOutput)
+	GetDevEndpointsWithContext(aws.Context, *glue.GetDevEndpointsInput, ...aws.Option) (*glue.GetDevEndpointsOutput, error)
+	GetDevEndpointsRequest(*glue.GetDevEndpointsInput) (*aws.Request, *glue.GetDevEndpointsOutput)
 
 	GetDevEndpointsPages(*glue.GetDevEndpointsInput, func(*glue.GetDevEndpointsOutput, bool) bool) error
-	GetDevEndpointsPagesWithContext(aws.Context, *glue.GetDevEndpointsInput, func(*glue.GetDevEndpointsOutput, bool) bool, ...request.Option) error
+	GetDevEndpointsPagesWithContext(aws.Context, *glue.GetDevEndpointsInput, func(*glue.GetDevEndpointsOutput, bool) bool, ...aws.Option) error
 
 	GetJob(*glue.GetJobInput) (*glue.GetJobOutput, error)
-	GetJobWithContext(aws.Context, *glue.GetJobInput, ...request.Option) (*glue.GetJobOutput, error)
-	GetJobRequest(*glue.GetJobInput) (*request.Request, *glue.GetJobOutput)
+	GetJobWithContext(aws.Context, *glue.GetJobInput, ...aws.Option) (*glue.GetJobOutput, error)
+	GetJobRequest(*glue.GetJobInput) (*aws.Request, *glue.GetJobOutput)
 
 	GetJobRun(*glue.GetJobRunInput) (*glue.GetJobRunOutput, error)
-	GetJobRunWithContext(aws.Context, *glue.GetJobRunInput, ...request.Option) (*glue.GetJobRunOutput, error)
-	GetJobRunRequest(*glue.GetJobRunInput) (*request.Request, *glue.GetJobRunOutput)
+	GetJobRunWithContext(aws.Context, *glue.GetJobRunInput, ...aws.Option) (*glue.GetJobRunOutput, error)
+	GetJobRunRequest(*glue.GetJobRunInput) (*aws.Request, *glue.GetJobRunOutput)
 
 	GetJobRuns(*glue.GetJobRunsInput) (*glue.GetJobRunsOutput, error)
-	GetJobRunsWithContext(aws.Context, *glue.GetJobRunsInput, ...request.Option) (*glue.GetJobRunsOutput, error)
-	GetJobRunsRequest(*glue.GetJobRunsInput) (*request.Request, *glue.GetJobRunsOutput)
+	GetJobRunsWithContext(aws.Context, *glue.GetJobRunsInput, ...aws.Option) (*glue.GetJobRunsOutput, error)
+	GetJobRunsRequest(*glue.GetJobRunsInput) (*aws.Request, *glue.GetJobRunsOutput)
 
 	GetJobRunsPages(*glue.GetJobRunsInput, func(*glue.GetJobRunsOutput, bool) bool) error
-	GetJobRunsPagesWithContext(aws.Context, *glue.GetJobRunsInput, func(*glue.GetJobRunsOutput, bool) bool, ...request.Option) error
+	GetJobRunsPagesWithContext(aws.Context, *glue.GetJobRunsInput, func(*glue.GetJobRunsOutput, bool) bool, ...aws.Option) error
 
 	GetJobs(*glue.GetJobsInput) (*glue.GetJobsOutput, error)
-	GetJobsWithContext(aws.Context, *glue.GetJobsInput, ...request.Option) (*glue.GetJobsOutput, error)
-	GetJobsRequest(*glue.GetJobsInput) (*request.Request, *glue.GetJobsOutput)
+	GetJobsWithContext(aws.Context, *glue.GetJobsInput, ...aws.Option) (*glue.GetJobsOutput, error)
+	GetJobsRequest(*glue.GetJobsInput) (*aws.Request, *glue.GetJobsOutput)
 
 	GetJobsPages(*glue.GetJobsInput, func(*glue.GetJobsOutput, bool) bool) error
-	GetJobsPagesWithContext(aws.Context, *glue.GetJobsInput, func(*glue.GetJobsOutput, bool) bool, ...request.Option) error
+	GetJobsPagesWithContext(aws.Context, *glue.GetJobsInput, func(*glue.GetJobsOutput, bool) bool, ...aws.Option) error
 
 	GetMapping(*glue.GetMappingInput) (*glue.GetMappingOutput, error)
-	GetMappingWithContext(aws.Context, *glue.GetMappingInput, ...request.Option) (*glue.GetMappingOutput, error)
-	GetMappingRequest(*glue.GetMappingInput) (*request.Request, *glue.GetMappingOutput)
+	GetMappingWithContext(aws.Context, *glue.GetMappingInput, ...aws.Option) (*glue.GetMappingOutput, error)
+	GetMappingRequest(*glue.GetMappingInput) (*aws.Request, *glue.GetMappingOutput)
 
 	GetPartition(*glue.GetPartitionInput) (*glue.GetPartitionOutput, error)
-	GetPartitionWithContext(aws.Context, *glue.GetPartitionInput, ...request.Option) (*glue.GetPartitionOutput, error)
-	GetPartitionRequest(*glue.GetPartitionInput) (*request.Request, *glue.GetPartitionOutput)
+	GetPartitionWithContext(aws.Context, *glue.GetPartitionInput, ...aws.Option) (*glue.GetPartitionOutput, error)
+	GetPartitionRequest(*glue.GetPartitionInput) (*aws.Request, *glue.GetPartitionOutput)
 
 	GetPartitions(*glue.GetPartitionsInput) (*glue.GetPartitionsOutput, error)
-	GetPartitionsWithContext(aws.Context, *glue.GetPartitionsInput, ...request.Option) (*glue.GetPartitionsOutput, error)
-	GetPartitionsRequest(*glue.GetPartitionsInput) (*request.Request, *glue.GetPartitionsOutput)
+	GetPartitionsWithContext(aws.Context, *glue.GetPartitionsInput, ...aws.Option) (*glue.GetPartitionsOutput, error)
+	GetPartitionsRequest(*glue.GetPartitionsInput) (*aws.Request, *glue.GetPartitionsOutput)
 
 	GetPartitionsPages(*glue.GetPartitionsInput, func(*glue.GetPartitionsOutput, bool) bool) error
-	GetPartitionsPagesWithContext(aws.Context, *glue.GetPartitionsInput, func(*glue.GetPartitionsOutput, bool) bool, ...request.Option) error
+	GetPartitionsPagesWithContext(aws.Context, *glue.GetPartitionsInput, func(*glue.GetPartitionsOutput, bool) bool, ...aws.Option) error
 
 	GetPlan(*glue.GetPlanInput) (*glue.GetPlanOutput, error)
-	GetPlanWithContext(aws.Context, *glue.GetPlanInput, ...request.Option) (*glue.GetPlanOutput, error)
-	GetPlanRequest(*glue.GetPlanInput) (*request.Request, *glue.GetPlanOutput)
+	GetPlanWithContext(aws.Context, *glue.GetPlanInput, ...aws.Option) (*glue.GetPlanOutput, error)
+	GetPlanRequest(*glue.GetPlanInput) (*aws.Request, *glue.GetPlanOutput)
 
 	GetTable(*glue.GetTableInput) (*glue.GetTableOutput, error)
-	GetTableWithContext(aws.Context, *glue.GetTableInput, ...request.Option) (*glue.GetTableOutput, error)
-	GetTableRequest(*glue.GetTableInput) (*request.Request, *glue.GetTableOutput)
+	GetTableWithContext(aws.Context, *glue.GetTableInput, ...aws.Option) (*glue.GetTableOutput, error)
+	GetTableRequest(*glue.GetTableInput) (*aws.Request, *glue.GetTableOutput)
 
 	GetTableVersions(*glue.GetTableVersionsInput) (*glue.GetTableVersionsOutput, error)
-	GetTableVersionsWithContext(aws.Context, *glue.GetTableVersionsInput, ...request.Option) (*glue.GetTableVersionsOutput, error)
-	GetTableVersionsRequest(*glue.GetTableVersionsInput) (*request.Request, *glue.GetTableVersionsOutput)
+	GetTableVersionsWithContext(aws.Context, *glue.GetTableVersionsInput, ...aws.Option) (*glue.GetTableVersionsOutput, error)
+	GetTableVersionsRequest(*glue.GetTableVersionsInput) (*aws.Request, *glue.GetTableVersionsOutput)
 
 	GetTableVersionsPages(*glue.GetTableVersionsInput, func(*glue.GetTableVersionsOutput, bool) bool) error
-	GetTableVersionsPagesWithContext(aws.Context, *glue.GetTableVersionsInput, func(*glue.GetTableVersionsOutput, bool) bool, ...request.Option) error
+	GetTableVersionsPagesWithContext(aws.Context, *glue.GetTableVersionsInput, func(*glue.GetTableVersionsOutput, bool) bool, ...aws.Option) error
 
 	GetTables(*glue.GetTablesInput) (*glue.GetTablesOutput, error)
-	GetTablesWithContext(aws.Context, *glue.GetTablesInput, ...request.Option) (*glue.GetTablesOutput, error)
-	GetTablesRequest(*glue.GetTablesInput) (*request.Request, *glue.GetTablesOutput)
+	GetTablesWithContext(aws.Context, *glue.GetTablesInput, ...aws.Option) (*glue.GetTablesOutput, error)
+	GetTablesRequest(*glue.GetTablesInput) (*aws.Request, *glue.GetTablesOutput)
 
 	GetTablesPages(*glue.GetTablesInput, func(*glue.GetTablesOutput, bool) bool) error
-	GetTablesPagesWithContext(aws.Context, *glue.GetTablesInput, func(*glue.GetTablesOutput, bool) bool, ...request.Option) error
+	GetTablesPagesWithContext(aws.Context, *glue.GetTablesInput, func(*glue.GetTablesOutput, bool) bool, ...aws.Option) error
 
 	GetTrigger(*glue.GetTriggerInput) (*glue.GetTriggerOutput, error)
-	GetTriggerWithContext(aws.Context, *glue.GetTriggerInput, ...request.Option) (*glue.GetTriggerOutput, error)
-	GetTriggerRequest(*glue.GetTriggerInput) (*request.Request, *glue.GetTriggerOutput)
+	GetTriggerWithContext(aws.Context, *glue.GetTriggerInput, ...aws.Option) (*glue.GetTriggerOutput, error)
+	GetTriggerRequest(*glue.GetTriggerInput) (*aws.Request, *glue.GetTriggerOutput)
 
 	GetTriggers(*glue.GetTriggersInput) (*glue.GetTriggersOutput, error)
-	GetTriggersWithContext(aws.Context, *glue.GetTriggersInput, ...request.Option) (*glue.GetTriggersOutput, error)
-	GetTriggersRequest(*glue.GetTriggersInput) (*request.Request, *glue.GetTriggersOutput)
+	GetTriggersWithContext(aws.Context, *glue.GetTriggersInput, ...aws.Option) (*glue.GetTriggersOutput, error)
+	GetTriggersRequest(*glue.GetTriggersInput) (*aws.Request, *glue.GetTriggersOutput)
 
 	GetTriggersPages(*glue.GetTriggersInput, func(*glue.GetTriggersOutput, bool) bool) error
-	GetTriggersPagesWithContext(aws.Context, *glue.GetTriggersInput, func(*glue.GetTriggersOutput, bool) bool, ...request.Option) error
+	GetTriggersPagesWithContext(aws.Context, *glue.GetTriggersInput, func(*glue.GetTriggersOutput, bool) bool, ...aws.Option) error
 
 	GetUserDefinedFunction(*glue.GetUserDefinedFunctionInput) (*glue.GetUserDefinedFunctionOutput, error)
-	GetUserDefinedFunctionWithContext(aws.Context, *glue.GetUserDefinedFunctionInput, ...request.Option) (*glue.GetUserDefinedFunctionOutput, error)
-	GetUserDefinedFunctionRequest(*glue.GetUserDefinedFunctionInput) (*request.Request, *glue.GetUserDefinedFunctionOutput)
+	GetUserDefinedFunctionWithContext(aws.Context, *glue.GetUserDefinedFunctionInput, ...aws.Option) (*glue.GetUserDefinedFunctionOutput, error)
+	GetUserDefinedFunctionRequest(*glue.GetUserDefinedFunctionInput) (*aws.Request, *glue.GetUserDefinedFunctionOutput)
 
 	GetUserDefinedFunctions(*glue.GetUserDefinedFunctionsInput) (*glue.GetUserDefinedFunctionsOutput, error)
-	GetUserDefinedFunctionsWithContext(aws.Context, *glue.GetUserDefinedFunctionsInput, ...request.Option) (*glue.GetUserDefinedFunctionsOutput, error)
-	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) (*request.Request, *glue.GetUserDefinedFunctionsOutput)
+	GetUserDefinedFunctionsWithContext(aws.Context, *glue.GetUserDefinedFunctionsInput, ...aws.Option) (*glue.GetUserDefinedFunctionsOutput, error)
+	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) (*aws.Request, *glue.GetUserDefinedFunctionsOutput)
 
 	GetUserDefinedFunctionsPages(*glue.GetUserDefinedFunctionsInput, func(*glue.GetUserDefinedFunctionsOutput, bool) bool) error
-	GetUserDefinedFunctionsPagesWithContext(aws.Context, *glue.GetUserDefinedFunctionsInput, func(*glue.GetUserDefinedFunctionsOutput, bool) bool, ...request.Option) error
+	GetUserDefinedFunctionsPagesWithContext(aws.Context, *glue.GetUserDefinedFunctionsInput, func(*glue.GetUserDefinedFunctionsOutput, bool) bool, ...aws.Option) error
 
 	ImportCatalogToGlue(*glue.ImportCatalogToGlueInput) (*glue.ImportCatalogToGlueOutput, error)
-	ImportCatalogToGlueWithContext(aws.Context, *glue.ImportCatalogToGlueInput, ...request.Option) (*glue.ImportCatalogToGlueOutput, error)
-	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) (*request.Request, *glue.ImportCatalogToGlueOutput)
+	ImportCatalogToGlueWithContext(aws.Context, *glue.ImportCatalogToGlueInput, ...aws.Option) (*glue.ImportCatalogToGlueOutput, error)
+	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) (*aws.Request, *glue.ImportCatalogToGlueOutput)
 
 	ResetJobBookmark(*glue.ResetJobBookmarkInput) (*glue.ResetJobBookmarkOutput, error)
-	ResetJobBookmarkWithContext(aws.Context, *glue.ResetJobBookmarkInput, ...request.Option) (*glue.ResetJobBookmarkOutput, error)
-	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) (*request.Request, *glue.ResetJobBookmarkOutput)
+	ResetJobBookmarkWithContext(aws.Context, *glue.ResetJobBookmarkInput, ...aws.Option) (*glue.ResetJobBookmarkOutput, error)
+	ResetJobBookmarkRequest(*glue.ResetJobBookmarkInput) (*aws.Request, *glue.ResetJobBookmarkOutput)
 
 	StartCrawler(*glue.StartCrawlerInput) (*glue.StartCrawlerOutput, error)
-	StartCrawlerWithContext(aws.Context, *glue.StartCrawlerInput, ...request.Option) (*glue.StartCrawlerOutput, error)
-	StartCrawlerRequest(*glue.StartCrawlerInput) (*request.Request, *glue.StartCrawlerOutput)
+	StartCrawlerWithContext(aws.Context, *glue.StartCrawlerInput, ...aws.Option) (*glue.StartCrawlerOutput, error)
+	StartCrawlerRequest(*glue.StartCrawlerInput) (*aws.Request, *glue.StartCrawlerOutput)
 
 	StartCrawlerSchedule(*glue.StartCrawlerScheduleInput) (*glue.StartCrawlerScheduleOutput, error)
-	StartCrawlerScheduleWithContext(aws.Context, *glue.StartCrawlerScheduleInput, ...request.Option) (*glue.StartCrawlerScheduleOutput, error)
-	StartCrawlerScheduleRequest(*glue.StartCrawlerScheduleInput) (*request.Request, *glue.StartCrawlerScheduleOutput)
+	StartCrawlerScheduleWithContext(aws.Context, *glue.StartCrawlerScheduleInput, ...aws.Option) (*glue.StartCrawlerScheduleOutput, error)
+	StartCrawlerScheduleRequest(*glue.StartCrawlerScheduleInput) (*aws.Request, *glue.StartCrawlerScheduleOutput)
 
 	StartJobRun(*glue.StartJobRunInput) (*glue.StartJobRunOutput, error)
-	StartJobRunWithContext(aws.Context, *glue.StartJobRunInput, ...request.Option) (*glue.StartJobRunOutput, error)
-	StartJobRunRequest(*glue.StartJobRunInput) (*request.Request, *glue.StartJobRunOutput)
+	StartJobRunWithContext(aws.Context, *glue.StartJobRunInput, ...aws.Option) (*glue.StartJobRunOutput, error)
+	StartJobRunRequest(*glue.StartJobRunInput) (*aws.Request, *glue.StartJobRunOutput)
 
 	StartTrigger(*glue.StartTriggerInput) (*glue.StartTriggerOutput, error)
-	StartTriggerWithContext(aws.Context, *glue.StartTriggerInput, ...request.Option) (*glue.StartTriggerOutput, error)
-	StartTriggerRequest(*glue.StartTriggerInput) (*request.Request, *glue.StartTriggerOutput)
+	StartTriggerWithContext(aws.Context, *glue.StartTriggerInput, ...aws.Option) (*glue.StartTriggerOutput, error)
+	StartTriggerRequest(*glue.StartTriggerInput) (*aws.Request, *glue.StartTriggerOutput)
 
 	StopCrawler(*glue.StopCrawlerInput) (*glue.StopCrawlerOutput, error)
-	StopCrawlerWithContext(aws.Context, *glue.StopCrawlerInput, ...request.Option) (*glue.StopCrawlerOutput, error)
-	StopCrawlerRequest(*glue.StopCrawlerInput) (*request.Request, *glue.StopCrawlerOutput)
+	StopCrawlerWithContext(aws.Context, *glue.StopCrawlerInput, ...aws.Option) (*glue.StopCrawlerOutput, error)
+	StopCrawlerRequest(*glue.StopCrawlerInput) (*aws.Request, *glue.StopCrawlerOutput)
 
 	StopCrawlerSchedule(*glue.StopCrawlerScheduleInput) (*glue.StopCrawlerScheduleOutput, error)
-	StopCrawlerScheduleWithContext(aws.Context, *glue.StopCrawlerScheduleInput, ...request.Option) (*glue.StopCrawlerScheduleOutput, error)
-	StopCrawlerScheduleRequest(*glue.StopCrawlerScheduleInput) (*request.Request, *glue.StopCrawlerScheduleOutput)
+	StopCrawlerScheduleWithContext(aws.Context, *glue.StopCrawlerScheduleInput, ...aws.Option) (*glue.StopCrawlerScheduleOutput, error)
+	StopCrawlerScheduleRequest(*glue.StopCrawlerScheduleInput) (*aws.Request, *glue.StopCrawlerScheduleOutput)
 
 	StopTrigger(*glue.StopTriggerInput) (*glue.StopTriggerOutput, error)
-	StopTriggerWithContext(aws.Context, *glue.StopTriggerInput, ...request.Option) (*glue.StopTriggerOutput, error)
-	StopTriggerRequest(*glue.StopTriggerInput) (*request.Request, *glue.StopTriggerOutput)
+	StopTriggerWithContext(aws.Context, *glue.StopTriggerInput, ...aws.Option) (*glue.StopTriggerOutput, error)
+	StopTriggerRequest(*glue.StopTriggerInput) (*aws.Request, *glue.StopTriggerOutput)
 
 	UpdateClassifier(*glue.UpdateClassifierInput) (*glue.UpdateClassifierOutput, error)
-	UpdateClassifierWithContext(aws.Context, *glue.UpdateClassifierInput, ...request.Option) (*glue.UpdateClassifierOutput, error)
-	UpdateClassifierRequest(*glue.UpdateClassifierInput) (*request.Request, *glue.UpdateClassifierOutput)
+	UpdateClassifierWithContext(aws.Context, *glue.UpdateClassifierInput, ...aws.Option) (*glue.UpdateClassifierOutput, error)
+	UpdateClassifierRequest(*glue.UpdateClassifierInput) (*aws.Request, *glue.UpdateClassifierOutput)
 
 	UpdateConnection(*glue.UpdateConnectionInput) (*glue.UpdateConnectionOutput, error)
-	UpdateConnectionWithContext(aws.Context, *glue.UpdateConnectionInput, ...request.Option) (*glue.UpdateConnectionOutput, error)
-	UpdateConnectionRequest(*glue.UpdateConnectionInput) (*request.Request, *glue.UpdateConnectionOutput)
+	UpdateConnectionWithContext(aws.Context, *glue.UpdateConnectionInput, ...aws.Option) (*glue.UpdateConnectionOutput, error)
+	UpdateConnectionRequest(*glue.UpdateConnectionInput) (*aws.Request, *glue.UpdateConnectionOutput)
 
 	UpdateCrawler(*glue.UpdateCrawlerInput) (*glue.UpdateCrawlerOutput, error)
-	UpdateCrawlerWithContext(aws.Context, *glue.UpdateCrawlerInput, ...request.Option) (*glue.UpdateCrawlerOutput, error)
-	UpdateCrawlerRequest(*glue.UpdateCrawlerInput) (*request.Request, *glue.UpdateCrawlerOutput)
+	UpdateCrawlerWithContext(aws.Context, *glue.UpdateCrawlerInput, ...aws.Option) (*glue.UpdateCrawlerOutput, error)
+	UpdateCrawlerRequest(*glue.UpdateCrawlerInput) (*aws.Request, *glue.UpdateCrawlerOutput)
 
 	UpdateCrawlerSchedule(*glue.UpdateCrawlerScheduleInput) (*glue.UpdateCrawlerScheduleOutput, error)
-	UpdateCrawlerScheduleWithContext(aws.Context, *glue.UpdateCrawlerScheduleInput, ...request.Option) (*glue.UpdateCrawlerScheduleOutput, error)
-	UpdateCrawlerScheduleRequest(*glue.UpdateCrawlerScheduleInput) (*request.Request, *glue.UpdateCrawlerScheduleOutput)
+	UpdateCrawlerScheduleWithContext(aws.Context, *glue.UpdateCrawlerScheduleInput, ...aws.Option) (*glue.UpdateCrawlerScheduleOutput, error)
+	UpdateCrawlerScheduleRequest(*glue.UpdateCrawlerScheduleInput) (*aws.Request, *glue.UpdateCrawlerScheduleOutput)
 
 	UpdateDatabase(*glue.UpdateDatabaseInput) (*glue.UpdateDatabaseOutput, error)
-	UpdateDatabaseWithContext(aws.Context, *glue.UpdateDatabaseInput, ...request.Option) (*glue.UpdateDatabaseOutput, error)
-	UpdateDatabaseRequest(*glue.UpdateDatabaseInput) (*request.Request, *glue.UpdateDatabaseOutput)
+	UpdateDatabaseWithContext(aws.Context, *glue.UpdateDatabaseInput, ...aws.Option) (*glue.UpdateDatabaseOutput, error)
+	UpdateDatabaseRequest(*glue.UpdateDatabaseInput) (*aws.Request, *glue.UpdateDatabaseOutput)
 
 	UpdateDevEndpoint(*glue.UpdateDevEndpointInput) (*glue.UpdateDevEndpointOutput, error)
-	UpdateDevEndpointWithContext(aws.Context, *glue.UpdateDevEndpointInput, ...request.Option) (*glue.UpdateDevEndpointOutput, error)
-	UpdateDevEndpointRequest(*glue.UpdateDevEndpointInput) (*request.Request, *glue.UpdateDevEndpointOutput)
+	UpdateDevEndpointWithContext(aws.Context, *glue.UpdateDevEndpointInput, ...aws.Option) (*glue.UpdateDevEndpointOutput, error)
+	UpdateDevEndpointRequest(*glue.UpdateDevEndpointInput) (*aws.Request, *glue.UpdateDevEndpointOutput)
 
 	UpdateJob(*glue.UpdateJobInput) (*glue.UpdateJobOutput, error)
-	UpdateJobWithContext(aws.Context, *glue.UpdateJobInput, ...request.Option) (*glue.UpdateJobOutput, error)
-	UpdateJobRequest(*glue.UpdateJobInput) (*request.Request, *glue.UpdateJobOutput)
+	UpdateJobWithContext(aws.Context, *glue.UpdateJobInput, ...aws.Option) (*glue.UpdateJobOutput, error)
+	UpdateJobRequest(*glue.UpdateJobInput) (*aws.Request, *glue.UpdateJobOutput)
 
 	UpdatePartition(*glue.UpdatePartitionInput) (*glue.UpdatePartitionOutput, error)
-	UpdatePartitionWithContext(aws.Context, *glue.UpdatePartitionInput, ...request.Option) (*glue.UpdatePartitionOutput, error)
-	UpdatePartitionRequest(*glue.UpdatePartitionInput) (*request.Request, *glue.UpdatePartitionOutput)
+	UpdatePartitionWithContext(aws.Context, *glue.UpdatePartitionInput, ...aws.Option) (*glue.UpdatePartitionOutput, error)
+	UpdatePartitionRequest(*glue.UpdatePartitionInput) (*aws.Request, *glue.UpdatePartitionOutput)
 
 	UpdateTable(*glue.UpdateTableInput) (*glue.UpdateTableOutput, error)
-	UpdateTableWithContext(aws.Context, *glue.UpdateTableInput, ...request.Option) (*glue.UpdateTableOutput, error)
-	UpdateTableRequest(*glue.UpdateTableInput) (*request.Request, *glue.UpdateTableOutput)
+	UpdateTableWithContext(aws.Context, *glue.UpdateTableInput, ...aws.Option) (*glue.UpdateTableOutput, error)
+	UpdateTableRequest(*glue.UpdateTableInput) (*aws.Request, *glue.UpdateTableOutput)
 
 	UpdateTrigger(*glue.UpdateTriggerInput) (*glue.UpdateTriggerOutput, error)
-	UpdateTriggerWithContext(aws.Context, *glue.UpdateTriggerInput, ...request.Option) (*glue.UpdateTriggerOutput, error)
-	UpdateTriggerRequest(*glue.UpdateTriggerInput) (*request.Request, *glue.UpdateTriggerOutput)
+	UpdateTriggerWithContext(aws.Context, *glue.UpdateTriggerInput, ...aws.Option) (*glue.UpdateTriggerOutput, error)
+	UpdateTriggerRequest(*glue.UpdateTriggerInput) (*aws.Request, *glue.UpdateTriggerOutput)
 
 	UpdateUserDefinedFunction(*glue.UpdateUserDefinedFunctionInput) (*glue.UpdateUserDefinedFunctionOutput, error)
-	UpdateUserDefinedFunctionWithContext(aws.Context, *glue.UpdateUserDefinedFunctionInput, ...request.Option) (*glue.UpdateUserDefinedFunctionOutput, error)
-	UpdateUserDefinedFunctionRequest(*glue.UpdateUserDefinedFunctionInput) (*request.Request, *glue.UpdateUserDefinedFunctionOutput)
+	UpdateUserDefinedFunctionWithContext(aws.Context, *glue.UpdateUserDefinedFunctionInput, ...aws.Option) (*glue.UpdateUserDefinedFunctionOutput, error)
+	UpdateUserDefinedFunctionRequest(*glue.UpdateUserDefinedFunctionInput) (*aws.Request, *glue.UpdateUserDefinedFunctionOutput)
 }
 
 var _ GlueAPI = (*glue.Glue)(nil)

@@ -129,7 +129,7 @@ func (t *testSuite) TestSuite() string {
 
 var tplInputTestCase = template.Must(template.New("inputcase").Parse(`
 func Test{{ .OpName }}(t *testing.T) {
-	svc := New{{ .TestCase.TestSuite.API.StructName }}(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := New{{ .TestCase.TestSuite.API.StructName }}(unit.Config, &aws.Config{Endpoint: aws.String("https://test")})
 	{{ if ne .ParamsString "" }}input := {{ .ParamsString }}
 	{{ range $k, $v := .JSONValues -}}
 	input.{{ $k }} = {{ $v }} 
@@ -226,7 +226,7 @@ func fmtAssertNil(v string) string {
 
 var tplOutputTestCase = template.Must(template.New("outputcase").Parse(`
 func Test{{ .OpName }}(t *testing.T) {
-	svc := New{{ .TestCase.TestSuite.API.StructName }}(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := New{{ .TestCase.TestSuite.API.StructName }}(unit.Config, &aws.Config{Endpoint: aws.String("https://test")})
 
 	buf := bytes.NewReader([]byte({{ .Body }}))
 	req, out := svc.{{ .TestCase.Given.ExportedName }}Request(nil)

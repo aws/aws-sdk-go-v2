@@ -2,8 +2,8 @@ package awstesting
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
+	client "github.com/aws/aws-sdk-go-v2/aws"
+	metadata "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 )
 
@@ -13,12 +13,12 @@ func NewClient(cfgs ...*aws.Config) *client.Client {
 		Endpoint:    "http://endpoint",
 		SigningName: "",
 	}
-	def := defaults.Get()
-	def.Config.MergeIn(cfgs...)
+	cfg := defaults.Config()
+	cfg.MergeIn(cfgs...)
 
-	if v := aws.StringValue(def.Config.Endpoint); len(v) > 0 {
+	if v := aws.StringValue(cfg.Endpoint); len(v) > 0 {
 		info.Endpoint = v
 	}
 
-	return client.New(*def.Config, info, def.Handlers)
+	return aws.NewClient(cfg, info, cfg.Handlers)
 }

@@ -3,7 +3,7 @@ package external
 import (
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // CredentialsSourceName provides a name of the provider when config is
@@ -76,7 +76,7 @@ type EnvConfig struct {
 	//
 	//	# Session Token
 	//	AWS_SESSION_TOKEN=TOKEN
-	Credentials credentials.Value
+	Credentials aws.Value
 
 	// TODO doc
 	CredentialsHTTPEndpoint string
@@ -146,7 +146,7 @@ func LoadEnvConfig(cfgs Configs) (Config, error) {
 func NewEnvConfig() (EnvConfig, error) {
 	var cfg EnvConfig
 
-	creds := credentials.Value{
+	creds := aws.Value{
 		ProviderName: CredentialsSourceName,
 	}
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
@@ -180,7 +180,7 @@ func (c EnvConfig) GetRegion() (string, error) {
 
 // GetCredentialsValue returns the AWS Credentials if both AccessKey and ScreteAccessKey
 // are set in the environment. Returns a zero value Credentials if not set.
-func (c EnvConfig) GetCredentialsValue() (credentials.Value, error) {
+func (c EnvConfig) GetCredentialsValue() (aws.Value, error) {
 	return c.Credentials, nil
 }
 

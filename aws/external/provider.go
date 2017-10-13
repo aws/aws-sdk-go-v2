@@ -1,6 +1,6 @@
 package external
 
-import "github.com/aws/aws-sdk-go-v2/aws/credentials"
+import "github.com/aws/aws-sdk-go-v2/aws"
 
 // CustomCABundleFileProvider provides access to the custom CA bundle external
 // configuration value.
@@ -16,7 +16,7 @@ type RegionProvider interface {
 // CredentialsValueProvider provides access to the credentials external
 // configuration value.
 type CredentialsValueProvider interface {
-	GetCredentialsValue() (credentials.Value, error)
+	GetCredentialsValue() (aws.Value, error)
 }
 
 // CredentialsEndpointProvider provides access to the credentials endpoint

@@ -10,7 +10,6 @@ package lambdaiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := lambda.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := lambda.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,122 +64,122 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type LambdaAPI interface {
 	AddPermission(*lambda.AddPermissionInput) (*lambda.AddPermissionOutput, error)
-	AddPermissionWithContext(aws.Context, *lambda.AddPermissionInput, ...request.Option) (*lambda.AddPermissionOutput, error)
-	AddPermissionRequest(*lambda.AddPermissionInput) (*request.Request, *lambda.AddPermissionOutput)
+	AddPermissionWithContext(aws.Context, *lambda.AddPermissionInput, ...aws.Option) (*lambda.AddPermissionOutput, error)
+	AddPermissionRequest(*lambda.AddPermissionInput) (*aws.Request, *lambda.AddPermissionOutput)
 
 	CreateAlias(*lambda.CreateAliasInput) (*lambda.AliasConfiguration, error)
-	CreateAliasWithContext(aws.Context, *lambda.CreateAliasInput, ...request.Option) (*lambda.AliasConfiguration, error)
-	CreateAliasRequest(*lambda.CreateAliasInput) (*request.Request, *lambda.AliasConfiguration)
+	CreateAliasWithContext(aws.Context, *lambda.CreateAliasInput, ...aws.Option) (*lambda.AliasConfiguration, error)
+	CreateAliasRequest(*lambda.CreateAliasInput) (*aws.Request, *lambda.AliasConfiguration)
 
 	CreateEventSourceMapping(*lambda.CreateEventSourceMappingInput) (*lambda.EventSourceMappingConfiguration, error)
-	CreateEventSourceMappingWithContext(aws.Context, *lambda.CreateEventSourceMappingInput, ...request.Option) (*lambda.EventSourceMappingConfiguration, error)
-	CreateEventSourceMappingRequest(*lambda.CreateEventSourceMappingInput) (*request.Request, *lambda.EventSourceMappingConfiguration)
+	CreateEventSourceMappingWithContext(aws.Context, *lambda.CreateEventSourceMappingInput, ...aws.Option) (*lambda.EventSourceMappingConfiguration, error)
+	CreateEventSourceMappingRequest(*lambda.CreateEventSourceMappingInput) (*aws.Request, *lambda.EventSourceMappingConfiguration)
 
 	CreateFunction(*lambda.CreateFunctionInput) (*lambda.FunctionConfiguration, error)
-	CreateFunctionWithContext(aws.Context, *lambda.CreateFunctionInput, ...request.Option) (*lambda.FunctionConfiguration, error)
-	CreateFunctionRequest(*lambda.CreateFunctionInput) (*request.Request, *lambda.FunctionConfiguration)
+	CreateFunctionWithContext(aws.Context, *lambda.CreateFunctionInput, ...aws.Option) (*lambda.FunctionConfiguration, error)
+	CreateFunctionRequest(*lambda.CreateFunctionInput) (*aws.Request, *lambda.FunctionConfiguration)
 
 	DeleteAlias(*lambda.DeleteAliasInput) (*lambda.DeleteAliasOutput, error)
-	DeleteAliasWithContext(aws.Context, *lambda.DeleteAliasInput, ...request.Option) (*lambda.DeleteAliasOutput, error)
-	DeleteAliasRequest(*lambda.DeleteAliasInput) (*request.Request, *lambda.DeleteAliasOutput)
+	DeleteAliasWithContext(aws.Context, *lambda.DeleteAliasInput, ...aws.Option) (*lambda.DeleteAliasOutput, error)
+	DeleteAliasRequest(*lambda.DeleteAliasInput) (*aws.Request, *lambda.DeleteAliasOutput)
 
 	DeleteEventSourceMapping(*lambda.DeleteEventSourceMappingInput) (*lambda.EventSourceMappingConfiguration, error)
-	DeleteEventSourceMappingWithContext(aws.Context, *lambda.DeleteEventSourceMappingInput, ...request.Option) (*lambda.EventSourceMappingConfiguration, error)
-	DeleteEventSourceMappingRequest(*lambda.DeleteEventSourceMappingInput) (*request.Request, *lambda.EventSourceMappingConfiguration)
+	DeleteEventSourceMappingWithContext(aws.Context, *lambda.DeleteEventSourceMappingInput, ...aws.Option) (*lambda.EventSourceMappingConfiguration, error)
+	DeleteEventSourceMappingRequest(*lambda.DeleteEventSourceMappingInput) (*aws.Request, *lambda.EventSourceMappingConfiguration)
 
 	DeleteFunction(*lambda.DeleteFunctionInput) (*lambda.DeleteFunctionOutput, error)
-	DeleteFunctionWithContext(aws.Context, *lambda.DeleteFunctionInput, ...request.Option) (*lambda.DeleteFunctionOutput, error)
-	DeleteFunctionRequest(*lambda.DeleteFunctionInput) (*request.Request, *lambda.DeleteFunctionOutput)
+	DeleteFunctionWithContext(aws.Context, *lambda.DeleteFunctionInput, ...aws.Option) (*lambda.DeleteFunctionOutput, error)
+	DeleteFunctionRequest(*lambda.DeleteFunctionInput) (*aws.Request, *lambda.DeleteFunctionOutput)
 
 	GetAccountSettings(*lambda.GetAccountSettingsInput) (*lambda.GetAccountSettingsOutput, error)
-	GetAccountSettingsWithContext(aws.Context, *lambda.GetAccountSettingsInput, ...request.Option) (*lambda.GetAccountSettingsOutput, error)
-	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) (*request.Request, *lambda.GetAccountSettingsOutput)
+	GetAccountSettingsWithContext(aws.Context, *lambda.GetAccountSettingsInput, ...aws.Option) (*lambda.GetAccountSettingsOutput, error)
+	GetAccountSettingsRequest(*lambda.GetAccountSettingsInput) (*aws.Request, *lambda.GetAccountSettingsOutput)
 
 	GetAlias(*lambda.GetAliasInput) (*lambda.AliasConfiguration, error)
-	GetAliasWithContext(aws.Context, *lambda.GetAliasInput, ...request.Option) (*lambda.AliasConfiguration, error)
-	GetAliasRequest(*lambda.GetAliasInput) (*request.Request, *lambda.AliasConfiguration)
+	GetAliasWithContext(aws.Context, *lambda.GetAliasInput, ...aws.Option) (*lambda.AliasConfiguration, error)
+	GetAliasRequest(*lambda.GetAliasInput) (*aws.Request, *lambda.AliasConfiguration)
 
 	GetEventSourceMapping(*lambda.GetEventSourceMappingInput) (*lambda.EventSourceMappingConfiguration, error)
-	GetEventSourceMappingWithContext(aws.Context, *lambda.GetEventSourceMappingInput, ...request.Option) (*lambda.EventSourceMappingConfiguration, error)
-	GetEventSourceMappingRequest(*lambda.GetEventSourceMappingInput) (*request.Request, *lambda.EventSourceMappingConfiguration)
+	GetEventSourceMappingWithContext(aws.Context, *lambda.GetEventSourceMappingInput, ...aws.Option) (*lambda.EventSourceMappingConfiguration, error)
+	GetEventSourceMappingRequest(*lambda.GetEventSourceMappingInput) (*aws.Request, *lambda.EventSourceMappingConfiguration)
 
 	GetFunction(*lambda.GetFunctionInput) (*lambda.GetFunctionOutput, error)
-	GetFunctionWithContext(aws.Context, *lambda.GetFunctionInput, ...request.Option) (*lambda.GetFunctionOutput, error)
-	GetFunctionRequest(*lambda.GetFunctionInput) (*request.Request, *lambda.GetFunctionOutput)
+	GetFunctionWithContext(aws.Context, *lambda.GetFunctionInput, ...aws.Option) (*lambda.GetFunctionOutput, error)
+	GetFunctionRequest(*lambda.GetFunctionInput) (*aws.Request, *lambda.GetFunctionOutput)
 
 	GetFunctionConfiguration(*lambda.GetFunctionConfigurationInput) (*lambda.FunctionConfiguration, error)
-	GetFunctionConfigurationWithContext(aws.Context, *lambda.GetFunctionConfigurationInput, ...request.Option) (*lambda.FunctionConfiguration, error)
-	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) (*request.Request, *lambda.FunctionConfiguration)
+	GetFunctionConfigurationWithContext(aws.Context, *lambda.GetFunctionConfigurationInput, ...aws.Option) (*lambda.FunctionConfiguration, error)
+	GetFunctionConfigurationRequest(*lambda.GetFunctionConfigurationInput) (*aws.Request, *lambda.FunctionConfiguration)
 
 	GetPolicy(*lambda.GetPolicyInput) (*lambda.GetPolicyOutput, error)
-	GetPolicyWithContext(aws.Context, *lambda.GetPolicyInput, ...request.Option) (*lambda.GetPolicyOutput, error)
-	GetPolicyRequest(*lambda.GetPolicyInput) (*request.Request, *lambda.GetPolicyOutput)
+	GetPolicyWithContext(aws.Context, *lambda.GetPolicyInput, ...aws.Option) (*lambda.GetPolicyOutput, error)
+	GetPolicyRequest(*lambda.GetPolicyInput) (*aws.Request, *lambda.GetPolicyOutput)
 
 	Invoke(*lambda.InvokeInput) (*lambda.InvokeOutput, error)
-	InvokeWithContext(aws.Context, *lambda.InvokeInput, ...request.Option) (*lambda.InvokeOutput, error)
-	InvokeRequest(*lambda.InvokeInput) (*request.Request, *lambda.InvokeOutput)
+	InvokeWithContext(aws.Context, *lambda.InvokeInput, ...aws.Option) (*lambda.InvokeOutput, error)
+	InvokeRequest(*lambda.InvokeInput) (*aws.Request, *lambda.InvokeOutput)
 
 	InvokeAsync(*lambda.InvokeAsyncInput) (*lambda.InvokeAsyncOutput, error)
-	InvokeAsyncWithContext(aws.Context, *lambda.InvokeAsyncInput, ...request.Option) (*lambda.InvokeAsyncOutput, error)
-	InvokeAsyncRequest(*lambda.InvokeAsyncInput) (*request.Request, *lambda.InvokeAsyncOutput)
+	InvokeAsyncWithContext(aws.Context, *lambda.InvokeAsyncInput, ...aws.Option) (*lambda.InvokeAsyncOutput, error)
+	InvokeAsyncRequest(*lambda.InvokeAsyncInput) (*aws.Request, *lambda.InvokeAsyncOutput)
 
 	ListAliases(*lambda.ListAliasesInput) (*lambda.ListAliasesOutput, error)
-	ListAliasesWithContext(aws.Context, *lambda.ListAliasesInput, ...request.Option) (*lambda.ListAliasesOutput, error)
-	ListAliasesRequest(*lambda.ListAliasesInput) (*request.Request, *lambda.ListAliasesOutput)
+	ListAliasesWithContext(aws.Context, *lambda.ListAliasesInput, ...aws.Option) (*lambda.ListAliasesOutput, error)
+	ListAliasesRequest(*lambda.ListAliasesInput) (*aws.Request, *lambda.ListAliasesOutput)
 
 	ListEventSourceMappings(*lambda.ListEventSourceMappingsInput) (*lambda.ListEventSourceMappingsOutput, error)
-	ListEventSourceMappingsWithContext(aws.Context, *lambda.ListEventSourceMappingsInput, ...request.Option) (*lambda.ListEventSourceMappingsOutput, error)
-	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) (*request.Request, *lambda.ListEventSourceMappingsOutput)
+	ListEventSourceMappingsWithContext(aws.Context, *lambda.ListEventSourceMappingsInput, ...aws.Option) (*lambda.ListEventSourceMappingsOutput, error)
+	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) (*aws.Request, *lambda.ListEventSourceMappingsOutput)
 
 	ListEventSourceMappingsPages(*lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool) error
-	ListEventSourceMappingsPagesWithContext(aws.Context, *lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool, ...request.Option) error
+	ListEventSourceMappingsPagesWithContext(aws.Context, *lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool, ...aws.Option) error
 
 	ListFunctions(*lambda.ListFunctionsInput) (*lambda.ListFunctionsOutput, error)
-	ListFunctionsWithContext(aws.Context, *lambda.ListFunctionsInput, ...request.Option) (*lambda.ListFunctionsOutput, error)
-	ListFunctionsRequest(*lambda.ListFunctionsInput) (*request.Request, *lambda.ListFunctionsOutput)
+	ListFunctionsWithContext(aws.Context, *lambda.ListFunctionsInput, ...aws.Option) (*lambda.ListFunctionsOutput, error)
+	ListFunctionsRequest(*lambda.ListFunctionsInput) (*aws.Request, *lambda.ListFunctionsOutput)
 
 	ListFunctionsPages(*lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool) error
-	ListFunctionsPagesWithContext(aws.Context, *lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool, ...request.Option) error
+	ListFunctionsPagesWithContext(aws.Context, *lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool, ...aws.Option) error
 
 	ListTags(*lambda.ListTagsInput) (*lambda.ListTagsOutput, error)
-	ListTagsWithContext(aws.Context, *lambda.ListTagsInput, ...request.Option) (*lambda.ListTagsOutput, error)
-	ListTagsRequest(*lambda.ListTagsInput) (*request.Request, *lambda.ListTagsOutput)
+	ListTagsWithContext(aws.Context, *lambda.ListTagsInput, ...aws.Option) (*lambda.ListTagsOutput, error)
+	ListTagsRequest(*lambda.ListTagsInput) (*aws.Request, *lambda.ListTagsOutput)
 
 	ListVersionsByFunction(*lambda.ListVersionsByFunctionInput) (*lambda.ListVersionsByFunctionOutput, error)
-	ListVersionsByFunctionWithContext(aws.Context, *lambda.ListVersionsByFunctionInput, ...request.Option) (*lambda.ListVersionsByFunctionOutput, error)
-	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) (*request.Request, *lambda.ListVersionsByFunctionOutput)
+	ListVersionsByFunctionWithContext(aws.Context, *lambda.ListVersionsByFunctionInput, ...aws.Option) (*lambda.ListVersionsByFunctionOutput, error)
+	ListVersionsByFunctionRequest(*lambda.ListVersionsByFunctionInput) (*aws.Request, *lambda.ListVersionsByFunctionOutput)
 
 	PublishVersion(*lambda.PublishVersionInput) (*lambda.FunctionConfiguration, error)
-	PublishVersionWithContext(aws.Context, *lambda.PublishVersionInput, ...request.Option) (*lambda.FunctionConfiguration, error)
-	PublishVersionRequest(*lambda.PublishVersionInput) (*request.Request, *lambda.FunctionConfiguration)
+	PublishVersionWithContext(aws.Context, *lambda.PublishVersionInput, ...aws.Option) (*lambda.FunctionConfiguration, error)
+	PublishVersionRequest(*lambda.PublishVersionInput) (*aws.Request, *lambda.FunctionConfiguration)
 
 	RemovePermission(*lambda.RemovePermissionInput) (*lambda.RemovePermissionOutput, error)
-	RemovePermissionWithContext(aws.Context, *lambda.RemovePermissionInput, ...request.Option) (*lambda.RemovePermissionOutput, error)
-	RemovePermissionRequest(*lambda.RemovePermissionInput) (*request.Request, *lambda.RemovePermissionOutput)
+	RemovePermissionWithContext(aws.Context, *lambda.RemovePermissionInput, ...aws.Option) (*lambda.RemovePermissionOutput, error)
+	RemovePermissionRequest(*lambda.RemovePermissionInput) (*aws.Request, *lambda.RemovePermissionOutput)
 
 	TagResource(*lambda.TagResourceInput) (*lambda.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *lambda.TagResourceInput, ...request.Option) (*lambda.TagResourceOutput, error)
-	TagResourceRequest(*lambda.TagResourceInput) (*request.Request, *lambda.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *lambda.TagResourceInput, ...aws.Option) (*lambda.TagResourceOutput, error)
+	TagResourceRequest(*lambda.TagResourceInput) (*aws.Request, *lambda.TagResourceOutput)
 
 	UntagResource(*lambda.UntagResourceInput) (*lambda.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *lambda.UntagResourceInput, ...request.Option) (*lambda.UntagResourceOutput, error)
-	UntagResourceRequest(*lambda.UntagResourceInput) (*request.Request, *lambda.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *lambda.UntagResourceInput, ...aws.Option) (*lambda.UntagResourceOutput, error)
+	UntagResourceRequest(*lambda.UntagResourceInput) (*aws.Request, *lambda.UntagResourceOutput)
 
 	UpdateAlias(*lambda.UpdateAliasInput) (*lambda.AliasConfiguration, error)
-	UpdateAliasWithContext(aws.Context, *lambda.UpdateAliasInput, ...request.Option) (*lambda.AliasConfiguration, error)
-	UpdateAliasRequest(*lambda.UpdateAliasInput) (*request.Request, *lambda.AliasConfiguration)
+	UpdateAliasWithContext(aws.Context, *lambda.UpdateAliasInput, ...aws.Option) (*lambda.AliasConfiguration, error)
+	UpdateAliasRequest(*lambda.UpdateAliasInput) (*aws.Request, *lambda.AliasConfiguration)
 
 	UpdateEventSourceMapping(*lambda.UpdateEventSourceMappingInput) (*lambda.EventSourceMappingConfiguration, error)
-	UpdateEventSourceMappingWithContext(aws.Context, *lambda.UpdateEventSourceMappingInput, ...request.Option) (*lambda.EventSourceMappingConfiguration, error)
-	UpdateEventSourceMappingRequest(*lambda.UpdateEventSourceMappingInput) (*request.Request, *lambda.EventSourceMappingConfiguration)
+	UpdateEventSourceMappingWithContext(aws.Context, *lambda.UpdateEventSourceMappingInput, ...aws.Option) (*lambda.EventSourceMappingConfiguration, error)
+	UpdateEventSourceMappingRequest(*lambda.UpdateEventSourceMappingInput) (*aws.Request, *lambda.EventSourceMappingConfiguration)
 
 	UpdateFunctionCode(*lambda.UpdateFunctionCodeInput) (*lambda.FunctionConfiguration, error)
-	UpdateFunctionCodeWithContext(aws.Context, *lambda.UpdateFunctionCodeInput, ...request.Option) (*lambda.FunctionConfiguration, error)
-	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) (*request.Request, *lambda.FunctionConfiguration)
+	UpdateFunctionCodeWithContext(aws.Context, *lambda.UpdateFunctionCodeInput, ...aws.Option) (*lambda.FunctionConfiguration, error)
+	UpdateFunctionCodeRequest(*lambda.UpdateFunctionCodeInput) (*aws.Request, *lambda.FunctionConfiguration)
 
 	UpdateFunctionConfiguration(*lambda.UpdateFunctionConfigurationInput) (*lambda.FunctionConfiguration, error)
-	UpdateFunctionConfigurationWithContext(aws.Context, *lambda.UpdateFunctionConfigurationInput, ...request.Option) (*lambda.FunctionConfiguration, error)
-	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) (*request.Request, *lambda.FunctionConfiguration)
+	UpdateFunctionConfigurationWithContext(aws.Context, *lambda.UpdateFunctionConfigurationInput, ...aws.Option) (*lambda.FunctionConfiguration, error)
+	UpdateFunctionConfigurationRequest(*lambda.UpdateFunctionConfigurationInput) (*aws.Request, *lambda.FunctionConfiguration)
 }
 
 var _ LambdaAPI = (*lambda.Lambda)(nil)

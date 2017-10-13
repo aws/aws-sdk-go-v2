@@ -4,13 +4,12 @@ package greengrass
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateRoleToGroup = "AssociateRoleToGroup"
 
-// AssociateRoleToGroupRequest generates a "aws/request.Request" representing the
+// AssociateRoleToGroupRequest generates a "aws.Request" representing the
 // client's request for the AssociateRoleToGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opAssociateRoleToGroup = "AssociateRoleToGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroup
-func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) (req *request.Request, output *AssociateRoleToGroupOutput) {
-	op := &request.Operation{
+func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInput) (req *aws.Request, output *AssociateRoleToGroupOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateRoleToGroup,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/groups/{GroupId}/role",
@@ -85,7 +84,7 @@ func (c *Greengrass) AssociateRoleToGroup(input *AssociateRoleToGroupInput) (*As
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) AssociateRoleToGroupWithContext(ctx aws.Context, input *AssociateRoleToGroupInput, opts ...request.Option) (*AssociateRoleToGroupOutput, error) {
+func (c *Greengrass) AssociateRoleToGroupWithContext(ctx aws.Context, input *AssociateRoleToGroupInput, opts ...aws.Option) (*AssociateRoleToGroupOutput, error) {
 	req, out := c.AssociateRoleToGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -94,7 +93,7 @@ func (c *Greengrass) AssociateRoleToGroupWithContext(ctx aws.Context, input *Ass
 
 const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
 
-// AssociateServiceRoleToAccountRequest generates a "aws/request.Request" representing the
+// AssociateServiceRoleToAccountRequest generates a "aws.Request" representing the
 // client's request for the AssociateServiceRoleToAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -118,8 +117,8 @@ const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccount
-func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServiceRoleToAccountInput) (req *request.Request, output *AssociateServiceRoleToAccountOutput) {
-	op := &request.Operation{
+func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServiceRoleToAccountInput) (req *aws.Request, output *AssociateServiceRoleToAccountOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateServiceRoleToAccount,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/servicerole",
@@ -170,7 +169,7 @@ func (c *Greengrass) AssociateServiceRoleToAccount(input *AssociateServiceRoleTo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) AssociateServiceRoleToAccountWithContext(ctx aws.Context, input *AssociateServiceRoleToAccountInput, opts ...request.Option) (*AssociateServiceRoleToAccountOutput, error) {
+func (c *Greengrass) AssociateServiceRoleToAccountWithContext(ctx aws.Context, input *AssociateServiceRoleToAccountInput, opts ...aws.Option) (*AssociateServiceRoleToAccountOutput, error) {
 	req, out := c.AssociateServiceRoleToAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -179,7 +178,7 @@ func (c *Greengrass) AssociateServiceRoleToAccountWithContext(ctx aws.Context, i
 
 const opCreateCoreDefinition = "CreateCoreDefinition"
 
-// CreateCoreDefinitionRequest generates a "aws/request.Request" representing the
+// CreateCoreDefinitionRequest generates a "aws.Request" representing the
 // client's request for the CreateCoreDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -203,8 +202,8 @@ const opCreateCoreDefinition = "CreateCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinition
-func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInput) (req *request.Request, output *CreateCoreDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInput) (req *aws.Request, output *CreateCoreDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCoreDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/cores",
@@ -251,7 +250,7 @@ func (c *Greengrass) CreateCoreDefinition(input *CreateCoreDefinitionInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateCoreDefinitionWithContext(ctx aws.Context, input *CreateCoreDefinitionInput, opts ...request.Option) (*CreateCoreDefinitionOutput, error) {
+func (c *Greengrass) CreateCoreDefinitionWithContext(ctx aws.Context, input *CreateCoreDefinitionInput, opts ...aws.Option) (*CreateCoreDefinitionOutput, error) {
 	req, out := c.CreateCoreDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -260,7 +259,7 @@ func (c *Greengrass) CreateCoreDefinitionWithContext(ctx aws.Context, input *Cre
 
 const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
 
-// CreateCoreDefinitionVersionRequest generates a "aws/request.Request" representing the
+// CreateCoreDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateCoreDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -284,8 +283,8 @@ const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersion
-func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionVersionInput) (req *request.Request, output *CreateCoreDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinitionVersionInput) (req *aws.Request, output *CreateCoreDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCoreDefinitionVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/cores/{CoreDefinitionId}/versions",
@@ -331,7 +330,7 @@ func (c *Greengrass) CreateCoreDefinitionVersion(input *CreateCoreDefinitionVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateCoreDefinitionVersionWithContext(ctx aws.Context, input *CreateCoreDefinitionVersionInput, opts ...request.Option) (*CreateCoreDefinitionVersionOutput, error) {
+func (c *Greengrass) CreateCoreDefinitionVersionWithContext(ctx aws.Context, input *CreateCoreDefinitionVersionInput, opts ...aws.Option) (*CreateCoreDefinitionVersionOutput, error) {
 	req, out := c.CreateCoreDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -340,7 +339,7 @@ func (c *Greengrass) CreateCoreDefinitionVersionWithContext(ctx aws.Context, inp
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws/request.Request" representing the
+// CreateDeploymentRequest generates a "aws.Request" representing the
 // client's request for the CreateDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -364,8 +363,8 @@ const opCreateDeployment = "CreateDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeployment
-func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) (req *request.Request, output *CreateDeploymentOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *CreateDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/groups/{GroupId}/deployments",
@@ -410,7 +409,7 @@ func (c *Greengrass) CreateDeployment(input *CreateDeploymentInput) (*CreateDepl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...request.Option) (*CreateDeploymentOutput, error) {
+func (c *Greengrass) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*CreateDeploymentOutput, error) {
 	req, out := c.CreateDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -419,7 +418,7 @@ func (c *Greengrass) CreateDeploymentWithContext(ctx aws.Context, input *CreateD
 
 const opCreateDeviceDefinition = "CreateDeviceDefinition"
 
-// CreateDeviceDefinitionRequest generates a "aws/request.Request" representing the
+// CreateDeviceDefinitionRequest generates a "aws.Request" representing the
 // client's request for the CreateDeviceDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -443,8 +442,8 @@ const opCreateDeviceDefinition = "CreateDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinition
-func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInput) (req *request.Request, output *CreateDeviceDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinitionInput) (req *aws.Request, output *CreateDeviceDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeviceDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/devices",
@@ -491,7 +490,7 @@ func (c *Greengrass) CreateDeviceDefinition(input *CreateDeviceDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateDeviceDefinitionWithContext(ctx aws.Context, input *CreateDeviceDefinitionInput, opts ...request.Option) (*CreateDeviceDefinitionOutput, error) {
+func (c *Greengrass) CreateDeviceDefinitionWithContext(ctx aws.Context, input *CreateDeviceDefinitionInput, opts ...aws.Option) (*CreateDeviceDefinitionOutput, error) {
 	req, out := c.CreateDeviceDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -500,7 +499,7 @@ func (c *Greengrass) CreateDeviceDefinitionWithContext(ctx aws.Context, input *C
 
 const opCreateDeviceDefinitionVersion = "CreateDeviceDefinitionVersion"
 
-// CreateDeviceDefinitionVersionRequest generates a "aws/request.Request" representing the
+// CreateDeviceDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateDeviceDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -524,8 +523,8 @@ const opCreateDeviceDefinitionVersion = "CreateDeviceDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersion
-func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDefinitionVersionInput) (req *request.Request, output *CreateDeviceDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDefinitionVersionInput) (req *aws.Request, output *CreateDeviceDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeviceDefinitionVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/devices/{DeviceDefinitionId}/versions",
@@ -570,7 +569,7 @@ func (c *Greengrass) CreateDeviceDefinitionVersion(input *CreateDeviceDefinition
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateDeviceDefinitionVersionWithContext(ctx aws.Context, input *CreateDeviceDefinitionVersionInput, opts ...request.Option) (*CreateDeviceDefinitionVersionOutput, error) {
+func (c *Greengrass) CreateDeviceDefinitionVersionWithContext(ctx aws.Context, input *CreateDeviceDefinitionVersionInput, opts ...aws.Option) (*CreateDeviceDefinitionVersionOutput, error) {
 	req, out := c.CreateDeviceDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -579,7 +578,7 @@ func (c *Greengrass) CreateDeviceDefinitionVersionWithContext(ctx aws.Context, i
 
 const opCreateFunctionDefinition = "CreateFunctionDefinition"
 
-// CreateFunctionDefinitionRequest generates a "aws/request.Request" representing the
+// CreateFunctionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the CreateFunctionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -603,8 +602,8 @@ const opCreateFunctionDefinition = "CreateFunctionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinition
-func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefinitionInput) (req *request.Request, output *CreateFunctionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefinitionInput) (req *aws.Request, output *CreateFunctionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateFunctionDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/functions",
@@ -652,7 +651,7 @@ func (c *Greengrass) CreateFunctionDefinition(input *CreateFunctionDefinitionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateFunctionDefinitionWithContext(ctx aws.Context, input *CreateFunctionDefinitionInput, opts ...request.Option) (*CreateFunctionDefinitionOutput, error) {
+func (c *Greengrass) CreateFunctionDefinitionWithContext(ctx aws.Context, input *CreateFunctionDefinitionInput, opts ...aws.Option) (*CreateFunctionDefinitionOutput, error) {
 	req, out := c.CreateFunctionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -661,7 +660,7 @@ func (c *Greengrass) CreateFunctionDefinitionWithContext(ctx aws.Context, input 
 
 const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
 
-// CreateFunctionDefinitionVersionRequest generates a "aws/request.Request" representing the
+// CreateFunctionDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateFunctionDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -685,8 +684,8 @@ const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersion
-func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDefinitionVersionInput) (req *request.Request, output *CreateFunctionDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctionDefinitionVersionInput) (req *aws.Request, output *CreateFunctionDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateFunctionDefinitionVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/functions/{FunctionDefinitionId}/versions",
@@ -731,7 +730,7 @@ func (c *Greengrass) CreateFunctionDefinitionVersion(input *CreateFunctionDefini
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateFunctionDefinitionVersionWithContext(ctx aws.Context, input *CreateFunctionDefinitionVersionInput, opts ...request.Option) (*CreateFunctionDefinitionVersionOutput, error) {
+func (c *Greengrass) CreateFunctionDefinitionVersionWithContext(ctx aws.Context, input *CreateFunctionDefinitionVersionInput, opts ...aws.Option) (*CreateFunctionDefinitionVersionOutput, error) {
 	req, out := c.CreateFunctionDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -740,7 +739,7 @@ func (c *Greengrass) CreateFunctionDefinitionVersionWithContext(ctx aws.Context,
 
 const opCreateGroup = "CreateGroup"
 
-// CreateGroupRequest generates a "aws/request.Request" representing the
+// CreateGroupRequest generates a "aws.Request" representing the
 // client's request for the CreateGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -764,8 +763,8 @@ const opCreateGroup = "CreateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroup
-func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) (req *request.Request, output *CreateGroupOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) (req *aws.Request, output *CreateGroupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/groups",
@@ -811,7 +810,7 @@ func (c *Greengrass) CreateGroup(input *CreateGroupInput) (*CreateGroupOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateGroupWithContext(ctx aws.Context, input *CreateGroupInput, opts ...request.Option) (*CreateGroupOutput, error) {
+func (c *Greengrass) CreateGroupWithContext(ctx aws.Context, input *CreateGroupInput, opts ...aws.Option) (*CreateGroupOutput, error) {
 	req, out := c.CreateGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -820,7 +819,7 @@ func (c *Greengrass) CreateGroupWithContext(ctx aws.Context, input *CreateGroupI
 
 const opCreateGroupCertificateAuthority = "CreateGroupCertificateAuthority"
 
-// CreateGroupCertificateAuthorityRequest generates a "aws/request.Request" representing the
+// CreateGroupCertificateAuthorityRequest generates a "aws.Request" representing the
 // client's request for the CreateGroupCertificateAuthority operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -844,8 +843,8 @@ const opCreateGroupCertificateAuthority = "CreateGroupCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthority
-func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCertificateAuthorityInput) (req *request.Request, output *CreateGroupCertificateAuthorityOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCertificateAuthorityInput) (req *aws.Request, output *CreateGroupCertificateAuthorityOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGroupCertificateAuthority,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/groups/{GroupId}/certificateauthorities",
@@ -894,7 +893,7 @@ func (c *Greengrass) CreateGroupCertificateAuthority(input *CreateGroupCertifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateGroupCertificateAuthorityWithContext(ctx aws.Context, input *CreateGroupCertificateAuthorityInput, opts ...request.Option) (*CreateGroupCertificateAuthorityOutput, error) {
+func (c *Greengrass) CreateGroupCertificateAuthorityWithContext(ctx aws.Context, input *CreateGroupCertificateAuthorityInput, opts ...aws.Option) (*CreateGroupCertificateAuthorityOutput, error) {
 	req, out := c.CreateGroupCertificateAuthorityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -903,7 +902,7 @@ func (c *Greengrass) CreateGroupCertificateAuthorityWithContext(ctx aws.Context,
 
 const opCreateGroupVersion = "CreateGroupVersion"
 
-// CreateGroupVersionRequest generates a "aws/request.Request" representing the
+// CreateGroupVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateGroupVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -927,8 +926,8 @@ const opCreateGroupVersion = "CreateGroupVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersion
-func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) (req *request.Request, output *CreateGroupVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) (req *aws.Request, output *CreateGroupVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateGroupVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/groups/{GroupId}/versions",
@@ -973,7 +972,7 @@ func (c *Greengrass) CreateGroupVersion(input *CreateGroupVersionInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateGroupVersionWithContext(ctx aws.Context, input *CreateGroupVersionInput, opts ...request.Option) (*CreateGroupVersionOutput, error) {
+func (c *Greengrass) CreateGroupVersionWithContext(ctx aws.Context, input *CreateGroupVersionInput, opts ...aws.Option) (*CreateGroupVersionOutput, error) {
 	req, out := c.CreateGroupVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -982,7 +981,7 @@ func (c *Greengrass) CreateGroupVersionWithContext(ctx aws.Context, input *Creat
 
 const opCreateLoggerDefinition = "CreateLoggerDefinition"
 
-// CreateLoggerDefinitionRequest generates a "aws/request.Request" representing the
+// CreateLoggerDefinitionRequest generates a "aws.Request" representing the
 // client's request for the CreateLoggerDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1006,8 +1005,8 @@ const opCreateLoggerDefinition = "CreateLoggerDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinition
-func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinitionInput) (req *request.Request, output *CreateLoggerDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinitionInput) (req *aws.Request, output *CreateLoggerDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLoggerDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/loggers",
@@ -1054,7 +1053,7 @@ func (c *Greengrass) CreateLoggerDefinition(input *CreateLoggerDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateLoggerDefinitionWithContext(ctx aws.Context, input *CreateLoggerDefinitionInput, opts ...request.Option) (*CreateLoggerDefinitionOutput, error) {
+func (c *Greengrass) CreateLoggerDefinitionWithContext(ctx aws.Context, input *CreateLoggerDefinitionInput, opts ...aws.Option) (*CreateLoggerDefinitionOutput, error) {
 	req, out := c.CreateLoggerDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1063,7 +1062,7 @@ func (c *Greengrass) CreateLoggerDefinitionWithContext(ctx aws.Context, input *C
 
 const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
 
-// CreateLoggerDefinitionVersionRequest generates a "aws/request.Request" representing the
+// CreateLoggerDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateLoggerDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1087,8 +1086,8 @@ const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersion
-func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinitionVersionInput) (req *request.Request, output *CreateLoggerDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDefinitionVersionInput) (req *aws.Request, output *CreateLoggerDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLoggerDefinitionVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/loggers/{LoggerDefinitionId}/versions",
@@ -1133,7 +1132,7 @@ func (c *Greengrass) CreateLoggerDefinitionVersion(input *CreateLoggerDefinition
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateLoggerDefinitionVersionWithContext(ctx aws.Context, input *CreateLoggerDefinitionVersionInput, opts ...request.Option) (*CreateLoggerDefinitionVersionOutput, error) {
+func (c *Greengrass) CreateLoggerDefinitionVersionWithContext(ctx aws.Context, input *CreateLoggerDefinitionVersionInput, opts ...aws.Option) (*CreateLoggerDefinitionVersionOutput, error) {
 	req, out := c.CreateLoggerDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1142,7 +1141,7 @@ func (c *Greengrass) CreateLoggerDefinitionVersionWithContext(ctx aws.Context, i
 
 const opCreateSubscriptionDefinition = "CreateSubscriptionDefinition"
 
-// CreateSubscriptionDefinitionRequest generates a "aws/request.Request" representing the
+// CreateSubscriptionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the CreateSubscriptionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1166,8 +1165,8 @@ const opCreateSubscriptionDefinition = "CreateSubscriptionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinition
-func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscriptionDefinitionInput) (req *request.Request, output *CreateSubscriptionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscriptionDefinitionInput) (req *aws.Request, output *CreateSubscriptionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSubscriptionDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/subscriptions",
@@ -1214,7 +1213,7 @@ func (c *Greengrass) CreateSubscriptionDefinition(input *CreateSubscriptionDefin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateSubscriptionDefinitionWithContext(ctx aws.Context, input *CreateSubscriptionDefinitionInput, opts ...request.Option) (*CreateSubscriptionDefinitionOutput, error) {
+func (c *Greengrass) CreateSubscriptionDefinitionWithContext(ctx aws.Context, input *CreateSubscriptionDefinitionInput, opts ...aws.Option) (*CreateSubscriptionDefinitionOutput, error) {
 	req, out := c.CreateSubscriptionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1223,7 +1222,7 @@ func (c *Greengrass) CreateSubscriptionDefinitionWithContext(ctx aws.Context, in
 
 const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersion"
 
-// CreateSubscriptionDefinitionVersionRequest generates a "aws/request.Request" representing the
+// CreateSubscriptionDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the CreateSubscriptionDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1247,8 +1246,8 @@ const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersi
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersion
-func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscriptionDefinitionVersionInput) (req *request.Request, output *CreateSubscriptionDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSubscriptionDefinitionVersionInput) (req *aws.Request, output *CreateSubscriptionDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSubscriptionDefinitionVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions",
@@ -1293,7 +1292,7 @@ func (c *Greengrass) CreateSubscriptionDefinitionVersion(input *CreateSubscripti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) CreateSubscriptionDefinitionVersionWithContext(ctx aws.Context, input *CreateSubscriptionDefinitionVersionInput, opts ...request.Option) (*CreateSubscriptionDefinitionVersionOutput, error) {
+func (c *Greengrass) CreateSubscriptionDefinitionVersionWithContext(ctx aws.Context, input *CreateSubscriptionDefinitionVersionInput, opts ...aws.Option) (*CreateSubscriptionDefinitionVersionOutput, error) {
 	req, out := c.CreateSubscriptionDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1302,7 +1301,7 @@ func (c *Greengrass) CreateSubscriptionDefinitionVersionWithContext(ctx aws.Cont
 
 const opDeleteCoreDefinition = "DeleteCoreDefinition"
 
-// DeleteCoreDefinitionRequest generates a "aws/request.Request" representing the
+// DeleteCoreDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeleteCoreDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1326,8 +1325,8 @@ const opDeleteCoreDefinition = "DeleteCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinition
-func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) (req *request.Request, output *DeleteCoreDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInput) (req *aws.Request, output *DeleteCoreDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCoreDefinition,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/definition/cores/{CoreDefinitionId}",
@@ -1373,7 +1372,7 @@ func (c *Greengrass) DeleteCoreDefinition(input *DeleteCoreDefinitionInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DeleteCoreDefinitionWithContext(ctx aws.Context, input *DeleteCoreDefinitionInput, opts ...request.Option) (*DeleteCoreDefinitionOutput, error) {
+func (c *Greengrass) DeleteCoreDefinitionWithContext(ctx aws.Context, input *DeleteCoreDefinitionInput, opts ...aws.Option) (*DeleteCoreDefinitionOutput, error) {
 	req, out := c.DeleteCoreDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1382,7 +1381,7 @@ func (c *Greengrass) DeleteCoreDefinitionWithContext(ctx aws.Context, input *Del
 
 const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
 
-// DeleteDeviceDefinitionRequest generates a "aws/request.Request" representing the
+// DeleteDeviceDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeleteDeviceDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1406,8 +1405,8 @@ const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinition
-func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInput) (req *request.Request, output *DeleteDeviceDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinitionInput) (req *aws.Request, output *DeleteDeviceDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDeviceDefinition,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/definition/devices/{DeviceDefinitionId}",
@@ -1453,7 +1452,7 @@ func (c *Greengrass) DeleteDeviceDefinition(input *DeleteDeviceDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DeleteDeviceDefinitionWithContext(ctx aws.Context, input *DeleteDeviceDefinitionInput, opts ...request.Option) (*DeleteDeviceDefinitionOutput, error) {
+func (c *Greengrass) DeleteDeviceDefinitionWithContext(ctx aws.Context, input *DeleteDeviceDefinitionInput, opts ...aws.Option) (*DeleteDeviceDefinitionOutput, error) {
 	req, out := c.DeleteDeviceDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1462,7 +1461,7 @@ func (c *Greengrass) DeleteDeviceDefinitionWithContext(ctx aws.Context, input *D
 
 const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
 
-// DeleteFunctionDefinitionRequest generates a "aws/request.Request" representing the
+// DeleteFunctionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeleteFunctionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1486,8 +1485,8 @@ const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinition
-func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinitionInput) (req *request.Request, output *DeleteFunctionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefinitionInput) (req *aws.Request, output *DeleteFunctionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFunctionDefinition,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/definition/functions/{FunctionDefinitionId}",
@@ -1533,7 +1532,7 @@ func (c *Greengrass) DeleteFunctionDefinition(input *DeleteFunctionDefinitionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DeleteFunctionDefinitionWithContext(ctx aws.Context, input *DeleteFunctionDefinitionInput, opts ...request.Option) (*DeleteFunctionDefinitionOutput, error) {
+func (c *Greengrass) DeleteFunctionDefinitionWithContext(ctx aws.Context, input *DeleteFunctionDefinitionInput, opts ...aws.Option) (*DeleteFunctionDefinitionOutput, error) {
 	req, out := c.DeleteFunctionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1542,7 +1541,7 @@ func (c *Greengrass) DeleteFunctionDefinitionWithContext(ctx aws.Context, input 
 
 const opDeleteGroup = "DeleteGroup"
 
-// DeleteGroupRequest generates a "aws/request.Request" representing the
+// DeleteGroupRequest generates a "aws.Request" representing the
 // client's request for the DeleteGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1566,8 +1565,8 @@ const opDeleteGroup = "DeleteGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroup
-func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) (req *request.Request, output *DeleteGroupOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) (req *aws.Request, output *DeleteGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteGroup,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/groups/{GroupId}",
@@ -1612,7 +1611,7 @@ func (c *Greengrass) DeleteGroup(input *DeleteGroupInput) (*DeleteGroupOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, opts ...request.Option) (*DeleteGroupOutput, error) {
+func (c *Greengrass) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupInput, opts ...aws.Option) (*DeleteGroupOutput, error) {
 	req, out := c.DeleteGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1621,7 +1620,7 @@ func (c *Greengrass) DeleteGroupWithContext(ctx aws.Context, input *DeleteGroupI
 
 const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
 
-// DeleteLoggerDefinitionRequest generates a "aws/request.Request" representing the
+// DeleteLoggerDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeleteLoggerDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1645,8 +1644,8 @@ const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinition
-func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInput) (req *request.Request, output *DeleteLoggerDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinitionInput) (req *aws.Request, output *DeleteLoggerDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLoggerDefinition,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/definition/loggers/{LoggerDefinitionId}",
@@ -1692,7 +1691,7 @@ func (c *Greengrass) DeleteLoggerDefinition(input *DeleteLoggerDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DeleteLoggerDefinitionWithContext(ctx aws.Context, input *DeleteLoggerDefinitionInput, opts ...request.Option) (*DeleteLoggerDefinitionOutput, error) {
+func (c *Greengrass) DeleteLoggerDefinitionWithContext(ctx aws.Context, input *DeleteLoggerDefinitionInput, opts ...aws.Option) (*DeleteLoggerDefinitionOutput, error) {
 	req, out := c.DeleteLoggerDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1701,7 +1700,7 @@ func (c *Greengrass) DeleteLoggerDefinitionWithContext(ctx aws.Context, input *D
 
 const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
 
-// DeleteSubscriptionDefinitionRequest generates a "aws/request.Request" representing the
+// DeleteSubscriptionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeleteSubscriptionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1725,8 +1724,8 @@ const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinition
-func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDefinitionInput) (req *request.Request, output *DeleteSubscriptionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscriptionDefinitionInput) (req *aws.Request, output *DeleteSubscriptionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSubscriptionDefinition,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}",
@@ -1772,7 +1771,7 @@ func (c *Greengrass) DeleteSubscriptionDefinition(input *DeleteSubscriptionDefin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DeleteSubscriptionDefinitionWithContext(ctx aws.Context, input *DeleteSubscriptionDefinitionInput, opts ...request.Option) (*DeleteSubscriptionDefinitionOutput, error) {
+func (c *Greengrass) DeleteSubscriptionDefinitionWithContext(ctx aws.Context, input *DeleteSubscriptionDefinitionInput, opts ...aws.Option) (*DeleteSubscriptionDefinitionOutput, error) {
 	req, out := c.DeleteSubscriptionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1781,7 +1780,7 @@ func (c *Greengrass) DeleteSubscriptionDefinitionWithContext(ctx aws.Context, in
 
 const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
 
-// DisassociateRoleFromGroupRequest generates a "aws/request.Request" representing the
+// DisassociateRoleFromGroupRequest generates a "aws.Request" representing the
 // client's request for the DisassociateRoleFromGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1805,8 +1804,8 @@ const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroup
-func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGroupInput) (req *request.Request, output *DisassociateRoleFromGroupOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFromGroupInput) (req *aws.Request, output *DisassociateRoleFromGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateRoleFromGroup,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/groups/{GroupId}/role",
@@ -1854,7 +1853,7 @@ func (c *Greengrass) DisassociateRoleFromGroup(input *DisassociateRoleFromGroupI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DisassociateRoleFromGroupWithContext(ctx aws.Context, input *DisassociateRoleFromGroupInput, opts ...request.Option) (*DisassociateRoleFromGroupOutput, error) {
+func (c *Greengrass) DisassociateRoleFromGroupWithContext(ctx aws.Context, input *DisassociateRoleFromGroupInput, opts ...aws.Option) (*DisassociateRoleFromGroupOutput, error) {
 	req, out := c.DisassociateRoleFromGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1863,7 +1862,7 @@ func (c *Greengrass) DisassociateRoleFromGroupWithContext(ctx aws.Context, input
 
 const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount"
 
-// DisassociateServiceRoleFromAccountRequest generates a "aws/request.Request" representing the
+// DisassociateServiceRoleFromAccountRequest generates a "aws.Request" representing the
 // client's request for the DisassociateServiceRoleFromAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1887,8 +1886,8 @@ const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccount
-func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *DisassociateServiceRoleFromAccountInput) (req *request.Request, output *DisassociateServiceRoleFromAccountOutput) {
-	op := &request.Operation{
+func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *DisassociateServiceRoleFromAccountInput) (req *aws.Request, output *DisassociateServiceRoleFromAccountOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateServiceRoleFromAccount,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/greengrass/servicerole",
@@ -1934,7 +1933,7 @@ func (c *Greengrass) DisassociateServiceRoleFromAccount(input *DisassociateServi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) DisassociateServiceRoleFromAccountWithContext(ctx aws.Context, input *DisassociateServiceRoleFromAccountInput, opts ...request.Option) (*DisassociateServiceRoleFromAccountOutput, error) {
+func (c *Greengrass) DisassociateServiceRoleFromAccountWithContext(ctx aws.Context, input *DisassociateServiceRoleFromAccountInput, opts ...aws.Option) (*DisassociateServiceRoleFromAccountOutput, error) {
 	req, out := c.DisassociateServiceRoleFromAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1943,7 +1942,7 @@ func (c *Greengrass) DisassociateServiceRoleFromAccountWithContext(ctx aws.Conte
 
 const opGetAssociatedRole = "GetAssociatedRole"
 
-// GetAssociatedRoleRequest generates a "aws/request.Request" representing the
+// GetAssociatedRoleRequest generates a "aws.Request" representing the
 // client's request for the GetAssociatedRole operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1967,8 +1966,8 @@ const opGetAssociatedRole = "GetAssociatedRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRole
-func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) (req *request.Request, output *GetAssociatedRoleOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) (req *aws.Request, output *GetAssociatedRoleOutput) {
+	op := &aws.Operation{
 		Name:       opGetAssociatedRole,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/role",
@@ -2016,7 +2015,7 @@ func (c *Greengrass) GetAssociatedRole(input *GetAssociatedRoleInput) (*GetAssoc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetAssociatedRoleWithContext(ctx aws.Context, input *GetAssociatedRoleInput, opts ...request.Option) (*GetAssociatedRoleOutput, error) {
+func (c *Greengrass) GetAssociatedRoleWithContext(ctx aws.Context, input *GetAssociatedRoleInput, opts ...aws.Option) (*GetAssociatedRoleOutput, error) {
 	req, out := c.GetAssociatedRoleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2025,7 +2024,7 @@ func (c *Greengrass) GetAssociatedRoleWithContext(ctx aws.Context, input *GetAss
 
 const opGetConnectivityInfo = "GetConnectivityInfo"
 
-// GetConnectivityInfoRequest generates a "aws/request.Request" representing the
+// GetConnectivityInfoRequest generates a "aws.Request" representing the
 // client's request for the GetConnectivityInfo operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2049,8 +2048,8 @@ const opGetConnectivityInfo = "GetConnectivityInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfo
-func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) (req *request.Request, output *GetConnectivityInfoOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput) (req *aws.Request, output *GetConnectivityInfoOutput) {
+	op := &aws.Operation{
 		Name:       opGetConnectivityInfo,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/things/{ThingName}/connectivityInfo",
@@ -2098,7 +2097,7 @@ func (c *Greengrass) GetConnectivityInfo(input *GetConnectivityInfoInput) (*GetC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetConnectivityInfoWithContext(ctx aws.Context, input *GetConnectivityInfoInput, opts ...request.Option) (*GetConnectivityInfoOutput, error) {
+func (c *Greengrass) GetConnectivityInfoWithContext(ctx aws.Context, input *GetConnectivityInfoInput, opts ...aws.Option) (*GetConnectivityInfoOutput, error) {
 	req, out := c.GetConnectivityInfoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2107,7 +2106,7 @@ func (c *Greengrass) GetConnectivityInfoWithContext(ctx aws.Context, input *GetC
 
 const opGetCoreDefinition = "GetCoreDefinition"
 
-// GetCoreDefinitionRequest generates a "aws/request.Request" representing the
+// GetCoreDefinitionRequest generates a "aws.Request" representing the
 // client's request for the GetCoreDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2131,8 +2130,8 @@ const opGetCoreDefinition = "GetCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinition
-func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) (req *request.Request, output *GetCoreDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) (req *aws.Request, output *GetCoreDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetCoreDefinition,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/cores/{CoreDefinitionId}",
@@ -2177,7 +2176,7 @@ func (c *Greengrass) GetCoreDefinition(input *GetCoreDefinitionInput) (*GetCoreD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetCoreDefinitionWithContext(ctx aws.Context, input *GetCoreDefinitionInput, opts ...request.Option) (*GetCoreDefinitionOutput, error) {
+func (c *Greengrass) GetCoreDefinitionWithContext(ctx aws.Context, input *GetCoreDefinitionInput, opts ...aws.Option) (*GetCoreDefinitionOutput, error) {
 	req, out := c.GetCoreDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2186,7 +2185,7 @@ func (c *Greengrass) GetCoreDefinitionWithContext(ctx aws.Context, input *GetCor
 
 const opGetCoreDefinitionVersion = "GetCoreDefinitionVersion"
 
-// GetCoreDefinitionVersionRequest generates a "aws/request.Request" representing the
+// GetCoreDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the GetCoreDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2210,8 +2209,8 @@ const opGetCoreDefinitionVersion = "GetCoreDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersion
-func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVersionInput) (req *request.Request, output *GetCoreDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVersionInput) (req *aws.Request, output *GetCoreDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetCoreDefinitionVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/cores/{CoreDefinitionId}/versions/{CoreDefinitionVersionId}",
@@ -2256,7 +2255,7 @@ func (c *Greengrass) GetCoreDefinitionVersion(input *GetCoreDefinitionVersionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetCoreDefinitionVersionWithContext(ctx aws.Context, input *GetCoreDefinitionVersionInput, opts ...request.Option) (*GetCoreDefinitionVersionOutput, error) {
+func (c *Greengrass) GetCoreDefinitionVersionWithContext(ctx aws.Context, input *GetCoreDefinitionVersionInput, opts ...aws.Option) (*GetCoreDefinitionVersionOutput, error) {
 	req, out := c.GetCoreDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2265,7 +2264,7 @@ func (c *Greengrass) GetCoreDefinitionVersionWithContext(ctx aws.Context, input 
 
 const opGetDeploymentStatus = "GetDeploymentStatus"
 
-// GetDeploymentStatusRequest generates a "aws/request.Request" representing the
+// GetDeploymentStatusRequest generates a "aws.Request" representing the
 // client's request for the GetDeploymentStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2289,8 +2288,8 @@ const opGetDeploymentStatus = "GetDeploymentStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatus
-func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput) (req *request.Request, output *GetDeploymentStatusOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput) (req *aws.Request, output *GetDeploymentStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeploymentStatus,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/deployments/{DeploymentId}/status",
@@ -2335,7 +2334,7 @@ func (c *Greengrass) GetDeploymentStatus(input *GetDeploymentStatusInput) (*GetD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetDeploymentStatusWithContext(ctx aws.Context, input *GetDeploymentStatusInput, opts ...request.Option) (*GetDeploymentStatusOutput, error) {
+func (c *Greengrass) GetDeploymentStatusWithContext(ctx aws.Context, input *GetDeploymentStatusInput, opts ...aws.Option) (*GetDeploymentStatusOutput, error) {
 	req, out := c.GetDeploymentStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2344,7 +2343,7 @@ func (c *Greengrass) GetDeploymentStatusWithContext(ctx aws.Context, input *GetD
 
 const opGetDeviceDefinition = "GetDeviceDefinition"
 
-// GetDeviceDefinitionRequest generates a "aws/request.Request" representing the
+// GetDeviceDefinitionRequest generates a "aws.Request" representing the
 // client's request for the GetDeviceDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2368,8 +2367,8 @@ const opGetDeviceDefinition = "GetDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinition
-func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput) (req *request.Request, output *GetDeviceDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput) (req *aws.Request, output *GetDeviceDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeviceDefinition,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/devices/{DeviceDefinitionId}",
@@ -2414,7 +2413,7 @@ func (c *Greengrass) GetDeviceDefinition(input *GetDeviceDefinitionInput) (*GetD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetDeviceDefinitionWithContext(ctx aws.Context, input *GetDeviceDefinitionInput, opts ...request.Option) (*GetDeviceDefinitionOutput, error) {
+func (c *Greengrass) GetDeviceDefinitionWithContext(ctx aws.Context, input *GetDeviceDefinitionInput, opts ...aws.Option) (*GetDeviceDefinitionOutput, error) {
 	req, out := c.GetDeviceDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2423,7 +2422,7 @@ func (c *Greengrass) GetDeviceDefinitionWithContext(ctx aws.Context, input *GetD
 
 const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
 
-// GetDeviceDefinitionVersionRequest generates a "aws/request.Request" representing the
+// GetDeviceDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the GetDeviceDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2447,8 +2446,8 @@ const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersion
-func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVersionInput) (req *request.Request, output *GetDeviceDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitionVersionInput) (req *aws.Request, output *GetDeviceDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeviceDefinitionVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/devices/{DeviceDefinitionId}/versions/{DeviceDefinitionVersionId}",
@@ -2493,7 +2492,7 @@ func (c *Greengrass) GetDeviceDefinitionVersion(input *GetDeviceDefinitionVersio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetDeviceDefinitionVersionWithContext(ctx aws.Context, input *GetDeviceDefinitionVersionInput, opts ...request.Option) (*GetDeviceDefinitionVersionOutput, error) {
+func (c *Greengrass) GetDeviceDefinitionVersionWithContext(ctx aws.Context, input *GetDeviceDefinitionVersionInput, opts ...aws.Option) (*GetDeviceDefinitionVersionOutput, error) {
 	req, out := c.GetDeviceDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2502,7 +2501,7 @@ func (c *Greengrass) GetDeviceDefinitionVersionWithContext(ctx aws.Context, inpu
 
 const opGetFunctionDefinition = "GetFunctionDefinition"
 
-// GetFunctionDefinitionRequest generates a "aws/request.Request" representing the
+// GetFunctionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the GetFunctionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2526,8 +2525,8 @@ const opGetFunctionDefinition = "GetFunctionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinition
-func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionInput) (req *request.Request, output *GetFunctionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionInput) (req *aws.Request, output *GetFunctionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetFunctionDefinition,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/functions/{FunctionDefinitionId}",
@@ -2573,7 +2572,7 @@ func (c *Greengrass) GetFunctionDefinition(input *GetFunctionDefinitionInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetFunctionDefinitionWithContext(ctx aws.Context, input *GetFunctionDefinitionInput, opts ...request.Option) (*GetFunctionDefinitionOutput, error) {
+func (c *Greengrass) GetFunctionDefinitionWithContext(ctx aws.Context, input *GetFunctionDefinitionInput, opts ...aws.Option) (*GetFunctionDefinitionOutput, error) {
 	req, out := c.GetFunctionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2582,7 +2581,7 @@ func (c *Greengrass) GetFunctionDefinitionWithContext(ctx aws.Context, input *Ge
 
 const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
 
-// GetFunctionDefinitionVersionRequest generates a "aws/request.Request" representing the
+// GetFunctionDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the GetFunctionDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2606,8 +2605,8 @@ const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersion
-func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitionVersionInput) (req *request.Request, output *GetFunctionDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefinitionVersionInput) (req *aws.Request, output *GetFunctionDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetFunctionDefinitionVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/functions/{FunctionDefinitionId}/versions/{FunctionDefinitionVersionId}",
@@ -2653,7 +2652,7 @@ func (c *Greengrass) GetFunctionDefinitionVersion(input *GetFunctionDefinitionVe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetFunctionDefinitionVersionWithContext(ctx aws.Context, input *GetFunctionDefinitionVersionInput, opts ...request.Option) (*GetFunctionDefinitionVersionOutput, error) {
+func (c *Greengrass) GetFunctionDefinitionVersionWithContext(ctx aws.Context, input *GetFunctionDefinitionVersionInput, opts ...aws.Option) (*GetFunctionDefinitionVersionOutput, error) {
 	req, out := c.GetFunctionDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2662,7 +2661,7 @@ func (c *Greengrass) GetFunctionDefinitionVersionWithContext(ctx aws.Context, in
 
 const opGetGroup = "GetGroup"
 
-// GetGroupRequest generates a "aws/request.Request" representing the
+// GetGroupRequest generates a "aws.Request" representing the
 // client's request for the GetGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2686,8 +2685,8 @@ const opGetGroup = "GetGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroup
-func (c *Greengrass) GetGroupRequest(input *GetGroupInput) (req *request.Request, output *GetGroupOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetGroupRequest(input *GetGroupInput) (req *aws.Request, output *GetGroupOutput) {
+	op := &aws.Operation{
 		Name:       opGetGroup,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}",
@@ -2732,7 +2731,7 @@ func (c *Greengrass) GetGroup(input *GetGroupInput) (*GetGroupOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, opts ...request.Option) (*GetGroupOutput, error) {
+func (c *Greengrass) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, opts ...aws.Option) (*GetGroupOutput, error) {
 	req, out := c.GetGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2741,7 +2740,7 @@ func (c *Greengrass) GetGroupWithContext(ctx aws.Context, input *GetGroupInput, 
 
 const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
 
-// GetGroupCertificateAuthorityRequest generates a "aws/request.Request" representing the
+// GetGroupCertificateAuthorityRequest generates a "aws.Request" representing the
 // client's request for the GetGroupCertificateAuthority operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2765,8 +2764,8 @@ const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthority
-func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateAuthorityInput) (req *request.Request, output *GetGroupCertificateAuthorityOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertificateAuthorityInput) (req *aws.Request, output *GetGroupCertificateAuthorityOutput) {
+	op := &aws.Operation{
 		Name:       opGetGroupCertificateAuthority,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/certificateauthorities/{CertificateAuthorityId}",
@@ -2814,7 +2813,7 @@ func (c *Greengrass) GetGroupCertificateAuthority(input *GetGroupCertificateAuth
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetGroupCertificateAuthorityWithContext(ctx aws.Context, input *GetGroupCertificateAuthorityInput, opts ...request.Option) (*GetGroupCertificateAuthorityOutput, error) {
+func (c *Greengrass) GetGroupCertificateAuthorityWithContext(ctx aws.Context, input *GetGroupCertificateAuthorityInput, opts ...aws.Option) (*GetGroupCertificateAuthorityOutput, error) {
 	req, out := c.GetGroupCertificateAuthorityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2823,7 +2822,7 @@ func (c *Greengrass) GetGroupCertificateAuthorityWithContext(ctx aws.Context, in
 
 const opGetGroupCertificateConfiguration = "GetGroupCertificateConfiguration"
 
-// GetGroupCertificateConfigurationRequest generates a "aws/request.Request" representing the
+// GetGroupCertificateConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetGroupCertificateConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2847,8 +2846,8 @@ const opGetGroupCertificateConfiguration = "GetGroupCertificateConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfiguration
-func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCertificateConfigurationInput) (req *request.Request, output *GetGroupCertificateConfigurationOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCertificateConfigurationInput) (req *aws.Request, output *GetGroupCertificateConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opGetGroupCertificateConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry",
@@ -2896,7 +2895,7 @@ func (c *Greengrass) GetGroupCertificateConfiguration(input *GetGroupCertificate
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetGroupCertificateConfigurationWithContext(ctx aws.Context, input *GetGroupCertificateConfigurationInput, opts ...request.Option) (*GetGroupCertificateConfigurationOutput, error) {
+func (c *Greengrass) GetGroupCertificateConfigurationWithContext(ctx aws.Context, input *GetGroupCertificateConfigurationInput, opts ...aws.Option) (*GetGroupCertificateConfigurationOutput, error) {
 	req, out := c.GetGroupCertificateConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2905,7 +2904,7 @@ func (c *Greengrass) GetGroupCertificateConfigurationWithContext(ctx aws.Context
 
 const opGetGroupVersion = "GetGroupVersion"
 
-// GetGroupVersionRequest generates a "aws/request.Request" representing the
+// GetGroupVersionRequest generates a "aws.Request" representing the
 // client's request for the GetGroupVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2929,8 +2928,8 @@ const opGetGroupVersion = "GetGroupVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersion
-func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) (req *request.Request, output *GetGroupVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) (req *aws.Request, output *GetGroupVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetGroupVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/versions/{GroupVersionId}",
@@ -2975,7 +2974,7 @@ func (c *Greengrass) GetGroupVersion(input *GetGroupVersionInput) (*GetGroupVers
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetGroupVersionWithContext(ctx aws.Context, input *GetGroupVersionInput, opts ...request.Option) (*GetGroupVersionOutput, error) {
+func (c *Greengrass) GetGroupVersionWithContext(ctx aws.Context, input *GetGroupVersionInput, opts ...aws.Option) (*GetGroupVersionOutput, error) {
 	req, out := c.GetGroupVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2984,7 +2983,7 @@ func (c *Greengrass) GetGroupVersionWithContext(ctx aws.Context, input *GetGroup
 
 const opGetLoggerDefinition = "GetLoggerDefinition"
 
-// GetLoggerDefinitionRequest generates a "aws/request.Request" representing the
+// GetLoggerDefinitionRequest generates a "aws.Request" representing the
 // client's request for the GetLoggerDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3008,8 +3007,8 @@ const opGetLoggerDefinition = "GetLoggerDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinition
-func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) (req *request.Request, output *GetLoggerDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput) (req *aws.Request, output *GetLoggerDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetLoggerDefinition,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/loggers/{LoggerDefinitionId}",
@@ -3054,7 +3053,7 @@ func (c *Greengrass) GetLoggerDefinition(input *GetLoggerDefinitionInput) (*GetL
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetLoggerDefinitionWithContext(ctx aws.Context, input *GetLoggerDefinitionInput, opts ...request.Option) (*GetLoggerDefinitionOutput, error) {
+func (c *Greengrass) GetLoggerDefinitionWithContext(ctx aws.Context, input *GetLoggerDefinitionInput, opts ...aws.Option) (*GetLoggerDefinitionOutput, error) {
 	req, out := c.GetLoggerDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3063,7 +3062,7 @@ func (c *Greengrass) GetLoggerDefinitionWithContext(ctx aws.Context, input *GetL
 
 const opGetLoggerDefinitionVersion = "GetLoggerDefinitionVersion"
 
-// GetLoggerDefinitionVersionRequest generates a "aws/request.Request" representing the
+// GetLoggerDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the GetLoggerDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3087,8 +3086,8 @@ const opGetLoggerDefinitionVersion = "GetLoggerDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersion
-func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitionVersionInput) (req *request.Request, output *GetLoggerDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitionVersionInput) (req *aws.Request, output *GetLoggerDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetLoggerDefinitionVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/loggers/{LoggerDefinitionId}/versions/{LoggerDefinitionVersionId}",
@@ -3133,7 +3132,7 @@ func (c *Greengrass) GetLoggerDefinitionVersion(input *GetLoggerDefinitionVersio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetLoggerDefinitionVersionWithContext(ctx aws.Context, input *GetLoggerDefinitionVersionInput, opts ...request.Option) (*GetLoggerDefinitionVersionOutput, error) {
+func (c *Greengrass) GetLoggerDefinitionVersionWithContext(ctx aws.Context, input *GetLoggerDefinitionVersionInput, opts ...aws.Option) (*GetLoggerDefinitionVersionOutput, error) {
 	req, out := c.GetLoggerDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3142,7 +3141,7 @@ func (c *Greengrass) GetLoggerDefinitionVersionWithContext(ctx aws.Context, inpu
 
 const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 
-// GetServiceRoleForAccountRequest generates a "aws/request.Request" representing the
+// GetServiceRoleForAccountRequest generates a "aws.Request" representing the
 // client's request for the GetServiceRoleForAccount operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3166,8 +3165,8 @@ const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccount
-func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccountInput) (req *request.Request, output *GetServiceRoleForAccountOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAccountInput) (req *aws.Request, output *GetServiceRoleForAccountOutput) {
+	op := &aws.Operation{
 		Name:       opGetServiceRoleForAccount,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/servicerole",
@@ -3212,7 +3211,7 @@ func (c *Greengrass) GetServiceRoleForAccount(input *GetServiceRoleForAccountInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetServiceRoleForAccountWithContext(ctx aws.Context, input *GetServiceRoleForAccountInput, opts ...request.Option) (*GetServiceRoleForAccountOutput, error) {
+func (c *Greengrass) GetServiceRoleForAccountWithContext(ctx aws.Context, input *GetServiceRoleForAccountInput, opts ...aws.Option) (*GetServiceRoleForAccountOutput, error) {
 	req, out := c.GetServiceRoleForAccountRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3221,7 +3220,7 @@ func (c *Greengrass) GetServiceRoleForAccountWithContext(ctx aws.Context, input 
 
 const opGetSubscriptionDefinition = "GetSubscriptionDefinition"
 
-// GetSubscriptionDefinitionRequest generates a "aws/request.Request" representing the
+// GetSubscriptionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the GetSubscriptionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3245,8 +3244,8 @@ const opGetSubscriptionDefinition = "GetSubscriptionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinition
-func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefinitionInput) (req *request.Request, output *GetSubscriptionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefinitionInput) (req *aws.Request, output *GetSubscriptionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetSubscriptionDefinition,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}",
@@ -3291,7 +3290,7 @@ func (c *Greengrass) GetSubscriptionDefinition(input *GetSubscriptionDefinitionI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetSubscriptionDefinitionWithContext(ctx aws.Context, input *GetSubscriptionDefinitionInput, opts ...request.Option) (*GetSubscriptionDefinitionOutput, error) {
+func (c *Greengrass) GetSubscriptionDefinitionWithContext(ctx aws.Context, input *GetSubscriptionDefinitionInput, opts ...aws.Option) (*GetSubscriptionDefinitionOutput, error) {
 	req, out := c.GetSubscriptionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3300,7 +3299,7 @@ func (c *Greengrass) GetSubscriptionDefinitionWithContext(ctx aws.Context, input
 
 const opGetSubscriptionDefinitionVersion = "GetSubscriptionDefinitionVersion"
 
-// GetSubscriptionDefinitionVersionRequest generates a "aws/request.Request" representing the
+// GetSubscriptionDefinitionVersionRequest generates a "aws.Request" representing the
 // client's request for the GetSubscriptionDefinitionVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3324,8 +3323,8 @@ const opGetSubscriptionDefinitionVersion = "GetSubscriptionDefinitionVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersion
-func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscriptionDefinitionVersionInput) (req *request.Request, output *GetSubscriptionDefinitionVersionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscriptionDefinitionVersionInput) (req *aws.Request, output *GetSubscriptionDefinitionVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetSubscriptionDefinitionVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions/{SubscriptionDefinitionVersionId}",
@@ -3370,7 +3369,7 @@ func (c *Greengrass) GetSubscriptionDefinitionVersion(input *GetSubscriptionDefi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) GetSubscriptionDefinitionVersionWithContext(ctx aws.Context, input *GetSubscriptionDefinitionVersionInput, opts ...request.Option) (*GetSubscriptionDefinitionVersionOutput, error) {
+func (c *Greengrass) GetSubscriptionDefinitionVersionWithContext(ctx aws.Context, input *GetSubscriptionDefinitionVersionInput, opts ...aws.Option) (*GetSubscriptionDefinitionVersionOutput, error) {
 	req, out := c.GetSubscriptionDefinitionVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3379,7 +3378,7 @@ func (c *Greengrass) GetSubscriptionDefinitionVersionWithContext(ctx aws.Context
 
 const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
 
-// ListCoreDefinitionVersionsRequest generates a "aws/request.Request" representing the
+// ListCoreDefinitionVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListCoreDefinitionVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3403,8 +3402,8 @@ const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersions
-func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVersionsInput) (req *request.Request, output *ListCoreDefinitionVersionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinitionVersionsInput) (req *aws.Request, output *ListCoreDefinitionVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListCoreDefinitionVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/cores/{CoreDefinitionId}/versions",
@@ -3449,7 +3448,7 @@ func (c *Greengrass) ListCoreDefinitionVersions(input *ListCoreDefinitionVersion
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListCoreDefinitionVersionsWithContext(ctx aws.Context, input *ListCoreDefinitionVersionsInput, opts ...request.Option) (*ListCoreDefinitionVersionsOutput, error) {
+func (c *Greengrass) ListCoreDefinitionVersionsWithContext(ctx aws.Context, input *ListCoreDefinitionVersionsInput, opts ...aws.Option) (*ListCoreDefinitionVersionsOutput, error) {
 	req, out := c.ListCoreDefinitionVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3458,7 +3457,7 @@ func (c *Greengrass) ListCoreDefinitionVersionsWithContext(ctx aws.Context, inpu
 
 const opListCoreDefinitions = "ListCoreDefinitions"
 
-// ListCoreDefinitionsRequest generates a "aws/request.Request" representing the
+// ListCoreDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the ListCoreDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3482,8 +3481,8 @@ const opListCoreDefinitions = "ListCoreDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitions
-func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) (req *request.Request, output *ListCoreDefinitionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput) (req *aws.Request, output *ListCoreDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opListCoreDefinitions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/cores",
@@ -3523,7 +3522,7 @@ func (c *Greengrass) ListCoreDefinitions(input *ListCoreDefinitionsInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListCoreDefinitionsWithContext(ctx aws.Context, input *ListCoreDefinitionsInput, opts ...request.Option) (*ListCoreDefinitionsOutput, error) {
+func (c *Greengrass) ListCoreDefinitionsWithContext(ctx aws.Context, input *ListCoreDefinitionsInput, opts ...aws.Option) (*ListCoreDefinitionsOutput, error) {
 	req, out := c.ListCoreDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3532,7 +3531,7 @@ func (c *Greengrass) ListCoreDefinitionsWithContext(ctx aws.Context, input *List
 
 const opListDeployments = "ListDeployments"
 
-// ListDeploymentsRequest generates a "aws/request.Request" representing the
+// ListDeploymentsRequest generates a "aws.Request" representing the
 // client's request for the ListDeployments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3556,8 +3555,8 @@ const opListDeployments = "ListDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeployments
-func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) (req *request.Request, output *ListDeploymentsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) (req *aws.Request, output *ListDeploymentsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeployments,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/deployments",
@@ -3602,7 +3601,7 @@ func (c *Greengrass) ListDeployments(input *ListDeploymentsInput) (*ListDeployme
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListDeploymentsWithContext(ctx aws.Context, input *ListDeploymentsInput, opts ...request.Option) (*ListDeploymentsOutput, error) {
+func (c *Greengrass) ListDeploymentsWithContext(ctx aws.Context, input *ListDeploymentsInput, opts ...aws.Option) (*ListDeploymentsOutput, error) {
 	req, out := c.ListDeploymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3611,7 +3610,7 @@ func (c *Greengrass) ListDeploymentsWithContext(ctx aws.Context, input *ListDepl
 
 const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
 
-// ListDeviceDefinitionVersionsRequest generates a "aws/request.Request" representing the
+// ListDeviceDefinitionVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListDeviceDefinitionVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3635,8 +3634,8 @@ const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersions
-func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinitionVersionsInput) (req *request.Request, output *ListDeviceDefinitionVersionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefinitionVersionsInput) (req *aws.Request, output *ListDeviceDefinitionVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeviceDefinitionVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/devices/{DeviceDefinitionId}/versions",
@@ -3681,7 +3680,7 @@ func (c *Greengrass) ListDeviceDefinitionVersions(input *ListDeviceDefinitionVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListDeviceDefinitionVersionsWithContext(ctx aws.Context, input *ListDeviceDefinitionVersionsInput, opts ...request.Option) (*ListDeviceDefinitionVersionsOutput, error) {
+func (c *Greengrass) ListDeviceDefinitionVersionsWithContext(ctx aws.Context, input *ListDeviceDefinitionVersionsInput, opts ...aws.Option) (*ListDeviceDefinitionVersionsOutput, error) {
 	req, out := c.ListDeviceDefinitionVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3690,7 +3689,7 @@ func (c *Greengrass) ListDeviceDefinitionVersionsWithContext(ctx aws.Context, in
 
 const opListDeviceDefinitions = "ListDeviceDefinitions"
 
-// ListDeviceDefinitionsRequest generates a "aws/request.Request" representing the
+// ListDeviceDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the ListDeviceDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3714,8 +3713,8 @@ const opListDeviceDefinitions = "ListDeviceDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitions
-func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput) (req *request.Request, output *ListDeviceDefinitionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsInput) (req *aws.Request, output *ListDeviceDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeviceDefinitions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/devices",
@@ -3755,7 +3754,7 @@ func (c *Greengrass) ListDeviceDefinitions(input *ListDeviceDefinitionsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListDeviceDefinitionsWithContext(ctx aws.Context, input *ListDeviceDefinitionsInput, opts ...request.Option) (*ListDeviceDefinitionsOutput, error) {
+func (c *Greengrass) ListDeviceDefinitionsWithContext(ctx aws.Context, input *ListDeviceDefinitionsInput, opts ...aws.Option) (*ListDeviceDefinitionsOutput, error) {
 	req, out := c.ListDeviceDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3764,7 +3763,7 @@ func (c *Greengrass) ListDeviceDefinitionsWithContext(ctx aws.Context, input *Li
 
 const opListFunctionDefinitionVersions = "ListFunctionDefinitionVersions"
 
-// ListFunctionDefinitionVersionsRequest generates a "aws/request.Request" representing the
+// ListFunctionDefinitionVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListFunctionDefinitionVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3788,8 +3787,8 @@ const opListFunctionDefinitionVersions = "ListFunctionDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersions
-func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDefinitionVersionsInput) (req *request.Request, output *ListFunctionDefinitionVersionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDefinitionVersionsInput) (req *aws.Request, output *ListFunctionDefinitionVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListFunctionDefinitionVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/functions/{FunctionDefinitionId}/versions",
@@ -3834,7 +3833,7 @@ func (c *Greengrass) ListFunctionDefinitionVersions(input *ListFunctionDefinitio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListFunctionDefinitionVersionsWithContext(ctx aws.Context, input *ListFunctionDefinitionVersionsInput, opts ...request.Option) (*ListFunctionDefinitionVersionsOutput, error) {
+func (c *Greengrass) ListFunctionDefinitionVersionsWithContext(ctx aws.Context, input *ListFunctionDefinitionVersionsInput, opts ...aws.Option) (*ListFunctionDefinitionVersionsOutput, error) {
 	req, out := c.ListFunctionDefinitionVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3843,7 +3842,7 @@ func (c *Greengrass) ListFunctionDefinitionVersionsWithContext(ctx aws.Context, 
 
 const opListFunctionDefinitions = "ListFunctionDefinitions"
 
-// ListFunctionDefinitionsRequest generates a "aws/request.Request" representing the
+// ListFunctionDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the ListFunctionDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3867,8 +3866,8 @@ const opListFunctionDefinitions = "ListFunctionDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitions
-func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitionsInput) (req *request.Request, output *ListFunctionDefinitionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitionsInput) (req *aws.Request, output *ListFunctionDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opListFunctionDefinitions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/functions",
@@ -3908,7 +3907,7 @@ func (c *Greengrass) ListFunctionDefinitions(input *ListFunctionDefinitionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListFunctionDefinitionsWithContext(ctx aws.Context, input *ListFunctionDefinitionsInput, opts ...request.Option) (*ListFunctionDefinitionsOutput, error) {
+func (c *Greengrass) ListFunctionDefinitionsWithContext(ctx aws.Context, input *ListFunctionDefinitionsInput, opts ...aws.Option) (*ListFunctionDefinitionsOutput, error) {
 	req, out := c.ListFunctionDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3917,7 +3916,7 @@ func (c *Greengrass) ListFunctionDefinitionsWithContext(ctx aws.Context, input *
 
 const opListGroupCertificateAuthorities = "ListGroupCertificateAuthorities"
 
-// ListGroupCertificateAuthoritiesRequest generates a "aws/request.Request" representing the
+// ListGroupCertificateAuthoritiesRequest generates a "aws.Request" representing the
 // client's request for the ListGroupCertificateAuthorities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3941,8 +3940,8 @@ const opListGroupCertificateAuthorities = "ListGroupCertificateAuthorities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthorities
-func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCertificateAuthoritiesInput) (req *request.Request, output *ListGroupCertificateAuthoritiesOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCertificateAuthoritiesInput) (req *aws.Request, output *ListGroupCertificateAuthoritiesOutput) {
+	op := &aws.Operation{
 		Name:       opListGroupCertificateAuthorities,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/certificateauthorities",
@@ -3990,7 +3989,7 @@ func (c *Greengrass) ListGroupCertificateAuthorities(input *ListGroupCertificate
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListGroupCertificateAuthoritiesWithContext(ctx aws.Context, input *ListGroupCertificateAuthoritiesInput, opts ...request.Option) (*ListGroupCertificateAuthoritiesOutput, error) {
+func (c *Greengrass) ListGroupCertificateAuthoritiesWithContext(ctx aws.Context, input *ListGroupCertificateAuthoritiesInput, opts ...aws.Option) (*ListGroupCertificateAuthoritiesOutput, error) {
 	req, out := c.ListGroupCertificateAuthoritiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3999,7 +3998,7 @@ func (c *Greengrass) ListGroupCertificateAuthoritiesWithContext(ctx aws.Context,
 
 const opListGroupVersions = "ListGroupVersions"
 
-// ListGroupVersionsRequest generates a "aws/request.Request" representing the
+// ListGroupVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListGroupVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4023,8 +4022,8 @@ const opListGroupVersions = "ListGroupVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersions
-func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) (req *request.Request, output *ListGroupVersionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) (req *aws.Request, output *ListGroupVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListGroupVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups/{GroupId}/versions",
@@ -4069,7 +4068,7 @@ func (c *Greengrass) ListGroupVersions(input *ListGroupVersionsInput) (*ListGrou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListGroupVersionsWithContext(ctx aws.Context, input *ListGroupVersionsInput, opts ...request.Option) (*ListGroupVersionsOutput, error) {
+func (c *Greengrass) ListGroupVersionsWithContext(ctx aws.Context, input *ListGroupVersionsInput, opts ...aws.Option) (*ListGroupVersionsOutput, error) {
 	req, out := c.ListGroupVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4078,7 +4077,7 @@ func (c *Greengrass) ListGroupVersionsWithContext(ctx aws.Context, input *ListGr
 
 const opListGroups = "ListGroups"
 
-// ListGroupsRequest generates a "aws/request.Request" representing the
+// ListGroupsRequest generates a "aws.Request" representing the
 // client's request for the ListGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4102,8 +4101,8 @@ const opListGroups = "ListGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroups
-func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) (req *request.Request, output *ListGroupsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) (req *aws.Request, output *ListGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opListGroups,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/groups",
@@ -4143,7 +4142,7 @@ func (c *Greengrass) ListGroups(input *ListGroupsInput) (*ListGroupsOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInput, opts ...request.Option) (*ListGroupsOutput, error) {
+func (c *Greengrass) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInput, opts ...aws.Option) (*ListGroupsOutput, error) {
 	req, out := c.ListGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4152,7 +4151,7 @@ func (c *Greengrass) ListGroupsWithContext(ctx aws.Context, input *ListGroupsInp
 
 const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
 
-// ListLoggerDefinitionVersionsRequest generates a "aws/request.Request" representing the
+// ListLoggerDefinitionVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListLoggerDefinitionVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4176,8 +4175,8 @@ const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersions
-func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinitionVersionsInput) (req *request.Request, output *ListLoggerDefinitionVersionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefinitionVersionsInput) (req *aws.Request, output *ListLoggerDefinitionVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListLoggerDefinitionVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/loggers/{LoggerDefinitionId}/versions",
@@ -4222,7 +4221,7 @@ func (c *Greengrass) ListLoggerDefinitionVersions(input *ListLoggerDefinitionVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListLoggerDefinitionVersionsWithContext(ctx aws.Context, input *ListLoggerDefinitionVersionsInput, opts ...request.Option) (*ListLoggerDefinitionVersionsOutput, error) {
+func (c *Greengrass) ListLoggerDefinitionVersionsWithContext(ctx aws.Context, input *ListLoggerDefinitionVersionsInput, opts ...aws.Option) (*ListLoggerDefinitionVersionsOutput, error) {
 	req, out := c.ListLoggerDefinitionVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4231,7 +4230,7 @@ func (c *Greengrass) ListLoggerDefinitionVersionsWithContext(ctx aws.Context, in
 
 const opListLoggerDefinitions = "ListLoggerDefinitions"
 
-// ListLoggerDefinitionsRequest generates a "aws/request.Request" representing the
+// ListLoggerDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the ListLoggerDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4255,8 +4254,8 @@ const opListLoggerDefinitions = "ListLoggerDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitions
-func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput) (req *request.Request, output *ListLoggerDefinitionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsInput) (req *aws.Request, output *ListLoggerDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opListLoggerDefinitions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/loggers",
@@ -4296,7 +4295,7 @@ func (c *Greengrass) ListLoggerDefinitions(input *ListLoggerDefinitionsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListLoggerDefinitionsWithContext(ctx aws.Context, input *ListLoggerDefinitionsInput, opts ...request.Option) (*ListLoggerDefinitionsOutput, error) {
+func (c *Greengrass) ListLoggerDefinitionsWithContext(ctx aws.Context, input *ListLoggerDefinitionsInput, opts ...aws.Option) (*ListLoggerDefinitionsOutput, error) {
 	req, out := c.ListLoggerDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4305,7 +4304,7 @@ func (c *Greengrass) ListLoggerDefinitionsWithContext(ctx aws.Context, input *Li
 
 const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions"
 
-// ListSubscriptionDefinitionVersionsRequest generates a "aws/request.Request" representing the
+// ListSubscriptionDefinitionVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListSubscriptionDefinitionVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4329,8 +4328,8 @@ const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersions
-func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscriptionDefinitionVersionsInput) (req *request.Request, output *ListSubscriptionDefinitionVersionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscriptionDefinitionVersionsInput) (req *aws.Request, output *ListSubscriptionDefinitionVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListSubscriptionDefinitionVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions",
@@ -4375,7 +4374,7 @@ func (c *Greengrass) ListSubscriptionDefinitionVersions(input *ListSubscriptionD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListSubscriptionDefinitionVersionsWithContext(ctx aws.Context, input *ListSubscriptionDefinitionVersionsInput, opts ...request.Option) (*ListSubscriptionDefinitionVersionsOutput, error) {
+func (c *Greengrass) ListSubscriptionDefinitionVersionsWithContext(ctx aws.Context, input *ListSubscriptionDefinitionVersionsInput, opts ...aws.Option) (*ListSubscriptionDefinitionVersionsOutput, error) {
 	req, out := c.ListSubscriptionDefinitionVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4384,7 +4383,7 @@ func (c *Greengrass) ListSubscriptionDefinitionVersionsWithContext(ctx aws.Conte
 
 const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
 
-// ListSubscriptionDefinitionsRequest generates a "aws/request.Request" representing the
+// ListSubscriptionDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the ListSubscriptionDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4408,8 +4407,8 @@ const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitions
-func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefinitionsInput) (req *request.Request, output *ListSubscriptionDefinitionsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionDefinitionsInput) (req *aws.Request, output *ListSubscriptionDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opListSubscriptionDefinitions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/greengrass/definition/subscriptions",
@@ -4449,7 +4448,7 @@ func (c *Greengrass) ListSubscriptionDefinitions(input *ListSubscriptionDefiniti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ListSubscriptionDefinitionsWithContext(ctx aws.Context, input *ListSubscriptionDefinitionsInput, opts ...request.Option) (*ListSubscriptionDefinitionsOutput, error) {
+func (c *Greengrass) ListSubscriptionDefinitionsWithContext(ctx aws.Context, input *ListSubscriptionDefinitionsInput, opts ...aws.Option) (*ListSubscriptionDefinitionsOutput, error) {
 	req, out := c.ListSubscriptionDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4458,7 +4457,7 @@ func (c *Greengrass) ListSubscriptionDefinitionsWithContext(ctx aws.Context, inp
 
 const opResetDeployments = "ResetDeployments"
 
-// ResetDeploymentsRequest generates a "aws/request.Request" representing the
+// ResetDeploymentsRequest generates a "aws.Request" representing the
 // client's request for the ResetDeployments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4482,8 +4481,8 @@ const opResetDeployments = "ResetDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeployments
-func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) (req *request.Request, output *ResetDeploymentsOutput) {
-	op := &request.Operation{
+func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) (req *aws.Request, output *ResetDeploymentsOutput) {
+	op := &aws.Operation{
 		Name:       opResetDeployments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/greengrass/groups/{GroupId}/deployments/$reset",
@@ -4528,7 +4527,7 @@ func (c *Greengrass) ResetDeployments(input *ResetDeploymentsInput) (*ResetDeplo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) ResetDeploymentsWithContext(ctx aws.Context, input *ResetDeploymentsInput, opts ...request.Option) (*ResetDeploymentsOutput, error) {
+func (c *Greengrass) ResetDeploymentsWithContext(ctx aws.Context, input *ResetDeploymentsInput, opts ...aws.Option) (*ResetDeploymentsOutput, error) {
 	req, out := c.ResetDeploymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4537,7 +4536,7 @@ func (c *Greengrass) ResetDeploymentsWithContext(ctx aws.Context, input *ResetDe
 
 const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
 
-// UpdateConnectivityInfoRequest generates a "aws/request.Request" representing the
+// UpdateConnectivityInfoRequest generates a "aws.Request" representing the
 // client's request for the UpdateConnectivityInfo operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4561,8 +4560,8 @@ const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfo
-func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInput) (req *request.Request, output *UpdateConnectivityInfoOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfoInput) (req *aws.Request, output *UpdateConnectivityInfoOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateConnectivityInfo,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/things/{ThingName}/connectivityInfo",
@@ -4612,7 +4611,7 @@ func (c *Greengrass) UpdateConnectivityInfo(input *UpdateConnectivityInfoInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateConnectivityInfoWithContext(ctx aws.Context, input *UpdateConnectivityInfoInput, opts ...request.Option) (*UpdateConnectivityInfoOutput, error) {
+func (c *Greengrass) UpdateConnectivityInfoWithContext(ctx aws.Context, input *UpdateConnectivityInfoInput, opts ...aws.Option) (*UpdateConnectivityInfoOutput, error) {
 	req, out := c.UpdateConnectivityInfoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4621,7 +4620,7 @@ func (c *Greengrass) UpdateConnectivityInfoWithContext(ctx aws.Context, input *U
 
 const opUpdateCoreDefinition = "UpdateCoreDefinition"
 
-// UpdateCoreDefinitionRequest generates a "aws/request.Request" representing the
+// UpdateCoreDefinitionRequest generates a "aws.Request" representing the
 // client's request for the UpdateCoreDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4645,8 +4644,8 @@ const opUpdateCoreDefinition = "UpdateCoreDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinition
-func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) (req *request.Request, output *UpdateCoreDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInput) (req *aws.Request, output *UpdateCoreDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCoreDefinition,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/definition/cores/{CoreDefinitionId}",
@@ -4691,7 +4690,7 @@ func (c *Greengrass) UpdateCoreDefinition(input *UpdateCoreDefinitionInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateCoreDefinitionWithContext(ctx aws.Context, input *UpdateCoreDefinitionInput, opts ...request.Option) (*UpdateCoreDefinitionOutput, error) {
+func (c *Greengrass) UpdateCoreDefinitionWithContext(ctx aws.Context, input *UpdateCoreDefinitionInput, opts ...aws.Option) (*UpdateCoreDefinitionOutput, error) {
 	req, out := c.UpdateCoreDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4700,7 +4699,7 @@ func (c *Greengrass) UpdateCoreDefinitionWithContext(ctx aws.Context, input *Upd
 
 const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
 
-// UpdateDeviceDefinitionRequest generates a "aws/request.Request" representing the
+// UpdateDeviceDefinitionRequest generates a "aws.Request" representing the
 // client's request for the UpdateDeviceDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4724,8 +4723,8 @@ const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinition
-func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInput) (req *request.Request, output *UpdateDeviceDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinitionInput) (req *aws.Request, output *UpdateDeviceDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDeviceDefinition,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/definition/devices/{DeviceDefinitionId}",
@@ -4770,7 +4769,7 @@ func (c *Greengrass) UpdateDeviceDefinition(input *UpdateDeviceDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateDeviceDefinitionWithContext(ctx aws.Context, input *UpdateDeviceDefinitionInput, opts ...request.Option) (*UpdateDeviceDefinitionOutput, error) {
+func (c *Greengrass) UpdateDeviceDefinitionWithContext(ctx aws.Context, input *UpdateDeviceDefinitionInput, opts ...aws.Option) (*UpdateDeviceDefinitionOutput, error) {
 	req, out := c.UpdateDeviceDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4779,7 +4778,7 @@ func (c *Greengrass) UpdateDeviceDefinitionWithContext(ctx aws.Context, input *U
 
 const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
 
-// UpdateFunctionDefinitionRequest generates a "aws/request.Request" representing the
+// UpdateFunctionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the UpdateFunctionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4803,8 +4802,8 @@ const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinition
-func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinitionInput) (req *request.Request, output *UpdateFunctionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefinitionInput) (req *aws.Request, output *UpdateFunctionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFunctionDefinition,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/definition/functions/{FunctionDefinitionId}",
@@ -4849,7 +4848,7 @@ func (c *Greengrass) UpdateFunctionDefinition(input *UpdateFunctionDefinitionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateFunctionDefinitionWithContext(ctx aws.Context, input *UpdateFunctionDefinitionInput, opts ...request.Option) (*UpdateFunctionDefinitionOutput, error) {
+func (c *Greengrass) UpdateFunctionDefinitionWithContext(ctx aws.Context, input *UpdateFunctionDefinitionInput, opts ...aws.Option) (*UpdateFunctionDefinitionOutput, error) {
 	req, out := c.UpdateFunctionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4858,7 +4857,7 @@ func (c *Greengrass) UpdateFunctionDefinitionWithContext(ctx aws.Context, input 
 
 const opUpdateGroup = "UpdateGroup"
 
-// UpdateGroupRequest generates a "aws/request.Request" representing the
+// UpdateGroupRequest generates a "aws.Request" representing the
 // client's request for the UpdateGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4882,8 +4881,8 @@ const opUpdateGroup = "UpdateGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroup
-func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) (req *request.Request, output *UpdateGroupOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) (req *aws.Request, output *UpdateGroupOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGroup,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/groups/{GroupId}",
@@ -4928,7 +4927,7 @@ func (c *Greengrass) UpdateGroup(input *UpdateGroupInput) (*UpdateGroupOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupInput, opts ...request.Option) (*UpdateGroupOutput, error) {
+func (c *Greengrass) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupInput, opts ...aws.Option) (*UpdateGroupOutput, error) {
 	req, out := c.UpdateGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4937,7 +4936,7 @@ func (c *Greengrass) UpdateGroupWithContext(ctx aws.Context, input *UpdateGroupI
 
 const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfiguration"
 
-// UpdateGroupCertificateConfigurationRequest generates a "aws/request.Request" representing the
+// UpdateGroupCertificateConfigurationRequest generates a "aws.Request" representing the
 // client's request for the UpdateGroupCertificateConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4961,8 +4960,8 @@ const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfigurati
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfiguration
-func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCertificateConfigurationInput) (req *request.Request, output *UpdateGroupCertificateConfigurationOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGroupCertificateConfigurationInput) (req *aws.Request, output *UpdateGroupCertificateConfigurationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGroupCertificateConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/groups/{GroupId}/certificateauthorities/configuration/expiry",
@@ -5010,7 +5009,7 @@ func (c *Greengrass) UpdateGroupCertificateConfiguration(input *UpdateGroupCerti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateGroupCertificateConfigurationWithContext(ctx aws.Context, input *UpdateGroupCertificateConfigurationInput, opts ...request.Option) (*UpdateGroupCertificateConfigurationOutput, error) {
+func (c *Greengrass) UpdateGroupCertificateConfigurationWithContext(ctx aws.Context, input *UpdateGroupCertificateConfigurationInput, opts ...aws.Option) (*UpdateGroupCertificateConfigurationOutput, error) {
 	req, out := c.UpdateGroupCertificateConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5019,7 +5018,7 @@ func (c *Greengrass) UpdateGroupCertificateConfigurationWithContext(ctx aws.Cont
 
 const opUpdateLoggerDefinition = "UpdateLoggerDefinition"
 
-// UpdateLoggerDefinitionRequest generates a "aws/request.Request" representing the
+// UpdateLoggerDefinitionRequest generates a "aws.Request" representing the
 // client's request for the UpdateLoggerDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5043,8 +5042,8 @@ const opUpdateLoggerDefinition = "UpdateLoggerDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinition
-func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinitionInput) (req *request.Request, output *UpdateLoggerDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinitionInput) (req *aws.Request, output *UpdateLoggerDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateLoggerDefinition,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/definition/loggers/{LoggerDefinitionId}",
@@ -5089,7 +5088,7 @@ func (c *Greengrass) UpdateLoggerDefinition(input *UpdateLoggerDefinitionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateLoggerDefinitionWithContext(ctx aws.Context, input *UpdateLoggerDefinitionInput, opts ...request.Option) (*UpdateLoggerDefinitionOutput, error) {
+func (c *Greengrass) UpdateLoggerDefinitionWithContext(ctx aws.Context, input *UpdateLoggerDefinitionInput, opts ...aws.Option) (*UpdateLoggerDefinitionOutput, error) {
 	req, out := c.UpdateLoggerDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5098,7 +5097,7 @@ func (c *Greengrass) UpdateLoggerDefinitionWithContext(ctx aws.Context, input *U
 
 const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 
-// UpdateSubscriptionDefinitionRequest generates a "aws/request.Request" representing the
+// UpdateSubscriptionDefinitionRequest generates a "aws.Request" representing the
 // client's request for the UpdateSubscriptionDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5122,8 +5121,8 @@ const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinition
-func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDefinitionInput) (req *request.Request, output *UpdateSubscriptionDefinitionOutput) {
-	op := &request.Operation{
+func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscriptionDefinitionInput) (req *aws.Request, output *UpdateSubscriptionDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSubscriptionDefinition,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}",
@@ -5168,7 +5167,7 @@ func (c *Greengrass) UpdateSubscriptionDefinition(input *UpdateSubscriptionDefin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Greengrass) UpdateSubscriptionDefinitionWithContext(ctx aws.Context, input *UpdateSubscriptionDefinitionInput, opts ...request.Option) (*UpdateSubscriptionDefinitionOutput, error) {
+func (c *Greengrass) UpdateSubscriptionDefinitionWithContext(ctx aws.Context, input *UpdateSubscriptionDefinitionInput, opts ...aws.Option) (*UpdateSubscriptionDefinitionOutput, error) {
 	req, out := c.UpdateSubscriptionDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5198,9 +5197,9 @@ func (s AssociateRoleToGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateRoleToGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateRoleToGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateRoleToGroupInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5558,9 +5557,9 @@ func (s CreateCoreDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCoreDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCoreDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCoreDefinitionVersionInput"}
 	if s.CoreDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5667,9 +5666,9 @@ func (s CreateDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5876,9 +5875,9 @@ func (s CreateDeviceDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeviceDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeviceDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeviceDefinitionVersionInput"}
 	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6087,9 +6086,9 @@ func (s CreateFunctionDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFunctionDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFunctionDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionDefinitionVersionInput"}
 	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6185,9 +6184,9 @@ func (s CreateGroupCertificateAuthorityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupCertificateAuthorityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGroupCertificateAuthorityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupCertificateAuthorityInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6375,9 +6374,9 @@ func (s CreateGroupVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGroupVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGroupVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGroupVersionInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6610,9 +6609,9 @@ func (s CreateLoggerDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoggerDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLoggerDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLoggerDefinitionVersionInput"}
 	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6821,9 +6820,9 @@ func (s CreateSubscriptionDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSubscriptionDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSubscriptionDefinitionVersionInput"}
 	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6996,9 +6995,9 @@ func (s DeleteCoreDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCoreDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCoreDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCoreDefinitionInput"}
 	if s.CoreDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7048,9 +7047,9 @@ func (s DeleteDeviceDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeviceDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDeviceDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeviceDefinitionInput"}
 	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7100,9 +7099,9 @@ func (s DeleteFunctionDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFunctionDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFunctionDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionDefinitionInput"}
 	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7152,9 +7151,9 @@ func (s DeleteGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGroupInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7204,9 +7203,9 @@ func (s DeleteLoggerDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoggerDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLoggerDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoggerDefinitionInput"}
 	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7256,9 +7255,9 @@ func (s DeleteSubscriptionDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSubscriptionDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSubscriptionDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSubscriptionDefinitionInput"}
 	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7447,9 +7446,9 @@ func (s DisassociateRoleFromGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateRoleFromGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateRoleFromGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateRoleFromGroupInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7745,9 +7744,9 @@ func (s GetAssociatedRoleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAssociatedRoleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAssociatedRoleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAssociatedRoleInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7815,9 +7814,9 @@ func (s GetConnectivityInfoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConnectivityInfoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetConnectivityInfoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetConnectivityInfoInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7885,9 +7884,9 @@ func (s GetCoreDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCoreDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCoreDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCoreDefinitionInput"}
 	if s.CoreDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7996,12 +7995,12 @@ func (s GetCoreDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCoreDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCoreDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCoreDefinitionVersionInput"}
 	if s.CoreDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
 	if s.CoreDefinitionVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8105,12 +8104,12 @@ func (s GetDeploymentStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeploymentStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeploymentStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeploymentStatusInput"}
 	if s.DeploymentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeploymentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentId"))
 	}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8212,9 +8211,9 @@ func (s GetDeviceDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeviceDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceDefinitionInput"}
 	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8323,12 +8322,12 @@ func (s GetDeviceDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeviceDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceDefinitionVersionInput"}
 	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
 	if s.DeviceDefinitionVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8429,9 +8428,9 @@ func (s GetFunctionDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFunctionDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionDefinitionInput"}
 	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8540,12 +8539,12 @@ func (s GetFunctionDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFunctionDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionDefinitionVersionInput"}
 	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
 	if s.FunctionDefinitionVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8650,12 +8649,12 @@ func (s GetGroupCertificateAuthorityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupCertificateAuthorityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGroupCertificateAuthorityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupCertificateAuthorityInput"}
 	if s.CertificateAuthorityId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateAuthorityId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityId"))
 	}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8739,9 +8738,9 @@ func (s GetGroupCertificateConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupCertificateConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGroupCertificateConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupCertificateConfigurationInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8815,9 +8814,9 @@ func (s GetGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8926,12 +8925,12 @@ func (s GetGroupVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGroupVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGroupVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGroupVersionInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 	if s.GroupVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9033,9 +9032,9 @@ func (s GetLoggerDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLoggerDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetLoggerDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetLoggerDefinitionInput"}
 	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9144,12 +9143,12 @@ func (s GetLoggerDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetLoggerDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetLoggerDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetLoggerDefinitionVersionInput"}
 	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
 	if s.LoggerDefinitionVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9299,9 +9298,9 @@ func (s GetSubscriptionDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSubscriptionDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSubscriptionDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionDefinitionInput"}
 	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9410,12 +9409,12 @@ func (s GetSubscriptionDefinitionVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSubscriptionDefinitionVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSubscriptionDefinitionVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSubscriptionDefinitionVersionInput"}
 	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
 	if s.SubscriptionDefinitionVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9695,9 +9694,9 @@ func (s ListCoreDefinitionVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCoreDefinitionVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCoreDefinitionVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCoreDefinitionVersionsInput"}
 	if s.CoreDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9841,9 +9840,9 @@ func (s ListDeploymentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeploymentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeploymentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeploymentsInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9928,9 +9927,9 @@ func (s ListDeviceDefinitionVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeviceDefinitionVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeviceDefinitionVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeviceDefinitionVersionsInput"}
 	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10074,9 +10073,9 @@ func (s ListFunctionDefinitionVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFunctionDefinitionVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFunctionDefinitionVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFunctionDefinitionVersionsInput"}
 	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10216,9 +10215,9 @@ func (s ListGroupCertificateAuthoritiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGroupCertificateAuthoritiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListGroupCertificateAuthoritiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListGroupCertificateAuthoritiesInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10281,9 +10280,9 @@ func (s ListGroupVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListGroupVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListGroupVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListGroupVersionsInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10430,9 +10429,9 @@ func (s ListLoggerDefinitionVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListLoggerDefinitionVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListLoggerDefinitionVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListLoggerDefinitionVersionsInput"}
 	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10576,9 +10575,9 @@ func (s ListSubscriptionDefinitionVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSubscriptionDefinitionVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSubscriptionDefinitionVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSubscriptionDefinitionVersionsInput"}
 	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10811,9 +10810,9 @@ func (s ResetDeploymentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetDeploymentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetDeploymentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetDeploymentsInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10974,9 +10973,9 @@ func (s UpdateConnectivityInfoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConnectivityInfoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConnectivityInfoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConnectivityInfoInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11051,9 +11050,9 @@ func (s UpdateCoreDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCoreDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCoreDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCoreDefinitionInput"}
 	if s.CoreDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CoreDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CoreDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11111,9 +11110,9 @@ func (s UpdateDeviceDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDeviceDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDeviceDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceDefinitionInput"}
 	if s.DeviceDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11171,9 +11170,9 @@ func (s UpdateFunctionDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFunctionDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFunctionDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionDefinitionInput"}
 	if s.FunctionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11232,9 +11231,9 @@ func (s UpdateGroupCertificateConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupCertificateConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGroupCertificateConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupCertificateConfigurationInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11316,9 +11315,9 @@ func (s UpdateGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGroupInput"}
 	if s.GroupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("GroupId"))
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11376,9 +11375,9 @@ func (s UpdateLoggerDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateLoggerDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateLoggerDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateLoggerDefinitionInput"}
 	if s.LoggerDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggerDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggerDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11436,9 +11435,9 @@ func (s UpdateSubscriptionDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSubscriptionDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSubscriptionDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSubscriptionDefinitionInput"}
 	if s.SubscriptionDefinitionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionDefinitionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionDefinitionId"))
 	}
 
 	if invalidParams.Len() > 0 {

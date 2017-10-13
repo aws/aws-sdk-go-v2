@@ -2,8 +2,29 @@ package external
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 )
+
+// DefaultConfigLoaders are a slice of functions that will read external configuration
+// sources for configuration values. These values are read by the AWSConfigResolvers
+// using interfaces to extract specific information from the external configuration.
+var DefaultConfigLoaders = []ConfigLoader{
+	LoadEnvConfig,
+	LoadSharedConfig,
+}
+
+// DefaultAWSConfigResolvers are a slice of functions that will resolve external
+// configuration values into AWS configuration values.
+//
+// This will setup the AWS configuration's Region,
+var DefaultAWSConfigResolvers = []AWSConfigResolver{
+	ResolveDefaultAWSConfig,
+	ResolveCustomCABundle,
+	ResolveRegion,
+	ResolveCredentialsValue,
+	ResolveEndpointCredentials,
+	ResolveAssumeRoleCredentials,
+	ResolveFallbackEC2Credentials,
+}
 
 // A Config represents a generic configuration value or set of values. This type
 // will be used by the AWSConfigResolvers to extract
@@ -76,28 +97,6 @@ func (cs Configs) ResolveAWSConfig(resolvers []AWSConfigResolver) (aws.Config, e
 	return cfg, nil
 }
 
-// DefaultConfigLoaders are a slice of functions that will read external configuration
-// sources for configuration values. These values are read by the AWSConfigResolvers
-// using interfaces to extract specific information from the external configuration.
-var DefaultConfigLoaders = []ConfigLoader{
-	LoadEnvConfig,
-	LoadSharedConfig,
-}
-
-// DefaultAWSConfigResolvers are a slice of functions that will resolve external
-// configuration values into AWS configuration values.
-//
-// This will setup the AWS configuration's Region,
-var DefaultAWSConfigResolvers = []AWSConfigResolver{
-	ResolveDefaultAWSConfig,
-	ResolveCustomCABundle,
-	ResolveRegion,
-	ResolveCredentialsValue,
-	ResolveEndpointCredentials,
-	ResolveAssumeRoleCredentials,
-	ResolveFallbackEC2Credentials,
-}
-
 // LoadDefaultAWSConfig reads the SDK's default external configurations, and
 // populates an AWS Config with the values from the external configurations.
 //
@@ -140,9 +139,9 @@ func (v WithRegion) GetRegion() (string, error) {
 
 // WithCredentialsValue provides wrapping of a credentials Value to satisfy the
 // CredentialsValueProvider interface.
-type WithCredentialsValue credentials.Value
+type WithCredentialsValue aws.Value
 
 // GetCredentialsValue returns the credentials value.
-func (v WithCredentialsValue) GetCredentialsValue() (credentials.Value, error) {
-	return credentials.Value(v), nil
+func (v WithCredentialsValue) GetCredentialsValue() (aws.Value, error) {
+	return aws.Value(v), nil
 }

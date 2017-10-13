@@ -16,7 +16,7 @@ import (
 )
 
 func TestBuildKMSEncryptHandler(t *testing.T) {
-	svc := kms.New(unit.Session)
+	svc := kms.New(unit.Config)
 	handler := NewKMSKeyGenerator(svc, "testid")
 	if handler == nil {
 		t.Error("expected non-nil handler")
@@ -24,7 +24,7 @@ func TestBuildKMSEncryptHandler(t *testing.T) {
 }
 
 func TestBuildKMSEncryptHandlerWithMatDesc(t *testing.T) {
-	svc := kms.New(unit.Session)
+	svc := kms.New(unit.Config)
 	handler := NewKMSKeyGeneratorWithMatDesc(svc, "testid", MaterialDescription{
 		"Testing": aws.String("123"),
 	})
@@ -48,15 +48,15 @@ func TestKMSGenerateCipherData(t *testing.T) {
 		fmt.Fprintln(w, `{"CiphertextBlob":"AQEDAHhqBCCY1MSimw8gOGcUma79cn4ANvTtQyv9iuBdbcEF1QAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDJ6IcN5E4wVbk38MNAIBEIA7oF1E3lS7FY9DkoxPc/UmJsEwHzL82zMqoLwXIvi8LQHr8If4Lv6zKqY8u0+JRgSVoqCvZDx3p8Cn6nM=","KeyId":"arn:aws:kms:us-west-2:042062605278:key/c80a5cdb-8d09-4f9f-89ee-df01b2e3870a","Plaintext":"6tmyz9JLBE2yIuU7iXpArqpDVle172WSmxjcO6GNT7E="}`)
 	}))
 
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		Endpoint:         aws.String(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
 	})
 
-	svc := kms.New(sess)
+	svc := kms.New(cfg)
 	handler := NewKMSKeyGenerator(svc, "testid")
 
 	keySize := 32
@@ -81,14 +81,14 @@ func TestKMSDecrypt(t *testing.T) {
 		fmt.Fprintln(w, fmt.Sprintf("%s%s%s", `{"KeyId":"test-key-id","Plaintext":"`, keyB64, `"}`))
 	}))
 
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		Endpoint:         aws.String(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
 	})
-	handler, err := (kmsKeyHandler{kms: kms.New(sess)}).decryptHandler(Envelope{MatDesc: `{"kms_cmk_id":"test"}`})
+	handler, err := (kmsKeyHandler{kms: kms.New(cfg)}).decryptHandler(Envelope{MatDesc: `{"kms_cmk_id":"test"}`})
 	if err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
@@ -110,15 +110,15 @@ func TestKMSDecryptBadJSON(t *testing.T) {
 		fmt.Fprintln(w, fmt.Sprintf("%s%s%s", `{"KeyId":"test-key-id","Plaintext":"`, keyB64, `"}`))
 	}))
 
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		Endpoint:         aws.String(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
 	})
 
-	_, err := (kmsKeyHandler{kms: kms.New(sess)}).decryptHandler(Envelope{MatDesc: `{"kms_cmk_id":"test"`})
+	_, err := (kmsKeyHandler{kms: kms.New(cfg)}).decryptHandler(Envelope{MatDesc: `{"kms_cmk_id":"test"`})
 	if err == nil {
 		t.Errorf("expected error, but received none")
 	}

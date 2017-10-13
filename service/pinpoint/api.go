@@ -4,13 +4,12 @@ package pinpoint
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateApp = "CreateApp"
 
-// CreateAppRequest generates a "aws/request.Request" representing the
+// CreateAppRequest generates a "aws.Request" representing the
 // client's request for the CreateApp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opCreateApp = "CreateApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp
-func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) (req *request.Request, output *CreateAppOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) (req *aws.Request, output *CreateAppOutput) {
+	op := &aws.Operation{
 		Name:       opCreateApp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps",
@@ -89,7 +88,7 @@ func (c *Pinpoint) CreateApp(input *CreateAppInput) (*CreateAppOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, opts ...request.Option) (*CreateAppOutput, error) {
+func (c *Pinpoint) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, opts ...aws.Option) (*CreateAppOutput, error) {
 	req, out := c.CreateAppRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -98,7 +97,7 @@ func (c *Pinpoint) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, 
 
 const opCreateCampaign = "CreateCampaign"
 
-// CreateCampaignRequest generates a "aws/request.Request" representing the
+// CreateCampaignRequest generates a "aws.Request" representing the
 // client's request for the CreateCampaign operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -122,8 +121,8 @@ const opCreateCampaign = "CreateCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateCampaign
-func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) (req *request.Request, output *CreateCampaignOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) (req *aws.Request, output *CreateCampaignOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCampaign,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns",
@@ -177,7 +176,7 @@ func (c *Pinpoint) CreateCampaign(input *CreateCampaignInput) (*CreateCampaignOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) CreateCampaignWithContext(ctx aws.Context, input *CreateCampaignInput, opts ...request.Option) (*CreateCampaignOutput, error) {
+func (c *Pinpoint) CreateCampaignWithContext(ctx aws.Context, input *CreateCampaignInput, opts ...aws.Option) (*CreateCampaignOutput, error) {
 	req, out := c.CreateCampaignRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -186,7 +185,7 @@ func (c *Pinpoint) CreateCampaignWithContext(ctx aws.Context, input *CreateCampa
 
 const opCreateImportJob = "CreateImportJob"
 
-// CreateImportJobRequest generates a "aws/request.Request" representing the
+// CreateImportJobRequest generates a "aws.Request" representing the
 // client's request for the CreateImportJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -210,8 +209,8 @@ const opCreateImportJob = "CreateImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJob
-func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) (req *request.Request, output *CreateImportJobOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) (req *aws.Request, output *CreateImportJobOutput) {
+	op := &aws.Operation{
 		Name:       opCreateImportJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps/{application-id}/jobs/import",
@@ -265,7 +264,7 @@ func (c *Pinpoint) CreateImportJob(input *CreateImportJobInput) (*CreateImportJo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) CreateImportJobWithContext(ctx aws.Context, input *CreateImportJobInput, opts ...request.Option) (*CreateImportJobOutput, error) {
+func (c *Pinpoint) CreateImportJobWithContext(ctx aws.Context, input *CreateImportJobInput, opts ...aws.Option) (*CreateImportJobOutput, error) {
 	req, out := c.CreateImportJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -274,7 +273,7 @@ func (c *Pinpoint) CreateImportJobWithContext(ctx aws.Context, input *CreateImpo
 
 const opCreateSegment = "CreateSegment"
 
-// CreateSegmentRequest generates a "aws/request.Request" representing the
+// CreateSegmentRequest generates a "aws.Request" representing the
 // client's request for the CreateSegment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -298,8 +297,8 @@ const opCreateSegment = "CreateSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateSegment
-func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) (req *request.Request, output *CreateSegmentOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) (req *aws.Request, output *CreateSegmentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSegment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps/{application-id}/segments",
@@ -353,7 +352,7 @@ func (c *Pinpoint) CreateSegment(input *CreateSegmentInput) (*CreateSegmentOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) CreateSegmentWithContext(ctx aws.Context, input *CreateSegmentInput, opts ...request.Option) (*CreateSegmentOutput, error) {
+func (c *Pinpoint) CreateSegmentWithContext(ctx aws.Context, input *CreateSegmentInput, opts ...aws.Option) (*CreateSegmentOutput, error) {
 	req, out := c.CreateSegmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -362,7 +361,7 @@ func (c *Pinpoint) CreateSegmentWithContext(ctx aws.Context, input *CreateSegmen
 
 const opDeleteAdmChannel = "DeleteAdmChannel"
 
-// DeleteAdmChannelRequest generates a "aws/request.Request" representing the
+// DeleteAdmChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteAdmChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -386,8 +385,8 @@ const opDeleteAdmChannel = "DeleteAdmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteAdmChannel
-func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) (req *request.Request, output *DeleteAdmChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) (req *aws.Request, output *DeleteAdmChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAdmChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/adm",
@@ -441,7 +440,7 @@ func (c *Pinpoint) DeleteAdmChannel(input *DeleteAdmChannelInput) (*DeleteAdmCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteAdmChannelWithContext(ctx aws.Context, input *DeleteAdmChannelInput, opts ...request.Option) (*DeleteAdmChannelOutput, error) {
+func (c *Pinpoint) DeleteAdmChannelWithContext(ctx aws.Context, input *DeleteAdmChannelInput, opts ...aws.Option) (*DeleteAdmChannelOutput, error) {
 	req, out := c.DeleteAdmChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -450,7 +449,7 @@ func (c *Pinpoint) DeleteAdmChannelWithContext(ctx aws.Context, input *DeleteAdm
 
 const opDeleteApnsChannel = "DeleteApnsChannel"
 
-// DeleteApnsChannelRequest generates a "aws/request.Request" representing the
+// DeleteApnsChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteApnsChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -474,8 +473,8 @@ const opDeleteApnsChannel = "DeleteApnsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsChannel
-func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) (req *request.Request, output *DeleteApnsChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) (req *aws.Request, output *DeleteApnsChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApnsChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/apns",
@@ -529,7 +528,7 @@ func (c *Pinpoint) DeleteApnsChannel(input *DeleteApnsChannelInput) (*DeleteApns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteApnsChannelWithContext(ctx aws.Context, input *DeleteApnsChannelInput, opts ...request.Option) (*DeleteApnsChannelOutput, error) {
+func (c *Pinpoint) DeleteApnsChannelWithContext(ctx aws.Context, input *DeleteApnsChannelInput, opts ...aws.Option) (*DeleteApnsChannelOutput, error) {
 	req, out := c.DeleteApnsChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -538,7 +537,7 @@ func (c *Pinpoint) DeleteApnsChannelWithContext(ctx aws.Context, input *DeleteAp
 
 const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 
-// DeleteApnsSandboxChannelRequest generates a "aws/request.Request" representing the
+// DeleteApnsSandboxChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteApnsSandboxChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -562,8 +561,8 @@ const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApnsSandboxChannel
-func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannelInput) (req *request.Request, output *DeleteApnsSandboxChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChannelInput) (req *aws.Request, output *DeleteApnsSandboxChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApnsSandboxChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/apns_sandbox",
@@ -617,7 +616,7 @@ func (c *Pinpoint) DeleteApnsSandboxChannel(input *DeleteApnsSandboxChannelInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteApnsSandboxChannelWithContext(ctx aws.Context, input *DeleteApnsSandboxChannelInput, opts ...request.Option) (*DeleteApnsSandboxChannelOutput, error) {
+func (c *Pinpoint) DeleteApnsSandboxChannelWithContext(ctx aws.Context, input *DeleteApnsSandboxChannelInput, opts ...aws.Option) (*DeleteApnsSandboxChannelOutput, error) {
 	req, out := c.DeleteApnsSandboxChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -626,7 +625,7 @@ func (c *Pinpoint) DeleteApnsSandboxChannelWithContext(ctx aws.Context, input *D
 
 const opDeleteApp = "DeleteApp"
 
-// DeleteAppRequest generates a "aws/request.Request" representing the
+// DeleteAppRequest generates a "aws.Request" representing the
 // client's request for the DeleteApp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -650,8 +649,8 @@ const opDeleteApp = "DeleteApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp
-func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) (req *request.Request, output *DeleteAppOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) (req *aws.Request, output *DeleteAppOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApp,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}",
@@ -705,7 +704,7 @@ func (c *Pinpoint) DeleteApp(input *DeleteAppInput) (*DeleteAppOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, opts ...request.Option) (*DeleteAppOutput, error) {
+func (c *Pinpoint) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, opts ...aws.Option) (*DeleteAppOutput, error) {
 	req, out := c.DeleteAppRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -714,7 +713,7 @@ func (c *Pinpoint) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, 
 
 const opDeleteBaiduChannel = "DeleteBaiduChannel"
 
-// DeleteBaiduChannelRequest generates a "aws/request.Request" representing the
+// DeleteBaiduChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteBaiduChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -738,8 +737,8 @@ const opDeleteBaiduChannel = "DeleteBaiduChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteBaiduChannel
-func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) (req *request.Request, output *DeleteBaiduChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) (req *aws.Request, output *DeleteBaiduChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBaiduChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/baidu",
@@ -793,7 +792,7 @@ func (c *Pinpoint) DeleteBaiduChannel(input *DeleteBaiduChannelInput) (*DeleteBa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteBaiduChannelWithContext(ctx aws.Context, input *DeleteBaiduChannelInput, opts ...request.Option) (*DeleteBaiduChannelOutput, error) {
+func (c *Pinpoint) DeleteBaiduChannelWithContext(ctx aws.Context, input *DeleteBaiduChannelInput, opts ...aws.Option) (*DeleteBaiduChannelOutput, error) {
 	req, out := c.DeleteBaiduChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -802,7 +801,7 @@ func (c *Pinpoint) DeleteBaiduChannelWithContext(ctx aws.Context, input *DeleteB
 
 const opDeleteCampaign = "DeleteCampaign"
 
-// DeleteCampaignRequest generates a "aws/request.Request" representing the
+// DeleteCampaignRequest generates a "aws.Request" representing the
 // client's request for the DeleteCampaign operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -826,8 +825,8 @@ const opDeleteCampaign = "DeleteCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteCampaign
-func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) (req *request.Request, output *DeleteCampaignOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) (req *aws.Request, output *DeleteCampaignOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCampaign,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns/{campaign-id}",
@@ -881,7 +880,7 @@ func (c *Pinpoint) DeleteCampaign(input *DeleteCampaignInput) (*DeleteCampaignOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteCampaignWithContext(ctx aws.Context, input *DeleteCampaignInput, opts ...request.Option) (*DeleteCampaignOutput, error) {
+func (c *Pinpoint) DeleteCampaignWithContext(ctx aws.Context, input *DeleteCampaignInput, opts ...aws.Option) (*DeleteCampaignOutput, error) {
 	req, out := c.DeleteCampaignRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -890,7 +889,7 @@ func (c *Pinpoint) DeleteCampaignWithContext(ctx aws.Context, input *DeleteCampa
 
 const opDeleteEmailChannel = "DeleteEmailChannel"
 
-// DeleteEmailChannelRequest generates a "aws/request.Request" representing the
+// DeleteEmailChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteEmailChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -914,8 +913,8 @@ const opDeleteEmailChannel = "DeleteEmailChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEmailChannel
-func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) (req *request.Request, output *DeleteEmailChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) (req *aws.Request, output *DeleteEmailChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEmailChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/email",
@@ -969,7 +968,7 @@ func (c *Pinpoint) DeleteEmailChannel(input *DeleteEmailChannelInput) (*DeleteEm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteEmailChannelWithContext(ctx aws.Context, input *DeleteEmailChannelInput, opts ...request.Option) (*DeleteEmailChannelOutput, error) {
+func (c *Pinpoint) DeleteEmailChannelWithContext(ctx aws.Context, input *DeleteEmailChannelInput, opts ...aws.Option) (*DeleteEmailChannelOutput, error) {
 	req, out := c.DeleteEmailChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -978,7 +977,7 @@ func (c *Pinpoint) DeleteEmailChannelWithContext(ctx aws.Context, input *DeleteE
 
 const opDeleteEventStream = "DeleteEventStream"
 
-// DeleteEventStreamRequest generates a "aws/request.Request" representing the
+// DeleteEventStreamRequest generates a "aws.Request" representing the
 // client's request for the DeleteEventStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1002,8 +1001,8 @@ const opDeleteEventStream = "DeleteEventStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEventStream
-func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) (req *request.Request, output *DeleteEventStreamOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) (req *aws.Request, output *DeleteEventStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEventStream,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/eventstream",
@@ -1057,7 +1056,7 @@ func (c *Pinpoint) DeleteEventStream(input *DeleteEventStreamInput) (*DeleteEven
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteEventStreamWithContext(ctx aws.Context, input *DeleteEventStreamInput, opts ...request.Option) (*DeleteEventStreamOutput, error) {
+func (c *Pinpoint) DeleteEventStreamWithContext(ctx aws.Context, input *DeleteEventStreamInput, opts ...aws.Option) (*DeleteEventStreamOutput, error) {
 	req, out := c.DeleteEventStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1066,7 +1065,7 @@ func (c *Pinpoint) DeleteEventStreamWithContext(ctx aws.Context, input *DeleteEv
 
 const opDeleteGcmChannel = "DeleteGcmChannel"
 
-// DeleteGcmChannelRequest generates a "aws/request.Request" representing the
+// DeleteGcmChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteGcmChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1090,8 +1089,8 @@ const opDeleteGcmChannel = "DeleteGcmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteGcmChannel
-func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) (req *request.Request, output *DeleteGcmChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) (req *aws.Request, output *DeleteGcmChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteGcmChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/gcm",
@@ -1145,7 +1144,7 @@ func (c *Pinpoint) DeleteGcmChannel(input *DeleteGcmChannelInput) (*DeleteGcmCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteGcmChannelWithContext(ctx aws.Context, input *DeleteGcmChannelInput, opts ...request.Option) (*DeleteGcmChannelOutput, error) {
+func (c *Pinpoint) DeleteGcmChannelWithContext(ctx aws.Context, input *DeleteGcmChannelInput, opts ...aws.Option) (*DeleteGcmChannelOutput, error) {
 	req, out := c.DeleteGcmChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1154,7 +1153,7 @@ func (c *Pinpoint) DeleteGcmChannelWithContext(ctx aws.Context, input *DeleteGcm
 
 const opDeleteSegment = "DeleteSegment"
 
-// DeleteSegmentRequest generates a "aws/request.Request" representing the
+// DeleteSegmentRequest generates a "aws.Request" representing the
 // client's request for the DeleteSegment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1178,8 +1177,8 @@ const opDeleteSegment = "DeleteSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSegment
-func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) (req *request.Request, output *DeleteSegmentOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) (req *aws.Request, output *DeleteSegmentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSegment,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}",
@@ -1233,7 +1232,7 @@ func (c *Pinpoint) DeleteSegment(input *DeleteSegmentInput) (*DeleteSegmentOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteSegmentWithContext(ctx aws.Context, input *DeleteSegmentInput, opts ...request.Option) (*DeleteSegmentOutput, error) {
+func (c *Pinpoint) DeleteSegmentWithContext(ctx aws.Context, input *DeleteSegmentInput, opts ...aws.Option) (*DeleteSegmentOutput, error) {
 	req, out := c.DeleteSegmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1242,7 +1241,7 @@ func (c *Pinpoint) DeleteSegmentWithContext(ctx aws.Context, input *DeleteSegmen
 
 const opDeleteSmsChannel = "DeleteSmsChannel"
 
-// DeleteSmsChannelRequest generates a "aws/request.Request" representing the
+// DeleteSmsChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteSmsChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1266,8 +1265,8 @@ const opDeleteSmsChannel = "DeleteSmsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteSmsChannel
-func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) (req *request.Request, output *DeleteSmsChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) (req *aws.Request, output *DeleteSmsChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSmsChannel,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/v1/apps/{application-id}/channels/sms",
@@ -1321,7 +1320,7 @@ func (c *Pinpoint) DeleteSmsChannel(input *DeleteSmsChannelInput) (*DeleteSmsCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) DeleteSmsChannelWithContext(ctx aws.Context, input *DeleteSmsChannelInput, opts ...request.Option) (*DeleteSmsChannelOutput, error) {
+func (c *Pinpoint) DeleteSmsChannelWithContext(ctx aws.Context, input *DeleteSmsChannelInput, opts ...aws.Option) (*DeleteSmsChannelOutput, error) {
 	req, out := c.DeleteSmsChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1330,7 +1329,7 @@ func (c *Pinpoint) DeleteSmsChannelWithContext(ctx aws.Context, input *DeleteSms
 
 const opGetAdmChannel = "GetAdmChannel"
 
-// GetAdmChannelRequest generates a "aws/request.Request" representing the
+// GetAdmChannelRequest generates a "aws.Request" representing the
 // client's request for the GetAdmChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1354,8 +1353,8 @@ const opGetAdmChannel = "GetAdmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetAdmChannel
-func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) (req *request.Request, output *GetAdmChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) (req *aws.Request, output *GetAdmChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetAdmChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/adm",
@@ -1409,7 +1408,7 @@ func (c *Pinpoint) GetAdmChannel(input *GetAdmChannelInput) (*GetAdmChannelOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetAdmChannelWithContext(ctx aws.Context, input *GetAdmChannelInput, opts ...request.Option) (*GetAdmChannelOutput, error) {
+func (c *Pinpoint) GetAdmChannelWithContext(ctx aws.Context, input *GetAdmChannelInput, opts ...aws.Option) (*GetAdmChannelOutput, error) {
 	req, out := c.GetAdmChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1418,7 +1417,7 @@ func (c *Pinpoint) GetAdmChannelWithContext(ctx aws.Context, input *GetAdmChanne
 
 const opGetApnsChannel = "GetApnsChannel"
 
-// GetApnsChannelRequest generates a "aws/request.Request" representing the
+// GetApnsChannelRequest generates a "aws.Request" representing the
 // client's request for the GetApnsChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1442,8 +1441,8 @@ const opGetApnsChannel = "GetApnsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsChannel
-func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) (req *request.Request, output *GetApnsChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) (req *aws.Request, output *GetApnsChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetApnsChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/apns",
@@ -1497,7 +1496,7 @@ func (c *Pinpoint) GetApnsChannel(input *GetApnsChannelInput) (*GetApnsChannelOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetApnsChannelWithContext(ctx aws.Context, input *GetApnsChannelInput, opts ...request.Option) (*GetApnsChannelOutput, error) {
+func (c *Pinpoint) GetApnsChannelWithContext(ctx aws.Context, input *GetApnsChannelInput, opts ...aws.Option) (*GetApnsChannelOutput, error) {
 	req, out := c.GetApnsChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1506,7 +1505,7 @@ func (c *Pinpoint) GetApnsChannelWithContext(ctx aws.Context, input *GetApnsChan
 
 const opGetApnsSandboxChannel = "GetApnsSandboxChannel"
 
-// GetApnsSandboxChannelRequest generates a "aws/request.Request" representing the
+// GetApnsSandboxChannelRequest generates a "aws.Request" representing the
 // client's request for the GetApnsSandboxChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1530,8 +1529,8 @@ const opGetApnsSandboxChannel = "GetApnsSandboxChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApnsSandboxChannel
-func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInput) (req *request.Request, output *GetApnsSandboxChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInput) (req *aws.Request, output *GetApnsSandboxChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetApnsSandboxChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/apns_sandbox",
@@ -1585,7 +1584,7 @@ func (c *Pinpoint) GetApnsSandboxChannel(input *GetApnsSandboxChannelInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetApnsSandboxChannelWithContext(ctx aws.Context, input *GetApnsSandboxChannelInput, opts ...request.Option) (*GetApnsSandboxChannelOutput, error) {
+func (c *Pinpoint) GetApnsSandboxChannelWithContext(ctx aws.Context, input *GetApnsSandboxChannelInput, opts ...aws.Option) (*GetApnsSandboxChannelOutput, error) {
 	req, out := c.GetApnsSandboxChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1594,7 +1593,7 @@ func (c *Pinpoint) GetApnsSandboxChannelWithContext(ctx aws.Context, input *GetA
 
 const opGetApp = "GetApp"
 
-// GetAppRequest generates a "aws/request.Request" representing the
+// GetAppRequest generates a "aws.Request" representing the
 // client's request for the GetApp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1618,8 +1617,8 @@ const opGetApp = "GetApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp
-func (c *Pinpoint) GetAppRequest(input *GetAppInput) (req *request.Request, output *GetAppOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetAppRequest(input *GetAppInput) (req *aws.Request, output *GetAppOutput) {
+	op := &aws.Operation{
 		Name:       opGetApp,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}",
@@ -1673,7 +1672,7 @@ func (c *Pinpoint) GetApp(input *GetAppInput) (*GetAppOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetAppWithContext(ctx aws.Context, input *GetAppInput, opts ...request.Option) (*GetAppOutput, error) {
+func (c *Pinpoint) GetAppWithContext(ctx aws.Context, input *GetAppInput, opts ...aws.Option) (*GetAppOutput, error) {
 	req, out := c.GetAppRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1682,7 +1681,7 @@ func (c *Pinpoint) GetAppWithContext(ctx aws.Context, input *GetAppInput, opts .
 
 const opGetApplicationSettings = "GetApplicationSettings"
 
-// GetApplicationSettingsRequest generates a "aws/request.Request" representing the
+// GetApplicationSettingsRequest generates a "aws.Request" representing the
 // client's request for the GetApplicationSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1706,8 +1705,8 @@ const opGetApplicationSettings = "GetApplicationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApplicationSettings
-func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsInput) (req *request.Request, output *GetApplicationSettingsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsInput) (req *aws.Request, output *GetApplicationSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opGetApplicationSettings,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/settings",
@@ -1761,7 +1760,7 @@ func (c *Pinpoint) GetApplicationSettings(input *GetApplicationSettingsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetApplicationSettingsWithContext(ctx aws.Context, input *GetApplicationSettingsInput, opts ...request.Option) (*GetApplicationSettingsOutput, error) {
+func (c *Pinpoint) GetApplicationSettingsWithContext(ctx aws.Context, input *GetApplicationSettingsInput, opts ...aws.Option) (*GetApplicationSettingsOutput, error) {
 	req, out := c.GetApplicationSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1770,7 +1769,7 @@ func (c *Pinpoint) GetApplicationSettingsWithContext(ctx aws.Context, input *Get
 
 const opGetApps = "GetApps"
 
-// GetAppsRequest generates a "aws/request.Request" representing the
+// GetAppsRequest generates a "aws.Request" representing the
 // client's request for the GetApps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1794,8 +1793,8 @@ const opGetApps = "GetApps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps
-func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) (req *request.Request, output *GetAppsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) (req *aws.Request, output *GetAppsOutput) {
+	op := &aws.Operation{
 		Name:       opGetApps,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps",
@@ -1849,7 +1848,7 @@ func (c *Pinpoint) GetApps(input *GetAppsInput) (*GetAppsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetAppsWithContext(ctx aws.Context, input *GetAppsInput, opts ...request.Option) (*GetAppsOutput, error) {
+func (c *Pinpoint) GetAppsWithContext(ctx aws.Context, input *GetAppsInput, opts ...aws.Option) (*GetAppsOutput, error) {
 	req, out := c.GetAppsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1858,7 +1857,7 @@ func (c *Pinpoint) GetAppsWithContext(ctx aws.Context, input *GetAppsInput, opts
 
 const opGetBaiduChannel = "GetBaiduChannel"
 
-// GetBaiduChannelRequest generates a "aws/request.Request" representing the
+// GetBaiduChannelRequest generates a "aws.Request" representing the
 // client's request for the GetBaiduChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1882,8 +1881,8 @@ const opGetBaiduChannel = "GetBaiduChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetBaiduChannel
-func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) (req *request.Request, output *GetBaiduChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) (req *aws.Request, output *GetBaiduChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetBaiduChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/baidu",
@@ -1937,7 +1936,7 @@ func (c *Pinpoint) GetBaiduChannel(input *GetBaiduChannelInput) (*GetBaiduChanne
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetBaiduChannelWithContext(ctx aws.Context, input *GetBaiduChannelInput, opts ...request.Option) (*GetBaiduChannelOutput, error) {
+func (c *Pinpoint) GetBaiduChannelWithContext(ctx aws.Context, input *GetBaiduChannelInput, opts ...aws.Option) (*GetBaiduChannelOutput, error) {
 	req, out := c.GetBaiduChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1946,7 +1945,7 @@ func (c *Pinpoint) GetBaiduChannelWithContext(ctx aws.Context, input *GetBaiduCh
 
 const opGetCampaign = "GetCampaign"
 
-// GetCampaignRequest generates a "aws/request.Request" representing the
+// GetCampaignRequest generates a "aws.Request" representing the
 // client's request for the GetCampaign operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1970,8 +1969,8 @@ const opGetCampaign = "GetCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaign
-func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) (req *request.Request, output *GetCampaignOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) (req *aws.Request, output *GetCampaignOutput) {
+	op := &aws.Operation{
 		Name:       opGetCampaign,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns/{campaign-id}",
@@ -2025,7 +2024,7 @@ func (c *Pinpoint) GetCampaign(input *GetCampaignInput) (*GetCampaignOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetCampaignWithContext(ctx aws.Context, input *GetCampaignInput, opts ...request.Option) (*GetCampaignOutput, error) {
+func (c *Pinpoint) GetCampaignWithContext(ctx aws.Context, input *GetCampaignInput, opts ...aws.Option) (*GetCampaignOutput, error) {
 	req, out := c.GetCampaignRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2034,7 +2033,7 @@ func (c *Pinpoint) GetCampaignWithContext(ctx aws.Context, input *GetCampaignInp
 
 const opGetCampaignActivities = "GetCampaignActivities"
 
-// GetCampaignActivitiesRequest generates a "aws/request.Request" representing the
+// GetCampaignActivitiesRequest generates a "aws.Request" representing the
 // client's request for the GetCampaignActivities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2058,8 +2057,8 @@ const opGetCampaignActivities = "GetCampaignActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignActivities
-func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInput) (req *request.Request, output *GetCampaignActivitiesOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInput) (req *aws.Request, output *GetCampaignActivitiesOutput) {
+	op := &aws.Operation{
 		Name:       opGetCampaignActivities,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns/{campaign-id}/activities",
@@ -2113,7 +2112,7 @@ func (c *Pinpoint) GetCampaignActivities(input *GetCampaignActivitiesInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetCampaignActivitiesWithContext(ctx aws.Context, input *GetCampaignActivitiesInput, opts ...request.Option) (*GetCampaignActivitiesOutput, error) {
+func (c *Pinpoint) GetCampaignActivitiesWithContext(ctx aws.Context, input *GetCampaignActivitiesInput, opts ...aws.Option) (*GetCampaignActivitiesOutput, error) {
 	req, out := c.GetCampaignActivitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2122,7 +2121,7 @@ func (c *Pinpoint) GetCampaignActivitiesWithContext(ctx aws.Context, input *GetC
 
 const opGetCampaignVersion = "GetCampaignVersion"
 
-// GetCampaignVersionRequest generates a "aws/request.Request" representing the
+// GetCampaignVersionRequest generates a "aws.Request" representing the
 // client's request for the GetCampaignVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2146,8 +2145,8 @@ const opGetCampaignVersion = "GetCampaignVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersion
-func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) (req *request.Request, output *GetCampaignVersionOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) (req *aws.Request, output *GetCampaignVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetCampaignVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns/{campaign-id}/versions/{version}",
@@ -2201,7 +2200,7 @@ func (c *Pinpoint) GetCampaignVersion(input *GetCampaignVersionInput) (*GetCampa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetCampaignVersionWithContext(ctx aws.Context, input *GetCampaignVersionInput, opts ...request.Option) (*GetCampaignVersionOutput, error) {
+func (c *Pinpoint) GetCampaignVersionWithContext(ctx aws.Context, input *GetCampaignVersionInput, opts ...aws.Option) (*GetCampaignVersionOutput, error) {
 	req, out := c.GetCampaignVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2210,7 +2209,7 @@ func (c *Pinpoint) GetCampaignVersionWithContext(ctx aws.Context, input *GetCamp
 
 const opGetCampaignVersions = "GetCampaignVersions"
 
-// GetCampaignVersionsRequest generates a "aws/request.Request" representing the
+// GetCampaignVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetCampaignVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2234,8 +2233,8 @@ const opGetCampaignVersions = "GetCampaignVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaignVersions
-func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) (req *request.Request, output *GetCampaignVersionsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) (req *aws.Request, output *GetCampaignVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetCampaignVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns/{campaign-id}/versions",
@@ -2289,7 +2288,7 @@ func (c *Pinpoint) GetCampaignVersions(input *GetCampaignVersionsInput) (*GetCam
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetCampaignVersionsWithContext(ctx aws.Context, input *GetCampaignVersionsInput, opts ...request.Option) (*GetCampaignVersionsOutput, error) {
+func (c *Pinpoint) GetCampaignVersionsWithContext(ctx aws.Context, input *GetCampaignVersionsInput, opts ...aws.Option) (*GetCampaignVersionsOutput, error) {
 	req, out := c.GetCampaignVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2298,7 +2297,7 @@ func (c *Pinpoint) GetCampaignVersionsWithContext(ctx aws.Context, input *GetCam
 
 const opGetCampaigns = "GetCampaigns"
 
-// GetCampaignsRequest generates a "aws/request.Request" representing the
+// GetCampaignsRequest generates a "aws.Request" representing the
 // client's request for the GetCampaigns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2322,8 +2321,8 @@ const opGetCampaigns = "GetCampaigns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetCampaigns
-func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) (req *request.Request, output *GetCampaignsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) (req *aws.Request, output *GetCampaignsOutput) {
+	op := &aws.Operation{
 		Name:       opGetCampaigns,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns",
@@ -2377,7 +2376,7 @@ func (c *Pinpoint) GetCampaigns(input *GetCampaignsInput) (*GetCampaignsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetCampaignsWithContext(ctx aws.Context, input *GetCampaignsInput, opts ...request.Option) (*GetCampaignsOutput, error) {
+func (c *Pinpoint) GetCampaignsWithContext(ctx aws.Context, input *GetCampaignsInput, opts ...aws.Option) (*GetCampaignsOutput, error) {
 	req, out := c.GetCampaignsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2386,7 +2385,7 @@ func (c *Pinpoint) GetCampaignsWithContext(ctx aws.Context, input *GetCampaignsI
 
 const opGetEmailChannel = "GetEmailChannel"
 
-// GetEmailChannelRequest generates a "aws/request.Request" representing the
+// GetEmailChannelRequest generates a "aws.Request" representing the
 // client's request for the GetEmailChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2410,8 +2409,8 @@ const opGetEmailChannel = "GetEmailChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEmailChannel
-func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) (req *request.Request, output *GetEmailChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) (req *aws.Request, output *GetEmailChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetEmailChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/email",
@@ -2465,7 +2464,7 @@ func (c *Pinpoint) GetEmailChannel(input *GetEmailChannelInput) (*GetEmailChanne
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetEmailChannelWithContext(ctx aws.Context, input *GetEmailChannelInput, opts ...request.Option) (*GetEmailChannelOutput, error) {
+func (c *Pinpoint) GetEmailChannelWithContext(ctx aws.Context, input *GetEmailChannelInput, opts ...aws.Option) (*GetEmailChannelOutput, error) {
 	req, out := c.GetEmailChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2474,7 +2473,7 @@ func (c *Pinpoint) GetEmailChannelWithContext(ctx aws.Context, input *GetEmailCh
 
 const opGetEndpoint = "GetEndpoint"
 
-// GetEndpointRequest generates a "aws/request.Request" representing the
+// GetEndpointRequest generates a "aws.Request" representing the
 // client's request for the GetEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2498,8 +2497,8 @@ const opGetEndpoint = "GetEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEndpoint
-func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) (req *request.Request, output *GetEndpointOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) (req *aws.Request, output *GetEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opGetEndpoint,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/endpoints/{endpoint-id}",
@@ -2553,7 +2552,7 @@ func (c *Pinpoint) GetEndpoint(input *GetEndpointInput) (*GetEndpointOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetEndpointWithContext(ctx aws.Context, input *GetEndpointInput, opts ...request.Option) (*GetEndpointOutput, error) {
+func (c *Pinpoint) GetEndpointWithContext(ctx aws.Context, input *GetEndpointInput, opts ...aws.Option) (*GetEndpointOutput, error) {
 	req, out := c.GetEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2562,7 +2561,7 @@ func (c *Pinpoint) GetEndpointWithContext(ctx aws.Context, input *GetEndpointInp
 
 const opGetEventStream = "GetEventStream"
 
-// GetEventStreamRequest generates a "aws/request.Request" representing the
+// GetEventStreamRequest generates a "aws.Request" representing the
 // client's request for the GetEventStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2586,8 +2585,8 @@ const opGetEventStream = "GetEventStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetEventStream
-func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) (req *request.Request, output *GetEventStreamOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) (req *aws.Request, output *GetEventStreamOutput) {
+	op := &aws.Operation{
 		Name:       opGetEventStream,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/eventstream",
@@ -2641,7 +2640,7 @@ func (c *Pinpoint) GetEventStream(input *GetEventStreamInput) (*GetEventStreamOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetEventStreamWithContext(ctx aws.Context, input *GetEventStreamInput, opts ...request.Option) (*GetEventStreamOutput, error) {
+func (c *Pinpoint) GetEventStreamWithContext(ctx aws.Context, input *GetEventStreamInput, opts ...aws.Option) (*GetEventStreamOutput, error) {
 	req, out := c.GetEventStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2650,7 +2649,7 @@ func (c *Pinpoint) GetEventStreamWithContext(ctx aws.Context, input *GetEventStr
 
 const opGetGcmChannel = "GetGcmChannel"
 
-// GetGcmChannelRequest generates a "aws/request.Request" representing the
+// GetGcmChannelRequest generates a "aws.Request" representing the
 // client's request for the GetGcmChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2674,8 +2673,8 @@ const opGetGcmChannel = "GetGcmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannel
-func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) (req *request.Request, output *GetGcmChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) (req *aws.Request, output *GetGcmChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetGcmChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/gcm",
@@ -2729,7 +2728,7 @@ func (c *Pinpoint) GetGcmChannel(input *GetGcmChannelInput) (*GetGcmChannelOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetGcmChannelWithContext(ctx aws.Context, input *GetGcmChannelInput, opts ...request.Option) (*GetGcmChannelOutput, error) {
+func (c *Pinpoint) GetGcmChannelWithContext(ctx aws.Context, input *GetGcmChannelInput, opts ...aws.Option) (*GetGcmChannelOutput, error) {
 	req, out := c.GetGcmChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2738,7 +2737,7 @@ func (c *Pinpoint) GetGcmChannelWithContext(ctx aws.Context, input *GetGcmChanne
 
 const opGetImportJob = "GetImportJob"
 
-// GetImportJobRequest generates a "aws/request.Request" representing the
+// GetImportJobRequest generates a "aws.Request" representing the
 // client's request for the GetImportJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2762,8 +2761,8 @@ const opGetImportJob = "GetImportJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJob
-func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) (req *request.Request, output *GetImportJobOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) (req *aws.Request, output *GetImportJobOutput) {
+	op := &aws.Operation{
 		Name:       opGetImportJob,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/jobs/import/{job-id}",
@@ -2817,7 +2816,7 @@ func (c *Pinpoint) GetImportJob(input *GetImportJobInput) (*GetImportJobOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetImportJobWithContext(ctx aws.Context, input *GetImportJobInput, opts ...request.Option) (*GetImportJobOutput, error) {
+func (c *Pinpoint) GetImportJobWithContext(ctx aws.Context, input *GetImportJobInput, opts ...aws.Option) (*GetImportJobOutput, error) {
 	req, out := c.GetImportJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2826,7 +2825,7 @@ func (c *Pinpoint) GetImportJobWithContext(ctx aws.Context, input *GetImportJobI
 
 const opGetImportJobs = "GetImportJobs"
 
-// GetImportJobsRequest generates a "aws/request.Request" representing the
+// GetImportJobsRequest generates a "aws.Request" representing the
 // client's request for the GetImportJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2850,8 +2849,8 @@ const opGetImportJobs = "GetImportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetImportJobs
-func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) (req *request.Request, output *GetImportJobsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) (req *aws.Request, output *GetImportJobsOutput) {
+	op := &aws.Operation{
 		Name:       opGetImportJobs,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/jobs/import",
@@ -2905,7 +2904,7 @@ func (c *Pinpoint) GetImportJobs(input *GetImportJobsInput) (*GetImportJobsOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetImportJobsWithContext(ctx aws.Context, input *GetImportJobsInput, opts ...request.Option) (*GetImportJobsOutput, error) {
+func (c *Pinpoint) GetImportJobsWithContext(ctx aws.Context, input *GetImportJobsInput, opts ...aws.Option) (*GetImportJobsOutput, error) {
 	req, out := c.GetImportJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2914,7 +2913,7 @@ func (c *Pinpoint) GetImportJobsWithContext(ctx aws.Context, input *GetImportJob
 
 const opGetSegment = "GetSegment"
 
-// GetSegmentRequest generates a "aws/request.Request" representing the
+// GetSegmentRequest generates a "aws.Request" representing the
 // client's request for the GetSegment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2938,8 +2937,8 @@ const opGetSegment = "GetSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegment
-func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) (req *request.Request, output *GetSegmentOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) (req *aws.Request, output *GetSegmentOutput) {
+	op := &aws.Operation{
 		Name:       opGetSegment,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}",
@@ -2993,7 +2992,7 @@ func (c *Pinpoint) GetSegment(input *GetSegmentInput) (*GetSegmentOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetSegmentWithContext(ctx aws.Context, input *GetSegmentInput, opts ...request.Option) (*GetSegmentOutput, error) {
+func (c *Pinpoint) GetSegmentWithContext(ctx aws.Context, input *GetSegmentInput, opts ...aws.Option) (*GetSegmentOutput, error) {
 	req, out := c.GetSegmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3002,7 +3001,7 @@ func (c *Pinpoint) GetSegmentWithContext(ctx aws.Context, input *GetSegmentInput
 
 const opGetSegmentImportJobs = "GetSegmentImportJobs"
 
-// GetSegmentImportJobsRequest generates a "aws/request.Request" representing the
+// GetSegmentImportJobsRequest generates a "aws.Request" representing the
 // client's request for the GetSegmentImportJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3026,8 +3025,8 @@ const opGetSegmentImportJobs = "GetSegmentImportJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentImportJobs
-func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) (req *request.Request, output *GetSegmentImportJobsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput) (req *aws.Request, output *GetSegmentImportJobsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSegmentImportJobs,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}/jobs/import",
@@ -3081,7 +3080,7 @@ func (c *Pinpoint) GetSegmentImportJobs(input *GetSegmentImportJobsInput) (*GetS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetSegmentImportJobsWithContext(ctx aws.Context, input *GetSegmentImportJobsInput, opts ...request.Option) (*GetSegmentImportJobsOutput, error) {
+func (c *Pinpoint) GetSegmentImportJobsWithContext(ctx aws.Context, input *GetSegmentImportJobsInput, opts ...aws.Option) (*GetSegmentImportJobsOutput, error) {
 	req, out := c.GetSegmentImportJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3090,7 +3089,7 @@ func (c *Pinpoint) GetSegmentImportJobsWithContext(ctx aws.Context, input *GetSe
 
 const opGetSegmentVersion = "GetSegmentVersion"
 
-// GetSegmentVersionRequest generates a "aws/request.Request" representing the
+// GetSegmentVersionRequest generates a "aws.Request" representing the
 // client's request for the GetSegmentVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3114,8 +3113,8 @@ const opGetSegmentVersion = "GetSegmentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersion
-func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) (req *request.Request, output *GetSegmentVersionOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) (req *aws.Request, output *GetSegmentVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetSegmentVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}/versions/{version}",
@@ -3169,7 +3168,7 @@ func (c *Pinpoint) GetSegmentVersion(input *GetSegmentVersionInput) (*GetSegment
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetSegmentVersionWithContext(ctx aws.Context, input *GetSegmentVersionInput, opts ...request.Option) (*GetSegmentVersionOutput, error) {
+func (c *Pinpoint) GetSegmentVersionWithContext(ctx aws.Context, input *GetSegmentVersionInput, opts ...aws.Option) (*GetSegmentVersionOutput, error) {
 	req, out := c.GetSegmentVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3178,7 +3177,7 @@ func (c *Pinpoint) GetSegmentVersionWithContext(ctx aws.Context, input *GetSegme
 
 const opGetSegmentVersions = "GetSegmentVersions"
 
-// GetSegmentVersionsRequest generates a "aws/request.Request" representing the
+// GetSegmentVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetSegmentVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3202,8 +3201,8 @@ const opGetSegmentVersions = "GetSegmentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentVersions
-func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) (req *request.Request, output *GetSegmentVersionsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) (req *aws.Request, output *GetSegmentVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSegmentVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}/versions",
@@ -3257,7 +3256,7 @@ func (c *Pinpoint) GetSegmentVersions(input *GetSegmentVersionsInput) (*GetSegme
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetSegmentVersionsWithContext(ctx aws.Context, input *GetSegmentVersionsInput, opts ...request.Option) (*GetSegmentVersionsOutput, error) {
+func (c *Pinpoint) GetSegmentVersionsWithContext(ctx aws.Context, input *GetSegmentVersionsInput, opts ...aws.Option) (*GetSegmentVersionsOutput, error) {
 	req, out := c.GetSegmentVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3266,7 +3265,7 @@ func (c *Pinpoint) GetSegmentVersionsWithContext(ctx aws.Context, input *GetSegm
 
 const opGetSegments = "GetSegments"
 
-// GetSegmentsRequest generates a "aws/request.Request" representing the
+// GetSegmentsRequest generates a "aws.Request" representing the
 // client's request for the GetSegments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3290,8 +3289,8 @@ const opGetSegments = "GetSegments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegments
-func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) (req *request.Request, output *GetSegmentsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) (req *aws.Request, output *GetSegmentsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSegments,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/segments",
@@ -3345,7 +3344,7 @@ func (c *Pinpoint) GetSegments(input *GetSegmentsInput) (*GetSegmentsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetSegmentsWithContext(ctx aws.Context, input *GetSegmentsInput, opts ...request.Option) (*GetSegmentsOutput, error) {
+func (c *Pinpoint) GetSegmentsWithContext(ctx aws.Context, input *GetSegmentsInput, opts ...aws.Option) (*GetSegmentsOutput, error) {
 	req, out := c.GetSegmentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3354,7 +3353,7 @@ func (c *Pinpoint) GetSegmentsWithContext(ctx aws.Context, input *GetSegmentsInp
 
 const opGetSmsChannel = "GetSmsChannel"
 
-// GetSmsChannelRequest generates a "aws/request.Request" representing the
+// GetSmsChannelRequest generates a "aws.Request" representing the
 // client's request for the GetSmsChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3378,8 +3377,8 @@ const opGetSmsChannel = "GetSmsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSmsChannel
-func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) (req *request.Request, output *GetSmsChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) (req *aws.Request, output *GetSmsChannelOutput) {
+	op := &aws.Operation{
 		Name:       opGetSmsChannel,
 		HTTPMethod: "GET",
 		HTTPPath:   "/v1/apps/{application-id}/channels/sms",
@@ -3433,7 +3432,7 @@ func (c *Pinpoint) GetSmsChannel(input *GetSmsChannelInput) (*GetSmsChannelOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) GetSmsChannelWithContext(ctx aws.Context, input *GetSmsChannelInput, opts ...request.Option) (*GetSmsChannelOutput, error) {
+func (c *Pinpoint) GetSmsChannelWithContext(ctx aws.Context, input *GetSmsChannelInput, opts ...aws.Option) (*GetSmsChannelOutput, error) {
 	req, out := c.GetSmsChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3442,7 +3441,7 @@ func (c *Pinpoint) GetSmsChannelWithContext(ctx aws.Context, input *GetSmsChanne
 
 const opPutEventStream = "PutEventStream"
 
-// PutEventStreamRequest generates a "aws/request.Request" representing the
+// PutEventStreamRequest generates a "aws.Request" representing the
 // client's request for the PutEventStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3466,8 +3465,8 @@ const opPutEventStream = "PutEventStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/PutEventStream
-func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) (req *request.Request, output *PutEventStreamOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) (req *aws.Request, output *PutEventStreamOutput) {
+	op := &aws.Operation{
 		Name:       opPutEventStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps/{application-id}/eventstream",
@@ -3521,7 +3520,7 @@ func (c *Pinpoint) PutEventStream(input *PutEventStreamInput) (*PutEventStreamOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) PutEventStreamWithContext(ctx aws.Context, input *PutEventStreamInput, opts ...request.Option) (*PutEventStreamOutput, error) {
+func (c *Pinpoint) PutEventStreamWithContext(ctx aws.Context, input *PutEventStreamInput, opts ...aws.Option) (*PutEventStreamOutput, error) {
 	req, out := c.PutEventStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3530,7 +3529,7 @@ func (c *Pinpoint) PutEventStreamWithContext(ctx aws.Context, input *PutEventStr
 
 const opSendMessages = "SendMessages"
 
-// SendMessagesRequest generates a "aws/request.Request" representing the
+// SendMessagesRequest generates a "aws.Request" representing the
 // client's request for the SendMessages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3554,8 +3553,8 @@ const opSendMessages = "SendMessages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendMessages
-func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) (req *request.Request, output *SendMessagesOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) (req *aws.Request, output *SendMessagesOutput) {
+	op := &aws.Operation{
 		Name:       opSendMessages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps/{application-id}/messages",
@@ -3609,7 +3608,7 @@ func (c *Pinpoint) SendMessages(input *SendMessagesInput) (*SendMessagesOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) SendMessagesWithContext(ctx aws.Context, input *SendMessagesInput, opts ...request.Option) (*SendMessagesOutput, error) {
+func (c *Pinpoint) SendMessagesWithContext(ctx aws.Context, input *SendMessagesInput, opts ...aws.Option) (*SendMessagesOutput, error) {
 	req, out := c.SendMessagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3618,7 +3617,7 @@ func (c *Pinpoint) SendMessagesWithContext(ctx aws.Context, input *SendMessagesI
 
 const opSendUsersMessages = "SendUsersMessages"
 
-// SendUsersMessagesRequest generates a "aws/request.Request" representing the
+// SendUsersMessagesRequest generates a "aws.Request" representing the
 // client's request for the SendUsersMessages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3642,8 +3641,8 @@ const opSendUsersMessages = "SendUsersMessages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SendUsersMessages
-func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) (req *request.Request, output *SendUsersMessagesOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) (req *aws.Request, output *SendUsersMessagesOutput) {
+	op := &aws.Operation{
 		Name:       opSendUsersMessages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/v1/apps/{application-id}/users-messages",
@@ -3697,7 +3696,7 @@ func (c *Pinpoint) SendUsersMessages(input *SendUsersMessagesInput) (*SendUsersM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) SendUsersMessagesWithContext(ctx aws.Context, input *SendUsersMessagesInput, opts ...request.Option) (*SendUsersMessagesOutput, error) {
+func (c *Pinpoint) SendUsersMessagesWithContext(ctx aws.Context, input *SendUsersMessagesInput, opts ...aws.Option) (*SendUsersMessagesOutput, error) {
 	req, out := c.SendUsersMessagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3706,7 +3705,7 @@ func (c *Pinpoint) SendUsersMessagesWithContext(ctx aws.Context, input *SendUser
 
 const opUpdateAdmChannel = "UpdateAdmChannel"
 
-// UpdateAdmChannelRequest generates a "aws/request.Request" representing the
+// UpdateAdmChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateAdmChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3730,8 +3729,8 @@ const opUpdateAdmChannel = "UpdateAdmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateAdmChannel
-func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) (req *request.Request, output *UpdateAdmChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) (req *aws.Request, output *UpdateAdmChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateAdmChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/adm",
@@ -3785,7 +3784,7 @@ func (c *Pinpoint) UpdateAdmChannel(input *UpdateAdmChannelInput) (*UpdateAdmCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateAdmChannelWithContext(ctx aws.Context, input *UpdateAdmChannelInput, opts ...request.Option) (*UpdateAdmChannelOutput, error) {
+func (c *Pinpoint) UpdateAdmChannelWithContext(ctx aws.Context, input *UpdateAdmChannelInput, opts ...aws.Option) (*UpdateAdmChannelOutput, error) {
 	req, out := c.UpdateAdmChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3794,7 +3793,7 @@ func (c *Pinpoint) UpdateAdmChannelWithContext(ctx aws.Context, input *UpdateAdm
 
 const opUpdateApnsChannel = "UpdateApnsChannel"
 
-// UpdateApnsChannelRequest generates a "aws/request.Request" representing the
+// UpdateApnsChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateApnsChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3818,8 +3817,8 @@ const opUpdateApnsChannel = "UpdateApnsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsChannel
-func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) (req *request.Request, output *UpdateApnsChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) (req *aws.Request, output *UpdateApnsChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApnsChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/apns",
@@ -3873,7 +3872,7 @@ func (c *Pinpoint) UpdateApnsChannel(input *UpdateApnsChannelInput) (*UpdateApns
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateApnsChannelWithContext(ctx aws.Context, input *UpdateApnsChannelInput, opts ...request.Option) (*UpdateApnsChannelOutput, error) {
+func (c *Pinpoint) UpdateApnsChannelWithContext(ctx aws.Context, input *UpdateApnsChannelInput, opts ...aws.Option) (*UpdateApnsChannelOutput, error) {
 	req, out := c.UpdateApnsChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3882,7 +3881,7 @@ func (c *Pinpoint) UpdateApnsChannelWithContext(ctx aws.Context, input *UpdateAp
 
 const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
 
-// UpdateApnsSandboxChannelRequest generates a "aws/request.Request" representing the
+// UpdateApnsSandboxChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateApnsSandboxChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3906,8 +3905,8 @@ const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApnsSandboxChannel
-func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChannelInput) (req *request.Request, output *UpdateApnsSandboxChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChannelInput) (req *aws.Request, output *UpdateApnsSandboxChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApnsSandboxChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/apns_sandbox",
@@ -3961,7 +3960,7 @@ func (c *Pinpoint) UpdateApnsSandboxChannel(input *UpdateApnsSandboxChannelInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateApnsSandboxChannelWithContext(ctx aws.Context, input *UpdateApnsSandboxChannelInput, opts ...request.Option) (*UpdateApnsSandboxChannelOutput, error) {
+func (c *Pinpoint) UpdateApnsSandboxChannelWithContext(ctx aws.Context, input *UpdateApnsSandboxChannelInput, opts ...aws.Option) (*UpdateApnsSandboxChannelOutput, error) {
 	req, out := c.UpdateApnsSandboxChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3970,7 +3969,7 @@ func (c *Pinpoint) UpdateApnsSandboxChannelWithContext(ctx aws.Context, input *U
 
 const opUpdateApplicationSettings = "UpdateApplicationSettings"
 
-// UpdateApplicationSettingsRequest generates a "aws/request.Request" representing the
+// UpdateApplicationSettingsRequest generates a "aws.Request" representing the
 // client's request for the UpdateApplicationSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3994,8 +3993,8 @@ const opUpdateApplicationSettings = "UpdateApplicationSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateApplicationSettings
-func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSettingsInput) (req *request.Request, output *UpdateApplicationSettingsOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSettingsInput) (req *aws.Request, output *UpdateApplicationSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApplicationSettings,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/settings",
@@ -4049,7 +4048,7 @@ func (c *Pinpoint) UpdateApplicationSettings(input *UpdateApplicationSettingsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateApplicationSettingsWithContext(ctx aws.Context, input *UpdateApplicationSettingsInput, opts ...request.Option) (*UpdateApplicationSettingsOutput, error) {
+func (c *Pinpoint) UpdateApplicationSettingsWithContext(ctx aws.Context, input *UpdateApplicationSettingsInput, opts ...aws.Option) (*UpdateApplicationSettingsOutput, error) {
 	req, out := c.UpdateApplicationSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4058,7 +4057,7 @@ func (c *Pinpoint) UpdateApplicationSettingsWithContext(ctx aws.Context, input *
 
 const opUpdateBaiduChannel = "UpdateBaiduChannel"
 
-// UpdateBaiduChannelRequest generates a "aws/request.Request" representing the
+// UpdateBaiduChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateBaiduChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4082,8 +4081,8 @@ const opUpdateBaiduChannel = "UpdateBaiduChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateBaiduChannel
-func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) (req *request.Request, output *UpdateBaiduChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) (req *aws.Request, output *UpdateBaiduChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateBaiduChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/baidu",
@@ -4137,7 +4136,7 @@ func (c *Pinpoint) UpdateBaiduChannel(input *UpdateBaiduChannelInput) (*UpdateBa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateBaiduChannelWithContext(ctx aws.Context, input *UpdateBaiduChannelInput, opts ...request.Option) (*UpdateBaiduChannelOutput, error) {
+func (c *Pinpoint) UpdateBaiduChannelWithContext(ctx aws.Context, input *UpdateBaiduChannelInput, opts ...aws.Option) (*UpdateBaiduChannelOutput, error) {
 	req, out := c.UpdateBaiduChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4146,7 +4145,7 @@ func (c *Pinpoint) UpdateBaiduChannelWithContext(ctx aws.Context, input *UpdateB
 
 const opUpdateCampaign = "UpdateCampaign"
 
-// UpdateCampaignRequest generates a "aws/request.Request" representing the
+// UpdateCampaignRequest generates a "aws.Request" representing the
 // client's request for the UpdateCampaign operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4170,8 +4169,8 @@ const opUpdateCampaign = "UpdateCampaign"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateCampaign
-func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) (req *request.Request, output *UpdateCampaignOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) (req *aws.Request, output *UpdateCampaignOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCampaign,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/campaigns/{campaign-id}",
@@ -4225,7 +4224,7 @@ func (c *Pinpoint) UpdateCampaign(input *UpdateCampaignInput) (*UpdateCampaignOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateCampaignWithContext(ctx aws.Context, input *UpdateCampaignInput, opts ...request.Option) (*UpdateCampaignOutput, error) {
+func (c *Pinpoint) UpdateCampaignWithContext(ctx aws.Context, input *UpdateCampaignInput, opts ...aws.Option) (*UpdateCampaignOutput, error) {
 	req, out := c.UpdateCampaignRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4234,7 +4233,7 @@ func (c *Pinpoint) UpdateCampaignWithContext(ctx aws.Context, input *UpdateCampa
 
 const opUpdateEmailChannel = "UpdateEmailChannel"
 
-// UpdateEmailChannelRequest generates a "aws/request.Request" representing the
+// UpdateEmailChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateEmailChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4258,8 +4257,8 @@ const opUpdateEmailChannel = "UpdateEmailChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEmailChannel
-func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) (req *request.Request, output *UpdateEmailChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) (req *aws.Request, output *UpdateEmailChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateEmailChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/email",
@@ -4313,7 +4312,7 @@ func (c *Pinpoint) UpdateEmailChannel(input *UpdateEmailChannelInput) (*UpdateEm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateEmailChannelWithContext(ctx aws.Context, input *UpdateEmailChannelInput, opts ...request.Option) (*UpdateEmailChannelOutput, error) {
+func (c *Pinpoint) UpdateEmailChannelWithContext(ctx aws.Context, input *UpdateEmailChannelInput, opts ...aws.Option) (*UpdateEmailChannelOutput, error) {
 	req, out := c.UpdateEmailChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4322,7 +4321,7 @@ func (c *Pinpoint) UpdateEmailChannelWithContext(ctx aws.Context, input *UpdateE
 
 const opUpdateEndpoint = "UpdateEndpoint"
 
-// UpdateEndpointRequest generates a "aws/request.Request" representing the
+// UpdateEndpointRequest generates a "aws.Request" representing the
 // client's request for the UpdateEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4346,8 +4345,8 @@ const opUpdateEndpoint = "UpdateEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpoint
-func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) (req *request.Request, output *UpdateEndpointOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) (req *aws.Request, output *UpdateEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateEndpoint,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/endpoints/{endpoint-id}",
@@ -4401,7 +4400,7 @@ func (c *Pinpoint) UpdateEndpoint(input *UpdateEndpointInput) (*UpdateEndpointOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateEndpointWithContext(ctx aws.Context, input *UpdateEndpointInput, opts ...request.Option) (*UpdateEndpointOutput, error) {
+func (c *Pinpoint) UpdateEndpointWithContext(ctx aws.Context, input *UpdateEndpointInput, opts ...aws.Option) (*UpdateEndpointOutput, error) {
 	req, out := c.UpdateEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4410,7 +4409,7 @@ func (c *Pinpoint) UpdateEndpointWithContext(ctx aws.Context, input *UpdateEndpo
 
 const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 
-// UpdateEndpointsBatchRequest generates a "aws/request.Request" representing the
+// UpdateEndpointsBatchRequest generates a "aws.Request" representing the
 // client's request for the UpdateEndpointsBatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4434,8 +4433,8 @@ const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateEndpointsBatch
-func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) (req *request.Request, output *UpdateEndpointsBatchOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput) (req *aws.Request, output *UpdateEndpointsBatchOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateEndpointsBatch,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/endpoints",
@@ -4489,7 +4488,7 @@ func (c *Pinpoint) UpdateEndpointsBatch(input *UpdateEndpointsBatchInput) (*Upda
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateEndpointsBatchWithContext(ctx aws.Context, input *UpdateEndpointsBatchInput, opts ...request.Option) (*UpdateEndpointsBatchOutput, error) {
+func (c *Pinpoint) UpdateEndpointsBatchWithContext(ctx aws.Context, input *UpdateEndpointsBatchInput, opts ...aws.Option) (*UpdateEndpointsBatchOutput, error) {
 	req, out := c.UpdateEndpointsBatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4498,7 +4497,7 @@ func (c *Pinpoint) UpdateEndpointsBatchWithContext(ctx aws.Context, input *Updat
 
 const opUpdateGcmChannel = "UpdateGcmChannel"
 
-// UpdateGcmChannelRequest generates a "aws/request.Request" representing the
+// UpdateGcmChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateGcmChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4522,8 +4521,8 @@ const opUpdateGcmChannel = "UpdateGcmChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateGcmChannel
-func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) (req *request.Request, output *UpdateGcmChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) (req *aws.Request, output *UpdateGcmChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateGcmChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/gcm",
@@ -4577,7 +4576,7 @@ func (c *Pinpoint) UpdateGcmChannel(input *UpdateGcmChannelInput) (*UpdateGcmCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateGcmChannelWithContext(ctx aws.Context, input *UpdateGcmChannelInput, opts ...request.Option) (*UpdateGcmChannelOutput, error) {
+func (c *Pinpoint) UpdateGcmChannelWithContext(ctx aws.Context, input *UpdateGcmChannelInput, opts ...aws.Option) (*UpdateGcmChannelOutput, error) {
 	req, out := c.UpdateGcmChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4586,7 +4585,7 @@ func (c *Pinpoint) UpdateGcmChannelWithContext(ctx aws.Context, input *UpdateGcm
 
 const opUpdateSegment = "UpdateSegment"
 
-// UpdateSegmentRequest generates a "aws/request.Request" representing the
+// UpdateSegmentRequest generates a "aws.Request" representing the
 // client's request for the UpdateSegment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4610,8 +4609,8 @@ const opUpdateSegment = "UpdateSegment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSegment
-func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) (req *request.Request, output *UpdateSegmentOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) (req *aws.Request, output *UpdateSegmentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSegment,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}",
@@ -4665,7 +4664,7 @@ func (c *Pinpoint) UpdateSegment(input *UpdateSegmentInput) (*UpdateSegmentOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateSegmentWithContext(ctx aws.Context, input *UpdateSegmentInput, opts ...request.Option) (*UpdateSegmentOutput, error) {
+func (c *Pinpoint) UpdateSegmentWithContext(ctx aws.Context, input *UpdateSegmentInput, opts ...aws.Option) (*UpdateSegmentOutput, error) {
 	req, out := c.UpdateSegmentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4674,7 +4673,7 @@ func (c *Pinpoint) UpdateSegmentWithContext(ctx aws.Context, input *UpdateSegmen
 
 const opUpdateSmsChannel = "UpdateSmsChannel"
 
-// UpdateSmsChannelRequest generates a "aws/request.Request" representing the
+// UpdateSmsChannelRequest generates a "aws.Request" representing the
 // client's request for the UpdateSmsChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4698,8 +4697,8 @@ const opUpdateSmsChannel = "UpdateSmsChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/UpdateSmsChannel
-func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) (req *request.Request, output *UpdateSmsChannelOutput) {
-	op := &request.Operation{
+func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) (req *aws.Request, output *UpdateSmsChannelOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSmsChannel,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/v1/apps/{application-id}/channels/sms",
@@ -4753,7 +4752,7 @@ func (c *Pinpoint) UpdateSmsChannel(input *UpdateSmsChannelInput) (*UpdateSmsCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Pinpoint) UpdateSmsChannelWithContext(ctx aws.Context, input *UpdateSmsChannelInput, opts ...request.Option) (*UpdateSmsChannelOutput, error) {
+func (c *Pinpoint) UpdateSmsChannelWithContext(ctx aws.Context, input *UpdateSmsChannelInput, opts ...aws.Option) (*UpdateSmsChannelOutput, error) {
 	req, out := c.UpdateSmsChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6744,9 +6743,9 @@ func (s CreateAppInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAppInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAppInput"}
 	if s.CreateApplicationRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreateApplicationRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("CreateApplicationRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6837,12 +6836,12 @@ func (s CreateCampaignInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCampaignInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCampaignInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCampaignInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.WriteCampaignRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteCampaignRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteCampaignRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6912,12 +6911,12 @@ func (s CreateImportJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImportJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateImportJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateImportJobInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.ImportJobRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImportJobRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("ImportJobRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6987,12 +6986,12 @@ func (s CreateSegmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSegmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSegmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSegmentInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.WriteSegmentRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteSegmentRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7187,9 +7186,9 @@ func (s DeleteAdmChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAdmChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAdmChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAdmChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7250,9 +7249,9 @@ func (s DeleteApnsChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApnsChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApnsChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApnsChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7313,9 +7312,9 @@ func (s DeleteApnsSandboxChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteApnsSandboxChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteApnsSandboxChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApnsSandboxChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7376,9 +7375,9 @@ func (s DeleteAppInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAppInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAppInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAppInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7439,9 +7438,9 @@ func (s DeleteBaiduChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBaiduChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBaiduChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBaiduChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7505,12 +7504,12 @@ func (s DeleteCampaignInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCampaignInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCampaignInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCampaignInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.CampaignId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CampaignId"))
+		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7577,9 +7576,9 @@ func (s DeleteEmailChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEmailChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEmailChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEmailChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7640,9 +7639,9 @@ func (s DeleteEventStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEventStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventStreamInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7703,9 +7702,9 @@ func (s DeleteGcmChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteGcmChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteGcmChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteGcmChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7769,12 +7768,12 @@ func (s DeleteSegmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSegmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSegmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSegmentInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SegmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7841,9 +7840,9 @@ func (s DeleteSmsChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSmsChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSmsChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSmsChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9383,9 +9382,9 @@ func (s GetAdmChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAdmChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAdmChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAdmChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9446,9 +9445,9 @@ func (s GetApnsChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApnsChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetApnsChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetApnsChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9509,9 +9508,9 @@ func (s GetApnsSandboxChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApnsSandboxChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetApnsSandboxChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetApnsSandboxChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9572,9 +9571,9 @@ func (s GetAppInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAppInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAppInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAppInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9635,9 +9634,9 @@ func (s GetApplicationSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetApplicationSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetApplicationSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetApplicationSettingsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9755,9 +9754,9 @@ func (s GetBaiduChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetBaiduChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetBaiduChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetBaiduChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9825,12 +9824,12 @@ func (s GetCampaignActivitiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignActivitiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCampaignActivitiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignActivitiesInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.CampaignId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CampaignId"))
+		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9912,12 +9911,12 @@ func (s GetCampaignInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCampaignInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.CampaignId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CampaignId"))
+		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9990,15 +9989,15 @@ func (s GetCampaignVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCampaignVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignVersionInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.CampaignId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CampaignId"))
+		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10078,12 +10077,12 @@ func (s GetCampaignVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCampaignVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignVersionsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.CampaignId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CampaignId"))
+		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10166,9 +10165,9 @@ func (s GetCampaignsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCampaignsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCampaignsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCampaignsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10241,9 +10240,9 @@ func (s GetEmailChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEmailChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEmailChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEmailChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10307,12 +10306,12 @@ func (s GetEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEndpointInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.EndpointId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointId"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10379,9 +10378,9 @@ func (s GetEventStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEventStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEventStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEventStreamInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10442,9 +10441,9 @@ func (s GetGcmChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetGcmChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetGcmChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetGcmChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10508,12 +10507,12 @@ func (s GetImportJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetImportJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetImportJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetImportJobInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.JobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobId"))
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10582,9 +10581,9 @@ func (s GetImportJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetImportJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetImportJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetImportJobsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10664,12 +10663,12 @@ func (s GetSegmentImportJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentImportJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSegmentImportJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentImportJobsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SegmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10751,12 +10750,12 @@ func (s GetSegmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSegmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SegmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10829,15 +10828,15 @@ func (s GetSegmentVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSegmentVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentVersionInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SegmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
 	if s.Version == nil {
-		invalidParams.Add(request.NewErrParamRequired("Version"))
+		invalidParams.Add(aws.NewErrParamRequired("Version"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10917,12 +10916,12 @@ func (s GetSegmentVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSegmentVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentVersionsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SegmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11005,9 +11004,9 @@ func (s GetSegmentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSegmentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSegmentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11080,9 +11079,9 @@ func (s GetSmsChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSmsChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSmsChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSmsChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11909,12 +11908,12 @@ func (s PutEventStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutEventStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutEventStreamInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.WriteEventStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteEventStream"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteEventStream"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12731,12 +12730,12 @@ func (s SendMessagesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendMessagesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendMessagesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendMessagesInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.MessageRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("MessageRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("MessageRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12903,12 +12902,12 @@ func (s SendUsersMessagesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendUsersMessagesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendUsersMessagesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendUsersMessagesInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SendUsersMessageRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("SendUsersMessageRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("SendUsersMessageRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13094,12 +13093,12 @@ func (s UpdateAdmChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAdmChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAdmChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAdmChannelInput"}
 	if s.ADMChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("ADMChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("ADMChannelRequest"))
 	}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13171,12 +13170,12 @@ func (s UpdateApnsChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApnsChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApnsChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApnsChannelInput"}
 	if s.APNSChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("APNSChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("APNSChannelRequest"))
 	}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13248,12 +13247,12 @@ func (s UpdateApnsSandboxChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApnsSandboxChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApnsSandboxChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApnsSandboxChannelInput"}
 	if s.APNSSandboxChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("APNSSandboxChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("APNSSandboxChannelRequest"))
 	}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13325,12 +13324,12 @@ func (s UpdateApplicationSettingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateApplicationSettingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateApplicationSettingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApplicationSettingsInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.WriteApplicationSettingsRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteApplicationSettingsRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteApplicationSettingsRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13402,12 +13401,12 @@ func (s UpdateBaiduChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateBaiduChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateBaiduChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateBaiduChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.BaiduChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaiduChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("BaiduChannelRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13482,15 +13481,15 @@ func (s UpdateCampaignInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCampaignInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCampaignInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCampaignInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.CampaignId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CampaignId"))
+		invalidParams.Add(aws.NewErrParamRequired("CampaignId"))
 	}
 	if s.WriteCampaignRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteCampaignRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteCampaignRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13568,12 +13567,12 @@ func (s UpdateEmailChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEmailChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateEmailChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEmailChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.EmailChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("EmailChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("EmailChannelRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13648,15 +13647,15 @@ func (s UpdateEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.EndpointId == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointId"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointId"))
 	}
 	if s.EndpointRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13734,12 +13733,12 @@ func (s UpdateEndpointsBatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEndpointsBatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateEndpointsBatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEndpointsBatchInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.EndpointBatchRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointBatchRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointBatchRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13811,12 +13810,12 @@ func (s UpdateGcmChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGcmChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGcmChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGcmChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.GCMChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("GCMChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("GCMChannelRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13891,15 +13890,15 @@ func (s UpdateSegmentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSegmentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSegmentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSegmentInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SegmentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentId"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
 	}
 	if s.WriteSegmentRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("WriteSegmentRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("WriteSegmentRequest"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13977,12 +13976,12 @@ func (s UpdateSmsChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSmsChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSmsChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSmsChannelInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.SMSChannelRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("SMSChannelRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("SMSChannelRequest"))
 	}
 
 	if invalidParams.Len() > 0 {

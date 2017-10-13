@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
-var svc = sts.New(unit.Session, &aws.Config{
+var svc = sts.New(unit.Config, &aws.Config{
 	Region: aws.String("mock-region"),
 })
 

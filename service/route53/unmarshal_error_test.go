@@ -7,14 +7,14 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/route53"
 )
 
 func makeClientWithResponse(response string) *route53.Route53 {
-	r := route53.New(unit.Session)
+	r := route53.New(unit.Config)
 	r.Handlers.Send.Clear()
 	r.Handlers.Send.PushBack(func(r *request.Request) {
 		body := ioutil.NopCloser(bytes.NewReader([]byte(response)))

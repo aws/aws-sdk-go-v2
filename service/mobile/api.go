@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws/request.Request" representing the
+// CreateProjectRequest generates a "aws.Request" representing the
 // client's request for the CreateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateProject = "CreateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProject
-func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) (req *request.Request, output *CreateProjectOutput) {
-	op := &request.Operation{
+func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/projects",
@@ -107,7 +106,7 @@ func (c *Mobile) CreateProject(input *CreateProjectInput) (*CreateProjectOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...request.Option) (*CreateProjectOutput, error) {
+func (c *Mobile) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
 	req, out := c.CreateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -116,7 +115,7 @@ func (c *Mobile) CreateProjectWithContext(ctx aws.Context, input *CreateProjectI
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws/request.Request" representing the
+// DeleteProjectRequest generates a "aws.Request" representing the
 // client's request for the DeleteProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -140,8 +139,8 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProject
-func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) (req *request.Request, output *DeleteProjectOutput) {
-	op := &request.Operation{
+func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/projects/{projectId}",
@@ -201,7 +200,7 @@ func (c *Mobile) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...request.Option) (*DeleteProjectOutput, error) {
+func (c *Mobile) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
 	req, out := c.DeleteProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -210,7 +209,7 @@ func (c *Mobile) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectI
 
 const opDescribeBundle = "DescribeBundle"
 
-// DescribeBundleRequest generates a "aws/request.Request" representing the
+// DescribeBundleRequest generates a "aws.Request" representing the
 // client's request for the DescribeBundle operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -234,8 +233,8 @@ const opDescribeBundle = "DescribeBundle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundle
-func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) (req *request.Request, output *DescribeBundleOutput) {
-	op := &request.Operation{
+func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) (req *aws.Request, output *DescribeBundleOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBundle,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bundles/{bundleId}",
@@ -299,7 +298,7 @@ func (c *Mobile) DescribeBundle(input *DescribeBundleInput) (*DescribeBundleOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) DescribeBundleWithContext(ctx aws.Context, input *DescribeBundleInput, opts ...request.Option) (*DescribeBundleOutput, error) {
+func (c *Mobile) DescribeBundleWithContext(ctx aws.Context, input *DescribeBundleInput, opts ...aws.Option) (*DescribeBundleOutput, error) {
 	req, out := c.DescribeBundleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -308,7 +307,7 @@ func (c *Mobile) DescribeBundleWithContext(ctx aws.Context, input *DescribeBundl
 
 const opDescribeProject = "DescribeProject"
 
-// DescribeProjectRequest generates a "aws/request.Request" representing the
+// DescribeProjectRequest generates a "aws.Request" representing the
 // client's request for the DescribeProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -332,8 +331,8 @@ const opDescribeProject = "DescribeProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProject
-func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) (req *request.Request, output *DescribeProjectOutput) {
-	op := &request.Operation{
+func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) (req *aws.Request, output *DescribeProjectOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProject,
 		HTTPMethod: "GET",
 		HTTPPath:   "/project",
@@ -397,7 +396,7 @@ func (c *Mobile) DescribeProject(input *DescribeProjectInput) (*DescribeProjectO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) DescribeProjectWithContext(ctx aws.Context, input *DescribeProjectInput, opts ...request.Option) (*DescribeProjectOutput, error) {
+func (c *Mobile) DescribeProjectWithContext(ctx aws.Context, input *DescribeProjectInput, opts ...aws.Option) (*DescribeProjectOutput, error) {
 	req, out := c.DescribeProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -406,7 +405,7 @@ func (c *Mobile) DescribeProjectWithContext(ctx aws.Context, input *DescribeProj
 
 const opExportBundle = "ExportBundle"
 
-// ExportBundleRequest generates a "aws/request.Request" representing the
+// ExportBundleRequest generates a "aws.Request" representing the
 // client's request for the ExportBundle operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -430,8 +429,8 @@ const opExportBundle = "ExportBundle"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportBundle
-func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) (req *request.Request, output *ExportBundleOutput) {
-	op := &request.Operation{
+func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) (req *aws.Request, output *ExportBundleOutput) {
+	op := &aws.Operation{
 		Name:       opExportBundle,
 		HTTPMethod: "POST",
 		HTTPPath:   "/bundles/{bundleId}",
@@ -496,7 +495,7 @@ func (c *Mobile) ExportBundle(input *ExportBundleInput) (*ExportBundleOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) ExportBundleWithContext(ctx aws.Context, input *ExportBundleInput, opts ...request.Option) (*ExportBundleOutput, error) {
+func (c *Mobile) ExportBundleWithContext(ctx aws.Context, input *ExportBundleInput, opts ...aws.Option) (*ExportBundleOutput, error) {
 	req, out := c.ExportBundleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -505,7 +504,7 @@ func (c *Mobile) ExportBundleWithContext(ctx aws.Context, input *ExportBundleInp
 
 const opExportProject = "ExportProject"
 
-// ExportProjectRequest generates a "aws/request.Request" representing the
+// ExportProjectRequest generates a "aws.Request" representing the
 // client's request for the ExportProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -529,8 +528,8 @@ const opExportProject = "ExportProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ExportProject
-func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) (req *request.Request, output *ExportProjectOutput) {
-	op := &request.Operation{
+func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) (req *aws.Request, output *ExportProjectOutput) {
+	op := &aws.Operation{
 		Name:       opExportProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/exports/{projectId}",
@@ -596,7 +595,7 @@ func (c *Mobile) ExportProject(input *ExportProjectInput) (*ExportProjectOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) ExportProjectWithContext(ctx aws.Context, input *ExportProjectInput, opts ...request.Option) (*ExportProjectOutput, error) {
+func (c *Mobile) ExportProjectWithContext(ctx aws.Context, input *ExportProjectInput, opts ...aws.Option) (*ExportProjectOutput, error) {
 	req, out := c.ExportProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -605,7 +604,7 @@ func (c *Mobile) ExportProjectWithContext(ctx aws.Context, input *ExportProjectI
 
 const opListBundles = "ListBundles"
 
-// ListBundlesRequest generates a "aws/request.Request" representing the
+// ListBundlesRequest generates a "aws.Request" representing the
 // client's request for the ListBundles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -629,12 +628,12 @@ const opListBundles = "ListBundles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundles
-func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) (req *request.Request, output *ListBundlesOutput) {
-	op := &request.Operation{
+func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) (req *aws.Request, output *ListBundlesOutput) {
+	op := &aws.Operation{
 		Name:       opListBundles,
 		HTTPMethod: "GET",
 		HTTPPath:   "/bundles",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -697,7 +696,7 @@ func (c *Mobile) ListBundles(input *ListBundlesInput) (*ListBundlesOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) ListBundlesWithContext(ctx aws.Context, input *ListBundlesInput, opts ...request.Option) (*ListBundlesOutput, error) {
+func (c *Mobile) ListBundlesWithContext(ctx aws.Context, input *ListBundlesInput, opts ...aws.Option) (*ListBundlesOutput, error) {
 	req, out := c.ListBundlesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -732,9 +731,9 @@ func (c *Mobile) ListBundlesPages(input *ListBundlesInput, fn func(*ListBundlesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) ListBundlesPagesWithContext(ctx aws.Context, input *ListBundlesInput, fn func(*ListBundlesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Mobile) ListBundlesPagesWithContext(ctx aws.Context, input *ListBundlesInput, fn func(*ListBundlesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListBundlesInput
 			if input != nil {
 				tmp := *input
@@ -756,7 +755,7 @@ func (c *Mobile) ListBundlesPagesWithContext(ctx aws.Context, input *ListBundles
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws/request.Request" representing the
+// ListProjectsRequest generates a "aws.Request" representing the
 // client's request for the ListProjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -780,12 +779,12 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjects
-func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) (req *request.Request, output *ListProjectsOutput) {
-	op := &request.Operation{
+func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "GET",
 		HTTPPath:   "/projects",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -848,7 +847,7 @@ func (c *Mobile) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...request.Option) (*ListProjectsOutput, error) {
+func (c *Mobile) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
 	req, out := c.ListProjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -883,9 +882,9 @@ func (c *Mobile) ListProjectsPages(input *ListProjectsInput, fn func(*ListProjec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjectsInput, fn func(*ListProjectsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Mobile) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjectsInput, fn func(*ListProjectsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListProjectsInput
 			if input != nil {
 				tmp := *input
@@ -907,7 +906,7 @@ func (c *Mobile) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjec
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws/request.Request" representing the
+// UpdateProjectRequest generates a "aws.Request" representing the
 // client's request for the UpdateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -931,8 +930,8 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProject
-func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) (req *request.Request, output *UpdateProjectOutput) {
-	op := &request.Operation{
+func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/update",
@@ -1005,7 +1004,7 @@ func (c *Mobile) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Mobile) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...request.Option) (*UpdateProjectOutput, error) {
+func (c *Mobile) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
 	req, out := c.UpdateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1185,9 +1184,9 @@ func (s DeleteProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1260,9 +1259,9 @@ func (s DescribeBundleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBundleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBundleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBundleInput"}
 	if s.BundleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1330,9 +1329,9 @@ func (s DescribeProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProjectInput"}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1408,9 +1407,9 @@ func (s ExportBundleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExportBundleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExportBundleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExportBundleInput"}
 	if s.BundleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BundleId"))
+		invalidParams.Add(aws.NewErrParamRequired("BundleId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1489,9 +1488,9 @@ func (s ExportProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExportProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExportProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExportProjectInput"}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1910,9 +1909,9 @@ func (s UpdateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 
 	if invalidParams.Len() > 0 {
