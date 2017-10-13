@@ -5,10 +5,13 @@
 // instead. This package is useful when you need to reset the defaults
 // of a session or service client to the SDK defaults before setting
 // additional parameters.
+//
+// TODO rename to "default"
 package defaults
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -41,6 +44,24 @@ func Get() Defaults {
 		Config:   cfg,
 		Handlers: handlers,
 	}
+}
+
+// Logger returns a Logger which will write log messages to stdout, and
+// use same formatting runes as the stdlib log.Logger
+func Logger() aws.Logger {
+	return &defaultLogger{
+		logger: log.New(os.Stdout, "", log.LstdFlags),
+	}
+}
+
+// A defaultLogger provides a minimalistic logger satisfying the Logger interface.
+type defaultLogger struct {
+	logger *log.Logger
+}
+
+// Log logs the parameters to the stdlib logger. See log.Println.
+func (l defaultLogger) Log(args ...interface{}) {
+	l.logger.Println(args...)
 }
 
 // Config returns the default configuration without credentials.
