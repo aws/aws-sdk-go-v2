@@ -100,11 +100,25 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 // LoadDefaultAWSConfig reads the SDK's default external configurations, and
 // populates an AWS Config with the values from the external configurations.
 //
+// An optional variadic set of additional Config values can be provided as input
+// that will be prepended to the Configs slice. Use this to add custom configuration.
+// The custom configurations must satisfy the respective providers for their data
+// or the custom data will be ignored by the resolvers and config loaders.
+//
+//    cfg, err := external.LoadDefaultAWSConfig(
+//       WithSharedConfigProfile("test-profile"),
+//    )
+//    if err != nil {
+//       panic(fmt.Sprintf("failed loading config, %v", err))
+//    }
+//
+//
 // The default configuration sources are:
 // * Environment Variables
 // * Shared Configuration and Shared Credentials files.
-func LoadDefaultAWSConfig() (aws.Config, error) {
+func LoadDefaultAWSConfig(configs ...Config) (aws.Config, error) {
 	var cfgs Configs
+	cfgs = append(cfgs, configs...)
 
 	cfgs, err := cfgs.AppendFromLoaders(DefaultConfigLoaders)
 	if err != nil {
