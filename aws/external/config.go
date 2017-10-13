@@ -2,6 +2,7 @@ package external
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 )
 
 // A Config represents a generic configuration value or set of values. This type
@@ -126,4 +127,16 @@ func LoadDefaultAWSConfig(configs ...Config) (aws.Config, error) {
 	}
 
 	return cfgs.ResolveAWSConfig(DefaultAWSConfigResolvers)
+}
+
+type WithRegion string
+
+func (v WithRegion) GetRegion() (string, error) {
+	return string(v), nil
+}
+
+type WithCredentialsValue credentials.Value
+
+func (v WithCredentialsValue) GetCredentialsValue() (credentials.Value, error) {
+	return credentials.Value(v), nil
 }
