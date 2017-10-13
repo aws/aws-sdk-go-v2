@@ -129,14 +129,20 @@ func LoadDefaultAWSConfig(configs ...Config) (aws.Config, error) {
 	return cfgs.ResolveAWSConfig(DefaultAWSConfigResolvers)
 }
 
+// WithRegion provides wrapping of a region string to satisfy the RegionProvider
+// interface.
 type WithRegion string
 
+// GetRegion returns the region string.
 func (v WithRegion) GetRegion() (string, error) {
 	return string(v), nil
 }
 
+// WithCredentialsValue provides wrapping of a credentials Value to satisfy the
+// CredentialsValueProvider interface.
 type WithCredentialsValue credentials.Value
 
+// GetCredentialsValue returns the credentials value.
 func (v WithCredentialsValue) GetCredentialsValue() (credentials.Value, error) {
 	return credentials.Value(v), nil
 }
