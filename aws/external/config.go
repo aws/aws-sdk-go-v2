@@ -19,7 +19,7 @@ type Config interface{}
 // or the configuration data is malformed, or required components missing.
 type ConfigLoader func(Configs) (Config, error)
 
-// An AWSConfigResolver will extract configuraiton data from the Configs slice
+// An AWSConfigResolver will extract configuration data from the Configs slice
 // using the provider interfaces to extract specific functionality. The extracted
 // configuration values will be written to the AWS Config value.
 //
