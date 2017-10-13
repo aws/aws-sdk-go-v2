@@ -9,40 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 	"github.com/aws/aws-sdk-go-v2/aws/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/aws/credentials/endpointcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
-
-// DefaultEndpointResolver returns the default SDK endpoint resolver
-func DefaultEndpointResolver() endpoints.Resolver {
-	// TODO move Resolver interface to aws package
-	return endpoints.DefaultResolver()
-}
-
-// DefaultLogger returns the SDK default logger.
-func DefaultLogger() aws.Logger {
-	// TODO move default logger setup into this package
-	return aws.NewDefaultLogger()
-}
-
-// DefaultHTTPClient returns a default HTTP client.
-func DefaultHTTPClient() *http.Client {
-	// TODO consider a HTTP client builder
-	return &http.Client{}
-}
-
-// DefaultRequestRetrier returns the default request retrier.
-func DefaultRequestRetrier() request.Retryer {
-	// TODO default request retrier
-	return nil
-}
-
-// DefaultHandlers returns a default set of handlers
-func DefaultHandlers() request.Handlers {
-	// TODO move default handlers into this package?
-	return defaults.Handlers()
-}
 
 // ResolveDefaultAWSConfig will write default configuration values into the cfg
 // value. It will write the default values, overwriting any previous value.
@@ -50,11 +18,11 @@ func DefaultHandlers() request.Handlers {
 // This should be used as the first resolver in the slice of resolvers when
 // resolving external configuration.
 func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
-	cfg.EndpointResolver = DefaultEndpointResolver()
-	cfg.HTTPClient = DefaultHTTPClient()
-	cfg.Logger = DefaultLogger()
-	cfg.Retryer = DefaultRequestRetrier()
-	//	TODO cfg.Handlers = DefaultHandlers()
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+	cfg.HTTPClient = &http.Client{} // TODO replace with a Sender not HTTP specific
+	cfg.Logger = aws.NewDefaultLogger()
+	cfg.Retryer = nil // TODO need expose defaulte retrier
+	//	TODO cfg.Handlers = defaults.Handlers()
 	return nil
 }
 
@@ -68,7 +36,8 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 	for _, extCfg := range configs {
 		if p, ok := extCfg.(CustomCABundleFileProvider); ok {
 			if v, err := p.GetCustomCABundleFile(); err == nil && len(v) > 0 {
-				// TODO need to suport custom CA bundle
+				// TODO need to suport custom CA bundle. Adding it to the
+				// Sender's TLs cert pool
 				return fmt.Errorf("ResolveCustomeCABundle not implemented")
 			}
 			// TODO error handling, What is the best way to handle this?
