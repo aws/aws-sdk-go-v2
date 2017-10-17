@@ -98,6 +98,16 @@ type SharedConfig struct {
 	Region string
 }
 
+// GetRegion returns the region for the profile if a region is set.
+func (c SharedConfig) GetRegion() (string, error) {
+	return c.Region, nil
+}
+
+// GetCredentialsValue returns the credentials for a profile if they were set.
+func (c SharedConfig) GetCredentialsValue() (aws.Value, error) {
+	return c.Creds, nil
+}
+
 // StaticSharedConfigProfile wraps a strings to satisfy the SharedConfigProfileProvider
 // interface so a slice of custom shared config files ared used when loading the
 // SharedConfig.

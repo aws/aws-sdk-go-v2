@@ -74,6 +74,8 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 					Value: v,
 				}
 				cfg.Credentials = aws.NewCredentials(provider)
+				crds, err := cfg.Credentials.Get()
+				fmt.Println("found credentials", crds, err)
 				break
 			}
 			// TODO error handling, What is the best way to handle this?

@@ -7,7 +7,7 @@ import (
 )
 
 func TestResolveCABundle(t *testing.T) {
-	t.Errorf("not implemented")
+	t.Errorf("pending HTTP client builder")
 }
 
 func TestResolveRegion(t *testing.T) {
