@@ -66,10 +66,12 @@ var DefaultSharedConfigFiles = []string{
 // assume role.
 type AssumeRoleConfig struct {
 	RoleARN         string
-	SourceProfile   string
 	ExternalID      string
 	MFASerial       string
 	RoleSessionName string
+
+	sourceProfile string
+	Source        *SharedConfig
 }
 
 // SharedConfig represents the configuration fields of the SDK config files.
@@ -87,9 +89,8 @@ type SharedConfig struct {
 	//	aws_session_token
 	Creds aws.Value
 
-	// TODO need good way to expose these in Provider interface
-	AssumeRole       AssumeRoleConfig
-	AssumeRoleSource *SharedConfig
+	AssumeRole AssumeRoleConfig
+	//	AssumeRoleSource *SharedConfig
 
 	// Region is the region the SDK should use for looking up AWS service endpoints
 	// and signing requests.
@@ -177,16 +178,16 @@ func LoadSharedConfig(cfgs Configs) (Config, error) {
 // For example, given two files A and B. Both define credentials. If the order
 // of the files are A then B, B's credential values will be used instead of A's.
 //
-// See SharedConfig.setFromFile for information how the config files
-// will be loaded.
+// Will ignore files that do not exist or cannot be read.
 func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
-	if len(profile) == 0 {
-		profile = DefaultSharedConfigProfile
-	}
-
 	files, err := loadSharedConfigIniFiles(filenames)
 	if err != nil {
 		return SharedConfig{}, err
+	}
+
+	if len(files) == 0 {
+		// TODO should return error if failed to load all files.
+		return SharedConfig{}, nil
 	}
 
 	cfg := SharedConfig{}
@@ -194,7 +195,7 @@ func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
 		return SharedConfig{}, err
 	}
 
-	if len(cfg.AssumeRole.SourceProfile) > 0 {
+	if len(cfg.AssumeRole.sourceProfile) > 0 {
 		if err := cfg.setAssumeRoleSource(profile, files); err != nil {
 			return SharedConfig{}, err
 		}
@@ -214,6 +215,10 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	for _, filename := range filenames {
 		b, err := ioutil.ReadFile(filename)
 		if err != nil {
+			// TODO create stronger contract that will return error if none of
+			// the files can be opened. Let the caller determine if it should
+			// continue if the files fail to load.
+
 			// Skip files which can't be opened and read for whatever reason
 			continue
 		}
@@ -235,11 +240,11 @@ func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedCon
 	var assumeRoleSrc SharedConfig
 
 	// Multiple level assume role chains are not support
-	if c.AssumeRole.SourceProfile == origProfile {
+	if c.AssumeRole.sourceProfile == origProfile {
 		assumeRoleSrc = *c
 		assumeRoleSrc.AssumeRole = AssumeRoleConfig{}
 	} else {
-		err := assumeRoleSrc.setFromIniFiles(c.AssumeRole.SourceProfile, files)
+		err := assumeRoleSrc.setFromIniFiles(c.AssumeRole.sourceProfile, files)
 		if err != nil {
 			return err
 		}
@@ -249,7 +254,7 @@ func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedCon
 		return SharedConfigAssumeRoleError{RoleARN: c.AssumeRole.RoleARN}
 	}
 
-	c.AssumeRoleSource = &assumeRoleSrc
+	c.AssumeRole.Source = &assumeRoleSrc
 
 	return nil
 }
@@ -307,10 +312,11 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	if len(roleArn) > 0 && len(srcProfile) > 0 {
 		c.AssumeRole = AssumeRoleConfig{
 			RoleARN:         roleArn,
-			SourceProfile:   srcProfile,
 			ExternalID:      section.Key(externalIDKey).String(),
 			MFASerial:       section.Key(mfaSerialKey).String(),
 			RoleSessionName: section.Key(roleSessionNameKey).String(),
+
+			sourceProfile: srcProfile,
 		}
 	}
 

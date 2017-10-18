@@ -1,8 +1,6 @@
 package external
 
 import (
-	"fmt"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
@@ -22,7 +20,7 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 	ResolveDefaultAWSConfig,
 	ResolveCustomCABundle,
 	ResolveRegion,
-	ResolveCredentialsValue,
+	ResolveCredentialsValue, // TODO move endpoint resolers into single call?
 	ResolveEndpointCredentials,
 	ResolveAssumeRoleCredentials,
 	ResolveFallbackEC2Credentials,
@@ -130,6 +128,22 @@ func LoadDefaultAWSConfig(configs ...Config) (aws.Config, error) {
 	return cfgs.ResolveAWSConfig(DefaultAWSConfigResolvers)
 }
 
+func GetCustomCABundleFile(configs Configs) (string, bool, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(CustomCABundleFileProvider); ok {
+			v, err := p.GetCustomCABundleFile()
+			if err != nil {
+				return "", false, err
+			}
+			if len(v) > 0 {
+				return v, true, nil
+			}
+		}
+	}
+
+	return "", false, nil
+}
+
 // WithRegion provides wrapping of a region string to satisfy the RegionProvider
 // interface.
 type WithRegion string
@@ -137,6 +151,22 @@ type WithRegion string
 // GetRegion returns the region string.
 func (v WithRegion) GetRegion() (string, error) {
 	return string(v), nil
+}
+
+func GetRegion(configs Configs) (string, bool, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(RegionProvider); ok {
+			v, err := p.GetRegion()
+			if err != nil {
+				return "", false, err
+			}
+			if len(v) > 0 {
+				return v, true, nil
+			}
+		}
+	}
+
+	return "", false, nil
 }
 
 // WithCredentialsValue provides wrapping of a credentials Value to satisfy the
@@ -148,75 +178,40 @@ func (v WithCredentialsValue) GetCredentialsValue() (aws.Value, error) {
 	return aws.Value(v), nil
 }
 
+func GetCredentialsValue(configs Configs) (aws.Value, bool, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(CredentialsValueProvider); ok {
+			v, err := p.GetCredentialsValue()
+			if err != nil {
+				return aws.Value{}, false, err
+			}
+			if v.Valid() {
+				return v, true, nil
+			}
+		}
+	}
+
+	return aws.Value{}, false, nil
+}
+
 type WithCredentialsEndpoint string
 
 func (p WithCredentialsEndpoint) GetCredentialsEndpoint() (string, error) {
 	return string(p), nil
 }
 
-func GetCustomCABundleFile(configs Configs) (string, error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(CustomCABundleFileProvider); ok {
-			v, err := p.GetCustomCABundleFile()
-			if err != nil {
-				return "", err
-			}
-			if len(v) > 0 {
-				return v, nil
-			}
-		}
-	}
-
-	return "", ErrNotFound
-}
-
-func GetRegion(configs Configs) (string, error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(RegionProvider); ok {
-			v, err := p.GetRegion()
-			if err != nil {
-				return "", err
-			}
-			if len(v) > 0 {
-				return v, nil
-			}
-		}
-	}
-
-	return "", ErrNotFound
-}
-
-func GetCredentialsValue(configs Configs) (aws.Value, error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(CredentialsValueProvider); ok {
-			v, err := p.GetCredentialsValue()
-			if err != nil {
-				return aws.Value{}, err
-			}
-			if v.Valid() {
-				return v, nil
-			}
-		}
-	}
-
-	return aws.Value{}, ErrNotFound
-}
-
-func GetCredentialsEndpoint(configs Configs) (string, error) {
+func GetCredentialsEndpoint(configs Configs) (string, bool, error) {
 	for _, cfg := range configs {
 		if p, ok := cfg.(CredentialsEndpointProvider); ok {
 			v, err := p.GetCredentialsEndpoint()
 			if err != nil {
-				return "", err
+				return "", false, err
 			}
 			if len(v) > 0 {
-				return v, nil
+				return v, true, nil
 			}
 		}
 	}
 
-	return "", ErrNotFound
+	return "", false, nil
 }
-
-// TODO should this be private, and export helper funciton instead?
-var ErrNotFound = fmt.Errorf("not found")

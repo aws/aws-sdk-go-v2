@@ -27,14 +27,14 @@ func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
 // Config provider used:
 // * CustomCABundleFileProvider
 func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
-	v, err := GetCustomCABundleFile(configs)
-	if err == ErrNotFound {
-		return nil
-	}
+	v, found, err := GetCustomCABundleFile(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
 		return err
+	}
+	if !found {
+		return nil
 	}
 
 	// TODO need to suport custom CA bundle. Adding it to the TLs cert pool.
@@ -46,14 +46,14 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 // * RegionProvider
 func ResolveRegion(cfg *aws.Config, configs Configs) error {
-	v, err := GetRegion(configs)
-	if err == ErrNotFound {
-		return nil
-	}
+	v, found, err := GetRegion(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
 		return err
+	}
+	if !found {
+		return nil
 	}
 
 	cfg.Region = aws.String(v)
@@ -66,14 +66,14 @@ func ResolveRegion(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 // * CredentialsValueProvider
 func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
-	v, err := GetCredentialsValue(configs)
-	if err == ErrNotFound {
-		return nil
-	}
+	v, found, err := GetCredentialsValue(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
 		return err
+	}
+	if !found {
+		return nil
 	}
 
 	provider := aws.StaticProvider{Value: v}
@@ -88,14 +88,14 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 // * CredentialsEndpointProvider
 func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
-	v, err := GetCredentialsEndpoint(configs)
-	if err == ErrNotFound {
-		return nil
-	}
+	v, found, err := GetCredentialsEndpoint(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
 		return err
+	}
+	if !found {
+		return nil
 	}
 
 	// TODO validate endpoint URL (localhost, 127/8, ect)
