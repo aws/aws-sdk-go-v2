@@ -231,35 +231,35 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	return files, nil
 }
 
-func (cfg *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedConfigFile) error {
+func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedConfigFile) error {
 	var assumeRoleSrc SharedConfig
 
 	// Multiple level assume role chains are not support
-	if cfg.AssumeRole.SourceProfile == origProfile {
-		assumeRoleSrc = *cfg
+	if c.AssumeRole.SourceProfile == origProfile {
+		assumeRoleSrc = *c
 		assumeRoleSrc.AssumeRole = AssumeRoleConfig{}
 	} else {
-		err := assumeRoleSrc.setFromIniFiles(cfg.AssumeRole.SourceProfile, files)
+		err := assumeRoleSrc.setFromIniFiles(c.AssumeRole.SourceProfile, files)
 		if err != nil {
 			return err
 		}
 	}
 
 	if len(assumeRoleSrc.Creds.AccessKeyID) == 0 {
-		return SharedConfigAssumeRoleError{RoleARN: cfg.AssumeRole.RoleARN}
+		return SharedConfigAssumeRoleError{RoleARN: c.AssumeRole.RoleARN}
 	}
 
-	cfg.AssumeRoleSource = &assumeRoleSrc
+	c.AssumeRoleSource = &assumeRoleSrc
 
 	return nil
 }
 
-func (cfg *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile) error {
-	cfg.Profile = profile
+func (c *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile) error {
+	c.Profile = profile
 
 	// Trim files from the list that don't exist.
 	for _, f := range files {
-		if err := cfg.setFromIniFile(profile, f); err != nil {
+		if err := c.setFromIniFile(profile, f); err != nil {
 			if _, ok := err.(SharedConfigProfileNotExistsError); ok {
 				// Ignore proviles missings
 				continue
@@ -279,7 +279,7 @@ func (cfg *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFil
 // for incomplete grouped values in the config. Such as credentials. For example
 // if a config file only includes aws_access_key_id but no aws_secret_access_key
 // the aws_access_key_id will be ignored.
-func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) error {
+func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) error {
 	section, err := file.IniData.GetSection(profile)
 	if err != nil {
 		// Fallback to to alternate profile name: profile <name>
@@ -293,7 +293,7 @@ func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) e
 	akid := section.Key(accessKeyIDKey).String()
 	secret := section.Key(secretAccessKey).String()
 	if len(akid) > 0 && len(secret) > 0 {
-		cfg.Creds = aws.Value{
+		c.Creds = aws.Value{
 			AccessKeyID:     akid,
 			SecretAccessKey: secret,
 			SessionToken:    section.Key(sessionTokenKey).String(),
@@ -305,7 +305,7 @@ func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) e
 	roleArn := section.Key(roleArnKey).String()
 	srcProfile := section.Key(sourceProfileKey).String()
 	if len(roleArn) > 0 && len(srcProfile) > 0 {
-		cfg.AssumeRole = AssumeRoleConfig{
+		c.AssumeRole = AssumeRoleConfig{
 			RoleARN:         roleArn,
 			SourceProfile:   srcProfile,
 			ExternalID:      section.Key(externalIDKey).String(),
@@ -316,7 +316,7 @@ func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) e
 
 	// Region
 	if v := section.Key(regionKey).String(); len(v) > 0 {
-		cfg.Region = v
+		c.Region = v
 	}
 
 	return nil
