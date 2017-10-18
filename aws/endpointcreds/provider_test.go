@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -33,24 +34,24 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 		}
 	}))
 
-	client := endpointcreds.NewProviderClient(*unit.Config,
-		unit.Config.Handlers,
-		server.URL+"/path/to/endpoint?something=else",
-	)
-	creds, err := client.Retrieve()
+	cfg := unit.Config.Copy()
+	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL+"/path/to/endpoint?something=else")
+
+	svc := endpointcreds.New(*cfg)
+	creds, err := svc.Retrieve()
 
 	assert.NoError(t, err)
 
 	assert.Equal(t, "AKID", creds.AccessKeyID)
 	assert.Equal(t, "SECRET", creds.SecretAccessKey)
 	assert.Equal(t, "TOKEN", creds.SessionToken)
-	assert.False(t, client.IsExpired())
+	assert.False(t, svc.IsExpired())
 
-	client.(*endpointcreds.Provider).CurrentTime = func() time.Time {
+	svc.CurrentTime = func() time.Time {
 		return time.Now().Add(2 * time.Hour)
 	}
 
-	assert.True(t, client.IsExpired())
+	assert.True(t, svc.IsExpired())
 }
 
 func TestRetrieveStaticCredentials(t *testing.T) {
@@ -66,7 +67,10 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 		}
 	}))
 
-	client := endpointcreds.NewProviderClient(*unit.Config, unit.Config.Handlers, server.URL)
+	cfg := unit.Config.Copy()
+	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL)
+
+	client := endpointcreds.New(*cfg)
 	creds, err := client.Retrieve()
 
 	assert.NoError(t, err)
@@ -91,7 +95,10 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 		}
 	}))
 
-	client := endpointcreds.NewProviderClient(*unit.Config, unit.Config.Handlers, server.URL)
+	cfg := unit.Config.Copy()
+	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL)
+
+	client := endpointcreds.New(*cfg)
 	creds, err := client.Retrieve()
 
 	assert.Error(t, err)

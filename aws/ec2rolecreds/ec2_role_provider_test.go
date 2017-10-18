@@ -55,7 +55,9 @@ func TestEC2RoleProvider(t *testing.T) {
 	defer server.Close()
 
 	p := &ec2rolecreds.EC2RoleProvider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{Endpoint: aws.String(server.URL + "/latest")}),
+		Client: ec2metadata.New(unit.Config, &aws.Config{
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		}),
 	}
 
 	creds, err := p.Retrieve()
@@ -71,7 +73,9 @@ func TestEC2RoleProviderFailAssume(t *testing.T) {
 	defer server.Close()
 
 	p := &ec2rolecreds.EC2RoleProvider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{Endpoint: aws.String(server.URL + "/latest")}),
+		Client: ec2metadata.New(unit.Config, &aws.Config{
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		}),
 	}
 
 	creds, err := p.Retrieve()
@@ -92,7 +96,9 @@ func TestEC2RoleProviderIsExpired(t *testing.T) {
 	defer server.Close()
 
 	p := &ec2rolecreds.EC2RoleProvider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{Endpoint: aws.String(server.URL + "/latest")}),
+		Client: ec2metadata.New(unit.Config, &aws.Config{
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		}),
 	}
 	p.CurrentTime = func() time.Time {
 		return time.Date(2014, 12, 15, 21, 26, 0, 0, time.UTC)
@@ -117,7 +123,9 @@ func TestEC2RoleProviderExpiryWindowIsExpired(t *testing.T) {
 	defer server.Close()
 
 	p := &ec2rolecreds.EC2RoleProvider{
-		Client:       ec2metadata.New(unit.Config, &aws.Config{Endpoint: aws.String(server.URL + "/latest")}),
+		Client:       ec2metadata.New(unit.Config, &aws.Config{
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		}),
 		ExpiryWindow: time.Hour * 1,
 	}
 	p.CurrentTime = func() time.Time {
@@ -143,7 +151,9 @@ func BenchmarkEC3RoleProvider(b *testing.B) {
 	defer server.Close()
 
 	p := &ec2rolecreds.EC2RoleProvider{
-		Client: ec2metadata.New(unit.Config, &aws.Config{Endpoint: aws.String(server.URL + "/latest")}),
+		Client: ec2metadata.New(unit.Config, &aws.Config{
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		}),
 	}
 	_, err := p.Retrieve()
 	if err != nil {

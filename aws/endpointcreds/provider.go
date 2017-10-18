@@ -43,12 +43,11 @@ const ProviderName = `CredentialsEndpointProvider`
 // Provider satisfies the aws.Provider interface, and is a client to
 // retrieve credentials from an arbitrary endpoint.
 type Provider struct {
-	staticCreds bool
 	aws.Expiry
 
-	// Requires a AWS Client to make HTTP requests to the endpoint with.
-	// the Endpoint the request will be made to is provided by the aws.Config's
-	// Endpoint value.
+	// The AWS Client to make HTTP requests to the endpoint with. The endpoint
+	// the request will be made to is provided by the aws.Config's
+	// EndpointResolver.
 	Client *aws.Client
 
 	// ExpiryWindow will allow the credentials to trigger refreshing prior to
@@ -61,19 +60,24 @@ type Provider struct {
 	//
 	// If ExpiryWindow is 0 or less it will be ignored.
 	ExpiryWindow time.Duration
+
+	staticCreds bool
 }
 
-// NewProviderClient returns a credentials Provider for retrieving AWS credentials
+// New returns a credentials Provider for retrieving AWS credentials
 // from arbitrary endpoint.
-func NewProviderClient(cfg aws.Config, handlers aws.Handlers, endpoint string, options ...func(*Provider)) aws.Provider {
+func New(cfg aws.Config) *Provider {
+	// TODO don't ignore error
+	endpoint, _ := cfg.EndpointResolver.EndpointFor("CredentialsEndpoint", "")
+
 	p := &Provider{
 		Client: aws.NewClient(
 			cfg,
 			aws.ClientInfo{
 				ServiceName: "CredentialsEndpoint",
-				Endpoint:    endpoint,
+				Endpoint:    endpoint.URL,
 			},
-			handlers,
+			cfg.Handlers,
 		),
 	}
 
@@ -82,17 +86,7 @@ func NewProviderClient(cfg aws.Config, handlers aws.Handlers, endpoint string, o
 	p.Client.Handlers.Validate.Clear()
 	p.Client.Handlers.Validate.PushBack(validateEndpointHandler)
 
-	for _, option := range options {
-		option(p)
-	}
-
 	return p
-}
-
-// NewCredentialsClient returns a Credentials wrapper for retrieving credentials
-// from an arbitrary endpoint concurrently. The client will request the
-func NewCredentialsClient(cfg aws.Config, handlers aws.Handlers, endpoint string, options ...func(*Provider)) *aws.Credentials {
-	return aws.NewCredentials(NewProviderClient(cfg, handlers, endpoint, options...))
 }
 
 // IsExpired returns true if the credentials retrieved are expired, or not yet

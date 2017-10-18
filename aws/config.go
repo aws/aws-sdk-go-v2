@@ -7,51 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
-// A Config provides service configuration for service clients. By default,
-// all clients will use the defaults.DefaultConfig tructure.
-//
-//     // Create Session with MaxRetry configuration to be shared by multiple
-//     // service clients.
-//     sess := session.Must(session.NewSession(&aws.Config{
-//         MaxRetries: aws.Int(3),
-//     }))
-//
-//     // Create S3 service client with a specific Region.
-//     svc := s3.New(sess, &aws.Config{
-//         Region: aws.String("us-west-2"),
-//     })
+// A Config provides service configuration for service clients.
 type Config struct {
-	Handlers Handlers
-
-	// Enables verbose error printing of all credential chain errors.
-	// Should be used when wanting to see all errors while attempting to
-	// retrieve credentials.
-	CredentialsChainVerboseErrors *bool
-
-	// The credentials object to use when signing requests. Defaults to a
-	// chain of credential providers to search for credentials in environment
-	// variables, shared credential file, and EC2 Instance Roles.
-	Credentials *Credentials
-
-	// An optional endpoint URL (hostname only or fully qualified URI)
-	// that overrides the default generated endpoint for a client. Set this
-	// to `""` to use the default generated endpoint.
-	//
-	// @note You must still provide a `Region` value when specifying an
-	//   endpoint for a client.
-	Endpoint *string
-
-	// The resolver to use for looking up endpoints for AWS service clients
-	// to use based on region.
-	EndpointResolver EndpointResolver
-
-	// EnforceShouldRetryCheck is used in the AfterRetryHandler to always call
-	// ShouldRetry regardless of whether or not if request.Retryable is set.
-	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
-	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
-	// Proper handling of the request.Retryable field is important when setting this field.
-	EnforceShouldRetryCheck *bool
-
 	// The region to send requests to. This parameter is required and must
 	// be configured globally or on a per-client basis unless otherwise
 	// noted. A full list of regions is found in the "Regions and Endpoints"
@@ -61,22 +18,21 @@ type Config struct {
 	//   AWS Regions and Endpoints
 	Region *string
 
-	// Set this to `true` to disable SSL when sending requests. Defaults
-	// to `false`.
-	DisableSSL *bool
+	// The credentials object to use when signing requests. Defaults to a
+	// chain of credential providers to search for credentials in environment
+	// variables, shared credential file, and EC2 Instance Roles.
+	Credentials *Credentials
+
+	// The resolver to use for looking up endpoints for AWS service clients
+	// to use based on region.
+	EndpointResolver EndpointResolver
 
 	// The HTTP client to use when sending requests. Defaults to
 	// `http.DefaultClient`.
 	HTTPClient *http.Client
 
-	// An integer value representing the logging level. The default log level
-	// is zero (LogOff), which represents no logging. To enable logging set
-	// to a LogLevel Value.
-	LogLevel *LogLevelType
-
-	// The logger writer interface to write logging messages to. Defaults to
-	// standard out.
-	Logger Logger
+	// TODO document
+	Handlers Handlers
 
 	// Retryer guides how HTTP requests should be retried in case of
 	// recoverable failures.
@@ -93,6 +49,26 @@ type Config struct {
 	//   cfg := request.WithRetryer(aws.NewConfig(), myRetryer)
 	//
 	Retryer Retryer
+
+	// An integer value representing the logging level. The default log level
+	// is zero (LogOff), which represents no logging. To enable logging set
+	// to a LogLevel Value.
+	LogLevel *LogLevelType
+
+	// The logger writer interface to write logging messages to. Defaults to
+	// standard out.
+	Logger Logger
+
+	// EnforceShouldRetryCheck is used in the AfterRetryHandler to always call
+	// ShouldRetry regardless of whether or not if request.Retryable is set.
+	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
+	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
+	// Proper handling of the request.Retryable field is important when setting this field.
+	EnforceShouldRetryCheck *bool
+
+	// Set this to `true` to disable SSL when sending requests. Defaults
+	// to `false`.
+	DisableSSL *bool
 
 	// Disables semantic parameter validation, which validates input for
 	// missing required fields and/or other semantic request input errors.
@@ -227,9 +203,6 @@ func (c Config) ClientConfig(serviceName string, cfgs ...*Config) ClientConfig {
 		},
 	)
 
-	// TODO need to simplify Endpoint
-	cfg.Endpoint = String(endpoint.URL)
-
 	clientCfg := ClientConfig{
 		Config:        cfg,
 		Handlers:      cfg.Handlers,
@@ -241,24 +214,10 @@ func (c Config) ClientConfig(serviceName string, cfgs ...*Config) ClientConfig {
 	return clientCfg
 }
 
-// WithCredentialsChainVerboseErrors sets a config verbose errors boolean and returning
-// a Config pointer.
-func (c *Config) WithCredentialsChainVerboseErrors(verboseErrs bool) *Config {
-	c.CredentialsChainVerboseErrors = &verboseErrs
-	return c
-}
-
 // WithCredentials sets a config Credentials value returning a Config pointer
 // for chaining.
 func (c *Config) WithCredentials(creds *Credentials) *Config {
 	c.Credentials = creds
-	return c
-}
-
-// WithEndpoint sets a config Endpoint value returning a Config pointer for
-// chaining.
-func (c *Config) WithEndpoint(endpoint string) *Config {
-	c.Endpoint = &endpoint
 	return c
 }
 
@@ -372,18 +331,8 @@ func mergeInConfig(dst *Config, other *Config) {
 		return
 	}
 
-	if other.CredentialsChainVerboseErrors != nil {
-		dst.CredentialsChainVerboseErrors = other.CredentialsChainVerboseErrors
-	}
-
 	if other.Credentials != nil {
 		dst.Credentials = other.Credentials
-	}
-
-	if other.Endpoint != nil {
-		// TODO remove endpoint and replace with endpoint resolver
-		dst.EndpointResolver = ResolveStaticEndpointURL(StringValue(other.Endpoint))
-		dst.Endpoint = other.Endpoint
 	}
 
 	if other.EndpointResolver != nil {

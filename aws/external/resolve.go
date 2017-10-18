@@ -101,7 +101,6 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 					ExpiryWindow: 5 * time.Minute,
 				}
 				cfg.Credentials = aws.NewCredentials(provider)
-
 				break
 			}
 			// TODO error handling, What is the best way to handle this?

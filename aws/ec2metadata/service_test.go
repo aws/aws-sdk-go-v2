@@ -49,7 +49,9 @@ func TestClientOverrideDefaultHTTPClientTimeoutRace(t *testing.T) {
 		w.Write([]byte("us-east-1a"))
 	}))
 
-	cfg := aws.NewConfig().WithEndpoint(server.URL)
+	cfg := &aws.Config{
+		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+	}
 	runEC2MetadataClients(t, cfg, 100)
 }
 
@@ -58,9 +60,12 @@ func TestClientOverrideDefaultHTTPClientTimeoutRaceWithTransport(t *testing.T) {
 		w.Write([]byte("us-east-1a"))
 	}))
 
-	cfg := aws.NewConfig().WithEndpoint(server.URL).WithHTTPClient(&http.Client{
-		Transport: http.DefaultTransport,
-	})
+	cfg := &aws.Config{
+		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		HTTPClient: &http.Client{
+			Transport: http.DefaultTransport,
+		},
+	}
 
 	runEC2MetadataClients(t, cfg, 100)
 }

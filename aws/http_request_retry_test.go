@@ -9,6 +9,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/mock"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+
 	"github.com/stretchr/testify/assert"
 )
 
