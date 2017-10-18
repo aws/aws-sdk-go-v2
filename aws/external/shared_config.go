@@ -109,24 +109,10 @@ func (c SharedConfig) GetCredentialsValue() (aws.Value, error) {
 	return c.Creds, nil
 }
 
-// StaticSharedConfigProfile wraps a strings to satisfy the SharedConfigProfileProvider
-// interface so a slice of custom shared config files ared used when loading the
-// SharedConfig.
-type StaticSharedConfigProfile string
-
-// GetSharedConfigProfile returns the shared config profile.
-func (c StaticSharedConfigProfile) GetSharedConfigProfile() (string, error) {
-	return string(c), nil
-}
-
-// StaticSharedConfigFiles wraps a slice of strings to satisfy the
-// SharedConfigFilesProvider interface so a slice of custom shared config files
-// ared used when loading the SharedConfig.
-type StaticSharedConfigFiles []string
-
-// GetSharedConfigFiles returns the slice of shared config files.
-func (c StaticSharedConfigFiles) GetSharedConfigFiles() ([]string, error) {
-	return []string(c), nil
+// GetAssumeRoleConfig returns the assume role config for a profile. Will be
+// a zero value if not set.
+func (c SharedConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
+	return c.AssumeRole, nil
 }
 
 // LoadSharedConfig uses the Configs passed in to load the SharedConfig from file

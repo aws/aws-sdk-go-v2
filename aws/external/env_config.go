@@ -15,8 +15,8 @@ const (
 	AWSAccessKeyIDEnvVar = "AWS_ACCESS_KEY_ID"
 	AWSAccessKeyEnvVar   = "AWS_ACCESS_KEY"
 
-	AWSSecreteAccessKeyEnvVar = "AWS_ACCESS_KEY_ID"
-	AWSSecreteKeyEnvVar       = "AWS_ACCESS_KEY"
+	AWSSecreteAccessKeyEnvVar = "AWS_SECRET_ACCESS_KEY"
+	AWSSecreteKeyEnvVar       = "AWS_SECRET_KEY"
 
 	AWSSessionTokenEnvVar = "AWS_SESSION_TOKEN"
 
@@ -152,9 +152,7 @@ func NewEnvConfig() (EnvConfig, error) {
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
 	setFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
 	if creds.Valid() {
-		creds.SessionToken = AWSSessionTokenEnvVar
-		creds.ProviderName = CredentialsSourceName
-
+		creds.SessionToken = os.Getenv(AWSSessionTokenEnvVar)
 		cfg.Credentials = creds
 	}
 

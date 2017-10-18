@@ -9,8 +9,8 @@ import (
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
 	_, err := Configs{
-		StaticSharedConfigProfile("profile-name"),
-		StaticSharedConfigFiles([]string{"creds-file"}),
+		WithSharedConfigProfile("profile-name"),
+		WithSharedConfigFiles([]string{"creds-file"}),
 	}.AppendFromLoaders([]ConfigLoader{
 		func(configs Configs) (Config, error) {
 			var profile string
