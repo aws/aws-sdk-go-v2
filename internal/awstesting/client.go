@@ -13,7 +13,7 @@ func NewClient(cfgs ...*aws.Config) *aws.Client {
 
 	endpoint, _ := cfg.EndpointResolver.EndpointFor("mock-client", aws.StringValue(cfg.Region))
 	info := aws.ClientInfo{
-		Endpoint:    endpoint.URL,
+		Endpoint: endpoint.URL,
 	}
 
 	return aws.NewClient(cfg, info, cfg.Handlers)

@@ -396,7 +396,7 @@ func TestBatchDeleteList(t *testing.T) {
 
 func buildS3SvcClient(u string) *s3.S3 {
 	return s3.New(unit.Config, &aws.Config{
-		Endpoint:         aws.String(u),
+		EndpointResolver: aws.ResolveStaticEndpointURL(u),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
 		Credentials:      credentials.NewStaticCredentials("AKID", "SECRET", "SESSION"),

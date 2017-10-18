@@ -237,7 +237,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 	}))
 
 	svc := awstesting.NewClient(&aws.Config{
-		DisableSSL: aws.Bool(true),
+		DisableSSL:       aws.Bool(true),
 		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
 	})
 	svc.Handlers.Clear()

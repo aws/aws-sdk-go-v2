@@ -125,8 +125,8 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 		}
 	}))
 	svc := s3.New(unit.Config, &aws.Config{
-		Endpoint:   aws.String(server.URL),
-		DisableSSL: aws.Bool(true),
+		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		DisableSSL:       aws.Bool(true),
 	})
 
 	_, err := svc.PutObject(&s3.PutObjectInput{
@@ -150,8 +150,8 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 		w.Header().Set(metaKeyPrefix+utf8KeySuffix, utf8Value)
 	}))
 	svc := s3.New(unit.Config, &aws.Config{
-		Endpoint:   aws.String(server.URL),
-		DisableSSL: aws.Bool(true),
+		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		DisableSSL:       aws.Bool(true),
 	})
 
 	resp, err := svc.GetObject(&s3.GetObjectInput{

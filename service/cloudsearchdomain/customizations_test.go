@@ -49,7 +49,7 @@ func TestRequireEndpointUsed(t *testing.T) {
 	svc := cloudsearchdomain.New(unit.Config, &aws.Config{
 		Region:                 aws.String("mock-region"),
 		DisableParamValidation: aws.Bool(true),
-		Endpoint:               aws.String("https://endpoint"),
+		EndpointResolver:       aws.ResolveStaticEndpointURL("https://endpoint"),
 	})
 	req, _ := svc.SearchRequest(nil)
 	err := req.Build()

@@ -74,9 +74,9 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
 		svc := s3.New(unit.Config, &aws.Config{
-			Region:     aws.String("region"),
-			Endpoint:   aws.String(server.URL),
-			DisableSSL: aws.Bool(true),
+			Region:           aws.String("region"),
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+			DisableSSL:       aws.Bool(true),
 		})
 
 		ctx := aws.BackgroundContext()

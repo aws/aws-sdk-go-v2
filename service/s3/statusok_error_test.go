@@ -159,7 +159,7 @@ func newCopyTestSvc(errMsg string) *s3.S3 {
 		http.Error(w, errMsg, http.StatusOK)
 	}))
 	return s3.New(unit.Config, &aws.Config{
-		Endpoint:         aws.String(server.URL),
+		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
 		DisableSSL:       aws.Bool(true),
 		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		S3ForcePathStyle: aws.Bool(true),

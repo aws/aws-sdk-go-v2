@@ -101,7 +101,7 @@ func TestCEKFactory(t *testing.T) {
 
 	cfg := unit.Config.Copy(&aws.Config{
 		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		Endpoint:         aws.String(ts.URL),
+		EndpointResolver: aws.ResolveStaticEndpointURL(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
@@ -160,7 +160,7 @@ func TestCEKFactoryNoCEK(t *testing.T) {
 
 	cfg := unit.Config.Copy(&aws.Config{
 		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		Endpoint:         aws.String(ts.URL),
+		EndpointResolver: aws.ResolveStaticEndpointURL(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
@@ -219,7 +219,7 @@ func TestCEKFactoryCustomEntry(t *testing.T) {
 
 	cfg := unit.Config.Copy(&aws.Config{
 		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
-		Endpoint:         aws.String(ts.URL),
+		EndpointResolver: aws.ResolveStaticEndpointURL(ts.URL),
 		DisableSSL:       aws.Bool(true),
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),

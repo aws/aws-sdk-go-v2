@@ -481,10 +481,10 @@ func TestRequest_NoBody(t *testing.T) {
 		}))
 
 		s := awstesting.NewClient(&aws.Config{
-			Region:     aws.String("mock-region"),
-			Retryer:    aws.DefaultRetryer{NumMaxRetries: 0},
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
-			DisableSSL: aws.Bool(true),
+			Region:           aws.String("mock-region"),
+			Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
+			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+			DisableSSL:       aws.Bool(true),
 		})
 		s.Handlers.Build.PushBack(rest.Build)
 		s.Handlers.Validate.Clear()
@@ -724,7 +724,7 @@ func TestEnforceShouldRetryCheck(t *testing.T) {
 	retryer := &testRetryer{}
 	s := awstesting.NewClient(&aws.Config{
 		Region:                  aws.String("mock-region"),
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver:        aws.ResolveStaticEndpointURL(server.URL),
 		DisableSSL:              aws.Bool(true),
 		Retryer:                 retryer,
 		HTTPClient:              client,
@@ -799,10 +799,10 @@ func TestRequest_TemporaryRetry(t *testing.T) {
 	}
 
 	svc := awstesting.NewClient(&aws.Config{
-		Region:     unit.Config.Region,
-		Retryer:    aws.DefaultRetryer{NumMaxRetries: 1},
-		HTTPClient: client,
-		DisableSSL: aws.Bool(true),
+		Region:           unit.Config.Region,
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 1},
+		HTTPClient:       client,
+		DisableSSL:       aws.Bool(true),
 		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
 	})
 

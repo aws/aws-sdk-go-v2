@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -37,7 +37,7 @@ func main() {
 
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
-		panic("failed to load config, "+ err.Error())
+		panic("failed to load config, " + err.Error())
 	}
 
 	svc := s3.New(cfg)

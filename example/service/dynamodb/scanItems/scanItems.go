@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
 )
 
-func exitErrorf(msg string, args...interface{}) {
+func exitErrorf(msg string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
@@ -23,7 +23,6 @@ func main() {
 	if err := cfg.Load(); err != nil {
 		exitErrorf("failed to load config, %v", err)
 	}
-
 
 	// Create the config that the DynamoDB service will use.
 	awscfg, err := external.LoadDefaultAWSConfig()

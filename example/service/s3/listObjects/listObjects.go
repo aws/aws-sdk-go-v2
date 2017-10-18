@@ -14,6 +14,7 @@ func exitErrorf(msg string, args ...interface{}) {
 	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
+
 // Lists all objects in a bucket using pagination
 //
 // Usage:

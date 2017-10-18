@@ -123,7 +123,7 @@ func TestEC2RoleProviderExpiryWindowIsExpired(t *testing.T) {
 	defer server.Close()
 
 	p := &ec2rolecreds.EC2RoleProvider{
-		Client:       ec2metadata.New(unit.Config, &aws.Config{
+		Client: ec2metadata.New(unit.Config, &aws.Config{
 			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
 		}),
 		ExpiryWindow: time.Hour * 1,
