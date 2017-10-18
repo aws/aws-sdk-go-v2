@@ -9,7 +9,6 @@ import (
 func init() {
 	// TODO getting a default populated config should be in the "defaults" package
 	*Config = defaults.Config()
-	Config.EndpointResolver = aws.ResolveStaticEndpointURL("http://endpoint")
 	Config.Region = aws.String("mock-region")
 	Config.Credentials = aws.NewStaticCredentials("AKID", "SECRET", "SESSION")
 }

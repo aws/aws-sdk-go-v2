@@ -90,7 +90,6 @@ var ValidateReqSigHandler = aws.NamedHandler{
 			return
 		}
 
-		fmt.Println("request expired, resigning")
 		r.Sign()
 	},
 }

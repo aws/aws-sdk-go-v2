@@ -20,7 +20,8 @@ func TestRequestCancelRetry(t *testing.T) {
 
 	reqNum := 0
 	s := mock.NewMockClient(unit.Config.Copy(&aws.Config{
-		Retryer: aws.DefaultRetryer{NumMaxRetries: 10},
+		EndpointResolver: aws.ResolveStaticEndpointURL("http://endpoint"),
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 10},
 	}))
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.Clear()
