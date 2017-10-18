@@ -4,6 +4,7 @@ package aws_test
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 	"testing"
 
@@ -35,6 +36,7 @@ func TestRequestCancelRetry(t *testing.T) {
 	close(c)
 
 	err := r.Send()
+	fmt.Println("request error", err)
 	assert.True(t, strings.Contains(err.Error(), "canceled"))
 	assert.Equal(t, 1, reqNum)
 }
