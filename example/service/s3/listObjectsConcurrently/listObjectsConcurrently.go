@@ -36,7 +36,7 @@ func main() {
 			defer wg.Done()
 
 			cfg, err := external.LoadDefaultAWSConfig(
-				external.StaticSharedConfigProfile(acc),
+				external.WithSharedConfigProfile(acc),
 			)
 			if err != nil {
 				exitErrorf("failed to load config for account, %s, %v\n", acc, err)
