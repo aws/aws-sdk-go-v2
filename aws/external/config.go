@@ -1,6 +1,8 @@
 package external
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
@@ -145,3 +147,76 @@ type WithCredentialsValue aws.Value
 func (v WithCredentialsValue) GetCredentialsValue() (aws.Value, error) {
 	return aws.Value(v), nil
 }
+
+type WithCredentialsEndpoint string
+
+func (p WithCredentialsEndpoint) GetCredentialsEndpoint() (string, error) {
+	return string(p), nil
+}
+
+func GetCustomCABundleFile(configs Configs) (string, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(CustomCABundleFileProvider); ok {
+			v, err := p.GetCustomCABundleFile()
+			if err != nil {
+				return "", err
+			}
+			if len(v) > 0 {
+				return v, nil
+			}
+		}
+	}
+
+	return "", ErrNotFound
+}
+
+func GetRegion(configs Configs) (string, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(RegionProvider); ok {
+			v, err := p.GetRegion()
+			if err != nil {
+				return "", err
+			}
+			if len(v) > 0 {
+				return v, nil
+			}
+		}
+	}
+
+	return "", ErrNotFound
+}
+
+func GetCredentialsValue(configs Configs) (aws.Value, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(CredentialsValueProvider); ok {
+			v, err := p.GetCredentialsValue()
+			if err != nil {
+				return aws.Value{}, err
+			}
+			if v.Valid() {
+				return v, nil
+			}
+		}
+	}
+
+	return aws.Value{}, ErrNotFound
+}
+
+func GetCredentialsEndpoint(configs Configs) (string, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(CredentialsEndpointProvider); ok {
+			v, err := p.GetCredentialsEndpoint()
+			if err != nil {
+				return "", err
+			}
+			if len(v) > 0 {
+				return v, nil
+			}
+		}
+	}
+
+	return "", ErrNotFound
+}
+
+// TODO should this be private, and export helper funciton instead?
+var ErrNotFound = fmt.Errorf("not found")

@@ -1,9 +1,13 @@
 package external
 
 import (
+	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestResolveCABundle(t *testing.T) {
@@ -55,7 +59,25 @@ func TestResolveCredentialsValue(t *testing.T) {
 }
 
 func TestResolveEndpointCredentilas(t *testing.T) {
-	t.Errorf("not implemented")
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(`{"accesskeyid": "AKID", "SecretAccessKey": "SECRET"}`))
+	}))
+	configs := Configs{
+		WithCredentialsEndpoint(server.URL),
+	}
+
+	cfg := unit.Config.Copy()
+	if err := ResolveEndpointCredentials(cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	creds, err := cfg.Credentials.Get()
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if e, a := endpointcreds.ProviderName, creds.ProviderName; e != a {
+		t.Errorf("expect %v creds, got %v", e, a)
+	}
 }
 
 func TestResolveAssumeRoleCredentilas(t *testing.T) {

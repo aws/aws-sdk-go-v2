@@ -27,19 +27,18 @@ func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
 // Config provider used:
 // * CustomCABundleFileProvider
 func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
-	for _, extCfg := range configs {
-		if p, ok := extCfg.(CustomCABundleFileProvider); ok {
-			if v, err := p.GetCustomCABundleFile(); err == nil && len(v) > 0 {
-				// TODO need to suport custom CA bundle. Adding it to the
-				// Sender's TLs cert pool
-				return fmt.Errorf("ResolveCustomeCABundle not implemented")
-			}
-			// TODO error handling, What is the best way to handle this?
-			// capture previous errors continue. error out if all errors
-		}
+	v, err := GetCustomCABundleFile(configs)
+	if err == ErrNotFound {
+		return nil
+	}
+	if err != nil {
+		// TODO error handling, What is the best way to handle this?
+		// capture previous errors continue. error out if all errors
+		return err
 	}
 
-	return nil
+	// TODO need to suport custom CA bundle. Adding it to the TLs cert pool.
+	return fmt.Errorf("ResolveCustomeCABundle pending HTTP Client builder, %s", v)
 }
 
 // ResolveRegion extracts the first instance of a Region from the Configs slice.
@@ -47,17 +46,17 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 // * RegionProvider
 func ResolveRegion(cfg *aws.Config, configs Configs) error {
-	for _, extCfg := range configs {
-		if p, ok := extCfg.(RegionProvider); ok {
-			if v, err := p.GetRegion(); err == nil && len(v) > 0 {
-				cfg.Region = aws.String(v)
-				break
-			}
-			// TODO error handling, What is the best way to handle this?
-			// capture previous errors continue. error out if all errors
-		}
+	v, err := GetRegion(configs)
+	if err == ErrNotFound {
+		return nil
+	}
+	if err != nil {
+		// TODO error handling, What is the best way to handle this?
+		// capture previous errors continue. error out if all errors
+		return err
 	}
 
+	cfg.Region = aws.String(v)
 	return nil
 }
 
@@ -67,19 +66,18 @@ func ResolveRegion(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 // * CredentialsValueProvider
 func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
-	for _, extCfg := range configs {
-		if p, ok := extCfg.(CredentialsValueProvider); ok {
-			if v, err := p.GetCredentialsValue(); err == nil && v.Valid() {
-				provider := aws.StaticProvider{
-					Value: v,
-				}
-				cfg.Credentials = aws.NewCredentials(provider)
-				break
-			}
-			// TODO error handling, What is the best way to handle this?
-			// capture previous errors continue. error out if all errors
-		}
+	v, err := GetCredentialsValue(configs)
+	if err == ErrNotFound {
+		return nil
 	}
+	if err != nil {
+		// TODO error handling, What is the best way to handle this?
+		// capture previous errors continue. error out if all errors
+		return err
+	}
+
+	provider := aws.StaticProvider{Value: v}
+	cfg.Credentials = aws.NewCredentials(provider)
 
 	return nil
 }
@@ -90,21 +88,24 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 // * CredentialsEndpointProvider
 func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
-	for _, extCfg := range configs {
-		if p, ok := extCfg.(CredentialsEndpointProvider); ok {
-			if v, err := p.GetCredentialsEndpoint(); err == nil && len(v) > 0 {
-				provider := &endpointcreds.Provider{
-					//					AWSConfig:    *cfg,
-					//					Endpoint:     v,
-					ExpiryWindow: 5 * time.Minute,
-				}
-				cfg.Credentials = aws.NewCredentials(provider)
-				break
-			}
-			// TODO error handling, What is the best way to handle this?
-			// capture previous errors continue. error out if all errors
-		}
+	v, err := GetCredentialsEndpoint(configs)
+	if err == ErrNotFound {
+		return nil
 	}
+	if err != nil {
+		// TODO error handling, What is the best way to handle this?
+		// capture previous errors continue. error out if all errors
+		return err
+	}
+
+	// TODO validate endpoint URL (localhost, 127/8, ect)
+	cfgCp := cfg.Copy()
+	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
+
+	provider := endpointcreds.New(*cfgCp)
+	provider.ExpiryWindow = 5 * time.Minute
+
+	cfg.Credentials = aws.NewCredentials(provider)
 
 	return nil
 }
