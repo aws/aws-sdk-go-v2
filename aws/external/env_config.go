@@ -147,7 +147,7 @@ func NewEnvConfig() (EnvConfig, error) {
 	var cfg EnvConfig
 
 	creds := aws.Credentials{
-		ProviderName: CredentialsSourceName,
+		Source: CredentialsSourceName,
 	}
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
 	setFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)

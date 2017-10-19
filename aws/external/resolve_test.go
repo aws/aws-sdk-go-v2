@@ -37,14 +37,14 @@ func TestResolveRegion(t *testing.T) {
 func TestResolveCredentialsValue(t *testing.T) {
 	configs := Configs{
 		WithCredentialsValue(aws.Credentials{
-			ProviderName: "invalid provider",
+			Source: "invalid provider",
 		}),
 		WithCredentialsValue(aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-			ProviderName: "valid",
+			Source: "valid",
 		}),
 		WithCredentialsValue(aws.Credentials{
-			ProviderName: "invalid provider 2",
+			Source: "invalid provider 2",
 		}),
 	}
 
@@ -62,7 +62,7 @@ func TestResolveCredentialsValue(t *testing.T) {
 	if e, a := "SECRET", p.Value.SecretAccessKey; e != a {
 		t.Errorf("expect %v secret, got %v", e, a)
 	}
-	if e, a := "valid", p.Value.ProviderName; e != a {
+	if e, a := "valid", p.Value.Source; e != a {
 		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 
@@ -70,7 +70,7 @@ func TestResolveCredentialsValue(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "valid", creds.ProviderName; e != a {
+	if e, a := "valid", creds.Source; e != a {
 		t.Errorf("expect %v creds, got %v", e, a)
 	}
 }

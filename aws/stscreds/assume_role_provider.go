@@ -222,11 +222,11 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
 			input.SerialNumber = p.SerialNumber
 			code, err := p.TokenProvider()
 			if err != nil {
-				return aws.Credentials{ProviderName: ProviderName}, err
+				return aws.Credentials{Source: ProviderName}, err
 			}
 			input.TokenCode = aws.String(code)
 		} else {
-			return aws.Credentials{ProviderName: ProviderName},
+			return aws.Credentials{Source: ProviderName},
 				awserr.New("AssumeRoleTokenNotAvailable",
 					"assume role with MFA enabled, but neither TokenCode nor TokenProvider are set", nil)
 		}
@@ -234,7 +234,7 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
 
 	roleOutput, err := p.Client.AssumeRole(input)
 	if err != nil {
-		return aws.Credentials{ProviderName: ProviderName}, err
+		return aws.Credentials{Source: ProviderName}, err
 	}
 
 	// We will proactively generate new credentials before they expire.
@@ -244,6 +244,6 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
 		AccessKeyID:     *roleOutput.Credentials.AccessKeyId,
 		SecretAccessKey: *roleOutput.Credentials.SecretAccessKey,
 		SessionToken:    *roleOutput.Credentials.SessionToken,
-		ProviderName:    ProviderName,
+		Source:    ProviderName,
 	}, nil
 }

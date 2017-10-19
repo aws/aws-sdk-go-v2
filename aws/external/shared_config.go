@@ -287,7 +287,7 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 			AccessKeyID:     akid,
 			SecretAccessKey: secret,
 			SessionToken:    section.Key(sessionTokenKey).String(),
-			ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", file.Filename),
+			Source:    fmt.Sprintf("SharedConfigCredentials: %s", file.Filename),
 		}
 	}
 

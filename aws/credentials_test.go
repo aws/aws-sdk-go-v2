@@ -15,7 +15,7 @@ type stubProvider struct {
 
 func (s *stubProvider) Retrieve() (Credentials, error) {
 	s.expired = false
-	s.creds.ProviderName = "stubProvider"
+	s.creds.Source = "stubProvider"
 	return s.creds, s.err
 }
 func (s *stubProvider) IsExpired() bool {
@@ -69,5 +69,5 @@ func TestCredentialsGetWithProviderName(t *testing.T) {
 
 	creds, err := c.Get()
 	assert.Nil(t, err, "Expected no error")
-	assert.Equal(t, creds.ProviderName, "stubProvider", "Expected provider name to match")
+	assert.Equal(t, creds.Source, "stubProvider", "Expected provider name to match")
 }

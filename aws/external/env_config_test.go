@@ -54,7 +54,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			},
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-				ProviderName: CredentialsSourceName,
+				Source: CredentialsSourceName,
 			},
 		},
 		{
@@ -64,7 +64,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			},
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-				ProviderName: CredentialsSourceName,
+				Source: CredentialsSourceName,
 			},
 		},
 		{
@@ -75,7 +75,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			},
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "TOKEN",
-				ProviderName: CredentialsSourceName,
+				Source: CredentialsSourceName,
 			},
 		},
 	}

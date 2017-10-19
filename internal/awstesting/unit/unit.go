@@ -13,7 +13,7 @@ func init() {
 	Config.CredentialsLoader = aws.NewCredentialsLoader(aws.StaticProvider{
 		Value: aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
-			ProviderName: "unit test credentials",
+			Source: "unit test credentials",
 		},
 	})
 }

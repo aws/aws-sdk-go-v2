@@ -79,7 +79,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		WithRegion("mock-region"),
 		WithCredentialsValue(aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-			ProviderName: "provider",
+			Source: "provider",
 		}),
 	}.ResolveAWSConfig([]AWSConfigResolver{
 		ResolveRegion,
@@ -97,7 +97,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "provider", creds.ProviderName; e != a {
+	if e, a := "provider", creds.Source; e != a {
 		t.Errorf("expect %v provider, got %v", e, a)
 	}
 }

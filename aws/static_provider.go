@@ -34,11 +34,11 @@ func NewStaticProvider(key, secret, session string) StaticProvider {
 func (s StaticProvider) Retrieve() (Credentials, error) {
 	v := s.Value
 	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
-		return Credentials{ProviderName: StaticProviderName}, ErrStaticCredentialsEmpty
+		return Credentials{Source: StaticProviderName}, ErrStaticCredentialsEmpty
 	}
 
-	if len(v.ProviderName) == 0 {
-		v.ProviderName = StaticProviderName
+	if len(v.Source) == 0 {
+		v.Source = StaticProviderName
 	}
 
 	return v, nil

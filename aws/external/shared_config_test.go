@@ -48,7 +48,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "shared_config_akid",
 					SecretAccessKey: "shared_config_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 			},
 		},
@@ -61,7 +61,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "shared_config_other_akid",
 					SecretAccessKey: "shared_config_other_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigOtherFilename),
+					Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigOtherFilename),
 				},
 			},
 		},
@@ -78,7 +78,7 @@ func TestNewSharedConfig(t *testing.T) {
 						Credentials: aws.Credentials{
 							AccessKeyID:     "complete_creds_akid",
 							SecretAccessKey: "complete_creds_secret",
-							ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+							Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 						},
 					},
 				},
@@ -104,7 +104,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "assume_role_w_creds_akid",
 					SecretAccessKey: "assume_role_w_creds_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 				AssumeRole: AssumeRoleConfig{
 					RoleARN:         "assume_role_w_creds_role_arn",
@@ -116,7 +116,7 @@ func TestNewSharedConfig(t *testing.T) {
 						Credentials: aws.Credentials{
 							AccessKeyID:     "assume_role_w_creds_akid",
 							SecretAccessKey: "assume_role_w_creds_secret",
-							ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+							Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 						},
 					},
 				},
@@ -194,7 +194,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "complete_creds_akid",
 					SecretAccessKey: "complete_creds_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 			},
 		},
@@ -205,7 +205,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 					AccessKeyID:     "complete_creds_with_token_akid",
 					SecretAccessKey: "complete_creds_with_token_secret",
 					SessionToken:    "complete_creds_with_token_token",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 			},
 		},
@@ -215,7 +215,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "full_profile_akid",
 					SecretAccessKey: "full_profile_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 				Region: "full_profile_region",
 			},
