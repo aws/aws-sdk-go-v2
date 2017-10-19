@@ -1,8 +1,7 @@
 package external
 
 import (
-	"net/http"
-	"net/http/httptest"
+	"strings"
 	"testing"
 	"time"
 
@@ -77,11 +76,10 @@ func TestResolveCredentialsValue(t *testing.T) {
 }
 
 func TestResolveEndpointCredentials(t *testing.T) {
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`{"AccessKeyID": "AKID", "SecretAccessKey": "SECRET"}`))
-	}))
+	const u = "https://localhost/something"
+
 	configs := Configs{
-		WithCredentialsEndpoint(server.URL),
+		WithCredentialsEndpoint(u),
 	}
 
 	cfg := unit.Config.Copy()
@@ -95,17 +93,69 @@ func TestResolveEndpointCredentials(t *testing.T) {
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}
-	if e, a := server.URL, p.Client.ClientInfo.Endpoint; e != a {
+	if e, a := u, p.Client.ClientInfo.Endpoint; e != a {
 		t.Errorf("expect %q endpoint, got %q", e, a)
 	}
 }
 
 func TestResolveEndpointCredentials_ValidateEndpoint(t *testing.T) {
-	t.Errorf("not implemented")
+	configs := Configs{
+		WithCredentialsEndpoint("http://notvalid.com"),
+	}
+	cfg := unit.Config.Copy()
+
+	err := ResolveEndpointCredentials(cfg, configs)
+	if err == nil {
+		t.Fatalf("expect error")
+	}
+
+	if e, a := "invalid endpoint", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q to be in %q", e, a)
+	}
+}
+
+func TestValidateLocalEndpointURL(t *testing.T) {
+	cases := []struct {
+		URL   string
+		IsErr bool
+	}{
+		{"http://127.0.0.1", false},
+		{"http://localhost", false},
+		{"http://invalid.tld", true},
+		{"http://164.254.170.1", true},
+	}
+
+	for i, c := range cases {
+		err := validateLocalEndpointURL(c.URL)
+		if e, a := c.IsErr, err != nil; e != a {
+			t.Errorf("%d, expect %t err, got %t", i, e, a)
+		}
+	}
 }
 
 func TestResolveContainerEndpointPathCredentials(t *testing.T) {
-	t.Errorf("not tested")
+	const u = "/some/path"
+
+	configs := Configs{
+		WithContainerCredentialsEndpointPath(u),
+	}
+
+	cfg := unit.Config.Copy()
+	cfg.Credentials = nil
+
+	if err := ResolveContainerEndpointPathCredentials(cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	p := cfg.Credentials.Provider.(*endpointcreds.Provider)
+	if p.Client == nil {
+		t.Errorf("expect client set")
+	}
+
+	expect := containerCredentialsEndpoint + u
+	if e, a := expect, p.Client.ClientInfo.Endpoint; e != a {
+		t.Errorf("expect %q endpoint, got %q", e, a)
+	}
 }
 
 func TestResolveAssumeRoleCredentials(t *testing.T) {
@@ -148,7 +198,76 @@ func TestResolveAssumeRoleCredentials(t *testing.T) {
 }
 
 func TestResolveAssumeRoleCredentials_WithMFAToken(t *testing.T) {
-	t.Errorf("not tested")
+	configs := Configs{
+		WithAssumeRoleConfig(AssumeRoleConfig{
+			RoleARN:    "arn",
+			ExternalID: "external",
+			MFASerial:  "abc123",
+			Source: &SharedConfig{
+				Profile: "source",
+				Credentials: aws.Value{
+					AccessKeyID: "AKID", SecretAccessKey: "SECRET",
+				},
+			},
+		}),
+		WithMFATokenFunc(func() (string, error) {
+			return "token", nil
+		}),
+	}
+
+	cfg := unit.Config.Copy()
+	cfg.Credentials = nil
+
+	if err := ResolveAssumeRoleCredentials(cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	p := cfg.Credentials.Provider.(*stscreds.AssumeRoleProvider)
+	if p.Client == nil {
+		t.Errorf("expect client set")
+	}
+	if e, a := "arn", p.RoleARN; e != a {
+		t.Errorf("expect %q arn, got %q", e, a)
+	}
+	if e, a := "external", *p.ExternalID; e != a {
+		t.Errorf("expect %q external id, got %q", e, a)
+	}
+	if e, a := "abc123", *p.SerialNumber; e != a {
+		t.Errorf("expect %q serial, got %q", e, a)
+	}
+	if p.TokenProvider == nil {
+		t.Errorf("expect token provider")
+	}
+}
+
+func TestResolveAssumeRoleCredentials_WithMFATokenError(t *testing.T) {
+	configs := Configs{
+		WithAssumeRoleConfig(AssumeRoleConfig{
+			RoleARN:    "arn",
+			ExternalID: "external",
+			MFASerial:  "abc123",
+			Source: &SharedConfig{
+				Profile: "source",
+				Credentials: aws.Value{
+					AccessKeyID: "AKID", SecretAccessKey: "SECRET",
+				},
+			},
+		}),
+	}
+
+	cfg := unit.Config.Copy()
+	cfg.Credentials = nil
+
+	err := ResolveAssumeRoleCredentials(cfg, configs)
+	if err == nil {
+		t.Fatalf("expect error")
+	}
+	if e, a := "MFA", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q error in %q", e, a)
+	}
+	if cfg.Credentials != nil {
+		t.Errorf("expect no credentials")
+	}
 }
 
 func TestResolveFallbackEC2Credentials(t *testing.T) {

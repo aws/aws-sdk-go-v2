@@ -2,6 +2,7 @@ package external
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -101,7 +102,10 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	// TODO validate endpoint URL (localhost, 127/8, ect)
+	if err := validateLocalEndpointURL(v); err != nil {
+		return err
+	}
+
 	cfgCp := cfg.Copy()
 	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
 
@@ -112,6 +116,21 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 
 	return nil
 }
+
+func validateLocalEndpointURL(v string) error {
+	u, err := url.Parse(v)
+	if err != nil {
+		return err
+	}
+
+	if host := u.Hostname(); !(host == "localhost" || host == "127.0.0.1") {
+		return fmt.Errorf("invalid endpoint credentials URL, %q, only localhost and 127.0.0.1 are valid", host)
+	}
+
+	return nil
+}
+
+const containerCredentialsEndpoint = "http://169.254.170.2"
 
 // ResolveContainerEndpointPathCredentials will extract the container credentials
 // endpoint from the config slice. Using the endpoint provided, to create a
@@ -132,8 +151,7 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 
 	cfgCp := cfg.Copy()
 
-	// TODO put this in a constant?
-	v = "http://169.254.170.2" + v
+	v = containerCredentialsEndpoint + v
 	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
 
 	provider := endpointcreds.New(*cfgCp)
