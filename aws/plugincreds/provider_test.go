@@ -25,7 +25,7 @@ func TestProvider_Passthrough(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	expect := aws.Value{
+	expect := aws.Credentials{
 		AccessKeyID:     "key",
 		SecretAccessKey: "secret",
 		SessionToken:    "token",
@@ -62,7 +62,7 @@ func TestProvider_Error(t *testing.T) {
 		t.Errorf("expect %v cause error, got %v", e, a)
 	}
 
-	expect := aws.Value{
+	expect := aws.Credentials{
 		ProviderName: ProviderName,
 	}
 	if expect != actual {

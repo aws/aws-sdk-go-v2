@@ -140,7 +140,7 @@ func TestPresignRequest(t *testing.T) {
 func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 	var expectSig = `AWS4-HMAC-SHA256 Credential=AKID/19700101/us-east-1/es/aws4_request, SignedHeaders=host;x-amz-date;x-amz-security-token, Signature=6601e883cc6d23871fd6c2a394c5677ea2b8c82b04a6446786d64cd74f520967`
 
-	creds := unit.Config.Credentials
+	creds := unit.Config.CredentialsLoader
 	signer := v4.NewSigner(creds, func(s *v4.Signer) {
 		s.DisableURIPathEscaping = true
 	})

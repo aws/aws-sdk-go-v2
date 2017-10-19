@@ -75,7 +75,7 @@ var ValidateReqSigHandler = aws.NamedHandler{
 	Name: "core.ValidateReqSigHandler",
 	Fn: func(r *aws.Request) {
 		// Unsigned requests are not signed
-		if r.Config.Credentials == aws.AnonymousCredentials {
+		if r.Config.CredentialsLoader == aws.AnonymousCredentials {
 			return
 		}
 
@@ -219,7 +219,7 @@ var AfterRetryHandler = aws.NamedHandler{Name: "core.AfterRetryHandler", Fn: fun
 		// need to be expired locally so that the next request to
 		// get credentials will trigger a credentials refresh.
 		if r.IsErrorExpired() {
-			r.Config.Credentials.Expire()
+			r.Config.CredentialsLoader.Expire()
 		}
 
 		r.RetryCount++

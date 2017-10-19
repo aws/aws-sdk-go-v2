@@ -81,7 +81,7 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 	}
 
 	provider := aws.StaticProvider{Value: v}
-	cfg.Credentials = aws.NewCredentials(provider)
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
 }
@@ -112,7 +112,7 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 	provider := endpointcreds.New(*cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
 
-	cfg.Credentials = aws.NewCredentials(provider)
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
 }
@@ -157,7 +157,7 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 	provider := endpointcreds.New(*cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
 
-	cfg.Credentials = aws.NewCredentials(provider)
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
 }
@@ -180,7 +180,9 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 
 	cfgCp := cfg.Copy()
 	// TODO support additional credential providers that are already set?
-	cfgCp.Credentials = aws.NewCredentials(aws.StaticProvider{Value: v.Source.Credentials})
+	cfgCp.CredentialsLoader = aws.NewCredentialsLoader(
+		aws.StaticProvider{Value: v.Source.Credentials},
+	)
 
 	provider := &stscreds.AssumeRoleProvider{
 		Client:          sts.New(cfgCp),
@@ -202,7 +204,7 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 		provider.TokenProvider = tp
 	}
 
-	cfg.Credentials = aws.NewCredentials(provider)
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
 }
@@ -210,7 +212,7 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 // ResolveFallbackEC2Credentials will configure the AWS config credentials to
 // use EC2 Instance Role if the config's Credentials field is not already set.
 func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
-	if cfg.Credentials != nil {
+	if cfg.CredentialsLoader != nil {
 		return nil
 	}
 
@@ -220,7 +222,7 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 		Client:       ec2metadata.New(*cfgCp),
 		ExpiryWindow: 5 * time.Minute,
 	}
-	cfg.Credentials = aws.NewCredentials(provider)
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
 }

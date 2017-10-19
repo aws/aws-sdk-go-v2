@@ -131,25 +131,25 @@ type Provider struct {
 	IsExpiredFn func() bool
 }
 
-// NewCredentials returns a new Credentials loader using the plugin provider.
+// New returns a new Credentials loader using the plugin provider.
 // If the symbol isn't found or is invalid in the plugin an error will be
 // returned.
-func NewCredentials(p *plugin.Plugin) (*aws.Credentials, error) {
+func New(p *plugin.Plugin) (Provider, error) {
 	retrieve, isExpired, err := GetPluginProviderFns(p)
 	if err != nil {
-		return nil, err
+		return Provider{}, err
 	}
 
-	return aws.NewCredentials(Provider{
+	return Provider{
 		RetrieveFn:  retrieve,
 		IsExpiredFn: isExpired,
-	}), nil
+	}, nil
 }
 
 // Retrieve will return the credentials Value if they were successfully retrieved
 // from the underlying plugin provider. An error will be returned otherwise.
-func (p Provider) Retrieve() (aws.Value, error) {
-	creds := aws.Value{
+func (p Provider) Retrieve() (aws.Credentials, error) {
+	creds := aws.Credentials{
 		ProviderName: ProviderName,
 	}
 

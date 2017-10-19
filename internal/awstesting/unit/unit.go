@@ -10,7 +10,12 @@ func init() {
 	// TODO getting a default populated config should be in the "defaults" package
 	*Config = defaults.Config()
 	Config.Region = aws.String("mock-region")
-	Config.Credentials = aws.NewStaticCredentials("AKID", "SECRET", "SESSION")
+	Config.CredentialsLoader = aws.NewCredentialsLoader(aws.StaticProvider{
+		Value: aws.Credentials{
+			AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
+			ProviderName: "unit test credentials",
+		},
+	})
 }
 
 // Config is a shared config for unit tests to use.

@@ -22,7 +22,7 @@ import (
 func TestValidateEndpointHandler(t *testing.T) {
 	os.Clearenv()
 
-	svc := awstesting.NewClient(aws.NewConfig().WithRegion("us-west-2"))
+	svc := awstesting.NewClient(&aws.Config{Region: aws.String("us-west-2")})
 	svc.Handlers.Clear()
 	svc.Handlers.Validate.PushBackNamed(corehandlers.ValidateEndpointHandler)
 
@@ -57,9 +57,9 @@ type mockCredsProvider struct {
 	retrieveCalled bool
 }
 
-func (m *mockCredsProvider) Retrieve() (aws.Value, error) {
+func (m *mockCredsProvider) Retrieve() (aws.Credentials, error) {
 	m.retrieveCalled = true
-	return aws.Value{ProviderName: "mockCredsProvider"}, nil
+	return aws.Credentials{ProviderName: "mockCredsProvider"}, nil
 }
 
 func (m *mockCredsProvider) IsExpired() bool {
@@ -71,8 +71,8 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 	credProvider := &mockCredsProvider{}
 
 	svc := awstesting.NewClient(&aws.Config{
-		Credentials: aws.NewCredentials(credProvider),
-		Retryer:     aws.DefaultRetryer{NumMaxRetries: 1},
+		CredentialsLoader: aws.NewCredentialsLoader(credProvider),
+		Retryer:           aws.DefaultRetryer{NumMaxRetries: 1},
 	})
 
 	svc.Handlers.Clear()
@@ -85,7 +85,7 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 	})
 	svc.Handlers.AfterRetry.PushBackNamed(corehandlers.AfterRetryHandler)
 
-	if !svc.Config.Credentials.IsExpired() {
+	if !svc.Config.CredentialsLoader.IsExpired() {
 		t.Errorf("Expect to start out expired")
 	}
 	if credProvider.retrieveCalled {
@@ -95,14 +95,14 @@ func TestAfterRetryRefreshCreds(t *testing.T) {
 	req := svc.NewRequest(&aws.Operation{Name: "Operation"}, nil, nil)
 	req.Send()
 
-	if !svc.Config.Credentials.IsExpired() {
+	if !svc.Config.CredentialsLoader.IsExpired() {
 		t.Errorf("Expect to start out expired")
 	}
 	if credProvider.retrieveCalled {
 		t.Errorf("expect not called")
 	}
 
-	_, err := svc.Config.Credentials.Get()
+	_, err := svc.Config.CredentialsLoader.Get()
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
@@ -265,7 +265,7 @@ func TestValidateReqSigHandler(t *testing.T) {
 	}{
 		{
 			Req: &aws.Request{
-				Config: aws.Config{Credentials: aws.AnonymousCredentials},
+				Config: aws.Config{CredentialsLoader: aws.AnonymousCredentials},
 				Time:   time.Now().Add(-15 * time.Minute),
 			},
 			Resign: false,

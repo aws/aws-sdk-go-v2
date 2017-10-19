@@ -40,7 +40,7 @@ import (
 // ProviderName is the name of the credentials provider.
 const ProviderName = `CredentialsEndpointProvider`
 
-// Provider satisfies the aws.Provider interface, and is a client to
+// Provider satisfies the aws.CredentialsProvider interface, and is a client to
 // retrieve credentials from an arbitrary endpoint.
 type Provider struct {
 	aws.Expiry
@@ -100,10 +100,10 @@ func (p *Provider) IsExpired() bool {
 
 // Retrieve will attempt to request the credentials from the endpoint the Provider
 // was configured for. And error will be returned if the retrieval fails.
-func (p *Provider) Retrieve() (aws.Value, error) {
+func (p *Provider) Retrieve() (aws.Credentials, error) {
 	resp, err := p.getCredentials()
 	if err != nil {
-		return aws.Value{ProviderName: ProviderName},
+		return aws.Credentials{ProviderName: ProviderName},
 			awserr.New("CredentialsEndpointError", "failed to load credentials", err)
 	}
 
@@ -113,7 +113,7 @@ func (p *Provider) Retrieve() (aws.Value, error) {
 		p.staticCreds = true
 	}
 
-	return aws.Value{
+	return aws.Credentials{
 		AccessKeyID:     resp.AccessKeyID,
 		SecretAccessKey: resp.SecretAccessKey,
 		SessionToken:    resp.Token,

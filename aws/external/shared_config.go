@@ -87,7 +87,7 @@ type SharedConfig struct {
 	//	aws_access_key_id
 	//	aws_secret_access_key
 	//	aws_session_token
-	Credentials aws.Value
+	Credentials aws.Credentials
 
 	AssumeRole AssumeRoleConfig
 
@@ -104,7 +104,7 @@ func (c SharedConfig) GetRegion() (string, error) {
 }
 
 // GetCredentialsValue returns the credentials for a profile if they were set.
-func (c SharedConfig) GetCredentialsValue() (aws.Value, error) {
+func (c SharedConfig) GetCredentialsValue() (aws.Credentials, error) {
 	return c.Credentials, nil
 }
 
@@ -283,7 +283,7 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	akid := section.Key(accessKeyIDKey).String()
 	secret := section.Key(secretAccessKey).String()
 	if len(akid) > 0 && len(secret) > 0 {
-		c.Credentials = aws.Value{
+		c.Credentials = aws.Credentials{
 			AccessKeyID:     akid,
 			SecretAccessKey: secret,
 			SessionToken:    section.Key(sessionTokenKey).String(),

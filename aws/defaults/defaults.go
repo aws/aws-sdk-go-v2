@@ -48,10 +48,10 @@ func Config() aws.Config {
 	return aws.Config{
 		EndpointResolver: endpoints.DefaultResolver(),
 		// TODO need to handle case of default credentials should be nil not set
-		Credentials: aws.AnonymousCredentials,
-		HTTPClient:  &http.Client{},
-		Logger:      Logger(),
-		Handlers:    Handlers(),
+		CredentialsLoader: aws.AnonymousCredentials,
+		HTTPClient:        &http.Client{},
+		Logger:            Logger(),
+		Handlers:          Handlers(),
 	}
 }
 

@@ -180,7 +180,7 @@ func TestRequestExhaustRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"UnknownError","message":"An error occurred."}`)},
 	}
 
-	s := awstesting.NewClient(aws.NewConfig().WithSleepDelay(sleepDelay))
+	s := awstesting.NewClient(&aws.Config{SleepDelay: sleepDelay})
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
 	s.Handlers.UnmarshalError.PushBack(unmarshalError)
@@ -228,8 +228,10 @@ func TestRequestRecoverExpiredCreds(t *testing.T) {
 	}
 
 	s := awstesting.NewClient(&aws.Config{
-		Retryer:     aws.DefaultRetryer{NumMaxRetries: 10},
-		Credentials: aws.NewStaticCredentials("AKID", "SECRET", ""),
+		Retryer: aws.DefaultRetryer{NumMaxRetries: 10},
+		CredentialsLoader: aws.NewCredentialsLoader(
+			aws.NewStaticProvider("AKID", "SECRET", ""),
+		),
 	})
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
@@ -239,12 +241,12 @@ func TestRequestRecoverExpiredCreds(t *testing.T) {
 	credExpiredAfterRetry := false
 
 	s.Handlers.AfterRetry.PushBack(func(r *aws.Request) {
-		credExpiredAfterRetry = r.Config.Credentials.IsExpired()
+		credExpiredAfterRetry = r.Config.CredentialsLoader.IsExpired()
 	})
 
 	s.Handlers.Sign.Clear()
 	s.Handlers.Sign.PushBack(func(r *aws.Request) {
-		r.Config.Credentials.Get()
+		r.Config.CredentialsLoader.Get()
 	})
 	s.Handlers.Send.Clear() // mock sending
 	s.Handlers.Send.PushBack(func(r *aws.Request) {
@@ -264,7 +266,7 @@ func TestRequestRecoverExpiredCreds(t *testing.T) {
 	if !credExpiredAfterRetry {
 		t.Errorf("Expect expired creds after retry check")
 	}
-	if s.Config.Credentials.IsExpired() {
+	if s.Config.CredentialsLoader.IsExpired() {
 		t.Errorf("Expect valid creds after cred expired recovery")
 	}
 
@@ -329,7 +331,7 @@ func TestRequestThrottleRetries(t *testing.T) {
 		{StatusCode: 500, Body: body(`{"__type":"Throttling","message":"An error occurred."}`)},
 	}
 
-	s := awstesting.NewClient(aws.NewConfig().WithSleepDelay(sleepDelay))
+	s := awstesting.NewClient(&aws.Config{SleepDelay: sleepDelay})
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.PushBack(unmarshal)
 	s.Handlers.UnmarshalError.PushBack(unmarshalError)

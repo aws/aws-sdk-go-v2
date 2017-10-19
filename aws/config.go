@@ -21,7 +21,7 @@ type Config struct {
 	// The credentials object to use when signing requests. Defaults to a
 	// chain of credential providers to search for credentials in environment
 	// variables, shared credential file, and EC2 Instance Roles.
-	Credentials *Credentials
+	CredentialsLoader *CredentialsLoader
 
 	// The resolver to use for looking up endpoints for AWS service clients
 	// to use based on region.
@@ -214,111 +214,6 @@ func (c Config) ClientConfig(serviceName string, cfgs ...*Config) ClientConfig {
 	return clientCfg
 }
 
-// WithCredentials sets a config Credentials value returning a Config pointer
-// for chaining.
-func (c *Config) WithCredentials(creds *Credentials) *Config {
-	c.Credentials = creds
-	return c
-}
-
-// WithEndpointResolver sets a config EndpointResolver value returning a
-// Config pointer for chaining.
-func (c *Config) WithEndpointResolver(resolver EndpointResolver) *Config {
-	c.EndpointResolver = resolver
-	return c
-}
-
-// WithRegion sets a config Region value returning a Config pointer for
-// chaining.
-func (c *Config) WithRegion(region string) *Config {
-	c.Region = &region
-	return c
-}
-
-// WithDisableSSL sets a config DisableSSL value returning a Config pointer
-// for chaining.
-func (c *Config) WithDisableSSL(disable bool) *Config {
-	c.DisableSSL = &disable
-	return c
-}
-
-// WithHTTPClient sets a config HTTPClient value returning a Config pointer
-// for chaining.
-func (c *Config) WithHTTPClient(client *http.Client) *Config {
-	c.HTTPClient = client
-	return c
-}
-
-// WithDisableParamValidation sets a config DisableParamValidation value
-// returning a Config pointer for chaining.
-func (c *Config) WithDisableParamValidation(disable bool) *Config {
-	c.DisableParamValidation = &disable
-	return c
-}
-
-// WithDisableComputeChecksums sets a config DisableComputeChecksums value
-// returning a Config pointer for chaining.
-func (c *Config) WithDisableComputeChecksums(disable bool) *Config {
-	c.DisableComputeChecksums = &disable
-	return c
-}
-
-// WithLogLevel sets a config LogLevel value returning a Config pointer for
-// chaining.
-func (c *Config) WithLogLevel(level LogLevelType) *Config {
-	c.LogLevel = &level
-	return c
-}
-
-// WithLogger sets a config Logger value returning a Config pointer for
-// chaining.
-func (c *Config) WithLogger(logger Logger) *Config {
-	c.Logger = logger
-	return c
-}
-
-// WithS3ForcePathStyle sets a config S3ForcePathStyle value returning a Config
-// pointer for chaining.
-func (c *Config) WithS3ForcePathStyle(force bool) *Config {
-	c.S3ForcePathStyle = &force
-	return c
-}
-
-// WithS3Disable100Continue sets a config S3Disable100Continue value returning
-// a Config pointer for chaining.
-func (c *Config) WithS3Disable100Continue(disable bool) *Config {
-	c.S3Disable100Continue = &disable
-	return c
-}
-
-// WithS3UseAccelerate sets a config S3UseAccelerate value returning a Config
-// pointer for chaining.
-func (c *Config) WithS3UseAccelerate(enable bool) *Config {
-	c.S3UseAccelerate = &enable
-	return c
-}
-
-// WithUseDualStack sets a config UseDualStack value returning a Config
-// pointer for chaining.
-func (c *Config) WithUseDualStack(enable bool) *Config {
-	c.UseDualStack = &enable
-	return c
-}
-
-// WithEC2MetadataDisableTimeoutOverride sets a config EC2MetadataDisableTimeoutOverride value
-// returning a Config pointer for chaining.
-func (c *Config) WithEC2MetadataDisableTimeoutOverride(enable bool) *Config {
-	c.EC2MetadataDisableTimeoutOverride = &enable
-	return c
-}
-
-// WithSleepDelay overrides the function used to sleep while waiting for the
-// next retry. Defaults to time.Sleep.
-func (c *Config) WithSleepDelay(fn func(time.Duration)) *Config {
-	c.SleepDelay = fn
-	return c
-}
-
 // MergeIn merges the passed in configs into the existing config object.
 func (c *Config) MergeIn(cfgs ...*Config) {
 	for _, other := range cfgs {
@@ -331,8 +226,8 @@ func mergeInConfig(dst *Config, other *Config) {
 		return
 	}
 
-	if other.Credentials != nil {
-		dst.Credentials = other.Credentials
+	if other.CredentialsLoader != nil {
+		dst.CredentialsLoader = other.CredentialsLoader
 	}
 
 	if other.EndpointResolver != nil {

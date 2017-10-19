@@ -149,7 +149,7 @@ var allowedQueryHoisting = inclusiveRules{
 type Signer struct {
 	// The authentication credentials the request will be signed against.
 	// This value must be set to sign requests.
-	Credentials *aws.Credentials
+	CredentialsLoader *aws.CredentialsLoader
 
 	// Sets the log level the signer should use when reporting information to
 	// the logger. If the logger is nil nothing will be logged. See
@@ -200,9 +200,9 @@ type Signer struct {
 // NewSigner returns a Signer pointer configured with the credentials and optional
 // option values provided. If not options are provided the Signer will use its
 // default configuration.
-func NewSigner(credentials *aws.Credentials, options ...func(*Signer)) *Signer {
+func NewSigner(credLoader *aws.CredentialsLoader, options ...func(*Signer)) *Signer {
 	v4 := &Signer{
-		Credentials: credentials,
+		CredentialsLoader: credLoader,
 	}
 
 	for _, option := range options {
@@ -224,7 +224,7 @@ type signingCtx struct {
 
 	DisableURIPathEscaping bool
 
-	credValues         aws.Value
+	credValues         aws.Credentials
 	isPresign          bool
 	formattedTime      string
 	formattedShortTime string
@@ -332,7 +332,7 @@ func (v4 Signer) signWithBody(r *http.Request, body io.ReadSeeker, service, regi
 	}
 
 	var err error
-	ctx.credValues, err = v4.Credentials.Get()
+	ctx.credValues, err = v4.CredentialsLoader.Get()
 	if err != nil {
 		return http.Header{}, err
 	}
@@ -426,7 +426,7 @@ func BuildNamedHandler(name string, opts ...func(*Signer)) aws.NamedHandler {
 func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, opts ...func(*Signer)) {
 	// If the request does not need to be signed ignore the signing of the
 	// request if the AnonymousCredentials object is used.
-	if req.Config.Credentials == aws.AnonymousCredentials {
+	if req.Config.CredentialsLoader == aws.AnonymousCredentials {
 		return
 	}
 
@@ -440,7 +440,7 @@ func signSDKRequestWithCurrTime(req *aws.Request, curTimeFn func() time.Time, op
 		name = req.ClientInfo.ServiceName
 	}
 
-	v4 := NewSigner(req.Config.Credentials, func(v4 *Signer) {
+	v4 := NewSigner(req.Config.CredentialsLoader, func(v4 *Signer) {
 		v4.Debug = req.Config.LogLevel.Value()
 		v4.Logger = req.Config.Logger
 		v4.DisableHeaderHoisting = req.NotHoist

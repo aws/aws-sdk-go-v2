@@ -76,7 +76,7 @@ type EnvConfig struct {
 	//
 	//	# Session Token
 	//	AWS_SESSION_TOKEN=TOKEN
-	Credentials aws.Value
+	Credentials aws.Credentials
 
 	// TODO doc
 	CredentialsEndpoint string
@@ -146,7 +146,7 @@ func LoadEnvConfig(cfgs Configs) (Config, error) {
 func NewEnvConfig() (EnvConfig, error) {
 	var cfg EnvConfig
 
-	creds := aws.Value{
+	creds := aws.Credentials{
 		ProviderName: CredentialsSourceName,
 	}
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
@@ -178,7 +178,7 @@ func (c EnvConfig) GetRegion() (string, error) {
 
 // GetCredentialsValue returns the AWS Credentials if both AccessKey and ScreteAccessKey
 // are set in the environment. Returns a zero value Credentials if not set.
-func (c EnvConfig) GetCredentialsValue() (aws.Value, error) {
+func (c EnvConfig) GetCredentialsValue() (aws.Credentials, error) {
 	return c.Credentials, nil
 }
 

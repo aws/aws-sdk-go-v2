@@ -4,20 +4,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
-var (
-	// ErrNoValidProvidersFoundInChain Is returned when there are no valid
-	// providers in the ChainProvider.
-	//
-	// This has been deprecated. For verbose error messaging set
-	// aws.Config.CredentialsChainVerboseErrors to true
-	//
-	// @readonly
-	ErrNoValidProvidersFoundInChain = awserr.New("NoCredentialProviders",
-		`no valid providers in chain. Deprecated.
-	For verbose messaging see aws.Config.CredentialsChainVerboseErrors`,
-		nil)
-)
-
 // A ChainProvider will search for a provider which returns credentials
 // and cache that provider until Retrieve is called again.
 //
@@ -25,45 +11,45 @@ var (
 // which will pick the first available using priority order of the Providers
 // in the list.
 //
-// If none of the Providers retrieve valid credentials Value, ChainProvider's
+// If none of the Providers retrieve valid credentials Credentials, ChainProvider's
 // Retrieve() will return the error ErrNoValidProvidersFoundInChain.
 //
-// If a Provider is found which returns valid credentials Value ChainProvider
-// will cache that Provider for all calls to IsExpired(), until Retrieve is
+// If a CredentialsProvider is found which returns valid credentials Credentials ChainProvider
+// will cache that CredentialsProvider for all calls to IsExpired(), until Retrieve is
 // called again.
 //
 // Example of ChainProvider to be used with an EnvProvider and EC2RoleProvider.
 // In this example EnvProvider will first check if any credentials are available
 // via the environment variables. If there are none ChainProvider will check
-// the next Provider in the list, EC2RoleProvider in this case. If EC2RoleProvider
+// the next CredentialsProvider in the list, EC2RoleProvider in this case. If EC2RoleProvider
 // does not return any credentials ChainProvider will return the error
 // ErrNoValidProvidersFoundInChain
 //
-//     creds := credentials.NewChainCredentials(
-//         []credentials.Provider{
+//     creds := aws.NewChainCredentials(
+//         []aws.CredentialsProvider{
 //             &credentials.EnvProvider{},
 //             &ec2rolecreds.EC2RoleProvider{
-//                 Client: ec2metadata.New(sess),
+//                 Client: ec2metadata.New(cfg),
 //             },
 //         })
 //
 //     // Usage of ChainCredentials with aws.Config
-//     svc := ec2.New(session.Must(session.NewSession(&aws.Config{
-//       Credentials: creds,
-//     })))
+//     cfg := cfg.Copy()
+//     cfg.Credentials = creds
+//     svc := ec2.New(cfg)
 //
 type ChainProvider struct {
-	Providers     []Provider
-	curr          Provider
+	Providers     []CredentialsProvider
+	curr          CredentialsProvider
 	VerboseErrors bool
 }
 
-// NewChainCredentials returns a pointer to a new Credentials object
-// wrapping a chain of providers.
-func NewChainCredentials(providers []Provider) *Credentials {
-	return NewCredentials(&ChainProvider{
-		Providers: append([]Provider{}, providers...),
-	})
+// NewChainProvider returns a pointer to a new ChainProvider value wrapping
+// a chain of credentials providers.
+func NewChainProvider(providers []CredentialsProvider) *ChainProvider {
+	return &ChainProvider{
+		Providers: append([]CredentialsProvider{}, providers...),
+	}
 }
 
 // Retrieve returns the credentials value or error if no provider returned
@@ -71,7 +57,7 @@ func NewChainCredentials(providers []Provider) *Credentials {
 //
 // If a provider is found it will be cached and any calls to IsExpired()
 // will return the expired state of the cached provider.
-func (c *ChainProvider) Retrieve() (Value, error) {
+func (c *ChainProvider) Retrieve() (Credentials, error) {
 	var errs []error
 	for _, p := range c.Providers {
 		creds, err := p.Retrieve()
@@ -83,12 +69,8 @@ func (c *ChainProvider) Retrieve() (Value, error) {
 	}
 	c.curr = nil
 
-	var err error
-	err = ErrNoValidProvidersFoundInChain
-	if c.VerboseErrors {
-		err = awserr.NewBatchError("NoCredentialProviders", "no valid providers in chain", errs)
-	}
-	return Value{}, err
+	return Credentials{},
+		awserr.NewBatchError("NoCredentialProviders", "no valid providers in chain", errs)
 }
 
 // IsExpired will returned the expired state of the currently cached provider

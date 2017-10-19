@@ -23,7 +23,7 @@ func TestResolveRegion(t *testing.T) {
 	}
 
 	cfg := aws.Config{}
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveRegion(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -36,26 +36,26 @@ func TestResolveRegion(t *testing.T) {
 
 func TestResolveCredentialsValue(t *testing.T) {
 	configs := Configs{
-		WithCredentialsValue(aws.Value{
+		WithCredentialsValue(aws.Credentials{
 			ProviderName: "invalid provider",
 		}),
-		WithCredentialsValue(aws.Value{
+		WithCredentialsValue(aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 			ProviderName: "valid",
 		}),
-		WithCredentialsValue(aws.Value{
+		WithCredentialsValue(aws.Credentials{
 			ProviderName: "invalid provider 2",
 		}),
 	}
 
 	cfg := aws.Config{}
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveCredentialsValue(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.Credentials.Provider.(aws.StaticProvider)
+	p := cfg.CredentialsLoader.Provider.(aws.StaticProvider)
 	if e, a := "AKID", p.Value.AccessKeyID; e != a {
 		t.Errorf("expect %v key, got %v", e, a)
 	}
@@ -66,7 +66,7 @@ func TestResolveCredentialsValue(t *testing.T) {
 		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 
-	creds, err := cfg.Credentials.Get()
+	creds, err := cfg.CredentialsLoader.Get()
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -83,13 +83,13 @@ func TestResolveEndpointCredentials(t *testing.T) {
 	}
 
 	cfg := unit.Config.Copy()
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveEndpointCredentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.Credentials.Provider.(*endpointcreds.Provider)
+	p := cfg.CredentialsLoader.Provider.(*endpointcreds.Provider)
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}
@@ -141,13 +141,13 @@ func TestResolveContainerEndpointPathCredentials(t *testing.T) {
 	}
 
 	cfg := unit.Config.Copy()
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveContainerEndpointPathCredentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.Credentials.Provider.(*endpointcreds.Provider)
+	p := cfg.CredentialsLoader.Provider.(*endpointcreds.Provider)
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}
@@ -165,7 +165,7 @@ func TestResolveAssumeRoleCredentials(t *testing.T) {
 			ExternalID: "external",
 			Source: &SharedConfig{
 				Profile: "source",
-				Credentials: aws.Value{
+				Credentials: aws.Credentials{
 					AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				},
 			},
@@ -173,13 +173,13 @@ func TestResolveAssumeRoleCredentials(t *testing.T) {
 	}
 
 	cfg := unit.Config.Copy()
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveAssumeRoleCredentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.Credentials.Provider.(*stscreds.AssumeRoleProvider)
+	p := cfg.CredentialsLoader.Provider.(*stscreds.AssumeRoleProvider)
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}
@@ -205,7 +205,7 @@ func TestResolveAssumeRoleCredentials_WithMFAToken(t *testing.T) {
 			MFASerial:  "abc123",
 			Source: &SharedConfig{
 				Profile: "source",
-				Credentials: aws.Value{
+				Credentials: aws.Credentials{
 					AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				},
 			},
@@ -216,13 +216,13 @@ func TestResolveAssumeRoleCredentials_WithMFAToken(t *testing.T) {
 	}
 
 	cfg := unit.Config.Copy()
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveAssumeRoleCredentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.Credentials.Provider.(*stscreds.AssumeRoleProvider)
+	p := cfg.CredentialsLoader.Provider.(*stscreds.AssumeRoleProvider)
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}
@@ -248,7 +248,7 @@ func TestResolveAssumeRoleCredentials_WithMFATokenError(t *testing.T) {
 			MFASerial:  "abc123",
 			Source: &SharedConfig{
 				Profile: "source",
-				Credentials: aws.Value{
+				Credentials: aws.Credentials{
 					AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				},
 			},
@@ -256,7 +256,7 @@ func TestResolveAssumeRoleCredentials_WithMFATokenError(t *testing.T) {
 	}
 
 	cfg := unit.Config.Copy()
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	err := ResolveAssumeRoleCredentials(cfg, configs)
 	if err == nil {
@@ -265,7 +265,7 @@ func TestResolveAssumeRoleCredentials_WithMFATokenError(t *testing.T) {
 	if e, a := "MFA", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %q error in %q", e, a)
 	}
-	if cfg.Credentials != nil {
+	if cfg.CredentialsLoader != nil {
 		t.Errorf("expect no credentials")
 	}
 }
@@ -274,17 +274,17 @@ func TestResolveFallbackEC2Credentials(t *testing.T) {
 	configs := Configs{}
 
 	cfg := unit.Config.Copy()
-	cfg.Credentials = nil
+	cfg.CredentialsLoader = nil
 
 	if err := ResolveFallbackEC2Credentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	if cfg.Credentials == nil {
+	if cfg.CredentialsLoader == nil {
 		t.Errorf("expect credentials set")
 	}
 
-	p := cfg.Credentials.Provider.(*ec2rolecreds.Provider)
+	p := cfg.CredentialsLoader.Provider.(*ec2rolecreds.Provider)
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}

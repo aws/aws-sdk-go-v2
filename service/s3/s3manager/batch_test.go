@@ -399,7 +399,9 @@ func buildS3SvcClient(u string) *s3.S3 {
 		EndpointResolver: aws.ResolveWithEndpointURL(u),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
-		Credentials:      credentials.NewStaticCredentials("AKID", "SECRET", "SESSION"),
+		CredentialsLoader: credentials.NewCredentialsLoader(
+			aws.NewStaticProvider("AKID", "SECRET", "SESSION"),
+		),
 	})
 
 }

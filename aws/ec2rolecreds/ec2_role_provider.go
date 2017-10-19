@@ -54,25 +54,25 @@ type Provider struct {
 // Retrieve retrieves credentials from the EC2 service.
 // Error will be returned if the request fails, or unable to extract
 // the desired credentials.
-func (m *Provider) Retrieve() (aws.Value, error) {
+func (m *Provider) Retrieve() (aws.Credentials, error) {
 	credsList, err := requestCredList(m.Client)
 	if err != nil {
-		return aws.Value{ProviderName: ProviderName}, err
+		return aws.Credentials{ProviderName: ProviderName}, err
 	}
 
 	if len(credsList) == 0 {
-		return aws.Value{ProviderName: ProviderName}, awserr.New("EmptyEC2RoleList", "empty EC2 Role list", nil)
+		return aws.Credentials{ProviderName: ProviderName}, awserr.New("EmptyEC2RoleList", "empty EC2 Role list", nil)
 	}
 	credsName := credsList[0]
 
 	roleCreds, err := requestCred(m.Client, credsName)
 	if err != nil {
-		return aws.Value{ProviderName: ProviderName}, err
+		return aws.Credentials{ProviderName: ProviderName}, err
 	}
 
 	m.SetExpiration(roleCreds.Expiration, m.ExpiryWindow)
 
-	return aws.Value{
+	return aws.Credentials{
 		AccessKeyID:     roleCreds.AccessKeyID,
 		SecretAccessKey: roleCreds.SecretAccessKey,
 		SessionToken:    roleCreds.Token,

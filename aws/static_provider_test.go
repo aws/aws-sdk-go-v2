@@ -1,13 +1,14 @@
 package aws
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestStaticProviderGet(t *testing.T) {
 	s := StaticProvider{
-		Value: Value{
+		Value: Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",
 			SessionToken:    "",
@@ -23,7 +24,7 @@ func TestStaticProviderGet(t *testing.T) {
 
 func TestStaticProviderIsExpired(t *testing.T) {
 	s := StaticProvider{
-		Value: Value{
+		Value: Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",
 			SessionToken:    "",

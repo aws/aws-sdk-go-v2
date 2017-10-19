@@ -141,27 +141,27 @@ func GetRegion(configs Configs) (string, bool, error) {
 // CredentialsValueProvider provides access to the credentials external
 // configuration value.
 type CredentialsValueProvider interface {
-	GetCredentialsValue() (aws.Value, error)
+	GetCredentialsValue() (aws.Credentials, error)
 }
 
 // WithCredentialsValue provides wrapping of a credentials Value to satisfy the
 // CredentialsValueProvider interface.
-type WithCredentialsValue aws.Value
+type WithCredentialsValue aws.Credentials
 
 // GetCredentialsValue returns the credentials value.
-func (v WithCredentialsValue) GetCredentialsValue() (aws.Value, error) {
-	return aws.Value(v), nil
+func (v WithCredentialsValue) GetCredentialsValue() (aws.Credentials, error) {
+	return aws.Credentials(v), nil
 }
 
 // GetCredentialsValue searchds the Confings for a CredentialsValueProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
-func GetCredentialsValue(configs Configs) (aws.Value, bool, error) {
+func GetCredentialsValue(configs Configs) (aws.Credentials, bool, error) {
 	for _, cfg := range configs {
 		if p, ok := cfg.(CredentialsValueProvider); ok {
 			v, err := p.GetCredentialsValue()
 			if err != nil {
-				return aws.Value{}, false, err
+				return aws.Credentials{}, false, err
 			}
 			if v.Valid() {
 				return v, true, nil
@@ -169,7 +169,7 @@ func GetCredentialsValue(configs Configs) (aws.Value, bool, error) {
 		}
 	}
 
-	return aws.Value{}, false, nil
+	return aws.Credentials{}, false, nil
 }
 
 // CredentialsEndpointProvider provides access to the credentials endpoint

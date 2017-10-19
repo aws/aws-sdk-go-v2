@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -8,12 +9,12 @@ import (
 )
 
 type secondStubProvider struct {
-	creds   Value
+	creds   Credentials
 	expired bool
 	err     error
 }
 
-func (s *secondStubProvider) Retrieve() (Value, error) {
+func (s *secondStubProvider) Retrieve() (Credentials, error) {
 	s.expired = false
 	s.creds.ProviderName = "secondStubProvider"
 	return s.creds, s.err
@@ -24,18 +25,18 @@ func (s *secondStubProvider) IsExpired() bool {
 
 func TestChainProviderWithNames(t *testing.T) {
 	p := &ChainProvider{
-		Providers: []Provider{
+		Providers: []CredentialsProvider{
 			&stubProvider{err: awserr.New("FirstError", "first provider error", nil)},
 			&stubProvider{err: awserr.New("SecondError", "second provider error", nil)},
 			&secondStubProvider{
-				creds: Value{
+				creds: Credentials{
 					AccessKeyID:     "AKIF",
 					SecretAccessKey: "NOSECRET",
 					SessionToken:    "",
 				},
 			},
 			&stubProvider{
-				creds: Value{
+				creds: Credentials{
 					AccessKeyID:     "AKID",
 					SecretAccessKey: "SECRET",
 					SessionToken:    "",
@@ -57,11 +58,11 @@ func TestChainProviderWithNames(t *testing.T) {
 
 func TestChainProviderGet(t *testing.T) {
 	p := &ChainProvider{
-		Providers: []Provider{
+		Providers: []CredentialsProvider{
 			&stubProvider{err: awserr.New("FirstError", "first provider error", nil)},
 			&stubProvider{err: awserr.New("SecondError", "second provider error", nil)},
 			&stubProvider{
-				creds: Value{
+				creds: Credentials{
 					AccessKeyID:     "AKID",
 					SecretAccessKey: "SECRET",
 					SessionToken:    "",
@@ -80,7 +81,7 @@ func TestChainProviderGet(t *testing.T) {
 func TestChainProviderIsExpired(t *testing.T) {
 	stubProvider := &stubProvider{expired: true}
 	p := &ChainProvider{
-		Providers: []Provider{
+		Providers: []CredentialsProvider{
 			stubProvider,
 		},
 	}
@@ -99,15 +100,14 @@ func TestChainProviderIsExpired(t *testing.T) {
 
 func TestChainProviderWithNoProvider(t *testing.T) {
 	p := &ChainProvider{
-		Providers: []Provider{},
+		Providers: []CredentialsProvider{},
 	}
 
 	assert.True(t, p.IsExpired(), "Expect expired with no providers")
 	_, err := p.Retrieve()
-	assert.Equal(t,
-		ErrNoValidProvidersFoundInChain,
-		err,
-		"Expect no providers error returned")
+	if e, a := "no valid providers", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q error in %q", e, a)
+	}
 }
 
 func TestChainProviderWithNoValidProvider(t *testing.T) {
@@ -116,7 +116,7 @@ func TestChainProviderWithNoValidProvider(t *testing.T) {
 		awserr.New("SecondError", "second provider error", nil),
 	}
 	p := &ChainProvider{
-		Providers: []Provider{
+		Providers: []CredentialsProvider{
 			&stubProvider{err: errs[0]},
 			&stubProvider{err: errs[1]},
 		},
@@ -124,31 +124,7 @@ func TestChainProviderWithNoValidProvider(t *testing.T) {
 
 	assert.True(t, p.IsExpired(), "Expect expired with no providers")
 	_, err := p.Retrieve()
-
-	assert.Equal(t,
-		ErrNoValidProvidersFoundInChain,
-		err,
-		"Expect no providers error returned")
-}
-
-func TestChainProviderWithNoValidProviderWithVerboseEnabled(t *testing.T) {
-	errs := []error{
-		awserr.New("FirstError", "first provider error", nil),
-		awserr.New("SecondError", "second provider error", nil),
+	if e, a := "no valid providers", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q error in %q", e, a)
 	}
-	p := &ChainProvider{
-		VerboseErrors: true,
-		Providers: []Provider{
-			&stubProvider{err: errs[0]},
-			&stubProvider{err: errs[1]},
-		},
-	}
-
-	assert.True(t, p.IsExpired(), "Expect expired with no providers")
-	_, err := p.Retrieve()
-
-	assert.Equal(t,
-		awserr.NewBatchError("NoCredentialProviders", "no valid providers in chain", errs),
-		err,
-		"Expect no providers error returned")
 }

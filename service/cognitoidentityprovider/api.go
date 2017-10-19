@@ -2611,7 +2611,7 @@ func (c *CognitoIdentityProvider) ChangePasswordRequest(input *ChangePasswordInp
 
 	output = &ChangePasswordOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -2842,7 +2842,7 @@ func (c *CognitoIdentityProvider) ConfirmForgotPasswordRequest(input *ConfirmFor
 
 	output = &ConfirmForgotPasswordOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -2974,7 +2974,7 @@ func (c *CognitoIdentityProvider) ConfirmSignUpRequest(input *ConfirmSignUpInput
 
 	output = &ConfirmSignUpOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -4112,7 +4112,7 @@ func (c *CognitoIdentityProvider) DeleteUserRequest(input *DeleteUserInput) (req
 	req = c.newRequest(op, input, output)
 	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -4216,7 +4216,7 @@ func (c *CognitoIdentityProvider) DeleteUserAttributesRequest(input *DeleteUserA
 
 	output = &DeleteUserAttributesOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -5279,7 +5279,7 @@ func (c *CognitoIdentityProvider) ForgotPasswordRequest(input *ForgotPasswordInp
 
 	output = &ForgotPasswordOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -5908,7 +5908,7 @@ func (c *CognitoIdentityProvider) GetUserRequest(input *GetUserInput) (req *aws.
 
 	output = &GetUserOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -6012,7 +6012,7 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input 
 
 	output = &GetUserAttributeVerificationCodeOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -7225,7 +7225,7 @@ func (c *CognitoIdentityProvider) ResendConfirmationCodeRequest(input *ResendCon
 
 	output = &ResendConfirmationCodeOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -7611,7 +7611,7 @@ func (c *CognitoIdentityProvider) SetUserSettingsRequest(input *SetUserSettingsI
 
 	output = &SetUserSettingsOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -7713,7 +7713,7 @@ func (c *CognitoIdentityProvider) SignUpRequest(input *SignUpInput) (req *aws.Re
 
 	output = &SignUpOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -8433,7 +8433,7 @@ func (c *CognitoIdentityProvider) UpdateUserAttributesRequest(input *UpdateUserA
 
 	output = &UpdateUserAttributesOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 
@@ -8798,7 +8798,7 @@ func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAt
 
 	output = &VerifyUserAttributeOutput{}
 	req = c.newRequest(op, input, output)
-	req.Config.Credentials = aws.AnonymousCredentials
+	req.Config.CredentialsLoader = aws.AnonymousCredentials
 	return
 }
 

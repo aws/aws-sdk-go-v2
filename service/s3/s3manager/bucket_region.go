@@ -51,7 +51,7 @@ func GetBucketRegionWithClient(ctx aws.Context, svc s3iface.S3API, bucket string
 		Bucket: aws.String(bucket),
 	})
 	req.Config.S3ForcePathStyle = aws.Bool(true)
-	req.Config.Credentials = credentials.AnonymousCredentials
+	req.Config.CredentialsLoader = credentials.AnonymousCredentials
 	req.SetContext(ctx)
 
 	// Disable HTTP redirects to prevent an invalid 301 from eating the response

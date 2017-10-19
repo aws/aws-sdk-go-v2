@@ -194,7 +194,7 @@ type AssumeRoleProvider struct {
 }
 
 // Retrieve generates a new set of temporary credentials using STS.
-func (p *AssumeRoleProvider) Retrieve() (aws.Value, error) {
+func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
 
 	// Apply defaults where parameters are not set.
 	if p.RoleSessionName == "" {
@@ -222,11 +222,11 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Value, error) {
 			input.SerialNumber = p.SerialNumber
 			code, err := p.TokenProvider()
 			if err != nil {
-				return aws.Value{ProviderName: ProviderName}, err
+				return aws.Credentials{ProviderName: ProviderName}, err
 			}
 			input.TokenCode = aws.String(code)
 		} else {
-			return aws.Value{ProviderName: ProviderName},
+			return aws.Credentials{ProviderName: ProviderName},
 				awserr.New("AssumeRoleTokenNotAvailable",
 					"assume role with MFA enabled, but neither TokenCode nor TokenProvider are set", nil)
 		}
@@ -234,13 +234,13 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Value, error) {
 
 	roleOutput, err := p.Client.AssumeRole(input)
 	if err != nil {
-		return aws.Value{ProviderName: ProviderName}, err
+		return aws.Credentials{ProviderName: ProviderName}, err
 	}
 
 	// We will proactively generate new credentials before they expire.
 	p.SetExpiration(*roleOutput.Credentials.Expiration, p.ExpiryWindow)
 
-	return aws.Value{
+	return aws.Credentials{
 		AccessKeyID:     *roleOutput.Credentials.AccessKeyId,
 		SecretAccessKey: *roleOutput.Credentials.SecretAccessKey,
 		SessionToken:    *roleOutput.Credentials.SessionToken,

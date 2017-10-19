@@ -8,12 +8,12 @@ import (
 )
 
 type stubProvider struct {
-	creds   Value
+	creds   Credentials
 	expired bool
 	err     error
 }
 
-func (s *stubProvider) Retrieve() (Value, error) {
+func (s *stubProvider) Retrieve() (Credentials, error) {
 	s.expired = false
 	s.creds.ProviderName = "stubProvider"
 	return s.creds, s.err
@@ -23,8 +23,8 @@ func (s *stubProvider) IsExpired() bool {
 }
 
 func TestCredentialsGet(t *testing.T) {
-	c := NewCredentials(&stubProvider{
-		creds: Value{
+	c := NewCredentialsLoader(&stubProvider{
+		creds: Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",
 			SessionToken:    "",
@@ -40,7 +40,7 @@ func TestCredentialsGet(t *testing.T) {
 }
 
 func TestCredentialsGetWithError(t *testing.T) {
-	c := NewCredentials(&stubProvider{err: awserr.New("provider error", "", nil), expired: true})
+	c := NewCredentialsLoader(&stubProvider{err: awserr.New("provider error", "", nil), expired: true})
 
 	_, err := c.Get()
 	assert.Equal(t, "provider error", err.(awserr.Error).Code(), "Expected provider error")
@@ -48,7 +48,7 @@ func TestCredentialsGetWithError(t *testing.T) {
 
 func TestCredentialsExpire(t *testing.T) {
 	stub := &stubProvider{}
-	c := NewCredentials(stub)
+	c := NewCredentialsLoader(stub)
 
 	stub.expired = false
 	assert.True(t, c.IsExpired(), "Expected to start out expired")
@@ -65,7 +65,7 @@ func TestCredentialsExpire(t *testing.T) {
 func TestCredentialsGetWithProviderName(t *testing.T) {
 	stub := &stubProvider{}
 
-	c := NewCredentials(stub)
+	c := NewCredentialsLoader(stub)
 
 	creds, err := c.Get()
 	assert.Nil(t, err, "Expected no error")

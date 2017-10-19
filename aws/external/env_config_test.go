@@ -21,38 +21,38 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 
 	cases := []struct {
 		Env map[string]string
-		Val aws.Value
+		Val aws.Credentials
 	}{
 		{
 			Env: map[string]string{
 				"AWS_ACCESS_KEY": "AKID",
 			},
-			Val: aws.Value{},
+			Val: aws.Credentials{},
 		},
 		{
 			Env: map[string]string{
 				"AWS_ACCESS_KEY_ID": "AKID",
 			},
-			Val: aws.Value{},
+			Val: aws.Credentials{},
 		},
 		{
 			Env: map[string]string{
 				"AWS_SECRET_KEY": "SECRET",
 			},
-			Val: aws.Value{},
+			Val: aws.Credentials{},
 		},
 		{
 			Env: map[string]string{
 				"AWS_SECRET_ACCESS_KEY": "SECRET",
 			},
-			Val: aws.Value{},
+			Val: aws.Credentials{},
 		},
 		{
 			Env: map[string]string{
 				"AWS_ACCESS_KEY_ID":     "AKID",
 				"AWS_SECRET_ACCESS_KEY": "SECRET",
 			},
-			Val: aws.Value{
+			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				ProviderName: CredentialsSourceName,
 			},
@@ -62,7 +62,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 				"AWS_ACCESS_KEY": "AKID",
 				"AWS_SECRET_KEY": "SECRET",
 			},
-			Val: aws.Value{
+			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				ProviderName: CredentialsSourceName,
 			},
@@ -73,7 +73,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 				"AWS_SECRET_KEY":    "SECRET",
 				"AWS_SESSION_TOKEN": "TOKEN",
 			},
-			Val: aws.Value{
+			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "TOKEN",
 				ProviderName: CredentialsSourceName,
 			},
