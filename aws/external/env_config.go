@@ -151,7 +151,7 @@ func NewEnvConfig() (EnvConfig, error) {
 	}
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
 	setFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
-	if creds.Valid() {
+	if creds.HasKeys() {
 		creds.SessionToken = os.Getenv(AWSSessionTokenEnvVar)
 		cfg.Credentials = creds
 	}

@@ -86,9 +86,8 @@ type Credentials struct {
 	ProviderName string
 }
 
-// Valid returns if the credentials are valid and can be used to sign
-// a AWS v4 request.
-func (v Credentials) Valid() bool {
+// HasKeys returns if the credentials keys are set.
+func (v Credentials) HasKeys() bool {
 	return len(v.AccessKeyID) > 0 && len(v.SecretAccessKey) > 0
 }
 

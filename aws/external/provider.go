@@ -163,7 +163,7 @@ func GetCredentialsValue(configs Configs) (aws.Credentials, bool, error) {
 			if err != nil {
 				return aws.Credentials{}, false, err
 			}
-			if v.Valid() {
+			if v.HasKeys() {
 				return v, true, nil
 			}
 		}
