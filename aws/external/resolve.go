@@ -85,7 +85,7 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 	return nil
 }
 
-// ResolveEndpointCredentials will extra the credentials endpoint from the config
+// ResolveEndpointCredentials will extract the credentials endpoint from the config
 // slice. Using the endpoint, provided, to create a endpoint credential provider.
 //
 // Config providers used:
@@ -103,6 +103,37 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 
 	// TODO validate endpoint URL (localhost, 127/8, ect)
 	cfgCp := cfg.Copy()
+	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
+
+	provider := endpointcreds.New(*cfgCp)
+	provider.ExpiryWindow = 5 * time.Minute
+
+	cfg.Credentials = aws.NewCredentials(provider)
+
+	return nil
+}
+
+// ResolveContainerEndpointPathCredentials will extract the container credentials
+// endpoint from the config slice. Using the endpoint provided, to create a
+// endpoint credential provider.
+//
+// Config providers used:
+// * ContainerCredentialsEndpointPathProvider
+func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) error {
+	v, found, err := GetContainerCredentialsEndpointPath(configs)
+	if err != nil {
+		// TODO error handling, What is the best way to handle this?
+		// capture previous errors continue. error out if all errors
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfgCp := cfg.Copy()
+
+	// TODO put this in a constant?
+	v = "http://169.254.170.2" + v
 	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
 
 	provider := endpointcreds.New(*cfgCp)

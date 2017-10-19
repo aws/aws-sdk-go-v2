@@ -206,6 +206,40 @@ func GetCredentialsEndpoint(configs Configs) (string, bool, error) {
 	return "", false, nil
 }
 
+// ContainerCredentialsEndpointPathProvider provides access to the credentials endpoint path
+// external configuration value.
+type ContainerCredentialsEndpointPathProvider interface {
+	GetContainerCredentialsEndpointPath() (string, error)
+}
+
+// WithContainerCredentialsEndpointPath provides wrapping of a string to satisfy the
+// ContainerCredentialsEndpointPathProvider interface.
+type WithContainerCredentialsEndpointPath string
+
+// GetContainerCredentialsEndpointPath returns the endpoint path.
+func (p WithContainerCredentialsEndpointPath) GetContainerCredentialsEndpointPath() (string, error) {
+	return string(p), nil
+}
+
+// GetContainerCredentialsEndpointPath searchds the Confings for a ContainerCredentialsEndpointPathProvider
+// and returns the value if found. Returns an error if a provider fails before a
+// value is found.
+func GetContainerCredentialsEndpointPath(configs Configs) (string, bool, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(ContainerCredentialsEndpointPathProvider); ok {
+			v, err := p.GetContainerCredentialsEndpointPath()
+			if err != nil {
+				return "", false, err
+			}
+			if len(v) > 0 {
+				return v, true, nil
+			}
+		}
+	}
+
+	return "", false, nil
+}
+
 // AssumeRoleConfigProvider provides access to the assume role config
 // external configuration value.
 type AssumeRoleConfigProvider interface {

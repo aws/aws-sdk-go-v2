@@ -23,7 +23,7 @@ const (
 	AWSCredentialsEndpointEnvVar = "AWS_CONTAINER_CREDENTIALS_FULL_URI"
 
 	// TODO shorter name?
-	AWSContainerCredentialsRelativeEndpointEnvVar = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
+	AWSContainerCredentialsEndpointPathEnvVar = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
 
 	AWSRegionEnvVar        = "AWS_REGION"
 	AWSDefaultRegionEnvVar = "AWS_DEFAULT_REGION"
@@ -79,10 +79,10 @@ type EnvConfig struct {
 	Credentials aws.Value
 
 	// TODO doc
-	CredentialsHTTPEndpoint string
+	CredentialsEndpoint string
 
 	// TODO doc, shorter name?
-	CredentialsContainerRelativeHTTPEndpoint string
+	ContainerCredentialsEndpointPath string
 
 	// Region value will instruct the SDK where to make service API requests to. If is
 	// not provided in the environment the region must be provided before a service
@@ -156,8 +156,8 @@ func NewEnvConfig() (EnvConfig, error) {
 		cfg.Credentials = creds
 	}
 
-	cfg.CredentialsHTTPEndpoint = os.Getenv(AWSCredentialsEndpointEnvVar)
-	cfg.CredentialsContainerRelativeHTTPEndpoint = os.Getenv(AWSContainerCredentialsRelativeEndpointEnvVar)
+	cfg.CredentialsEndpoint = os.Getenv(AWSCredentialsEndpointEnvVar)
+	cfg.ContainerCredentialsEndpointPath = os.Getenv(AWSContainerCredentialsEndpointPathEnvVar)
 
 	setFromEnvVal(&cfg.Region, regionEnvKeys)
 	setFromEnvVal(&cfg.SharedConfigProfile, profileEnvKeys)
@@ -186,6 +186,17 @@ func (c EnvConfig) GetCredentialsValue() (aws.Value, error) {
 // environment. Returns an empty string if not set.
 func (c EnvConfig) GetSharedConfigProfile() (string, error) {
 	return c.SharedConfigProfile, nil
+}
+
+// GetCredentialsEndpoint returns the credentials endpoint string if set.
+func (c EnvConfig) GetCredentialsEndpoint() (string, error) {
+	return c.CredentialsEndpoint, nil
+}
+
+// GetContainerCredentailsEndpointPath returns the container credentails endpoint
+// path string if set.
+func (c EnvConfig) GetContainerCredentailsEndpointPath() (string, error) {
+	return c.ContainerCredentialsEndpointPath, nil
 }
 
 // GetSharedConfigFiles returns a slice of filenames set in the environment.

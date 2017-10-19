@@ -100,8 +100,12 @@ func TestResolveEndpointCredentials(t *testing.T) {
 	}
 }
 
-func TestResolveendpointCredentials_ValidateEndpoint(t *testing.T) {
+func TestResolveEndpointCredentials_ValidateEndpoint(t *testing.T) {
 	t.Errorf("not implemented")
+}
+
+func TestResolveContainerEndpointPathCredentials(t *testing.T) {
+	t.Errorf("not tested")
 }
 
 func TestResolveAssumeRoleCredentials(t *testing.T) {

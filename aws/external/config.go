@@ -22,6 +22,7 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 	ResolveRegion,
 	ResolveCredentialsValue, // TODO move endpoint resolers into single call?
 	ResolveEndpointCredentials,
+	ResolveContainerEndpointPathCredentials, // TODO is this order right?
 	ResolveAssumeRoleCredentials,
 	ResolveFallbackEC2Credentials,
 }
