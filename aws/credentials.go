@@ -66,7 +66,7 @@ import (
 //     // Access public S3 buckets.
 //
 // @readonly
-var AnonymousCredentials = NewCredentialsLoader(StaticProvider{
+var AnonymousCredentials = NewCredentialsLoader(StaticCredentialsProvider{
 	Value: Credentials{Source: "AnonymousCredentials"},
 })
 

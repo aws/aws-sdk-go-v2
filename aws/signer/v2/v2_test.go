@@ -41,7 +41,7 @@ func (sb signerBuilder) BuildSigner() signer {
 		Time:    sb.SignTime,
 
 		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticProvider("AKID", "SECRET", sb.SessionToken)),
+			aws.NewStaticCredentialsProvider("AKID", "SECRET", sb.SessionToken)),
 	}
 
 	if os.Getenv("DEBUG") != "" {
@@ -144,7 +144,7 @@ func TestGet(t *testing.T) {
 	assert := assert.New(t)
 	svc := awstesting.NewClient(&aws.Config{
 		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticProvider("AKID", "SECRET", "SESSION"),
+			aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
 		),
 		Region: aws.String("ap-southeast-2"),
 	})

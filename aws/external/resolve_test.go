@@ -55,7 +55,7 @@ func TestResolveCredentialsValue(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.CredentialsLoader.Provider.(aws.StaticProvider)
+	p := cfg.CredentialsLoader.Provider.(aws.StaticCredentialsProvider)
 	if e, a := "AKID", p.Value.AccessKeyID; e != a {
 		t.Errorf("expect %v key, got %v", e, a)
 	}

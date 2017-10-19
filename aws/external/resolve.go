@@ -80,7 +80,7 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	provider := aws.StaticProvider{Value: v}
+	provider := aws.StaticCredentialsProvider{Value: v}
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
@@ -181,7 +181,7 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 	cfgCp := cfg.Copy()
 	// TODO support additional credential providers that are already set?
 	cfgCp.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.StaticProvider{Value: v.Source.Credentials},
+		aws.StaticCredentialsProvider{Value: v.Source.Credentials},
 	)
 
 	provider := &stscreds.AssumeRoleProvider{
