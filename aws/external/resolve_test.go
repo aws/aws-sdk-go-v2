@@ -4,9 +4,12 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
+	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
@@ -19,7 +22,9 @@ func TestResolveRegion(t *testing.T) {
 		WithRegion("mock-region"),
 		WithRegion("ignored-region"),
 	}
+
 	cfg := aws.Config{}
+	cfg.Credentials = nil
 
 	if err := ResolveRegion(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
@@ -43,10 +48,23 @@ func TestResolveCredentialsValue(t *testing.T) {
 			ProviderName: "invalid provider 2",
 		}),
 	}
+
 	cfg := aws.Config{}
+	cfg.Credentials = nil
 
 	if err := ResolveCredentialsValue(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
+	}
+
+	p := cfg.Credentials.Provider.(aws.StaticProvider)
+	if e, a := "AKID", p.Value.AccessKeyID; e != a {
+		t.Errorf("expect %v key, got %v", e, a)
+	}
+	if e, a := "SECRET", p.Value.SecretAccessKey; e != a {
+		t.Errorf("expect %v secret, got %v", e, a)
+	}
+	if e, a := "valid", p.Value.ProviderName; e != a {
+		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 
 	creds, err := cfg.Credentials.Get()
@@ -58,41 +76,97 @@ func TestResolveCredentialsValue(t *testing.T) {
 	}
 }
 
-func TestResolveEndpointCredentilas(t *testing.T) {
+func TestResolveEndpointCredentials(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`{"accesskeyid": "AKID", "SecretAccessKey": "SECRET"}`))
+		w.Write([]byte(`{"AccessKeyID": "AKID", "SecretAccessKey": "SECRET"}`))
 	}))
 	configs := Configs{
 		WithCredentialsEndpoint(server.URL),
 	}
 
 	cfg := unit.Config.Copy()
+	cfg.Credentials = nil
+
 	if err := ResolveEndpointCredentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	creds, err := cfg.Credentials.Get()
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	p := cfg.Credentials.Provider.(*endpointcreds.Provider)
+	if p.Client == nil {
+		t.Errorf("expect client set")
 	}
-	if e, a := endpointcreds.ProviderName, creds.ProviderName; e != a {
-		t.Errorf("expect %v creds, got %v", e, a)
+	if e, a := server.URL, p.Client.ClientInfo.Endpoint; e != a {
+		t.Errorf("expect %q endpoint, got %q", e, a)
 	}
 }
 
-func TestResolveAssumeRoleCredentilas(t *testing.T) {
+func TestResolveendpointCredentials_ValidateEndpoint(t *testing.T) {
 	t.Errorf("not implemented")
+}
+
+func TestResolveAssumeRoleCredentials(t *testing.T) {
+	configs := Configs{
+		WithAssumeRoleConfig(AssumeRoleConfig{
+			RoleARN:    "arn",
+			ExternalID: "external",
+			Source: &SharedConfig{
+				Profile: "source",
+				Credentials: aws.Value{
+					AccessKeyID: "AKID", SecretAccessKey: "SECRET",
+				},
+			},
+		}),
+	}
+
+	cfg := unit.Config.Copy()
+	cfg.Credentials = nil
+
+	if err := ResolveAssumeRoleCredentials(cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	p := cfg.Credentials.Provider.(*stscreds.AssumeRoleProvider)
+	if p.Client == nil {
+		t.Errorf("expect client set")
+	}
+	if e, a := "arn", p.RoleARN; e != a {
+		t.Errorf("expect %q arn, got %q", e, a)
+	}
+	if e, a := "external", *p.ExternalID; e != a {
+		t.Errorf("expect %q external id, got %q", e, a)
+	}
+	if p.SerialNumber != nil {
+		t.Errorf("expect no serial number")
+	}
+	if p.TokenProvider != nil {
+		t.Errorf("expect no token provider")
+	}
+}
+
+func TestResolveAssumeRoleCredentials_WithMFAToken(t *testing.T) {
+	t.Errorf("not tested")
 }
 
 func TestResolveFallbackEC2Credentials(t *testing.T) {
 	configs := Configs{}
-	cfg := aws.Config{}
 
-	if err := ResolveFallbackEC2Credentials(&cfg, configs); err != nil {
+	cfg := unit.Config.Copy()
+	cfg.Credentials = nil
+
+	if err := ResolveFallbackEC2Credentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
+
 	if cfg.Credentials == nil {
 		t.Errorf("expect credentials set")
+	}
+
+	p := cfg.Credentials.Provider.(*ec2rolecreds.Provider)
+	if p.Client == nil {
+		t.Errorf("expect client set")
+	}
+	if e, a := 5*time.Minute, p.ExpiryWindow; e != a {
+		t.Errorf("expect %v expiry window, got %v", e, a)
 	}
 }
 

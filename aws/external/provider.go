@@ -205,3 +205,71 @@ func GetCredentialsEndpoint(configs Configs) (string, bool, error) {
 
 	return "", false, nil
 }
+
+// AssumeRoleConfigProvider provides access to the assume role config
+// external configuration value.
+type AssumeRoleConfigProvider interface {
+	GetAssumeRoleConfig() (AssumeRoleConfig, error)
+}
+
+// WithAssumeRoleConfig provides wrapping of a string to satisfy the
+// AssumeRoleConfigProvider interface.
+type WithAssumeRoleConfig AssumeRoleConfig
+
+// GetAssumeRoleConfig returns the AssumeRoleConfig.
+func (p WithAssumeRoleConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
+	return AssumeRoleConfig(p), nil
+}
+
+// GetAssumeRoleConfig searchds the Confings for a AssumeRoleConfigProvider
+// and returns the value if found. Returns an error if a provider fails before a
+// value is found.
+func GetAssumeRoleConfig(configs Configs) (AssumeRoleConfig, bool, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(AssumeRoleConfigProvider); ok {
+			v, err := p.GetAssumeRoleConfig()
+			if err != nil {
+				return AssumeRoleConfig{}, false, err
+			}
+			if len(v.RoleARN) > 0 && v.Source != nil {
+				return v, true, nil
+			}
+		}
+	}
+
+	return AssumeRoleConfig{}, false, nil
+}
+
+// MFATokenFuncProvider provides access to the MFA token function needed for
+// Assume Role with MFA.
+type MFATokenFuncProvider interface {
+	GetMFATokenFunc() (func() (string, error), error)
+}
+
+// WithMFATokenFunc provides wrapping of a string to satisfy the
+// MFATokenFuncProvider interface.
+type WithMFATokenFunc func() (string, error)
+
+// GetMFATokenFunc returns the MFA Token function.
+func (p WithMFATokenFunc) GetMFATokenFunc() (func() (string, error), error) {
+	return p, nil
+}
+
+// GetMFATokenFunc searchds the Confings for a MFATokenFuncProvider
+// and returns the value if found. Returns an error if a provider fails before a
+// value is found.
+func GetMFATokenFunc(configs Configs) (func() (string, error), bool, error) {
+	for _, cfg := range configs {
+		if p, ok := cfg.(MFATokenFuncProvider); ok {
+			v, err := p.GetMFATokenFunc()
+			if err != nil {
+				return nil, false, err
+			}
+			if v != nil {
+				return v, true, nil
+			}
+		}
+	}
+
+	return nil, false, nil
+}

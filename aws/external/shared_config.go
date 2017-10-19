@@ -87,10 +87,9 @@ type SharedConfig struct {
 	//	aws_access_key_id
 	//	aws_secret_access_key
 	//	aws_session_token
-	Creds aws.Value
+	Credentials aws.Value
 
 	AssumeRole AssumeRoleConfig
-	//	AssumeRoleSource *SharedConfig
 
 	// Region is the region the SDK should use for looking up AWS service endpoints
 	// and signing requests.
@@ -106,7 +105,7 @@ func (c SharedConfig) GetRegion() (string, error) {
 
 // GetCredentialsValue returns the credentials for a profile if they were set.
 func (c SharedConfig) GetCredentialsValue() (aws.Value, error) {
-	return c.Creds, nil
+	return c.Credentials, nil
 }
 
 // GetAssumeRoleConfig returns the assume role config for a profile. Will be
@@ -236,7 +235,7 @@ func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedCon
 		}
 	}
 
-	if len(assumeRoleSrc.Creds.AccessKeyID) == 0 {
+	if len(assumeRoleSrc.Credentials.AccessKeyID) == 0 {
 		return SharedConfigAssumeRoleError{RoleARN: c.AssumeRole.RoleARN}
 	}
 
@@ -284,7 +283,7 @@ func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) err
 	akid := section.Key(accessKeyIDKey).String()
 	secret := section.Key(secretAccessKey).String()
 	if len(akid) > 0 && len(secret) > 0 {
-		c.Creds = aws.Value{
+		c.Credentials = aws.Value{
 			AccessKeyID:     akid,
 			SecretAccessKey: secret,
 			SessionToken:    section.Key(sessionTokenKey).String(),

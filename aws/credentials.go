@@ -35,7 +35,7 @@
 // Custom Provider
 //
 // Each Provider built into this package also provides a helper method to generate
-// a Credentials pointer setup with the provider. To use a custom Provider just
+// a Credentials pointer setup with the Provider. To use a custom Provider just
 // create a type which satisfies the Provider interface and pass it to the
 // NewCredentials method.
 //
@@ -91,7 +91,7 @@ func (v Value) Valid() bool {
 }
 
 // A Provider is the interface for any component which will provide credentials
-// Value. A provider is required to manage its own Expired state, and what to
+// Value. A Provider is required to manage its own Expired state, and what to
 // be expired means.
 //
 // The Provider should not need to implement its own mutexes, because
@@ -106,14 +106,14 @@ type Provider interface {
 	IsExpired() bool
 }
 
-// An ErrorProvider is a stub credentials provider that always returns an error
-// this is used by the SDK when construction a known provider is not possible
+// An ErrorProvider is a stub credentials Provider that always returns an error
+// this is used by the SDK when construction a known Provider is not possible
 // due to an error.
 type ErrorProvider struct {
 	// The error to be returned from Retrieve
 	Err error
 
-	// The provider name to set on the Retrieved returned Value
+	// The Provider name to set on the Retrieved returned Value
 	ProviderName string
 }
 
@@ -131,7 +131,7 @@ func (p ErrorProvider) IsExpired() bool {
 // providers to implement expiry functionality.
 //
 // The best method to use this struct is as an anonymous field within the
-// provider's struct.
+// Provider's struct.
 //
 // Example:
 //     type EC2RoleProvider struct {
@@ -187,13 +187,13 @@ type Credentials struct {
 	forceRefresh bool
 	m            sync.Mutex
 
-	provider Provider
+	Provider Provider
 }
 
-// NewCredentials returns a pointer to a new Credentials with the provider set.
-func NewCredentials(provider Provider) *Credentials {
+// NewCredentials returns a pointer to a new Credentials with the Provider set.
+func NewCredentials(Provider Provider) *Credentials {
 	return &Credentials{
-		provider:     provider,
+		Provider:     Provider,
 		forceRefresh: true,
 	}
 }
@@ -212,7 +212,7 @@ func (c *Credentials) Get() (Value, error) {
 	defer c.m.Unlock()
 
 	if c.isExpired() {
-		creds, err := c.provider.Retrieve()
+		creds, err := c.Provider.Retrieve()
 		if err != nil {
 			return Value{}, err
 		}
@@ -249,5 +249,5 @@ func (c *Credentials) IsExpired() bool {
 
 // isExpired helper method wrapping the definition of expired credentials.
 func (c *Credentials) isExpired() bool {
-	return c.forceRefresh || c.provider.IsExpired()
+	return c.forceRefresh || c.Provider.IsExpired()
 }

@@ -13,6 +13,7 @@ import (
 
 var _ RegionProvider = (*SharedConfig)(nil)
 var _ CredentialsValueProvider = (*SharedConfig)(nil)
+var _ AssumeRoleConfigProvider = (*SharedConfig)(nil)
 
 var (
 	testConfigFilename      = filepath.Join("testdata", "shared_config")
@@ -44,7 +45,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Expected: SharedConfig{
 				Profile: "config_file_load_order",
 				Region:  "shared_config_region",
-				Creds: aws.Value{
+				Credentials: aws.Value{
 					AccessKeyID:     "shared_config_akid",
 					SecretAccessKey: "shared_config_secret",
 					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
@@ -57,7 +58,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Expected: SharedConfig{
 				Profile: "config_file_load_order",
 				Region:  "shared_config_other_region",
-				Creds: aws.Value{
+				Credentials: aws.Value{
 					AccessKeyID:     "shared_config_other_akid",
 					SecretAccessKey: "shared_config_other_secret",
 					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigOtherFilename),
@@ -74,7 +75,7 @@ func TestNewSharedConfig(t *testing.T) {
 					sourceProfile: "complete_creds",
 					Source: &SharedConfig{
 						Profile: "complete_creds",
-						Creds: aws.Value{
+						Credentials: aws.Value{
 							AccessKeyID:     "complete_creds_akid",
 							SecretAccessKey: "complete_creds_secret",
 							ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
@@ -100,7 +101,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:   "assume_role_w_creds",
 			Expected: SharedConfig{
 				Profile: "assume_role_w_creds",
-				Creds: aws.Value{
+				Credentials: aws.Value{
 					AccessKeyID:     "assume_role_w_creds_akid",
 					SecretAccessKey: "assume_role_w_creds_secret",
 					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
@@ -112,7 +113,7 @@ func TestNewSharedConfig(t *testing.T) {
 					sourceProfile:   "assume_role_w_creds",
 					Source: &SharedConfig{
 						Profile: "assume_role_w_creds",
-						Creds: aws.Value{
+						Credentials: aws.Value{
 							AccessKeyID:     "assume_role_w_creds_akid",
 							SecretAccessKey: "assume_role_w_creds_secret",
 							ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
@@ -190,7 +191,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 		{
 			Profile: "complete_creds",
 			Expected: SharedConfig{
-				Creds: aws.Value{
+				Credentials: aws.Value{
 					AccessKeyID:     "complete_creds_akid",
 					SecretAccessKey: "complete_creds_secret",
 					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
@@ -200,7 +201,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 		{
 			Profile: "complete_creds_with_token",
 			Expected: SharedConfig{
-				Creds: aws.Value{
+				Credentials: aws.Value{
 					AccessKeyID:     "complete_creds_with_token_akid",
 					SecretAccessKey: "complete_creds_with_token_secret",
 					SessionToken:    "complete_creds_with_token_token",
@@ -211,7 +212,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 		{
 			Profile: "full_profile",
 			Expected: SharedConfig{
-				Creds: aws.Value{
+				Credentials: aws.Value{
 					AccessKeyID:     "full_profile_akid",
 					SecretAccessKey: "full_profile_secret",
 					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
@@ -313,5 +314,5 @@ func cmpFiles(expects, actuals []sharedConfigFile) bool {
 }
 
 func TestLoadSharedConfig(t *testing.T) {
-	t.Errorf("need test")
+	t.Errorf("not tested")
 }

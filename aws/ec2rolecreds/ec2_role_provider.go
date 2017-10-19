@@ -16,13 +16,13 @@ import (
 // ProviderName provides a name of EC2Role provider
 const ProviderName = "EC2RoleProvider"
 
-// A EC2RoleProvider retrieves credentials from the EC2 service, and keeps track if
+// A Provider retrieves credentials from the EC2 service, and keeps track if
 // those credentials are expired.
 //
-// Example how to configure the EC2RoleProvider with custom http Client, Endpoint
+// Example how to configure the Provider with custom http Client, Endpoint
 // or ExpiryWindow
 //
-//     p := &ec2rolecreds.EC2RoleProvider{
+//     p := &ec2rolecreds.Provider{
 //         // Pass in a custom timeout to be used when requesting
 //         // IAM EC2 Role credentials.
 //         Client: ec2metadata.New(sess, aws.Config{
@@ -33,7 +33,7 @@ const ProviderName = "EC2RoleProvider"
 //         // specified the credentials will be expired early
 //         ExpiryWindow: 0,
 //     }
-type EC2RoleProvider struct {
+type Provider struct {
 	aws.Expiry
 
 	// Required EC2Metadata client to use when connecting to EC2 metadata service.
@@ -51,40 +51,10 @@ type EC2RoleProvider struct {
 	ExpiryWindow time.Duration
 }
 
-// NewCredentials returns a pointer to a new Credentials object wrapping
-// the EC2RoleProvider. Takes a ConfigProvider to create a EC2Metadata client.
-// The ConfigProvider is satisfied by the session.Session type.
-func NewCredentials(c aws.ConfigProvider, options ...func(*EC2RoleProvider)) *aws.Credentials {
-	p := &EC2RoleProvider{
-		Client: ec2metadata.New(c),
-	}
-
-	for _, option := range options {
-		option(p)
-	}
-
-	return aws.NewCredentials(p)
-}
-
-// NewCredentialsWithClient returns a pointer to a new Credentials object wrapping
-// the EC2RoleProvider. Takes a EC2Metadata client to use when connecting to EC2
-// metadata service.
-func NewCredentialsWithClient(client *ec2metadata.EC2Metadata, options ...func(*EC2RoleProvider)) *aws.Credentials {
-	p := &EC2RoleProvider{
-		Client: client,
-	}
-
-	for _, option := range options {
-		option(p)
-	}
-
-	return aws.NewCredentials(p)
-}
-
 // Retrieve retrieves credentials from the EC2 service.
 // Error will be returned if the request fails, or unable to extract
 // the desired credentials.
-func (m *EC2RoleProvider) Retrieve() (aws.Value, error) {
+func (m *Provider) Retrieve() (aws.Value, error) {
 	credsList, err := requestCredList(m.Client)
 	if err != nil {
 		return aws.Value{ProviderName: ProviderName}, err

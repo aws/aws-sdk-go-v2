@@ -6,8 +6,11 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
+	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
+	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
 // ResolveDefaultAWSConfig will write default configuration values into the cfg
@@ -116,6 +119,42 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 // Config providers used:
 func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 	// TODO need implemented with assume role information from SharedConfig
+	v, found, err := GetAssumeRoleConfig(configs)
+	if err != nil {
+		// TODO error handling, What is the best way to handle this?
+		// capture previous errors continue. error out if all errors
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfgCp := cfg.Copy()
+	// TODO support additional credential providers that are already set?
+	cfgCp.Credentials = aws.NewCredentials(aws.StaticProvider{Value: v.Source.Credentials})
+
+	provider := &stscreds.AssumeRoleProvider{
+		Client:          sts.New(cfgCp),
+		RoleARN:         v.RoleARN,
+		RoleSessionName: v.RoleSessionName,
+	}
+	if id := v.ExternalID; len(id) > 0 {
+		provider.ExternalID = aws.String(id)
+	}
+	if len(v.MFASerial) > 0 {
+		tp, foundTP, err := GetMFATokenFunc(configs)
+		if err != nil {
+			return err
+		}
+		if !foundTP {
+			return fmt.Errorf("token provider required for AssumeRole with MFA")
+		}
+		provider.SerialNumber = aws.String(v.MFASerial)
+		provider.TokenProvider = tp
+	}
+
+	cfg.Credentials = aws.NewCredentials(provider)
+
 	return nil
 }
 
@@ -126,8 +165,10 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	provider := &ec2rolecreds.EC2RoleProvider{
-		//		AWSConfig:    *cfg,
+	cfgCp := cfg.Copy()
+
+	provider := &ec2rolecreds.Provider{
+		Client:       ec2metadata.New(*cfgCp),
 		ExpiryWindow: 5 * time.Minute,
 	}
 	cfg.Credentials = aws.NewCredentials(provider)

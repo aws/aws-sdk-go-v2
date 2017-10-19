@@ -193,53 +193,6 @@ type AssumeRoleProvider struct {
 	ExpiryWindow time.Duration
 }
 
-// NewCredentials returns a pointer to a new Credentials object wrapping the
-// AssumeRoleProvider. The credentials will expire every 15 minutes and the
-// role will be named after a nanosecond timestamp of this operation.
-//
-// Takes a Config provider to create the STS client. The ConfigProvider is
-// satisfied by the session.Session type.
-//
-// It is safe to share the returned Credentials with multiple Sessions and
-// service clients. All access to the credentials and refreshing them
-// will be synchronized.
-func NewCredentials(c aws.ConfigProvider, roleARN string, options ...func(*AssumeRoleProvider)) *aws.Credentials {
-	p := &AssumeRoleProvider{
-		Client:   sts.New(c),
-		RoleARN:  roleARN,
-		Duration: DefaultDuration,
-	}
-
-	for _, option := range options {
-		option(p)
-	}
-
-	return aws.NewCredentials(p)
-}
-
-// NewCredentialsWithClient returns a pointer to a new Credentials object wrapping the
-// AssumeRoleProvider. The credentials will expire every 15 minutes and the
-// role will be named after a nanosecond timestamp of this operation.
-//
-// Takes an AssumeRoler which can be satisfied by the STS client.
-//
-// It is safe to share the returned Credentials with multiple Sessions and
-// service clients. All access to the credentials and refreshing them
-// will be synchronized.
-func NewCredentialsWithClient(svc AssumeRoler, roleARN string, options ...func(*AssumeRoleProvider)) *aws.Credentials {
-	p := &AssumeRoleProvider{
-		Client:   svc,
-		RoleARN:  roleARN,
-		Duration: DefaultDuration,
-	}
-
-	for _, option := range options {
-		option(p)
-	}
-
-	return aws.NewCredentials(p)
-}
-
 // Retrieve generates a new set of temporary credentials using STS.
 func (p *AssumeRoleProvider) Retrieve() (aws.Value, error) {
 
