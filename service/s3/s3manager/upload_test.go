@@ -737,7 +737,7 @@ func TestUploadZeroLenObject(t *testing.T) {
 		w.WriteHeader(http.StatusOK)
 	}))
 	mgr := s3manager.NewUploaderWithClient(s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 	}))
 	resp, err := mgr.Upload(&s3manager.UploadInput{
 		Bucket: aws.String("Bucket"),

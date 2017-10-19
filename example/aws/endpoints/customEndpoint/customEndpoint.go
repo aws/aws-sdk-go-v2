@@ -72,7 +72,7 @@ func main() {
 	// the service clien to make all operation to the endpoint specified
 	// the in the config.
 	ddbSvcLocal := dynamodb.New(cfg, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("http://localhost:8088"),
+		EndpointResolver: aws.ResolveWithEndpointURL("http://localhost:8088"),
 	})
 	ddbSvcLocal.ListTables(&dynamodb.ListTablesInput{})
 }

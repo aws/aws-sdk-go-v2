@@ -108,7 +108,7 @@ func presignURL(r *request.Request, sourceRegion *string, newParams interface{})
 		return nil
 	}
 
-	cfgCp.EndpointResolver = aws.ResolveStaticEndpoint(resolved)
+	cfgCp.EndpointResolver = aws.ResolveWithEndpoint(resolved)
 	clientInfo.Endpoint = resolved.URL
 	clientInfo.SigningRegion = resolved.SigningRegion
 

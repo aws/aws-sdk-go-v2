@@ -125,7 +125,7 @@ func TestPutObjectMetadataWithUnicode(t *testing.T) {
 		}
 	}))
 	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 		DisableSSL:       aws.Bool(true),
 	})
 
@@ -150,7 +150,7 @@ func TestGetObjectMetadataWithUnicode(t *testing.T) {
 		w.Header().Set(metaKeyPrefix+utf8KeySuffix, utf8Value)
 	}))
 	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 		DisableSSL:       aws.Bool(true),
 	})
 

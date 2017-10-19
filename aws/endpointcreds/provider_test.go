@@ -35,7 +35,7 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 	}))
 
 	cfg := unit.Config.Copy()
-	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL + "/path/to/endpoint?something=else")
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL + "/path/to/endpoint?something=else")
 
 	svc := endpointcreds.New(*cfg)
 	creds, err := svc.Retrieve()
@@ -68,7 +68,7 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 	}))
 
 	cfg := unit.Config.Copy()
-	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	client := endpointcreds.New(*cfg)
 	creds, err := client.Retrieve()
@@ -96,7 +96,7 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 	}))
 
 	cfg := unit.Config.Copy()
-	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	client := endpointcreds.New(*cfg)
 	creds, err := client.Retrieve()

@@ -56,7 +56,7 @@ func TestEC2RoleProvider(t *testing.T) {
 
 	p := &ec2rolecreds.Provider{
 		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 		}),
 	}
 
@@ -74,7 +74,7 @@ func TestEC2RoleProviderFailAssume(t *testing.T) {
 
 	p := &ec2rolecreds.Provider{
 		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 		}),
 	}
 
@@ -97,7 +97,7 @@ func TestEC2RoleProviderIsExpired(t *testing.T) {
 
 	p := &ec2rolecreds.Provider{
 		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 		}),
 	}
 	p.CurrentTime = func() time.Time {
@@ -124,7 +124,7 @@ func TestEC2RoleProviderExpiryWindowIsExpired(t *testing.T) {
 
 	p := &ec2rolecreds.Provider{
 		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 		}),
 		ExpiryWindow: time.Hour * 1,
 	}
@@ -152,7 +152,7 @@ func BenchmarkEC3RoleProvider(b *testing.B) {
 
 	p := &ec2rolecreds.Provider{
 		Client: ec2metadata.New(unit.Config, &aws.Config{
-			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+			EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 		}),
 	}
 	_, err := p.Retrieve()

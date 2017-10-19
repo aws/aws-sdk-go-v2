@@ -238,7 +238,7 @@ func TestSendWithoutFollowRedirects(t *testing.T) {
 
 	svc := awstesting.NewClient(&aws.Config{
 		DisableSSL:       aws.Bool(true),
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 	})
 	svc.Handlers.Clear()
 	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
@@ -342,7 +342,7 @@ func TestBuildContentLength_ZeroBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, false, 0)
 
 	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
 	})
@@ -361,7 +361,7 @@ func TestBuildContentLength_NegativeBody(t *testing.T) {
 
 	fmt.Println("unit.Config", unit.Config.EndpointResolver)
 	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
 	})
@@ -381,7 +381,7 @@ func TestBuildContentLength_WithBody(t *testing.T) {
 	server := setupContentLengthTestServer(t, true, 1024)
 
 	svc := s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 		S3ForcePathStyle: aws.Bool(true),
 		DisableSSL:       aws.Bool(true),
 	})

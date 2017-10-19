@@ -50,7 +50,7 @@ func TestClientOverrideDefaultHTTPClientTimeoutRace(t *testing.T) {
 	}))
 
 	cfg := &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 	}
 	runEC2MetadataClients(t, cfg, 100)
 }
@@ -61,7 +61,7 @@ func TestClientOverrideDefaultHTTPClientTimeoutRaceWithTransport(t *testing.T) {
 	}))
 
 	cfg := &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 		HTTPClient: &http.Client{
 			Transport: http.DefaultTransport,
 		},

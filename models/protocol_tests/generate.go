@@ -130,7 +130,7 @@ func (t *testSuite) TestSuite() string {
 var tplInputTestCase = template.Must(template.New("inputcase").Parse(`
 func Test{{ .OpName }}(t *testing.T) {
 	svc := New{{ .TestCase.TestSuite.API.StructName }}(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	{{ if ne .ParamsString "" }}input := {{ .ParamsString }}
 	{{ range $k, $v := .JSONValues -}}
@@ -229,7 +229,7 @@ func fmtAssertNil(v string) string {
 var tplOutputTestCase = template.Must(template.New("outputcase").Parse(`
 func Test{{ .OpName }}(t *testing.T) {
 	svc := New{{ .TestCase.TestSuite.API.StructName }}(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte({{ .Body }}))

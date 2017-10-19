@@ -18,7 +18,7 @@ func init() {
 	// TODO getting a default populated config should be in the "defaults" package
 	*Config = defaults.Config()
 	Config.Region = aws.String("mock-region")
-	Config.EndpointResolver = aws.ResolveStaticEndpoint(endpoints.ResolvedEndpoint{
+	Config.EndpointResolver = aws.ResolveWithEndpoint(endpoints.ResolvedEndpoint{
 		URL:           server.URL,
 		SigningRegion: aws.StringValue(Config.Region),
 	})

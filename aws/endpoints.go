@@ -21,17 +21,17 @@ func (fn EndpointResolverFunc) EndpointFor(service, region string, opts ...func(
 	return fn(service, region, opts...)
 }
 
-// ResolveStaticEndpoint allows a static Resolved Endpoint to be used as an endpoint resolver
-type ResolveStaticEndpoint endpoints.ResolvedEndpoint
+// ResolveWithEndpoint allows a static Resolved Endpoint to be used as an endpoint resolver
+type ResolveWithEndpoint endpoints.ResolvedEndpoint
 
-// ResolveStaticEndpointURL allows a static URL to be used as a endpoint resolver.
+// ResolveWithEndpointURL allows a static URL to be used as a endpoint resolver.
 // TODO is this helper utility funciton needed?
-func ResolveStaticEndpointURL(url string) ResolveStaticEndpoint {
-	return ResolveStaticEndpoint(endpoints.ResolvedEndpoint{URL: url})
+func ResolveWithEndpointURL(url string) ResolveWithEndpoint {
+	return ResolveWithEndpoint(endpoints.ResolvedEndpoint{URL: url})
 }
 
 // EndpointFor returns the static endpoint.
-func (v ResolveStaticEndpoint) EndpointFor(service, region string, opts ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
+func (v ResolveWithEndpoint) EndpointFor(service, region string, opts ...func(*endpoints.Options)) (endpoints.ResolvedEndpoint, error) {
 	return endpoints.ResolvedEndpoint(v), nil
 }
 

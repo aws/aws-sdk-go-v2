@@ -34,7 +34,7 @@ func TestGetBucketRegion_Exists(t *testing.T) {
 		server := testSetupGetBucketRegionServer(c.RespRegion, c.StatusCode, true)
 
 		cfg := unit.Config.Copy()
-		cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL)
+		cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 		cfg.DisableSSL = aws.Bool(true)
 
 		ctx := aws.BackgroundContext()
@@ -52,7 +52,7 @@ func TestGetBucketRegion_NotExists(t *testing.T) {
 	server := testSetupGetBucketRegionServer("ignore-region", 404, false)
 
 	cfg := unit.Config.Copy()
-	cfg.EndpointResolver = aws.ResolveStaticEndpointURL(server.URL)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 	cfg.DisableSSL = aws.Bool(true)
 
 	ctx := aws.BackgroundContext()
@@ -75,7 +75,7 @@ func TestGetBucketRegionWithClient(t *testing.T) {
 
 		svc := s3.New(unit.Config, &aws.Config{
 			Region:           aws.String("region"),
-			EndpointResolver: aws.ResolveStaticEndpointURL(server.URL),
+			EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
 			DisableSSL:       aws.Bool(true),
 		})
 

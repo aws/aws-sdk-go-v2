@@ -83,7 +83,7 @@ func TestGetMetadata(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	resp, err := c.GetMetadata("some/path")
@@ -103,7 +103,7 @@ func TestGetUserData(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	resp, err := c.GetUserData()
@@ -137,7 +137,7 @@ func TestGetUserData_Error(t *testing.T) {
 
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	resp, err := c.GetUserData()
@@ -161,7 +161,7 @@ func TestGetRegion(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	region, err := c.Region()
@@ -181,7 +181,7 @@ func TestMetadataAvailable(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	if !c.Available() {
@@ -196,7 +196,7 @@ func TestMetadataIAMInfo_success(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	iamInfo, err := c.IAMInfo()
@@ -221,7 +221,7 @@ func TestMetadataIAMInfo_failure(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	iamInfo, err := c.IAMInfo()
@@ -285,7 +285,7 @@ func TestEC2RoleProviderInstanceIdentity(t *testing.T) {
 	)
 	defer server.Close()
 	c := ec2metadata.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL(server.URL + "/latest"),
+		EndpointResolver: aws.ResolveWithEndpointURL(server.URL + "/latest"),
 	})
 
 	doc, err := c.GetInstanceIdentityDocument()

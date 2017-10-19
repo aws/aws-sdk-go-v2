@@ -1463,7 +1463,7 @@ type InputService9TestShapeInputService9TestCaseOperation2Output struct {
 
 func TestInputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	svc := NewInputService1ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService1TestShapeInputService1TestCaseOperation1Input{
 		Bar: aws.String("val2"),
@@ -1494,7 +1494,7 @@ func TestInputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 
 func TestInputService2ProtocolTestStructureWithLocationNameAndQueryNameAppliedToMembersCase1(t *testing.T) {
 	svc := NewInputService2ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService2TestShapeInputService2TestCaseOperation1Input{
 		Bar:  aws.String("val2"),
@@ -1526,7 +1526,7 @@ func TestInputService2ProtocolTestStructureWithLocationNameAndQueryNameAppliedTo
 
 func TestInputService3ProtocolTestNestedStructureMembersCase1(t *testing.T) {
 	svc := NewInputService3ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService3TestShapeInputService3TestCaseOperation1Input{
 		StructArg: &InputService3TestShapeStructType{
@@ -1558,7 +1558,7 @@ func TestInputService3ProtocolTestNestedStructureMembersCase1(t *testing.T) {
 
 func TestInputService4ProtocolTestListTypesCase1(t *testing.T) {
 	svc := NewInputService4ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService4TestShapeInputService4TestCaseOperation1Input{
 		ListArg: []*string{
@@ -1592,7 +1592,7 @@ func TestInputService4ProtocolTestListTypesCase1(t *testing.T) {
 
 func TestInputService5ProtocolTestListWithLocationNameAppliedToMemberCase1(t *testing.T) {
 	svc := NewInputService5ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService5TestShapeInputService5TestCaseOperation1Input{
 		ListArg: []*string{
@@ -1626,7 +1626,7 @@ func TestInputService5ProtocolTestListWithLocationNameAppliedToMemberCase1(t *te
 
 func TestInputService6ProtocolTestListWithLocationNameAndQueryNameCase1(t *testing.T) {
 	svc := NewInputService6ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
 		ListArg: []*string{
@@ -1660,7 +1660,7 @@ func TestInputService6ProtocolTestListWithLocationNameAndQueryNameCase1(t *testi
 
 func TestInputService7ProtocolTestBase64EncodedBlobsCase1(t *testing.T) {
 	svc := NewInputService7ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService7TestShapeInputService7TestCaseOperation1Input{
 		BlobArg: []byte("foo"),
@@ -1690,7 +1690,7 @@ func TestInputService7ProtocolTestBase64EncodedBlobsCase1(t *testing.T) {
 
 func TestInputService8ProtocolTestTimestampValuesCase1(t *testing.T) {
 	svc := NewInputService8ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService8TestShapeInputService8TestCaseOperation1Input{
 		TimeArg: aws.Time(time.Unix(1422172800, 0)),
@@ -1720,7 +1720,7 @@ func TestInputService8ProtocolTestTimestampValuesCase1(t *testing.T) {
 
 func TestInputService9ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 	svc := NewInputService9ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService9TestShapeInputService9TestCaseOperation2Input{
 		Token: aws.String("abc123"),
@@ -1750,7 +1750,7 @@ func TestInputService9ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 
 func TestInputService9ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
 	svc := NewInputService9ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 	input := &InputService9TestShapeInputService9TestCaseOperation2Input{}
 	req, _ := svc.InputService9TestCaseOperation2Request(input)

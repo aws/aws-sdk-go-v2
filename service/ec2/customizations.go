@@ -51,7 +51,7 @@ func fillPresignedURL(r *request.Request) {
 		return
 	}
 
-	cfgCp.EndpointResolver = aws.ResolveStaticEndpoint(resolved)
+	cfgCp.EndpointResolver = aws.ResolveWithEndpoint(resolved)
 	clientInfo.Endpoint = resolved.URL
 	clientInfo.SigningRegion = resolved.SigningRegion
 

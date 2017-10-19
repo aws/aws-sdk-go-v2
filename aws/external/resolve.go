@@ -107,7 +107,7 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 	}
 
 	cfgCp := cfg.Copy()
-	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
+	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL(v)
 
 	provider := endpointcreds.New(*cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
@@ -152,7 +152,7 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 	cfgCp := cfg.Copy()
 
 	v = containerCredentialsEndpoint + v
-	cfgCp.EndpointResolver = aws.ResolveStaticEndpointURL(v)
+	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL(v)
 
 	provider := endpointcreds.New(*cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute

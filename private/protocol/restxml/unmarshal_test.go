@@ -2012,7 +2012,7 @@ func (s *OutputService12TestShapeOutputService12TestCaseOperation1Output) SetFoo
 
 func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 	svc := NewOutputService1ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResponse><Str>myname</Str><FooNum>123</FooNum><FalseBool>false</FalseBool><TrueBool>true</TrueBool><Float>1.2</Float><Double>1.3</Double><Long>200</Long><Char>a</Char><Timestamp>2015-01-25T08:00:00Z</Timestamp></OperationNameResponse>"))
@@ -2072,7 +2072,7 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 
 func TestOutputService1ProtocolTestScalarMembersCase2(t *testing.T) {
 	svc := NewOutputService1ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResponse><Str></Str><FooNum>123</FooNum><FalseBool>false</FalseBool><TrueBool>true</TrueBool><Float>1.2</Float><Double>1.3</Double><Long>200</Long><Char>a</Char><Timestamp>2015-01-25T08:00:00Z</Timestamp></OperationNameResponse>"))
@@ -2132,7 +2132,7 @@ func TestOutputService1ProtocolTestScalarMembersCase2(t *testing.T) {
 
 func TestOutputService2ProtocolTestBlobCase1(t *testing.T) {
 	svc := NewOutputService2ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><Blob>dmFsdWU=</Blob></OperationNameResult>"))
@@ -2160,7 +2160,7 @@ func TestOutputService2ProtocolTestBlobCase1(t *testing.T) {
 
 func TestOutputService3ProtocolTestListsCase1(t *testing.T) {
 	svc := NewOutputService3ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><ListMember><member>abc</member><member>123</member></ListMember></OperationNameResult>"))
@@ -2191,7 +2191,7 @@ func TestOutputService3ProtocolTestListsCase1(t *testing.T) {
 
 func TestOutputService4ProtocolTestListWithCustomMemberNameCase1(t *testing.T) {
 	svc := NewOutputService4ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><ListMember><item>abc</item><item>123</item></ListMember></OperationNameResult>"))
@@ -2222,7 +2222,7 @@ func TestOutputService4ProtocolTestListWithCustomMemberNameCase1(t *testing.T) {
 
 func TestOutputService5ProtocolTestFlattenedListCase1(t *testing.T) {
 	svc := NewOutputService5ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><ListMember>abc</ListMember><ListMember>123</ListMember></OperationNameResult>"))
@@ -2253,7 +2253,7 @@ func TestOutputService5ProtocolTestFlattenedListCase1(t *testing.T) {
 
 func TestOutputService6ProtocolTestNormalMapCase1(t *testing.T) {
 	svc := NewOutputService6ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><Map><entry><key>qux</key><value><foo>bar</foo></value></entry><entry><key>baz</key><value><foo>bam</foo></value></entry></Map></OperationNameResult>"))
@@ -2284,7 +2284,7 @@ func TestOutputService6ProtocolTestNormalMapCase1(t *testing.T) {
 
 func TestOutputService7ProtocolTestFlattenedMapCase1(t *testing.T) {
 	svc := NewOutputService7ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><Map><key>qux</key><value>bar</value></Map><Map><key>baz</key><value>bam</value></Map></OperationNameResult>"))
@@ -2315,7 +2315,7 @@ func TestOutputService7ProtocolTestFlattenedMapCase1(t *testing.T) {
 
 func TestOutputService8ProtocolTestNamedMapCase1(t *testing.T) {
 	svc := NewOutputService8ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResult><Map><entry><foo>qux</foo><bar>bar</bar></entry><entry><foo>baz</foo><bar>bam</bar></entry></Map></OperationNameResult>"))
@@ -2346,7 +2346,7 @@ func TestOutputService8ProtocolTestNamedMapCase1(t *testing.T) {
 
 func TestOutputService9ProtocolTestXMLPayloadCase1(t *testing.T) {
 	svc := NewOutputService9ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResponse><Foo>abc</Foo></OperationNameResponse>"))
@@ -2378,7 +2378,7 @@ func TestOutputService9ProtocolTestXMLPayloadCase1(t *testing.T) {
 
 func TestOutputService10ProtocolTestStreamingPayloadCase1(t *testing.T) {
 	svc := NewOutputService10ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("abc"))
@@ -2406,7 +2406,7 @@ func TestOutputService10ProtocolTestStreamingPayloadCase1(t *testing.T) {
 
 func TestOutputService11ProtocolTestScalarMembersInHeadersCase1(t *testing.T) {
 	svc := NewOutputService11ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte(""))
@@ -2467,7 +2467,7 @@ func TestOutputService11ProtocolTestScalarMembersInHeadersCase1(t *testing.T) {
 
 func TestOutputService12ProtocolTestEmptyStringCase1(t *testing.T) {
 	svc := NewOutputService12ProtocolTest(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveStaticEndpointURL("https://test"),
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
 	})
 
 	buf := bytes.NewReader([]byte("<OperationNameResponse><Foo/><RequestId>requestid</RequestId></OperationNameResponse>"))
