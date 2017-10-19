@@ -8,42 +8,43 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/expression"
 )
 
-func exitWithError(err error) {
-	fmt.Fprintln(os.Stderr, err)
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
 
 func main() {
 	cfg := Config{}
 	if err := cfg.Load(); err != nil {
-		exitWithError(fmt.Errorf("failed to load config, %v", err))
+		exitErrorf("failed to load config, %v", err)
 	}
 
-	// Create the config specifying the Region for the DynamoDB table.
-	// If Config.Region is not set the region must come from the shared
-	// config or AWS_REGION environment variable.
-	awscfg := &aws.Config{}
+	// Create the config that the DynamoDB service will use.
+	awscfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 	if len(cfg.Region) > 0 {
-		awscfg.WithRegion(cfg.Region)
+		// The Region for the DynamoDB table. If Config.Region is not set
+		// the region must come from the shared config or AWS_REGION
+		// environment variable.
+		awscfg.Region = aws.String(cfg.Region)
 	}
-
-	// Create the session that the DynamoDB service will use.
-	sess := session.Must(session.NewSession(awscfg))
 
 	// Create the DynamoDB service client to make the query request with.
-	svc := dynamodb.New(sess)
+	svc := dynamodb.New(awscfg)
 
 	// Create the Expression to fill the input struct with.
 	filt := expression.Name("Artist").Equal(expression.Value("No One You Know"))
 	proj := expression.NamesList(expression.Name("SongTitle"), expression.Name("AlbumTitle"))
 	expr, err := expression.NewBuilder().WithFilter(filt).WithProjection(proj).Build()
 	if err != nil {
-		exitWithError(fmt.Errorf("failed to create the Expression, %v", err))
+		exitErrorf("failed to create the Expression, %v", err)
 	}
 
 	// Build the query input parameters
@@ -61,7 +62,7 @@ func main() {
 	// Make the DynamoDB Query API call
 	result, err := svc.Scan(params)
 	if err != nil {
-		exitWithError(fmt.Errorf("failed to make Query API call, %v", err))
+		exitErrorf("failed to make Query API call, %v", err)
 	}
 
 	fmt.Println(result)

@@ -319,6 +319,7 @@ endpoints{
 
 {{ define "gocode Endpoint" -}}
 endpoint{
+	{{ BoxedBoolIfSet "Unresolveable: %s,\n" .Unresolveable -}}
 	{{ StringIfSet "Hostname: %q,\n" .Hostname -}}
 	{{ StringIfSet "SSLCommonName: %q,\n" .SSLCommonName -}}
 	{{ StringSliceIfSet "Protocols: []string{%s},\n" .Protocols -}}

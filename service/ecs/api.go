@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateCluster = "CreateCluster"
 
-// CreateClusterRequest generates a "aws/request.Request" representing the
+// CreateClusterRequest generates a "aws.Request" representing the
 // client's request for the CreateCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCreateCluster = "CreateCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster
-func (c *ECS) CreateClusterRequest(input *CreateClusterInput) (req *request.Request, output *CreateClusterOutput) {
-	op := &request.Operation{
+func (c *ECS) CreateClusterRequest(input *CreateClusterInput) (req *aws.Request, output *CreateClusterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -94,7 +93,7 @@ func (c *ECS) CreateCluster(input *CreateClusterInput) (*CreateClusterOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...request.Option) (*CreateClusterOutput, error) {
+func (c *ECS) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInput, opts ...aws.Option) (*CreateClusterOutput, error) {
 	req, out := c.CreateClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -103,7 +102,7 @@ func (c *ECS) CreateClusterWithContext(ctx aws.Context, input *CreateClusterInpu
 
 const opCreateService = "CreateService"
 
-// CreateServiceRequest generates a "aws/request.Request" representing the
+// CreateServiceRequest generates a "aws.Request" representing the
 // client's request for the CreateService operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -127,8 +126,8 @@ const opCreateService = "CreateService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService
-func (c *ECS) CreateServiceRequest(input *CreateServiceInput) (req *request.Request, output *CreateServiceOutput) {
-	op := &request.Operation{
+func (c *ECS) CreateServiceRequest(input *CreateServiceInput) (req *aws.Request, output *CreateServiceOutput) {
+	op := &aws.Operation{
 		Name:       opCreateService,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -244,7 +243,7 @@ func (c *ECS) CreateService(input *CreateServiceInput) (*CreateServiceOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) CreateServiceWithContext(ctx aws.Context, input *CreateServiceInput, opts ...request.Option) (*CreateServiceOutput, error) {
+func (c *ECS) CreateServiceWithContext(ctx aws.Context, input *CreateServiceInput, opts ...aws.Option) (*CreateServiceOutput, error) {
 	req, out := c.CreateServiceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -253,7 +252,7 @@ func (c *ECS) CreateServiceWithContext(ctx aws.Context, input *CreateServiceInpu
 
 const opDeleteAttributes = "DeleteAttributes"
 
-// DeleteAttributesRequest generates a "aws/request.Request" representing the
+// DeleteAttributesRequest generates a "aws.Request" representing the
 // client's request for the DeleteAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -277,8 +276,8 @@ const opDeleteAttributes = "DeleteAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes
-func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) (req *request.Request, output *DeleteAttributesOutput) {
-	op := &request.Operation{
+func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) (req *aws.Request, output *DeleteAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -333,7 +332,7 @@ func (c *ECS) DeleteAttributes(input *DeleteAttributesInput) (*DeleteAttributesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttributesInput, opts ...request.Option) (*DeleteAttributesOutput, error) {
+func (c *ECS) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttributesInput, opts ...aws.Option) (*DeleteAttributesOutput, error) {
 	req, out := c.DeleteAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -342,7 +341,7 @@ func (c *ECS) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttribut
 
 const opDeleteCluster = "DeleteCluster"
 
-// DeleteClusterRequest generates a "aws/request.Request" representing the
+// DeleteClusterRequest generates a "aws.Request" representing the
 // client's request for the DeleteCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -366,8 +365,8 @@ const opDeleteCluster = "DeleteCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster
-func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) (req *request.Request, output *DeleteClusterOutput) {
-	op := &request.Operation{
+func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) (req *aws.Request, output *DeleteClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -437,7 +436,7 @@ func (c *ECS) DeleteCluster(input *DeleteClusterInput) (*DeleteClusterOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...request.Option) (*DeleteClusterOutput, error) {
+func (c *ECS) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInput, opts ...aws.Option) (*DeleteClusterOutput, error) {
 	req, out := c.DeleteClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -446,7 +445,7 @@ func (c *ECS) DeleteClusterWithContext(ctx aws.Context, input *DeleteClusterInpu
 
 const opDeleteService = "DeleteService"
 
-// DeleteServiceRequest generates a "aws/request.Request" representing the
+// DeleteServiceRequest generates a "aws.Request" representing the
 // client's request for the DeleteService operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -470,8 +469,8 @@ const opDeleteService = "DeleteService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService
-func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) (req *request.Request, output *DeleteServiceOutput) {
-	op := &request.Operation{
+func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) (req *aws.Request, output *DeleteServiceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteService,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -546,7 +545,7 @@ func (c *ECS) DeleteService(input *DeleteServiceInput) (*DeleteServiceOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DeleteServiceWithContext(ctx aws.Context, input *DeleteServiceInput, opts ...request.Option) (*DeleteServiceOutput, error) {
+func (c *ECS) DeleteServiceWithContext(ctx aws.Context, input *DeleteServiceInput, opts ...aws.Option) (*DeleteServiceOutput, error) {
 	req, out := c.DeleteServiceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -555,7 +554,7 @@ func (c *ECS) DeleteServiceWithContext(ctx aws.Context, input *DeleteServiceInpu
 
 const opDeregisterContainerInstance = "DeregisterContainerInstance"
 
-// DeregisterContainerInstanceRequest generates a "aws/request.Request" representing the
+// DeregisterContainerInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeregisterContainerInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -579,8 +578,8 @@ const opDeregisterContainerInstance = "DeregisterContainerInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance
-func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInstanceInput) (req *request.Request, output *DeregisterContainerInstanceOutput) {
-	op := &request.Operation{
+func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInstanceInput) (req *aws.Request, output *DeregisterContainerInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterContainerInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -652,7 +651,7 @@ func (c *ECS) DeregisterContainerInstance(input *DeregisterContainerInstanceInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DeregisterContainerInstanceWithContext(ctx aws.Context, input *DeregisterContainerInstanceInput, opts ...request.Option) (*DeregisterContainerInstanceOutput, error) {
+func (c *ECS) DeregisterContainerInstanceWithContext(ctx aws.Context, input *DeregisterContainerInstanceInput, opts ...aws.Option) (*DeregisterContainerInstanceOutput, error) {
 	req, out := c.DeregisterContainerInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -661,7 +660,7 @@ func (c *ECS) DeregisterContainerInstanceWithContext(ctx aws.Context, input *Der
 
 const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
 
-// DeregisterTaskDefinitionRequest generates a "aws/request.Request" representing the
+// DeregisterTaskDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeregisterTaskDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -685,8 +684,8 @@ const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition
-func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInput) (req *request.Request, output *DeregisterTaskDefinitionOutput) {
-	op := &request.Operation{
+func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInput) (req *aws.Request, output *DeregisterTaskDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterTaskDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -754,7 +753,7 @@ func (c *ECS) DeregisterTaskDefinition(input *DeregisterTaskDefinitionInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DeregisterTaskDefinitionWithContext(ctx aws.Context, input *DeregisterTaskDefinitionInput, opts ...request.Option) (*DeregisterTaskDefinitionOutput, error) {
+func (c *ECS) DeregisterTaskDefinitionWithContext(ctx aws.Context, input *DeregisterTaskDefinitionInput, opts ...aws.Option) (*DeregisterTaskDefinitionOutput, error) {
 	req, out := c.DeregisterTaskDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -763,7 +762,7 @@ func (c *ECS) DeregisterTaskDefinitionWithContext(ctx aws.Context, input *Deregi
 
 const opDescribeClusters = "DescribeClusters"
 
-// DescribeClustersRequest generates a "aws/request.Request" representing the
+// DescribeClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -787,8 +786,8 @@ const opDescribeClusters = "DescribeClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters
-func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) (req *request.Request, output *DescribeClustersOutput) {
-	op := &request.Operation{
+func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) (req *aws.Request, output *DescribeClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -842,7 +841,7 @@ func (c *ECS) DescribeClusters(input *DescribeClustersInput) (*DescribeClustersO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.Option) (*DescribeClustersOutput, error) {
+func (c *ECS) DescribeClustersWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.Option) (*DescribeClustersOutput, error) {
 	req, out := c.DescribeClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -851,7 +850,7 @@ func (c *ECS) DescribeClustersWithContext(ctx aws.Context, input *DescribeCluste
 
 const opDescribeContainerInstances = "DescribeContainerInstances"
 
-// DescribeContainerInstancesRequest generates a "aws/request.Request" representing the
+// DescribeContainerInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeContainerInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -875,8 +874,8 @@ const opDescribeContainerInstances = "DescribeContainerInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances
-func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstancesInput) (req *request.Request, output *DescribeContainerInstancesOutput) {
-	op := &request.Operation{
+func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstancesInput) (req *aws.Request, output *DescribeContainerInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeContainerInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -935,7 +934,7 @@ func (c *ECS) DescribeContainerInstances(input *DescribeContainerInstancesInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DescribeContainerInstancesWithContext(ctx aws.Context, input *DescribeContainerInstancesInput, opts ...request.Option) (*DescribeContainerInstancesOutput, error) {
+func (c *ECS) DescribeContainerInstancesWithContext(ctx aws.Context, input *DescribeContainerInstancesInput, opts ...aws.Option) (*DescribeContainerInstancesOutput, error) {
 	req, out := c.DescribeContainerInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -944,7 +943,7 @@ func (c *ECS) DescribeContainerInstancesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeServices = "DescribeServices"
 
-// DescribeServicesRequest generates a "aws/request.Request" representing the
+// DescribeServicesRequest generates a "aws.Request" representing the
 // client's request for the DescribeServices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -968,8 +967,8 @@ const opDescribeServices = "DescribeServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices
-func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) (req *request.Request, output *DescribeServicesOutput) {
-	op := &request.Operation{
+func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) (req *aws.Request, output *DescribeServicesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeServices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1027,7 +1026,7 @@ func (c *ECS) DescribeServices(input *DescribeServicesInput) (*DescribeServicesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DescribeServicesWithContext(ctx aws.Context, input *DescribeServicesInput, opts ...request.Option) (*DescribeServicesOutput, error) {
+func (c *ECS) DescribeServicesWithContext(ctx aws.Context, input *DescribeServicesInput, opts ...aws.Option) (*DescribeServicesOutput, error) {
 	req, out := c.DescribeServicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1036,7 +1035,7 @@ func (c *ECS) DescribeServicesWithContext(ctx aws.Context, input *DescribeServic
 
 const opDescribeTaskDefinition = "DescribeTaskDefinition"
 
-// DescribeTaskDefinitionRequest generates a "aws/request.Request" representing the
+// DescribeTaskDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DescribeTaskDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1060,8 +1059,8 @@ const opDescribeTaskDefinition = "DescribeTaskDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition
-func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) (req *request.Request, output *DescribeTaskDefinitionOutput) {
-	op := &request.Operation{
+func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) (req *aws.Request, output *DescribeTaskDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTaskDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1120,7 +1119,7 @@ func (c *ECS) DescribeTaskDefinition(input *DescribeTaskDefinitionInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DescribeTaskDefinitionWithContext(ctx aws.Context, input *DescribeTaskDefinitionInput, opts ...request.Option) (*DescribeTaskDefinitionOutput, error) {
+func (c *ECS) DescribeTaskDefinitionWithContext(ctx aws.Context, input *DescribeTaskDefinitionInput, opts ...aws.Option) (*DescribeTaskDefinitionOutput, error) {
 	req, out := c.DescribeTaskDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1129,7 +1128,7 @@ func (c *ECS) DescribeTaskDefinitionWithContext(ctx aws.Context, input *Describe
 
 const opDescribeTasks = "DescribeTasks"
 
-// DescribeTasksRequest generates a "aws/request.Request" representing the
+// DescribeTasksRequest generates a "aws.Request" representing the
 // client's request for the DescribeTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1153,8 +1152,8 @@ const opDescribeTasks = "DescribeTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks
-func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) (req *request.Request, output *DescribeTasksOutput) {
-	op := &request.Operation{
+func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) (req *aws.Request, output *DescribeTasksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1212,7 +1211,7 @@ func (c *ECS) DescribeTasks(input *DescribeTasksInput) (*DescribeTasksOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DescribeTasksWithContext(ctx aws.Context, input *DescribeTasksInput, opts ...request.Option) (*DescribeTasksOutput, error) {
+func (c *ECS) DescribeTasksWithContext(ctx aws.Context, input *DescribeTasksInput, opts ...aws.Option) (*DescribeTasksOutput, error) {
 	req, out := c.DescribeTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1221,7 +1220,7 @@ func (c *ECS) DescribeTasksWithContext(ctx aws.Context, input *DescribeTasksInpu
 
 const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 
-// DiscoverPollEndpointRequest generates a "aws/request.Request" representing the
+// DiscoverPollEndpointRequest generates a "aws.Request" representing the
 // client's request for the DiscoverPollEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1245,8 +1244,8 @@ const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint
-func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) (req *request.Request, output *DiscoverPollEndpointOutput) {
-	op := &request.Operation{
+func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) (req *aws.Request, output *DiscoverPollEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opDiscoverPollEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1300,7 +1299,7 @@ func (c *ECS) DiscoverPollEndpoint(input *DiscoverPollEndpointInput) (*DiscoverP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) DiscoverPollEndpointWithContext(ctx aws.Context, input *DiscoverPollEndpointInput, opts ...request.Option) (*DiscoverPollEndpointOutput, error) {
+func (c *ECS) DiscoverPollEndpointWithContext(ctx aws.Context, input *DiscoverPollEndpointInput, opts ...aws.Option) (*DiscoverPollEndpointOutput, error) {
 	req, out := c.DiscoverPollEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1309,7 +1308,7 @@ func (c *ECS) DiscoverPollEndpointWithContext(ctx aws.Context, input *DiscoverPo
 
 const opListAttributes = "ListAttributes"
 
-// ListAttributesRequest generates a "aws/request.Request" representing the
+// ListAttributesRequest generates a "aws.Request" representing the
 // client's request for the ListAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1333,8 +1332,8 @@ const opListAttributes = "ListAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes
-func (c *ECS) ListAttributesRequest(input *ListAttributesInput) (req *request.Request, output *ListAttributesOutput) {
-	op := &request.Operation{
+func (c *ECS) ListAttributesRequest(input *ListAttributesInput) (req *aws.Request, output *ListAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opListAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1390,7 +1389,7 @@ func (c *ECS) ListAttributes(input *ListAttributesInput) (*ListAttributesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListAttributesWithContext(ctx aws.Context, input *ListAttributesInput, opts ...request.Option) (*ListAttributesOutput, error) {
+func (c *ECS) ListAttributesWithContext(ctx aws.Context, input *ListAttributesInput, opts ...aws.Option) (*ListAttributesOutput, error) {
 	req, out := c.ListAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1399,7 +1398,7 @@ func (c *ECS) ListAttributesWithContext(ctx aws.Context, input *ListAttributesIn
 
 const opListClusters = "ListClusters"
 
-// ListClustersRequest generates a "aws/request.Request" representing the
+// ListClustersRequest generates a "aws.Request" representing the
 // client's request for the ListClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1423,12 +1422,12 @@ const opListClusters = "ListClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters
-func (c *ECS) ListClustersRequest(input *ListClustersInput) (req *request.Request, output *ListClustersOutput) {
-	op := &request.Operation{
+func (c *ECS) ListClustersRequest(input *ListClustersInput) (req *aws.Request, output *ListClustersOutput) {
+	op := &aws.Operation{
 		Name:       opListClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1484,7 +1483,7 @@ func (c *ECS) ListClusters(input *ListClustersInput) (*ListClustersOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...request.Option) (*ListClustersOutput, error) {
+func (c *ECS) ListClustersWithContext(ctx aws.Context, input *ListClustersInput, opts ...aws.Option) (*ListClustersOutput, error) {
 	req, out := c.ListClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1519,9 +1518,9 @@ func (c *ECS) ListClustersPages(input *ListClustersInput, fn func(*ListClustersO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersInput, fn func(*ListClustersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECS) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersInput, fn func(*ListClustersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListClustersInput
 			if input != nil {
 				tmp := *input
@@ -1543,7 +1542,7 @@ func (c *ECS) ListClustersPagesWithContext(ctx aws.Context, input *ListClustersI
 
 const opListContainerInstances = "ListContainerInstances"
 
-// ListContainerInstancesRequest generates a "aws/request.Request" representing the
+// ListContainerInstancesRequest generates a "aws.Request" representing the
 // client's request for the ListContainerInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1567,12 +1566,12 @@ const opListContainerInstances = "ListContainerInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances
-func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) (req *request.Request, output *ListContainerInstancesOutput) {
-	op := &request.Operation{
+func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) (req *aws.Request, output *ListContainerInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opListContainerInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1636,7 +1635,7 @@ func (c *ECS) ListContainerInstances(input *ListContainerInstancesInput) (*ListC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListContainerInstancesWithContext(ctx aws.Context, input *ListContainerInstancesInput, opts ...request.Option) (*ListContainerInstancesOutput, error) {
+func (c *ECS) ListContainerInstancesWithContext(ctx aws.Context, input *ListContainerInstancesInput, opts ...aws.Option) (*ListContainerInstancesOutput, error) {
 	req, out := c.ListContainerInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1671,9 +1670,9 @@ func (c *ECS) ListContainerInstancesPages(input *ListContainerInstancesInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListContainerInstancesPagesWithContext(ctx aws.Context, input *ListContainerInstancesInput, fn func(*ListContainerInstancesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECS) ListContainerInstancesPagesWithContext(ctx aws.Context, input *ListContainerInstancesInput, fn func(*ListContainerInstancesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListContainerInstancesInput
 			if input != nil {
 				tmp := *input
@@ -1695,7 +1694,7 @@ func (c *ECS) ListContainerInstancesPagesWithContext(ctx aws.Context, input *Lis
 
 const opListServices = "ListServices"
 
-// ListServicesRequest generates a "aws/request.Request" representing the
+// ListServicesRequest generates a "aws.Request" representing the
 // client's request for the ListServices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1719,12 +1718,12 @@ const opListServices = "ListServices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices
-func (c *ECS) ListServicesRequest(input *ListServicesInput) (req *request.Request, output *ListServicesOutput) {
-	op := &request.Operation{
+func (c *ECS) ListServicesRequest(input *ListServicesInput) (req *aws.Request, output *ListServicesOutput) {
+	op := &aws.Operation{
 		Name:       opListServices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1784,7 +1783,7 @@ func (c *ECS) ListServices(input *ListServicesInput) (*ListServicesOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListServicesWithContext(ctx aws.Context, input *ListServicesInput, opts ...request.Option) (*ListServicesOutput, error) {
+func (c *ECS) ListServicesWithContext(ctx aws.Context, input *ListServicesInput, opts ...aws.Option) (*ListServicesOutput, error) {
 	req, out := c.ListServicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1819,9 +1818,9 @@ func (c *ECS) ListServicesPages(input *ListServicesInput, fn func(*ListServicesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListServicesPagesWithContext(ctx aws.Context, input *ListServicesInput, fn func(*ListServicesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECS) ListServicesPagesWithContext(ctx aws.Context, input *ListServicesInput, fn func(*ListServicesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListServicesInput
 			if input != nil {
 				tmp := *input
@@ -1843,7 +1842,7 @@ func (c *ECS) ListServicesPagesWithContext(ctx aws.Context, input *ListServicesI
 
 const opListTaskDefinitionFamilies = "ListTaskDefinitionFamilies"
 
-// ListTaskDefinitionFamiliesRequest generates a "aws/request.Request" representing the
+// ListTaskDefinitionFamiliesRequest generates a "aws.Request" representing the
 // client's request for the ListTaskDefinitionFamilies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1867,12 +1866,12 @@ const opListTaskDefinitionFamilies = "ListTaskDefinitionFamilies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies
-func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamiliesInput) (req *request.Request, output *ListTaskDefinitionFamiliesOutput) {
-	op := &request.Operation{
+func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamiliesInput) (req *aws.Request, output *ListTaskDefinitionFamiliesOutput) {
+	op := &aws.Operation{
 		Name:       opListTaskDefinitionFamilies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1934,7 +1933,7 @@ func (c *ECS) ListTaskDefinitionFamilies(input *ListTaskDefinitionFamiliesInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListTaskDefinitionFamiliesWithContext(ctx aws.Context, input *ListTaskDefinitionFamiliesInput, opts ...request.Option) (*ListTaskDefinitionFamiliesOutput, error) {
+func (c *ECS) ListTaskDefinitionFamiliesWithContext(ctx aws.Context, input *ListTaskDefinitionFamiliesInput, opts ...aws.Option) (*ListTaskDefinitionFamiliesOutput, error) {
 	req, out := c.ListTaskDefinitionFamiliesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1969,9 +1968,9 @@ func (c *ECS) ListTaskDefinitionFamiliesPages(input *ListTaskDefinitionFamiliesI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListTaskDefinitionFamiliesPagesWithContext(ctx aws.Context, input *ListTaskDefinitionFamiliesInput, fn func(*ListTaskDefinitionFamiliesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECS) ListTaskDefinitionFamiliesPagesWithContext(ctx aws.Context, input *ListTaskDefinitionFamiliesInput, fn func(*ListTaskDefinitionFamiliesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTaskDefinitionFamiliesInput
 			if input != nil {
 				tmp := *input
@@ -1993,7 +1992,7 @@ func (c *ECS) ListTaskDefinitionFamiliesPagesWithContext(ctx aws.Context, input 
 
 const opListTaskDefinitions = "ListTaskDefinitions"
 
-// ListTaskDefinitionsRequest generates a "aws/request.Request" representing the
+// ListTaskDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the ListTaskDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2017,12 +2016,12 @@ const opListTaskDefinitions = "ListTaskDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions
-func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) (req *request.Request, output *ListTaskDefinitionsOutput) {
-	op := &request.Operation{
+func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) (req *aws.Request, output *ListTaskDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opListTaskDefinitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2080,7 +2079,7 @@ func (c *ECS) ListTaskDefinitions(input *ListTaskDefinitionsInput) (*ListTaskDef
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListTaskDefinitionsWithContext(ctx aws.Context, input *ListTaskDefinitionsInput, opts ...request.Option) (*ListTaskDefinitionsOutput, error) {
+func (c *ECS) ListTaskDefinitionsWithContext(ctx aws.Context, input *ListTaskDefinitionsInput, opts ...aws.Option) (*ListTaskDefinitionsOutput, error) {
 	req, out := c.ListTaskDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2115,9 +2114,9 @@ func (c *ECS) ListTaskDefinitionsPages(input *ListTaskDefinitionsInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListTaskDefinitionsPagesWithContext(ctx aws.Context, input *ListTaskDefinitionsInput, fn func(*ListTaskDefinitionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECS) ListTaskDefinitionsPagesWithContext(ctx aws.Context, input *ListTaskDefinitionsInput, fn func(*ListTaskDefinitionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTaskDefinitionsInput
 			if input != nil {
 				tmp := *input
@@ -2139,7 +2138,7 @@ func (c *ECS) ListTaskDefinitionsPagesWithContext(ctx aws.Context, input *ListTa
 
 const opListTasks = "ListTasks"
 
-// ListTasksRequest generates a "aws/request.Request" representing the
+// ListTasksRequest generates a "aws.Request" representing the
 // client's request for the ListTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2163,12 +2162,12 @@ const opListTasks = "ListTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks
-func (c *ECS) ListTasksRequest(input *ListTasksInput) (req *request.Request, output *ListTasksOutput) {
-	op := &request.Operation{
+func (c *ECS) ListTasksRequest(input *ListTasksInput) (req *aws.Request, output *ListTasksOutput) {
+	op := &aws.Operation{
 		Name:       opListTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -2237,7 +2236,7 @@ func (c *ECS) ListTasks(input *ListTasksInput) (*ListTasksOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListTasksWithContext(ctx aws.Context, input *ListTasksInput, opts ...request.Option) (*ListTasksOutput, error) {
+func (c *ECS) ListTasksWithContext(ctx aws.Context, input *ListTasksInput, opts ...aws.Option) (*ListTasksOutput, error) {
 	req, out := c.ListTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2272,9 +2271,9 @@ func (c *ECS) ListTasksPages(input *ListTasksInput, fn func(*ListTasksOutput, bo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) ListTasksPagesWithContext(ctx aws.Context, input *ListTasksInput, fn func(*ListTasksOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ECS) ListTasksPagesWithContext(ctx aws.Context, input *ListTasksInput, fn func(*ListTasksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTasksInput
 			if input != nil {
 				tmp := *input
@@ -2296,7 +2295,7 @@ func (c *ECS) ListTasksPagesWithContext(ctx aws.Context, input *ListTasksInput, 
 
 const opPutAttributes = "PutAttributes"
 
-// PutAttributesRequest generates a "aws/request.Request" representing the
+// PutAttributesRequest generates a "aws.Request" representing the
 // client's request for the PutAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2320,8 +2319,8 @@ const opPutAttributes = "PutAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes
-func (c *ECS) PutAttributesRequest(input *PutAttributesInput) (req *request.Request, output *PutAttributesOutput) {
-	op := &request.Operation{
+func (c *ECS) PutAttributesRequest(input *PutAttributesInput) (req *aws.Request, output *PutAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opPutAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2385,7 +2384,7 @@ func (c *ECS) PutAttributes(input *PutAttributesInput) (*PutAttributesOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInput, opts ...request.Option) (*PutAttributesOutput, error) {
+func (c *ECS) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInput, opts ...aws.Option) (*PutAttributesOutput, error) {
 	req, out := c.PutAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2394,7 +2393,7 @@ func (c *ECS) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInpu
 
 const opRegisterContainerInstance = "RegisterContainerInstance"
 
-// RegisterContainerInstanceRequest generates a "aws/request.Request" representing the
+// RegisterContainerInstanceRequest generates a "aws.Request" representing the
 // client's request for the RegisterContainerInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2418,8 +2417,8 @@ const opRegisterContainerInstance = "RegisterContainerInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance
-func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceInput) (req *request.Request, output *RegisterContainerInstanceOutput) {
-	op := &request.Operation{
+func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceInput) (req *aws.Request, output *RegisterContainerInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterContainerInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2473,7 +2472,7 @@ func (c *ECS) RegisterContainerInstance(input *RegisterContainerInstanceInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) RegisterContainerInstanceWithContext(ctx aws.Context, input *RegisterContainerInstanceInput, opts ...request.Option) (*RegisterContainerInstanceOutput, error) {
+func (c *ECS) RegisterContainerInstanceWithContext(ctx aws.Context, input *RegisterContainerInstanceInput, opts ...aws.Option) (*RegisterContainerInstanceOutput, error) {
 	req, out := c.RegisterContainerInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2482,7 +2481,7 @@ func (c *ECS) RegisterContainerInstanceWithContext(ctx aws.Context, input *Regis
 
 const opRegisterTaskDefinition = "RegisterTaskDefinition"
 
-// RegisterTaskDefinitionRequest generates a "aws/request.Request" representing the
+// RegisterTaskDefinitionRequest generates a "aws.Request" representing the
 // client's request for the RegisterTaskDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2506,8 +2505,8 @@ const opRegisterTaskDefinition = "RegisterTaskDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition
-func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) (req *request.Request, output *RegisterTaskDefinitionOutput) {
-	op := &request.Operation{
+func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) (req *aws.Request, output *RegisterTaskDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterTaskDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2577,7 +2576,7 @@ func (c *ECS) RegisterTaskDefinition(input *RegisterTaskDefinitionInput) (*Regis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) RegisterTaskDefinitionWithContext(ctx aws.Context, input *RegisterTaskDefinitionInput, opts ...request.Option) (*RegisterTaskDefinitionOutput, error) {
+func (c *ECS) RegisterTaskDefinitionWithContext(ctx aws.Context, input *RegisterTaskDefinitionInput, opts ...aws.Option) (*RegisterTaskDefinitionOutput, error) {
 	req, out := c.RegisterTaskDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2586,7 +2585,7 @@ func (c *ECS) RegisterTaskDefinitionWithContext(ctx aws.Context, input *Register
 
 const opRunTask = "RunTask"
 
-// RunTaskRequest generates a "aws/request.Request" representing the
+// RunTaskRequest generates a "aws.Request" representing the
 // client's request for the RunTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2610,8 +2609,8 @@ const opRunTask = "RunTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask
-func (c *ECS) RunTaskRequest(input *RunTaskInput) (req *request.Request, output *RunTaskOutput) {
-	op := &request.Operation{
+func (c *ECS) RunTaskRequest(input *RunTaskInput) (req *aws.Request, output *RunTaskOutput) {
+	op := &aws.Operation{
 		Name:       opRunTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2677,7 +2676,7 @@ func (c *ECS) RunTask(input *RunTaskInput) (*RunTaskOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) RunTaskWithContext(ctx aws.Context, input *RunTaskInput, opts ...request.Option) (*RunTaskOutput, error) {
+func (c *ECS) RunTaskWithContext(ctx aws.Context, input *RunTaskInput, opts ...aws.Option) (*RunTaskOutput, error) {
 	req, out := c.RunTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2686,7 +2685,7 @@ func (c *ECS) RunTaskWithContext(ctx aws.Context, input *RunTaskInput, opts ...r
 
 const opStartTask = "StartTask"
 
-// StartTaskRequest generates a "aws/request.Request" representing the
+// StartTaskRequest generates a "aws.Request" representing the
 // client's request for the StartTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2710,8 +2709,8 @@ const opStartTask = "StartTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask
-func (c *ECS) StartTaskRequest(input *StartTaskInput) (req *request.Request, output *StartTaskOutput) {
-	op := &request.Operation{
+func (c *ECS) StartTaskRequest(input *StartTaskInput) (req *aws.Request, output *StartTaskOutput) {
+	op := &aws.Operation{
 		Name:       opStartTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2774,7 +2773,7 @@ func (c *ECS) StartTask(input *StartTaskInput) (*StartTaskOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) StartTaskWithContext(ctx aws.Context, input *StartTaskInput, opts ...request.Option) (*StartTaskOutput, error) {
+func (c *ECS) StartTaskWithContext(ctx aws.Context, input *StartTaskInput, opts ...aws.Option) (*StartTaskOutput, error) {
 	req, out := c.StartTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2783,7 +2782,7 @@ func (c *ECS) StartTaskWithContext(ctx aws.Context, input *StartTaskInput, opts 
 
 const opStopTask = "StopTask"
 
-// StopTaskRequest generates a "aws/request.Request" representing the
+// StopTaskRequest generates a "aws.Request" representing the
 // client's request for the StopTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2807,8 +2806,8 @@ const opStopTask = "StopTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask
-func (c *ECS) StopTaskRequest(input *StopTaskInput) (req *request.Request, output *StopTaskOutput) {
-	op := &request.Operation{
+func (c *ECS) StopTaskRequest(input *StopTaskInput) (req *aws.Request, output *StopTaskOutput) {
+	op := &aws.Operation{
 		Name:       opStopTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2877,7 +2876,7 @@ func (c *ECS) StopTask(input *StopTaskInput) (*StopTaskOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) StopTaskWithContext(ctx aws.Context, input *StopTaskInput, opts ...request.Option) (*StopTaskOutput, error) {
+func (c *ECS) StopTaskWithContext(ctx aws.Context, input *StopTaskInput, opts ...aws.Option) (*StopTaskOutput, error) {
 	req, out := c.StopTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2886,7 +2885,7 @@ func (c *ECS) StopTaskWithContext(ctx aws.Context, input *StopTaskInput, opts ..
 
 const opSubmitContainerStateChange = "SubmitContainerStateChange"
 
-// SubmitContainerStateChangeRequest generates a "aws/request.Request" representing the
+// SubmitContainerStateChangeRequest generates a "aws.Request" representing the
 // client's request for the SubmitContainerStateChange operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2910,8 +2909,8 @@ const opSubmitContainerStateChange = "SubmitContainerStateChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange
-func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChangeInput) (req *request.Request, output *SubmitContainerStateChangeOutput) {
-	op := &request.Operation{
+func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChangeInput) (req *aws.Request, output *SubmitContainerStateChangeOutput) {
+	op := &aws.Operation{
 		Name:       opSubmitContainerStateChange,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2964,7 +2963,7 @@ func (c *ECS) SubmitContainerStateChange(input *SubmitContainerStateChangeInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) SubmitContainerStateChangeWithContext(ctx aws.Context, input *SubmitContainerStateChangeInput, opts ...request.Option) (*SubmitContainerStateChangeOutput, error) {
+func (c *ECS) SubmitContainerStateChangeWithContext(ctx aws.Context, input *SubmitContainerStateChangeInput, opts ...aws.Option) (*SubmitContainerStateChangeOutput, error) {
 	req, out := c.SubmitContainerStateChangeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2973,7 +2972,7 @@ func (c *ECS) SubmitContainerStateChangeWithContext(ctx aws.Context, input *Subm
 
 const opSubmitTaskStateChange = "SubmitTaskStateChange"
 
-// SubmitTaskStateChangeRequest generates a "aws/request.Request" representing the
+// SubmitTaskStateChangeRequest generates a "aws.Request" representing the
 // client's request for the SubmitTaskStateChange operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2997,8 +2996,8 @@ const opSubmitTaskStateChange = "SubmitTaskStateChange"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange
-func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) (req *request.Request, output *SubmitTaskStateChangeOutput) {
-	op := &request.Operation{
+func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) (req *aws.Request, output *SubmitTaskStateChangeOutput) {
+	op := &aws.Operation{
 		Name:       opSubmitTaskStateChange,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3051,7 +3050,7 @@ func (c *ECS) SubmitTaskStateChange(input *SubmitTaskStateChangeInput) (*SubmitT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) SubmitTaskStateChangeWithContext(ctx aws.Context, input *SubmitTaskStateChangeInput, opts ...request.Option) (*SubmitTaskStateChangeOutput, error) {
+func (c *ECS) SubmitTaskStateChangeWithContext(ctx aws.Context, input *SubmitTaskStateChangeInput, opts ...aws.Option) (*SubmitTaskStateChangeOutput, error) {
 	req, out := c.SubmitTaskStateChangeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3060,7 +3059,7 @@ func (c *ECS) SubmitTaskStateChangeWithContext(ctx aws.Context, input *SubmitTas
 
 const opUpdateContainerAgent = "UpdateContainerAgent"
 
-// UpdateContainerAgentRequest generates a "aws/request.Request" representing the
+// UpdateContainerAgentRequest generates a "aws.Request" representing the
 // client's request for the UpdateContainerAgent operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3084,8 +3083,8 @@ const opUpdateContainerAgent = "UpdateContainerAgent"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent
-func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) (req *request.Request, output *UpdateContainerAgentOutput) {
-	op := &request.Operation{
+func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) (req *aws.Request, output *UpdateContainerAgentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateContainerAgent,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3171,7 +3170,7 @@ func (c *ECS) UpdateContainerAgent(input *UpdateContainerAgentInput) (*UpdateCon
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) UpdateContainerAgentWithContext(ctx aws.Context, input *UpdateContainerAgentInput, opts ...request.Option) (*UpdateContainerAgentOutput, error) {
+func (c *ECS) UpdateContainerAgentWithContext(ctx aws.Context, input *UpdateContainerAgentInput, opts ...aws.Option) (*UpdateContainerAgentOutput, error) {
 	req, out := c.UpdateContainerAgentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3180,7 +3179,7 @@ func (c *ECS) UpdateContainerAgentWithContext(ctx aws.Context, input *UpdateCont
 
 const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 
-// UpdateContainerInstancesStateRequest generates a "aws/request.Request" representing the
+// UpdateContainerInstancesStateRequest generates a "aws.Request" representing the
 // client's request for the UpdateContainerInstancesState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3204,8 +3203,8 @@ const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState
-func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstancesStateInput) (req *request.Request, output *UpdateContainerInstancesStateOutput) {
-	op := &request.Operation{
+func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstancesStateInput) (req *aws.Request, output *UpdateContainerInstancesStateOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateContainerInstancesState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3306,7 +3305,7 @@ func (c *ECS) UpdateContainerInstancesState(input *UpdateContainerInstancesState
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) UpdateContainerInstancesStateWithContext(ctx aws.Context, input *UpdateContainerInstancesStateInput, opts ...request.Option) (*UpdateContainerInstancesStateOutput, error) {
+func (c *ECS) UpdateContainerInstancesStateWithContext(ctx aws.Context, input *UpdateContainerInstancesStateInput, opts ...aws.Option) (*UpdateContainerInstancesStateOutput, error) {
 	req, out := c.UpdateContainerInstancesStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3315,7 +3314,7 @@ func (c *ECS) UpdateContainerInstancesStateWithContext(ctx aws.Context, input *U
 
 const opUpdateService = "UpdateService"
 
-// UpdateServiceRequest generates a "aws/request.Request" representing the
+// UpdateServiceRequest generates a "aws.Request" representing the
 // client's request for the UpdateService operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3339,8 +3338,8 @@ const opUpdateService = "UpdateService"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService
-func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) (req *request.Request, output *UpdateServiceOutput) {
-	op := &request.Operation{
+func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) (req *aws.Request, output *UpdateServiceOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateService,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3473,7 +3472,7 @@ func (c *ECS) UpdateService(input *UpdateServiceInput) (*UpdateServiceOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ECS) UpdateServiceWithContext(ctx aws.Context, input *UpdateServiceInput, opts ...request.Option) (*UpdateServiceOutput, error) {
+func (c *ECS) UpdateServiceWithContext(ctx aws.Context, input *UpdateServiceInput, opts ...aws.Option) (*UpdateServiceOutput, error) {
 	req, out := c.UpdateServiceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3521,9 +3520,9 @@ func (s Attribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Attribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Attribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "Attribute"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4072,20 +4071,20 @@ func (s ContainerDefinition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContainerDefinition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ContainerDefinition"}
+	invalidParams := aws.ErrInvalidParams{Context: "ContainerDefinition"}
 	if s.ExtraHosts != nil {
 		for i, v := range s.ExtraHosts {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtraHosts", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtraHosts", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.LogConfiguration != nil {
 		if err := s.LogConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("LogConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LogConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Ulimits != nil {
@@ -4094,7 +4093,7 @@ func (s *ContainerDefinition) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ulimits", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Ulimits", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4654,15 +4653,15 @@ func (s CreateServiceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServiceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateServiceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateServiceInput"}
 	if s.DesiredCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("DesiredCount"))
+		invalidParams.Add(aws.NewErrParamRequired("DesiredCount"))
 	}
 	if s.ServiceName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceName"))
 	}
 	if s.TaskDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4785,9 +4784,9 @@ func (s DeleteAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -4795,7 +4794,7 @@ func (s *DeleteAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4864,9 +4863,9 @@ func (s DeleteClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClusterInput"}
 	if s.Cluster == nil {
-		invalidParams.Add(request.NewErrParamRequired("Cluster"))
+		invalidParams.Add(aws.NewErrParamRequired("Cluster"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4932,9 +4931,9 @@ func (s DeleteServiceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServiceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteServiceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceInput"}
 	if s.Service == nil {
-		invalidParams.Add(request.NewErrParamRequired("Service"))
+		invalidParams.Add(aws.NewErrParamRequired("Service"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5158,9 +5157,9 @@ func (s DeregisterContainerInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterContainerInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterContainerInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterContainerInstanceInput"}
 	if s.ContainerInstance == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContainerInstance"))
+		invalidParams.Add(aws.NewErrParamRequired("ContainerInstance"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5234,9 +5233,9 @@ func (s DeregisterTaskDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTaskDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterTaskDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTaskDefinitionInput"}
 	if s.TaskDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5360,9 +5359,9 @@ func (s DescribeContainerInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeContainerInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeContainerInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeContainerInstancesInput"}
 	if s.ContainerInstances == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContainerInstances"))
+		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5444,9 +5443,9 @@ func (s DescribeServicesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeServicesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeServicesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeServicesInput"}
 	if s.Services == nil {
-		invalidParams.Add(request.NewErrParamRequired("Services"))
+		invalidParams.Add(aws.NewErrParamRequired("Services"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5524,9 +5523,9 @@ func (s DescribeTaskDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTaskDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTaskDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTaskDefinitionInput"}
 	if s.TaskDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5592,9 +5591,9 @@ func (s DescribeTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTasksInput"}
 	if s.Tasks == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tasks"))
+		invalidParams.Add(aws.NewErrParamRequired("Tasks"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5782,12 +5781,12 @@ func (s HostEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HostEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HostEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "HostEntry"}
 	if s.Hostname == nil {
-		invalidParams.Add(request.NewErrParamRequired("Hostname"))
+		invalidParams.Add(aws.NewErrParamRequired("Hostname"))
 	}
 	if s.IpAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("IpAddress"))
+		invalidParams.Add(aws.NewErrParamRequired("IpAddress"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6000,9 +5999,9 @@ func (s ListAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAttributesInput"}
 	if s.TargetType == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetType"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6861,9 +6860,9 @@ func (s LogConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LogConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LogConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "LogConfiguration"}
 	if s.LogDriver == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogDriver"))
+		invalidParams.Add(aws.NewErrParamRequired("LogDriver"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7178,9 +7177,9 @@ func (s PutAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -7188,7 +7187,7 @@ func (s *PutAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7280,14 +7279,14 @@ func (s RegisterContainerInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterContainerInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterContainerInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterContainerInstanceInput"}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7428,12 +7427,12 @@ func (s RegisterTaskDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterTaskDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterTaskDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterTaskDefinitionInput"}
 	if s.ContainerDefinitions == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContainerDefinitions"))
+		invalidParams.Add(aws.NewErrParamRequired("ContainerDefinitions"))
 	}
 	if s.Family == nil {
-		invalidParams.Add(request.NewErrParamRequired("Family"))
+		invalidParams.Add(aws.NewErrParamRequired("Family"))
 	}
 	if s.ContainerDefinitions != nil {
 		for i, v := range s.ContainerDefinitions {
@@ -7441,7 +7440,7 @@ func (s *RegisterTaskDefinitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContainerDefinitions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ContainerDefinitions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7654,9 +7653,9 @@ func (s RunTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RunTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RunTaskInput"}
 	if s.TaskDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8029,12 +8028,12 @@ func (s StartTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartTaskInput"}
 	if s.ContainerInstances == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContainerInstances"))
+		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
 	}
 	if s.TaskDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskDefinition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8146,9 +8145,9 @@ func (s StopTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopTaskInput"}
 	if s.Task == nil {
-		invalidParams.Add(request.NewErrParamRequired("Task"))
+		invalidParams.Add(aws.NewErrParamRequired("Task"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8776,15 +8775,15 @@ func (s Ulimit) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Ulimit) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Ulimit"}
+	invalidParams := aws.ErrInvalidParams{Context: "Ulimit"}
 	if s.HardLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("HardLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("HardLimit"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.SoftLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("SoftLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("SoftLimit"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8840,9 +8839,9 @@ func (s UpdateContainerAgentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateContainerAgentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateContainerAgentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateContainerAgentInput"}
 	if s.ContainerInstance == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContainerInstance"))
+		invalidParams.Add(aws.NewErrParamRequired("ContainerInstance"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8919,12 +8918,12 @@ func (s UpdateContainerInstancesStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateContainerInstancesStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateContainerInstancesStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateContainerInstancesStateInput"}
 	if s.ContainerInstances == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContainerInstances"))
+		invalidParams.Add(aws.NewErrParamRequired("ContainerInstances"))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9026,9 +9025,9 @@ func (s UpdateServiceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServiceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateServiceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateServiceInput"}
 	if s.Service == nil {
-		invalidParams.Add(request.NewErrParamRequired("Service"))
+		invalidParams.Add(aws.NewErrParamRequired("Service"))
 	}
 
 	if invalidParams.Len() > 0 {

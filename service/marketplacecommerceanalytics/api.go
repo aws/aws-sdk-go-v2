@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opGenerateDataSet = "GenerateDataSet"
 
-// GenerateDataSetRequest generates a "aws/request.Request" representing the
+// GenerateDataSetRequest generates a "aws.Request" representing the
 // client's request for the GenerateDataSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opGenerateDataSet = "GenerateDataSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSet
-func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDataSetInput) (req *request.Request, output *GenerateDataSetOutput) {
-	op := &request.Operation{
+func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDataSetInput) (req *aws.Request, output *GenerateDataSetOutput) {
+	op := &aws.Operation{
 		Name:       opGenerateDataSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -91,7 +90,7 @@ func (c *MarketplaceCommerceAnalytics) GenerateDataSet(input *GenerateDataSetInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MarketplaceCommerceAnalytics) GenerateDataSetWithContext(ctx aws.Context, input *GenerateDataSetInput, opts ...request.Option) (*GenerateDataSetOutput, error) {
+func (c *MarketplaceCommerceAnalytics) GenerateDataSetWithContext(ctx aws.Context, input *GenerateDataSetInput, opts ...aws.Option) (*GenerateDataSetOutput, error) {
 	req, out := c.GenerateDataSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -100,7 +99,7 @@ func (c *MarketplaceCommerceAnalytics) GenerateDataSetWithContext(ctx aws.Contex
 
 const opStartSupportDataExport = "StartSupportDataExport"
 
-// StartSupportDataExportRequest generates a "aws/request.Request" representing the
+// StartSupportDataExportRequest generates a "aws.Request" representing the
 // client's request for the StartSupportDataExport operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -124,8 +123,8 @@ const opStartSupportDataExport = "StartSupportDataExport"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExport
-func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *StartSupportDataExportInput) (req *request.Request, output *StartSupportDataExportOutput) {
-	op := &request.Operation{
+func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *StartSupportDataExportInput) (req *aws.Request, output *StartSupportDataExportOutput) {
+	op := &aws.Operation{
 		Name:       opStartSupportDataExport,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -180,7 +179,7 @@ func (c *MarketplaceCommerceAnalytics) StartSupportDataExport(input *StartSuppor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MarketplaceCommerceAnalytics) StartSupportDataExportWithContext(ctx aws.Context, input *StartSupportDataExportInput, opts ...request.Option) (*StartSupportDataExportOutput, error) {
+func (c *MarketplaceCommerceAnalytics) StartSupportDataExportWithContext(ctx aws.Context, input *StartSupportDataExportInput, opts ...aws.Option) (*StartSupportDataExportOutput, error) {
 	req, out := c.StartSupportDataExportRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -340,36 +339,36 @@ func (s GenerateDataSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GenerateDataSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GenerateDataSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GenerateDataSetInput"}
 	if s.CustomerDefinedValues != nil && len(s.CustomerDefinedValues) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomerDefinedValues", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomerDefinedValues", 1))
 	}
 	if s.DataSetPublicationDate == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSetPublicationDate"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSetPublicationDate"))
 	}
 	if s.DataSetType == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSetType"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSetType"))
 	}
 	if s.DataSetType != nil && len(*s.DataSetType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSetType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSetType", 1))
 	}
 	if s.DestinationS3BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationS3BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationS3BucketName"))
 	}
 	if s.DestinationS3BucketName != nil && len(*s.DestinationS3BucketName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationS3BucketName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationS3BucketName", 1))
 	}
 	if s.RoleNameArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleNameArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleNameArn"))
 	}
 	if s.RoleNameArn != nil && len(*s.RoleNameArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleNameArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleNameArn", 1))
 	}
 	if s.SnsTopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnsTopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
 	if s.SnsTopicArn != nil && len(*s.SnsTopicArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SnsTopicArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SnsTopicArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -516,36 +515,36 @@ func (s StartSupportDataExportInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartSupportDataExportInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartSupportDataExportInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartSupportDataExportInput"}
 	if s.CustomerDefinedValues != nil && len(s.CustomerDefinedValues) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomerDefinedValues", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomerDefinedValues", 1))
 	}
 	if s.DataSetType == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataSetType"))
+		invalidParams.Add(aws.NewErrParamRequired("DataSetType"))
 	}
 	if s.DataSetType != nil && len(*s.DataSetType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataSetType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataSetType", 1))
 	}
 	if s.DestinationS3BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationS3BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationS3BucketName"))
 	}
 	if s.DestinationS3BucketName != nil && len(*s.DestinationS3BucketName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationS3BucketName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationS3BucketName", 1))
 	}
 	if s.FromDate == nil {
-		invalidParams.Add(request.NewErrParamRequired("FromDate"))
+		invalidParams.Add(aws.NewErrParamRequired("FromDate"))
 	}
 	if s.RoleNameArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleNameArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleNameArn"))
 	}
 	if s.RoleNameArn != nil && len(*s.RoleNameArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleNameArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleNameArn", 1))
 	}
 	if s.SnsTopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnsTopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("SnsTopicArn"))
 	}
 	if s.SnsTopicArn != nil && len(*s.SnsTopicArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SnsTopicArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SnsTopicArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {

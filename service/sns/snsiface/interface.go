@@ -10,7 +10,6 @@ package snsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/sns"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := sns.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := sns.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,139 +64,139 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type SNSAPI interface {
 	AddPermission(*sns.AddPermissionInput) (*sns.AddPermissionOutput, error)
-	AddPermissionWithContext(aws.Context, *sns.AddPermissionInput, ...request.Option) (*sns.AddPermissionOutput, error)
-	AddPermissionRequest(*sns.AddPermissionInput) (*request.Request, *sns.AddPermissionOutput)
+	AddPermissionWithContext(aws.Context, *sns.AddPermissionInput, ...aws.Option) (*sns.AddPermissionOutput, error)
+	AddPermissionRequest(*sns.AddPermissionInput) (*aws.Request, *sns.AddPermissionOutput)
 
 	CheckIfPhoneNumberIsOptedOut(*sns.CheckIfPhoneNumberIsOptedOutInput) (*sns.CheckIfPhoneNumberIsOptedOutOutput, error)
-	CheckIfPhoneNumberIsOptedOutWithContext(aws.Context, *sns.CheckIfPhoneNumberIsOptedOutInput, ...request.Option) (*sns.CheckIfPhoneNumberIsOptedOutOutput, error)
-	CheckIfPhoneNumberIsOptedOutRequest(*sns.CheckIfPhoneNumberIsOptedOutInput) (*request.Request, *sns.CheckIfPhoneNumberIsOptedOutOutput)
+	CheckIfPhoneNumberIsOptedOutWithContext(aws.Context, *sns.CheckIfPhoneNumberIsOptedOutInput, ...aws.Option) (*sns.CheckIfPhoneNumberIsOptedOutOutput, error)
+	CheckIfPhoneNumberIsOptedOutRequest(*sns.CheckIfPhoneNumberIsOptedOutInput) (*aws.Request, *sns.CheckIfPhoneNumberIsOptedOutOutput)
 
 	ConfirmSubscription(*sns.ConfirmSubscriptionInput) (*sns.ConfirmSubscriptionOutput, error)
-	ConfirmSubscriptionWithContext(aws.Context, *sns.ConfirmSubscriptionInput, ...request.Option) (*sns.ConfirmSubscriptionOutput, error)
-	ConfirmSubscriptionRequest(*sns.ConfirmSubscriptionInput) (*request.Request, *sns.ConfirmSubscriptionOutput)
+	ConfirmSubscriptionWithContext(aws.Context, *sns.ConfirmSubscriptionInput, ...aws.Option) (*sns.ConfirmSubscriptionOutput, error)
+	ConfirmSubscriptionRequest(*sns.ConfirmSubscriptionInput) (*aws.Request, *sns.ConfirmSubscriptionOutput)
 
 	CreatePlatformApplication(*sns.CreatePlatformApplicationInput) (*sns.CreatePlatformApplicationOutput, error)
-	CreatePlatformApplicationWithContext(aws.Context, *sns.CreatePlatformApplicationInput, ...request.Option) (*sns.CreatePlatformApplicationOutput, error)
-	CreatePlatformApplicationRequest(*sns.CreatePlatformApplicationInput) (*request.Request, *sns.CreatePlatformApplicationOutput)
+	CreatePlatformApplicationWithContext(aws.Context, *sns.CreatePlatformApplicationInput, ...aws.Option) (*sns.CreatePlatformApplicationOutput, error)
+	CreatePlatformApplicationRequest(*sns.CreatePlatformApplicationInput) (*aws.Request, *sns.CreatePlatformApplicationOutput)
 
 	CreatePlatformEndpoint(*sns.CreatePlatformEndpointInput) (*sns.CreatePlatformEndpointOutput, error)
-	CreatePlatformEndpointWithContext(aws.Context, *sns.CreatePlatformEndpointInput, ...request.Option) (*sns.CreatePlatformEndpointOutput, error)
-	CreatePlatformEndpointRequest(*sns.CreatePlatformEndpointInput) (*request.Request, *sns.CreatePlatformEndpointOutput)
+	CreatePlatformEndpointWithContext(aws.Context, *sns.CreatePlatformEndpointInput, ...aws.Option) (*sns.CreatePlatformEndpointOutput, error)
+	CreatePlatformEndpointRequest(*sns.CreatePlatformEndpointInput) (*aws.Request, *sns.CreatePlatformEndpointOutput)
 
 	CreateTopic(*sns.CreateTopicInput) (*sns.CreateTopicOutput, error)
-	CreateTopicWithContext(aws.Context, *sns.CreateTopicInput, ...request.Option) (*sns.CreateTopicOutput, error)
-	CreateTopicRequest(*sns.CreateTopicInput) (*request.Request, *sns.CreateTopicOutput)
+	CreateTopicWithContext(aws.Context, *sns.CreateTopicInput, ...aws.Option) (*sns.CreateTopicOutput, error)
+	CreateTopicRequest(*sns.CreateTopicInput) (*aws.Request, *sns.CreateTopicOutput)
 
 	DeleteEndpoint(*sns.DeleteEndpointInput) (*sns.DeleteEndpointOutput, error)
-	DeleteEndpointWithContext(aws.Context, *sns.DeleteEndpointInput, ...request.Option) (*sns.DeleteEndpointOutput, error)
-	DeleteEndpointRequest(*sns.DeleteEndpointInput) (*request.Request, *sns.DeleteEndpointOutput)
+	DeleteEndpointWithContext(aws.Context, *sns.DeleteEndpointInput, ...aws.Option) (*sns.DeleteEndpointOutput, error)
+	DeleteEndpointRequest(*sns.DeleteEndpointInput) (*aws.Request, *sns.DeleteEndpointOutput)
 
 	DeletePlatformApplication(*sns.DeletePlatformApplicationInput) (*sns.DeletePlatformApplicationOutput, error)
-	DeletePlatformApplicationWithContext(aws.Context, *sns.DeletePlatformApplicationInput, ...request.Option) (*sns.DeletePlatformApplicationOutput, error)
-	DeletePlatformApplicationRequest(*sns.DeletePlatformApplicationInput) (*request.Request, *sns.DeletePlatformApplicationOutput)
+	DeletePlatformApplicationWithContext(aws.Context, *sns.DeletePlatformApplicationInput, ...aws.Option) (*sns.DeletePlatformApplicationOutput, error)
+	DeletePlatformApplicationRequest(*sns.DeletePlatformApplicationInput) (*aws.Request, *sns.DeletePlatformApplicationOutput)
 
 	DeleteTopic(*sns.DeleteTopicInput) (*sns.DeleteTopicOutput, error)
-	DeleteTopicWithContext(aws.Context, *sns.DeleteTopicInput, ...request.Option) (*sns.DeleteTopicOutput, error)
-	DeleteTopicRequest(*sns.DeleteTopicInput) (*request.Request, *sns.DeleteTopicOutput)
+	DeleteTopicWithContext(aws.Context, *sns.DeleteTopicInput, ...aws.Option) (*sns.DeleteTopicOutput, error)
+	DeleteTopicRequest(*sns.DeleteTopicInput) (*aws.Request, *sns.DeleteTopicOutput)
 
 	GetEndpointAttributes(*sns.GetEndpointAttributesInput) (*sns.GetEndpointAttributesOutput, error)
-	GetEndpointAttributesWithContext(aws.Context, *sns.GetEndpointAttributesInput, ...request.Option) (*sns.GetEndpointAttributesOutput, error)
-	GetEndpointAttributesRequest(*sns.GetEndpointAttributesInput) (*request.Request, *sns.GetEndpointAttributesOutput)
+	GetEndpointAttributesWithContext(aws.Context, *sns.GetEndpointAttributesInput, ...aws.Option) (*sns.GetEndpointAttributesOutput, error)
+	GetEndpointAttributesRequest(*sns.GetEndpointAttributesInput) (*aws.Request, *sns.GetEndpointAttributesOutput)
 
 	GetPlatformApplicationAttributes(*sns.GetPlatformApplicationAttributesInput) (*sns.GetPlatformApplicationAttributesOutput, error)
-	GetPlatformApplicationAttributesWithContext(aws.Context, *sns.GetPlatformApplicationAttributesInput, ...request.Option) (*sns.GetPlatformApplicationAttributesOutput, error)
-	GetPlatformApplicationAttributesRequest(*sns.GetPlatformApplicationAttributesInput) (*request.Request, *sns.GetPlatformApplicationAttributesOutput)
+	GetPlatformApplicationAttributesWithContext(aws.Context, *sns.GetPlatformApplicationAttributesInput, ...aws.Option) (*sns.GetPlatformApplicationAttributesOutput, error)
+	GetPlatformApplicationAttributesRequest(*sns.GetPlatformApplicationAttributesInput) (*aws.Request, *sns.GetPlatformApplicationAttributesOutput)
 
 	GetSMSAttributes(*sns.GetSMSAttributesInput) (*sns.GetSMSAttributesOutput, error)
-	GetSMSAttributesWithContext(aws.Context, *sns.GetSMSAttributesInput, ...request.Option) (*sns.GetSMSAttributesOutput, error)
-	GetSMSAttributesRequest(*sns.GetSMSAttributesInput) (*request.Request, *sns.GetSMSAttributesOutput)
+	GetSMSAttributesWithContext(aws.Context, *sns.GetSMSAttributesInput, ...aws.Option) (*sns.GetSMSAttributesOutput, error)
+	GetSMSAttributesRequest(*sns.GetSMSAttributesInput) (*aws.Request, *sns.GetSMSAttributesOutput)
 
 	GetSubscriptionAttributes(*sns.GetSubscriptionAttributesInput) (*sns.GetSubscriptionAttributesOutput, error)
-	GetSubscriptionAttributesWithContext(aws.Context, *sns.GetSubscriptionAttributesInput, ...request.Option) (*sns.GetSubscriptionAttributesOutput, error)
-	GetSubscriptionAttributesRequest(*sns.GetSubscriptionAttributesInput) (*request.Request, *sns.GetSubscriptionAttributesOutput)
+	GetSubscriptionAttributesWithContext(aws.Context, *sns.GetSubscriptionAttributesInput, ...aws.Option) (*sns.GetSubscriptionAttributesOutput, error)
+	GetSubscriptionAttributesRequest(*sns.GetSubscriptionAttributesInput) (*aws.Request, *sns.GetSubscriptionAttributesOutput)
 
 	GetTopicAttributes(*sns.GetTopicAttributesInput) (*sns.GetTopicAttributesOutput, error)
-	GetTopicAttributesWithContext(aws.Context, *sns.GetTopicAttributesInput, ...request.Option) (*sns.GetTopicAttributesOutput, error)
-	GetTopicAttributesRequest(*sns.GetTopicAttributesInput) (*request.Request, *sns.GetTopicAttributesOutput)
+	GetTopicAttributesWithContext(aws.Context, *sns.GetTopicAttributesInput, ...aws.Option) (*sns.GetTopicAttributesOutput, error)
+	GetTopicAttributesRequest(*sns.GetTopicAttributesInput) (*aws.Request, *sns.GetTopicAttributesOutput)
 
 	ListEndpointsByPlatformApplication(*sns.ListEndpointsByPlatformApplicationInput) (*sns.ListEndpointsByPlatformApplicationOutput, error)
-	ListEndpointsByPlatformApplicationWithContext(aws.Context, *sns.ListEndpointsByPlatformApplicationInput, ...request.Option) (*sns.ListEndpointsByPlatformApplicationOutput, error)
-	ListEndpointsByPlatformApplicationRequest(*sns.ListEndpointsByPlatformApplicationInput) (*request.Request, *sns.ListEndpointsByPlatformApplicationOutput)
+	ListEndpointsByPlatformApplicationWithContext(aws.Context, *sns.ListEndpointsByPlatformApplicationInput, ...aws.Option) (*sns.ListEndpointsByPlatformApplicationOutput, error)
+	ListEndpointsByPlatformApplicationRequest(*sns.ListEndpointsByPlatformApplicationInput) (*aws.Request, *sns.ListEndpointsByPlatformApplicationOutput)
 
 	ListEndpointsByPlatformApplicationPages(*sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool) error
-	ListEndpointsByPlatformApplicationPagesWithContext(aws.Context, *sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool, ...request.Option) error
+	ListEndpointsByPlatformApplicationPagesWithContext(aws.Context, *sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool, ...aws.Option) error
 
 	ListPhoneNumbersOptedOut(*sns.ListPhoneNumbersOptedOutInput) (*sns.ListPhoneNumbersOptedOutOutput, error)
-	ListPhoneNumbersOptedOutWithContext(aws.Context, *sns.ListPhoneNumbersOptedOutInput, ...request.Option) (*sns.ListPhoneNumbersOptedOutOutput, error)
-	ListPhoneNumbersOptedOutRequest(*sns.ListPhoneNumbersOptedOutInput) (*request.Request, *sns.ListPhoneNumbersOptedOutOutput)
+	ListPhoneNumbersOptedOutWithContext(aws.Context, *sns.ListPhoneNumbersOptedOutInput, ...aws.Option) (*sns.ListPhoneNumbersOptedOutOutput, error)
+	ListPhoneNumbersOptedOutRequest(*sns.ListPhoneNumbersOptedOutInput) (*aws.Request, *sns.ListPhoneNumbersOptedOutOutput)
 
 	ListPlatformApplications(*sns.ListPlatformApplicationsInput) (*sns.ListPlatformApplicationsOutput, error)
-	ListPlatformApplicationsWithContext(aws.Context, *sns.ListPlatformApplicationsInput, ...request.Option) (*sns.ListPlatformApplicationsOutput, error)
-	ListPlatformApplicationsRequest(*sns.ListPlatformApplicationsInput) (*request.Request, *sns.ListPlatformApplicationsOutput)
+	ListPlatformApplicationsWithContext(aws.Context, *sns.ListPlatformApplicationsInput, ...aws.Option) (*sns.ListPlatformApplicationsOutput, error)
+	ListPlatformApplicationsRequest(*sns.ListPlatformApplicationsInput) (*aws.Request, *sns.ListPlatformApplicationsOutput)
 
 	ListPlatformApplicationsPages(*sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool) error
-	ListPlatformApplicationsPagesWithContext(aws.Context, *sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool, ...request.Option) error
+	ListPlatformApplicationsPagesWithContext(aws.Context, *sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool, ...aws.Option) error
 
 	ListSubscriptions(*sns.ListSubscriptionsInput) (*sns.ListSubscriptionsOutput, error)
-	ListSubscriptionsWithContext(aws.Context, *sns.ListSubscriptionsInput, ...request.Option) (*sns.ListSubscriptionsOutput, error)
-	ListSubscriptionsRequest(*sns.ListSubscriptionsInput) (*request.Request, *sns.ListSubscriptionsOutput)
+	ListSubscriptionsWithContext(aws.Context, *sns.ListSubscriptionsInput, ...aws.Option) (*sns.ListSubscriptionsOutput, error)
+	ListSubscriptionsRequest(*sns.ListSubscriptionsInput) (*aws.Request, *sns.ListSubscriptionsOutput)
 
 	ListSubscriptionsPages(*sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool) error
-	ListSubscriptionsPagesWithContext(aws.Context, *sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool, ...request.Option) error
+	ListSubscriptionsPagesWithContext(aws.Context, *sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool, ...aws.Option) error
 
 	ListSubscriptionsByTopic(*sns.ListSubscriptionsByTopicInput) (*sns.ListSubscriptionsByTopicOutput, error)
-	ListSubscriptionsByTopicWithContext(aws.Context, *sns.ListSubscriptionsByTopicInput, ...request.Option) (*sns.ListSubscriptionsByTopicOutput, error)
-	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) (*request.Request, *sns.ListSubscriptionsByTopicOutput)
+	ListSubscriptionsByTopicWithContext(aws.Context, *sns.ListSubscriptionsByTopicInput, ...aws.Option) (*sns.ListSubscriptionsByTopicOutput, error)
+	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) (*aws.Request, *sns.ListSubscriptionsByTopicOutput)
 
 	ListSubscriptionsByTopicPages(*sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool) error
-	ListSubscriptionsByTopicPagesWithContext(aws.Context, *sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool, ...request.Option) error
+	ListSubscriptionsByTopicPagesWithContext(aws.Context, *sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool, ...aws.Option) error
 
 	ListTopics(*sns.ListTopicsInput) (*sns.ListTopicsOutput, error)
-	ListTopicsWithContext(aws.Context, *sns.ListTopicsInput, ...request.Option) (*sns.ListTopicsOutput, error)
-	ListTopicsRequest(*sns.ListTopicsInput) (*request.Request, *sns.ListTopicsOutput)
+	ListTopicsWithContext(aws.Context, *sns.ListTopicsInput, ...aws.Option) (*sns.ListTopicsOutput, error)
+	ListTopicsRequest(*sns.ListTopicsInput) (*aws.Request, *sns.ListTopicsOutput)
 
 	ListTopicsPages(*sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool) error
-	ListTopicsPagesWithContext(aws.Context, *sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool, ...request.Option) error
+	ListTopicsPagesWithContext(aws.Context, *sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool, ...aws.Option) error
 
 	OptInPhoneNumber(*sns.OptInPhoneNumberInput) (*sns.OptInPhoneNumberOutput, error)
-	OptInPhoneNumberWithContext(aws.Context, *sns.OptInPhoneNumberInput, ...request.Option) (*sns.OptInPhoneNumberOutput, error)
-	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) (*request.Request, *sns.OptInPhoneNumberOutput)
+	OptInPhoneNumberWithContext(aws.Context, *sns.OptInPhoneNumberInput, ...aws.Option) (*sns.OptInPhoneNumberOutput, error)
+	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) (*aws.Request, *sns.OptInPhoneNumberOutput)
 
 	Publish(*sns.PublishInput) (*sns.PublishOutput, error)
-	PublishWithContext(aws.Context, *sns.PublishInput, ...request.Option) (*sns.PublishOutput, error)
-	PublishRequest(*sns.PublishInput) (*request.Request, *sns.PublishOutput)
+	PublishWithContext(aws.Context, *sns.PublishInput, ...aws.Option) (*sns.PublishOutput, error)
+	PublishRequest(*sns.PublishInput) (*aws.Request, *sns.PublishOutput)
 
 	RemovePermission(*sns.RemovePermissionInput) (*sns.RemovePermissionOutput, error)
-	RemovePermissionWithContext(aws.Context, *sns.RemovePermissionInput, ...request.Option) (*sns.RemovePermissionOutput, error)
-	RemovePermissionRequest(*sns.RemovePermissionInput) (*request.Request, *sns.RemovePermissionOutput)
+	RemovePermissionWithContext(aws.Context, *sns.RemovePermissionInput, ...aws.Option) (*sns.RemovePermissionOutput, error)
+	RemovePermissionRequest(*sns.RemovePermissionInput) (*aws.Request, *sns.RemovePermissionOutput)
 
 	SetEndpointAttributes(*sns.SetEndpointAttributesInput) (*sns.SetEndpointAttributesOutput, error)
-	SetEndpointAttributesWithContext(aws.Context, *sns.SetEndpointAttributesInput, ...request.Option) (*sns.SetEndpointAttributesOutput, error)
-	SetEndpointAttributesRequest(*sns.SetEndpointAttributesInput) (*request.Request, *sns.SetEndpointAttributesOutput)
+	SetEndpointAttributesWithContext(aws.Context, *sns.SetEndpointAttributesInput, ...aws.Option) (*sns.SetEndpointAttributesOutput, error)
+	SetEndpointAttributesRequest(*sns.SetEndpointAttributesInput) (*aws.Request, *sns.SetEndpointAttributesOutput)
 
 	SetPlatformApplicationAttributes(*sns.SetPlatformApplicationAttributesInput) (*sns.SetPlatformApplicationAttributesOutput, error)
-	SetPlatformApplicationAttributesWithContext(aws.Context, *sns.SetPlatformApplicationAttributesInput, ...request.Option) (*sns.SetPlatformApplicationAttributesOutput, error)
-	SetPlatformApplicationAttributesRequest(*sns.SetPlatformApplicationAttributesInput) (*request.Request, *sns.SetPlatformApplicationAttributesOutput)
+	SetPlatformApplicationAttributesWithContext(aws.Context, *sns.SetPlatformApplicationAttributesInput, ...aws.Option) (*sns.SetPlatformApplicationAttributesOutput, error)
+	SetPlatformApplicationAttributesRequest(*sns.SetPlatformApplicationAttributesInput) (*aws.Request, *sns.SetPlatformApplicationAttributesOutput)
 
 	SetSMSAttributes(*sns.SetSMSAttributesInput) (*sns.SetSMSAttributesOutput, error)
-	SetSMSAttributesWithContext(aws.Context, *sns.SetSMSAttributesInput, ...request.Option) (*sns.SetSMSAttributesOutput, error)
-	SetSMSAttributesRequest(*sns.SetSMSAttributesInput) (*request.Request, *sns.SetSMSAttributesOutput)
+	SetSMSAttributesWithContext(aws.Context, *sns.SetSMSAttributesInput, ...aws.Option) (*sns.SetSMSAttributesOutput, error)
+	SetSMSAttributesRequest(*sns.SetSMSAttributesInput) (*aws.Request, *sns.SetSMSAttributesOutput)
 
 	SetSubscriptionAttributes(*sns.SetSubscriptionAttributesInput) (*sns.SetSubscriptionAttributesOutput, error)
-	SetSubscriptionAttributesWithContext(aws.Context, *sns.SetSubscriptionAttributesInput, ...request.Option) (*sns.SetSubscriptionAttributesOutput, error)
-	SetSubscriptionAttributesRequest(*sns.SetSubscriptionAttributesInput) (*request.Request, *sns.SetSubscriptionAttributesOutput)
+	SetSubscriptionAttributesWithContext(aws.Context, *sns.SetSubscriptionAttributesInput, ...aws.Option) (*sns.SetSubscriptionAttributesOutput, error)
+	SetSubscriptionAttributesRequest(*sns.SetSubscriptionAttributesInput) (*aws.Request, *sns.SetSubscriptionAttributesOutput)
 
 	SetTopicAttributes(*sns.SetTopicAttributesInput) (*sns.SetTopicAttributesOutput, error)
-	SetTopicAttributesWithContext(aws.Context, *sns.SetTopicAttributesInput, ...request.Option) (*sns.SetTopicAttributesOutput, error)
-	SetTopicAttributesRequest(*sns.SetTopicAttributesInput) (*request.Request, *sns.SetTopicAttributesOutput)
+	SetTopicAttributesWithContext(aws.Context, *sns.SetTopicAttributesInput, ...aws.Option) (*sns.SetTopicAttributesOutput, error)
+	SetTopicAttributesRequest(*sns.SetTopicAttributesInput) (*aws.Request, *sns.SetTopicAttributesOutput)
 
 	Subscribe(*sns.SubscribeInput) (*sns.SubscribeOutput, error)
-	SubscribeWithContext(aws.Context, *sns.SubscribeInput, ...request.Option) (*sns.SubscribeOutput, error)
-	SubscribeRequest(*sns.SubscribeInput) (*request.Request, *sns.SubscribeOutput)
+	SubscribeWithContext(aws.Context, *sns.SubscribeInput, ...aws.Option) (*sns.SubscribeOutput, error)
+	SubscribeRequest(*sns.SubscribeInput) (*aws.Request, *sns.SubscribeOutput)
 
 	Unsubscribe(*sns.UnsubscribeInput) (*sns.UnsubscribeOutput, error)
-	UnsubscribeWithContext(aws.Context, *sns.UnsubscribeInput, ...request.Option) (*sns.UnsubscribeOutput, error)
-	UnsubscribeRequest(*sns.UnsubscribeInput) (*request.Request, *sns.UnsubscribeOutput)
+	UnsubscribeWithContext(aws.Context, *sns.UnsubscribeInput, ...aws.Option) (*sns.UnsubscribeOutput, error)
+	UnsubscribeRequest(*sns.UnsubscribeInput) (*aws.Request, *sns.UnsubscribeOutput)
 }
 
 var _ SNSAPI = (*sns.SNS)(nil)

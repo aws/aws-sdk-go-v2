@@ -10,7 +10,6 @@ package appstreamiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/appstream"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := appstream.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := appstream.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,126 +64,126 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type AppStreamAPI interface {
 	AssociateFleet(*appstream.AssociateFleetInput) (*appstream.AssociateFleetOutput, error)
-	AssociateFleetWithContext(aws.Context, *appstream.AssociateFleetInput, ...request.Option) (*appstream.AssociateFleetOutput, error)
-	AssociateFleetRequest(*appstream.AssociateFleetInput) (*request.Request, *appstream.AssociateFleetOutput)
+	AssociateFleetWithContext(aws.Context, *appstream.AssociateFleetInput, ...aws.Option) (*appstream.AssociateFleetOutput, error)
+	AssociateFleetRequest(*appstream.AssociateFleetInput) (*aws.Request, *appstream.AssociateFleetOutput)
 
 	CreateDirectoryConfig(*appstream.CreateDirectoryConfigInput) (*appstream.CreateDirectoryConfigOutput, error)
-	CreateDirectoryConfigWithContext(aws.Context, *appstream.CreateDirectoryConfigInput, ...request.Option) (*appstream.CreateDirectoryConfigOutput, error)
-	CreateDirectoryConfigRequest(*appstream.CreateDirectoryConfigInput) (*request.Request, *appstream.CreateDirectoryConfigOutput)
+	CreateDirectoryConfigWithContext(aws.Context, *appstream.CreateDirectoryConfigInput, ...aws.Option) (*appstream.CreateDirectoryConfigOutput, error)
+	CreateDirectoryConfigRequest(*appstream.CreateDirectoryConfigInput) (*aws.Request, *appstream.CreateDirectoryConfigOutput)
 
 	CreateFleet(*appstream.CreateFleetInput) (*appstream.CreateFleetOutput, error)
-	CreateFleetWithContext(aws.Context, *appstream.CreateFleetInput, ...request.Option) (*appstream.CreateFleetOutput, error)
-	CreateFleetRequest(*appstream.CreateFleetInput) (*request.Request, *appstream.CreateFleetOutput)
+	CreateFleetWithContext(aws.Context, *appstream.CreateFleetInput, ...aws.Option) (*appstream.CreateFleetOutput, error)
+	CreateFleetRequest(*appstream.CreateFleetInput) (*aws.Request, *appstream.CreateFleetOutput)
 
 	CreateImageBuilder(*appstream.CreateImageBuilderInput) (*appstream.CreateImageBuilderOutput, error)
-	CreateImageBuilderWithContext(aws.Context, *appstream.CreateImageBuilderInput, ...request.Option) (*appstream.CreateImageBuilderOutput, error)
-	CreateImageBuilderRequest(*appstream.CreateImageBuilderInput) (*request.Request, *appstream.CreateImageBuilderOutput)
+	CreateImageBuilderWithContext(aws.Context, *appstream.CreateImageBuilderInput, ...aws.Option) (*appstream.CreateImageBuilderOutput, error)
+	CreateImageBuilderRequest(*appstream.CreateImageBuilderInput) (*aws.Request, *appstream.CreateImageBuilderOutput)
 
 	CreateImageBuilderStreamingURL(*appstream.CreateImageBuilderStreamingURLInput) (*appstream.CreateImageBuilderStreamingURLOutput, error)
-	CreateImageBuilderStreamingURLWithContext(aws.Context, *appstream.CreateImageBuilderStreamingURLInput, ...request.Option) (*appstream.CreateImageBuilderStreamingURLOutput, error)
-	CreateImageBuilderStreamingURLRequest(*appstream.CreateImageBuilderStreamingURLInput) (*request.Request, *appstream.CreateImageBuilderStreamingURLOutput)
+	CreateImageBuilderStreamingURLWithContext(aws.Context, *appstream.CreateImageBuilderStreamingURLInput, ...aws.Option) (*appstream.CreateImageBuilderStreamingURLOutput, error)
+	CreateImageBuilderStreamingURLRequest(*appstream.CreateImageBuilderStreamingURLInput) (*aws.Request, *appstream.CreateImageBuilderStreamingURLOutput)
 
 	CreateStack(*appstream.CreateStackInput) (*appstream.CreateStackOutput, error)
-	CreateStackWithContext(aws.Context, *appstream.CreateStackInput, ...request.Option) (*appstream.CreateStackOutput, error)
-	CreateStackRequest(*appstream.CreateStackInput) (*request.Request, *appstream.CreateStackOutput)
+	CreateStackWithContext(aws.Context, *appstream.CreateStackInput, ...aws.Option) (*appstream.CreateStackOutput, error)
+	CreateStackRequest(*appstream.CreateStackInput) (*aws.Request, *appstream.CreateStackOutput)
 
 	CreateStreamingURL(*appstream.CreateStreamingURLInput) (*appstream.CreateStreamingURLOutput, error)
-	CreateStreamingURLWithContext(aws.Context, *appstream.CreateStreamingURLInput, ...request.Option) (*appstream.CreateStreamingURLOutput, error)
-	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) (*request.Request, *appstream.CreateStreamingURLOutput)
+	CreateStreamingURLWithContext(aws.Context, *appstream.CreateStreamingURLInput, ...aws.Option) (*appstream.CreateStreamingURLOutput, error)
+	CreateStreamingURLRequest(*appstream.CreateStreamingURLInput) (*aws.Request, *appstream.CreateStreamingURLOutput)
 
 	DeleteDirectoryConfig(*appstream.DeleteDirectoryConfigInput) (*appstream.DeleteDirectoryConfigOutput, error)
-	DeleteDirectoryConfigWithContext(aws.Context, *appstream.DeleteDirectoryConfigInput, ...request.Option) (*appstream.DeleteDirectoryConfigOutput, error)
-	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) (*request.Request, *appstream.DeleteDirectoryConfigOutput)
+	DeleteDirectoryConfigWithContext(aws.Context, *appstream.DeleteDirectoryConfigInput, ...aws.Option) (*appstream.DeleteDirectoryConfigOutput, error)
+	DeleteDirectoryConfigRequest(*appstream.DeleteDirectoryConfigInput) (*aws.Request, *appstream.DeleteDirectoryConfigOutput)
 
 	DeleteFleet(*appstream.DeleteFleetInput) (*appstream.DeleteFleetOutput, error)
-	DeleteFleetWithContext(aws.Context, *appstream.DeleteFleetInput, ...request.Option) (*appstream.DeleteFleetOutput, error)
-	DeleteFleetRequest(*appstream.DeleteFleetInput) (*request.Request, *appstream.DeleteFleetOutput)
+	DeleteFleetWithContext(aws.Context, *appstream.DeleteFleetInput, ...aws.Option) (*appstream.DeleteFleetOutput, error)
+	DeleteFleetRequest(*appstream.DeleteFleetInput) (*aws.Request, *appstream.DeleteFleetOutput)
 
 	DeleteImage(*appstream.DeleteImageInput) (*appstream.DeleteImageOutput, error)
-	DeleteImageWithContext(aws.Context, *appstream.DeleteImageInput, ...request.Option) (*appstream.DeleteImageOutput, error)
-	DeleteImageRequest(*appstream.DeleteImageInput) (*request.Request, *appstream.DeleteImageOutput)
+	DeleteImageWithContext(aws.Context, *appstream.DeleteImageInput, ...aws.Option) (*appstream.DeleteImageOutput, error)
+	DeleteImageRequest(*appstream.DeleteImageInput) (*aws.Request, *appstream.DeleteImageOutput)
 
 	DeleteImageBuilder(*appstream.DeleteImageBuilderInput) (*appstream.DeleteImageBuilderOutput, error)
-	DeleteImageBuilderWithContext(aws.Context, *appstream.DeleteImageBuilderInput, ...request.Option) (*appstream.DeleteImageBuilderOutput, error)
-	DeleteImageBuilderRequest(*appstream.DeleteImageBuilderInput) (*request.Request, *appstream.DeleteImageBuilderOutput)
+	DeleteImageBuilderWithContext(aws.Context, *appstream.DeleteImageBuilderInput, ...aws.Option) (*appstream.DeleteImageBuilderOutput, error)
+	DeleteImageBuilderRequest(*appstream.DeleteImageBuilderInput) (*aws.Request, *appstream.DeleteImageBuilderOutput)
 
 	DeleteStack(*appstream.DeleteStackInput) (*appstream.DeleteStackOutput, error)
-	DeleteStackWithContext(aws.Context, *appstream.DeleteStackInput, ...request.Option) (*appstream.DeleteStackOutput, error)
-	DeleteStackRequest(*appstream.DeleteStackInput) (*request.Request, *appstream.DeleteStackOutput)
+	DeleteStackWithContext(aws.Context, *appstream.DeleteStackInput, ...aws.Option) (*appstream.DeleteStackOutput, error)
+	DeleteStackRequest(*appstream.DeleteStackInput) (*aws.Request, *appstream.DeleteStackOutput)
 
 	DescribeDirectoryConfigs(*appstream.DescribeDirectoryConfigsInput) (*appstream.DescribeDirectoryConfigsOutput, error)
-	DescribeDirectoryConfigsWithContext(aws.Context, *appstream.DescribeDirectoryConfigsInput, ...request.Option) (*appstream.DescribeDirectoryConfigsOutput, error)
-	DescribeDirectoryConfigsRequest(*appstream.DescribeDirectoryConfigsInput) (*request.Request, *appstream.DescribeDirectoryConfigsOutput)
+	DescribeDirectoryConfigsWithContext(aws.Context, *appstream.DescribeDirectoryConfigsInput, ...aws.Option) (*appstream.DescribeDirectoryConfigsOutput, error)
+	DescribeDirectoryConfigsRequest(*appstream.DescribeDirectoryConfigsInput) (*aws.Request, *appstream.DescribeDirectoryConfigsOutput)
 
 	DescribeFleets(*appstream.DescribeFleetsInput) (*appstream.DescribeFleetsOutput, error)
-	DescribeFleetsWithContext(aws.Context, *appstream.DescribeFleetsInput, ...request.Option) (*appstream.DescribeFleetsOutput, error)
-	DescribeFleetsRequest(*appstream.DescribeFleetsInput) (*request.Request, *appstream.DescribeFleetsOutput)
+	DescribeFleetsWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.Option) (*appstream.DescribeFleetsOutput, error)
+	DescribeFleetsRequest(*appstream.DescribeFleetsInput) (*aws.Request, *appstream.DescribeFleetsOutput)
 
 	DescribeImageBuilders(*appstream.DescribeImageBuildersInput) (*appstream.DescribeImageBuildersOutput, error)
-	DescribeImageBuildersWithContext(aws.Context, *appstream.DescribeImageBuildersInput, ...request.Option) (*appstream.DescribeImageBuildersOutput, error)
-	DescribeImageBuildersRequest(*appstream.DescribeImageBuildersInput) (*request.Request, *appstream.DescribeImageBuildersOutput)
+	DescribeImageBuildersWithContext(aws.Context, *appstream.DescribeImageBuildersInput, ...aws.Option) (*appstream.DescribeImageBuildersOutput, error)
+	DescribeImageBuildersRequest(*appstream.DescribeImageBuildersInput) (*aws.Request, *appstream.DescribeImageBuildersOutput)
 
 	DescribeImages(*appstream.DescribeImagesInput) (*appstream.DescribeImagesOutput, error)
-	DescribeImagesWithContext(aws.Context, *appstream.DescribeImagesInput, ...request.Option) (*appstream.DescribeImagesOutput, error)
-	DescribeImagesRequest(*appstream.DescribeImagesInput) (*request.Request, *appstream.DescribeImagesOutput)
+	DescribeImagesWithContext(aws.Context, *appstream.DescribeImagesInput, ...aws.Option) (*appstream.DescribeImagesOutput, error)
+	DescribeImagesRequest(*appstream.DescribeImagesInput) (*aws.Request, *appstream.DescribeImagesOutput)
 
 	DescribeSessions(*appstream.DescribeSessionsInput) (*appstream.DescribeSessionsOutput, error)
-	DescribeSessionsWithContext(aws.Context, *appstream.DescribeSessionsInput, ...request.Option) (*appstream.DescribeSessionsOutput, error)
-	DescribeSessionsRequest(*appstream.DescribeSessionsInput) (*request.Request, *appstream.DescribeSessionsOutput)
+	DescribeSessionsWithContext(aws.Context, *appstream.DescribeSessionsInput, ...aws.Option) (*appstream.DescribeSessionsOutput, error)
+	DescribeSessionsRequest(*appstream.DescribeSessionsInput) (*aws.Request, *appstream.DescribeSessionsOutput)
 
 	DescribeStacks(*appstream.DescribeStacksInput) (*appstream.DescribeStacksOutput, error)
-	DescribeStacksWithContext(aws.Context, *appstream.DescribeStacksInput, ...request.Option) (*appstream.DescribeStacksOutput, error)
-	DescribeStacksRequest(*appstream.DescribeStacksInput) (*request.Request, *appstream.DescribeStacksOutput)
+	DescribeStacksWithContext(aws.Context, *appstream.DescribeStacksInput, ...aws.Option) (*appstream.DescribeStacksOutput, error)
+	DescribeStacksRequest(*appstream.DescribeStacksInput) (*aws.Request, *appstream.DescribeStacksOutput)
 
 	DisassociateFleet(*appstream.DisassociateFleetInput) (*appstream.DisassociateFleetOutput, error)
-	DisassociateFleetWithContext(aws.Context, *appstream.DisassociateFleetInput, ...request.Option) (*appstream.DisassociateFleetOutput, error)
-	DisassociateFleetRequest(*appstream.DisassociateFleetInput) (*request.Request, *appstream.DisassociateFleetOutput)
+	DisassociateFleetWithContext(aws.Context, *appstream.DisassociateFleetInput, ...aws.Option) (*appstream.DisassociateFleetOutput, error)
+	DisassociateFleetRequest(*appstream.DisassociateFleetInput) (*aws.Request, *appstream.DisassociateFleetOutput)
 
 	ExpireSession(*appstream.ExpireSessionInput) (*appstream.ExpireSessionOutput, error)
-	ExpireSessionWithContext(aws.Context, *appstream.ExpireSessionInput, ...request.Option) (*appstream.ExpireSessionOutput, error)
-	ExpireSessionRequest(*appstream.ExpireSessionInput) (*request.Request, *appstream.ExpireSessionOutput)
+	ExpireSessionWithContext(aws.Context, *appstream.ExpireSessionInput, ...aws.Option) (*appstream.ExpireSessionOutput, error)
+	ExpireSessionRequest(*appstream.ExpireSessionInput) (*aws.Request, *appstream.ExpireSessionOutput)
 
 	ListAssociatedFleets(*appstream.ListAssociatedFleetsInput) (*appstream.ListAssociatedFleetsOutput, error)
-	ListAssociatedFleetsWithContext(aws.Context, *appstream.ListAssociatedFleetsInput, ...request.Option) (*appstream.ListAssociatedFleetsOutput, error)
-	ListAssociatedFleetsRequest(*appstream.ListAssociatedFleetsInput) (*request.Request, *appstream.ListAssociatedFleetsOutput)
+	ListAssociatedFleetsWithContext(aws.Context, *appstream.ListAssociatedFleetsInput, ...aws.Option) (*appstream.ListAssociatedFleetsOutput, error)
+	ListAssociatedFleetsRequest(*appstream.ListAssociatedFleetsInput) (*aws.Request, *appstream.ListAssociatedFleetsOutput)
 
 	ListAssociatedStacks(*appstream.ListAssociatedStacksInput) (*appstream.ListAssociatedStacksOutput, error)
-	ListAssociatedStacksWithContext(aws.Context, *appstream.ListAssociatedStacksInput, ...request.Option) (*appstream.ListAssociatedStacksOutput, error)
-	ListAssociatedStacksRequest(*appstream.ListAssociatedStacksInput) (*request.Request, *appstream.ListAssociatedStacksOutput)
+	ListAssociatedStacksWithContext(aws.Context, *appstream.ListAssociatedStacksInput, ...aws.Option) (*appstream.ListAssociatedStacksOutput, error)
+	ListAssociatedStacksRequest(*appstream.ListAssociatedStacksInput) (*aws.Request, *appstream.ListAssociatedStacksOutput)
 
 	StartFleet(*appstream.StartFleetInput) (*appstream.StartFleetOutput, error)
-	StartFleetWithContext(aws.Context, *appstream.StartFleetInput, ...request.Option) (*appstream.StartFleetOutput, error)
-	StartFleetRequest(*appstream.StartFleetInput) (*request.Request, *appstream.StartFleetOutput)
+	StartFleetWithContext(aws.Context, *appstream.StartFleetInput, ...aws.Option) (*appstream.StartFleetOutput, error)
+	StartFleetRequest(*appstream.StartFleetInput) (*aws.Request, *appstream.StartFleetOutput)
 
 	StartImageBuilder(*appstream.StartImageBuilderInput) (*appstream.StartImageBuilderOutput, error)
-	StartImageBuilderWithContext(aws.Context, *appstream.StartImageBuilderInput, ...request.Option) (*appstream.StartImageBuilderOutput, error)
-	StartImageBuilderRequest(*appstream.StartImageBuilderInput) (*request.Request, *appstream.StartImageBuilderOutput)
+	StartImageBuilderWithContext(aws.Context, *appstream.StartImageBuilderInput, ...aws.Option) (*appstream.StartImageBuilderOutput, error)
+	StartImageBuilderRequest(*appstream.StartImageBuilderInput) (*aws.Request, *appstream.StartImageBuilderOutput)
 
 	StopFleet(*appstream.StopFleetInput) (*appstream.StopFleetOutput, error)
-	StopFleetWithContext(aws.Context, *appstream.StopFleetInput, ...request.Option) (*appstream.StopFleetOutput, error)
-	StopFleetRequest(*appstream.StopFleetInput) (*request.Request, *appstream.StopFleetOutput)
+	StopFleetWithContext(aws.Context, *appstream.StopFleetInput, ...aws.Option) (*appstream.StopFleetOutput, error)
+	StopFleetRequest(*appstream.StopFleetInput) (*aws.Request, *appstream.StopFleetOutput)
 
 	StopImageBuilder(*appstream.StopImageBuilderInput) (*appstream.StopImageBuilderOutput, error)
-	StopImageBuilderWithContext(aws.Context, *appstream.StopImageBuilderInput, ...request.Option) (*appstream.StopImageBuilderOutput, error)
-	StopImageBuilderRequest(*appstream.StopImageBuilderInput) (*request.Request, *appstream.StopImageBuilderOutput)
+	StopImageBuilderWithContext(aws.Context, *appstream.StopImageBuilderInput, ...aws.Option) (*appstream.StopImageBuilderOutput, error)
+	StopImageBuilderRequest(*appstream.StopImageBuilderInput) (*aws.Request, *appstream.StopImageBuilderOutput)
 
 	UpdateDirectoryConfig(*appstream.UpdateDirectoryConfigInput) (*appstream.UpdateDirectoryConfigOutput, error)
-	UpdateDirectoryConfigWithContext(aws.Context, *appstream.UpdateDirectoryConfigInput, ...request.Option) (*appstream.UpdateDirectoryConfigOutput, error)
-	UpdateDirectoryConfigRequest(*appstream.UpdateDirectoryConfigInput) (*request.Request, *appstream.UpdateDirectoryConfigOutput)
+	UpdateDirectoryConfigWithContext(aws.Context, *appstream.UpdateDirectoryConfigInput, ...aws.Option) (*appstream.UpdateDirectoryConfigOutput, error)
+	UpdateDirectoryConfigRequest(*appstream.UpdateDirectoryConfigInput) (*aws.Request, *appstream.UpdateDirectoryConfigOutput)
 
 	UpdateFleet(*appstream.UpdateFleetInput) (*appstream.UpdateFleetOutput, error)
-	UpdateFleetWithContext(aws.Context, *appstream.UpdateFleetInput, ...request.Option) (*appstream.UpdateFleetOutput, error)
-	UpdateFleetRequest(*appstream.UpdateFleetInput) (*request.Request, *appstream.UpdateFleetOutput)
+	UpdateFleetWithContext(aws.Context, *appstream.UpdateFleetInput, ...aws.Option) (*appstream.UpdateFleetOutput, error)
+	UpdateFleetRequest(*appstream.UpdateFleetInput) (*aws.Request, *appstream.UpdateFleetOutput)
 
 	UpdateStack(*appstream.UpdateStackInput) (*appstream.UpdateStackOutput, error)
-	UpdateStackWithContext(aws.Context, *appstream.UpdateStackInput, ...request.Option) (*appstream.UpdateStackOutput, error)
-	UpdateStackRequest(*appstream.UpdateStackInput) (*request.Request, *appstream.UpdateStackOutput)
+	UpdateStackWithContext(aws.Context, *appstream.UpdateStackInput, ...aws.Option) (*appstream.UpdateStackOutput, error)
+	UpdateStackRequest(*appstream.UpdateStackInput) (*aws.Request, *appstream.UpdateStackOutput)
 
 	WaitUntilFleetStarted(*appstream.DescribeFleetsInput) error
-	WaitUntilFleetStartedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...request.WaiterOption) error
+	WaitUntilFleetStartedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
 
 	WaitUntilFleetStopped(*appstream.DescribeFleetsInput) error
-	WaitUntilFleetStoppedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...request.WaiterOption) error
+	WaitUntilFleetStoppedWithContext(aws.Context, *appstream.DescribeFleetsInput, ...aws.WaiterOption) error
 }
 
 var _ AppStreamAPI = (*appstream.AppStream)(nil)

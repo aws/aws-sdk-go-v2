@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateTeamMember = "AssociateTeamMember"
 
-// AssociateTeamMemberRequest generates a "aws/request.Request" representing the
+// AssociateTeamMemberRequest generates a "aws.Request" representing the
 // client's request for the AssociateTeamMember operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opAssociateTeamMember = "AssociateTeamMember"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMember
-func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) (req *request.Request, output *AssociateTeamMemberOutput) {
-	op := &request.Operation{
+func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) (req *aws.Request, output *AssociateTeamMemberOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateTeamMember,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -101,7 +100,7 @@ func (c *CodeStar) AssociateTeamMember(input *AssociateTeamMemberInput) (*Associ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) AssociateTeamMemberWithContext(ctx aws.Context, input *AssociateTeamMemberInput, opts ...request.Option) (*AssociateTeamMemberOutput, error) {
+func (c *CodeStar) AssociateTeamMemberWithContext(ctx aws.Context, input *AssociateTeamMemberInput, opts ...aws.Option) (*AssociateTeamMemberOutput, error) {
 	req, out := c.AssociateTeamMemberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -110,7 +109,7 @@ func (c *CodeStar) AssociateTeamMemberWithContext(ctx aws.Context, input *Associ
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws/request.Request" representing the
+// CreateProjectRequest generates a "aws.Request" representing the
 // client's request for the CreateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -134,8 +133,8 @@ const opCreateProject = "CreateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProject
-func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) (req *request.Request, output *CreateProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -203,7 +202,7 @@ func (c *CodeStar) CreateProject(input *CreateProjectInput) (*CreateProjectOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...request.Option) (*CreateProjectOutput, error) {
+func (c *CodeStar) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
 	req, out := c.CreateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -212,7 +211,7 @@ func (c *CodeStar) CreateProjectWithContext(ctx aws.Context, input *CreateProjec
 
 const opCreateUserProfile = "CreateUserProfile"
 
-// CreateUserProfileRequest generates a "aws/request.Request" representing the
+// CreateUserProfileRequest generates a "aws.Request" representing the
 // client's request for the CreateUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -236,8 +235,8 @@ const opCreateUserProfile = "CreateUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateUserProfile
-func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) (req *request.Request, output *CreateUserProfileOutput) {
-	op := &request.Operation{
+func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) (req *aws.Request, output *CreateUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -291,7 +290,7 @@ func (c *CodeStar) CreateUserProfile(input *CreateUserProfileInput) (*CreateUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) CreateUserProfileWithContext(ctx aws.Context, input *CreateUserProfileInput, opts ...request.Option) (*CreateUserProfileOutput, error) {
+func (c *CodeStar) CreateUserProfileWithContext(ctx aws.Context, input *CreateUserProfileInput, opts ...aws.Option) (*CreateUserProfileOutput, error) {
 	req, out := c.CreateUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -300,7 +299,7 @@ func (c *CodeStar) CreateUserProfileWithContext(ctx aws.Context, input *CreateUs
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws/request.Request" representing the
+// DeleteProjectRequest generates a "aws.Request" representing the
 // client's request for the DeleteProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -324,8 +323,8 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteProject
-func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) (req *request.Request, output *DeleteProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -379,7 +378,7 @@ func (c *CodeStar) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...request.Option) (*DeleteProjectOutput, error) {
+func (c *CodeStar) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
 	req, out := c.DeleteProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -388,7 +387,7 @@ func (c *CodeStar) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjec
 
 const opDeleteUserProfile = "DeleteUserProfile"
 
-// DeleteUserProfileRequest generates a "aws/request.Request" representing the
+// DeleteUserProfileRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -412,8 +411,8 @@ const opDeleteUserProfile = "DeleteUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DeleteUserProfile
-func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *request.Request, output *DeleteUserProfileOutput) {
-	op := &request.Operation{
+func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *aws.Request, output *DeleteUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -461,7 +460,7 @@ func (c *CodeStar) DeleteUserProfile(input *DeleteUserProfileInput) (*DeleteUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUserProfileInput, opts ...request.Option) (*DeleteUserProfileOutput, error) {
+func (c *CodeStar) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUserProfileInput, opts ...aws.Option) (*DeleteUserProfileOutput, error) {
 	req, out := c.DeleteUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -470,7 +469,7 @@ func (c *CodeStar) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUs
 
 const opDescribeProject = "DescribeProject"
 
-// DescribeProjectRequest generates a "aws/request.Request" representing the
+// DescribeProjectRequest generates a "aws.Request" representing the
 // client's request for the DescribeProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -494,8 +493,8 @@ const opDescribeProject = "DescribeProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeProject
-func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) (req *request.Request, output *DescribeProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) (req *aws.Request, output *DescribeProjectOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -553,7 +552,7 @@ func (c *CodeStar) DescribeProject(input *DescribeProjectInput) (*DescribeProjec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) DescribeProjectWithContext(ctx aws.Context, input *DescribeProjectInput, opts ...request.Option) (*DescribeProjectOutput, error) {
+func (c *CodeStar) DescribeProjectWithContext(ctx aws.Context, input *DescribeProjectInput, opts ...aws.Option) (*DescribeProjectOutput, error) {
 	req, out := c.DescribeProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -562,7 +561,7 @@ func (c *CodeStar) DescribeProjectWithContext(ctx aws.Context, input *DescribePr
 
 const opDescribeUserProfile = "DescribeUserProfile"
 
-// DescribeUserProfileRequest generates a "aws/request.Request" representing the
+// DescribeUserProfileRequest generates a "aws.Request" representing the
 // client's request for the DescribeUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -586,8 +585,8 @@ const opDescribeUserProfile = "DescribeUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DescribeUserProfile
-func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) (req *request.Request, output *DescribeUserProfileOutput) {
-	op := &request.Operation{
+func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) (req *aws.Request, output *DescribeUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -635,7 +634,7 @@ func (c *CodeStar) DescribeUserProfile(input *DescribeUserProfileInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) DescribeUserProfileWithContext(ctx aws.Context, input *DescribeUserProfileInput, opts ...request.Option) (*DescribeUserProfileOutput, error) {
+func (c *CodeStar) DescribeUserProfileWithContext(ctx aws.Context, input *DescribeUserProfileInput, opts ...aws.Option) (*DescribeUserProfileOutput, error) {
 	req, out := c.DescribeUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -644,7 +643,7 @@ func (c *CodeStar) DescribeUserProfileWithContext(ctx aws.Context, input *Descri
 
 const opDisassociateTeamMember = "DisassociateTeamMember"
 
-// DisassociateTeamMemberRequest generates a "aws/request.Request" representing the
+// DisassociateTeamMemberRequest generates a "aws.Request" representing the
 // client's request for the DisassociateTeamMember operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -668,8 +667,8 @@ const opDisassociateTeamMember = "DisassociateTeamMember"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/DisassociateTeamMember
-func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInput) (req *request.Request, output *DisassociateTeamMemberOutput) {
-	op := &request.Operation{
+func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberInput) (req *aws.Request, output *DisassociateTeamMemberOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateTeamMember,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -727,7 +726,7 @@ func (c *CodeStar) DisassociateTeamMember(input *DisassociateTeamMemberInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) DisassociateTeamMemberWithContext(ctx aws.Context, input *DisassociateTeamMemberInput, opts ...request.Option) (*DisassociateTeamMemberOutput, error) {
+func (c *CodeStar) DisassociateTeamMemberWithContext(ctx aws.Context, input *DisassociateTeamMemberInput, opts ...aws.Option) (*DisassociateTeamMemberOutput, error) {
 	req, out := c.DisassociateTeamMemberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -736,7 +735,7 @@ func (c *CodeStar) DisassociateTeamMemberWithContext(ctx aws.Context, input *Dis
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws/request.Request" representing the
+// ListProjectsRequest generates a "aws.Request" representing the
 // client's request for the ListProjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -760,8 +759,8 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListProjects
-func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) (req *request.Request, output *ListProjectsOutput) {
-	op := &request.Operation{
+func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -809,7 +808,7 @@ func (c *CodeStar) ListProjects(input *ListProjectsInput) (*ListProjectsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...request.Option) (*ListProjectsOutput, error) {
+func (c *CodeStar) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
 	req, out := c.ListProjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -818,7 +817,7 @@ func (c *CodeStar) ListProjectsWithContext(ctx aws.Context, input *ListProjectsI
 
 const opListResources = "ListResources"
 
-// ListResourcesRequest generates a "aws/request.Request" representing the
+// ListResourcesRequest generates a "aws.Request" representing the
 // client's request for the ListResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -842,8 +841,8 @@ const opListResources = "ListResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListResources
-func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) (req *request.Request, output *ListResourcesOutput) {
-	op := &request.Operation{
+func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) (req *aws.Request, output *ListResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opListResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -894,7 +893,7 @@ func (c *CodeStar) ListResources(input *ListResourcesInput) (*ListResourcesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) ListResourcesWithContext(ctx aws.Context, input *ListResourcesInput, opts ...request.Option) (*ListResourcesOutput, error) {
+func (c *CodeStar) ListResourcesWithContext(ctx aws.Context, input *ListResourcesInput, opts ...aws.Option) (*ListResourcesOutput, error) {
 	req, out := c.ListResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -903,7 +902,7 @@ func (c *CodeStar) ListResourcesWithContext(ctx aws.Context, input *ListResource
 
 const opListTagsForProject = "ListTagsForProject"
 
-// ListTagsForProjectRequest generates a "aws/request.Request" representing the
+// ListTagsForProjectRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -927,8 +926,8 @@ const opListTagsForProject = "ListTagsForProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTagsForProject
-func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) (req *request.Request, output *ListTagsForProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) (req *aws.Request, output *ListTagsForProjectOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -979,7 +978,7 @@ func (c *CodeStar) ListTagsForProject(input *ListTagsForProjectInput) (*ListTags
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) ListTagsForProjectWithContext(ctx aws.Context, input *ListTagsForProjectInput, opts ...request.Option) (*ListTagsForProjectOutput, error) {
+func (c *CodeStar) ListTagsForProjectWithContext(ctx aws.Context, input *ListTagsForProjectInput, opts ...aws.Option) (*ListTagsForProjectOutput, error) {
 	req, out := c.ListTagsForProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -988,7 +987,7 @@ func (c *CodeStar) ListTagsForProjectWithContext(ctx aws.Context, input *ListTag
 
 const opListTeamMembers = "ListTeamMembers"
 
-// ListTeamMembersRequest generates a "aws/request.Request" representing the
+// ListTeamMembersRequest generates a "aws.Request" representing the
 // client's request for the ListTeamMembers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1012,8 +1011,8 @@ const opListTeamMembers = "ListTeamMembers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListTeamMembers
-func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) (req *request.Request, output *ListTeamMembersOutput) {
-	op := &request.Operation{
+func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) (req *aws.Request, output *ListTeamMembersOutput) {
+	op := &aws.Operation{
 		Name:       opListTeamMembers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1064,7 +1063,7 @@ func (c *CodeStar) ListTeamMembers(input *ListTeamMembersInput) (*ListTeamMember
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) ListTeamMembersWithContext(ctx aws.Context, input *ListTeamMembersInput, opts ...request.Option) (*ListTeamMembersOutput, error) {
+func (c *CodeStar) ListTeamMembersWithContext(ctx aws.Context, input *ListTeamMembersInput, opts ...aws.Option) (*ListTeamMembersOutput, error) {
 	req, out := c.ListTeamMembersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1073,7 +1072,7 @@ func (c *CodeStar) ListTeamMembersWithContext(ctx aws.Context, input *ListTeamMe
 
 const opListUserProfiles = "ListUserProfiles"
 
-// ListUserProfilesRequest generates a "aws/request.Request" representing the
+// ListUserProfilesRequest generates a "aws.Request" representing the
 // client's request for the ListUserProfiles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1097,8 +1096,8 @@ const opListUserProfiles = "ListUserProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/ListUserProfiles
-func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) (req *request.Request, output *ListUserProfilesOutput) {
-	op := &request.Operation{
+func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) (req *aws.Request, output *ListUserProfilesOutput) {
+	op := &aws.Operation{
 		Name:       opListUserProfiles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1146,7 +1145,7 @@ func (c *CodeStar) ListUserProfiles(input *ListUserProfilesInput) (*ListUserProf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) ListUserProfilesWithContext(ctx aws.Context, input *ListUserProfilesInput, opts ...request.Option) (*ListUserProfilesOutput, error) {
+func (c *CodeStar) ListUserProfilesWithContext(ctx aws.Context, input *ListUserProfilesInput, opts ...aws.Option) (*ListUserProfilesOutput, error) {
 	req, out := c.ListUserProfilesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1155,7 +1154,7 @@ func (c *CodeStar) ListUserProfilesWithContext(ctx aws.Context, input *ListUserP
 
 const opTagProject = "TagProject"
 
-// TagProjectRequest generates a "aws/request.Request" representing the
+// TagProjectRequest generates a "aws.Request" representing the
 // client's request for the TagProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1179,8 +1178,8 @@ const opTagProject = "TagProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/TagProject
-func (c *CodeStar) TagProjectRequest(input *TagProjectInput) (req *request.Request, output *TagProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) TagProjectRequest(input *TagProjectInput) (req *aws.Request, output *TagProjectOutput) {
+	op := &aws.Operation{
 		Name:       opTagProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1235,7 +1234,7 @@ func (c *CodeStar) TagProject(input *TagProjectInput) (*TagProjectOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) TagProjectWithContext(ctx aws.Context, input *TagProjectInput, opts ...request.Option) (*TagProjectOutput, error) {
+func (c *CodeStar) TagProjectWithContext(ctx aws.Context, input *TagProjectInput, opts ...aws.Option) (*TagProjectOutput, error) {
 	req, out := c.TagProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1244,7 +1243,7 @@ func (c *CodeStar) TagProjectWithContext(ctx aws.Context, input *TagProjectInput
 
 const opUntagProject = "UntagProject"
 
-// UntagProjectRequest generates a "aws/request.Request" representing the
+// UntagProjectRequest generates a "aws.Request" representing the
 // client's request for the UntagProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1268,8 +1267,8 @@ const opUntagProject = "UntagProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UntagProject
-func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) (req *request.Request, output *UntagProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) (req *aws.Request, output *UntagProjectOutput) {
+	op := &aws.Operation{
 		Name:       opUntagProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1324,7 +1323,7 @@ func (c *CodeStar) UntagProject(input *UntagProjectInput) (*UntagProjectOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) UntagProjectWithContext(ctx aws.Context, input *UntagProjectInput, opts ...request.Option) (*UntagProjectOutput, error) {
+func (c *CodeStar) UntagProjectWithContext(ctx aws.Context, input *UntagProjectInput, opts ...aws.Option) (*UntagProjectOutput, error) {
 	req, out := c.UntagProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1333,7 +1332,7 @@ func (c *CodeStar) UntagProjectWithContext(ctx aws.Context, input *UntagProjectI
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws/request.Request" representing the
+// UpdateProjectRequest generates a "aws.Request" representing the
 // client's request for the UpdateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1357,8 +1356,8 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateProject
-func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) (req *request.Request, output *UpdateProjectOutput) {
-	op := &request.Operation{
+func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1406,7 +1405,7 @@ func (c *CodeStar) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...request.Option) (*UpdateProjectOutput, error) {
+func (c *CodeStar) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
 	req, out := c.UpdateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1415,7 +1414,7 @@ func (c *CodeStar) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjec
 
 const opUpdateTeamMember = "UpdateTeamMember"
 
-// UpdateTeamMemberRequest generates a "aws/request.Request" representing the
+// UpdateTeamMemberRequest generates a "aws.Request" representing the
 // client's request for the UpdateTeamMember operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1439,8 +1438,8 @@ const opUpdateTeamMember = "UpdateTeamMember"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateTeamMember
-func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) (req *request.Request, output *UpdateTeamMemberOutput) {
-	op := &request.Operation{
+func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) (req *aws.Request, output *UpdateTeamMemberOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTeamMember,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1506,7 +1505,7 @@ func (c *CodeStar) UpdateTeamMember(input *UpdateTeamMemberInput) (*UpdateTeamMe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) UpdateTeamMemberWithContext(ctx aws.Context, input *UpdateTeamMemberInput, opts ...request.Option) (*UpdateTeamMemberOutput, error) {
+func (c *CodeStar) UpdateTeamMemberWithContext(ctx aws.Context, input *UpdateTeamMemberInput, opts ...aws.Option) (*UpdateTeamMemberOutput, error) {
 	req, out := c.UpdateTeamMemberRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1515,7 +1514,7 @@ func (c *CodeStar) UpdateTeamMemberWithContext(ctx aws.Context, input *UpdateTea
 
 const opUpdateUserProfile = "UpdateUserProfile"
 
-// UpdateUserProfileRequest generates a "aws/request.Request" representing the
+// UpdateUserProfileRequest generates a "aws.Request" representing the
 // client's request for the UpdateUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1539,8 +1538,8 @@ const opUpdateUserProfile = "UpdateUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/UpdateUserProfile
-func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *request.Request, output *UpdateUserProfileOutput) {
-	op := &request.Operation{
+func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *aws.Request, output *UpdateUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1590,7 +1589,7 @@ func (c *CodeStar) UpdateUserProfile(input *UpdateUserProfileInput) (*UpdateUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CodeStar) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUserProfileInput, opts ...request.Option) (*UpdateUserProfileOutput, error) {
+func (c *CodeStar) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUserProfileInput, opts ...aws.Option) (*UpdateUserProfileOutput, error) {
 	req, out := c.UpdateUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1640,24 +1639,24 @@ func (s AssociateTeamMemberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateTeamMemberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateTeamMemberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateTeamMemberInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
 	if s.ProjectRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectRole"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectRole"))
 	}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1754,21 +1753,21 @@ func (s CreateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProjectInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1895,24 +1894,24 @@ func (s CreateUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserProfileInput"}
 	if s.DisplayName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DisplayName"))
+		invalidParams.Add(aws.NewErrParamRequired("DisplayName"))
 	}
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DisplayName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
 	if s.EmailAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("EmailAddress"))
+		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailAddress", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 3))
 	}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2051,15 +2050,15 @@ func (s DeleteProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2142,12 +2141,12 @@ func (s DeleteUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserProfileInput"}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2210,12 +2209,12 @@ func (s DescribeProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProjectInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2341,12 +2340,12 @@ func (s DescribeUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUserProfileInput"}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2476,18 +2475,18 @@ func (s DisassociateTeamMemberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateTeamMemberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateTeamMemberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateTeamMemberInput"}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2547,12 +2546,12 @@ func (s ListProjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProjectsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2638,18 +2637,18 @@ func (s ListResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourcesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2738,18 +2737,18 @@ func (s ListTagsForProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForProjectInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2838,18 +2837,18 @@ func (s ListTeamMembersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTeamMembersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTeamMembersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTeamMembersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2936,12 +2935,12 @@ func (s ListUserProfilesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUserProfilesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUserProfilesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUserProfilesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3086,15 +3085,15 @@ func (s TagProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagProjectInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3216,15 +3215,15 @@ func (s UntagProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagProjectInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3288,15 +3287,15 @@ func (s UpdateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 2))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3377,18 +3376,18 @@ func (s UpdateTeamMemberInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTeamMemberInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTeamMemberInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTeamMemberInput"}
 	if s.ProjectId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectId"))
 	}
 	if s.ProjectId != nil && len(*s.ProjectId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectId", 2))
 	}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3500,18 +3499,18 @@ func (s UpdateUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserProfileInput"}
 	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DisplayName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
 	}
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailAddress", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 3))
 	}
 	if s.UserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("UserArn"))
 	}
 	if s.UserArn != nil && len(*s.UserArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("UserArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("UserArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -10,7 +10,6 @@ package marketplaceentitlementserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := marketplaceentitlementservice.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := marketplaceentitlementservice.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,8 +64,8 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type MarketplaceEntitlementServiceAPI interface {
 	GetEntitlements(*marketplaceentitlementservice.GetEntitlementsInput) (*marketplaceentitlementservice.GetEntitlementsOutput, error)
-	GetEntitlementsWithContext(aws.Context, *marketplaceentitlementservice.GetEntitlementsInput, ...request.Option) (*marketplaceentitlementservice.GetEntitlementsOutput, error)
-	GetEntitlementsRequest(*marketplaceentitlementservice.GetEntitlementsInput) (*request.Request, *marketplaceentitlementservice.GetEntitlementsOutput)
+	GetEntitlementsWithContext(aws.Context, *marketplaceentitlementservice.GetEntitlementsInput, ...aws.Option) (*marketplaceentitlementservice.GetEntitlementsOutput, error)
+	GetEntitlementsRequest(*marketplaceentitlementservice.GetEntitlementsInput) (*aws.Request, *marketplaceentitlementservice.GetEntitlementsOutput)
 }
 
 var _ MarketplaceEntitlementServiceAPI = (*marketplaceentitlementservice.MarketplaceEntitlementService)(nil)

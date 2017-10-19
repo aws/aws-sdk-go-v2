@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateProtection = "CreateProtection"
 
-// CreateProtectionRequest generates a "aws/request.Request" representing the
+// CreateProtectionRequest generates a "aws.Request" representing the
 // client's request for the CreateProtection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateProtection = "CreateProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection
-func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *request.Request, output *CreateProtectionOutput) {
-	op := &request.Operation{
+func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) (req *aws.Request, output *CreateProtectionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProtection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -106,7 +105,7 @@ func (c *Shield) CreateProtection(input *CreateProtectionInput) (*CreateProtecti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) CreateProtectionWithContext(ctx aws.Context, input *CreateProtectionInput, opts ...request.Option) (*CreateProtectionOutput, error) {
+func (c *Shield) CreateProtectionWithContext(ctx aws.Context, input *CreateProtectionInput, opts ...aws.Option) (*CreateProtectionOutput, error) {
 	req, out := c.CreateProtectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -115,7 +114,7 @@ func (c *Shield) CreateProtectionWithContext(ctx aws.Context, input *CreateProte
 
 const opCreateSubscription = "CreateSubscription"
 
-// CreateSubscriptionRequest generates a "aws/request.Request" representing the
+// CreateSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the CreateSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -139,8 +138,8 @@ const opCreateSubscription = "CreateSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription
-func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req *request.Request, output *CreateSubscriptionOutput) {
-	op := &request.Operation{
+func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) (req *aws.Request, output *CreateSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -189,7 +188,7 @@ func (c *Shield) CreateSubscription(input *CreateSubscriptionInput) (*CreateSubs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) CreateSubscriptionWithContext(ctx aws.Context, input *CreateSubscriptionInput, opts ...request.Option) (*CreateSubscriptionOutput, error) {
+func (c *Shield) CreateSubscriptionWithContext(ctx aws.Context, input *CreateSubscriptionInput, opts ...aws.Option) (*CreateSubscriptionOutput, error) {
 	req, out := c.CreateSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -198,7 +197,7 @@ func (c *Shield) CreateSubscriptionWithContext(ctx aws.Context, input *CreateSub
 
 const opDeleteProtection = "DeleteProtection"
 
-// DeleteProtectionRequest generates a "aws/request.Request" representing the
+// DeleteProtectionRequest generates a "aws.Request" representing the
 // client's request for the DeleteProtection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -222,8 +221,8 @@ const opDeleteProtection = "DeleteProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection
-func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *request.Request, output *DeleteProtectionOutput) {
-	op := &request.Operation{
+func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) (req *aws.Request, output *DeleteProtectionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProtection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -276,7 +275,7 @@ func (c *Shield) DeleteProtection(input *DeleteProtectionInput) (*DeleteProtecti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) DeleteProtectionWithContext(ctx aws.Context, input *DeleteProtectionInput, opts ...request.Option) (*DeleteProtectionOutput, error) {
+func (c *Shield) DeleteProtectionWithContext(ctx aws.Context, input *DeleteProtectionInput, opts ...aws.Option) (*DeleteProtectionOutput, error) {
 	req, out := c.DeleteProtectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -285,7 +284,7 @@ func (c *Shield) DeleteProtectionWithContext(ctx aws.Context, input *DeleteProte
 
 const opDeleteSubscription = "DeleteSubscription"
 
-// DeleteSubscriptionRequest generates a "aws/request.Request" representing the
+// DeleteSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the DeleteSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -309,8 +308,8 @@ const opDeleteSubscription = "DeleteSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription
-func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req *request.Request, output *DeleteSubscriptionOutput) {
-	op := &request.Operation{
+func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) (req *aws.Request, output *DeleteSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -363,7 +362,7 @@ func (c *Shield) DeleteSubscription(input *DeleteSubscriptionInput) (*DeleteSubs
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) DeleteSubscriptionWithContext(ctx aws.Context, input *DeleteSubscriptionInput, opts ...request.Option) (*DeleteSubscriptionOutput, error) {
+func (c *Shield) DeleteSubscriptionWithContext(ctx aws.Context, input *DeleteSubscriptionInput, opts ...aws.Option) (*DeleteSubscriptionOutput, error) {
 	req, out := c.DeleteSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -372,7 +371,7 @@ func (c *Shield) DeleteSubscriptionWithContext(ctx aws.Context, input *DeleteSub
 
 const opDescribeAttack = "DescribeAttack"
 
-// DescribeAttackRequest generates a "aws/request.Request" representing the
+// DescribeAttackRequest generates a "aws.Request" representing the
 // client's request for the DescribeAttack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -396,8 +395,8 @@ const opDescribeAttack = "DescribeAttack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack
-func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) (req *request.Request, output *DescribeAttackOutput) {
-	op := &request.Operation{
+func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) (req *aws.Request, output *DescribeAttackOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAttack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -446,7 +445,7 @@ func (c *Shield) DescribeAttack(input *DescribeAttackInput) (*DescribeAttackOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) DescribeAttackWithContext(ctx aws.Context, input *DescribeAttackInput, opts ...request.Option) (*DescribeAttackOutput, error) {
+func (c *Shield) DescribeAttackWithContext(ctx aws.Context, input *DescribeAttackInput, opts ...aws.Option) (*DescribeAttackOutput, error) {
 	req, out := c.DescribeAttackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -455,7 +454,7 @@ func (c *Shield) DescribeAttackWithContext(ctx aws.Context, input *DescribeAttac
 
 const opDescribeProtection = "DescribeProtection"
 
-// DescribeProtectionRequest generates a "aws/request.Request" representing the
+// DescribeProtectionRequest generates a "aws.Request" representing the
 // client's request for the DescribeProtection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -479,8 +478,8 @@ const opDescribeProtection = "DescribeProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection
-func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) (req *request.Request, output *DescribeProtectionOutput) {
-	op := &request.Operation{
+func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) (req *aws.Request, output *DescribeProtectionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeProtection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -529,7 +528,7 @@ func (c *Shield) DescribeProtection(input *DescribeProtectionInput) (*DescribePr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) DescribeProtectionWithContext(ctx aws.Context, input *DescribeProtectionInput, opts ...request.Option) (*DescribeProtectionOutput, error) {
+func (c *Shield) DescribeProtectionWithContext(ctx aws.Context, input *DescribeProtectionInput, opts ...aws.Option) (*DescribeProtectionOutput, error) {
 	req, out := c.DescribeProtectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -538,7 +537,7 @@ func (c *Shield) DescribeProtectionWithContext(ctx aws.Context, input *DescribeP
 
 const opDescribeSubscription = "DescribeSubscription"
 
-// DescribeSubscriptionRequest generates a "aws/request.Request" representing the
+// DescribeSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the DescribeSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -562,8 +561,8 @@ const opDescribeSubscription = "DescribeSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription
-func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (req *request.Request, output *DescribeSubscriptionOutput) {
-	op := &request.Operation{
+func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) (req *aws.Request, output *DescribeSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -612,7 +611,7 @@ func (c *Shield) DescribeSubscription(input *DescribeSubscriptionInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) DescribeSubscriptionWithContext(ctx aws.Context, input *DescribeSubscriptionInput, opts ...request.Option) (*DescribeSubscriptionOutput, error) {
+func (c *Shield) DescribeSubscriptionWithContext(ctx aws.Context, input *DescribeSubscriptionInput, opts ...aws.Option) (*DescribeSubscriptionOutput, error) {
 	req, out := c.DescribeSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -621,7 +620,7 @@ func (c *Shield) DescribeSubscriptionWithContext(ctx aws.Context, input *Describ
 
 const opListAttacks = "ListAttacks"
 
-// ListAttacksRequest generates a "aws/request.Request" representing the
+// ListAttacksRequest generates a "aws.Request" representing the
 // client's request for the ListAttacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -645,8 +644,8 @@ const opListAttacks = "ListAttacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacks
-func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *request.Request, output *ListAttacksOutput) {
-	op := &request.Operation{
+func (c *Shield) ListAttacksRequest(input *ListAttacksInput) (req *aws.Request, output *ListAttacksOutput) {
+	op := &aws.Operation{
 		Name:       opListAttacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -700,7 +699,7 @@ func (c *Shield) ListAttacks(input *ListAttacksInput) (*ListAttacksOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) ListAttacksWithContext(ctx aws.Context, input *ListAttacksInput, opts ...request.Option) (*ListAttacksOutput, error) {
+func (c *Shield) ListAttacksWithContext(ctx aws.Context, input *ListAttacksInput, opts ...aws.Option) (*ListAttacksOutput, error) {
 	req, out := c.ListAttacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -709,7 +708,7 @@ func (c *Shield) ListAttacksWithContext(ctx aws.Context, input *ListAttacksInput
 
 const opListProtections = "ListProtections"
 
-// ListProtectionsRequest generates a "aws/request.Request" representing the
+// ListProtectionsRequest generates a "aws.Request" representing the
 // client's request for the ListProtections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -733,8 +732,8 @@ const opListProtections = "ListProtections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections
-func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *request.Request, output *ListProtectionsOutput) {
-	op := &request.Operation{
+func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) (req *aws.Request, output *ListProtectionsOutput) {
+	op := &aws.Operation{
 		Name:       opListProtections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -783,7 +782,7 @@ func (c *Shield) ListProtections(input *ListProtectionsInput) (*ListProtectionsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Shield) ListProtectionsWithContext(ctx aws.Context, input *ListProtectionsInput, opts ...request.Option) (*ListProtectionsOutput, error) {
+func (c *Shield) ListProtectionsWithContext(ctx aws.Context, input *ListProtectionsInput, opts ...aws.Option) (*ListProtectionsOutput, error) {
 	req, out := c.ListProtectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,18 +984,18 @@ func (s CreateProtectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProtectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProtectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProtectionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1093,12 +1092,12 @@ func (s DeleteProtectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProtectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProtectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProtectionInput"}
 	if s.ProtectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProtectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProtectionId"))
 	}
 	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProtectionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1180,12 +1179,12 @@ func (s DescribeAttackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAttackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAttackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAttackInput"}
 	if s.AttackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttackId"))
+		invalidParams.Add(aws.NewErrParamRequired("AttackId"))
 	}
 	if s.AttackId != nil && len(*s.AttackId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttackId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttackId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1246,12 +1245,12 @@ func (s DescribeProtectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProtectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeProtectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProtectionInput"}
 	if s.ProtectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProtectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("ProtectionId"))
 	}
 	if s.ProtectionId != nil && len(*s.ProtectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProtectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProtectionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1364,9 +1363,9 @@ func (s ListAttacksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAttacksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAttacksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAttacksInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1466,9 +1465,9 @@ func (s ListProtectionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProtectionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProtectionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProtectionsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {

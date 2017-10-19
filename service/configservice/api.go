@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opDeleteConfigRule = "DeleteConfigRule"
 
-// DeleteConfigRuleRequest generates a "aws/request.Request" representing the
+// DeleteConfigRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteConfigRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opDeleteConfigRule = "DeleteConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRule
-func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) (req *request.Request, output *DeleteConfigRuleOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) (req *aws.Request, output *DeleteConfigRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -98,7 +97,7 @@ func (c *ConfigService) DeleteConfigRule(input *DeleteConfigRuleInput) (*DeleteC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DeleteConfigRuleWithContext(ctx aws.Context, input *DeleteConfigRuleInput, opts ...request.Option) (*DeleteConfigRuleOutput, error) {
+func (c *ConfigService) DeleteConfigRuleWithContext(ctx aws.Context, input *DeleteConfigRuleInput, opts ...aws.Option) (*DeleteConfigRuleOutput, error) {
 	req, out := c.DeleteConfigRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -107,7 +106,7 @@ func (c *ConfigService) DeleteConfigRuleWithContext(ctx aws.Context, input *Dele
 
 const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
 
-// DeleteConfigurationRecorderRequest generates a "aws/request.Request" representing the
+// DeleteConfigurationRecorderRequest generates a "aws.Request" representing the
 // client's request for the DeleteConfigurationRecorder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -131,8 +130,8 @@ const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorder
-func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRecorderInput) (req *request.Request, output *DeleteConfigurationRecorderOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigurationRecorderInput) (req *aws.Request, output *DeleteConfigurationRecorderOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConfigurationRecorder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -188,7 +187,7 @@ func (c *ConfigService) DeleteConfigurationRecorder(input *DeleteConfigurationRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DeleteConfigurationRecorderWithContext(ctx aws.Context, input *DeleteConfigurationRecorderInput, opts ...request.Option) (*DeleteConfigurationRecorderOutput, error) {
+func (c *ConfigService) DeleteConfigurationRecorderWithContext(ctx aws.Context, input *DeleteConfigurationRecorderInput, opts ...aws.Option) (*DeleteConfigurationRecorderOutput, error) {
 	req, out := c.DeleteConfigurationRecorderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -197,7 +196,7 @@ func (c *ConfigService) DeleteConfigurationRecorderWithContext(ctx aws.Context, 
 
 const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
 
-// DeleteDeliveryChannelRequest generates a "aws/request.Request" representing the
+// DeleteDeliveryChannelRequest generates a "aws.Request" representing the
 // client's request for the DeleteDeliveryChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -221,8 +220,8 @@ const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannel
-func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput) (req *request.Request, output *DeleteDeliveryChannelOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChannelInput) (req *aws.Request, output *DeleteDeliveryChannelOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDeliveryChannel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -276,7 +275,7 @@ func (c *ConfigService) DeleteDeliveryChannel(input *DeleteDeliveryChannelInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DeleteDeliveryChannelWithContext(ctx aws.Context, input *DeleteDeliveryChannelInput, opts ...request.Option) (*DeleteDeliveryChannelOutput, error) {
+func (c *ConfigService) DeleteDeliveryChannelWithContext(ctx aws.Context, input *DeleteDeliveryChannelInput, opts ...aws.Option) (*DeleteDeliveryChannelOutput, error) {
 	req, out := c.DeleteDeliveryChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -285,7 +284,7 @@ func (c *ConfigService) DeleteDeliveryChannelWithContext(ctx aws.Context, input 
 
 const opDeleteEvaluationResults = "DeleteEvaluationResults"
 
-// DeleteEvaluationResultsRequest generates a "aws/request.Request" representing the
+// DeleteEvaluationResultsRequest generates a "aws.Request" representing the
 // client's request for the DeleteEvaluationResults operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -309,8 +308,8 @@ const opDeleteEvaluationResults = "DeleteEvaluationResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResults
-func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsInput) (req *request.Request, output *DeleteEvaluationResultsOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationResultsInput) (req *aws.Request, output *DeleteEvaluationResultsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteEvaluationResults,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -363,7 +362,7 @@ func (c *ConfigService) DeleteEvaluationResults(input *DeleteEvaluationResultsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DeleteEvaluationResultsWithContext(ctx aws.Context, input *DeleteEvaluationResultsInput, opts ...request.Option) (*DeleteEvaluationResultsOutput, error) {
+func (c *ConfigService) DeleteEvaluationResultsWithContext(ctx aws.Context, input *DeleteEvaluationResultsInput, opts ...aws.Option) (*DeleteEvaluationResultsOutput, error) {
 	req, out := c.DeleteEvaluationResultsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -372,7 +371,7 @@ func (c *ConfigService) DeleteEvaluationResultsWithContext(ctx aws.Context, inpu
 
 const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 
-// DeliverConfigSnapshotRequest generates a "aws/request.Request" representing the
+// DeliverConfigSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeliverConfigSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -396,8 +395,8 @@ const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshot
-func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput) (req *request.Request, output *DeliverConfigSnapshotOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapshotInput) (req *aws.Request, output *DeliverConfigSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeliverConfigSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -458,7 +457,7 @@ func (c *ConfigService) DeliverConfigSnapshot(input *DeliverConfigSnapshotInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DeliverConfigSnapshotWithContext(ctx aws.Context, input *DeliverConfigSnapshotInput, opts ...request.Option) (*DeliverConfigSnapshotOutput, error) {
+func (c *ConfigService) DeliverConfigSnapshotWithContext(ctx aws.Context, input *DeliverConfigSnapshotInput, opts ...aws.Option) (*DeliverConfigSnapshotOutput, error) {
 	req, out := c.DeliverConfigSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -467,7 +466,7 @@ func (c *ConfigService) DeliverConfigSnapshotWithContext(ctx aws.Context, input 
 
 const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
 
-// DescribeComplianceByConfigRuleRequest generates a "aws/request.Request" representing the
+// DescribeComplianceByConfigRuleRequest generates a "aws.Request" representing the
 // client's request for the DescribeComplianceByConfigRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -491,8 +490,8 @@ const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRule
-func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeComplianceByConfigRuleInput) (req *request.Request, output *DescribeComplianceByConfigRuleOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeComplianceByConfigRuleInput) (req *aws.Request, output *DescribeComplianceByConfigRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeComplianceByConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -568,7 +567,7 @@ func (c *ConfigService) DescribeComplianceByConfigRule(input *DescribeCompliance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeComplianceByConfigRuleWithContext(ctx aws.Context, input *DescribeComplianceByConfigRuleInput, opts ...request.Option) (*DescribeComplianceByConfigRuleOutput, error) {
+func (c *ConfigService) DescribeComplianceByConfigRuleWithContext(ctx aws.Context, input *DescribeComplianceByConfigRuleInput, opts ...aws.Option) (*DescribeComplianceByConfigRuleOutput, error) {
 	req, out := c.DescribeComplianceByConfigRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -577,7 +576,7 @@ func (c *ConfigService) DescribeComplianceByConfigRuleWithContext(ctx aws.Contex
 
 const opDescribeComplianceByResource = "DescribeComplianceByResource"
 
-// DescribeComplianceByResourceRequest generates a "aws/request.Request" representing the
+// DescribeComplianceByResourceRequest generates a "aws.Request" representing the
 // client's request for the DescribeComplianceByResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -601,8 +600,8 @@ const opDescribeComplianceByResource = "DescribeComplianceByResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResource
-func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeComplianceByResourceInput) (req *request.Request, output *DescribeComplianceByResourceOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeComplianceByResourceInput) (req *aws.Request, output *DescribeComplianceByResourceOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeComplianceByResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -676,7 +675,7 @@ func (c *ConfigService) DescribeComplianceByResource(input *DescribeComplianceBy
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeComplianceByResourceWithContext(ctx aws.Context, input *DescribeComplianceByResourceInput, opts ...request.Option) (*DescribeComplianceByResourceOutput, error) {
+func (c *ConfigService) DescribeComplianceByResourceWithContext(ctx aws.Context, input *DescribeComplianceByResourceInput, opts ...aws.Option) (*DescribeComplianceByResourceOutput, error) {
 	req, out := c.DescribeComplianceByResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -685,7 +684,7 @@ func (c *ConfigService) DescribeComplianceByResourceWithContext(ctx aws.Context,
 
 const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus"
 
-// DescribeConfigRuleEvaluationStatusRequest generates a "aws/request.Request" representing the
+// DescribeConfigRuleEvaluationStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigRuleEvaluationStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -709,8 +708,8 @@ const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatus
-func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfigRuleEvaluationStatusInput) (req *request.Request, output *DescribeConfigRuleEvaluationStatusOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *DescribeConfigRuleEvaluationStatusInput) (req *aws.Request, output *DescribeConfigRuleEvaluationStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigRuleEvaluationStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -767,7 +766,7 @@ func (c *ConfigService) DescribeConfigRuleEvaluationStatus(input *DescribeConfig
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeConfigRuleEvaluationStatusWithContext(ctx aws.Context, input *DescribeConfigRuleEvaluationStatusInput, opts ...request.Option) (*DescribeConfigRuleEvaluationStatusOutput, error) {
+func (c *ConfigService) DescribeConfigRuleEvaluationStatusWithContext(ctx aws.Context, input *DescribeConfigRuleEvaluationStatusInput, opts ...aws.Option) (*DescribeConfigRuleEvaluationStatusOutput, error) {
 	req, out := c.DescribeConfigRuleEvaluationStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -776,7 +775,7 @@ func (c *ConfigService) DescribeConfigRuleEvaluationStatusWithContext(ctx aws.Co
 
 const opDescribeConfigRules = "DescribeConfigRules"
 
-// DescribeConfigRulesRequest generates a "aws/request.Request" representing the
+// DescribeConfigRulesRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -800,8 +799,8 @@ const opDescribeConfigRules = "DescribeConfigRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules
-func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) (req *request.Request, output *DescribeConfigRulesOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInput) (req *aws.Request, output *DescribeConfigRulesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -851,7 +850,7 @@ func (c *ConfigService) DescribeConfigRules(input *DescribeConfigRulesInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeConfigRulesWithContext(ctx aws.Context, input *DescribeConfigRulesInput, opts ...request.Option) (*DescribeConfigRulesOutput, error) {
+func (c *ConfigService) DescribeConfigRulesWithContext(ctx aws.Context, input *DescribeConfigRulesInput, opts ...aws.Option) (*DescribeConfigRulesOutput, error) {
 	req, out := c.DescribeConfigRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -860,7 +859,7 @@ func (c *ConfigService) DescribeConfigRulesWithContext(ctx aws.Context, input *D
 
 const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStatus"
 
-// DescribeConfigurationRecorderStatusRequest generates a "aws/request.Request" representing the
+// DescribeConfigurationRecorderStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigurationRecorderStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -884,8 +883,8 @@ const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStat
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatus
-func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *DescribeConfigurationRecorderStatusInput) (req *request.Request, output *DescribeConfigurationRecorderStatusOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *DescribeConfigurationRecorderStatusInput) (req *aws.Request, output *DescribeConfigurationRecorderStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigurationRecorderStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -935,7 +934,7 @@ func (c *ConfigService) DescribeConfigurationRecorderStatus(input *DescribeConfi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeConfigurationRecorderStatusWithContext(ctx aws.Context, input *DescribeConfigurationRecorderStatusInput, opts ...request.Option) (*DescribeConfigurationRecorderStatusOutput, error) {
+func (c *ConfigService) DescribeConfigurationRecorderStatusWithContext(ctx aws.Context, input *DescribeConfigurationRecorderStatusInput, opts ...aws.Option) (*DescribeConfigurationRecorderStatusOutput, error) {
 	req, out := c.DescribeConfigurationRecorderStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -944,7 +943,7 @@ func (c *ConfigService) DescribeConfigurationRecorderStatusWithContext(ctx aws.C
 
 const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
 
-// DescribeConfigurationRecordersRequest generates a "aws/request.Request" representing the
+// DescribeConfigurationRecordersRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigurationRecorders operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -968,8 +967,8 @@ const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders
-func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeConfigurationRecordersInput) (req *request.Request, output *DescribeConfigurationRecordersOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeConfigurationRecordersInput) (req *aws.Request, output *DescribeConfigurationRecordersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigurationRecorders,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1019,7 +1018,7 @@ func (c *ConfigService) DescribeConfigurationRecorders(input *DescribeConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeConfigurationRecordersWithContext(ctx aws.Context, input *DescribeConfigurationRecordersInput, opts ...request.Option) (*DescribeConfigurationRecordersOutput, error) {
+func (c *ConfigService) DescribeConfigurationRecordersWithContext(ctx aws.Context, input *DescribeConfigurationRecordersInput, opts ...aws.Option) (*DescribeConfigurationRecordersOutput, error) {
 	req, out := c.DescribeConfigurationRecordersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1028,7 +1027,7 @@ func (c *ConfigService) DescribeConfigurationRecordersWithContext(ctx aws.Contex
 
 const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
 
-// DescribeDeliveryChannelStatusRequest generates a "aws/request.Request" representing the
+// DescribeDeliveryChannelStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeDeliveryChannelStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1052,8 +1051,8 @@ const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatus
-func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryChannelStatusInput) (req *request.Request, output *DescribeDeliveryChannelStatusOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeliveryChannelStatusInput) (req *aws.Request, output *DescribeDeliveryChannelStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDeliveryChannelStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1102,7 +1101,7 @@ func (c *ConfigService) DescribeDeliveryChannelStatus(input *DescribeDeliveryCha
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeDeliveryChannelStatusWithContext(ctx aws.Context, input *DescribeDeliveryChannelStatusInput, opts ...request.Option) (*DescribeDeliveryChannelStatusOutput, error) {
+func (c *ConfigService) DescribeDeliveryChannelStatusWithContext(ctx aws.Context, input *DescribeDeliveryChannelStatusInput, opts ...aws.Option) (*DescribeDeliveryChannelStatusOutput, error) {
 	req, out := c.DescribeDeliveryChannelStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1111,7 +1110,7 @@ func (c *ConfigService) DescribeDeliveryChannelStatusWithContext(ctx aws.Context
 
 const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
 
-// DescribeDeliveryChannelsRequest generates a "aws/request.Request" representing the
+// DescribeDeliveryChannelsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDeliveryChannels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1135,8 +1134,8 @@ const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannels
-func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannelsInput) (req *request.Request, output *DescribeDeliveryChannelsOutput) {
-	op := &request.Operation{
+func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryChannelsInput) (req *aws.Request, output *DescribeDeliveryChannelsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDeliveryChannels,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1185,7 +1184,7 @@ func (c *ConfigService) DescribeDeliveryChannels(input *DescribeDeliveryChannels
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) DescribeDeliveryChannelsWithContext(ctx aws.Context, input *DescribeDeliveryChannelsInput, opts ...request.Option) (*DescribeDeliveryChannelsOutput, error) {
+func (c *ConfigService) DescribeDeliveryChannelsWithContext(ctx aws.Context, input *DescribeDeliveryChannelsInput, opts ...aws.Option) (*DescribeDeliveryChannelsOutput, error) {
 	req, out := c.DescribeDeliveryChannelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1194,7 +1193,7 @@ func (c *ConfigService) DescribeDeliveryChannelsWithContext(ctx aws.Context, inp
 
 const opGetComplianceDetailsByConfigRule = "GetComplianceDetailsByConfigRule"
 
-// GetComplianceDetailsByConfigRuleRequest generates a "aws/request.Request" representing the
+// GetComplianceDetailsByConfigRuleRequest generates a "aws.Request" representing the
 // client's request for the GetComplianceDetailsByConfigRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1218,8 +1217,8 @@ const opGetComplianceDetailsByConfigRule = "GetComplianceDetailsByConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRule
-func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetComplianceDetailsByConfigRuleInput) (req *request.Request, output *GetComplianceDetailsByConfigRuleOutput) {
-	op := &request.Operation{
+func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetComplianceDetailsByConfigRuleInput) (req *aws.Request, output *GetComplianceDetailsByConfigRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetComplianceDetailsByConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1275,7 +1274,7 @@ func (c *ConfigService) GetComplianceDetailsByConfigRule(input *GetComplianceDet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetComplianceDetailsByConfigRuleWithContext(ctx aws.Context, input *GetComplianceDetailsByConfigRuleInput, opts ...request.Option) (*GetComplianceDetailsByConfigRuleOutput, error) {
+func (c *ConfigService) GetComplianceDetailsByConfigRuleWithContext(ctx aws.Context, input *GetComplianceDetailsByConfigRuleInput, opts ...aws.Option) (*GetComplianceDetailsByConfigRuleOutput, error) {
 	req, out := c.GetComplianceDetailsByConfigRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1284,7 +1283,7 @@ func (c *ConfigService) GetComplianceDetailsByConfigRuleWithContext(ctx aws.Cont
 
 const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
 
-// GetComplianceDetailsByResourceRequest generates a "aws/request.Request" representing the
+// GetComplianceDetailsByResourceRequest generates a "aws.Request" representing the
 // client's request for the GetComplianceDetailsByResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1308,8 +1307,8 @@ const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResource
-func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplianceDetailsByResourceInput) (req *request.Request, output *GetComplianceDetailsByResourceOutput) {
-	op := &request.Operation{
+func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplianceDetailsByResourceInput) (req *aws.Request, output *GetComplianceDetailsByResourceOutput) {
+	op := &aws.Operation{
 		Name:       opGetComplianceDetailsByResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1357,7 +1356,7 @@ func (c *ConfigService) GetComplianceDetailsByResource(input *GetComplianceDetai
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetComplianceDetailsByResourceWithContext(ctx aws.Context, input *GetComplianceDetailsByResourceInput, opts ...request.Option) (*GetComplianceDetailsByResourceOutput, error) {
+func (c *ConfigService) GetComplianceDetailsByResourceWithContext(ctx aws.Context, input *GetComplianceDetailsByResourceInput, opts ...aws.Option) (*GetComplianceDetailsByResourceOutput, error) {
 	req, out := c.GetComplianceDetailsByResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1366,7 +1365,7 @@ func (c *ConfigService) GetComplianceDetailsByResourceWithContext(ctx aws.Contex
 
 const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
 
-// GetComplianceSummaryByConfigRuleRequest generates a "aws/request.Request" representing the
+// GetComplianceSummaryByConfigRuleRequest generates a "aws.Request" representing the
 // client's request for the GetComplianceSummaryByConfigRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1390,8 +1389,8 @@ const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRule
-func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSummaryByConfigRuleInput) (req *request.Request, output *GetComplianceSummaryByConfigRuleOutput) {
-	op := &request.Operation{
+func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetComplianceSummaryByConfigRuleInput) (req *aws.Request, output *GetComplianceSummaryByConfigRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetComplianceSummaryByConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1432,7 +1431,7 @@ func (c *ConfigService) GetComplianceSummaryByConfigRule(input *GetComplianceSum
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetComplianceSummaryByConfigRuleWithContext(ctx aws.Context, input *GetComplianceSummaryByConfigRuleInput, opts ...request.Option) (*GetComplianceSummaryByConfigRuleOutput, error) {
+func (c *ConfigService) GetComplianceSummaryByConfigRuleWithContext(ctx aws.Context, input *GetComplianceSummaryByConfigRuleInput, opts ...aws.Option) (*GetComplianceSummaryByConfigRuleOutput, error) {
 	req, out := c.GetComplianceSummaryByConfigRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1441,7 +1440,7 @@ func (c *ConfigService) GetComplianceSummaryByConfigRuleWithContext(ctx aws.Cont
 
 const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType"
 
-// GetComplianceSummaryByResourceTypeRequest generates a "aws/request.Request" representing the
+// GetComplianceSummaryByResourceTypeRequest generates a "aws.Request" representing the
 // client's request for the GetComplianceSummaryByResourceType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1465,8 +1464,8 @@ const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceType
-func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceSummaryByResourceTypeInput) (req *request.Request, output *GetComplianceSummaryByResourceTypeOutput) {
-	op := &request.Operation{
+func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComplianceSummaryByResourceTypeInput) (req *aws.Request, output *GetComplianceSummaryByResourceTypeOutput) {
+	op := &aws.Operation{
 		Name:       opGetComplianceSummaryByResourceType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1514,7 +1513,7 @@ func (c *ConfigService) GetComplianceSummaryByResourceType(input *GetComplianceS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetComplianceSummaryByResourceTypeWithContext(ctx aws.Context, input *GetComplianceSummaryByResourceTypeInput, opts ...request.Option) (*GetComplianceSummaryByResourceTypeOutput, error) {
+func (c *ConfigService) GetComplianceSummaryByResourceTypeWithContext(ctx aws.Context, input *GetComplianceSummaryByResourceTypeInput, opts ...aws.Option) (*GetComplianceSummaryByResourceTypeOutput, error) {
 	req, out := c.GetComplianceSummaryByResourceTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1523,7 +1522,7 @@ func (c *ConfigService) GetComplianceSummaryByResourceTypeWithContext(ctx aws.Co
 
 const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
 
-// GetDiscoveredResourceCountsRequest generates a "aws/request.Request" representing the
+// GetDiscoveredResourceCountsRequest generates a "aws.Request" representing the
 // client's request for the GetDiscoveredResourceCounts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1547,8 +1546,8 @@ const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCounts
-func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredResourceCountsInput) (req *request.Request, output *GetDiscoveredResourceCountsOutput) {
-	op := &request.Operation{
+func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredResourceCountsInput) (req *aws.Request, output *GetDiscoveredResourceCountsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDiscoveredResourceCounts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1633,7 +1632,7 @@ func (c *ConfigService) GetDiscoveredResourceCounts(input *GetDiscoveredResource
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetDiscoveredResourceCountsWithContext(ctx aws.Context, input *GetDiscoveredResourceCountsInput, opts ...request.Option) (*GetDiscoveredResourceCountsOutput, error) {
+func (c *ConfigService) GetDiscoveredResourceCountsWithContext(ctx aws.Context, input *GetDiscoveredResourceCountsInput, opts ...aws.Option) (*GetDiscoveredResourceCountsOutput, error) {
 	req, out := c.GetDiscoveredResourceCountsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1642,7 +1641,7 @@ func (c *ConfigService) GetDiscoveredResourceCountsWithContext(ctx aws.Context, 
 
 const opGetResourceConfigHistory = "GetResourceConfigHistory"
 
-// GetResourceConfigHistoryRequest generates a "aws/request.Request" representing the
+// GetResourceConfigHistoryRequest generates a "aws.Request" representing the
 // client's request for the GetResourceConfigHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1666,12 +1665,12 @@ const opGetResourceConfigHistory = "GetResourceConfigHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistory
-func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfigHistoryInput) (req *request.Request, output *GetResourceConfigHistoryOutput) {
-	op := &request.Operation{
+func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfigHistoryInput) (req *aws.Request, output *GetResourceConfigHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetResourceConfigHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "limit",
@@ -1747,7 +1746,7 @@ func (c *ConfigService) GetResourceConfigHistory(input *GetResourceConfigHistory
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetResourceConfigHistoryWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, opts ...request.Option) (*GetResourceConfigHistoryOutput, error) {
+func (c *ConfigService) GetResourceConfigHistoryWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, opts ...aws.Option) (*GetResourceConfigHistoryOutput, error) {
 	req, out := c.GetResourceConfigHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1782,9 +1781,9 @@ func (c *ConfigService) GetResourceConfigHistoryPages(input *GetResourceConfigHi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, fn func(*GetResourceConfigHistoryOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, fn func(*GetResourceConfigHistoryOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetResourceConfigHistoryInput
 			if input != nil {
 				tmp := *input
@@ -1806,7 +1805,7 @@ func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context
 
 const opListDiscoveredResources = "ListDiscoveredResources"
 
-// ListDiscoveredResourcesRequest generates a "aws/request.Request" representing the
+// ListDiscoveredResourcesRequest generates a "aws.Request" representing the
 // client's request for the ListDiscoveredResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1830,8 +1829,8 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResources
-func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *request.Request, output *ListDiscoveredResourcesOutput) {
-	op := &request.Operation{
+func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *aws.Request, output *ListDiscoveredResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opListDiscoveredResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1900,7 +1899,7 @@ func (c *ConfigService) ListDiscoveredResources(input *ListDiscoveredResourcesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) ListDiscoveredResourcesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, opts ...request.Option) (*ListDiscoveredResourcesOutput, error) {
+func (c *ConfigService) ListDiscoveredResourcesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, opts ...aws.Option) (*ListDiscoveredResourcesOutput, error) {
 	req, out := c.ListDiscoveredResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1909,7 +1908,7 @@ func (c *ConfigService) ListDiscoveredResourcesWithContext(ctx aws.Context, inpu
 
 const opPutConfigRule = "PutConfigRule"
 
-// PutConfigRuleRequest generates a "aws/request.Request" representing the
+// PutConfigRuleRequest generates a "aws.Request" representing the
 // client's request for the PutConfigRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1933,8 +1932,8 @@ const opPutConfigRule = "PutConfigRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule
-func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) (req *request.Request, output *PutConfigRuleOutput) {
-	op := &request.Operation{
+func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) (req *aws.Request, output *PutConfigRuleOutput) {
+	op := &aws.Operation{
 		Name:       opPutConfigRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2038,7 +2037,7 @@ func (c *ConfigService) PutConfigRule(input *PutConfigRuleInput) (*PutConfigRule
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) PutConfigRuleWithContext(ctx aws.Context, input *PutConfigRuleInput, opts ...request.Option) (*PutConfigRuleOutput, error) {
+func (c *ConfigService) PutConfigRuleWithContext(ctx aws.Context, input *PutConfigRuleInput, opts ...aws.Option) (*PutConfigRuleOutput, error) {
 	req, out := c.PutConfigRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2047,7 +2046,7 @@ func (c *ConfigService) PutConfigRuleWithContext(ctx aws.Context, input *PutConf
 
 const opPutConfigurationRecorder = "PutConfigurationRecorder"
 
-// PutConfigurationRecorderRequest generates a "aws/request.Request" representing the
+// PutConfigurationRecorderRequest generates a "aws.Request" representing the
 // client's request for the PutConfigurationRecorder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2071,8 +2070,8 @@ const opPutConfigurationRecorder = "PutConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorder
-func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationRecorderInput) (req *request.Request, output *PutConfigurationRecorderOutput) {
-	op := &request.Operation{
+func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationRecorderInput) (req *aws.Request, output *PutConfigurationRecorderOutput) {
+	op := &aws.Operation{
 		Name:       opPutConfigurationRecorder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2139,7 +2138,7 @@ func (c *ConfigService) PutConfigurationRecorder(input *PutConfigurationRecorder
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) PutConfigurationRecorderWithContext(ctx aws.Context, input *PutConfigurationRecorderInput, opts ...request.Option) (*PutConfigurationRecorderOutput, error) {
+func (c *ConfigService) PutConfigurationRecorderWithContext(ctx aws.Context, input *PutConfigurationRecorderInput, opts ...aws.Option) (*PutConfigurationRecorderOutput, error) {
 	req, out := c.PutConfigurationRecorderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2148,7 +2147,7 @@ func (c *ConfigService) PutConfigurationRecorderWithContext(ctx aws.Context, inp
 
 const opPutDeliveryChannel = "PutDeliveryChannel"
 
-// PutDeliveryChannelRequest generates a "aws/request.Request" representing the
+// PutDeliveryChannelRequest generates a "aws.Request" representing the
 // client's request for the PutDeliveryChannel operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2172,8 +2171,8 @@ const opPutDeliveryChannel = "PutDeliveryChannel"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannel
-func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) (req *request.Request, output *PutDeliveryChannelOutput) {
-	op := &request.Operation{
+func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput) (req *aws.Request, output *PutDeliveryChannelOutput) {
+	op := &aws.Operation{
 		Name:       opPutDeliveryChannel,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2252,7 +2251,7 @@ func (c *ConfigService) PutDeliveryChannel(input *PutDeliveryChannelInput) (*Put
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) PutDeliveryChannelWithContext(ctx aws.Context, input *PutDeliveryChannelInput, opts ...request.Option) (*PutDeliveryChannelOutput, error) {
+func (c *ConfigService) PutDeliveryChannelWithContext(ctx aws.Context, input *PutDeliveryChannelInput, opts ...aws.Option) (*PutDeliveryChannelOutput, error) {
 	req, out := c.PutDeliveryChannelRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2261,7 +2260,7 @@ func (c *ConfigService) PutDeliveryChannelWithContext(ctx aws.Context, input *Pu
 
 const opPutEvaluations = "PutEvaluations"
 
-// PutEvaluationsRequest generates a "aws/request.Request" representing the
+// PutEvaluationsRequest generates a "aws.Request" representing the
 // client's request for the PutEvaluations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2285,8 +2284,8 @@ const opPutEvaluations = "PutEvaluations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluations
-func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) (req *request.Request, output *PutEvaluationsOutput) {
-	op := &request.Operation{
+func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) (req *aws.Request, output *PutEvaluationsOutput) {
+	op := &aws.Operation{
 		Name:       opPutEvaluations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2341,7 +2340,7 @@ func (c *ConfigService) PutEvaluations(input *PutEvaluationsInput) (*PutEvaluati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) PutEvaluationsWithContext(ctx aws.Context, input *PutEvaluationsInput, opts ...request.Option) (*PutEvaluationsOutput, error) {
+func (c *ConfigService) PutEvaluationsWithContext(ctx aws.Context, input *PutEvaluationsInput, opts ...aws.Option) (*PutEvaluationsOutput, error) {
 	req, out := c.PutEvaluationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2350,7 +2349,7 @@ func (c *ConfigService) PutEvaluationsWithContext(ctx aws.Context, input *PutEva
 
 const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 
-// StartConfigRulesEvaluationRequest generates a "aws/request.Request" representing the
+// StartConfigRulesEvaluationRequest generates a "aws.Request" representing the
 // client's request for the StartConfigRulesEvaluation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2374,8 +2373,8 @@ const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluation
-func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvaluationInput) (req *request.Request, output *StartConfigRulesEvaluationOutput) {
-	op := &request.Operation{
+func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRulesEvaluationInput) (req *aws.Request, output *StartConfigRulesEvaluationOutput) {
+	op := &aws.Operation{
 		Name:       opStartConfigRulesEvaluation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2462,7 +2461,7 @@ func (c *ConfigService) StartConfigRulesEvaluation(input *StartConfigRulesEvalua
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) StartConfigRulesEvaluationWithContext(ctx aws.Context, input *StartConfigRulesEvaluationInput, opts ...request.Option) (*StartConfigRulesEvaluationOutput, error) {
+func (c *ConfigService) StartConfigRulesEvaluationWithContext(ctx aws.Context, input *StartConfigRulesEvaluationInput, opts ...aws.Option) (*StartConfigRulesEvaluationOutput, error) {
 	req, out := c.StartConfigRulesEvaluationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2471,7 +2470,7 @@ func (c *ConfigService) StartConfigRulesEvaluationWithContext(ctx aws.Context, i
 
 const opStartConfigurationRecorder = "StartConfigurationRecorder"
 
-// StartConfigurationRecorderRequest generates a "aws/request.Request" representing the
+// StartConfigurationRecorderRequest generates a "aws.Request" representing the
 // client's request for the StartConfigurationRecorder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2495,8 +2494,8 @@ const opStartConfigurationRecorder = "StartConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorder
-func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurationRecorderInput) (req *request.Request, output *StartConfigurationRecorderOutput) {
-	op := &request.Operation{
+func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurationRecorderInput) (req *aws.Request, output *StartConfigurationRecorderOutput) {
+	op := &aws.Operation{
 		Name:       opStartConfigurationRecorder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2550,7 +2549,7 @@ func (c *ConfigService) StartConfigurationRecorder(input *StartConfigurationReco
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) StartConfigurationRecorderWithContext(ctx aws.Context, input *StartConfigurationRecorderInput, opts ...request.Option) (*StartConfigurationRecorderOutput, error) {
+func (c *ConfigService) StartConfigurationRecorderWithContext(ctx aws.Context, input *StartConfigurationRecorderInput, opts ...aws.Option) (*StartConfigurationRecorderOutput, error) {
 	req, out := c.StartConfigurationRecorderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2559,7 +2558,7 @@ func (c *ConfigService) StartConfigurationRecorderWithContext(ctx aws.Context, i
 
 const opStopConfigurationRecorder = "StopConfigurationRecorder"
 
-// StopConfigurationRecorderRequest generates a "aws/request.Request" representing the
+// StopConfigurationRecorderRequest generates a "aws.Request" representing the
 // client's request for the StopConfigurationRecorder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2583,8 +2582,8 @@ const opStopConfigurationRecorder = "StopConfigurationRecorder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorder
-func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfigurationRecorderInput) (req *request.Request, output *StopConfigurationRecorderOutput) {
-	op := &request.Operation{
+func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfigurationRecorderInput) (req *aws.Request, output *StopConfigurationRecorderOutput) {
+	op := &aws.Operation{
 		Name:       opStopConfigurationRecorder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2632,7 +2631,7 @@ func (c *ConfigService) StopConfigurationRecorder(input *StopConfigurationRecord
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ConfigService) StopConfigurationRecorderWithContext(ctx aws.Context, input *StopConfigurationRecorderInput, opts ...request.Option) (*StopConfigurationRecorderOutput, error) {
+func (c *ConfigService) StopConfigurationRecorderWithContext(ctx aws.Context, input *StopConfigurationRecorderInput, opts ...aws.Option) (*StopConfigurationRecorderOutput, error) {
 	req, out := c.StopConfigurationRecorderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3053,24 +3052,24 @@ func (s ConfigRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfigRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfigRule"}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigRuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
 	}
 	if s.InputParameters != nil && len(*s.InputParameters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputParameters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputParameters", 1))
 	}
 	if s.Source == nil {
-		invalidParams.Add(request.NewErrParamRequired("Source"))
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Scope != nil {
 		if err := s.Scope.Validate(); err != nil {
-			invalidParams.AddNested("Scope", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Scope", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Source != nil {
 		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3606,9 +3605,9 @@ func (s ConfigurationRecorder) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigurationRecorder) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfigurationRecorder"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfigurationRecorder"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3745,12 +3744,12 @@ func (s DeleteConfigRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConfigRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigRuleInput"}
 	if s.ConfigRuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigRuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigRuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3805,12 +3804,12 @@ func (s DeleteConfigurationRecorderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationRecorderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConfigurationRecorderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationRecorderInput"}
 	if s.ConfigurationRecorderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationRecorderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
 	}
 	if s.ConfigurationRecorderName != nil && len(*s.ConfigurationRecorderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigurationRecorderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationRecorderName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3864,12 +3863,12 @@ func (s DeleteDeliveryChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeliveryChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDeliveryChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeliveryChannelInput"}
 	if s.DeliveryChannelName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryChannelName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannelName"))
 	}
 	if s.DeliveryChannelName != nil && len(*s.DeliveryChannelName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryChannelName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryChannelName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3921,12 +3920,12 @@ func (s DeleteEvaluationResultsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEvaluationResultsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEvaluationResultsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEvaluationResultsInput"}
 	if s.ConfigRuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigRuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigRuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3981,12 +3980,12 @@ func (s DeliverConfigSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeliverConfigSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeliverConfigSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeliverConfigSnapshotInput"}
 	if s.DeliveryChannelName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryChannelName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannelName"))
 	}
 	if s.DeliveryChannelName != nil && len(*s.DeliveryChannelName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryChannelName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryChannelName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4077,9 +4076,9 @@ func (s DeliveryChannel) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeliveryChannel) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeliveryChannel"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeliveryChannel"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4295,12 +4294,12 @@ func (s DescribeComplianceByResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeComplianceByResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeComplianceByResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeComplianceByResourceInput"}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4787,27 +4786,27 @@ func (s Evaluation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Evaluation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Evaluation"}
+	invalidParams := aws.ErrInvalidParams{Context: "Evaluation"}
 	if s.Annotation != nil && len(*s.Annotation) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Annotation", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Annotation", 1))
 	}
 	if s.ComplianceResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComplianceResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ComplianceResourceId"))
 	}
 	if s.ComplianceResourceId != nil && len(*s.ComplianceResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ComplianceResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ComplianceResourceId", 1))
 	}
 	if s.ComplianceResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComplianceResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ComplianceResourceType"))
 	}
 	if s.ComplianceResourceType != nil && len(*s.ComplianceResourceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ComplianceResourceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ComplianceResourceType", 1))
 	}
 	if s.ComplianceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComplianceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ComplianceType"))
 	}
 	if s.OrderingTimestamp == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrderingTimestamp"))
+		invalidParams.Add(aws.NewErrParamRequired("OrderingTimestamp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5043,12 +5042,12 @@ func (s GetComplianceDetailsByConfigRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetComplianceDetailsByConfigRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetComplianceDetailsByConfigRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetComplianceDetailsByConfigRuleInput"}
 	if s.ConfigRuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigRuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigRuleName"))
 	}
 	if s.ConfigRuleName != nil && len(*s.ConfigRuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigRuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5152,18 +5151,18 @@ func (s GetComplianceDetailsByResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetComplianceDetailsByResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetComplianceDetailsByResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetComplianceDetailsByResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5486,12 +5485,12 @@ func (s GetResourceConfigHistoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourceConfigHistoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetResourceConfigHistoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourceConfigHistoryInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5622,9 +5621,9 @@ func (s ListDiscoveredResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDiscoveredResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDiscoveredResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDiscoveredResourcesInput"}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5726,13 +5725,13 @@ func (s PutConfigRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutConfigRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutConfigRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutConfigRuleInput"}
 	if s.ConfigRule == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigRule"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigRule"))
 	}
 	if s.ConfigRule != nil {
 		if err := s.ConfigRule.Validate(); err != nil {
-			invalidParams.AddNested("ConfigRule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConfigRule", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5787,13 +5786,13 @@ func (s PutConfigurationRecorderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutConfigurationRecorderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutConfigurationRecorderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutConfigurationRecorderInput"}
 	if s.ConfigurationRecorder == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationRecorder"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorder"))
 	}
 	if s.ConfigurationRecorder != nil {
 		if err := s.ConfigurationRecorder.Validate(); err != nil {
-			invalidParams.AddNested("ConfigurationRecorder", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConfigurationRecorder", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5848,13 +5847,13 @@ func (s PutDeliveryChannelInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutDeliveryChannelInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutDeliveryChannelInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutDeliveryChannelInput"}
 	if s.DeliveryChannel == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryChannel"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryChannel"))
 	}
 	if s.DeliveryChannel != nil {
 		if err := s.DeliveryChannel.Validate(); err != nil {
-			invalidParams.AddNested("DeliveryChannel", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DeliveryChannel", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5922,9 +5921,9 @@ func (s PutEvaluationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEvaluationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutEvaluationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutEvaluationsInput"}
 	if s.ResultToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResultToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ResultToken"))
 	}
 	if s.Evaluations != nil {
 		for i, v := range s.Evaluations {
@@ -5932,7 +5931,7 @@ func (s *PutEvaluationsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Evaluations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Evaluations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6268,15 +6267,15 @@ func (s Scope) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Scope) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Scope"}
+	invalidParams := aws.ErrInvalidParams{Context: "Scope"}
 	if s.ComplianceResourceId != nil && len(*s.ComplianceResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ComplianceResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ComplianceResourceId", 1))
 	}
 	if s.TagKey != nil && len(*s.TagKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagKey", 1))
 	}
 	if s.TagValue != nil && len(*s.TagValue) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagValue", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagValue", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6347,15 +6346,15 @@ func (s Source) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Source) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Source"}
+	invalidParams := aws.ErrInvalidParams{Context: "Source"}
 	if s.Owner == nil {
-		invalidParams.Add(request.NewErrParamRequired("Owner"))
+		invalidParams.Add(aws.NewErrParamRequired("Owner"))
 	}
 	if s.SourceIdentifier == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceIdentifier"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceIdentifier"))
 	}
 	if s.SourceIdentifier != nil && len(*s.SourceIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SourceIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SourceIdentifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6474,9 +6473,9 @@ func (s StartConfigRulesEvaluationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartConfigRulesEvaluationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartConfigRulesEvaluationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartConfigRulesEvaluationInput"}
 	if s.ConfigRuleNames != nil && len(s.ConfigRuleNames) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigRuleNames", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigRuleNames", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6531,12 +6530,12 @@ func (s StartConfigurationRecorderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartConfigurationRecorderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartConfigurationRecorderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartConfigurationRecorderInput"}
 	if s.ConfigurationRecorderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationRecorderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
 	}
 	if s.ConfigurationRecorderName != nil && len(*s.ConfigurationRecorderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigurationRecorderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationRecorderName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6590,12 +6589,12 @@ func (s StopConfigurationRecorderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopConfigurationRecorderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopConfigurationRecorderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopConfigurationRecorderInput"}
 	if s.ConfigurationRecorderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationRecorderName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationRecorderName"))
 	}
 	if s.ConfigurationRecorderName != nil && len(*s.ConfigurationRecorderName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigurationRecorderName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationRecorderName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilDBInstanceAvailable uses the Amazon RDS API operation
@@ -25,45 +24,45 @@ func (c *RDS) WaitUntilDBInstanceAvailable(input *DescribeDBInstancesInput) erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) WaitUntilDBInstanceAvailableWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *RDS) WaitUntilDBInstanceAvailableWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceAvailable",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "deleted",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "deleting",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "failed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "incompatible-restore",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "incompatible-parameters",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input
@@ -96,45 +95,45 @@ func (c *RDS) WaitUntilDBInstanceDeleted(input *DescribeDBInstancesInput) error 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *RDS) WaitUntilDBInstanceDeletedWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *RDS) WaitUntilDBInstanceDeletedWithContext(ctx aws.Context, input *DescribeDBInstancesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilDBInstanceDeleted",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "deleted",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "DBInstanceNotFound",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "creating",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "modifying",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "rebooting",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "DBInstances[].DBInstanceStatus",
 				Expected: "resetting-master-credentials",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeDBInstancesInput
 			if input != nil {
 				tmp := *input

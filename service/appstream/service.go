@@ -4,9 +4,6 @@ package appstream
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
@@ -18,14 +15,14 @@ import (
 // AppStream methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type AppStream struct {
-	*client.Client
+	*aws.Client
 }
 
 // Used for custom client initialization logic
-var initClient func(*client.Client)
+var initClient func(*aws.Client)
 
 // Used for custom request initialization logic
-var initRequest func(*request.Request)
+var initRequest func(*aws.Request)
 
 // Service information constants
 const (
@@ -33,30 +30,30 @@ const (
 	EndpointsID = ServiceName  // Service ID for Regions and Endpoints metadata.
 )
 
-// New creates a new instance of the AppStream client with a session.
+// New creates a new instance of the AppStream client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a AppStream client from just a session.
-//     svc := appstream.New(mySession)
+//     // Create a AppStream client from just a config.
+//     svc := appstream.New(myConfig)
 //
 //     // Create a AppStream client with additional configuration
-//     svc := appstream.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func New(p client.ConfigProvider, cfgs ...*aws.Config) *AppStream {
+//     svc := appstream.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func New(p aws.ConfigProvider, cfgs ...*aws.Config) *AppStream {
 	c := p.ClientConfig(EndpointsID, cfgs...)
 	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *AppStream {
+func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *AppStream {
 	if len(signingName) == 0 {
 		signingName = "appstream"
 	}
 	svc := &AppStream{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -86,7 +83,7 @@ func newClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegio
 
 // newRequest creates a new request for a AppStream operation and runs any
 // custom request initialization.
-func (c *AppStream) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *AppStream) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	// Run custom request initialization if present

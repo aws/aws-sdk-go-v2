@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateActivity = "CreateActivity"
 
-// CreateActivityRequest generates a "aws/request.Request" representing the
+// CreateActivityRequest generates a "aws.Request" representing the
 // client's request for the CreateActivity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateActivity = "CreateActivity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivity
-func (c *SFN) CreateActivityRequest(input *CreateActivityInput) (req *request.Request, output *CreateActivityOutput) {
-	op := &request.Operation{
+func (c *SFN) CreateActivityRequest(input *CreateActivityInput) (req *aws.Request, output *CreateActivityOutput) {
+	op := &aws.Operation{
 		Name:       opCreateActivity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -86,7 +85,7 @@ func (c *SFN) CreateActivity(input *CreateActivityInput) (*CreateActivityOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) CreateActivityWithContext(ctx aws.Context, input *CreateActivityInput, opts ...request.Option) (*CreateActivityOutput, error) {
+func (c *SFN) CreateActivityWithContext(ctx aws.Context, input *CreateActivityInput, opts ...aws.Option) (*CreateActivityOutput, error) {
 	req, out := c.CreateActivityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -95,7 +94,7 @@ func (c *SFN) CreateActivityWithContext(ctx aws.Context, input *CreateActivityIn
 
 const opCreateStateMachine = "CreateStateMachine"
 
-// CreateStateMachineRequest generates a "aws/request.Request" representing the
+// CreateStateMachineRequest generates a "aws.Request" representing the
 // client's request for the CreateStateMachine operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -119,8 +118,8 @@ const opCreateStateMachine = "CreateStateMachine"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachine
-func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) (req *request.Request, output *CreateStateMachineOutput) {
-	op := &request.Operation{
+func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) (req *aws.Request, output *CreateStateMachineOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStateMachine,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -182,7 +181,7 @@ func (c *SFN) CreateStateMachine(input *CreateStateMachineInput) (*CreateStateMa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) CreateStateMachineWithContext(ctx aws.Context, input *CreateStateMachineInput, opts ...request.Option) (*CreateStateMachineOutput, error) {
+func (c *SFN) CreateStateMachineWithContext(ctx aws.Context, input *CreateStateMachineInput, opts ...aws.Option) (*CreateStateMachineOutput, error) {
 	req, out := c.CreateStateMachineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -191,7 +190,7 @@ func (c *SFN) CreateStateMachineWithContext(ctx aws.Context, input *CreateStateM
 
 const opDeleteActivity = "DeleteActivity"
 
-// DeleteActivityRequest generates a "aws/request.Request" representing the
+// DeleteActivityRequest generates a "aws.Request" representing the
 // client's request for the DeleteActivity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -215,8 +214,8 @@ const opDeleteActivity = "DeleteActivity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivity
-func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) (req *request.Request, output *DeleteActivityOutput) {
-	op := &request.Operation{
+func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) (req *aws.Request, output *DeleteActivityOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteActivity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -261,7 +260,7 @@ func (c *SFN) DeleteActivity(input *DeleteActivityInput) (*DeleteActivityOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) DeleteActivityWithContext(ctx aws.Context, input *DeleteActivityInput, opts ...request.Option) (*DeleteActivityOutput, error) {
+func (c *SFN) DeleteActivityWithContext(ctx aws.Context, input *DeleteActivityInput, opts ...aws.Option) (*DeleteActivityOutput, error) {
 	req, out := c.DeleteActivityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -270,7 +269,7 @@ func (c *SFN) DeleteActivityWithContext(ctx aws.Context, input *DeleteActivityIn
 
 const opDeleteStateMachine = "DeleteStateMachine"
 
-// DeleteStateMachineRequest generates a "aws/request.Request" representing the
+// DeleteStateMachineRequest generates a "aws.Request" representing the
 // client's request for the DeleteStateMachine operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -294,8 +293,8 @@ const opDeleteStateMachine = "DeleteStateMachine"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachine
-func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) (req *request.Request, output *DeleteStateMachineOutput) {
-	op := &request.Operation{
+func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) (req *aws.Request, output *DeleteStateMachineOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStateMachine,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -341,7 +340,7 @@ func (c *SFN) DeleteStateMachine(input *DeleteStateMachineInput) (*DeleteStateMa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) DeleteStateMachineWithContext(ctx aws.Context, input *DeleteStateMachineInput, opts ...request.Option) (*DeleteStateMachineOutput, error) {
+func (c *SFN) DeleteStateMachineWithContext(ctx aws.Context, input *DeleteStateMachineInput, opts ...aws.Option) (*DeleteStateMachineOutput, error) {
 	req, out := c.DeleteStateMachineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -350,7 +349,7 @@ func (c *SFN) DeleteStateMachineWithContext(ctx aws.Context, input *DeleteStateM
 
 const opDescribeActivity = "DescribeActivity"
 
-// DescribeActivityRequest generates a "aws/request.Request" representing the
+// DescribeActivityRequest generates a "aws.Request" representing the
 // client's request for the DescribeActivity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -374,8 +373,8 @@ const opDescribeActivity = "DescribeActivity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivity
-func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) (req *request.Request, output *DescribeActivityOutput) {
-	op := &request.Operation{
+func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) (req *aws.Request, output *DescribeActivityOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeActivity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -423,7 +422,7 @@ func (c *SFN) DescribeActivity(input *DescribeActivityInput) (*DescribeActivityO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) DescribeActivityWithContext(ctx aws.Context, input *DescribeActivityInput, opts ...request.Option) (*DescribeActivityOutput, error) {
+func (c *SFN) DescribeActivityWithContext(ctx aws.Context, input *DescribeActivityInput, opts ...aws.Option) (*DescribeActivityOutput, error) {
 	req, out := c.DescribeActivityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -432,7 +431,7 @@ func (c *SFN) DescribeActivityWithContext(ctx aws.Context, input *DescribeActivi
 
 const opDescribeExecution = "DescribeExecution"
 
-// DescribeExecutionRequest generates a "aws/request.Request" representing the
+// DescribeExecutionRequest generates a "aws.Request" representing the
 // client's request for the DescribeExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -456,8 +455,8 @@ const opDescribeExecution = "DescribeExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution
-func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) (req *request.Request, output *DescribeExecutionOutput) {
-	op := &request.Operation{
+func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) (req *aws.Request, output *DescribeExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -505,7 +504,7 @@ func (c *SFN) DescribeExecution(input *DescribeExecutionInput) (*DescribeExecuti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) DescribeExecutionWithContext(ctx aws.Context, input *DescribeExecutionInput, opts ...request.Option) (*DescribeExecutionOutput, error) {
+func (c *SFN) DescribeExecutionWithContext(ctx aws.Context, input *DescribeExecutionInput, opts ...aws.Option) (*DescribeExecutionOutput, error) {
 	req, out := c.DescribeExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -514,7 +513,7 @@ func (c *SFN) DescribeExecutionWithContext(ctx aws.Context, input *DescribeExecu
 
 const opDescribeStateMachine = "DescribeStateMachine"
 
-// DescribeStateMachineRequest generates a "aws/request.Request" representing the
+// DescribeStateMachineRequest generates a "aws.Request" representing the
 // client's request for the DescribeStateMachine operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -538,8 +537,8 @@ const opDescribeStateMachine = "DescribeStateMachine"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine
-func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) (req *request.Request, output *DescribeStateMachineOutput) {
-	op := &request.Operation{
+func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) (req *aws.Request, output *DescribeStateMachineOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStateMachine,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -587,7 +586,7 @@ func (c *SFN) DescribeStateMachine(input *DescribeStateMachineInput) (*DescribeS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) DescribeStateMachineWithContext(ctx aws.Context, input *DescribeStateMachineInput, opts ...request.Option) (*DescribeStateMachineOutput, error) {
+func (c *SFN) DescribeStateMachineWithContext(ctx aws.Context, input *DescribeStateMachineInput, opts ...aws.Option) (*DescribeStateMachineOutput, error) {
 	req, out := c.DescribeStateMachineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -596,7 +595,7 @@ func (c *SFN) DescribeStateMachineWithContext(ctx aws.Context, input *DescribeSt
 
 const opGetActivityTask = "GetActivityTask"
 
-// GetActivityTaskRequest generates a "aws/request.Request" representing the
+// GetActivityTaskRequest generates a "aws.Request" representing the
 // client's request for the GetActivityTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -620,8 +619,8 @@ const opGetActivityTask = "GetActivityTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTask
-func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) (req *request.Request, output *GetActivityTaskOutput) {
-	op := &request.Operation{
+func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) (req *aws.Request, output *GetActivityTaskOutput) {
+	op := &aws.Operation{
 		Name:       opGetActivityTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -682,7 +681,7 @@ func (c *SFN) GetActivityTask(input *GetActivityTaskInput) (*GetActivityTaskOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) GetActivityTaskWithContext(ctx aws.Context, input *GetActivityTaskInput, opts ...request.Option) (*GetActivityTaskOutput, error) {
+func (c *SFN) GetActivityTaskWithContext(ctx aws.Context, input *GetActivityTaskInput, opts ...aws.Option) (*GetActivityTaskOutput, error) {
 	req, out := c.GetActivityTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -691,7 +690,7 @@ func (c *SFN) GetActivityTaskWithContext(ctx aws.Context, input *GetActivityTask
 
 const opGetExecutionHistory = "GetExecutionHistory"
 
-// GetExecutionHistoryRequest generates a "aws/request.Request" representing the
+// GetExecutionHistoryRequest generates a "aws.Request" representing the
 // client's request for the GetExecutionHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -715,12 +714,12 @@ const opGetExecutionHistory = "GetExecutionHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory
-func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) (req *request.Request, output *GetExecutionHistoryOutput) {
-	op := &request.Operation{
+func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) (req *aws.Request, output *GetExecutionHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetExecutionHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -777,7 +776,7 @@ func (c *SFN) GetExecutionHistory(input *GetExecutionHistoryInput) (*GetExecutio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) GetExecutionHistoryWithContext(ctx aws.Context, input *GetExecutionHistoryInput, opts ...request.Option) (*GetExecutionHistoryOutput, error) {
+func (c *SFN) GetExecutionHistoryWithContext(ctx aws.Context, input *GetExecutionHistoryInput, opts ...aws.Option) (*GetExecutionHistoryOutput, error) {
 	req, out := c.GetExecutionHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -812,9 +811,9 @@ func (c *SFN) GetExecutionHistoryPages(input *GetExecutionHistoryInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) GetExecutionHistoryPagesWithContext(ctx aws.Context, input *GetExecutionHistoryInput, fn func(*GetExecutionHistoryOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SFN) GetExecutionHistoryPagesWithContext(ctx aws.Context, input *GetExecutionHistoryInput, fn func(*GetExecutionHistoryOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetExecutionHistoryInput
 			if input != nil {
 				tmp := *input
@@ -836,7 +835,7 @@ func (c *SFN) GetExecutionHistoryPagesWithContext(ctx aws.Context, input *GetExe
 
 const opListActivities = "ListActivities"
 
-// ListActivitiesRequest generates a "aws/request.Request" representing the
+// ListActivitiesRequest generates a "aws.Request" representing the
 // client's request for the ListActivities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -860,12 +859,12 @@ const opListActivities = "ListActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivities
-func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) (req *request.Request, output *ListActivitiesOutput) {
-	op := &request.Operation{
+func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) (req *aws.Request, output *ListActivitiesOutput) {
+	op := &aws.Operation{
 		Name:       opListActivities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -914,7 +913,7 @@ func (c *SFN) ListActivities(input *ListActivitiesInput) (*ListActivitiesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) ListActivitiesWithContext(ctx aws.Context, input *ListActivitiesInput, opts ...request.Option) (*ListActivitiesOutput, error) {
+func (c *SFN) ListActivitiesWithContext(ctx aws.Context, input *ListActivitiesInput, opts ...aws.Option) (*ListActivitiesOutput, error) {
 	req, out := c.ListActivitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -949,9 +948,9 @@ func (c *SFN) ListActivitiesPages(input *ListActivitiesInput, fn func(*ListActiv
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) ListActivitiesPagesWithContext(ctx aws.Context, input *ListActivitiesInput, fn func(*ListActivitiesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SFN) ListActivitiesPagesWithContext(ctx aws.Context, input *ListActivitiesInput, fn func(*ListActivitiesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListActivitiesInput
 			if input != nil {
 				tmp := *input
@@ -973,7 +972,7 @@ func (c *SFN) ListActivitiesPagesWithContext(ctx aws.Context, input *ListActivit
 
 const opListExecutions = "ListExecutions"
 
-// ListExecutionsRequest generates a "aws/request.Request" representing the
+// ListExecutionsRequest generates a "aws.Request" representing the
 // client's request for the ListExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -997,12 +996,12 @@ const opListExecutions = "ListExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions
-func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) (req *request.Request, output *ListExecutionsOutput) {
-	op := &request.Operation{
+func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) (req *aws.Request, output *ListExecutionsOutput) {
+	op := &aws.Operation{
 		Name:       opListExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1057,7 +1056,7 @@ func (c *SFN) ListExecutions(input *ListExecutionsInput) (*ListExecutionsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) ListExecutionsWithContext(ctx aws.Context, input *ListExecutionsInput, opts ...request.Option) (*ListExecutionsOutput, error) {
+func (c *SFN) ListExecutionsWithContext(ctx aws.Context, input *ListExecutionsInput, opts ...aws.Option) (*ListExecutionsOutput, error) {
 	req, out := c.ListExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1092,9 +1091,9 @@ func (c *SFN) ListExecutionsPages(input *ListExecutionsInput, fn func(*ListExecu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) ListExecutionsPagesWithContext(ctx aws.Context, input *ListExecutionsInput, fn func(*ListExecutionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SFN) ListExecutionsPagesWithContext(ctx aws.Context, input *ListExecutionsInput, fn func(*ListExecutionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListExecutionsInput
 			if input != nil {
 				tmp := *input
@@ -1116,7 +1115,7 @@ func (c *SFN) ListExecutionsPagesWithContext(ctx aws.Context, input *ListExecuti
 
 const opListStateMachines = "ListStateMachines"
 
-// ListStateMachinesRequest generates a "aws/request.Request" representing the
+// ListStateMachinesRequest generates a "aws.Request" representing the
 // client's request for the ListStateMachines operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1140,12 +1139,12 @@ const opListStateMachines = "ListStateMachines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachines
-func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) (req *request.Request, output *ListStateMachinesOutput) {
-	op := &request.Operation{
+func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) (req *aws.Request, output *ListStateMachinesOutput) {
+	op := &aws.Operation{
 		Name:       opListStateMachines,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -1194,7 +1193,7 @@ func (c *SFN) ListStateMachines(input *ListStateMachinesInput) (*ListStateMachin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) ListStateMachinesWithContext(ctx aws.Context, input *ListStateMachinesInput, opts ...request.Option) (*ListStateMachinesOutput, error) {
+func (c *SFN) ListStateMachinesWithContext(ctx aws.Context, input *ListStateMachinesInput, opts ...aws.Option) (*ListStateMachinesOutput, error) {
 	req, out := c.ListStateMachinesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1229,9 +1228,9 @@ func (c *SFN) ListStateMachinesPages(input *ListStateMachinesInput, fn func(*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) ListStateMachinesPagesWithContext(ctx aws.Context, input *ListStateMachinesInput, fn func(*ListStateMachinesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SFN) ListStateMachinesPagesWithContext(ctx aws.Context, input *ListStateMachinesInput, fn func(*ListStateMachinesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStateMachinesInput
 			if input != nil {
 				tmp := *input
@@ -1253,7 +1252,7 @@ func (c *SFN) ListStateMachinesPagesWithContext(ctx aws.Context, input *ListStat
 
 const opSendTaskFailure = "SendTaskFailure"
 
-// SendTaskFailureRequest generates a "aws/request.Request" representing the
+// SendTaskFailureRequest generates a "aws.Request" representing the
 // client's request for the SendTaskFailure operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1277,8 +1276,8 @@ const opSendTaskFailure = "SendTaskFailure"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailure
-func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) (req *request.Request, output *SendTaskFailureOutput) {
-	op := &request.Operation{
+func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) (req *aws.Request, output *SendTaskFailureOutput) {
+	op := &aws.Operation{
 		Name:       opSendTaskFailure,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1327,7 +1326,7 @@ func (c *SFN) SendTaskFailure(input *SendTaskFailureInput) (*SendTaskFailureOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) SendTaskFailureWithContext(ctx aws.Context, input *SendTaskFailureInput, opts ...request.Option) (*SendTaskFailureOutput, error) {
+func (c *SFN) SendTaskFailureWithContext(ctx aws.Context, input *SendTaskFailureInput, opts ...aws.Option) (*SendTaskFailureOutput, error) {
 	req, out := c.SendTaskFailureRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1336,7 +1335,7 @@ func (c *SFN) SendTaskFailureWithContext(ctx aws.Context, input *SendTaskFailure
 
 const opSendTaskHeartbeat = "SendTaskHeartbeat"
 
-// SendTaskHeartbeatRequest generates a "aws/request.Request" representing the
+// SendTaskHeartbeatRequest generates a "aws.Request" representing the
 // client's request for the SendTaskHeartbeat operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1360,8 +1359,8 @@ const opSendTaskHeartbeat = "SendTaskHeartbeat"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeat
-func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) (req *request.Request, output *SendTaskHeartbeatOutput) {
-	op := &request.Operation{
+func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) (req *aws.Request, output *SendTaskHeartbeatOutput) {
+	op := &aws.Operation{
 		Name:       opSendTaskHeartbeat,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1422,7 +1421,7 @@ func (c *SFN) SendTaskHeartbeat(input *SendTaskHeartbeatInput) (*SendTaskHeartbe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) SendTaskHeartbeatWithContext(ctx aws.Context, input *SendTaskHeartbeatInput, opts ...request.Option) (*SendTaskHeartbeatOutput, error) {
+func (c *SFN) SendTaskHeartbeatWithContext(ctx aws.Context, input *SendTaskHeartbeatInput, opts ...aws.Option) (*SendTaskHeartbeatOutput, error) {
 	req, out := c.SendTaskHeartbeatRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1431,7 +1430,7 @@ func (c *SFN) SendTaskHeartbeatWithContext(ctx aws.Context, input *SendTaskHeart
 
 const opSendTaskSuccess = "SendTaskSuccess"
 
-// SendTaskSuccessRequest generates a "aws/request.Request" representing the
+// SendTaskSuccessRequest generates a "aws.Request" representing the
 // client's request for the SendTaskSuccess operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1455,8 +1454,8 @@ const opSendTaskSuccess = "SendTaskSuccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccess
-func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) (req *request.Request, output *SendTaskSuccessOutput) {
-	op := &request.Operation{
+func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) (req *aws.Request, output *SendTaskSuccessOutput) {
+	op := &aws.Operation{
 		Name:       opSendTaskSuccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1509,7 +1508,7 @@ func (c *SFN) SendTaskSuccess(input *SendTaskSuccessInput) (*SendTaskSuccessOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) SendTaskSuccessWithContext(ctx aws.Context, input *SendTaskSuccessInput, opts ...request.Option) (*SendTaskSuccessOutput, error) {
+func (c *SFN) SendTaskSuccessWithContext(ctx aws.Context, input *SendTaskSuccessInput, opts ...aws.Option) (*SendTaskSuccessOutput, error) {
 	req, out := c.SendTaskSuccessRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1518,7 +1517,7 @@ func (c *SFN) SendTaskSuccessWithContext(ctx aws.Context, input *SendTaskSuccess
 
 const opStartExecution = "StartExecution"
 
-// StartExecutionRequest generates a "aws/request.Request" representing the
+// StartExecutionRequest generates a "aws.Request" representing the
 // client's request for the StartExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1542,8 +1541,8 @@ const opStartExecution = "StartExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecution
-func (c *SFN) StartExecutionRequest(input *StartExecutionInput) (req *request.Request, output *StartExecutionOutput) {
-	op := &request.Operation{
+func (c *SFN) StartExecutionRequest(input *StartExecutionInput) (req *aws.Request, output *StartExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStartExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1607,7 +1606,7 @@ func (c *SFN) StartExecution(input *StartExecutionInput) (*StartExecutionOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) StartExecutionWithContext(ctx aws.Context, input *StartExecutionInput, opts ...request.Option) (*StartExecutionOutput, error) {
+func (c *SFN) StartExecutionWithContext(ctx aws.Context, input *StartExecutionInput, opts ...aws.Option) (*StartExecutionOutput, error) {
 	req, out := c.StartExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1616,7 +1615,7 @@ func (c *SFN) StartExecutionWithContext(ctx aws.Context, input *StartExecutionIn
 
 const opStopExecution = "StopExecution"
 
-// StopExecutionRequest generates a "aws/request.Request" representing the
+// StopExecutionRequest generates a "aws.Request" representing the
 // client's request for the StopExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1640,8 +1639,8 @@ const opStopExecution = "StopExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecution
-func (c *SFN) StopExecutionRequest(input *StopExecutionInput) (req *request.Request, output *StopExecutionOutput) {
-	op := &request.Operation{
+func (c *SFN) StopExecutionRequest(input *StopExecutionInput) (req *aws.Request, output *StopExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStopExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1689,7 +1688,7 @@ func (c *SFN) StopExecution(input *StopExecutionInput) (*StopExecutionOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SFN) StopExecutionWithContext(ctx aws.Context, input *StopExecutionInput, opts ...request.Option) (*StopExecutionOutput, error) {
+func (c *SFN) StopExecutionWithContext(ctx aws.Context, input *StopExecutionInput, opts ...aws.Option) (*StopExecutionOutput, error) {
 	req, out := c.StopExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1968,12 +1967,12 @@ func (s CreateActivityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateActivityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateActivityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateActivityInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2058,24 +2057,24 @@ func (s CreateStateMachineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStateMachineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStateMachineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStateMachineInput"}
 	if s.Definition == nil {
-		invalidParams.Add(request.NewErrParamRequired("Definition"))
+		invalidParams.Add(aws.NewErrParamRequired("Definition"))
 	}
 	if s.Definition != nil && len(*s.Definition) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Definition", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Definition", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2161,12 +2160,12 @@ func (s DeleteActivityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteActivityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteActivityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteActivityInput"}
 	if s.ActivityArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
 	}
 	if s.ActivityArn != nil && len(*s.ActivityArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActivityArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2218,12 +2217,12 @@ func (s DeleteStateMachineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStateMachineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStateMachineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStateMachineInput"}
 	if s.StateMachineArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateMachineArn"))
+		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
 	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StateMachineArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2275,12 +2274,12 @@ func (s DescribeActivityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeActivityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivityInput"}
 	if s.ActivityArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
 	}
 	if s.ActivityArn != nil && len(*s.ActivityArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActivityArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2365,12 +2364,12 @@ func (s DescribeExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeExecutionInput"}
 	if s.ExecutionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExecutionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
 	}
 	if s.ExecutionArn != nil && len(*s.ExecutionArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExecutionArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExecutionArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2504,12 +2503,12 @@ func (s DescribeStateMachineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStateMachineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStateMachineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStateMachineInput"}
 	if s.StateMachineArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateMachineArn"))
+		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
 	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StateMachineArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2867,15 +2866,15 @@ func (s GetActivityTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetActivityTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetActivityTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetActivityTaskInput"}
 	if s.ActivityArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivityArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivityArn"))
 	}
 	if s.ActivityArn != nil && len(*s.ActivityArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ActivityArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ActivityArn", 1))
 	}
 	if s.WorkerName != nil && len(*s.WorkerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WorkerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WorkerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2972,15 +2971,15 @@ func (s GetExecutionHistoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetExecutionHistoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetExecutionHistoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetExecutionHistoryInput"}
 	if s.ExecutionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExecutionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
 	}
 	if s.ExecutionArn != nil && len(*s.ExecutionArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExecutionArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExecutionArn", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3495,9 +3494,9 @@ func (s ListActivitiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListActivitiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListActivitiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListActivitiesInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3601,15 +3600,15 @@ func (s ListExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListExecutionsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StateMachineArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateMachineArn"))
+		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
 	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StateMachineArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3715,9 +3714,9 @@ func (s ListStateMachinesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStateMachinesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStateMachinesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStateMachinesInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3805,12 +3804,12 @@ func (s SendTaskFailureInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTaskFailureInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendTaskFailureInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendTaskFailureInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3875,12 +3874,12 @@ func (s SendTaskHeartbeatInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTaskHeartbeatInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendTaskHeartbeatInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendTaskHeartbeatInput"}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3938,15 +3937,15 @@ func (s SendTaskSuccessInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendTaskSuccessInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendTaskSuccessInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendTaskSuccessInput"}
 	if s.Output == nil {
-		invalidParams.Add(request.NewErrParamRequired("Output"))
+		invalidParams.Add(aws.NewErrParamRequired("Output"))
 	}
 	if s.TaskToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskToken"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskToken"))
 	}
 	if s.TaskToken != nil && len(*s.TaskToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4011,15 +4010,15 @@ func (s StartExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartExecutionInput"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.StateMachineArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateMachineArn"))
+		invalidParams.Add(aws.NewErrParamRequired("StateMachineArn"))
 	}
 	if s.StateMachineArn != nil && len(*s.StateMachineArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StateMachineArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StateMachineArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4229,12 +4228,12 @@ func (s StopExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopExecutionInput"}
 	if s.ExecutionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExecutionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionArn"))
 	}
 	if s.ExecutionArn != nil && len(*s.ExecutionArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExecutionArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExecutionArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {

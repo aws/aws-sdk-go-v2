@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddTags = "AddTags"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-01-01/tags",
@@ -99,7 +98,7 @@ func (c *ElasticsearchService) AddTags(input *AddTagsInput) (*AddTagsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *ElasticsearchService) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -108,7 +107,7 @@ func (c *ElasticsearchService) AddTagsWithContext(ctx aws.Context, input *AddTag
 
 const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
 
-// CreateElasticsearchDomainRequest generates a "aws/request.Request" representing the
+// CreateElasticsearchDomainRequest generates a "aws.Request" representing the
 // client's request for the CreateElasticsearchDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -130,8 +129,8 @@ const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateElasticsearchDomainInput) (req *request.Request, output *CreateElasticsearchDomainOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateElasticsearchDomainInput) (req *aws.Request, output *CreateElasticsearchDomainOutput) {
+	op := &aws.Operation{
 		Name:       opCreateElasticsearchDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-01-01/es/domain",
@@ -202,7 +201,7 @@ func (c *ElasticsearchService) CreateElasticsearchDomain(input *CreateElasticsea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) CreateElasticsearchDomainWithContext(ctx aws.Context, input *CreateElasticsearchDomainInput, opts ...request.Option) (*CreateElasticsearchDomainOutput, error) {
+func (c *ElasticsearchService) CreateElasticsearchDomainWithContext(ctx aws.Context, input *CreateElasticsearchDomainInput, opts ...aws.Option) (*CreateElasticsearchDomainOutput, error) {
 	req, out := c.CreateElasticsearchDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -211,7 +210,7 @@ func (c *ElasticsearchService) CreateElasticsearchDomainWithContext(ctx aws.Cont
 
 const opDeleteElasticsearchDomain = "DeleteElasticsearchDomain"
 
-// DeleteElasticsearchDomainRequest generates a "aws/request.Request" representing the
+// DeleteElasticsearchDomainRequest generates a "aws.Request" representing the
 // client's request for the DeleteElasticsearchDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -233,8 +232,8 @@ const opDeleteElasticsearchDomain = "DeleteElasticsearchDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteElasticsearchDomainInput) (req *request.Request, output *DeleteElasticsearchDomainOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteElasticsearchDomainInput) (req *aws.Request, output *DeleteElasticsearchDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteElasticsearchDomain,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-01-01/es/domain/{DomainName}",
@@ -292,7 +291,7 @@ func (c *ElasticsearchService) DeleteElasticsearchDomain(input *DeleteElasticsea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) DeleteElasticsearchDomainWithContext(ctx aws.Context, input *DeleteElasticsearchDomainInput, opts ...request.Option) (*DeleteElasticsearchDomainOutput, error) {
+func (c *ElasticsearchService) DeleteElasticsearchDomainWithContext(ctx aws.Context, input *DeleteElasticsearchDomainInput, opts ...aws.Option) (*DeleteElasticsearchDomainOutput, error) {
 	req, out := c.DeleteElasticsearchDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -301,7 +300,7 @@ func (c *ElasticsearchService) DeleteElasticsearchDomainWithContext(ctx aws.Cont
 
 const opDescribeElasticsearchDomain = "DescribeElasticsearchDomain"
 
-// DescribeElasticsearchDomainRequest generates a "aws/request.Request" representing the
+// DescribeElasticsearchDomainRequest generates a "aws.Request" representing the
 // client's request for the DescribeElasticsearchDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -323,8 +322,8 @@ const opDescribeElasticsearchDomain = "DescribeElasticsearchDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *DescribeElasticsearchDomainInput) (req *request.Request, output *DescribeElasticsearchDomainOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *DescribeElasticsearchDomainInput) (req *aws.Request, output *DescribeElasticsearchDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomain,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/es/domain/{DomainName}",
@@ -382,7 +381,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomain(input *DescribeElasti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchDomainWithContext(ctx aws.Context, input *DescribeElasticsearchDomainInput, opts ...request.Option) (*DescribeElasticsearchDomainOutput, error) {
+func (c *ElasticsearchService) DescribeElasticsearchDomainWithContext(ctx aws.Context, input *DescribeElasticsearchDomainInput, opts ...aws.Option) (*DescribeElasticsearchDomainOutput, error) {
 	req, out := c.DescribeElasticsearchDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -391,7 +390,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainWithContext(ctx aws.Co
 
 const opDescribeElasticsearchDomainConfig = "DescribeElasticsearchDomainConfig"
 
-// DescribeElasticsearchDomainConfigRequest generates a "aws/request.Request" representing the
+// DescribeElasticsearchDomainConfigRequest generates a "aws.Request" representing the
 // client's request for the DescribeElasticsearchDomainConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -413,8 +412,8 @@ const opDescribeElasticsearchDomainConfig = "DescribeElasticsearchDomainConfig"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *DescribeElasticsearchDomainConfigInput) (req *request.Request, output *DescribeElasticsearchDomainConfigOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *DescribeElasticsearchDomainConfigInput) (req *aws.Request, output *DescribeElasticsearchDomainConfigOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomainConfig,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/es/domain/{DomainName}/config",
@@ -473,7 +472,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainConfig(input *Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchDomainConfigWithContext(ctx aws.Context, input *DescribeElasticsearchDomainConfigInput, opts ...request.Option) (*DescribeElasticsearchDomainConfigOutput, error) {
+func (c *ElasticsearchService) DescribeElasticsearchDomainConfigWithContext(ctx aws.Context, input *DescribeElasticsearchDomainConfigInput, opts ...aws.Option) (*DescribeElasticsearchDomainConfigOutput, error) {
 	req, out := c.DescribeElasticsearchDomainConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -482,7 +481,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainConfigWithContext(ctx 
 
 const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
 
-// DescribeElasticsearchDomainsRequest generates a "aws/request.Request" representing the
+// DescribeElasticsearchDomainsRequest generates a "aws.Request" representing the
 // client's request for the DescribeElasticsearchDomains operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -504,8 +503,8 @@ const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearchDomainsInput) (req *request.Request, output *DescribeElasticsearchDomainsOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *DescribeElasticsearchDomainsInput) (req *aws.Request, output *DescribeElasticsearchDomainsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeElasticsearchDomains,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-01-01/es/domain-info",
@@ -559,7 +558,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomains(input *DescribeElast
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchDomainsWithContext(ctx aws.Context, input *DescribeElasticsearchDomainsInput, opts ...request.Option) (*DescribeElasticsearchDomainsOutput, error) {
+func (c *ElasticsearchService) DescribeElasticsearchDomainsWithContext(ctx aws.Context, input *DescribeElasticsearchDomainsInput, opts ...aws.Option) (*DescribeElasticsearchDomainsOutput, error) {
 	req, out := c.DescribeElasticsearchDomainsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -568,7 +567,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainsWithContext(ctx aws.C
 
 const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstanceTypeLimits"
 
-// DescribeElasticsearchInstanceTypeLimitsRequest generates a "aws/request.Request" representing the
+// DescribeElasticsearchInstanceTypeLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeElasticsearchInstanceTypeLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -590,8 +589,8 @@ const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstance
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeElasticsearchInstanceTypeLimitsInput) (req *request.Request, output *DescribeElasticsearchInstanceTypeLimitsOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(input *DescribeElasticsearchInstanceTypeLimitsInput) (req *aws.Request, output *DescribeElasticsearchInstanceTypeLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeElasticsearchInstanceTypeLimits,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/es/instanceTypeLimits/{ElasticsearchVersion}/{InstanceType}",
@@ -658,7 +657,7 @@ func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimits(input *De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsWithContext(ctx aws.Context, input *DescribeElasticsearchInstanceTypeLimitsInput, opts ...request.Option) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
+func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsWithContext(ctx aws.Context, input *DescribeElasticsearchInstanceTypeLimitsInput, opts ...aws.Option) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
 	req, out := c.DescribeElasticsearchInstanceTypeLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -667,7 +666,7 @@ func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsWithContex
 
 const opListDomainNames = "ListDomainNames"
 
-// ListDomainNamesRequest generates a "aws/request.Request" representing the
+// ListDomainNamesRequest generates a "aws.Request" representing the
 // client's request for the ListDomainNames operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -689,8 +688,8 @@ const opListDomainNames = "ListDomainNames"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInput) (req *request.Request, output *ListDomainNamesOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInput) (req *aws.Request, output *ListDomainNamesOutput) {
+	op := &aws.Operation{
 		Name:       opListDomainNames,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/domain",
@@ -739,7 +738,7 @@ func (c *ElasticsearchService) ListDomainNames(input *ListDomainNamesInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) ListDomainNamesWithContext(ctx aws.Context, input *ListDomainNamesInput, opts ...request.Option) (*ListDomainNamesOutput, error) {
+func (c *ElasticsearchService) ListDomainNamesWithContext(ctx aws.Context, input *ListDomainNamesInput, opts ...aws.Option) (*ListDomainNamesOutput, error) {
 	req, out := c.ListDomainNamesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -748,7 +747,7 @@ func (c *ElasticsearchService) ListDomainNamesWithContext(ctx aws.Context, input
 
 const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
 
-// ListElasticsearchInstanceTypesRequest generates a "aws/request.Request" representing the
+// ListElasticsearchInstanceTypesRequest generates a "aws.Request" representing the
 // client's request for the ListElasticsearchInstanceTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -770,12 +769,12 @@ const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchInstanceTypesInput) (req *request.Request, output *ListElasticsearchInstanceTypesOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *ListElasticsearchInstanceTypesInput) (req *aws.Request, output *ListElasticsearchInstanceTypesOutput) {
+	op := &aws.Operation{
 		Name:       opListElasticsearchInstanceTypes,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/es/instanceTypes/{ElasticsearchVersion}",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -834,7 +833,7 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypes(input *ListElastic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, opts ...request.Option) (*ListElasticsearchInstanceTypesOutput, error) {
+func (c *ElasticsearchService) ListElasticsearchInstanceTypesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, opts ...aws.Option) (*ListElasticsearchInstanceTypesOutput, error) {
 	req, out := c.ListElasticsearchInstanceTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -869,9 +868,9 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesPages(input *ListEl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, fn func(*ListElasticsearchInstanceTypesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, fn func(*ListElasticsearchInstanceTypesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListElasticsearchInstanceTypesInput
 			if input != nil {
 				tmp := *input
@@ -893,7 +892,7 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ct
 
 const opListElasticsearchVersions = "ListElasticsearchVersions"
 
-// ListElasticsearchVersionsRequest generates a "aws/request.Request" representing the
+// ListElasticsearchVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListElasticsearchVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -915,12 +914,12 @@ const opListElasticsearchVersions = "ListElasticsearchVersions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElasticsearchVersionsInput) (req *request.Request, output *ListElasticsearchVersionsOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElasticsearchVersionsInput) (req *aws.Request, output *ListElasticsearchVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListElasticsearchVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/es/versions",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -979,7 +978,7 @@ func (c *ElasticsearchService) ListElasticsearchVersions(input *ListElasticsearc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchVersionsWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, opts ...request.Option) (*ListElasticsearchVersionsOutput, error) {
+func (c *ElasticsearchService) ListElasticsearchVersionsWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, opts ...aws.Option) (*ListElasticsearchVersionsOutput, error) {
 	req, out := c.ListElasticsearchVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1014,9 +1013,9 @@ func (c *ElasticsearchService) ListElasticsearchVersionsPages(input *ListElastic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, fn func(*ListElasticsearchVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, fn func(*ListElasticsearchVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListElasticsearchVersionsInput
 			if input != nil {
 				tmp := *input
@@ -1038,7 +1037,7 @@ func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws/request.Request" representing the
+// ListTagsRequest generates a "aws.Request" representing the
 // client's request for the ListTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1060,8 +1059,8 @@ const opListTags = "ListTags"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-01-01/tags/",
@@ -1118,7 +1117,7 @@ func (c *ElasticsearchService) ListTags(input *ListTagsInput) (*ListTagsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
+func (c *ElasticsearchService) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1127,7 +1126,7 @@ func (c *ElasticsearchService) ListTagsWithContext(ctx aws.Context, input *ListT
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws/request.Request" representing the
+// RemoveTagsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1149,8 +1148,8 @@ const opRemoveTags = "RemoveTags"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) (req *request.Request, output *RemoveTagsOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-01-01/tags-removal",
@@ -1205,7 +1204,7 @@ func (c *ElasticsearchService) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...request.Option) (*RemoveTagsOutput, error) {
+func (c *ElasticsearchService) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
 	req, out := c.RemoveTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1214,7 +1213,7 @@ func (c *ElasticsearchService) RemoveTagsWithContext(ctx aws.Context, input *Rem
 
 const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
 
-// UpdateElasticsearchDomainConfigRequest generates a "aws/request.Request" representing the
+// UpdateElasticsearchDomainConfigRequest generates a "aws.Request" representing the
 // client's request for the UpdateElasticsearchDomainConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1236,8 +1235,8 @@ const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *UpdateElasticsearchDomainConfigInput) (req *request.Request, output *UpdateElasticsearchDomainConfigOutput) {
-	op := &request.Operation{
+func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *UpdateElasticsearchDomainConfigInput) (req *aws.Request, output *UpdateElasticsearchDomainConfigOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateElasticsearchDomainConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-01-01/es/domain/{DomainName}/config",
@@ -1303,7 +1302,7 @@ func (c *ElasticsearchService) UpdateElasticsearchDomainConfig(input *UpdateElas
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElasticsearchService) UpdateElasticsearchDomainConfigWithContext(ctx aws.Context, input *UpdateElasticsearchDomainConfigInput, opts ...request.Option) (*UpdateElasticsearchDomainConfigOutput, error) {
+func (c *ElasticsearchService) UpdateElasticsearchDomainConfigWithContext(ctx aws.Context, input *UpdateElasticsearchDomainConfigInput, opts ...aws.Option) (*UpdateElasticsearchDomainConfigOutput, error) {
 	req, out := c.UpdateElasticsearchDomainConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1380,12 +1379,12 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.ARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ARN"))
 	}
 	if s.TagList == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagList"))
+		invalidParams.Add(aws.NewErrParamRequired("TagList"))
 	}
 	if s.TagList != nil {
 		for i, v := range s.TagList {
@@ -1393,7 +1392,7 @@ func (s *AddTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1567,12 +1566,12 @@ func (s CreateElasticsearchDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateElasticsearchDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateElasticsearchDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateElasticsearchDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1671,12 +1670,12 @@ func (s DeleteElasticsearchDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteElasticsearchDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteElasticsearchDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteElasticsearchDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1740,12 +1739,12 @@ func (s DescribeElasticsearchDomainConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchDomainConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeElasticsearchDomainConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainConfigInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1810,12 +1809,12 @@ func (s DescribeElasticsearchDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeElasticsearchDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1880,9 +1879,9 @@ func (s DescribeElasticsearchDomainsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchDomainsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeElasticsearchDomainsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchDomainsInput"}
 	if s.DomainNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainNames"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1957,15 +1956,15 @@ func (s DescribeElasticsearchInstanceTypeLimitsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeElasticsearchInstanceTypeLimitsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeElasticsearchInstanceTypeLimitsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeElasticsearchInstanceTypeLimitsInput"}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.ElasticsearchVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticsearchVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticsearchVersion"))
 	}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2687,12 +2686,12 @@ func (s ListElasticsearchInstanceTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListElasticsearchInstanceTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListElasticsearchInstanceTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListElasticsearchInstanceTypesInput"}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 	if s.ElasticsearchVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticsearchVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticsearchVersion"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2863,9 +2862,9 @@ func (s ListTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
 	if s.ARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ARN"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3002,12 +3001,12 @@ func (s RemoveTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
 	if s.ARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("ARN"))
+		invalidParams.Add(aws.NewErrParamRequired("ARN"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3228,15 +3227,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3299,12 +3298,12 @@ func (s UpdateElasticsearchDomainConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateElasticsearchDomainConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateElasticsearchDomainConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateElasticsearchDomainConfigInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -6,15 +6,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAssignInstance = "AssignInstance"
 
-// AssignInstanceRequest generates a "aws/request.Request" representing the
+// AssignInstanceRequest generates a "aws.Request" representing the
 // client's request for the AssignInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -38,8 +37,8 @@ const opAssignInstance = "AssignInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstance
-func (c *OpsWorks) AssignInstanceRequest(input *AssignInstanceInput) (req *request.Request, output *AssignInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) AssignInstanceRequest(input *AssignInstanceInput) (req *aws.Request, output *AssignInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opAssignInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -101,7 +100,7 @@ func (c *OpsWorks) AssignInstance(input *AssignInstanceInput) (*AssignInstanceOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) AssignInstanceWithContext(ctx aws.Context, input *AssignInstanceInput, opts ...request.Option) (*AssignInstanceOutput, error) {
+func (c *OpsWorks) AssignInstanceWithContext(ctx aws.Context, input *AssignInstanceInput, opts ...aws.Option) (*AssignInstanceOutput, error) {
 	req, out := c.AssignInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -110,7 +109,7 @@ func (c *OpsWorks) AssignInstanceWithContext(ctx aws.Context, input *AssignInsta
 
 const opAssignVolume = "AssignVolume"
 
-// AssignVolumeRequest generates a "aws/request.Request" representing the
+// AssignVolumeRequest generates a "aws.Request" representing the
 // client's request for the AssignVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -134,8 +133,8 @@ const opAssignVolume = "AssignVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolume
-func (c *OpsWorks) AssignVolumeRequest(input *AssignVolumeInput) (req *request.Request, output *AssignVolumeOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) AssignVolumeRequest(input *AssignVolumeInput) (req *aws.Request, output *AssignVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opAssignVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -194,7 +193,7 @@ func (c *OpsWorks) AssignVolume(input *AssignVolumeInput) (*AssignVolumeOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) AssignVolumeWithContext(ctx aws.Context, input *AssignVolumeInput, opts ...request.Option) (*AssignVolumeOutput, error) {
+func (c *OpsWorks) AssignVolumeWithContext(ctx aws.Context, input *AssignVolumeInput, opts ...aws.Option) (*AssignVolumeOutput, error) {
 	req, out := c.AssignVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -203,7 +202,7 @@ func (c *OpsWorks) AssignVolumeWithContext(ctx aws.Context, input *AssignVolumeI
 
 const opAssociateElasticIp = "AssociateElasticIp"
 
-// AssociateElasticIpRequest generates a "aws/request.Request" representing the
+// AssociateElasticIpRequest generates a "aws.Request" representing the
 // client's request for the AssociateElasticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -227,8 +226,8 @@ const opAssociateElasticIp = "AssociateElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIp
-func (c *OpsWorks) AssociateElasticIpRequest(input *AssociateElasticIpInput) (req *request.Request, output *AssociateElasticIpOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) AssociateElasticIpRequest(input *AssociateElasticIpInput) (req *aws.Request, output *AssociateElasticIpOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -285,7 +284,7 @@ func (c *OpsWorks) AssociateElasticIp(input *AssociateElasticIpInput) (*Associat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) AssociateElasticIpWithContext(ctx aws.Context, input *AssociateElasticIpInput, opts ...request.Option) (*AssociateElasticIpOutput, error) {
+func (c *OpsWorks) AssociateElasticIpWithContext(ctx aws.Context, input *AssociateElasticIpInput, opts ...aws.Option) (*AssociateElasticIpOutput, error) {
 	req, out := c.AssociateElasticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -294,7 +293,7 @@ func (c *OpsWorks) AssociateElasticIpWithContext(ctx aws.Context, input *Associa
 
 const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
 
-// AttachElasticLoadBalancerRequest generates a "aws/request.Request" representing the
+// AttachElasticLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the AttachElasticLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -318,8 +317,8 @@ const opAttachElasticLoadBalancer = "AttachElasticLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancer
-func (c *OpsWorks) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalancerInput) (req *request.Request, output *AttachElasticLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) AttachElasticLoadBalancerRequest(input *AttachElasticLoadBalancerInput) (req *aws.Request, output *AttachElasticLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opAttachElasticLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -381,7 +380,7 @@ func (c *OpsWorks) AttachElasticLoadBalancer(input *AttachElasticLoadBalancerInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) AttachElasticLoadBalancerWithContext(ctx aws.Context, input *AttachElasticLoadBalancerInput, opts ...request.Option) (*AttachElasticLoadBalancerOutput, error) {
+func (c *OpsWorks) AttachElasticLoadBalancerWithContext(ctx aws.Context, input *AttachElasticLoadBalancerInput, opts ...aws.Option) (*AttachElasticLoadBalancerOutput, error) {
 	req, out := c.AttachElasticLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -390,7 +389,7 @@ func (c *OpsWorks) AttachElasticLoadBalancerWithContext(ctx aws.Context, input *
 
 const opCloneStack = "CloneStack"
 
-// CloneStackRequest generates a "aws/request.Request" representing the
+// CloneStackRequest generates a "aws.Request" representing the
 // client's request for the CloneStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -414,8 +413,8 @@ const opCloneStack = "CloneStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStack
-func (c *OpsWorks) CloneStackRequest(input *CloneStackInput) (req *request.Request, output *CloneStackOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CloneStackRequest(input *CloneStackInput) (req *aws.Request, output *CloneStackOutput) {
+	op := &aws.Operation{
 		Name:       opCloneStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -469,7 +468,7 @@ func (c *OpsWorks) CloneStack(input *CloneStackInput) (*CloneStackOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CloneStackWithContext(ctx aws.Context, input *CloneStackInput, opts ...request.Option) (*CloneStackOutput, error) {
+func (c *OpsWorks) CloneStackWithContext(ctx aws.Context, input *CloneStackInput, opts ...aws.Option) (*CloneStackOutput, error) {
 	req, out := c.CloneStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -478,7 +477,7 @@ func (c *OpsWorks) CloneStackWithContext(ctx aws.Context, input *CloneStackInput
 
 const opCreateApp = "CreateApp"
 
-// CreateAppRequest generates a "aws/request.Request" representing the
+// CreateAppRequest generates a "aws.Request" representing the
 // client's request for the CreateApp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -502,8 +501,8 @@ const opCreateApp = "CreateApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateApp
-func (c *OpsWorks) CreateAppRequest(input *CreateAppInput) (req *request.Request, output *CreateAppOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CreateAppRequest(input *CreateAppInput) (req *aws.Request, output *CreateAppOutput) {
+	op := &aws.Operation{
 		Name:       opCreateApp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -557,7 +556,7 @@ func (c *OpsWorks) CreateApp(input *CreateAppInput) (*CreateAppOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, opts ...request.Option) (*CreateAppOutput, error) {
+func (c *OpsWorks) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, opts ...aws.Option) (*CreateAppOutput, error) {
 	req, out := c.CreateAppRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -566,7 +565,7 @@ func (c *OpsWorks) CreateAppWithContext(ctx aws.Context, input *CreateAppInput, 
 
 const opCreateDeployment = "CreateDeployment"
 
-// CreateDeploymentRequest generates a "aws/request.Request" representing the
+// CreateDeploymentRequest generates a "aws.Request" representing the
 // client's request for the CreateDeployment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -590,8 +589,8 @@ const opCreateDeployment = "CreateDeployment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeployment
-func (c *OpsWorks) CreateDeploymentRequest(input *CreateDeploymentInput) (req *request.Request, output *CreateDeploymentOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CreateDeploymentRequest(input *CreateDeploymentInput) (req *aws.Request, output *CreateDeploymentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeployment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -646,7 +645,7 @@ func (c *OpsWorks) CreateDeployment(input *CreateDeploymentInput) (*CreateDeploy
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...request.Option) (*CreateDeploymentOutput, error) {
+func (c *OpsWorks) CreateDeploymentWithContext(ctx aws.Context, input *CreateDeploymentInput, opts ...aws.Option) (*CreateDeploymentOutput, error) {
 	req, out := c.CreateDeploymentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -655,7 +654,7 @@ func (c *OpsWorks) CreateDeploymentWithContext(ctx aws.Context, input *CreateDep
 
 const opCreateInstance = "CreateInstance"
 
-// CreateInstanceRequest generates a "aws/request.Request" representing the
+// CreateInstanceRequest generates a "aws.Request" representing the
 // client's request for the CreateInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -679,8 +678,8 @@ const opCreateInstance = "CreateInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstance
-func (c *OpsWorks) CreateInstanceRequest(input *CreateInstanceInput) (req *request.Request, output *CreateInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CreateInstanceRequest(input *CreateInstanceInput) (req *aws.Request, output *CreateInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opCreateInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -734,7 +733,7 @@ func (c *OpsWorks) CreateInstance(input *CreateInstanceInput) (*CreateInstanceOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CreateInstanceWithContext(ctx aws.Context, input *CreateInstanceInput, opts ...request.Option) (*CreateInstanceOutput, error) {
+func (c *OpsWorks) CreateInstanceWithContext(ctx aws.Context, input *CreateInstanceInput, opts ...aws.Option) (*CreateInstanceOutput, error) {
 	req, out := c.CreateInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -743,7 +742,7 @@ func (c *OpsWorks) CreateInstanceWithContext(ctx aws.Context, input *CreateInsta
 
 const opCreateLayer = "CreateLayer"
 
-// CreateLayerRequest generates a "aws/request.Request" representing the
+// CreateLayerRequest generates a "aws.Request" representing the
 // client's request for the CreateLayer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -767,8 +766,8 @@ const opCreateLayer = "CreateLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayer
-func (c *OpsWorks) CreateLayerRequest(input *CreateLayerInput) (req *request.Request, output *CreateLayerOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CreateLayerRequest(input *CreateLayerInput) (req *aws.Request, output *CreateLayerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLayer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -828,7 +827,7 @@ func (c *OpsWorks) CreateLayer(input *CreateLayerInput) (*CreateLayerOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CreateLayerWithContext(ctx aws.Context, input *CreateLayerInput, opts ...request.Option) (*CreateLayerOutput, error) {
+func (c *OpsWorks) CreateLayerWithContext(ctx aws.Context, input *CreateLayerInput, opts ...aws.Option) (*CreateLayerOutput, error) {
 	req, out := c.CreateLayerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -837,7 +836,7 @@ func (c *OpsWorks) CreateLayerWithContext(ctx aws.Context, input *CreateLayerInp
 
 const opCreateStack = "CreateStack"
 
-// CreateStackRequest generates a "aws/request.Request" representing the
+// CreateStackRequest generates a "aws.Request" representing the
 // client's request for the CreateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -861,8 +860,8 @@ const opCreateStack = "CreateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStack
-func (c *OpsWorks) CreateStackRequest(input *CreateStackInput) (req *request.Request, output *CreateStackOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CreateStackRequest(input *CreateStackInput) (req *aws.Request, output *CreateStackOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -911,7 +910,7 @@ func (c *OpsWorks) CreateStack(input *CreateStackInput) (*CreateStackOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...request.Option) (*CreateStackOutput, error) {
+func (c *OpsWorks) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...aws.Option) (*CreateStackOutput, error) {
 	req, out := c.CreateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -920,7 +919,7 @@ func (c *OpsWorks) CreateStackWithContext(ctx aws.Context, input *CreateStackInp
 
 const opCreateUserProfile = "CreateUserProfile"
 
-// CreateUserProfileRequest generates a "aws/request.Request" representing the
+// CreateUserProfileRequest generates a "aws.Request" representing the
 // client's request for the CreateUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -944,8 +943,8 @@ const opCreateUserProfile = "CreateUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfile
-func (c *OpsWorks) CreateUserProfileRequest(input *CreateUserProfileInput) (req *request.Request, output *CreateUserProfileOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) CreateUserProfileRequest(input *CreateUserProfileInput) (req *aws.Request, output *CreateUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -994,7 +993,7 @@ func (c *OpsWorks) CreateUserProfile(input *CreateUserProfileInput) (*CreateUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) CreateUserProfileWithContext(ctx aws.Context, input *CreateUserProfileInput, opts ...request.Option) (*CreateUserProfileOutput, error) {
+func (c *OpsWorks) CreateUserProfileWithContext(ctx aws.Context, input *CreateUserProfileInput, opts ...aws.Option) (*CreateUserProfileOutput, error) {
 	req, out := c.CreateUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1003,7 +1002,7 @@ func (c *OpsWorks) CreateUserProfileWithContext(ctx aws.Context, input *CreateUs
 
 const opDeleteApp = "DeleteApp"
 
-// DeleteAppRequest generates a "aws/request.Request" representing the
+// DeleteAppRequest generates a "aws.Request" representing the
 // client's request for the DeleteApp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1027,8 +1026,8 @@ const opDeleteApp = "DeleteApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteApp
-func (c *OpsWorks) DeleteAppRequest(input *DeleteAppInput) (req *request.Request, output *DeleteAppOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeleteAppRequest(input *DeleteAppInput) (req *aws.Request, output *DeleteAppOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteApp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1083,7 +1082,7 @@ func (c *OpsWorks) DeleteApp(input *DeleteAppInput) (*DeleteAppOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, opts ...request.Option) (*DeleteAppOutput, error) {
+func (c *OpsWorks) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, opts ...aws.Option) (*DeleteAppOutput, error) {
 	req, out := c.DeleteAppRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1092,7 +1091,7 @@ func (c *OpsWorks) DeleteAppWithContext(ctx aws.Context, input *DeleteAppInput, 
 
 const opDeleteInstance = "DeleteInstance"
 
-// DeleteInstanceRequest generates a "aws/request.Request" representing the
+// DeleteInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeleteInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1116,8 +1115,8 @@ const opDeleteInstance = "DeleteInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstance
-func (c *OpsWorks) DeleteInstanceRequest(input *DeleteInstanceInput) (req *request.Request, output *DeleteInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeleteInstanceRequest(input *DeleteInstanceInput) (req *aws.Request, output *DeleteInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1175,7 +1174,7 @@ func (c *OpsWorks) DeleteInstance(input *DeleteInstanceInput) (*DeleteInstanceOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInstanceInput, opts ...request.Option) (*DeleteInstanceOutput, error) {
+func (c *OpsWorks) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInstanceInput, opts ...aws.Option) (*DeleteInstanceOutput, error) {
 	req, out := c.DeleteInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1184,7 +1183,7 @@ func (c *OpsWorks) DeleteInstanceWithContext(ctx aws.Context, input *DeleteInsta
 
 const opDeleteLayer = "DeleteLayer"
 
-// DeleteLayerRequest generates a "aws/request.Request" representing the
+// DeleteLayerRequest generates a "aws.Request" representing the
 // client's request for the DeleteLayer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1208,8 +1207,8 @@ const opDeleteLayer = "DeleteLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayer
-func (c *OpsWorks) DeleteLayerRequest(input *DeleteLayerInput) (req *request.Request, output *DeleteLayerOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeleteLayerRequest(input *DeleteLayerInput) (req *aws.Request, output *DeleteLayerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLayer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1266,7 +1265,7 @@ func (c *OpsWorks) DeleteLayer(input *DeleteLayerInput) (*DeleteLayerOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeleteLayerWithContext(ctx aws.Context, input *DeleteLayerInput, opts ...request.Option) (*DeleteLayerOutput, error) {
+func (c *OpsWorks) DeleteLayerWithContext(ctx aws.Context, input *DeleteLayerInput, opts ...aws.Option) (*DeleteLayerOutput, error) {
 	req, out := c.DeleteLayerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1275,7 +1274,7 @@ func (c *OpsWorks) DeleteLayerWithContext(ctx aws.Context, input *DeleteLayerInp
 
 const opDeleteStack = "DeleteStack"
 
-// DeleteStackRequest generates a "aws/request.Request" representing the
+// DeleteStackRequest generates a "aws.Request" representing the
 // client's request for the DeleteStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1299,8 +1298,8 @@ const opDeleteStack = "DeleteStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStack
-func (c *OpsWorks) DeleteStackRequest(input *DeleteStackInput) (req *request.Request, output *DeleteStackOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request, output *DeleteStackOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1357,7 +1356,7 @@ func (c *OpsWorks) DeleteStack(input *DeleteStackInput) (*DeleteStackOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...request.Option) (*DeleteStackOutput, error) {
+func (c *OpsWorks) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...aws.Option) (*DeleteStackOutput, error) {
 	req, out := c.DeleteStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1366,7 +1365,7 @@ func (c *OpsWorks) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInp
 
 const opDeleteUserProfile = "DeleteUserProfile"
 
-// DeleteUserProfileRequest generates a "aws/request.Request" representing the
+// DeleteUserProfileRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1390,8 +1389,8 @@ const opDeleteUserProfile = "DeleteUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfile
-func (c *OpsWorks) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *request.Request, output *DeleteUserProfileOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeleteUserProfileRequest(input *DeleteUserProfileInput) (req *aws.Request, output *DeleteUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1445,7 +1444,7 @@ func (c *OpsWorks) DeleteUserProfile(input *DeleteUserProfileInput) (*DeleteUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUserProfileInput, opts ...request.Option) (*DeleteUserProfileOutput, error) {
+func (c *OpsWorks) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUserProfileInput, opts ...aws.Option) (*DeleteUserProfileOutput, error) {
 	req, out := c.DeleteUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1454,7 +1453,7 @@ func (c *OpsWorks) DeleteUserProfileWithContext(ctx aws.Context, input *DeleteUs
 
 const opDeregisterEcsCluster = "DeregisterEcsCluster"
 
-// DeregisterEcsClusterRequest generates a "aws/request.Request" representing the
+// DeregisterEcsClusterRequest generates a "aws.Request" representing the
 // client's request for the DeregisterEcsCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1478,8 +1477,8 @@ const opDeregisterEcsCluster = "DeregisterEcsCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsCluster
-func (c *OpsWorks) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) (req *request.Request, output *DeregisterEcsClusterOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeregisterEcsClusterRequest(input *DeregisterEcsClusterInput) (req *aws.Request, output *DeregisterEcsClusterOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterEcsCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1535,7 +1534,7 @@ func (c *OpsWorks) DeregisterEcsCluster(input *DeregisterEcsClusterInput) (*Dere
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeregisterEcsClusterWithContext(ctx aws.Context, input *DeregisterEcsClusterInput, opts ...request.Option) (*DeregisterEcsClusterOutput, error) {
+func (c *OpsWorks) DeregisterEcsClusterWithContext(ctx aws.Context, input *DeregisterEcsClusterInput, opts ...aws.Option) (*DeregisterEcsClusterOutput, error) {
 	req, out := c.DeregisterEcsClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1544,7 +1543,7 @@ func (c *OpsWorks) DeregisterEcsClusterWithContext(ctx aws.Context, input *Dereg
 
 const opDeregisterElasticIp = "DeregisterElasticIp"
 
-// DeregisterElasticIpRequest generates a "aws/request.Request" representing the
+// DeregisterElasticIpRequest generates a "aws.Request" representing the
 // client's request for the DeregisterElasticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1568,8 +1567,8 @@ const opDeregisterElasticIp = "DeregisterElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIp
-func (c *OpsWorks) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) (req *request.Request, output *DeregisterElasticIpOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeregisterElasticIpRequest(input *DeregisterElasticIpInput) (req *aws.Request, output *DeregisterElasticIpOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1625,7 +1624,7 @@ func (c *OpsWorks) DeregisterElasticIp(input *DeregisterElasticIpInput) (*Deregi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeregisterElasticIpWithContext(ctx aws.Context, input *DeregisterElasticIpInput, opts ...request.Option) (*DeregisterElasticIpOutput, error) {
+func (c *OpsWorks) DeregisterElasticIpWithContext(ctx aws.Context, input *DeregisterElasticIpInput, opts ...aws.Option) (*DeregisterElasticIpOutput, error) {
 	req, out := c.DeregisterElasticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1634,7 +1633,7 @@ func (c *OpsWorks) DeregisterElasticIpWithContext(ctx aws.Context, input *Deregi
 
 const opDeregisterInstance = "DeregisterInstance"
 
-// DeregisterInstanceRequest generates a "aws/request.Request" representing the
+// DeregisterInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeregisterInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1658,8 +1657,8 @@ const opDeregisterInstance = "DeregisterInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstance
-func (c *OpsWorks) DeregisterInstanceRequest(input *DeregisterInstanceInput) (req *request.Request, output *DeregisterInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeregisterInstanceRequest(input *DeregisterInstanceInput) (req *aws.Request, output *DeregisterInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1716,7 +1715,7 @@ func (c *OpsWorks) DeregisterInstance(input *DeregisterInstanceInput) (*Deregist
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeregisterInstanceWithContext(ctx aws.Context, input *DeregisterInstanceInput, opts ...request.Option) (*DeregisterInstanceOutput, error) {
+func (c *OpsWorks) DeregisterInstanceWithContext(ctx aws.Context, input *DeregisterInstanceInput, opts ...aws.Option) (*DeregisterInstanceOutput, error) {
 	req, out := c.DeregisterInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1725,7 +1724,7 @@ func (c *OpsWorks) DeregisterInstanceWithContext(ctx aws.Context, input *Deregis
 
 const opDeregisterRdsDbInstance = "DeregisterRdsDbInstance"
 
-// DeregisterRdsDbInstanceRequest generates a "aws/request.Request" representing the
+// DeregisterRdsDbInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeregisterRdsDbInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1749,8 +1748,8 @@ const opDeregisterRdsDbInstance = "DeregisterRdsDbInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstance
-func (c *OpsWorks) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceInput) (req *request.Request, output *DeregisterRdsDbInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeregisterRdsDbInstanceRequest(input *DeregisterRdsDbInstanceInput) (req *aws.Request, output *DeregisterRdsDbInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterRdsDbInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1805,7 +1804,7 @@ func (c *OpsWorks) DeregisterRdsDbInstance(input *DeregisterRdsDbInstanceInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeregisterRdsDbInstanceWithContext(ctx aws.Context, input *DeregisterRdsDbInstanceInput, opts ...request.Option) (*DeregisterRdsDbInstanceOutput, error) {
+func (c *OpsWorks) DeregisterRdsDbInstanceWithContext(ctx aws.Context, input *DeregisterRdsDbInstanceInput, opts ...aws.Option) (*DeregisterRdsDbInstanceOutput, error) {
 	req, out := c.DeregisterRdsDbInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1814,7 +1813,7 @@ func (c *OpsWorks) DeregisterRdsDbInstanceWithContext(ctx aws.Context, input *De
 
 const opDeregisterVolume = "DeregisterVolume"
 
-// DeregisterVolumeRequest generates a "aws/request.Request" representing the
+// DeregisterVolumeRequest generates a "aws.Request" representing the
 // client's request for the DeregisterVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1838,8 +1837,8 @@ const opDeregisterVolume = "DeregisterVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolume
-func (c *OpsWorks) DeregisterVolumeRequest(input *DeregisterVolumeInput) (req *request.Request, output *DeregisterVolumeOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DeregisterVolumeRequest(input *DeregisterVolumeInput) (req *aws.Request, output *DeregisterVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1895,7 +1894,7 @@ func (c *OpsWorks) DeregisterVolume(input *DeregisterVolumeInput) (*DeregisterVo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DeregisterVolumeWithContext(ctx aws.Context, input *DeregisterVolumeInput, opts ...request.Option) (*DeregisterVolumeOutput, error) {
+func (c *OpsWorks) DeregisterVolumeWithContext(ctx aws.Context, input *DeregisterVolumeInput, opts ...aws.Option) (*DeregisterVolumeOutput, error) {
 	req, out := c.DeregisterVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1904,7 +1903,7 @@ func (c *OpsWorks) DeregisterVolumeWithContext(ctx aws.Context, input *Deregiste
 
 const opDescribeAgentVersions = "DescribeAgentVersions"
 
-// DescribeAgentVersionsRequest generates a "aws/request.Request" representing the
+// DescribeAgentVersionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAgentVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1928,8 +1927,8 @@ const opDescribeAgentVersions = "DescribeAgentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersions
-func (c *OpsWorks) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput) (req *request.Request, output *DescribeAgentVersionsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeAgentVersionsRequest(input *DescribeAgentVersionsInput) (req *aws.Request, output *DescribeAgentVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAgentVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1979,7 +1978,7 @@ func (c *OpsWorks) DescribeAgentVersions(input *DescribeAgentVersionsInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeAgentVersionsWithContext(ctx aws.Context, input *DescribeAgentVersionsInput, opts ...request.Option) (*DescribeAgentVersionsOutput, error) {
+func (c *OpsWorks) DescribeAgentVersionsWithContext(ctx aws.Context, input *DescribeAgentVersionsInput, opts ...aws.Option) (*DescribeAgentVersionsOutput, error) {
 	req, out := c.DescribeAgentVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1988,7 +1987,7 @@ func (c *OpsWorks) DescribeAgentVersionsWithContext(ctx aws.Context, input *Desc
 
 const opDescribeApps = "DescribeApps"
 
-// DescribeAppsRequest generates a "aws/request.Request" representing the
+// DescribeAppsRequest generates a "aws.Request" representing the
 // client's request for the DescribeApps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2012,8 +2011,8 @@ const opDescribeApps = "DescribeApps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeApps
-func (c *OpsWorks) DescribeAppsRequest(input *DescribeAppsInput) (req *request.Request, output *DescribeAppsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeAppsRequest(input *DescribeAppsInput) (req *aws.Request, output *DescribeAppsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeApps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2068,7 +2067,7 @@ func (c *OpsWorks) DescribeApps(input *DescribeAppsInput) (*DescribeAppsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeAppsWithContext(ctx aws.Context, input *DescribeAppsInput, opts ...request.Option) (*DescribeAppsOutput, error) {
+func (c *OpsWorks) DescribeAppsWithContext(ctx aws.Context, input *DescribeAppsInput, opts ...aws.Option) (*DescribeAppsOutput, error) {
 	req, out := c.DescribeAppsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2077,7 +2076,7 @@ func (c *OpsWorks) DescribeAppsWithContext(ctx aws.Context, input *DescribeAppsI
 
 const opDescribeCommands = "DescribeCommands"
 
-// DescribeCommandsRequest generates a "aws/request.Request" representing the
+// DescribeCommandsRequest generates a "aws.Request" representing the
 // client's request for the DescribeCommands operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2101,8 +2100,8 @@ const opDescribeCommands = "DescribeCommands"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommands
-func (c *OpsWorks) DescribeCommandsRequest(input *DescribeCommandsInput) (req *request.Request, output *DescribeCommandsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeCommandsRequest(input *DescribeCommandsInput) (req *aws.Request, output *DescribeCommandsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCommands,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2157,7 +2156,7 @@ func (c *OpsWorks) DescribeCommands(input *DescribeCommandsInput) (*DescribeComm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeCommandsWithContext(ctx aws.Context, input *DescribeCommandsInput, opts ...request.Option) (*DescribeCommandsOutput, error) {
+func (c *OpsWorks) DescribeCommandsWithContext(ctx aws.Context, input *DescribeCommandsInput, opts ...aws.Option) (*DescribeCommandsOutput, error) {
 	req, out := c.DescribeCommandsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2166,7 +2165,7 @@ func (c *OpsWorks) DescribeCommandsWithContext(ctx aws.Context, input *DescribeC
 
 const opDescribeDeployments = "DescribeDeployments"
 
-// DescribeDeploymentsRequest generates a "aws/request.Request" representing the
+// DescribeDeploymentsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDeployments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2190,8 +2189,8 @@ const opDescribeDeployments = "DescribeDeployments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeployments
-func (c *OpsWorks) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) (req *request.Request, output *DescribeDeploymentsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeDeploymentsRequest(input *DescribeDeploymentsInput) (req *aws.Request, output *DescribeDeploymentsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDeployments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2246,7 +2245,7 @@ func (c *OpsWorks) DescribeDeployments(input *DescribeDeploymentsInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeDeploymentsWithContext(ctx aws.Context, input *DescribeDeploymentsInput, opts ...request.Option) (*DescribeDeploymentsOutput, error) {
+func (c *OpsWorks) DescribeDeploymentsWithContext(ctx aws.Context, input *DescribeDeploymentsInput, opts ...aws.Option) (*DescribeDeploymentsOutput, error) {
 	req, out := c.DescribeDeploymentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2255,7 +2254,7 @@ func (c *OpsWorks) DescribeDeploymentsWithContext(ctx aws.Context, input *Descri
 
 const opDescribeEcsClusters = "DescribeEcsClusters"
 
-// DescribeEcsClustersRequest generates a "aws/request.Request" representing the
+// DescribeEcsClustersRequest generates a "aws.Request" representing the
 // client's request for the DescribeEcsClusters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2279,12 +2278,12 @@ const opDescribeEcsClusters = "DescribeEcsClusters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClusters
-func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) (req *request.Request, output *DescribeEcsClustersOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) (req *aws.Request, output *DescribeEcsClustersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEcsClusters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2344,7 +2343,7 @@ func (c *OpsWorks) DescribeEcsClusters(input *DescribeEcsClustersInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeEcsClustersWithContext(ctx aws.Context, input *DescribeEcsClustersInput, opts ...request.Option) (*DescribeEcsClustersOutput, error) {
+func (c *OpsWorks) DescribeEcsClustersWithContext(ctx aws.Context, input *DescribeEcsClustersInput, opts ...aws.Option) (*DescribeEcsClustersOutput, error) {
 	req, out := c.DescribeEcsClustersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2379,9 +2378,9 @@ func (c *OpsWorks) DescribeEcsClustersPages(input *DescribeEcsClustersInput, fn 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeEcsClustersPagesWithContext(ctx aws.Context, input *DescribeEcsClustersInput, fn func(*DescribeEcsClustersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *OpsWorks) DescribeEcsClustersPagesWithContext(ctx aws.Context, input *DescribeEcsClustersInput, fn func(*DescribeEcsClustersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEcsClustersInput
 			if input != nil {
 				tmp := *input
@@ -2403,7 +2402,7 @@ func (c *OpsWorks) DescribeEcsClustersPagesWithContext(ctx aws.Context, input *D
 
 const opDescribeElasticIps = "DescribeElasticIps"
 
-// DescribeElasticIpsRequest generates a "aws/request.Request" representing the
+// DescribeElasticIpsRequest generates a "aws.Request" representing the
 // client's request for the DescribeElasticIps operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2427,8 +2426,8 @@ const opDescribeElasticIps = "DescribeElasticIps"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIps
-func (c *OpsWorks) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) (req *request.Request, output *DescribeElasticIpsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeElasticIpsRequest(input *DescribeElasticIpsInput) (req *aws.Request, output *DescribeElasticIpsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeElasticIps,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2483,7 +2482,7 @@ func (c *OpsWorks) DescribeElasticIps(input *DescribeElasticIpsInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeElasticIpsWithContext(ctx aws.Context, input *DescribeElasticIpsInput, opts ...request.Option) (*DescribeElasticIpsOutput, error) {
+func (c *OpsWorks) DescribeElasticIpsWithContext(ctx aws.Context, input *DescribeElasticIpsInput, opts ...aws.Option) (*DescribeElasticIpsOutput, error) {
 	req, out := c.DescribeElasticIpsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2492,7 +2491,7 @@ func (c *OpsWorks) DescribeElasticIpsWithContext(ctx aws.Context, input *Describ
 
 const opDescribeElasticLoadBalancers = "DescribeElasticLoadBalancers"
 
-// DescribeElasticLoadBalancersRequest generates a "aws/request.Request" representing the
+// DescribeElasticLoadBalancersRequest generates a "aws.Request" representing the
 // client's request for the DescribeElasticLoadBalancers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2516,8 +2515,8 @@ const opDescribeElasticLoadBalancers = "DescribeElasticLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancers
-func (c *OpsWorks) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadBalancersInput) (req *request.Request, output *DescribeElasticLoadBalancersOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeElasticLoadBalancersRequest(input *DescribeElasticLoadBalancersInput) (req *aws.Request, output *DescribeElasticLoadBalancersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeElasticLoadBalancers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2572,7 +2571,7 @@ func (c *OpsWorks) DescribeElasticLoadBalancers(input *DescribeElasticLoadBalanc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeElasticLoadBalancersWithContext(ctx aws.Context, input *DescribeElasticLoadBalancersInput, opts ...request.Option) (*DescribeElasticLoadBalancersOutput, error) {
+func (c *OpsWorks) DescribeElasticLoadBalancersWithContext(ctx aws.Context, input *DescribeElasticLoadBalancersInput, opts ...aws.Option) (*DescribeElasticLoadBalancersOutput, error) {
 	req, out := c.DescribeElasticLoadBalancersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2581,7 +2580,7 @@ func (c *OpsWorks) DescribeElasticLoadBalancersWithContext(ctx aws.Context, inpu
 
 const opDescribeInstances = "DescribeInstances"
 
-// DescribeInstancesRequest generates a "aws/request.Request" representing the
+// DescribeInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2605,8 +2604,8 @@ const opDescribeInstances = "DescribeInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstances
-func (c *OpsWorks) DescribeInstancesRequest(input *DescribeInstancesInput) (req *request.Request, output *DescribeInstancesOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeInstancesRequest(input *DescribeInstancesInput) (req *aws.Request, output *DescribeInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2661,7 +2660,7 @@ func (c *OpsWorks) DescribeInstances(input *DescribeInstancesInput) (*DescribeIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeInstancesWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...request.Option) (*DescribeInstancesOutput, error) {
+func (c *OpsWorks) DescribeInstancesWithContext(ctx aws.Context, input *DescribeInstancesInput, opts ...aws.Option) (*DescribeInstancesOutput, error) {
 	req, out := c.DescribeInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2670,7 +2669,7 @@ func (c *OpsWorks) DescribeInstancesWithContext(ctx aws.Context, input *Describe
 
 const opDescribeLayers = "DescribeLayers"
 
-// DescribeLayersRequest generates a "aws/request.Request" representing the
+// DescribeLayersRequest generates a "aws.Request" representing the
 // client's request for the DescribeLayers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2694,8 +2693,8 @@ const opDescribeLayers = "DescribeLayers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayers
-func (c *OpsWorks) DescribeLayersRequest(input *DescribeLayersInput) (req *request.Request, output *DescribeLayersOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeLayersRequest(input *DescribeLayersInput) (req *aws.Request, output *DescribeLayersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLayers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2750,7 +2749,7 @@ func (c *OpsWorks) DescribeLayers(input *DescribeLayersInput) (*DescribeLayersOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeLayersWithContext(ctx aws.Context, input *DescribeLayersInput, opts ...request.Option) (*DescribeLayersOutput, error) {
+func (c *OpsWorks) DescribeLayersWithContext(ctx aws.Context, input *DescribeLayersInput, opts ...aws.Option) (*DescribeLayersOutput, error) {
 	req, out := c.DescribeLayersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2759,7 +2758,7 @@ func (c *OpsWorks) DescribeLayersWithContext(ctx aws.Context, input *DescribeLay
 
 const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
 
-// DescribeLoadBasedAutoScalingRequest generates a "aws/request.Request" representing the
+// DescribeLoadBasedAutoScalingRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBasedAutoScaling operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2783,8 +2782,8 @@ const opDescribeLoadBasedAutoScaling = "DescribeLoadBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScaling
-func (c *OpsWorks) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAutoScalingInput) (req *request.Request, output *DescribeLoadBasedAutoScalingOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeLoadBasedAutoScalingRequest(input *DescribeLoadBasedAutoScalingInput) (req *aws.Request, output *DescribeLoadBasedAutoScalingOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBasedAutoScaling,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2839,7 +2838,7 @@ func (c *OpsWorks) DescribeLoadBasedAutoScaling(input *DescribeLoadBasedAutoScal
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeLoadBasedAutoScalingWithContext(ctx aws.Context, input *DescribeLoadBasedAutoScalingInput, opts ...request.Option) (*DescribeLoadBasedAutoScalingOutput, error) {
+func (c *OpsWorks) DescribeLoadBasedAutoScalingWithContext(ctx aws.Context, input *DescribeLoadBasedAutoScalingInput, opts ...aws.Option) (*DescribeLoadBasedAutoScalingOutput, error) {
 	req, out := c.DescribeLoadBasedAutoScalingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2848,7 +2847,7 @@ func (c *OpsWorks) DescribeLoadBasedAutoScalingWithContext(ctx aws.Context, inpu
 
 const opDescribeMyUserProfile = "DescribeMyUserProfile"
 
-// DescribeMyUserProfileRequest generates a "aws/request.Request" representing the
+// DescribeMyUserProfileRequest generates a "aws.Request" representing the
 // client's request for the DescribeMyUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2872,8 +2871,8 @@ const opDescribeMyUserProfile = "DescribeMyUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeMyUserProfile
-func (c *OpsWorks) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput) (req *request.Request, output *DescribeMyUserProfileOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeMyUserProfileRequest(input *DescribeMyUserProfileInput) (req *aws.Request, output *DescribeMyUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMyUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2917,7 +2916,7 @@ func (c *OpsWorks) DescribeMyUserProfile(input *DescribeMyUserProfileInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeMyUserProfileWithContext(ctx aws.Context, input *DescribeMyUserProfileInput, opts ...request.Option) (*DescribeMyUserProfileOutput, error) {
+func (c *OpsWorks) DescribeMyUserProfileWithContext(ctx aws.Context, input *DescribeMyUserProfileInput, opts ...aws.Option) (*DescribeMyUserProfileOutput, error) {
 	req, out := c.DescribeMyUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2926,7 +2925,7 @@ func (c *OpsWorks) DescribeMyUserProfileWithContext(ctx aws.Context, input *Desc
 
 const opDescribePermissions = "DescribePermissions"
 
-// DescribePermissionsRequest generates a "aws/request.Request" representing the
+// DescribePermissionsRequest generates a "aws.Request" representing the
 // client's request for the DescribePermissions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2950,8 +2949,8 @@ const opDescribePermissions = "DescribePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissions
-func (c *OpsWorks) DescribePermissionsRequest(input *DescribePermissionsInput) (req *request.Request, output *DescribePermissionsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribePermissionsRequest(input *DescribePermissionsInput) (req *aws.Request, output *DescribePermissionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePermissions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3004,7 +3003,7 @@ func (c *OpsWorks) DescribePermissions(input *DescribePermissionsInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribePermissionsWithContext(ctx aws.Context, input *DescribePermissionsInput, opts ...request.Option) (*DescribePermissionsOutput, error) {
+func (c *OpsWorks) DescribePermissionsWithContext(ctx aws.Context, input *DescribePermissionsInput, opts ...aws.Option) (*DescribePermissionsOutput, error) {
 	req, out := c.DescribePermissionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3013,7 +3012,7 @@ func (c *OpsWorks) DescribePermissionsWithContext(ctx aws.Context, input *Descri
 
 const opDescribeRaidArrays = "DescribeRaidArrays"
 
-// DescribeRaidArraysRequest generates a "aws/request.Request" representing the
+// DescribeRaidArraysRequest generates a "aws.Request" representing the
 // client's request for the DescribeRaidArrays operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3037,8 +3036,8 @@ const opDescribeRaidArrays = "DescribeRaidArrays"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArrays
-func (c *OpsWorks) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) (req *request.Request, output *DescribeRaidArraysOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeRaidArraysRequest(input *DescribeRaidArraysInput) (req *aws.Request, output *DescribeRaidArraysOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRaidArrays,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3093,7 +3092,7 @@ func (c *OpsWorks) DescribeRaidArrays(input *DescribeRaidArraysInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeRaidArraysWithContext(ctx aws.Context, input *DescribeRaidArraysInput, opts ...request.Option) (*DescribeRaidArraysOutput, error) {
+func (c *OpsWorks) DescribeRaidArraysWithContext(ctx aws.Context, input *DescribeRaidArraysInput, opts ...aws.Option) (*DescribeRaidArraysOutput, error) {
 	req, out := c.DescribeRaidArraysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3102,7 +3101,7 @@ func (c *OpsWorks) DescribeRaidArraysWithContext(ctx aws.Context, input *Describ
 
 const opDescribeRdsDbInstances = "DescribeRdsDbInstances"
 
-// DescribeRdsDbInstancesRequest generates a "aws/request.Request" representing the
+// DescribeRdsDbInstancesRequest generates a "aws.Request" representing the
 // client's request for the DescribeRdsDbInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3126,8 +3125,8 @@ const opDescribeRdsDbInstances = "DescribeRdsDbInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstances
-func (c *OpsWorks) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInput) (req *request.Request, output *DescribeRdsDbInstancesOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeRdsDbInstancesRequest(input *DescribeRdsDbInstancesInput) (req *aws.Request, output *DescribeRdsDbInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRdsDbInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3182,7 +3181,7 @@ func (c *OpsWorks) DescribeRdsDbInstances(input *DescribeRdsDbInstancesInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeRdsDbInstancesWithContext(ctx aws.Context, input *DescribeRdsDbInstancesInput, opts ...request.Option) (*DescribeRdsDbInstancesOutput, error) {
+func (c *OpsWorks) DescribeRdsDbInstancesWithContext(ctx aws.Context, input *DescribeRdsDbInstancesInput, opts ...aws.Option) (*DescribeRdsDbInstancesOutput, error) {
 	req, out := c.DescribeRdsDbInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3191,7 +3190,7 @@ func (c *OpsWorks) DescribeRdsDbInstancesWithContext(ctx aws.Context, input *Des
 
 const opDescribeServiceErrors = "DescribeServiceErrors"
 
-// DescribeServiceErrorsRequest generates a "aws/request.Request" representing the
+// DescribeServiceErrorsRequest generates a "aws.Request" representing the
 // client's request for the DescribeServiceErrors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3215,8 +3214,8 @@ const opDescribeServiceErrors = "DescribeServiceErrors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrors
-func (c *OpsWorks) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput) (req *request.Request, output *DescribeServiceErrorsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeServiceErrorsRequest(input *DescribeServiceErrorsInput) (req *aws.Request, output *DescribeServiceErrorsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeServiceErrors,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3271,7 +3270,7 @@ func (c *OpsWorks) DescribeServiceErrors(input *DescribeServiceErrorsInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeServiceErrorsWithContext(ctx aws.Context, input *DescribeServiceErrorsInput, opts ...request.Option) (*DescribeServiceErrorsOutput, error) {
+func (c *OpsWorks) DescribeServiceErrorsWithContext(ctx aws.Context, input *DescribeServiceErrorsInput, opts ...aws.Option) (*DescribeServiceErrorsOutput, error) {
 	req, out := c.DescribeServiceErrorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3280,7 +3279,7 @@ func (c *OpsWorks) DescribeServiceErrorsWithContext(ctx aws.Context, input *Desc
 
 const opDescribeStackProvisioningParameters = "DescribeStackProvisioningParameters"
 
-// DescribeStackProvisioningParametersRequest generates a "aws/request.Request" representing the
+// DescribeStackProvisioningParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackProvisioningParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3304,8 +3303,8 @@ const opDescribeStackProvisioningParameters = "DescribeStackProvisioningParamete
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParameters
-func (c *OpsWorks) DescribeStackProvisioningParametersRequest(input *DescribeStackProvisioningParametersInput) (req *request.Request, output *DescribeStackProvisioningParametersOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeStackProvisioningParametersRequest(input *DescribeStackProvisioningParametersInput) (req *aws.Request, output *DescribeStackProvisioningParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackProvisioningParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3358,7 +3357,7 @@ func (c *OpsWorks) DescribeStackProvisioningParameters(input *DescribeStackProvi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeStackProvisioningParametersWithContext(ctx aws.Context, input *DescribeStackProvisioningParametersInput, opts ...request.Option) (*DescribeStackProvisioningParametersOutput, error) {
+func (c *OpsWorks) DescribeStackProvisioningParametersWithContext(ctx aws.Context, input *DescribeStackProvisioningParametersInput, opts ...aws.Option) (*DescribeStackProvisioningParametersOutput, error) {
 	req, out := c.DescribeStackProvisioningParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3367,7 +3366,7 @@ func (c *OpsWorks) DescribeStackProvisioningParametersWithContext(ctx aws.Contex
 
 const opDescribeStackSummary = "DescribeStackSummary"
 
-// DescribeStackSummaryRequest generates a "aws/request.Request" representing the
+// DescribeStackSummaryRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackSummary operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3391,8 +3390,8 @@ const opDescribeStackSummary = "DescribeStackSummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummary
-func (c *OpsWorks) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) (req *request.Request, output *DescribeStackSummaryOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeStackSummaryRequest(input *DescribeStackSummaryInput) (req *aws.Request, output *DescribeStackSummaryOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackSummary,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3446,7 +3445,7 @@ func (c *OpsWorks) DescribeStackSummary(input *DescribeStackSummaryInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeStackSummaryWithContext(ctx aws.Context, input *DescribeStackSummaryInput, opts ...request.Option) (*DescribeStackSummaryOutput, error) {
+func (c *OpsWorks) DescribeStackSummaryWithContext(ctx aws.Context, input *DescribeStackSummaryInput, opts ...aws.Option) (*DescribeStackSummaryOutput, error) {
 	req, out := c.DescribeStackSummaryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3455,7 +3454,7 @@ func (c *OpsWorks) DescribeStackSummaryWithContext(ctx aws.Context, input *Descr
 
 const opDescribeStacks = "DescribeStacks"
 
-// DescribeStacksRequest generates a "aws/request.Request" representing the
+// DescribeStacksRequest generates a "aws.Request" representing the
 // client's request for the DescribeStacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3479,8 +3478,8 @@ const opDescribeStacks = "DescribeStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacks
-func (c *OpsWorks) DescribeStacksRequest(input *DescribeStacksInput) (req *request.Request, output *DescribeStacksOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.Request, output *DescribeStacksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3533,7 +3532,7 @@ func (c *OpsWorks) DescribeStacks(input *DescribeStacksInput) (*DescribeStacksOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.Option) (*DescribeStacksOutput, error) {
+func (c *OpsWorks) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.Option) (*DescribeStacksOutput, error) {
 	req, out := c.DescribeStacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3542,7 +3541,7 @@ func (c *OpsWorks) DescribeStacksWithContext(ctx aws.Context, input *DescribeSta
 
 const opDescribeTimeBasedAutoScaling = "DescribeTimeBasedAutoScaling"
 
-// DescribeTimeBasedAutoScalingRequest generates a "aws/request.Request" representing the
+// DescribeTimeBasedAutoScalingRequest generates a "aws.Request" representing the
 // client's request for the DescribeTimeBasedAutoScaling operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3566,8 +3565,8 @@ const opDescribeTimeBasedAutoScaling = "DescribeTimeBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScaling
-func (c *OpsWorks) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAutoScalingInput) (req *request.Request, output *DescribeTimeBasedAutoScalingOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeTimeBasedAutoScalingRequest(input *DescribeTimeBasedAutoScalingInput) (req *aws.Request, output *DescribeTimeBasedAutoScalingOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTimeBasedAutoScaling,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3622,7 +3621,7 @@ func (c *OpsWorks) DescribeTimeBasedAutoScaling(input *DescribeTimeBasedAutoScal
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeTimeBasedAutoScalingWithContext(ctx aws.Context, input *DescribeTimeBasedAutoScalingInput, opts ...request.Option) (*DescribeTimeBasedAutoScalingOutput, error) {
+func (c *OpsWorks) DescribeTimeBasedAutoScalingWithContext(ctx aws.Context, input *DescribeTimeBasedAutoScalingInput, opts ...aws.Option) (*DescribeTimeBasedAutoScalingOutput, error) {
 	req, out := c.DescribeTimeBasedAutoScalingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3631,7 +3630,7 @@ func (c *OpsWorks) DescribeTimeBasedAutoScalingWithContext(ctx aws.Context, inpu
 
 const opDescribeUserProfiles = "DescribeUserProfiles"
 
-// DescribeUserProfilesRequest generates a "aws/request.Request" representing the
+// DescribeUserProfilesRequest generates a "aws.Request" representing the
 // client's request for the DescribeUserProfiles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3655,8 +3654,8 @@ const opDescribeUserProfiles = "DescribeUserProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeUserProfiles
-func (c *OpsWorks) DescribeUserProfilesRequest(input *DescribeUserProfilesInput) (req *request.Request, output *DescribeUserProfilesOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeUserProfilesRequest(input *DescribeUserProfilesInput) (req *aws.Request, output *DescribeUserProfilesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUserProfiles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3708,7 +3707,7 @@ func (c *OpsWorks) DescribeUserProfiles(input *DescribeUserProfilesInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeUserProfilesWithContext(ctx aws.Context, input *DescribeUserProfilesInput, opts ...request.Option) (*DescribeUserProfilesOutput, error) {
+func (c *OpsWorks) DescribeUserProfilesWithContext(ctx aws.Context, input *DescribeUserProfilesInput, opts ...aws.Option) (*DescribeUserProfilesOutput, error) {
 	req, out := c.DescribeUserProfilesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3717,7 +3716,7 @@ func (c *OpsWorks) DescribeUserProfilesWithContext(ctx aws.Context, input *Descr
 
 const opDescribeVolumes = "DescribeVolumes"
 
-// DescribeVolumesRequest generates a "aws/request.Request" representing the
+// DescribeVolumesRequest generates a "aws.Request" representing the
 // client's request for the DescribeVolumes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3741,8 +3740,8 @@ const opDescribeVolumes = "DescribeVolumes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumes
-func (c *OpsWorks) DescribeVolumesRequest(input *DescribeVolumesInput) (req *request.Request, output *DescribeVolumesOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DescribeVolumesRequest(input *DescribeVolumesInput) (req *aws.Request, output *DescribeVolumesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeVolumes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3797,7 +3796,7 @@ func (c *OpsWorks) DescribeVolumes(input *DescribeVolumesInput) (*DescribeVolume
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DescribeVolumesWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...request.Option) (*DescribeVolumesOutput, error) {
+func (c *OpsWorks) DescribeVolumesWithContext(ctx aws.Context, input *DescribeVolumesInput, opts ...aws.Option) (*DescribeVolumesOutput, error) {
 	req, out := c.DescribeVolumesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3806,7 +3805,7 @@ func (c *OpsWorks) DescribeVolumesWithContext(ctx aws.Context, input *DescribeVo
 
 const opDetachElasticLoadBalancer = "DetachElasticLoadBalancer"
 
-// DetachElasticLoadBalancerRequest generates a "aws/request.Request" representing the
+// DetachElasticLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the DetachElasticLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3830,8 +3829,8 @@ const opDetachElasticLoadBalancer = "DetachElasticLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancer
-func (c *OpsWorks) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalancerInput) (req *request.Request, output *DetachElasticLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DetachElasticLoadBalancerRequest(input *DetachElasticLoadBalancerInput) (req *aws.Request, output *DetachElasticLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opDetachElasticLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3883,7 +3882,7 @@ func (c *OpsWorks) DetachElasticLoadBalancer(input *DetachElasticLoadBalancerInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DetachElasticLoadBalancerWithContext(ctx aws.Context, input *DetachElasticLoadBalancerInput, opts ...request.Option) (*DetachElasticLoadBalancerOutput, error) {
+func (c *OpsWorks) DetachElasticLoadBalancerWithContext(ctx aws.Context, input *DetachElasticLoadBalancerInput, opts ...aws.Option) (*DetachElasticLoadBalancerOutput, error) {
 	req, out := c.DetachElasticLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3892,7 +3891,7 @@ func (c *OpsWorks) DetachElasticLoadBalancerWithContext(ctx aws.Context, input *
 
 const opDisassociateElasticIp = "DisassociateElasticIp"
 
-// DisassociateElasticIpRequest generates a "aws/request.Request" representing the
+// DisassociateElasticIpRequest generates a "aws.Request" representing the
 // client's request for the DisassociateElasticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3916,8 +3915,8 @@ const opDisassociateElasticIp = "DisassociateElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIp
-func (c *OpsWorks) DisassociateElasticIpRequest(input *DisassociateElasticIpInput) (req *request.Request, output *DisassociateElasticIpOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) DisassociateElasticIpRequest(input *DisassociateElasticIpInput) (req *aws.Request, output *DisassociateElasticIpOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3974,7 +3973,7 @@ func (c *OpsWorks) DisassociateElasticIp(input *DisassociateElasticIpInput) (*Di
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) DisassociateElasticIpWithContext(ctx aws.Context, input *DisassociateElasticIpInput, opts ...request.Option) (*DisassociateElasticIpOutput, error) {
+func (c *OpsWorks) DisassociateElasticIpWithContext(ctx aws.Context, input *DisassociateElasticIpInput, opts ...aws.Option) (*DisassociateElasticIpOutput, error) {
 	req, out := c.DisassociateElasticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3983,7 +3982,7 @@ func (c *OpsWorks) DisassociateElasticIpWithContext(ctx aws.Context, input *Disa
 
 const opGetHostnameSuggestion = "GetHostnameSuggestion"
 
-// GetHostnameSuggestionRequest generates a "aws/request.Request" representing the
+// GetHostnameSuggestionRequest generates a "aws.Request" representing the
 // client's request for the GetHostnameSuggestion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4007,8 +4006,8 @@ const opGetHostnameSuggestion = "GetHostnameSuggestion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestion
-func (c *OpsWorks) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput) (req *request.Request, output *GetHostnameSuggestionOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) GetHostnameSuggestionRequest(input *GetHostnameSuggestionInput) (req *aws.Request, output *GetHostnameSuggestionOutput) {
+	op := &aws.Operation{
 		Name:       opGetHostnameSuggestion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4062,7 +4061,7 @@ func (c *OpsWorks) GetHostnameSuggestion(input *GetHostnameSuggestionInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) GetHostnameSuggestionWithContext(ctx aws.Context, input *GetHostnameSuggestionInput, opts ...request.Option) (*GetHostnameSuggestionOutput, error) {
+func (c *OpsWorks) GetHostnameSuggestionWithContext(ctx aws.Context, input *GetHostnameSuggestionInput, opts ...aws.Option) (*GetHostnameSuggestionOutput, error) {
 	req, out := c.GetHostnameSuggestionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4071,7 +4070,7 @@ func (c *OpsWorks) GetHostnameSuggestionWithContext(ctx aws.Context, input *GetH
 
 const opGrantAccess = "GrantAccess"
 
-// GrantAccessRequest generates a "aws/request.Request" representing the
+// GrantAccessRequest generates a "aws.Request" representing the
 // client's request for the GrantAccess operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4095,8 +4094,8 @@ const opGrantAccess = "GrantAccess"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccess
-func (c *OpsWorks) GrantAccessRequest(input *GrantAccessInput) (req *request.Request, output *GrantAccessOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) GrantAccessRequest(input *GrantAccessInput) (req *aws.Request, output *GrantAccessOutput) {
+	op := &aws.Operation{
 		Name:       opGrantAccess,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4146,7 +4145,7 @@ func (c *OpsWorks) GrantAccess(input *GrantAccessInput) (*GrantAccessOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) GrantAccessWithContext(ctx aws.Context, input *GrantAccessInput, opts ...request.Option) (*GrantAccessOutput, error) {
+func (c *OpsWorks) GrantAccessWithContext(ctx aws.Context, input *GrantAccessInput, opts ...aws.Option) (*GrantAccessOutput, error) {
 	req, out := c.GrantAccessRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4155,7 +4154,7 @@ func (c *OpsWorks) GrantAccessWithContext(ctx aws.Context, input *GrantAccessInp
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws/request.Request" representing the
+// ListTagsRequest generates a "aws.Request" representing the
 // client's request for the ListTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4179,8 +4178,8 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTags
-func (c *OpsWorks) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4228,7 +4227,7 @@ func (c *OpsWorks) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
+func (c *OpsWorks) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4237,7 +4236,7 @@ func (c *OpsWorks) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, op
 
 const opRebootInstance = "RebootInstance"
 
-// RebootInstanceRequest generates a "aws/request.Request" representing the
+// RebootInstanceRequest generates a "aws.Request" representing the
 // client's request for the RebootInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4261,8 +4260,8 @@ const opRebootInstance = "RebootInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstance
-func (c *OpsWorks) RebootInstanceRequest(input *RebootInstanceInput) (req *request.Request, output *RebootInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) RebootInstanceRequest(input *RebootInstanceInput) (req *aws.Request, output *RebootInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRebootInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4318,7 +4317,7 @@ func (c *OpsWorks) RebootInstance(input *RebootInstanceInput) (*RebootInstanceOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) RebootInstanceWithContext(ctx aws.Context, input *RebootInstanceInput, opts ...request.Option) (*RebootInstanceOutput, error) {
+func (c *OpsWorks) RebootInstanceWithContext(ctx aws.Context, input *RebootInstanceInput, opts ...aws.Option) (*RebootInstanceOutput, error) {
 	req, out := c.RebootInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4327,7 +4326,7 @@ func (c *OpsWorks) RebootInstanceWithContext(ctx aws.Context, input *RebootInsta
 
 const opRegisterEcsCluster = "RegisterEcsCluster"
 
-// RegisterEcsClusterRequest generates a "aws/request.Request" representing the
+// RegisterEcsClusterRequest generates a "aws.Request" representing the
 // client's request for the RegisterEcsCluster operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4351,8 +4350,8 @@ const opRegisterEcsCluster = "RegisterEcsCluster"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsCluster
-func (c *OpsWorks) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) (req *request.Request, output *RegisterEcsClusterOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) RegisterEcsClusterRequest(input *RegisterEcsClusterInput) (req *aws.Request, output *RegisterEcsClusterOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterEcsCluster,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4407,7 +4406,7 @@ func (c *OpsWorks) RegisterEcsCluster(input *RegisterEcsClusterInput) (*Register
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) RegisterEcsClusterWithContext(ctx aws.Context, input *RegisterEcsClusterInput, opts ...request.Option) (*RegisterEcsClusterOutput, error) {
+func (c *OpsWorks) RegisterEcsClusterWithContext(ctx aws.Context, input *RegisterEcsClusterInput, opts ...aws.Option) (*RegisterEcsClusterOutput, error) {
 	req, out := c.RegisterEcsClusterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4416,7 +4415,7 @@ func (c *OpsWorks) RegisterEcsClusterWithContext(ctx aws.Context, input *Registe
 
 const opRegisterElasticIp = "RegisterElasticIp"
 
-// RegisterElasticIpRequest generates a "aws/request.Request" representing the
+// RegisterElasticIpRequest generates a "aws.Request" representing the
 // client's request for the RegisterElasticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4440,8 +4439,8 @@ const opRegisterElasticIp = "RegisterElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIp
-func (c *OpsWorks) RegisterElasticIpRequest(input *RegisterElasticIpInput) (req *request.Request, output *RegisterElasticIpOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) RegisterElasticIpRequest(input *RegisterElasticIpInput) (req *aws.Request, output *RegisterElasticIpOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4497,7 +4496,7 @@ func (c *OpsWorks) RegisterElasticIp(input *RegisterElasticIpInput) (*RegisterEl
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) RegisterElasticIpWithContext(ctx aws.Context, input *RegisterElasticIpInput, opts ...request.Option) (*RegisterElasticIpOutput, error) {
+func (c *OpsWorks) RegisterElasticIpWithContext(ctx aws.Context, input *RegisterElasticIpInput, opts ...aws.Option) (*RegisterElasticIpOutput, error) {
 	req, out := c.RegisterElasticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4506,7 +4505,7 @@ func (c *OpsWorks) RegisterElasticIpWithContext(ctx aws.Context, input *Register
 
 const opRegisterInstance = "RegisterInstance"
 
-// RegisterInstanceRequest generates a "aws/request.Request" representing the
+// RegisterInstanceRequest generates a "aws.Request" representing the
 // client's request for the RegisterInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4530,8 +4529,8 @@ const opRegisterInstance = "RegisterInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstance
-func (c *OpsWorks) RegisterInstanceRequest(input *RegisterInstanceInput) (req *request.Request, output *RegisterInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) RegisterInstanceRequest(input *RegisterInstanceInput) (req *aws.Request, output *RegisterInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4598,7 +4597,7 @@ func (c *OpsWorks) RegisterInstance(input *RegisterInstanceInput) (*RegisterInst
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) RegisterInstanceWithContext(ctx aws.Context, input *RegisterInstanceInput, opts ...request.Option) (*RegisterInstanceOutput, error) {
+func (c *OpsWorks) RegisterInstanceWithContext(ctx aws.Context, input *RegisterInstanceInput, opts ...aws.Option) (*RegisterInstanceOutput, error) {
 	req, out := c.RegisterInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4607,7 +4606,7 @@ func (c *OpsWorks) RegisterInstanceWithContext(ctx aws.Context, input *RegisterI
 
 const opRegisterRdsDbInstance = "RegisterRdsDbInstance"
 
-// RegisterRdsDbInstanceRequest generates a "aws/request.Request" representing the
+// RegisterRdsDbInstanceRequest generates a "aws.Request" representing the
 // client's request for the RegisterRdsDbInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4631,8 +4630,8 @@ const opRegisterRdsDbInstance = "RegisterRdsDbInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstance
-func (c *OpsWorks) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput) (req *request.Request, output *RegisterRdsDbInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) RegisterRdsDbInstanceRequest(input *RegisterRdsDbInstanceInput) (req *aws.Request, output *RegisterRdsDbInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterRdsDbInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4687,7 +4686,7 @@ func (c *OpsWorks) RegisterRdsDbInstance(input *RegisterRdsDbInstanceInput) (*Re
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) RegisterRdsDbInstanceWithContext(ctx aws.Context, input *RegisterRdsDbInstanceInput, opts ...request.Option) (*RegisterRdsDbInstanceOutput, error) {
+func (c *OpsWorks) RegisterRdsDbInstanceWithContext(ctx aws.Context, input *RegisterRdsDbInstanceInput, opts ...aws.Option) (*RegisterRdsDbInstanceOutput, error) {
 	req, out := c.RegisterRdsDbInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4696,7 +4695,7 @@ func (c *OpsWorks) RegisterRdsDbInstanceWithContext(ctx aws.Context, input *Regi
 
 const opRegisterVolume = "RegisterVolume"
 
-// RegisterVolumeRequest generates a "aws/request.Request" representing the
+// RegisterVolumeRequest generates a "aws.Request" representing the
 // client's request for the RegisterVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4720,8 +4719,8 @@ const opRegisterVolume = "RegisterVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolume
-func (c *OpsWorks) RegisterVolumeRequest(input *RegisterVolumeInput) (req *request.Request, output *RegisterVolumeOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) RegisterVolumeRequest(input *RegisterVolumeInput) (req *aws.Request, output *RegisterVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4777,7 +4776,7 @@ func (c *OpsWorks) RegisterVolume(input *RegisterVolumeInput) (*RegisterVolumeOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) RegisterVolumeWithContext(ctx aws.Context, input *RegisterVolumeInput, opts ...request.Option) (*RegisterVolumeOutput, error) {
+func (c *OpsWorks) RegisterVolumeWithContext(ctx aws.Context, input *RegisterVolumeInput, opts ...aws.Option) (*RegisterVolumeOutput, error) {
 	req, out := c.RegisterVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4786,7 +4785,7 @@ func (c *OpsWorks) RegisterVolumeWithContext(ctx aws.Context, input *RegisterVol
 
 const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
 
-// SetLoadBasedAutoScalingRequest generates a "aws/request.Request" representing the
+// SetLoadBasedAutoScalingRequest generates a "aws.Request" representing the
 // client's request for the SetLoadBasedAutoScaling operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4810,8 +4809,8 @@ const opSetLoadBasedAutoScaling = "SetLoadBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScaling
-func (c *OpsWorks) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingInput) (req *request.Request, output *SetLoadBasedAutoScalingOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) SetLoadBasedAutoScalingRequest(input *SetLoadBasedAutoScalingInput) (req *aws.Request, output *SetLoadBasedAutoScalingOutput) {
+	op := &aws.Operation{
 		Name:       opSetLoadBasedAutoScaling,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4873,7 +4872,7 @@ func (c *OpsWorks) SetLoadBasedAutoScaling(input *SetLoadBasedAutoScalingInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) SetLoadBasedAutoScalingWithContext(ctx aws.Context, input *SetLoadBasedAutoScalingInput, opts ...request.Option) (*SetLoadBasedAutoScalingOutput, error) {
+func (c *OpsWorks) SetLoadBasedAutoScalingWithContext(ctx aws.Context, input *SetLoadBasedAutoScalingInput, opts ...aws.Option) (*SetLoadBasedAutoScalingOutput, error) {
 	req, out := c.SetLoadBasedAutoScalingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4882,7 +4881,7 @@ func (c *OpsWorks) SetLoadBasedAutoScalingWithContext(ctx aws.Context, input *Se
 
 const opSetPermission = "SetPermission"
 
-// SetPermissionRequest generates a "aws/request.Request" representing the
+// SetPermissionRequest generates a "aws.Request" representing the
 // client's request for the SetPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4906,8 +4905,8 @@ const opSetPermission = "SetPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermission
-func (c *OpsWorks) SetPermissionRequest(input *SetPermissionInput) (req *request.Request, output *SetPermissionOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) SetPermissionRequest(input *SetPermissionInput) (req *aws.Request, output *SetPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opSetPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4963,7 +4962,7 @@ func (c *OpsWorks) SetPermission(input *SetPermissionInput) (*SetPermissionOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) SetPermissionWithContext(ctx aws.Context, input *SetPermissionInput, opts ...request.Option) (*SetPermissionOutput, error) {
+func (c *OpsWorks) SetPermissionWithContext(ctx aws.Context, input *SetPermissionInput, opts ...aws.Option) (*SetPermissionOutput, error) {
 	req, out := c.SetPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4972,7 +4971,7 @@ func (c *OpsWorks) SetPermissionWithContext(ctx aws.Context, input *SetPermissio
 
 const opSetTimeBasedAutoScaling = "SetTimeBasedAutoScaling"
 
-// SetTimeBasedAutoScalingRequest generates a "aws/request.Request" representing the
+// SetTimeBasedAutoScalingRequest generates a "aws.Request" representing the
 // client's request for the SetTimeBasedAutoScaling operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4996,8 +4995,8 @@ const opSetTimeBasedAutoScaling = "SetTimeBasedAutoScaling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScaling
-func (c *OpsWorks) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingInput) (req *request.Request, output *SetTimeBasedAutoScalingOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) SetTimeBasedAutoScalingRequest(input *SetTimeBasedAutoScalingInput) (req *aws.Request, output *SetTimeBasedAutoScalingOutput) {
+	op := &aws.Operation{
 		Name:       opSetTimeBasedAutoScaling,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5054,7 +5053,7 @@ func (c *OpsWorks) SetTimeBasedAutoScaling(input *SetTimeBasedAutoScalingInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) SetTimeBasedAutoScalingWithContext(ctx aws.Context, input *SetTimeBasedAutoScalingInput, opts ...request.Option) (*SetTimeBasedAutoScalingOutput, error) {
+func (c *OpsWorks) SetTimeBasedAutoScalingWithContext(ctx aws.Context, input *SetTimeBasedAutoScalingInput, opts ...aws.Option) (*SetTimeBasedAutoScalingOutput, error) {
 	req, out := c.SetTimeBasedAutoScalingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5063,7 +5062,7 @@ func (c *OpsWorks) SetTimeBasedAutoScalingWithContext(ctx aws.Context, input *Se
 
 const opStartInstance = "StartInstance"
 
-// StartInstanceRequest generates a "aws/request.Request" representing the
+// StartInstanceRequest generates a "aws.Request" representing the
 // client's request for the StartInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5087,8 +5086,8 @@ const opStartInstance = "StartInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstance
-func (c *OpsWorks) StartInstanceRequest(input *StartInstanceInput) (req *request.Request, output *StartInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) StartInstanceRequest(input *StartInstanceInput) (req *aws.Request, output *StartInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opStartInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5144,7 +5143,7 @@ func (c *OpsWorks) StartInstance(input *StartInstanceInput) (*StartInstanceOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) StartInstanceWithContext(ctx aws.Context, input *StartInstanceInput, opts ...request.Option) (*StartInstanceOutput, error) {
+func (c *OpsWorks) StartInstanceWithContext(ctx aws.Context, input *StartInstanceInput, opts ...aws.Option) (*StartInstanceOutput, error) {
 	req, out := c.StartInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5153,7 +5152,7 @@ func (c *OpsWorks) StartInstanceWithContext(ctx aws.Context, input *StartInstanc
 
 const opStartStack = "StartStack"
 
-// StartStackRequest generates a "aws/request.Request" representing the
+// StartStackRequest generates a "aws.Request" representing the
 // client's request for the StartStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5177,8 +5176,8 @@ const opStartStack = "StartStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStack
-func (c *OpsWorks) StartStackRequest(input *StartStackInput) (req *request.Request, output *StartStackOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) StartStackRequest(input *StartStackInput) (req *aws.Request, output *StartStackOutput) {
+	op := &aws.Operation{
 		Name:       opStartStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5233,7 +5232,7 @@ func (c *OpsWorks) StartStack(input *StartStackInput) (*StartStackOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) StartStackWithContext(ctx aws.Context, input *StartStackInput, opts ...request.Option) (*StartStackOutput, error) {
+func (c *OpsWorks) StartStackWithContext(ctx aws.Context, input *StartStackInput, opts ...aws.Option) (*StartStackOutput, error) {
 	req, out := c.StartStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5242,7 +5241,7 @@ func (c *OpsWorks) StartStackWithContext(ctx aws.Context, input *StartStackInput
 
 const opStopInstance = "StopInstance"
 
-// StopInstanceRequest generates a "aws/request.Request" representing the
+// StopInstanceRequest generates a "aws.Request" representing the
 // client's request for the StopInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5266,8 +5265,8 @@ const opStopInstance = "StopInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstance
-func (c *OpsWorks) StopInstanceRequest(input *StopInstanceInput) (req *request.Request, output *StopInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) StopInstanceRequest(input *StopInstanceInput) (req *aws.Request, output *StopInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opStopInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5325,7 +5324,7 @@ func (c *OpsWorks) StopInstance(input *StopInstanceInput) (*StopInstanceOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) StopInstanceWithContext(ctx aws.Context, input *StopInstanceInput, opts ...request.Option) (*StopInstanceOutput, error) {
+func (c *OpsWorks) StopInstanceWithContext(ctx aws.Context, input *StopInstanceInput, opts ...aws.Option) (*StopInstanceOutput, error) {
 	req, out := c.StopInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5334,7 +5333,7 @@ func (c *OpsWorks) StopInstanceWithContext(ctx aws.Context, input *StopInstanceI
 
 const opStopStack = "StopStack"
 
-// StopStackRequest generates a "aws/request.Request" representing the
+// StopStackRequest generates a "aws.Request" representing the
 // client's request for the StopStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5358,8 +5357,8 @@ const opStopStack = "StopStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStack
-func (c *OpsWorks) StopStackRequest(input *StopStackInput) (req *request.Request, output *StopStackOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) StopStackRequest(input *StopStackInput) (req *aws.Request, output *StopStackOutput) {
+	op := &aws.Operation{
 		Name:       opStopStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5414,7 +5413,7 @@ func (c *OpsWorks) StopStack(input *StopStackInput) (*StopStackOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) StopStackWithContext(ctx aws.Context, input *StopStackInput, opts ...request.Option) (*StopStackOutput, error) {
+func (c *OpsWorks) StopStackWithContext(ctx aws.Context, input *StopStackInput, opts ...aws.Option) (*StopStackOutput, error) {
 	req, out := c.StopStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5423,7 +5422,7 @@ func (c *OpsWorks) StopStackWithContext(ctx aws.Context, input *StopStackInput, 
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5447,8 +5446,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResource
-func (c *OpsWorks) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5500,7 +5499,7 @@ func (c *OpsWorks) TagResource(input *TagResourceInput) (*TagResourceOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *OpsWorks) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5509,7 +5508,7 @@ func (c *OpsWorks) TagResourceWithContext(ctx aws.Context, input *TagResourceInp
 
 const opUnassignInstance = "UnassignInstance"
 
-// UnassignInstanceRequest generates a "aws/request.Request" representing the
+// UnassignInstanceRequest generates a "aws.Request" representing the
 // client's request for the UnassignInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5533,8 +5532,8 @@ const opUnassignInstance = "UnassignInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstance
-func (c *OpsWorks) UnassignInstanceRequest(input *UnassignInstanceInput) (req *request.Request, output *UnassignInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UnassignInstanceRequest(input *UnassignInstanceInput) (req *aws.Request, output *UnassignInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opUnassignInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5592,7 +5591,7 @@ func (c *OpsWorks) UnassignInstance(input *UnassignInstanceInput) (*UnassignInst
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UnassignInstanceWithContext(ctx aws.Context, input *UnassignInstanceInput, opts ...request.Option) (*UnassignInstanceOutput, error) {
+func (c *OpsWorks) UnassignInstanceWithContext(ctx aws.Context, input *UnassignInstanceInput, opts ...aws.Option) (*UnassignInstanceOutput, error) {
 	req, out := c.UnassignInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5601,7 +5600,7 @@ func (c *OpsWorks) UnassignInstanceWithContext(ctx aws.Context, input *UnassignI
 
 const opUnassignVolume = "UnassignVolume"
 
-// UnassignVolumeRequest generates a "aws/request.Request" representing the
+// UnassignVolumeRequest generates a "aws.Request" representing the
 // client's request for the UnassignVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5625,8 +5624,8 @@ const opUnassignVolume = "UnassignVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolume
-func (c *OpsWorks) UnassignVolumeRequest(input *UnassignVolumeInput) (req *request.Request, output *UnassignVolumeOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UnassignVolumeRequest(input *UnassignVolumeInput) (req *aws.Request, output *UnassignVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opUnassignVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5682,7 +5681,7 @@ func (c *OpsWorks) UnassignVolume(input *UnassignVolumeInput) (*UnassignVolumeOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UnassignVolumeWithContext(ctx aws.Context, input *UnassignVolumeInput, opts ...request.Option) (*UnassignVolumeOutput, error) {
+func (c *OpsWorks) UnassignVolumeWithContext(ctx aws.Context, input *UnassignVolumeInput, opts ...aws.Option) (*UnassignVolumeOutput, error) {
 	req, out := c.UnassignVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5691,7 +5690,7 @@ func (c *OpsWorks) UnassignVolumeWithContext(ctx aws.Context, input *UnassignVol
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5715,8 +5714,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResource
-func (c *OpsWorks) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5766,7 +5765,7 @@ func (c *OpsWorks) UntagResource(input *UntagResourceInput) (*UntagResourceOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *OpsWorks) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5775,7 +5774,7 @@ func (c *OpsWorks) UntagResourceWithContext(ctx aws.Context, input *UntagResourc
 
 const opUpdateApp = "UpdateApp"
 
-// UpdateAppRequest generates a "aws/request.Request" representing the
+// UpdateAppRequest generates a "aws.Request" representing the
 // client's request for the UpdateApp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5799,8 +5798,8 @@ const opUpdateApp = "UpdateApp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateApp
-func (c *OpsWorks) UpdateAppRequest(input *UpdateAppInput) (req *request.Request, output *UpdateAppOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateAppRequest(input *UpdateAppInput) (req *aws.Request, output *UpdateAppOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateApp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5855,7 +5854,7 @@ func (c *OpsWorks) UpdateApp(input *UpdateAppInput) (*UpdateAppOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateAppWithContext(ctx aws.Context, input *UpdateAppInput, opts ...request.Option) (*UpdateAppOutput, error) {
+func (c *OpsWorks) UpdateAppWithContext(ctx aws.Context, input *UpdateAppInput, opts ...aws.Option) (*UpdateAppOutput, error) {
 	req, out := c.UpdateAppRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5864,7 +5863,7 @@ func (c *OpsWorks) UpdateAppWithContext(ctx aws.Context, input *UpdateAppInput, 
 
 const opUpdateElasticIp = "UpdateElasticIp"
 
-// UpdateElasticIpRequest generates a "aws/request.Request" representing the
+// UpdateElasticIpRequest generates a "aws.Request" representing the
 // client's request for the UpdateElasticIp operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5888,8 +5887,8 @@ const opUpdateElasticIp = "UpdateElasticIp"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIp
-func (c *OpsWorks) UpdateElasticIpRequest(input *UpdateElasticIpInput) (req *request.Request, output *UpdateElasticIpOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateElasticIpRequest(input *UpdateElasticIpInput) (req *aws.Request, output *UpdateElasticIpOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateElasticIp,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5945,7 +5944,7 @@ func (c *OpsWorks) UpdateElasticIp(input *UpdateElasticIpInput) (*UpdateElasticI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateElasticIpWithContext(ctx aws.Context, input *UpdateElasticIpInput, opts ...request.Option) (*UpdateElasticIpOutput, error) {
+func (c *OpsWorks) UpdateElasticIpWithContext(ctx aws.Context, input *UpdateElasticIpInput, opts ...aws.Option) (*UpdateElasticIpOutput, error) {
 	req, out := c.UpdateElasticIpRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5954,7 +5953,7 @@ func (c *OpsWorks) UpdateElasticIpWithContext(ctx aws.Context, input *UpdateElas
 
 const opUpdateInstance = "UpdateInstance"
 
-// UpdateInstanceRequest generates a "aws/request.Request" representing the
+// UpdateInstanceRequest generates a "aws.Request" representing the
 // client's request for the UpdateInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5978,8 +5977,8 @@ const opUpdateInstance = "UpdateInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstance
-func (c *OpsWorks) UpdateInstanceRequest(input *UpdateInstanceInput) (req *request.Request, output *UpdateInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateInstanceRequest(input *UpdateInstanceInput) (req *aws.Request, output *UpdateInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6034,7 +6033,7 @@ func (c *OpsWorks) UpdateInstance(input *UpdateInstanceInput) (*UpdateInstanceOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateInstanceWithContext(ctx aws.Context, input *UpdateInstanceInput, opts ...request.Option) (*UpdateInstanceOutput, error) {
+func (c *OpsWorks) UpdateInstanceWithContext(ctx aws.Context, input *UpdateInstanceInput, opts ...aws.Option) (*UpdateInstanceOutput, error) {
 	req, out := c.UpdateInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6043,7 +6042,7 @@ func (c *OpsWorks) UpdateInstanceWithContext(ctx aws.Context, input *UpdateInsta
 
 const opUpdateLayer = "UpdateLayer"
 
-// UpdateLayerRequest generates a "aws/request.Request" representing the
+// UpdateLayerRequest generates a "aws.Request" representing the
 // client's request for the UpdateLayer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6067,8 +6066,8 @@ const opUpdateLayer = "UpdateLayer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayer
-func (c *OpsWorks) UpdateLayerRequest(input *UpdateLayerInput) (req *request.Request, output *UpdateLayerOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateLayerRequest(input *UpdateLayerInput) (req *aws.Request, output *UpdateLayerOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateLayer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6123,7 +6122,7 @@ func (c *OpsWorks) UpdateLayer(input *UpdateLayerInput) (*UpdateLayerOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateLayerWithContext(ctx aws.Context, input *UpdateLayerInput, opts ...request.Option) (*UpdateLayerOutput, error) {
+func (c *OpsWorks) UpdateLayerWithContext(ctx aws.Context, input *UpdateLayerInput, opts ...aws.Option) (*UpdateLayerOutput, error) {
 	req, out := c.UpdateLayerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6132,7 +6131,7 @@ func (c *OpsWorks) UpdateLayerWithContext(ctx aws.Context, input *UpdateLayerInp
 
 const opUpdateMyUserProfile = "UpdateMyUserProfile"
 
-// UpdateMyUserProfileRequest generates a "aws/request.Request" representing the
+// UpdateMyUserProfileRequest generates a "aws.Request" representing the
 // client's request for the UpdateMyUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6156,8 +6155,8 @@ const opUpdateMyUserProfile = "UpdateMyUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfile
-func (c *OpsWorks) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) (req *request.Request, output *UpdateMyUserProfileOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateMyUserProfileRequest(input *UpdateMyUserProfileInput) (req *aws.Request, output *UpdateMyUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMyUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6208,7 +6207,7 @@ func (c *OpsWorks) UpdateMyUserProfile(input *UpdateMyUserProfileInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateMyUserProfileWithContext(ctx aws.Context, input *UpdateMyUserProfileInput, opts ...request.Option) (*UpdateMyUserProfileOutput, error) {
+func (c *OpsWorks) UpdateMyUserProfileWithContext(ctx aws.Context, input *UpdateMyUserProfileInput, opts ...aws.Option) (*UpdateMyUserProfileOutput, error) {
 	req, out := c.UpdateMyUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6217,7 +6216,7 @@ func (c *OpsWorks) UpdateMyUserProfileWithContext(ctx aws.Context, input *Update
 
 const opUpdateRdsDbInstance = "UpdateRdsDbInstance"
 
-// UpdateRdsDbInstanceRequest generates a "aws/request.Request" representing the
+// UpdateRdsDbInstanceRequest generates a "aws.Request" representing the
 // client's request for the UpdateRdsDbInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6241,8 +6240,8 @@ const opUpdateRdsDbInstance = "UpdateRdsDbInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstance
-func (c *OpsWorks) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) (req *request.Request, output *UpdateRdsDbInstanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateRdsDbInstanceRequest(input *UpdateRdsDbInstanceInput) (req *aws.Request, output *UpdateRdsDbInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRdsDbInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6297,7 +6296,7 @@ func (c *OpsWorks) UpdateRdsDbInstance(input *UpdateRdsDbInstanceInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateRdsDbInstanceWithContext(ctx aws.Context, input *UpdateRdsDbInstanceInput, opts ...request.Option) (*UpdateRdsDbInstanceOutput, error) {
+func (c *OpsWorks) UpdateRdsDbInstanceWithContext(ctx aws.Context, input *UpdateRdsDbInstanceInput, opts ...aws.Option) (*UpdateRdsDbInstanceOutput, error) {
 	req, out := c.UpdateRdsDbInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6306,7 +6305,7 @@ func (c *OpsWorks) UpdateRdsDbInstanceWithContext(ctx aws.Context, input *Update
 
 const opUpdateStack = "UpdateStack"
 
-// UpdateStackRequest generates a "aws/request.Request" representing the
+// UpdateStackRequest generates a "aws.Request" representing the
 // client's request for the UpdateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6330,8 +6329,8 @@ const opUpdateStack = "UpdateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStack
-func (c *OpsWorks) UpdateStackRequest(input *UpdateStackInput) (req *request.Request, output *UpdateStackOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request, output *UpdateStackOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6386,7 +6385,7 @@ func (c *OpsWorks) UpdateStack(input *UpdateStackInput) (*UpdateStackOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...request.Option) (*UpdateStackOutput, error) {
+func (c *OpsWorks) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...aws.Option) (*UpdateStackOutput, error) {
 	req, out := c.UpdateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6395,7 +6394,7 @@ func (c *OpsWorks) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInp
 
 const opUpdateUserProfile = "UpdateUserProfile"
 
-// UpdateUserProfileRequest generates a "aws/request.Request" representing the
+// UpdateUserProfileRequest generates a "aws.Request" representing the
 // client's request for the UpdateUserProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6419,8 +6418,8 @@ const opUpdateUserProfile = "UpdateUserProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfile
-func (c *OpsWorks) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *request.Request, output *UpdateUserProfileOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateUserProfileRequest(input *UpdateUserProfileInput) (req *aws.Request, output *UpdateUserProfileOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUserProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6474,7 +6473,7 @@ func (c *OpsWorks) UpdateUserProfile(input *UpdateUserProfileInput) (*UpdateUser
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUserProfileInput, opts ...request.Option) (*UpdateUserProfileOutput, error) {
+func (c *OpsWorks) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUserProfileInput, opts ...aws.Option) (*UpdateUserProfileOutput, error) {
 	req, out := c.UpdateUserProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6483,7 +6482,7 @@ func (c *OpsWorks) UpdateUserProfileWithContext(ctx aws.Context, input *UpdateUs
 
 const opUpdateVolume = "UpdateVolume"
 
-// UpdateVolumeRequest generates a "aws/request.Request" representing the
+// UpdateVolumeRequest generates a "aws.Request" representing the
 // client's request for the UpdateVolume operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6507,8 +6506,8 @@ const opUpdateVolume = "UpdateVolume"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolume
-func (c *OpsWorks) UpdateVolumeRequest(input *UpdateVolumeInput) (req *request.Request, output *UpdateVolumeOutput) {
-	op := &request.Operation{
+func (c *OpsWorks) UpdateVolumeRequest(input *UpdateVolumeInput) (req *aws.Request, output *UpdateVolumeOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateVolume,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6564,7 +6563,7 @@ func (c *OpsWorks) UpdateVolume(input *UpdateVolumeInput) (*UpdateVolumeOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorks) UpdateVolumeWithContext(ctx aws.Context, input *UpdateVolumeInput, opts ...request.Option) (*UpdateVolumeOutput, error) {
+func (c *OpsWorks) UpdateVolumeWithContext(ctx aws.Context, input *UpdateVolumeInput, opts ...aws.Option) (*UpdateVolumeOutput, error) {
 	req, out := c.UpdateVolumeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6786,12 +6785,12 @@ func (s AssignInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssignInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssignInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssignInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.LayerIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerIds"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6852,9 +6851,9 @@ func (s AssignVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssignVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssignVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssignVolumeInput"}
 	if s.VolumeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeId"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6915,9 +6914,9 @@ func (s AssociateElasticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateElasticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateElasticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateElasticIpInput"}
 	if s.ElasticIp == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticIp"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6981,12 +6980,12 @@ func (s AttachElasticLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachElasticLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachElasticLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachElasticLoadBalancerInput"}
 	if s.ElasticLoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticLoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticLoadBalancerName"))
 	}
 	if s.LayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7080,12 +7079,12 @@ func (s AutoScalingThresholds) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AutoScalingThresholds) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AutoScalingThresholds"}
+	invalidParams := aws.ErrInvalidParams{Context: "AutoScalingThresholds"}
 	if s.IgnoreMetricsTime != nil && *s.IgnoreMetricsTime < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("IgnoreMetricsTime", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("IgnoreMetricsTime", 1))
 	}
 	if s.ThresholdsWaitTime != nil && *s.ThresholdsWaitTime < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("ThresholdsWaitTime", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("ThresholdsWaitTime", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7474,12 +7473,12 @@ func (s CloneStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloneStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloneStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloneStackInput"}
 	if s.ServiceRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
 	if s.SourceStackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceStackId"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceStackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8039,15 +8038,15 @@ func (s CreateAppInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAppInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAppInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Environment != nil {
 		for i, v := range s.Environment {
@@ -8055,13 +8054,13 @@ func (s *CreateAppInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Environment", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Environment", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SslConfiguration != nil {
 		if err := s.SslConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SslConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SslConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8219,16 +8218,16 @@ func (s CreateDeploymentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeploymentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeploymentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeploymentInput"}
 	if s.Command == nil {
-		invalidParams.Add(request.NewErrParamRequired("Command"))
+		invalidParams.Add(aws.NewErrParamRequired("Command"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 	if s.Command != nil {
 		if err := s.Command.Validate(); err != nil {
-			invalidParams.AddNested("Command", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Command", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8459,15 +8458,15 @@ func (s CreateInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceInput"}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.LayerIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerIds"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8717,18 +8716,18 @@ func (s CreateLayerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLayerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLayerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLayerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Shortname == nil {
-		invalidParams.Add(request.NewErrParamRequired("Shortname"))
+		invalidParams.Add(aws.NewErrParamRequired("Shortname"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.VolumeConfigurations != nil {
 		for i, v := range s.VolumeConfigurations {
@@ -8736,7 +8735,7 @@ func (s *CreateLayerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9114,18 +9113,18 @@ func (s CreateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInput"}
 	if s.DefaultInstanceProfileArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DefaultInstanceProfileArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DefaultInstanceProfileArn"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Region == nil {
-		invalidParams.Add(request.NewErrParamRequired("Region"))
+		invalidParams.Add(aws.NewErrParamRequired("Region"))
 	}
 	if s.ServiceRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9310,9 +9309,9 @@ func (s CreateUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserProfileInput"}
 	if s.IamUserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamUserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9436,9 +9435,9 @@ func (s DeleteAppInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAppInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAppInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAppInput"}
 	if s.AppId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AppId"))
+		invalidParams.Add(aws.NewErrParamRequired("AppId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9496,9 +9495,9 @@ func (s DeleteInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9562,9 +9561,9 @@ func (s DeleteLayerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLayerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLayerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLayerInput"}
 	if s.LayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9616,9 +9615,9 @@ func (s DeleteStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9670,9 +9669,9 @@ func (s DeleteUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserProfileInput"}
 	if s.IamUserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamUserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9919,9 +9918,9 @@ func (s DeploymentCommand) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeploymentCommand) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeploymentCommand"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeploymentCommand"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9964,9 +9963,9 @@ func (s DeregisterEcsClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterEcsClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterEcsClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterEcsClusterInput"}
 	if s.EcsClusterArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EcsClusterArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EcsClusterArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10018,9 +10017,9 @@ func (s DeregisterElasticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterElasticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterElasticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterElasticIpInput"}
 	if s.ElasticIp == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticIp"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10072,9 +10071,9 @@ func (s DeregisterInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10126,9 +10125,9 @@ func (s DeregisterRdsDbInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterRdsDbInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterRdsDbInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterRdsDbInstanceInput"}
 	if s.RdsDbInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RdsDbInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10182,9 +10181,9 @@ func (s DeregisterVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterVolumeInput"}
 	if s.VolumeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeId"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10858,9 +10857,9 @@ func (s DescribeLoadBasedAutoScalingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBasedAutoScalingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoadBasedAutoScalingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBasedAutoScalingInput"}
 	if s.LayerIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerIds"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11106,9 +11105,9 @@ func (s DescribeRdsDbInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRdsDbInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRdsDbInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRdsDbInstancesInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11247,9 +11246,9 @@ func (s DescribeStackProvisioningParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackProvisioningParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackProvisioningParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackProvisioningParametersInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11320,9 +11319,9 @@ func (s DescribeStackSummaryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackSummaryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackSummaryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSummaryInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11434,9 +11433,9 @@ func (s DescribeTimeBasedAutoScalingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTimeBasedAutoScalingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTimeBasedAutoScalingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTimeBasedAutoScalingInput"}
 	if s.InstanceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11634,12 +11633,12 @@ func (s DetachElasticLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachElasticLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachElasticLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachElasticLoadBalancerInput"}
 	if s.ElasticLoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticLoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticLoadBalancerName"))
 	}
 	if s.LayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11697,9 +11696,9 @@ func (s DisassociateElasticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateElasticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateElasticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateElasticIpInput"}
 	if s.ElasticIp == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticIp"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12044,12 +12043,12 @@ func (s EnvironmentVariable) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnvironmentVariable) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnvironmentVariable"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnvironmentVariable"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12098,9 +12097,9 @@ func (s GetHostnameSuggestionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetHostnameSuggestionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetHostnameSuggestionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetHostnameSuggestionInput"}
 	if s.LayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12177,12 +12176,12 @@ func (s GrantAccessInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GrantAccessInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GrantAccessInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GrantAccessInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.ValidForInMinutes != nil && *s.ValidForInMinutes < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("ValidForInMinutes", 60))
+		invalidParams.Add(aws.NewErrParamMinValue("ValidForInMinutes", 60))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13184,9 +13183,9 @@ func (s ListTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13636,9 +13635,9 @@ func (s RebootInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RebootInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RebootInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RebootInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13767,12 +13766,12 @@ func (s RegisterEcsClusterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterEcsClusterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterEcsClusterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterEcsClusterInput"}
 	if s.EcsClusterArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EcsClusterArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EcsClusterArn"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13845,12 +13844,12 @@ func (s RegisterElasticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterElasticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterElasticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterElasticIpInput"}
 	if s.ElasticIp == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticIp"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13937,9 +13936,9 @@ func (s RegisterInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterInstanceInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14052,18 +14051,18 @@ func (s RegisterRdsDbInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterRdsDbInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterRdsDbInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterRdsDbInstanceInput"}
 	if s.DbPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("DbPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("DbPassword"))
 	}
 	if s.DbUser == nil {
-		invalidParams.Add(request.NewErrParamRequired("DbUser"))
+		invalidParams.Add(aws.NewErrParamRequired("DbUser"))
 	}
 	if s.RdsDbInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RdsDbInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14136,9 +14135,9 @@ func (s RegisterVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterVolumeInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14384,18 +14383,18 @@ func (s SetLoadBasedAutoScalingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBasedAutoScalingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetLoadBasedAutoScalingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBasedAutoScalingInput"}
 	if s.LayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
 	if s.DownScaling != nil {
 		if err := s.DownScaling.Validate(); err != nil {
-			invalidParams.AddNested("DownScaling", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DownScaling", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.UpScaling != nil {
 		if err := s.UpScaling.Validate(); err != nil {
-			invalidParams.AddNested("UpScaling", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("UpScaling", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -14494,12 +14493,12 @@ func (s SetPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetPermissionInput"}
 	if s.IamUserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamUserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14578,9 +14577,9 @@ func (s SetTimeBasedAutoScalingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetTimeBasedAutoScalingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetTimeBasedAutoScalingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetTimeBasedAutoScalingInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14779,12 +14778,12 @@ func (s SslConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SslConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SslConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "SslConfiguration"}
 	if s.Certificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("Certificate"))
+		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
 	if s.PrivateKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrivateKey"))
+		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15173,9 +15172,9 @@ func (s StartInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15227,9 +15226,9 @@ func (s StartStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartStackInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15281,9 +15280,9 @@ func (s StopInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15335,9 +15334,9 @@ func (s StopStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopStackInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15410,12 +15409,12 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15563,9 +15562,9 @@ func (s UnassignInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnassignInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UnassignInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UnassignInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15617,9 +15616,9 @@ func (s UnassignVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UnassignVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UnassignVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UnassignVolumeInput"}
 	if s.VolumeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeId"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15676,12 +15675,12 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.ResourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15783,9 +15782,9 @@ func (s UpdateAppInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAppInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAppInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAppInput"}
 	if s.AppId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AppId"))
+		invalidParams.Add(aws.NewErrParamRequired("AppId"))
 	}
 	if s.Environment != nil {
 		for i, v := range s.Environment {
@@ -15793,13 +15792,13 @@ func (s *UpdateAppInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Environment", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Environment", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SslConfiguration != nil {
 		if err := s.SslConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("SslConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SslConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -15915,9 +15914,9 @@ func (s UpdateElasticIpInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateElasticIpInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateElasticIpInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateElasticIpInput"}
 	if s.ElasticIp == nil {
-		invalidParams.Add(request.NewErrParamRequired("ElasticIp"))
+		invalidParams.Add(aws.NewErrParamRequired("ElasticIp"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16069,9 +16068,9 @@ func (s UpdateInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16258,9 +16257,9 @@ func (s UpdateLayerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateLayerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateLayerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateLayerInput"}
 	if s.LayerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LayerId"))
+		invalidParams.Add(aws.NewErrParamRequired("LayerId"))
 	}
 	if s.VolumeConfigurations != nil {
 		for i, v := range s.VolumeConfigurations {
@@ -16268,7 +16267,7 @@ func (s *UpdateLayerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "VolumeConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -16463,9 +16462,9 @@ func (s UpdateRdsDbInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRdsDbInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRdsDbInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRdsDbInstanceInput"}
 	if s.RdsDbInstanceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RdsDbInstanceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RdsDbInstanceArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16700,9 +16699,9 @@ func (s UpdateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackInput"}
 	if s.StackId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackId"))
+		invalidParams.Add(aws.NewErrParamRequired("StackId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16870,9 +16869,9 @@ func (s UpdateUserProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserProfileInput"}
 	if s.IamUserArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamUserArn"))
+		invalidParams.Add(aws.NewErrParamRequired("IamUserArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16948,9 +16947,9 @@ func (s UpdateVolumeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateVolumeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateVolumeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVolumeInput"}
 	if s.VolumeId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VolumeId"))
+		invalidParams.Add(aws.NewErrParamRequired("VolumeId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17237,15 +17236,15 @@ func (s VolumeConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VolumeConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VolumeConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "VolumeConfiguration"}
 	if s.MountPoint == nil {
-		invalidParams.Add(request.NewErrParamRequired("MountPoint"))
+		invalidParams.Add(aws.NewErrParamRequired("MountPoint"))
 	}
 	if s.NumberOfDisks == nil {
-		invalidParams.Add(request.NewErrParamRequired("NumberOfDisks"))
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfDisks"))
 	}
 	if s.Size == nil {
-		invalidParams.Add(request.NewErrParamRequired("Size"))
+		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
 
 	if invalidParams.Len() > 0 {

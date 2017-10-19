@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateReplicationJob = "CreateReplicationJob"
 
-// CreateReplicationJobRequest generates a "aws/request.Request" representing the
+// CreateReplicationJobRequest generates a "aws.Request" representing the
 // client's request for the CreateReplicationJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateReplicationJob = "CreateReplicationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJob
-func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) (req *request.Request, output *CreateReplicationJobOutput) {
-	op := &request.Operation{
+func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) (req *aws.Request, output *CreateReplicationJobOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReplicationJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -111,7 +110,7 @@ func (c *SMS) CreateReplicationJob(input *CreateReplicationJobInput) (*CreateRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) CreateReplicationJobWithContext(ctx aws.Context, input *CreateReplicationJobInput, opts ...request.Option) (*CreateReplicationJobOutput, error) {
+func (c *SMS) CreateReplicationJobWithContext(ctx aws.Context, input *CreateReplicationJobInput, opts ...aws.Option) (*CreateReplicationJobOutput, error) {
 	req, out := c.CreateReplicationJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -120,7 +119,7 @@ func (c *SMS) CreateReplicationJobWithContext(ctx aws.Context, input *CreateRepl
 
 const opDeleteReplicationJob = "DeleteReplicationJob"
 
-// DeleteReplicationJobRequest generates a "aws/request.Request" representing the
+// DeleteReplicationJobRequest generates a "aws.Request" representing the
 // client's request for the DeleteReplicationJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -144,8 +143,8 @@ const opDeleteReplicationJob = "DeleteReplicationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJob
-func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) (req *request.Request, output *DeleteReplicationJobOutput) {
-	op := &request.Operation{
+func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) (req *aws.Request, output *DeleteReplicationJobOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReplicationJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -209,7 +208,7 @@ func (c *SMS) DeleteReplicationJob(input *DeleteReplicationJobInput) (*DeleteRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) DeleteReplicationJobWithContext(ctx aws.Context, input *DeleteReplicationJobInput, opts ...request.Option) (*DeleteReplicationJobOutput, error) {
+func (c *SMS) DeleteReplicationJobWithContext(ctx aws.Context, input *DeleteReplicationJobInput, opts ...aws.Option) (*DeleteReplicationJobOutput, error) {
 	req, out := c.DeleteReplicationJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -218,7 +217,7 @@ func (c *SMS) DeleteReplicationJobWithContext(ctx aws.Context, input *DeleteRepl
 
 const opDeleteServerCatalog = "DeleteServerCatalog"
 
-// DeleteServerCatalogRequest generates a "aws/request.Request" representing the
+// DeleteServerCatalogRequest generates a "aws.Request" representing the
 // client's request for the DeleteServerCatalog operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -242,8 +241,8 @@ const opDeleteServerCatalog = "DeleteServerCatalog"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalog
-func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) (req *request.Request, output *DeleteServerCatalogOutput) {
-	op := &request.Operation{
+func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) (req *aws.Request, output *DeleteServerCatalogOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteServerCatalog,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -303,7 +302,7 @@ func (c *SMS) DeleteServerCatalog(input *DeleteServerCatalogInput) (*DeleteServe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) DeleteServerCatalogWithContext(ctx aws.Context, input *DeleteServerCatalogInput, opts ...request.Option) (*DeleteServerCatalogOutput, error) {
+func (c *SMS) DeleteServerCatalogWithContext(ctx aws.Context, input *DeleteServerCatalogInput, opts ...aws.Option) (*DeleteServerCatalogOutput, error) {
 	req, out := c.DeleteServerCatalogRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -312,7 +311,7 @@ func (c *SMS) DeleteServerCatalogWithContext(ctx aws.Context, input *DeleteServe
 
 const opDisassociateConnector = "DisassociateConnector"
 
-// DisassociateConnectorRequest generates a "aws/request.Request" representing the
+// DisassociateConnectorRequest generates a "aws.Request" representing the
 // client's request for the DisassociateConnector operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -336,8 +335,8 @@ const opDisassociateConnector = "DisassociateConnector"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnector
-func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) (req *request.Request, output *DisassociateConnectorOutput) {
-	op := &request.Operation{
+func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) (req *aws.Request, output *DisassociateConnectorOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateConnector,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -396,7 +395,7 @@ func (c *SMS) DisassociateConnector(input *DisassociateConnectorInput) (*Disasso
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) DisassociateConnectorWithContext(ctx aws.Context, input *DisassociateConnectorInput, opts ...request.Option) (*DisassociateConnectorOutput, error) {
+func (c *SMS) DisassociateConnectorWithContext(ctx aws.Context, input *DisassociateConnectorInput, opts ...aws.Option) (*DisassociateConnectorOutput, error) {
 	req, out := c.DisassociateConnectorRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -405,7 +404,7 @@ func (c *SMS) DisassociateConnectorWithContext(ctx aws.Context, input *Disassoci
 
 const opGetConnectors = "GetConnectors"
 
-// GetConnectorsRequest generates a "aws/request.Request" representing the
+// GetConnectorsRequest generates a "aws.Request" representing the
 // client's request for the GetConnectors operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -429,12 +428,12 @@ const opGetConnectors = "GetConnectors"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectors
-func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) (req *request.Request, output *GetConnectorsOutput) {
-	op := &request.Operation{
+func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) (req *aws.Request, output *GetConnectorsOutput) {
+	op := &aws.Operation{
 		Name:       opGetConnectors,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -482,7 +481,7 @@ func (c *SMS) GetConnectors(input *GetConnectorsInput) (*GetConnectorsOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetConnectorsWithContext(ctx aws.Context, input *GetConnectorsInput, opts ...request.Option) (*GetConnectorsOutput, error) {
+func (c *SMS) GetConnectorsWithContext(ctx aws.Context, input *GetConnectorsInput, opts ...aws.Option) (*GetConnectorsOutput, error) {
 	req, out := c.GetConnectorsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -517,9 +516,9 @@ func (c *SMS) GetConnectorsPages(input *GetConnectorsInput, fn func(*GetConnecto
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetConnectorsPagesWithContext(ctx aws.Context, input *GetConnectorsInput, fn func(*GetConnectorsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SMS) GetConnectorsPagesWithContext(ctx aws.Context, input *GetConnectorsInput, fn func(*GetConnectorsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetConnectorsInput
 			if input != nil {
 				tmp := *input
@@ -541,7 +540,7 @@ func (c *SMS) GetConnectorsPagesWithContext(ctx aws.Context, input *GetConnector
 
 const opGetReplicationJobs = "GetReplicationJobs"
 
-// GetReplicationJobsRequest generates a "aws/request.Request" representing the
+// GetReplicationJobsRequest generates a "aws.Request" representing the
 // client's request for the GetReplicationJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -565,12 +564,12 @@ const opGetReplicationJobs = "GetReplicationJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobs
-func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) (req *request.Request, output *GetReplicationJobsOutput) {
-	op := &request.Operation{
+func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) (req *aws.Request, output *GetReplicationJobsOutput) {
+	op := &aws.Operation{
 		Name:       opGetReplicationJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -627,7 +626,7 @@ func (c *SMS) GetReplicationJobs(input *GetReplicationJobsInput) (*GetReplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetReplicationJobsWithContext(ctx aws.Context, input *GetReplicationJobsInput, opts ...request.Option) (*GetReplicationJobsOutput, error) {
+func (c *SMS) GetReplicationJobsWithContext(ctx aws.Context, input *GetReplicationJobsInput, opts ...aws.Option) (*GetReplicationJobsOutput, error) {
 	req, out := c.GetReplicationJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -662,9 +661,9 @@ func (c *SMS) GetReplicationJobsPages(input *GetReplicationJobsInput, fn func(*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetReplicationJobsPagesWithContext(ctx aws.Context, input *GetReplicationJobsInput, fn func(*GetReplicationJobsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SMS) GetReplicationJobsPagesWithContext(ctx aws.Context, input *GetReplicationJobsInput, fn func(*GetReplicationJobsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetReplicationJobsInput
 			if input != nil {
 				tmp := *input
@@ -686,7 +685,7 @@ func (c *SMS) GetReplicationJobsPagesWithContext(ctx aws.Context, input *GetRepl
 
 const opGetReplicationRuns = "GetReplicationRuns"
 
-// GetReplicationRunsRequest generates a "aws/request.Request" representing the
+// GetReplicationRunsRequest generates a "aws.Request" representing the
 // client's request for the GetReplicationRuns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -710,12 +709,12 @@ const opGetReplicationRuns = "GetReplicationRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRuns
-func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) (req *request.Request, output *GetReplicationRunsOutput) {
-	op := &request.Operation{
+func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) (req *aws.Request, output *GetReplicationRunsOutput) {
+	op := &aws.Operation{
 		Name:       opGetReplicationRuns,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -772,7 +771,7 @@ func (c *SMS) GetReplicationRuns(input *GetReplicationRunsInput) (*GetReplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetReplicationRunsWithContext(ctx aws.Context, input *GetReplicationRunsInput, opts ...request.Option) (*GetReplicationRunsOutput, error) {
+func (c *SMS) GetReplicationRunsWithContext(ctx aws.Context, input *GetReplicationRunsInput, opts ...aws.Option) (*GetReplicationRunsOutput, error) {
 	req, out := c.GetReplicationRunsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -807,9 +806,9 @@ func (c *SMS) GetReplicationRunsPages(input *GetReplicationRunsInput, fn func(*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetReplicationRunsPagesWithContext(ctx aws.Context, input *GetReplicationRunsInput, fn func(*GetReplicationRunsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SMS) GetReplicationRunsPagesWithContext(ctx aws.Context, input *GetReplicationRunsInput, fn func(*GetReplicationRunsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetReplicationRunsInput
 			if input != nil {
 				tmp := *input
@@ -831,7 +830,7 @@ func (c *SMS) GetReplicationRunsPagesWithContext(ctx aws.Context, input *GetRepl
 
 const opGetServers = "GetServers"
 
-// GetServersRequest generates a "aws/request.Request" representing the
+// GetServersRequest generates a "aws.Request" representing the
 // client's request for the GetServers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -855,12 +854,12 @@ const opGetServers = "GetServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServers
-func (c *SMS) GetServersRequest(input *GetServersInput) (req *request.Request, output *GetServersOutput) {
-	op := &request.Operation{
+func (c *SMS) GetServersRequest(input *GetServersInput) (req *aws.Request, output *GetServersOutput) {
+	op := &aws.Operation{
 		Name:       opGetServers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "maxResults",
@@ -908,7 +907,7 @@ func (c *SMS) GetServers(input *GetServersInput) (*GetServersOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetServersWithContext(ctx aws.Context, input *GetServersInput, opts ...request.Option) (*GetServersOutput, error) {
+func (c *SMS) GetServersWithContext(ctx aws.Context, input *GetServersInput, opts ...aws.Option) (*GetServersOutput, error) {
 	req, out := c.GetServersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -943,9 +942,9 @@ func (c *SMS) GetServersPages(input *GetServersInput, fn func(*GetServersOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) GetServersPagesWithContext(ctx aws.Context, input *GetServersInput, fn func(*GetServersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SMS) GetServersPagesWithContext(ctx aws.Context, input *GetServersInput, fn func(*GetServersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetServersInput
 			if input != nil {
 				tmp := *input
@@ -967,7 +966,7 @@ func (c *SMS) GetServersPagesWithContext(ctx aws.Context, input *GetServersInput
 
 const opImportServerCatalog = "ImportServerCatalog"
 
-// ImportServerCatalogRequest generates a "aws/request.Request" representing the
+// ImportServerCatalogRequest generates a "aws.Request" representing the
 // client's request for the ImportServerCatalog operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -991,8 +990,8 @@ const opImportServerCatalog = "ImportServerCatalog"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalog
-func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) (req *request.Request, output *ImportServerCatalogOutput) {
-	op := &request.Operation{
+func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) (req *aws.Request, output *ImportServerCatalogOutput) {
+	op := &aws.Operation{
 		Name:       opImportServerCatalog,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1057,7 +1056,7 @@ func (c *SMS) ImportServerCatalog(input *ImportServerCatalogInput) (*ImportServe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) ImportServerCatalogWithContext(ctx aws.Context, input *ImportServerCatalogInput, opts ...request.Option) (*ImportServerCatalogOutput, error) {
+func (c *SMS) ImportServerCatalogWithContext(ctx aws.Context, input *ImportServerCatalogInput, opts ...aws.Option) (*ImportServerCatalogOutput, error) {
 	req, out := c.ImportServerCatalogRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1066,7 +1065,7 @@ func (c *SMS) ImportServerCatalogWithContext(ctx aws.Context, input *ImportServe
 
 const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 
-// StartOnDemandReplicationRunRequest generates a "aws/request.Request" representing the
+// StartOnDemandReplicationRunRequest generates a "aws.Request" representing the
 // client's request for the StartOnDemandReplicationRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1090,8 +1089,8 @@ const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRun
-func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicationRunInput) (req *request.Request, output *StartOnDemandReplicationRunOutput) {
-	op := &request.Operation{
+func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplicationRunInput) (req *aws.Request, output *StartOnDemandReplicationRunOutput) {
+	op := &aws.Operation{
 		Name:       opStartOnDemandReplicationRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1156,7 +1155,7 @@ func (c *SMS) StartOnDemandReplicationRun(input *StartOnDemandReplicationRunInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) StartOnDemandReplicationRunWithContext(ctx aws.Context, input *StartOnDemandReplicationRunInput, opts ...request.Option) (*StartOnDemandReplicationRunOutput, error) {
+func (c *SMS) StartOnDemandReplicationRunWithContext(ctx aws.Context, input *StartOnDemandReplicationRunInput, opts ...aws.Option) (*StartOnDemandReplicationRunOutput, error) {
 	req, out := c.StartOnDemandReplicationRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1165,7 +1164,7 @@ func (c *SMS) StartOnDemandReplicationRunWithContext(ctx aws.Context, input *Sta
 
 const opUpdateReplicationJob = "UpdateReplicationJob"
 
-// UpdateReplicationJobRequest generates a "aws/request.Request" representing the
+// UpdateReplicationJobRequest generates a "aws.Request" representing the
 // client's request for the UpdateReplicationJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1189,8 +1188,8 @@ const opUpdateReplicationJob = "UpdateReplicationJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJob
-func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) (req *request.Request, output *UpdateReplicationJobOutput) {
-	op := &request.Operation{
+func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) (req *aws.Request, output *UpdateReplicationJobOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateReplicationJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1259,7 +1258,7 @@ func (c *SMS) UpdateReplicationJob(input *UpdateReplicationJobInput) (*UpdateRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SMS) UpdateReplicationJobWithContext(ctx aws.Context, input *UpdateReplicationJobInput, opts ...request.Option) (*UpdateReplicationJobOutput, error) {
+func (c *SMS) UpdateReplicationJobWithContext(ctx aws.Context, input *UpdateReplicationJobInput, opts ...aws.Option) (*UpdateReplicationJobOutput, error) {
 	req, out := c.UpdateReplicationJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1415,15 +1414,15 @@ func (s CreateReplicationJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReplicationJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReplicationJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicationJobInput"}
 	if s.Frequency == nil {
-		invalidParams.Add(request.NewErrParamRequired("Frequency"))
+		invalidParams.Add(aws.NewErrParamRequired("Frequency"))
 	}
 	if s.SeedReplicationTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("SeedReplicationTime"))
+		invalidParams.Add(aws.NewErrParamRequired("SeedReplicationTime"))
 	}
 	if s.ServerId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerId"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1514,9 +1513,9 @@ func (s DeleteReplicationJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReplicationJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReplicationJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicationJobInput"}
 	if s.ReplicationJobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationJobId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1598,9 +1597,9 @@ func (s DisassociateConnectorInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateConnectorInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateConnectorInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateConnectorInput"}
 	if s.ConnectorId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectorId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectorId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1802,9 +1801,9 @@ func (s GetReplicationRunsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetReplicationRunsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetReplicationRunsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetReplicationRunsInput"}
 	if s.ReplicationJobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationJobId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2306,9 +2305,9 @@ func (s StartOnDemandReplicationRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartOnDemandReplicationRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartOnDemandReplicationRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartOnDemandReplicationRunInput"}
 	if s.ReplicationJobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationJobId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2392,9 +2391,9 @@ func (s UpdateReplicationJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateReplicationJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateReplicationJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateReplicationJobInput"}
 	if s.ReplicationJobId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReplicationJobId"))
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationJobId"))
 	}
 
 	if invalidParams.Len() > 0 {

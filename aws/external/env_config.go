@@ -3,7 +3,7 @@ package external
 import (
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
 // CredentialsSourceName provides a name of the provider when config is
@@ -15,15 +15,15 @@ const (
 	AWSAccessKeyIDEnvVar = "AWS_ACCESS_KEY_ID"
 	AWSAccessKeyEnvVar   = "AWS_ACCESS_KEY"
 
-	AWSSecreteAccessKeyEnvVar = "AWS_ACCESS_KEY_ID"
-	AWSSecreteKeyEnvVar       = "AWS_ACCESS_KEY"
+	AWSSecreteAccessKeyEnvVar = "AWS_SECRET_ACCESS_KEY"
+	AWSSecreteKeyEnvVar       = "AWS_SECRET_KEY"
 
 	AWSSessionTokenEnvVar = "AWS_SESSION_TOKEN"
 
 	AWSCredentialsEndpointEnvVar = "AWS_CONTAINER_CREDENTIALS_FULL_URI"
 
 	// TODO shorter name?
-	AWSContainerCredentialsRelativeEndpointEnvVar = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
+	AWSContainerCredentialsEndpointPathEnvVar = "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
 
 	AWSRegionEnvVar        = "AWS_REGION"
 	AWSDefaultRegionEnvVar = "AWS_DEFAULT_REGION"
@@ -76,13 +76,13 @@ type EnvConfig struct {
 	//
 	//	# Session Token
 	//	AWS_SESSION_TOKEN=TOKEN
-	Credentials credentials.Value
+	Credentials aws.Credentials
 
 	// TODO doc
-	CredentialsHTTPEndpoint string
+	CredentialsEndpoint string
 
 	// TODO doc, shorter name?
-	CredentialsContainerRelativeHTTPEndpoint string
+	ContainerCredentialsEndpointPath string
 
 	// Region value will instruct the SDK where to make service API requests to. If is
 	// not provided in the environment the region must be provided before a service
@@ -146,20 +146,18 @@ func LoadEnvConfig(cfgs Configs) (Config, error) {
 func NewEnvConfig() (EnvConfig, error) {
 	var cfg EnvConfig
 
-	creds := credentials.Value{
+	creds := aws.Credentials{
 		ProviderName: CredentialsSourceName,
 	}
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
 	setFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
 	if creds.Valid() {
-		creds.SessionToken = AWSSessionTokenEnvVar
-		creds.ProviderName = CredentialsSourceName
-
+		creds.SessionToken = os.Getenv(AWSSessionTokenEnvVar)
 		cfg.Credentials = creds
 	}
 
-	cfg.CredentialsHTTPEndpoint = os.Getenv(AWSCredentialsEndpointEnvVar)
-	cfg.CredentialsContainerRelativeHTTPEndpoint = os.Getenv(AWSContainerCredentialsRelativeEndpointEnvVar)
+	cfg.CredentialsEndpoint = os.Getenv(AWSCredentialsEndpointEnvVar)
+	cfg.ContainerCredentialsEndpointPath = os.Getenv(AWSContainerCredentialsEndpointPathEnvVar)
 
 	setFromEnvVal(&cfg.Region, regionEnvKeys)
 	setFromEnvVal(&cfg.SharedConfigProfile, profileEnvKeys)
@@ -180,7 +178,7 @@ func (c EnvConfig) GetRegion() (string, error) {
 
 // GetCredentialsValue returns the AWS Credentials if both AccessKey and ScreteAccessKey
 // are set in the environment. Returns a zero value Credentials if not set.
-func (c EnvConfig) GetCredentialsValue() (credentials.Value, error) {
+func (c EnvConfig) GetCredentialsValue() (aws.Credentials, error) {
 	return c.Credentials, nil
 }
 
@@ -188,6 +186,17 @@ func (c EnvConfig) GetCredentialsValue() (credentials.Value, error) {
 // environment. Returns an empty string if not set.
 func (c EnvConfig) GetSharedConfigProfile() (string, error) {
 	return c.SharedConfigProfile, nil
+}
+
+// GetCredentialsEndpoint returns the credentials endpoint string if set.
+func (c EnvConfig) GetCredentialsEndpoint() (string, error) {
+	return c.CredentialsEndpoint, nil
+}
+
+// GetContainerCredentailsEndpointPath returns the container credentails endpoint
+// path string if set.
+func (c EnvConfig) GetContainerCredentailsEndpointPath() (string, error) {
+	return c.ContainerCredentialsEndpointPath, nil
 }
 
 // GetSharedConfigFiles returns a slice of filenames set in the environment.

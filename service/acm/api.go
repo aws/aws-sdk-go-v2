@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opAddTagsToCertificate = "AddTagsToCertificate"
 
-// AddTagsToCertificateRequest generates a "aws/request.Request" representing the
+// AddTagsToCertificateRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAddTagsToCertificate = "AddTagsToCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate
-func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) (req *request.Request, output *AddTagsToCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) (req *aws.Request, output *AddTagsToCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -114,7 +113,7 @@ func (c *ACM) AddTagsToCertificate(input *AddTagsToCertificateInput) (*AddTagsTo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) AddTagsToCertificateWithContext(ctx aws.Context, input *AddTagsToCertificateInput, opts ...request.Option) (*AddTagsToCertificateOutput, error) {
+func (c *ACM) AddTagsToCertificateWithContext(ctx aws.Context, input *AddTagsToCertificateInput, opts ...aws.Option) (*AddTagsToCertificateOutput, error) {
 	req, out := c.AddTagsToCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -123,7 +122,7 @@ func (c *ACM) AddTagsToCertificateWithContext(ctx aws.Context, input *AddTagsToC
 
 const opDeleteCertificate = "DeleteCertificate"
 
-// DeleteCertificateRequest generates a "aws/request.Request" representing the
+// DeleteCertificateRequest generates a "aws.Request" representing the
 // client's request for the DeleteCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -147,8 +146,8 @@ const opDeleteCertificate = "DeleteCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificate
-func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) (req *request.Request, output *DeleteCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) (req *aws.Request, output *DeleteCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -211,7 +210,7 @@ func (c *ACM) DeleteCertificate(input *DeleteCertificateInput) (*DeleteCertifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...request.Option) (*DeleteCertificateOutput, error) {
+func (c *ACM) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...aws.Option) (*DeleteCertificateOutput, error) {
 	req, out := c.DeleteCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -220,7 +219,7 @@ func (c *ACM) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertifi
 
 const opDescribeCertificate = "DescribeCertificate"
 
-// DescribeCertificateRequest generates a "aws/request.Request" representing the
+// DescribeCertificateRequest generates a "aws.Request" representing the
 // client's request for the DescribeCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -244,8 +243,8 @@ const opDescribeCertificate = "DescribeCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate
-func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) (req *request.Request, output *DescribeCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) (req *aws.Request, output *DescribeCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -294,7 +293,7 @@ func (c *ACM) DescribeCertificate(input *DescribeCertificateInput) (*DescribeCer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCertificateInput, opts ...request.Option) (*DescribeCertificateOutput, error) {
+func (c *ACM) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCertificateInput, opts ...aws.Option) (*DescribeCertificateOutput, error) {
 	req, out := c.DescribeCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -303,7 +302,7 @@ func (c *ACM) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCer
 
 const opGetCertificate = "GetCertificate"
 
-// GetCertificateRequest generates a "aws/request.Request" representing the
+// GetCertificateRequest generates a "aws.Request" representing the
 // client's request for the GetCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -327,8 +326,8 @@ const opGetCertificate = "GetCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate
-func (c *ACM) GetCertificateRequest(input *GetCertificateInput) (req *request.Request, output *GetCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) GetCertificateRequest(input *GetCertificateInput) (req *aws.Request, output *GetCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opGetCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -389,7 +388,7 @@ func (c *ACM) GetCertificate(input *GetCertificateInput) (*GetCertificateOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) GetCertificateWithContext(ctx aws.Context, input *GetCertificateInput, opts ...request.Option) (*GetCertificateOutput, error) {
+func (c *ACM) GetCertificateWithContext(ctx aws.Context, input *GetCertificateInput, opts ...aws.Option) (*GetCertificateOutput, error) {
 	req, out := c.GetCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -398,7 +397,7 @@ func (c *ACM) GetCertificateWithContext(ctx aws.Context, input *GetCertificateIn
 
 const opImportCertificate = "ImportCertificate"
 
-// ImportCertificateRequest generates a "aws/request.Request" representing the
+// ImportCertificateRequest generates a "aws.Request" representing the
 // client's request for the ImportCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -422,8 +421,8 @@ const opImportCertificate = "ImportCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificate
-func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) (req *request.Request, output *ImportCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) (req *aws.Request, output *ImportCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opImportCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -501,7 +500,7 @@ func (c *ACM) ImportCertificate(input *ImportCertificateInput) (*ImportCertifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) ImportCertificateWithContext(ctx aws.Context, input *ImportCertificateInput, opts ...request.Option) (*ImportCertificateOutput, error) {
+func (c *ACM) ImportCertificateWithContext(ctx aws.Context, input *ImportCertificateInput, opts ...aws.Option) (*ImportCertificateOutput, error) {
 	req, out := c.ImportCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -510,7 +509,7 @@ func (c *ACM) ImportCertificateWithContext(ctx aws.Context, input *ImportCertifi
 
 const opListCertificates = "ListCertificates"
 
-// ListCertificatesRequest generates a "aws/request.Request" representing the
+// ListCertificatesRequest generates a "aws.Request" representing the
 // client's request for the ListCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -534,12 +533,12 @@ const opListCertificates = "ListCertificates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates
-func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) (req *request.Request, output *ListCertificatesOutput) {
-	op := &request.Operation{
+func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) (req *aws.Request, output *ListCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opListCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxItems",
@@ -583,7 +582,7 @@ func (c *ACM) ListCertificates(input *ListCertificatesInput) (*ListCertificatesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) ListCertificatesWithContext(ctx aws.Context, input *ListCertificatesInput, opts ...request.Option) (*ListCertificatesOutput, error) {
+func (c *ACM) ListCertificatesWithContext(ctx aws.Context, input *ListCertificatesInput, opts ...aws.Option) (*ListCertificatesOutput, error) {
 	req, out := c.ListCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -618,9 +617,9 @@ func (c *ACM) ListCertificatesPages(input *ListCertificatesInput, fn func(*ListC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCertificatesInput, fn func(*ListCertificatesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ACM) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCertificatesInput, fn func(*ListCertificatesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCertificatesInput
 			if input != nil {
 				tmp := *input
@@ -642,7 +641,7 @@ func (c *ACM) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCerti
 
 const opListTagsForCertificate = "ListTagsForCertificate"
 
-// ListTagsForCertificateRequest generates a "aws/request.Request" representing the
+// ListTagsForCertificateRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -666,8 +665,8 @@ const opListTagsForCertificate = "ListTagsForCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificate
-func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) (req *request.Request, output *ListTagsForCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) (req *aws.Request, output *ListTagsForCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -719,7 +718,7 @@ func (c *ACM) ListTagsForCertificate(input *ListTagsForCertificateInput) (*ListT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) ListTagsForCertificateWithContext(ctx aws.Context, input *ListTagsForCertificateInput, opts ...request.Option) (*ListTagsForCertificateOutput, error) {
+func (c *ACM) ListTagsForCertificateWithContext(ctx aws.Context, input *ListTagsForCertificateInput, opts ...aws.Option) (*ListTagsForCertificateOutput, error) {
 	req, out := c.ListTagsForCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -728,7 +727,7 @@ func (c *ACM) ListTagsForCertificateWithContext(ctx aws.Context, input *ListTags
 
 const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
 
-// RemoveTagsFromCertificateRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromCertificateRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -752,8 +751,8 @@ const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate
-func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateInput) (req *request.Request, output *RemoveTagsFromCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateInput) (req *aws.Request, output *RemoveTagsFromCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -815,7 +814,7 @@ func (c *ACM) RemoveTagsFromCertificate(input *RemoveTagsFromCertificateInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) RemoveTagsFromCertificateWithContext(ctx aws.Context, input *RemoveTagsFromCertificateInput, opts ...request.Option) (*RemoveTagsFromCertificateOutput, error) {
+func (c *ACM) RemoveTagsFromCertificateWithContext(ctx aws.Context, input *RemoveTagsFromCertificateInput, opts ...aws.Option) (*RemoveTagsFromCertificateOutput, error) {
 	req, out := c.RemoveTagsFromCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -824,7 +823,7 @@ func (c *ACM) RemoveTagsFromCertificateWithContext(ctx aws.Context, input *Remov
 
 const opRequestCertificate = "RequestCertificate"
 
-// RequestCertificateRequest generates a "aws/request.Request" representing the
+// RequestCertificateRequest generates a "aws.Request" representing the
 // client's request for the RequestCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -848,8 +847,8 @@ const opRequestCertificate = "RequestCertificate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificate
-func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) (req *request.Request, output *RequestCertificateOutput) {
-	op := &request.Operation{
+func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) (req *aws.Request, output *RequestCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opRequestCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -907,7 +906,7 @@ func (c *ACM) RequestCertificate(input *RequestCertificateInput) (*RequestCertif
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) RequestCertificateWithContext(ctx aws.Context, input *RequestCertificateInput, opts ...request.Option) (*RequestCertificateOutput, error) {
+func (c *ACM) RequestCertificateWithContext(ctx aws.Context, input *RequestCertificateInput, opts ...aws.Option) (*RequestCertificateOutput, error) {
 	req, out := c.RequestCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -916,7 +915,7 @@ func (c *ACM) RequestCertificateWithContext(ctx aws.Context, input *RequestCerti
 
 const opResendValidationEmail = "ResendValidationEmail"
 
-// ResendValidationEmailRequest generates a "aws/request.Request" representing the
+// ResendValidationEmailRequest generates a "aws.Request" representing the
 // client's request for the ResendValidationEmail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -940,8 +939,8 @@ const opResendValidationEmail = "ResendValidationEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmail
-func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) (req *request.Request, output *ResendValidationEmailOutput) {
-	op := &request.Operation{
+func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) (req *aws.Request, output *ResendValidationEmailOutput) {
+	op := &aws.Operation{
 		Name:       opResendValidationEmail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1011,7 +1010,7 @@ func (c *ACM) ResendValidationEmail(input *ResendValidationEmailInput) (*ResendV
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ACM) ResendValidationEmailWithContext(ctx aws.Context, input *ResendValidationEmailInput, opts ...request.Option) (*ResendValidationEmailOutput, error) {
+func (c *ACM) ResendValidationEmailWithContext(ctx aws.Context, input *ResendValidationEmailInput, opts ...aws.Option) (*ResendValidationEmailOutput, error) {
 	req, out := c.ResendValidationEmailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1051,18 +1050,18 @@ func (s AddTagsToCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -1070,7 +1069,7 @@ func (s *AddTagsToCertificateInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1410,12 +1409,12 @@ func (s DeleteCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1473,12 +1472,12 @@ func (s DescribeCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1616,18 +1615,18 @@ func (s DomainValidationOption) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DomainValidationOption) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DomainValidationOption"}
+	invalidParams := aws.ErrInvalidParams{Context: "DomainValidationOption"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
 	}
 	if s.ValidationDomain == nil {
-		invalidParams.Add(request.NewErrParamRequired("ValidationDomain"))
+		invalidParams.Add(aws.NewErrParamRequired("ValidationDomain"))
 	}
 	if s.ValidationDomain != nil && len(*s.ValidationDomain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ValidationDomain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ValidationDomain", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1675,12 +1674,12 @@ func (s GetCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1785,24 +1784,24 @@ func (s ImportCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportCertificateInput"}
 	if s.Certificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("Certificate"))
+		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
 	}
 	if s.Certificate != nil && len(s.Certificate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Certificate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Certificate", 1))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 	if s.CertificateChain != nil && len(s.CertificateChain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateChain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
 	}
 	if s.PrivateKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrivateKey"))
+		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
 	}
 	if s.PrivateKey != nil && len(s.PrivateKey) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PrivateKey", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PrivateKey", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1891,12 +1890,12 @@ func (s ListCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCertificatesInput"}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1985,12 +1984,12 @@ func (s ListTagsForCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2062,18 +2061,18 @@ func (s RemoveTagsFromCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromCertificateInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2081,7 +2080,7 @@ func (s *RemoveTagsFromCertificateInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2224,21 +2223,21 @@ func (s RequestCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RequestCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RequestCertificateInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DomainName != nil && len(*s.DomainName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 1))
 	}
 	if s.DomainValidationOptions != nil && len(s.DomainValidationOptions) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainValidationOptions", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainValidationOptions", 1))
 	}
 	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IdempotencyToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
 	}
 	if s.SubjectAlternativeNames != nil && len(s.SubjectAlternativeNames) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubjectAlternativeNames", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubjectAlternativeNames", 1))
 	}
 	if s.DomainValidationOptions != nil {
 		for i, v := range s.DomainValidationOptions {
@@ -2246,7 +2245,7 @@ func (s *RequestCertificateInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DomainValidationOptions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DomainValidationOptions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2363,24 +2362,24 @@ func (s ResendValidationEmailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResendValidationEmailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResendValidationEmailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResendValidationEmailInput"}
 	if s.CertificateArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateArn"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
 	}
 	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateArn", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
 	}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 	if s.Domain != nil && len(*s.Domain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Domain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Domain", 1))
 	}
 	if s.ValidationDomain == nil {
-		invalidParams.Add(request.NewErrParamRequired("ValidationDomain"))
+		invalidParams.Add(aws.NewErrParamRequired("ValidationDomain"))
 	}
 	if s.ValidationDomain != nil && len(*s.ValidationDomain) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ValidationDomain", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ValidationDomain", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2448,12 +2447,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {

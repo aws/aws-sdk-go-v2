@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilCacheClusterAvailable uses the Amazon ElastiCache API operation
@@ -25,40 +24,40 @@ func (c *ElastiCache) WaitUntilCacheClusterAvailable(input *DescribeCacheCluster
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilCacheClusterAvailableWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ElastiCache) WaitUntilCacheClusterAvailableWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilCacheClusterAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "deleted",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "deleting",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "incompatible-network",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "restore-failed",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeCacheClustersInput
 			if input != nil {
 				tmp := *input
@@ -91,55 +90,55 @@ func (c *ElastiCache) WaitUntilCacheClusterDeleted(input *DescribeCacheClustersI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilCacheClusterDeletedWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ElastiCache) WaitUntilCacheClusterDeletedWithContext(ctx aws.Context, input *DescribeCacheClustersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilCacheClusterDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "deleted",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "CacheClusterNotFound",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "creating",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "incompatible-network",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "modifying",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "restore-failed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "CacheClusters[].CacheClusterStatus",
 				Expected: "snapshotting",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeCacheClustersInput
 			if input != nil {
 				tmp := *input
@@ -172,25 +171,25 @@ func (c *ElastiCache) WaitUntilReplicationGroupAvailable(input *DescribeReplicat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilReplicationGroupAvailableWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ElastiCache) WaitUntilReplicationGroupAvailableWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilReplicationGroupAvailable",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ReplicationGroups[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ReplicationGroups[].Status",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "ReplicationGroups[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "ReplicationGroups[].Status",
 				Expected: "deleted",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeReplicationGroupsInput
 			if input != nil {
 				tmp := *input
@@ -223,30 +222,30 @@ func (c *ElastiCache) WaitUntilReplicationGroupDeleted(input *DescribeReplicatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ElastiCache) WaitUntilReplicationGroupDeletedWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *ElastiCache) WaitUntilReplicationGroupDeletedWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilReplicationGroupDeleted",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "ReplicationGroups[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "ReplicationGroups[].Status",
 				Expected: "deleted",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "ReplicationGroups[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "ReplicationGroups[].Status",
 				Expected: "available",
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ReplicationGroupNotFoundFault",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeReplicationGroupsInput
 			if input != nil {
 				tmp := *input

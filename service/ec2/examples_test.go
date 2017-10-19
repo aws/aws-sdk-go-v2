@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
 
@@ -29,7 +29,12 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example allocates an Elastic IP address to use with an instance in a VPC.
 func ExampleEC2_AllocateAddress_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AllocateAddressInput{
 		Domain: aws.String("vpc"),
 	}
@@ -56,7 +61,12 @@ func ExampleEC2_AllocateAddress_shared00() {
 //
 // This example allocates an Elastic IP address to use with an instance in EC2-Classic.
 func ExampleEC2_AllocateAddress_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AllocateAddressInput{}
 
 	result, err := svc.AllocateAddress(input)
@@ -82,7 +92,12 @@ func ExampleEC2_AllocateAddress_shared01() {
 // This example assigns the specified secondary private IP address to the specified
 // network interface.
 func ExampleEC2_AssignPrivateIpAddresses_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 		PrivateIpAddresses: []*string{
@@ -115,7 +130,12 @@ func ExampleEC2_AssignPrivateIpAddresses_shared00() {
 // IP addresses in the CIDR block range of the subnet the network interface is associated
 // with.
 func ExampleEC2_AssignPrivateIpAddresses_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssignPrivateIpAddressesInput{
 		NetworkInterfaceId:             aws.String("eni-e5aa89a3"),
 		SecondaryPrivateIpAddressCount: aws.Int64(2),
@@ -144,7 +164,12 @@ func ExampleEC2_AssignPrivateIpAddresses_shared01() {
 // This example associates the specified Elastic IP address with the specified instance
 // in a VPC.
 func ExampleEC2_AssociateAddress_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssociateAddressInput{
 		AllocationId: aws.String("eipalloc-64d5890a"),
 		InstanceId:   aws.String("i-0b263919b6498b123"),
@@ -173,7 +198,12 @@ func ExampleEC2_AssociateAddress_shared00() {
 // This example associates the specified Elastic IP address with the specified network
 // interface.
 func ExampleEC2_AssociateAddress_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssociateAddressInput{
 		AllocationId:       aws.String("eipalloc-64d5890a"),
 		NetworkInterfaceId: aws.String("eni-1a2b3c4d"),
@@ -201,7 +231,12 @@ func ExampleEC2_AssociateAddress_shared01() {
 //
 // This example associates an Elastic IP address with an instance in EC2-Classic.
 func ExampleEC2_AssociateAddress_shared02() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssociateAddressInput{
 		InstanceId: aws.String("i-07ffe74c7330ebf53"),
 		PublicIp:   aws.String("198.51.100.0"),
@@ -229,7 +264,12 @@ func ExampleEC2_AssociateAddress_shared02() {
 //
 // This example associates the specified DHCP options set with the specified VPC.
 func ExampleEC2_AssociateDhcpOptions_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssociateDhcpOptionsInput{
 		DhcpOptionsId: aws.String("dopt-d9070ebb"),
 		VpcId:         aws.String("vpc-a01106c2"),
@@ -257,7 +297,12 @@ func ExampleEC2_AssociateDhcpOptions_shared00() {
 //
 // This example associates the default DHCP options set with the specified VPC.
 func ExampleEC2_AssociateDhcpOptions_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssociateDhcpOptionsInput{
 		DhcpOptionsId: aws.String("default"),
 		VpcId:         aws.String("vpc-a01106c2"),
@@ -285,7 +330,12 @@ func ExampleEC2_AssociateDhcpOptions_shared01() {
 //
 // This example associates the specified route table with the specified subnet.
 func ExampleEC2_AssociateRouteTable_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AssociateRouteTableInput{
 		RouteTableId: aws.String("rtb-22574640"),
 		SubnetId:     aws.String("subnet-9d4a7b6"),
@@ -313,7 +363,12 @@ func ExampleEC2_AssociateRouteTable_shared00() {
 //
 // This example attaches the specified Internet gateway to the specified VPC.
 func ExampleEC2_AttachInternetGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AttachInternetGatewayInput{
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 		VpcId:             aws.String("vpc-a01106c2"),
@@ -341,7 +396,12 @@ func ExampleEC2_AttachInternetGateway_shared00() {
 //
 // This example attaches the specified network interface to the specified instance.
 func ExampleEC2_AttachNetworkInterface_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AttachNetworkInterfaceInput{
 		DeviceIndex:        aws.Int64(1),
 		InstanceId:         aws.String("i-1234567890abcdef0"),
@@ -371,7 +431,12 @@ func ExampleEC2_AttachNetworkInterface_shared00() {
 // This example attaches a volume (``vol-1234567890abcdef0``) to an instance (``i-01474ef662b89480``)
 // as ``/dev/sdf``.
 func ExampleEC2_AttachVolume_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.AttachVolumeInput{
 		Device:     aws.String("/dev/sdf"),
 		InstanceId: aws.String("i-01474ef662b89480"),
@@ -401,7 +466,12 @@ func ExampleEC2_AttachVolume_shared00() {
 // This example cancels the specified Spot fleet request and terminates its associated
 // Spot Instances.
 func ExampleEC2_CancelSpotFleetRequests_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CancelSpotFleetRequestsInput{
 		SpotFleetRequestIds: []*string{
 			aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
@@ -432,7 +502,12 @@ func ExampleEC2_CancelSpotFleetRequests_shared00() {
 // This example cancels the specified Spot fleet request without terminating its associated
 // Spot Instances.
 func ExampleEC2_CancelSpotFleetRequests_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CancelSpotFleetRequestsInput{
 		SpotFleetRequestIds: []*string{
 			aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
@@ -462,7 +537,12 @@ func ExampleEC2_CancelSpotFleetRequests_shared01() {
 //
 // This example cancels a Spot Instance request.
 func ExampleEC2_CancelSpotInstanceRequests_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CancelSpotInstanceRequestsInput{
 		SpotInstanceRequestIds: []*string{
 			aws.String("sir-08b93456"),
@@ -492,7 +572,12 @@ func ExampleEC2_CancelSpotInstanceRequests_shared00() {
 // This example determines whether the specified product code is associated with the
 // specified instance.
 func ExampleEC2_ConfirmProductInstance_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ConfirmProductInstanceInput{
 		InstanceId:  aws.String("i-1234567890abcdef0"),
 		ProductCode: aws.String("774F4FF8"),
@@ -522,7 +607,12 @@ func ExampleEC2_ConfirmProductInstance_shared00() {
 // from the ``us-west-2`` region to the ``us-east-1`` region and adds a short description
 // to identify the snapshot.
 func ExampleEC2_CopySnapshot_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CopySnapshotInput{
 		Description:       aws.String("This is my copied snapshot."),
 		DestinationRegion: aws.String("us-east-1"),
@@ -553,7 +643,12 @@ func ExampleEC2_CopySnapshot_shared00() {
 // This example creates a customer gateway with the specified IP address for its outside
 // interface.
 func ExampleEC2_CreateCustomerGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateCustomerGatewayInput{
 		BgpAsn:   aws.Int64(65534),
 		PublicIp: aws.String("12.1.2.3"),
@@ -582,7 +677,12 @@ func ExampleEC2_CreateCustomerGateway_shared00() {
 //
 // This example creates a DHCP options set.
 func ExampleEC2_CreateDhcpOptions_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateDhcpOptionsInput{
 		DhcpConfigurations: []*ec2.NewDhcpConfiguration{
 			{
@@ -617,7 +717,12 @@ func ExampleEC2_CreateDhcpOptions_shared00() {
 //
 // This example creates an Internet gateway.
 func ExampleEC2_CreateInternetGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateInternetGatewayInput{}
 
 	result, err := svc.CreateInternetGateway(input)
@@ -642,7 +747,12 @@ func ExampleEC2_CreateInternetGateway_shared00() {
 //
 // This example creates a key pair named my-key-pair.
 func ExampleEC2_CreateKeyPair_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateKeyPairInput{
 		KeyName: aws.String("my-key-pair"),
 	}
@@ -670,7 +780,12 @@ func ExampleEC2_CreateKeyPair_shared00() {
 // This example creates a NAT gateway in subnet subnet-1a2b3c4d and associates an Elastic
 // IP address with the allocation ID eipalloc-37fc1a52 with the NAT gateway.
 func ExampleEC2_CreateNatGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateNatGatewayInput{
 		AllocationId: aws.String("eipalloc-37fc1a52"),
 		SubnetId:     aws.String("subnet-1a2b3c4d"),
@@ -698,7 +813,12 @@ func ExampleEC2_CreateNatGateway_shared00() {
 //
 // This example creates a network ACL for the specified VPC.
 func ExampleEC2_CreateNetworkAcl_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateNetworkAclInput{
 		VpcId: aws.String("vpc-a01106c2"),
 	}
@@ -726,7 +846,12 @@ func ExampleEC2_CreateNetworkAcl_shared00() {
 // This example creates an entry for the specified network ACL. The rule allows ingress
 // traffic from anywhere (0.0.0.0/0) on UDP port 53 (DNS) into any associated subnet.
 func ExampleEC2_CreateNetworkAclEntry_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateNetworkAclEntryInput{
 		CidrBlock:    aws.String("0.0.0.0/0"),
 		Egress:       aws.Bool(false),
@@ -762,7 +887,12 @@ func ExampleEC2_CreateNetworkAclEntry_shared00() {
 //
 // This example creates a network interface for the specified subnet.
 func ExampleEC2_CreateNetworkInterface_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateNetworkInterfaceInput{
 		Description: aws.String("my network interface"),
 		Groups: []*string{
@@ -794,7 +924,12 @@ func ExampleEC2_CreateNetworkInterface_shared00() {
 //
 // This example creates a placement group with the specified name.
 func ExampleEC2_CreatePlacementGroup_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreatePlacementGroupInput{
 		GroupName: aws.String("my-cluster"),
 		Strategy:  aws.String("cluster"),
@@ -823,7 +958,12 @@ func ExampleEC2_CreatePlacementGroup_shared00() {
 // This example creates a route for the specified route table. The route matches all
 // traffic (0.0.0.0/0) and routes it to the specified Internet gateway.
 func ExampleEC2_CreateRoute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateRouteInput{
 		DestinationCidrBlock: aws.String("0.0.0.0/0"),
 		GatewayId:            aws.String("igw-c0a643a9"),
@@ -852,7 +992,12 @@ func ExampleEC2_CreateRoute_shared00() {
 //
 // This example creates a route table for the specified VPC.
 func ExampleEC2_CreateRouteTable_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateRouteTableInput{
 		VpcId: aws.String("vpc-a01106c2"),
 	}
@@ -880,7 +1025,12 @@ func ExampleEC2_CreateRouteTable_shared00() {
 // This example creates a snapshot of the volume with a volume ID of ``vol-1234567890abcdef0``
 // and a short description to identify the snapshot.
 func ExampleEC2_CreateSnapshot_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateSnapshotInput{
 		Description: aws.String("This is my root volume snapshot."),
 		VolumeId:    aws.String("vol-1234567890abcdef0"),
@@ -908,7 +1058,12 @@ func ExampleEC2_CreateSnapshot_shared00() {
 //
 // This example creates a Spot Instance data feed for your AWS account.
 func ExampleEC2_CreateSpotDatafeedSubscription_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateSpotDatafeedSubscriptionInput{
 		Bucket: aws.String("my-s3-bucket"),
 		Prefix: aws.String("spotdata"),
@@ -937,7 +1092,12 @@ func ExampleEC2_CreateSpotDatafeedSubscription_shared00() {
 // This example creates a subnet in the specified VPC with the specified CIDR block.
 // We recommend that you let us select an Availability Zone for you.
 func ExampleEC2_CreateSubnet_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateSubnetInput{
 		CidrBlock: aws.String("10.0.1.0/24"),
 		VpcId:     aws.String("vpc-a01106c2"),
@@ -966,7 +1126,12 @@ func ExampleEC2_CreateSubnet_shared00() {
 // This example adds the tag Stack=production to the specified image, or overwrites
 // an existing tag for the AMI where the tag key is Stack.
 func ExampleEC2_CreateTags_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateTagsInput{
 		Resources: []*string{
 			aws.String("ami-78a54011"),
@@ -1002,7 +1167,12 @@ func ExampleEC2_CreateTags_shared00() {
 // This example creates an 80 GiB General Purpose (SSD) volume in the Availability Zone
 // ``us-east-1a``.
 func ExampleEC2_CreateVolume_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateVolumeInput{
 		AvailabilityZone: aws.String("us-east-1a"),
 		Size:             aws.Int64(80),
@@ -1032,7 +1202,12 @@ func ExampleEC2_CreateVolume_shared00() {
 // This example creates a new Provisioned IOPS (SSD) volume with 1000 provisioned IOPS
 // from a snapshot in the Availability Zone ``us-east-1a``.
 func ExampleEC2_CreateVolume_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateVolumeInput{
 		AvailabilityZone: aws.String("us-east-1a"),
 		Iops:             aws.Int64(1000),
@@ -1062,7 +1237,12 @@ func ExampleEC2_CreateVolume_shared01() {
 //
 // This example creates a VPC with the specified CIDR block.
 func ExampleEC2_CreateVpc_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.CreateVpcInput{
 		CidrBlock: aws.String("10.0.0.0/16"),
 	}
@@ -1089,7 +1269,12 @@ func ExampleEC2_CreateVpc_shared00() {
 //
 // This example deletes the specified customer gateway.
 func ExampleEC2_DeleteCustomerGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteCustomerGatewayInput{
 		CustomerGatewayId: aws.String("cgw-0e11f167"),
 	}
@@ -1116,7 +1301,12 @@ func ExampleEC2_DeleteCustomerGateway_shared00() {
 //
 // This example deletes the specified DHCP options set.
 func ExampleEC2_DeleteDhcpOptions_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteDhcpOptionsInput{
 		DhcpOptionsId: aws.String("dopt-d9070ebb"),
 	}
@@ -1143,7 +1333,12 @@ func ExampleEC2_DeleteDhcpOptions_shared00() {
 //
 // This example deletes the specified Internet gateway.
 func ExampleEC2_DeleteInternetGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteInternetGatewayInput{
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 	}
@@ -1170,7 +1365,12 @@ func ExampleEC2_DeleteInternetGateway_shared00() {
 //
 // This example deletes the specified key pair.
 func ExampleEC2_DeleteKeyPair_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteKeyPairInput{
 		KeyName: aws.String("my-key-pair"),
 	}
@@ -1197,7 +1397,12 @@ func ExampleEC2_DeleteKeyPair_shared00() {
 //
 // This example deletes the specified NAT gateway.
 func ExampleEC2_DeleteNatGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteNatGatewayInput{
 		NatGatewayId: aws.String("nat-04ae55e711cec5680"),
 	}
@@ -1224,7 +1429,12 @@ func ExampleEC2_DeleteNatGateway_shared00() {
 //
 // This example deletes the specified network ACL.
 func ExampleEC2_DeleteNetworkAcl_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteNetworkAclInput{
 		NetworkAclId: aws.String("acl-5fb85d36"),
 	}
@@ -1251,7 +1461,12 @@ func ExampleEC2_DeleteNetworkAcl_shared00() {
 //
 // This example deletes ingress rule number 100 from the specified network ACL.
 func ExampleEC2_DeleteNetworkAclEntry_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteNetworkAclEntryInput{
 		Egress:       aws.Bool(true),
 		NetworkAclId: aws.String("acl-5fb85d36"),
@@ -1280,7 +1495,12 @@ func ExampleEC2_DeleteNetworkAclEntry_shared00() {
 //
 // This example deletes the specified network interface.
 func ExampleEC2_DeleteNetworkInterface_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteNetworkInterfaceInput{
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 	}
@@ -1308,7 +1528,12 @@ func ExampleEC2_DeleteNetworkInterface_shared00() {
 // This example deletes the specified placement group.
 //
 func ExampleEC2_DeletePlacementGroup_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeletePlacementGroupInput{
 		GroupName: aws.String("my-cluster"),
 	}
@@ -1335,7 +1560,12 @@ func ExampleEC2_DeletePlacementGroup_shared00() {
 //
 // This example deletes the specified route from the specified route table.
 func ExampleEC2_DeleteRoute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteRouteInput{
 		DestinationCidrBlock: aws.String("0.0.0.0/0"),
 		RouteTableId:         aws.String("rtb-22574640"),
@@ -1363,7 +1593,12 @@ func ExampleEC2_DeleteRoute_shared00() {
 //
 // This example deletes the specified route table.
 func ExampleEC2_DeleteRouteTable_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteRouteTableInput{
 		RouteTableId: aws.String("rtb-22574640"),
 	}
@@ -1391,7 +1626,12 @@ func ExampleEC2_DeleteRouteTable_shared00() {
 // This example deletes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``.
 // If the command succeeds, no output is returned.
 func ExampleEC2_DeleteSnapshot_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteSnapshotInput{
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
 	}
@@ -1418,7 +1658,12 @@ func ExampleEC2_DeleteSnapshot_shared00() {
 //
 // This example deletes a Spot data feed subscription for the account.
 func ExampleEC2_DeleteSpotDatafeedSubscription_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteSpotDatafeedSubscriptionInput{}
 
 	result, err := svc.DeleteSpotDatafeedSubscription(input)
@@ -1443,7 +1688,12 @@ func ExampleEC2_DeleteSpotDatafeedSubscription_shared00() {
 //
 // This example deletes the specified subnet.
 func ExampleEC2_DeleteSubnet_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteSubnetInput{
 		SubnetId: aws.String("subnet-9d4a7b6c"),
 	}
@@ -1470,7 +1720,12 @@ func ExampleEC2_DeleteSubnet_shared00() {
 //
 // This example deletes the tag Stack=test from the specified image.
 func ExampleEC2_DeleteTags_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteTagsInput{
 		Resources: []*string{
 			aws.String("ami-78a54011"),
@@ -1506,7 +1761,12 @@ func ExampleEC2_DeleteTags_shared00() {
 // This example deletes an available volume with the volume ID of ``vol-049df61146c4d7901``.
 // If the command succeeds, no output is returned.
 func ExampleEC2_DeleteVolume_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteVolumeInput{
 		VolumeId: aws.String("vol-049df61146c4d7901"),
 	}
@@ -1533,7 +1793,12 @@ func ExampleEC2_DeleteVolume_shared00() {
 //
 // This example deletes the specified VPC.
 func ExampleEC2_DeleteVpc_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DeleteVpcInput{
 		VpcId: aws.String("vpc-a01106c2"),
 	}
@@ -1560,7 +1825,12 @@ func ExampleEC2_DeleteVpc_shared00() {
 //
 // This example describes the supported-platforms attribute for your AWS account.
 func ExampleEC2_DescribeAccountAttributes_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeAccountAttributesInput{
 		AttributeNames: []*string{
 			aws.String("supported-platforms"),
@@ -1589,7 +1859,12 @@ func ExampleEC2_DescribeAccountAttributes_shared00() {
 //
 // This example describes the attributes for your AWS account.
 func ExampleEC2_DescribeAccountAttributes_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeAccountAttributesInput{}
 
 	result, err := svc.DescribeAccountAttributes(input)
@@ -1614,7 +1889,12 @@ func ExampleEC2_DescribeAccountAttributes_shared01() {
 //
 // This example describes your Elastic IP addresses.
 func ExampleEC2_DescribeAddresses_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeAddressesInput{}
 
 	result, err := svc.DescribeAddresses(input)
@@ -1639,7 +1919,12 @@ func ExampleEC2_DescribeAddresses_shared00() {
 //
 // This example describes your Elastic IP addresses for use with instances in a VPC.
 func ExampleEC2_DescribeAddresses_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeAddressesInput{
 		Filters: []*ec2.Filter{
 			{
@@ -1673,7 +1958,12 @@ func ExampleEC2_DescribeAddresses_shared01() {
 //
 // This example describes your Elastic IP addresses for use with instances in EC2-Classic.
 func ExampleEC2_DescribeAddresses_shared02() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeAddressesInput{
 		Filters: []*ec2.Filter{
 			{
@@ -1708,7 +1998,12 @@ func ExampleEC2_DescribeAddresses_shared02() {
 // This example describes the Availability Zones that are available to you. The response
 // includes Availability Zones only for the current region.
 func ExampleEC2_DescribeAvailabilityZones_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeAvailabilityZonesInput{}
 
 	result, err := svc.DescribeAvailabilityZones(input)
@@ -1733,7 +2028,12 @@ func ExampleEC2_DescribeAvailabilityZones_shared00() {
 //
 // This example describes the specified customer gateway.
 func ExampleEC2_DescribeCustomerGateways_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeCustomerGatewaysInput{
 		CustomerGatewayIds: []*string{
 			aws.String("cgw-0e11f167"),
@@ -1762,7 +2062,12 @@ func ExampleEC2_DescribeCustomerGateways_shared00() {
 //
 // This example describes the specified DHCP options set.
 func ExampleEC2_DescribeDhcpOptions_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeDhcpOptionsInput{
 		DhcpOptionsIds: []*string{
 			aws.String("dopt-d9070ebb"),
@@ -1792,7 +2097,12 @@ func ExampleEC2_DescribeDhcpOptions_shared00() {
 // This example describes the instance type of the specified instance.
 //
 func ExampleEC2_DescribeInstanceAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeInstanceAttributeInput{
 		Attribute:  aws.String("instanceType"),
 		InstanceId: aws.String("i-1234567890abcdef0"),
@@ -1821,7 +2131,12 @@ func ExampleEC2_DescribeInstanceAttribute_shared00() {
 // This example describes the ``disableApiTermination`` attribute of the specified instance.
 //
 func ExampleEC2_DescribeInstanceAttribute_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeInstanceAttributeInput{
 		Attribute:  aws.String("disableApiTermination"),
 		InstanceId: aws.String("i-1234567890abcdef0"),
@@ -1850,7 +2165,12 @@ func ExampleEC2_DescribeInstanceAttribute_shared01() {
 // This example describes the ``blockDeviceMapping`` attribute of the specified instance.
 //
 func ExampleEC2_DescribeInstanceAttribute_shared02() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeInstanceAttributeInput{
 		Attribute:  aws.String("blockDeviceMapping"),
 		InstanceId: aws.String("i-1234567890abcdef0"),
@@ -1878,7 +2198,12 @@ func ExampleEC2_DescribeInstanceAttribute_shared02() {
 //
 // This example describes the Internet gateway for the specified VPC.
 func ExampleEC2_DescribeInternetGateways_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeInternetGatewaysInput{
 		Filters: []*ec2.Filter{
 			{
@@ -1912,7 +2237,12 @@ func ExampleEC2_DescribeInternetGateways_shared00() {
 //
 // This example displays the fingerprint for the specified key.
 func ExampleEC2_DescribeKeyPairs_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeKeyPairsInput{
 		KeyNames: []*string{
 			aws.String("my-key-pair"),
@@ -1941,7 +2271,12 @@ func ExampleEC2_DescribeKeyPairs_shared00() {
 //
 // This example describes all of your moving Elastic IP addresses.
 func ExampleEC2_DescribeMovingAddresses_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeMovingAddressesInput{}
 
 	result, err := svc.DescribeMovingAddresses(input)
@@ -1966,7 +2301,12 @@ func ExampleEC2_DescribeMovingAddresses_shared00() {
 //
 // This example describes the NAT gateway for the specified VPC.
 func ExampleEC2_DescribeNatGateways_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNatGatewaysInput{
 		Filter: []*ec2.Filter{
 			{
@@ -2000,7 +2340,12 @@ func ExampleEC2_DescribeNatGateways_shared00() {
 //
 // This example describes the specified network ACL.
 func ExampleEC2_DescribeNetworkAcls_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkAclsInput{
 		NetworkAclIds: []*string{
 			aws.String("acl-5fb85d36"),
@@ -2029,7 +2374,12 @@ func ExampleEC2_DescribeNetworkAcls_shared00() {
 //
 // This example describes the attachment attribute of the specified network interface.
 func ExampleEC2_DescribeNetworkInterfaceAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
 		Attribute:          aws.String("attachment"),
 		NetworkInterfaceId: aws.String("eni-686ea200"),
@@ -2057,7 +2407,12 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared00() {
 //
 // This example describes the description attribute of the specified network interface.
 func ExampleEC2_DescribeNetworkInterfaceAttribute_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
 		Attribute:          aws.String("description"),
 		NetworkInterfaceId: aws.String("eni-686ea200"),
@@ -2085,7 +2440,12 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared01() {
 //
 // This example describes the groupSet attribute of the specified network interface.
 func ExampleEC2_DescribeNetworkInterfaceAttribute_shared02() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
 		Attribute:          aws.String("groupSet"),
 		NetworkInterfaceId: aws.String("eni-686ea200"),
@@ -2113,7 +2473,12 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared02() {
 //
 // This example describes the sourceDestCheck attribute of the specified network interface.
 func ExampleEC2_DescribeNetworkInterfaceAttribute_shared03() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfaceAttributeInput{
 		Attribute:          aws.String("sourceDestCheck"),
 		NetworkInterfaceId: aws.String("eni-686ea200"),
@@ -2141,7 +2506,12 @@ func ExampleEC2_DescribeNetworkInterfaceAttribute_shared03() {
 //
 
 func ExampleEC2_DescribeNetworkInterfaces_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeNetworkInterfacesInput{
 		NetworkInterfaceIds: []*string{
 			aws.String("eni-e5aa89a3"),
@@ -2170,7 +2540,12 @@ func ExampleEC2_DescribeNetworkInterfaces_shared00() {
 //
 // This example describes all the regions that are available to you.
 func ExampleEC2_DescribeRegions_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeRegionsInput{}
 
 	result, err := svc.DescribeRegions(input)
@@ -2195,7 +2570,12 @@ func ExampleEC2_DescribeRegions_shared00() {
 //
 // This example describes the specified route table.
 func ExampleEC2_DescribeRouteTables_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeRouteTablesInput{
 		RouteTableIds: []*string{
 			aws.String("rtb-1f382e7d"),
@@ -2225,7 +2605,12 @@ func ExampleEC2_DescribeRouteTables_shared00() {
 // This example describes a schedule that occurs every week on Sunday, starting on the
 // specified date. Note that the output contains a single schedule as an example.
 func ExampleEC2_DescribeScheduledInstanceAvailability_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeScheduledInstanceAvailabilityInput{
 		FirstSlotStartTimeRange: &ec2.SlotDateTimeRangeRequest{
 			EarliestTime: parseTime("2006-01-02T15:04:05Z", "2016-01-31T00:00:00Z"),
@@ -2262,7 +2647,12 @@ func ExampleEC2_DescribeScheduledInstanceAvailability_shared00() {
 //
 // This example describes the specified Scheduled Instance.
 func ExampleEC2_DescribeScheduledInstances_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeScheduledInstancesInput{
 		ScheduledInstanceIds: []*string{
 			aws.String("sci-1234-1234-1234-1234-123456789012"),
@@ -2292,7 +2682,12 @@ func ExampleEC2_DescribeScheduledInstances_shared00() {
 // This example describes the ``createVolumePermission`` attribute on a snapshot with
 // the snapshot ID of ``snap-066877671789bd71b``.
 func ExampleEC2_DescribeSnapshotAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSnapshotAttributeInput{
 		Attribute:  aws.String("createVolumePermission"),
 		SnapshotId: aws.String("snap-066877671789bd71b"),
@@ -2320,7 +2715,12 @@ func ExampleEC2_DescribeSnapshotAttribute_shared00() {
 //
 // This example describes a snapshot with the snapshot ID of ``snap-1234567890abcdef0``.
 func ExampleEC2_DescribeSnapshots_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSnapshotsInput{
 		SnapshotIds: []*string{
 			aws.String("snap-1234567890abcdef0"),
@@ -2350,7 +2750,12 @@ func ExampleEC2_DescribeSnapshots_shared00() {
 // This example describes all snapshots owned by the ID 012345678910 that are in the
 // ``pending`` status.
 func ExampleEC2_DescribeSnapshots_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSnapshotsInput{
 		Filters: []*ec2.Filter{
 			{
@@ -2387,7 +2792,12 @@ func ExampleEC2_DescribeSnapshots_shared01() {
 //
 // This example describes the Spot Instance datafeed subscription for your AWS account.
 func ExampleEC2_DescribeSpotDatafeedSubscription_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotDatafeedSubscriptionInput{}
 
 	result, err := svc.DescribeSpotDatafeedSubscription(input)
@@ -2412,7 +2822,12 @@ func ExampleEC2_DescribeSpotDatafeedSubscription_shared00() {
 //
 // This example lists the Spot Instances associated with the specified Spot fleet.
 func ExampleEC2_DescribeSpotFleetInstances_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotFleetInstancesInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 	}
@@ -2440,7 +2855,12 @@ func ExampleEC2_DescribeSpotFleetInstances_shared00() {
 // This example returns the history for the specified Spot fleet starting at the specified
 // time.
 func ExampleEC2_DescribeSpotFleetRequestHistory_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotFleetRequestHistoryInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 		StartTime:          parseTime("2006-01-02T15:04:05Z", "2015-05-26T00:00:00Z"),
@@ -2468,7 +2888,12 @@ func ExampleEC2_DescribeSpotFleetRequestHistory_shared00() {
 //
 // This example describes the specified Spot fleet request.
 func ExampleEC2_DescribeSpotFleetRequests_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotFleetRequestsInput{
 		SpotFleetRequestIds: []*string{
 			aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
@@ -2497,7 +2922,12 @@ func ExampleEC2_DescribeSpotFleetRequests_shared00() {
 //
 // This example describes the specified Spot Instance request.
 func ExampleEC2_DescribeSpotInstanceRequests_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotInstanceRequestsInput{
 		SpotInstanceRequestIds: []*string{
 			aws.String("sir-08b93456"),
@@ -2527,7 +2957,12 @@ func ExampleEC2_DescribeSpotInstanceRequests_shared00() {
 // This example returns the Spot Price history for m1.xlarge, Linux/UNIX (Amazon VPC)
 // instances for a particular day in January.
 func ExampleEC2_DescribeSpotPriceHistory_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSpotPriceHistoryInput{
 		EndTime: parseTime("2006-01-02T15:04:05Z", "2014-01-06T08:09:10"),
 		InstanceTypes: []*string{
@@ -2561,7 +2996,12 @@ func ExampleEC2_DescribeSpotPriceHistory_shared00() {
 //
 // This example describes the subnets for the specified VPC.
 func ExampleEC2_DescribeSubnets_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeSubnetsInput{
 		Filters: []*ec2.Filter{
 			{
@@ -2595,7 +3035,12 @@ func ExampleEC2_DescribeSubnets_shared00() {
 //
 // This example describes the tags for the specified instance.
 func ExampleEC2_DescribeTags_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeTagsInput{
 		Filters: []*ec2.Filter{
 			{
@@ -2629,7 +3074,12 @@ func ExampleEC2_DescribeTags_shared00() {
 //
 // This example describes the ``autoEnableIo`` attribute of the volume with the ID ``vol-049df61146c4d7901``.
 func ExampleEC2_DescribeVolumeAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumeAttributeInput{
 		Attribute: aws.String("autoEnableIO"),
 		VolumeId:  aws.String("vol-049df61146c4d7901"),
@@ -2657,7 +3107,12 @@ func ExampleEC2_DescribeVolumeAttribute_shared00() {
 //
 // This example describes the status for the volume ``vol-1234567890abcdef0``.
 func ExampleEC2_DescribeVolumeStatus_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumeStatusInput{
 		VolumeIds: []*string{
 			aws.String("vol-1234567890abcdef0"),
@@ -2687,7 +3142,12 @@ func ExampleEC2_DescribeVolumeStatus_shared00() {
 // This example describes the status for all volumes that are impaired. In this example
 // output, there are no impaired volumes.
 func ExampleEC2_DescribeVolumeStatus_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumeStatusInput{
 		Filters: []*ec2.Filter{
 			{
@@ -2721,7 +3181,12 @@ func ExampleEC2_DescribeVolumeStatus_shared01() {
 //
 // This example describes all of your volumes in the default region.
 func ExampleEC2_DescribeVolumes_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumesInput{}
 
 	result, err := svc.DescribeVolumes(input)
@@ -2747,7 +3212,12 @@ func ExampleEC2_DescribeVolumes_shared00() {
 // This example describes all volumes that are both attached to the instance with the
 // ID i-1234567890abcdef0 and set to delete when the instance terminates.
 func ExampleEC2_DescribeVolumes_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVolumesInput{
 		Filters: []*ec2.Filter{
 			{
@@ -2790,7 +3260,12 @@ func ExampleEC2_DescribeVolumes_shared01() {
 // server resolves DNS hostnames for your instances to their corresponding IP addresses;
 // otherwise, it does not.
 func ExampleEC2_DescribeVpcAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVpcAttributeInput{
 		Attribute: aws.String("enableDnsSupport"),
 		VpcId:     aws.String("vpc-a01106c2"),
@@ -2820,7 +3295,12 @@ func ExampleEC2_DescribeVpcAttribute_shared00() {
 // whether the instances launched in the VPC get DNS hostnames. If this attribute is
 // true, instances in the VPC get DNS hostnames; otherwise, they do not.
 func ExampleEC2_DescribeVpcAttribute_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVpcAttributeInput{
 		Attribute: aws.String("enableDnsHostnames"),
 		VpcId:     aws.String("vpc-a01106c2"),
@@ -2848,7 +3328,12 @@ func ExampleEC2_DescribeVpcAttribute_shared01() {
 //
 // This example describes the specified VPC.
 func ExampleEC2_DescribeVpcs_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DescribeVpcsInput{
 		VpcIds: []*string{
 			aws.String("vpc-a01106c2"),
@@ -2877,7 +3362,12 @@ func ExampleEC2_DescribeVpcs_shared00() {
 //
 // This example detaches the specified Internet gateway from the specified VPC.
 func ExampleEC2_DetachInternetGateway_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DetachInternetGatewayInput{
 		InternetGatewayId: aws.String("igw-c0a643a9"),
 		VpcId:             aws.String("vpc-a01106c2"),
@@ -2905,7 +3395,12 @@ func ExampleEC2_DetachInternetGateway_shared00() {
 //
 // This example detaches the specified network interface from its attached instance.
 func ExampleEC2_DetachNetworkInterface_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DetachNetworkInterfaceInput{
 		AttachmentId: aws.String("eni-attach-66c4350a"),
 	}
@@ -2933,7 +3428,12 @@ func ExampleEC2_DetachNetworkInterface_shared00() {
 // This example detaches the volume (``vol-049df61146c4d7901``) from the instance it
 // is attached to.
 func ExampleEC2_DetachVolume_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DetachVolumeInput{
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
@@ -2961,7 +3461,12 @@ func ExampleEC2_DetachVolume_shared00() {
 // This example disables the specified virtual private gateway from propagating static
 // routes to the specified route table.
 func ExampleEC2_DisableVgwRoutePropagation_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DisableVgwRoutePropagationInput{
 		GatewayId:    aws.String("vgw-9a4cacf3"),
 		RouteTableId: aws.String("rtb-22574640"),
@@ -2989,7 +3494,12 @@ func ExampleEC2_DisableVgwRoutePropagation_shared00() {
 //
 // This example disassociates an Elastic IP address from an instance in a VPC.
 func ExampleEC2_DisassociateAddress_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DisassociateAddressInput{
 		AssociationId: aws.String("eipassoc-2bebb745"),
 	}
@@ -3016,7 +3526,12 @@ func ExampleEC2_DisassociateAddress_shared00() {
 //
 // This example disassociates an Elastic IP address from an instance in EC2-Classic.
 func ExampleEC2_DisassociateAddress_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DisassociateAddressInput{
 		PublicIp: aws.String("198.51.100.0"),
 	}
@@ -3043,7 +3558,12 @@ func ExampleEC2_DisassociateAddress_shared01() {
 //
 // This example disassociates the specified route table from its associated subnet.
 func ExampleEC2_DisassociateRouteTable_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.DisassociateRouteTableInput{
 		AssociationId: aws.String("rtbassoc-781d0d1a"),
 	}
@@ -3071,7 +3591,12 @@ func ExampleEC2_DisassociateRouteTable_shared00() {
 // This example enables the specified virtual private gateway to propagate static routes
 // to the specified route table.
 func ExampleEC2_EnableVgwRoutePropagation_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.EnableVgwRoutePropagationInput{
 		GatewayId:    aws.String("vgw-9a4cacf3"),
 		RouteTableId: aws.String("rtb-22574640"),
@@ -3099,7 +3624,12 @@ func ExampleEC2_EnableVgwRoutePropagation_shared00() {
 //
 // This example enables I/O on volume ``vol-1234567890abcdef0``.
 func ExampleEC2_EnableVolumeIO_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.EnableVolumeIOInput{
 		VolumeId: aws.String("vol-1234567890abcdef0"),
 	}
@@ -3126,7 +3656,12 @@ func ExampleEC2_EnableVolumeIO_shared00() {
 //
 // This example modifies the attachment attribute of the specified network interface.
 func ExampleEC2_ModifyNetworkInterfaceAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyNetworkInterfaceAttributeInput{
 		Attachment: &ec2.NetworkInterfaceAttachmentChanges{
 			AttachmentId:        aws.String("eni-attach-43348162"),
@@ -3157,7 +3692,12 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared00() {
 //
 // This example modifies the description attribute of the specified network interface.
 func ExampleEC2_ModifyNetworkInterfaceAttribute_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyNetworkInterfaceAttributeInput{
 		Description: &ec2.AttributeValue{
 			Value: aws.String("My description"),
@@ -3187,7 +3727,12 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared01() {
 //
 // This example command modifies the groupSet attribute of the specified network interface.
 func ExampleEC2_ModifyNetworkInterfaceAttribute_shared02() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyNetworkInterfaceAttributeInput{
 		Groups: []*string{
 			aws.String("sg-903004f8"),
@@ -3219,7 +3764,12 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared02() {
 // This example command modifies the sourceDestCheck attribute of the specified network
 // interface.
 func ExampleEC2_ModifyNetworkInterfaceAttribute_shared03() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyNetworkInterfaceAttributeInput{
 		NetworkInterfaceId: aws.String("eni-686ea200"),
 		SourceDestCheck: &ec2.AttributeBooleanValue{
@@ -3251,7 +3801,12 @@ func ExampleEC2_ModifyNetworkInterfaceAttribute_shared03() {
 // permission for a user with the account ID ``123456789012``. If the command succeeds,
 // no output is returned.
 func ExampleEC2_ModifySnapshotAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifySnapshotAttributeInput{
 		Attribute:     aws.String("createVolumePermission"),
 		OperationType: aws.String("remove"),
@@ -3283,7 +3838,12 @@ func ExampleEC2_ModifySnapshotAttribute_shared00() {
 //
 // This example makes the snapshot ``snap-1234567890abcdef0`` public.
 func ExampleEC2_ModifySnapshotAttribute_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifySnapshotAttributeInput{
 		Attribute: aws.String("createVolumePermission"),
 		GroupNames: []*string{
@@ -3315,7 +3875,12 @@ func ExampleEC2_ModifySnapshotAttribute_shared01() {
 //
 // This example increases the target capacity of the specified Spot fleet request.
 func ExampleEC2_ModifySpotFleetRequest_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifySpotFleetRequestInput{
 		SpotFleetRequestId: aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
 		TargetCapacity:     aws.Int64(20),
@@ -3344,7 +3909,12 @@ func ExampleEC2_ModifySpotFleetRequest_shared00() {
 // This example decreases the target capacity of the specified Spot fleet request without
 // terminating any Spot Instances as a result.
 func ExampleEC2_ModifySpotFleetRequest_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifySpotFleetRequestInput{
 		ExcessCapacityTerminationPolicy: aws.String("NoTermination "),
 		SpotFleetRequestId:              aws.String("sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE"),
@@ -3374,7 +3944,12 @@ func ExampleEC2_ModifySpotFleetRequest_shared01() {
 // This example modifies the specified subnet so that all instances launched into this
 // subnet are assigned a public IP address.
 func ExampleEC2_ModifySubnetAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifySubnetAttributeInput{
 		MapPublicIpOnLaunch: &ec2.AttributeBooleanValue{
 			Value: aws.Bool(true),
@@ -3405,7 +3980,12 @@ func ExampleEC2_ModifySubnetAttribute_shared00() {
 // This example sets the ``autoEnableIo`` attribute of the volume with the ID ``vol-1234567890abcdef0``
 // to ``true``. If the command succeeds, no output is returned.
 func ExampleEC2_ModifyVolumeAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyVolumeAttributeInput{
 		AutoEnableIO: &ec2.AttributeBooleanValue{
 			Value: aws.Bool(true),
@@ -3439,7 +4019,12 @@ func ExampleEC2_ModifyVolumeAttribute_shared00() {
 // server resolves DNS hostnames for instances in the VPC to their corresponding IP
 // addresses; otherwise, it does not.
 func ExampleEC2_ModifyVpcAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyVpcAttributeInput{
 		EnableDnsSupport: &ec2.AttributeBooleanValue{
 			Value: aws.Bool(false),
@@ -3471,7 +4056,12 @@ func ExampleEC2_ModifyVpcAttribute_shared00() {
 // whether instances launched in the VPC get DNS hostnames. If this attribute is true,
 // instances in the VPC get DNS hostnames; otherwise, they do not.
 func ExampleEC2_ModifyVpcAttribute_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ModifyVpcAttributeInput{
 		EnableDnsHostnames: &ec2.AttributeBooleanValue{
 			Value: aws.Bool(false),
@@ -3501,7 +4091,12 @@ func ExampleEC2_ModifyVpcAttribute_shared01() {
 //
 // This example moves the specified Elastic IP address to the EC2-VPC platform.
 func ExampleEC2_MoveAddressToVpc_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.MoveAddressToVpcInput{
 		PublicIp: aws.String("54.123.4.56"),
 	}
@@ -3528,7 +4123,12 @@ func ExampleEC2_MoveAddressToVpc_shared00() {
 //
 // This example purchases a Scheduled Instance.
 func ExampleEC2_PurchaseScheduledInstances_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.PurchaseScheduledInstancesInput{
 		PurchaseRequests: []*ec2.PurchaseRequest{
 			{
@@ -3560,7 +4160,12 @@ func ExampleEC2_PurchaseScheduledInstances_shared00() {
 //
 // This example releases an Elastic IP address for use with instances in a VPC.
 func ExampleEC2_ReleaseAddress_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ReleaseAddressInput{
 		AllocationId: aws.String("eipalloc-64d5890a"),
 	}
@@ -3587,7 +4192,12 @@ func ExampleEC2_ReleaseAddress_shared00() {
 //
 // This example releases an Elastic IP address for use with instances in EC2-Classic.
 func ExampleEC2_ReleaseAddress_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ReleaseAddressInput{
 		PublicIp: aws.String("198.51.100.0"),
 	}
@@ -3615,7 +4225,12 @@ func ExampleEC2_ReleaseAddress_shared01() {
 // This example associates the specified network ACL with the subnet for the specified
 // network ACL association.
 func ExampleEC2_ReplaceNetworkAclAssociation_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ReplaceNetworkAclAssociationInput{
 		AssociationId: aws.String("aclassoc-e5b95c8c"),
 		NetworkAclId:  aws.String("acl-5fb85d36"),
@@ -3644,7 +4259,12 @@ func ExampleEC2_ReplaceNetworkAclAssociation_shared00() {
 // This example replaces an entry for the specified network ACL. The new rule 100 allows
 // ingress traffic from 203.0.113.12/24 on UDP port 53 (DNS) into any associated subnet.
 func ExampleEC2_ReplaceNetworkAclEntry_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ReplaceNetworkAclEntryInput{
 		CidrBlock:    aws.String("203.0.113.12/24"),
 		Egress:       aws.Bool(false),
@@ -3682,7 +4302,12 @@ func ExampleEC2_ReplaceNetworkAclEntry_shared00() {
 // matches the specified CIDR and sends the traffic to the specified virtual private
 // gateway.
 func ExampleEC2_ReplaceRoute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ReplaceRouteInput{
 		DestinationCidrBlock: aws.String("10.0.0.0/16"),
 		GatewayId:            aws.String("vgw-9a4cacf3"),
@@ -3712,7 +4337,12 @@ func ExampleEC2_ReplaceRoute_shared00() {
 // This example associates the specified route table with the subnet for the specified
 // route table association.
 func ExampleEC2_ReplaceRouteTableAssociation_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ReplaceRouteTableAssociationInput{
 		AssociationId: aws.String("rtbassoc-781d0d1a"),
 		RouteTableId:  aws.String("rtb-22574640"),
@@ -3745,7 +4375,12 @@ func ExampleEC2_ReplaceRouteTableAssociation_shared00() {
 // they do not receive a public IP address by default. Note that you can't specify different
 // subnets from the same Availability Zone in a Spot fleet request.
 func ExampleEC2_RequestSpotFleet_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotFleetInput{
 		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
@@ -3794,7 +4429,12 @@ func ExampleEC2_RequestSpotFleet_shared00() {
 // your account supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic
 // in the Availability Zone.
 func ExampleEC2_RequestSpotFleet_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotFleetInput{
 		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
@@ -3839,7 +4479,12 @@ func ExampleEC2_RequestSpotFleet_shared01() {
 // Note that when you specify a network interface, you must include the subnet ID and
 // security group ID using the network interface.
 func ExampleEC2_RequestSpotFleet_shared02() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotFleetInput{
 		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
 			IamFleetRole: aws.String("arn:aws:iam::123456789012:role/my-spot-fleet-role"),
@@ -3890,7 +4535,12 @@ func ExampleEC2_RequestSpotFleet_shared02() {
 // fleet distributes the instances across the launch specifications such that there
 // are 10 instances of each type.
 func ExampleEC2_RequestSpotFleet_shared03() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotFleetInput{
 		SpotFleetRequestConfig: &ec2.SpotFleetRequestConfigData{
 			AllocationStrategy: aws.String("diversified"),
@@ -3943,7 +4593,12 @@ func ExampleEC2_RequestSpotFleet_shared03() {
 // supports EC2-Classic, Amazon EC2 launches the instances in EC2-Classic in the specified
 // Availability Zone.
 func ExampleEC2_RequestSpotInstances_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotInstancesInput{
 		InstanceCount: aws.Int64(5),
 		LaunchSpecification: &ec2.RequestSpotLaunchSpecification{
@@ -3989,7 +4644,12 @@ func ExampleEC2_RequestSpotInstances_shared00() {
 // If the VPC is a nondefault VPC, the instances do not receive a public IP address
 // by default.
 func ExampleEC2_RequestSpotInstances_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RequestSpotInstancesInput{
 		InstanceCount: aws.Int64(5),
 		LaunchSpecification: &ec2.RequestSpotLaunchSpecification{
@@ -4030,7 +4690,12 @@ func ExampleEC2_RequestSpotInstances_shared01() {
 // This example resets the create volume permissions for snapshot ``snap-1234567890abcdef0``.
 // If the command succeeds, no output is returned.
 func ExampleEC2_ResetSnapshotAttribute_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.ResetSnapshotAttributeInput{
 		Attribute:  aws.String("createVolumePermission"),
 		SnapshotId: aws.String("snap-1234567890abcdef0"),
@@ -4058,7 +4723,12 @@ func ExampleEC2_ResetSnapshotAttribute_shared00() {
 //
 // This example restores the specified Elastic IP address to the EC2-Classic platform.
 func ExampleEC2_RestoreAddressToClassic_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RestoreAddressToClassicInput{
 		PublicIp: aws.String("198.51.100.0"),
 	}
@@ -4085,7 +4755,12 @@ func ExampleEC2_RestoreAddressToClassic_shared00() {
 //
 // This example launches the specified Scheduled Instance in a VPC.
 func ExampleEC2_RunScheduledInstances_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RunScheduledInstancesInput{
 		InstanceCount: aws.Int64(1),
 		LaunchSpecification: &ec2.ScheduledInstancesLaunchSpecification{
@@ -4131,7 +4806,12 @@ func ExampleEC2_RunScheduledInstances_shared00() {
 //
 // This example launches the specified Scheduled Instance in EC2-Classic.
 func ExampleEC2_RunScheduledInstances_shared01() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.RunScheduledInstancesInput{
 		InstanceCount: aws.Int64(1),
 		LaunchSpecification: &ec2.ScheduledInstancesLaunchSpecification{
@@ -4174,7 +4854,12 @@ func ExampleEC2_RunScheduledInstances_shared01() {
 // This example unassigns the specified private IP address from the specified network
 // interface.
 func ExampleEC2_UnassignPrivateIpAddresses_shared00() {
-	svc := ec2.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ec2.New(cfg)
 	input := &ec2.UnassignPrivateIpAddressesInput{
 		NetworkInterfaceId: aws.String("eni-e5aa89a3"),
 		PrivateIpAddresses: []*string{

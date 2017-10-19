@@ -10,7 +10,6 @@ package servicecatalogiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := servicecatalog.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := servicecatalog.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,246 +64,246 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type ServiceCatalogAPI interface {
 	AcceptPortfolioShare(*servicecatalog.AcceptPortfolioShareInput) (*servicecatalog.AcceptPortfolioShareOutput, error)
-	AcceptPortfolioShareWithContext(aws.Context, *servicecatalog.AcceptPortfolioShareInput, ...request.Option) (*servicecatalog.AcceptPortfolioShareOutput, error)
-	AcceptPortfolioShareRequest(*servicecatalog.AcceptPortfolioShareInput) (*request.Request, *servicecatalog.AcceptPortfolioShareOutput)
+	AcceptPortfolioShareWithContext(aws.Context, *servicecatalog.AcceptPortfolioShareInput, ...aws.Option) (*servicecatalog.AcceptPortfolioShareOutput, error)
+	AcceptPortfolioShareRequest(*servicecatalog.AcceptPortfolioShareInput) (*aws.Request, *servicecatalog.AcceptPortfolioShareOutput)
 
 	AssociatePrincipalWithPortfolio(*servicecatalog.AssociatePrincipalWithPortfolioInput) (*servicecatalog.AssociatePrincipalWithPortfolioOutput, error)
-	AssociatePrincipalWithPortfolioWithContext(aws.Context, *servicecatalog.AssociatePrincipalWithPortfolioInput, ...request.Option) (*servicecatalog.AssociatePrincipalWithPortfolioOutput, error)
-	AssociatePrincipalWithPortfolioRequest(*servicecatalog.AssociatePrincipalWithPortfolioInput) (*request.Request, *servicecatalog.AssociatePrincipalWithPortfolioOutput)
+	AssociatePrincipalWithPortfolioWithContext(aws.Context, *servicecatalog.AssociatePrincipalWithPortfolioInput, ...aws.Option) (*servicecatalog.AssociatePrincipalWithPortfolioOutput, error)
+	AssociatePrincipalWithPortfolioRequest(*servicecatalog.AssociatePrincipalWithPortfolioInput) (*aws.Request, *servicecatalog.AssociatePrincipalWithPortfolioOutput)
 
 	AssociateProductWithPortfolio(*servicecatalog.AssociateProductWithPortfolioInput) (*servicecatalog.AssociateProductWithPortfolioOutput, error)
-	AssociateProductWithPortfolioWithContext(aws.Context, *servicecatalog.AssociateProductWithPortfolioInput, ...request.Option) (*servicecatalog.AssociateProductWithPortfolioOutput, error)
-	AssociateProductWithPortfolioRequest(*servicecatalog.AssociateProductWithPortfolioInput) (*request.Request, *servicecatalog.AssociateProductWithPortfolioOutput)
+	AssociateProductWithPortfolioWithContext(aws.Context, *servicecatalog.AssociateProductWithPortfolioInput, ...aws.Option) (*servicecatalog.AssociateProductWithPortfolioOutput, error)
+	AssociateProductWithPortfolioRequest(*servicecatalog.AssociateProductWithPortfolioInput) (*aws.Request, *servicecatalog.AssociateProductWithPortfolioOutput)
 
 	AssociateTagOptionWithResource(*servicecatalog.AssociateTagOptionWithResourceInput) (*servicecatalog.AssociateTagOptionWithResourceOutput, error)
-	AssociateTagOptionWithResourceWithContext(aws.Context, *servicecatalog.AssociateTagOptionWithResourceInput, ...request.Option) (*servicecatalog.AssociateTagOptionWithResourceOutput, error)
-	AssociateTagOptionWithResourceRequest(*servicecatalog.AssociateTagOptionWithResourceInput) (*request.Request, *servicecatalog.AssociateTagOptionWithResourceOutput)
+	AssociateTagOptionWithResourceWithContext(aws.Context, *servicecatalog.AssociateTagOptionWithResourceInput, ...aws.Option) (*servicecatalog.AssociateTagOptionWithResourceOutput, error)
+	AssociateTagOptionWithResourceRequest(*servicecatalog.AssociateTagOptionWithResourceInput) (*aws.Request, *servicecatalog.AssociateTagOptionWithResourceOutput)
 
 	CopyProduct(*servicecatalog.CopyProductInput) (*servicecatalog.CopyProductOutput, error)
-	CopyProductWithContext(aws.Context, *servicecatalog.CopyProductInput, ...request.Option) (*servicecatalog.CopyProductOutput, error)
-	CopyProductRequest(*servicecatalog.CopyProductInput) (*request.Request, *servicecatalog.CopyProductOutput)
+	CopyProductWithContext(aws.Context, *servicecatalog.CopyProductInput, ...aws.Option) (*servicecatalog.CopyProductOutput, error)
+	CopyProductRequest(*servicecatalog.CopyProductInput) (*aws.Request, *servicecatalog.CopyProductOutput)
 
 	CreateConstraint(*servicecatalog.CreateConstraintInput) (*servicecatalog.CreateConstraintOutput, error)
-	CreateConstraintWithContext(aws.Context, *servicecatalog.CreateConstraintInput, ...request.Option) (*servicecatalog.CreateConstraintOutput, error)
-	CreateConstraintRequest(*servicecatalog.CreateConstraintInput) (*request.Request, *servicecatalog.CreateConstraintOutput)
+	CreateConstraintWithContext(aws.Context, *servicecatalog.CreateConstraintInput, ...aws.Option) (*servicecatalog.CreateConstraintOutput, error)
+	CreateConstraintRequest(*servicecatalog.CreateConstraintInput) (*aws.Request, *servicecatalog.CreateConstraintOutput)
 
 	CreatePortfolio(*servicecatalog.CreatePortfolioInput) (*servicecatalog.CreatePortfolioOutput, error)
-	CreatePortfolioWithContext(aws.Context, *servicecatalog.CreatePortfolioInput, ...request.Option) (*servicecatalog.CreatePortfolioOutput, error)
-	CreatePortfolioRequest(*servicecatalog.CreatePortfolioInput) (*request.Request, *servicecatalog.CreatePortfolioOutput)
+	CreatePortfolioWithContext(aws.Context, *servicecatalog.CreatePortfolioInput, ...aws.Option) (*servicecatalog.CreatePortfolioOutput, error)
+	CreatePortfolioRequest(*servicecatalog.CreatePortfolioInput) (*aws.Request, *servicecatalog.CreatePortfolioOutput)
 
 	CreatePortfolioShare(*servicecatalog.CreatePortfolioShareInput) (*servicecatalog.CreatePortfolioShareOutput, error)
-	CreatePortfolioShareWithContext(aws.Context, *servicecatalog.CreatePortfolioShareInput, ...request.Option) (*servicecatalog.CreatePortfolioShareOutput, error)
-	CreatePortfolioShareRequest(*servicecatalog.CreatePortfolioShareInput) (*request.Request, *servicecatalog.CreatePortfolioShareOutput)
+	CreatePortfolioShareWithContext(aws.Context, *servicecatalog.CreatePortfolioShareInput, ...aws.Option) (*servicecatalog.CreatePortfolioShareOutput, error)
+	CreatePortfolioShareRequest(*servicecatalog.CreatePortfolioShareInput) (*aws.Request, *servicecatalog.CreatePortfolioShareOutput)
 
 	CreateProduct(*servicecatalog.CreateProductInput) (*servicecatalog.CreateProductOutput, error)
-	CreateProductWithContext(aws.Context, *servicecatalog.CreateProductInput, ...request.Option) (*servicecatalog.CreateProductOutput, error)
-	CreateProductRequest(*servicecatalog.CreateProductInput) (*request.Request, *servicecatalog.CreateProductOutput)
+	CreateProductWithContext(aws.Context, *servicecatalog.CreateProductInput, ...aws.Option) (*servicecatalog.CreateProductOutput, error)
+	CreateProductRequest(*servicecatalog.CreateProductInput) (*aws.Request, *servicecatalog.CreateProductOutput)
 
 	CreateProvisioningArtifact(*servicecatalog.CreateProvisioningArtifactInput) (*servicecatalog.CreateProvisioningArtifactOutput, error)
-	CreateProvisioningArtifactWithContext(aws.Context, *servicecatalog.CreateProvisioningArtifactInput, ...request.Option) (*servicecatalog.CreateProvisioningArtifactOutput, error)
-	CreateProvisioningArtifactRequest(*servicecatalog.CreateProvisioningArtifactInput) (*request.Request, *servicecatalog.CreateProvisioningArtifactOutput)
+	CreateProvisioningArtifactWithContext(aws.Context, *servicecatalog.CreateProvisioningArtifactInput, ...aws.Option) (*servicecatalog.CreateProvisioningArtifactOutput, error)
+	CreateProvisioningArtifactRequest(*servicecatalog.CreateProvisioningArtifactInput) (*aws.Request, *servicecatalog.CreateProvisioningArtifactOutput)
 
 	CreateTagOption(*servicecatalog.CreateTagOptionInput) (*servicecatalog.CreateTagOptionOutput, error)
-	CreateTagOptionWithContext(aws.Context, *servicecatalog.CreateTagOptionInput, ...request.Option) (*servicecatalog.CreateTagOptionOutput, error)
-	CreateTagOptionRequest(*servicecatalog.CreateTagOptionInput) (*request.Request, *servicecatalog.CreateTagOptionOutput)
+	CreateTagOptionWithContext(aws.Context, *servicecatalog.CreateTagOptionInput, ...aws.Option) (*servicecatalog.CreateTagOptionOutput, error)
+	CreateTagOptionRequest(*servicecatalog.CreateTagOptionInput) (*aws.Request, *servicecatalog.CreateTagOptionOutput)
 
 	DeleteConstraint(*servicecatalog.DeleteConstraintInput) (*servicecatalog.DeleteConstraintOutput, error)
-	DeleteConstraintWithContext(aws.Context, *servicecatalog.DeleteConstraintInput, ...request.Option) (*servicecatalog.DeleteConstraintOutput, error)
-	DeleteConstraintRequest(*servicecatalog.DeleteConstraintInput) (*request.Request, *servicecatalog.DeleteConstraintOutput)
+	DeleteConstraintWithContext(aws.Context, *servicecatalog.DeleteConstraintInput, ...aws.Option) (*servicecatalog.DeleteConstraintOutput, error)
+	DeleteConstraintRequest(*servicecatalog.DeleteConstraintInput) (*aws.Request, *servicecatalog.DeleteConstraintOutput)
 
 	DeletePortfolio(*servicecatalog.DeletePortfolioInput) (*servicecatalog.DeletePortfolioOutput, error)
-	DeletePortfolioWithContext(aws.Context, *servicecatalog.DeletePortfolioInput, ...request.Option) (*servicecatalog.DeletePortfolioOutput, error)
-	DeletePortfolioRequest(*servicecatalog.DeletePortfolioInput) (*request.Request, *servicecatalog.DeletePortfolioOutput)
+	DeletePortfolioWithContext(aws.Context, *servicecatalog.DeletePortfolioInput, ...aws.Option) (*servicecatalog.DeletePortfolioOutput, error)
+	DeletePortfolioRequest(*servicecatalog.DeletePortfolioInput) (*aws.Request, *servicecatalog.DeletePortfolioOutput)
 
 	DeletePortfolioShare(*servicecatalog.DeletePortfolioShareInput) (*servicecatalog.DeletePortfolioShareOutput, error)
-	DeletePortfolioShareWithContext(aws.Context, *servicecatalog.DeletePortfolioShareInput, ...request.Option) (*servicecatalog.DeletePortfolioShareOutput, error)
-	DeletePortfolioShareRequest(*servicecatalog.DeletePortfolioShareInput) (*request.Request, *servicecatalog.DeletePortfolioShareOutput)
+	DeletePortfolioShareWithContext(aws.Context, *servicecatalog.DeletePortfolioShareInput, ...aws.Option) (*servicecatalog.DeletePortfolioShareOutput, error)
+	DeletePortfolioShareRequest(*servicecatalog.DeletePortfolioShareInput) (*aws.Request, *servicecatalog.DeletePortfolioShareOutput)
 
 	DeleteProduct(*servicecatalog.DeleteProductInput) (*servicecatalog.DeleteProductOutput, error)
-	DeleteProductWithContext(aws.Context, *servicecatalog.DeleteProductInput, ...request.Option) (*servicecatalog.DeleteProductOutput, error)
-	DeleteProductRequest(*servicecatalog.DeleteProductInput) (*request.Request, *servicecatalog.DeleteProductOutput)
+	DeleteProductWithContext(aws.Context, *servicecatalog.DeleteProductInput, ...aws.Option) (*servicecatalog.DeleteProductOutput, error)
+	DeleteProductRequest(*servicecatalog.DeleteProductInput) (*aws.Request, *servicecatalog.DeleteProductOutput)
 
 	DeleteProvisioningArtifact(*servicecatalog.DeleteProvisioningArtifactInput) (*servicecatalog.DeleteProvisioningArtifactOutput, error)
-	DeleteProvisioningArtifactWithContext(aws.Context, *servicecatalog.DeleteProvisioningArtifactInput, ...request.Option) (*servicecatalog.DeleteProvisioningArtifactOutput, error)
-	DeleteProvisioningArtifactRequest(*servicecatalog.DeleteProvisioningArtifactInput) (*request.Request, *servicecatalog.DeleteProvisioningArtifactOutput)
+	DeleteProvisioningArtifactWithContext(aws.Context, *servicecatalog.DeleteProvisioningArtifactInput, ...aws.Option) (*servicecatalog.DeleteProvisioningArtifactOutput, error)
+	DeleteProvisioningArtifactRequest(*servicecatalog.DeleteProvisioningArtifactInput) (*aws.Request, *servicecatalog.DeleteProvisioningArtifactOutput)
 
 	DescribeConstraint(*servicecatalog.DescribeConstraintInput) (*servicecatalog.DescribeConstraintOutput, error)
-	DescribeConstraintWithContext(aws.Context, *servicecatalog.DescribeConstraintInput, ...request.Option) (*servicecatalog.DescribeConstraintOutput, error)
-	DescribeConstraintRequest(*servicecatalog.DescribeConstraintInput) (*request.Request, *servicecatalog.DescribeConstraintOutput)
+	DescribeConstraintWithContext(aws.Context, *servicecatalog.DescribeConstraintInput, ...aws.Option) (*servicecatalog.DescribeConstraintOutput, error)
+	DescribeConstraintRequest(*servicecatalog.DescribeConstraintInput) (*aws.Request, *servicecatalog.DescribeConstraintOutput)
 
 	DescribeCopyProductStatus(*servicecatalog.DescribeCopyProductStatusInput) (*servicecatalog.DescribeCopyProductStatusOutput, error)
-	DescribeCopyProductStatusWithContext(aws.Context, *servicecatalog.DescribeCopyProductStatusInput, ...request.Option) (*servicecatalog.DescribeCopyProductStatusOutput, error)
-	DescribeCopyProductStatusRequest(*servicecatalog.DescribeCopyProductStatusInput) (*request.Request, *servicecatalog.DescribeCopyProductStatusOutput)
+	DescribeCopyProductStatusWithContext(aws.Context, *servicecatalog.DescribeCopyProductStatusInput, ...aws.Option) (*servicecatalog.DescribeCopyProductStatusOutput, error)
+	DescribeCopyProductStatusRequest(*servicecatalog.DescribeCopyProductStatusInput) (*aws.Request, *servicecatalog.DescribeCopyProductStatusOutput)
 
 	DescribePortfolio(*servicecatalog.DescribePortfolioInput) (*servicecatalog.DescribePortfolioOutput, error)
-	DescribePortfolioWithContext(aws.Context, *servicecatalog.DescribePortfolioInput, ...request.Option) (*servicecatalog.DescribePortfolioOutput, error)
-	DescribePortfolioRequest(*servicecatalog.DescribePortfolioInput) (*request.Request, *servicecatalog.DescribePortfolioOutput)
+	DescribePortfolioWithContext(aws.Context, *servicecatalog.DescribePortfolioInput, ...aws.Option) (*servicecatalog.DescribePortfolioOutput, error)
+	DescribePortfolioRequest(*servicecatalog.DescribePortfolioInput) (*aws.Request, *servicecatalog.DescribePortfolioOutput)
 
 	DescribeProduct(*servicecatalog.DescribeProductInput) (*servicecatalog.DescribeProductOutput, error)
-	DescribeProductWithContext(aws.Context, *servicecatalog.DescribeProductInput, ...request.Option) (*servicecatalog.DescribeProductOutput, error)
-	DescribeProductRequest(*servicecatalog.DescribeProductInput) (*request.Request, *servicecatalog.DescribeProductOutput)
+	DescribeProductWithContext(aws.Context, *servicecatalog.DescribeProductInput, ...aws.Option) (*servicecatalog.DescribeProductOutput, error)
+	DescribeProductRequest(*servicecatalog.DescribeProductInput) (*aws.Request, *servicecatalog.DescribeProductOutput)
 
 	DescribeProductAsAdmin(*servicecatalog.DescribeProductAsAdminInput) (*servicecatalog.DescribeProductAsAdminOutput, error)
-	DescribeProductAsAdminWithContext(aws.Context, *servicecatalog.DescribeProductAsAdminInput, ...request.Option) (*servicecatalog.DescribeProductAsAdminOutput, error)
-	DescribeProductAsAdminRequest(*servicecatalog.DescribeProductAsAdminInput) (*request.Request, *servicecatalog.DescribeProductAsAdminOutput)
+	DescribeProductAsAdminWithContext(aws.Context, *servicecatalog.DescribeProductAsAdminInput, ...aws.Option) (*servicecatalog.DescribeProductAsAdminOutput, error)
+	DescribeProductAsAdminRequest(*servicecatalog.DescribeProductAsAdminInput) (*aws.Request, *servicecatalog.DescribeProductAsAdminOutput)
 
 	DescribeProductView(*servicecatalog.DescribeProductViewInput) (*servicecatalog.DescribeProductViewOutput, error)
-	DescribeProductViewWithContext(aws.Context, *servicecatalog.DescribeProductViewInput, ...request.Option) (*servicecatalog.DescribeProductViewOutput, error)
-	DescribeProductViewRequest(*servicecatalog.DescribeProductViewInput) (*request.Request, *servicecatalog.DescribeProductViewOutput)
+	DescribeProductViewWithContext(aws.Context, *servicecatalog.DescribeProductViewInput, ...aws.Option) (*servicecatalog.DescribeProductViewOutput, error)
+	DescribeProductViewRequest(*servicecatalog.DescribeProductViewInput) (*aws.Request, *servicecatalog.DescribeProductViewOutput)
 
 	DescribeProvisionedProduct(*servicecatalog.DescribeProvisionedProductInput) (*servicecatalog.DescribeProvisionedProductOutput, error)
-	DescribeProvisionedProductWithContext(aws.Context, *servicecatalog.DescribeProvisionedProductInput, ...request.Option) (*servicecatalog.DescribeProvisionedProductOutput, error)
-	DescribeProvisionedProductRequest(*servicecatalog.DescribeProvisionedProductInput) (*request.Request, *servicecatalog.DescribeProvisionedProductOutput)
+	DescribeProvisionedProductWithContext(aws.Context, *servicecatalog.DescribeProvisionedProductInput, ...aws.Option) (*servicecatalog.DescribeProvisionedProductOutput, error)
+	DescribeProvisionedProductRequest(*servicecatalog.DescribeProvisionedProductInput) (*aws.Request, *servicecatalog.DescribeProvisionedProductOutput)
 
 	DescribeProvisioningArtifact(*servicecatalog.DescribeProvisioningArtifactInput) (*servicecatalog.DescribeProvisioningArtifactOutput, error)
-	DescribeProvisioningArtifactWithContext(aws.Context, *servicecatalog.DescribeProvisioningArtifactInput, ...request.Option) (*servicecatalog.DescribeProvisioningArtifactOutput, error)
-	DescribeProvisioningArtifactRequest(*servicecatalog.DescribeProvisioningArtifactInput) (*request.Request, *servicecatalog.DescribeProvisioningArtifactOutput)
+	DescribeProvisioningArtifactWithContext(aws.Context, *servicecatalog.DescribeProvisioningArtifactInput, ...aws.Option) (*servicecatalog.DescribeProvisioningArtifactOutput, error)
+	DescribeProvisioningArtifactRequest(*servicecatalog.DescribeProvisioningArtifactInput) (*aws.Request, *servicecatalog.DescribeProvisioningArtifactOutput)
 
 	DescribeProvisioningParameters(*servicecatalog.DescribeProvisioningParametersInput) (*servicecatalog.DescribeProvisioningParametersOutput, error)
-	DescribeProvisioningParametersWithContext(aws.Context, *servicecatalog.DescribeProvisioningParametersInput, ...request.Option) (*servicecatalog.DescribeProvisioningParametersOutput, error)
-	DescribeProvisioningParametersRequest(*servicecatalog.DescribeProvisioningParametersInput) (*request.Request, *servicecatalog.DescribeProvisioningParametersOutput)
+	DescribeProvisioningParametersWithContext(aws.Context, *servicecatalog.DescribeProvisioningParametersInput, ...aws.Option) (*servicecatalog.DescribeProvisioningParametersOutput, error)
+	DescribeProvisioningParametersRequest(*servicecatalog.DescribeProvisioningParametersInput) (*aws.Request, *servicecatalog.DescribeProvisioningParametersOutput)
 
 	DescribeRecord(*servicecatalog.DescribeRecordInput) (*servicecatalog.DescribeRecordOutput, error)
-	DescribeRecordWithContext(aws.Context, *servicecatalog.DescribeRecordInput, ...request.Option) (*servicecatalog.DescribeRecordOutput, error)
-	DescribeRecordRequest(*servicecatalog.DescribeRecordInput) (*request.Request, *servicecatalog.DescribeRecordOutput)
+	DescribeRecordWithContext(aws.Context, *servicecatalog.DescribeRecordInput, ...aws.Option) (*servicecatalog.DescribeRecordOutput, error)
+	DescribeRecordRequest(*servicecatalog.DescribeRecordInput) (*aws.Request, *servicecatalog.DescribeRecordOutput)
 
 	DescribeTagOption(*servicecatalog.DescribeTagOptionInput) (*servicecatalog.DescribeTagOptionOutput, error)
-	DescribeTagOptionWithContext(aws.Context, *servicecatalog.DescribeTagOptionInput, ...request.Option) (*servicecatalog.DescribeTagOptionOutput, error)
-	DescribeTagOptionRequest(*servicecatalog.DescribeTagOptionInput) (*request.Request, *servicecatalog.DescribeTagOptionOutput)
+	DescribeTagOptionWithContext(aws.Context, *servicecatalog.DescribeTagOptionInput, ...aws.Option) (*servicecatalog.DescribeTagOptionOutput, error)
+	DescribeTagOptionRequest(*servicecatalog.DescribeTagOptionInput) (*aws.Request, *servicecatalog.DescribeTagOptionOutput)
 
 	DisassociatePrincipalFromPortfolio(*servicecatalog.DisassociatePrincipalFromPortfolioInput) (*servicecatalog.DisassociatePrincipalFromPortfolioOutput, error)
-	DisassociatePrincipalFromPortfolioWithContext(aws.Context, *servicecatalog.DisassociatePrincipalFromPortfolioInput, ...request.Option) (*servicecatalog.DisassociatePrincipalFromPortfolioOutput, error)
-	DisassociatePrincipalFromPortfolioRequest(*servicecatalog.DisassociatePrincipalFromPortfolioInput) (*request.Request, *servicecatalog.DisassociatePrincipalFromPortfolioOutput)
+	DisassociatePrincipalFromPortfolioWithContext(aws.Context, *servicecatalog.DisassociatePrincipalFromPortfolioInput, ...aws.Option) (*servicecatalog.DisassociatePrincipalFromPortfolioOutput, error)
+	DisassociatePrincipalFromPortfolioRequest(*servicecatalog.DisassociatePrincipalFromPortfolioInput) (*aws.Request, *servicecatalog.DisassociatePrincipalFromPortfolioOutput)
 
 	DisassociateProductFromPortfolio(*servicecatalog.DisassociateProductFromPortfolioInput) (*servicecatalog.DisassociateProductFromPortfolioOutput, error)
-	DisassociateProductFromPortfolioWithContext(aws.Context, *servicecatalog.DisassociateProductFromPortfolioInput, ...request.Option) (*servicecatalog.DisassociateProductFromPortfolioOutput, error)
-	DisassociateProductFromPortfolioRequest(*servicecatalog.DisassociateProductFromPortfolioInput) (*request.Request, *servicecatalog.DisassociateProductFromPortfolioOutput)
+	DisassociateProductFromPortfolioWithContext(aws.Context, *servicecatalog.DisassociateProductFromPortfolioInput, ...aws.Option) (*servicecatalog.DisassociateProductFromPortfolioOutput, error)
+	DisassociateProductFromPortfolioRequest(*servicecatalog.DisassociateProductFromPortfolioInput) (*aws.Request, *servicecatalog.DisassociateProductFromPortfolioOutput)
 
 	DisassociateTagOptionFromResource(*servicecatalog.DisassociateTagOptionFromResourceInput) (*servicecatalog.DisassociateTagOptionFromResourceOutput, error)
-	DisassociateTagOptionFromResourceWithContext(aws.Context, *servicecatalog.DisassociateTagOptionFromResourceInput, ...request.Option) (*servicecatalog.DisassociateTagOptionFromResourceOutput, error)
-	DisassociateTagOptionFromResourceRequest(*servicecatalog.DisassociateTagOptionFromResourceInput) (*request.Request, *servicecatalog.DisassociateTagOptionFromResourceOutput)
+	DisassociateTagOptionFromResourceWithContext(aws.Context, *servicecatalog.DisassociateTagOptionFromResourceInput, ...aws.Option) (*servicecatalog.DisassociateTagOptionFromResourceOutput, error)
+	DisassociateTagOptionFromResourceRequest(*servicecatalog.DisassociateTagOptionFromResourceInput) (*aws.Request, *servicecatalog.DisassociateTagOptionFromResourceOutput)
 
 	ListAcceptedPortfolioShares(*servicecatalog.ListAcceptedPortfolioSharesInput) (*servicecatalog.ListAcceptedPortfolioSharesOutput, error)
-	ListAcceptedPortfolioSharesWithContext(aws.Context, *servicecatalog.ListAcceptedPortfolioSharesInput, ...request.Option) (*servicecatalog.ListAcceptedPortfolioSharesOutput, error)
-	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) (*request.Request, *servicecatalog.ListAcceptedPortfolioSharesOutput)
+	ListAcceptedPortfolioSharesWithContext(aws.Context, *servicecatalog.ListAcceptedPortfolioSharesInput, ...aws.Option) (*servicecatalog.ListAcceptedPortfolioSharesOutput, error)
+	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) (*aws.Request, *servicecatalog.ListAcceptedPortfolioSharesOutput)
 
 	ListAcceptedPortfolioSharesPages(*servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool) error
-	ListAcceptedPortfolioSharesPagesWithContext(aws.Context, *servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool, ...request.Option) error
+	ListAcceptedPortfolioSharesPagesWithContext(aws.Context, *servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool, ...aws.Option) error
 
 	ListConstraintsForPortfolio(*servicecatalog.ListConstraintsForPortfolioInput) (*servicecatalog.ListConstraintsForPortfolioOutput, error)
-	ListConstraintsForPortfolioWithContext(aws.Context, *servicecatalog.ListConstraintsForPortfolioInput, ...request.Option) (*servicecatalog.ListConstraintsForPortfolioOutput, error)
-	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) (*request.Request, *servicecatalog.ListConstraintsForPortfolioOutput)
+	ListConstraintsForPortfolioWithContext(aws.Context, *servicecatalog.ListConstraintsForPortfolioInput, ...aws.Option) (*servicecatalog.ListConstraintsForPortfolioOutput, error)
+	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) (*aws.Request, *servicecatalog.ListConstraintsForPortfolioOutput)
 
 	ListConstraintsForPortfolioPages(*servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool) error
-	ListConstraintsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool, ...request.Option) error
+	ListConstraintsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool, ...aws.Option) error
 
 	ListLaunchPaths(*servicecatalog.ListLaunchPathsInput) (*servicecatalog.ListLaunchPathsOutput, error)
-	ListLaunchPathsWithContext(aws.Context, *servicecatalog.ListLaunchPathsInput, ...request.Option) (*servicecatalog.ListLaunchPathsOutput, error)
-	ListLaunchPathsRequest(*servicecatalog.ListLaunchPathsInput) (*request.Request, *servicecatalog.ListLaunchPathsOutput)
+	ListLaunchPathsWithContext(aws.Context, *servicecatalog.ListLaunchPathsInput, ...aws.Option) (*servicecatalog.ListLaunchPathsOutput, error)
+	ListLaunchPathsRequest(*servicecatalog.ListLaunchPathsInput) (*aws.Request, *servicecatalog.ListLaunchPathsOutput)
 
 	ListLaunchPathsPages(*servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool) error
-	ListLaunchPathsPagesWithContext(aws.Context, *servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool, ...request.Option) error
+	ListLaunchPathsPagesWithContext(aws.Context, *servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool, ...aws.Option) error
 
 	ListPortfolioAccess(*servicecatalog.ListPortfolioAccessInput) (*servicecatalog.ListPortfolioAccessOutput, error)
-	ListPortfolioAccessWithContext(aws.Context, *servicecatalog.ListPortfolioAccessInput, ...request.Option) (*servicecatalog.ListPortfolioAccessOutput, error)
-	ListPortfolioAccessRequest(*servicecatalog.ListPortfolioAccessInput) (*request.Request, *servicecatalog.ListPortfolioAccessOutput)
+	ListPortfolioAccessWithContext(aws.Context, *servicecatalog.ListPortfolioAccessInput, ...aws.Option) (*servicecatalog.ListPortfolioAccessOutput, error)
+	ListPortfolioAccessRequest(*servicecatalog.ListPortfolioAccessInput) (*aws.Request, *servicecatalog.ListPortfolioAccessOutput)
 
 	ListPortfolios(*servicecatalog.ListPortfoliosInput) (*servicecatalog.ListPortfoliosOutput, error)
-	ListPortfoliosWithContext(aws.Context, *servicecatalog.ListPortfoliosInput, ...request.Option) (*servicecatalog.ListPortfoliosOutput, error)
-	ListPortfoliosRequest(*servicecatalog.ListPortfoliosInput) (*request.Request, *servicecatalog.ListPortfoliosOutput)
+	ListPortfoliosWithContext(aws.Context, *servicecatalog.ListPortfoliosInput, ...aws.Option) (*servicecatalog.ListPortfoliosOutput, error)
+	ListPortfoliosRequest(*servicecatalog.ListPortfoliosInput) (*aws.Request, *servicecatalog.ListPortfoliosOutput)
 
 	ListPortfoliosPages(*servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool) error
-	ListPortfoliosPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool, ...request.Option) error
+	ListPortfoliosPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool, ...aws.Option) error
 
 	ListPortfoliosForProduct(*servicecatalog.ListPortfoliosForProductInput) (*servicecatalog.ListPortfoliosForProductOutput, error)
-	ListPortfoliosForProductWithContext(aws.Context, *servicecatalog.ListPortfoliosForProductInput, ...request.Option) (*servicecatalog.ListPortfoliosForProductOutput, error)
-	ListPortfoliosForProductRequest(*servicecatalog.ListPortfoliosForProductInput) (*request.Request, *servicecatalog.ListPortfoliosForProductOutput)
+	ListPortfoliosForProductWithContext(aws.Context, *servicecatalog.ListPortfoliosForProductInput, ...aws.Option) (*servicecatalog.ListPortfoliosForProductOutput, error)
+	ListPortfoliosForProductRequest(*servicecatalog.ListPortfoliosForProductInput) (*aws.Request, *servicecatalog.ListPortfoliosForProductOutput)
 
 	ListPortfoliosForProductPages(*servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool) error
-	ListPortfoliosForProductPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool, ...request.Option) error
+	ListPortfoliosForProductPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool, ...aws.Option) error
 
 	ListPrincipalsForPortfolio(*servicecatalog.ListPrincipalsForPortfolioInput) (*servicecatalog.ListPrincipalsForPortfolioOutput, error)
-	ListPrincipalsForPortfolioWithContext(aws.Context, *servicecatalog.ListPrincipalsForPortfolioInput, ...request.Option) (*servicecatalog.ListPrincipalsForPortfolioOutput, error)
-	ListPrincipalsForPortfolioRequest(*servicecatalog.ListPrincipalsForPortfolioInput) (*request.Request, *servicecatalog.ListPrincipalsForPortfolioOutput)
+	ListPrincipalsForPortfolioWithContext(aws.Context, *servicecatalog.ListPrincipalsForPortfolioInput, ...aws.Option) (*servicecatalog.ListPrincipalsForPortfolioOutput, error)
+	ListPrincipalsForPortfolioRequest(*servicecatalog.ListPrincipalsForPortfolioInput) (*aws.Request, *servicecatalog.ListPrincipalsForPortfolioOutput)
 
 	ListPrincipalsForPortfolioPages(*servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool) error
-	ListPrincipalsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool, ...request.Option) error
+	ListPrincipalsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool, ...aws.Option) error
 
 	ListProvisioningArtifacts(*servicecatalog.ListProvisioningArtifactsInput) (*servicecatalog.ListProvisioningArtifactsOutput, error)
-	ListProvisioningArtifactsWithContext(aws.Context, *servicecatalog.ListProvisioningArtifactsInput, ...request.Option) (*servicecatalog.ListProvisioningArtifactsOutput, error)
-	ListProvisioningArtifactsRequest(*servicecatalog.ListProvisioningArtifactsInput) (*request.Request, *servicecatalog.ListProvisioningArtifactsOutput)
+	ListProvisioningArtifactsWithContext(aws.Context, *servicecatalog.ListProvisioningArtifactsInput, ...aws.Option) (*servicecatalog.ListProvisioningArtifactsOutput, error)
+	ListProvisioningArtifactsRequest(*servicecatalog.ListProvisioningArtifactsInput) (*aws.Request, *servicecatalog.ListProvisioningArtifactsOutput)
 
 	ListRecordHistory(*servicecatalog.ListRecordHistoryInput) (*servicecatalog.ListRecordHistoryOutput, error)
-	ListRecordHistoryWithContext(aws.Context, *servicecatalog.ListRecordHistoryInput, ...request.Option) (*servicecatalog.ListRecordHistoryOutput, error)
-	ListRecordHistoryRequest(*servicecatalog.ListRecordHistoryInput) (*request.Request, *servicecatalog.ListRecordHistoryOutput)
+	ListRecordHistoryWithContext(aws.Context, *servicecatalog.ListRecordHistoryInput, ...aws.Option) (*servicecatalog.ListRecordHistoryOutput, error)
+	ListRecordHistoryRequest(*servicecatalog.ListRecordHistoryInput) (*aws.Request, *servicecatalog.ListRecordHistoryOutput)
 
 	ListResourcesForTagOption(*servicecatalog.ListResourcesForTagOptionInput) (*servicecatalog.ListResourcesForTagOptionOutput, error)
-	ListResourcesForTagOptionWithContext(aws.Context, *servicecatalog.ListResourcesForTagOptionInput, ...request.Option) (*servicecatalog.ListResourcesForTagOptionOutput, error)
-	ListResourcesForTagOptionRequest(*servicecatalog.ListResourcesForTagOptionInput) (*request.Request, *servicecatalog.ListResourcesForTagOptionOutput)
+	ListResourcesForTagOptionWithContext(aws.Context, *servicecatalog.ListResourcesForTagOptionInput, ...aws.Option) (*servicecatalog.ListResourcesForTagOptionOutput, error)
+	ListResourcesForTagOptionRequest(*servicecatalog.ListResourcesForTagOptionInput) (*aws.Request, *servicecatalog.ListResourcesForTagOptionOutput)
 
 	ListResourcesForTagOptionPages(*servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool) error
-	ListResourcesForTagOptionPagesWithContext(aws.Context, *servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool, ...request.Option) error
+	ListResourcesForTagOptionPagesWithContext(aws.Context, *servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool, ...aws.Option) error
 
 	ListTagOptions(*servicecatalog.ListTagOptionsInput) (*servicecatalog.ListTagOptionsOutput, error)
-	ListTagOptionsWithContext(aws.Context, *servicecatalog.ListTagOptionsInput, ...request.Option) (*servicecatalog.ListTagOptionsOutput, error)
-	ListTagOptionsRequest(*servicecatalog.ListTagOptionsInput) (*request.Request, *servicecatalog.ListTagOptionsOutput)
+	ListTagOptionsWithContext(aws.Context, *servicecatalog.ListTagOptionsInput, ...aws.Option) (*servicecatalog.ListTagOptionsOutput, error)
+	ListTagOptionsRequest(*servicecatalog.ListTagOptionsInput) (*aws.Request, *servicecatalog.ListTagOptionsOutput)
 
 	ListTagOptionsPages(*servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool) error
-	ListTagOptionsPagesWithContext(aws.Context, *servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool, ...request.Option) error
+	ListTagOptionsPagesWithContext(aws.Context, *servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool, ...aws.Option) error
 
 	ProvisionProduct(*servicecatalog.ProvisionProductInput) (*servicecatalog.ProvisionProductOutput, error)
-	ProvisionProductWithContext(aws.Context, *servicecatalog.ProvisionProductInput, ...request.Option) (*servicecatalog.ProvisionProductOutput, error)
-	ProvisionProductRequest(*servicecatalog.ProvisionProductInput) (*request.Request, *servicecatalog.ProvisionProductOutput)
+	ProvisionProductWithContext(aws.Context, *servicecatalog.ProvisionProductInput, ...aws.Option) (*servicecatalog.ProvisionProductOutput, error)
+	ProvisionProductRequest(*servicecatalog.ProvisionProductInput) (*aws.Request, *servicecatalog.ProvisionProductOutput)
 
 	RejectPortfolioShare(*servicecatalog.RejectPortfolioShareInput) (*servicecatalog.RejectPortfolioShareOutput, error)
-	RejectPortfolioShareWithContext(aws.Context, *servicecatalog.RejectPortfolioShareInput, ...request.Option) (*servicecatalog.RejectPortfolioShareOutput, error)
-	RejectPortfolioShareRequest(*servicecatalog.RejectPortfolioShareInput) (*request.Request, *servicecatalog.RejectPortfolioShareOutput)
+	RejectPortfolioShareWithContext(aws.Context, *servicecatalog.RejectPortfolioShareInput, ...aws.Option) (*servicecatalog.RejectPortfolioShareOutput, error)
+	RejectPortfolioShareRequest(*servicecatalog.RejectPortfolioShareInput) (*aws.Request, *servicecatalog.RejectPortfolioShareOutput)
 
 	ScanProvisionedProducts(*servicecatalog.ScanProvisionedProductsInput) (*servicecatalog.ScanProvisionedProductsOutput, error)
-	ScanProvisionedProductsWithContext(aws.Context, *servicecatalog.ScanProvisionedProductsInput, ...request.Option) (*servicecatalog.ScanProvisionedProductsOutput, error)
-	ScanProvisionedProductsRequest(*servicecatalog.ScanProvisionedProductsInput) (*request.Request, *servicecatalog.ScanProvisionedProductsOutput)
+	ScanProvisionedProductsWithContext(aws.Context, *servicecatalog.ScanProvisionedProductsInput, ...aws.Option) (*servicecatalog.ScanProvisionedProductsOutput, error)
+	ScanProvisionedProductsRequest(*servicecatalog.ScanProvisionedProductsInput) (*aws.Request, *servicecatalog.ScanProvisionedProductsOutput)
 
 	SearchProducts(*servicecatalog.SearchProductsInput) (*servicecatalog.SearchProductsOutput, error)
-	SearchProductsWithContext(aws.Context, *servicecatalog.SearchProductsInput, ...request.Option) (*servicecatalog.SearchProductsOutput, error)
-	SearchProductsRequest(*servicecatalog.SearchProductsInput) (*request.Request, *servicecatalog.SearchProductsOutput)
+	SearchProductsWithContext(aws.Context, *servicecatalog.SearchProductsInput, ...aws.Option) (*servicecatalog.SearchProductsOutput, error)
+	SearchProductsRequest(*servicecatalog.SearchProductsInput) (*aws.Request, *servicecatalog.SearchProductsOutput)
 
 	SearchProductsPages(*servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool) error
-	SearchProductsPagesWithContext(aws.Context, *servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool, ...request.Option) error
+	SearchProductsPagesWithContext(aws.Context, *servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool, ...aws.Option) error
 
 	SearchProductsAsAdmin(*servicecatalog.SearchProductsAsAdminInput) (*servicecatalog.SearchProductsAsAdminOutput, error)
-	SearchProductsAsAdminWithContext(aws.Context, *servicecatalog.SearchProductsAsAdminInput, ...request.Option) (*servicecatalog.SearchProductsAsAdminOutput, error)
-	SearchProductsAsAdminRequest(*servicecatalog.SearchProductsAsAdminInput) (*request.Request, *servicecatalog.SearchProductsAsAdminOutput)
+	SearchProductsAsAdminWithContext(aws.Context, *servicecatalog.SearchProductsAsAdminInput, ...aws.Option) (*servicecatalog.SearchProductsAsAdminOutput, error)
+	SearchProductsAsAdminRequest(*servicecatalog.SearchProductsAsAdminInput) (*aws.Request, *servicecatalog.SearchProductsAsAdminOutput)
 
 	SearchProductsAsAdminPages(*servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool) error
-	SearchProductsAsAdminPagesWithContext(aws.Context, *servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool, ...request.Option) error
+	SearchProductsAsAdminPagesWithContext(aws.Context, *servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool, ...aws.Option) error
 
 	TerminateProvisionedProduct(*servicecatalog.TerminateProvisionedProductInput) (*servicecatalog.TerminateProvisionedProductOutput, error)
-	TerminateProvisionedProductWithContext(aws.Context, *servicecatalog.TerminateProvisionedProductInput, ...request.Option) (*servicecatalog.TerminateProvisionedProductOutput, error)
-	TerminateProvisionedProductRequest(*servicecatalog.TerminateProvisionedProductInput) (*request.Request, *servicecatalog.TerminateProvisionedProductOutput)
+	TerminateProvisionedProductWithContext(aws.Context, *servicecatalog.TerminateProvisionedProductInput, ...aws.Option) (*servicecatalog.TerminateProvisionedProductOutput, error)
+	TerminateProvisionedProductRequest(*servicecatalog.TerminateProvisionedProductInput) (*aws.Request, *servicecatalog.TerminateProvisionedProductOutput)
 
 	UpdateConstraint(*servicecatalog.UpdateConstraintInput) (*servicecatalog.UpdateConstraintOutput, error)
-	UpdateConstraintWithContext(aws.Context, *servicecatalog.UpdateConstraintInput, ...request.Option) (*servicecatalog.UpdateConstraintOutput, error)
-	UpdateConstraintRequest(*servicecatalog.UpdateConstraintInput) (*request.Request, *servicecatalog.UpdateConstraintOutput)
+	UpdateConstraintWithContext(aws.Context, *servicecatalog.UpdateConstraintInput, ...aws.Option) (*servicecatalog.UpdateConstraintOutput, error)
+	UpdateConstraintRequest(*servicecatalog.UpdateConstraintInput) (*aws.Request, *servicecatalog.UpdateConstraintOutput)
 
 	UpdatePortfolio(*servicecatalog.UpdatePortfolioInput) (*servicecatalog.UpdatePortfolioOutput, error)
-	UpdatePortfolioWithContext(aws.Context, *servicecatalog.UpdatePortfolioInput, ...request.Option) (*servicecatalog.UpdatePortfolioOutput, error)
-	UpdatePortfolioRequest(*servicecatalog.UpdatePortfolioInput) (*request.Request, *servicecatalog.UpdatePortfolioOutput)
+	UpdatePortfolioWithContext(aws.Context, *servicecatalog.UpdatePortfolioInput, ...aws.Option) (*servicecatalog.UpdatePortfolioOutput, error)
+	UpdatePortfolioRequest(*servicecatalog.UpdatePortfolioInput) (*aws.Request, *servicecatalog.UpdatePortfolioOutput)
 
 	UpdateProduct(*servicecatalog.UpdateProductInput) (*servicecatalog.UpdateProductOutput, error)
-	UpdateProductWithContext(aws.Context, *servicecatalog.UpdateProductInput, ...request.Option) (*servicecatalog.UpdateProductOutput, error)
-	UpdateProductRequest(*servicecatalog.UpdateProductInput) (*request.Request, *servicecatalog.UpdateProductOutput)
+	UpdateProductWithContext(aws.Context, *servicecatalog.UpdateProductInput, ...aws.Option) (*servicecatalog.UpdateProductOutput, error)
+	UpdateProductRequest(*servicecatalog.UpdateProductInput) (*aws.Request, *servicecatalog.UpdateProductOutput)
 
 	UpdateProvisionedProduct(*servicecatalog.UpdateProvisionedProductInput) (*servicecatalog.UpdateProvisionedProductOutput, error)
-	UpdateProvisionedProductWithContext(aws.Context, *servicecatalog.UpdateProvisionedProductInput, ...request.Option) (*servicecatalog.UpdateProvisionedProductOutput, error)
-	UpdateProvisionedProductRequest(*servicecatalog.UpdateProvisionedProductInput) (*request.Request, *servicecatalog.UpdateProvisionedProductOutput)
+	UpdateProvisionedProductWithContext(aws.Context, *servicecatalog.UpdateProvisionedProductInput, ...aws.Option) (*servicecatalog.UpdateProvisionedProductOutput, error)
+	UpdateProvisionedProductRequest(*servicecatalog.UpdateProvisionedProductInput) (*aws.Request, *servicecatalog.UpdateProvisionedProductOutput)
 
 	UpdateProvisioningArtifact(*servicecatalog.UpdateProvisioningArtifactInput) (*servicecatalog.UpdateProvisioningArtifactOutput, error)
-	UpdateProvisioningArtifactWithContext(aws.Context, *servicecatalog.UpdateProvisioningArtifactInput, ...request.Option) (*servicecatalog.UpdateProvisioningArtifactOutput, error)
-	UpdateProvisioningArtifactRequest(*servicecatalog.UpdateProvisioningArtifactInput) (*request.Request, *servicecatalog.UpdateProvisioningArtifactOutput)
+	UpdateProvisioningArtifactWithContext(aws.Context, *servicecatalog.UpdateProvisioningArtifactInput, ...aws.Option) (*servicecatalog.UpdateProvisioningArtifactOutput, error)
+	UpdateProvisioningArtifactRequest(*servicecatalog.UpdateProvisioningArtifactInput) (*aws.Request, *servicecatalog.UpdateProvisioningArtifactOutput)
 
 	UpdateTagOption(*servicecatalog.UpdateTagOptionInput) (*servicecatalog.UpdateTagOptionOutput, error)
-	UpdateTagOptionWithContext(aws.Context, *servicecatalog.UpdateTagOptionInput, ...request.Option) (*servicecatalog.UpdateTagOptionOutput, error)
-	UpdateTagOptionRequest(*servicecatalog.UpdateTagOptionInput) (*request.Request, *servicecatalog.UpdateTagOptionOutput)
+	UpdateTagOptionWithContext(aws.Context, *servicecatalog.UpdateTagOptionInput, ...aws.Option) (*servicecatalog.UpdateTagOptionOutput, error)
+	UpdateTagOptionRequest(*servicecatalog.UpdateTagOptionInput) (*aws.Request, *servicecatalog.UpdateTagOptionOutput)
 }
 
 var _ ServiceCatalogAPI = (*servicecatalog.ServiceCatalog)(nil)

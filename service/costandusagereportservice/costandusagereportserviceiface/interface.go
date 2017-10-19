@@ -10,7 +10,6 @@ package costandusagereportserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := costandusagereportservice.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := costandusagereportservice.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,19 +64,19 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CostandUsageReportServiceAPI interface {
 	DeleteReportDefinition(*costandusagereportservice.DeleteReportDefinitionInput) (*costandusagereportservice.DeleteReportDefinitionOutput, error)
-	DeleteReportDefinitionWithContext(aws.Context, *costandusagereportservice.DeleteReportDefinitionInput, ...request.Option) (*costandusagereportservice.DeleteReportDefinitionOutput, error)
-	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) (*request.Request, *costandusagereportservice.DeleteReportDefinitionOutput)
+	DeleteReportDefinitionWithContext(aws.Context, *costandusagereportservice.DeleteReportDefinitionInput, ...aws.Option) (*costandusagereportservice.DeleteReportDefinitionOutput, error)
+	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) (*aws.Request, *costandusagereportservice.DeleteReportDefinitionOutput)
 
 	DescribeReportDefinitions(*costandusagereportservice.DescribeReportDefinitionsInput) (*costandusagereportservice.DescribeReportDefinitionsOutput, error)
-	DescribeReportDefinitionsWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, ...request.Option) (*costandusagereportservice.DescribeReportDefinitionsOutput, error)
-	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) (*request.Request, *costandusagereportservice.DescribeReportDefinitionsOutput)
+	DescribeReportDefinitionsWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, ...aws.Option) (*costandusagereportservice.DescribeReportDefinitionsOutput, error)
+	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) (*aws.Request, *costandusagereportservice.DescribeReportDefinitionsOutput)
 
 	DescribeReportDefinitionsPages(*costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool) error
-	DescribeReportDefinitionsPagesWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool, ...request.Option) error
+	DescribeReportDefinitionsPagesWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool, ...aws.Option) error
 
 	PutReportDefinition(*costandusagereportservice.PutReportDefinitionInput) (*costandusagereportservice.PutReportDefinitionOutput, error)
-	PutReportDefinitionWithContext(aws.Context, *costandusagereportservice.PutReportDefinitionInput, ...request.Option) (*costandusagereportservice.PutReportDefinitionOutput, error)
-	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) (*request.Request, *costandusagereportservice.PutReportDefinitionOutput)
+	PutReportDefinitionWithContext(aws.Context, *costandusagereportservice.PutReportDefinitionInput, ...aws.Option) (*costandusagereportservice.PutReportDefinitionOutput, error)
+	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) (*aws.Request, *costandusagereportservice.PutReportDefinitionOutput)
 }
 
 var _ CostandUsageReportServiceAPI = (*costandusagereportservice.CostandUsageReportService)(nil)

@@ -10,7 +10,6 @@ package codecommitiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := codecommit.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := codecommit.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,81 +64,81 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CodeCommitAPI interface {
 	BatchGetRepositories(*codecommit.BatchGetRepositoriesInput) (*codecommit.BatchGetRepositoriesOutput, error)
-	BatchGetRepositoriesWithContext(aws.Context, *codecommit.BatchGetRepositoriesInput, ...request.Option) (*codecommit.BatchGetRepositoriesOutput, error)
-	BatchGetRepositoriesRequest(*codecommit.BatchGetRepositoriesInput) (*request.Request, *codecommit.BatchGetRepositoriesOutput)
+	BatchGetRepositoriesWithContext(aws.Context, *codecommit.BatchGetRepositoriesInput, ...aws.Option) (*codecommit.BatchGetRepositoriesOutput, error)
+	BatchGetRepositoriesRequest(*codecommit.BatchGetRepositoriesInput) (*aws.Request, *codecommit.BatchGetRepositoriesOutput)
 
 	CreateBranch(*codecommit.CreateBranchInput) (*codecommit.CreateBranchOutput, error)
-	CreateBranchWithContext(aws.Context, *codecommit.CreateBranchInput, ...request.Option) (*codecommit.CreateBranchOutput, error)
-	CreateBranchRequest(*codecommit.CreateBranchInput) (*request.Request, *codecommit.CreateBranchOutput)
+	CreateBranchWithContext(aws.Context, *codecommit.CreateBranchInput, ...aws.Option) (*codecommit.CreateBranchOutput, error)
+	CreateBranchRequest(*codecommit.CreateBranchInput) (*aws.Request, *codecommit.CreateBranchOutput)
 
 	CreateRepository(*codecommit.CreateRepositoryInput) (*codecommit.CreateRepositoryOutput, error)
-	CreateRepositoryWithContext(aws.Context, *codecommit.CreateRepositoryInput, ...request.Option) (*codecommit.CreateRepositoryOutput, error)
-	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) (*request.Request, *codecommit.CreateRepositoryOutput)
+	CreateRepositoryWithContext(aws.Context, *codecommit.CreateRepositoryInput, ...aws.Option) (*codecommit.CreateRepositoryOutput, error)
+	CreateRepositoryRequest(*codecommit.CreateRepositoryInput) (*aws.Request, *codecommit.CreateRepositoryOutput)
 
 	DeleteRepository(*codecommit.DeleteRepositoryInput) (*codecommit.DeleteRepositoryOutput, error)
-	DeleteRepositoryWithContext(aws.Context, *codecommit.DeleteRepositoryInput, ...request.Option) (*codecommit.DeleteRepositoryOutput, error)
-	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) (*request.Request, *codecommit.DeleteRepositoryOutput)
+	DeleteRepositoryWithContext(aws.Context, *codecommit.DeleteRepositoryInput, ...aws.Option) (*codecommit.DeleteRepositoryOutput, error)
+	DeleteRepositoryRequest(*codecommit.DeleteRepositoryInput) (*aws.Request, *codecommit.DeleteRepositoryOutput)
 
 	GetBlob(*codecommit.GetBlobInput) (*codecommit.GetBlobOutput, error)
-	GetBlobWithContext(aws.Context, *codecommit.GetBlobInput, ...request.Option) (*codecommit.GetBlobOutput, error)
-	GetBlobRequest(*codecommit.GetBlobInput) (*request.Request, *codecommit.GetBlobOutput)
+	GetBlobWithContext(aws.Context, *codecommit.GetBlobInput, ...aws.Option) (*codecommit.GetBlobOutput, error)
+	GetBlobRequest(*codecommit.GetBlobInput) (*aws.Request, *codecommit.GetBlobOutput)
 
 	GetBranch(*codecommit.GetBranchInput) (*codecommit.GetBranchOutput, error)
-	GetBranchWithContext(aws.Context, *codecommit.GetBranchInput, ...request.Option) (*codecommit.GetBranchOutput, error)
-	GetBranchRequest(*codecommit.GetBranchInput) (*request.Request, *codecommit.GetBranchOutput)
+	GetBranchWithContext(aws.Context, *codecommit.GetBranchInput, ...aws.Option) (*codecommit.GetBranchOutput, error)
+	GetBranchRequest(*codecommit.GetBranchInput) (*aws.Request, *codecommit.GetBranchOutput)
 
 	GetCommit(*codecommit.GetCommitInput) (*codecommit.GetCommitOutput, error)
-	GetCommitWithContext(aws.Context, *codecommit.GetCommitInput, ...request.Option) (*codecommit.GetCommitOutput, error)
-	GetCommitRequest(*codecommit.GetCommitInput) (*request.Request, *codecommit.GetCommitOutput)
+	GetCommitWithContext(aws.Context, *codecommit.GetCommitInput, ...aws.Option) (*codecommit.GetCommitOutput, error)
+	GetCommitRequest(*codecommit.GetCommitInput) (*aws.Request, *codecommit.GetCommitOutput)
 
 	GetDifferences(*codecommit.GetDifferencesInput) (*codecommit.GetDifferencesOutput, error)
-	GetDifferencesWithContext(aws.Context, *codecommit.GetDifferencesInput, ...request.Option) (*codecommit.GetDifferencesOutput, error)
-	GetDifferencesRequest(*codecommit.GetDifferencesInput) (*request.Request, *codecommit.GetDifferencesOutput)
+	GetDifferencesWithContext(aws.Context, *codecommit.GetDifferencesInput, ...aws.Option) (*codecommit.GetDifferencesOutput, error)
+	GetDifferencesRequest(*codecommit.GetDifferencesInput) (*aws.Request, *codecommit.GetDifferencesOutput)
 
 	GetDifferencesPages(*codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool) error
-	GetDifferencesPagesWithContext(aws.Context, *codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool, ...request.Option) error
+	GetDifferencesPagesWithContext(aws.Context, *codecommit.GetDifferencesInput, func(*codecommit.GetDifferencesOutput, bool) bool, ...aws.Option) error
 
 	GetRepository(*codecommit.GetRepositoryInput) (*codecommit.GetRepositoryOutput, error)
-	GetRepositoryWithContext(aws.Context, *codecommit.GetRepositoryInput, ...request.Option) (*codecommit.GetRepositoryOutput, error)
-	GetRepositoryRequest(*codecommit.GetRepositoryInput) (*request.Request, *codecommit.GetRepositoryOutput)
+	GetRepositoryWithContext(aws.Context, *codecommit.GetRepositoryInput, ...aws.Option) (*codecommit.GetRepositoryOutput, error)
+	GetRepositoryRequest(*codecommit.GetRepositoryInput) (*aws.Request, *codecommit.GetRepositoryOutput)
 
 	GetRepositoryTriggers(*codecommit.GetRepositoryTriggersInput) (*codecommit.GetRepositoryTriggersOutput, error)
-	GetRepositoryTriggersWithContext(aws.Context, *codecommit.GetRepositoryTriggersInput, ...request.Option) (*codecommit.GetRepositoryTriggersOutput, error)
-	GetRepositoryTriggersRequest(*codecommit.GetRepositoryTriggersInput) (*request.Request, *codecommit.GetRepositoryTriggersOutput)
+	GetRepositoryTriggersWithContext(aws.Context, *codecommit.GetRepositoryTriggersInput, ...aws.Option) (*codecommit.GetRepositoryTriggersOutput, error)
+	GetRepositoryTriggersRequest(*codecommit.GetRepositoryTriggersInput) (*aws.Request, *codecommit.GetRepositoryTriggersOutput)
 
 	ListBranches(*codecommit.ListBranchesInput) (*codecommit.ListBranchesOutput, error)
-	ListBranchesWithContext(aws.Context, *codecommit.ListBranchesInput, ...request.Option) (*codecommit.ListBranchesOutput, error)
-	ListBranchesRequest(*codecommit.ListBranchesInput) (*request.Request, *codecommit.ListBranchesOutput)
+	ListBranchesWithContext(aws.Context, *codecommit.ListBranchesInput, ...aws.Option) (*codecommit.ListBranchesOutput, error)
+	ListBranchesRequest(*codecommit.ListBranchesInput) (*aws.Request, *codecommit.ListBranchesOutput)
 
 	ListBranchesPages(*codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool) error
-	ListBranchesPagesWithContext(aws.Context, *codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool, ...request.Option) error
+	ListBranchesPagesWithContext(aws.Context, *codecommit.ListBranchesInput, func(*codecommit.ListBranchesOutput, bool) bool, ...aws.Option) error
 
 	ListRepositories(*codecommit.ListRepositoriesInput) (*codecommit.ListRepositoriesOutput, error)
-	ListRepositoriesWithContext(aws.Context, *codecommit.ListRepositoriesInput, ...request.Option) (*codecommit.ListRepositoriesOutput, error)
-	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) (*request.Request, *codecommit.ListRepositoriesOutput)
+	ListRepositoriesWithContext(aws.Context, *codecommit.ListRepositoriesInput, ...aws.Option) (*codecommit.ListRepositoriesOutput, error)
+	ListRepositoriesRequest(*codecommit.ListRepositoriesInput) (*aws.Request, *codecommit.ListRepositoriesOutput)
 
 	ListRepositoriesPages(*codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool) error
-	ListRepositoriesPagesWithContext(aws.Context, *codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool, ...request.Option) error
+	ListRepositoriesPagesWithContext(aws.Context, *codecommit.ListRepositoriesInput, func(*codecommit.ListRepositoriesOutput, bool) bool, ...aws.Option) error
 
 	PutRepositoryTriggers(*codecommit.PutRepositoryTriggersInput) (*codecommit.PutRepositoryTriggersOutput, error)
-	PutRepositoryTriggersWithContext(aws.Context, *codecommit.PutRepositoryTriggersInput, ...request.Option) (*codecommit.PutRepositoryTriggersOutput, error)
-	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) (*request.Request, *codecommit.PutRepositoryTriggersOutput)
+	PutRepositoryTriggersWithContext(aws.Context, *codecommit.PutRepositoryTriggersInput, ...aws.Option) (*codecommit.PutRepositoryTriggersOutput, error)
+	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) (*aws.Request, *codecommit.PutRepositoryTriggersOutput)
 
 	TestRepositoryTriggers(*codecommit.TestRepositoryTriggersInput) (*codecommit.TestRepositoryTriggersOutput, error)
-	TestRepositoryTriggersWithContext(aws.Context, *codecommit.TestRepositoryTriggersInput, ...request.Option) (*codecommit.TestRepositoryTriggersOutput, error)
-	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) (*request.Request, *codecommit.TestRepositoryTriggersOutput)
+	TestRepositoryTriggersWithContext(aws.Context, *codecommit.TestRepositoryTriggersInput, ...aws.Option) (*codecommit.TestRepositoryTriggersOutput, error)
+	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) (*aws.Request, *codecommit.TestRepositoryTriggersOutput)
 
 	UpdateDefaultBranch(*codecommit.UpdateDefaultBranchInput) (*codecommit.UpdateDefaultBranchOutput, error)
-	UpdateDefaultBranchWithContext(aws.Context, *codecommit.UpdateDefaultBranchInput, ...request.Option) (*codecommit.UpdateDefaultBranchOutput, error)
-	UpdateDefaultBranchRequest(*codecommit.UpdateDefaultBranchInput) (*request.Request, *codecommit.UpdateDefaultBranchOutput)
+	UpdateDefaultBranchWithContext(aws.Context, *codecommit.UpdateDefaultBranchInput, ...aws.Option) (*codecommit.UpdateDefaultBranchOutput, error)
+	UpdateDefaultBranchRequest(*codecommit.UpdateDefaultBranchInput) (*aws.Request, *codecommit.UpdateDefaultBranchOutput)
 
 	UpdateRepositoryDescription(*codecommit.UpdateRepositoryDescriptionInput) (*codecommit.UpdateRepositoryDescriptionOutput, error)
-	UpdateRepositoryDescriptionWithContext(aws.Context, *codecommit.UpdateRepositoryDescriptionInput, ...request.Option) (*codecommit.UpdateRepositoryDescriptionOutput, error)
-	UpdateRepositoryDescriptionRequest(*codecommit.UpdateRepositoryDescriptionInput) (*request.Request, *codecommit.UpdateRepositoryDescriptionOutput)
+	UpdateRepositoryDescriptionWithContext(aws.Context, *codecommit.UpdateRepositoryDescriptionInput, ...aws.Option) (*codecommit.UpdateRepositoryDescriptionOutput, error)
+	UpdateRepositoryDescriptionRequest(*codecommit.UpdateRepositoryDescriptionInput) (*aws.Request, *codecommit.UpdateRepositoryDescriptionOutput)
 
 	UpdateRepositoryName(*codecommit.UpdateRepositoryNameInput) (*codecommit.UpdateRepositoryNameOutput, error)
-	UpdateRepositoryNameWithContext(aws.Context, *codecommit.UpdateRepositoryNameInput, ...request.Option) (*codecommit.UpdateRepositoryNameOutput, error)
-	UpdateRepositoryNameRequest(*codecommit.UpdateRepositoryNameInput) (*request.Request, *codecommit.UpdateRepositoryNameOutput)
+	UpdateRepositoryNameWithContext(aws.Context, *codecommit.UpdateRepositoryNameInput, ...aws.Option) (*codecommit.UpdateRepositoryNameOutput, error)
+	UpdateRepositoryNameRequest(*codecommit.UpdateRepositoryNameInput) (*aws.Request, *codecommit.UpdateRepositoryNameOutput)
 }
 
 var _ CodeCommitAPI = (*codecommit.CodeCommit)(nil)

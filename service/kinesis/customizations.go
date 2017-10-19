@@ -3,7 +3,7 @@ package kinesis
 import (
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 )
 
 var readDuration = 5 * time.Second

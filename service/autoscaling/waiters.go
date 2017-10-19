@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilGroupExists uses the Auto Scaling API operation
@@ -25,25 +24,25 @@ func (c *AutoScaling) WaitUntilGroupExists(input *DescribeAutoScalingGroupsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AutoScaling) WaitUntilGroupExistsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *AutoScaling) WaitUntilGroupExistsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilGroupExists",
 		MaxAttempts: 10,
-		Delay:       request.ConstantWaiterDelay(5 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(5 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
 				Expected: true,
 			},
 			{
-				State:   request.RetryWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
 				Expected: false,
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeAutoScalingGroupsInput
 			if input != nil {
 				tmp := *input
@@ -76,25 +75,25 @@ func (c *AutoScaling) WaitUntilGroupInService(input *DescribeAutoScalingGroupsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AutoScaling) WaitUntilGroupInServiceWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *AutoScaling) WaitUntilGroupInServiceWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilGroupInService",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "contains(AutoScalingGroups[].[length(Instances[?LifecycleState=='InService']) >= MinSize][], `false`)",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "contains(AutoScalingGroups[].[length(Instances[?LifecycleState=='InService']) >= MinSize][], `false`)",
 				Expected: false,
 			},
 			{
-				State:   request.RetryWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "contains(AutoScalingGroups[].[length(Instances[?LifecycleState=='InService']) >= MinSize][], `false`)",
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "contains(AutoScalingGroups[].[length(Instances[?LifecycleState=='InService']) >= MinSize][], `false`)",
 				Expected: true,
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeAutoScalingGroupsInput
 			if input != nil {
 				tmp := *input
@@ -127,25 +126,25 @@ func (c *AutoScaling) WaitUntilGroupNotExists(input *DescribeAutoScalingGroupsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AutoScaling) WaitUntilGroupNotExistsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *AutoScaling) WaitUntilGroupNotExistsWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilGroupNotExists",
 		MaxAttempts: 40,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
 				Expected: false,
 			},
 			{
-				State:   request.RetryWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
+				State:   aws.RetryWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "length(AutoScalingGroups) > `0`",
 				Expected: true,
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeAutoScalingGroupsInput
 			if input != nil {
 				tmp := *input

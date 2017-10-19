@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opDeleteRule = "DeleteRule"
 
-// DeleteRuleRequest generates a "aws/request.Request" representing the
+// DeleteRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opDeleteRule = "DeleteRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule
-func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) (req *request.Request, output *DeleteRuleOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) (req *aws.Request, output *DeleteRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -96,7 +95,7 @@ func (c *CloudWatchEvents) DeleteRule(input *DeleteRuleInput) (*DeleteRuleOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...request.Option) (*DeleteRuleOutput, error) {
+func (c *CloudWatchEvents) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...aws.Option) (*DeleteRuleOutput, error) {
 	req, out := c.DeleteRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -105,7 +104,7 @@ func (c *CloudWatchEvents) DeleteRuleWithContext(ctx aws.Context, input *DeleteR
 
 const opDescribeEventBus = "DescribeEventBus"
 
-// DescribeEventBusRequest generates a "aws/request.Request" representing the
+// DescribeEventBusRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventBus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -129,8 +128,8 @@ const opDescribeEventBus = "DescribeEventBus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeEventBus
-func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput) (req *request.Request, output *DescribeEventBusOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput) (req *aws.Request, output *DescribeEventBusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventBus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -180,7 +179,7 @@ func (c *CloudWatchEvents) DescribeEventBus(input *DescribeEventBusInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) DescribeEventBusWithContext(ctx aws.Context, input *DescribeEventBusInput, opts ...request.Option) (*DescribeEventBusOutput, error) {
+func (c *CloudWatchEvents) DescribeEventBusWithContext(ctx aws.Context, input *DescribeEventBusInput, opts ...aws.Option) (*DescribeEventBusOutput, error) {
 	req, out := c.DescribeEventBusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -189,7 +188,7 @@ func (c *CloudWatchEvents) DescribeEventBusWithContext(ctx aws.Context, input *D
 
 const opDescribeRule = "DescribeRule"
 
-// DescribeRuleRequest generates a "aws/request.Request" representing the
+// DescribeRuleRequest generates a "aws.Request" representing the
 // client's request for the DescribeRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -213,8 +212,8 @@ const opDescribeRule = "DescribeRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule
-func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) (req *request.Request, output *DescribeRuleOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) (req *aws.Request, output *DescribeRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -262,7 +261,7 @@ func (c *CloudWatchEvents) DescribeRule(input *DescribeRuleInput) (*DescribeRule
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) DescribeRuleWithContext(ctx aws.Context, input *DescribeRuleInput, opts ...request.Option) (*DescribeRuleOutput, error) {
+func (c *CloudWatchEvents) DescribeRuleWithContext(ctx aws.Context, input *DescribeRuleInput, opts ...aws.Option) (*DescribeRuleOutput, error) {
 	req, out := c.DescribeRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -271,7 +270,7 @@ func (c *CloudWatchEvents) DescribeRuleWithContext(ctx aws.Context, input *Descr
 
 const opDisableRule = "DisableRule"
 
-// DisableRuleRequest generates a "aws/request.Request" representing the
+// DisableRuleRequest generates a "aws.Request" representing the
 // client's request for the DisableRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -295,8 +294,8 @@ const opDisableRule = "DisableRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule
-func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) (req *request.Request, output *DisableRuleOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) (req *aws.Request, output *DisableRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDisableRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -353,7 +352,7 @@ func (c *CloudWatchEvents) DisableRule(input *DisableRuleInput) (*DisableRuleOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) DisableRuleWithContext(ctx aws.Context, input *DisableRuleInput, opts ...request.Option) (*DisableRuleOutput, error) {
+func (c *CloudWatchEvents) DisableRuleWithContext(ctx aws.Context, input *DisableRuleInput, opts ...aws.Option) (*DisableRuleOutput, error) {
 	req, out := c.DisableRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -362,7 +361,7 @@ func (c *CloudWatchEvents) DisableRuleWithContext(ctx aws.Context, input *Disabl
 
 const opEnableRule = "EnableRule"
 
-// EnableRuleRequest generates a "aws/request.Request" representing the
+// EnableRuleRequest generates a "aws.Request" representing the
 // client's request for the EnableRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -386,8 +385,8 @@ const opEnableRule = "EnableRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule
-func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) (req *request.Request, output *EnableRuleOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) (req *aws.Request, output *EnableRuleOutput) {
+	op := &aws.Operation{
 		Name:       opEnableRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -444,7 +443,7 @@ func (c *CloudWatchEvents) EnableRule(input *EnableRuleInput) (*EnableRuleOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) EnableRuleWithContext(ctx aws.Context, input *EnableRuleInput, opts ...request.Option) (*EnableRuleOutput, error) {
+func (c *CloudWatchEvents) EnableRuleWithContext(ctx aws.Context, input *EnableRuleInput, opts ...aws.Option) (*EnableRuleOutput, error) {
 	req, out := c.EnableRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -453,7 +452,7 @@ func (c *CloudWatchEvents) EnableRuleWithContext(ctx aws.Context, input *EnableR
 
 const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 
-// ListRuleNamesByTargetRequest generates a "aws/request.Request" representing the
+// ListRuleNamesByTargetRequest generates a "aws.Request" representing the
 // client's request for the ListRuleNamesByTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -477,8 +476,8 @@ const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTarget
-func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput) (req *request.Request, output *ListRuleNamesByTargetOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTargetInput) (req *aws.Request, output *ListRuleNamesByTargetOutput) {
+	op := &aws.Operation{
 		Name:       opListRuleNamesByTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -524,7 +523,7 @@ func (c *CloudWatchEvents) ListRuleNamesByTarget(input *ListRuleNamesByTargetInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) ListRuleNamesByTargetWithContext(ctx aws.Context, input *ListRuleNamesByTargetInput, opts ...request.Option) (*ListRuleNamesByTargetOutput, error) {
+func (c *CloudWatchEvents) ListRuleNamesByTargetWithContext(ctx aws.Context, input *ListRuleNamesByTargetInput, opts ...aws.Option) (*ListRuleNamesByTargetOutput, error) {
 	req, out := c.ListRuleNamesByTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -533,7 +532,7 @@ func (c *CloudWatchEvents) ListRuleNamesByTargetWithContext(ctx aws.Context, inp
 
 const opListRules = "ListRules"
 
-// ListRulesRequest generates a "aws/request.Request" representing the
+// ListRulesRequest generates a "aws.Request" representing the
 // client's request for the ListRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -557,8 +556,8 @@ const opListRules = "ListRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules
-func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) (req *request.Request, output *ListRulesOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) (req *aws.Request, output *ListRulesOutput) {
+	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -604,7 +603,7 @@ func (c *CloudWatchEvents) ListRules(input *ListRulesInput) (*ListRulesOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) ListRulesWithContext(ctx aws.Context, input *ListRulesInput, opts ...request.Option) (*ListRulesOutput, error) {
+func (c *CloudWatchEvents) ListRulesWithContext(ctx aws.Context, input *ListRulesInput, opts ...aws.Option) (*ListRulesOutput, error) {
 	req, out := c.ListRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -613,7 +612,7 @@ func (c *CloudWatchEvents) ListRulesWithContext(ctx aws.Context, input *ListRule
 
 const opListTargetsByRule = "ListTargetsByRule"
 
-// ListTargetsByRuleRequest generates a "aws/request.Request" representing the
+// ListTargetsByRuleRequest generates a "aws.Request" representing the
 // client's request for the ListTargetsByRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -637,8 +636,8 @@ const opListTargetsByRule = "ListTargetsByRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule
-func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInput) (req *request.Request, output *ListTargetsByRuleOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInput) (req *aws.Request, output *ListTargetsByRuleOutput) {
+	op := &aws.Operation{
 		Name:       opListTargetsByRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -686,7 +685,7 @@ func (c *CloudWatchEvents) ListTargetsByRule(input *ListTargetsByRuleInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) ListTargetsByRuleWithContext(ctx aws.Context, input *ListTargetsByRuleInput, opts ...request.Option) (*ListTargetsByRuleOutput, error) {
+func (c *CloudWatchEvents) ListTargetsByRuleWithContext(ctx aws.Context, input *ListTargetsByRuleInput, opts ...aws.Option) (*ListTargetsByRuleOutput, error) {
 	req, out := c.ListTargetsByRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -695,7 +694,7 @@ func (c *CloudWatchEvents) ListTargetsByRuleWithContext(ctx aws.Context, input *
 
 const opPutEvents = "PutEvents"
 
-// PutEventsRequest generates a "aws/request.Request" representing the
+// PutEventsRequest generates a "aws.Request" representing the
 // client's request for the PutEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -719,8 +718,8 @@ const opPutEvents = "PutEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents
-func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) (req *request.Request, output *PutEventsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) (req *aws.Request, output *PutEventsOutput) {
+	op := &aws.Operation{
 		Name:       opPutEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -766,7 +765,7 @@ func (c *CloudWatchEvents) PutEvents(input *PutEventsInput) (*PutEventsOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) PutEventsWithContext(ctx aws.Context, input *PutEventsInput, opts ...request.Option) (*PutEventsOutput, error) {
+func (c *CloudWatchEvents) PutEventsWithContext(ctx aws.Context, input *PutEventsInput, opts ...aws.Option) (*PutEventsOutput, error) {
 	req, out := c.PutEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -775,7 +774,7 @@ func (c *CloudWatchEvents) PutEventsWithContext(ctx aws.Context, input *PutEvent
 
 const opPutPermission = "PutPermission"
 
-// PutPermissionRequest generates a "aws/request.Request" representing the
+// PutPermissionRequest generates a "aws.Request" representing the
 // client's request for the PutPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -799,8 +798,8 @@ const opPutPermission = "PutPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutPermission
-func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) (req *request.Request, output *PutPermissionOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) (req *aws.Request, output *PutPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opPutPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -867,7 +866,7 @@ func (c *CloudWatchEvents) PutPermission(input *PutPermissionInput) (*PutPermiss
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) PutPermissionWithContext(ctx aws.Context, input *PutPermissionInput, opts ...request.Option) (*PutPermissionOutput, error) {
+func (c *CloudWatchEvents) PutPermissionWithContext(ctx aws.Context, input *PutPermissionInput, opts ...aws.Option) (*PutPermissionOutput, error) {
 	req, out := c.PutPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -876,7 +875,7 @@ func (c *CloudWatchEvents) PutPermissionWithContext(ctx aws.Context, input *PutP
 
 const opPutRule = "PutRule"
 
-// PutRuleRequest generates a "aws/request.Request" representing the
+// PutRuleRequest generates a "aws.Request" representing the
 // client's request for the PutRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -900,8 +899,8 @@ const opPutRule = "PutRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule
-func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) (req *request.Request, output *PutRuleOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) (req *aws.Request, output *PutRuleOutput) {
+	op := &aws.Operation{
 		Name:       opPutRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -971,7 +970,7 @@ func (c *CloudWatchEvents) PutRule(input *PutRuleInput) (*PutRuleOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) PutRuleWithContext(ctx aws.Context, input *PutRuleInput, opts ...request.Option) (*PutRuleOutput, error) {
+func (c *CloudWatchEvents) PutRuleWithContext(ctx aws.Context, input *PutRuleInput, opts ...aws.Option) (*PutRuleOutput, error) {
 	req, out := c.PutRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -980,7 +979,7 @@ func (c *CloudWatchEvents) PutRuleWithContext(ctx aws.Context, input *PutRuleInp
 
 const opPutTargets = "PutTargets"
 
-// PutTargetsRequest generates a "aws/request.Request" representing the
+// PutTargetsRequest generates a "aws.Request" representing the
 // client's request for the PutTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1004,8 +1003,8 @@ const opPutTargets = "PutTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargets
-func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) (req *request.Request, output *PutTargetsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) (req *aws.Request, output *PutTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opPutTargets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1146,7 +1145,7 @@ func (c *CloudWatchEvents) PutTargets(input *PutTargetsInput) (*PutTargetsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) PutTargetsWithContext(ctx aws.Context, input *PutTargetsInput, opts ...request.Option) (*PutTargetsOutput, error) {
+func (c *CloudWatchEvents) PutTargetsWithContext(ctx aws.Context, input *PutTargetsInput, opts ...aws.Option) (*PutTargetsOutput, error) {
 	req, out := c.PutTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1155,7 +1154,7 @@ func (c *CloudWatchEvents) PutTargetsWithContext(ctx aws.Context, input *PutTarg
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws/request.Request" representing the
+// RemovePermissionRequest generates a "aws.Request" representing the
 // client's request for the RemovePermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1179,8 +1178,8 @@ const opRemovePermission = "RemovePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemovePermission
-func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput) (req *request.Request, output *RemovePermissionOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1236,7 +1235,7 @@ func (c *CloudWatchEvents) RemovePermission(input *RemovePermissionInput) (*Remo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...request.Option) (*RemovePermissionOutput, error) {
+func (c *CloudWatchEvents) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
 	req, out := c.RemovePermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1245,7 +1244,7 @@ func (c *CloudWatchEvents) RemovePermissionWithContext(ctx aws.Context, input *R
 
 const opRemoveTargets = "RemoveTargets"
 
-// RemoveTargetsRequest generates a "aws/request.Request" representing the
+// RemoveTargetsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1269,8 +1268,8 @@ const opRemoveTargets = "RemoveTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargets
-func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) (req *request.Request, output *RemoveTargetsOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) (req *aws.Request, output *RemoveTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTargets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1331,7 +1330,7 @@ func (c *CloudWatchEvents) RemoveTargets(input *RemoveTargetsInput) (*RemoveTarg
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) RemoveTargetsWithContext(ctx aws.Context, input *RemoveTargetsInput, opts ...request.Option) (*RemoveTargetsOutput, error) {
+func (c *CloudWatchEvents) RemoveTargetsWithContext(ctx aws.Context, input *RemoveTargetsInput, opts ...aws.Option) (*RemoveTargetsOutput, error) {
 	req, out := c.RemoveTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1340,7 +1339,7 @@ func (c *CloudWatchEvents) RemoveTargetsWithContext(ctx aws.Context, input *Remo
 
 const opTestEventPattern = "TestEventPattern"
 
-// TestEventPatternRequest generates a "aws/request.Request" representing the
+// TestEventPatternRequest generates a "aws.Request" representing the
 // client's request for the TestEventPattern operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1364,8 +1363,8 @@ const opTestEventPattern = "TestEventPattern"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPattern
-func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput) (req *request.Request, output *TestEventPatternOutput) {
-	op := &request.Operation{
+func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput) (req *aws.Request, output *TestEventPatternOutput) {
+	op := &aws.Operation{
 		Name:       opTestEventPattern,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1418,7 +1417,7 @@ func (c *CloudWatchEvents) TestEventPattern(input *TestEventPatternInput) (*Test
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudWatchEvents) TestEventPatternWithContext(ctx aws.Context, input *TestEventPatternInput, opts ...request.Option) (*TestEventPatternOutput, error) {
+func (c *CloudWatchEvents) TestEventPatternWithContext(ctx aws.Context, input *TestEventPatternInput, opts ...aws.Option) (*TestEventPatternOutput, error) {
 	req, out := c.TestEventPatternRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1447,12 +1446,12 @@ func (s DeleteRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1562,12 +1561,12 @@ func (s DescribeRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRuleInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1683,12 +1682,12 @@ func (s DisableRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableRuleInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1746,15 +1745,15 @@ func (s EcsParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EcsParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EcsParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "EcsParameters"}
 	if s.TaskCount != nil && *s.TaskCount < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TaskCount", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TaskCount", 1))
 	}
 	if s.TaskDefinitionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskDefinitionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskDefinitionArn"))
 	}
 	if s.TaskDefinitionArn != nil && len(*s.TaskDefinitionArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskDefinitionArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskDefinitionArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1797,12 +1796,12 @@ func (s EnableRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableRuleInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1862,12 +1861,12 @@ func (s InputTransformer) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputTransformer) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputTransformer"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputTransformer"}
 	if s.InputTemplate == nil {
-		invalidParams.Add(request.NewErrParamRequired("InputTemplate"))
+		invalidParams.Add(aws.NewErrParamRequired("InputTemplate"))
 	}
 	if s.InputTemplate != nil && len(*s.InputTemplate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InputTemplate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InputTemplate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1916,9 +1915,9 @@ func (s KinesisParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisParameters"}
 	if s.PartitionKeyPath == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionKeyPath"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionKeyPath"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1961,18 +1960,18 @@ func (s ListRuleNamesByTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRuleNamesByTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRuleNamesByTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRuleNamesByTargetInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.TargetArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
 	}
 	if s.TargetArn != nil && len(*s.TargetArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TargetArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TargetArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2059,15 +2058,15 @@ func (s ListRulesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRulesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRulesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRulesInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NamePrefix != nil && len(*s.NamePrefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NamePrefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NamePrefix", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2156,18 +2155,18 @@ func (s ListTargetsByRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTargetsByRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTargetsByRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTargetsByRuleInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.Rule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rule"))
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
 	if s.Rule != nil && len(*s.Rule) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Rule", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Rule", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2252,12 +2251,12 @@ func (s PutEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutEventsInput"}
 	if s.Entries == nil {
-		invalidParams.Add(request.NewErrParamRequired("Entries"))
+		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
 	if s.Entries != nil && len(s.Entries) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Entries", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Entries", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2457,24 +2456,24 @@ func (s PutPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutPermissionInput"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Action != nil && len(*s.Action) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Action", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Action", 1))
 	}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 	if s.Principal != nil && len(*s.Principal) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Principal", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Principal", 1))
 	}
 	if s.StatementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatementId"))
+		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
 	if s.StatementId != nil && len(*s.StatementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatementId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2554,15 +2553,15 @@ func (s PutRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRuleInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2658,18 +2657,18 @@ func (s PutTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutTargetsInput"}
 	if s.Rule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rule"))
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
 	if s.Rule != nil && len(*s.Rule) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Rule", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Rule", 1))
 	}
 	if s.Targets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Targets"))
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
 	if s.Targets != nil && len(s.Targets) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Targets", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Targets", 1))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -2677,7 +2676,7 @@ func (s *PutTargetsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2801,12 +2800,12 @@ func (s RemovePermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemovePermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
 	if s.StatementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatementId"))
+		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
 	if s.StatementId != nil && len(*s.StatementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatementId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2863,18 +2862,18 @@ func (s RemoveTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTargetsInput"}
 	if s.Ids == nil {
-		invalidParams.Add(request.NewErrParamRequired("Ids"))
+		invalidParams.Add(aws.NewErrParamRequired("Ids"))
 	}
 	if s.Ids != nil && len(s.Ids) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Ids", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Ids", 1))
 	}
 	if s.Rule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rule"))
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
 	if s.Rule != nil && len(*s.Rule) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Rule", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Rule", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3079,12 +3078,12 @@ func (s RunCommandParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunCommandParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RunCommandParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "RunCommandParameters"}
 	if s.RunCommandTargets == nil {
-		invalidParams.Add(request.NewErrParamRequired("RunCommandTargets"))
+		invalidParams.Add(aws.NewErrParamRequired("RunCommandTargets"))
 	}
 	if s.RunCommandTargets != nil && len(s.RunCommandTargets) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RunCommandTargets", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RunCommandTargets", 1))
 	}
 	if s.RunCommandTargets != nil {
 		for i, v := range s.RunCommandTargets {
@@ -3092,7 +3091,7 @@ func (s *RunCommandParameters) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RunCommandTargets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RunCommandTargets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3140,18 +3139,18 @@ func (s RunCommandTarget) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RunCommandTarget) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RunCommandTarget"}
+	invalidParams := aws.ErrInvalidParams{Context: "RunCommandTarget"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3238,40 +3237,40 @@ func (s Target) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Target) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Target"}
+	invalidParams := aws.ErrInvalidParams{Context: "Target"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 1))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
 	}
 	if s.EcsParameters != nil {
 		if err := s.EcsParameters.Validate(); err != nil {
-			invalidParams.AddNested("EcsParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EcsParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputTransformer != nil {
 		if err := s.InputTransformer.Validate(); err != nil {
-			invalidParams.AddNested("InputTransformer", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InputTransformer", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisParameters != nil {
 		if err := s.KinesisParameters.Validate(); err != nil {
-			invalidParams.AddNested("KinesisParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RunCommandParameters != nil {
 		if err := s.RunCommandParameters.Validate(); err != nil {
-			invalidParams.AddNested("RunCommandParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RunCommandParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3363,12 +3362,12 @@ func (s TestEventPatternInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TestEventPatternInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TestEventPatternInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TestEventPatternInput"}
 	if s.Event == nil {
-		invalidParams.Add(request.NewErrParamRequired("Event"))
+		invalidParams.Add(aws.NewErrParamRequired("Event"))
 	}
 	if s.EventPattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventPattern"))
+		invalidParams.Add(aws.NewErrParamRequired("EventPattern"))
 	}
 
 	if invalidParams.Len() > 0 {

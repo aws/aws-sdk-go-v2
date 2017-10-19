@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddIpRoutes = "AddIpRoutes"
 
-// AddIpRoutesRequest generates a "aws/request.Request" representing the
+// AddIpRoutesRequest generates a "aws.Request" representing the
 // client's request for the AddIpRoutes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddIpRoutes = "AddIpRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutes
-func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) (req *request.Request, output *AddIpRoutesOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) (req *aws.Request, output *AddIpRoutesOutput) {
+	op := &aws.Operation{
 		Name:       opAddIpRoutes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -111,7 +110,7 @@ func (c *DirectoryService) AddIpRoutes(input *AddIpRoutesInput) (*AddIpRoutesOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) AddIpRoutesWithContext(ctx aws.Context, input *AddIpRoutesInput, opts ...request.Option) (*AddIpRoutesOutput, error) {
+func (c *DirectoryService) AddIpRoutesWithContext(ctx aws.Context, input *AddIpRoutesInput, opts ...aws.Option) (*AddIpRoutesOutput, error) {
 	req, out := c.AddIpRoutesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -120,7 +119,7 @@ func (c *DirectoryService) AddIpRoutesWithContext(ctx aws.Context, input *AddIpR
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -144,8 +143,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResource
-func (c *DirectoryService) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -204,7 +203,7 @@ func (c *DirectoryService) AddTagsToResource(input *AddTagsToResourceInput) (*Ad
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
+func (c *DirectoryService) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -213,7 +212,7 @@ func (c *DirectoryService) AddTagsToResourceWithContext(ctx aws.Context, input *
 
 const opCancelSchemaExtension = "CancelSchemaExtension"
 
-// CancelSchemaExtensionRequest generates a "aws/request.Request" representing the
+// CancelSchemaExtensionRequest generates a "aws.Request" representing the
 // client's request for the CancelSchemaExtension operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -237,8 +236,8 @@ const opCancelSchemaExtension = "CancelSchemaExtension"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtension
-func (c *DirectoryService) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput) (req *request.Request, output *CancelSchemaExtensionOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CancelSchemaExtensionRequest(input *CancelSchemaExtensionInput) (req *aws.Request, output *CancelSchemaExtensionOutput) {
+	op := &aws.Operation{
 		Name:       opCancelSchemaExtension,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -292,7 +291,7 @@ func (c *DirectoryService) CancelSchemaExtension(input *CancelSchemaExtensionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CancelSchemaExtensionWithContext(ctx aws.Context, input *CancelSchemaExtensionInput, opts ...request.Option) (*CancelSchemaExtensionOutput, error) {
+func (c *DirectoryService) CancelSchemaExtensionWithContext(ctx aws.Context, input *CancelSchemaExtensionInput, opts ...aws.Option) (*CancelSchemaExtensionOutput, error) {
 	req, out := c.CancelSchemaExtensionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -301,7 +300,7 @@ func (c *DirectoryService) CancelSchemaExtensionWithContext(ctx aws.Context, inp
 
 const opConnectDirectory = "ConnectDirectory"
 
-// ConnectDirectoryRequest generates a "aws/request.Request" representing the
+// ConnectDirectoryRequest generates a "aws.Request" representing the
 // client's request for the ConnectDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -325,8 +324,8 @@ const opConnectDirectory = "ConnectDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectory
-func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput) (req *request.Request, output *ConnectDirectoryOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput) (req *aws.Request, output *ConnectDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opConnectDirectory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -387,7 +386,7 @@ func (c *DirectoryService) ConnectDirectory(input *ConnectDirectoryInput) (*Conn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) ConnectDirectoryWithContext(ctx aws.Context, input *ConnectDirectoryInput, opts ...request.Option) (*ConnectDirectoryOutput, error) {
+func (c *DirectoryService) ConnectDirectoryWithContext(ctx aws.Context, input *ConnectDirectoryInput, opts ...aws.Option) (*ConnectDirectoryOutput, error) {
 	req, out := c.ConnectDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -396,7 +395,7 @@ func (c *DirectoryService) ConnectDirectoryWithContext(ctx aws.Context, input *C
 
 const opCreateAlias = "CreateAlias"
 
-// CreateAliasRequest generates a "aws/request.Request" representing the
+// CreateAliasRequest generates a "aws.Request" representing the
 // client's request for the CreateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -420,8 +419,8 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAlias
-func (c *DirectoryService) CreateAliasRequest(input *CreateAliasInput) (req *request.Request, output *CreateAliasOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *CreateAliasOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -483,7 +482,7 @@ func (c *DirectoryService) CreateAlias(input *CreateAliasInput) (*CreateAliasOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...request.Option) (*CreateAliasOutput, error) {
+func (c *DirectoryService) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*CreateAliasOutput, error) {
 	req, out := c.CreateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -492,7 +491,7 @@ func (c *DirectoryService) CreateAliasWithContext(ctx aws.Context, input *Create
 
 const opCreateComputer = "CreateComputer"
 
-// CreateComputerRequest generates a "aws/request.Request" representing the
+// CreateComputerRequest generates a "aws.Request" representing the
 // client's request for the CreateComputer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -516,8 +515,8 @@ const opCreateComputer = "CreateComputer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputer
-func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) (req *request.Request, output *CreateComputerOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) (req *aws.Request, output *CreateComputerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateComputer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -584,7 +583,7 @@ func (c *DirectoryService) CreateComputer(input *CreateComputerInput) (*CreateCo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateComputerWithContext(ctx aws.Context, input *CreateComputerInput, opts ...request.Option) (*CreateComputerOutput, error) {
+func (c *DirectoryService) CreateComputerWithContext(ctx aws.Context, input *CreateComputerInput, opts ...aws.Option) (*CreateComputerOutput, error) {
 	req, out := c.CreateComputerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -593,7 +592,7 @@ func (c *DirectoryService) CreateComputerWithContext(ctx aws.Context, input *Cre
 
 const opCreateConditionalForwarder = "CreateConditionalForwarder"
 
-// CreateConditionalForwarderRequest generates a "aws/request.Request" representing the
+// CreateConditionalForwarderRequest generates a "aws.Request" representing the
 // client's request for the CreateConditionalForwarder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -617,8 +616,8 @@ const opCreateConditionalForwarder = "CreateConditionalForwarder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarder
-func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateConditionalForwarderInput) (req *request.Request, output *CreateConditionalForwarderOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateConditionalForwarderInput) (req *aws.Request, output *CreateConditionalForwarderOutput) {
+	op := &aws.Operation{
 		Name:       opCreateConditionalForwarder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -683,7 +682,7 @@ func (c *DirectoryService) CreateConditionalForwarder(input *CreateConditionalFo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateConditionalForwarderWithContext(ctx aws.Context, input *CreateConditionalForwarderInput, opts ...request.Option) (*CreateConditionalForwarderOutput, error) {
+func (c *DirectoryService) CreateConditionalForwarderWithContext(ctx aws.Context, input *CreateConditionalForwarderInput, opts ...aws.Option) (*CreateConditionalForwarderOutput, error) {
 	req, out := c.CreateConditionalForwarderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -692,7 +691,7 @@ func (c *DirectoryService) CreateConditionalForwarderWithContext(ctx aws.Context
 
 const opCreateDirectory = "CreateDirectory"
 
-// CreateDirectoryRequest generates a "aws/request.Request" representing the
+// CreateDirectoryRequest generates a "aws.Request" representing the
 // client's request for the CreateDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -716,8 +715,8 @@ const opCreateDirectory = "CreateDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectory
-func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) (req *request.Request, output *CreateDirectoryOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) (req *aws.Request, output *CreateDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDirectory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -778,7 +777,7 @@ func (c *DirectoryService) CreateDirectory(input *CreateDirectoryInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateDirectoryWithContext(ctx aws.Context, input *CreateDirectoryInput, opts ...request.Option) (*CreateDirectoryOutput, error) {
+func (c *DirectoryService) CreateDirectoryWithContext(ctx aws.Context, input *CreateDirectoryInput, opts ...aws.Option) (*CreateDirectoryOutput, error) {
 	req, out := c.CreateDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -787,7 +786,7 @@ func (c *DirectoryService) CreateDirectoryWithContext(ctx aws.Context, input *Cr
 
 const opCreateMicrosoftAD = "CreateMicrosoftAD"
 
-// CreateMicrosoftADRequest generates a "aws/request.Request" representing the
+// CreateMicrosoftADRequest generates a "aws.Request" representing the
 // client's request for the CreateMicrosoftAD operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -811,8 +810,8 @@ const opCreateMicrosoftAD = "CreateMicrosoftAD"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftAD
-func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) (req *request.Request, output *CreateMicrosoftADOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInput) (req *aws.Request, output *CreateMicrosoftADOutput) {
+	op := &aws.Operation{
 		Name:       opCreateMicrosoftAD,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -876,7 +875,7 @@ func (c *DirectoryService) CreateMicrosoftAD(input *CreateMicrosoftADInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateMicrosoftADWithContext(ctx aws.Context, input *CreateMicrosoftADInput, opts ...request.Option) (*CreateMicrosoftADOutput, error) {
+func (c *DirectoryService) CreateMicrosoftADWithContext(ctx aws.Context, input *CreateMicrosoftADInput, opts ...aws.Option) (*CreateMicrosoftADOutput, error) {
 	req, out := c.CreateMicrosoftADRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -885,7 +884,7 @@ func (c *DirectoryService) CreateMicrosoftADWithContext(ctx aws.Context, input *
 
 const opCreateSnapshot = "CreateSnapshot"
 
-// CreateSnapshotRequest generates a "aws/request.Request" representing the
+// CreateSnapshotRequest generates a "aws.Request" representing the
 // client's request for the CreateSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -909,8 +908,8 @@ const opCreateSnapshot = "CreateSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshot
-func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) (req *request.Request, output *CreateSnapshotOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) (req *aws.Request, output *CreateSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -971,7 +970,7 @@ func (c *DirectoryService) CreateSnapshot(input *CreateSnapshotInput) (*CreateSn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...request.Option) (*CreateSnapshotOutput, error) {
+func (c *DirectoryService) CreateSnapshotWithContext(ctx aws.Context, input *CreateSnapshotInput, opts ...aws.Option) (*CreateSnapshotOutput, error) {
 	req, out := c.CreateSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -980,7 +979,7 @@ func (c *DirectoryService) CreateSnapshotWithContext(ctx aws.Context, input *Cre
 
 const opCreateTrust = "CreateTrust"
 
-// CreateTrustRequest generates a "aws/request.Request" representing the
+// CreateTrustRequest generates a "aws.Request" representing the
 // client's request for the CreateTrust operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1004,8 +1003,8 @@ const opCreateTrust = "CreateTrust"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrust
-func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) (req *request.Request, output *CreateTrustOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) (req *aws.Request, output *CreateTrustOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTrust,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1072,7 +1071,7 @@ func (c *DirectoryService) CreateTrust(input *CreateTrustInput) (*CreateTrustOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) CreateTrustWithContext(ctx aws.Context, input *CreateTrustInput, opts ...request.Option) (*CreateTrustOutput, error) {
+func (c *DirectoryService) CreateTrustWithContext(ctx aws.Context, input *CreateTrustInput, opts ...aws.Option) (*CreateTrustOutput, error) {
 	req, out := c.CreateTrustRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1081,7 +1080,7 @@ func (c *DirectoryService) CreateTrustWithContext(ctx aws.Context, input *Create
 
 const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
 
-// DeleteConditionalForwarderRequest generates a "aws/request.Request" representing the
+// DeleteConditionalForwarderRequest generates a "aws.Request" representing the
 // client's request for the DeleteConditionalForwarder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1105,8 +1104,8 @@ const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarder
-func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteConditionalForwarderInput) (req *request.Request, output *DeleteConditionalForwarderOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteConditionalForwarderInput) (req *aws.Request, output *DeleteConditionalForwarderOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConditionalForwarder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1166,7 +1165,7 @@ func (c *DirectoryService) DeleteConditionalForwarder(input *DeleteConditionalFo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DeleteConditionalForwarderWithContext(ctx aws.Context, input *DeleteConditionalForwarderInput, opts ...request.Option) (*DeleteConditionalForwarderOutput, error) {
+func (c *DirectoryService) DeleteConditionalForwarderWithContext(ctx aws.Context, input *DeleteConditionalForwarderInput, opts ...aws.Option) (*DeleteConditionalForwarderOutput, error) {
 	req, out := c.DeleteConditionalForwarderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1175,7 +1174,7 @@ func (c *DirectoryService) DeleteConditionalForwarderWithContext(ctx aws.Context
 
 const opDeleteDirectory = "DeleteDirectory"
 
-// DeleteDirectoryRequest generates a "aws/request.Request" representing the
+// DeleteDirectoryRequest generates a "aws.Request" representing the
 // client's request for the DeleteDirectory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1199,8 +1198,8 @@ const opDeleteDirectory = "DeleteDirectory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectory
-func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *request.Request, output *DeleteDirectoryOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) (req *aws.Request, output *DeleteDirectoryOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDirectory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1256,7 +1255,7 @@ func (c *DirectoryService) DeleteDirectory(input *DeleteDirectoryInput) (*Delete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DeleteDirectoryWithContext(ctx aws.Context, input *DeleteDirectoryInput, opts ...request.Option) (*DeleteDirectoryOutput, error) {
+func (c *DirectoryService) DeleteDirectoryWithContext(ctx aws.Context, input *DeleteDirectoryInput, opts ...aws.Option) (*DeleteDirectoryOutput, error) {
 	req, out := c.DeleteDirectoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1265,7 +1264,7 @@ func (c *DirectoryService) DeleteDirectoryWithContext(ctx aws.Context, input *De
 
 const opDeleteSnapshot = "DeleteSnapshot"
 
-// DeleteSnapshotRequest generates a "aws/request.Request" representing the
+// DeleteSnapshotRequest generates a "aws.Request" representing the
 // client's request for the DeleteSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1289,8 +1288,8 @@ const opDeleteSnapshot = "DeleteSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteSnapshot
-func (c *DirectoryService) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *request.Request, output *DeleteSnapshotOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DeleteSnapshotRequest(input *DeleteSnapshotInput) (req *aws.Request, output *DeleteSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1344,7 +1343,7 @@ func (c *DirectoryService) DeleteSnapshot(input *DeleteSnapshotInput) (*DeleteSn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DeleteSnapshotWithContext(ctx aws.Context, input *DeleteSnapshotInput, opts ...request.Option) (*DeleteSnapshotOutput, error) {
+func (c *DirectoryService) DeleteSnapshotWithContext(ctx aws.Context, input *DeleteSnapshotInput, opts ...aws.Option) (*DeleteSnapshotOutput, error) {
 	req, out := c.DeleteSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1353,7 +1352,7 @@ func (c *DirectoryService) DeleteSnapshotWithContext(ctx aws.Context, input *Del
 
 const opDeleteTrust = "DeleteTrust"
 
-// DeleteTrustRequest generates a "aws/request.Request" representing the
+// DeleteTrustRequest generates a "aws.Request" representing the
 // client's request for the DeleteTrust operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1377,8 +1376,8 @@ const opDeleteTrust = "DeleteTrust"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrust
-func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) (req *request.Request, output *DeleteTrustOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) (req *aws.Request, output *DeleteTrustOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTrust,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1436,7 +1435,7 @@ func (c *DirectoryService) DeleteTrust(input *DeleteTrustInput) (*DeleteTrustOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DeleteTrustWithContext(ctx aws.Context, input *DeleteTrustInput, opts ...request.Option) (*DeleteTrustOutput, error) {
+func (c *DirectoryService) DeleteTrustWithContext(ctx aws.Context, input *DeleteTrustInput, opts ...aws.Option) (*DeleteTrustOutput, error) {
 	req, out := c.DeleteTrustRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1445,7 +1444,7 @@ func (c *DirectoryService) DeleteTrustWithContext(ctx aws.Context, input *Delete
 
 const opDeregisterEventTopic = "DeregisterEventTopic"
 
-// DeregisterEventTopicRequest generates a "aws/request.Request" representing the
+// DeregisterEventTopicRequest generates a "aws.Request" representing the
 // client's request for the DeregisterEventTopic operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1469,8 +1468,8 @@ const opDeregisterEventTopic = "DeregisterEventTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopic
-func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) (req *request.Request, output *DeregisterEventTopicOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTopicInput) (req *aws.Request, output *DeregisterEventTopicOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterEventTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1524,7 +1523,7 @@ func (c *DirectoryService) DeregisterEventTopic(input *DeregisterEventTopicInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DeregisterEventTopicWithContext(ctx aws.Context, input *DeregisterEventTopicInput, opts ...request.Option) (*DeregisterEventTopicOutput, error) {
+func (c *DirectoryService) DeregisterEventTopicWithContext(ctx aws.Context, input *DeregisterEventTopicInput, opts ...aws.Option) (*DeregisterEventTopicOutput, error) {
 	req, out := c.DeregisterEventTopicRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1533,7 +1532,7 @@ func (c *DirectoryService) DeregisterEventTopicWithContext(ctx aws.Context, inpu
 
 const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 
-// DescribeConditionalForwardersRequest generates a "aws/request.Request" representing the
+// DescribeConditionalForwardersRequest generates a "aws.Request" representing the
 // client's request for the DescribeConditionalForwarders operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1557,8 +1556,8 @@ const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwarders
-func (c *DirectoryService) DescribeConditionalForwardersRequest(input *DescribeConditionalForwardersInput) (req *request.Request, output *DescribeConditionalForwardersOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DescribeConditionalForwardersRequest(input *DescribeConditionalForwardersInput) (req *aws.Request, output *DescribeConditionalForwardersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConditionalForwarders,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1621,7 +1620,7 @@ func (c *DirectoryService) DescribeConditionalForwarders(input *DescribeConditio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeConditionalForwardersWithContext(ctx aws.Context, input *DescribeConditionalForwardersInput, opts ...request.Option) (*DescribeConditionalForwardersOutput, error) {
+func (c *DirectoryService) DescribeConditionalForwardersWithContext(ctx aws.Context, input *DescribeConditionalForwardersInput, opts ...aws.Option) (*DescribeConditionalForwardersOutput, error) {
 	req, out := c.DescribeConditionalForwardersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1630,7 +1629,7 @@ func (c *DirectoryService) DescribeConditionalForwardersWithContext(ctx aws.Cont
 
 const opDescribeDirectories = "DescribeDirectories"
 
-// DescribeDirectoriesRequest generates a "aws/request.Request" representing the
+// DescribeDirectoriesRequest generates a "aws.Request" representing the
 // client's request for the DescribeDirectories operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1654,8 +1653,8 @@ const opDescribeDirectories = "DescribeDirectories"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories
-func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectoriesInput) (req *request.Request, output *DescribeDirectoriesOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectoriesInput) (req *aws.Request, output *DescribeDirectoriesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDirectories,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1723,7 +1722,7 @@ func (c *DirectoryService) DescribeDirectories(input *DescribeDirectoriesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeDirectoriesWithContext(ctx aws.Context, input *DescribeDirectoriesInput, opts ...request.Option) (*DescribeDirectoriesOutput, error) {
+func (c *DirectoryService) DescribeDirectoriesWithContext(ctx aws.Context, input *DescribeDirectoriesInput, opts ...aws.Option) (*DescribeDirectoriesOutput, error) {
 	req, out := c.DescribeDirectoriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1732,7 +1731,7 @@ func (c *DirectoryService) DescribeDirectoriesWithContext(ctx aws.Context, input
 
 const opDescribeDomainControllers = "DescribeDomainControllers"
 
-// DescribeDomainControllersRequest generates a "aws/request.Request" representing the
+// DescribeDomainControllersRequest generates a "aws.Request" representing the
 // client's request for the DescribeDomainControllers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1756,12 +1755,12 @@ const opDescribeDomainControllers = "DescribeDomainControllers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDomainControllers
-func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomainControllersInput) (req *request.Request, output *DescribeDomainControllersOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomainControllersInput) (req *aws.Request, output *DescribeDomainControllersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDomainControllers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "Limit",
@@ -1823,7 +1822,7 @@ func (c *DirectoryService) DescribeDomainControllers(input *DescribeDomainContro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeDomainControllersWithContext(ctx aws.Context, input *DescribeDomainControllersInput, opts ...request.Option) (*DescribeDomainControllersOutput, error) {
+func (c *DirectoryService) DescribeDomainControllersWithContext(ctx aws.Context, input *DescribeDomainControllersInput, opts ...aws.Option) (*DescribeDomainControllersOutput, error) {
 	req, out := c.DescribeDomainControllersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1858,9 +1857,9 @@ func (c *DirectoryService) DescribeDomainControllersPages(input *DescribeDomainC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeDomainControllersPagesWithContext(ctx aws.Context, input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DirectoryService) DescribeDomainControllersPagesWithContext(ctx aws.Context, input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDomainControllersInput
 			if input != nil {
 				tmp := *input
@@ -1882,7 +1881,7 @@ func (c *DirectoryService) DescribeDomainControllersPagesWithContext(ctx aws.Con
 
 const opDescribeEventTopics = "DescribeEventTopics"
 
-// DescribeEventTopicsRequest generates a "aws/request.Request" representing the
+// DescribeEventTopicsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEventTopics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1906,8 +1905,8 @@ const opDescribeEventTopics = "DescribeEventTopics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopics
-func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopicsInput) (req *request.Request, output *DescribeEventTopicsOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopicsInput) (req *aws.Request, output *DescribeEventTopicsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEventTopics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1965,7 +1964,7 @@ func (c *DirectoryService) DescribeEventTopics(input *DescribeEventTopicsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeEventTopicsWithContext(ctx aws.Context, input *DescribeEventTopicsInput, opts ...request.Option) (*DescribeEventTopicsOutput, error) {
+func (c *DirectoryService) DescribeEventTopicsWithContext(ctx aws.Context, input *DescribeEventTopicsInput, opts ...aws.Option) (*DescribeEventTopicsOutput, error) {
 	req, out := c.DescribeEventTopicsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1974,7 +1973,7 @@ func (c *DirectoryService) DescribeEventTopicsWithContext(ctx aws.Context, input
 
 const opDescribeSnapshots = "DescribeSnapshots"
 
-// DescribeSnapshotsRequest generates a "aws/request.Request" representing the
+// DescribeSnapshotsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSnapshots operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1998,8 +1997,8 @@ const opDescribeSnapshots = "DescribeSnapshots"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshots
-func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *request.Request, output *DescribeSnapshotsOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) (req *aws.Request, output *DescribeSnapshotsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2063,7 +2062,7 @@ func (c *DirectoryService) DescribeSnapshots(input *DescribeSnapshotsInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeSnapshotsWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...request.Option) (*DescribeSnapshotsOutput, error) {
+func (c *DirectoryService) DescribeSnapshotsWithContext(ctx aws.Context, input *DescribeSnapshotsInput, opts ...aws.Option) (*DescribeSnapshotsOutput, error) {
 	req, out := c.DescribeSnapshotsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2072,7 +2071,7 @@ func (c *DirectoryService) DescribeSnapshotsWithContext(ctx aws.Context, input *
 
 const opDescribeTrusts = "DescribeTrusts"
 
-// DescribeTrustsRequest generates a "aws/request.Request" representing the
+// DescribeTrustsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTrusts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2096,8 +2095,8 @@ const opDescribeTrusts = "DescribeTrusts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrusts
-func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) (req *request.Request, output *DescribeTrustsOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) (req *aws.Request, output *DescribeTrustsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTrusts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2160,7 +2159,7 @@ func (c *DirectoryService) DescribeTrusts(input *DescribeTrustsInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DescribeTrustsWithContext(ctx aws.Context, input *DescribeTrustsInput, opts ...request.Option) (*DescribeTrustsOutput, error) {
+func (c *DirectoryService) DescribeTrustsWithContext(ctx aws.Context, input *DescribeTrustsInput, opts ...aws.Option) (*DescribeTrustsOutput, error) {
 	req, out := c.DescribeTrustsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2169,7 +2168,7 @@ func (c *DirectoryService) DescribeTrustsWithContext(ctx aws.Context, input *Des
 
 const opDisableRadius = "DisableRadius"
 
-// DisableRadiusRequest generates a "aws/request.Request" representing the
+// DisableRadiusRequest generates a "aws.Request" representing the
 // client's request for the DisableRadius operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2193,8 +2192,8 @@ const opDisableRadius = "DisableRadius"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadius
-func (c *DirectoryService) DisableRadiusRequest(input *DisableRadiusInput) (req *request.Request, output *DisableRadiusOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DisableRadiusRequest(input *DisableRadiusInput) (req *aws.Request, output *DisableRadiusOutput) {
+	op := &aws.Operation{
 		Name:       opDisableRadius,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2246,7 +2245,7 @@ func (c *DirectoryService) DisableRadius(input *DisableRadiusInput) (*DisableRad
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DisableRadiusWithContext(ctx aws.Context, input *DisableRadiusInput, opts ...request.Option) (*DisableRadiusOutput, error) {
+func (c *DirectoryService) DisableRadiusWithContext(ctx aws.Context, input *DisableRadiusInput, opts ...aws.Option) (*DisableRadiusOutput, error) {
 	req, out := c.DisableRadiusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2255,7 +2254,7 @@ func (c *DirectoryService) DisableRadiusWithContext(ctx aws.Context, input *Disa
 
 const opDisableSso = "DisableSso"
 
-// DisableSsoRequest generates a "aws/request.Request" representing the
+// DisableSsoRequest generates a "aws.Request" representing the
 // client's request for the DisableSso operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2279,8 +2278,8 @@ const opDisableSso = "DisableSso"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSso
-func (c *DirectoryService) DisableSsoRequest(input *DisableSsoInput) (req *request.Request, output *DisableSsoOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) DisableSsoRequest(input *DisableSsoInput) (req *aws.Request, output *DisableSsoOutput) {
+	op := &aws.Operation{
 		Name:       opDisableSso,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2337,7 +2336,7 @@ func (c *DirectoryService) DisableSso(input *DisableSsoInput) (*DisableSsoOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) DisableSsoWithContext(ctx aws.Context, input *DisableSsoInput, opts ...request.Option) (*DisableSsoOutput, error) {
+func (c *DirectoryService) DisableSsoWithContext(ctx aws.Context, input *DisableSsoInput, opts ...aws.Option) (*DisableSsoOutput, error) {
 	req, out := c.DisableSsoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2346,7 +2345,7 @@ func (c *DirectoryService) DisableSsoWithContext(ctx aws.Context, input *Disable
 
 const opEnableRadius = "EnableRadius"
 
-// EnableRadiusRequest generates a "aws/request.Request" representing the
+// EnableRadiusRequest generates a "aws.Request" representing the
 // client's request for the EnableRadius operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2370,8 +2369,8 @@ const opEnableRadius = "EnableRadius"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadius
-func (c *DirectoryService) EnableRadiusRequest(input *EnableRadiusInput) (req *request.Request, output *EnableRadiusOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) EnableRadiusRequest(input *EnableRadiusInput) (req *aws.Request, output *EnableRadiusOutput) {
+	op := &aws.Operation{
 		Name:       opEnableRadius,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2429,7 +2428,7 @@ func (c *DirectoryService) EnableRadius(input *EnableRadiusInput) (*EnableRadius
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) EnableRadiusWithContext(ctx aws.Context, input *EnableRadiusInput, opts ...request.Option) (*EnableRadiusOutput, error) {
+func (c *DirectoryService) EnableRadiusWithContext(ctx aws.Context, input *EnableRadiusInput, opts ...aws.Option) (*EnableRadiusOutput, error) {
 	req, out := c.EnableRadiusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2438,7 +2437,7 @@ func (c *DirectoryService) EnableRadiusWithContext(ctx aws.Context, input *Enabl
 
 const opEnableSso = "EnableSso"
 
-// EnableSsoRequest generates a "aws/request.Request" representing the
+// EnableSsoRequest generates a "aws.Request" representing the
 // client's request for the EnableSso operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2462,8 +2461,8 @@ const opEnableSso = "EnableSso"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSso
-func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) (req *request.Request, output *EnableSsoOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) (req *aws.Request, output *EnableSsoOutput) {
+	op := &aws.Operation{
 		Name:       opEnableSso,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2520,7 +2519,7 @@ func (c *DirectoryService) EnableSso(input *EnableSsoInput) (*EnableSsoOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) EnableSsoWithContext(ctx aws.Context, input *EnableSsoInput, opts ...request.Option) (*EnableSsoOutput, error) {
+func (c *DirectoryService) EnableSsoWithContext(ctx aws.Context, input *EnableSsoInput, opts ...aws.Option) (*EnableSsoOutput, error) {
 	req, out := c.EnableSsoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2529,7 +2528,7 @@ func (c *DirectoryService) EnableSsoWithContext(ctx aws.Context, input *EnableSs
 
 const opGetDirectoryLimits = "GetDirectoryLimits"
 
-// GetDirectoryLimitsRequest generates a "aws/request.Request" representing the
+// GetDirectoryLimitsRequest generates a "aws.Request" representing the
 // client's request for the GetDirectoryLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2553,8 +2552,8 @@ const opGetDirectoryLimits = "GetDirectoryLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimits
-func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) (req *request.Request, output *GetDirectoryLimitsOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsInput) (req *aws.Request, output *GetDirectoryLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDirectoryLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2605,7 +2604,7 @@ func (c *DirectoryService) GetDirectoryLimits(input *GetDirectoryLimitsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) GetDirectoryLimitsWithContext(ctx aws.Context, input *GetDirectoryLimitsInput, opts ...request.Option) (*GetDirectoryLimitsOutput, error) {
+func (c *DirectoryService) GetDirectoryLimitsWithContext(ctx aws.Context, input *GetDirectoryLimitsInput, opts ...aws.Option) (*GetDirectoryLimitsOutput, error) {
 	req, out := c.GetDirectoryLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2614,7 +2613,7 @@ func (c *DirectoryService) GetDirectoryLimitsWithContext(ctx aws.Context, input 
 
 const opGetSnapshotLimits = "GetSnapshotLimits"
 
-// GetSnapshotLimitsRequest generates a "aws/request.Request" representing the
+// GetSnapshotLimitsRequest generates a "aws.Request" representing the
 // client's request for the GetSnapshotLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2638,8 +2637,8 @@ const opGetSnapshotLimits = "GetSnapshotLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimits
-func (c *DirectoryService) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) (req *request.Request, output *GetSnapshotLimitsOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInput) (req *aws.Request, output *GetSnapshotLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSnapshotLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2690,7 +2689,7 @@ func (c *DirectoryService) GetSnapshotLimits(input *GetSnapshotLimitsInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) GetSnapshotLimitsWithContext(ctx aws.Context, input *GetSnapshotLimitsInput, opts ...request.Option) (*GetSnapshotLimitsOutput, error) {
+func (c *DirectoryService) GetSnapshotLimitsWithContext(ctx aws.Context, input *GetSnapshotLimitsInput, opts ...aws.Option) (*GetSnapshotLimitsOutput, error) {
 	req, out := c.GetSnapshotLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2699,7 +2698,7 @@ func (c *DirectoryService) GetSnapshotLimitsWithContext(ctx aws.Context, input *
 
 const opListIpRoutes = "ListIpRoutes"
 
-// ListIpRoutesRequest generates a "aws/request.Request" representing the
+// ListIpRoutesRequest generates a "aws.Request" representing the
 // client's request for the ListIpRoutes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2723,8 +2722,8 @@ const opListIpRoutes = "ListIpRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutes
-func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) (req *request.Request, output *ListIpRoutesOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) (req *aws.Request, output *ListIpRoutesOutput) {
+	op := &aws.Operation{
 		Name:       opListIpRoutes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2781,7 +2780,7 @@ func (c *DirectoryService) ListIpRoutes(input *ListIpRoutesInput) (*ListIpRoutes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) ListIpRoutesWithContext(ctx aws.Context, input *ListIpRoutesInput, opts ...request.Option) (*ListIpRoutesOutput, error) {
+func (c *DirectoryService) ListIpRoutesWithContext(ctx aws.Context, input *ListIpRoutesInput, opts ...aws.Option) (*ListIpRoutesOutput, error) {
 	req, out := c.ListIpRoutesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2790,7 +2789,7 @@ func (c *DirectoryService) ListIpRoutesWithContext(ctx aws.Context, input *ListI
 
 const opListSchemaExtensions = "ListSchemaExtensions"
 
-// ListSchemaExtensionsRequest generates a "aws/request.Request" representing the
+// ListSchemaExtensionsRequest generates a "aws.Request" representing the
 // client's request for the ListSchemaExtensions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2814,8 +2813,8 @@ const opListSchemaExtensions = "ListSchemaExtensions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensions
-func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) (req *request.Request, output *ListSchemaExtensionsOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensionsInput) (req *aws.Request, output *ListSchemaExtensionsOutput) {
+	op := &aws.Operation{
 		Name:       opListSchemaExtensions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2869,7 +2868,7 @@ func (c *DirectoryService) ListSchemaExtensions(input *ListSchemaExtensionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) ListSchemaExtensionsWithContext(ctx aws.Context, input *ListSchemaExtensionsInput, opts ...request.Option) (*ListSchemaExtensionsOutput, error) {
+func (c *DirectoryService) ListSchemaExtensionsWithContext(ctx aws.Context, input *ListSchemaExtensionsInput, opts ...aws.Option) (*ListSchemaExtensionsOutput, error) {
 	req, out := c.ListSchemaExtensionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2878,7 +2877,7 @@ func (c *DirectoryService) ListSchemaExtensionsWithContext(ctx aws.Context, inpu
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2902,8 +2901,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListTagsForResource
-func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2960,7 +2959,7 @@ func (c *DirectoryService) ListTagsForResource(input *ListTagsForResourceInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *DirectoryService) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2969,7 +2968,7 @@ func (c *DirectoryService) ListTagsForResourceWithContext(ctx aws.Context, input
 
 const opRegisterEventTopic = "RegisterEventTopic"
 
-// RegisterEventTopicRequest generates a "aws/request.Request" representing the
+// RegisterEventTopicRequest generates a "aws.Request" representing the
 // client's request for the RegisterEventTopic operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2993,8 +2992,8 @@ const opRegisterEventTopic = "RegisterEventTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopic
-func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicInput) (req *request.Request, output *RegisterEventTopicOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicInput) (req *aws.Request, output *RegisterEventTopicOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterEventTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3053,7 +3052,7 @@ func (c *DirectoryService) RegisterEventTopic(input *RegisterEventTopicInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) RegisterEventTopicWithContext(ctx aws.Context, input *RegisterEventTopicInput, opts ...request.Option) (*RegisterEventTopicOutput, error) {
+func (c *DirectoryService) RegisterEventTopicWithContext(ctx aws.Context, input *RegisterEventTopicInput, opts ...aws.Option) (*RegisterEventTopicOutput, error) {
 	req, out := c.RegisterEventTopicRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3062,7 +3061,7 @@ func (c *DirectoryService) RegisterEventTopicWithContext(ctx aws.Context, input 
 
 const opRemoveIpRoutes = "RemoveIpRoutes"
 
-// RemoveIpRoutesRequest generates a "aws/request.Request" representing the
+// RemoveIpRoutesRequest generates a "aws.Request" representing the
 // client's request for the RemoveIpRoutes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3086,8 +3085,8 @@ const opRemoveIpRoutes = "RemoveIpRoutes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutes
-func (c *DirectoryService) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) (req *request.Request, output *RemoveIpRoutesOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) (req *aws.Request, output *RemoveIpRoutesOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveIpRoutes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3144,7 +3143,7 @@ func (c *DirectoryService) RemoveIpRoutes(input *RemoveIpRoutesInput) (*RemoveIp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) RemoveIpRoutesWithContext(ctx aws.Context, input *RemoveIpRoutesInput, opts ...request.Option) (*RemoveIpRoutesOutput, error) {
+func (c *DirectoryService) RemoveIpRoutesWithContext(ctx aws.Context, input *RemoveIpRoutesInput, opts ...aws.Option) (*RemoveIpRoutesOutput, error) {
 	req, out := c.RemoveIpRoutesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3153,7 +3152,7 @@ func (c *DirectoryService) RemoveIpRoutesWithContext(ctx aws.Context, input *Rem
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3177,8 +3176,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResource
-func (c *DirectoryService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3232,7 +3231,7 @@ func (c *DirectoryService) RemoveTagsFromResource(input *RemoveTagsFromResourceI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
+func (c *DirectoryService) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3241,7 +3240,7 @@ func (c *DirectoryService) RemoveTagsFromResourceWithContext(ctx aws.Context, in
 
 const opRestoreFromSnapshot = "RestoreFromSnapshot"
 
-// RestoreFromSnapshotRequest generates a "aws/request.Request" representing the
+// RestoreFromSnapshotRequest generates a "aws.Request" representing the
 // client's request for the RestoreFromSnapshot operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3265,8 +3264,8 @@ const opRestoreFromSnapshot = "RestoreFromSnapshot"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshot
-func (c *DirectoryService) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) (req *request.Request, output *RestoreFromSnapshotOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) RestoreFromSnapshotRequest(input *RestoreFromSnapshotInput) (req *aws.Request, output *RestoreFromSnapshotOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreFromSnapshot,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3328,7 +3327,7 @@ func (c *DirectoryService) RestoreFromSnapshot(input *RestoreFromSnapshotInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) RestoreFromSnapshotWithContext(ctx aws.Context, input *RestoreFromSnapshotInput, opts ...request.Option) (*RestoreFromSnapshotOutput, error) {
+func (c *DirectoryService) RestoreFromSnapshotWithContext(ctx aws.Context, input *RestoreFromSnapshotInput, opts ...aws.Option) (*RestoreFromSnapshotOutput, error) {
 	req, out := c.RestoreFromSnapshotRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3337,7 +3336,7 @@ func (c *DirectoryService) RestoreFromSnapshotWithContext(ctx aws.Context, input
 
 const opStartSchemaExtension = "StartSchemaExtension"
 
-// StartSchemaExtensionRequest generates a "aws/request.Request" representing the
+// StartSchemaExtensionRequest generates a "aws.Request" representing the
 // client's request for the StartSchemaExtension operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3361,8 +3360,8 @@ const opStartSchemaExtension = "StartSchemaExtension"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtension
-func (c *DirectoryService) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) (req *request.Request, output *StartSchemaExtensionOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) StartSchemaExtensionRequest(input *StartSchemaExtensionInput) (req *aws.Request, output *StartSchemaExtensionOutput) {
+	op := &aws.Operation{
 		Name:       opStartSchemaExtension,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3424,7 +3423,7 @@ func (c *DirectoryService) StartSchemaExtension(input *StartSchemaExtensionInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) StartSchemaExtensionWithContext(ctx aws.Context, input *StartSchemaExtensionInput, opts ...request.Option) (*StartSchemaExtensionOutput, error) {
+func (c *DirectoryService) StartSchemaExtensionWithContext(ctx aws.Context, input *StartSchemaExtensionInput, opts ...aws.Option) (*StartSchemaExtensionOutput, error) {
 	req, out := c.StartSchemaExtensionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3433,7 +3432,7 @@ func (c *DirectoryService) StartSchemaExtensionWithContext(ctx aws.Context, inpu
 
 const opUpdateConditionalForwarder = "UpdateConditionalForwarder"
 
-// UpdateConditionalForwarderRequest generates a "aws/request.Request" representing the
+// UpdateConditionalForwarderRequest generates a "aws.Request" representing the
 // client's request for the UpdateConditionalForwarder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3457,8 +3456,8 @@ const opUpdateConditionalForwarder = "UpdateConditionalForwarder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarder
-func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateConditionalForwarderInput) (req *request.Request, output *UpdateConditionalForwarderOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateConditionalForwarderInput) (req *aws.Request, output *UpdateConditionalForwarderOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateConditionalForwarder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3518,7 +3517,7 @@ func (c *DirectoryService) UpdateConditionalForwarder(input *UpdateConditionalFo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) UpdateConditionalForwarderWithContext(ctx aws.Context, input *UpdateConditionalForwarderInput, opts ...request.Option) (*UpdateConditionalForwarderOutput, error) {
+func (c *DirectoryService) UpdateConditionalForwarderWithContext(ctx aws.Context, input *UpdateConditionalForwarderInput, opts ...aws.Option) (*UpdateConditionalForwarderOutput, error) {
 	req, out := c.UpdateConditionalForwarderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3527,7 +3526,7 @@ func (c *DirectoryService) UpdateConditionalForwarderWithContext(ctx aws.Context
 
 const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 
-// UpdateNumberOfDomainControllersRequest generates a "aws/request.Request" representing the
+// UpdateNumberOfDomainControllersRequest generates a "aws.Request" representing the
 // client's request for the UpdateNumberOfDomainControllers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3551,8 +3550,8 @@ const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateNumberOfDomainControllers
-func (c *DirectoryService) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDomainControllersInput) (req *request.Request, output *UpdateNumberOfDomainControllersOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) UpdateNumberOfDomainControllersRequest(input *UpdateNumberOfDomainControllersInput) (req *aws.Request, output *UpdateNumberOfDomainControllersOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateNumberOfDomainControllers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3621,7 +3620,7 @@ func (c *DirectoryService) UpdateNumberOfDomainControllers(input *UpdateNumberOf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) UpdateNumberOfDomainControllersWithContext(ctx aws.Context, input *UpdateNumberOfDomainControllersInput, opts ...request.Option) (*UpdateNumberOfDomainControllersOutput, error) {
+func (c *DirectoryService) UpdateNumberOfDomainControllersWithContext(ctx aws.Context, input *UpdateNumberOfDomainControllersInput, opts ...aws.Option) (*UpdateNumberOfDomainControllersOutput, error) {
 	req, out := c.UpdateNumberOfDomainControllersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3630,7 +3629,7 @@ func (c *DirectoryService) UpdateNumberOfDomainControllersWithContext(ctx aws.Co
 
 const opUpdateRadius = "UpdateRadius"
 
-// UpdateRadiusRequest generates a "aws/request.Request" representing the
+// UpdateRadiusRequest generates a "aws.Request" representing the
 // client's request for the UpdateRadius operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3654,8 +3653,8 @@ const opUpdateRadius = "UpdateRadius"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadius
-func (c *DirectoryService) UpdateRadiusRequest(input *UpdateRadiusInput) (req *request.Request, output *UpdateRadiusOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) UpdateRadiusRequest(input *UpdateRadiusInput) (req *aws.Request, output *UpdateRadiusOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRadius,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3710,7 +3709,7 @@ func (c *DirectoryService) UpdateRadius(input *UpdateRadiusInput) (*UpdateRadius
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) UpdateRadiusWithContext(ctx aws.Context, input *UpdateRadiusInput, opts ...request.Option) (*UpdateRadiusOutput, error) {
+func (c *DirectoryService) UpdateRadiusWithContext(ctx aws.Context, input *UpdateRadiusInput, opts ...aws.Option) (*UpdateRadiusOutput, error) {
 	req, out := c.UpdateRadiusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3719,7 +3718,7 @@ func (c *DirectoryService) UpdateRadiusWithContext(ctx aws.Context, input *Updat
 
 const opVerifyTrust = "VerifyTrust"
 
-// VerifyTrustRequest generates a "aws/request.Request" representing the
+// VerifyTrustRequest generates a "aws.Request" representing the
 // client's request for the VerifyTrust operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3743,8 +3742,8 @@ const opVerifyTrust = "VerifyTrust"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrust
-func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) (req *request.Request, output *VerifyTrustOutput) {
-	op := &request.Operation{
+func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) (req *aws.Request, output *VerifyTrustOutput) {
+	op := &aws.Operation{
 		Name:       opVerifyTrust,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3805,7 +3804,7 @@ func (c *DirectoryService) VerifyTrust(input *VerifyTrustInput) (*VerifyTrustOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DirectoryService) VerifyTrustWithContext(ctx aws.Context, input *VerifyTrustInput, opts ...request.Option) (*VerifyTrustOutput, error) {
+func (c *DirectoryService) VerifyTrustWithContext(ctx aws.Context, input *VerifyTrustInput, opts ...aws.Option) (*VerifyTrustOutput, error) {
 	req, out := c.VerifyTrustRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3885,12 +3884,12 @@ func (s AddIpRoutesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddIpRoutesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddIpRoutesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddIpRoutesInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.IpRoutes == nil {
-		invalidParams.Add(request.NewErrParamRequired("IpRoutes"))
+		invalidParams.Add(aws.NewErrParamRequired("IpRoutes"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3959,12 +3958,12 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -3972,7 +3971,7 @@ func (s *AddTagsToResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4034,9 +4033,9 @@ func (s Attribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Attribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Attribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "Attribute"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4084,12 +4083,12 @@ func (s CancelSchemaExtensionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelSchemaExtensionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelSchemaExtensionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelSchemaExtensionInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.SchemaExtensionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaExtensionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaExtensionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4264,25 +4263,25 @@ func (s ConnectDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConnectDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConnectDirectoryInput"}
 	if s.ConnectSettings == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectSettings"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectSettings"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
 	}
 	if s.Size == nil {
-		invalidParams.Add(request.NewErrParamRequired("Size"))
+		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
 	if s.ConnectSettings != nil {
 		if err := s.ConnectSettings.Validate(); err != nil {
-			invalidParams.AddNested("ConnectSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConnectSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4384,15 +4383,15 @@ func (s CreateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
 	if s.Alias == nil {
-		invalidParams.Add(request.NewErrParamRequired("Alias"))
+		invalidParams.Add(aws.NewErrParamRequired("Alias"))
 	}
 	if s.Alias != nil && len(*s.Alias) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Alias", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Alias", 1))
 	}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4489,24 +4488,24 @@ func (s CreateComputerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateComputerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateComputerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateComputerInput"}
 	if s.ComputerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputerName"))
 	}
 	if s.ComputerName != nil && len(*s.ComputerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ComputerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ComputerName", 1))
 	}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.OrganizationalUnitDistinguishedName != nil && len(*s.OrganizationalUnitDistinguishedName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationalUnitDistinguishedName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationalUnitDistinguishedName", 1))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 8 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 8))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 8))
 	}
 	if s.ComputerAttributes != nil {
 		for i, v := range s.ComputerAttributes {
@@ -4514,7 +4513,7 @@ func (s *CreateComputerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputerAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ComputerAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4617,15 +4616,15 @@ func (s CreateConditionalForwarderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConditionalForwarderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConditionalForwarderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConditionalForwarderInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.DnsIpAddrs == nil {
-		invalidParams.Add(request.NewErrParamRequired("DnsIpAddrs"))
+		invalidParams.Add(aws.NewErrParamRequired("DnsIpAddrs"))
 	}
 	if s.RemoteDomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RemoteDomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4713,19 +4712,19 @@ func (s CreateDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Size == nil {
-		invalidParams.Add(request.NewErrParamRequired("Size"))
+		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
 	if s.VpcSettings != nil {
 		if err := s.VpcSettings.Validate(); err != nil {
-			invalidParams.AddNested("VpcSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VpcSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4840,19 +4839,19 @@ func (s CreateMicrosoftADInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMicrosoftADInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMicrosoftADInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMicrosoftADInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.VpcSettings == nil {
-		invalidParams.Add(request.NewErrParamRequired("VpcSettings"))
+		invalidParams.Add(aws.NewErrParamRequired("VpcSettings"))
 	}
 	if s.VpcSettings != nil {
 		if err := s.VpcSettings.Validate(); err != nil {
-			invalidParams.AddNested("VpcSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("VpcSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4943,9 +4942,9 @@ func (s CreateSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSnapshotInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5045,21 +5044,21 @@ func (s CreateTrustInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTrustInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTrustInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTrustInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.RemoteDomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RemoteDomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
 	if s.TrustDirection == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustDirection"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustDirection"))
 	}
 	if s.TrustPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustPassword"))
 	}
 	if s.TrustPassword != nil && len(*s.TrustPassword) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TrustPassword", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TrustPassword", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5158,12 +5157,12 @@ func (s DeleteConditionalForwarderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConditionalForwarderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConditionalForwarderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConditionalForwarderInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.RemoteDomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RemoteDomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5223,9 +5222,9 @@ func (s DeleteDirectoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDirectoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDirectoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5288,9 +5287,9 @@ func (s DeleteSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSnapshotInput"}
 	if s.SnapshotId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotId"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5357,9 +5356,9 @@ func (s DeleteTrustInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTrustInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTrustInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTrustInput"}
 	if s.TrustId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustId"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5434,15 +5433,15 @@ func (s DeregisterEventTopicInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterEventTopicInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterEventTopicInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterEventTopicInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.TopicName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicName"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicName"))
 	}
 	if s.TopicName != nil && len(*s.TopicName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TopicName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TopicName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5507,9 +5506,9 @@ func (s DescribeConditionalForwardersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConditionalForwardersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConditionalForwardersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConditionalForwardersInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5678,9 +5677,9 @@ func (s DescribeDomainControllersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDomainControllersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDomainControllersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDomainControllersInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6055,21 +6054,21 @@ func (s DirectoryConnectSettings) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DirectoryConnectSettings) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DirectoryConnectSettings"}
+	invalidParams := aws.ErrInvalidParams{Context: "DirectoryConnectSettings"}
 	if s.CustomerDnsIps == nil {
-		invalidParams.Add(request.NewErrParamRequired("CustomerDnsIps"))
+		invalidParams.Add(aws.NewErrParamRequired("CustomerDnsIps"))
 	}
 	if s.CustomerUserName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CustomerUserName"))
+		invalidParams.Add(aws.NewErrParamRequired("CustomerUserName"))
 	}
 	if s.CustomerUserName != nil && len(*s.CustomerUserName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomerUserName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomerUserName", 1))
 	}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 	if s.VpcId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VpcId"))
+		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6500,12 +6499,12 @@ func (s DirectoryVpcSettings) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DirectoryVpcSettings) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DirectoryVpcSettings"}
+	invalidParams := aws.ErrInvalidParams{Context: "DirectoryVpcSettings"}
 	if s.SubnetIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
 	}
 	if s.VpcId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VpcId"))
+		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6604,9 +6603,9 @@ func (s DisableRadiusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableRadiusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableRadiusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableRadiusInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6676,15 +6675,15 @@ func (s DisableSsoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableSsoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableSsoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableSsoInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.Password != nil && len(*s.Password) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6861,16 +6860,16 @@ func (s EnableRadiusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableRadiusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableRadiusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableRadiusInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.RadiusSettings == nil {
-		invalidParams.Add(request.NewErrParamRequired("RadiusSettings"))
+		invalidParams.Add(aws.NewErrParamRequired("RadiusSettings"))
 	}
 	if s.RadiusSettings != nil {
 		if err := s.RadiusSettings.Validate(); err != nil {
-			invalidParams.AddNested("RadiusSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RadiusSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6947,15 +6946,15 @@ func (s EnableSsoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableSsoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableSsoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableSsoInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.Password != nil && len(*s.Password) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 1))
 	}
 	if s.UserName != nil && len(*s.UserName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7125,9 +7124,9 @@ func (s GetSnapshotLimitsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSnapshotLimitsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSnapshotLimitsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSnapshotLimitsInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7305,9 +7304,9 @@ func (s ListIpRoutesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIpRoutesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListIpRoutesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListIpRoutesInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7399,9 +7398,9 @@ func (s ListSchemaExtensionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSchemaExtensionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSchemaExtensionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSchemaExtensionsInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7491,9 +7490,9 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7600,18 +7599,18 @@ func (s RadiusSettings) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RadiusSettings) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RadiusSettings"}
+	invalidParams := aws.ErrInvalidParams{Context: "RadiusSettings"}
 	if s.DisplayLabel != nil && len(*s.DisplayLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DisplayLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayLabel", 1))
 	}
 	if s.RadiusPort != nil && *s.RadiusPort < 1025 {
-		invalidParams.Add(request.NewErrParamMinValue("RadiusPort", 1025))
+		invalidParams.Add(aws.NewErrParamMinValue("RadiusPort", 1025))
 	}
 	if s.RadiusTimeout != nil && *s.RadiusTimeout < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RadiusTimeout", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RadiusTimeout", 1))
 	}
 	if s.SharedSecret != nil && len(*s.SharedSecret) < 8 {
-		invalidParams.Add(request.NewErrParamMinLen("SharedSecret", 8))
+		invalidParams.Add(aws.NewErrParamMinLen("SharedSecret", 8))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7697,15 +7696,15 @@ func (s RegisterEventTopicInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterEventTopicInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterEventTopicInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterEventTopicInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.TopicName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicName"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicName"))
 	}
 	if s.TopicName != nil && len(*s.TopicName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TopicName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TopicName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7769,12 +7768,12 @@ func (s RemoveIpRoutesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveIpRoutesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveIpRoutesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveIpRoutesInput"}
 	if s.CidrIps == nil {
-		invalidParams.Add(request.NewErrParamRequired("CidrIps"))
+		invalidParams.Add(aws.NewErrParamRequired("CidrIps"))
 	}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7837,12 +7836,12 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7901,9 +7900,9 @@ func (s RestoreFromSnapshotInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreFromSnapshotInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreFromSnapshotInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreFromSnapshotInput"}
 	if s.SnapshotId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotId"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8168,21 +8167,21 @@ func (s StartSchemaExtensionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartSchemaExtensionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartSchemaExtensionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartSchemaExtensionInput"}
 	if s.CreateSnapshotBeforeSchemaExtension == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreateSnapshotBeforeSchemaExtension"))
+		invalidParams.Add(aws.NewErrParamRequired("CreateSnapshotBeforeSchemaExtension"))
 	}
 	if s.Description == nil {
-		invalidParams.Add(request.NewErrParamRequired("Description"))
+		invalidParams.Add(aws.NewErrParamRequired("Description"))
 	}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.LdifContent == nil {
-		invalidParams.Add(request.NewErrParamRequired("LdifContent"))
+		invalidParams.Add(aws.NewErrParamRequired("LdifContent"))
 	}
 	if s.LdifContent != nil && len(*s.LdifContent) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LdifContent", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LdifContent", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8271,15 +8270,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8444,15 +8443,15 @@ func (s UpdateConditionalForwarderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConditionalForwarderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConditionalForwarderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConditionalForwarderInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.DnsIpAddrs == nil {
-		invalidParams.Add(request.NewErrParamRequired("DnsIpAddrs"))
+		invalidParams.Add(aws.NewErrParamRequired("DnsIpAddrs"))
 	}
 	if s.RemoteDomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RemoteDomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("RemoteDomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8523,15 +8522,15 @@ func (s UpdateNumberOfDomainControllersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNumberOfDomainControllersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateNumberOfDomainControllersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateNumberOfDomainControllersInput"}
 	if s.DesiredNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("DesiredNumber"))
+		invalidParams.Add(aws.NewErrParamRequired("DesiredNumber"))
 	}
 	if s.DesiredNumber != nil && *s.DesiredNumber < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("DesiredNumber", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("DesiredNumber", 2))
 	}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8595,16 +8594,16 @@ func (s UpdateRadiusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRadiusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRadiusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRadiusInput"}
 	if s.DirectoryId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryId"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
 	}
 	if s.RadiusSettings == nil {
-		invalidParams.Add(request.NewErrParamRequired("RadiusSettings"))
+		invalidParams.Add(aws.NewErrParamRequired("RadiusSettings"))
 	}
 	if s.RadiusSettings != nil {
 		if err := s.RadiusSettings.Validate(); err != nil {
-			invalidParams.AddNested("RadiusSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RadiusSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8666,9 +8665,9 @@ func (s VerifyTrustInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyTrustInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerifyTrustInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerifyTrustInput"}
 	if s.TrustId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustId"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustId"))
 	}
 
 	if invalidParams.Len() > 0 {

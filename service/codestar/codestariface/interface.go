@@ -10,7 +10,6 @@ package codestariface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/codestar"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := codestar.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := codestar.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,76 +64,76 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CodeStarAPI interface {
 	AssociateTeamMember(*codestar.AssociateTeamMemberInput) (*codestar.AssociateTeamMemberOutput, error)
-	AssociateTeamMemberWithContext(aws.Context, *codestar.AssociateTeamMemberInput, ...request.Option) (*codestar.AssociateTeamMemberOutput, error)
-	AssociateTeamMemberRequest(*codestar.AssociateTeamMemberInput) (*request.Request, *codestar.AssociateTeamMemberOutput)
+	AssociateTeamMemberWithContext(aws.Context, *codestar.AssociateTeamMemberInput, ...aws.Option) (*codestar.AssociateTeamMemberOutput, error)
+	AssociateTeamMemberRequest(*codestar.AssociateTeamMemberInput) (*aws.Request, *codestar.AssociateTeamMemberOutput)
 
 	CreateProject(*codestar.CreateProjectInput) (*codestar.CreateProjectOutput, error)
-	CreateProjectWithContext(aws.Context, *codestar.CreateProjectInput, ...request.Option) (*codestar.CreateProjectOutput, error)
-	CreateProjectRequest(*codestar.CreateProjectInput) (*request.Request, *codestar.CreateProjectOutput)
+	CreateProjectWithContext(aws.Context, *codestar.CreateProjectInput, ...aws.Option) (*codestar.CreateProjectOutput, error)
+	CreateProjectRequest(*codestar.CreateProjectInput) (*aws.Request, *codestar.CreateProjectOutput)
 
 	CreateUserProfile(*codestar.CreateUserProfileInput) (*codestar.CreateUserProfileOutput, error)
-	CreateUserProfileWithContext(aws.Context, *codestar.CreateUserProfileInput, ...request.Option) (*codestar.CreateUserProfileOutput, error)
-	CreateUserProfileRequest(*codestar.CreateUserProfileInput) (*request.Request, *codestar.CreateUserProfileOutput)
+	CreateUserProfileWithContext(aws.Context, *codestar.CreateUserProfileInput, ...aws.Option) (*codestar.CreateUserProfileOutput, error)
+	CreateUserProfileRequest(*codestar.CreateUserProfileInput) (*aws.Request, *codestar.CreateUserProfileOutput)
 
 	DeleteProject(*codestar.DeleteProjectInput) (*codestar.DeleteProjectOutput, error)
-	DeleteProjectWithContext(aws.Context, *codestar.DeleteProjectInput, ...request.Option) (*codestar.DeleteProjectOutput, error)
-	DeleteProjectRequest(*codestar.DeleteProjectInput) (*request.Request, *codestar.DeleteProjectOutput)
+	DeleteProjectWithContext(aws.Context, *codestar.DeleteProjectInput, ...aws.Option) (*codestar.DeleteProjectOutput, error)
+	DeleteProjectRequest(*codestar.DeleteProjectInput) (*aws.Request, *codestar.DeleteProjectOutput)
 
 	DeleteUserProfile(*codestar.DeleteUserProfileInput) (*codestar.DeleteUserProfileOutput, error)
-	DeleteUserProfileWithContext(aws.Context, *codestar.DeleteUserProfileInput, ...request.Option) (*codestar.DeleteUserProfileOutput, error)
-	DeleteUserProfileRequest(*codestar.DeleteUserProfileInput) (*request.Request, *codestar.DeleteUserProfileOutput)
+	DeleteUserProfileWithContext(aws.Context, *codestar.DeleteUserProfileInput, ...aws.Option) (*codestar.DeleteUserProfileOutput, error)
+	DeleteUserProfileRequest(*codestar.DeleteUserProfileInput) (*aws.Request, *codestar.DeleteUserProfileOutput)
 
 	DescribeProject(*codestar.DescribeProjectInput) (*codestar.DescribeProjectOutput, error)
-	DescribeProjectWithContext(aws.Context, *codestar.DescribeProjectInput, ...request.Option) (*codestar.DescribeProjectOutput, error)
-	DescribeProjectRequest(*codestar.DescribeProjectInput) (*request.Request, *codestar.DescribeProjectOutput)
+	DescribeProjectWithContext(aws.Context, *codestar.DescribeProjectInput, ...aws.Option) (*codestar.DescribeProjectOutput, error)
+	DescribeProjectRequest(*codestar.DescribeProjectInput) (*aws.Request, *codestar.DescribeProjectOutput)
 
 	DescribeUserProfile(*codestar.DescribeUserProfileInput) (*codestar.DescribeUserProfileOutput, error)
-	DescribeUserProfileWithContext(aws.Context, *codestar.DescribeUserProfileInput, ...request.Option) (*codestar.DescribeUserProfileOutput, error)
-	DescribeUserProfileRequest(*codestar.DescribeUserProfileInput) (*request.Request, *codestar.DescribeUserProfileOutput)
+	DescribeUserProfileWithContext(aws.Context, *codestar.DescribeUserProfileInput, ...aws.Option) (*codestar.DescribeUserProfileOutput, error)
+	DescribeUserProfileRequest(*codestar.DescribeUserProfileInput) (*aws.Request, *codestar.DescribeUserProfileOutput)
 
 	DisassociateTeamMember(*codestar.DisassociateTeamMemberInput) (*codestar.DisassociateTeamMemberOutput, error)
-	DisassociateTeamMemberWithContext(aws.Context, *codestar.DisassociateTeamMemberInput, ...request.Option) (*codestar.DisassociateTeamMemberOutput, error)
-	DisassociateTeamMemberRequest(*codestar.DisassociateTeamMemberInput) (*request.Request, *codestar.DisassociateTeamMemberOutput)
+	DisassociateTeamMemberWithContext(aws.Context, *codestar.DisassociateTeamMemberInput, ...aws.Option) (*codestar.DisassociateTeamMemberOutput, error)
+	DisassociateTeamMemberRequest(*codestar.DisassociateTeamMemberInput) (*aws.Request, *codestar.DisassociateTeamMemberOutput)
 
 	ListProjects(*codestar.ListProjectsInput) (*codestar.ListProjectsOutput, error)
-	ListProjectsWithContext(aws.Context, *codestar.ListProjectsInput, ...request.Option) (*codestar.ListProjectsOutput, error)
-	ListProjectsRequest(*codestar.ListProjectsInput) (*request.Request, *codestar.ListProjectsOutput)
+	ListProjectsWithContext(aws.Context, *codestar.ListProjectsInput, ...aws.Option) (*codestar.ListProjectsOutput, error)
+	ListProjectsRequest(*codestar.ListProjectsInput) (*aws.Request, *codestar.ListProjectsOutput)
 
 	ListResources(*codestar.ListResourcesInput) (*codestar.ListResourcesOutput, error)
-	ListResourcesWithContext(aws.Context, *codestar.ListResourcesInput, ...request.Option) (*codestar.ListResourcesOutput, error)
-	ListResourcesRequest(*codestar.ListResourcesInput) (*request.Request, *codestar.ListResourcesOutput)
+	ListResourcesWithContext(aws.Context, *codestar.ListResourcesInput, ...aws.Option) (*codestar.ListResourcesOutput, error)
+	ListResourcesRequest(*codestar.ListResourcesInput) (*aws.Request, *codestar.ListResourcesOutput)
 
 	ListTagsForProject(*codestar.ListTagsForProjectInput) (*codestar.ListTagsForProjectOutput, error)
-	ListTagsForProjectWithContext(aws.Context, *codestar.ListTagsForProjectInput, ...request.Option) (*codestar.ListTagsForProjectOutput, error)
-	ListTagsForProjectRequest(*codestar.ListTagsForProjectInput) (*request.Request, *codestar.ListTagsForProjectOutput)
+	ListTagsForProjectWithContext(aws.Context, *codestar.ListTagsForProjectInput, ...aws.Option) (*codestar.ListTagsForProjectOutput, error)
+	ListTagsForProjectRequest(*codestar.ListTagsForProjectInput) (*aws.Request, *codestar.ListTagsForProjectOutput)
 
 	ListTeamMembers(*codestar.ListTeamMembersInput) (*codestar.ListTeamMembersOutput, error)
-	ListTeamMembersWithContext(aws.Context, *codestar.ListTeamMembersInput, ...request.Option) (*codestar.ListTeamMembersOutput, error)
-	ListTeamMembersRequest(*codestar.ListTeamMembersInput) (*request.Request, *codestar.ListTeamMembersOutput)
+	ListTeamMembersWithContext(aws.Context, *codestar.ListTeamMembersInput, ...aws.Option) (*codestar.ListTeamMembersOutput, error)
+	ListTeamMembersRequest(*codestar.ListTeamMembersInput) (*aws.Request, *codestar.ListTeamMembersOutput)
 
 	ListUserProfiles(*codestar.ListUserProfilesInput) (*codestar.ListUserProfilesOutput, error)
-	ListUserProfilesWithContext(aws.Context, *codestar.ListUserProfilesInput, ...request.Option) (*codestar.ListUserProfilesOutput, error)
-	ListUserProfilesRequest(*codestar.ListUserProfilesInput) (*request.Request, *codestar.ListUserProfilesOutput)
+	ListUserProfilesWithContext(aws.Context, *codestar.ListUserProfilesInput, ...aws.Option) (*codestar.ListUserProfilesOutput, error)
+	ListUserProfilesRequest(*codestar.ListUserProfilesInput) (*aws.Request, *codestar.ListUserProfilesOutput)
 
 	TagProject(*codestar.TagProjectInput) (*codestar.TagProjectOutput, error)
-	TagProjectWithContext(aws.Context, *codestar.TagProjectInput, ...request.Option) (*codestar.TagProjectOutput, error)
-	TagProjectRequest(*codestar.TagProjectInput) (*request.Request, *codestar.TagProjectOutput)
+	TagProjectWithContext(aws.Context, *codestar.TagProjectInput, ...aws.Option) (*codestar.TagProjectOutput, error)
+	TagProjectRequest(*codestar.TagProjectInput) (*aws.Request, *codestar.TagProjectOutput)
 
 	UntagProject(*codestar.UntagProjectInput) (*codestar.UntagProjectOutput, error)
-	UntagProjectWithContext(aws.Context, *codestar.UntagProjectInput, ...request.Option) (*codestar.UntagProjectOutput, error)
-	UntagProjectRequest(*codestar.UntagProjectInput) (*request.Request, *codestar.UntagProjectOutput)
+	UntagProjectWithContext(aws.Context, *codestar.UntagProjectInput, ...aws.Option) (*codestar.UntagProjectOutput, error)
+	UntagProjectRequest(*codestar.UntagProjectInput) (*aws.Request, *codestar.UntagProjectOutput)
 
 	UpdateProject(*codestar.UpdateProjectInput) (*codestar.UpdateProjectOutput, error)
-	UpdateProjectWithContext(aws.Context, *codestar.UpdateProjectInput, ...request.Option) (*codestar.UpdateProjectOutput, error)
-	UpdateProjectRequest(*codestar.UpdateProjectInput) (*request.Request, *codestar.UpdateProjectOutput)
+	UpdateProjectWithContext(aws.Context, *codestar.UpdateProjectInput, ...aws.Option) (*codestar.UpdateProjectOutput, error)
+	UpdateProjectRequest(*codestar.UpdateProjectInput) (*aws.Request, *codestar.UpdateProjectOutput)
 
 	UpdateTeamMember(*codestar.UpdateTeamMemberInput) (*codestar.UpdateTeamMemberOutput, error)
-	UpdateTeamMemberWithContext(aws.Context, *codestar.UpdateTeamMemberInput, ...request.Option) (*codestar.UpdateTeamMemberOutput, error)
-	UpdateTeamMemberRequest(*codestar.UpdateTeamMemberInput) (*request.Request, *codestar.UpdateTeamMemberOutput)
+	UpdateTeamMemberWithContext(aws.Context, *codestar.UpdateTeamMemberInput, ...aws.Option) (*codestar.UpdateTeamMemberOutput, error)
+	UpdateTeamMemberRequest(*codestar.UpdateTeamMemberInput) (*aws.Request, *codestar.UpdateTeamMemberOutput)
 
 	UpdateUserProfile(*codestar.UpdateUserProfileInput) (*codestar.UpdateUserProfileOutput, error)
-	UpdateUserProfileWithContext(aws.Context, *codestar.UpdateUserProfileInput, ...request.Option) (*codestar.UpdateUserProfileOutput, error)
-	UpdateUserProfileRequest(*codestar.UpdateUserProfileInput) (*request.Request, *codestar.UpdateUserProfileOutput)
+	UpdateUserProfileWithContext(aws.Context, *codestar.UpdateUserProfileInput, ...aws.Option) (*codestar.UpdateUserProfileOutput, error)
+	UpdateUserProfileRequest(*codestar.UpdateUserProfileInput) (*aws.Request, *codestar.UpdateUserProfileOutput)
 }
 
 var _ CodeStarAPI = (*codestar.CodeStar)(nil)

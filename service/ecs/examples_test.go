@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 )
 
@@ -29,7 +29,12 @@ func parseTime(layout, value string) *time.Time {
 //
 // This example creates a cluster in your default region.
 func ExampleECS_CreateCluster_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.CreateClusterInput{
 		ClusterName: aws.String("my_cluster"),
 	}
@@ -64,7 +69,12 @@ func ExampleECS_CreateCluster_shared00() {
 // The service uses the ``hello_world`` task definition and it maintains 10 copies of
 // that task.
 func ExampleECS_CreateService_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.CreateServiceInput{
 		DesiredCount:   aws.Int64(10),
 		ServiceName:    aws.String("ecs-simple-service"),
@@ -103,7 +113,12 @@ func ExampleECS_CreateService_shared00() {
 // The service uses the ``ecs-demo`` task definition and it maintains 10 copies of that
 // task. You must reference an existing load balancer in the same region by its name.
 func ExampleECS_CreateService_shared01() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.CreateServiceInput{
 		DesiredCount: aws.Int64(10),
 		LoadBalancers: []*ecs.LoadBalancer{
@@ -148,7 +163,12 @@ func ExampleECS_CreateService_shared01() {
 //
 // This example deletes an empty cluster in your default region.
 func ExampleECS_DeleteCluster_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DeleteClusterInput{
 		Cluster: aws.String("my_cluster"),
 	}
@@ -188,7 +208,12 @@ func ExampleECS_DeleteCluster_shared00() {
 // This example deletes the my-http-service service. The service must have a desired
 // count and running count of 0 before you can delete it.
 func ExampleECS_DeleteService_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DeleteServiceInput{
 		Service: aws.String("my-http-service"),
 	}
@@ -227,7 +252,12 @@ func ExampleECS_DeleteService_shared00() {
 // default region. If there are still tasks running on the container instance, you must
 // either stop those tasks before deregistering, or use the force option.
 func ExampleECS_DeregisterContainerInstance_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DeregisterContainerInstanceInput{
 		Cluster:           aws.String("default"),
 		ContainerInstance: aws.String("container_instance_UUID"),
@@ -264,7 +294,12 @@ func ExampleECS_DeregisterContainerInstance_shared00() {
 //
 // This example provides a description of the specified cluster in your default region.
 func ExampleECS_DescribeClusters_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DescribeClustersInput{
 		Clusters: []*string{
 			aws.String("default"),
@@ -300,7 +335,12 @@ func ExampleECS_DescribeClusters_shared00() {
 // This example provides a description of the specified container instance in your default
 // region, using the container instance UUID as an identifier.
 func ExampleECS_DescribeContainerInstances_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DescribeContainerInstancesInput{
 		Cluster: aws.String("default"),
 		ContainerInstances: []*string{
@@ -338,7 +378,12 @@ func ExampleECS_DescribeContainerInstances_shared00() {
 //
 // This example provides descriptive information about the service named ``ecs-simple-service``.
 func ExampleECS_DescribeServices_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DescribeServicesInput{
 		Services: []*string{
 			aws.String("ecs-simple-service"),
@@ -375,7 +420,12 @@ func ExampleECS_DescribeServices_shared00() {
 //
 // This example provides a description of the specified task definition.
 func ExampleECS_DescribeTaskDefinition_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DescribeTaskDefinitionInput{
 		TaskDefinition: aws.String("hello_world:8"),
 	}
@@ -409,7 +459,12 @@ func ExampleECS_DescribeTaskDefinition_shared00() {
 // This example provides a description of the specified task, using the task UUID as
 // an identifier.
 func ExampleECS_DescribeTasks_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.DescribeTasksInput{
 		Tasks: []*string{
 			aws.String("c5cba4eb-5dad-405e-96db-71ef8eefe6a8"),
@@ -446,7 +501,12 @@ func ExampleECS_DescribeTasks_shared00() {
 //
 // This example lists all of your available clusters in your default region.
 func ExampleECS_ListClusters_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListClustersInput{}
 
 	result, err := svc.ListClusters(input)
@@ -478,7 +538,12 @@ func ExampleECS_ListClusters_shared00() {
 // This example lists all of your available container instances in the specified cluster
 // in your default region.
 func ExampleECS_ListContainerInstances_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListContainerInstancesInput{
 		Cluster: aws.String("default"),
 	}
@@ -513,7 +578,12 @@ func ExampleECS_ListContainerInstances_shared00() {
 //
 // This example lists the services running in the default cluster for an account.
 func ExampleECS_ListServices_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListServicesInput{}
 
 	result, err := svc.ListServices(input)
@@ -546,7 +616,12 @@ func ExampleECS_ListServices_shared00() {
 //
 // This example lists all of your registered task definition families.
 func ExampleECS_ListTaskDefinitionFamilies_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListTaskDefinitionFamiliesInput{}
 
 	result, err := svc.ListTaskDefinitionFamilies(input)
@@ -577,7 +652,12 @@ func ExampleECS_ListTaskDefinitionFamilies_shared00() {
 //
 // This example lists the task definition revisions that start with "hpcc".
 func ExampleECS_ListTaskDefinitionFamilies_shared01() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListTaskDefinitionFamiliesInput{
 		FamilyPrefix: aws.String("hpcc"),
 	}
@@ -610,7 +690,12 @@ func ExampleECS_ListTaskDefinitionFamilies_shared01() {
 //
 // This example lists all of your registered task definitions.
 func ExampleECS_ListTaskDefinitions_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListTaskDefinitionsInput{}
 
 	result, err := svc.ListTaskDefinitions(input)
@@ -641,7 +726,12 @@ func ExampleECS_ListTaskDefinitions_shared00() {
 //
 // This example lists the task definition revisions of a specified family.
 func ExampleECS_ListTaskDefinitions_shared01() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListTaskDefinitionsInput{
 		FamilyPrefix: aws.String("wordpress"),
 	}
@@ -674,7 +764,12 @@ func ExampleECS_ListTaskDefinitions_shared01() {
 //
 // This example lists all of the tasks in a cluster.
 func ExampleECS_ListTasks_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListTasksInput{
 		Cluster: aws.String("default"),
 	}
@@ -712,7 +807,12 @@ func ExampleECS_ListTasks_shared00() {
 // This example lists the tasks of a specified container instance. Specifying a ``containerInstance``
 // value limits  the  results  to  tasks  that belong to that container instance.
 func ExampleECS_ListTasks_shared01() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.ListTasksInput{
 		Cluster:           aws.String("default"),
 		ContainerInstance: aws.String("f6bbb147-5370-4ace-8c73-c7181ded911f"),
@@ -750,7 +850,12 @@ func ExampleECS_ListTasks_shared01() {
 //
 // This example registers a task definition to the specified family.
 func ExampleECS_RegisterTaskDefinition_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.RegisterTaskDefinitionInput{
 		ContainerDefinitions: []*ecs.ContainerDefinition{
 			{
@@ -797,7 +902,12 @@ func ExampleECS_RegisterTaskDefinition_shared00() {
 //
 // This example runs the specified task definition on your default cluster.
 func ExampleECS_RunTask_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.RunTaskInput{
 		Cluster:        aws.String("default"),
 		TaskDefinition: aws.String("sleep360:1"),
@@ -834,7 +944,12 @@ func ExampleECS_RunTask_shared00() {
 // This example updates the my-http-service service to use the amazon-ecs-sample task
 // definition.
 func ExampleECS_UpdateService_shared00() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.UpdateServiceInput{
 		Service:        aws.String("my-http-service"),
 		TaskDefinition: aws.String("amazon-ecs-sample"),
@@ -874,7 +989,12 @@ func ExampleECS_UpdateService_shared00() {
 //
 // This example updates the desired count of the my-http-service service to 10.
 func ExampleECS_UpdateService_shared01() {
-	svc := ecs.New(session.New())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic("failed to load config, " + err.Error())
+	}
+
+	svc := ecs.New(cfg)
 	input := &ecs.UpdateServiceInput{
 		DesiredCount: aws.Int64(10),
 		Service:      aws.String("my-http-service"),

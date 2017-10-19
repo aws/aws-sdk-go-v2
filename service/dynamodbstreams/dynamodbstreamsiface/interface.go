@@ -10,7 +10,6 @@ package dynamodbstreamsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := dynamodbstreams.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := dynamodbstreams.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,20 +64,20 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type DynamoDBStreamsAPI interface {
 	DescribeStream(*dynamodbstreams.DescribeStreamInput) (*dynamodbstreams.DescribeStreamOutput, error)
-	DescribeStreamWithContext(aws.Context, *dynamodbstreams.DescribeStreamInput, ...request.Option) (*dynamodbstreams.DescribeStreamOutput, error)
-	DescribeStreamRequest(*dynamodbstreams.DescribeStreamInput) (*request.Request, *dynamodbstreams.DescribeStreamOutput)
+	DescribeStreamWithContext(aws.Context, *dynamodbstreams.DescribeStreamInput, ...aws.Option) (*dynamodbstreams.DescribeStreamOutput, error)
+	DescribeStreamRequest(*dynamodbstreams.DescribeStreamInput) (*aws.Request, *dynamodbstreams.DescribeStreamOutput)
 
 	GetRecords(*dynamodbstreams.GetRecordsInput) (*dynamodbstreams.GetRecordsOutput, error)
-	GetRecordsWithContext(aws.Context, *dynamodbstreams.GetRecordsInput, ...request.Option) (*dynamodbstreams.GetRecordsOutput, error)
-	GetRecordsRequest(*dynamodbstreams.GetRecordsInput) (*request.Request, *dynamodbstreams.GetRecordsOutput)
+	GetRecordsWithContext(aws.Context, *dynamodbstreams.GetRecordsInput, ...aws.Option) (*dynamodbstreams.GetRecordsOutput, error)
+	GetRecordsRequest(*dynamodbstreams.GetRecordsInput) (*aws.Request, *dynamodbstreams.GetRecordsOutput)
 
 	GetShardIterator(*dynamodbstreams.GetShardIteratorInput) (*dynamodbstreams.GetShardIteratorOutput, error)
-	GetShardIteratorWithContext(aws.Context, *dynamodbstreams.GetShardIteratorInput, ...request.Option) (*dynamodbstreams.GetShardIteratorOutput, error)
-	GetShardIteratorRequest(*dynamodbstreams.GetShardIteratorInput) (*request.Request, *dynamodbstreams.GetShardIteratorOutput)
+	GetShardIteratorWithContext(aws.Context, *dynamodbstreams.GetShardIteratorInput, ...aws.Option) (*dynamodbstreams.GetShardIteratorOutput, error)
+	GetShardIteratorRequest(*dynamodbstreams.GetShardIteratorInput) (*aws.Request, *dynamodbstreams.GetShardIteratorOutput)
 
 	ListStreams(*dynamodbstreams.ListStreamsInput) (*dynamodbstreams.ListStreamsOutput, error)
-	ListStreamsWithContext(aws.Context, *dynamodbstreams.ListStreamsInput, ...request.Option) (*dynamodbstreams.ListStreamsOutput, error)
-	ListStreamsRequest(*dynamodbstreams.ListStreamsInput) (*request.Request, *dynamodbstreams.ListStreamsOutput)
+	ListStreamsWithContext(aws.Context, *dynamodbstreams.ListStreamsInput, ...aws.Option) (*dynamodbstreams.ListStreamsOutput, error)
+	ListStreamsRequest(*dynamodbstreams.ListStreamsInput) (*aws.Request, *dynamodbstreams.ListStreamsOutput)
 }
 
 var _ DynamoDBStreamsAPI = (*dynamodbstreams.DynamoDBStreams)(nil)

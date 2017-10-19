@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/go-ini/ini"
 )
 
@@ -33,6 +33,28 @@ const (
 // is not provided.
 const DefaultSharedConfigProfile = `default`
 
+// DefaultSharedCredentialsFilename returns the SDK's default file path
+// for the shared credentials file.
+//
+// Builds the shared config file path based on the OS's platform.
+//
+//   - Linux/Unix: $HOME/.aws/credentials
+//   - Windows: %USERPROFILE%\.aws\credentials
+func DefaultSharedCredentialsFilename() string {
+	return filepath.Join(userHomeDir(), ".aws", "credentials")
+}
+
+// DefaultSharedConfigFilename returns the SDK's default file path for
+// the shared config file.
+//
+// Builds the shared config file path based on the OS's platform.
+//
+//   - Linux/Unix: $HOME/.aws/config
+//   - Windows: %USERPROFILE%\.aws\config
+func DefaultSharedConfigFilename() string {
+	return filepath.Join(userHomeDir(), ".aws", "config")
+}
+
 // DefaultSharedConfigFiles is a slice of the default shared config files that
 // the will be used in order to load the SharedConfig.
 var DefaultSharedConfigFiles = []string{
@@ -44,10 +66,12 @@ var DefaultSharedConfigFiles = []string{
 // assume role.
 type AssumeRoleConfig struct {
 	RoleARN         string
-	SourceProfile   string
 	ExternalID      string
 	MFASerial       string
 	RoleSessionName string
+
+	sourceProfile string
+	Source        *SharedConfig
 }
 
 // SharedConfig represents the configuration fields of the SDK config files.
@@ -63,11 +87,9 @@ type SharedConfig struct {
 	//	aws_access_key_id
 	//	aws_secret_access_key
 	//	aws_session_token
-	Creds credentials.Value
+	Credentials aws.Credentials
 
-	// TODO need good way to expose these in Provider interface
-	AssumeRole       AssumeRoleConfig
-	AssumeRoleSource *SharedConfig
+	AssumeRole AssumeRoleConfig
 
 	// Region is the region the SDK should use for looking up AWS service endpoints
 	// and signing requests.
@@ -76,24 +98,20 @@ type SharedConfig struct {
 	Region string
 }
 
-// StaticSharedConfigProfile wraps a strings to satisfy the SharedConfigProfileProvider
-// interface so a slice of custom shared config files ared used when loading the
-// SharedConfig.
-type StaticSharedConfigProfile string
-
-// GetSharedConfigProfile returns the shared config profile.
-func (c StaticSharedConfigProfile) GetSharedConfigProfile() (string, error) {
-	return string(c), nil
+// GetRegion returns the region for the profile if a region is set.
+func (c SharedConfig) GetRegion() (string, error) {
+	return c.Region, nil
 }
 
-// StaticSharedConfigFiles wraps a slice of strings to satisfy the
-// SharedConfigFilesProvider interface so a slice of custom shared config files
-// ared used when loading the SharedConfig.
-type StaticSharedConfigFiles []string
+// GetCredentialsValue returns the credentials for a profile if they were set.
+func (c SharedConfig) GetCredentialsValue() (aws.Credentials, error) {
+	return c.Credentials, nil
+}
 
-// GetSharedConfigFiles returns the slice of shared config files.
-func (c StaticSharedConfigFiles) GetSharedConfigFiles() ([]string, error) {
-	return []string(c), nil
+// GetAssumeRoleConfig returns the assume role config for a profile. Will be
+// a zero value if not set.
+func (c SharedConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
+	return c.AssumeRole, nil
 }
 
 // LoadSharedConfig uses the Configs passed in to load the SharedConfig from file
@@ -145,16 +163,16 @@ func LoadSharedConfig(cfgs Configs) (Config, error) {
 // For example, given two files A and B. Both define credentials. If the order
 // of the files are A then B, B's credential values will be used instead of A's.
 //
-// See SharedConfig.setFromFile for information how the config files
-// will be loaded.
+// Will ignore files that do not exist or cannot be read.
 func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
-	if len(profile) == 0 {
-		profile = DefaultSharedConfigProfile
-	}
-
 	files, err := loadSharedConfigIniFiles(filenames)
 	if err != nil {
 		return SharedConfig{}, err
+	}
+
+	if len(files) == 0 {
+		// TODO should return error if failed to load all files.
+		return SharedConfig{}, nil
 	}
 
 	cfg := SharedConfig{}
@@ -162,7 +180,7 @@ func NewSharedConfig(profile string, filenames []string) (SharedConfig, error) {
 		return SharedConfig{}, err
 	}
 
-	if len(cfg.AssumeRole.SourceProfile) > 0 {
+	if len(cfg.AssumeRole.sourceProfile) > 0 {
 		if err := cfg.setAssumeRoleSource(profile, files); err != nil {
 			return SharedConfig{}, err
 		}
@@ -182,6 +200,10 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	for _, filename := range filenames {
 		b, err := ioutil.ReadFile(filename)
 		if err != nil {
+			// TODO create stronger contract that will return error if none of
+			// the files can be opened. Let the caller determine if it should
+			// continue if the files fail to load.
+
 			// Skip files which can't be opened and read for whatever reason
 			continue
 		}
@@ -199,35 +221,35 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	return files, nil
 }
 
-func (cfg *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedConfigFile) error {
+func (c *SharedConfig) setAssumeRoleSource(origProfile string, files []sharedConfigFile) error {
 	var assumeRoleSrc SharedConfig
 
 	// Multiple level assume role chains are not support
-	if cfg.AssumeRole.SourceProfile == origProfile {
-		assumeRoleSrc = *cfg
+	if c.AssumeRole.sourceProfile == origProfile {
+		assumeRoleSrc = *c
 		assumeRoleSrc.AssumeRole = AssumeRoleConfig{}
 	} else {
-		err := assumeRoleSrc.setFromIniFiles(cfg.AssumeRole.SourceProfile, files)
+		err := assumeRoleSrc.setFromIniFiles(c.AssumeRole.sourceProfile, files)
 		if err != nil {
 			return err
 		}
 	}
 
-	if len(assumeRoleSrc.Creds.AccessKeyID) == 0 {
-		return SharedConfigAssumeRoleError{RoleARN: cfg.AssumeRole.RoleARN}
+	if len(assumeRoleSrc.Credentials.AccessKeyID) == 0 {
+		return SharedConfigAssumeRoleError{RoleARN: c.AssumeRole.RoleARN}
 	}
 
-	cfg.AssumeRoleSource = &assumeRoleSrc
+	c.AssumeRole.Source = &assumeRoleSrc
 
 	return nil
 }
 
-func (cfg *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile) error {
-	cfg.Profile = profile
+func (c *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFile) error {
+	c.Profile = profile
 
 	// Trim files from the list that don't exist.
 	for _, f := range files {
-		if err := cfg.setFromIniFile(profile, f); err != nil {
+		if err := c.setFromIniFile(profile, f); err != nil {
 			if _, ok := err.(SharedConfigProfileNotExistsError); ok {
 				// Ignore proviles missings
 				continue
@@ -247,7 +269,7 @@ func (cfg *SharedConfig) setFromIniFiles(profile string, files []sharedConfigFil
 // for incomplete grouped values in the config. Such as credentials. For example
 // if a config file only includes aws_access_key_id but no aws_secret_access_key
 // the aws_access_key_id will be ignored.
-func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) error {
+func (c *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) error {
 	section, err := file.IniData.GetSection(profile)
 	if err != nil {
 		// Fallback to to alternate profile name: profile <name>
@@ -261,7 +283,7 @@ func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) e
 	akid := section.Key(accessKeyIDKey).String()
 	secret := section.Key(secretAccessKey).String()
 	if len(akid) > 0 && len(secret) > 0 {
-		cfg.Creds = credentials.Value{
+		c.Credentials = aws.Credentials{
 			AccessKeyID:     akid,
 			SecretAccessKey: secret,
 			SessionToken:    section.Key(sessionTokenKey).String(),
@@ -273,18 +295,19 @@ func (cfg *SharedConfig) setFromIniFile(profile string, file sharedConfigFile) e
 	roleArn := section.Key(roleArnKey).String()
 	srcProfile := section.Key(sourceProfileKey).String()
 	if len(roleArn) > 0 && len(srcProfile) > 0 {
-		cfg.AssumeRole = AssumeRoleConfig{
+		c.AssumeRole = AssumeRoleConfig{
 			RoleARN:         roleArn,
-			SourceProfile:   srcProfile,
 			ExternalID:      section.Key(externalIDKey).String(),
 			MFASerial:       section.Key(mfaSerialKey).String(),
 			RoleSessionName: section.Key(roleSessionNameKey).String(),
+
+			sourceProfile: srcProfile,
 		}
 	}
 
 	// Region
 	if v := section.Key(regionKey).String(); len(v) > 0 {
-		cfg.Region = v
+		c.Region = v
 	}
 
 	return nil
@@ -326,28 +349,6 @@ type SharedConfigAssumeRoleError struct {
 func (e SharedConfigAssumeRoleError) Error() string {
 	return fmt.Sprintf("failed to load assume role for %s, source profile has no shared credentials",
 		e.RoleARN)
-}
-
-// DefaultSharedCredentialsFilename returns the SDK's default file path
-// for the shared credentials file.
-//
-// Builds the shared config file path based on the OS's platform.
-//
-//   - Linux/Unix: $HOME/.aws/credentials
-//   - Windows: %USERPROFILE%\.aws\credentials
-func DefaultSharedCredentialsFilename() string {
-	return filepath.Join(userHomeDir(), ".aws", "credentials")
-}
-
-// DefaultSharedConfigFilename returns the SDK's default file path for
-// the shared config file.
-//
-// Builds the shared config file path based on the OS's platform.
-//
-//   - Linux/Unix: $HOME/.aws/config
-//   - Windows: %USERPROFILE%\.aws\config
-func DefaultSharedConfigFilename() string {
-	return filepath.Join(userHomeDir(), ".aws", "config")
 }
 
 func userHomeDir() string {

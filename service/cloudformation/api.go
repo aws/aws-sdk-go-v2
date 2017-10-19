@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opCancelUpdateStack = "CancelUpdateStack"
 
-// CancelUpdateStackRequest generates a "aws/request.Request" representing the
+// CancelUpdateStackRequest generates a "aws.Request" representing the
 // client's request for the CancelUpdateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opCancelUpdateStack = "CancelUpdateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack
-func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput) (req *request.Request, output *CancelUpdateStackOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput) (req *aws.Request, output *CancelUpdateStackOutput) {
+	op := &aws.Operation{
 		Name:       opCancelUpdateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -90,7 +89,7 @@ func (c *CloudFormation) CancelUpdateStack(input *CancelUpdateStackInput) (*Canc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) CancelUpdateStackWithContext(ctx aws.Context, input *CancelUpdateStackInput, opts ...request.Option) (*CancelUpdateStackOutput, error) {
+func (c *CloudFormation) CancelUpdateStackWithContext(ctx aws.Context, input *CancelUpdateStackInput, opts ...aws.Option) (*CancelUpdateStackOutput, error) {
 	req, out := c.CancelUpdateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -99,7 +98,7 @@ func (c *CloudFormation) CancelUpdateStackWithContext(ctx aws.Context, input *Ca
 
 const opContinueUpdateRollback = "ContinueUpdateRollback"
 
-// ContinueUpdateRollbackRequest generates a "aws/request.Request" representing the
+// ContinueUpdateRollbackRequest generates a "aws.Request" representing the
 // client's request for the ContinueUpdateRollback operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -123,8 +122,8 @@ const opContinueUpdateRollback = "ContinueUpdateRollback"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback
-func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRollbackInput) (req *request.Request, output *ContinueUpdateRollbackOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRollbackInput) (req *aws.Request, output *ContinueUpdateRollbackOutput) {
+	op := &aws.Operation{
 		Name:       opContinueUpdateRollback,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -181,7 +180,7 @@ func (c *CloudFormation) ContinueUpdateRollback(input *ContinueUpdateRollbackInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ContinueUpdateRollbackWithContext(ctx aws.Context, input *ContinueUpdateRollbackInput, opts ...request.Option) (*ContinueUpdateRollbackOutput, error) {
+func (c *CloudFormation) ContinueUpdateRollbackWithContext(ctx aws.Context, input *ContinueUpdateRollbackInput, opts ...aws.Option) (*ContinueUpdateRollbackOutput, error) {
 	req, out := c.ContinueUpdateRollbackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -190,7 +189,7 @@ func (c *CloudFormation) ContinueUpdateRollbackWithContext(ctx aws.Context, inpu
 
 const opCreateChangeSet = "CreateChangeSet"
 
-// CreateChangeSetRequest generates a "aws/request.Request" representing the
+// CreateChangeSetRequest generates a "aws.Request" representing the
 // client's request for the CreateChangeSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -214,8 +213,8 @@ const opCreateChangeSet = "CreateChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet
-func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) (req *request.Request, output *CreateChangeSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) (req *aws.Request, output *CreateChangeSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateChangeSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -289,7 +288,7 @@ func (c *CloudFormation) CreateChangeSet(input *CreateChangeSetInput) (*CreateCh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) CreateChangeSetWithContext(ctx aws.Context, input *CreateChangeSetInput, opts ...request.Option) (*CreateChangeSetOutput, error) {
+func (c *CloudFormation) CreateChangeSetWithContext(ctx aws.Context, input *CreateChangeSetInput, opts ...aws.Option) (*CreateChangeSetOutput, error) {
 	req, out := c.CreateChangeSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -298,7 +297,7 @@ func (c *CloudFormation) CreateChangeSetWithContext(ctx aws.Context, input *Crea
 
 const opCreateStack = "CreateStack"
 
-// CreateStackRequest generates a "aws/request.Request" representing the
+// CreateStackRequest generates a "aws.Request" representing the
 // client's request for the CreateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -322,8 +321,8 @@ const opCreateStack = "CreateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStack
-func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) (req *request.Request, output *CreateStackOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) (req *aws.Request, output *CreateStackOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -382,7 +381,7 @@ func (c *CloudFormation) CreateStack(input *CreateStackInput) (*CreateStackOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...request.Option) (*CreateStackOutput, error) {
+func (c *CloudFormation) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...aws.Option) (*CreateStackOutput, error) {
 	req, out := c.CreateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -391,7 +390,7 @@ func (c *CloudFormation) CreateStackWithContext(ctx aws.Context, input *CreateSt
 
 const opCreateStackInstances = "CreateStackInstances"
 
-// CreateStackInstancesRequest generates a "aws/request.Request" representing the
+// CreateStackInstancesRequest generates a "aws.Request" representing the
 // client's request for the CreateStackInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -415,8 +414,8 @@ const opCreateStackInstances = "CreateStackInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInstances
-func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstancesInput) (req *request.Request, output *CreateStackInstancesOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstancesInput) (req *aws.Request, output *CreateStackInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStackInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -483,7 +482,7 @@ func (c *CloudFormation) CreateStackInstances(input *CreateStackInstancesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) CreateStackInstancesWithContext(ctx aws.Context, input *CreateStackInstancesInput, opts ...request.Option) (*CreateStackInstancesOutput, error) {
+func (c *CloudFormation) CreateStackInstancesWithContext(ctx aws.Context, input *CreateStackInstancesInput, opts ...aws.Option) (*CreateStackInstancesOutput, error) {
 	req, out := c.CreateStackInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -492,7 +491,7 @@ func (c *CloudFormation) CreateStackInstancesWithContext(ctx aws.Context, input 
 
 const opCreateStackSet = "CreateStackSet"
 
-// CreateStackSetRequest generates a "aws/request.Request" representing the
+// CreateStackSetRequest generates a "aws.Request" representing the
 // client's request for the CreateStackSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -516,8 +515,8 @@ const opCreateStackSet = "CreateStackSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackSet
-func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) (req *request.Request, output *CreateStackSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) (req *aws.Request, output *CreateStackSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStackSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -570,7 +569,7 @@ func (c *CloudFormation) CreateStackSet(input *CreateStackSetInput) (*CreateStac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) CreateStackSetWithContext(ctx aws.Context, input *CreateStackSetInput, opts ...request.Option) (*CreateStackSetOutput, error) {
+func (c *CloudFormation) CreateStackSetWithContext(ctx aws.Context, input *CreateStackSetInput, opts ...aws.Option) (*CreateStackSetOutput, error) {
 	req, out := c.CreateStackSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -579,7 +578,7 @@ func (c *CloudFormation) CreateStackSetWithContext(ctx aws.Context, input *Creat
 
 const opDeleteChangeSet = "DeleteChangeSet"
 
-// DeleteChangeSetRequest generates a "aws/request.Request" representing the
+// DeleteChangeSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteChangeSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -603,8 +602,8 @@ const opDeleteChangeSet = "DeleteChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSet
-func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) (req *request.Request, output *DeleteChangeSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) (req *aws.Request, output *DeleteChangeSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteChangeSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -655,7 +654,7 @@ func (c *CloudFormation) DeleteChangeSet(input *DeleteChangeSetInput) (*DeleteCh
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DeleteChangeSetWithContext(ctx aws.Context, input *DeleteChangeSetInput, opts ...request.Option) (*DeleteChangeSetOutput, error) {
+func (c *CloudFormation) DeleteChangeSetWithContext(ctx aws.Context, input *DeleteChangeSetInput, opts ...aws.Option) (*DeleteChangeSetOutput, error) {
 	req, out := c.DeleteChangeSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -664,7 +663,7 @@ func (c *CloudFormation) DeleteChangeSetWithContext(ctx aws.Context, input *Dele
 
 const opDeleteStack = "DeleteStack"
 
-// DeleteStackRequest generates a "aws/request.Request" representing the
+// DeleteStackRequest generates a "aws.Request" representing the
 // client's request for the DeleteStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -688,8 +687,8 @@ const opDeleteStack = "DeleteStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStack
-func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) (req *request.Request, output *DeleteStackOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request, output *DeleteStackOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -738,7 +737,7 @@ func (c *CloudFormation) DeleteStack(input *DeleteStackInput) (*DeleteStackOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...request.Option) (*DeleteStackOutput, error) {
+func (c *CloudFormation) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...aws.Option) (*DeleteStackOutput, error) {
 	req, out := c.DeleteStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -747,7 +746,7 @@ func (c *CloudFormation) DeleteStackWithContext(ctx aws.Context, input *DeleteSt
 
 const opDeleteStackInstances = "DeleteStackInstances"
 
-// DeleteStackInstancesRequest generates a "aws/request.Request" representing the
+// DeleteStackInstancesRequest generates a "aws.Request" representing the
 // client's request for the DeleteStackInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -771,8 +770,8 @@ const opDeleteStackInstances = "DeleteStackInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInstances
-func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstancesInput) (req *request.Request, output *DeleteStackInstancesOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstancesInput) (req *aws.Request, output *DeleteStackInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStackInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -831,7 +830,7 @@ func (c *CloudFormation) DeleteStackInstances(input *DeleteStackInstancesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DeleteStackInstancesWithContext(ctx aws.Context, input *DeleteStackInstancesInput, opts ...request.Option) (*DeleteStackInstancesOutput, error) {
+func (c *CloudFormation) DeleteStackInstancesWithContext(ctx aws.Context, input *DeleteStackInstancesInput, opts ...aws.Option) (*DeleteStackInstancesOutput, error) {
 	req, out := c.DeleteStackInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -840,7 +839,7 @@ func (c *CloudFormation) DeleteStackInstancesWithContext(ctx aws.Context, input 
 
 const opDeleteStackSet = "DeleteStackSet"
 
-// DeleteStackSetRequest generates a "aws/request.Request" representing the
+// DeleteStackSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteStackSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -864,8 +863,8 @@ const opDeleteStackSet = "DeleteStackSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackSet
-func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) (req *request.Request, output *DeleteStackSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) (req *aws.Request, output *DeleteStackSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStackSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -918,7 +917,7 @@ func (c *CloudFormation) DeleteStackSet(input *DeleteStackSetInput) (*DeleteStac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DeleteStackSetWithContext(ctx aws.Context, input *DeleteStackSetInput, opts ...request.Option) (*DeleteStackSetOutput, error) {
+func (c *CloudFormation) DeleteStackSetWithContext(ctx aws.Context, input *DeleteStackSetInput, opts ...aws.Option) (*DeleteStackSetOutput, error) {
 	req, out := c.DeleteStackSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -927,7 +926,7 @@ func (c *CloudFormation) DeleteStackSetWithContext(ctx aws.Context, input *Delet
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
-// DescribeAccountLimitsRequest generates a "aws/request.Request" representing the
+// DescribeAccountLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccountLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -951,8 +950,8 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimits
-func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *request.Request, output *DescribeAccountLimitsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *aws.Request, output *DescribeAccountLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -993,7 +992,7 @@ func (c *CloudFormation) DescribeAccountLimits(input *DescribeAccountLimitsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...request.Option) (*DescribeAccountLimitsOutput, error) {
+func (c *CloudFormation) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...aws.Option) (*DescribeAccountLimitsOutput, error) {
 	req, out := c.DescribeAccountLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1002,7 +1001,7 @@ func (c *CloudFormation) DescribeAccountLimitsWithContext(ctx aws.Context, input
 
 const opDescribeChangeSet = "DescribeChangeSet"
 
-// DescribeChangeSetRequest generates a "aws/request.Request" representing the
+// DescribeChangeSetRequest generates a "aws.Request" representing the
 // client's request for the DescribeChangeSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1026,8 +1025,8 @@ const opDescribeChangeSet = "DescribeChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet
-func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput) (req *request.Request, output *DescribeChangeSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput) (req *aws.Request, output *DescribeChangeSetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeChangeSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1076,7 +1075,7 @@ func (c *CloudFormation) DescribeChangeSet(input *DescribeChangeSetInput) (*Desc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeChangeSetWithContext(ctx aws.Context, input *DescribeChangeSetInput, opts ...request.Option) (*DescribeChangeSetOutput, error) {
+func (c *CloudFormation) DescribeChangeSetWithContext(ctx aws.Context, input *DescribeChangeSetInput, opts ...aws.Option) (*DescribeChangeSetOutput, error) {
 	req, out := c.DescribeChangeSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1085,7 +1084,7 @@ func (c *CloudFormation) DescribeChangeSetWithContext(ctx aws.Context, input *De
 
 const opDescribeStackEvents = "DescribeStackEvents"
 
-// DescribeStackEventsRequest generates a "aws/request.Request" representing the
+// DescribeStackEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1109,12 +1108,12 @@ const opDescribeStackEvents = "DescribeStackEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents
-func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsInput) (req *request.Request, output *DescribeStackEventsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsInput) (req *aws.Request, output *DescribeStackEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1161,7 +1160,7 @@ func (c *CloudFormation) DescribeStackEvents(input *DescribeStackEventsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackEventsWithContext(ctx aws.Context, input *DescribeStackEventsInput, opts ...request.Option) (*DescribeStackEventsOutput, error) {
+func (c *CloudFormation) DescribeStackEventsWithContext(ctx aws.Context, input *DescribeStackEventsInput, opts ...aws.Option) (*DescribeStackEventsOutput, error) {
 	req, out := c.DescribeStackEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1196,9 +1195,9 @@ func (c *CloudFormation) DescribeStackEventsPages(input *DescribeStackEventsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackEventsPagesWithContext(ctx aws.Context, input *DescribeStackEventsInput, fn func(*DescribeStackEventsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFormation) DescribeStackEventsPagesWithContext(ctx aws.Context, input *DescribeStackEventsInput, fn func(*DescribeStackEventsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeStackEventsInput
 			if input != nil {
 				tmp := *input
@@ -1220,7 +1219,7 @@ func (c *CloudFormation) DescribeStackEventsPagesWithContext(ctx aws.Context, in
 
 const opDescribeStackInstance = "DescribeStackInstance"
 
-// DescribeStackInstanceRequest generates a "aws/request.Request" representing the
+// DescribeStackInstanceRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1244,8 +1243,8 @@ const opDescribeStackInstance = "DescribeStackInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackInstance
-func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstanceInput) (req *request.Request, output *DescribeStackInstanceOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstanceInput) (req *aws.Request, output *DescribeStackInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1297,7 +1296,7 @@ func (c *CloudFormation) DescribeStackInstance(input *DescribeStackInstanceInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackInstanceWithContext(ctx aws.Context, input *DescribeStackInstanceInput, opts ...request.Option) (*DescribeStackInstanceOutput, error) {
+func (c *CloudFormation) DescribeStackInstanceWithContext(ctx aws.Context, input *DescribeStackInstanceInput, opts ...aws.Option) (*DescribeStackInstanceOutput, error) {
 	req, out := c.DescribeStackInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1306,7 +1305,7 @@ func (c *CloudFormation) DescribeStackInstanceWithContext(ctx aws.Context, input
 
 const opDescribeStackResource = "DescribeStackResource"
 
-// DescribeStackResourceRequest generates a "aws/request.Request" representing the
+// DescribeStackResourceRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1330,8 +1329,8 @@ const opDescribeStackResource = "DescribeStackResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource
-func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResourceInput) (req *request.Request, output *DescribeStackResourceOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResourceInput) (req *aws.Request, output *DescribeStackResourceOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1374,7 +1373,7 @@ func (c *CloudFormation) DescribeStackResource(input *DescribeStackResourceInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackResourceWithContext(ctx aws.Context, input *DescribeStackResourceInput, opts ...request.Option) (*DescribeStackResourceOutput, error) {
+func (c *CloudFormation) DescribeStackResourceWithContext(ctx aws.Context, input *DescribeStackResourceInput, opts ...aws.Option) (*DescribeStackResourceOutput, error) {
 	req, out := c.DescribeStackResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1383,7 +1382,7 @@ func (c *CloudFormation) DescribeStackResourceWithContext(ctx aws.Context, input
 
 const opDescribeStackResources = "DescribeStackResources"
 
-// DescribeStackResourcesRequest generates a "aws/request.Request" representing the
+// DescribeStackResourcesRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1407,8 +1406,8 @@ const opDescribeStackResources = "DescribeStackResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources
-func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResourcesInput) (req *request.Request, output *DescribeStackResourcesOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResourcesInput) (req *aws.Request, output *DescribeStackResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1465,7 +1464,7 @@ func (c *CloudFormation) DescribeStackResources(input *DescribeStackResourcesInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackResourcesWithContext(ctx aws.Context, input *DescribeStackResourcesInput, opts ...request.Option) (*DescribeStackResourcesOutput, error) {
+func (c *CloudFormation) DescribeStackResourcesWithContext(ctx aws.Context, input *DescribeStackResourcesInput, opts ...aws.Option) (*DescribeStackResourcesOutput, error) {
 	req, out := c.DescribeStackResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1474,7 +1473,7 @@ func (c *CloudFormation) DescribeStackResourcesWithContext(ctx aws.Context, inpu
 
 const opDescribeStackSet = "DescribeStackSet"
 
-// DescribeStackSetRequest generates a "aws/request.Request" representing the
+// DescribeStackSetRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1498,8 +1497,8 @@ const opDescribeStackSet = "DescribeStackSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet
-func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) (req *request.Request, output *DescribeStackSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) (req *aws.Request, output *DescribeStackSetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1544,7 +1543,7 @@ func (c *CloudFormation) DescribeStackSet(input *DescribeStackSetInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackSetWithContext(ctx aws.Context, input *DescribeStackSetInput, opts ...request.Option) (*DescribeStackSetOutput, error) {
+func (c *CloudFormation) DescribeStackSetWithContext(ctx aws.Context, input *DescribeStackSetInput, opts ...aws.Option) (*DescribeStackSetOutput, error) {
 	req, out := c.DescribeStackSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1553,7 +1552,7 @@ func (c *CloudFormation) DescribeStackSetWithContext(ctx aws.Context, input *Des
 
 const opDescribeStackSetOperation = "DescribeStackSetOperation"
 
-// DescribeStackSetOperationRequest generates a "aws/request.Request" representing the
+// DescribeStackSetOperationRequest generates a "aws.Request" representing the
 // client's request for the DescribeStackSetOperation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1577,8 +1576,8 @@ const opDescribeStackSetOperation = "DescribeStackSetOperation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation
-func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSetOperationInput) (req *request.Request, output *DescribeStackSetOperationOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSetOperationInput) (req *aws.Request, output *DescribeStackSetOperationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStackSetOperation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1626,7 +1625,7 @@ func (c *CloudFormation) DescribeStackSetOperation(input *DescribeStackSetOperat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStackSetOperationWithContext(ctx aws.Context, input *DescribeStackSetOperationInput, opts ...request.Option) (*DescribeStackSetOperationOutput, error) {
+func (c *CloudFormation) DescribeStackSetOperationWithContext(ctx aws.Context, input *DescribeStackSetOperationInput, opts ...aws.Option) (*DescribeStackSetOperationOutput, error) {
 	req, out := c.DescribeStackSetOperationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1635,7 +1634,7 @@ func (c *CloudFormation) DescribeStackSetOperationWithContext(ctx aws.Context, i
 
 const opDescribeStacks = "DescribeStacks"
 
-// DescribeStacksRequest generates a "aws/request.Request" representing the
+// DescribeStacksRequest generates a "aws.Request" representing the
 // client's request for the DescribeStacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1659,12 +1658,12 @@ const opDescribeStacks = "DescribeStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks
-func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) (req *request.Request, output *DescribeStacksOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.Request, output *DescribeStacksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1709,7 +1708,7 @@ func (c *CloudFormation) DescribeStacks(input *DescribeStacksInput) (*DescribeSt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.Option) (*DescribeStacksOutput, error) {
+func (c *CloudFormation) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.Option) (*DescribeStacksOutput, error) {
 	req, out := c.DescribeStacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1744,9 +1743,9 @@ func (c *CloudFormation) DescribeStacksPages(input *DescribeStacksInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) DescribeStacksPagesWithContext(ctx aws.Context, input *DescribeStacksInput, fn func(*DescribeStacksOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFormation) DescribeStacksPagesWithContext(ctx aws.Context, input *DescribeStacksInput, fn func(*DescribeStacksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeStacksInput
 			if input != nil {
 				tmp := *input
@@ -1768,7 +1767,7 @@ func (c *CloudFormation) DescribeStacksPagesWithContext(ctx aws.Context, input *
 
 const opEstimateTemplateCost = "EstimateTemplateCost"
 
-// EstimateTemplateCostRequest generates a "aws/request.Request" representing the
+// EstimateTemplateCostRequest generates a "aws.Request" representing the
 // client's request for the EstimateTemplateCost operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1792,8 +1791,8 @@ const opEstimateTemplateCost = "EstimateTemplateCost"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCost
-func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) (req *request.Request, output *EstimateTemplateCostOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCostInput) (req *aws.Request, output *EstimateTemplateCostOutput) {
+	op := &aws.Operation{
 		Name:       opEstimateTemplateCost,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1835,7 +1834,7 @@ func (c *CloudFormation) EstimateTemplateCost(input *EstimateTemplateCostInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) EstimateTemplateCostWithContext(ctx aws.Context, input *EstimateTemplateCostInput, opts ...request.Option) (*EstimateTemplateCostOutput, error) {
+func (c *CloudFormation) EstimateTemplateCostWithContext(ctx aws.Context, input *EstimateTemplateCostInput, opts ...aws.Option) (*EstimateTemplateCostOutput, error) {
 	req, out := c.EstimateTemplateCostRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1844,7 +1843,7 @@ func (c *CloudFormation) EstimateTemplateCostWithContext(ctx aws.Context, input 
 
 const opExecuteChangeSet = "ExecuteChangeSet"
 
-// ExecuteChangeSetRequest generates a "aws/request.Request" representing the
+// ExecuteChangeSetRequest generates a "aws.Request" representing the
 // client's request for the ExecuteChangeSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1868,8 +1867,8 @@ const opExecuteChangeSet = "ExecuteChangeSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet
-func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) (req *request.Request, output *ExecuteChangeSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) (req *aws.Request, output *ExecuteChangeSetOutput) {
+	op := &aws.Operation{
 		Name:       opExecuteChangeSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1938,7 +1937,7 @@ func (c *CloudFormation) ExecuteChangeSet(input *ExecuteChangeSetInput) (*Execut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ExecuteChangeSetWithContext(ctx aws.Context, input *ExecuteChangeSetInput, opts ...request.Option) (*ExecuteChangeSetOutput, error) {
+func (c *CloudFormation) ExecuteChangeSetWithContext(ctx aws.Context, input *ExecuteChangeSetInput, opts ...aws.Option) (*ExecuteChangeSetOutput, error) {
 	req, out := c.ExecuteChangeSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1947,7 +1946,7 @@ func (c *CloudFormation) ExecuteChangeSetWithContext(ctx aws.Context, input *Exe
 
 const opGetStackPolicy = "GetStackPolicy"
 
-// GetStackPolicyRequest generates a "aws/request.Request" representing the
+// GetStackPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetStackPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1971,8 +1970,8 @@ const opGetStackPolicy = "GetStackPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicy
-func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) (req *request.Request, output *GetStackPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) (req *aws.Request, output *GetStackPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetStackPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2013,7 +2012,7 @@ func (c *CloudFormation) GetStackPolicy(input *GetStackPolicyInput) (*GetStackPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) GetStackPolicyWithContext(ctx aws.Context, input *GetStackPolicyInput, opts ...request.Option) (*GetStackPolicyOutput, error) {
+func (c *CloudFormation) GetStackPolicyWithContext(ctx aws.Context, input *GetStackPolicyInput, opts ...aws.Option) (*GetStackPolicyOutput, error) {
 	req, out := c.GetStackPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2022,7 +2021,7 @@ func (c *CloudFormation) GetStackPolicyWithContext(ctx aws.Context, input *GetSt
 
 const opGetTemplate = "GetTemplate"
 
-// GetTemplateRequest generates a "aws/request.Request" representing the
+// GetTemplateRequest generates a "aws.Request" representing the
 // client's request for the GetTemplate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2046,8 +2045,8 @@ const opGetTemplate = "GetTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplate
-func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) (req *request.Request, output *GetTemplateOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) (req *aws.Request, output *GetTemplateOutput) {
+	op := &aws.Operation{
 		Name:       opGetTemplate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2099,7 +2098,7 @@ func (c *CloudFormation) GetTemplate(input *GetTemplateInput) (*GetTemplateOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) GetTemplateWithContext(ctx aws.Context, input *GetTemplateInput, opts ...request.Option) (*GetTemplateOutput, error) {
+func (c *CloudFormation) GetTemplateWithContext(ctx aws.Context, input *GetTemplateInput, opts ...aws.Option) (*GetTemplateOutput, error) {
 	req, out := c.GetTemplateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2108,7 +2107,7 @@ func (c *CloudFormation) GetTemplateWithContext(ctx aws.Context, input *GetTempl
 
 const opGetTemplateSummary = "GetTemplateSummary"
 
-// GetTemplateSummaryRequest generates a "aws/request.Request" representing the
+// GetTemplateSummaryRequest generates a "aws.Request" representing the
 // client's request for the GetTemplateSummary operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2132,8 +2131,8 @@ const opGetTemplateSummary = "GetTemplateSummary"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummary
-func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInput) (req *request.Request, output *GetTemplateSummaryOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInput) (req *aws.Request, output *GetTemplateSummaryOutput) {
+	op := &aws.Operation{
 		Name:       opGetTemplateSummary,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2189,7 +2188,7 @@ func (c *CloudFormation) GetTemplateSummary(input *GetTemplateSummaryInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) GetTemplateSummaryWithContext(ctx aws.Context, input *GetTemplateSummaryInput, opts ...request.Option) (*GetTemplateSummaryOutput, error) {
+func (c *CloudFormation) GetTemplateSummaryWithContext(ctx aws.Context, input *GetTemplateSummaryInput, opts ...aws.Option) (*GetTemplateSummaryOutput, error) {
 	req, out := c.GetTemplateSummaryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2198,7 +2197,7 @@ func (c *CloudFormation) GetTemplateSummaryWithContext(ctx aws.Context, input *G
 
 const opListChangeSets = "ListChangeSets"
 
-// ListChangeSetsRequest generates a "aws/request.Request" representing the
+// ListChangeSetsRequest generates a "aws.Request" representing the
 // client's request for the ListChangeSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2222,8 +2221,8 @@ const opListChangeSets = "ListChangeSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets
-func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) (req *request.Request, output *ListChangeSetsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) (req *aws.Request, output *ListChangeSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListChangeSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2265,7 +2264,7 @@ func (c *CloudFormation) ListChangeSets(input *ListChangeSetsInput) (*ListChange
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListChangeSetsWithContext(ctx aws.Context, input *ListChangeSetsInput, opts ...request.Option) (*ListChangeSetsOutput, error) {
+func (c *CloudFormation) ListChangeSetsWithContext(ctx aws.Context, input *ListChangeSetsInput, opts ...aws.Option) (*ListChangeSetsOutput, error) {
 	req, out := c.ListChangeSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2274,7 +2273,7 @@ func (c *CloudFormation) ListChangeSetsWithContext(ctx aws.Context, input *ListC
 
 const opListExports = "ListExports"
 
-// ListExportsRequest generates a "aws/request.Request" representing the
+// ListExportsRequest generates a "aws.Request" representing the
 // client's request for the ListExports operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2298,12 +2297,12 @@ const opListExports = "ListExports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExports
-func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) (req *request.Request, output *ListExportsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) (req *aws.Request, output *ListExportsOutput) {
+	op := &aws.Operation{
 		Name:       opListExports,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -2351,7 +2350,7 @@ func (c *CloudFormation) ListExports(input *ListExportsInput) (*ListExportsOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListExportsWithContext(ctx aws.Context, input *ListExportsInput, opts ...request.Option) (*ListExportsOutput, error) {
+func (c *CloudFormation) ListExportsWithContext(ctx aws.Context, input *ListExportsInput, opts ...aws.Option) (*ListExportsOutput, error) {
 	req, out := c.ListExportsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2386,9 +2385,9 @@ func (c *CloudFormation) ListExportsPages(input *ListExportsInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListExportsPagesWithContext(ctx aws.Context, input *ListExportsInput, fn func(*ListExportsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFormation) ListExportsPagesWithContext(ctx aws.Context, input *ListExportsInput, fn func(*ListExportsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListExportsInput
 			if input != nil {
 				tmp := *input
@@ -2410,7 +2409,7 @@ func (c *CloudFormation) ListExportsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListImports = "ListImports"
 
-// ListImportsRequest generates a "aws/request.Request" representing the
+// ListImportsRequest generates a "aws.Request" representing the
 // client's request for the ListImports operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2434,12 +2433,12 @@ const opListImports = "ListImports"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImports
-func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) (req *request.Request, output *ListImportsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) (req *aws.Request, output *ListImportsOutput) {
+	op := &aws.Operation{
 		Name:       opListImports,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -2487,7 +2486,7 @@ func (c *CloudFormation) ListImports(input *ListImportsInput) (*ListImportsOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListImportsWithContext(ctx aws.Context, input *ListImportsInput, opts ...request.Option) (*ListImportsOutput, error) {
+func (c *CloudFormation) ListImportsWithContext(ctx aws.Context, input *ListImportsInput, opts ...aws.Option) (*ListImportsOutput, error) {
 	req, out := c.ListImportsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2522,9 +2521,9 @@ func (c *CloudFormation) ListImportsPages(input *ListImportsInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListImportsPagesWithContext(ctx aws.Context, input *ListImportsInput, fn func(*ListImportsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFormation) ListImportsPagesWithContext(ctx aws.Context, input *ListImportsInput, fn func(*ListImportsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListImportsInput
 			if input != nil {
 				tmp := *input
@@ -2546,7 +2545,7 @@ func (c *CloudFormation) ListImportsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListStackInstances = "ListStackInstances"
 
-// ListStackInstancesRequest generates a "aws/request.Request" representing the
+// ListStackInstancesRequest generates a "aws.Request" representing the
 // client's request for the ListStackInstances operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2570,8 +2569,8 @@ const opListStackInstances = "ListStackInstances"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackInstances
-func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInput) (req *request.Request, output *ListStackInstancesOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInput) (req *aws.Request, output *ListStackInstancesOutput) {
+	op := &aws.Operation{
 		Name:       opListStackInstances,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2618,7 +2617,7 @@ func (c *CloudFormation) ListStackInstances(input *ListStackInstancesInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStackInstancesWithContext(ctx aws.Context, input *ListStackInstancesInput, opts ...request.Option) (*ListStackInstancesOutput, error) {
+func (c *CloudFormation) ListStackInstancesWithContext(ctx aws.Context, input *ListStackInstancesInput, opts ...aws.Option) (*ListStackInstancesOutput, error) {
 	req, out := c.ListStackInstancesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2627,7 +2626,7 @@ func (c *CloudFormation) ListStackInstancesWithContext(ctx aws.Context, input *L
 
 const opListStackResources = "ListStackResources"
 
-// ListStackResourcesRequest generates a "aws/request.Request" representing the
+// ListStackResourcesRequest generates a "aws.Request" representing the
 // client's request for the ListStackResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2651,12 +2650,12 @@ const opListStackResources = "ListStackResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources
-func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInput) (req *request.Request, output *ListStackResourcesOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInput) (req *aws.Request, output *ListStackResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opListStackResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -2701,7 +2700,7 @@ func (c *CloudFormation) ListStackResources(input *ListStackResourcesInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStackResourcesWithContext(ctx aws.Context, input *ListStackResourcesInput, opts ...request.Option) (*ListStackResourcesOutput, error) {
+func (c *CloudFormation) ListStackResourcesWithContext(ctx aws.Context, input *ListStackResourcesInput, opts ...aws.Option) (*ListStackResourcesOutput, error) {
 	req, out := c.ListStackResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2736,9 +2735,9 @@ func (c *CloudFormation) ListStackResourcesPages(input *ListStackResourcesInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStackResourcesPagesWithContext(ctx aws.Context, input *ListStackResourcesInput, fn func(*ListStackResourcesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFormation) ListStackResourcesPagesWithContext(ctx aws.Context, input *ListStackResourcesInput, fn func(*ListStackResourcesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStackResourcesInput
 			if input != nil {
 				tmp := *input
@@ -2760,7 +2759,7 @@ func (c *CloudFormation) ListStackResourcesPagesWithContext(ctx aws.Context, inp
 
 const opListStackSetOperationResults = "ListStackSetOperationResults"
 
-// ListStackSetOperationResultsRequest generates a "aws/request.Request" representing the
+// ListStackSetOperationResultsRequest generates a "aws.Request" representing the
 // client's request for the ListStackSetOperationResults operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2784,8 +2783,8 @@ const opListStackSetOperationResults = "ListStackSetOperationResults"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperationResults
-func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSetOperationResultsInput) (req *request.Request, output *ListStackSetOperationResultsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSetOperationResultsInput) (req *aws.Request, output *ListStackSetOperationResultsOutput) {
+	op := &aws.Operation{
 		Name:       opListStackSetOperationResults,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2833,7 +2832,7 @@ func (c *CloudFormation) ListStackSetOperationResults(input *ListStackSetOperati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStackSetOperationResultsWithContext(ctx aws.Context, input *ListStackSetOperationResultsInput, opts ...request.Option) (*ListStackSetOperationResultsOutput, error) {
+func (c *CloudFormation) ListStackSetOperationResultsWithContext(ctx aws.Context, input *ListStackSetOperationResultsInput, opts ...aws.Option) (*ListStackSetOperationResultsOutput, error) {
 	req, out := c.ListStackSetOperationResultsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2842,7 +2841,7 @@ func (c *CloudFormation) ListStackSetOperationResultsWithContext(ctx aws.Context
 
 const opListStackSetOperations = "ListStackSetOperations"
 
-// ListStackSetOperationsRequest generates a "aws/request.Request" representing the
+// ListStackSetOperationsRequest generates a "aws.Request" representing the
 // client's request for the ListStackSetOperations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2866,8 +2865,8 @@ const opListStackSetOperations = "ListStackSetOperations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperations
-func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperationsInput) (req *request.Request, output *ListStackSetOperationsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperationsInput) (req *aws.Request, output *ListStackSetOperationsOutput) {
+	op := &aws.Operation{
 		Name:       opListStackSetOperations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2912,7 +2911,7 @@ func (c *CloudFormation) ListStackSetOperations(input *ListStackSetOperationsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStackSetOperationsWithContext(ctx aws.Context, input *ListStackSetOperationsInput, opts ...request.Option) (*ListStackSetOperationsOutput, error) {
+func (c *CloudFormation) ListStackSetOperationsWithContext(ctx aws.Context, input *ListStackSetOperationsInput, opts ...aws.Option) (*ListStackSetOperationsOutput, error) {
 	req, out := c.ListStackSetOperationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2921,7 +2920,7 @@ func (c *CloudFormation) ListStackSetOperationsWithContext(ctx aws.Context, inpu
 
 const opListStackSets = "ListStackSets"
 
-// ListStackSetsRequest generates a "aws/request.Request" representing the
+// ListStackSetsRequest generates a "aws.Request" representing the
 // client's request for the ListStackSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2945,8 +2944,8 @@ const opListStackSets = "ListStackSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSets
-func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) (req *request.Request, output *ListStackSetsOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) (req *aws.Request, output *ListStackSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListStackSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2987,7 +2986,7 @@ func (c *CloudFormation) ListStackSets(input *ListStackSetsInput) (*ListStackSet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStackSetsWithContext(ctx aws.Context, input *ListStackSetsInput, opts ...request.Option) (*ListStackSetsOutput, error) {
+func (c *CloudFormation) ListStackSetsWithContext(ctx aws.Context, input *ListStackSetsInput, opts ...aws.Option) (*ListStackSetsOutput, error) {
 	req, out := c.ListStackSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2996,7 +2995,7 @@ func (c *CloudFormation) ListStackSetsWithContext(ctx aws.Context, input *ListSt
 
 const opListStacks = "ListStacks"
 
-// ListStacksRequest generates a "aws/request.Request" representing the
+// ListStacksRequest generates a "aws.Request" representing the
 // client's request for the ListStacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3020,12 +3019,12 @@ const opListStacks = "ListStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks
-func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) (req *request.Request, output *ListStacksOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) (req *aws.Request, output *ListStacksOutput) {
+	op := &aws.Operation{
 		Name:       opListStacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -3071,7 +3070,7 @@ func (c *CloudFormation) ListStacks(input *ListStacksInput) (*ListStacksOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStacksWithContext(ctx aws.Context, input *ListStacksInput, opts ...request.Option) (*ListStacksOutput, error) {
+func (c *CloudFormation) ListStacksWithContext(ctx aws.Context, input *ListStacksInput, opts ...aws.Option) (*ListStacksOutput, error) {
 	req, out := c.ListStacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3106,9 +3105,9 @@ func (c *CloudFormation) ListStacksPages(input *ListStacksInput, fn func(*ListSt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ListStacksPagesWithContext(ctx aws.Context, input *ListStacksInput, fn func(*ListStacksOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFormation) ListStacksPagesWithContext(ctx aws.Context, input *ListStacksInput, fn func(*ListStacksOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStacksInput
 			if input != nil {
 				tmp := *input
@@ -3130,7 +3129,7 @@ func (c *CloudFormation) ListStacksPagesWithContext(ctx aws.Context, input *List
 
 const opSetStackPolicy = "SetStackPolicy"
 
-// SetStackPolicyRequest generates a "aws/request.Request" representing the
+// SetStackPolicyRequest generates a "aws.Request" representing the
 // client's request for the SetStackPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3154,8 +3153,8 @@ const opSetStackPolicy = "SetStackPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicy
-func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) (req *request.Request, output *SetStackPolicyOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) (req *aws.Request, output *SetStackPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opSetStackPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3197,7 +3196,7 @@ func (c *CloudFormation) SetStackPolicy(input *SetStackPolicyInput) (*SetStackPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) SetStackPolicyWithContext(ctx aws.Context, input *SetStackPolicyInput, opts ...request.Option) (*SetStackPolicyOutput, error) {
+func (c *CloudFormation) SetStackPolicyWithContext(ctx aws.Context, input *SetStackPolicyInput, opts ...aws.Option) (*SetStackPolicyOutput, error) {
 	req, out := c.SetStackPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3206,7 +3205,7 @@ func (c *CloudFormation) SetStackPolicyWithContext(ctx aws.Context, input *SetSt
 
 const opSignalResource = "SignalResource"
 
-// SignalResourceRequest generates a "aws/request.Request" representing the
+// SignalResourceRequest generates a "aws.Request" representing the
 // client's request for the SignalResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3230,8 +3229,8 @@ const opSignalResource = "SignalResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResource
-func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) (req *request.Request, output *SignalResourceOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) (req *aws.Request, output *SignalResourceOutput) {
+	op := &aws.Operation{
 		Name:       opSignalResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3278,7 +3277,7 @@ func (c *CloudFormation) SignalResource(input *SignalResourceInput) (*SignalReso
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) SignalResourceWithContext(ctx aws.Context, input *SignalResourceInput, opts ...request.Option) (*SignalResourceOutput, error) {
+func (c *CloudFormation) SignalResourceWithContext(ctx aws.Context, input *SignalResourceInput, opts ...aws.Option) (*SignalResourceOutput, error) {
 	req, out := c.SignalResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3287,7 +3286,7 @@ func (c *CloudFormation) SignalResourceWithContext(ctx aws.Context, input *Signa
 
 const opStopStackSetOperation = "StopStackSetOperation"
 
-// StopStackSetOperationRequest generates a "aws/request.Request" representing the
+// StopStackSetOperationRequest generates a "aws.Request" representing the
 // client's request for the StopStackSetOperation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3311,8 +3310,8 @@ const opStopStackSetOperation = "StopStackSetOperation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StopStackSetOperation
-func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperationInput) (req *request.Request, output *StopStackSetOperationOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperationInput) (req *aws.Request, output *StopStackSetOperationOutput) {
+	op := &aws.Operation{
 		Name:       opStopStackSetOperation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3363,7 +3362,7 @@ func (c *CloudFormation) StopStackSetOperation(input *StopStackSetOperationInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) StopStackSetOperationWithContext(ctx aws.Context, input *StopStackSetOperationInput, opts ...request.Option) (*StopStackSetOperationOutput, error) {
+func (c *CloudFormation) StopStackSetOperationWithContext(ctx aws.Context, input *StopStackSetOperationInput, opts ...aws.Option) (*StopStackSetOperationOutput, error) {
 	req, out := c.StopStackSetOperationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3372,7 +3371,7 @@ func (c *CloudFormation) StopStackSetOperationWithContext(ctx aws.Context, input
 
 const opUpdateStack = "UpdateStack"
 
-// UpdateStackRequest generates a "aws/request.Request" representing the
+// UpdateStackRequest generates a "aws.Request" representing the
 // client's request for the UpdateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3396,8 +3395,8 @@ const opUpdateStack = "UpdateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStack
-func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) (req *request.Request, output *UpdateStackOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request, output *UpdateStackOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3454,7 +3453,7 @@ func (c *CloudFormation) UpdateStack(input *UpdateStackInput) (*UpdateStackOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...request.Option) (*UpdateStackOutput, error) {
+func (c *CloudFormation) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...aws.Option) (*UpdateStackOutput, error) {
 	req, out := c.UpdateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3463,7 +3462,7 @@ func (c *CloudFormation) UpdateStackWithContext(ctx aws.Context, input *UpdateSt
 
 const opUpdateStackSet = "UpdateStackSet"
 
-// UpdateStackSetRequest generates a "aws/request.Request" representing the
+// UpdateStackSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateStackSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3487,8 +3486,8 @@ const opUpdateStackSet = "UpdateStackSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackSet
-func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) (req *request.Request, output *UpdateStackSetOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) (req *aws.Request, output *UpdateStackSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateStackSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3552,7 +3551,7 @@ func (c *CloudFormation) UpdateStackSet(input *UpdateStackSetInput) (*UpdateStac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) UpdateStackSetWithContext(ctx aws.Context, input *UpdateStackSetInput, opts ...request.Option) (*UpdateStackSetOutput, error) {
+func (c *CloudFormation) UpdateStackSetWithContext(ctx aws.Context, input *UpdateStackSetInput, opts ...aws.Option) (*UpdateStackSetOutput, error) {
 	req, out := c.UpdateStackSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3561,7 +3560,7 @@ func (c *CloudFormation) UpdateStackSetWithContext(ctx aws.Context, input *Updat
 
 const opUpdateTerminationProtection = "UpdateTerminationProtection"
 
-// UpdateTerminationProtectionRequest generates a "aws/request.Request" representing the
+// UpdateTerminationProtectionRequest generates a "aws.Request" representing the
 // client's request for the UpdateTerminationProtection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3585,8 +3584,8 @@ const opUpdateTerminationProtection = "UpdateTerminationProtection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateTerminationProtection
-func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTerminationProtectionInput) (req *request.Request, output *UpdateTerminationProtectionOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTerminationProtectionInput) (req *aws.Request, output *UpdateTerminationProtectionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTerminationProtection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3634,7 +3633,7 @@ func (c *CloudFormation) UpdateTerminationProtection(input *UpdateTerminationPro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) UpdateTerminationProtectionWithContext(ctx aws.Context, input *UpdateTerminationProtectionInput, opts ...request.Option) (*UpdateTerminationProtectionOutput, error) {
+func (c *CloudFormation) UpdateTerminationProtectionWithContext(ctx aws.Context, input *UpdateTerminationProtectionInput, opts ...aws.Option) (*UpdateTerminationProtectionOutput, error) {
 	req, out := c.UpdateTerminationProtectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3643,7 +3642,7 @@ func (c *CloudFormation) UpdateTerminationProtectionWithContext(ctx aws.Context,
 
 const opValidateTemplate = "ValidateTemplate"
 
-// ValidateTemplateRequest generates a "aws/request.Request" representing the
+// ValidateTemplateRequest generates a "aws.Request" representing the
 // client's request for the ValidateTemplate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3667,8 +3666,8 @@ const opValidateTemplate = "ValidateTemplate"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplate
-func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) (req *request.Request, output *ValidateTemplateOutput) {
-	op := &request.Operation{
+func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) (req *aws.Request, output *ValidateTemplateOutput) {
+	op := &aws.Operation{
 		Name:       opValidateTemplate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3711,7 +3710,7 @@ func (c *CloudFormation) ValidateTemplate(input *ValidateTemplateInput) (*Valida
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFormation) ValidateTemplateWithContext(ctx aws.Context, input *ValidateTemplateInput, opts ...request.Option) (*ValidateTemplateOutput, error) {
+func (c *CloudFormation) ValidateTemplateWithContext(ctx aws.Context, input *ValidateTemplateInput, opts ...aws.Option) (*ValidateTemplateOutput, error) {
 	req, out := c.ValidateTemplateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3854,12 +3853,12 @@ func (s CancelUpdateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelUpdateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelUpdateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelUpdateStackInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4119,18 +4118,18 @@ func (s ContinueUpdateRollbackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContinueUpdateRollbackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ContinueUpdateRollbackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ContinueUpdateRollbackInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4327,37 +4326,37 @@ func (s CreateChangeSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateChangeSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateChangeSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateChangeSetInput"}
 	if s.ChangeSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
 	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 	if s.RollbackConfiguration != nil {
 		if err := s.RollbackConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RollbackConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RollbackConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -4366,7 +4365,7 @@ func (s *CreateChangeSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4680,34 +4679,34 @@ func (s CreateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackPolicyBody != nil && len(*s.StackPolicyBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyBody", 1))
 	}
 	if s.StackPolicyURL != nil && len(*s.StackPolicyURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyURL", 1))
 	}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 	if s.TimeoutInMinutes != nil && *s.TimeoutInMinutes < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TimeoutInMinutes", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutInMinutes", 1))
 	}
 	if s.RollbackConfiguration != nil {
 		if err := s.RollbackConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RollbackConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RollbackConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -4716,7 +4715,7 @@ func (s *CreateStackInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4880,22 +4879,22 @@ func (s CreateStackInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStackInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInstancesInput"}
 	if s.Accounts == nil {
-		invalidParams.Add(request.NewErrParamRequired("Accounts"))
+		invalidParams.Add(aws.NewErrParamRequired("Accounts"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OperationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
 	if s.Regions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Regions"))
+		invalidParams.Add(aws.NewErrParamRequired("Regions"))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 	if s.OperationPreferences != nil {
 		if err := s.OperationPreferences.Validate(); err != nil {
-			invalidParams.AddNested("OperationPreferences", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OperationPreferences", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5091,21 +5090,21 @@ func (s CreateStackSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStackSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStackSetInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -5113,7 +5112,7 @@ func (s *CreateStackSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5224,15 +5223,15 @@ func (s DeleteChangeSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteChangeSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteChangeSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteChangeSetInput"}
 	if s.ChangeSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
 	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5326,15 +5325,15 @@ func (s DeleteStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5425,25 +5424,25 @@ func (s DeleteStackInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStackInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInstancesInput"}
 	if s.Accounts == nil {
-		invalidParams.Add(request.NewErrParamRequired("Accounts"))
+		invalidParams.Add(aws.NewErrParamRequired("Accounts"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OperationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
 	if s.Regions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Regions"))
+		invalidParams.Add(aws.NewErrParamRequired("Regions"))
 	}
 	if s.RetainStacks == nil {
-		invalidParams.Add(request.NewErrParamRequired("RetainStacks"))
+		invalidParams.Add(aws.NewErrParamRequired("RetainStacks"))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 	if s.OperationPreferences != nil {
 		if err := s.OperationPreferences.Validate(); err != nil {
-			invalidParams.AddNested("OperationPreferences", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OperationPreferences", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5551,9 +5550,9 @@ func (s DeleteStackSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStackSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackSetInput"}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5604,9 +5603,9 @@ func (s DescribeAccountLimitsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAccountLimitsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5689,18 +5688,18 @@ func (s DescribeChangeSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeChangeSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeChangeSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeChangeSetInput"}
 	if s.ChangeSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
 	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5934,9 +5933,9 @@ func (s DescribeStackEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackEventsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6025,15 +6024,15 @@ func (s DescribeStackInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackInstanceInput"}
 	if s.StackInstanceAccount == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackInstanceAccount"))
+		invalidParams.Add(aws.NewErrParamRequired("StackInstanceAccount"))
 	}
 	if s.StackInstanceRegion == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackInstanceRegion"))
+		invalidParams.Add(aws.NewErrParamRequired("StackInstanceRegion"))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6122,12 +6121,12 @@ func (s DescribeStackResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackResourceInput"}
 	if s.LogicalResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogicalResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6288,9 +6287,9 @@ func (s DescribeStackSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSetInput"}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6332,15 +6331,15 @@ func (s DescribeStackSetOperationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStackSetOperationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStackSetOperationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStackSetOperationInput"}
 	if s.OperationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OperationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OperationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6441,9 +6440,9 @@ func (s DescribeStacksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStacksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStacksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStacksInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6538,12 +6537,12 @@ func (s EstimateTemplateCostInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EstimateTemplateCostInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EstimateTemplateCostInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EstimateTemplateCostInput"}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6631,18 +6630,18 @@ func (s ExecuteChangeSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExecuteChangeSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExecuteChangeSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExecuteChangeSetInput"}
 	if s.ChangeSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeSetName"))
 	}
 	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
 	}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6755,9 +6754,9 @@ func (s GetStackPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStackPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetStackPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetStackPolicyInput"}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6842,9 +6841,9 @@ func (s GetTemplateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTemplateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTemplateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTemplateInput"}
 	if s.ChangeSetName != nil && len(*s.ChangeSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeSetName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6964,18 +6963,18 @@ func (s GetTemplateSummaryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTemplateSummaryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTemplateSummaryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTemplateSummaryInput"}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 	if s.StackSetName != nil && len(*s.StackSetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackSetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackSetName", 1))
 	}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7135,15 +7134,15 @@ func (s ListChangeSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListChangeSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListChangeSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListChangeSetsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7221,9 +7220,9 @@ func (s ListExportsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListExportsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListExportsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListExportsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7299,12 +7298,12 @@ func (s ListImportsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListImportsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListImportsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListImportsInput"}
 	if s.ExportName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExportName"))
+		invalidParams.Add(aws.NewErrParamRequired("ExportName"))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7401,15 +7400,15 @@ func (s ListStackInstancesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStackInstancesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStackInstancesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStackInstancesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7520,12 +7519,12 @@ func (s ListStackResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStackResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStackResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStackResourcesInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7622,21 +7621,21 @@ func (s ListStackSetOperationResultsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStackSetOperationResultsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStackSetOperationResultsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStackSetOperationResultsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.OperationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OperationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OperationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7743,15 +7742,15 @@ func (s ListStackSetOperationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStackSetOperationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStackSetOperationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStackSetOperationsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7848,12 +7847,12 @@ func (s ListStackSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStackSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStackSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStackSetsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7943,9 +7942,9 @@ func (s ListStacksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListStacksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListStacksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListStacksInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8524,14 +8523,14 @@ func (s RollbackConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RollbackConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RollbackConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "RollbackConfiguration"}
 	if s.RollbackTriggers != nil {
 		for i, v := range s.RollbackTriggers {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RollbackTriggers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "RollbackTriggers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8587,12 +8586,12 @@ func (s RollbackTrigger) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RollbackTrigger) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RollbackTrigger"}
+	invalidParams := aws.ErrInvalidParams{Context: "RollbackTrigger"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8648,15 +8647,15 @@ func (s SetStackPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetStackPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetStackPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetStackPolicyInput"}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackPolicyBody != nil && len(*s.StackPolicyBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyBody", 1))
 	}
 	if s.StackPolicyURL != nil && len(*s.StackPolicyURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyURL", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8742,24 +8741,24 @@ func (s SignalResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SignalResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SignalResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SignalResourceInput"}
 	if s.LogicalResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("LogicalResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("LogicalResourceId"))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.UniqueId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UniqueId"))
+		invalidParams.Add(aws.NewErrParamRequired("UniqueId"))
 	}
 	if s.UniqueId != nil && len(*s.UniqueId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UniqueId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UniqueId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9959,12 +9958,12 @@ func (s StackSetOperationPreferences) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StackSetOperationPreferences) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StackSetOperationPreferences"}
+	invalidParams := aws.ErrInvalidParams{Context: "StackSetOperationPreferences"}
 	if s.MaxConcurrentCount != nil && *s.MaxConcurrentCount < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxConcurrentCount", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxConcurrentCount", 1))
 	}
 	if s.MaxConcurrentPercentage != nil && *s.MaxConcurrentPercentage < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxConcurrentPercentage", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxConcurrentPercentage", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10378,15 +10377,15 @@ func (s StopStackSetOperationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopStackSetOperationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopStackSetOperationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopStackSetOperationInput"}
 	if s.OperationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OperationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OperationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10454,18 +10453,18 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10714,37 +10713,37 @@ func (s UpdateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackInput"}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientRequestToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 20))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackPolicyBody != nil && len(*s.StackPolicyBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyBody", 1))
 	}
 	if s.StackPolicyDuringUpdateBody != nil && len(*s.StackPolicyDuringUpdateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyDuringUpdateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyDuringUpdateBody", 1))
 	}
 	if s.StackPolicyDuringUpdateURL != nil && len(*s.StackPolicyDuringUpdateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyDuringUpdateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyDuringUpdateURL", 1))
 	}
 	if s.StackPolicyURL != nil && len(*s.StackPolicyURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackPolicyURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackPolicyURL", 1))
 	}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 	if s.RollbackConfiguration != nil {
 		if err := s.RollbackConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RollbackConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RollbackConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -10753,7 +10752,7 @@ func (s *UpdateStackInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11019,25 +11018,25 @@ func (s UpdateStackSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateStackSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackSetInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.OperationId != nil && len(*s.OperationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OperationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OperationId", 1))
 	}
 	if s.StackSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 	if s.OperationPreferences != nil {
 		if err := s.OperationPreferences.Validate(); err != nil {
-			invalidParams.AddNested("OperationPreferences", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OperationPreferences", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -11046,7 +11045,7 @@ func (s *UpdateStackSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11169,15 +11168,15 @@ func (s UpdateTerminationProtectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTerminationProtectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTerminationProtectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTerminationProtectionInput"}
 	if s.EnableTerminationProtection == nil {
-		invalidParams.Add(request.NewErrParamRequired("EnableTerminationProtection"))
+		invalidParams.Add(aws.NewErrParamRequired("EnableTerminationProtection"))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11258,12 +11257,12 @@ func (s ValidateTemplateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ValidateTemplateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ValidateTemplateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ValidateTemplateInput"}
 	if s.TemplateBody != nil && len(*s.TemplateBody) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateBody", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateBody", 1))
 	}
 	if s.TemplateURL != nil && len(*s.TemplateURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TemplateURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TemplateURL", 1))
 	}
 
 	if invalidParams.Len() > 0 {

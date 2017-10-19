@@ -10,7 +10,6 @@ package sqsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := sqs.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := sqs.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,72 +64,72 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type SQSAPI interface {
 	AddPermission(*sqs.AddPermissionInput) (*sqs.AddPermissionOutput, error)
-	AddPermissionWithContext(aws.Context, *sqs.AddPermissionInput, ...request.Option) (*sqs.AddPermissionOutput, error)
-	AddPermissionRequest(*sqs.AddPermissionInput) (*request.Request, *sqs.AddPermissionOutput)
+	AddPermissionWithContext(aws.Context, *sqs.AddPermissionInput, ...aws.Option) (*sqs.AddPermissionOutput, error)
+	AddPermissionRequest(*sqs.AddPermissionInput) (*aws.Request, *sqs.AddPermissionOutput)
 
 	ChangeMessageVisibility(*sqs.ChangeMessageVisibilityInput) (*sqs.ChangeMessageVisibilityOutput, error)
-	ChangeMessageVisibilityWithContext(aws.Context, *sqs.ChangeMessageVisibilityInput, ...request.Option) (*sqs.ChangeMessageVisibilityOutput, error)
-	ChangeMessageVisibilityRequest(*sqs.ChangeMessageVisibilityInput) (*request.Request, *sqs.ChangeMessageVisibilityOutput)
+	ChangeMessageVisibilityWithContext(aws.Context, *sqs.ChangeMessageVisibilityInput, ...aws.Option) (*sqs.ChangeMessageVisibilityOutput, error)
+	ChangeMessageVisibilityRequest(*sqs.ChangeMessageVisibilityInput) (*aws.Request, *sqs.ChangeMessageVisibilityOutput)
 
 	ChangeMessageVisibilityBatch(*sqs.ChangeMessageVisibilityBatchInput) (*sqs.ChangeMessageVisibilityBatchOutput, error)
-	ChangeMessageVisibilityBatchWithContext(aws.Context, *sqs.ChangeMessageVisibilityBatchInput, ...request.Option) (*sqs.ChangeMessageVisibilityBatchOutput, error)
-	ChangeMessageVisibilityBatchRequest(*sqs.ChangeMessageVisibilityBatchInput) (*request.Request, *sqs.ChangeMessageVisibilityBatchOutput)
+	ChangeMessageVisibilityBatchWithContext(aws.Context, *sqs.ChangeMessageVisibilityBatchInput, ...aws.Option) (*sqs.ChangeMessageVisibilityBatchOutput, error)
+	ChangeMessageVisibilityBatchRequest(*sqs.ChangeMessageVisibilityBatchInput) (*aws.Request, *sqs.ChangeMessageVisibilityBatchOutput)
 
 	CreateQueue(*sqs.CreateQueueInput) (*sqs.CreateQueueOutput, error)
-	CreateQueueWithContext(aws.Context, *sqs.CreateQueueInput, ...request.Option) (*sqs.CreateQueueOutput, error)
-	CreateQueueRequest(*sqs.CreateQueueInput) (*request.Request, *sqs.CreateQueueOutput)
+	CreateQueueWithContext(aws.Context, *sqs.CreateQueueInput, ...aws.Option) (*sqs.CreateQueueOutput, error)
+	CreateQueueRequest(*sqs.CreateQueueInput) (*aws.Request, *sqs.CreateQueueOutput)
 
 	DeleteMessage(*sqs.DeleteMessageInput) (*sqs.DeleteMessageOutput, error)
-	DeleteMessageWithContext(aws.Context, *sqs.DeleteMessageInput, ...request.Option) (*sqs.DeleteMessageOutput, error)
-	DeleteMessageRequest(*sqs.DeleteMessageInput) (*request.Request, *sqs.DeleteMessageOutput)
+	DeleteMessageWithContext(aws.Context, *sqs.DeleteMessageInput, ...aws.Option) (*sqs.DeleteMessageOutput, error)
+	DeleteMessageRequest(*sqs.DeleteMessageInput) (*aws.Request, *sqs.DeleteMessageOutput)
 
 	DeleteMessageBatch(*sqs.DeleteMessageBatchInput) (*sqs.DeleteMessageBatchOutput, error)
-	DeleteMessageBatchWithContext(aws.Context, *sqs.DeleteMessageBatchInput, ...request.Option) (*sqs.DeleteMessageBatchOutput, error)
-	DeleteMessageBatchRequest(*sqs.DeleteMessageBatchInput) (*request.Request, *sqs.DeleteMessageBatchOutput)
+	DeleteMessageBatchWithContext(aws.Context, *sqs.DeleteMessageBatchInput, ...aws.Option) (*sqs.DeleteMessageBatchOutput, error)
+	DeleteMessageBatchRequest(*sqs.DeleteMessageBatchInput) (*aws.Request, *sqs.DeleteMessageBatchOutput)
 
 	DeleteQueue(*sqs.DeleteQueueInput) (*sqs.DeleteQueueOutput, error)
-	DeleteQueueWithContext(aws.Context, *sqs.DeleteQueueInput, ...request.Option) (*sqs.DeleteQueueOutput, error)
-	DeleteQueueRequest(*sqs.DeleteQueueInput) (*request.Request, *sqs.DeleteQueueOutput)
+	DeleteQueueWithContext(aws.Context, *sqs.DeleteQueueInput, ...aws.Option) (*sqs.DeleteQueueOutput, error)
+	DeleteQueueRequest(*sqs.DeleteQueueInput) (*aws.Request, *sqs.DeleteQueueOutput)
 
 	GetQueueAttributes(*sqs.GetQueueAttributesInput) (*sqs.GetQueueAttributesOutput, error)
-	GetQueueAttributesWithContext(aws.Context, *sqs.GetQueueAttributesInput, ...request.Option) (*sqs.GetQueueAttributesOutput, error)
-	GetQueueAttributesRequest(*sqs.GetQueueAttributesInput) (*request.Request, *sqs.GetQueueAttributesOutput)
+	GetQueueAttributesWithContext(aws.Context, *sqs.GetQueueAttributesInput, ...aws.Option) (*sqs.GetQueueAttributesOutput, error)
+	GetQueueAttributesRequest(*sqs.GetQueueAttributesInput) (*aws.Request, *sqs.GetQueueAttributesOutput)
 
 	GetQueueUrl(*sqs.GetQueueUrlInput) (*sqs.GetQueueUrlOutput, error)
-	GetQueueUrlWithContext(aws.Context, *sqs.GetQueueUrlInput, ...request.Option) (*sqs.GetQueueUrlOutput, error)
-	GetQueueUrlRequest(*sqs.GetQueueUrlInput) (*request.Request, *sqs.GetQueueUrlOutput)
+	GetQueueUrlWithContext(aws.Context, *sqs.GetQueueUrlInput, ...aws.Option) (*sqs.GetQueueUrlOutput, error)
+	GetQueueUrlRequest(*sqs.GetQueueUrlInput) (*aws.Request, *sqs.GetQueueUrlOutput)
 
 	ListDeadLetterSourceQueues(*sqs.ListDeadLetterSourceQueuesInput) (*sqs.ListDeadLetterSourceQueuesOutput, error)
-	ListDeadLetterSourceQueuesWithContext(aws.Context, *sqs.ListDeadLetterSourceQueuesInput, ...request.Option) (*sqs.ListDeadLetterSourceQueuesOutput, error)
-	ListDeadLetterSourceQueuesRequest(*sqs.ListDeadLetterSourceQueuesInput) (*request.Request, *sqs.ListDeadLetterSourceQueuesOutput)
+	ListDeadLetterSourceQueuesWithContext(aws.Context, *sqs.ListDeadLetterSourceQueuesInput, ...aws.Option) (*sqs.ListDeadLetterSourceQueuesOutput, error)
+	ListDeadLetterSourceQueuesRequest(*sqs.ListDeadLetterSourceQueuesInput) (*aws.Request, *sqs.ListDeadLetterSourceQueuesOutput)
 
 	ListQueues(*sqs.ListQueuesInput) (*sqs.ListQueuesOutput, error)
-	ListQueuesWithContext(aws.Context, *sqs.ListQueuesInput, ...request.Option) (*sqs.ListQueuesOutput, error)
-	ListQueuesRequest(*sqs.ListQueuesInput) (*request.Request, *sqs.ListQueuesOutput)
+	ListQueuesWithContext(aws.Context, *sqs.ListQueuesInput, ...aws.Option) (*sqs.ListQueuesOutput, error)
+	ListQueuesRequest(*sqs.ListQueuesInput) (*aws.Request, *sqs.ListQueuesOutput)
 
 	PurgeQueue(*sqs.PurgeQueueInput) (*sqs.PurgeQueueOutput, error)
-	PurgeQueueWithContext(aws.Context, *sqs.PurgeQueueInput, ...request.Option) (*sqs.PurgeQueueOutput, error)
-	PurgeQueueRequest(*sqs.PurgeQueueInput) (*request.Request, *sqs.PurgeQueueOutput)
+	PurgeQueueWithContext(aws.Context, *sqs.PurgeQueueInput, ...aws.Option) (*sqs.PurgeQueueOutput, error)
+	PurgeQueueRequest(*sqs.PurgeQueueInput) (*aws.Request, *sqs.PurgeQueueOutput)
 
 	ReceiveMessage(*sqs.ReceiveMessageInput) (*sqs.ReceiveMessageOutput, error)
-	ReceiveMessageWithContext(aws.Context, *sqs.ReceiveMessageInput, ...request.Option) (*sqs.ReceiveMessageOutput, error)
-	ReceiveMessageRequest(*sqs.ReceiveMessageInput) (*request.Request, *sqs.ReceiveMessageOutput)
+	ReceiveMessageWithContext(aws.Context, *sqs.ReceiveMessageInput, ...aws.Option) (*sqs.ReceiveMessageOutput, error)
+	ReceiveMessageRequest(*sqs.ReceiveMessageInput) (*aws.Request, *sqs.ReceiveMessageOutput)
 
 	RemovePermission(*sqs.RemovePermissionInput) (*sqs.RemovePermissionOutput, error)
-	RemovePermissionWithContext(aws.Context, *sqs.RemovePermissionInput, ...request.Option) (*sqs.RemovePermissionOutput, error)
-	RemovePermissionRequest(*sqs.RemovePermissionInput) (*request.Request, *sqs.RemovePermissionOutput)
+	RemovePermissionWithContext(aws.Context, *sqs.RemovePermissionInput, ...aws.Option) (*sqs.RemovePermissionOutput, error)
+	RemovePermissionRequest(*sqs.RemovePermissionInput) (*aws.Request, *sqs.RemovePermissionOutput)
 
 	SendMessage(*sqs.SendMessageInput) (*sqs.SendMessageOutput, error)
-	SendMessageWithContext(aws.Context, *sqs.SendMessageInput, ...request.Option) (*sqs.SendMessageOutput, error)
-	SendMessageRequest(*sqs.SendMessageInput) (*request.Request, *sqs.SendMessageOutput)
+	SendMessageWithContext(aws.Context, *sqs.SendMessageInput, ...aws.Option) (*sqs.SendMessageOutput, error)
+	SendMessageRequest(*sqs.SendMessageInput) (*aws.Request, *sqs.SendMessageOutput)
 
 	SendMessageBatch(*sqs.SendMessageBatchInput) (*sqs.SendMessageBatchOutput, error)
-	SendMessageBatchWithContext(aws.Context, *sqs.SendMessageBatchInput, ...request.Option) (*sqs.SendMessageBatchOutput, error)
-	SendMessageBatchRequest(*sqs.SendMessageBatchInput) (*request.Request, *sqs.SendMessageBatchOutput)
+	SendMessageBatchWithContext(aws.Context, *sqs.SendMessageBatchInput, ...aws.Option) (*sqs.SendMessageBatchOutput, error)
+	SendMessageBatchRequest(*sqs.SendMessageBatchInput) (*aws.Request, *sqs.SendMessageBatchOutput)
 
 	SetQueueAttributes(*sqs.SetQueueAttributesInput) (*sqs.SetQueueAttributesOutput, error)
-	SetQueueAttributesWithContext(aws.Context, *sqs.SetQueueAttributesInput, ...request.Option) (*sqs.SetQueueAttributesOutput, error)
-	SetQueueAttributesRequest(*sqs.SetQueueAttributesInput) (*request.Request, *sqs.SetQueueAttributesOutput)
+	SetQueueAttributesWithContext(aws.Context, *sqs.SetQueueAttributesInput, ...aws.Option) (*sqs.SetQueueAttributesOutput, error)
+	SetQueueAttributesRequest(*sqs.SetQueueAttributesInput) (*aws.Request, *sqs.SetQueueAttributesOutput)
 }
 
 var _ SQSAPI = (*sqs.SQS)(nil)

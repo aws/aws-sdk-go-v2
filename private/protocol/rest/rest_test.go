@@ -7,9 +7,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	metadata "github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/rest"
@@ -17,8 +16,8 @@ import (
 
 func TestUnsetHeaders(t *testing.T) {
 	cfg := &aws.Config{Region: aws.String("us-west-2")}
-	c := unit.Session.ClientConfig("testService", cfg)
-	svc := client.New(
+	c := unit.Config.ClientConfig("testService", cfg)
+	svc := aws.NewClient(
 		*cfg,
 		metadata.ClientInfo{
 			ServiceName:   "testService",

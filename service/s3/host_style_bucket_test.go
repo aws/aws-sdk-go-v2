@@ -75,17 +75,22 @@ func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
 }
 
 func TestAccelerateBucketBuild(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{S3UseAccelerate: aws.Bool(true)})
+	s := s3.New(unit.Config, &aws.Config{
+		S3UseAccelerate: aws.Bool(true),
+	})
 	runTests(t, s, accelerateTests)
 }
 
 func TestAccelerateNoSSLBucketBuild(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{S3UseAccelerate: aws.Bool(true), DisableSSL: aws.Bool(true)})
+	s := s3.New(unit.Config, &aws.Config{
+		S3UseAccelerate: aws.Bool(true),
+		DisableSSL:      aws.Bool(true),
+	})
 	runTests(t, s, accelerateNoSSLTests)
 }
 
 func TestAccelerateDualstackBucketBuild(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{
+	s := s3.New(unit.Config, &aws.Config{
 		S3UseAccelerate: aws.Bool(true),
 		UseDualStack:    aws.Bool(true),
 	})
@@ -93,22 +98,26 @@ func TestAccelerateDualstackBucketBuild(t *testing.T) {
 }
 
 func TestHostStyleBucketBuild(t *testing.T) {
-	s := s3.New(unit.Session)
+	s := s3.New(unit.Config)
 	runTests(t, s, sslTests)
 }
 
 func TestHostStyleBucketBuildNoSSL(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{DisableSSL: aws.Bool(true)})
+	s := s3.New(unit.Config, &aws.Config{
+		DisableSSL: aws.Bool(true),
+	})
 	runTests(t, s, nosslTests)
 }
 
 func TestPathStyleBucketBuild(t *testing.T) {
-	s := s3.New(unit.Session, &aws.Config{S3ForcePathStyle: aws.Bool(true)})
+	s := s3.New(unit.Config, &aws.Config{
+		S3ForcePathStyle: aws.Bool(true),
+	})
 	runTests(t, s, forcepathTests)
 }
 
 func TestHostStyleBucketGetBucketLocation(t *testing.T) {
-	s := s3.New(unit.Session)
+	s := s3.New(unit.Config)
 	req, _ := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{
 		Bucket: aws.String("bucket"),
 	})

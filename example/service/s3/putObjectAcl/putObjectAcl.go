@@ -5,9 +5,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -54,11 +55,15 @@ func main() {
 		emailPtr, userPtr = nil, nil
 	}
 
-	sess := session.Must(session.NewSession(&aws.Config{
-		Region: regionPtr,
-	}))
+	// Create a AWS SDK for Go config that will load credentials using the SDK's
+	// default credential change.
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
+	cfg.Region = regionPtr
 
-	svc := s3.New(sess)
+	svc := s3.New(cfg)
 
 	resp, err := svc.PutObjectAcl(&s3.PutObjectAclInput{
 		Bucket: bucketPtr,
@@ -84,8 +89,13 @@ func main() {
 	})
 
 	if err != nil {
-		fmt.Println("failed", err)
-	} else {
-		fmt.Println("success", resp)
+		exitErrorf("failed, %v", err)
 	}
+
+	fmt.Println("success", resp)
+}
+
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
+	os.Exit(1)
 }

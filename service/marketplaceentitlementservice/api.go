@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opGetEntitlements = "GetEntitlements"
 
-// GetEntitlementsRequest generates a "aws/request.Request" representing the
+// GetEntitlementsRequest generates a "aws.Request" representing the
 // client's request for the GetEntitlements operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opGetEntitlements = "GetEntitlements"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/entitlement.marketplace-2017-01-11/GetEntitlements
-func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitlementsInput) (req *request.Request, output *GetEntitlementsOutput) {
-	op := &request.Operation{
+func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitlementsInput) (req *aws.Request, output *GetEntitlementsOutput) {
+	op := &aws.Operation{
 		Name:       opGetEntitlements,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -90,7 +89,7 @@ func (c *MarketplaceEntitlementService) GetEntitlements(input *GetEntitlementsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MarketplaceEntitlementService) GetEntitlementsWithContext(ctx aws.Context, input *GetEntitlementsInput, opts ...request.Option) (*GetEntitlementsOutput, error) {
+func (c *MarketplaceEntitlementService) GetEntitlementsWithContext(ctx aws.Context, input *GetEntitlementsInput, opts ...aws.Option) (*GetEntitlementsOutput, error) {
 	req, out := c.GetEntitlementsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -266,12 +265,12 @@ func (s GetEntitlementsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEntitlementsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEntitlementsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEntitlementsInput"}
 	if s.ProductCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProductCode"))
+		invalidParams.Add(aws.NewErrParamRequired("ProductCode"))
 	}
 	if s.ProductCode != nil && len(*s.ProductCode) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProductCode", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProductCode", 1))
 	}
 
 	if invalidParams.Len() > 0 {

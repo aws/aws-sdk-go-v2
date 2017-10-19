@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opDeleteScalingPolicy = "DeleteScalingPolicy"
 
-// DeleteScalingPolicyRequest generates a "aws/request.Request" representing the
+// DeleteScalingPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteScalingPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy
-func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (req *request.Request, output *DeleteScalingPolicyOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) (req *aws.Request, output *DeleteScalingPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -105,7 +104,7 @@ func (c *ApplicationAutoScaling) DeleteScalingPolicy(input *DeleteScalingPolicyI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DeleteScalingPolicyWithContext(ctx aws.Context, input *DeleteScalingPolicyInput, opts ...request.Option) (*DeleteScalingPolicyOutput, error) {
+func (c *ApplicationAutoScaling) DeleteScalingPolicyWithContext(ctx aws.Context, input *DeleteScalingPolicyInput, opts ...aws.Option) (*DeleteScalingPolicyOutput, error) {
 	req, out := c.DeleteScalingPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -114,7 +113,7 @@ func (c *ApplicationAutoScaling) DeleteScalingPolicyWithContext(ctx aws.Context,
 
 const opDeregisterScalableTarget = "DeregisterScalableTarget"
 
-// DeregisterScalableTargetRequest generates a "aws/request.Request" representing the
+// DeregisterScalableTargetRequest generates a "aws.Request" representing the
 // client's request for the DeregisterScalableTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -138,8 +137,8 @@ const opDeregisterScalableTarget = "DeregisterScalableTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget
-func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *DeregisterScalableTargetInput) (req *request.Request, output *DeregisterScalableTargetOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *DeregisterScalableTargetInput) (req *aws.Request, output *DeregisterScalableTargetOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterScalableTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -205,7 +204,7 @@ func (c *ApplicationAutoScaling) DeregisterScalableTarget(input *DeregisterScala
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DeregisterScalableTargetWithContext(ctx aws.Context, input *DeregisterScalableTargetInput, opts ...request.Option) (*DeregisterScalableTargetOutput, error) {
+func (c *ApplicationAutoScaling) DeregisterScalableTargetWithContext(ctx aws.Context, input *DeregisterScalableTargetInput, opts ...aws.Option) (*DeregisterScalableTargetOutput, error) {
 	req, out := c.DeregisterScalableTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -214,7 +213,7 @@ func (c *ApplicationAutoScaling) DeregisterScalableTargetWithContext(ctx aws.Con
 
 const opDescribeScalableTargets = "DescribeScalableTargets"
 
-// DescribeScalableTargetsRequest generates a "aws/request.Request" representing the
+// DescribeScalableTargetsRequest generates a "aws.Request" representing the
 // client's request for the DescribeScalableTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -238,12 +237,12 @@ const opDescribeScalableTargets = "DescribeScalableTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets
-func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeScalableTargetsInput) (req *request.Request, output *DescribeScalableTargetsOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeScalableTargetsInput) (req *aws.Request, output *DescribeScalableTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeScalableTargets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -308,7 +307,7 @@ func (c *ApplicationAutoScaling) DescribeScalableTargets(input *DescribeScalable
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalableTargetsWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, opts ...request.Option) (*DescribeScalableTargetsOutput, error) {
+func (c *ApplicationAutoScaling) DescribeScalableTargetsWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, opts ...aws.Option) (*DescribeScalableTargetsOutput, error) {
 	req, out := c.DescribeScalableTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -343,9 +342,9 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsPages(input *DescribeSca
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, fn func(*DescribeScalableTargetsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, fn func(*DescribeScalableTargetsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeScalableTargetsInput
 			if input != nil {
 				tmp := *input
@@ -367,7 +366,7 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
 
-// DescribeScalingActivitiesRequest generates a "aws/request.Request" representing the
+// DescribeScalingActivitiesRequest generates a "aws.Request" representing the
 // client's request for the DescribeScalingActivities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -391,12 +390,12 @@ const opDescribeScalingActivities = "DescribeScalingActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivities
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) (req *request.Request, output *DescribeScalingActivitiesOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingActivitiesInput) (req *aws.Request, output *DescribeScalingActivitiesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeScalingActivities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -462,7 +461,7 @@ func (c *ApplicationAutoScaling) DescribeScalingActivities(input *DescribeScalin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, opts ...request.Option) (*DescribeScalingActivitiesOutput, error) {
+func (c *ApplicationAutoScaling) DescribeScalingActivitiesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, opts ...aws.Option) (*DescribeScalingActivitiesOutput, error) {
 	req, out := c.DescribeScalingActivitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -497,9 +496,9 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesPages(input *DescribeS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeScalingActivitiesInput
 			if input != nil {
 				tmp := *input
@@ -521,7 +520,7 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx a
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
 
-// DescribeScalingPoliciesRequest generates a "aws/request.Request" representing the
+// DescribeScalingPoliciesRequest generates a "aws.Request" representing the
 // client's request for the DescribeScalingPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -545,12 +544,12 @@ const opDescribeScalingPolicies = "DescribeScalingPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPolicies
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) (req *request.Request, output *DescribeScalingPoliciesOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeScalingPoliciesInput) (req *aws.Request, output *DescribeScalingPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeScalingPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -623,7 +622,7 @@ func (c *ApplicationAutoScaling) DescribeScalingPolicies(input *DescribeScalingP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, opts ...request.Option) (*DescribeScalingPoliciesOutput, error) {
+func (c *ApplicationAutoScaling) DescribeScalingPoliciesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, opts ...aws.Option) (*DescribeScalingPoliciesOutput, error) {
 	req, out := c.DescribeScalingPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -658,9 +657,9 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesPages(input *DescribeSca
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, fn func(*DescribeScalingPoliciesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, fn func(*DescribeScalingPoliciesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeScalingPoliciesInput
 			if input != nil {
 				tmp := *input
@@ -682,7 +681,7 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws
 
 const opPutScalingPolicy = "PutScalingPolicy"
 
-// PutScalingPolicyRequest generates a "aws/request.Request" representing the
+// PutScalingPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutScalingPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -706,8 +705,8 @@ const opPutScalingPolicy = "PutScalingPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicy
-func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *request.Request, output *PutScalingPolicyOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) (req *aws.Request, output *PutScalingPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutScalingPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -793,7 +792,7 @@ func (c *ApplicationAutoScaling) PutScalingPolicy(input *PutScalingPolicyInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...request.Option) (*PutScalingPolicyOutput, error) {
+func (c *ApplicationAutoScaling) PutScalingPolicyWithContext(ctx aws.Context, input *PutScalingPolicyInput, opts ...aws.Option) (*PutScalingPolicyOutput, error) {
 	req, out := c.PutScalingPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -802,7 +801,7 @@ func (c *ApplicationAutoScaling) PutScalingPolicyWithContext(ctx aws.Context, in
 
 const opRegisterScalableTarget = "RegisterScalableTarget"
 
-// RegisterScalableTargetRequest generates a "aws/request.Request" representing the
+// RegisterScalableTargetRequest generates a "aws.Request" representing the
 // client's request for the RegisterScalableTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -826,8 +825,8 @@ const opRegisterScalableTarget = "RegisterScalableTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget
-func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterScalableTargetInput) (req *request.Request, output *RegisterScalableTargetOutput) {
-	op := &request.Operation{
+func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterScalableTargetInput) (req *aws.Request, output *RegisterScalableTargetOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterScalableTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -893,7 +892,7 @@ func (c *ApplicationAutoScaling) RegisterScalableTarget(input *RegisterScalableT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ApplicationAutoScaling) RegisterScalableTargetWithContext(ctx aws.Context, input *RegisterScalableTargetInput, opts ...request.Option) (*RegisterScalableTargetOutput, error) {
+func (c *ApplicationAutoScaling) RegisterScalableTargetWithContext(ctx aws.Context, input *RegisterScalableTargetInput, opts ...aws.Option) (*RegisterScalableTargetOutput, error) {
 	req, out := c.RegisterScalableTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -977,15 +976,15 @@ func (s CustomizedMetricSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomizedMetricSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CustomizedMetricSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "CustomizedMetricSpecification"}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Namespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("Namespace"))
+		invalidParams.Add(aws.NewErrParamRequired("Namespace"))
 	}
 	if s.Statistic == nil {
-		invalidParams.Add(request.NewErrParamRequired("Statistic"))
+		invalidParams.Add(aws.NewErrParamRequired("Statistic"))
 	}
 	if s.Dimensions != nil {
 		for i, v := range s.Dimensions {
@@ -993,7 +992,7 @@ func (s *CustomizedMetricSpecification) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1116,24 +1115,24 @@ func (s DeleteScalingPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteScalingPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteScalingPolicyInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ScalableDimension == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalableDimension"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1258,18 +1257,18 @@ func (s DeregisterScalableTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterScalableTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterScalableTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterScalableTargetInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ScalableDimension == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalableDimension"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1398,9 +1397,9 @@ func (s DescribeScalableTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalableTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeScalableTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalableTargetsInput"}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1560,12 +1559,12 @@ func (s DescribeScalingActivitiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalingActivitiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeScalingActivitiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingActivitiesInput"}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1728,12 +1727,12 @@ func (s DescribeScalingPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeScalingPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeScalingPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingPoliciesInput"}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1840,12 +1839,12 @@ func (s MetricDimension) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MetricDimension) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MetricDimension"}
+	invalidParams := aws.ErrInvalidParams{Context: "MetricDimension"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1892,12 +1891,12 @@ func (s PredefinedMetricSpecification) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PredefinedMetricSpecification) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PredefinedMetricSpecification"}
+	invalidParams := aws.ErrInvalidParams{Context: "PredefinedMetricSpecification"}
 	if s.PredefinedMetricType == nil {
-		invalidParams.Add(request.NewErrParamRequired("PredefinedMetricType"))
+		invalidParams.Add(aws.NewErrParamRequired("PredefinedMetricType"))
 	}
 	if s.ResourceLabel != nil && len(*s.ResourceLabel) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceLabel", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceLabel", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2019,33 +2018,33 @@ func (s PutScalingPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutScalingPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutScalingPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutScalingPolicyInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ScalableDimension == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalableDimension"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 	if s.StepScalingPolicyConfiguration != nil {
 		if err := s.StepScalingPolicyConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("StepScalingPolicyConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StepScalingPolicyConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TargetTrackingScalingPolicyConfiguration != nil {
 		if err := s.TargetTrackingScalingPolicyConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("TargetTrackingScalingPolicyConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TargetTrackingScalingPolicyConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2224,21 +2223,21 @@ func (s RegisterScalableTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterScalableTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterScalableTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterScalableTargetInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.ScalableDimension == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalableDimension"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalableDimension"))
 	}
 	if s.ServiceNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceNamespace"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2847,9 +2846,9 @@ func (s StepAdjustment) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StepAdjustment) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StepAdjustment"}
+	invalidParams := aws.ErrInvalidParams{Context: "StepAdjustment"}
 	if s.ScalingAdjustment == nil {
-		invalidParams.Add(request.NewErrParamRequired("ScalingAdjustment"))
+		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2934,14 +2933,14 @@ func (s StepScalingPolicyConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StepScalingPolicyConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StepScalingPolicyConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "StepScalingPolicyConfiguration"}
 	if s.StepAdjustments != nil {
 		for i, v := range s.StepAdjustments {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StepAdjustments", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StepAdjustments", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3038,18 +3037,18 @@ func (s TargetTrackingScalingPolicyConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TargetTrackingScalingPolicyConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TargetTrackingScalingPolicyConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "TargetTrackingScalingPolicyConfiguration"}
 	if s.TargetValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetValue"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetValue"))
 	}
 	if s.CustomizedMetricSpecification != nil {
 		if err := s.CustomizedMetricSpecification.Validate(); err != nil {
-			invalidParams.AddNested("CustomizedMetricSpecification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CustomizedMetricSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.PredefinedMetricSpecification != nil {
 		if err := s.PredefinedMetricSpecification.Validate(); err != nil {
-			invalidParams.AddNested("PredefinedMetricSpecification", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PredefinedMetricSpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 

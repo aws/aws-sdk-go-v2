@@ -10,7 +10,6 @@ package lexruntimeserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := lexruntimeservice.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := lexruntimeservice.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,12 +64,12 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type LexRuntimeServiceAPI interface {
 	PostContent(*lexruntimeservice.PostContentInput) (*lexruntimeservice.PostContentOutput, error)
-	PostContentWithContext(aws.Context, *lexruntimeservice.PostContentInput, ...request.Option) (*lexruntimeservice.PostContentOutput, error)
-	PostContentRequest(*lexruntimeservice.PostContentInput) (*request.Request, *lexruntimeservice.PostContentOutput)
+	PostContentWithContext(aws.Context, *lexruntimeservice.PostContentInput, ...aws.Option) (*lexruntimeservice.PostContentOutput, error)
+	PostContentRequest(*lexruntimeservice.PostContentInput) (*aws.Request, *lexruntimeservice.PostContentOutput)
 
 	PostText(*lexruntimeservice.PostTextInput) (*lexruntimeservice.PostTextOutput, error)
-	PostTextWithContext(aws.Context, *lexruntimeservice.PostTextInput, ...request.Option) (*lexruntimeservice.PostTextOutput, error)
-	PostTextRequest(*lexruntimeservice.PostTextInput) (*request.Request, *lexruntimeservice.PostTextOutput)
+	PostTextWithContext(aws.Context, *lexruntimeservice.PostTextInput, ...aws.Option) (*lexruntimeservice.PostTextOutput, error)
+	PostTextRequest(*lexruntimeservice.PostTextInput) (*aws.Request, *lexruntimeservice.PostTextOutput)
 }
 
 var _ LexRuntimeServiceAPI = (*lexruntimeservice.LexRuntimeService)(nil)

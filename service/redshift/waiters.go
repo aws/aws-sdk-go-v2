@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilClusterAvailable uses the Amazon Redshift API operation
@@ -25,30 +24,30 @@ func (c *Redshift) WaitUntilClusterAvailable(input *DescribeClustersInput) error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilClusterAvailableWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Redshift) WaitUntilClusterAvailableWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilClusterAvailable",
 		MaxAttempts: 30,
-		Delay:       request.ConstantWaiterDelay(60 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Clusters[].ClusterStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Clusters[].ClusterStatus",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
 				Expected: "deleting",
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ClusterNotFound",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeClustersInput
 			if input != nil {
 				tmp := *input
@@ -81,30 +80,30 @@ func (c *Redshift) WaitUntilClusterDeleted(input *DescribeClustersInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Redshift) WaitUntilClusterDeletedWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilClusterDeleted",
 		MaxAttempts: 30,
-		Delay:       request.ConstantWaiterDelay(60 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ClusterNotFound",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
 				Expected: "creating",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
 				Expected: "modifying",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeClustersInput
 			if input != nil {
 				tmp := *input
@@ -137,25 +136,25 @@ func (c *Redshift) WaitUntilClusterRestored(input *DescribeClustersInput) error 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilClusterRestoredWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Redshift) WaitUntilClusterRestoredWithContext(ctx aws.Context, input *DescribeClustersInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilClusterRestored",
 		MaxAttempts: 30,
-		Delay:       request.ConstantWaiterDelay(60 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(60 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Clusters[].RestoreStatus.Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Clusters[].RestoreStatus.Status",
 				Expected: "completed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Clusters[].ClusterStatus",
 				Expected: "deleting",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeClustersInput
 			if input != nil {
 				tmp := *input
@@ -188,30 +187,30 @@ func (c *Redshift) WaitUntilSnapshotAvailable(input *DescribeClusterSnapshotsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Redshift) WaitUntilSnapshotAvailableWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Redshift) WaitUntilSnapshotAvailableWithContext(ctx aws.Context, input *DescribeClusterSnapshotsInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilSnapshotAvailable",
 		MaxAttempts: 20,
-		Delay:       request.ConstantWaiterDelay(15 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(15 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "Snapshots[].Status",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "Snapshots[].Status",
 				Expected: "available",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Snapshots[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Snapshots[].Status",
 				Expected: "failed",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathAnyWaiterMatch, Argument: "Snapshots[].Status",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathAnyWaiterMatch, Argument: "Snapshots[].Status",
 				Expected: "deleted",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeClusterSnapshotsInput
 			if input != nil {
 				tmp := *input

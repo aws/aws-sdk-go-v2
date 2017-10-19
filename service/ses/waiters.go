@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilIdentityExists uses the Amazon SES API operation
@@ -25,20 +24,20 @@ func (c *SES) WaitUntilIdentityExists(input *GetIdentityVerificationAttributesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) WaitUntilIdentityExistsWithContext(ctx aws.Context, input *GetIdentityVerificationAttributesInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *SES) WaitUntilIdentityExistsWithContext(ctx aws.Context, input *GetIdentityVerificationAttributesInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilIdentityExists",
 		MaxAttempts: 20,
-		Delay:       request.ConstantWaiterDelay(3 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(3 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathAllWaiterMatch, Argument: "VerificationAttributes.*.VerificationStatus",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathAllWaiterMatch, Argument: "VerificationAttributes.*.VerificationStatus",
 				Expected: "Success",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *GetIdentityVerificationAttributesInput
 			if input != nil {
 				tmp := *input

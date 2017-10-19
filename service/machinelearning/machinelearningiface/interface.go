@@ -10,7 +10,6 @@ package machinelearningiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := machinelearning.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := machinelearning.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,140 +64,140 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type MachineLearningAPI interface {
 	AddTags(*machinelearning.AddTagsInput) (*machinelearning.AddTagsOutput, error)
-	AddTagsWithContext(aws.Context, *machinelearning.AddTagsInput, ...request.Option) (*machinelearning.AddTagsOutput, error)
-	AddTagsRequest(*machinelearning.AddTagsInput) (*request.Request, *machinelearning.AddTagsOutput)
+	AddTagsWithContext(aws.Context, *machinelearning.AddTagsInput, ...aws.Option) (*machinelearning.AddTagsOutput, error)
+	AddTagsRequest(*machinelearning.AddTagsInput) (*aws.Request, *machinelearning.AddTagsOutput)
 
 	CreateBatchPrediction(*machinelearning.CreateBatchPredictionInput) (*machinelearning.CreateBatchPredictionOutput, error)
-	CreateBatchPredictionWithContext(aws.Context, *machinelearning.CreateBatchPredictionInput, ...request.Option) (*machinelearning.CreateBatchPredictionOutput, error)
-	CreateBatchPredictionRequest(*machinelearning.CreateBatchPredictionInput) (*request.Request, *machinelearning.CreateBatchPredictionOutput)
+	CreateBatchPredictionWithContext(aws.Context, *machinelearning.CreateBatchPredictionInput, ...aws.Option) (*machinelearning.CreateBatchPredictionOutput, error)
+	CreateBatchPredictionRequest(*machinelearning.CreateBatchPredictionInput) (*aws.Request, *machinelearning.CreateBatchPredictionOutput)
 
 	CreateDataSourceFromRDS(*machinelearning.CreateDataSourceFromRDSInput) (*machinelearning.CreateDataSourceFromRDSOutput, error)
-	CreateDataSourceFromRDSWithContext(aws.Context, *machinelearning.CreateDataSourceFromRDSInput, ...request.Option) (*machinelearning.CreateDataSourceFromRDSOutput, error)
-	CreateDataSourceFromRDSRequest(*machinelearning.CreateDataSourceFromRDSInput) (*request.Request, *machinelearning.CreateDataSourceFromRDSOutput)
+	CreateDataSourceFromRDSWithContext(aws.Context, *machinelearning.CreateDataSourceFromRDSInput, ...aws.Option) (*machinelearning.CreateDataSourceFromRDSOutput, error)
+	CreateDataSourceFromRDSRequest(*machinelearning.CreateDataSourceFromRDSInput) (*aws.Request, *machinelearning.CreateDataSourceFromRDSOutput)
 
 	CreateDataSourceFromRedshift(*machinelearning.CreateDataSourceFromRedshiftInput) (*machinelearning.CreateDataSourceFromRedshiftOutput, error)
-	CreateDataSourceFromRedshiftWithContext(aws.Context, *machinelearning.CreateDataSourceFromRedshiftInput, ...request.Option) (*machinelearning.CreateDataSourceFromRedshiftOutput, error)
-	CreateDataSourceFromRedshiftRequest(*machinelearning.CreateDataSourceFromRedshiftInput) (*request.Request, *machinelearning.CreateDataSourceFromRedshiftOutput)
+	CreateDataSourceFromRedshiftWithContext(aws.Context, *machinelearning.CreateDataSourceFromRedshiftInput, ...aws.Option) (*machinelearning.CreateDataSourceFromRedshiftOutput, error)
+	CreateDataSourceFromRedshiftRequest(*machinelearning.CreateDataSourceFromRedshiftInput) (*aws.Request, *machinelearning.CreateDataSourceFromRedshiftOutput)
 
 	CreateDataSourceFromS3(*machinelearning.CreateDataSourceFromS3Input) (*machinelearning.CreateDataSourceFromS3Output, error)
-	CreateDataSourceFromS3WithContext(aws.Context, *machinelearning.CreateDataSourceFromS3Input, ...request.Option) (*machinelearning.CreateDataSourceFromS3Output, error)
-	CreateDataSourceFromS3Request(*machinelearning.CreateDataSourceFromS3Input) (*request.Request, *machinelearning.CreateDataSourceFromS3Output)
+	CreateDataSourceFromS3WithContext(aws.Context, *machinelearning.CreateDataSourceFromS3Input, ...aws.Option) (*machinelearning.CreateDataSourceFromS3Output, error)
+	CreateDataSourceFromS3Request(*machinelearning.CreateDataSourceFromS3Input) (*aws.Request, *machinelearning.CreateDataSourceFromS3Output)
 
 	CreateEvaluation(*machinelearning.CreateEvaluationInput) (*machinelearning.CreateEvaluationOutput, error)
-	CreateEvaluationWithContext(aws.Context, *machinelearning.CreateEvaluationInput, ...request.Option) (*machinelearning.CreateEvaluationOutput, error)
-	CreateEvaluationRequest(*machinelearning.CreateEvaluationInput) (*request.Request, *machinelearning.CreateEvaluationOutput)
+	CreateEvaluationWithContext(aws.Context, *machinelearning.CreateEvaluationInput, ...aws.Option) (*machinelearning.CreateEvaluationOutput, error)
+	CreateEvaluationRequest(*machinelearning.CreateEvaluationInput) (*aws.Request, *machinelearning.CreateEvaluationOutput)
 
 	CreateMLModel(*machinelearning.CreateMLModelInput) (*machinelearning.CreateMLModelOutput, error)
-	CreateMLModelWithContext(aws.Context, *machinelearning.CreateMLModelInput, ...request.Option) (*machinelearning.CreateMLModelOutput, error)
-	CreateMLModelRequest(*machinelearning.CreateMLModelInput) (*request.Request, *machinelearning.CreateMLModelOutput)
+	CreateMLModelWithContext(aws.Context, *machinelearning.CreateMLModelInput, ...aws.Option) (*machinelearning.CreateMLModelOutput, error)
+	CreateMLModelRequest(*machinelearning.CreateMLModelInput) (*aws.Request, *machinelearning.CreateMLModelOutput)
 
 	CreateRealtimeEndpoint(*machinelearning.CreateRealtimeEndpointInput) (*machinelearning.CreateRealtimeEndpointOutput, error)
-	CreateRealtimeEndpointWithContext(aws.Context, *machinelearning.CreateRealtimeEndpointInput, ...request.Option) (*machinelearning.CreateRealtimeEndpointOutput, error)
-	CreateRealtimeEndpointRequest(*machinelearning.CreateRealtimeEndpointInput) (*request.Request, *machinelearning.CreateRealtimeEndpointOutput)
+	CreateRealtimeEndpointWithContext(aws.Context, *machinelearning.CreateRealtimeEndpointInput, ...aws.Option) (*machinelearning.CreateRealtimeEndpointOutput, error)
+	CreateRealtimeEndpointRequest(*machinelearning.CreateRealtimeEndpointInput) (*aws.Request, *machinelearning.CreateRealtimeEndpointOutput)
 
 	DeleteBatchPrediction(*machinelearning.DeleteBatchPredictionInput) (*machinelearning.DeleteBatchPredictionOutput, error)
-	DeleteBatchPredictionWithContext(aws.Context, *machinelearning.DeleteBatchPredictionInput, ...request.Option) (*machinelearning.DeleteBatchPredictionOutput, error)
-	DeleteBatchPredictionRequest(*machinelearning.DeleteBatchPredictionInput) (*request.Request, *machinelearning.DeleteBatchPredictionOutput)
+	DeleteBatchPredictionWithContext(aws.Context, *machinelearning.DeleteBatchPredictionInput, ...aws.Option) (*machinelearning.DeleteBatchPredictionOutput, error)
+	DeleteBatchPredictionRequest(*machinelearning.DeleteBatchPredictionInput) (*aws.Request, *machinelearning.DeleteBatchPredictionOutput)
 
 	DeleteDataSource(*machinelearning.DeleteDataSourceInput) (*machinelearning.DeleteDataSourceOutput, error)
-	DeleteDataSourceWithContext(aws.Context, *machinelearning.DeleteDataSourceInput, ...request.Option) (*machinelearning.DeleteDataSourceOutput, error)
-	DeleteDataSourceRequest(*machinelearning.DeleteDataSourceInput) (*request.Request, *machinelearning.DeleteDataSourceOutput)
+	DeleteDataSourceWithContext(aws.Context, *machinelearning.DeleteDataSourceInput, ...aws.Option) (*machinelearning.DeleteDataSourceOutput, error)
+	DeleteDataSourceRequest(*machinelearning.DeleteDataSourceInput) (*aws.Request, *machinelearning.DeleteDataSourceOutput)
 
 	DeleteEvaluation(*machinelearning.DeleteEvaluationInput) (*machinelearning.DeleteEvaluationOutput, error)
-	DeleteEvaluationWithContext(aws.Context, *machinelearning.DeleteEvaluationInput, ...request.Option) (*machinelearning.DeleteEvaluationOutput, error)
-	DeleteEvaluationRequest(*machinelearning.DeleteEvaluationInput) (*request.Request, *machinelearning.DeleteEvaluationOutput)
+	DeleteEvaluationWithContext(aws.Context, *machinelearning.DeleteEvaluationInput, ...aws.Option) (*machinelearning.DeleteEvaluationOutput, error)
+	DeleteEvaluationRequest(*machinelearning.DeleteEvaluationInput) (*aws.Request, *machinelearning.DeleteEvaluationOutput)
 
 	DeleteMLModel(*machinelearning.DeleteMLModelInput) (*machinelearning.DeleteMLModelOutput, error)
-	DeleteMLModelWithContext(aws.Context, *machinelearning.DeleteMLModelInput, ...request.Option) (*machinelearning.DeleteMLModelOutput, error)
-	DeleteMLModelRequest(*machinelearning.DeleteMLModelInput) (*request.Request, *machinelearning.DeleteMLModelOutput)
+	DeleteMLModelWithContext(aws.Context, *machinelearning.DeleteMLModelInput, ...aws.Option) (*machinelearning.DeleteMLModelOutput, error)
+	DeleteMLModelRequest(*machinelearning.DeleteMLModelInput) (*aws.Request, *machinelearning.DeleteMLModelOutput)
 
 	DeleteRealtimeEndpoint(*machinelearning.DeleteRealtimeEndpointInput) (*machinelearning.DeleteRealtimeEndpointOutput, error)
-	DeleteRealtimeEndpointWithContext(aws.Context, *machinelearning.DeleteRealtimeEndpointInput, ...request.Option) (*machinelearning.DeleteRealtimeEndpointOutput, error)
-	DeleteRealtimeEndpointRequest(*machinelearning.DeleteRealtimeEndpointInput) (*request.Request, *machinelearning.DeleteRealtimeEndpointOutput)
+	DeleteRealtimeEndpointWithContext(aws.Context, *machinelearning.DeleteRealtimeEndpointInput, ...aws.Option) (*machinelearning.DeleteRealtimeEndpointOutput, error)
+	DeleteRealtimeEndpointRequest(*machinelearning.DeleteRealtimeEndpointInput) (*aws.Request, *machinelearning.DeleteRealtimeEndpointOutput)
 
 	DeleteTags(*machinelearning.DeleteTagsInput) (*machinelearning.DeleteTagsOutput, error)
-	DeleteTagsWithContext(aws.Context, *machinelearning.DeleteTagsInput, ...request.Option) (*machinelearning.DeleteTagsOutput, error)
-	DeleteTagsRequest(*machinelearning.DeleteTagsInput) (*request.Request, *machinelearning.DeleteTagsOutput)
+	DeleteTagsWithContext(aws.Context, *machinelearning.DeleteTagsInput, ...aws.Option) (*machinelearning.DeleteTagsOutput, error)
+	DeleteTagsRequest(*machinelearning.DeleteTagsInput) (*aws.Request, *machinelearning.DeleteTagsOutput)
 
 	DescribeBatchPredictions(*machinelearning.DescribeBatchPredictionsInput) (*machinelearning.DescribeBatchPredictionsOutput, error)
-	DescribeBatchPredictionsWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, ...request.Option) (*machinelearning.DescribeBatchPredictionsOutput, error)
-	DescribeBatchPredictionsRequest(*machinelearning.DescribeBatchPredictionsInput) (*request.Request, *machinelearning.DescribeBatchPredictionsOutput)
+	DescribeBatchPredictionsWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, ...aws.Option) (*machinelearning.DescribeBatchPredictionsOutput, error)
+	DescribeBatchPredictionsRequest(*machinelearning.DescribeBatchPredictionsInput) (*aws.Request, *machinelearning.DescribeBatchPredictionsOutput)
 
 	DescribeBatchPredictionsPages(*machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool) error
-	DescribeBatchPredictionsPagesWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool, ...request.Option) error
+	DescribeBatchPredictionsPagesWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDataSources(*machinelearning.DescribeDataSourcesInput) (*machinelearning.DescribeDataSourcesOutput, error)
-	DescribeDataSourcesWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, ...request.Option) (*machinelearning.DescribeDataSourcesOutput, error)
-	DescribeDataSourcesRequest(*machinelearning.DescribeDataSourcesInput) (*request.Request, *machinelearning.DescribeDataSourcesOutput)
+	DescribeDataSourcesWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, ...aws.Option) (*machinelearning.DescribeDataSourcesOutput, error)
+	DescribeDataSourcesRequest(*machinelearning.DescribeDataSourcesInput) (*aws.Request, *machinelearning.DescribeDataSourcesOutput)
 
 	DescribeDataSourcesPages(*machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool) error
-	DescribeDataSourcesPagesWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool, ...request.Option) error
+	DescribeDataSourcesPagesWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool, ...aws.Option) error
 
 	DescribeEvaluations(*machinelearning.DescribeEvaluationsInput) (*machinelearning.DescribeEvaluationsOutput, error)
-	DescribeEvaluationsWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, ...request.Option) (*machinelearning.DescribeEvaluationsOutput, error)
-	DescribeEvaluationsRequest(*machinelearning.DescribeEvaluationsInput) (*request.Request, *machinelearning.DescribeEvaluationsOutput)
+	DescribeEvaluationsWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, ...aws.Option) (*machinelearning.DescribeEvaluationsOutput, error)
+	DescribeEvaluationsRequest(*machinelearning.DescribeEvaluationsInput) (*aws.Request, *machinelearning.DescribeEvaluationsOutput)
 
 	DescribeEvaluationsPages(*machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool) error
-	DescribeEvaluationsPagesWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool, ...request.Option) error
+	DescribeEvaluationsPagesWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool, ...aws.Option) error
 
 	DescribeMLModels(*machinelearning.DescribeMLModelsInput) (*machinelearning.DescribeMLModelsOutput, error)
-	DescribeMLModelsWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, ...request.Option) (*machinelearning.DescribeMLModelsOutput, error)
-	DescribeMLModelsRequest(*machinelearning.DescribeMLModelsInput) (*request.Request, *machinelearning.DescribeMLModelsOutput)
+	DescribeMLModelsWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, ...aws.Option) (*machinelearning.DescribeMLModelsOutput, error)
+	DescribeMLModelsRequest(*machinelearning.DescribeMLModelsInput) (*aws.Request, *machinelearning.DescribeMLModelsOutput)
 
 	DescribeMLModelsPages(*machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool) error
-	DescribeMLModelsPagesWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool, ...request.Option) error
+	DescribeMLModelsPagesWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool, ...aws.Option) error
 
 	DescribeTags(*machinelearning.DescribeTagsInput) (*machinelearning.DescribeTagsOutput, error)
-	DescribeTagsWithContext(aws.Context, *machinelearning.DescribeTagsInput, ...request.Option) (*machinelearning.DescribeTagsOutput, error)
-	DescribeTagsRequest(*machinelearning.DescribeTagsInput) (*request.Request, *machinelearning.DescribeTagsOutput)
+	DescribeTagsWithContext(aws.Context, *machinelearning.DescribeTagsInput, ...aws.Option) (*machinelearning.DescribeTagsOutput, error)
+	DescribeTagsRequest(*machinelearning.DescribeTagsInput) (*aws.Request, *machinelearning.DescribeTagsOutput)
 
 	GetBatchPrediction(*machinelearning.GetBatchPredictionInput) (*machinelearning.GetBatchPredictionOutput, error)
-	GetBatchPredictionWithContext(aws.Context, *machinelearning.GetBatchPredictionInput, ...request.Option) (*machinelearning.GetBatchPredictionOutput, error)
-	GetBatchPredictionRequest(*machinelearning.GetBatchPredictionInput) (*request.Request, *machinelearning.GetBatchPredictionOutput)
+	GetBatchPredictionWithContext(aws.Context, *machinelearning.GetBatchPredictionInput, ...aws.Option) (*machinelearning.GetBatchPredictionOutput, error)
+	GetBatchPredictionRequest(*machinelearning.GetBatchPredictionInput) (*aws.Request, *machinelearning.GetBatchPredictionOutput)
 
 	GetDataSource(*machinelearning.GetDataSourceInput) (*machinelearning.GetDataSourceOutput, error)
-	GetDataSourceWithContext(aws.Context, *machinelearning.GetDataSourceInput, ...request.Option) (*machinelearning.GetDataSourceOutput, error)
-	GetDataSourceRequest(*machinelearning.GetDataSourceInput) (*request.Request, *machinelearning.GetDataSourceOutput)
+	GetDataSourceWithContext(aws.Context, *machinelearning.GetDataSourceInput, ...aws.Option) (*machinelearning.GetDataSourceOutput, error)
+	GetDataSourceRequest(*machinelearning.GetDataSourceInput) (*aws.Request, *machinelearning.GetDataSourceOutput)
 
 	GetEvaluation(*machinelearning.GetEvaluationInput) (*machinelearning.GetEvaluationOutput, error)
-	GetEvaluationWithContext(aws.Context, *machinelearning.GetEvaluationInput, ...request.Option) (*machinelearning.GetEvaluationOutput, error)
-	GetEvaluationRequest(*machinelearning.GetEvaluationInput) (*request.Request, *machinelearning.GetEvaluationOutput)
+	GetEvaluationWithContext(aws.Context, *machinelearning.GetEvaluationInput, ...aws.Option) (*machinelearning.GetEvaluationOutput, error)
+	GetEvaluationRequest(*machinelearning.GetEvaluationInput) (*aws.Request, *machinelearning.GetEvaluationOutput)
 
 	GetMLModel(*machinelearning.GetMLModelInput) (*machinelearning.GetMLModelOutput, error)
-	GetMLModelWithContext(aws.Context, *machinelearning.GetMLModelInput, ...request.Option) (*machinelearning.GetMLModelOutput, error)
-	GetMLModelRequest(*machinelearning.GetMLModelInput) (*request.Request, *machinelearning.GetMLModelOutput)
+	GetMLModelWithContext(aws.Context, *machinelearning.GetMLModelInput, ...aws.Option) (*machinelearning.GetMLModelOutput, error)
+	GetMLModelRequest(*machinelearning.GetMLModelInput) (*aws.Request, *machinelearning.GetMLModelOutput)
 
 	Predict(*machinelearning.PredictInput) (*machinelearning.PredictOutput, error)
-	PredictWithContext(aws.Context, *machinelearning.PredictInput, ...request.Option) (*machinelearning.PredictOutput, error)
-	PredictRequest(*machinelearning.PredictInput) (*request.Request, *machinelearning.PredictOutput)
+	PredictWithContext(aws.Context, *machinelearning.PredictInput, ...aws.Option) (*machinelearning.PredictOutput, error)
+	PredictRequest(*machinelearning.PredictInput) (*aws.Request, *machinelearning.PredictOutput)
 
 	UpdateBatchPrediction(*machinelearning.UpdateBatchPredictionInput) (*machinelearning.UpdateBatchPredictionOutput, error)
-	UpdateBatchPredictionWithContext(aws.Context, *machinelearning.UpdateBatchPredictionInput, ...request.Option) (*machinelearning.UpdateBatchPredictionOutput, error)
-	UpdateBatchPredictionRequest(*machinelearning.UpdateBatchPredictionInput) (*request.Request, *machinelearning.UpdateBatchPredictionOutput)
+	UpdateBatchPredictionWithContext(aws.Context, *machinelearning.UpdateBatchPredictionInput, ...aws.Option) (*machinelearning.UpdateBatchPredictionOutput, error)
+	UpdateBatchPredictionRequest(*machinelearning.UpdateBatchPredictionInput) (*aws.Request, *machinelearning.UpdateBatchPredictionOutput)
 
 	UpdateDataSource(*machinelearning.UpdateDataSourceInput) (*machinelearning.UpdateDataSourceOutput, error)
-	UpdateDataSourceWithContext(aws.Context, *machinelearning.UpdateDataSourceInput, ...request.Option) (*machinelearning.UpdateDataSourceOutput, error)
-	UpdateDataSourceRequest(*machinelearning.UpdateDataSourceInput) (*request.Request, *machinelearning.UpdateDataSourceOutput)
+	UpdateDataSourceWithContext(aws.Context, *machinelearning.UpdateDataSourceInput, ...aws.Option) (*machinelearning.UpdateDataSourceOutput, error)
+	UpdateDataSourceRequest(*machinelearning.UpdateDataSourceInput) (*aws.Request, *machinelearning.UpdateDataSourceOutput)
 
 	UpdateEvaluation(*machinelearning.UpdateEvaluationInput) (*machinelearning.UpdateEvaluationOutput, error)
-	UpdateEvaluationWithContext(aws.Context, *machinelearning.UpdateEvaluationInput, ...request.Option) (*machinelearning.UpdateEvaluationOutput, error)
-	UpdateEvaluationRequest(*machinelearning.UpdateEvaluationInput) (*request.Request, *machinelearning.UpdateEvaluationOutput)
+	UpdateEvaluationWithContext(aws.Context, *machinelearning.UpdateEvaluationInput, ...aws.Option) (*machinelearning.UpdateEvaluationOutput, error)
+	UpdateEvaluationRequest(*machinelearning.UpdateEvaluationInput) (*aws.Request, *machinelearning.UpdateEvaluationOutput)
 
 	UpdateMLModel(*machinelearning.UpdateMLModelInput) (*machinelearning.UpdateMLModelOutput, error)
-	UpdateMLModelWithContext(aws.Context, *machinelearning.UpdateMLModelInput, ...request.Option) (*machinelearning.UpdateMLModelOutput, error)
-	UpdateMLModelRequest(*machinelearning.UpdateMLModelInput) (*request.Request, *machinelearning.UpdateMLModelOutput)
+	UpdateMLModelWithContext(aws.Context, *machinelearning.UpdateMLModelInput, ...aws.Option) (*machinelearning.UpdateMLModelOutput, error)
+	UpdateMLModelRequest(*machinelearning.UpdateMLModelInput) (*aws.Request, *machinelearning.UpdateMLModelOutput)
 
 	WaitUntilBatchPredictionAvailable(*machinelearning.DescribeBatchPredictionsInput) error
-	WaitUntilBatchPredictionAvailableWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, ...request.WaiterOption) error
+	WaitUntilBatchPredictionAvailableWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, ...aws.WaiterOption) error
 
 	WaitUntilDataSourceAvailable(*machinelearning.DescribeDataSourcesInput) error
-	WaitUntilDataSourceAvailableWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, ...request.WaiterOption) error
+	WaitUntilDataSourceAvailableWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, ...aws.WaiterOption) error
 
 	WaitUntilEvaluationAvailable(*machinelearning.DescribeEvaluationsInput) error
-	WaitUntilEvaluationAvailableWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, ...request.WaiterOption) error
+	WaitUntilEvaluationAvailableWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, ...aws.WaiterOption) error
 
 	WaitUntilMLModelAvailable(*machinelearning.DescribeMLModelsInput) error
-	WaitUntilMLModelAvailableWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, ...request.WaiterOption) error
+	WaitUntilMLModelAvailableWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, ...aws.WaiterOption) error
 }
 
 var _ MachineLearningAPI = (*machinelearning.MachineLearning)(nil)

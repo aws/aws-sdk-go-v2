@@ -4,13 +4,12 @@ package costandusagereportservice
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opDeleteReportDefinition = "DeleteReportDefinition"
 
-// DeleteReportDefinitionRequest generates a "aws/request.Request" representing the
+// DeleteReportDefinitionRequest generates a "aws.Request" representing the
 // client's request for the DeleteReportDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opDeleteReportDefinition = "DeleteReportDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DeleteReportDefinition
-func (c *CostandUsageReportService) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) (req *request.Request, output *DeleteReportDefinitionOutput) {
-	op := &request.Operation{
+func (c *CostandUsageReportService) DeleteReportDefinitionRequest(input *DeleteReportDefinitionInput) (req *aws.Request, output *DeleteReportDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReportDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -85,7 +84,7 @@ func (c *CostandUsageReportService) DeleteReportDefinition(input *DeleteReportDe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CostandUsageReportService) DeleteReportDefinitionWithContext(ctx aws.Context, input *DeleteReportDefinitionInput, opts ...request.Option) (*DeleteReportDefinitionOutput, error) {
+func (c *CostandUsageReportService) DeleteReportDefinitionWithContext(ctx aws.Context, input *DeleteReportDefinitionInput, opts ...aws.Option) (*DeleteReportDefinitionOutput, error) {
 	req, out := c.DeleteReportDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -94,7 +93,7 @@ func (c *CostandUsageReportService) DeleteReportDefinitionWithContext(ctx aws.Co
 
 const opDescribeReportDefinitions = "DescribeReportDefinitions"
 
-// DescribeReportDefinitionsRequest generates a "aws/request.Request" representing the
+// DescribeReportDefinitionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeReportDefinitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -118,12 +117,12 @@ const opDescribeReportDefinitions = "DescribeReportDefinitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions
-func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) (req *request.Request, output *DescribeReportDefinitionsOutput) {
-	op := &request.Operation{
+func (c *CostandUsageReportService) DescribeReportDefinitionsRequest(input *DescribeReportDefinitionsInput) (req *aws.Request, output *DescribeReportDefinitionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReportDefinitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -170,7 +169,7 @@ func (c *CostandUsageReportService) DescribeReportDefinitions(input *DescribeRep
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CostandUsageReportService) DescribeReportDefinitionsWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, opts ...request.Option) (*DescribeReportDefinitionsOutput, error) {
+func (c *CostandUsageReportService) DescribeReportDefinitionsWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, opts ...aws.Option) (*DescribeReportDefinitionsOutput, error) {
 	req, out := c.DescribeReportDefinitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -205,9 +204,9 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsPages(input *Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CostandUsageReportService) DescribeReportDefinitionsPagesWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CostandUsageReportService) DescribeReportDefinitionsPagesWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReportDefinitionsInput
 			if input != nil {
 				tmp := *input
@@ -229,7 +228,7 @@ func (c *CostandUsageReportService) DescribeReportDefinitionsPagesWithContext(ct
 
 const opPutReportDefinition = "PutReportDefinition"
 
-// PutReportDefinitionRequest generates a "aws/request.Request" representing the
+// PutReportDefinitionRequest generates a "aws.Request" representing the
 // client's request for the PutReportDefinition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -253,8 +252,8 @@ const opPutReportDefinition = "PutReportDefinition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition
-func (c *CostandUsageReportService) PutReportDefinitionRequest(input *PutReportDefinitionInput) (req *request.Request, output *PutReportDefinitionOutput) {
-	op := &request.Operation{
+func (c *CostandUsageReportService) PutReportDefinitionRequest(input *PutReportDefinitionInput) (req *aws.Request, output *PutReportDefinitionOutput) {
+	op := &aws.Operation{
 		Name:       opPutReportDefinition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -312,7 +311,7 @@ func (c *CostandUsageReportService) PutReportDefinition(input *PutReportDefiniti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CostandUsageReportService) PutReportDefinitionWithContext(ctx aws.Context, input *PutReportDefinitionInput, opts ...request.Option) (*PutReportDefinitionOutput, error) {
+func (c *CostandUsageReportService) PutReportDefinitionWithContext(ctx aws.Context, input *PutReportDefinitionInput, opts ...aws.Option) (*PutReportDefinitionOutput, error) {
 	req, out := c.PutReportDefinitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -394,9 +393,9 @@ func (s DescribeReportDefinitionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReportDefinitionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReportDefinitionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReportDefinitionsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -476,13 +475,13 @@ func (s PutReportDefinitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutReportDefinitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutReportDefinitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutReportDefinitionInput"}
 	if s.ReportDefinition == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReportDefinition"))
+		invalidParams.Add(aws.NewErrParamRequired("ReportDefinition"))
 	}
 	if s.ReportDefinition != nil {
 		if err := s.ReportDefinition.Validate(); err != nil {
-			invalidParams.AddNested("ReportDefinition", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ReportDefinition", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -578,30 +577,30 @@ func (s ReportDefinition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReportDefinition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReportDefinition"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReportDefinition"}
 	if s.AdditionalSchemaElements == nil {
-		invalidParams.Add(request.NewErrParamRequired("AdditionalSchemaElements"))
+		invalidParams.Add(aws.NewErrParamRequired("AdditionalSchemaElements"))
 	}
 	if s.Compression == nil {
-		invalidParams.Add(request.NewErrParamRequired("Compression"))
+		invalidParams.Add(aws.NewErrParamRequired("Compression"))
 	}
 	if s.Format == nil {
-		invalidParams.Add(request.NewErrParamRequired("Format"))
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
 	}
 	if s.ReportName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReportName"))
+		invalidParams.Add(aws.NewErrParamRequired("ReportName"))
 	}
 	if s.S3Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Bucket"))
 	}
 	if s.S3Prefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Prefix"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Prefix"))
 	}
 	if s.S3Region == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Region"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Region"))
 	}
 	if s.TimeUnit == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimeUnit"))
+		invalidParams.Add(aws.NewErrParamRequired("TimeUnit"))
 	}
 
 	if invalidParams.Len() > 0 {

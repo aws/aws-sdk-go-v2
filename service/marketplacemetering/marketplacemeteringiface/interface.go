@@ -10,7 +10,6 @@ package marketplacemeteringiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := marketplacemetering.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := marketplacemetering.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,16 +64,16 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type MarketplaceMeteringAPI interface {
 	BatchMeterUsage(*marketplacemetering.BatchMeterUsageInput) (*marketplacemetering.BatchMeterUsageOutput, error)
-	BatchMeterUsageWithContext(aws.Context, *marketplacemetering.BatchMeterUsageInput, ...request.Option) (*marketplacemetering.BatchMeterUsageOutput, error)
-	BatchMeterUsageRequest(*marketplacemetering.BatchMeterUsageInput) (*request.Request, *marketplacemetering.BatchMeterUsageOutput)
+	BatchMeterUsageWithContext(aws.Context, *marketplacemetering.BatchMeterUsageInput, ...aws.Option) (*marketplacemetering.BatchMeterUsageOutput, error)
+	BatchMeterUsageRequest(*marketplacemetering.BatchMeterUsageInput) (*aws.Request, *marketplacemetering.BatchMeterUsageOutput)
 
 	MeterUsage(*marketplacemetering.MeterUsageInput) (*marketplacemetering.MeterUsageOutput, error)
-	MeterUsageWithContext(aws.Context, *marketplacemetering.MeterUsageInput, ...request.Option) (*marketplacemetering.MeterUsageOutput, error)
-	MeterUsageRequest(*marketplacemetering.MeterUsageInput) (*request.Request, *marketplacemetering.MeterUsageOutput)
+	MeterUsageWithContext(aws.Context, *marketplacemetering.MeterUsageInput, ...aws.Option) (*marketplacemetering.MeterUsageOutput, error)
+	MeterUsageRequest(*marketplacemetering.MeterUsageInput) (*aws.Request, *marketplacemetering.MeterUsageOutput)
 
 	ResolveCustomer(*marketplacemetering.ResolveCustomerInput) (*marketplacemetering.ResolveCustomerOutput, error)
-	ResolveCustomerWithContext(aws.Context, *marketplacemetering.ResolveCustomerInput, ...request.Option) (*marketplacemetering.ResolveCustomerOutput, error)
-	ResolveCustomerRequest(*marketplacemetering.ResolveCustomerInput) (*request.Request, *marketplacemetering.ResolveCustomerOutput)
+	ResolveCustomerWithContext(aws.Context, *marketplacemetering.ResolveCustomerInput, ...aws.Option) (*marketplacemetering.ResolveCustomerOutput, error)
+	ResolveCustomerRequest(*marketplacemetering.ResolveCustomerInput) (*aws.Request, *marketplacemetering.ResolveCustomerOutput)
 }
 
 var _ MarketplaceMeteringAPI = (*marketplacemetering.MarketplaceMetering)(nil)

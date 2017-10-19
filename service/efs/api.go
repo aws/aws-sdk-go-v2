@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opCreateFileSystem = "CreateFileSystem"
 
-// CreateFileSystemRequest generates a "aws/request.Request" representing the
+// CreateFileSystemRequest generates a "aws.Request" representing the
 // client's request for the CreateFileSystem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opCreateFileSystem = "CreateFileSystem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem
-func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) (req *request.Request, output *FileSystemDescription) {
-	op := &request.Operation{
+func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) (req *aws.Request, output *FileSystemDescription) {
+	op := &aws.Operation{
 		Name:       opCreateFileSystem,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/file-systems",
@@ -142,7 +141,7 @@ func (c *EFS) CreateFileSystem(input *CreateFileSystemInput) (*FileSystemDescrip
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) CreateFileSystemWithContext(ctx aws.Context, input *CreateFileSystemInput, opts ...request.Option) (*FileSystemDescription, error) {
+func (c *EFS) CreateFileSystemWithContext(ctx aws.Context, input *CreateFileSystemInput, opts ...aws.Option) (*FileSystemDescription, error) {
 	req, out := c.CreateFileSystemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -151,7 +150,7 @@ func (c *EFS) CreateFileSystemWithContext(ctx aws.Context, input *CreateFileSyst
 
 const opCreateMountTarget = "CreateMountTarget"
 
-// CreateMountTargetRequest generates a "aws/request.Request" representing the
+// CreateMountTargetRequest generates a "aws.Request" representing the
 // client's request for the CreateMountTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -175,8 +174,8 @@ const opCreateMountTarget = "CreateMountTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget
-func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) (req *request.Request, output *MountTargetDescription) {
-	op := &request.Operation{
+func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) (req *aws.Request, output *MountTargetDescription) {
+	op := &aws.Operation{
 		Name:       opCreateMountTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/mount-targets",
@@ -358,7 +357,7 @@ func (c *EFS) CreateMountTarget(input *CreateMountTargetInput) (*MountTargetDesc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) CreateMountTargetWithContext(ctx aws.Context, input *CreateMountTargetInput, opts ...request.Option) (*MountTargetDescription, error) {
+func (c *EFS) CreateMountTargetWithContext(ctx aws.Context, input *CreateMountTargetInput, opts ...aws.Option) (*MountTargetDescription, error) {
 	req, out := c.CreateMountTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -367,7 +366,7 @@ func (c *EFS) CreateMountTargetWithContext(ctx aws.Context, input *CreateMountTa
 
 const opCreateTags = "CreateTags"
 
-// CreateTagsRequest generates a "aws/request.Request" representing the
+// CreateTagsRequest generates a "aws.Request" representing the
 // client's request for the CreateTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -391,8 +390,8 @@ const opCreateTags = "CreateTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTags
-func (c *EFS) CreateTagsRequest(input *CreateTagsInput) (req *request.Request, output *CreateTagsOutput) {
-	op := &request.Operation{
+func (c *EFS) CreateTagsRequest(input *CreateTagsInput) (req *aws.Request, output *CreateTagsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/create-tags/{FileSystemId}",
@@ -453,7 +452,7 @@ func (c *EFS) CreateTags(input *CreateTagsInput) (*CreateTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...request.Option) (*CreateTagsOutput, error) {
+func (c *EFS) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opts ...aws.Option) (*CreateTagsOutput, error) {
 	req, out := c.CreateTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -462,7 +461,7 @@ func (c *EFS) CreateTagsWithContext(ctx aws.Context, input *CreateTagsInput, opt
 
 const opDeleteFileSystem = "DeleteFileSystem"
 
-// DeleteFileSystemRequest generates a "aws/request.Request" representing the
+// DeleteFileSystemRequest generates a "aws.Request" representing the
 // client's request for the DeleteFileSystem operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -486,8 +485,8 @@ const opDeleteFileSystem = "DeleteFileSystem"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystem
-func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) (req *request.Request, output *DeleteFileSystemOutput) {
-	op := &request.Operation{
+func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) (req *aws.Request, output *DeleteFileSystemOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFileSystem,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-02-01/file-systems/{FileSystemId}",
@@ -560,7 +559,7 @@ func (c *EFS) DeleteFileSystem(input *DeleteFileSystemInput) (*DeleteFileSystemO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DeleteFileSystemWithContext(ctx aws.Context, input *DeleteFileSystemInput, opts ...request.Option) (*DeleteFileSystemOutput, error) {
+func (c *EFS) DeleteFileSystemWithContext(ctx aws.Context, input *DeleteFileSystemInput, opts ...aws.Option) (*DeleteFileSystemOutput, error) {
 	req, out := c.DeleteFileSystemRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -569,7 +568,7 @@ func (c *EFS) DeleteFileSystemWithContext(ctx aws.Context, input *DeleteFileSyst
 
 const opDeleteMountTarget = "DeleteMountTarget"
 
-// DeleteMountTargetRequest generates a "aws/request.Request" representing the
+// DeleteMountTargetRequest generates a "aws.Request" representing the
 // client's request for the DeleteMountTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -593,8 +592,8 @@ const opDeleteMountTarget = "DeleteMountTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTarget
-func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) (req *request.Request, output *DeleteMountTargetOutput) {
-	op := &request.Operation{
+func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) (req *aws.Request, output *DeleteMountTargetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMountTarget,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}",
@@ -677,7 +676,7 @@ func (c *EFS) DeleteMountTarget(input *DeleteMountTargetInput) (*DeleteMountTarg
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DeleteMountTargetWithContext(ctx aws.Context, input *DeleteMountTargetInput, opts ...request.Option) (*DeleteMountTargetOutput, error) {
+func (c *EFS) DeleteMountTargetWithContext(ctx aws.Context, input *DeleteMountTargetInput, opts ...aws.Option) (*DeleteMountTargetOutput, error) {
 	req, out := c.DeleteMountTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -686,7 +685,7 @@ func (c *EFS) DeleteMountTargetWithContext(ctx aws.Context, input *DeleteMountTa
 
 const opDeleteTags = "DeleteTags"
 
-// DeleteTagsRequest generates a "aws/request.Request" representing the
+// DeleteTagsRequest generates a "aws.Request" representing the
 // client's request for the DeleteTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -710,8 +709,8 @@ const opDeleteTags = "DeleteTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags
-func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) (req *request.Request, output *DeleteTagsOutput) {
-	op := &request.Operation{
+func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) (req *aws.Request, output *DeleteTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-02-01/delete-tags/{FileSystemId}",
@@ -773,7 +772,7 @@ func (c *EFS) DeleteTags(input *DeleteTagsInput) (*DeleteTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...request.Option) (*DeleteTagsOutput, error) {
+func (c *EFS) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opts ...aws.Option) (*DeleteTagsOutput, error) {
 	req, out := c.DeleteTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -782,7 +781,7 @@ func (c *EFS) DeleteTagsWithContext(ctx aws.Context, input *DeleteTagsInput, opt
 
 const opDescribeFileSystems = "DescribeFileSystems"
 
-// DescribeFileSystemsRequest generates a "aws/request.Request" representing the
+// DescribeFileSystemsRequest generates a "aws.Request" representing the
 // client's request for the DescribeFileSystems operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -806,8 +805,8 @@ const opDescribeFileSystems = "DescribeFileSystems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems
-func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) (req *request.Request, output *DescribeFileSystemsOutput) {
-	op := &request.Operation{
+func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) (req *aws.Request, output *DescribeFileSystemsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFileSystems,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/file-systems",
@@ -885,7 +884,7 @@ func (c *EFS) DescribeFileSystems(input *DescribeFileSystemsInput) (*DescribeFil
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DescribeFileSystemsWithContext(ctx aws.Context, input *DescribeFileSystemsInput, opts ...request.Option) (*DescribeFileSystemsOutput, error) {
+func (c *EFS) DescribeFileSystemsWithContext(ctx aws.Context, input *DescribeFileSystemsInput, opts ...aws.Option) (*DescribeFileSystemsOutput, error) {
 	req, out := c.DescribeFileSystemsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -894,7 +893,7 @@ func (c *EFS) DescribeFileSystemsWithContext(ctx aws.Context, input *DescribeFil
 
 const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 
-// DescribeMountTargetSecurityGroupsRequest generates a "aws/request.Request" representing the
+// DescribeMountTargetSecurityGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMountTargetSecurityGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -918,8 +917,8 @@ const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroups
-func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) (req *request.Request, output *DescribeMountTargetSecurityGroupsOutput) {
-	op := &request.Operation{
+func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTargetSecurityGroupsInput) (req *aws.Request, output *DescribeMountTargetSecurityGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMountTargetSecurityGroups,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
@@ -985,7 +984,7 @@ func (c *EFS) DescribeMountTargetSecurityGroups(input *DescribeMountTargetSecuri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DescribeMountTargetSecurityGroupsWithContext(ctx aws.Context, input *DescribeMountTargetSecurityGroupsInput, opts ...request.Option) (*DescribeMountTargetSecurityGroupsOutput, error) {
+func (c *EFS) DescribeMountTargetSecurityGroupsWithContext(ctx aws.Context, input *DescribeMountTargetSecurityGroupsInput, opts ...aws.Option) (*DescribeMountTargetSecurityGroupsOutput, error) {
 	req, out := c.DescribeMountTargetSecurityGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -994,7 +993,7 @@ func (c *EFS) DescribeMountTargetSecurityGroupsWithContext(ctx aws.Context, inpu
 
 const opDescribeMountTargets = "DescribeMountTargets"
 
-// DescribeMountTargetsRequest generates a "aws/request.Request" representing the
+// DescribeMountTargetsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMountTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1018,8 +1017,8 @@ const opDescribeMountTargets = "DescribeMountTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets
-func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) (req *request.Request, output *DescribeMountTargetsOutput) {
-	op := &request.Operation{
+func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) (req *aws.Request, output *DescribeMountTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMountTargets,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/mount-targets",
@@ -1082,7 +1081,7 @@ func (c *EFS) DescribeMountTargets(input *DescribeMountTargetsInput) (*DescribeM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DescribeMountTargetsWithContext(ctx aws.Context, input *DescribeMountTargetsInput, opts ...request.Option) (*DescribeMountTargetsOutput, error) {
+func (c *EFS) DescribeMountTargetsWithContext(ctx aws.Context, input *DescribeMountTargetsInput, opts ...aws.Option) (*DescribeMountTargetsOutput, error) {
 	req, out := c.DescribeMountTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1091,7 +1090,7 @@ func (c *EFS) DescribeMountTargetsWithContext(ctx aws.Context, input *DescribeMo
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1115,8 +1114,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags
-func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-02-01/tags/{FileSystemId}/",
@@ -1174,7 +1173,7 @@ func (c *EFS) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *EFS) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1183,7 +1182,7 @@ func (c *EFS) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput,
 
 const opModifyMountTargetSecurityGroups = "ModifyMountTargetSecurityGroups"
 
-// ModifyMountTargetSecurityGroupsRequest generates a "aws/request.Request" representing the
+// ModifyMountTargetSecurityGroupsRequest generates a "aws.Request" representing the
 // client's request for the ModifyMountTargetSecurityGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1207,8 +1206,8 @@ const opModifyMountTargetSecurityGroups = "ModifyMountTargetSecurityGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroups
-func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSecurityGroupsInput) (req *request.Request, output *ModifyMountTargetSecurityGroupsOutput) {
-	op := &request.Operation{
+func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSecurityGroupsInput) (req *aws.Request, output *ModifyMountTargetSecurityGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opModifyMountTargetSecurityGroups,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2015-02-01/mount-targets/{MountTargetId}/security-groups",
@@ -1289,7 +1288,7 @@ func (c *EFS) ModifyMountTargetSecurityGroups(input *ModifyMountTargetSecurityGr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EFS) ModifyMountTargetSecurityGroupsWithContext(ctx aws.Context, input *ModifyMountTargetSecurityGroupsInput, opts ...request.Option) (*ModifyMountTargetSecurityGroupsOutput, error) {
+func (c *EFS) ModifyMountTargetSecurityGroupsWithContext(ctx aws.Context, input *ModifyMountTargetSecurityGroupsInput, opts ...aws.Option) (*ModifyMountTargetSecurityGroupsOutput, error) {
 	req, out := c.ModifyMountTargetSecurityGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1352,15 +1351,15 @@ func (s CreateFileSystemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFileSystemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFileSystemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFileSystemInput"}
 	if s.CreationToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreationToken"))
+		invalidParams.Add(aws.NewErrParamRequired("CreationToken"))
 	}
 	if s.CreationToken != nil && len(*s.CreationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CreationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CreationToken", 1))
 	}
 	if s.KmsKeyId != nil && len(*s.KmsKeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KmsKeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KmsKeyId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1427,12 +1426,12 @@ func (s CreateMountTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMountTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMountTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMountTargetInput"}
 	if s.FileSystemId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileSystemId"))
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
 	if s.SubnetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1493,12 +1492,12 @@ func (s CreateTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTagsInput"}
 	if s.FileSystemId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileSystemId"))
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -1506,7 +1505,7 @@ func (s *CreateTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1566,9 +1565,9 @@ func (s DeleteFileSystemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFileSystemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFileSystemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFileSystemInput"}
 	if s.FileSystemId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileSystemId"))
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1620,9 +1619,9 @@ func (s DeleteMountTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMountTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMountTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMountTargetInput"}
 	if s.MountTargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MountTargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1679,12 +1678,12 @@ func (s DeleteTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsInput"}
 	if s.FileSystemId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileSystemId"))
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1757,12 +1756,12 @@ func (s DescribeFileSystemsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFileSystemsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFileSystemsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFileSystemsInput"}
 	if s.CreationToken != nil && len(*s.CreationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CreationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CreationToken", 1))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1860,9 +1859,9 @@ func (s DescribeMountTargetSecurityGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMountTargetSecurityGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMountTargetSecurityGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMountTargetSecurityGroupsInput"}
 	if s.MountTargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MountTargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1937,9 +1936,9 @@ func (s DescribeMountTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMountTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMountTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMountTargetsInput"}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2049,12 +2048,12 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.FileSystemId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FileSystemId"))
+		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2341,9 +2340,9 @@ func (s ModifyMountTargetSecurityGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyMountTargetSecurityGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyMountTargetSecurityGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyMountTargetSecurityGroupsInput"}
 	if s.MountTargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("MountTargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2496,15 +2495,15 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {

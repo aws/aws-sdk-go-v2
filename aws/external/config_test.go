@@ -5,13 +5,12 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 )
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
 	_, err := Configs{
-		StaticSharedConfigProfile("profile-name"),
-		StaticSharedConfigFiles([]string{"creds-file"}),
+		WithSharedConfigProfile("profile-name"),
+		WithSharedConfigFiles([]string{"creds-file"}),
 	}.AppendFromLoaders([]ConfigLoader{
 		func(configs Configs) (Config, error) {
 			var profile string
@@ -78,7 +77,7 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	cfg, err := Configs{
 		WithRegion("mock-region"),
-		WithCredentialsValue(credentials.Value{
+		WithCredentialsValue(aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 			ProviderName: "provider",
 		}),
@@ -94,7 +93,7 @@ func TestConfigs_ResolveAWSConfig(t *testing.T) {
 		t.Errorf("expect %v region, got %v", e, a)
 	}
 
-	creds, err := cfg.Credentials.Get()
+	creds, err := cfg.CredentialsLoader.Get()
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

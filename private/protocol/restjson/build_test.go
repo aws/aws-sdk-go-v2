@@ -14,9 +14,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
@@ -51,30 +48,30 @@ func init() {
 // InputService1ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService1ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService1ProtocolTest client with a session.
+// New creates a new instance of the InputService1ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService1ProtocolTest client from just a session.
-//     svc := inputservice1protocoltest.New(mySession)
+//     // Create a InputService1ProtocolTest client from just a config.
+//     svc := inputservice1protocoltest.New(myConfig)
 //
 //     // Create a InputService1ProtocolTest client with additional configuration
-//     svc := inputservice1protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService1ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService1ProtocolTest {
+//     svc := inputservice1protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService1ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService1ProtocolTest {
 	c := p.ClientConfig("inputservice1protocoltest", cfgs...)
 	return newInputService1ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService1ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService1ProtocolTest {
+func newInputService1ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService1ProtocolTest {
 	svc := &InputService1ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice1protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -97,7 +94,7 @@ func newInputService1ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService1ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService1ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService1ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -105,7 +102,7 @@ func (c *InputService1ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService1TestCaseOperation1 = "OperationName"
 
-// InputService1TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService1TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService1TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -127,8 +124,8 @@ const opInputService1TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input *InputService1TestShapeInputService1TestCaseOperation1Input) (req *request.Request, output *InputService1TestShapeInputService1TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input *InputService1TestShapeInputService1TestCaseOperation1Input) (req *aws.Request, output *InputService1TestShapeInputService1TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService1TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2014-01-01/jobs",
@@ -167,7 +164,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService1ProtocolTest) InputService1TestCaseOperation1WithContext(ctx aws.Context, input *InputService1TestShapeInputService1TestCaseOperation1Input, opts ...request.Option) (*InputService1TestShapeInputService1TestCaseOperation1Output, error) {
+func (c *InputService1ProtocolTest) InputService1TestCaseOperation1WithContext(ctx aws.Context, input *InputService1TestShapeInputService1TestCaseOperation1Input, opts ...aws.Option) (*InputService1TestShapeInputService1TestCaseOperation1Output, error) {
 	req, out := c.InputService1TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -189,30 +186,30 @@ type InputService1TestShapeInputService1TestCaseOperation1Output struct {
 // InputService2ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService2ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService2ProtocolTest client with a session.
+// New creates a new instance of the InputService2ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService2ProtocolTest client from just a session.
-//     svc := inputservice2protocoltest.New(mySession)
+//     // Create a InputService2ProtocolTest client from just a config.
+//     svc := inputservice2protocoltest.New(myConfig)
 //
 //     // Create a InputService2ProtocolTest client with additional configuration
-//     svc := inputservice2protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService2ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService2ProtocolTest {
+//     svc := inputservice2protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService2ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService2ProtocolTest {
 	c := p.ClientConfig("inputservice2protocoltest", cfgs...)
 	return newInputService2ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService2ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService2ProtocolTest {
+func newInputService2ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService2ProtocolTest {
 	svc := &InputService2ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice2protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -235,7 +232,7 @@ func newInputService2ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService2ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService2ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService2ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -243,7 +240,7 @@ func (c *InputService2ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService2TestCaseOperation1 = "OperationName"
 
-// InputService2TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService2TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService2TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -265,8 +262,8 @@ const opInputService2TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input *InputService2TestShapeInputService2TestCaseOperation1Input) (req *request.Request, output *InputService2TestShapeInputService2TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input *InputService2TestShapeInputService2TestCaseOperation1Input) (req *aws.Request, output *InputService2TestShapeInputService2TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService2TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -305,7 +302,7 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService2ProtocolTest) InputService2TestCaseOperation1WithContext(ctx aws.Context, input *InputService2TestShapeInputService2TestCaseOperation1Input, opts ...request.Option) (*InputService2TestShapeInputService2TestCaseOperation1Output, error) {
+func (c *InputService2ProtocolTest) InputService2TestCaseOperation1WithContext(ctx aws.Context, input *InputService2TestShapeInputService2TestCaseOperation1Input, opts ...aws.Option) (*InputService2TestShapeInputService2TestCaseOperation1Output, error) {
 	req, out := c.InputService2TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -335,30 +332,30 @@ type InputService2TestShapeInputService2TestCaseOperation1Output struct {
 // InputService3ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService3ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService3ProtocolTest client with a session.
+// New creates a new instance of the InputService3ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService3ProtocolTest client from just a session.
-//     svc := inputservice3protocoltest.New(mySession)
+//     // Create a InputService3ProtocolTest client from just a config.
+//     svc := inputservice3protocoltest.New(myConfig)
 //
 //     // Create a InputService3ProtocolTest client with additional configuration
-//     svc := inputservice3protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService3ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService3ProtocolTest {
+//     svc := inputservice3protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService3ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService3ProtocolTest {
 	c := p.ClientConfig("inputservice3protocoltest", cfgs...)
 	return newInputService3ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService3ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService3ProtocolTest {
+func newInputService3ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService3ProtocolTest {
 	svc := &InputService3ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice3protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -381,7 +378,7 @@ func newInputService3ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService3ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService3ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService3ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -389,7 +386,7 @@ func (c *InputService3ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService3TestCaseOperation1 = "OperationName"
 
-// InputService3TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService3TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService3TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -411,8 +408,8 @@ const opInputService3TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input *InputService3TestShapeInputService3TestCaseOperation1Input) (req *request.Request, output *InputService3TestShapeInputService3TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input *InputService3TestShapeInputService3TestCaseOperation1Input) (req *aws.Request, output *InputService3TestShapeInputService3TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService3TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -451,7 +448,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService3ProtocolTest) InputService3TestCaseOperation1WithContext(ctx aws.Context, input *InputService3TestShapeInputService3TestCaseOperation1Input, opts ...request.Option) (*InputService3TestShapeInputService3TestCaseOperation1Output, error) {
+func (c *InputService3ProtocolTest) InputService3TestCaseOperation1WithContext(ctx aws.Context, input *InputService3TestShapeInputService3TestCaseOperation1Input, opts ...aws.Option) (*InputService3TestShapeInputService3TestCaseOperation1Output, error) {
 	req, out := c.InputService3TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -481,30 +478,30 @@ type InputService3TestShapeInputService3TestCaseOperation1Output struct {
 // InputService4ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService4ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService4ProtocolTest client with a session.
+// New creates a new instance of the InputService4ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService4ProtocolTest client from just a session.
-//     svc := inputservice4protocoltest.New(mySession)
+//     // Create a InputService4ProtocolTest client from just a config.
+//     svc := inputservice4protocoltest.New(myConfig)
 //
 //     // Create a InputService4ProtocolTest client with additional configuration
-//     svc := inputservice4protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService4ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService4ProtocolTest {
+//     svc := inputservice4protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService4ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService4ProtocolTest {
 	c := p.ClientConfig("inputservice4protocoltest", cfgs...)
 	return newInputService4ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService4ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService4ProtocolTest {
+func newInputService4ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService4ProtocolTest {
 	svc := &InputService4ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice4protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -527,7 +524,7 @@ func newInputService4ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService4ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService4ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService4ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -535,7 +532,7 @@ func (c *InputService4ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService4TestCaseOperation1 = "OperationName"
 
-// InputService4TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService4TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService4TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -557,8 +554,8 @@ const opInputService4TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input *InputService4TestShapeInputService4TestCaseOperation1Input) (req *request.Request, output *InputService4TestShapeInputService4TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input *InputService4TestShapeInputService4TestCaseOperation1Input) (req *aws.Request, output *InputService4TestShapeInputService4TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService4TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/path",
@@ -597,7 +594,7 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService4ProtocolTest) InputService4TestCaseOperation1WithContext(ctx aws.Context, input *InputService4TestShapeInputService4TestCaseOperation1Input, opts ...request.Option) (*InputService4TestShapeInputService4TestCaseOperation1Output, error) {
+func (c *InputService4ProtocolTest) InputService4TestCaseOperation1WithContext(ctx aws.Context, input *InputService4TestShapeInputService4TestCaseOperation1Input, opts ...aws.Option) (*InputService4TestShapeInputService4TestCaseOperation1Output, error) {
 	req, out := c.InputService4TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -627,30 +624,30 @@ type InputService4TestShapeInputService4TestCaseOperation1Output struct {
 // InputService5ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService5ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService5ProtocolTest client with a session.
+// New creates a new instance of the InputService5ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService5ProtocolTest client from just a session.
-//     svc := inputservice5protocoltest.New(mySession)
+//     // Create a InputService5ProtocolTest client from just a config.
+//     svc := inputservice5protocoltest.New(myConfig)
 //
 //     // Create a InputService5ProtocolTest client with additional configuration
-//     svc := inputservice5protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService5ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService5ProtocolTest {
+//     svc := inputservice5protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService5ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService5ProtocolTest {
 	c := p.ClientConfig("inputservice5protocoltest", cfgs...)
 	return newInputService5ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService5ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService5ProtocolTest {
+func newInputService5ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService5ProtocolTest {
 	svc := &InputService5ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice5protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -673,7 +670,7 @@ func newInputService5ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService5ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService5ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService5ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -681,7 +678,7 @@ func (c *InputService5ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService5TestCaseOperation1 = "OperationName"
 
-// InputService5TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService5TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService5TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -703,8 +700,8 @@ const opInputService5TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input *InputService5TestShapeInputService5TestCaseOperation1Input) (req *request.Request, output *InputService5TestShapeInputService5TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input *InputService5TestShapeInputService5TestCaseOperation1Input) (req *aws.Request, output *InputService5TestShapeInputService5TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService5TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -743,7 +740,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService5ProtocolTest) InputService5TestCaseOperation1WithContext(ctx aws.Context, input *InputService5TestShapeInputService5TestCaseOperation1Input, opts ...request.Option) (*InputService5TestShapeInputService5TestCaseOperation1Output, error) {
+func (c *InputService5ProtocolTest) InputService5TestCaseOperation1WithContext(ctx aws.Context, input *InputService5TestShapeInputService5TestCaseOperation1Input, opts ...aws.Option) (*InputService5TestShapeInputService5TestCaseOperation1Output, error) {
 	req, out := c.InputService5TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -781,30 +778,30 @@ type InputService5TestShapeInputService5TestCaseOperation1Output struct {
 // InputService6ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService6ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService6ProtocolTest client with a session.
+// New creates a new instance of the InputService6ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService6ProtocolTest client from just a session.
-//     svc := inputservice6protocoltest.New(mySession)
+//     // Create a InputService6ProtocolTest client from just a config.
+//     svc := inputservice6protocoltest.New(myConfig)
 //
 //     // Create a InputService6ProtocolTest client with additional configuration
-//     svc := inputservice6protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService6ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService6ProtocolTest {
+//     svc := inputservice6protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService6ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService6ProtocolTest {
 	c := p.ClientConfig("inputservice6protocoltest", cfgs...)
 	return newInputService6ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService6ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService6ProtocolTest {
+func newInputService6ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService6ProtocolTest {
 	svc := &InputService6ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice6protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -827,7 +824,7 @@ func newInputService6ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService6ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService6ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService6ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -835,7 +832,7 @@ func (c *InputService6ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService6TestCaseOperation1 = "OperationName"
 
-// InputService6TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService6TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService6TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -857,8 +854,8 @@ const opInputService6TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input *InputService6TestShapeInputService6TestCaseOperation1Input) (req *request.Request, output *InputService6TestShapeInputService6TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input *InputService6TestShapeInputService6TestCaseOperation1Input) (req *aws.Request, output *InputService6TestShapeInputService6TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService6TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -897,7 +894,7 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService6ProtocolTest) InputService6TestCaseOperation1WithContext(ctx aws.Context, input *InputService6TestShapeInputService6TestCaseOperation1Input, opts ...request.Option) (*InputService6TestShapeInputService6TestCaseOperation1Output, error) {
+func (c *InputService6ProtocolTest) InputService6TestCaseOperation1WithContext(ctx aws.Context, input *InputService6TestShapeInputService6TestCaseOperation1Input, opts ...aws.Option) (*InputService6TestShapeInputService6TestCaseOperation1Output, error) {
 	req, out := c.InputService6TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -935,30 +932,30 @@ type InputService6TestShapeInputService6TestCaseOperation1Output struct {
 // InputService7ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService7ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService7ProtocolTest client with a session.
+// New creates a new instance of the InputService7ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService7ProtocolTest client from just a session.
-//     svc := inputservice7protocoltest.New(mySession)
+//     // Create a InputService7ProtocolTest client from just a config.
+//     svc := inputservice7protocoltest.New(myConfig)
 //
 //     // Create a InputService7ProtocolTest client with additional configuration
-//     svc := inputservice7protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService7ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService7ProtocolTest {
+//     svc := inputservice7protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService7ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService7ProtocolTest {
 	c := p.ClientConfig("inputservice7protocoltest", cfgs...)
 	return newInputService7ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService7ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService7ProtocolTest {
+func newInputService7ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService7ProtocolTest {
 	svc := &InputService7ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice7protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -981,7 +978,7 @@ func newInputService7ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService7ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService7ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService7ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -989,7 +986,7 @@ func (c *InputService7ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService7TestCaseOperation1 = "OperationName"
 
-// InputService7TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService7TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService7TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1011,8 +1008,8 @@ const opInputService7TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input *InputService7TestShapeInputService7TestCaseOperation2Input) (req *request.Request, output *InputService7TestShapeInputService7TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input *InputService7TestShapeInputService7TestCaseOperation2Input) (req *aws.Request, output *InputService7TestShapeInputService7TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService7TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/path",
@@ -1051,7 +1048,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService7ProtocolTest) InputService7TestCaseOperation1WithContext(ctx aws.Context, input *InputService7TestShapeInputService7TestCaseOperation2Input, opts ...request.Option) (*InputService7TestShapeInputService7TestCaseOperation1Output, error) {
+func (c *InputService7ProtocolTest) InputService7TestCaseOperation1WithContext(ctx aws.Context, input *InputService7TestShapeInputService7TestCaseOperation2Input, opts ...aws.Option) (*InputService7TestShapeInputService7TestCaseOperation1Output, error) {
 	req, out := c.InputService7TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1060,7 +1057,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1WithContext(c
 
 const opInputService7TestCaseOperation2 = "OperationName"
 
-// InputService7TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService7TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService7TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1082,8 +1079,8 @@ const opInputService7TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input *InputService7TestShapeInputService7TestCaseOperation2Input) (req *request.Request, output *InputService7TestShapeInputService7TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService7ProtocolTest) InputService7TestCaseOperation2Request(input *InputService7TestShapeInputService7TestCaseOperation2Input) (req *aws.Request, output *InputService7TestShapeInputService7TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService7TestCaseOperation2,
 		HTTPMethod: "GET",
 		HTTPPath:   "/path",
@@ -1122,7 +1119,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation2(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService7ProtocolTest) InputService7TestCaseOperation2WithContext(ctx aws.Context, input *InputService7TestShapeInputService7TestCaseOperation2Input, opts ...request.Option) (*InputService7TestShapeInputService7TestCaseOperation2Output, error) {
+func (c *InputService7ProtocolTest) InputService7TestCaseOperation2WithContext(ctx aws.Context, input *InputService7TestShapeInputService7TestCaseOperation2Input, opts ...aws.Option) (*InputService7TestShapeInputService7TestCaseOperation2Output, error) {
 	req, out := c.InputService7TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1156,30 +1153,30 @@ type InputService7TestShapeInputService7TestCaseOperation2Output struct {
 // InputService8ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService8ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService8ProtocolTest client with a session.
+// New creates a new instance of the InputService8ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService8ProtocolTest client from just a session.
-//     svc := inputservice8protocoltest.New(mySession)
+//     // Create a InputService8ProtocolTest client from just a config.
+//     svc := inputservice8protocoltest.New(myConfig)
 //
 //     // Create a InputService8ProtocolTest client with additional configuration
-//     svc := inputservice8protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService8ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService8ProtocolTest {
+//     svc := inputservice8protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService8ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService8ProtocolTest {
 	c := p.ClientConfig("inputservice8protocoltest", cfgs...)
 	return newInputService8ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService8ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService8ProtocolTest {
+func newInputService8ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService8ProtocolTest {
 	svc := &InputService8ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice8protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1202,7 +1199,7 @@ func newInputService8ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService8ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService8ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService8ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -1210,7 +1207,7 @@ func (c *InputService8ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService8TestCaseOperation1 = "OperationName"
 
-// InputService8TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService8TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService8TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1232,8 +1229,8 @@ const opInputService8TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input *InputService8TestShapeInputService8TestCaseOperation1Input) (req *request.Request, output *InputService8TestShapeInputService8TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input *InputService8TestShapeInputService8TestCaseOperation1Input) (req *aws.Request, output *InputService8TestShapeInputService8TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService8TestCaseOperation1,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -1272,7 +1269,7 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService8ProtocolTest) InputService8TestCaseOperation1WithContext(ctx aws.Context, input *InputService8TestShapeInputService8TestCaseOperation1Input, opts ...request.Option) (*InputService8TestShapeInputService8TestCaseOperation1Output, error) {
+func (c *InputService8ProtocolTest) InputService8TestCaseOperation1WithContext(ctx aws.Context, input *InputService8TestShapeInputService8TestCaseOperation1Input, opts ...aws.Option) (*InputService8TestShapeInputService8TestCaseOperation1Output, error) {
 	req, out := c.InputService8TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1318,30 +1315,30 @@ type InputService8TestShapeInputService8TestCaseOperation1Output struct {
 // InputService9ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService9ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService9ProtocolTest client with a session.
+// New creates a new instance of the InputService9ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService9ProtocolTest client from just a session.
-//     svc := inputservice9protocoltest.New(mySession)
+//     // Create a InputService9ProtocolTest client from just a config.
+//     svc := inputservice9protocoltest.New(myConfig)
 //
 //     // Create a InputService9ProtocolTest client with additional configuration
-//     svc := inputservice9protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService9ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService9ProtocolTest {
+//     svc := inputservice9protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService9ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService9ProtocolTest {
 	c := p.ClientConfig("inputservice9protocoltest", cfgs...)
 	return newInputService9ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService9ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService9ProtocolTest {
+func newInputService9ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService9ProtocolTest {
 	svc := &InputService9ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice9protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1364,7 +1361,7 @@ func newInputService9ProtocolTestClient(cfg aws.Config, handlers request.Handler
 
 // newRequest creates a new request for a InputService9ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService9ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService9ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -1372,7 +1369,7 @@ func (c *InputService9ProtocolTest) newRequest(op *request.Operation, params, da
 
 const opInputService9TestCaseOperation1 = "OperationName"
 
-// InputService9TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService9TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService9TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1394,8 +1391,8 @@ const opInputService9TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input *InputService9TestShapeInputService9TestCaseOperation1Input) (req *request.Request, output *InputService9TestShapeInputService9TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input *InputService9TestShapeInputService9TestCaseOperation1Input) (req *aws.Request, output *InputService9TestShapeInputService9TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService9TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -1434,7 +1431,7 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1(input *Input
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService9ProtocolTest) InputService9TestCaseOperation1WithContext(ctx aws.Context, input *InputService9TestShapeInputService9TestCaseOperation1Input, opts ...request.Option) (*InputService9TestShapeInputService9TestCaseOperation1Output, error) {
+func (c *InputService9ProtocolTest) InputService9TestCaseOperation1WithContext(ctx aws.Context, input *InputService9TestShapeInputService9TestCaseOperation1Input, opts ...aws.Option) (*InputService9TestShapeInputService9TestCaseOperation1Output, error) {
 	req, out := c.InputService9TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1508,30 +1505,30 @@ func (s *InputService9TestShapeStructType) SetB(v string) *InputService9TestShap
 // InputService10ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService10ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService10ProtocolTest client with a session.
+// New creates a new instance of the InputService10ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService10ProtocolTest client from just a session.
-//     svc := inputservice10protocoltest.New(mySession)
+//     // Create a InputService10ProtocolTest client from just a config.
+//     svc := inputservice10protocoltest.New(myConfig)
 //
 //     // Create a InputService10ProtocolTest client with additional configuration
-//     svc := inputservice10protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService10ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService10ProtocolTest {
+//     svc := inputservice10protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService10ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService10ProtocolTest {
 	c := p.ClientConfig("inputservice10protocoltest", cfgs...)
 	return newInputService10ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService10ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService10ProtocolTest {
+func newInputService10ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService10ProtocolTest {
 	svc := &InputService10ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice10protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1554,7 +1551,7 @@ func newInputService10ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService10ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService10ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService10ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -1562,7 +1559,7 @@ func (c *InputService10ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService10TestCaseOperation1 = "OperationName"
 
-// InputService10TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService10TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService10TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1584,8 +1581,8 @@ const opInputService10TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService10ProtocolTest) InputService10TestCaseOperation1Request(input *InputService10TestShapeInputService10TestCaseOperation1Input) (req *request.Request, output *InputService10TestShapeInputService10TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService10ProtocolTest) InputService10TestCaseOperation1Request(input *InputService10TestShapeInputService10TestCaseOperation1Input) (req *aws.Request, output *InputService10TestShapeInputService10TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService10TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-01-01/jobsByPipeline/{PipelineId}",
@@ -1624,7 +1621,7 @@ func (c *InputService10ProtocolTest) InputService10TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService10ProtocolTest) InputService10TestCaseOperation1WithContext(ctx aws.Context, input *InputService10TestShapeInputService10TestCaseOperation1Input, opts ...request.Option) (*InputService10TestShapeInputService10TestCaseOperation1Output, error) {
+func (c *InputService10ProtocolTest) InputService10TestCaseOperation1WithContext(ctx aws.Context, input *InputService10TestShapeInputService10TestCaseOperation1Input, opts ...aws.Option) (*InputService10TestShapeInputService10TestCaseOperation1Output, error) {
 	req, out := c.InputService10TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1706,30 +1703,30 @@ func (s *InputService10TestShapeStructType) SetB(v string) *InputService10TestSh
 // InputService11ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService11ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService11ProtocolTest client with a session.
+// New creates a new instance of the InputService11ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService11ProtocolTest client from just a session.
-//     svc := inputservice11protocoltest.New(mySession)
+//     // Create a InputService11ProtocolTest client from just a config.
+//     svc := inputservice11protocoltest.New(myConfig)
 //
 //     // Create a InputService11ProtocolTest client with additional configuration
-//     svc := inputservice11protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService11ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService11ProtocolTest {
+//     svc := inputservice11protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService11ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService11ProtocolTest {
 	c := p.ClientConfig("inputservice11protocoltest", cfgs...)
 	return newInputService11ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService11ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService11ProtocolTest {
+func newInputService11ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService11ProtocolTest {
 	svc := &InputService11ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice11protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1752,7 +1749,7 @@ func newInputService11ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService11ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService11ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService11ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -1760,7 +1757,7 @@ func (c *InputService11ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService11TestCaseOperation1 = "OperationName"
 
-// InputService11TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService11TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService11TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1782,8 +1779,8 @@ const opInputService11TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService11ProtocolTest) InputService11TestCaseOperation1Request(input *InputService11TestShapeInputService11TestCaseOperation1Input) (req *request.Request, output *InputService11TestShapeInputService11TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService11ProtocolTest) InputService11TestCaseOperation1Request(input *InputService11TestShapeInputService11TestCaseOperation1Input) (req *aws.Request, output *InputService11TestShapeInputService11TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService11TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-01-01/vaults/{vaultName}/archives",
@@ -1822,7 +1819,7 @@ func (c *InputService11ProtocolTest) InputService11TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService11ProtocolTest) InputService11TestCaseOperation1WithContext(ctx aws.Context, input *InputService11TestShapeInputService11TestCaseOperation1Input, opts ...request.Option) (*InputService11TestShapeInputService11TestCaseOperation1Output, error) {
+func (c *InputService11ProtocolTest) InputService11TestCaseOperation1WithContext(ctx aws.Context, input *InputService11TestShapeInputService11TestCaseOperation1Input, opts ...aws.Option) (*InputService11TestShapeInputService11TestCaseOperation1Output, error) {
 	req, out := c.InputService11TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1842,9 +1839,9 @@ type InputService11TestShapeInputService11TestCaseOperation1Input struct {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputService11TestShapeInputService11TestCaseOperation1Input) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputService11TestShapeInputService11TestCaseOperation1Input"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputService11TestShapeInputService11TestCaseOperation1Input"}
 	if s.VaultName == nil {
-		invalidParams.Add(request.NewErrParamRequired("VaultName"))
+		invalidParams.Add(aws.NewErrParamRequired("VaultName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1882,30 +1879,30 @@ type InputService11TestShapeInputService11TestCaseOperation1Output struct {
 // InputService12ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService12ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService12ProtocolTest client with a session.
+// New creates a new instance of the InputService12ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService12ProtocolTest client from just a session.
-//     svc := inputservice12protocoltest.New(mySession)
+//     // Create a InputService12ProtocolTest client from just a config.
+//     svc := inputservice12protocoltest.New(myConfig)
 //
 //     // Create a InputService12ProtocolTest client with additional configuration
-//     svc := inputservice12protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService12ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService12ProtocolTest {
+//     svc := inputservice12protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService12ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService12ProtocolTest {
 	c := p.ClientConfig("inputservice12protocoltest", cfgs...)
 	return newInputService12ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService12ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService12ProtocolTest {
+func newInputService12ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService12ProtocolTest {
 	svc := &InputService12ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice12protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -1928,7 +1925,7 @@ func newInputService12ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService12ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService12ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService12ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -1936,7 +1933,7 @@ func (c *InputService12ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService12TestCaseOperation1 = "OperationName"
 
-// InputService12TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService12TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService12TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1958,8 +1955,8 @@ const opInputService12TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService12ProtocolTest) InputService12TestCaseOperation1Request(input *InputService12TestShapeInputService12TestCaseOperation1Input) (req *request.Request, output *InputService12TestShapeInputService12TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService12ProtocolTest) InputService12TestCaseOperation1Request(input *InputService12TestShapeInputService12TestCaseOperation1Input) (req *aws.Request, output *InputService12TestShapeInputService12TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService12TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-01-01/{Foo}",
@@ -1998,7 +1995,7 @@ func (c *InputService12ProtocolTest) InputService12TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService12ProtocolTest) InputService12TestCaseOperation1WithContext(ctx aws.Context, input *InputService12TestShapeInputService12TestCaseOperation1Input, opts ...request.Option) (*InputService12TestShapeInputService12TestCaseOperation1Output, error) {
+func (c *InputService12ProtocolTest) InputService12TestCaseOperation1WithContext(ctx aws.Context, input *InputService12TestShapeInputService12TestCaseOperation1Input, opts ...aws.Option) (*InputService12TestShapeInputService12TestCaseOperation1Output, error) {
 	req, out := c.InputService12TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2017,9 +2014,9 @@ type InputService12TestShapeInputService12TestCaseOperation1Input struct {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InputService12TestShapeInputService12TestCaseOperation1Input) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InputService12TestShapeInputService12TestCaseOperation1Input"}
+	invalidParams := aws.ErrInvalidParams{Context: "InputService12TestShapeInputService12TestCaseOperation1Input"}
 	if s.Foo == nil {
-		invalidParams.Add(request.NewErrParamRequired("Foo"))
+		invalidParams.Add(aws.NewErrParamRequired("Foo"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2051,30 +2048,30 @@ type InputService12TestShapeInputService12TestCaseOperation1Output struct {
 // InputService13ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService13ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService13ProtocolTest client with a session.
+// New creates a new instance of the InputService13ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService13ProtocolTest client from just a session.
-//     svc := inputservice13protocoltest.New(mySession)
+//     // Create a InputService13ProtocolTest client from just a config.
+//     svc := inputservice13protocoltest.New(myConfig)
 //
 //     // Create a InputService13ProtocolTest client with additional configuration
-//     svc := inputservice13protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService13ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService13ProtocolTest {
+//     svc := inputservice13protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService13ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService13ProtocolTest {
 	c := p.ClientConfig("inputservice13protocoltest", cfgs...)
 	return newInputService13ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService13ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService13ProtocolTest {
+func newInputService13ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService13ProtocolTest {
 	svc := &InputService13ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice13protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2097,7 +2094,7 @@ func newInputService13ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService13ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService13ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService13ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -2105,7 +2102,7 @@ func (c *InputService13ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService13TestCaseOperation1 = "OperationName"
 
-// InputService13TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService13TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService13TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2127,8 +2124,8 @@ const opInputService13TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService13ProtocolTest) InputService13TestCaseOperation1Request(input *InputService13TestShapeInputService13TestCaseOperation2Input) (req *request.Request, output *InputService13TestShapeInputService13TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService13ProtocolTest) InputService13TestCaseOperation1Request(input *InputService13TestShapeInputService13TestCaseOperation2Input) (req *aws.Request, output *InputService13TestShapeInputService13TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService13TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2167,7 +2164,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService13ProtocolTest) InputService13TestCaseOperation1WithContext(ctx aws.Context, input *InputService13TestShapeInputService13TestCaseOperation2Input, opts ...request.Option) (*InputService13TestShapeInputService13TestCaseOperation1Output, error) {
+func (c *InputService13ProtocolTest) InputService13TestCaseOperation1WithContext(ctx aws.Context, input *InputService13TestShapeInputService13TestCaseOperation2Input, opts ...aws.Option) (*InputService13TestShapeInputService13TestCaseOperation1Output, error) {
 	req, out := c.InputService13TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2176,7 +2173,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation1WithContext
 
 const opInputService13TestCaseOperation2 = "OperationName"
 
-// InputService13TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService13TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService13TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2198,8 +2195,8 @@ const opInputService13TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService13ProtocolTest) InputService13TestCaseOperation2Request(input *InputService13TestShapeInputService13TestCaseOperation2Input) (req *request.Request, output *InputService13TestShapeInputService13TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService13ProtocolTest) InputService13TestCaseOperation2Request(input *InputService13TestShapeInputService13TestCaseOperation2Input) (req *aws.Request, output *InputService13TestShapeInputService13TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService13TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2238,7 +2235,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService13ProtocolTest) InputService13TestCaseOperation2WithContext(ctx aws.Context, input *InputService13TestShapeInputService13TestCaseOperation2Input, opts ...request.Option) (*InputService13TestShapeInputService13TestCaseOperation2Output, error) {
+func (c *InputService13ProtocolTest) InputService13TestCaseOperation2WithContext(ctx aws.Context, input *InputService13TestShapeInputService13TestCaseOperation2Input, opts ...aws.Option) (*InputService13TestShapeInputService13TestCaseOperation2Output, error) {
 	req, out := c.InputService13TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2272,30 +2269,30 @@ type InputService13TestShapeInputService13TestCaseOperation2Output struct {
 // InputService14ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService14ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService14ProtocolTest client with a session.
+// New creates a new instance of the InputService14ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService14ProtocolTest client from just a session.
-//     svc := inputservice14protocoltest.New(mySession)
+//     // Create a InputService14ProtocolTest client from just a config.
+//     svc := inputservice14protocoltest.New(myConfig)
 //
 //     // Create a InputService14ProtocolTest client with additional configuration
-//     svc := inputservice14protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService14ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService14ProtocolTest {
+//     svc := inputservice14protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService14ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService14ProtocolTest {
 	c := p.ClientConfig("inputservice14protocoltest", cfgs...)
 	return newInputService14ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService14ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService14ProtocolTest {
+func newInputService14ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService14ProtocolTest {
 	svc := &InputService14ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice14protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2318,7 +2315,7 @@ func newInputService14ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService14ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService14ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService14ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -2326,7 +2323,7 @@ func (c *InputService14ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService14TestCaseOperation1 = "OperationName"
 
-// InputService14TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService14TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService14TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2348,8 +2345,8 @@ const opInputService14TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService14ProtocolTest) InputService14TestCaseOperation1Request(input *InputService14TestShapeInputService14TestCaseOperation2Input) (req *request.Request, output *InputService14TestShapeInputService14TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService14ProtocolTest) InputService14TestCaseOperation1Request(input *InputService14TestShapeInputService14TestCaseOperation2Input) (req *aws.Request, output *InputService14TestShapeInputService14TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService14TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2388,7 +2385,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService14ProtocolTest) InputService14TestCaseOperation1WithContext(ctx aws.Context, input *InputService14TestShapeInputService14TestCaseOperation2Input, opts ...request.Option) (*InputService14TestShapeInputService14TestCaseOperation1Output, error) {
+func (c *InputService14ProtocolTest) InputService14TestCaseOperation1WithContext(ctx aws.Context, input *InputService14TestShapeInputService14TestCaseOperation2Input, opts ...aws.Option) (*InputService14TestShapeInputService14TestCaseOperation1Output, error) {
 	req, out := c.InputService14TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2397,7 +2394,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation1WithContext
 
 const opInputService14TestCaseOperation2 = "OperationName"
 
-// InputService14TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService14TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService14TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2419,8 +2416,8 @@ const opInputService14TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService14ProtocolTest) InputService14TestCaseOperation2Request(input *InputService14TestShapeInputService14TestCaseOperation2Input) (req *request.Request, output *InputService14TestShapeInputService14TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService14ProtocolTest) InputService14TestCaseOperation2Request(input *InputService14TestShapeInputService14TestCaseOperation2Input) (req *aws.Request, output *InputService14TestShapeInputService14TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService14TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2459,7 +2456,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService14ProtocolTest) InputService14TestCaseOperation2WithContext(ctx aws.Context, input *InputService14TestShapeInputService14TestCaseOperation2Input, opts ...request.Option) (*InputService14TestShapeInputService14TestCaseOperation2Output, error) {
+func (c *InputService14ProtocolTest) InputService14TestCaseOperation2WithContext(ctx aws.Context, input *InputService14TestShapeInputService14TestCaseOperation2Input, opts ...aws.Option) (*InputService14TestShapeInputService14TestCaseOperation2Output, error) {
 	req, out := c.InputService14TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2505,30 +2502,30 @@ type InputService14TestShapeInputService14TestCaseOperation2Output struct {
 // InputService15ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService15ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService15ProtocolTest client with a session.
+// New creates a new instance of the InputService15ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService15ProtocolTest client from just a session.
-//     svc := inputservice15protocoltest.New(mySession)
+//     // Create a InputService15ProtocolTest client from just a config.
+//     svc := inputservice15protocoltest.New(myConfig)
 //
 //     // Create a InputService15ProtocolTest client with additional configuration
-//     svc := inputservice15protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService15ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService15ProtocolTest {
+//     svc := inputservice15protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService15ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService15ProtocolTest {
 	c := p.ClientConfig("inputservice15protocoltest", cfgs...)
 	return newInputService15ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService15ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService15ProtocolTest {
+func newInputService15ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService15ProtocolTest {
 	svc := &InputService15ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice15protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2551,7 +2548,7 @@ func newInputService15ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService15ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService15ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService15ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -2559,7 +2556,7 @@ func (c *InputService15ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService15TestCaseOperation1 = "OperationName"
 
-// InputService15TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService15TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService15TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2581,8 +2578,8 @@ const opInputService15TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService15ProtocolTest) InputService15TestCaseOperation1Request(input *InputService15TestShapeInputService15TestCaseOperation2Input) (req *request.Request, output *InputService15TestShapeInputService15TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService15ProtocolTest) InputService15TestCaseOperation1Request(input *InputService15TestShapeInputService15TestCaseOperation2Input) (req *aws.Request, output *InputService15TestShapeInputService15TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService15TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -2621,7 +2618,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService15ProtocolTest) InputService15TestCaseOperation1WithContext(ctx aws.Context, input *InputService15TestShapeInputService15TestCaseOperation2Input, opts ...request.Option) (*InputService15TestShapeInputService15TestCaseOperation1Output, error) {
+func (c *InputService15ProtocolTest) InputService15TestCaseOperation1WithContext(ctx aws.Context, input *InputService15TestShapeInputService15TestCaseOperation2Input, opts ...aws.Option) (*InputService15TestShapeInputService15TestCaseOperation1Output, error) {
 	req, out := c.InputService15TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2630,7 +2627,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation1WithContext
 
 const opInputService15TestCaseOperation2 = "OperationName"
 
-// InputService15TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService15TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService15TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2652,8 +2649,8 @@ const opInputService15TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService15ProtocolTest) InputService15TestCaseOperation2Request(input *InputService15TestShapeInputService15TestCaseOperation2Input) (req *request.Request, output *InputService15TestShapeInputService15TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService15ProtocolTest) InputService15TestCaseOperation2Request(input *InputService15TestShapeInputService15TestCaseOperation2Input) (req *aws.Request, output *InputService15TestShapeInputService15TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService15TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path?abc=mno",
@@ -2692,7 +2689,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService15ProtocolTest) InputService15TestCaseOperation2WithContext(ctx aws.Context, input *InputService15TestShapeInputService15TestCaseOperation2Input, opts ...request.Option) (*InputService15TestShapeInputService15TestCaseOperation2Output, error) {
+func (c *InputService15ProtocolTest) InputService15TestCaseOperation2WithContext(ctx aws.Context, input *InputService15TestShapeInputService15TestCaseOperation2Input, opts ...aws.Option) (*InputService15TestShapeInputService15TestCaseOperation2Output, error) {
 	req, out := c.InputService15TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2726,30 +2723,30 @@ type InputService15TestShapeInputService15TestCaseOperation2Output struct {
 // InputService16ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService16ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService16ProtocolTest client with a session.
+// New creates a new instance of the InputService16ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService16ProtocolTest client from just a session.
-//     svc := inputservice16protocoltest.New(mySession)
+//     // Create a InputService16ProtocolTest client from just a config.
+//     svc := inputservice16protocoltest.New(myConfig)
 //
 //     // Create a InputService16ProtocolTest client with additional configuration
-//     svc := inputservice16protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService16ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService16ProtocolTest {
+//     svc := inputservice16protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService16ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService16ProtocolTest {
 	c := p.ClientConfig("inputservice16protocoltest", cfgs...)
 	return newInputService16ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService16ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService16ProtocolTest {
+func newInputService16ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService16ProtocolTest {
 	svc := &InputService16ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice16protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -2772,7 +2769,7 @@ func newInputService16ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService16ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService16ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService16ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -2780,7 +2777,7 @@ func (c *InputService16ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService16TestCaseOperation1 = "OperationName"
 
-// InputService16TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService16TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService16TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2802,8 +2799,8 @@ const opInputService16TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation1Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *request.Request, output *InputService16TestShapeInputService16TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation1Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *aws.Request, output *InputService16TestShapeInputService16TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService16TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -2842,7 +2839,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation1WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...request.Option) (*InputService16TestShapeInputService16TestCaseOperation1Output, error) {
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation1WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...aws.Option) (*InputService16TestShapeInputService16TestCaseOperation1Output, error) {
 	req, out := c.InputService16TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2851,7 +2848,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation1WithContext
 
 const opInputService16TestCaseOperation2 = "OperationName"
 
-// InputService16TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService16TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService16TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2873,8 +2870,8 @@ const opInputService16TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation2Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *request.Request, output *InputService16TestShapeInputService16TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation2Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *aws.Request, output *InputService16TestShapeInputService16TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService16TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -2913,7 +2910,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation2WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...request.Option) (*InputService16TestShapeInputService16TestCaseOperation2Output, error) {
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation2WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...aws.Option) (*InputService16TestShapeInputService16TestCaseOperation2Output, error) {
 	req, out := c.InputService16TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2922,7 +2919,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation2WithContext
 
 const opInputService16TestCaseOperation3 = "OperationName"
 
-// InputService16TestCaseOperation3Request generates a "aws/request.Request" representing the
+// InputService16TestCaseOperation3Request generates a "aws.Request" representing the
 // client's request for the InputService16TestCaseOperation3 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2944,8 +2941,8 @@ const opInputService16TestCaseOperation3 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation3Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *request.Request, output *InputService16TestShapeInputService16TestCaseOperation3Output) {
-	op := &request.Operation{
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation3Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *aws.Request, output *InputService16TestShapeInputService16TestCaseOperation3Output) {
+	op := &aws.Operation{
 		Name:       opInputService16TestCaseOperation3,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -2984,7 +2981,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation3(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation3WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...request.Option) (*InputService16TestShapeInputService16TestCaseOperation3Output, error) {
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation3WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...aws.Option) (*InputService16TestShapeInputService16TestCaseOperation3Output, error) {
 	req, out := c.InputService16TestCaseOperation3Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2993,7 +2990,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation3WithContext
 
 const opInputService16TestCaseOperation4 = "OperationName"
 
-// InputService16TestCaseOperation4Request generates a "aws/request.Request" representing the
+// InputService16TestCaseOperation4Request generates a "aws.Request" representing the
 // client's request for the InputService16TestCaseOperation4 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3015,8 +3012,8 @@ const opInputService16TestCaseOperation4 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation4Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *request.Request, output *InputService16TestShapeInputService16TestCaseOperation4Output) {
-	op := &request.Operation{
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation4Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *aws.Request, output *InputService16TestShapeInputService16TestCaseOperation4Output) {
+	op := &aws.Operation{
 		Name:       opInputService16TestCaseOperation4,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3055,7 +3052,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation4(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation4WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...request.Option) (*InputService16TestShapeInputService16TestCaseOperation4Output, error) {
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation4WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...aws.Option) (*InputService16TestShapeInputService16TestCaseOperation4Output, error) {
 	req, out := c.InputService16TestCaseOperation4Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3064,7 +3061,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation4WithContext
 
 const opInputService16TestCaseOperation5 = "OperationName"
 
-// InputService16TestCaseOperation5Request generates a "aws/request.Request" representing the
+// InputService16TestCaseOperation5Request generates a "aws.Request" representing the
 // client's request for the InputService16TestCaseOperation5 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3086,8 +3083,8 @@ const opInputService16TestCaseOperation5 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation5Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *request.Request, output *InputService16TestShapeInputService16TestCaseOperation5Output) {
-	op := &request.Operation{
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation5Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *aws.Request, output *InputService16TestShapeInputService16TestCaseOperation5Output) {
+	op := &aws.Operation{
 		Name:       opInputService16TestCaseOperation5,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3126,7 +3123,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation5(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation5WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...request.Option) (*InputService16TestShapeInputService16TestCaseOperation5Output, error) {
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation5WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...aws.Option) (*InputService16TestShapeInputService16TestCaseOperation5Output, error) {
 	req, out := c.InputService16TestCaseOperation5Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3135,7 +3132,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation5WithContext
 
 const opInputService16TestCaseOperation6 = "OperationName"
 
-// InputService16TestCaseOperation6Request generates a "aws/request.Request" representing the
+// InputService16TestCaseOperation6Request generates a "aws.Request" representing the
 // client's request for the InputService16TestCaseOperation6 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3157,8 +3154,8 @@ const opInputService16TestCaseOperation6 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation6Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *request.Request, output *InputService16TestShapeInputService16TestCaseOperation6Output) {
-	op := &request.Operation{
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation6Request(input *InputService16TestShapeInputService16TestCaseOperation6Input) (req *aws.Request, output *InputService16TestShapeInputService16TestCaseOperation6Output) {
+	op := &aws.Operation{
 		Name:       opInputService16TestCaseOperation6,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3197,7 +3194,7 @@ func (c *InputService16ProtocolTest) InputService16TestCaseOperation6(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService16ProtocolTest) InputService16TestCaseOperation6WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...request.Option) (*InputService16TestShapeInputService16TestCaseOperation6Output, error) {
+func (c *InputService16ProtocolTest) InputService16TestCaseOperation6WithContext(ctx aws.Context, input *InputService16TestShapeInputService16TestCaseOperation6Input, opts ...aws.Option) (*InputService16TestShapeInputService16TestCaseOperation6Output, error) {
 	req, out := c.InputService16TestCaseOperation6Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3283,30 +3280,30 @@ func (s *InputService16TestShapeRecursiveStructType) SetRecursiveStruct(v *Input
 // InputService17ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService17ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService17ProtocolTest client with a session.
+// New creates a new instance of the InputService17ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService17ProtocolTest client from just a session.
-//     svc := inputservice17protocoltest.New(mySession)
+//     // Create a InputService17ProtocolTest client from just a config.
+//     svc := inputservice17protocoltest.New(myConfig)
 //
 //     // Create a InputService17ProtocolTest client with additional configuration
-//     svc := inputservice17protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService17ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService17ProtocolTest {
+//     svc := inputservice17protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService17ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService17ProtocolTest {
 	c := p.ClientConfig("inputservice17protocoltest", cfgs...)
 	return newInputService17ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService17ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService17ProtocolTest {
+func newInputService17ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService17ProtocolTest {
 	svc := &InputService17ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice17protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3329,7 +3326,7 @@ func newInputService17ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService17ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService17ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService17ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -3337,7 +3334,7 @@ func (c *InputService17ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService17TestCaseOperation1 = "OperationName"
 
-// InputService17TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService17TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService17TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3359,8 +3356,8 @@ const opInputService17TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService17ProtocolTest) InputService17TestCaseOperation1Request(input *InputService17TestShapeInputService17TestCaseOperation2Input) (req *request.Request, output *InputService17TestShapeInputService17TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService17ProtocolTest) InputService17TestCaseOperation1Request(input *InputService17TestShapeInputService17TestCaseOperation2Input) (req *aws.Request, output *InputService17TestShapeInputService17TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService17TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3399,7 +3396,7 @@ func (c *InputService17ProtocolTest) InputService17TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService17ProtocolTest) InputService17TestCaseOperation1WithContext(ctx aws.Context, input *InputService17TestShapeInputService17TestCaseOperation2Input, opts ...request.Option) (*InputService17TestShapeInputService17TestCaseOperation1Output, error) {
+func (c *InputService17ProtocolTest) InputService17TestCaseOperation1WithContext(ctx aws.Context, input *InputService17TestShapeInputService17TestCaseOperation2Input, opts ...aws.Option) (*InputService17TestShapeInputService17TestCaseOperation1Output, error) {
 	req, out := c.InputService17TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3408,7 +3405,7 @@ func (c *InputService17ProtocolTest) InputService17TestCaseOperation1WithContext
 
 const opInputService17TestCaseOperation2 = "OperationName"
 
-// InputService17TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService17TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService17TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3430,8 +3427,8 @@ const opInputService17TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService17ProtocolTest) InputService17TestCaseOperation2Request(input *InputService17TestShapeInputService17TestCaseOperation2Input) (req *request.Request, output *InputService17TestShapeInputService17TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService17ProtocolTest) InputService17TestCaseOperation2Request(input *InputService17TestShapeInputService17TestCaseOperation2Input) (req *aws.Request, output *InputService17TestShapeInputService17TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService17TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3470,7 +3467,7 @@ func (c *InputService17ProtocolTest) InputService17TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService17ProtocolTest) InputService17TestCaseOperation2WithContext(ctx aws.Context, input *InputService17TestShapeInputService17TestCaseOperation2Input, opts ...request.Option) (*InputService17TestShapeInputService17TestCaseOperation2Output, error) {
+func (c *InputService17ProtocolTest) InputService17TestCaseOperation2WithContext(ctx aws.Context, input *InputService17TestShapeInputService17TestCaseOperation2Input, opts ...aws.Option) (*InputService17TestShapeInputService17TestCaseOperation2Output, error) {
 	req, out := c.InputService17TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3512,30 +3509,30 @@ type InputService17TestShapeInputService17TestCaseOperation2Output struct {
 // InputService18ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService18ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService18ProtocolTest client with a session.
+// New creates a new instance of the InputService18ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService18ProtocolTest client from just a session.
-//     svc := inputservice18protocoltest.New(mySession)
+//     // Create a InputService18ProtocolTest client from just a config.
+//     svc := inputservice18protocoltest.New(myConfig)
 //
 //     // Create a InputService18ProtocolTest client with additional configuration
-//     svc := inputservice18protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService18ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService18ProtocolTest {
+//     svc := inputservice18protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService18ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService18ProtocolTest {
 	c := p.ClientConfig("inputservice18protocoltest", cfgs...)
 	return newInputService18ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService18ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService18ProtocolTest {
+func newInputService18ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService18ProtocolTest {
 	svc := &InputService18ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice18protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3558,7 +3555,7 @@ func newInputService18ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService18ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService18ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService18ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -3566,7 +3563,7 @@ func (c *InputService18ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService18TestCaseOperation1 = "OperationName"
 
-// InputService18TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService18TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService18TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3588,8 +3585,8 @@ const opInputService18TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService18ProtocolTest) InputService18TestCaseOperation1Request(input *InputService18TestShapeInputService18TestCaseOperation1Input) (req *request.Request, output *InputService18TestShapeInputService18TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService18ProtocolTest) InputService18TestCaseOperation1Request(input *InputService18TestShapeInputService18TestCaseOperation1Input) (req *aws.Request, output *InputService18TestShapeInputService18TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService18TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3628,7 +3625,7 @@ func (c *InputService18ProtocolTest) InputService18TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService18ProtocolTest) InputService18TestCaseOperation1WithContext(ctx aws.Context, input *InputService18TestShapeInputService18TestCaseOperation1Input, opts ...request.Option) (*InputService18TestShapeInputService18TestCaseOperation1Output, error) {
+func (c *InputService18ProtocolTest) InputService18TestCaseOperation1WithContext(ctx aws.Context, input *InputService18TestShapeInputService18TestCaseOperation1Input, opts ...aws.Option) (*InputService18TestShapeInputService18TestCaseOperation1Output, error) {
 	req, out := c.InputService18TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3658,30 +3655,30 @@ type InputService18TestShapeInputService18TestCaseOperation1Output struct {
 // InputService19ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService19ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService19ProtocolTest client with a session.
+// New creates a new instance of the InputService19ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService19ProtocolTest client from just a session.
-//     svc := inputservice19protocoltest.New(mySession)
+//     // Create a InputService19ProtocolTest client from just a config.
+//     svc := inputservice19protocoltest.New(myConfig)
 //
 //     // Create a InputService19ProtocolTest client with additional configuration
-//     svc := inputservice19protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService19ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService19ProtocolTest {
+//     svc := inputservice19protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService19ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService19ProtocolTest {
 	c := p.ClientConfig("inputservice19protocoltest", cfgs...)
 	return newInputService19ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService19ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService19ProtocolTest {
+func newInputService19ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService19ProtocolTest {
 	svc := &InputService19ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice19protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3704,7 +3701,7 @@ func newInputService19ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService19ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService19ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService19ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -3712,7 +3709,7 @@ func (c *InputService19ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService19TestCaseOperation1 = "OperationName"
 
-// InputService19TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService19TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService19TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3734,8 +3731,8 @@ const opInputService19TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService19ProtocolTest) InputService19TestCaseOperation1Request(input *InputService19TestShapeInputService19TestCaseOperation1Input) (req *request.Request, output *InputService19TestShapeInputService19TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService19ProtocolTest) InputService19TestCaseOperation1Request(input *InputService19TestShapeInputService19TestCaseOperation1Input) (req *aws.Request, output *InputService19TestShapeInputService19TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService19TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3774,7 +3771,7 @@ func (c *InputService19ProtocolTest) InputService19TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService19ProtocolTest) InputService19TestCaseOperation1WithContext(ctx aws.Context, input *InputService19TestShapeInputService19TestCaseOperation1Input, opts ...request.Option) (*InputService19TestShapeInputService19TestCaseOperation1Output, error) {
+func (c *InputService19ProtocolTest) InputService19TestCaseOperation1WithContext(ctx aws.Context, input *InputService19TestShapeInputService19TestCaseOperation1Input, opts ...aws.Option) (*InputService19TestShapeInputService19TestCaseOperation1Output, error) {
 	req, out := c.InputService19TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3804,30 +3801,30 @@ type InputService19TestShapeInputService19TestCaseOperation1Output struct {
 // InputService20ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService20ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService20ProtocolTest client with a session.
+// New creates a new instance of the InputService20ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService20ProtocolTest client from just a session.
-//     svc := inputservice20protocoltest.New(mySession)
+//     // Create a InputService20ProtocolTest client from just a config.
+//     svc := inputservice20protocoltest.New(myConfig)
 //
 //     // Create a InputService20ProtocolTest client with additional configuration
-//     svc := inputservice20protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService20ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService20ProtocolTest {
+//     svc := inputservice20protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService20ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService20ProtocolTest {
 	c := p.ClientConfig("inputservice20protocoltest", cfgs...)
 	return newInputService20ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService20ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService20ProtocolTest {
+func newInputService20ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService20ProtocolTest {
 	svc := &InputService20ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice20protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -3850,7 +3847,7 @@ func newInputService20ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService20ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService20ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService20ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -3858,7 +3855,7 @@ func (c *InputService20ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService20TestCaseOperation1 = "OperationName"
 
-// InputService20TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService20TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService20TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3880,8 +3877,8 @@ const opInputService20TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService20ProtocolTest) InputService20TestCaseOperation1Request(input *InputService20TestShapeInputService20TestCaseOperation2Input) (req *request.Request, output *InputService20TestShapeInputService20TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService20ProtocolTest) InputService20TestCaseOperation1Request(input *InputService20TestShapeInputService20TestCaseOperation2Input) (req *aws.Request, output *InputService20TestShapeInputService20TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService20TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3920,7 +3917,7 @@ func (c *InputService20ProtocolTest) InputService20TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService20ProtocolTest) InputService20TestCaseOperation1WithContext(ctx aws.Context, input *InputService20TestShapeInputService20TestCaseOperation2Input, opts ...request.Option) (*InputService20TestShapeInputService20TestCaseOperation1Output, error) {
+func (c *InputService20ProtocolTest) InputService20TestCaseOperation1WithContext(ctx aws.Context, input *InputService20TestShapeInputService20TestCaseOperation2Input, opts ...aws.Option) (*InputService20TestShapeInputService20TestCaseOperation1Output, error) {
 	req, out := c.InputService20TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3929,7 +3926,7 @@ func (c *InputService20ProtocolTest) InputService20TestCaseOperation1WithContext
 
 const opInputService20TestCaseOperation2 = "OperationName"
 
-// InputService20TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService20TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService20TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3951,8 +3948,8 @@ const opInputService20TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService20ProtocolTest) InputService20TestCaseOperation2Request(input *InputService20TestShapeInputService20TestCaseOperation2Input) (req *request.Request, output *InputService20TestShapeInputService20TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService20ProtocolTest) InputService20TestCaseOperation2Request(input *InputService20TestShapeInputService20TestCaseOperation2Input) (req *aws.Request, output *InputService20TestShapeInputService20TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService20TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/path",
@@ -3991,7 +3988,7 @@ func (c *InputService20ProtocolTest) InputService20TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService20ProtocolTest) InputService20TestCaseOperation2WithContext(ctx aws.Context, input *InputService20TestShapeInputService20TestCaseOperation2Input, opts ...request.Option) (*InputService20TestShapeInputService20TestCaseOperation2Output, error) {
+func (c *InputService20ProtocolTest) InputService20TestCaseOperation2WithContext(ctx aws.Context, input *InputService20TestShapeInputService20TestCaseOperation2Input, opts ...aws.Option) (*InputService20TestShapeInputService20TestCaseOperation2Output, error) {
 	req, out := c.InputService20TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4025,30 +4022,30 @@ type InputService20TestShapeInputService20TestCaseOperation2Output struct {
 // InputService21ProtocolTest methods are safe to use concurrently. It is not safe to
 // modify mutate any of the struct's properties though.
 type InputService21ProtocolTest struct {
-	*client.Client
+	*aws.Client
 }
 
-// New creates a new instance of the InputService21ProtocolTest client with a session.
+// New creates a new instance of the InputService21ProtocolTest client with a config.
 // If additional configuration is needed for the client instance use the optional
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     // Create a InputService21ProtocolTest client from just a session.
-//     svc := inputservice21protocoltest.New(mySession)
+//     // Create a InputService21ProtocolTest client from just a config.
+//     svc := inputservice21protocoltest.New(myConfig)
 //
 //     // Create a InputService21ProtocolTest client with additional configuration
-//     svc := inputservice21protocoltest.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
-func NewInputService21ProtocolTest(p client.ConfigProvider, cfgs ...*aws.Config) *InputService21ProtocolTest {
+//     svc := inputservice21protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
+func NewInputService21ProtocolTest(p aws.ConfigProvider, cfgs ...*aws.Config) *InputService21ProtocolTest {
 	c := p.ClientConfig("inputservice21protocoltest", cfgs...)
 	return newInputService21ProtocolTestClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
 }
 
 // newClient creates, initializes and returns a new service client instance.
-func newInputService21ProtocolTestClient(cfg aws.Config, handlers request.Handlers, endpoint, signingRegion, signingName string) *InputService21ProtocolTest {
+func newInputService21ProtocolTestClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *InputService21ProtocolTest {
 	svc := &InputService21ProtocolTest{
-		Client: client.New(
+		Client: aws.NewClient(
 			cfg,
-			metadata.ClientInfo{
+			aws.ClientInfo{
 				ServiceName:   "inputservice21protocoltest",
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
@@ -4071,7 +4068,7 @@ func newInputService21ProtocolTestClient(cfg aws.Config, handlers request.Handle
 
 // newRequest creates a new request for a InputService21ProtocolTest operation and runs any
 // custom request initialization.
-func (c *InputService21ProtocolTest) newRequest(op *request.Operation, params, data interface{}) *request.Request {
+func (c *InputService21ProtocolTest) newRequest(op *aws.Operation, params, data interface{}) *aws.Request {
 	req := c.NewRequest(op, params, data)
 
 	return req
@@ -4079,7 +4076,7 @@ func (c *InputService21ProtocolTest) newRequest(op *request.Operation, params, d
 
 const opInputService21TestCaseOperation1 = "OperationName"
 
-// InputService21TestCaseOperation1Request generates a "aws/request.Request" representing the
+// InputService21TestCaseOperation1Request generates a "aws.Request" representing the
 // client's request for the InputService21TestCaseOperation1 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4101,8 +4098,8 @@ const opInputService21TestCaseOperation1 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService21ProtocolTest) InputService21TestCaseOperation1Request(input *InputService21TestShapeInputService21TestCaseOperation2Input) (req *request.Request, output *InputService21TestShapeInputService21TestCaseOperation1Output) {
-	op := &request.Operation{
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation1Request(input *InputService21TestShapeInputService21TestCaseOperation2Input) (req *aws.Request, output *InputService21TestShapeInputService21TestCaseOperation1Output) {
+	op := &aws.Operation{
 		Name:       opInputService21TestCaseOperation1,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4141,7 +4138,7 @@ func (c *InputService21ProtocolTest) InputService21TestCaseOperation1(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService21ProtocolTest) InputService21TestCaseOperation1WithContext(ctx aws.Context, input *InputService21TestShapeInputService21TestCaseOperation2Input, opts ...request.Option) (*InputService21TestShapeInputService21TestCaseOperation1Output, error) {
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation1WithContext(ctx aws.Context, input *InputService21TestShapeInputService21TestCaseOperation2Input, opts ...aws.Option) (*InputService21TestShapeInputService21TestCaseOperation1Output, error) {
 	req, out := c.InputService21TestCaseOperation1Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4150,7 +4147,7 @@ func (c *InputService21ProtocolTest) InputService21TestCaseOperation1WithContext
 
 const opInputService21TestCaseOperation2 = "OperationName"
 
-// InputService21TestCaseOperation2Request generates a "aws/request.Request" representing the
+// InputService21TestCaseOperation2Request generates a "aws.Request" representing the
 // client's request for the InputService21TestCaseOperation2 operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4172,8 +4169,8 @@ const opInputService21TestCaseOperation2 = "OperationName"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *InputService21ProtocolTest) InputService21TestCaseOperation2Request(input *InputService21TestShapeInputService21TestCaseOperation2Input) (req *request.Request, output *InputService21TestShapeInputService21TestCaseOperation2Output) {
-	op := &request.Operation{
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation2Request(input *InputService21TestShapeInputService21TestCaseOperation2Input) (req *aws.Request, output *InputService21TestShapeInputService21TestCaseOperation2Output) {
+	op := &aws.Operation{
 		Name:       opInputService21TestCaseOperation2,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4212,7 +4209,7 @@ func (c *InputService21ProtocolTest) InputService21TestCaseOperation2(input *Inp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *InputService21ProtocolTest) InputService21TestCaseOperation2WithContext(ctx aws.Context, input *InputService21TestShapeInputService21TestCaseOperation2Input, opts ...request.Option) (*InputService21TestShapeInputService21TestCaseOperation2Output, error) {
+func (c *InputService21ProtocolTest) InputService21TestCaseOperation2WithContext(ctx aws.Context, input *InputService21TestShapeInputService21TestCaseOperation2Input, opts ...aws.Option) (*InputService21TestShapeInputService21TestCaseOperation2Output, error) {
 	req, out := c.InputService21TestCaseOperation2Request(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4244,7 +4241,9 @@ type InputService21TestShapeInputService21TestCaseOperation2Output struct {
 //
 
 func TestInputService1ProtocolTestNoParametersCase1(t *testing.T) {
-	svc := NewInputService1ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService1ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	req, _ := svc.InputService1TestCaseOperation1Request(nil)
 	r := req.HTTPRequest
 
@@ -4262,7 +4261,9 @@ func TestInputService1ProtocolTestNoParametersCase1(t *testing.T) {
 }
 
 func TestInputService2ProtocolTestURIParameterOnlyWithNoLocationNameCase1(t *testing.T) {
-	svc := NewInputService2ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService2ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService2TestShapeInputService2TestCaseOperation1Input{
 		PipelineId: aws.String("foo"),
 	}
@@ -4283,7 +4284,9 @@ func TestInputService2ProtocolTestURIParameterOnlyWithNoLocationNameCase1(t *tes
 }
 
 func TestInputService3ProtocolTestURIParameterOnlyWithLocationNameCase1(t *testing.T) {
-	svc := NewInputService3ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService3ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService3TestShapeInputService3TestCaseOperation1Input{
 		Foo: aws.String("bar"),
 	}
@@ -4304,7 +4307,9 @@ func TestInputService3ProtocolTestURIParameterOnlyWithLocationNameCase1(t *testi
 }
 
 func TestInputService4ProtocolTestQuerystringListOfStringsCase1(t *testing.T) {
-	svc := NewInputService4ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService4ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService4TestShapeInputService4TestCaseOperation1Input{
 		Items: []*string{
 			aws.String("value1"),
@@ -4328,7 +4333,9 @@ func TestInputService4ProtocolTestQuerystringListOfStringsCase1(t *testing.T) {
 }
 
 func TestInputService5ProtocolTestStringToStringMapsInQuerystringCase1(t *testing.T) {
-	svc := NewInputService5ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService5ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService5TestShapeInputService5TestCaseOperation1Input{
 		PipelineId: aws.String("foo"),
 		QueryDoc: map[string]*string{
@@ -4353,7 +4360,9 @@ func TestInputService5ProtocolTestStringToStringMapsInQuerystringCase1(t *testin
 }
 
 func TestInputService6ProtocolTestStringToStringListMapsInQuerystringCase1(t *testing.T) {
-	svc := NewInputService6ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService6ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService6TestShapeInputService6TestCaseOperation1Input{
 		PipelineId: aws.String("id"),
 		QueryDoc: map[string][]*string{
@@ -4384,7 +4393,9 @@ func TestInputService6ProtocolTestStringToStringListMapsInQuerystringCase1(t *te
 }
 
 func TestInputService7ProtocolTestBooleanInQuerystringCase1(t *testing.T) {
-	svc := NewInputService7ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService7ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService7TestShapeInputService7TestCaseOperation2Input{
 		BoolQuery: aws.Bool(true),
 	}
@@ -4405,7 +4416,9 @@ func TestInputService7ProtocolTestBooleanInQuerystringCase1(t *testing.T) {
 }
 
 func TestInputService7ProtocolTestBooleanInQuerystringCase2(t *testing.T) {
-	svc := NewInputService7ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService7ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService7TestShapeInputService7TestCaseOperation2Input{
 		BoolQuery: aws.Bool(false),
 	}
@@ -4426,7 +4439,9 @@ func TestInputService7ProtocolTestBooleanInQuerystringCase2(t *testing.T) {
 }
 
 func TestInputService8ProtocolTestURIParameterAndQuerystringParamsCase1(t *testing.T) {
-	svc := NewInputService8ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService8ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService8TestShapeInputService8TestCaseOperation1Input{
 		Ascending:  aws.String("true"),
 		PageToken:  aws.String("bar"),
@@ -4449,7 +4464,9 @@ func TestInputService8ProtocolTestURIParameterAndQuerystringParamsCase1(t *testi
 }
 
 func TestInputService9ProtocolTestURIParameterQuerystringParamsAndJSONBodyCase1(t *testing.T) {
-	svc := NewInputService9ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService9ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService9TestShapeInputService9TestCaseOperation1Input{
 		Ascending: aws.String("true"),
 		Config: &InputService9TestShapeStructType{
@@ -4483,7 +4500,9 @@ func TestInputService9ProtocolTestURIParameterQuerystringParamsAndJSONBodyCase1(
 }
 
 func TestInputService10ProtocolTestURIParameterQuerystringParamsHeadersAndJSONBodyCase1(t *testing.T) {
-	svc := NewInputService10ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService10ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService10TestShapeInputService10TestCaseOperation1Input{
 		Ascending: aws.String("true"),
 		Checksum:  aws.String("12345"),
@@ -4521,7 +4540,9 @@ func TestInputService10ProtocolTestURIParameterQuerystringParamsHeadersAndJSONBo
 }
 
 func TestInputService11ProtocolTestStreamingPayloadCase1(t *testing.T) {
-	svc := NewInputService11ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService11ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService11TestShapeInputService11TestCaseOperation1Input{
 		Body:      bytes.NewReader([]byte("contents")),
 		Checksum:  aws.String("foo"),
@@ -4556,7 +4577,9 @@ func TestInputService11ProtocolTestStreamingPayloadCase1(t *testing.T) {
 }
 
 func TestInputService12ProtocolTestSerializeBlobsInBodyCase1(t *testing.T) {
-	svc := NewInputService12ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService12ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService12TestShapeInputService12TestCaseOperation1Input{
 		Bar: []byte("Blob param"),
 		Foo: aws.String("foo_name"),
@@ -4585,7 +4608,9 @@ func TestInputService12ProtocolTestSerializeBlobsInBodyCase1(t *testing.T) {
 }
 
 func TestInputService13ProtocolTestBlobPayloadCase1(t *testing.T) {
-	svc := NewInputService13ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService13ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService13TestShapeInputService13TestCaseOperation2Input{
 		Foo: []byte("bar"),
 	}
@@ -4615,7 +4640,9 @@ func TestInputService13ProtocolTestBlobPayloadCase1(t *testing.T) {
 }
 
 func TestInputService13ProtocolTestBlobPayloadCase2(t *testing.T) {
-	svc := NewInputService13ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService13ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService13TestShapeInputService13TestCaseOperation2Input{}
 	req, _ := svc.InputService13TestCaseOperation2Request(input)
 	r := req.HTTPRequest
@@ -4634,7 +4661,9 @@ func TestInputService13ProtocolTestBlobPayloadCase2(t *testing.T) {
 }
 
 func TestInputService14ProtocolTestStructurePayloadCase1(t *testing.T) {
-	svc := NewInputService14ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService14ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService14TestShapeInputService14TestCaseOperation2Input{
 		Foo: &InputService14TestShapeFooShape{
 			Baz: aws.String("bar"),
@@ -4664,7 +4693,9 @@ func TestInputService14ProtocolTestStructurePayloadCase1(t *testing.T) {
 }
 
 func TestInputService14ProtocolTestStructurePayloadCase2(t *testing.T) {
-	svc := NewInputService14ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService14ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService14TestShapeInputService14TestCaseOperation2Input{}
 	req, _ := svc.InputService14TestCaseOperation2Request(input)
 	r := req.HTTPRequest
@@ -4683,7 +4714,9 @@ func TestInputService14ProtocolTestStructurePayloadCase2(t *testing.T) {
 }
 
 func TestInputService15ProtocolTestOmitsNullQueryParamsButSerializesEmptyStringsCase1(t *testing.T) {
-	svc := NewInputService15ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService15ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService15TestShapeInputService15TestCaseOperation2Input{}
 	req, _ := svc.InputService15TestCaseOperation1Request(input)
 	r := req.HTTPRequest
@@ -4702,7 +4735,9 @@ func TestInputService15ProtocolTestOmitsNullQueryParamsButSerializesEmptyStrings
 }
 
 func TestInputService15ProtocolTestOmitsNullQueryParamsButSerializesEmptyStringsCase2(t *testing.T) {
-	svc := NewInputService15ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService15ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService15TestShapeInputService15TestCaseOperation2Input{
 		Foo: aws.String(""),
 	}
@@ -4723,7 +4758,9 @@ func TestInputService15ProtocolTestOmitsNullQueryParamsButSerializesEmptyStrings
 }
 
 func TestInputService16ProtocolTestRecursiveShapesCase1(t *testing.T) {
-	svc := NewInputService16ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService16ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
 			NoRecurse: aws.String("foo"),
@@ -4753,7 +4790,9 @@ func TestInputService16ProtocolTestRecursiveShapesCase1(t *testing.T) {
 }
 
 func TestInputService16ProtocolTestRecursiveShapesCase2(t *testing.T) {
-	svc := NewInputService16ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService16ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
 			RecursiveStruct: &InputService16TestShapeRecursiveStructType{
@@ -4785,7 +4824,9 @@ func TestInputService16ProtocolTestRecursiveShapesCase2(t *testing.T) {
 }
 
 func TestInputService16ProtocolTestRecursiveShapesCase3(t *testing.T) {
-	svc := NewInputService16ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService16ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
 			RecursiveStruct: &InputService16TestShapeRecursiveStructType{
@@ -4821,7 +4862,9 @@ func TestInputService16ProtocolTestRecursiveShapesCase3(t *testing.T) {
 }
 
 func TestInputService16ProtocolTestRecursiveShapesCase4(t *testing.T) {
-	svc := NewInputService16ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService16ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
 			RecursiveList: []*InputService16TestShapeRecursiveStructType{
@@ -4858,7 +4901,9 @@ func TestInputService16ProtocolTestRecursiveShapesCase4(t *testing.T) {
 }
 
 func TestInputService16ProtocolTestRecursiveShapesCase5(t *testing.T) {
-	svc := NewInputService16ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService16ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
 			RecursiveList: []*InputService16TestShapeRecursiveStructType{
@@ -4897,7 +4942,9 @@ func TestInputService16ProtocolTestRecursiveShapesCase5(t *testing.T) {
 }
 
 func TestInputService16ProtocolTestRecursiveShapesCase6(t *testing.T) {
-	svc := NewInputService16ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService16ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService16TestShapeInputService16TestCaseOperation6Input{
 		RecursiveStruct: &InputService16TestShapeRecursiveStructType{
 			RecursiveMap: map[string]*InputService16TestShapeRecursiveStructType{
@@ -4934,7 +4981,9 @@ func TestInputService16ProtocolTestRecursiveShapesCase6(t *testing.T) {
 }
 
 func TestInputService17ProtocolTestTimestampValuesCase1(t *testing.T) {
-	svc := NewInputService17ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService17ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService17TestShapeInputService17TestCaseOperation2Input{
 		TimeArg: aws.Time(time.Unix(1422172800, 0)),
 	}
@@ -4962,7 +5011,9 @@ func TestInputService17ProtocolTestTimestampValuesCase1(t *testing.T) {
 }
 
 func TestInputService17ProtocolTestTimestampValuesCase2(t *testing.T) {
-	svc := NewInputService17ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService17ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService17TestShapeInputService17TestCaseOperation2Input{
 		TimeArgInHeader: aws.Time(time.Unix(1422172800, 0)),
 	}
@@ -4986,7 +5037,9 @@ func TestInputService17ProtocolTestTimestampValuesCase2(t *testing.T) {
 }
 
 func TestInputService18ProtocolTestNamedLocationsInJSONBodyCase1(t *testing.T) {
-	svc := NewInputService18ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService18ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService18TestShapeInputService18TestCaseOperation1Input{
 		TimeArg: aws.Time(time.Unix(1422172800, 0)),
 	}
@@ -5014,7 +5067,9 @@ func TestInputService18ProtocolTestNamedLocationsInJSONBodyCase1(t *testing.T) {
 }
 
 func TestInputService19ProtocolTestStringPayloadCase1(t *testing.T) {
-	svc := NewInputService19ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService19ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService19TestShapeInputService19TestCaseOperation1Input{
 		Foo: aws.String("bar"),
 	}
@@ -5044,7 +5099,9 @@ func TestInputService19ProtocolTestStringPayloadCase1(t *testing.T) {
 }
 
 func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
-	svc := NewInputService20ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService20ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService20TestShapeInputService20TestCaseOperation2Input{
 		Token: aws.String("abc123"),
 	}
@@ -5072,7 +5129,9 @@ func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase1(t *testing.T) {
 }
 
 func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
-	svc := NewInputService20ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService20ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService20TestShapeInputService20TestCaseOperation2Input{}
 	req, _ := svc.InputService20TestCaseOperation2Request(input)
 	r := req.HTTPRequest
@@ -5098,7 +5157,9 @@ func TestInputService20ProtocolTestIdempotencyTokenAutoFillCase2(t *testing.T) {
 }
 
 func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
-	svc := NewInputService21ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService21ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService21TestShapeInputService21TestCaseOperation2Input{}
 	input.Attr = aws.JSONValue{"Foo": "Bar"}
 	req, _ := svc.InputService21TestCaseOperation1Request(input)
@@ -5121,7 +5182,9 @@ func TestInputService21ProtocolTestJSONValueTraitCase1(t *testing.T) {
 }
 
 func TestInputService21ProtocolTestJSONValueTraitCase2(t *testing.T) {
-	svc := NewInputService21ProtocolTest(unit.Session, &aws.Config{Endpoint: aws.String("https://test")})
+	svc := NewInputService21ProtocolTest(unit.Config, &aws.Config{
+		EndpointResolver: aws.ResolveWithEndpointURL("https://test"),
+	})
 	input := &InputService21TestShapeInputService21TestCaseOperation2Input{}
 	req, _ := svc.InputService21TestCaseOperation2Request(input)
 	r := req.HTTPRequest

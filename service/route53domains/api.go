@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCheckDomainAvailability = "CheckDomainAvailability"
 
-// CheckDomainAvailabilityRequest generates a "aws/request.Request" representing the
+// CheckDomainAvailabilityRequest generates a "aws.Request" representing the
 // client's request for the CheckDomainAvailability operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCheckDomainAvailability = "CheckDomainAvailability"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailability
-func (c *Route53Domains) CheckDomainAvailabilityRequest(input *CheckDomainAvailabilityInput) (req *request.Request, output *CheckDomainAvailabilityOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) CheckDomainAvailabilityRequest(input *CheckDomainAvailabilityInput) (req *aws.Request, output *CheckDomainAvailabilityOutput) {
+	op := &aws.Operation{
 		Name:       opCheckDomainAvailability,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -90,7 +89,7 @@ func (c *Route53Domains) CheckDomainAvailability(input *CheckDomainAvailabilityI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) CheckDomainAvailabilityWithContext(ctx aws.Context, input *CheckDomainAvailabilityInput, opts ...request.Option) (*CheckDomainAvailabilityOutput, error) {
+func (c *Route53Domains) CheckDomainAvailabilityWithContext(ctx aws.Context, input *CheckDomainAvailabilityInput, opts ...aws.Option) (*CheckDomainAvailabilityOutput, error) {
 	req, out := c.CheckDomainAvailabilityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -99,7 +98,7 @@ func (c *Route53Domains) CheckDomainAvailabilityWithContext(ctx aws.Context, inp
 
 const opCheckDomainTransferability = "CheckDomainTransferability"
 
-// CheckDomainTransferabilityRequest generates a "aws/request.Request" representing the
+// CheckDomainTransferabilityRequest generates a "aws.Request" representing the
 // client's request for the CheckDomainTransferability operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -123,8 +122,8 @@ const opCheckDomainTransferability = "CheckDomainTransferability"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferability
-func (c *Route53Domains) CheckDomainTransferabilityRequest(input *CheckDomainTransferabilityInput) (req *request.Request, output *CheckDomainTransferabilityOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) CheckDomainTransferabilityRequest(input *CheckDomainTransferabilityInput) (req *aws.Request, output *CheckDomainTransferabilityOutput) {
+	op := &aws.Operation{
 		Name:       opCheckDomainTransferability,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -174,7 +173,7 @@ func (c *Route53Domains) CheckDomainTransferability(input *CheckDomainTransferab
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) CheckDomainTransferabilityWithContext(ctx aws.Context, input *CheckDomainTransferabilityInput, opts ...request.Option) (*CheckDomainTransferabilityOutput, error) {
+func (c *Route53Domains) CheckDomainTransferabilityWithContext(ctx aws.Context, input *CheckDomainTransferabilityInput, opts ...aws.Option) (*CheckDomainTransferabilityOutput, error) {
 	req, out := c.CheckDomainTransferabilityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -183,7 +182,7 @@ func (c *Route53Domains) CheckDomainTransferabilityWithContext(ctx aws.Context, 
 
 const opDeleteTagsForDomain = "DeleteTagsForDomain"
 
-// DeleteTagsForDomainRequest generates a "aws/request.Request" representing the
+// DeleteTagsForDomainRequest generates a "aws.Request" representing the
 // client's request for the DeleteTagsForDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -207,8 +206,8 @@ const opDeleteTagsForDomain = "DeleteTagsForDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomain
-func (c *Route53Domains) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) (req *request.Request, output *DeleteTagsForDomainOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) DeleteTagsForDomainRequest(input *DeleteTagsForDomainInput) (req *aws.Request, output *DeleteTagsForDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTagsForDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -265,7 +264,7 @@ func (c *Route53Domains) DeleteTagsForDomain(input *DeleteTagsForDomainInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) DeleteTagsForDomainWithContext(ctx aws.Context, input *DeleteTagsForDomainInput, opts ...request.Option) (*DeleteTagsForDomainOutput, error) {
+func (c *Route53Domains) DeleteTagsForDomainWithContext(ctx aws.Context, input *DeleteTagsForDomainInput, opts ...aws.Option) (*DeleteTagsForDomainOutput, error) {
 	req, out := c.DeleteTagsForDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -274,7 +273,7 @@ func (c *Route53Domains) DeleteTagsForDomainWithContext(ctx aws.Context, input *
 
 const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
 
-// DisableDomainAutoRenewRequest generates a "aws/request.Request" representing the
+// DisableDomainAutoRenewRequest generates a "aws.Request" representing the
 // client's request for the DisableDomainAutoRenew operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -298,8 +297,8 @@ const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenew
-func (c *Route53Domains) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInput) (req *request.Request, output *DisableDomainAutoRenewOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) DisableDomainAutoRenewRequest(input *DisableDomainAutoRenewInput) (req *aws.Request, output *DisableDomainAutoRenewOutput) {
+	op := &aws.Operation{
 		Name:       opDisableDomainAutoRenew,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -350,7 +349,7 @@ func (c *Route53Domains) DisableDomainAutoRenew(input *DisableDomainAutoRenewInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) DisableDomainAutoRenewWithContext(ctx aws.Context, input *DisableDomainAutoRenewInput, opts ...request.Option) (*DisableDomainAutoRenewOutput, error) {
+func (c *Route53Domains) DisableDomainAutoRenewWithContext(ctx aws.Context, input *DisableDomainAutoRenewInput, opts ...aws.Option) (*DisableDomainAutoRenewOutput, error) {
 	req, out := c.DisableDomainAutoRenewRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -359,7 +358,7 @@ func (c *Route53Domains) DisableDomainAutoRenewWithContext(ctx aws.Context, inpu
 
 const opDisableDomainTransferLock = "DisableDomainTransferLock"
 
-// DisableDomainTransferLockRequest generates a "aws/request.Request" representing the
+// DisableDomainTransferLockRequest generates a "aws.Request" representing the
 // client's request for the DisableDomainTransferLock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -383,8 +382,8 @@ const opDisableDomainTransferLock = "DisableDomainTransferLock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLock
-func (c *Route53Domains) DisableDomainTransferLockRequest(input *DisableDomainTransferLockInput) (req *request.Request, output *DisableDomainTransferLockOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) DisableDomainTransferLockRequest(input *DisableDomainTransferLockInput) (req *aws.Request, output *DisableDomainTransferLockOutput) {
+	op := &aws.Operation{
 		Name:       opDisableDomainTransferLock,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -450,7 +449,7 @@ func (c *Route53Domains) DisableDomainTransferLock(input *DisableDomainTransferL
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) DisableDomainTransferLockWithContext(ctx aws.Context, input *DisableDomainTransferLockInput, opts ...request.Option) (*DisableDomainTransferLockOutput, error) {
+func (c *Route53Domains) DisableDomainTransferLockWithContext(ctx aws.Context, input *DisableDomainTransferLockInput, opts ...aws.Option) (*DisableDomainTransferLockOutput, error) {
 	req, out := c.DisableDomainTransferLockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -459,7 +458,7 @@ func (c *Route53Domains) DisableDomainTransferLockWithContext(ctx aws.Context, i
 
 const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 
-// EnableDomainAutoRenewRequest generates a "aws/request.Request" representing the
+// EnableDomainAutoRenewRequest generates a "aws.Request" representing the
 // client's request for the EnableDomainAutoRenew operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -483,8 +482,8 @@ const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenew
-func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput) (req *request.Request, output *EnableDomainAutoRenewOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRenewInput) (req *aws.Request, output *EnableDomainAutoRenewOutput) {
+	op := &aws.Operation{
 		Name:       opEnableDomainAutoRenew,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -546,7 +545,7 @@ func (c *Route53Domains) EnableDomainAutoRenew(input *EnableDomainAutoRenewInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) EnableDomainAutoRenewWithContext(ctx aws.Context, input *EnableDomainAutoRenewInput, opts ...request.Option) (*EnableDomainAutoRenewOutput, error) {
+func (c *Route53Domains) EnableDomainAutoRenewWithContext(ctx aws.Context, input *EnableDomainAutoRenewInput, opts ...aws.Option) (*EnableDomainAutoRenewOutput, error) {
 	req, out := c.EnableDomainAutoRenewRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -555,7 +554,7 @@ func (c *Route53Domains) EnableDomainAutoRenewWithContext(ctx aws.Context, input
 
 const opEnableDomainTransferLock = "EnableDomainTransferLock"
 
-// EnableDomainTransferLockRequest generates a "aws/request.Request" representing the
+// EnableDomainTransferLockRequest generates a "aws.Request" representing the
 // client's request for the EnableDomainTransferLock operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -579,8 +578,8 @@ const opEnableDomainTransferLock = "EnableDomainTransferLock"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLock
-func (c *Route53Domains) EnableDomainTransferLockRequest(input *EnableDomainTransferLockInput) (req *request.Request, output *EnableDomainTransferLockOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) EnableDomainTransferLockRequest(input *EnableDomainTransferLockInput) (req *aws.Request, output *EnableDomainTransferLockOutput) {
+	op := &aws.Operation{
 		Name:       opEnableDomainTransferLock,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -644,7 +643,7 @@ func (c *Route53Domains) EnableDomainTransferLock(input *EnableDomainTransferLoc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) EnableDomainTransferLockWithContext(ctx aws.Context, input *EnableDomainTransferLockInput, opts ...request.Option) (*EnableDomainTransferLockOutput, error) {
+func (c *Route53Domains) EnableDomainTransferLockWithContext(ctx aws.Context, input *EnableDomainTransferLockInput, opts ...aws.Option) (*EnableDomainTransferLockOutput, error) {
 	req, out := c.EnableDomainTransferLockRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -653,7 +652,7 @@ func (c *Route53Domains) EnableDomainTransferLockWithContext(ctx aws.Context, in
 
 const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
 
-// GetContactReachabilityStatusRequest generates a "aws/request.Request" representing the
+// GetContactReachabilityStatusRequest generates a "aws.Request" representing the
 // client's request for the GetContactReachabilityStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -677,8 +676,8 @@ const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatus
-func (c *Route53Domains) GetContactReachabilityStatusRequest(input *GetContactReachabilityStatusInput) (req *request.Request, output *GetContactReachabilityStatusOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) GetContactReachabilityStatusRequest(input *GetContactReachabilityStatusInput) (req *aws.Request, output *GetContactReachabilityStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetContactReachabilityStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -737,7 +736,7 @@ func (c *Route53Domains) GetContactReachabilityStatus(input *GetContactReachabil
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) GetContactReachabilityStatusWithContext(ctx aws.Context, input *GetContactReachabilityStatusInput, opts ...request.Option) (*GetContactReachabilityStatusOutput, error) {
+func (c *Route53Domains) GetContactReachabilityStatusWithContext(ctx aws.Context, input *GetContactReachabilityStatusInput, opts ...aws.Option) (*GetContactReachabilityStatusOutput, error) {
 	req, out := c.GetContactReachabilityStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -746,7 +745,7 @@ func (c *Route53Domains) GetContactReachabilityStatusWithContext(ctx aws.Context
 
 const opGetDomainDetail = "GetDomainDetail"
 
-// GetDomainDetailRequest generates a "aws/request.Request" representing the
+// GetDomainDetailRequest generates a "aws.Request" representing the
 // client's request for the GetDomainDetail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -770,8 +769,8 @@ const opGetDomainDetail = "GetDomainDetail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetail
-func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) (req *request.Request, output *GetDomainDetailOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) (req *aws.Request, output *GetDomainDetailOutput) {
+	op := &aws.Operation{
 		Name:       opGetDomainDetail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -823,7 +822,7 @@ func (c *Route53Domains) GetDomainDetail(input *GetDomainDetailInput) (*GetDomai
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) GetDomainDetailWithContext(ctx aws.Context, input *GetDomainDetailInput, opts ...request.Option) (*GetDomainDetailOutput, error) {
+func (c *Route53Domains) GetDomainDetailWithContext(ctx aws.Context, input *GetDomainDetailInput, opts ...aws.Option) (*GetDomainDetailOutput, error) {
 	req, out := c.GetDomainDetailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -832,7 +831,7 @@ func (c *Route53Domains) GetDomainDetailWithContext(ctx aws.Context, input *GetD
 
 const opGetDomainSuggestions = "GetDomainSuggestions"
 
-// GetDomainSuggestionsRequest generates a "aws/request.Request" representing the
+// GetDomainSuggestionsRequest generates a "aws.Request" representing the
 // client's request for the GetDomainSuggestions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -856,8 +855,8 @@ const opGetDomainSuggestions = "GetDomainSuggestions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestions
-func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestionsInput) (req *request.Request, output *GetDomainSuggestionsOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestionsInput) (req *aws.Request, output *GetDomainSuggestionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDomainSuggestions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -909,7 +908,7 @@ func (c *Route53Domains) GetDomainSuggestions(input *GetDomainSuggestionsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) GetDomainSuggestionsWithContext(ctx aws.Context, input *GetDomainSuggestionsInput, opts ...request.Option) (*GetDomainSuggestionsOutput, error) {
+func (c *Route53Domains) GetDomainSuggestionsWithContext(ctx aws.Context, input *GetDomainSuggestionsInput, opts ...aws.Option) (*GetDomainSuggestionsOutput, error) {
 	req, out := c.GetDomainSuggestionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -918,7 +917,7 @@ func (c *Route53Domains) GetDomainSuggestionsWithContext(ctx aws.Context, input 
 
 const opGetOperationDetail = "GetOperationDetail"
 
-// GetOperationDetailRequest generates a "aws/request.Request" representing the
+// GetOperationDetailRequest generates a "aws.Request" representing the
 // client's request for the GetOperationDetail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -942,8 +941,8 @@ const opGetOperationDetail = "GetOperationDetail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail
-func (c *Route53Domains) GetOperationDetailRequest(input *GetOperationDetailInput) (req *request.Request, output *GetOperationDetailOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) GetOperationDetailRequest(input *GetOperationDetailInput) (req *aws.Request, output *GetOperationDetailOutput) {
+	op := &aws.Operation{
 		Name:       opGetOperationDetail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -990,7 +989,7 @@ func (c *Route53Domains) GetOperationDetail(input *GetOperationDetailInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) GetOperationDetailWithContext(ctx aws.Context, input *GetOperationDetailInput, opts ...request.Option) (*GetOperationDetailOutput, error) {
+func (c *Route53Domains) GetOperationDetailWithContext(ctx aws.Context, input *GetOperationDetailInput, opts ...aws.Option) (*GetOperationDetailOutput, error) {
 	req, out := c.GetOperationDetailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -999,7 +998,7 @@ func (c *Route53Domains) GetOperationDetailWithContext(ctx aws.Context, input *G
 
 const opListDomains = "ListDomains"
 
-// ListDomainsRequest generates a "aws/request.Request" representing the
+// ListDomainsRequest generates a "aws.Request" representing the
 // client's request for the ListDomains operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1023,12 +1022,12 @@ const opListDomains = "ListDomains"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomains
-func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) (req *request.Request, output *ListDomainsOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request, output *ListDomainsOutput) {
+	op := &aws.Operation{
 		Name:       opListDomains,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextPageMarker"},
 			LimitToken:      "MaxItems",
@@ -1078,7 +1077,7 @@ func (c *Route53Domains) ListDomains(input *ListDomainsInput) (*ListDomainsOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...request.Option) (*ListDomainsOutput, error) {
+func (c *Route53Domains) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...aws.Option) (*ListDomainsOutput, error) {
 	req, out := c.ListDomainsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1113,9 +1112,9 @@ func (c *Route53Domains) ListDomainsPages(input *ListDomainsInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Route53Domains) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDomainsInput
 			if input != nil {
 				tmp := *input
@@ -1137,7 +1136,7 @@ func (c *Route53Domains) ListDomainsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListOperations = "ListOperations"
 
-// ListOperationsRequest generates a "aws/request.Request" representing the
+// ListOperationsRequest generates a "aws.Request" representing the
 // client's request for the ListOperations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1161,12 +1160,12 @@ const opListOperations = "ListOperations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperations
-func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) (req *request.Request, output *ListOperationsOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) (req *aws.Request, output *ListOperationsOutput) {
+	op := &aws.Operation{
 		Name:       opListOperations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextPageMarker"},
 			LimitToken:      "MaxItems",
@@ -1215,7 +1214,7 @@ func (c *Route53Domains) ListOperations(input *ListOperationsInput) (*ListOperat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ListOperationsWithContext(ctx aws.Context, input *ListOperationsInput, opts ...request.Option) (*ListOperationsOutput, error) {
+func (c *Route53Domains) ListOperationsWithContext(ctx aws.Context, input *ListOperationsInput, opts ...aws.Option) (*ListOperationsOutput, error) {
 	req, out := c.ListOperationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1250,9 +1249,9 @@ func (c *Route53Domains) ListOperationsPages(input *ListOperationsInput, fn func
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ListOperationsPagesWithContext(ctx aws.Context, input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Route53Domains) ListOperationsPagesWithContext(ctx aws.Context, input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOperationsInput
 			if input != nil {
 				tmp := *input
@@ -1274,7 +1273,7 @@ func (c *Route53Domains) ListOperationsPagesWithContext(ctx aws.Context, input *
 
 const opListTagsForDomain = "ListTagsForDomain"
 
-// ListTagsForDomainRequest generates a "aws/request.Request" representing the
+// ListTagsForDomainRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1298,8 +1297,8 @@ const opListTagsForDomain = "ListTagsForDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomain
-func (c *Route53Domains) ListTagsForDomainRequest(input *ListTagsForDomainInput) (req *request.Request, output *ListTagsForDomainOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) ListTagsForDomainRequest(input *ListTagsForDomainInput) (req *aws.Request, output *ListTagsForDomainOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1357,7 +1356,7 @@ func (c *Route53Domains) ListTagsForDomain(input *ListTagsForDomainInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ListTagsForDomainWithContext(ctx aws.Context, input *ListTagsForDomainInput, opts ...request.Option) (*ListTagsForDomainOutput, error) {
+func (c *Route53Domains) ListTagsForDomainWithContext(ctx aws.Context, input *ListTagsForDomainInput, opts ...aws.Option) (*ListTagsForDomainOutput, error) {
 	req, out := c.ListTagsForDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1366,7 +1365,7 @@ func (c *Route53Domains) ListTagsForDomainWithContext(ctx aws.Context, input *Li
 
 const opRegisterDomain = "RegisterDomain"
 
-// RegisterDomainRequest generates a "aws/request.Request" representing the
+// RegisterDomainRequest generates a "aws.Request" representing the
 // client's request for the RegisterDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1390,8 +1389,8 @@ const opRegisterDomain = "RegisterDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomain
-func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) (req *request.Request, output *RegisterDomainOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) (req *aws.Request, output *RegisterDomainOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1478,7 +1477,7 @@ func (c *Route53Domains) RegisterDomain(input *RegisterDomainInput) (*RegisterDo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) RegisterDomainWithContext(ctx aws.Context, input *RegisterDomainInput, opts ...request.Option) (*RegisterDomainOutput, error) {
+func (c *Route53Domains) RegisterDomainWithContext(ctx aws.Context, input *RegisterDomainInput, opts ...aws.Option) (*RegisterDomainOutput, error) {
 	req, out := c.RegisterDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1487,7 +1486,7 @@ func (c *Route53Domains) RegisterDomainWithContext(ctx aws.Context, input *Regis
 
 const opRenewDomain = "RenewDomain"
 
-// RenewDomainRequest generates a "aws/request.Request" representing the
+// RenewDomainRequest generates a "aws.Request" representing the
 // client's request for the RenewDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1511,8 +1510,8 @@ const opRenewDomain = "RenewDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomain
-func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) (req *request.Request, output *RenewDomainOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) (req *aws.Request, output *RenewDomainOutput) {
+	op := &aws.Operation{
 		Name:       opRenewDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1579,7 +1578,7 @@ func (c *Route53Domains) RenewDomain(input *RenewDomainInput) (*RenewDomainOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) RenewDomainWithContext(ctx aws.Context, input *RenewDomainInput, opts ...request.Option) (*RenewDomainOutput, error) {
+func (c *Route53Domains) RenewDomainWithContext(ctx aws.Context, input *RenewDomainInput, opts ...aws.Option) (*RenewDomainOutput, error) {
 	req, out := c.RenewDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1588,7 +1587,7 @@ func (c *Route53Domains) RenewDomainWithContext(ctx aws.Context, input *RenewDom
 
 const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
 
-// ResendContactReachabilityEmailRequest generates a "aws/request.Request" representing the
+// ResendContactReachabilityEmailRequest generates a "aws.Request" representing the
 // client's request for the ResendContactReachabilityEmail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1612,8 +1611,8 @@ const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmail
-func (c *Route53Domains) ResendContactReachabilityEmailRequest(input *ResendContactReachabilityEmailInput) (req *request.Request, output *ResendContactReachabilityEmailOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) ResendContactReachabilityEmailRequest(input *ResendContactReachabilityEmailInput) (req *aws.Request, output *ResendContactReachabilityEmailOutput) {
+	op := &aws.Operation{
 		Name:       opResendContactReachabilityEmail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1669,7 +1668,7 @@ func (c *Route53Domains) ResendContactReachabilityEmail(input *ResendContactReac
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ResendContactReachabilityEmailWithContext(ctx aws.Context, input *ResendContactReachabilityEmailInput, opts ...request.Option) (*ResendContactReachabilityEmailOutput, error) {
+func (c *Route53Domains) ResendContactReachabilityEmailWithContext(ctx aws.Context, input *ResendContactReachabilityEmailInput, opts ...aws.Option) (*ResendContactReachabilityEmailOutput, error) {
 	req, out := c.ResendContactReachabilityEmailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1678,7 +1677,7 @@ func (c *Route53Domains) ResendContactReachabilityEmailWithContext(ctx aws.Conte
 
 const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 
-// RetrieveDomainAuthCodeRequest generates a "aws/request.Request" representing the
+// RetrieveDomainAuthCodeRequest generates a "aws.Request" representing the
 // client's request for the RetrieveDomainAuthCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1702,8 +1701,8 @@ const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCode
-func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInput) (req *request.Request, output *RetrieveDomainAuthCodeOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuthCodeInput) (req *aws.Request, output *RetrieveDomainAuthCodeOutput) {
+	op := &aws.Operation{
 		Name:       opRetrieveDomainAuthCode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1754,7 +1753,7 @@ func (c *Route53Domains) RetrieveDomainAuthCode(input *RetrieveDomainAuthCodeInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) RetrieveDomainAuthCodeWithContext(ctx aws.Context, input *RetrieveDomainAuthCodeInput, opts ...request.Option) (*RetrieveDomainAuthCodeOutput, error) {
+func (c *Route53Domains) RetrieveDomainAuthCodeWithContext(ctx aws.Context, input *RetrieveDomainAuthCodeInput, opts ...aws.Option) (*RetrieveDomainAuthCodeOutput, error) {
 	req, out := c.RetrieveDomainAuthCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1763,7 +1762,7 @@ func (c *Route53Domains) RetrieveDomainAuthCodeWithContext(ctx aws.Context, inpu
 
 const opTransferDomain = "TransferDomain"
 
-// TransferDomainRequest generates a "aws/request.Request" representing the
+// TransferDomainRequest generates a "aws.Request" representing the
 // client's request for the TransferDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1787,8 +1786,8 @@ const opTransferDomain = "TransferDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomain
-func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) (req *request.Request, output *TransferDomainOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) (req *aws.Request, output *TransferDomainOutput) {
+	op := &aws.Operation{
 		Name:       opTransferDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1875,7 +1874,7 @@ func (c *Route53Domains) TransferDomain(input *TransferDomainInput) (*TransferDo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) TransferDomainWithContext(ctx aws.Context, input *TransferDomainInput, opts ...request.Option) (*TransferDomainOutput, error) {
+func (c *Route53Domains) TransferDomainWithContext(ctx aws.Context, input *TransferDomainInput, opts ...aws.Option) (*TransferDomainOutput, error) {
 	req, out := c.TransferDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1884,7 +1883,7 @@ func (c *Route53Domains) TransferDomainWithContext(ctx aws.Context, input *Trans
 
 const opUpdateDomainContact = "UpdateDomainContact"
 
-// UpdateDomainContactRequest generates a "aws/request.Request" representing the
+// UpdateDomainContactRequest generates a "aws.Request" representing the
 // client's request for the UpdateDomainContact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1908,8 +1907,8 @@ const opUpdateDomainContact = "UpdateDomainContact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContact
-func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactInput) (req *request.Request, output *UpdateDomainContactOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactInput) (req *aws.Request, output *UpdateDomainContactOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDomainContact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1976,7 +1975,7 @@ func (c *Route53Domains) UpdateDomainContact(input *UpdateDomainContactInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) UpdateDomainContactWithContext(ctx aws.Context, input *UpdateDomainContactInput, opts ...request.Option) (*UpdateDomainContactOutput, error) {
+func (c *Route53Domains) UpdateDomainContactWithContext(ctx aws.Context, input *UpdateDomainContactInput, opts ...aws.Option) (*UpdateDomainContactOutput, error) {
 	req, out := c.UpdateDomainContactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1985,7 +1984,7 @@ func (c *Route53Domains) UpdateDomainContactWithContext(ctx aws.Context, input *
 
 const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
 
-// UpdateDomainContactPrivacyRequest generates a "aws/request.Request" representing the
+// UpdateDomainContactPrivacyRequest generates a "aws.Request" representing the
 // client's request for the UpdateDomainContactPrivacy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2009,8 +2008,8 @@ const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacy
-func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPrivacyInput) (req *request.Request, output *UpdateDomainContactPrivacyOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainContactPrivacyInput) (req *aws.Request, output *UpdateDomainContactPrivacyOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDomainContactPrivacy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2080,7 +2079,7 @@ func (c *Route53Domains) UpdateDomainContactPrivacy(input *UpdateDomainContactPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) UpdateDomainContactPrivacyWithContext(ctx aws.Context, input *UpdateDomainContactPrivacyInput, opts ...request.Option) (*UpdateDomainContactPrivacyOutput, error) {
+func (c *Route53Domains) UpdateDomainContactPrivacyWithContext(ctx aws.Context, input *UpdateDomainContactPrivacyInput, opts ...aws.Option) (*UpdateDomainContactPrivacyOutput, error) {
 	req, out := c.UpdateDomainContactPrivacyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2089,7 +2088,7 @@ func (c *Route53Domains) UpdateDomainContactPrivacyWithContext(ctx aws.Context, 
 
 const opUpdateDomainNameservers = "UpdateDomainNameservers"
 
-// UpdateDomainNameserversRequest generates a "aws/request.Request" representing the
+// UpdateDomainNameserversRequest generates a "aws.Request" representing the
 // client's request for the UpdateDomainNameservers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2113,8 +2112,8 @@ const opUpdateDomainNameservers = "UpdateDomainNameservers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameservers
-func (c *Route53Domains) UpdateDomainNameserversRequest(input *UpdateDomainNameserversInput) (req *request.Request, output *UpdateDomainNameserversOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) UpdateDomainNameserversRequest(input *UpdateDomainNameserversInput) (req *aws.Request, output *UpdateDomainNameserversOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDomainNameservers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2181,7 +2180,7 @@ func (c *Route53Domains) UpdateDomainNameservers(input *UpdateDomainNameserversI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) UpdateDomainNameserversWithContext(ctx aws.Context, input *UpdateDomainNameserversInput, opts ...request.Option) (*UpdateDomainNameserversOutput, error) {
+func (c *Route53Domains) UpdateDomainNameserversWithContext(ctx aws.Context, input *UpdateDomainNameserversInput, opts ...aws.Option) (*UpdateDomainNameserversOutput, error) {
 	req, out := c.UpdateDomainNameserversRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2190,7 +2189,7 @@ func (c *Route53Domains) UpdateDomainNameserversWithContext(ctx aws.Context, inp
 
 const opUpdateTagsForDomain = "UpdateTagsForDomain"
 
-// UpdateTagsForDomainRequest generates a "aws/request.Request" representing the
+// UpdateTagsForDomainRequest generates a "aws.Request" representing the
 // client's request for the UpdateTagsForDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2214,8 +2213,8 @@ const opUpdateTagsForDomain = "UpdateTagsForDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomain
-func (c *Route53Domains) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) (req *request.Request, output *UpdateTagsForDomainOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) UpdateTagsForDomainRequest(input *UpdateTagsForDomainInput) (req *aws.Request, output *UpdateTagsForDomainOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTagsForDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2272,7 +2271,7 @@ func (c *Route53Domains) UpdateTagsForDomain(input *UpdateTagsForDomainInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) UpdateTagsForDomainWithContext(ctx aws.Context, input *UpdateTagsForDomainInput, opts ...request.Option) (*UpdateTagsForDomainOutput, error) {
+func (c *Route53Domains) UpdateTagsForDomainWithContext(ctx aws.Context, input *UpdateTagsForDomainInput, opts ...aws.Option) (*UpdateTagsForDomainOutput, error) {
 	req, out := c.UpdateTagsForDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2281,7 +2280,7 @@ func (c *Route53Domains) UpdateTagsForDomainWithContext(ctx aws.Context, input *
 
 const opViewBilling = "ViewBilling"
 
-// ViewBillingRequest generates a "aws/request.Request" representing the
+// ViewBillingRequest generates a "aws.Request" representing the
 // client's request for the ViewBilling operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2305,8 +2304,8 @@ const opViewBilling = "ViewBilling"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBilling
-func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) (req *request.Request, output *ViewBillingOutput) {
-	op := &request.Operation{
+func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) (req *aws.Request, output *ViewBillingOutput) {
+	op := &aws.Operation{
 		Name:       opViewBilling,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2354,7 +2353,7 @@ func (c *Route53Domains) ViewBilling(input *ViewBillingInput) (*ViewBillingOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Route53Domains) ViewBillingWithContext(ctx aws.Context, input *ViewBillingInput, opts ...request.Option) (*ViewBillingOutput, error) {
+func (c *Route53Domains) ViewBillingWithContext(ctx aws.Context, input *ViewBillingInput, opts ...aws.Option) (*ViewBillingOutput, error) {
 	req, out := c.ViewBillingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2458,9 +2457,9 @@ func (s CheckDomainAvailabilityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckDomainAvailabilityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CheckDomainAvailabilityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CheckDomainAvailabilityInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2567,9 +2566,9 @@ func (s CheckDomainTransferabilityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CheckDomainTransferabilityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CheckDomainTransferabilityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CheckDomainTransferabilityInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2688,14 +2687,14 @@ func (s ContactDetail) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ContactDetail) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ContactDetail"}
+	invalidParams := aws.ErrInvalidParams{Context: "ContactDetail"}
 	if s.ExtraParams != nil {
 		for i, v := range s.ExtraParams {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtraParams", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtraParams", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2818,12 +2817,12 @@ func (s DeleteTagsForDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTagsForDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTagsForDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagsForDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.TagsToDelete == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagsToDelete"))
+		invalidParams.Add(aws.NewErrParamRequired("TagsToDelete"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2881,9 +2880,9 @@ func (s DisableDomainAutoRenewInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableDomainAutoRenewInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableDomainAutoRenewInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableDomainAutoRenewInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2936,9 +2935,9 @@ func (s DisableDomainTransferLockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableDomainTransferLockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableDomainTransferLockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableDomainTransferLockInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3153,9 +3152,9 @@ func (s EnableDomainAutoRenewInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableDomainAutoRenewInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableDomainAutoRenewInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableDomainAutoRenewInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3208,9 +3207,9 @@ func (s EnableDomainTransferLockInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableDomainTransferLockInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableDomainTransferLockInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableDomainTransferLockInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3282,12 +3281,12 @@ func (s ExtraParam) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtraParam) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExtraParam"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExtraParam"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3395,9 +3394,9 @@ func (s GetDomainDetailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainDetailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDomainDetailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDomainDetailInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3697,15 +3696,15 @@ func (s GetDomainSuggestionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDomainSuggestionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDomainSuggestionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDomainSuggestionsInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.OnlyAvailable == nil {
-		invalidParams.Add(request.NewErrParamRequired("OnlyAvailable"))
+		invalidParams.Add(aws.NewErrParamRequired("OnlyAvailable"))
 	}
 	if s.SuggestionCount == nil {
-		invalidParams.Add(request.NewErrParamRequired("SuggestionCount"))
+		invalidParams.Add(aws.NewErrParamRequired("SuggestionCount"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3781,9 +3780,9 @@ func (s GetOperationDetailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOperationDetailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetOperationDetailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetOperationDetailInput"}
 	if s.OperationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OperationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OperationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4051,9 +4050,9 @@ func (s ListTagsForDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4128,9 +4127,9 @@ func (s Nameserver) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Nameserver) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Nameserver"}
+	invalidParams := aws.ErrInvalidParams{Context: "Nameserver"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4297,38 +4296,38 @@ func (s RegisterDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterDomainInput"}
 	if s.AdminContact == nil {
-		invalidParams.Add(request.NewErrParamRequired("AdminContact"))
+		invalidParams.Add(aws.NewErrParamRequired("AdminContact"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DurationInYears == nil {
-		invalidParams.Add(request.NewErrParamRequired("DurationInYears"))
+		invalidParams.Add(aws.NewErrParamRequired("DurationInYears"))
 	}
 	if s.DurationInYears != nil && *s.DurationInYears < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationInYears", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationInYears", 1))
 	}
 	if s.RegistrantContact == nil {
-		invalidParams.Add(request.NewErrParamRequired("RegistrantContact"))
+		invalidParams.Add(aws.NewErrParamRequired("RegistrantContact"))
 	}
 	if s.TechContact == nil {
-		invalidParams.Add(request.NewErrParamRequired("TechContact"))
+		invalidParams.Add(aws.NewErrParamRequired("TechContact"))
 	}
 	if s.AdminContact != nil {
 		if err := s.AdminContact.Validate(); err != nil {
-			invalidParams.AddNested("AdminContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AdminContact", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RegistrantContact != nil {
 		if err := s.RegistrantContact.Validate(); err != nil {
-			invalidParams.AddNested("RegistrantContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RegistrantContact", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TechContact != nil {
 		if err := s.TechContact.Validate(); err != nil {
-			invalidParams.AddNested("TechContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TechContact", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4464,15 +4463,15 @@ func (s RenewDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RenewDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RenewDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RenewDomainInput"}
 	if s.CurrentExpiryYear == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentExpiryYear"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentExpiryYear"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DurationInYears != nil && *s.DurationInYears < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationInYears", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationInYears", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4620,9 +4619,9 @@ func (s RetrieveDomainAuthCodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RetrieveDomainAuthCodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RetrieveDomainAuthCodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RetrieveDomainAuthCodeInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4797,28 +4796,28 @@ func (s TransferDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TransferDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TransferDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TransferDomainInput"}
 	if s.AdminContact == nil {
-		invalidParams.Add(request.NewErrParamRequired("AdminContact"))
+		invalidParams.Add(aws.NewErrParamRequired("AdminContact"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.DurationInYears == nil {
-		invalidParams.Add(request.NewErrParamRequired("DurationInYears"))
+		invalidParams.Add(aws.NewErrParamRequired("DurationInYears"))
 	}
 	if s.DurationInYears != nil && *s.DurationInYears < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("DurationInYears", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("DurationInYears", 1))
 	}
 	if s.RegistrantContact == nil {
-		invalidParams.Add(request.NewErrParamRequired("RegistrantContact"))
+		invalidParams.Add(aws.NewErrParamRequired("RegistrantContact"))
 	}
 	if s.TechContact == nil {
-		invalidParams.Add(request.NewErrParamRequired("TechContact"))
+		invalidParams.Add(aws.NewErrParamRequired("TechContact"))
 	}
 	if s.AdminContact != nil {
 		if err := s.AdminContact.Validate(); err != nil {
-			invalidParams.AddNested("AdminContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AdminContact", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Nameservers != nil {
@@ -4827,18 +4826,18 @@ func (s *TransferDomainInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.RegistrantContact != nil {
 		if err := s.RegistrantContact.Validate(); err != nil {
-			invalidParams.AddNested("RegistrantContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RegistrantContact", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TechContact != nil {
 		if err := s.TechContact.Validate(); err != nil {
-			invalidParams.AddNested("TechContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TechContact", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4980,23 +4979,23 @@ func (s UpdateDomainContactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainContactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDomainContactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainContactInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.AdminContact != nil {
 		if err := s.AdminContact.Validate(); err != nil {
-			invalidParams.AddNested("AdminContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AdminContact", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RegistrantContact != nil {
 		if err := s.RegistrantContact.Validate(); err != nil {
-			invalidParams.AddNested("RegistrantContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RegistrantContact", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TechContact != nil {
 		if err := s.TechContact.Validate(); err != nil {
-			invalidParams.AddNested("TechContact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TechContact", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5099,9 +5098,9 @@ func (s UpdateDomainContactPrivacyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainContactPrivacyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDomainContactPrivacyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainContactPrivacyInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5199,12 +5198,12 @@ func (s UpdateDomainNameserversInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDomainNameserversInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDomainNameserversInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDomainNameserversInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.Nameservers == nil {
-		invalidParams.Add(request.NewErrParamRequired("Nameservers"))
+		invalidParams.Add(aws.NewErrParamRequired("Nameservers"))
 	}
 	if s.Nameservers != nil {
 		for i, v := range s.Nameservers {
@@ -5212,7 +5211,7 @@ func (s *UpdateDomainNameserversInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Nameservers", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5296,9 +5295,9 @@ func (s UpdateTagsForDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTagsForDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTagsForDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTagsForDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
