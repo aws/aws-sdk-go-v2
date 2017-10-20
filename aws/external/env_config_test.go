@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
-var _ CustomCABundleFileProvider = (*EnvConfig)(nil)
+var _ CustomCABundleProvider = (*EnvConfig)(nil)
 var _ RegionProvider = (*EnvConfig)(nil)
 var _ CredentialsValueProvider = (*EnvConfig)(nil)
 var _ SharedConfigProfileProvider = (*EnvConfig)(nil)

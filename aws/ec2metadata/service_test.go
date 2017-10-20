@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestClientOverrideDefaultHTTPClientTimeout(t *testing.T) {
@@ -77,7 +76,9 @@ func runEC2MetadataClients(t *testing.T, cfg *aws.Config, atOnce int) {
 		go func() {
 			svc := ec2metadata.New(unit.Config, cfg)
 			_, err := svc.Region()
-			assert.NoError(t, err)
+			if err != nil {
+				t.Errorf("failed to get region, %v", err)
+			}
 			wg.Done()
 		}()
 	}

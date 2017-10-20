@@ -1,6 +1,7 @@
 package external
 
 import (
+	"net/http"
 	"strings"
 	"testing"
 	"time"
@@ -9,11 +10,27 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
-func TestResolveCABundle(t *testing.T) {
-	t.Errorf("pending HTTP client builder")
+func TestResolveCustomCABundle(t *testing.T) {
+	configs := Configs{
+		WithCustomCABundle(awstesting.TLSBundleCA),
+	}
+
+	cfg := aws.Config{
+		HTTPClient: &http.Client{Transport: &http.Transport{}},
+	}
+
+	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	transport := cfg.HTTPClient.Transport.(*http.Transport)
+	if transport.TLSClientConfig.RootCAs == nil {
+		t.Errorf("expect root CAs set")
+	}
 }
 
 func TestResolveRegion(t *testing.T) {

@@ -18,7 +18,7 @@ func (c WithSharedConfigProfile) GetSharedConfigProfile() (string, error) {
 	return string(c), nil
 }
 
-// GetSharedConfigProfile searchds the Confings for a SharedConfigProfileProvider
+// GetSharedConfigProfile searchds the Configs for a SharedConfigProfileProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetSharedConfigProfile(configs Configs) (string, bool, error) {
@@ -53,7 +53,7 @@ func (c WithSharedConfigFiles) GetSharedConfigFiles() ([]string, error) {
 	return []string(c), nil
 }
 
-// GetSharedConfigFiles searchds the Confings for a SharedConfigFilesProvider
+// GetSharedConfigFiles searchds the Configs for a SharedConfigFilesProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetSharedConfigFiles(configs Configs) ([]string, bool, error) {
@@ -72,30 +72,29 @@ func GetSharedConfigFiles(configs Configs) ([]string, bool, error) {
 	return nil, false, nil
 }
 
-// CustomCABundleFileProvider provides access to the custom CA bundle external
-// configuration value.
-type CustomCABundleFileProvider interface {
-	GetCustomCABundleFile() (string, error)
+// CustomCABundleProvider provides access to the custom CA bundle PEM bytes.
+type CustomCABundleProvider interface {
+	GetCustomCABundle() ([]byte, error)
 }
 
-// WithCustomCABundleFile provides wrapping of a region string to satisfy the
-// CustomCABundleFileProvider interface.
-type WithCustomCABundleFile string
+// WithCustomCABundle provides wrapping of a region string to satisfy the
+// CustomCABundleProvider interface.
+type WithCustomCABundle []byte
 
-// GetCustomCABundleFile returns the region string.
-func (v WithCustomCABundleFile) GetCustomCABundleFile() (string, error) {
-	return string(v), nil
+// GetCustomCABundle returns the CA bundle PEM bytes.
+func (v WithCustomCABundle) GetCustomCABundle() ([]byte, error) {
+	return []byte(v), nil
 }
 
-// GetCustomCABundleFile searchds the Confings for a CustomCABundleFileProvider
+// GetCustomCABundle searchds the Configs for a CustomCABundleProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
-func GetCustomCABundleFile(configs Configs) (string, bool, error) {
+func GetCustomCABundle(configs Configs) ([]byte, bool, error) {
 	for _, cfg := range configs {
-		if p, ok := cfg.(CustomCABundleFileProvider); ok {
-			v, err := p.GetCustomCABundleFile()
+		if p, ok := cfg.(CustomCABundleProvider); ok {
+			v, err := p.GetCustomCABundle()
 			if err != nil {
-				return "", false, err
+				return nil, false, err
 			}
 			if len(v) > 0 {
 				return v, true, nil
@@ -103,7 +102,7 @@ func GetCustomCABundleFile(configs Configs) (string, bool, error) {
 		}
 	}
 
-	return "", false, nil
+	return nil, false, nil
 }
 
 // RegionProvider provides access to the region external configuration value.
@@ -120,7 +119,7 @@ func (v WithRegion) GetRegion() (string, error) {
 	return string(v), nil
 }
 
-// GetRegion searchds the Confings for a RegionProvider and returns the value
+// GetRegion searchds the Configs for a RegionProvider and returns the value
 // if found. Returns an error if a provider fails before a value is found.
 func GetRegion(configs Configs) (string, bool, error) {
 	for _, cfg := range configs {
@@ -153,7 +152,7 @@ func (v WithCredentialsValue) GetCredentialsValue() (aws.Credentials, error) {
 	return aws.Credentials(v), nil
 }
 
-// GetCredentialsValue searchds the Confings for a CredentialsValueProvider
+// GetCredentialsValue searchds the Configs for a CredentialsValueProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetCredentialsValue(configs Configs) (aws.Credentials, bool, error) {
@@ -187,7 +186,7 @@ func (p WithCredentialsEndpoint) GetCredentialsEndpoint() (string, error) {
 	return string(p), nil
 }
 
-// GetCredentialsEndpoint searchds the Confings for a CredentialsEndpointProvider
+// GetCredentialsEndpoint searchds the Configs for a CredentialsEndpointProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetCredentialsEndpoint(configs Configs) (string, bool, error) {
@@ -221,8 +220,9 @@ func (p WithContainerCredentialsEndpointPath) GetContainerCredentialsEndpointPat
 	return string(p), nil
 }
 
-// GetContainerCredentialsEndpointPath searchds the Confings for a ContainerCredentialsEndpointPathProvider
-// and returns the value if found. Returns an error if a provider fails before a
+// GetContainerCredentialsEndpointPath searchds the Configs for a
+// ContainerCredentialsEndpointPathProvider and returns the value if found.
+// Returns an error if a provider fails before a
 // value is found.
 func GetContainerCredentialsEndpointPath(configs Configs) (string, bool, error) {
 	for _, cfg := range configs {
@@ -255,7 +255,7 @@ func (p WithAssumeRoleConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
 	return AssumeRoleConfig(p), nil
 }
 
-// GetAssumeRoleConfig searchds the Confings for a AssumeRoleConfigProvider
+// GetAssumeRoleConfig searchds the Configs for a AssumeRoleConfigProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetAssumeRoleConfig(configs Configs) (AssumeRoleConfig, bool, error) {
@@ -289,7 +289,7 @@ func (p WithMFATokenFunc) GetMFATokenFunc() (func() (string, error), error) {
 	return p, nil
 }
 
-// GetMFATokenFunc searchds the Confings for a MFATokenFuncProvider
+// GetMFATokenFunc searchds the Configs for a MFATokenFuncProvider
 // and returns the value if found. Returns an error if a provider fails before a
 // value is found.
 func GetMFATokenFunc(configs Configs) (func() (string, error), bool, error) {

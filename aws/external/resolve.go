@@ -29,9 +29,9 @@ func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
 // to be configured with the custom CA bundle.
 //
 // Config provider used:
-// * CustomCABundleFileProvider
+// * CustomCABundleProvider
 func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
-	v, found, err := GetCustomCABundleFile(configs)
+	v, found, err := GetCustomCABundle(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
@@ -41,8 +41,7 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	// TODO need to suport custom CA bundle. Adding it to the TLs cert pool.
-	return fmt.Errorf("ResolveCustomeCABundle pending HTTP Client builder, %s", v)
+	return addHTTPClientCABundle(cfg.HTTPClient, v)
 }
 
 // ResolveRegion extracts the first instance of a Region from the Configs slice.
