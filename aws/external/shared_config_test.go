@@ -314,5 +314,69 @@ func cmpFiles(expects, actuals []sharedConfigFile) bool {
 }
 
 func TestLoadSharedConfig(t *testing.T) {
-	t.Errorf("not tested")
+	origProf := DefaultSharedConfigProfile
+	origFiles := DefaultSharedConfigFiles
+	defer func() {
+		DefaultSharedConfigProfile = origProf
+		DefaultSharedConfigFiles = origFiles
+	}()
+
+	cases := []struct {
+		Configs Configs
+		Files   []string
+		Profile string
+		Expect  SharedConfig
+		Err     string
+	}{
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("alt_profile_name"),
+			},
+			Files: []string{
+				filepath.Join("testdata", "shared_config"),
+			},
+			Expect: SharedConfig{
+				Profile: "alt_profile_name",
+				Region:  "alt_profile_name_region",
+			},
+		},
+		{
+			Configs: Configs{
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "shared_config"),
+				}),
+			},
+			Profile: "alt_profile_name",
+			Expect: SharedConfig{
+				Profile: "alt_profile_name",
+				Region:  "alt_profile_name_region",
+			},
+		},
+	}
+
+	for i, c := range cases {
+		DefaultSharedConfigProfile = origProf
+		DefaultSharedConfigFiles = origFiles
+
+		if len(c.Profile) > 0 {
+			DefaultSharedConfigProfile = c.Profile
+		}
+		if len(c.Files) > 0 {
+			DefaultSharedConfigFiles = c.Files
+		}
+
+		cfg, err := LoadSharedConfig(c.Configs)
+		if len(c.Err) > 0 {
+			if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
+				t.Errorf("%d, expect %q to be in %q", i, e, a)
+			}
+			continue
+		} else if err != nil {
+			t.Fatalf("%d, expect no error, got %v", i, err)
+		}
+
+		if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
+			t.Errorf("expect %v got %v", e, a)
+		}
+	}
 }

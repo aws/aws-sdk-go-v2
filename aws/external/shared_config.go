@@ -31,7 +31,7 @@ const (
 // DefaultSharedConfigProfile is the default profile to be used when
 // loading configuration from the config files if another profile name
 // is not provided.
-const DefaultSharedConfigProfile = `default`
+var DefaultSharedConfigProfile = `default`
 
 // DefaultSharedCredentialsFilename returns the SDK's default file path
 // for the shared credentials file.
@@ -126,29 +126,25 @@ func (c SharedConfig) GetAssumeRoleConfig() (AssumeRoleConfig, error) {
 // Config providers used:
 // * SharedConfigProfileProvider
 // * SharedConfigFilesProvider
-func LoadSharedConfig(cfgs Configs) (Config, error) {
+func LoadSharedConfig(configs Configs) (Config, error) {
 	var profile string
 	var files []string
+	var ok bool
+	var err error
 
-	for _, cfg := range cfgs {
-		if len(profile) == 0 {
-			if g, ok := cfg.(SharedConfigProfileProvider); ok {
-				profile, _ = g.GetSharedConfigProfile()
-				// TODO error handling...
-			}
-
-		}
-		if len(files) == 0 {
-			if g, ok := cfg.(SharedConfigFilesProvider); ok {
-				files, _ = g.GetSharedConfigFiles()
-				// TODO error handling...
-			}
-		}
+	profile, ok, err = GetSharedConfigProfile(configs)
+	if err != nil {
+		return nil, err
 	}
-	if len(profile) == 0 {
+	if !ok {
 		profile = DefaultSharedConfigProfile
 	}
-	if len(files) == 0 {
+
+	files, ok, err = GetSharedConfigFiles(configs)
+	if err != nil {
+		return nil, err
+	}
+	if !ok {
 		files = DefaultSharedConfigFiles
 	}
 
