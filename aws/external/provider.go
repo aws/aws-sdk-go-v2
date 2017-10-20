@@ -1,6 +1,9 @@
 package external
 
-import "github.com/aws/aws-sdk-go-v2/aws"
+import (
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
+)
 
 // SharedConfigProfileProvider provides access to the shared config profile
 // name external configuration value.
@@ -306,4 +309,17 @@ func GetMFATokenFunc(configs Configs) (func() (string, error), bool, error) {
 	}
 
 	return nil, false, nil
+}
+
+// WithEC2MetadataRegion provides a RegionProvider that retrieves the region
+// from the EC2 Metadata service.
+//
+// TODO add this provider to the default config loading?
+type WithEC2MetadataRegion struct {
+	Client *ec2metadata.EC2Metadata
+}
+
+// GetRegion attempts to retreive the region from EC2 Metadata service.
+func (p WithEC2MetadataRegion) GetRegion() (string, error) {
+	return p.Client.Region()
 }

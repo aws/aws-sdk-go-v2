@@ -2,6 +2,7 @@ package external
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 	"time"
 
@@ -216,6 +217,8 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 	}
 
 	cfgCp := cfg.Copy()
+	cfgCp.HTTPClient = shallowCopyHTTPClient(cfgCp.HTTPClient)
+	cfgCp.HTTPClient.Timeout = 5 * time.Second
 
 	provider := &ec2rolecreds.Provider{
 		Client:       ec2metadata.New(*cfgCp),
@@ -224,4 +227,13 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
+}
+
+func shallowCopyHTTPClient(client *http.Client) *http.Client {
+	return &http.Client{
+		Transport:     client.Transport,
+		CheckRedirect: client.CheckRedirect,
+		Jar:           client.Jar,
+		Timeout:       client.Timeout,
+	}
 }
