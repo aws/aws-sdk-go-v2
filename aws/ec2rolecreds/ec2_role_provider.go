@@ -76,7 +76,7 @@ func (m *Provider) Retrieve() (aws.Credentials, error) {
 		AccessKeyID:     roleCreds.AccessKeyID,
 		SecretAccessKey: roleCreds.SecretAccessKey,
 		SessionToken:    roleCreds.Token,
-		Source:    ProviderName,
+		Source:          ProviderName,
 	}, nil
 }
 

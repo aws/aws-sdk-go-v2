@@ -117,7 +117,7 @@ func (p *Provider) Retrieve() (aws.Credentials, error) {
 		AccessKeyID:     resp.AccessKeyID,
 		SecretAccessKey: resp.SecretAccessKey,
 		SessionToken:    resp.Token,
-		Source:    ProviderName,
+		Source:          ProviderName,
 	}, nil
 }
 

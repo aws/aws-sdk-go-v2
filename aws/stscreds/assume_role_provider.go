@@ -244,6 +244,6 @@ func (p *AssumeRoleProvider) Retrieve() (aws.Credentials, error) {
 		AccessKeyID:     *roleOutput.Credentials.AccessKeyId,
 		SecretAccessKey: *roleOutput.Credentials.SecretAccessKey,
 		SessionToken:    *roleOutput.Credentials.SessionToken,
-		Source:    ProviderName,
+		Source:          ProviderName,
 	}, nil
 }

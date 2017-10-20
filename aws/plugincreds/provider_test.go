@@ -29,7 +29,7 @@ func TestProvider_Passthrough(t *testing.T) {
 		AccessKeyID:     "key",
 		SecretAccessKey: "secret",
 		SessionToken:    "token",
-		Source:    ProviderName,
+		Source:          ProviderName,
 	}
 	if expect != actual {
 		t.Errorf("expect %+v credentials, got %+v", expect, actual)
