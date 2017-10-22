@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
@@ -20,15 +20,15 @@ import (
 )
 
 func TestDefaultConfigValues(t *testing.T) {
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
 	})
-	svc := kms.New(sess)
+	svc := kms.New(cfg)
 	handler := s3crypto.NewKMSKeyGenerator(svc, "testid")
 
-	c := s3crypto.NewEncryptionClient(sess, s3crypto.AESGCMContentCipherBuilder(handler))
+	c := s3crypto.NewEncryptionClient(cfg, s3crypto.AESGCMContentCipherBuilder(handler))
 
 	if c == nil {
 		t.Error("expected non-vil client value")
@@ -47,12 +47,12 @@ func TestPutObject(t *testing.T) {
 	expected := bytes.Repeat([]byte{1}, size)
 	generator := mockGenerator{}
 	cb := mockCipherBuilder{generator}
-	sess := unit.Session.Copy(&aws.Config{
-		MaxRetries:       aws.Int(0),
+	cfg := unit.Config.Copy(&aws.Config{
+		Retryer:          aws.DefaultRetryer{NumMaxRetries: 0},
 		S3ForcePathStyle: aws.Bool(true),
 		Region:           aws.String("us-west-2"),
 	})
-	c := s3crypto.NewEncryptionClient(sess, cb)
+	c := s3crypto.NewEncryptionClient(cfg, cb)
 	if c == nil {
 		t.Error("expected non-vil client value")
 	}
@@ -86,7 +86,7 @@ func TestPutObjectWithContext(t *testing.T) {
 	generator := mockGenerator{}
 	cb := mockCipherBuilder{generator}
 
-	c := s3crypto.NewEncryptionClient(unit.Session, cb)
+	c := s3crypto.NewEncryptionClient(unit.Config, cb)
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	ctx.Error = fmt.Errorf("context canceled")

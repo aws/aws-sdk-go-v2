@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity"
 )
 
-var svc = cognitoidentity.New(unit.Session)
+var svc = cognitoidentity.New(unit.Config)
 
 func TestUnsignedRequest_GetID(t *testing.T) {
 	req, _ := svc.GetIdRequest(&cognitoidentity.GetIdInput{

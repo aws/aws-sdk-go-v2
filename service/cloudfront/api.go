@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
 const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2017_03_25"
 
-// CreateCloudFrontOriginAccessIdentityRequest generates a "aws/request.Request" representing the
+// CreateCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
 // client's request for the CreateCloudFrontOriginAccessIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIden
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentity
-func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) (req *request.Request, output *CreateCloudFrontOriginAccessIdentityOutput) {
-	op := &request.Operation{
+func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *CreateCloudFrontOriginAccessIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront",
@@ -107,7 +106,7 @@ func (c *CloudFront) CreateCloudFrontOriginAccessIdentity(input *CreateCloudFron
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) CreateCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *CreateCloudFrontOriginAccessIdentityInput, opts ...request.Option) (*CreateCloudFrontOriginAccessIdentityOutput, error) {
+func (c *CloudFront) CreateCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *CreateCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*CreateCloudFrontOriginAccessIdentityOutput, error) {
 	req, out := c.CreateCloudFrontOriginAccessIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -116,7 +115,7 @@ func (c *CloudFront) CreateCloudFrontOriginAccessIdentityWithContext(ctx aws.Con
 
 const opCreateDistribution = "CreateDistribution2017_03_25"
 
-// CreateDistributionRequest generates a "aws/request.Request" representing the
+// CreateDistributionRequest generates a "aws.Request" representing the
 // client's request for the CreateDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -140,8 +139,8 @@ const opCreateDistribution = "CreateDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistribution
-func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) (req *request.Request, output *CreateDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) (req *aws.Request, output *CreateDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDistribution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/distribution",
@@ -302,7 +301,7 @@ func (c *CloudFront) CreateDistribution(input *CreateDistributionInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) CreateDistributionWithContext(ctx aws.Context, input *CreateDistributionInput, opts ...request.Option) (*CreateDistributionOutput, error) {
+func (c *CloudFront) CreateDistributionWithContext(ctx aws.Context, input *CreateDistributionInput, opts ...aws.Option) (*CreateDistributionOutput, error) {
 	req, out := c.CreateDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -311,7 +310,7 @@ func (c *CloudFront) CreateDistributionWithContext(ctx aws.Context, input *Creat
 
 const opCreateDistributionWithTags = "CreateDistributionWithTags2017_03_25"
 
-// CreateDistributionWithTagsRequest generates a "aws/request.Request" representing the
+// CreateDistributionWithTagsRequest generates a "aws.Request" representing the
 // client's request for the CreateDistributionWithTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -335,8 +334,8 @@ const opCreateDistributionWithTags = "CreateDistributionWithTags2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTags
-func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistributionWithTagsInput) (req *request.Request, output *CreateDistributionWithTagsOutput) {
-	op := &request.Operation{
+func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistributionWithTagsInput) (req *aws.Request, output *CreateDistributionWithTagsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDistributionWithTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/distribution?WithTags",
@@ -498,7 +497,7 @@ func (c *CloudFront) CreateDistributionWithTags(input *CreateDistributionWithTag
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) CreateDistributionWithTagsWithContext(ctx aws.Context, input *CreateDistributionWithTagsInput, opts ...request.Option) (*CreateDistributionWithTagsOutput, error) {
+func (c *CloudFront) CreateDistributionWithTagsWithContext(ctx aws.Context, input *CreateDistributionWithTagsInput, opts ...aws.Option) (*CreateDistributionWithTagsOutput, error) {
 	req, out := c.CreateDistributionWithTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -507,7 +506,7 @@ func (c *CloudFront) CreateDistributionWithTagsWithContext(ctx aws.Context, inpu
 
 const opCreateInvalidation = "CreateInvalidation2017_03_25"
 
-// CreateInvalidationRequest generates a "aws/request.Request" representing the
+// CreateInvalidationRequest generates a "aws.Request" representing the
 // client's request for the CreateInvalidation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -531,8 +530,8 @@ const opCreateInvalidation = "CreateInvalidation2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidation
-func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) (req *request.Request, output *CreateInvalidationOutput) {
-	op := &request.Operation{
+func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) (req *aws.Request, output *CreateInvalidationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateInvalidation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/distribution/{DistributionId}/invalidation",
@@ -596,7 +595,7 @@ func (c *CloudFront) CreateInvalidation(input *CreateInvalidationInput) (*Create
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) CreateInvalidationWithContext(ctx aws.Context, input *CreateInvalidationInput, opts ...request.Option) (*CreateInvalidationOutput, error) {
+func (c *CloudFront) CreateInvalidationWithContext(ctx aws.Context, input *CreateInvalidationInput, opts ...aws.Option) (*CreateInvalidationOutput, error) {
 	req, out := c.CreateInvalidationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -605,7 +604,7 @@ func (c *CloudFront) CreateInvalidationWithContext(ctx aws.Context, input *Creat
 
 const opCreateStreamingDistribution = "CreateStreamingDistribution2017_03_25"
 
-// CreateStreamingDistributionRequest generates a "aws/request.Request" representing the
+// CreateStreamingDistributionRequest generates a "aws.Request" representing the
 // client's request for the CreateStreamingDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -629,8 +628,8 @@ const opCreateStreamingDistribution = "CreateStreamingDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistribution
-func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) (req *request.Request, output *CreateStreamingDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) (req *aws.Request, output *CreateStreamingDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStreamingDistribution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/streaming-distribution",
@@ -735,7 +734,7 @@ func (c *CloudFront) CreateStreamingDistribution(input *CreateStreamingDistribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) CreateStreamingDistributionWithContext(ctx aws.Context, input *CreateStreamingDistributionInput, opts ...request.Option) (*CreateStreamingDistributionOutput, error) {
+func (c *CloudFront) CreateStreamingDistributionWithContext(ctx aws.Context, input *CreateStreamingDistributionInput, opts ...aws.Option) (*CreateStreamingDistributionOutput, error) {
 	req, out := c.CreateStreamingDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -744,7 +743,7 @@ func (c *CloudFront) CreateStreamingDistributionWithContext(ctx aws.Context, inp
 
 const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2017_03_25"
 
-// CreateStreamingDistributionWithTagsRequest generates a "aws/request.Request" representing the
+// CreateStreamingDistributionWithTagsRequest generates a "aws.Request" representing the
 // client's request for the CreateStreamingDistributionWithTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -768,8 +767,8 @@ const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTa
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTags
-func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStreamingDistributionWithTagsInput) (req *request.Request, output *CreateStreamingDistributionWithTagsOutput) {
-	op := &request.Operation{
+func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStreamingDistributionWithTagsInput) (req *aws.Request, output *CreateStreamingDistributionWithTagsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStreamingDistributionWithTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/streaming-distribution?WithTags",
@@ -849,7 +848,7 @@ func (c *CloudFront) CreateStreamingDistributionWithTags(input *CreateStreamingD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) CreateStreamingDistributionWithTagsWithContext(ctx aws.Context, input *CreateStreamingDistributionWithTagsInput, opts ...request.Option) (*CreateStreamingDistributionWithTagsOutput, error) {
+func (c *CloudFront) CreateStreamingDistributionWithTagsWithContext(ctx aws.Context, input *CreateStreamingDistributionWithTagsInput, opts ...aws.Option) (*CreateStreamingDistributionWithTagsOutput, error) {
 	req, out := c.CreateStreamingDistributionWithTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -858,7 +857,7 @@ func (c *CloudFront) CreateStreamingDistributionWithTagsWithContext(ctx aws.Cont
 
 const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2017_03_25"
 
-// DeleteCloudFrontOriginAccessIdentityRequest generates a "aws/request.Request" representing the
+// DeleteCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
 // client's request for the DeleteCloudFrontOriginAccessIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -882,8 +881,8 @@ const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIden
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentity
-func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) (req *request.Request, output *DeleteCloudFrontOriginAccessIdentityOutput) {
-	op := &request.Operation{
+func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *DeleteCloudFrontOriginAccessIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCloudFrontOriginAccessIdentity,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}",
@@ -942,7 +941,7 @@ func (c *CloudFront) DeleteCloudFrontOriginAccessIdentity(input *DeleteCloudFron
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *DeleteCloudFrontOriginAccessIdentityInput, opts ...request.Option) (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
+func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *DeleteCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*DeleteCloudFrontOriginAccessIdentityOutput, error) {
 	req, out := c.DeleteCloudFrontOriginAccessIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -951,7 +950,7 @@ func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityWithContext(ctx aws.Con
 
 const opDeleteDistribution = "DeleteDistribution2017_03_25"
 
-// DeleteDistributionRequest generates a "aws/request.Request" representing the
+// DeleteDistributionRequest generates a "aws.Request" representing the
 // client's request for the DeleteDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -975,8 +974,8 @@ const opDeleteDistribution = "DeleteDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistribution
-func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) (req *request.Request, output *DeleteDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) (req *aws.Request, output *DeleteDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDistribution,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2017-03-25/distribution/{Id}",
@@ -1035,7 +1034,7 @@ func (c *CloudFront) DeleteDistribution(input *DeleteDistributionInput) (*Delete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) DeleteDistributionWithContext(ctx aws.Context, input *DeleteDistributionInput, opts ...request.Option) (*DeleteDistributionOutput, error) {
+func (c *CloudFront) DeleteDistributionWithContext(ctx aws.Context, input *DeleteDistributionInput, opts ...aws.Option) (*DeleteDistributionOutput, error) {
 	req, out := c.DeleteDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1044,7 +1043,7 @@ func (c *CloudFront) DeleteDistributionWithContext(ctx aws.Context, input *Delet
 
 const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
 
-// DeleteStreamingDistributionRequest generates a "aws/request.Request" representing the
+// DeleteStreamingDistributionRequest generates a "aws.Request" representing the
 // client's request for the DeleteStreamingDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1068,8 +1067,8 @@ const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistribution
-func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) (req *request.Request, output *DeleteStreamingDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) (req *aws.Request, output *DeleteStreamingDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStreamingDistribution,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}",
@@ -1163,7 +1162,7 @@ func (c *CloudFront) DeleteStreamingDistribution(input *DeleteStreamingDistribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) DeleteStreamingDistributionWithContext(ctx aws.Context, input *DeleteStreamingDistributionInput, opts ...request.Option) (*DeleteStreamingDistributionOutput, error) {
+func (c *CloudFront) DeleteStreamingDistributionWithContext(ctx aws.Context, input *DeleteStreamingDistributionInput, opts ...aws.Option) (*DeleteStreamingDistributionOutput, error) {
 	req, out := c.DeleteStreamingDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1172,7 +1171,7 @@ func (c *CloudFront) DeleteStreamingDistributionWithContext(ctx aws.Context, inp
 
 const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity2017_03_25"
 
-// GetCloudFrontOriginAccessIdentityRequest generates a "aws/request.Request" representing the
+// GetCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
 // client's request for the GetCloudFrontOriginAccessIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1196,8 +1195,8 @@ const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity20
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentity
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFrontOriginAccessIdentityInput) (req *request.Request, output *GetCloudFrontOriginAccessIdentityOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *GetCloudFrontOriginAccessIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentity,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}",
@@ -1245,7 +1244,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentity(input *GetCloudFrontOrigi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *GetCloudFrontOriginAccessIdentityInput, opts ...request.Option) (*GetCloudFrontOriginAccessIdentityOutput, error) {
+func (c *CloudFront) GetCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *GetCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*GetCloudFrontOriginAccessIdentityOutput, error) {
 	req, out := c.GetCloudFrontOriginAccessIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1254,7 +1253,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityWithContext(ctx aws.Contex
 
 const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2017_03_25"
 
-// GetCloudFrontOriginAccessIdentityConfigRequest generates a "aws/request.Request" representing the
+// GetCloudFrontOriginAccessIdentityConfigRequest generates a "aws.Request" representing the
 // client's request for the GetCloudFrontOriginAccessIdentityConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1278,8 +1277,8 @@ const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIden
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfig
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) (req *request.Request, output *GetCloudFrontOriginAccessIdentityConfigOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) (req *aws.Request, output *GetCloudFrontOriginAccessIdentityConfigOutput) {
+	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentityConfig,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}/config",
@@ -1327,7 +1326,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfig(input *GetCloudFron
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigWithContext(ctx aws.Context, input *GetCloudFrontOriginAccessIdentityConfigInput, opts ...request.Option) (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
+func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigWithContext(ctx aws.Context, input *GetCloudFrontOriginAccessIdentityConfigInput, opts ...aws.Option) (*GetCloudFrontOriginAccessIdentityConfigOutput, error) {
 	req, out := c.GetCloudFrontOriginAccessIdentityConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1336,7 +1335,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigWithContext(ctx aws.
 
 const opGetDistribution = "GetDistribution2017_03_25"
 
-// GetDistributionRequest generates a "aws/request.Request" representing the
+// GetDistributionRequest generates a "aws.Request" representing the
 // client's request for the GetDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1360,8 +1359,8 @@ const opGetDistribution = "GetDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistribution
-func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) (req *request.Request, output *GetDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) (req *aws.Request, output *GetDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opGetDistribution,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/distribution/{Id}",
@@ -1409,7 +1408,7 @@ func (c *CloudFront) GetDistribution(input *GetDistributionInput) (*GetDistribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetDistributionWithContext(ctx aws.Context, input *GetDistributionInput, opts ...request.Option) (*GetDistributionOutput, error) {
+func (c *CloudFront) GetDistributionWithContext(ctx aws.Context, input *GetDistributionInput, opts ...aws.Option) (*GetDistributionOutput, error) {
 	req, out := c.GetDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1418,7 +1417,7 @@ func (c *CloudFront) GetDistributionWithContext(ctx aws.Context, input *GetDistr
 
 const opGetDistributionConfig = "GetDistributionConfig2017_03_25"
 
-// GetDistributionConfigRequest generates a "aws/request.Request" representing the
+// GetDistributionConfigRequest generates a "aws.Request" representing the
 // client's request for the GetDistributionConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1442,8 +1441,8 @@ const opGetDistributionConfig = "GetDistributionConfig2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfig
-func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigInput) (req *request.Request, output *GetDistributionConfigOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigInput) (req *aws.Request, output *GetDistributionConfigOutput) {
+	op := &aws.Operation{
 		Name:       opGetDistributionConfig,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/distribution/{Id}/config",
@@ -1491,7 +1490,7 @@ func (c *CloudFront) GetDistributionConfig(input *GetDistributionConfigInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetDistributionConfigWithContext(ctx aws.Context, input *GetDistributionConfigInput, opts ...request.Option) (*GetDistributionConfigOutput, error) {
+func (c *CloudFront) GetDistributionConfigWithContext(ctx aws.Context, input *GetDistributionConfigInput, opts ...aws.Option) (*GetDistributionConfigOutput, error) {
 	req, out := c.GetDistributionConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1500,7 +1499,7 @@ func (c *CloudFront) GetDistributionConfigWithContext(ctx aws.Context, input *Ge
 
 const opGetInvalidation = "GetInvalidation2017_03_25"
 
-// GetInvalidationRequest generates a "aws/request.Request" representing the
+// GetInvalidationRequest generates a "aws.Request" representing the
 // client's request for the GetInvalidation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1524,8 +1523,8 @@ const opGetInvalidation = "GetInvalidation2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidation
-func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) (req *request.Request, output *GetInvalidationOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) (req *aws.Request, output *GetInvalidationOutput) {
+	op := &aws.Operation{
 		Name:       opGetInvalidation,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/distribution/{DistributionId}/invalidation/{Id}",
@@ -1576,7 +1575,7 @@ func (c *CloudFront) GetInvalidation(input *GetInvalidationInput) (*GetInvalidat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetInvalidationWithContext(ctx aws.Context, input *GetInvalidationInput, opts ...request.Option) (*GetInvalidationOutput, error) {
+func (c *CloudFront) GetInvalidationWithContext(ctx aws.Context, input *GetInvalidationInput, opts ...aws.Option) (*GetInvalidationOutput, error) {
 	req, out := c.GetInvalidationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1585,7 +1584,7 @@ func (c *CloudFront) GetInvalidationWithContext(ctx aws.Context, input *GetInval
 
 const opGetStreamingDistribution = "GetStreamingDistribution2017_03_25"
 
-// GetStreamingDistributionRequest generates a "aws/request.Request" representing the
+// GetStreamingDistributionRequest generates a "aws.Request" representing the
 // client's request for the GetStreamingDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1609,8 +1608,8 @@ const opGetStreamingDistribution = "GetStreamingDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistribution
-func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) (req *request.Request, output *GetStreamingDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) (req *aws.Request, output *GetStreamingDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opGetStreamingDistribution,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}",
@@ -1659,7 +1658,7 @@ func (c *CloudFront) GetStreamingDistribution(input *GetStreamingDistributionInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetStreamingDistributionWithContext(ctx aws.Context, input *GetStreamingDistributionInput, opts ...request.Option) (*GetStreamingDistributionOutput, error) {
+func (c *CloudFront) GetStreamingDistributionWithContext(ctx aws.Context, input *GetStreamingDistributionInput, opts ...aws.Option) (*GetStreamingDistributionOutput, error) {
 	req, out := c.GetStreamingDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1668,7 +1667,7 @@ func (c *CloudFront) GetStreamingDistributionWithContext(ctx aws.Context, input 
 
 const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_03_25"
 
-// GetStreamingDistributionConfigRequest generates a "aws/request.Request" representing the
+// GetStreamingDistributionConfigRequest generates a "aws.Request" representing the
 // client's request for the GetStreamingDistributionConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1692,8 +1691,8 @@ const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_03_
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfig
-func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) (req *request.Request, output *GetStreamingDistributionConfigOutput) {
-	op := &request.Operation{
+func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) (req *aws.Request, output *GetStreamingDistributionConfigOutput) {
+	op := &aws.Operation{
 		Name:       opGetStreamingDistributionConfig,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}/config",
@@ -1741,7 +1740,7 @@ func (c *CloudFront) GetStreamingDistributionConfig(input *GetStreamingDistribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) GetStreamingDistributionConfigWithContext(ctx aws.Context, input *GetStreamingDistributionConfigInput, opts ...request.Option) (*GetStreamingDistributionConfigOutput, error) {
+func (c *CloudFront) GetStreamingDistributionConfigWithContext(ctx aws.Context, input *GetStreamingDistributionConfigInput, opts ...aws.Option) (*GetStreamingDistributionConfigOutput, error) {
 	req, out := c.GetStreamingDistributionConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1750,7 +1749,7 @@ func (c *CloudFront) GetStreamingDistributionConfigWithContext(ctx aws.Context, 
 
 const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2017_03_25"
 
-// ListCloudFrontOriginAccessIdentitiesRequest generates a "aws/request.Request" representing the
+// ListCloudFrontOriginAccessIdentitiesRequest generates a "aws.Request" representing the
 // client's request for the ListCloudFrontOriginAccessIdentities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1774,12 +1773,12 @@ const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdenti
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentities
-func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) (req *request.Request, output *ListCloudFrontOriginAccessIdentitiesOutput) {
-	op := &request.Operation{
+func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) (req *aws.Request, output *ListCloudFrontOriginAccessIdentitiesOutput) {
+	op := &aws.Operation{
 		Name:       opListCloudFrontOriginAccessIdentities,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"CloudFrontOriginAccessIdentityList.NextMarker"},
 			LimitToken:      "MaxItems",
@@ -1826,7 +1825,7 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentities(input *ListCloudFrontO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesWithContext(ctx aws.Context, input *ListCloudFrontOriginAccessIdentitiesInput, opts ...request.Option) (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
+func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesWithContext(ctx aws.Context, input *ListCloudFrontOriginAccessIdentitiesInput, opts ...aws.Option) (*ListCloudFrontOriginAccessIdentitiesOutput, error) {
 	req, out := c.ListCloudFrontOriginAccessIdentitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1861,9 +1860,9 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPages(input *ListCloudF
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPagesWithContext(ctx aws.Context, input *ListCloudFrontOriginAccessIdentitiesInput, fn func(*ListCloudFrontOriginAccessIdentitiesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPagesWithContext(ctx aws.Context, input *ListCloudFrontOriginAccessIdentitiesInput, fn func(*ListCloudFrontOriginAccessIdentitiesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCloudFrontOriginAccessIdentitiesInput
 			if input != nil {
 				tmp := *input
@@ -1885,7 +1884,7 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesPagesWithContext(ctx aw
 
 const opListDistributions = "ListDistributions2017_03_25"
 
-// ListDistributionsRequest generates a "aws/request.Request" representing the
+// ListDistributionsRequest generates a "aws.Request" representing the
 // client's request for the ListDistributions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1909,12 +1908,12 @@ const opListDistributions = "ListDistributions2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributions
-func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) (req *request.Request, output *ListDistributionsOutput) {
-	op := &request.Operation{
+func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) (req *aws.Request, output *ListDistributionsOutput) {
+	op := &aws.Operation{
 		Name:       opListDistributions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/distribution",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"DistributionList.NextMarker"},
 			LimitToken:      "MaxItems",
@@ -1961,7 +1960,7 @@ func (c *CloudFront) ListDistributions(input *ListDistributionsInput) (*ListDist
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListDistributionsWithContext(ctx aws.Context, input *ListDistributionsInput, opts ...request.Option) (*ListDistributionsOutput, error) {
+func (c *CloudFront) ListDistributionsWithContext(ctx aws.Context, input *ListDistributionsInput, opts ...aws.Option) (*ListDistributionsOutput, error) {
 	req, out := c.ListDistributionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1996,9 +1995,9 @@ func (c *CloudFront) ListDistributionsPages(input *ListDistributionsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListDistributionsPagesWithContext(ctx aws.Context, input *ListDistributionsInput, fn func(*ListDistributionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFront) ListDistributionsPagesWithContext(ctx aws.Context, input *ListDistributionsInput, fn func(*ListDistributionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDistributionsInput
 			if input != nil {
 				tmp := *input
@@ -2020,7 +2019,7 @@ func (c *CloudFront) ListDistributionsPagesWithContext(ctx aws.Context, input *L
 
 const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2017_03_25"
 
-// ListDistributionsByWebACLIdRequest generates a "aws/request.Request" representing the
+// ListDistributionsByWebACLIdRequest generates a "aws.Request" representing the
 // client's request for the ListDistributionsByWebACLId operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2044,8 +2043,8 @@ const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLId
-func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) (req *request.Request, output *ListDistributionsByWebACLIdOutput) {
-	op := &request.Operation{
+func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) (req *aws.Request, output *ListDistributionsByWebACLIdOutput) {
+	op := &aws.Operation{
 		Name:       opListDistributionsByWebACLId,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/distributionsByWebACLId/{WebACLId}",
@@ -2092,7 +2091,7 @@ func (c *CloudFront) ListDistributionsByWebACLId(input *ListDistributionsByWebAC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListDistributionsByWebACLIdWithContext(ctx aws.Context, input *ListDistributionsByWebACLIdInput, opts ...request.Option) (*ListDistributionsByWebACLIdOutput, error) {
+func (c *CloudFront) ListDistributionsByWebACLIdWithContext(ctx aws.Context, input *ListDistributionsByWebACLIdInput, opts ...aws.Option) (*ListDistributionsByWebACLIdOutput, error) {
 	req, out := c.ListDistributionsByWebACLIdRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2101,7 +2100,7 @@ func (c *CloudFront) ListDistributionsByWebACLIdWithContext(ctx aws.Context, inp
 
 const opListInvalidations = "ListInvalidations2017_03_25"
 
-// ListInvalidationsRequest generates a "aws/request.Request" representing the
+// ListInvalidationsRequest generates a "aws.Request" representing the
 // client's request for the ListInvalidations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2125,12 +2124,12 @@ const opListInvalidations = "ListInvalidations2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidations
-func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) (req *request.Request, output *ListInvalidationsOutput) {
-	op := &request.Operation{
+func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) (req *aws.Request, output *ListInvalidationsOutput) {
+	op := &aws.Operation{
 		Name:       opListInvalidations,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/distribution/{DistributionId}/invalidation",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"InvalidationList.NextMarker"},
 			LimitToken:      "MaxItems",
@@ -2183,7 +2182,7 @@ func (c *CloudFront) ListInvalidations(input *ListInvalidationsInput) (*ListInva
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListInvalidationsWithContext(ctx aws.Context, input *ListInvalidationsInput, opts ...request.Option) (*ListInvalidationsOutput, error) {
+func (c *CloudFront) ListInvalidationsWithContext(ctx aws.Context, input *ListInvalidationsInput, opts ...aws.Option) (*ListInvalidationsOutput, error) {
 	req, out := c.ListInvalidationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2218,9 +2217,9 @@ func (c *CloudFront) ListInvalidationsPages(input *ListInvalidationsInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListInvalidationsPagesWithContext(ctx aws.Context, input *ListInvalidationsInput, fn func(*ListInvalidationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFront) ListInvalidationsPagesWithContext(ctx aws.Context, input *ListInvalidationsInput, fn func(*ListInvalidationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInvalidationsInput
 			if input != nil {
 				tmp := *input
@@ -2242,7 +2241,7 @@ func (c *CloudFront) ListInvalidationsPagesWithContext(ctx aws.Context, input *L
 
 const opListStreamingDistributions = "ListStreamingDistributions2017_03_25"
 
-// ListStreamingDistributionsRequest generates a "aws/request.Request" representing the
+// ListStreamingDistributionsRequest generates a "aws.Request" representing the
 // client's request for the ListStreamingDistributions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2266,12 +2265,12 @@ const opListStreamingDistributions = "ListStreamingDistributions2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributions
-func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) (req *request.Request, output *ListStreamingDistributionsOutput) {
-	op := &request.Operation{
+func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) (req *aws.Request, output *ListStreamingDistributionsOutput) {
+	op := &aws.Operation{
 		Name:       opListStreamingDistributions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/streaming-distribution",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"StreamingDistributionList.NextMarker"},
 			LimitToken:      "MaxItems",
@@ -2318,7 +2317,7 @@ func (c *CloudFront) ListStreamingDistributions(input *ListStreamingDistribution
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListStreamingDistributionsWithContext(ctx aws.Context, input *ListStreamingDistributionsInput, opts ...request.Option) (*ListStreamingDistributionsOutput, error) {
+func (c *CloudFront) ListStreamingDistributionsWithContext(ctx aws.Context, input *ListStreamingDistributionsInput, opts ...aws.Option) (*ListStreamingDistributionsOutput, error) {
 	req, out := c.ListStreamingDistributionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2353,9 +2352,9 @@ func (c *CloudFront) ListStreamingDistributionsPages(input *ListStreamingDistrib
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListStreamingDistributionsPagesWithContext(ctx aws.Context, input *ListStreamingDistributionsInput, fn func(*ListStreamingDistributionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *CloudFront) ListStreamingDistributionsPagesWithContext(ctx aws.Context, input *ListStreamingDistributionsInput, fn func(*ListStreamingDistributionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStreamingDistributionsInput
 			if input != nil {
 				tmp := *input
@@ -2377,7 +2376,7 @@ func (c *CloudFront) ListStreamingDistributionsPagesWithContext(ctx aws.Context,
 
 const opListTagsForResource = "ListTagsForResource2017_03_25"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2401,8 +2400,8 @@ const opListTagsForResource = "ListTagsForResource2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResource
-func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-25/tagging",
@@ -2454,7 +2453,7 @@ func (c *CloudFront) ListTagsForResource(input *ListTagsForResourceInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *CloudFront) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2463,7 +2462,7 @@ func (c *CloudFront) ListTagsForResourceWithContext(ctx aws.Context, input *List
 
 const opTagResource = "TagResource2017_03_25"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2487,8 +2486,8 @@ const opTagResource = "TagResource2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResource
-func (c *CloudFront) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *CloudFront) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/tagging?Operation=Tag",
@@ -2542,7 +2541,7 @@ func (c *CloudFront) TagResource(input *TagResourceInput) (*TagResourceOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *CloudFront) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2551,7 +2550,7 @@ func (c *CloudFront) TagResourceWithContext(ctx aws.Context, input *TagResourceI
 
 const opUntagResource = "UntagResource2017_03_25"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2575,8 +2574,8 @@ const opUntagResource = "UntagResource2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResource
-func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-25/tagging?Operation=Untag",
@@ -2630,7 +2629,7 @@ func (c *CloudFront) UntagResource(input *UntagResourceInput) (*UntagResourceOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *CloudFront) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2639,7 +2638,7 @@ func (c *CloudFront) UntagResourceWithContext(ctx aws.Context, input *UntagResou
 
 const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2017_03_25"
 
-// UpdateCloudFrontOriginAccessIdentityRequest generates a "aws/request.Request" representing the
+// UpdateCloudFrontOriginAccessIdentityRequest generates a "aws.Request" representing the
 // client's request for the UpdateCloudFrontOriginAccessIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2663,8 +2662,8 @@ const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIden
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentity
-func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudFrontOriginAccessIdentityInput) (req *request.Request, output *UpdateCloudFrontOriginAccessIdentityOutput) {
-	op := &request.Operation{
+func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudFrontOriginAccessIdentityInput) (req *aws.Request, output *UpdateCloudFrontOriginAccessIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}/config",
@@ -2732,7 +2731,7 @@ func (c *CloudFront) UpdateCloudFrontOriginAccessIdentity(input *UpdateCloudFron
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *UpdateCloudFrontOriginAccessIdentityInput, opts ...request.Option) (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
+func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityWithContext(ctx aws.Context, input *UpdateCloudFrontOriginAccessIdentityInput, opts ...aws.Option) (*UpdateCloudFrontOriginAccessIdentityOutput, error) {
 	req, out := c.UpdateCloudFrontOriginAccessIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2741,7 +2740,7 @@ func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityWithContext(ctx aws.Con
 
 const opUpdateDistribution = "UpdateDistribution2017_03_25"
 
-// UpdateDistributionRequest generates a "aws/request.Request" representing the
+// UpdateDistributionRequest generates a "aws.Request" representing the
 // client's request for the UpdateDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2765,8 +2764,8 @@ const opUpdateDistribution = "UpdateDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistribution
-func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) (req *request.Request, output *UpdateDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) (req *aws.Request, output *UpdateDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDistribution,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2017-03-25/distribution/{Id}/config",
@@ -2972,7 +2971,7 @@ func (c *CloudFront) UpdateDistribution(input *UpdateDistributionInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) UpdateDistributionWithContext(ctx aws.Context, input *UpdateDistributionInput, opts ...request.Option) (*UpdateDistributionOutput, error) {
+func (c *CloudFront) UpdateDistributionWithContext(ctx aws.Context, input *UpdateDistributionInput, opts ...aws.Option) (*UpdateDistributionOutput, error) {
 	req, out := c.UpdateDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2981,7 +2980,7 @@ func (c *CloudFront) UpdateDistributionWithContext(ctx aws.Context, input *Updat
 
 const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_03_25"
 
-// UpdateStreamingDistributionRequest generates a "aws/request.Request" representing the
+// UpdateStreamingDistributionRequest generates a "aws.Request" representing the
 // client's request for the UpdateStreamingDistribution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3005,8 +3004,8 @@ const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_03_25"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistribution
-func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDistributionInput) (req *request.Request, output *UpdateStreamingDistributionOutput) {
-	op := &request.Operation{
+func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDistributionInput) (req *aws.Request, output *UpdateStreamingDistributionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateStreamingDistribution,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}/config",
@@ -3087,7 +3086,7 @@ func (c *CloudFront) UpdateStreamingDistribution(input *UpdateStreamingDistribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudFront) UpdateStreamingDistributionWithContext(ctx aws.Context, input *UpdateStreamingDistributionInput, opts ...request.Option) (*UpdateStreamingDistributionOutput, error) {
+func (c *CloudFront) UpdateStreamingDistributionWithContext(ctx aws.Context, input *UpdateStreamingDistributionInput, opts ...aws.Option) (*UpdateStreamingDistributionOutput, error) {
 	req, out := c.UpdateStreamingDistributionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3191,9 +3190,9 @@ func (s Aliases) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Aliases) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Aliases"}
+	invalidParams := aws.ErrInvalidParams{Context: "Aliases"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3271,16 +3270,16 @@ func (s AllowedMethods) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AllowedMethods) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AllowedMethods"}
+	invalidParams := aws.ErrInvalidParams{Context: "AllowedMethods"}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.CachedMethods != nil {
 		if err := s.CachedMethods.Validate(); err != nil {
-			invalidParams.AddNested("CachedMethods", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CachedMethods", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3497,43 +3496,43 @@ func (s CacheBehavior) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CacheBehavior) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CacheBehavior"}
+	invalidParams := aws.ErrInvalidParams{Context: "CacheBehavior"}
 	if s.ForwardedValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("ForwardedValues"))
+		invalidParams.Add(aws.NewErrParamRequired("ForwardedValues"))
 	}
 	if s.MinTTL == nil {
-		invalidParams.Add(request.NewErrParamRequired("MinTTL"))
+		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
 	}
 	if s.PathPattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("PathPattern"))
+		invalidParams.Add(aws.NewErrParamRequired("PathPattern"))
 	}
 	if s.TargetOriginId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetOriginId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetOriginId"))
 	}
 	if s.TrustedSigners == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustedSigners"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustedSigners"))
 	}
 	if s.ViewerProtocolPolicy == nil {
-		invalidParams.Add(request.NewErrParamRequired("ViewerProtocolPolicy"))
+		invalidParams.Add(aws.NewErrParamRequired("ViewerProtocolPolicy"))
 	}
 	if s.AllowedMethods != nil {
 		if err := s.AllowedMethods.Validate(); err != nil {
-			invalidParams.AddNested("AllowedMethods", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AllowedMethods", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ForwardedValues != nil {
 		if err := s.ForwardedValues.Validate(); err != nil {
-			invalidParams.AddNested("ForwardedValues", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ForwardedValues", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaFunctionAssociations != nil {
 		if err := s.LambdaFunctionAssociations.Validate(); err != nil {
-			invalidParams.AddNested("LambdaFunctionAssociations", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LambdaFunctionAssociations", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TrustedSigners != nil {
 		if err := s.TrustedSigners.Validate(); err != nil {
-			invalidParams.AddNested("TrustedSigners", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TrustedSigners", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3642,9 +3641,9 @@ func (s CacheBehaviors) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CacheBehaviors) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CacheBehaviors"}
+	invalidParams := aws.ErrInvalidParams{Context: "CacheBehaviors"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -3652,7 +3651,7 @@ func (s *CacheBehaviors) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3715,12 +3714,12 @@ func (s CachedMethods) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CachedMethods) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CachedMethods"}
+	invalidParams := aws.ErrInvalidParams{Context: "CachedMethods"}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3773,9 +3772,9 @@ func (s CookieNames) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CookieNames) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CookieNames"}
+	invalidParams := aws.ErrInvalidParams{Context: "CookieNames"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3843,13 +3842,13 @@ func (s CookiePreference) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CookiePreference) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CookiePreference"}
+	invalidParams := aws.ErrInvalidParams{Context: "CookiePreference"}
 	if s.Forward == nil {
-		invalidParams.Add(request.NewErrParamRequired("Forward"))
+		invalidParams.Add(aws.NewErrParamRequired("Forward"))
 	}
 	if s.WhitelistedNames != nil {
 		if err := s.WhitelistedNames.Validate(); err != nil {
-			invalidParams.AddNested("WhitelistedNames", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WhitelistedNames", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3894,13 +3893,13 @@ func (s CreateCloudFrontOriginAccessIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCloudFrontOriginAccessIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCloudFrontOriginAccessIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCloudFrontOriginAccessIdentityInput"}
 	if s.CloudFrontOriginAccessIdentityConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
 	}
 	if s.CloudFrontOriginAccessIdentityConfig != nil {
 		if err := s.CloudFrontOriginAccessIdentityConfig.Validate(); err != nil {
-			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3983,13 +3982,13 @@ func (s CreateDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDistributionInput"}
 	if s.DistributionConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
 	}
 	if s.DistributionConfig != nil {
 		if err := s.DistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("DistributionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DistributionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4072,13 +4071,13 @@ func (s CreateDistributionWithTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDistributionWithTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDistributionWithTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDistributionWithTagsInput"}
 	if s.DistributionConfigWithTags == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionConfigWithTags"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionConfigWithTags"))
 	}
 	if s.DistributionConfigWithTags != nil {
 		if err := s.DistributionConfigWithTags.Validate(); err != nil {
-			invalidParams.AddNested("DistributionConfigWithTags", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DistributionConfigWithTags", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4166,16 +4165,16 @@ func (s CreateInvalidationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateInvalidationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateInvalidationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInvalidationInput"}
 	if s.DistributionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
 	}
 	if s.InvalidationBatch == nil {
-		invalidParams.Add(request.NewErrParamRequired("InvalidationBatch"))
+		invalidParams.Add(aws.NewErrParamRequired("InvalidationBatch"))
 	}
 	if s.InvalidationBatch != nil {
 		if err := s.InvalidationBatch.Validate(); err != nil {
-			invalidParams.AddNested("InvalidationBatch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("InvalidationBatch", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4255,13 +4254,13 @@ func (s CreateStreamingDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamingDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStreamingDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamingDistributionInput"}
 	if s.StreamingDistributionConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamingDistributionConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
 	}
 	if s.StreamingDistributionConfig != nil {
 		if err := s.StreamingDistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("StreamingDistributionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StreamingDistributionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4344,13 +4343,13 @@ func (s CreateStreamingDistributionWithTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamingDistributionWithTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStreamingDistributionWithTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamingDistributionWithTagsInput"}
 	if s.StreamingDistributionConfigWithTags == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamingDistributionConfigWithTags"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfigWithTags"))
 	}
 	if s.StreamingDistributionConfigWithTags != nil {
 		if err := s.StreamingDistributionConfigWithTags.Validate(); err != nil {
-			invalidParams.AddNested("StreamingDistributionConfigWithTags", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StreamingDistributionConfigWithTags", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4503,9 +4502,9 @@ func (s CustomErrorResponse) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomErrorResponse) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CustomErrorResponse"}
+	invalidParams := aws.ErrInvalidParams{Context: "CustomErrorResponse"}
 	if s.ErrorCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("ErrorCode"))
+		invalidParams.Add(aws.NewErrParamRequired("ErrorCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4576,9 +4575,9 @@ func (s CustomErrorResponses) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomErrorResponses) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CustomErrorResponses"}
+	invalidParams := aws.ErrInvalidParams{Context: "CustomErrorResponses"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -4586,7 +4585,7 @@ func (s *CustomErrorResponses) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4637,9 +4636,9 @@ func (s CustomHeaders) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomHeaders) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CustomHeaders"}
+	invalidParams := aws.ErrInvalidParams{Context: "CustomHeaders"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -4647,7 +4646,7 @@ func (s *CustomHeaders) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4725,19 +4724,19 @@ func (s CustomOriginConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CustomOriginConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CustomOriginConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "CustomOriginConfig"}
 	if s.HTTPPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("HTTPPort"))
+		invalidParams.Add(aws.NewErrParamRequired("HTTPPort"))
 	}
 	if s.HTTPSPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("HTTPSPort"))
+		invalidParams.Add(aws.NewErrParamRequired("HTTPSPort"))
 	}
 	if s.OriginProtocolPolicy == nil {
-		invalidParams.Add(request.NewErrParamRequired("OriginProtocolPolicy"))
+		invalidParams.Add(aws.NewErrParamRequired("OriginProtocolPolicy"))
 	}
 	if s.OriginSslProtocols != nil {
 		if err := s.OriginSslProtocols.Validate(); err != nil {
-			invalidParams.AddNested("OriginSslProtocols", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OriginSslProtocols", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4922,40 +4921,40 @@ func (s DefaultCacheBehavior) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefaultCacheBehavior) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DefaultCacheBehavior"}
+	invalidParams := aws.ErrInvalidParams{Context: "DefaultCacheBehavior"}
 	if s.ForwardedValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("ForwardedValues"))
+		invalidParams.Add(aws.NewErrParamRequired("ForwardedValues"))
 	}
 	if s.MinTTL == nil {
-		invalidParams.Add(request.NewErrParamRequired("MinTTL"))
+		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
 	}
 	if s.TargetOriginId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetOriginId"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetOriginId"))
 	}
 	if s.TrustedSigners == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustedSigners"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustedSigners"))
 	}
 	if s.ViewerProtocolPolicy == nil {
-		invalidParams.Add(request.NewErrParamRequired("ViewerProtocolPolicy"))
+		invalidParams.Add(aws.NewErrParamRequired("ViewerProtocolPolicy"))
 	}
 	if s.AllowedMethods != nil {
 		if err := s.AllowedMethods.Validate(); err != nil {
-			invalidParams.AddNested("AllowedMethods", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AllowedMethods", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ForwardedValues != nil {
 		if err := s.ForwardedValues.Validate(); err != nil {
-			invalidParams.AddNested("ForwardedValues", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ForwardedValues", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaFunctionAssociations != nil {
 		if err := s.LambdaFunctionAssociations.Validate(); err != nil {
-			invalidParams.AddNested("LambdaFunctionAssociations", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LambdaFunctionAssociations", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TrustedSigners != nil {
 		if err := s.TrustedSigners.Validate(); err != nil {
-			invalidParams.AddNested("TrustedSigners", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TrustedSigners", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5058,9 +5057,9 @@ func (s DeleteCloudFrontOriginAccessIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCloudFrontOriginAccessIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCloudFrontOriginAccessIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCloudFrontOriginAccessIdentityInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5157,9 +5156,9 @@ func (s DeleteDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDistributionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5222,9 +5221,9 @@ func (s DeleteStreamingDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStreamingDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStreamingDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStreamingDistributionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5588,55 +5587,55 @@ func (s DistributionConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DistributionConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DistributionConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "DistributionConfig"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.Comment == nil {
-		invalidParams.Add(request.NewErrParamRequired("Comment"))
+		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
 	if s.DefaultCacheBehavior == nil {
-		invalidParams.Add(request.NewErrParamRequired("DefaultCacheBehavior"))
+		invalidParams.Add(aws.NewErrParamRequired("DefaultCacheBehavior"))
 	}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 	if s.Origins == nil {
-		invalidParams.Add(request.NewErrParamRequired("Origins"))
+		invalidParams.Add(aws.NewErrParamRequired("Origins"))
 	}
 	if s.Aliases != nil {
 		if err := s.Aliases.Validate(); err != nil {
-			invalidParams.AddNested("Aliases", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Aliases", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CacheBehaviors != nil {
 		if err := s.CacheBehaviors.Validate(); err != nil {
-			invalidParams.AddNested("CacheBehaviors", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CacheBehaviors", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CustomErrorResponses != nil {
 		if err := s.CustomErrorResponses.Validate(); err != nil {
-			invalidParams.AddNested("CustomErrorResponses", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CustomErrorResponses", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DefaultCacheBehavior != nil {
 		if err := s.DefaultCacheBehavior.Validate(); err != nil {
-			invalidParams.AddNested("DefaultCacheBehavior", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DefaultCacheBehavior", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Logging != nil {
 		if err := s.Logging.Validate(); err != nil {
-			invalidParams.AddNested("Logging", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Logging", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Origins != nil {
 		if err := s.Origins.Validate(); err != nil {
-			invalidParams.AddNested("Origins", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Origins", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Restrictions != nil {
 		if err := s.Restrictions.Validate(); err != nil {
-			invalidParams.AddNested("Restrictions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Restrictions", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5771,21 +5770,21 @@ func (s DistributionConfigWithTags) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DistributionConfigWithTags) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DistributionConfigWithTags"}
+	invalidParams := aws.ErrInvalidParams{Context: "DistributionConfigWithTags"}
 	if s.DistributionConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.DistributionConfig != nil {
 		if err := s.DistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("DistributionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DistributionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
 		if err := s.Tags.Validate(); err != nil {
-			invalidParams.AddNested("Tags", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tags", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6187,26 +6186,26 @@ func (s ForwardedValues) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ForwardedValues) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ForwardedValues"}
+	invalidParams := aws.ErrInvalidParams{Context: "ForwardedValues"}
 	if s.Cookies == nil {
-		invalidParams.Add(request.NewErrParamRequired("Cookies"))
+		invalidParams.Add(aws.NewErrParamRequired("Cookies"))
 	}
 	if s.QueryString == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueryString"))
+		invalidParams.Add(aws.NewErrParamRequired("QueryString"))
 	}
 	if s.Cookies != nil {
 		if err := s.Cookies.Validate(); err != nil {
-			invalidParams.AddNested("Cookies", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Cookies", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Headers != nil {
 		if err := s.Headers.Validate(); err != nil {
-			invalidParams.AddNested("Headers", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Headers", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.QueryStringCacheKeys != nil {
 		if err := s.QueryStringCacheKeys.Validate(); err != nil {
-			invalidParams.AddNested("QueryStringCacheKeys", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("QueryStringCacheKeys", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6296,12 +6295,12 @@ func (s GeoRestriction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GeoRestriction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GeoRestriction"}
+	invalidParams := aws.ErrInvalidParams{Context: "GeoRestriction"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.RestrictionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("RestrictionType"))
+		invalidParams.Add(aws.NewErrParamRequired("RestrictionType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6352,9 +6351,9 @@ func (s GetCloudFrontOriginAccessIdentityConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCloudFrontOriginAccessIdentityConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityConfigInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6426,9 +6425,9 @@ func (s GetCloudFrontOriginAccessIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCloudFrontOriginAccessIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCloudFrontOriginAccessIdentityInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6501,9 +6500,9 @@ func (s GetDistributionConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDistributionConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDistributionConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDistributionConfigInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6575,9 +6574,9 @@ func (s GetDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDistributionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6654,12 +6653,12 @@ func (s GetInvalidationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInvalidationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInvalidationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInvalidationInput"}
 	if s.DistributionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6729,9 +6728,9 @@ func (s GetStreamingDistributionConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStreamingDistributionConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetStreamingDistributionConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetStreamingDistributionConfigInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6803,9 +6802,9 @@ func (s GetStreamingDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetStreamingDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetStreamingDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetStreamingDistributionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6914,9 +6913,9 @@ func (s Headers) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Headers) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Headers"}
+	invalidParams := aws.ErrInvalidParams{Context: "Headers"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7043,16 +7042,16 @@ func (s InvalidationBatch) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InvalidationBatch) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InvalidationBatch"}
+	invalidParams := aws.ErrInvalidParams{Context: "InvalidationBatch"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.Paths == nil {
-		invalidParams.Add(request.NewErrParamRequired("Paths"))
+		invalidParams.Add(aws.NewErrParamRequired("Paths"))
 	}
 	if s.Paths != nil {
 		if err := s.Paths.Validate(); err != nil {
-			invalidParams.AddNested("Paths", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Paths", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7332,9 +7331,9 @@ func (s LambdaFunctionAssociations) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaFunctionAssociations) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LambdaFunctionAssociations"}
+	invalidParams := aws.ErrInvalidParams{Context: "LambdaFunctionAssociations"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7455,9 +7454,9 @@ func (s ListDistributionsByWebACLIdInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDistributionsByWebACLIdInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDistributionsByWebACLIdInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDistributionsByWebACLIdInput"}
 	if s.WebACLId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebACLId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7609,9 +7608,9 @@ func (s ListInvalidationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInvalidationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListInvalidationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListInvalidationsInput"}
 	if s.DistributionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionId"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7745,9 +7744,9 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.Resource == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resource"))
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7840,18 +7839,18 @@ func (s LoggingConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LoggingConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingConfig"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 	if s.IncludeCookies == nil {
-		invalidParams.Add(request.NewErrParamRequired("IncludeCookies"))
+		invalidParams.Add(aws.NewErrParamRequired("IncludeCookies"))
 	}
 	if s.Prefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("Prefix"))
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7983,26 +7982,26 @@ func (s Origin) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Origin) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Origin"}
+	invalidParams := aws.ErrInvalidParams{Context: "Origin"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.CustomHeaders != nil {
 		if err := s.CustomHeaders.Validate(); err != nil {
-			invalidParams.AddNested("CustomHeaders", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CustomHeaders", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CustomOriginConfig != nil {
 		if err := s.CustomOriginConfig.Validate(); err != nil {
-			invalidParams.AddNested("CustomOriginConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CustomOriginConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3OriginConfig != nil {
 		if err := s.S3OriginConfig.Validate(); err != nil {
-			invalidParams.AddNested("S3OriginConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3OriginConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8139,12 +8138,12 @@ func (s OriginAccessIdentityConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OriginAccessIdentityConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OriginAccessIdentityConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "OriginAccessIdentityConfig"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.Comment == nil {
-		invalidParams.Add(request.NewErrParamRequired("Comment"))
+		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8343,12 +8342,12 @@ func (s OriginCustomHeader) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OriginCustomHeader) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OriginCustomHeader"}
+	invalidParams := aws.ErrInvalidParams{Context: "OriginCustomHeader"}
 	if s.HeaderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("HeaderName"))
+		invalidParams.Add(aws.NewErrParamRequired("HeaderName"))
 	}
 	if s.HeaderValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("HeaderValue"))
+		invalidParams.Add(aws.NewErrParamRequired("HeaderValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8399,12 +8398,12 @@ func (s OriginSslProtocols) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *OriginSslProtocols) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "OriginSslProtocols"}
+	invalidParams := aws.ErrInvalidParams{Context: "OriginSslProtocols"}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8451,12 +8450,12 @@ func (s Origins) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Origins) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Origins"}
+	invalidParams := aws.ErrInvalidParams{Context: "Origins"}
 	if s.Items != nil && len(s.Items) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Items", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Items", 1))
 	}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -8464,7 +8463,7 @@ func (s *Origins) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8516,9 +8515,9 @@ func (s Paths) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Paths) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Paths"}
+	invalidParams := aws.ErrInvalidParams{Context: "Paths"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8566,9 +8565,9 @@ func (s QueryStringCacheKeys) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryStringCacheKeys) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "QueryStringCacheKeys"}
+	invalidParams := aws.ErrInvalidParams{Context: "QueryStringCacheKeys"}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8614,13 +8613,13 @@ func (s Restrictions) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Restrictions) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Restrictions"}
+	invalidParams := aws.ErrInvalidParams{Context: "Restrictions"}
 	if s.GeoRestriction == nil {
-		invalidParams.Add(request.NewErrParamRequired("GeoRestriction"))
+		invalidParams.Add(aws.NewErrParamRequired("GeoRestriction"))
 	}
 	if s.GeoRestriction != nil {
 		if err := s.GeoRestriction.Validate(); err != nil {
-			invalidParams.AddNested("GeoRestriction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GeoRestriction", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8681,12 +8680,12 @@ func (s S3Origin) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Origin) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Origin"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Origin"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.OriginAccessIdentity == nil {
-		invalidParams.Add(request.NewErrParamRequired("OriginAccessIdentity"))
+		invalidParams.Add(aws.NewErrParamRequired("OriginAccessIdentity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8753,9 +8752,9 @@ func (s S3OriginConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3OriginConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3OriginConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3OriginConfig"}
 	if s.OriginAccessIdentity == nil {
-		invalidParams.Add(request.NewErrParamRequired("OriginAccessIdentity"))
+		invalidParams.Add(aws.NewErrParamRequired("OriginAccessIdentity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8984,40 +8983,40 @@ func (s StreamingDistributionConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StreamingDistributionConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StreamingDistributionConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "StreamingDistributionConfig"}
 	if s.CallerReference == nil {
-		invalidParams.Add(request.NewErrParamRequired("CallerReference"))
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
 	}
 	if s.Comment == nil {
-		invalidParams.Add(request.NewErrParamRequired("Comment"))
+		invalidParams.Add(aws.NewErrParamRequired("Comment"))
 	}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 	if s.S3Origin == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Origin"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Origin"))
 	}
 	if s.TrustedSigners == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrustedSigners"))
+		invalidParams.Add(aws.NewErrParamRequired("TrustedSigners"))
 	}
 	if s.Aliases != nil {
 		if err := s.Aliases.Validate(); err != nil {
-			invalidParams.AddNested("Aliases", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Aliases", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Logging != nil {
 		if err := s.Logging.Validate(); err != nil {
-			invalidParams.AddNested("Logging", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Logging", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Origin != nil {
 		if err := s.S3Origin.Validate(); err != nil {
-			invalidParams.AddNested("S3Origin", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Origin", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TrustedSigners != nil {
 		if err := s.TrustedSigners.Validate(); err != nil {
-			invalidParams.AddNested("TrustedSigners", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TrustedSigners", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9104,21 +9103,21 @@ func (s StreamingDistributionConfigWithTags) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StreamingDistributionConfigWithTags) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StreamingDistributionConfigWithTags"}
+	invalidParams := aws.ErrInvalidParams{Context: "StreamingDistributionConfigWithTags"}
 	if s.StreamingDistributionConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamingDistributionConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.StreamingDistributionConfig != nil {
 		if err := s.StreamingDistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("StreamingDistributionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StreamingDistributionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
 		if err := s.Tags.Validate(); err != nil {
-			invalidParams.AddNested("Tags", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tags", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9417,15 +9416,15 @@ func (s StreamingLoggingConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StreamingLoggingConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StreamingLoggingConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "StreamingLoggingConfig"}
 	if s.Bucket == nil {
-		invalidParams.Add(request.NewErrParamRequired("Bucket"))
+		invalidParams.Add(aws.NewErrParamRequired("Bucket"))
 	}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 	if s.Prefix == nil {
-		invalidParams.Add(request.NewErrParamRequired("Prefix"))
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9484,12 +9483,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9563,16 +9562,16 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.Resource == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resource"))
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		if err := s.Tags.Validate(); err != nil {
-			invalidParams.AddNested("Tags", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Tags", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9630,14 +9629,14 @@ func (s Tags) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tags) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tags"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tags"}
 	if s.Items != nil {
 		for i, v := range s.Items {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9704,12 +9703,12 @@ func (s TrustedSigners) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TrustedSigners) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TrustedSigners"}
+	invalidParams := aws.ErrInvalidParams{Context: "TrustedSigners"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 	if s.Quantity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Quantity"))
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9764,12 +9763,12 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.Resource == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resource"))
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9837,16 +9836,16 @@ func (s UpdateCloudFrontOriginAccessIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCloudFrontOriginAccessIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCloudFrontOriginAccessIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCloudFrontOriginAccessIdentityInput"}
 	if s.CloudFrontOriginAccessIdentityConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.CloudFrontOriginAccessIdentityConfig != nil {
 		if err := s.CloudFrontOriginAccessIdentityConfig.Validate(); err != nil {
-			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9940,16 +9939,16 @@ func (s UpdateDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDistributionInput"}
 	if s.DistributionConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("DistributionConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("DistributionConfig"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.DistributionConfig != nil {
 		if err := s.DistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("DistributionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DistributionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10043,16 +10042,16 @@ func (s UpdateStreamingDistributionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStreamingDistributionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateStreamingDistributionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateStreamingDistributionInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.StreamingDistributionConfig == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamingDistributionConfig"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamingDistributionConfig"))
 	}
 	if s.StreamingDistributionConfig != nil {
 		if err := s.StreamingDistributionConfig.Validate(); err != nil {
-			invalidParams.AddNested("StreamingDistributionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StreamingDistributionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 

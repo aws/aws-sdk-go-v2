@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opAddPermission = "AddPermission"
 
-// AddPermissionRequest generates a "aws/request.Request" representing the
+// AddPermissionRequest generates a "aws.Request" representing the
 // client's request for the AddPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAddPermission = "AddPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission
-func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) (req *request.Request, output *AddPermissionOutput) {
-	op := &request.Operation{
+func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) (req *aws.Request, output *AddPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opAddPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy",
@@ -118,7 +117,7 @@ func (c *Lambda) AddPermission(input *AddPermissionInput) (*AddPermissionOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...request.Option) (*AddPermissionOutput, error) {
+func (c *Lambda) AddPermissionWithContext(ctx aws.Context, input *AddPermissionInput, opts ...aws.Option) (*AddPermissionOutput, error) {
 	req, out := c.AddPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -127,7 +126,7 @@ func (c *Lambda) AddPermissionWithContext(ctx aws.Context, input *AddPermissionI
 
 const opCreateAlias = "CreateAlias"
 
-// CreateAliasRequest generates a "aws/request.Request" representing the
+// CreateAliasRequest generates a "aws.Request" representing the
 // client's request for the CreateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -151,8 +150,8 @@ const opCreateAlias = "CreateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias
-func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) (req *request.Request, output *AliasConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) (req *aws.Request, output *AliasConfiguration) {
+	op := &aws.Operation{
 		Name:       opCreateAlias,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/aliases",
@@ -217,7 +216,7 @@ func (c *Lambda) CreateAlias(input *CreateAliasInput) (*AliasConfiguration, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...request.Option) (*AliasConfiguration, error) {
+func (c *Lambda) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput, opts ...aws.Option) (*AliasConfiguration, error) {
 	req, out := c.CreateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -226,7 +225,7 @@ func (c *Lambda) CreateAliasWithContext(ctx aws.Context, input *CreateAliasInput
 
 const opCreateEventSourceMapping = "CreateEventSourceMapping"
 
-// CreateEventSourceMappingRequest generates a "aws/request.Request" representing the
+// CreateEventSourceMappingRequest generates a "aws.Request" representing the
 // client's request for the CreateEventSourceMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -250,8 +249,8 @@ const opCreateEventSourceMapping = "CreateEventSourceMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping
-func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
+	op := &aws.Operation{
 		Name:       opCreateEventSourceMapping,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-03-31/event-source-mappings/",
@@ -336,7 +335,7 @@ func (c *Lambda) CreateEventSourceMapping(input *CreateEventSourceMappingInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) CreateEventSourceMappingWithContext(ctx aws.Context, input *CreateEventSourceMappingInput, opts ...request.Option) (*EventSourceMappingConfiguration, error) {
+func (c *Lambda) CreateEventSourceMappingWithContext(ctx aws.Context, input *CreateEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
 	req, out := c.CreateEventSourceMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -345,7 +344,7 @@ func (c *Lambda) CreateEventSourceMappingWithContext(ctx aws.Context, input *Cre
 
 const opCreateFunction = "CreateFunction"
 
-// CreateFunctionRequest generates a "aws/request.Request" representing the
+// CreateFunctionRequest generates a "aws.Request" representing the
 // client's request for the CreateFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -369,8 +368,8 @@ const opCreateFunction = "CreateFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction
-func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) (req *request.Request, output *FunctionConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) (req *aws.Request, output *FunctionConfiguration) {
+	op := &aws.Operation{
 		Name:       opCreateFunction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-03-31/functions",
@@ -443,7 +442,7 @@ func (c *Lambda) CreateFunction(input *CreateFunctionInput) (*FunctionConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) CreateFunctionWithContext(ctx aws.Context, input *CreateFunctionInput, opts ...request.Option) (*FunctionConfiguration, error) {
+func (c *Lambda) CreateFunctionWithContext(ctx aws.Context, input *CreateFunctionInput, opts ...aws.Option) (*FunctionConfiguration, error) {
 	req, out := c.CreateFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -452,7 +451,7 @@ func (c *Lambda) CreateFunctionWithContext(ctx aws.Context, input *CreateFunctio
 
 const opDeleteAlias = "DeleteAlias"
 
-// DeleteAliasRequest generates a "aws/request.Request" representing the
+// DeleteAliasRequest generates a "aws.Request" representing the
 // client's request for the DeleteAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -476,8 +475,8 @@ const opDeleteAlias = "DeleteAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias
-func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) (req *request.Request, output *DeleteAliasOutput) {
-	op := &request.Operation{
+func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) (req *aws.Request, output *DeleteAliasOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAlias,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
@@ -536,7 +535,7 @@ func (c *Lambda) DeleteAlias(input *DeleteAliasInput) (*DeleteAliasOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...request.Option) (*DeleteAliasOutput, error) {
+func (c *Lambda) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput, opts ...aws.Option) (*DeleteAliasOutput, error) {
 	req, out := c.DeleteAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -545,7 +544,7 @@ func (c *Lambda) DeleteAliasWithContext(ctx aws.Context, input *DeleteAliasInput
 
 const opDeleteEventSourceMapping = "DeleteEventSourceMapping"
 
-// DeleteEventSourceMappingRequest generates a "aws/request.Request" representing the
+// DeleteEventSourceMappingRequest generates a "aws.Request" representing the
 // client's request for the DeleteEventSourceMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -569,8 +568,8 @@ const opDeleteEventSourceMapping = "DeleteEventSourceMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping
-func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
+	op := &aws.Operation{
 		Name:       opDeleteEventSourceMapping,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-03-31/event-source-mappings/{UUID}",
@@ -632,7 +631,7 @@ func (c *Lambda) DeleteEventSourceMapping(input *DeleteEventSourceMappingInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) DeleteEventSourceMappingWithContext(ctx aws.Context, input *DeleteEventSourceMappingInput, opts ...request.Option) (*EventSourceMappingConfiguration, error) {
+func (c *Lambda) DeleteEventSourceMappingWithContext(ctx aws.Context, input *DeleteEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
 	req, out := c.DeleteEventSourceMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -641,7 +640,7 @@ func (c *Lambda) DeleteEventSourceMappingWithContext(ctx aws.Context, input *Del
 
 const opDeleteFunction = "DeleteFunction"
 
-// DeleteFunctionRequest generates a "aws/request.Request" representing the
+// DeleteFunctionRequest generates a "aws.Request" representing the
 // client's request for the DeleteFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -665,8 +664,8 @@ const opDeleteFunction = "DeleteFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction
-func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) (req *request.Request, output *DeleteFunctionOutput) {
-	op := &request.Operation{
+func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) (req *aws.Request, output *DeleteFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFunction,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}",
@@ -741,7 +740,7 @@ func (c *Lambda) DeleteFunction(input *DeleteFunctionInput) (*DeleteFunctionOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) DeleteFunctionWithContext(ctx aws.Context, input *DeleteFunctionInput, opts ...request.Option) (*DeleteFunctionOutput, error) {
+func (c *Lambda) DeleteFunctionWithContext(ctx aws.Context, input *DeleteFunctionInput, opts ...aws.Option) (*DeleteFunctionOutput, error) {
 	req, out := c.DeleteFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -750,7 +749,7 @@ func (c *Lambda) DeleteFunctionWithContext(ctx aws.Context, input *DeleteFunctio
 
 const opGetAccountSettings = "GetAccountSettings"
 
-// GetAccountSettingsRequest generates a "aws/request.Request" representing the
+// GetAccountSettingsRequest generates a "aws.Request" representing the
 // client's request for the GetAccountSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -774,8 +773,8 @@ const opGetAccountSettings = "GetAccountSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings
-func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *request.Request, output *GetAccountSettingsOutput) {
-	op := &request.Operation{
+func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *aws.Request, output *GetAccountSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2016-08-19/account-settings/",
@@ -828,7 +827,7 @@ func (c *Lambda) GetAccountSettings(input *GetAccountSettingsInput) (*GetAccount
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccountSettingsInput, opts ...request.Option) (*GetAccountSettingsOutput, error) {
+func (c *Lambda) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccountSettingsInput, opts ...aws.Option) (*GetAccountSettingsOutput, error) {
 	req, out := c.GetAccountSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -837,7 +836,7 @@ func (c *Lambda) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccoun
 
 const opGetAlias = "GetAlias"
 
-// GetAliasRequest generates a "aws/request.Request" representing the
+// GetAliasRequest generates a "aws.Request" representing the
 // client's request for the GetAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -861,8 +860,8 @@ const opGetAlias = "GetAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias
-func (c *Lambda) GetAliasRequest(input *GetAliasInput) (req *request.Request, output *AliasConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) GetAliasRequest(input *GetAliasInput) (req *aws.Request, output *AliasConfiguration) {
+	op := &aws.Operation{
 		Name:       opGetAlias,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
@@ -924,7 +923,7 @@ func (c *Lambda) GetAlias(input *GetAliasInput) (*AliasConfiguration, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) GetAliasWithContext(ctx aws.Context, input *GetAliasInput, opts ...request.Option) (*AliasConfiguration, error) {
+func (c *Lambda) GetAliasWithContext(ctx aws.Context, input *GetAliasInput, opts ...aws.Option) (*AliasConfiguration, error) {
 	req, out := c.GetAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -933,7 +932,7 @@ func (c *Lambda) GetAliasWithContext(ctx aws.Context, input *GetAliasInput, opts
 
 const opGetEventSourceMapping = "GetEventSourceMapping"
 
-// GetEventSourceMappingRequest generates a "aws/request.Request" representing the
+// GetEventSourceMappingRequest generates a "aws.Request" representing the
 // client's request for the GetEventSourceMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -957,8 +956,8 @@ const opGetEventSourceMapping = "GetEventSourceMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping
-func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
+	op := &aws.Operation{
 		Name:       opGetEventSourceMapping,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/event-source-mappings/{UUID}",
@@ -1019,7 +1018,7 @@ func (c *Lambda) GetEventSourceMapping(input *GetEventSourceMappingInput) (*Even
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) GetEventSourceMappingWithContext(ctx aws.Context, input *GetEventSourceMappingInput, opts ...request.Option) (*EventSourceMappingConfiguration, error) {
+func (c *Lambda) GetEventSourceMappingWithContext(ctx aws.Context, input *GetEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
 	req, out := c.GetEventSourceMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1028,7 +1027,7 @@ func (c *Lambda) GetEventSourceMappingWithContext(ctx aws.Context, input *GetEve
 
 const opGetFunction = "GetFunction"
 
-// GetFunctionRequest generates a "aws/request.Request" representing the
+// GetFunctionRequest generates a "aws.Request" representing the
 // client's request for the GetFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1052,8 +1051,8 @@ const opGetFunction = "GetFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction
-func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) (req *request.Request, output *GetFunctionOutput) {
-	op := &request.Operation{
+func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) (req *aws.Request, output *GetFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opGetFunction,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}",
@@ -1123,7 +1122,7 @@ func (c *Lambda) GetFunction(input *GetFunctionInput) (*GetFunctionOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) GetFunctionWithContext(ctx aws.Context, input *GetFunctionInput, opts ...request.Option) (*GetFunctionOutput, error) {
+func (c *Lambda) GetFunctionWithContext(ctx aws.Context, input *GetFunctionInput, opts ...aws.Option) (*GetFunctionOutput, error) {
 	req, out := c.GetFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1132,7 +1131,7 @@ func (c *Lambda) GetFunctionWithContext(ctx aws.Context, input *GetFunctionInput
 
 const opGetFunctionConfiguration = "GetFunctionConfiguration"
 
-// GetFunctionConfigurationRequest generates a "aws/request.Request" representing the
+// GetFunctionConfigurationRequest generates a "aws.Request" representing the
 // client's request for the GetFunctionConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1156,8 +1155,8 @@ const opGetFunctionConfiguration = "GetFunctionConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration
-func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfigurationInput) (req *request.Request, output *FunctionConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfigurationInput) (req *aws.Request, output *FunctionConfiguration) {
+	op := &aws.Operation{
 		Name:       opGetFunctionConfiguration,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/configuration",
@@ -1227,7 +1226,7 @@ func (c *Lambda) GetFunctionConfiguration(input *GetFunctionConfigurationInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) GetFunctionConfigurationWithContext(ctx aws.Context, input *GetFunctionConfigurationInput, opts ...request.Option) (*FunctionConfiguration, error) {
+func (c *Lambda) GetFunctionConfigurationWithContext(ctx aws.Context, input *GetFunctionConfigurationInput, opts ...aws.Option) (*FunctionConfiguration, error) {
 	req, out := c.GetFunctionConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1236,7 +1235,7 @@ func (c *Lambda) GetFunctionConfigurationWithContext(ctx aws.Context, input *Get
 
 const opGetPolicy = "GetPolicy"
 
-// GetPolicyRequest generates a "aws/request.Request" representing the
+// GetPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1260,8 +1259,8 @@ const opGetPolicy = "GetPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy
-func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) (req *request.Request, output *GetPolicyOutput) {
-	op := &request.Operation{
+func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) (req *aws.Request, output *GetPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy",
@@ -1326,7 +1325,7 @@ func (c *Lambda) GetPolicy(input *GetPolicyInput) (*GetPolicyOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts ...request.Option) (*GetPolicyOutput, error) {
+func (c *Lambda) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts ...aws.Option) (*GetPolicyOutput, error) {
 	req, out := c.GetPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1335,7 +1334,7 @@ func (c *Lambda) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, op
 
 const opInvoke = "Invoke"
 
-// InvokeRequest generates a "aws/request.Request" representing the
+// InvokeRequest generates a "aws.Request" representing the
 // client's request for the Invoke operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1359,8 +1358,8 @@ const opInvoke = "Invoke"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke
-func (c *Lambda) InvokeRequest(input *InvokeInput) (req *request.Request, output *InvokeOutput) {
-	op := &request.Operation{
+func (c *Lambda) InvokeRequest(input *InvokeInput) (req *aws.Request, output *InvokeOutput) {
+	op := &aws.Operation{
 		Name:       opInvoke,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/invocations",
@@ -1487,7 +1486,7 @@ func (c *Lambda) Invoke(input *InvokeInput) (*InvokeOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) InvokeWithContext(ctx aws.Context, input *InvokeInput, opts ...request.Option) (*InvokeOutput, error) {
+func (c *Lambda) InvokeWithContext(ctx aws.Context, input *InvokeInput, opts ...aws.Option) (*InvokeOutput, error) {
 	req, out := c.InvokeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1496,7 +1495,7 @@ func (c *Lambda) InvokeWithContext(ctx aws.Context, input *InvokeInput, opts ...
 
 const opInvokeAsync = "InvokeAsync"
 
-// InvokeAsyncRequest generates a "aws/request.Request" representing the
+// InvokeAsyncRequest generates a "aws.Request" representing the
 // client's request for the InvokeAsync operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1520,11 +1519,11 @@ const opInvokeAsync = "InvokeAsync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync
-func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) (req *request.Request, output *InvokeAsyncOutput) {
+func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) (req *aws.Request, output *InvokeAsyncOutput) {
 	if c.Client.Config.Logger != nil {
 		c.Client.Config.Logger.Log("This operation, InvokeAsync, has been deprecated")
 	}
-	op := &request.Operation{
+	op := &aws.Operation{
 		Name:       opInvokeAsync,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2014-11-13/functions/{FunctionName}/invoke-async/",
@@ -1585,7 +1584,7 @@ func (c *Lambda) InvokeAsync(input *InvokeAsyncInput) (*InvokeAsyncOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) InvokeAsyncWithContext(ctx aws.Context, input *InvokeAsyncInput, opts ...request.Option) (*InvokeAsyncOutput, error) {
+func (c *Lambda) InvokeAsyncWithContext(ctx aws.Context, input *InvokeAsyncInput, opts ...aws.Option) (*InvokeAsyncOutput, error) {
 	req, out := c.InvokeAsyncRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1594,7 +1593,7 @@ func (c *Lambda) InvokeAsyncWithContext(ctx aws.Context, input *InvokeAsyncInput
 
 const opListAliases = "ListAliases"
 
-// ListAliasesRequest generates a "aws/request.Request" representing the
+// ListAliasesRequest generates a "aws.Request" representing the
 // client's request for the ListAliases operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1618,8 +1617,8 @@ const opListAliases = "ListAliases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases
-func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) (req *request.Request, output *ListAliasesOutput) {
-	op := &request.Operation{
+func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) (req *aws.Request, output *ListAliasesOutput) {
+	op := &aws.Operation{
 		Name:       opListAliases,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/aliases",
@@ -1682,7 +1681,7 @@ func (c *Lambda) ListAliases(input *ListAliasesInput) (*ListAliasesOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...request.Option) (*ListAliasesOutput, error) {
+func (c *Lambda) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput, opts ...aws.Option) (*ListAliasesOutput, error) {
 	req, out := c.ListAliasesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1691,7 +1690,7 @@ func (c *Lambda) ListAliasesWithContext(ctx aws.Context, input *ListAliasesInput
 
 const opListEventSourceMappings = "ListEventSourceMappings"
 
-// ListEventSourceMappingsRequest generates a "aws/request.Request" representing the
+// ListEventSourceMappingsRequest generates a "aws.Request" representing the
 // client's request for the ListEventSourceMappings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1715,12 +1714,12 @@ const opListEventSourceMappings = "ListEventSourceMappings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings
-func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsInput) (req *request.Request, output *ListEventSourceMappingsOutput) {
-	op := &request.Operation{
+func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsInput) (req *aws.Request, output *ListEventSourceMappingsOutput) {
+	op := &aws.Operation{
 		Name:       opListEventSourceMappings,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/event-source-mappings/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "MaxItems",
@@ -1792,7 +1791,7 @@ func (c *Lambda) ListEventSourceMappings(input *ListEventSourceMappingsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListEventSourceMappingsWithContext(ctx aws.Context, input *ListEventSourceMappingsInput, opts ...request.Option) (*ListEventSourceMappingsOutput, error) {
+func (c *Lambda) ListEventSourceMappingsWithContext(ctx aws.Context, input *ListEventSourceMappingsInput, opts ...aws.Option) (*ListEventSourceMappingsOutput, error) {
 	req, out := c.ListEventSourceMappingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1827,9 +1826,9 @@ func (c *Lambda) ListEventSourceMappingsPages(input *ListEventSourceMappingsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListEventSourceMappingsPagesWithContext(ctx aws.Context, input *ListEventSourceMappingsInput, fn func(*ListEventSourceMappingsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Lambda) ListEventSourceMappingsPagesWithContext(ctx aws.Context, input *ListEventSourceMappingsInput, fn func(*ListEventSourceMappingsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListEventSourceMappingsInput
 			if input != nil {
 				tmp := *input
@@ -1851,7 +1850,7 @@ func (c *Lambda) ListEventSourceMappingsPagesWithContext(ctx aws.Context, input 
 
 const opListFunctions = "ListFunctions"
 
-// ListFunctionsRequest generates a "aws/request.Request" representing the
+// ListFunctionsRequest generates a "aws.Request" representing the
 // client's request for the ListFunctions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1875,12 +1874,12 @@ const opListFunctions = "ListFunctions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions
-func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *request.Request, output *ListFunctionsOutput) {
-	op := &request.Operation{
+func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) (req *aws.Request, output *ListFunctionsOutput) {
+	op := &aws.Operation{
 		Name:       opListFunctions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "MaxItems",
@@ -1944,7 +1943,7 @@ func (c *Lambda) ListFunctions(input *ListFunctionsInput) (*ListFunctionsOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListFunctionsWithContext(ctx aws.Context, input *ListFunctionsInput, opts ...request.Option) (*ListFunctionsOutput, error) {
+func (c *Lambda) ListFunctionsWithContext(ctx aws.Context, input *ListFunctionsInput, opts ...aws.Option) (*ListFunctionsOutput, error) {
 	req, out := c.ListFunctionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1979,9 +1978,9 @@ func (c *Lambda) ListFunctionsPages(input *ListFunctionsInput, fn func(*ListFunc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListFunctionsPagesWithContext(ctx aws.Context, input *ListFunctionsInput, fn func(*ListFunctionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Lambda) ListFunctionsPagesWithContext(ctx aws.Context, input *ListFunctionsInput, fn func(*ListFunctionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListFunctionsInput
 			if input != nil {
 				tmp := *input
@@ -2003,7 +2002,7 @@ func (c *Lambda) ListFunctionsPagesWithContext(ctx aws.Context, input *ListFunct
 
 const opListTags = "ListTags"
 
-// ListTagsRequest generates a "aws/request.Request" representing the
+// ListTagsRequest generates a "aws.Request" representing the
 // client's request for the ListTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2027,8 +2026,8 @@ const opListTags = "ListTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTags
-func (c *Lambda) ListTagsRequest(input *ListTagsInput) (req *request.Request, output *ListTagsOutput) {
-	op := &request.Operation{
+func (c *Lambda) ListTagsRequest(input *ListTagsInput) (req *aws.Request, output *ListTagsOutput) {
+	op := &aws.Operation{
 		Name:       opListTags,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2017-03-31/tags/{ARN}",
@@ -2087,7 +2086,7 @@ func (c *Lambda) ListTags(input *ListTagsInput) (*ListTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...request.Option) (*ListTagsOutput, error) {
+func (c *Lambda) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts ...aws.Option) (*ListTagsOutput, error) {
 	req, out := c.ListTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2096,7 +2095,7 @@ func (c *Lambda) ListTagsWithContext(ctx aws.Context, input *ListTagsInput, opts
 
 const opListVersionsByFunction = "ListVersionsByFunction"
 
-// ListVersionsByFunctionRequest generates a "aws/request.Request" representing the
+// ListVersionsByFunctionRequest generates a "aws.Request" representing the
 // client's request for the ListVersionsByFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2120,8 +2119,8 @@ const opListVersionsByFunction = "ListVersionsByFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction
-func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInput) (req *request.Request, output *ListVersionsByFunctionOutput) {
-	op := &request.Operation{
+func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInput) (req *aws.Request, output *ListVersionsByFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opListVersionsByFunction,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/versions",
@@ -2180,7 +2179,7 @@ func (c *Lambda) ListVersionsByFunction(input *ListVersionsByFunctionInput) (*Li
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) ListVersionsByFunctionWithContext(ctx aws.Context, input *ListVersionsByFunctionInput, opts ...request.Option) (*ListVersionsByFunctionOutput, error) {
+func (c *Lambda) ListVersionsByFunctionWithContext(ctx aws.Context, input *ListVersionsByFunctionInput, opts ...aws.Option) (*ListVersionsByFunctionOutput, error) {
 	req, out := c.ListVersionsByFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2189,7 +2188,7 @@ func (c *Lambda) ListVersionsByFunctionWithContext(ctx aws.Context, input *ListV
 
 const opPublishVersion = "PublishVersion"
 
-// PublishVersionRequest generates a "aws/request.Request" representing the
+// PublishVersionRequest generates a "aws.Request" representing the
 // client's request for the PublishVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2213,8 +2212,8 @@ const opPublishVersion = "PublishVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion
-func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) (req *request.Request, output *FunctionConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) (req *aws.Request, output *FunctionConfiguration) {
+	op := &aws.Operation{
 		Name:       opPublishVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/versions",
@@ -2279,7 +2278,7 @@ func (c *Lambda) PublishVersion(input *PublishVersionInput) (*FunctionConfigurat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) PublishVersionWithContext(ctx aws.Context, input *PublishVersionInput, opts ...request.Option) (*FunctionConfiguration, error) {
+func (c *Lambda) PublishVersionWithContext(ctx aws.Context, input *PublishVersionInput, opts ...aws.Option) (*FunctionConfiguration, error) {
 	req, out := c.PublishVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2288,7 +2287,7 @@ func (c *Lambda) PublishVersionWithContext(ctx aws.Context, input *PublishVersio
 
 const opRemovePermission = "RemovePermission"
 
-// RemovePermissionRequest generates a "aws/request.Request" representing the
+// RemovePermissionRequest generates a "aws.Request" representing the
 // client's request for the RemovePermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2312,8 +2311,8 @@ const opRemovePermission = "RemovePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission
-func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) (req *request.Request, output *RemovePermissionOutput) {
-	op := &request.Operation{
+func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) (req *aws.Request, output *RemovePermissionOutput) {
+	op := &aws.Operation{
 		Name:       opRemovePermission,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/policy/{StatementId}",
@@ -2385,7 +2384,7 @@ func (c *Lambda) RemovePermission(input *RemovePermissionInput) (*RemovePermissi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...request.Option) (*RemovePermissionOutput, error) {
+func (c *Lambda) RemovePermissionWithContext(ctx aws.Context, input *RemovePermissionInput, opts ...aws.Option) (*RemovePermissionOutput, error) {
 	req, out := c.RemovePermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2394,7 +2393,7 @@ func (c *Lambda) RemovePermissionWithContext(ctx aws.Context, input *RemovePermi
 
 const opTagResource = "TagResource"
 
-// TagResourceRequest generates a "aws/request.Request" representing the
+// TagResourceRequest generates a "aws.Request" representing the
 // client's request for the TagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2418,8 +2417,8 @@ const opTagResource = "TagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResource
-func (c *Lambda) TagResourceRequest(input *TagResourceInput) (req *request.Request, output *TagResourceOutput) {
-	op := &request.Operation{
+func (c *Lambda) TagResourceRequest(input *TagResourceInput) (req *aws.Request, output *TagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2017-03-31/tags/{ARN}",
@@ -2481,7 +2480,7 @@ func (c *Lambda) TagResource(input *TagResourceInput) (*TagResourceOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...request.Option) (*TagResourceOutput, error) {
+func (c *Lambda) TagResourceWithContext(ctx aws.Context, input *TagResourceInput, opts ...aws.Option) (*TagResourceOutput, error) {
 	req, out := c.TagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2490,7 +2489,7 @@ func (c *Lambda) TagResourceWithContext(ctx aws.Context, input *TagResourceInput
 
 const opUntagResource = "UntagResource"
 
-// UntagResourceRequest generates a "aws/request.Request" representing the
+// UntagResourceRequest generates a "aws.Request" representing the
 // client's request for the UntagResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2514,8 +2513,8 @@ const opUntagResource = "UntagResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResource
-func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) (req *request.Request, output *UntagResourceOutput) {
-	op := &request.Operation{
+func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) (req *aws.Request, output *UntagResourceOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/2017-03-31/tags/{ARN}",
@@ -2576,7 +2575,7 @@ func (c *Lambda) UntagResource(input *UntagResourceInput) (*UntagResourceOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...request.Option) (*UntagResourceOutput, error) {
+func (c *Lambda) UntagResourceWithContext(ctx aws.Context, input *UntagResourceInput, opts ...aws.Option) (*UntagResourceOutput, error) {
 	req, out := c.UntagResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2585,7 +2584,7 @@ func (c *Lambda) UntagResourceWithContext(ctx aws.Context, input *UntagResourceI
 
 const opUpdateAlias = "UpdateAlias"
 
-// UpdateAliasRequest generates a "aws/request.Request" representing the
+// UpdateAliasRequest generates a "aws.Request" representing the
 // client's request for the UpdateAlias operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2609,8 +2608,8 @@ const opUpdateAlias = "UpdateAlias"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias
-func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) (req *request.Request, output *AliasConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) (req *aws.Request, output *AliasConfiguration) {
+	op := &aws.Operation{
 		Name:       opUpdateAlias,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/aliases/{Name}",
@@ -2672,7 +2671,7 @@ func (c *Lambda) UpdateAlias(input *UpdateAliasInput) (*AliasConfiguration, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...request.Option) (*AliasConfiguration, error) {
+func (c *Lambda) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput, opts ...aws.Option) (*AliasConfiguration, error) {
 	req, out := c.UpdateAliasRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2681,7 +2680,7 @@ func (c *Lambda) UpdateAliasWithContext(ctx aws.Context, input *UpdateAliasInput
 
 const opUpdateEventSourceMapping = "UpdateEventSourceMapping"
 
-// UpdateEventSourceMappingRequest generates a "aws/request.Request" representing the
+// UpdateEventSourceMappingRequest generates a "aws.Request" representing the
 // client's request for the UpdateEventSourceMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2705,8 +2704,8 @@ const opUpdateEventSourceMapping = "UpdateEventSourceMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping
-func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMappingInput) (req *request.Request, output *EventSourceMappingConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMappingInput) (req *aws.Request, output *EventSourceMappingConfiguration) {
+	op := &aws.Operation{
 		Name:       opUpdateEventSourceMapping,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2015-03-31/event-source-mappings/{UUID}",
@@ -2783,7 +2782,7 @@ func (c *Lambda) UpdateEventSourceMapping(input *UpdateEventSourceMappingInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) UpdateEventSourceMappingWithContext(ctx aws.Context, input *UpdateEventSourceMappingInput, opts ...request.Option) (*EventSourceMappingConfiguration, error) {
+func (c *Lambda) UpdateEventSourceMappingWithContext(ctx aws.Context, input *UpdateEventSourceMappingInput, opts ...aws.Option) (*EventSourceMappingConfiguration, error) {
 	req, out := c.UpdateEventSourceMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2792,7 +2791,7 @@ func (c *Lambda) UpdateEventSourceMappingWithContext(ctx aws.Context, input *Upd
 
 const opUpdateFunctionCode = "UpdateFunctionCode"
 
-// UpdateFunctionCodeRequest generates a "aws/request.Request" representing the
+// UpdateFunctionCodeRequest generates a "aws.Request" representing the
 // client's request for the UpdateFunctionCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2816,8 +2815,8 @@ const opUpdateFunctionCode = "UpdateFunctionCode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode
-func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) (req *request.Request, output *FunctionConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) (req *aws.Request, output *FunctionConfiguration) {
+	op := &aws.Operation{
 		Name:       opUpdateFunctionCode,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/code",
@@ -2886,7 +2885,7 @@ func (c *Lambda) UpdateFunctionCode(input *UpdateFunctionCodeInput) (*FunctionCo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) UpdateFunctionCodeWithContext(ctx aws.Context, input *UpdateFunctionCodeInput, opts ...request.Option) (*FunctionConfiguration, error) {
+func (c *Lambda) UpdateFunctionCodeWithContext(ctx aws.Context, input *UpdateFunctionCodeInput, opts ...aws.Option) (*FunctionConfiguration, error) {
 	req, out := c.UpdateFunctionCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2895,7 +2894,7 @@ func (c *Lambda) UpdateFunctionCodeWithContext(ctx aws.Context, input *UpdateFun
 
 const opUpdateFunctionConfiguration = "UpdateFunctionConfiguration"
 
-// UpdateFunctionConfigurationRequest generates a "aws/request.Request" representing the
+// UpdateFunctionConfigurationRequest generates a "aws.Request" representing the
 // client's request for the UpdateFunctionConfiguration operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2919,8 +2918,8 @@ const opUpdateFunctionConfiguration = "UpdateFunctionConfiguration"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration
-func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigurationInput) (req *request.Request, output *FunctionConfiguration) {
-	op := &request.Operation{
+func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigurationInput) (req *aws.Request, output *FunctionConfiguration) {
+	op := &aws.Operation{
 		Name:       opUpdateFunctionConfiguration,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/2015-03-31/functions/{FunctionName}/configuration",
@@ -2991,7 +2990,7 @@ func (c *Lambda) UpdateFunctionConfiguration(input *UpdateFunctionConfigurationI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Lambda) UpdateFunctionConfigurationWithContext(ctx aws.Context, input *UpdateFunctionConfigurationInput, opts ...request.Option) (*FunctionConfiguration, error) {
+func (c *Lambda) UpdateFunctionConfigurationWithContext(ctx aws.Context, input *UpdateFunctionConfigurationInput, opts ...aws.Option) (*FunctionConfiguration, error) {
 	req, out := c.UpdateFunctionConfigurationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3187,27 +3186,27 @@ func (s AddPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddPermissionInput"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 	if s.StatementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatementId"))
+		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
 	if s.StatementId != nil && len(*s.StatementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatementId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3381,24 +3380,24 @@ func (s CreateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAliasInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.FunctionVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionVersion"))
 	}
 	if s.FunctionVersion != nil && len(*s.FunctionVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionVersion", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3500,21 +3499,21 @@ func (s CreateEventSourceMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateEventSourceMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateEventSourceMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateEventSourceMappingInput"}
 	if s.BatchSize != nil && *s.BatchSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("BatchSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("BatchSize", 1))
 	}
 	if s.EventSourceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventSourceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("EventSourceArn"))
 	}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.StartingPosition == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartingPosition"))
+		invalidParams.Add(aws.NewErrParamRequired("StartingPosition"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3668,34 +3667,34 @@ func (s CreateFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFunctionInput"}
 	if s.Code == nil {
-		invalidParams.Add(request.NewErrParamRequired("Code"))
+		invalidParams.Add(aws.NewErrParamRequired("Code"))
 	}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Handler == nil {
-		invalidParams.Add(request.NewErrParamRequired("Handler"))
+		invalidParams.Add(aws.NewErrParamRequired("Handler"))
 	}
 	if s.MemorySize != nil && *s.MemorySize < 128 {
-		invalidParams.Add(request.NewErrParamMinValue("MemorySize", 128))
+		invalidParams.Add(aws.NewErrParamMinValue("MemorySize", 128))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.Runtime == nil {
-		invalidParams.Add(request.NewErrParamRequired("Runtime"))
+		invalidParams.Add(aws.NewErrParamRequired("Runtime"))
 	}
 	if s.Timeout != nil && *s.Timeout < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Timeout", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
 	}
 	if s.Code != nil {
 		if err := s.Code.Validate(); err != nil {
-			invalidParams.AddNested("Code", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Code", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3852,18 +3851,18 @@ func (s DeleteAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAliasInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3921,9 +3920,9 @@ func (s DeleteEventSourceMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteEventSourceMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteEventSourceMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEventSourceMappingInput"}
 	if s.UUID == nil {
-		invalidParams.Add(request.NewErrParamRequired("UUID"))
+		invalidParams.Add(aws.NewErrParamRequired("UUID"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3984,15 +3983,15 @@ func (s DeleteFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFunctionInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4257,15 +4256,15 @@ func (s FunctionCode) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FunctionCode) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FunctionCode"}
+	invalidParams := aws.ErrInvalidParams{Context: "FunctionCode"}
 	if s.S3Bucket != nil && len(*s.S3Bucket) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("S3Bucket", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("S3Bucket", 3))
 	}
 	if s.S3Key != nil && len(*s.S3Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("S3Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("S3Key", 1))
 	}
 	if s.S3ObjectVersion != nil && len(*s.S3ObjectVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("S3ObjectVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("S3ObjectVersion", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4604,18 +4603,18 @@ func (s GetAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAliasInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4658,9 +4657,9 @@ func (s GetEventSourceMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetEventSourceMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetEventSourceMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetEventSourceMappingInput"}
 	if s.UUID == nil {
-		invalidParams.Add(request.NewErrParamRequired("UUID"))
+		invalidParams.Add(aws.NewErrParamRequired("UUID"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4714,15 +4713,15 @@ func (s GetFunctionConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFunctionConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionConfigurationInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4780,15 +4779,15 @@ func (s GetFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFunctionInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4889,15 +4888,15 @@ func (s GetPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4973,15 +4972,15 @@ func (s InvokeAsyncInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InvokeAsyncInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InvokeAsyncInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InvokeAsyncInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.InvokeArgs == nil {
-		invalidParams.Add(request.NewErrParamRequired("InvokeArgs"))
+		invalidParams.Add(aws.NewErrParamRequired("InvokeArgs"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5092,15 +5091,15 @@ func (s InvokeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InvokeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InvokeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InvokeInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5249,18 +5248,18 @@ func (s ListAliasesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAliasesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAliasesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAliasesInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.FunctionVersion != nil && len(*s.FunctionVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionVersion", 1))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5368,12 +5367,12 @@ func (s ListEventSourceMappingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListEventSourceMappingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListEventSourceMappingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListEventSourceMappingsInput"}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5486,9 +5485,9 @@ func (s ListFunctionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFunctionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFunctionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFunctionsInput"}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5577,9 +5576,9 @@ func (s ListTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsInput"}
 	if s.Resource == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resource"))
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5653,15 +5652,15 @@ func (s ListVersionsByFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListVersionsByFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListVersionsByFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListVersionsByFunctionInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5758,12 +5757,12 @@ func (s PublishVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PublishVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PublishVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PublishVersionInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5829,21 +5828,21 @@ func (s RemovePermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemovePermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemovePermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemovePermissionInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 	if s.StatementId == nil {
-		invalidParams.Add(request.NewErrParamRequired("StatementId"))
+		invalidParams.Add(aws.NewErrParamRequired("StatementId"))
 	}
 	if s.StatementId != nil && len(*s.StatementId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StatementId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StatementId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5912,12 +5911,12 @@ func (s TagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
 	if s.Resource == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resource"))
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6034,12 +6033,12 @@ func (s UntagResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
 	if s.Resource == nil {
-		invalidParams.Add(request.NewErrParamRequired("Resource"))
+		invalidParams.Add(aws.NewErrParamRequired("Resource"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6111,21 +6110,21 @@ func (s UpdateAliasInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAliasInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAliasInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAliasInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.FunctionVersion != nil && len(*s.FunctionVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionVersion", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6205,15 +6204,15 @@ func (s UpdateEventSourceMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateEventSourceMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateEventSourceMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateEventSourceMappingInput"}
 	if s.BatchSize != nil && *s.BatchSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("BatchSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("BatchSize", 1))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.UUID == nil {
-		invalidParams.Add(request.NewErrParamRequired("UUID"))
+		invalidParams.Add(aws.NewErrParamRequired("UUID"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6307,21 +6306,21 @@ func (s UpdateFunctionCodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFunctionCodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFunctionCodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionCodeInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.S3Bucket != nil && len(*s.S3Bucket) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("S3Bucket", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("S3Bucket", 3))
 	}
 	if s.S3Key != nil && len(*s.S3Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("S3Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("S3Key", 1))
 	}
 	if s.S3ObjectVersion != nil && len(*s.S3ObjectVersion) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("S3ObjectVersion", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("S3ObjectVersion", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6463,18 +6462,18 @@ func (s UpdateFunctionConfigurationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFunctionConfigurationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFunctionConfigurationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFunctionConfigurationInput"}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.MemorySize != nil && *s.MemorySize < 128 {
-		invalidParams.Add(request.NewErrParamMinValue("MemorySize", 128))
+		invalidParams.Add(aws.NewErrParamMinValue("MemorySize", 128))
 	}
 	if s.Timeout != nil && *s.Timeout < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Timeout", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
 	}
 
 	if invalidParams.Len() > 0 {

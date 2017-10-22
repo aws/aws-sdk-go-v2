@@ -10,9 +10,9 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	client "github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 type retryer struct {
@@ -38,14 +38,9 @@ func init() {
 }
 
 func setCustomRetryer(c *client.Client) {
-	maxRetries := aws.IntValue(c.Config.MaxRetries)
-	if c.Config.MaxRetries == nil || maxRetries == aws.UseServiceDefaultRetries {
-		maxRetries = 10
-	}
-
 	c.Retryer = retryer{
 		DefaultRetryer: client.DefaultRetryer{
-			NumMaxRetries: maxRetries,
+			NumMaxRetries: 10,
 		},
 	}
 }

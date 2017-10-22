@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opCloneReceiptRuleSet = "CloneReceiptRuleSet"
 
-// CloneReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// CloneReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the CloneReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opCloneReceiptRuleSet = "CloneReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSet
-func (c *SES) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) (req *request.Request, output *CloneReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) (req *aws.Request, output *CloneReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opCloneReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -99,7 +98,7 @@ func (c *SES) CloneReceiptRuleSet(input *CloneReceiptRuleSetInput) (*CloneReceip
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CloneReceiptRuleSetWithContext(ctx aws.Context, input *CloneReceiptRuleSetInput, opts ...request.Option) (*CloneReceiptRuleSetOutput, error) {
+func (c *SES) CloneReceiptRuleSetWithContext(ctx aws.Context, input *CloneReceiptRuleSetInput, opts ...aws.Option) (*CloneReceiptRuleSetOutput, error) {
 	req, out := c.CloneReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -108,7 +107,7 @@ func (c *SES) CloneReceiptRuleSetWithContext(ctx aws.Context, input *CloneReceip
 
 const opCreateConfigurationSet = "CreateConfigurationSet"
 
-// CreateConfigurationSetRequest generates a "aws/request.Request" representing the
+// CreateConfigurationSetRequest generates a "aws.Request" representing the
 // client's request for the CreateConfigurationSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -132,8 +131,8 @@ const opCreateConfigurationSet = "CreateConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSet
-func (c *SES) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) (req *request.Request, output *CreateConfigurationSetOutput) {
-	op := &request.Operation{
+func (c *SES) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) (req *aws.Request, output *CreateConfigurationSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateConfigurationSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -192,7 +191,7 @@ func (c *SES) CreateConfigurationSet(input *CreateConfigurationSetInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CreateConfigurationSetWithContext(ctx aws.Context, input *CreateConfigurationSetInput, opts ...request.Option) (*CreateConfigurationSetOutput, error) {
+func (c *SES) CreateConfigurationSetWithContext(ctx aws.Context, input *CreateConfigurationSetInput, opts ...aws.Option) (*CreateConfigurationSetOutput, error) {
 	req, out := c.CreateConfigurationSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -201,7 +200,7 @@ func (c *SES) CreateConfigurationSetWithContext(ctx aws.Context, input *CreateCo
 
 const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDestination"
 
-// CreateConfigurationSetEventDestinationRequest generates a "aws/request.Request" representing the
+// CreateConfigurationSetEventDestinationRequest generates a "aws.Request" representing the
 // client's request for the CreateConfigurationSetEventDestination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -225,8 +224,8 @@ const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestination
-func (c *SES) CreateConfigurationSetEventDestinationRequest(input *CreateConfigurationSetEventDestinationInput) (req *request.Request, output *CreateConfigurationSetEventDestinationOutput) {
-	op := &request.Operation{
+func (c *SES) CreateConfigurationSetEventDestinationRequest(input *CreateConfigurationSetEventDestinationInput) (req *aws.Request, output *CreateConfigurationSetEventDestinationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateConfigurationSetEventDestination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -301,7 +300,7 @@ func (c *SES) CreateConfigurationSetEventDestination(input *CreateConfigurationS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CreateConfigurationSetEventDestinationWithContext(ctx aws.Context, input *CreateConfigurationSetEventDestinationInput, opts ...request.Option) (*CreateConfigurationSetEventDestinationOutput, error) {
+func (c *SES) CreateConfigurationSetEventDestinationWithContext(ctx aws.Context, input *CreateConfigurationSetEventDestinationInput, opts ...aws.Option) (*CreateConfigurationSetEventDestinationOutput, error) {
 	req, out := c.CreateConfigurationSetEventDestinationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -310,7 +309,7 @@ func (c *SES) CreateConfigurationSetEventDestinationWithContext(ctx aws.Context,
 
 const opCreateConfigurationSetTrackingOptions = "CreateConfigurationSetTrackingOptions"
 
-// CreateConfigurationSetTrackingOptionsRequest generates a "aws/request.Request" representing the
+// CreateConfigurationSetTrackingOptionsRequest generates a "aws.Request" representing the
 // client's request for the CreateConfigurationSetTrackingOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -334,8 +333,8 @@ const opCreateConfigurationSetTrackingOptions = "CreateConfigurationSetTrackingO
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetTrackingOptions
-func (c *SES) CreateConfigurationSetTrackingOptionsRequest(input *CreateConfigurationSetTrackingOptionsInput) (req *request.Request, output *CreateConfigurationSetTrackingOptionsOutput) {
-	op := &request.Operation{
+func (c *SES) CreateConfigurationSetTrackingOptionsRequest(input *CreateConfigurationSetTrackingOptionsInput) (req *aws.Request, output *CreateConfigurationSetTrackingOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateConfigurationSetTrackingOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -400,7 +399,7 @@ func (c *SES) CreateConfigurationSetTrackingOptions(input *CreateConfigurationSe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CreateConfigurationSetTrackingOptionsWithContext(ctx aws.Context, input *CreateConfigurationSetTrackingOptionsInput, opts ...request.Option) (*CreateConfigurationSetTrackingOptionsOutput, error) {
+func (c *SES) CreateConfigurationSetTrackingOptionsWithContext(ctx aws.Context, input *CreateConfigurationSetTrackingOptionsInput, opts ...aws.Option) (*CreateConfigurationSetTrackingOptionsOutput, error) {
 	req, out := c.CreateConfigurationSetTrackingOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -409,7 +408,7 @@ func (c *SES) CreateConfigurationSetTrackingOptionsWithContext(ctx aws.Context, 
 
 const opCreateReceiptFilter = "CreateReceiptFilter"
 
-// CreateReceiptFilterRequest generates a "aws/request.Request" representing the
+// CreateReceiptFilterRequest generates a "aws.Request" representing the
 // client's request for the CreateReceiptFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -433,8 +432,8 @@ const opCreateReceiptFilter = "CreateReceiptFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilter
-func (c *SES) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) (req *request.Request, output *CreateReceiptFilterOutput) {
-	op := &request.Operation{
+func (c *SES) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) (req *aws.Request, output *CreateReceiptFilterOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReceiptFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -488,7 +487,7 @@ func (c *SES) CreateReceiptFilter(input *CreateReceiptFilterInput) (*CreateRecei
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CreateReceiptFilterWithContext(ctx aws.Context, input *CreateReceiptFilterInput, opts ...request.Option) (*CreateReceiptFilterOutput, error) {
+func (c *SES) CreateReceiptFilterWithContext(ctx aws.Context, input *CreateReceiptFilterInput, opts ...aws.Option) (*CreateReceiptFilterOutput, error) {
 	req, out := c.CreateReceiptFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -497,7 +496,7 @@ func (c *SES) CreateReceiptFilterWithContext(ctx aws.Context, input *CreateRecei
 
 const opCreateReceiptRule = "CreateReceiptRule"
 
-// CreateReceiptRuleRequest generates a "aws/request.Request" representing the
+// CreateReceiptRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateReceiptRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -521,8 +520,8 @@ const opCreateReceiptRule = "CreateReceiptRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRule
-func (c *SES) CreateReceiptRuleRequest(input *CreateReceiptRuleInput) (req *request.Request, output *CreateReceiptRuleOutput) {
-	op := &request.Operation{
+func (c *SES) CreateReceiptRuleRequest(input *CreateReceiptRuleInput) (req *aws.Request, output *CreateReceiptRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReceiptRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -599,7 +598,7 @@ func (c *SES) CreateReceiptRule(input *CreateReceiptRuleInput) (*CreateReceiptRu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CreateReceiptRuleWithContext(ctx aws.Context, input *CreateReceiptRuleInput, opts ...request.Option) (*CreateReceiptRuleOutput, error) {
+func (c *SES) CreateReceiptRuleWithContext(ctx aws.Context, input *CreateReceiptRuleInput, opts ...aws.Option) (*CreateReceiptRuleOutput, error) {
 	req, out := c.CreateReceiptRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -608,7 +607,7 @@ func (c *SES) CreateReceiptRuleWithContext(ctx aws.Context, input *CreateReceipt
 
 const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
 
-// CreateReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// CreateReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the CreateReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -632,8 +631,8 @@ const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSet
-func (c *SES) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) (req *request.Request, output *CreateReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) (req *aws.Request, output *CreateReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -687,7 +686,7 @@ func (c *SES) CreateReceiptRuleSet(input *CreateReceiptRuleSetInput) (*CreateRec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) CreateReceiptRuleSetWithContext(ctx aws.Context, input *CreateReceiptRuleSetInput, opts ...request.Option) (*CreateReceiptRuleSetOutput, error) {
+func (c *SES) CreateReceiptRuleSetWithContext(ctx aws.Context, input *CreateReceiptRuleSetInput, opts ...aws.Option) (*CreateReceiptRuleSetOutput, error) {
 	req, out := c.CreateReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -696,7 +695,7 @@ func (c *SES) CreateReceiptRuleSetWithContext(ctx aws.Context, input *CreateRece
 
 const opDeleteConfigurationSet = "DeleteConfigurationSet"
 
-// DeleteConfigurationSetRequest generates a "aws/request.Request" representing the
+// DeleteConfigurationSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteConfigurationSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -720,8 +719,8 @@ const opDeleteConfigurationSet = "DeleteConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSet
-func (c *SES) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) (req *request.Request, output *DeleteConfigurationSetOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) (req *aws.Request, output *DeleteConfigurationSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConfigurationSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -770,7 +769,7 @@ func (c *SES) DeleteConfigurationSet(input *DeleteConfigurationSetInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteConfigurationSetWithContext(ctx aws.Context, input *DeleteConfigurationSetInput, opts ...request.Option) (*DeleteConfigurationSetOutput, error) {
+func (c *SES) DeleteConfigurationSetWithContext(ctx aws.Context, input *DeleteConfigurationSetInput, opts ...aws.Option) (*DeleteConfigurationSetOutput, error) {
 	req, out := c.DeleteConfigurationSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -779,7 +778,7 @@ func (c *SES) DeleteConfigurationSetWithContext(ctx aws.Context, input *DeleteCo
 
 const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDestination"
 
-// DeleteConfigurationSetEventDestinationRequest generates a "aws/request.Request" representing the
+// DeleteConfigurationSetEventDestinationRequest generates a "aws.Request" representing the
 // client's request for the DeleteConfigurationSetEventDestination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -803,8 +802,8 @@ const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestination
-func (c *SES) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigurationSetEventDestinationInput) (req *request.Request, output *DeleteConfigurationSetEventDestinationOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigurationSetEventDestinationInput) (req *aws.Request, output *DeleteConfigurationSetEventDestinationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConfigurationSetEventDestination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -857,7 +856,7 @@ func (c *SES) DeleteConfigurationSetEventDestination(input *DeleteConfigurationS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteConfigurationSetEventDestinationWithContext(ctx aws.Context, input *DeleteConfigurationSetEventDestinationInput, opts ...request.Option) (*DeleteConfigurationSetEventDestinationOutput, error) {
+func (c *SES) DeleteConfigurationSetEventDestinationWithContext(ctx aws.Context, input *DeleteConfigurationSetEventDestinationInput, opts ...aws.Option) (*DeleteConfigurationSetEventDestinationOutput, error) {
 	req, out := c.DeleteConfigurationSetEventDestinationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -866,7 +865,7 @@ func (c *SES) DeleteConfigurationSetEventDestinationWithContext(ctx aws.Context,
 
 const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingOptions"
 
-// DeleteConfigurationSetTrackingOptionsRequest generates a "aws/request.Request" representing the
+// DeleteConfigurationSetTrackingOptionsRequest generates a "aws.Request" representing the
 // client's request for the DeleteConfigurationSetTrackingOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -890,8 +889,8 @@ const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingO
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptions
-func (c *SES) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfigurationSetTrackingOptionsInput) (req *request.Request, output *DeleteConfigurationSetTrackingOptionsOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfigurationSetTrackingOptionsInput) (req *aws.Request, output *DeleteConfigurationSetTrackingOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConfigurationSetTrackingOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -951,7 +950,7 @@ func (c *SES) DeleteConfigurationSetTrackingOptions(input *DeleteConfigurationSe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteConfigurationSetTrackingOptionsWithContext(ctx aws.Context, input *DeleteConfigurationSetTrackingOptionsInput, opts ...request.Option) (*DeleteConfigurationSetTrackingOptionsOutput, error) {
+func (c *SES) DeleteConfigurationSetTrackingOptionsWithContext(ctx aws.Context, input *DeleteConfigurationSetTrackingOptionsInput, opts ...aws.Option) (*DeleteConfigurationSetTrackingOptionsOutput, error) {
 	req, out := c.DeleteConfigurationSetTrackingOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -960,7 +959,7 @@ func (c *SES) DeleteConfigurationSetTrackingOptionsWithContext(ctx aws.Context, 
 
 const opDeleteIdentity = "DeleteIdentity"
 
-// DeleteIdentityRequest generates a "aws/request.Request" representing the
+// DeleteIdentityRequest generates a "aws.Request" representing the
 // client's request for the DeleteIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -984,8 +983,8 @@ const opDeleteIdentity = "DeleteIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentity
-func (c *SES) DeleteIdentityRequest(input *DeleteIdentityInput) (req *request.Request, output *DeleteIdentityOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteIdentityRequest(input *DeleteIdentityInput) (req *aws.Request, output *DeleteIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1028,7 +1027,7 @@ func (c *SES) DeleteIdentity(input *DeleteIdentityInput) (*DeleteIdentityOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteIdentityWithContext(ctx aws.Context, input *DeleteIdentityInput, opts ...request.Option) (*DeleteIdentityOutput, error) {
+func (c *SES) DeleteIdentityWithContext(ctx aws.Context, input *DeleteIdentityInput, opts ...aws.Option) (*DeleteIdentityOutput, error) {
 	req, out := c.DeleteIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1037,7 +1036,7 @@ func (c *SES) DeleteIdentityWithContext(ctx aws.Context, input *DeleteIdentityIn
 
 const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
 
-// DeleteIdentityPolicyRequest generates a "aws/request.Request" representing the
+// DeleteIdentityPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteIdentityPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1061,8 +1060,8 @@ const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicy
-func (c *SES) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) (req *request.Request, output *DeleteIdentityPolicyOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) (req *aws.Request, output *DeleteIdentityPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIdentityPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1113,7 +1112,7 @@ func (c *SES) DeleteIdentityPolicy(input *DeleteIdentityPolicyInput) (*DeleteIde
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteIdentityPolicyWithContext(ctx aws.Context, input *DeleteIdentityPolicyInput, opts ...request.Option) (*DeleteIdentityPolicyOutput, error) {
+func (c *SES) DeleteIdentityPolicyWithContext(ctx aws.Context, input *DeleteIdentityPolicyInput, opts ...aws.Option) (*DeleteIdentityPolicyOutput, error) {
 	req, out := c.DeleteIdentityPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1122,7 +1121,7 @@ func (c *SES) DeleteIdentityPolicyWithContext(ctx aws.Context, input *DeleteIden
 
 const opDeleteReceiptFilter = "DeleteReceiptFilter"
 
-// DeleteReceiptFilterRequest generates a "aws/request.Request" representing the
+// DeleteReceiptFilterRequest generates a "aws.Request" representing the
 // client's request for the DeleteReceiptFilter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1146,8 +1145,8 @@ const opDeleteReceiptFilter = "DeleteReceiptFilter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilter
-func (c *SES) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) (req *request.Request, output *DeleteReceiptFilterOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) (req *aws.Request, output *DeleteReceiptFilterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReceiptFilter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1192,7 +1191,7 @@ func (c *SES) DeleteReceiptFilter(input *DeleteReceiptFilterInput) (*DeleteRecei
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteReceiptFilterWithContext(ctx aws.Context, input *DeleteReceiptFilterInput, opts ...request.Option) (*DeleteReceiptFilterOutput, error) {
+func (c *SES) DeleteReceiptFilterWithContext(ctx aws.Context, input *DeleteReceiptFilterInput, opts ...aws.Option) (*DeleteReceiptFilterOutput, error) {
 	req, out := c.DeleteReceiptFilterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1201,7 +1200,7 @@ func (c *SES) DeleteReceiptFilterWithContext(ctx aws.Context, input *DeleteRecei
 
 const opDeleteReceiptRule = "DeleteReceiptRule"
 
-// DeleteReceiptRuleRequest generates a "aws/request.Request" representing the
+// DeleteReceiptRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteReceiptRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1225,8 +1224,8 @@ const opDeleteReceiptRule = "DeleteReceiptRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRule
-func (c *SES) DeleteReceiptRuleRequest(input *DeleteReceiptRuleInput) (req *request.Request, output *DeleteReceiptRuleOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteReceiptRuleRequest(input *DeleteReceiptRuleInput) (req *aws.Request, output *DeleteReceiptRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReceiptRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1276,7 +1275,7 @@ func (c *SES) DeleteReceiptRule(input *DeleteReceiptRuleInput) (*DeleteReceiptRu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteReceiptRuleWithContext(ctx aws.Context, input *DeleteReceiptRuleInput, opts ...request.Option) (*DeleteReceiptRuleOutput, error) {
+func (c *SES) DeleteReceiptRuleWithContext(ctx aws.Context, input *DeleteReceiptRuleInput, opts ...aws.Option) (*DeleteReceiptRuleOutput, error) {
 	req, out := c.DeleteReceiptRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1285,7 +1284,7 @@ func (c *SES) DeleteReceiptRuleWithContext(ctx aws.Context, input *DeleteReceipt
 
 const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
 
-// DeleteReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// DeleteReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1309,8 +1308,8 @@ const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSet
-func (c *SES) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) (req *request.Request, output *DeleteReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) (req *aws.Request, output *DeleteReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1362,7 +1361,7 @@ func (c *SES) DeleteReceiptRuleSet(input *DeleteReceiptRuleSetInput) (*DeleteRec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteReceiptRuleSetWithContext(ctx aws.Context, input *DeleteReceiptRuleSetInput, opts ...request.Option) (*DeleteReceiptRuleSetOutput, error) {
+func (c *SES) DeleteReceiptRuleSetWithContext(ctx aws.Context, input *DeleteReceiptRuleSetInput, opts ...aws.Option) (*DeleteReceiptRuleSetOutput, error) {
 	req, out := c.DeleteReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1371,7 +1370,7 @@ func (c *SES) DeleteReceiptRuleSetWithContext(ctx aws.Context, input *DeleteRece
 
 const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
 
-// DeleteVerifiedEmailAddressRequest generates a "aws/request.Request" representing the
+// DeleteVerifiedEmailAddressRequest generates a "aws.Request" representing the
 // client's request for the DeleteVerifiedEmailAddress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1395,8 +1394,8 @@ const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddress
-func (c *SES) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddressInput) (req *request.Request, output *DeleteVerifiedEmailAddressOutput) {
-	op := &request.Operation{
+func (c *SES) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddressInput) (req *aws.Request, output *DeleteVerifiedEmailAddressOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteVerifiedEmailAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1439,7 +1438,7 @@ func (c *SES) DeleteVerifiedEmailAddress(input *DeleteVerifiedEmailAddressInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DeleteVerifiedEmailAddressWithContext(ctx aws.Context, input *DeleteVerifiedEmailAddressInput, opts ...request.Option) (*DeleteVerifiedEmailAddressOutput, error) {
+func (c *SES) DeleteVerifiedEmailAddressWithContext(ctx aws.Context, input *DeleteVerifiedEmailAddressInput, opts ...aws.Option) (*DeleteVerifiedEmailAddressOutput, error) {
 	req, out := c.DeleteVerifiedEmailAddressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1448,7 +1447,7 @@ func (c *SES) DeleteVerifiedEmailAddressWithContext(ctx aws.Context, input *Dele
 
 const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
 
-// DescribeActiveReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// DescribeActiveReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the DescribeActiveReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1472,8 +1471,8 @@ const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSet
-func (c *SES) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceiptRuleSetInput) (req *request.Request, output *DescribeActiveReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceiptRuleSetInput) (req *aws.Request, output *DescribeActiveReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeActiveReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1519,7 +1518,7 @@ func (c *SES) DescribeActiveReceiptRuleSet(input *DescribeActiveReceiptRuleSetIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DescribeActiveReceiptRuleSetWithContext(ctx aws.Context, input *DescribeActiveReceiptRuleSetInput, opts ...request.Option) (*DescribeActiveReceiptRuleSetOutput, error) {
+func (c *SES) DescribeActiveReceiptRuleSetWithContext(ctx aws.Context, input *DescribeActiveReceiptRuleSetInput, opts ...aws.Option) (*DescribeActiveReceiptRuleSetOutput, error) {
 	req, out := c.DescribeActiveReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1528,7 +1527,7 @@ func (c *SES) DescribeActiveReceiptRuleSetWithContext(ctx aws.Context, input *De
 
 const opDescribeConfigurationSet = "DescribeConfigurationSet"
 
-// DescribeConfigurationSetRequest generates a "aws/request.Request" representing the
+// DescribeConfigurationSetRequest generates a "aws.Request" representing the
 // client's request for the DescribeConfigurationSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1552,8 +1551,8 @@ const opDescribeConfigurationSet = "DescribeConfigurationSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSet
-func (c *SES) DescribeConfigurationSetRequest(input *DescribeConfigurationSetInput) (req *request.Request, output *DescribeConfigurationSetOutput) {
-	op := &request.Operation{
+func (c *SES) DescribeConfigurationSetRequest(input *DescribeConfigurationSetInput) (req *aws.Request, output *DescribeConfigurationSetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeConfigurationSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1601,7 +1600,7 @@ func (c *SES) DescribeConfigurationSet(input *DescribeConfigurationSetInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DescribeConfigurationSetWithContext(ctx aws.Context, input *DescribeConfigurationSetInput, opts ...request.Option) (*DescribeConfigurationSetOutput, error) {
+func (c *SES) DescribeConfigurationSetWithContext(ctx aws.Context, input *DescribeConfigurationSetInput, opts ...aws.Option) (*DescribeConfigurationSetOutput, error) {
 	req, out := c.DescribeConfigurationSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1610,7 +1609,7 @@ func (c *SES) DescribeConfigurationSetWithContext(ctx aws.Context, input *Descri
 
 const opDescribeReceiptRule = "DescribeReceiptRule"
 
-// DescribeReceiptRuleRequest generates a "aws/request.Request" representing the
+// DescribeReceiptRuleRequest generates a "aws.Request" representing the
 // client's request for the DescribeReceiptRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1634,8 +1633,8 @@ const opDescribeReceiptRule = "DescribeReceiptRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRule
-func (c *SES) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) (req *request.Request, output *DescribeReceiptRuleOutput) {
-	op := &request.Operation{
+func (c *SES) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) (req *aws.Request, output *DescribeReceiptRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReceiptRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1688,7 +1687,7 @@ func (c *SES) DescribeReceiptRule(input *DescribeReceiptRuleInput) (*DescribeRec
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DescribeReceiptRuleWithContext(ctx aws.Context, input *DescribeReceiptRuleInput, opts ...request.Option) (*DescribeReceiptRuleOutput, error) {
+func (c *SES) DescribeReceiptRuleWithContext(ctx aws.Context, input *DescribeReceiptRuleInput, opts ...aws.Option) (*DescribeReceiptRuleOutput, error) {
 	req, out := c.DescribeReceiptRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1697,7 +1696,7 @@ func (c *SES) DescribeReceiptRuleWithContext(ctx aws.Context, input *DescribeRec
 
 const opDescribeReceiptRuleSet = "DescribeReceiptRuleSet"
 
-// DescribeReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// DescribeReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the DescribeReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1721,8 +1720,8 @@ const opDescribeReceiptRuleSet = "DescribeReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSet
-func (c *SES) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInput) (req *request.Request, output *DescribeReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInput) (req *aws.Request, output *DescribeReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1772,7 +1771,7 @@ func (c *SES) DescribeReceiptRuleSet(input *DescribeReceiptRuleSetInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) DescribeReceiptRuleSetWithContext(ctx aws.Context, input *DescribeReceiptRuleSetInput, opts ...request.Option) (*DescribeReceiptRuleSetOutput, error) {
+func (c *SES) DescribeReceiptRuleSetWithContext(ctx aws.Context, input *DescribeReceiptRuleSetInput, opts ...aws.Option) (*DescribeReceiptRuleSetOutput, error) {
 	req, out := c.DescribeReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1781,7 +1780,7 @@ func (c *SES) DescribeReceiptRuleSetWithContext(ctx aws.Context, input *Describe
 
 const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 
-// GetIdentityDkimAttributesRequest generates a "aws/request.Request" representing the
+// GetIdentityDkimAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetIdentityDkimAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1805,8 +1804,8 @@ const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributes
-func (c *SES) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttributesInput) (req *request.Request, output *GetIdentityDkimAttributesOutput) {
-	op := &request.Operation{
+func (c *SES) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttributesInput) (req *aws.Request, output *GetIdentityDkimAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetIdentityDkimAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1867,7 +1866,7 @@ func (c *SES) GetIdentityDkimAttributes(input *GetIdentityDkimAttributesInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetIdentityDkimAttributesWithContext(ctx aws.Context, input *GetIdentityDkimAttributesInput, opts ...request.Option) (*GetIdentityDkimAttributesOutput, error) {
+func (c *SES) GetIdentityDkimAttributesWithContext(ctx aws.Context, input *GetIdentityDkimAttributesInput, opts ...aws.Option) (*GetIdentityDkimAttributesOutput, error) {
 	req, out := c.GetIdentityDkimAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1876,7 +1875,7 @@ func (c *SES) GetIdentityDkimAttributesWithContext(ctx aws.Context, input *GetId
 
 const opGetIdentityMailFromDomainAttributes = "GetIdentityMailFromDomainAttributes"
 
-// GetIdentityMailFromDomainAttributesRequest generates a "aws/request.Request" representing the
+// GetIdentityMailFromDomainAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetIdentityMailFromDomainAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1900,8 +1899,8 @@ const opGetIdentityMailFromDomainAttributes = "GetIdentityMailFromDomainAttribut
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributes
-func (c *SES) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMailFromDomainAttributesInput) (req *request.Request, output *GetIdentityMailFromDomainAttributesOutput) {
-	op := &request.Operation{
+func (c *SES) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMailFromDomainAttributesInput) (req *aws.Request, output *GetIdentityMailFromDomainAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetIdentityMailFromDomainAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1945,7 +1944,7 @@ func (c *SES) GetIdentityMailFromDomainAttributes(input *GetIdentityMailFromDoma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetIdentityMailFromDomainAttributesWithContext(ctx aws.Context, input *GetIdentityMailFromDomainAttributesInput, opts ...request.Option) (*GetIdentityMailFromDomainAttributesOutput, error) {
+func (c *SES) GetIdentityMailFromDomainAttributesWithContext(ctx aws.Context, input *GetIdentityMailFromDomainAttributesInput, opts ...aws.Option) (*GetIdentityMailFromDomainAttributesOutput, error) {
 	req, out := c.GetIdentityMailFromDomainAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1954,7 +1953,7 @@ func (c *SES) GetIdentityMailFromDomainAttributesWithContext(ctx aws.Context, in
 
 const opGetIdentityNotificationAttributes = "GetIdentityNotificationAttributes"
 
-// GetIdentityNotificationAttributesRequest generates a "aws/request.Request" representing the
+// GetIdentityNotificationAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetIdentityNotificationAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1978,8 +1977,8 @@ const opGetIdentityNotificationAttributes = "GetIdentityNotificationAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributes
-func (c *SES) GetIdentityNotificationAttributesRequest(input *GetIdentityNotificationAttributesInput) (req *request.Request, output *GetIdentityNotificationAttributesOutput) {
-	op := &request.Operation{
+func (c *SES) GetIdentityNotificationAttributesRequest(input *GetIdentityNotificationAttributesInput) (req *aws.Request, output *GetIdentityNotificationAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetIdentityNotificationAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2026,7 +2025,7 @@ func (c *SES) GetIdentityNotificationAttributes(input *GetIdentityNotificationAt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetIdentityNotificationAttributesWithContext(ctx aws.Context, input *GetIdentityNotificationAttributesInput, opts ...request.Option) (*GetIdentityNotificationAttributesOutput, error) {
+func (c *SES) GetIdentityNotificationAttributesWithContext(ctx aws.Context, input *GetIdentityNotificationAttributesInput, opts ...aws.Option) (*GetIdentityNotificationAttributesOutput, error) {
 	req, out := c.GetIdentityNotificationAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2035,7 +2034,7 @@ func (c *SES) GetIdentityNotificationAttributesWithContext(ctx aws.Context, inpu
 
 const opGetIdentityPolicies = "GetIdentityPolicies"
 
-// GetIdentityPoliciesRequest generates a "aws/request.Request" representing the
+// GetIdentityPoliciesRequest generates a "aws.Request" representing the
 // client's request for the GetIdentityPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2059,8 +2058,8 @@ const opGetIdentityPolicies = "GetIdentityPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPolicies
-func (c *SES) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) (req *request.Request, output *GetIdentityPoliciesOutput) {
-	op := &request.Operation{
+func (c *SES) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) (req *aws.Request, output *GetIdentityPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opGetIdentityPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2112,7 +2111,7 @@ func (c *SES) GetIdentityPolicies(input *GetIdentityPoliciesInput) (*GetIdentity
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetIdentityPoliciesWithContext(ctx aws.Context, input *GetIdentityPoliciesInput, opts ...request.Option) (*GetIdentityPoliciesOutput, error) {
+func (c *SES) GetIdentityPoliciesWithContext(ctx aws.Context, input *GetIdentityPoliciesInput, opts ...aws.Option) (*GetIdentityPoliciesOutput, error) {
 	req, out := c.GetIdentityPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2121,7 +2120,7 @@ func (c *SES) GetIdentityPoliciesWithContext(ctx aws.Context, input *GetIdentity
 
 const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
 
-// GetIdentityVerificationAttributesRequest generates a "aws/request.Request" representing the
+// GetIdentityVerificationAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetIdentityVerificationAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2145,8 +2144,8 @@ const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributes
-func (c *SES) GetIdentityVerificationAttributesRequest(input *GetIdentityVerificationAttributesInput) (req *request.Request, output *GetIdentityVerificationAttributesOutput) {
-	op := &request.Operation{
+func (c *SES) GetIdentityVerificationAttributesRequest(input *GetIdentityVerificationAttributesInput) (req *aws.Request, output *GetIdentityVerificationAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetIdentityVerificationAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2207,7 +2206,7 @@ func (c *SES) GetIdentityVerificationAttributes(input *GetIdentityVerificationAt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetIdentityVerificationAttributesWithContext(ctx aws.Context, input *GetIdentityVerificationAttributesInput, opts ...request.Option) (*GetIdentityVerificationAttributesOutput, error) {
+func (c *SES) GetIdentityVerificationAttributesWithContext(ctx aws.Context, input *GetIdentityVerificationAttributesInput, opts ...aws.Option) (*GetIdentityVerificationAttributesOutput, error) {
 	req, out := c.GetIdentityVerificationAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2216,7 +2215,7 @@ func (c *SES) GetIdentityVerificationAttributesWithContext(ctx aws.Context, inpu
 
 const opGetSendQuota = "GetSendQuota"
 
-// GetSendQuotaRequest generates a "aws/request.Request" representing the
+// GetSendQuotaRequest generates a "aws.Request" representing the
 // client's request for the GetSendQuota operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2240,8 +2239,8 @@ const opGetSendQuota = "GetSendQuota"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuota
-func (c *SES) GetSendQuotaRequest(input *GetSendQuotaInput) (req *request.Request, output *GetSendQuotaOutput) {
-	op := &request.Operation{
+func (c *SES) GetSendQuotaRequest(input *GetSendQuotaInput) (req *aws.Request, output *GetSendQuotaOutput) {
+	op := &aws.Operation{
 		Name:       opGetSendQuota,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2283,7 +2282,7 @@ func (c *SES) GetSendQuota(input *GetSendQuotaInput) (*GetSendQuotaOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetSendQuotaWithContext(ctx aws.Context, input *GetSendQuotaInput, opts ...request.Option) (*GetSendQuotaOutput, error) {
+func (c *SES) GetSendQuotaWithContext(ctx aws.Context, input *GetSendQuotaInput, opts ...aws.Option) (*GetSendQuotaOutput, error) {
 	req, out := c.GetSendQuotaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2292,7 +2291,7 @@ func (c *SES) GetSendQuotaWithContext(ctx aws.Context, input *GetSendQuotaInput,
 
 const opGetSendStatistics = "GetSendStatistics"
 
-// GetSendStatisticsRequest generates a "aws/request.Request" representing the
+// GetSendStatisticsRequest generates a "aws.Request" representing the
 // client's request for the GetSendStatistics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2316,8 +2315,8 @@ const opGetSendStatistics = "GetSendStatistics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendStatistics
-func (c *SES) GetSendStatisticsRequest(input *GetSendStatisticsInput) (req *request.Request, output *GetSendStatisticsOutput) {
-	op := &request.Operation{
+func (c *SES) GetSendStatisticsRequest(input *GetSendStatisticsInput) (req *aws.Request, output *GetSendStatisticsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSendStatistics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2361,7 +2360,7 @@ func (c *SES) GetSendStatistics(input *GetSendStatisticsInput) (*GetSendStatisti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) GetSendStatisticsWithContext(ctx aws.Context, input *GetSendStatisticsInput, opts ...request.Option) (*GetSendStatisticsOutput, error) {
+func (c *SES) GetSendStatisticsWithContext(ctx aws.Context, input *GetSendStatisticsInput, opts ...aws.Option) (*GetSendStatisticsOutput, error) {
 	req, out := c.GetSendStatisticsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2370,7 +2369,7 @@ func (c *SES) GetSendStatisticsWithContext(ctx aws.Context, input *GetSendStatis
 
 const opListConfigurationSets = "ListConfigurationSets"
 
-// ListConfigurationSetsRequest generates a "aws/request.Request" representing the
+// ListConfigurationSetsRequest generates a "aws.Request" representing the
 // client's request for the ListConfigurationSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2394,8 +2393,8 @@ const opListConfigurationSets = "ListConfigurationSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSets
-func (c *SES) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) (req *request.Request, output *ListConfigurationSetsOutput) {
-	op := &request.Operation{
+func (c *SES) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) (req *aws.Request, output *ListConfigurationSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListConfigurationSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2445,7 +2444,7 @@ func (c *SES) ListConfigurationSets(input *ListConfigurationSetsInput) (*ListCon
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListConfigurationSetsWithContext(ctx aws.Context, input *ListConfigurationSetsInput, opts ...request.Option) (*ListConfigurationSetsOutput, error) {
+func (c *SES) ListConfigurationSetsWithContext(ctx aws.Context, input *ListConfigurationSetsInput, opts ...aws.Option) (*ListConfigurationSetsOutput, error) {
 	req, out := c.ListConfigurationSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2454,7 +2453,7 @@ func (c *SES) ListConfigurationSetsWithContext(ctx aws.Context, input *ListConfi
 
 const opListIdentities = "ListIdentities"
 
-// ListIdentitiesRequest generates a "aws/request.Request" representing the
+// ListIdentitiesRequest generates a "aws.Request" representing the
 // client's request for the ListIdentities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2478,12 +2477,12 @@ const opListIdentities = "ListIdentities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentities
-func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) (req *request.Request, output *ListIdentitiesOutput) {
-	op := &request.Operation{
+func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) (req *aws.Request, output *ListIdentitiesOutput) {
+	op := &aws.Operation{
 		Name:       opListIdentities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxItems",
@@ -2528,7 +2527,7 @@ func (c *SES) ListIdentities(input *ListIdentitiesInput) (*ListIdentitiesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListIdentitiesWithContext(ctx aws.Context, input *ListIdentitiesInput, opts ...request.Option) (*ListIdentitiesOutput, error) {
+func (c *SES) ListIdentitiesWithContext(ctx aws.Context, input *ListIdentitiesInput, opts ...aws.Option) (*ListIdentitiesOutput, error) {
 	req, out := c.ListIdentitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2563,9 +2562,9 @@ func (c *SES) ListIdentitiesPages(input *ListIdentitiesInput, fn func(*ListIdent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListIdentitiesPagesWithContext(ctx aws.Context, input *ListIdentitiesInput, fn func(*ListIdentitiesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SES) ListIdentitiesPagesWithContext(ctx aws.Context, input *ListIdentitiesInput, fn func(*ListIdentitiesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListIdentitiesInput
 			if input != nil {
 				tmp := *input
@@ -2587,7 +2586,7 @@ func (c *SES) ListIdentitiesPagesWithContext(ctx aws.Context, input *ListIdentit
 
 const opListIdentityPolicies = "ListIdentityPolicies"
 
-// ListIdentityPoliciesRequest generates a "aws/request.Request" representing the
+// ListIdentityPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListIdentityPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2611,8 +2610,8 @@ const opListIdentityPolicies = "ListIdentityPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPolicies
-func (c *SES) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) (req *request.Request, output *ListIdentityPoliciesOutput) {
-	op := &request.Operation{
+func (c *SES) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) (req *aws.Request, output *ListIdentityPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListIdentityPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2663,7 +2662,7 @@ func (c *SES) ListIdentityPolicies(input *ListIdentityPoliciesInput) (*ListIdent
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListIdentityPoliciesWithContext(ctx aws.Context, input *ListIdentityPoliciesInput, opts ...request.Option) (*ListIdentityPoliciesOutput, error) {
+func (c *SES) ListIdentityPoliciesWithContext(ctx aws.Context, input *ListIdentityPoliciesInput, opts ...aws.Option) (*ListIdentityPoliciesOutput, error) {
 	req, out := c.ListIdentityPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2672,7 +2671,7 @@ func (c *SES) ListIdentityPoliciesWithContext(ctx aws.Context, input *ListIdenti
 
 const opListReceiptFilters = "ListReceiptFilters"
 
-// ListReceiptFiltersRequest generates a "aws/request.Request" representing the
+// ListReceiptFiltersRequest generates a "aws.Request" representing the
 // client's request for the ListReceiptFilters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2696,8 +2695,8 @@ const opListReceiptFilters = "ListReceiptFilters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFilters
-func (c *SES) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) (req *request.Request, output *ListReceiptFiltersOutput) {
-	op := &request.Operation{
+func (c *SES) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) (req *aws.Request, output *ListReceiptFiltersOutput) {
+	op := &aws.Operation{
 		Name:       opListReceiptFilters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2742,7 +2741,7 @@ func (c *SES) ListReceiptFilters(input *ListReceiptFiltersInput) (*ListReceiptFi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListReceiptFiltersWithContext(ctx aws.Context, input *ListReceiptFiltersInput, opts ...request.Option) (*ListReceiptFiltersOutput, error) {
+func (c *SES) ListReceiptFiltersWithContext(ctx aws.Context, input *ListReceiptFiltersInput, opts ...aws.Option) (*ListReceiptFiltersOutput, error) {
 	req, out := c.ListReceiptFiltersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2751,7 +2750,7 @@ func (c *SES) ListReceiptFiltersWithContext(ctx aws.Context, input *ListReceiptF
 
 const opListReceiptRuleSets = "ListReceiptRuleSets"
 
-// ListReceiptRuleSetsRequest generates a "aws/request.Request" representing the
+// ListReceiptRuleSetsRequest generates a "aws.Request" representing the
 // client's request for the ListReceiptRuleSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2775,8 +2774,8 @@ const opListReceiptRuleSets = "ListReceiptRuleSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSets
-func (c *SES) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) (req *request.Request, output *ListReceiptRuleSetsOutput) {
-	op := &request.Operation{
+func (c *SES) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) (req *aws.Request, output *ListReceiptRuleSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListReceiptRuleSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2824,7 +2823,7 @@ func (c *SES) ListReceiptRuleSets(input *ListReceiptRuleSetsInput) (*ListReceipt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListReceiptRuleSetsWithContext(ctx aws.Context, input *ListReceiptRuleSetsInput, opts ...request.Option) (*ListReceiptRuleSetsOutput, error) {
+func (c *SES) ListReceiptRuleSetsWithContext(ctx aws.Context, input *ListReceiptRuleSetsInput, opts ...aws.Option) (*ListReceiptRuleSetsOutput, error) {
 	req, out := c.ListReceiptRuleSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2833,7 +2832,7 @@ func (c *SES) ListReceiptRuleSetsWithContext(ctx aws.Context, input *ListReceipt
 
 const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
 
-// ListVerifiedEmailAddressesRequest generates a "aws/request.Request" representing the
+// ListVerifiedEmailAddressesRequest generates a "aws.Request" representing the
 // client's request for the ListVerifiedEmailAddresses operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2857,8 +2856,8 @@ const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddresses
-func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddressesInput) (req *request.Request, output *ListVerifiedEmailAddressesOutput) {
-	op := &request.Operation{
+func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddressesInput) (req *aws.Request, output *ListVerifiedEmailAddressesOutput) {
+	op := &aws.Operation{
 		Name:       opListVerifiedEmailAddresses,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2899,7 +2898,7 @@ func (c *SES) ListVerifiedEmailAddresses(input *ListVerifiedEmailAddressesInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ListVerifiedEmailAddressesWithContext(ctx aws.Context, input *ListVerifiedEmailAddressesInput, opts ...request.Option) (*ListVerifiedEmailAddressesOutput, error) {
+func (c *SES) ListVerifiedEmailAddressesWithContext(ctx aws.Context, input *ListVerifiedEmailAddressesInput, opts ...aws.Option) (*ListVerifiedEmailAddressesOutput, error) {
 	req, out := c.ListVerifiedEmailAddressesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2908,7 +2907,7 @@ func (c *SES) ListVerifiedEmailAddressesWithContext(ctx aws.Context, input *List
 
 const opPutIdentityPolicy = "PutIdentityPolicy"
 
-// PutIdentityPolicyRequest generates a "aws/request.Request" representing the
+// PutIdentityPolicyRequest generates a "aws.Request" representing the
 // client's request for the PutIdentityPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2932,8 +2931,8 @@ const opPutIdentityPolicy = "PutIdentityPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicy
-func (c *SES) PutIdentityPolicyRequest(input *PutIdentityPolicyInput) (req *request.Request, output *PutIdentityPolicyOutput) {
-	op := &request.Operation{
+func (c *SES) PutIdentityPolicyRequest(input *PutIdentityPolicyInput) (req *aws.Request, output *PutIdentityPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opPutIdentityPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2989,7 +2988,7 @@ func (c *SES) PutIdentityPolicy(input *PutIdentityPolicyInput) (*PutIdentityPoli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) PutIdentityPolicyWithContext(ctx aws.Context, input *PutIdentityPolicyInput, opts ...request.Option) (*PutIdentityPolicyOutput, error) {
+func (c *SES) PutIdentityPolicyWithContext(ctx aws.Context, input *PutIdentityPolicyInput, opts ...aws.Option) (*PutIdentityPolicyOutput, error) {
 	req, out := c.PutIdentityPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2998,7 +2997,7 @@ func (c *SES) PutIdentityPolicyWithContext(ctx aws.Context, input *PutIdentityPo
 
 const opReorderReceiptRuleSet = "ReorderReceiptRuleSet"
 
-// ReorderReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// ReorderReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the ReorderReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3022,8 +3021,8 @@ const opReorderReceiptRuleSet = "ReorderReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSet
-func (c *SES) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput) (req *request.Request, output *ReorderReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput) (req *aws.Request, output *ReorderReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opReorderReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3080,7 +3079,7 @@ func (c *SES) ReorderReceiptRuleSet(input *ReorderReceiptRuleSetInput) (*Reorder
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) ReorderReceiptRuleSetWithContext(ctx aws.Context, input *ReorderReceiptRuleSetInput, opts ...request.Option) (*ReorderReceiptRuleSetOutput, error) {
+func (c *SES) ReorderReceiptRuleSetWithContext(ctx aws.Context, input *ReorderReceiptRuleSetInput, opts ...aws.Option) (*ReorderReceiptRuleSetOutput, error) {
 	req, out := c.ReorderReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3089,7 +3088,7 @@ func (c *SES) ReorderReceiptRuleSetWithContext(ctx aws.Context, input *ReorderRe
 
 const opSendBounce = "SendBounce"
 
-// SendBounceRequest generates a "aws/request.Request" representing the
+// SendBounceRequest generates a "aws.Request" representing the
 // client's request for the SendBounce operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3113,8 +3112,8 @@ const opSendBounce = "SendBounce"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounce
-func (c *SES) SendBounceRequest(input *SendBounceInput) (req *request.Request, output *SendBounceOutput) {
-	op := &request.Operation{
+func (c *SES) SendBounceRequest(input *SendBounceInput) (req *aws.Request, output *SendBounceOutput) {
+	op := &aws.Operation{
 		Name:       opSendBounce,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3170,7 +3169,7 @@ func (c *SES) SendBounce(input *SendBounceInput) (*SendBounceOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SendBounceWithContext(ctx aws.Context, input *SendBounceInput, opts ...request.Option) (*SendBounceOutput, error) {
+func (c *SES) SendBounceWithContext(ctx aws.Context, input *SendBounceInput, opts ...aws.Option) (*SendBounceOutput, error) {
 	req, out := c.SendBounceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3179,7 +3178,7 @@ func (c *SES) SendBounceWithContext(ctx aws.Context, input *SendBounceInput, opt
 
 const opSendEmail = "SendEmail"
 
-// SendEmailRequest generates a "aws/request.Request" representing the
+// SendEmailRequest generates a "aws.Request" representing the
 // client's request for the SendEmail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3203,8 +3202,8 @@ const opSendEmail = "SendEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmail
-func (c *SES) SendEmailRequest(input *SendEmailInput) (req *request.Request, output *SendEmailOutput) {
-	op := &request.Operation{
+func (c *SES) SendEmailRequest(input *SendEmailInput) (req *aws.Request, output *SendEmailOutput) {
+	op := &aws.Operation{
 		Name:       opSendEmail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3293,7 +3292,7 @@ func (c *SES) SendEmail(input *SendEmailInput) (*SendEmailOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SendEmailWithContext(ctx aws.Context, input *SendEmailInput, opts ...request.Option) (*SendEmailOutput, error) {
+func (c *SES) SendEmailWithContext(ctx aws.Context, input *SendEmailInput, opts ...aws.Option) (*SendEmailOutput, error) {
 	req, out := c.SendEmailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3302,7 +3301,7 @@ func (c *SES) SendEmailWithContext(ctx aws.Context, input *SendEmailInput, opts 
 
 const opSendRawEmail = "SendRawEmail"
 
-// SendRawEmailRequest generates a "aws/request.Request" representing the
+// SendRawEmailRequest generates a "aws.Request" representing the
 // client's request for the SendRawEmail operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3326,8 +3325,8 @@ const opSendRawEmail = "SendRawEmail"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmail
-func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) (req *request.Request, output *SendRawEmailOutput) {
-	op := &request.Operation{
+func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) (req *aws.Request, output *SendRawEmailOutput) {
+	op := &aws.Operation{
 		Name:       opSendRawEmail,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3452,7 +3451,7 @@ func (c *SES) SendRawEmail(input *SendRawEmailInput) (*SendRawEmailOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SendRawEmailWithContext(ctx aws.Context, input *SendRawEmailInput, opts ...request.Option) (*SendRawEmailOutput, error) {
+func (c *SES) SendRawEmailWithContext(ctx aws.Context, input *SendRawEmailInput, opts ...aws.Option) (*SendRawEmailOutput, error) {
 	req, out := c.SendRawEmailRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3461,7 +3460,7 @@ func (c *SES) SendRawEmailWithContext(ctx aws.Context, input *SendRawEmailInput,
 
 const opSetActiveReceiptRuleSet = "SetActiveReceiptRuleSet"
 
-// SetActiveReceiptRuleSetRequest generates a "aws/request.Request" representing the
+// SetActiveReceiptRuleSetRequest generates a "aws.Request" representing the
 // client's request for the SetActiveReceiptRuleSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3485,8 +3484,8 @@ const opSetActiveReceiptRuleSet = "SetActiveReceiptRuleSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSet
-func (c *SES) SetActiveReceiptRuleSetRequest(input *SetActiveReceiptRuleSetInput) (req *request.Request, output *SetActiveReceiptRuleSetOutput) {
-	op := &request.Operation{
+func (c *SES) SetActiveReceiptRuleSetRequest(input *SetActiveReceiptRuleSetInput) (req *aws.Request, output *SetActiveReceiptRuleSetOutput) {
+	op := &aws.Operation{
 		Name:       opSetActiveReceiptRuleSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3539,7 +3538,7 @@ func (c *SES) SetActiveReceiptRuleSet(input *SetActiveReceiptRuleSetInput) (*Set
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetActiveReceiptRuleSetWithContext(ctx aws.Context, input *SetActiveReceiptRuleSetInput, opts ...request.Option) (*SetActiveReceiptRuleSetOutput, error) {
+func (c *SES) SetActiveReceiptRuleSetWithContext(ctx aws.Context, input *SetActiveReceiptRuleSetInput, opts ...aws.Option) (*SetActiveReceiptRuleSetOutput, error) {
 	req, out := c.SetActiveReceiptRuleSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3548,7 +3547,7 @@ func (c *SES) SetActiveReceiptRuleSetWithContext(ctx aws.Context, input *SetActi
 
 const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 
-// SetIdentityDkimEnabledRequest generates a "aws/request.Request" representing the
+// SetIdentityDkimEnabledRequest generates a "aws.Request" representing the
 // client's request for the SetIdentityDkimEnabled operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3572,8 +3571,8 @@ const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabled
-func (c *SES) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInput) (req *request.Request, output *SetIdentityDkimEnabledOutput) {
-	op := &request.Operation{
+func (c *SES) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInput) (req *aws.Request, output *SetIdentityDkimEnabledOutput) {
+	op := &aws.Operation{
 		Name:       opSetIdentityDkimEnabled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3630,7 +3629,7 @@ func (c *SES) SetIdentityDkimEnabled(input *SetIdentityDkimEnabledInput) (*SetId
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetIdentityDkimEnabledWithContext(ctx aws.Context, input *SetIdentityDkimEnabledInput, opts ...request.Option) (*SetIdentityDkimEnabledOutput, error) {
+func (c *SES) SetIdentityDkimEnabledWithContext(ctx aws.Context, input *SetIdentityDkimEnabledInput, opts ...aws.Option) (*SetIdentityDkimEnabledOutput, error) {
 	req, out := c.SetIdentityDkimEnabledRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3639,7 +3638,7 @@ func (c *SES) SetIdentityDkimEnabledWithContext(ctx aws.Context, input *SetIdent
 
 const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEnabled"
 
-// SetIdentityFeedbackForwardingEnabledRequest generates a "aws/request.Request" representing the
+// SetIdentityFeedbackForwardingEnabledRequest generates a "aws.Request" representing the
 // client's request for the SetIdentityFeedbackForwardingEnabled operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3663,8 +3662,8 @@ const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEna
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabled
-func (c *SES) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeedbackForwardingEnabledInput) (req *request.Request, output *SetIdentityFeedbackForwardingEnabledOutput) {
-	op := &request.Operation{
+func (c *SES) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeedbackForwardingEnabledInput) (req *aws.Request, output *SetIdentityFeedbackForwardingEnabledOutput) {
+	op := &aws.Operation{
 		Name:       opSetIdentityFeedbackForwardingEnabled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3715,7 +3714,7 @@ func (c *SES) SetIdentityFeedbackForwardingEnabled(input *SetIdentityFeedbackFor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetIdentityFeedbackForwardingEnabledWithContext(ctx aws.Context, input *SetIdentityFeedbackForwardingEnabledInput, opts ...request.Option) (*SetIdentityFeedbackForwardingEnabledOutput, error) {
+func (c *SES) SetIdentityFeedbackForwardingEnabledWithContext(ctx aws.Context, input *SetIdentityFeedbackForwardingEnabledInput, opts ...aws.Option) (*SetIdentityFeedbackForwardingEnabledOutput, error) {
 	req, out := c.SetIdentityFeedbackForwardingEnabledRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3724,7 +3723,7 @@ func (c *SES) SetIdentityFeedbackForwardingEnabledWithContext(ctx aws.Context, i
 
 const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotificationsEnabled"
 
-// SetIdentityHeadersInNotificationsEnabledRequest generates a "aws/request.Request" representing the
+// SetIdentityHeadersInNotificationsEnabledRequest generates a "aws.Request" representing the
 // client's request for the SetIdentityHeadersInNotificationsEnabled operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3748,8 +3747,8 @@ const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotifica
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabled
-func (c *SES) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdentityHeadersInNotificationsEnabledInput) (req *request.Request, output *SetIdentityHeadersInNotificationsEnabledOutput) {
-	op := &request.Operation{
+func (c *SES) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdentityHeadersInNotificationsEnabledInput) (req *aws.Request, output *SetIdentityHeadersInNotificationsEnabledOutput) {
+	op := &aws.Operation{
 		Name:       opSetIdentityHeadersInNotificationsEnabled,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3796,7 +3795,7 @@ func (c *SES) SetIdentityHeadersInNotificationsEnabled(input *SetIdentityHeaders
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetIdentityHeadersInNotificationsEnabledWithContext(ctx aws.Context, input *SetIdentityHeadersInNotificationsEnabledInput, opts ...request.Option) (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
+func (c *SES) SetIdentityHeadersInNotificationsEnabledWithContext(ctx aws.Context, input *SetIdentityHeadersInNotificationsEnabledInput, opts ...aws.Option) (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
 	req, out := c.SetIdentityHeadersInNotificationsEnabledRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3805,7 +3804,7 @@ func (c *SES) SetIdentityHeadersInNotificationsEnabledWithContext(ctx aws.Contex
 
 const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
 
-// SetIdentityMailFromDomainRequest generates a "aws/request.Request" representing the
+// SetIdentityMailFromDomainRequest generates a "aws.Request" representing the
 // client's request for the SetIdentityMailFromDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3829,8 +3828,8 @@ const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomain
-func (c *SES) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDomainInput) (req *request.Request, output *SetIdentityMailFromDomainOutput) {
-	op := &request.Operation{
+func (c *SES) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDomainInput) (req *aws.Request, output *SetIdentityMailFromDomainOutput) {
+	op := &aws.Operation{
 		Name:       opSetIdentityMailFromDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3878,7 +3877,7 @@ func (c *SES) SetIdentityMailFromDomain(input *SetIdentityMailFromDomainInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetIdentityMailFromDomainWithContext(ctx aws.Context, input *SetIdentityMailFromDomainInput, opts ...request.Option) (*SetIdentityMailFromDomainOutput, error) {
+func (c *SES) SetIdentityMailFromDomainWithContext(ctx aws.Context, input *SetIdentityMailFromDomainInput, opts ...aws.Option) (*SetIdentityMailFromDomainOutput, error) {
 	req, out := c.SetIdentityMailFromDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3887,7 +3886,7 @@ func (c *SES) SetIdentityMailFromDomainWithContext(ctx aws.Context, input *SetId
 
 const opSetIdentityNotificationTopic = "SetIdentityNotificationTopic"
 
-// SetIdentityNotificationTopicRequest generates a "aws/request.Request" representing the
+// SetIdentityNotificationTopicRequest generates a "aws.Request" representing the
 // client's request for the SetIdentityNotificationTopic operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3911,8 +3910,8 @@ const opSetIdentityNotificationTopic = "SetIdentityNotificationTopic"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopic
-func (c *SES) SetIdentityNotificationTopicRequest(input *SetIdentityNotificationTopicInput) (req *request.Request, output *SetIdentityNotificationTopicOutput) {
-	op := &request.Operation{
+func (c *SES) SetIdentityNotificationTopicRequest(input *SetIdentityNotificationTopicInput) (req *aws.Request, output *SetIdentityNotificationTopicOutput) {
+	op := &aws.Operation{
 		Name:       opSetIdentityNotificationTopic,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3963,7 +3962,7 @@ func (c *SES) SetIdentityNotificationTopic(input *SetIdentityNotificationTopicIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetIdentityNotificationTopicWithContext(ctx aws.Context, input *SetIdentityNotificationTopicInput, opts ...request.Option) (*SetIdentityNotificationTopicOutput, error) {
+func (c *SES) SetIdentityNotificationTopicWithContext(ctx aws.Context, input *SetIdentityNotificationTopicInput, opts ...aws.Option) (*SetIdentityNotificationTopicOutput, error) {
 	req, out := c.SetIdentityNotificationTopicRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3972,7 +3971,7 @@ func (c *SES) SetIdentityNotificationTopicWithContext(ctx aws.Context, input *Se
 
 const opSetReceiptRulePosition = "SetReceiptRulePosition"
 
-// SetReceiptRulePositionRequest generates a "aws/request.Request" representing the
+// SetReceiptRulePositionRequest generates a "aws.Request" representing the
 // client's request for the SetReceiptRulePosition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3996,8 +3995,8 @@ const opSetReceiptRulePosition = "SetReceiptRulePosition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePosition
-func (c *SES) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInput) (req *request.Request, output *SetReceiptRulePositionOutput) {
-	op := &request.Operation{
+func (c *SES) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInput) (req *aws.Request, output *SetReceiptRulePositionOutput) {
+	op := &aws.Operation{
 		Name:       opSetReceiptRulePosition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4050,7 +4049,7 @@ func (c *SES) SetReceiptRulePosition(input *SetReceiptRulePositionInput) (*SetRe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) SetReceiptRulePositionWithContext(ctx aws.Context, input *SetReceiptRulePositionInput, opts ...request.Option) (*SetReceiptRulePositionOutput, error) {
+func (c *SES) SetReceiptRulePositionWithContext(ctx aws.Context, input *SetReceiptRulePositionInput, opts ...aws.Option) (*SetReceiptRulePositionOutput, error) {
 	req, out := c.SetReceiptRulePositionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4059,7 +4058,7 @@ func (c *SES) SetReceiptRulePositionWithContext(ctx aws.Context, input *SetRecei
 
 const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDestination"
 
-// UpdateConfigurationSetEventDestinationRequest generates a "aws/request.Request" representing the
+// UpdateConfigurationSetEventDestinationRequest generates a "aws.Request" representing the
 // client's request for the UpdateConfigurationSetEventDestination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4083,8 +4082,8 @@ const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDes
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestination
-func (c *SES) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigurationSetEventDestinationInput) (req *request.Request, output *UpdateConfigurationSetEventDestinationOutput) {
-	op := &request.Operation{
+func (c *SES) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigurationSetEventDestinationInput) (req *aws.Request, output *UpdateConfigurationSetEventDestinationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateConfigurationSetEventDestination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4155,7 +4154,7 @@ func (c *SES) UpdateConfigurationSetEventDestination(input *UpdateConfigurationS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) UpdateConfigurationSetEventDestinationWithContext(ctx aws.Context, input *UpdateConfigurationSetEventDestinationInput, opts ...request.Option) (*UpdateConfigurationSetEventDestinationOutput, error) {
+func (c *SES) UpdateConfigurationSetEventDestinationWithContext(ctx aws.Context, input *UpdateConfigurationSetEventDestinationInput, opts ...aws.Option) (*UpdateConfigurationSetEventDestinationOutput, error) {
 	req, out := c.UpdateConfigurationSetEventDestinationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4164,7 +4163,7 @@ func (c *SES) UpdateConfigurationSetEventDestinationWithContext(ctx aws.Context,
 
 const opUpdateConfigurationSetTrackingOptions = "UpdateConfigurationSetTrackingOptions"
 
-// UpdateConfigurationSetTrackingOptionsRequest generates a "aws/request.Request" representing the
+// UpdateConfigurationSetTrackingOptionsRequest generates a "aws.Request" representing the
 // client's request for the UpdateConfigurationSetTrackingOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4188,8 +4187,8 @@ const opUpdateConfigurationSetTrackingOptions = "UpdateConfigurationSetTrackingO
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptions
-func (c *SES) UpdateConfigurationSetTrackingOptionsRequest(input *UpdateConfigurationSetTrackingOptionsInput) (req *request.Request, output *UpdateConfigurationSetTrackingOptionsOutput) {
-	op := &request.Operation{
+func (c *SES) UpdateConfigurationSetTrackingOptionsRequest(input *UpdateConfigurationSetTrackingOptionsInput) (req *aws.Request, output *UpdateConfigurationSetTrackingOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateConfigurationSetTrackingOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4253,7 +4252,7 @@ func (c *SES) UpdateConfigurationSetTrackingOptions(input *UpdateConfigurationSe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) UpdateConfigurationSetTrackingOptionsWithContext(ctx aws.Context, input *UpdateConfigurationSetTrackingOptionsInput, opts ...request.Option) (*UpdateConfigurationSetTrackingOptionsOutput, error) {
+func (c *SES) UpdateConfigurationSetTrackingOptionsWithContext(ctx aws.Context, input *UpdateConfigurationSetTrackingOptionsInput, opts ...aws.Option) (*UpdateConfigurationSetTrackingOptionsOutput, error) {
 	req, out := c.UpdateConfigurationSetTrackingOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4262,7 +4261,7 @@ func (c *SES) UpdateConfigurationSetTrackingOptionsWithContext(ctx aws.Context, 
 
 const opUpdateReceiptRule = "UpdateReceiptRule"
 
-// UpdateReceiptRuleRequest generates a "aws/request.Request" representing the
+// UpdateReceiptRuleRequest generates a "aws.Request" representing the
 // client's request for the UpdateReceiptRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4286,8 +4285,8 @@ const opUpdateReceiptRule = "UpdateReceiptRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRule
-func (c *SES) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) (req *request.Request, output *UpdateReceiptRuleOutput) {
-	op := &request.Operation{
+func (c *SES) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) (req *aws.Request, output *UpdateReceiptRuleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateReceiptRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4361,7 +4360,7 @@ func (c *SES) UpdateReceiptRule(input *UpdateReceiptRuleInput) (*UpdateReceiptRu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) UpdateReceiptRuleWithContext(ctx aws.Context, input *UpdateReceiptRuleInput, opts ...request.Option) (*UpdateReceiptRuleOutput, error) {
+func (c *SES) UpdateReceiptRuleWithContext(ctx aws.Context, input *UpdateReceiptRuleInput, opts ...aws.Option) (*UpdateReceiptRuleOutput, error) {
 	req, out := c.UpdateReceiptRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4370,7 +4369,7 @@ func (c *SES) UpdateReceiptRuleWithContext(ctx aws.Context, input *UpdateReceipt
 
 const opVerifyDomainDkim = "VerifyDomainDkim"
 
-// VerifyDomainDkimRequest generates a "aws/request.Request" representing the
+// VerifyDomainDkimRequest generates a "aws.Request" representing the
 // client's request for the VerifyDomainDkim operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4394,8 +4393,8 @@ const opVerifyDomainDkim = "VerifyDomainDkim"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkim
-func (c *SES) VerifyDomainDkimRequest(input *VerifyDomainDkimInput) (req *request.Request, output *VerifyDomainDkimOutput) {
-	op := &request.Operation{
+func (c *SES) VerifyDomainDkimRequest(input *VerifyDomainDkimInput) (req *aws.Request, output *VerifyDomainDkimOutput) {
+	op := &aws.Operation{
 		Name:       opVerifyDomainDkim,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4449,7 +4448,7 @@ func (c *SES) VerifyDomainDkim(input *VerifyDomainDkimInput) (*VerifyDomainDkimO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) VerifyDomainDkimWithContext(ctx aws.Context, input *VerifyDomainDkimInput, opts ...request.Option) (*VerifyDomainDkimOutput, error) {
+func (c *SES) VerifyDomainDkimWithContext(ctx aws.Context, input *VerifyDomainDkimInput, opts ...aws.Option) (*VerifyDomainDkimOutput, error) {
 	req, out := c.VerifyDomainDkimRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4458,7 +4457,7 @@ func (c *SES) VerifyDomainDkimWithContext(ctx aws.Context, input *VerifyDomainDk
 
 const opVerifyDomainIdentity = "VerifyDomainIdentity"
 
-// VerifyDomainIdentityRequest generates a "aws/request.Request" representing the
+// VerifyDomainIdentityRequest generates a "aws.Request" representing the
 // client's request for the VerifyDomainIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4482,8 +4481,8 @@ const opVerifyDomainIdentity = "VerifyDomainIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentity
-func (c *SES) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) (req *request.Request, output *VerifyDomainIdentityOutput) {
-	op := &request.Operation{
+func (c *SES) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) (req *aws.Request, output *VerifyDomainIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opVerifyDomainIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4528,7 +4527,7 @@ func (c *SES) VerifyDomainIdentity(input *VerifyDomainIdentityInput) (*VerifyDom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) VerifyDomainIdentityWithContext(ctx aws.Context, input *VerifyDomainIdentityInput, opts ...request.Option) (*VerifyDomainIdentityOutput, error) {
+func (c *SES) VerifyDomainIdentityWithContext(ctx aws.Context, input *VerifyDomainIdentityInput, opts ...aws.Option) (*VerifyDomainIdentityOutput, error) {
 	req, out := c.VerifyDomainIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4537,7 +4536,7 @@ func (c *SES) VerifyDomainIdentityWithContext(ctx aws.Context, input *VerifyDoma
 
 const opVerifyEmailAddress = "VerifyEmailAddress"
 
-// VerifyEmailAddressRequest generates a "aws/request.Request" representing the
+// VerifyEmailAddressRequest generates a "aws.Request" representing the
 // client's request for the VerifyEmailAddress operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4561,8 +4560,8 @@ const opVerifyEmailAddress = "VerifyEmailAddress"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailAddress
-func (c *SES) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) (req *request.Request, output *VerifyEmailAddressOutput) {
-	op := &request.Operation{
+func (c *SES) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) (req *aws.Request, output *VerifyEmailAddressOutput) {
+	op := &aws.Operation{
 		Name:       opVerifyEmailAddress,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4604,7 +4603,7 @@ func (c *SES) VerifyEmailAddress(input *VerifyEmailAddressInput) (*VerifyEmailAd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) VerifyEmailAddressWithContext(ctx aws.Context, input *VerifyEmailAddressInput, opts ...request.Option) (*VerifyEmailAddressOutput, error) {
+func (c *SES) VerifyEmailAddressWithContext(ctx aws.Context, input *VerifyEmailAddressInput, opts ...aws.Option) (*VerifyEmailAddressOutput, error) {
 	req, out := c.VerifyEmailAddressRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4613,7 +4612,7 @@ func (c *SES) VerifyEmailAddressWithContext(ctx aws.Context, input *VerifyEmailA
 
 const opVerifyEmailIdentity = "VerifyEmailIdentity"
 
-// VerifyEmailIdentityRequest generates a "aws/request.Request" representing the
+// VerifyEmailIdentityRequest generates a "aws.Request" representing the
 // client's request for the VerifyEmailIdentity operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4637,8 +4636,8 @@ const opVerifyEmailIdentity = "VerifyEmailIdentity"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentity
-func (c *SES) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) (req *request.Request, output *VerifyEmailIdentityOutput) {
-	op := &request.Operation{
+func (c *SES) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) (req *aws.Request, output *VerifyEmailIdentityOutput) {
+	op := &aws.Operation{
 		Name:       opVerifyEmailIdentity,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4682,7 +4681,7 @@ func (c *SES) VerifyEmailIdentity(input *VerifyEmailIdentityInput) (*VerifyEmail
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SES) VerifyEmailIdentityWithContext(ctx aws.Context, input *VerifyEmailIdentityInput, opts ...request.Option) (*VerifyEmailIdentityOutput, error) {
+func (c *SES) VerifyEmailIdentityWithContext(ctx aws.Context, input *VerifyEmailIdentityInput, opts ...aws.Option) (*VerifyEmailIdentityOutput, error) {
 	req, out := c.VerifyEmailIdentityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4723,12 +4722,12 @@ func (s AddHeaderAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddHeaderAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddHeaderAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddHeaderAction"}
 	if s.HeaderName == nil {
-		invalidParams.Add(request.NewErrParamRequired("HeaderName"))
+		invalidParams.Add(aws.NewErrParamRequired("HeaderName"))
 	}
 	if s.HeaderValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("HeaderValue"))
+		invalidParams.Add(aws.NewErrParamRequired("HeaderValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4778,15 +4777,15 @@ func (s Body) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Body) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Body"}
+	invalidParams := aws.ErrInvalidParams{Context: "Body"}
 	if s.Html != nil {
 		if err := s.Html.Validate(); err != nil {
-			invalidParams.AddNested("Html", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Html", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Text != nil {
 		if err := s.Text.Validate(); err != nil {
-			invalidParams.AddNested("Text", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Text", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4856,15 +4855,15 @@ func (s BounceAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BounceAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BounceAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "BounceAction"}
 	if s.Message == nil {
-		invalidParams.Add(request.NewErrParamRequired("Message"))
+		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.Sender == nil {
-		invalidParams.Add(request.NewErrParamRequired("Sender"))
+		invalidParams.Add(aws.NewErrParamRequired("Sender"))
 	}
 	if s.SmtpReplyCode == nil {
-		invalidParams.Add(request.NewErrParamRequired("SmtpReplyCode"))
+		invalidParams.Add(aws.NewErrParamRequired("SmtpReplyCode"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4944,13 +4943,13 @@ func (s BouncedRecipientInfo) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BouncedRecipientInfo) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BouncedRecipientInfo"}
+	invalidParams := aws.ErrInvalidParams{Context: "BouncedRecipientInfo"}
 	if s.Recipient == nil {
-		invalidParams.Add(request.NewErrParamRequired("Recipient"))
+		invalidParams.Add(aws.NewErrParamRequired("Recipient"))
 	}
 	if s.RecipientDsnFields != nil {
 		if err := s.RecipientDsnFields.Validate(); err != nil {
-			invalidParams.AddNested("RecipientDsnFields", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RecipientDsnFields", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5021,12 +5020,12 @@ func (s CloneReceiptRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloneReceiptRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloneReceiptRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloneReceiptRuleSetInput"}
 	if s.OriginalRuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("OriginalRuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("OriginalRuleSetName"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5092,9 +5091,9 @@ func (s CloudWatchDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudWatchDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchDestination"}
 	if s.DimensionConfigurations == nil {
-		invalidParams.Add(request.NewErrParamRequired("DimensionConfigurations"))
+		invalidParams.Add(aws.NewErrParamRequired("DimensionConfigurations"))
 	}
 	if s.DimensionConfigurations != nil {
 		for i, v := range s.DimensionConfigurations {
@@ -5102,7 +5101,7 @@ func (s *CloudWatchDestination) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DimensionConfigurations", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DimensionConfigurations", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5173,15 +5172,15 @@ func (s CloudWatchDimensionConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudWatchDimensionConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudWatchDimensionConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudWatchDimensionConfiguration"}
 	if s.DefaultDimensionValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("DefaultDimensionValue"))
+		invalidParams.Add(aws.NewErrParamRequired("DefaultDimensionValue"))
 	}
 	if s.DimensionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DimensionName"))
+		invalidParams.Add(aws.NewErrParamRequired("DimensionName"))
 	}
 	if s.DimensionValueSource == nil {
-		invalidParams.Add(request.NewErrParamRequired("DimensionValueSource"))
+		invalidParams.Add(aws.NewErrParamRequired("DimensionValueSource"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5241,9 +5240,9 @@ func (s ConfigurationSet) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigurationSet) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfigurationSet"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfigurationSet"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5288,9 +5287,9 @@ func (s Content) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Content) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Content"}
+	invalidParams := aws.ErrInvalidParams{Context: "Content"}
 	if s.Data == nil {
-		invalidParams.Add(request.NewErrParamRequired("Data"))
+		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5345,16 +5344,16 @@ func (s CreateConfigurationSetEventDestinationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConfigurationSetEventDestinationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetEventDestinationInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if s.EventDestination == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventDestination"))
+		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
 	}
 	if s.EventDestination != nil {
 		if err := s.EventDestination.Validate(); err != nil {
-			invalidParams.AddNested("EventDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EventDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5417,13 +5416,13 @@ func (s CreateConfigurationSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConfigurationSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetInput"}
 	if s.ConfigurationSet == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSet"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSet"))
 	}
 	if s.ConfigurationSet != nil {
 		if err := s.ConfigurationSet.Validate(); err != nil {
-			invalidParams.AddNested("ConfigurationSet", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConfigurationSet", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5491,12 +5490,12 @@ func (s CreateConfigurationSetTrackingOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConfigurationSetTrackingOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConfigurationSetTrackingOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConfigurationSetTrackingOptionsInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if s.TrackingOptions == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrackingOptions"))
+		invalidParams.Add(aws.NewErrParamRequired("TrackingOptions"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5559,13 +5558,13 @@ func (s CreateReceiptFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReceiptFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReceiptFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptFilterInput"}
 	if s.Filter == nil {
-		invalidParams.Add(request.NewErrParamRequired("Filter"))
+		invalidParams.Add(aws.NewErrParamRequired("Filter"))
 	}
 	if s.Filter != nil {
 		if err := s.Filter.Validate(); err != nil {
-			invalidParams.AddNested("Filter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Filter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5633,16 +5632,16 @@ func (s CreateReceiptRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReceiptRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReceiptRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptRuleInput"}
 	if s.Rule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rule"))
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 	if s.Rule != nil {
 		if err := s.Rule.Validate(); err != nil {
-			invalidParams.AddNested("Rule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Rule", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5718,9 +5717,9 @@ func (s CreateReceiptRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateReceiptRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateReceiptRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReceiptRuleSetInput"}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5782,12 +5781,12 @@ func (s DeleteConfigurationSetEventDestinationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConfigurationSetEventDestinationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetEventDestinationInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if s.EventDestinationName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventDestinationName"))
+		invalidParams.Add(aws.NewErrParamRequired("EventDestinationName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5849,9 +5848,9 @@ func (s DeleteConfigurationSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConfigurationSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5907,9 +5906,9 @@ func (s DeleteConfigurationSetTrackingOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConfigurationSetTrackingOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConfigurationSetTrackingOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConfigurationSetTrackingOptionsInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5964,9 +5963,9 @@ func (s DeleteIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6032,15 +6031,15 @@ func (s DeleteIdentityPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIdentityPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIdentityPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIdentityPolicyInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6102,9 +6101,9 @@ func (s DeleteReceiptFilterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReceiptFilterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReceiptFilterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptFilterInput"}
 	if s.FilterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FilterName"))
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6165,12 +6164,12 @@ func (s DeleteReceiptRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReceiptRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReceiptRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6232,9 +6231,9 @@ func (s DeleteReceiptRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteReceiptRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteReceiptRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReceiptRuleSetInput"}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6289,9 +6288,9 @@ func (s DeleteVerifiedEmailAddressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVerifiedEmailAddressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteVerifiedEmailAddressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVerifiedEmailAddressInput"}
 	if s.EmailAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("EmailAddress"))
+		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6404,9 +6403,9 @@ func (s DescribeConfigurationSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeConfigurationSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeConfigurationSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeConfigurationSetInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6504,12 +6503,12 @@ func (s DescribeReceiptRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReceiptRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReceiptRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReceiptRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6582,9 +6581,9 @@ func (s DescribeReceiptRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeReceiptRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeReceiptRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReceiptRuleSetInput"}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6744,26 +6743,26 @@ func (s EventDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EventDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EventDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "EventDestination"}
 	if s.MatchingEventTypes == nil {
-		invalidParams.Add(request.NewErrParamRequired("MatchingEventTypes"))
+		invalidParams.Add(aws.NewErrParamRequired("MatchingEventTypes"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.CloudWatchDestination != nil {
 		if err := s.CloudWatchDestination.Validate(); err != nil {
-			invalidParams.AddNested("CloudWatchDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudWatchDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisFirehoseDestination != nil {
 		if err := s.KinesisFirehoseDestination.Validate(); err != nil {
-			invalidParams.AddNested("KinesisFirehoseDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisFirehoseDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SNSDestination != nil {
 		if err := s.SNSDestination.Validate(); err != nil {
-			invalidParams.AddNested("SNSDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SNSDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6843,12 +6842,12 @@ func (s ExtensionField) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtensionField) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExtensionField"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExtensionField"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6897,9 +6896,9 @@ func (s GetIdentityDkimAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityDkimAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIdentityDkimAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityDkimAttributesInput"}
 	if s.Identities == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identities"))
+		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6969,9 +6968,9 @@ func (s GetIdentityMailFromDomainAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityMailFromDomainAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIdentityMailFromDomainAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityMailFromDomainAttributesInput"}
 	if s.Identities == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identities"))
+		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7040,9 +7039,9 @@ func (s GetIdentityNotificationAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityNotificationAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIdentityNotificationAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityNotificationAttributesInput"}
 	if s.Identities == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identities"))
+		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7121,12 +7120,12 @@ func (s GetIdentityPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIdentityPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityPoliciesInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 	if s.PolicyNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyNames"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7200,9 +7199,9 @@ func (s GetIdentityVerificationAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIdentityVerificationAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIdentityVerificationAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIdentityVerificationAttributesInput"}
 	if s.Identities == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identities"))
+		invalidParams.Add(aws.NewErrParamRequired("Identities"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7649,12 +7648,12 @@ func (s KinesisFirehoseDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisFirehoseDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisFirehoseDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisFirehoseDestination"}
 	if s.DeliveryStreamARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamARN"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamARN"))
 	}
 	if s.IAMRoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("IAMRoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("IAMRoleARN"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7729,9 +7728,9 @@ func (s LambdaAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LambdaAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "LambdaAction"}
 	if s.FunctionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7946,9 +7945,9 @@ func (s ListIdentityPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIdentityPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListIdentityPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListIdentityPoliciesInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8169,21 +8168,21 @@ func (s Message) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Message) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Message"}
+	invalidParams := aws.ErrInvalidParams{Context: "Message"}
 	if s.Body == nil {
-		invalidParams.Add(request.NewErrParamRequired("Body"))
+		invalidParams.Add(aws.NewErrParamRequired("Body"))
 	}
 	if s.Subject == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subject"))
+		invalidParams.Add(aws.NewErrParamRequired("Subject"))
 	}
 	if s.Body != nil {
 		if err := s.Body.Validate(); err != nil {
-			invalidParams.AddNested("Body", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Body", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Subject != nil {
 		if err := s.Subject.Validate(); err != nil {
-			invalidParams.AddNested("Subject", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Subject", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8241,9 +8240,9 @@ func (s MessageDsn) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageDsn) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MessageDsn"}
+	invalidParams := aws.ErrInvalidParams{Context: "MessageDsn"}
 	if s.ReportingMta == nil {
-		invalidParams.Add(request.NewErrParamRequired("ReportingMta"))
+		invalidParams.Add(aws.NewErrParamRequired("ReportingMta"))
 	}
 	if s.ExtensionFields != nil {
 		for i, v := range s.ExtensionFields {
@@ -8251,7 +8250,7 @@ func (s *MessageDsn) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtensionFields", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtensionFields", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8323,12 +8322,12 @@ func (s MessageTag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MessageTag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MessageTag"}
+	invalidParams := aws.ErrInvalidParams{Context: "MessageTag"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8395,21 +8394,21 @@ func (s PutIdentityPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutIdentityPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutIdentityPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutIdentityPolicyInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 	if s.Policy == nil {
-		invalidParams.Add(request.NewErrParamRequired("Policy"))
+		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 	if s.Policy != nil && len(*s.Policy) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Policy", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Policy", 1))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8493,9 +8492,9 @@ func (s RawMessage) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RawMessage) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RawMessage"}
+	invalidParams := aws.ErrInvalidParams{Context: "RawMessage"}
 	if s.Data == nil {
-		invalidParams.Add(request.NewErrParamRequired("Data"))
+		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8560,40 +8559,40 @@ func (s ReceiptAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReceiptAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReceiptAction"}
 	if s.AddHeaderAction != nil {
 		if err := s.AddHeaderAction.Validate(); err != nil {
-			invalidParams.AddNested("AddHeaderAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AddHeaderAction", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.BounceAction != nil {
 		if err := s.BounceAction.Validate(); err != nil {
-			invalidParams.AddNested("BounceAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BounceAction", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.LambdaAction != nil {
 		if err := s.LambdaAction.Validate(); err != nil {
-			invalidParams.AddNested("LambdaAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LambdaAction", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Action != nil {
 		if err := s.S3Action.Validate(); err != nil {
-			invalidParams.AddNested("S3Action", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Action", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SNSAction != nil {
 		if err := s.SNSAction.Validate(); err != nil {
-			invalidParams.AddNested("SNSAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SNSAction", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StopAction != nil {
 		if err := s.StopAction.Validate(); err != nil {
-			invalidParams.AddNested("StopAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StopAction", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.WorkmailAction != nil {
 		if err := s.WorkmailAction.Validate(); err != nil {
-			invalidParams.AddNested("WorkmailAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("WorkmailAction", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8685,16 +8684,16 @@ func (s ReceiptFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReceiptFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReceiptFilter"}
 	if s.IpFilter == nil {
-		invalidParams.Add(request.NewErrParamRequired("IpFilter"))
+		invalidParams.Add(aws.NewErrParamRequired("IpFilter"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.IpFilter != nil {
 		if err := s.IpFilter.Validate(); err != nil {
-			invalidParams.AddNested("IpFilter", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("IpFilter", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8751,12 +8750,12 @@ func (s ReceiptIpFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptIpFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReceiptIpFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReceiptIpFilter"}
 	if s.Cidr == nil {
-		invalidParams.Add(request.NewErrParamRequired("Cidr"))
+		invalidParams.Add(aws.NewErrParamRequired("Cidr"))
 	}
 	if s.Policy == nil {
-		invalidParams.Add(request.NewErrParamRequired("Policy"))
+		invalidParams.Add(aws.NewErrParamRequired("Policy"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8839,9 +8838,9 @@ func (s ReceiptRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReceiptRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReceiptRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReceiptRule"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
@@ -8849,7 +8848,7 @@ func (s *ReceiptRule) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9006,12 +9005,12 @@ func (s RecipientDsnFields) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecipientDsnFields) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RecipientDsnFields"}
+	invalidParams := aws.ErrInvalidParams{Context: "RecipientDsnFields"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 	if s.ExtensionFields != nil {
 		for i, v := range s.ExtensionFields {
@@ -9019,7 +9018,7 @@ func (s *RecipientDsnFields) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtensionFields", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ExtensionFields", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9103,12 +9102,12 @@ func (s ReorderReceiptRuleSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReorderReceiptRuleSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReorderReceiptRuleSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReorderReceiptRuleSetInput"}
 	if s.RuleNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleNames"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleNames"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9223,9 +9222,9 @@ func (s S3Action) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Action) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Action"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Action"}
 	if s.BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9307,9 +9306,9 @@ func (s SNSAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SNSAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SNSAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "SNSAction"}
 	if s.TopicArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9361,9 +9360,9 @@ func (s SNSDestination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SNSDestination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SNSDestination"}
+	invalidParams := aws.ErrInvalidParams{Context: "SNSDestination"}
 	if s.TopicARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicARN"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicARN"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9430,15 +9429,15 @@ func (s SendBounceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendBounceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendBounceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendBounceInput"}
 	if s.BounceSender == nil {
-		invalidParams.Add(request.NewErrParamRequired("BounceSender"))
+		invalidParams.Add(aws.NewErrParamRequired("BounceSender"))
 	}
 	if s.BouncedRecipientInfoList == nil {
-		invalidParams.Add(request.NewErrParamRequired("BouncedRecipientInfoList"))
+		invalidParams.Add(aws.NewErrParamRequired("BouncedRecipientInfoList"))
 	}
 	if s.OriginalMessageId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OriginalMessageId"))
+		invalidParams.Add(aws.NewErrParamRequired("OriginalMessageId"))
 	}
 	if s.BouncedRecipientInfoList != nil {
 		for i, v := range s.BouncedRecipientInfoList {
@@ -9446,13 +9445,13 @@ func (s *SendBounceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BouncedRecipientInfoList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "BouncedRecipientInfoList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.MessageDsn != nil {
 		if err := s.MessageDsn.Validate(); err != nil {
-			invalidParams.AddNested("MessageDsn", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("MessageDsn", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9680,19 +9679,19 @@ func (s SendEmailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendEmailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendEmailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendEmailInput"}
 	if s.Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
 	}
 	if s.Message == nil {
-		invalidParams.Add(request.NewErrParamRequired("Message"))
+		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.Source == nil {
-		invalidParams.Add(request.NewErrParamRequired("Source"))
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Message != nil {
 		if err := s.Message.Validate(); err != nil {
-			invalidParams.AddNested("Message", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Message", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -9701,7 +9700,7 @@ func (s *SendEmailInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9907,13 +9906,13 @@ func (s SendRawEmailInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendRawEmailInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendRawEmailInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendRawEmailInput"}
 	if s.RawMessage == nil {
-		invalidParams.Add(request.NewErrParamRequired("RawMessage"))
+		invalidParams.Add(aws.NewErrParamRequired("RawMessage"))
 	}
 	if s.RawMessage != nil {
 		if err := s.RawMessage.Validate(); err != nil {
-			invalidParams.AddNested("RawMessage", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RawMessage", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {
@@ -9922,7 +9921,7 @@ func (s *SendRawEmailInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -10083,12 +10082,12 @@ func (s SetIdentityDkimEnabledInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityDkimEnabledInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetIdentityDkimEnabledInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityDkimEnabledInput"}
 	if s.DkimEnabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("DkimEnabled"))
+		invalidParams.Add(aws.NewErrParamRequired("DkimEnabled"))
 	}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10161,12 +10160,12 @@ func (s SetIdentityFeedbackForwardingEnabledInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityFeedbackForwardingEnabledInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetIdentityFeedbackForwardingEnabledInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityFeedbackForwardingEnabledInput"}
 	if s.ForwardingEnabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("ForwardingEnabled"))
+		invalidParams.Add(aws.NewErrParamRequired("ForwardingEnabled"))
 	}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10245,15 +10244,15 @@ func (s SetIdentityHeadersInNotificationsEnabledInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityHeadersInNotificationsEnabledInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetIdentityHeadersInNotificationsEnabledInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityHeadersInNotificationsEnabledInput"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 	if s.NotificationType == nil {
-		invalidParams.Add(request.NewErrParamRequired("NotificationType"))
+		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10341,9 +10340,9 @@ func (s SetIdentityMailFromDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityMailFromDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetIdentityMailFromDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityMailFromDomainInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10425,12 +10424,12 @@ func (s SetIdentityNotificationTopicInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetIdentityNotificationTopicInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetIdentityNotificationTopicInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetIdentityNotificationTopicInput"}
 	if s.Identity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Identity"))
+		invalidParams.Add(aws.NewErrParamRequired("Identity"))
 	}
 	if s.NotificationType == nil {
-		invalidParams.Add(request.NewErrParamRequired("NotificationType"))
+		invalidParams.Add(aws.NewErrParamRequired("NotificationType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10506,12 +10505,12 @@ func (s SetReceiptRulePositionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetReceiptRulePositionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetReceiptRulePositionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetReceiptRulePositionInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10588,9 +10587,9 @@ func (s StopAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopAction"}
 	if s.Scope == nil {
-		invalidParams.Add(request.NewErrParamRequired("Scope"))
+		invalidParams.Add(aws.NewErrParamRequired("Scope"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10675,16 +10674,16 @@ func (s UpdateConfigurationSetEventDestinationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConfigurationSetEventDestinationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConfigurationSetEventDestinationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetEventDestinationInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if s.EventDestination == nil {
-		invalidParams.Add(request.NewErrParamRequired("EventDestination"))
+		invalidParams.Add(aws.NewErrParamRequired("EventDestination"))
 	}
 	if s.EventDestination != nil {
 		if err := s.EventDestination.Validate(); err != nil {
-			invalidParams.AddNested("EventDestination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EventDestination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10757,12 +10756,12 @@ func (s UpdateConfigurationSetTrackingOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConfigurationSetTrackingOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConfigurationSetTrackingOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConfigurationSetTrackingOptionsInput"}
 	if s.ConfigurationSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if s.TrackingOptions == nil {
-		invalidParams.Add(request.NewErrParamRequired("TrackingOptions"))
+		invalidParams.Add(aws.NewErrParamRequired("TrackingOptions"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10829,16 +10828,16 @@ func (s UpdateReceiptRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateReceiptRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateReceiptRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateReceiptRuleInput"}
 	if s.Rule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rule"))
+		invalidParams.Add(aws.NewErrParamRequired("Rule"))
 	}
 	if s.RuleSetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleSetName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleSetName"))
 	}
 	if s.Rule != nil {
 		if err := s.Rule.Validate(); err != nil {
-			invalidParams.AddNested("Rule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Rule", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10901,9 +10900,9 @@ func (s VerifyDomainDkimInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyDomainDkimInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerifyDomainDkimInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerifyDomainDkimInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10982,9 +10981,9 @@ func (s VerifyDomainIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyDomainIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerifyDomainIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerifyDomainIdentityInput"}
 	if s.Domain == nil {
-		invalidParams.Add(request.NewErrParamRequired("Domain"))
+		invalidParams.Add(aws.NewErrParamRequired("Domain"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11060,9 +11059,9 @@ func (s VerifyEmailAddressInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyEmailAddressInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerifyEmailAddressInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerifyEmailAddressInput"}
 	if s.EmailAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("EmailAddress"))
+		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11117,9 +11116,9 @@ func (s VerifyEmailIdentityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *VerifyEmailIdentityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "VerifyEmailIdentityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "VerifyEmailIdentityInput"}
 	if s.EmailAddress == nil {
-		invalidParams.Add(request.NewErrParamRequired("EmailAddress"))
+		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11188,9 +11187,9 @@ func (s WorkmailAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WorkmailAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WorkmailAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "WorkmailAction"}
 	if s.OrganizationArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationArn"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationArn"))
 	}
 
 	if invalidParams.Len() > 0 {

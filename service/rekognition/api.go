@@ -4,13 +4,12 @@ package rekognition
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCompareFaces = "CompareFaces"
 
-// CompareFacesRequest generates a "aws/request.Request" representing the
+// CompareFacesRequest generates a "aws.Request" representing the
 // client's request for the CompareFaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -32,8 +31,8 @@ const opCompareFaces = "CompareFaces"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) (req *request.Request, output *CompareFacesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) (req *aws.Request, output *CompareFacesOutput) {
+	op := &aws.Operation{
 		Name:       opCompareFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -135,7 +134,7 @@ func (c *Rekognition) CompareFaces(input *CompareFacesInput) (*CompareFacesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) CompareFacesWithContext(ctx aws.Context, input *CompareFacesInput, opts ...request.Option) (*CompareFacesOutput, error) {
+func (c *Rekognition) CompareFacesWithContext(ctx aws.Context, input *CompareFacesInput, opts ...aws.Option) (*CompareFacesOutput, error) {
 	req, out := c.CompareFacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -144,7 +143,7 @@ func (c *Rekognition) CompareFacesWithContext(ctx aws.Context, input *CompareFac
 
 const opCreateCollection = "CreateCollection"
 
-// CreateCollectionRequest generates a "aws/request.Request" representing the
+// CreateCollectionRequest generates a "aws.Request" representing the
 // client's request for the CreateCollection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -166,8 +165,8 @@ const opCreateCollection = "CreateCollection"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) (req *request.Request, output *CreateCollectionOutput) {
-	op := &request.Operation{
+func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) (req *aws.Request, output *CreateCollectionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCollection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -242,7 +241,7 @@ func (c *Rekognition) CreateCollection(input *CreateCollectionInput) (*CreateCol
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) CreateCollectionWithContext(ctx aws.Context, input *CreateCollectionInput, opts ...request.Option) (*CreateCollectionOutput, error) {
+func (c *Rekognition) CreateCollectionWithContext(ctx aws.Context, input *CreateCollectionInput, opts ...aws.Option) (*CreateCollectionOutput, error) {
 	req, out := c.CreateCollectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -251,7 +250,7 @@ func (c *Rekognition) CreateCollectionWithContext(ctx aws.Context, input *Create
 
 const opDeleteCollection = "DeleteCollection"
 
-// DeleteCollectionRequest generates a "aws/request.Request" representing the
+// DeleteCollectionRequest generates a "aws.Request" representing the
 // client's request for the DeleteCollection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -273,8 +272,8 @@ const opDeleteCollection = "DeleteCollection"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) (req *request.Request, output *DeleteCollectionOutput) {
-	op := &request.Operation{
+func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) (req *aws.Request, output *DeleteCollectionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCollection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -340,7 +339,7 @@ func (c *Rekognition) DeleteCollection(input *DeleteCollectionInput) (*DeleteCol
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) DeleteCollectionWithContext(ctx aws.Context, input *DeleteCollectionInput, opts ...request.Option) (*DeleteCollectionOutput, error) {
+func (c *Rekognition) DeleteCollectionWithContext(ctx aws.Context, input *DeleteCollectionInput, opts ...aws.Option) (*DeleteCollectionOutput, error) {
 	req, out := c.DeleteCollectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -349,7 +348,7 @@ func (c *Rekognition) DeleteCollectionWithContext(ctx aws.Context, input *Delete
 
 const opDeleteFaces = "DeleteFaces"
 
-// DeleteFacesRequest generates a "aws/request.Request" representing the
+// DeleteFacesRequest generates a "aws.Request" representing the
 // client's request for the DeleteFaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -371,8 +370,8 @@ const opDeleteFaces = "DeleteFaces"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) (req *request.Request, output *DeleteFacesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) (req *aws.Request, output *DeleteFacesOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -438,7 +437,7 @@ func (c *Rekognition) DeleteFaces(input *DeleteFacesInput) (*DeleteFacesOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) DeleteFacesWithContext(ctx aws.Context, input *DeleteFacesInput, opts ...request.Option) (*DeleteFacesOutput, error) {
+func (c *Rekognition) DeleteFacesWithContext(ctx aws.Context, input *DeleteFacesInput, opts ...aws.Option) (*DeleteFacesOutput, error) {
 	req, out := c.DeleteFacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -447,7 +446,7 @@ func (c *Rekognition) DeleteFacesWithContext(ctx aws.Context, input *DeleteFaces
 
 const opDetectFaces = "DetectFaces"
 
-// DetectFacesRequest generates a "aws/request.Request" representing the
+// DetectFacesRequest generates a "aws.Request" representing the
 // client's request for the DetectFaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -469,8 +468,8 @@ const opDetectFaces = "DetectFaces"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) (req *request.Request, output *DetectFacesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) (req *aws.Request, output *DetectFacesOutput) {
+	op := &aws.Operation{
 		Name:       opDetectFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -556,7 +555,7 @@ func (c *Rekognition) DetectFaces(input *DetectFacesInput) (*DetectFacesOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) DetectFacesWithContext(ctx aws.Context, input *DetectFacesInput, opts ...request.Option) (*DetectFacesOutput, error) {
+func (c *Rekognition) DetectFacesWithContext(ctx aws.Context, input *DetectFacesInput, opts ...aws.Option) (*DetectFacesOutput, error) {
 	req, out := c.DetectFacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -565,7 +564,7 @@ func (c *Rekognition) DetectFacesWithContext(ctx aws.Context, input *DetectFaces
 
 const opDetectLabels = "DetectLabels"
 
-// DetectLabelsRequest generates a "aws/request.Request" representing the
+// DetectLabelsRequest generates a "aws.Request" representing the
 // client's request for the DetectLabels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -587,8 +586,8 @@ const opDetectLabels = "DetectLabels"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) (req *request.Request, output *DetectLabelsOutput) {
-	op := &request.Operation{
+func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) (req *aws.Request, output *DetectLabelsOutput) {
+	op := &aws.Operation{
 		Name:       opDetectLabels,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -702,7 +701,7 @@ func (c *Rekognition) DetectLabels(input *DetectLabelsInput) (*DetectLabelsOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) DetectLabelsWithContext(ctx aws.Context, input *DetectLabelsInput, opts ...request.Option) (*DetectLabelsOutput, error) {
+func (c *Rekognition) DetectLabelsWithContext(ctx aws.Context, input *DetectLabelsInput, opts ...aws.Option) (*DetectLabelsOutput, error) {
 	req, out := c.DetectLabelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -711,7 +710,7 @@ func (c *Rekognition) DetectLabelsWithContext(ctx aws.Context, input *DetectLabe
 
 const opDetectModerationLabels = "DetectModerationLabels"
 
-// DetectModerationLabelsRequest generates a "aws/request.Request" representing the
+// DetectModerationLabelsRequest generates a "aws.Request" representing the
 // client's request for the DetectModerationLabels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -733,8 +732,8 @@ const opDetectModerationLabels = "DetectModerationLabels"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabelsInput) (req *request.Request, output *DetectModerationLabelsOutput) {
-	op := &request.Operation{
+func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabelsInput) (req *aws.Request, output *DetectModerationLabelsOutput) {
+	op := &aws.Operation{
 		Name:       opDetectModerationLabels,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -810,7 +809,7 @@ func (c *Rekognition) DetectModerationLabels(input *DetectModerationLabelsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) DetectModerationLabelsWithContext(ctx aws.Context, input *DetectModerationLabelsInput, opts ...request.Option) (*DetectModerationLabelsOutput, error) {
+func (c *Rekognition) DetectModerationLabelsWithContext(ctx aws.Context, input *DetectModerationLabelsInput, opts ...aws.Option) (*DetectModerationLabelsOutput, error) {
 	req, out := c.DetectModerationLabelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -819,7 +818,7 @@ func (c *Rekognition) DetectModerationLabelsWithContext(ctx aws.Context, input *
 
 const opGetCelebrityInfo = "GetCelebrityInfo"
 
-// GetCelebrityInfoRequest generates a "aws/request.Request" representing the
+// GetCelebrityInfoRequest generates a "aws.Request" representing the
 // client's request for the GetCelebrityInfo operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -841,8 +840,8 @@ const opGetCelebrityInfo = "GetCelebrityInfo"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) (req *request.Request, output *GetCelebrityInfoOutput) {
-	op := &request.Operation{
+func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) (req *aws.Request, output *GetCelebrityInfoOutput) {
+	op := &aws.Operation{
 		Name:       opGetCelebrityInfo,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -910,7 +909,7 @@ func (c *Rekognition) GetCelebrityInfo(input *GetCelebrityInfoInput) (*GetCelebr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) GetCelebrityInfoWithContext(ctx aws.Context, input *GetCelebrityInfoInput, opts ...request.Option) (*GetCelebrityInfoOutput, error) {
+func (c *Rekognition) GetCelebrityInfoWithContext(ctx aws.Context, input *GetCelebrityInfoInput, opts ...aws.Option) (*GetCelebrityInfoOutput, error) {
 	req, out := c.GetCelebrityInfoRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -919,7 +918,7 @@ func (c *Rekognition) GetCelebrityInfoWithContext(ctx aws.Context, input *GetCel
 
 const opIndexFaces = "IndexFaces"
 
-// IndexFacesRequest generates a "aws/request.Request" representing the
+// IndexFacesRequest generates a "aws.Request" representing the
 // client's request for the IndexFaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -941,8 +940,8 @@ const opIndexFaces = "IndexFaces"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) (req *request.Request, output *IndexFacesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) (req *aws.Request, output *IndexFacesOutput) {
+	op := &aws.Operation{
 		Name:       opIndexFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1042,7 +1041,7 @@ func (c *Rekognition) IndexFaces(input *IndexFacesInput) (*IndexFacesOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) IndexFacesWithContext(ctx aws.Context, input *IndexFacesInput, opts ...request.Option) (*IndexFacesOutput, error) {
+func (c *Rekognition) IndexFacesWithContext(ctx aws.Context, input *IndexFacesInput, opts ...aws.Option) (*IndexFacesOutput, error) {
 	req, out := c.IndexFacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1051,7 +1050,7 @@ func (c *Rekognition) IndexFacesWithContext(ctx aws.Context, input *IndexFacesIn
 
 const opListCollections = "ListCollections"
 
-// ListCollectionsRequest generates a "aws/request.Request" representing the
+// ListCollectionsRequest generates a "aws.Request" representing the
 // client's request for the ListCollections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1073,12 +1072,12 @@ const opListCollections = "ListCollections"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) (req *request.Request, output *ListCollectionsOutput) {
-	op := &request.Operation{
+func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) (req *aws.Request, output *ListCollectionsOutput) {
+	op := &aws.Operation{
 		Name:       opListCollections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -1152,7 +1151,7 @@ func (c *Rekognition) ListCollections(input *ListCollectionsInput) (*ListCollect
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) ListCollectionsWithContext(ctx aws.Context, input *ListCollectionsInput, opts ...request.Option) (*ListCollectionsOutput, error) {
+func (c *Rekognition) ListCollectionsWithContext(ctx aws.Context, input *ListCollectionsInput, opts ...aws.Option) (*ListCollectionsOutput, error) {
 	req, out := c.ListCollectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1187,9 +1186,9 @@ func (c *Rekognition) ListCollectionsPages(input *ListCollectionsInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *ListCollectionsInput, fn func(*ListCollectionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *ListCollectionsInput, fn func(*ListCollectionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCollectionsInput
 			if input != nil {
 				tmp := *input
@@ -1211,7 +1210,7 @@ func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *Li
 
 const opListFaces = "ListFaces"
 
-// ListFacesRequest generates a "aws/request.Request" representing the
+// ListFacesRequest generates a "aws.Request" representing the
 // client's request for the ListFaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1233,12 +1232,12 @@ const opListFaces = "ListFaces"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) ListFacesRequest(input *ListFacesInput) (req *request.Request, output *ListFacesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) ListFacesRequest(input *ListFacesInput) (req *aws.Request, output *ListFacesOutput) {
+	op := &aws.Operation{
 		Name:       opListFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -1310,7 +1309,7 @@ func (c *Rekognition) ListFaces(input *ListFacesInput) (*ListFacesOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) ListFacesWithContext(ctx aws.Context, input *ListFacesInput, opts ...request.Option) (*ListFacesOutput, error) {
+func (c *Rekognition) ListFacesWithContext(ctx aws.Context, input *ListFacesInput, opts ...aws.Option) (*ListFacesOutput, error) {
 	req, out := c.ListFacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1345,9 +1344,9 @@ func (c *Rekognition) ListFacesPages(input *ListFacesInput, fn func(*ListFacesOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFacesInput, fn func(*ListFacesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFacesInput, fn func(*ListFacesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListFacesInput
 			if input != nil {
 				tmp := *input
@@ -1369,7 +1368,7 @@ func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFace
 
 const opRecognizeCelebrities = "RecognizeCelebrities"
 
-// RecognizeCelebritiesRequest generates a "aws/request.Request" representing the
+// RecognizeCelebritiesRequest generates a "aws.Request" representing the
 // client's request for the RecognizeCelebrities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1391,8 +1390,8 @@ const opRecognizeCelebrities = "RecognizeCelebrities"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) (req *request.Request, output *RecognizeCelebritiesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInput) (req *aws.Request, output *RecognizeCelebritiesOutput) {
+	op := &aws.Operation{
 		Name:       opRecognizeCelebrities,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1489,7 +1488,7 @@ func (c *Rekognition) RecognizeCelebrities(input *RecognizeCelebritiesInput) (*R
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) RecognizeCelebritiesWithContext(ctx aws.Context, input *RecognizeCelebritiesInput, opts ...request.Option) (*RecognizeCelebritiesOutput, error) {
+func (c *Rekognition) RecognizeCelebritiesWithContext(ctx aws.Context, input *RecognizeCelebritiesInput, opts ...aws.Option) (*RecognizeCelebritiesOutput, error) {
 	req, out := c.RecognizeCelebritiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1498,7 +1497,7 @@ func (c *Rekognition) RecognizeCelebritiesWithContext(ctx aws.Context, input *Re
 
 const opSearchFaces = "SearchFaces"
 
-// SearchFacesRequest generates a "aws/request.Request" representing the
+// SearchFacesRequest generates a "aws.Request" representing the
 // client's request for the SearchFaces operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1520,8 +1519,8 @@ const opSearchFaces = "SearchFaces"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) (req *request.Request, output *SearchFacesOutput) {
-	op := &request.Operation{
+func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) (req *aws.Request, output *SearchFacesOutput) {
+	op := &aws.Operation{
 		Name:       opSearchFaces,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1600,7 +1599,7 @@ func (c *Rekognition) SearchFaces(input *SearchFacesInput) (*SearchFacesOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) SearchFacesWithContext(ctx aws.Context, input *SearchFacesInput, opts ...request.Option) (*SearchFacesOutput, error) {
+func (c *Rekognition) SearchFacesWithContext(ctx aws.Context, input *SearchFacesInput, opts ...aws.Option) (*SearchFacesOutput, error) {
 	req, out := c.SearchFacesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1609,7 +1608,7 @@ func (c *Rekognition) SearchFacesWithContext(ctx aws.Context, input *SearchFaces
 
 const opSearchFacesByImage = "SearchFacesByImage"
 
-// SearchFacesByImageRequest generates a "aws/request.Request" representing the
+// SearchFacesByImageRequest generates a "aws.Request" representing the
 // client's request for the SearchFacesByImage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1631,8 +1630,8 @@ const opSearchFacesByImage = "SearchFacesByImage"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) (req *request.Request, output *SearchFacesByImageOutput) {
-	op := &request.Operation{
+func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) (req *aws.Request, output *SearchFacesByImageOutput) {
+	op := &aws.Operation{
 		Name:       opSearchFacesByImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1726,7 +1725,7 @@ func (c *Rekognition) SearchFacesByImage(input *SearchFacesByImageInput) (*Searc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Rekognition) SearchFacesByImageWithContext(ctx aws.Context, input *SearchFacesByImageInput, opts ...request.Option) (*SearchFacesByImageOutput, error) {
+func (c *Rekognition) SearchFacesByImageWithContext(ctx aws.Context, input *SearchFacesByImageInput, opts ...aws.Option) (*SearchFacesByImageOutput, error) {
 	req, out := c.SearchFacesByImageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1968,21 +1967,21 @@ func (s CompareFacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CompareFacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CompareFacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CompareFacesInput"}
 	if s.SourceImage == nil {
-		invalidParams.Add(request.NewErrParamRequired("SourceImage"))
+		invalidParams.Add(aws.NewErrParamRequired("SourceImage"))
 	}
 	if s.TargetImage == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetImage"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetImage"))
 	}
 	if s.SourceImage != nil {
 		if err := s.SourceImage.Validate(); err != nil {
-			invalidParams.AddNested("SourceImage", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SourceImage", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.TargetImage != nil {
 		if err := s.TargetImage.Validate(); err != nil {
-			invalidParams.AddNested("TargetImage", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TargetImage", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2249,12 +2248,12 @@ func (s CreateCollectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCollectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCollectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCollectionInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2323,12 +2322,12 @@ func (s DeleteCollectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCollectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCollectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCollectionInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2392,18 +2391,18 @@ func (s DeleteFacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFacesInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 	if s.FaceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("FaceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("FaceIds"))
 	}
 	if s.FaceIds != nil && len(s.FaceIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FaceIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FaceIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2480,13 +2479,13 @@ func (s DetectFacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectFacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetectFacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetectFacesInput"}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2582,13 +2581,13 @@ func (s DetectLabelsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectLabelsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetectLabelsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetectLabelsInput"}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2684,13 +2683,13 @@ func (s DetectModerationLabelsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectModerationLabelsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetectModerationLabelsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetectModerationLabelsInput"}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3186,9 +3185,9 @@ func (s GetCelebrityInfoInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCelebrityInfoInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCelebrityInfoInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCelebrityInfoInput"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3282,13 +3281,13 @@ func (s Image) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Image) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Image"}
+	invalidParams := aws.ErrInvalidParams{Context: "Image"}
 	if s.Bytes != nil && len(s.Bytes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Bytes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Bytes", 1))
 	}
 	if s.S3Object != nil {
 		if err := s.S3Object.Validate(); err != nil {
-			invalidParams.AddNested("S3Object", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Object", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3386,22 +3385,22 @@ func (s IndexFacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IndexFacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IndexFacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "IndexFacesInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 	if s.ExternalImageId != nil && len(*s.ExternalImageId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExternalImageId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExternalImageId", 1))
 	}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3651,12 +3650,12 @@ func (s ListFacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListFacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListFacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListFacesInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3897,13 +3896,13 @@ func (s RecognizeCelebritiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RecognizeCelebritiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RecognizeCelebritiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RecognizeCelebritiesInput"}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4004,15 +4003,15 @@ func (s S3Object) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Object) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Object"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Object"}
 	if s.Bucket != nil && len(*s.Bucket) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Bucket", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Bucket", 3))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Version != nil && len(*s.Version) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Version", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Version", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4074,22 +4073,22 @@ func (s SearchFacesByImageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchFacesByImageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SearchFacesByImageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SearchFacesByImageInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 	if s.Image == nil {
-		invalidParams.Add(request.NewErrParamRequired("Image"))
+		invalidParams.Add(aws.NewErrParamRequired("Image"))
 	}
 	if s.MaxFaces != nil && *s.MaxFaces < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxFaces", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxFaces", 1))
 	}
 	if s.Image != nil {
 		if err := s.Image.Validate(); err != nil {
-			invalidParams.AddNested("Image", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Image", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4201,18 +4200,18 @@ func (s SearchFacesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchFacesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SearchFacesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SearchFacesInput"}
 	if s.CollectionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CollectionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CollectionId"))
 	}
 	if s.CollectionId != nil && len(*s.CollectionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CollectionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CollectionId", 1))
 	}
 	if s.FaceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FaceId"))
+		invalidParams.Add(aws.NewErrParamRequired("FaceId"))
 	}
 	if s.MaxFaces != nil && *s.MaxFaces < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxFaces", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxFaces", 1))
 	}
 
 	if invalidParams.Len() > 0 {

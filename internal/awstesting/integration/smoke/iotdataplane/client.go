@@ -22,7 +22,6 @@ func init() {
 			return
 		}
 
-		fmt.Println("IOT Data endpoint:", *result.EndpointAddress)
 		gucumber.World["client"] = iotdataplane.New(smoke.Session, aws.NewConfig().
 			WithEndpoint(*result.EndpointAddress))
 	})

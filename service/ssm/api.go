@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddTagsToResource = "AddTagsToResource"
 
-// AddTagsToResourceRequest generates a "aws/request.Request" representing the
+// AddTagsToResourceRequest generates a "aws.Request" representing the
 // client's request for the AddTagsToResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddTagsToResource = "AddTagsToResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResource
-func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *request.Request, output *AddTagsToResourceOutput) {
-	op := &request.Operation{
+func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) (req *aws.Request, output *AddTagsToResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAddTagsToResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -114,7 +113,7 @@ func (c *SSM) AddTagsToResource(input *AddTagsToResourceInput) (*AddTagsToResour
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...request.Option) (*AddTagsToResourceOutput, error) {
+func (c *SSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToResourceInput, opts ...aws.Option) (*AddTagsToResourceOutput, error) {
 	req, out := c.AddTagsToResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -123,7 +122,7 @@ func (c *SSM) AddTagsToResourceWithContext(ctx aws.Context, input *AddTagsToReso
 
 const opCancelCommand = "CancelCommand"
 
-// CancelCommandRequest generates a "aws/request.Request" representing the
+// CancelCommandRequest generates a "aws.Request" representing the
 // client's request for the CancelCommand operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -147,8 +146,8 @@ const opCancelCommand = "CancelCommand"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommand
-func (c *SSM) CancelCommandRequest(input *CancelCommandInput) (req *request.Request, output *CancelCommandOutput) {
-	op := &request.Operation{
+func (c *SSM) CancelCommandRequest(input *CancelCommandInput) (req *aws.Request, output *CancelCommandOutput) {
+	op := &aws.Operation{
 		Name:       opCancelCommand,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -214,7 +213,7 @@ func (c *SSM) CancelCommand(input *CancelCommandInput) (*CancelCommandOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CancelCommandWithContext(ctx aws.Context, input *CancelCommandInput, opts ...request.Option) (*CancelCommandOutput, error) {
+func (c *SSM) CancelCommandWithContext(ctx aws.Context, input *CancelCommandInput, opts ...aws.Option) (*CancelCommandOutput, error) {
 	req, out := c.CancelCommandRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -223,7 +222,7 @@ func (c *SSM) CancelCommandWithContext(ctx aws.Context, input *CancelCommandInpu
 
 const opCreateActivation = "CreateActivation"
 
-// CreateActivationRequest generates a "aws/request.Request" representing the
+// CreateActivationRequest generates a "aws.Request" representing the
 // client's request for the CreateActivation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -247,8 +246,8 @@ const opCreateActivation = "CreateActivation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivation
-func (c *SSM) CreateActivationRequest(input *CreateActivationInput) (req *request.Request, output *CreateActivationOutput) {
-	op := &request.Operation{
+func (c *SSM) CreateActivationRequest(input *CreateActivationInput) (req *aws.Request, output *CreateActivationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateActivation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -297,7 +296,7 @@ func (c *SSM) CreateActivation(input *CreateActivationInput) (*CreateActivationO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreateActivationWithContext(ctx aws.Context, input *CreateActivationInput, opts ...request.Option) (*CreateActivationOutput, error) {
+func (c *SSM) CreateActivationWithContext(ctx aws.Context, input *CreateActivationInput, opts ...aws.Option) (*CreateActivationOutput, error) {
 	req, out := c.CreateActivationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -306,7 +305,7 @@ func (c *SSM) CreateActivationWithContext(ctx aws.Context, input *CreateActivati
 
 const opCreateAssociation = "CreateAssociation"
 
-// CreateAssociationRequest generates a "aws/request.Request" representing the
+// CreateAssociationRequest generates a "aws.Request" representing the
 // client's request for the CreateAssociation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -330,8 +329,8 @@ const opCreateAssociation = "CreateAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation
-func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *request.Request, output *CreateAssociationOutput) {
-	op := &request.Operation{
+func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) (req *aws.Request, output *CreateAssociationOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -430,7 +429,7 @@ func (c *SSM) CreateAssociation(input *CreateAssociationInput) (*CreateAssociati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreateAssociationWithContext(ctx aws.Context, input *CreateAssociationInput, opts ...request.Option) (*CreateAssociationOutput, error) {
+func (c *SSM) CreateAssociationWithContext(ctx aws.Context, input *CreateAssociationInput, opts ...aws.Option) (*CreateAssociationOutput, error) {
 	req, out := c.CreateAssociationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -439,7 +438,7 @@ func (c *SSM) CreateAssociationWithContext(ctx aws.Context, input *CreateAssocia
 
 const opCreateAssociationBatch = "CreateAssociationBatch"
 
-// CreateAssociationBatchRequest generates a "aws/request.Request" representing the
+// CreateAssociationBatchRequest generates a "aws.Request" representing the
 // client's request for the CreateAssociationBatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -463,8 +462,8 @@ const opCreateAssociationBatch = "CreateAssociationBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatch
-func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) (req *request.Request, output *CreateAssociationBatchOutput) {
-	op := &request.Operation{
+func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) (req *aws.Request, output *CreateAssociationBatchOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAssociationBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -563,7 +562,7 @@ func (c *SSM) CreateAssociationBatch(input *CreateAssociationBatchInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreateAssociationBatchWithContext(ctx aws.Context, input *CreateAssociationBatchInput, opts ...request.Option) (*CreateAssociationBatchOutput, error) {
+func (c *SSM) CreateAssociationBatchWithContext(ctx aws.Context, input *CreateAssociationBatchInput, opts ...aws.Option) (*CreateAssociationBatchOutput, error) {
 	req, out := c.CreateAssociationBatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -572,7 +571,7 @@ func (c *SSM) CreateAssociationBatchWithContext(ctx aws.Context, input *CreateAs
 
 const opCreateDocument = "CreateDocument"
 
-// CreateDocumentRequest generates a "aws/request.Request" representing the
+// CreateDocumentRequest generates a "aws.Request" representing the
 // client's request for the CreateDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -596,8 +595,8 @@ const opCreateDocument = "CreateDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument
-func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) (req *request.Request, output *CreateDocumentOutput) {
-	op := &request.Operation{
+func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) (req *aws.Request, output *CreateDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -660,7 +659,7 @@ func (c *SSM) CreateDocument(input *CreateDocumentInput) (*CreateDocumentOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreateDocumentWithContext(ctx aws.Context, input *CreateDocumentInput, opts ...request.Option) (*CreateDocumentOutput, error) {
+func (c *SSM) CreateDocumentWithContext(ctx aws.Context, input *CreateDocumentInput, opts ...aws.Option) (*CreateDocumentOutput, error) {
 	req, out := c.CreateDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -669,7 +668,7 @@ func (c *SSM) CreateDocumentWithContext(ctx aws.Context, input *CreateDocumentIn
 
 const opCreateMaintenanceWindow = "CreateMaintenanceWindow"
 
-// CreateMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// CreateMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the CreateMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -693,8 +692,8 @@ const opCreateMaintenanceWindow = "CreateMaintenanceWindow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindow
-func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput) (req *request.Request, output *CreateMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput) (req *aws.Request, output *CreateMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opCreateMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -747,7 +746,7 @@ func (c *SSM) CreateMaintenanceWindow(input *CreateMaintenanceWindowInput) (*Cre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreateMaintenanceWindowWithContext(ctx aws.Context, input *CreateMaintenanceWindowInput, opts ...request.Option) (*CreateMaintenanceWindowOutput, error) {
+func (c *SSM) CreateMaintenanceWindowWithContext(ctx aws.Context, input *CreateMaintenanceWindowInput, opts ...aws.Option) (*CreateMaintenanceWindowOutput, error) {
 	req, out := c.CreateMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -756,7 +755,7 @@ func (c *SSM) CreateMaintenanceWindowWithContext(ctx aws.Context, input *CreateM
 
 const opCreatePatchBaseline = "CreatePatchBaseline"
 
-// CreatePatchBaselineRequest generates a "aws/request.Request" representing the
+// CreatePatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the CreatePatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -780,8 +779,8 @@ const opCreatePatchBaseline = "CreatePatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaseline
-func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) (req *request.Request, output *CreatePatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) (req *aws.Request, output *CreatePatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -834,7 +833,7 @@ func (c *SSM) CreatePatchBaseline(input *CreatePatchBaselineInput) (*CreatePatch
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreatePatchBaselineWithContext(ctx aws.Context, input *CreatePatchBaselineInput, opts ...request.Option) (*CreatePatchBaselineOutput, error) {
+func (c *SSM) CreatePatchBaselineWithContext(ctx aws.Context, input *CreatePatchBaselineInput, opts ...aws.Option) (*CreatePatchBaselineOutput, error) {
 	req, out := c.CreatePatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -843,7 +842,7 @@ func (c *SSM) CreatePatchBaselineWithContext(ctx aws.Context, input *CreatePatch
 
 const opCreateResourceDataSync = "CreateResourceDataSync"
 
-// CreateResourceDataSyncRequest generates a "aws/request.Request" representing the
+// CreateResourceDataSyncRequest generates a "aws.Request" representing the
 // client's request for the CreateResourceDataSync operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -867,8 +866,8 @@ const opCreateResourceDataSync = "CreateResourceDataSync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateResourceDataSync
-func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) (req *request.Request, output *CreateResourceDataSyncOutput) {
-	op := &request.Operation{
+func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) (req *aws.Request, output *CreateResourceDataSyncOutput) {
+	op := &aws.Operation{
 		Name:       opCreateResourceDataSync,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -933,7 +932,7 @@ func (c *SSM) CreateResourceDataSync(input *CreateResourceDataSyncInput) (*Creat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) CreateResourceDataSyncWithContext(ctx aws.Context, input *CreateResourceDataSyncInput, opts ...request.Option) (*CreateResourceDataSyncOutput, error) {
+func (c *SSM) CreateResourceDataSyncWithContext(ctx aws.Context, input *CreateResourceDataSyncInput, opts ...aws.Option) (*CreateResourceDataSyncOutput, error) {
 	req, out := c.CreateResourceDataSyncRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -942,7 +941,7 @@ func (c *SSM) CreateResourceDataSyncWithContext(ctx aws.Context, input *CreateRe
 
 const opDeleteActivation = "DeleteActivation"
 
-// DeleteActivationRequest generates a "aws/request.Request" representing the
+// DeleteActivationRequest generates a "aws.Request" representing the
 // client's request for the DeleteActivation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -966,8 +965,8 @@ const opDeleteActivation = "DeleteActivation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivation
-func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) (req *request.Request, output *DeleteActivationOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) (req *aws.Request, output *DeleteActivationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteActivation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1023,7 +1022,7 @@ func (c *SSM) DeleteActivation(input *DeleteActivationInput) (*DeleteActivationO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteActivationWithContext(ctx aws.Context, input *DeleteActivationInput, opts ...request.Option) (*DeleteActivationOutput, error) {
+func (c *SSM) DeleteActivationWithContext(ctx aws.Context, input *DeleteActivationInput, opts ...aws.Option) (*DeleteActivationOutput, error) {
 	req, out := c.DeleteActivationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1032,7 +1031,7 @@ func (c *SSM) DeleteActivationWithContext(ctx aws.Context, input *DeleteActivati
 
 const opDeleteAssociation = "DeleteAssociation"
 
-// DeleteAssociationRequest generates a "aws/request.Request" representing the
+// DeleteAssociationRequest generates a "aws.Request" representing the
 // client's request for the DeleteAssociation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1056,8 +1055,8 @@ const opDeleteAssociation = "DeleteAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociation
-func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) (req *request.Request, output *DeleteAssociationOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) (req *aws.Request, output *DeleteAssociationOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1132,7 +1131,7 @@ func (c *SSM) DeleteAssociation(input *DeleteAssociationInput) (*DeleteAssociati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteAssociationWithContext(ctx aws.Context, input *DeleteAssociationInput, opts ...request.Option) (*DeleteAssociationOutput, error) {
+func (c *SSM) DeleteAssociationWithContext(ctx aws.Context, input *DeleteAssociationInput, opts ...aws.Option) (*DeleteAssociationOutput, error) {
 	req, out := c.DeleteAssociationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1141,7 +1140,7 @@ func (c *SSM) DeleteAssociationWithContext(ctx aws.Context, input *DeleteAssocia
 
 const opDeleteDocument = "DeleteDocument"
 
-// DeleteDocumentRequest generates a "aws/request.Request" representing the
+// DeleteDocumentRequest generates a "aws.Request" representing the
 // client's request for the DeleteDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1165,8 +1164,8 @@ const opDeleteDocument = "DeleteDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument
-func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) (req *request.Request, output *DeleteDocumentOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) (req *aws.Request, output *DeleteDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1226,7 +1225,7 @@ func (c *SSM) DeleteDocument(input *DeleteDocumentInput) (*DeleteDocumentOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocumentInput, opts ...request.Option) (*DeleteDocumentOutput, error) {
+func (c *SSM) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocumentInput, opts ...aws.Option) (*DeleteDocumentOutput, error) {
 	req, out := c.DeleteDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1235,7 +1234,7 @@ func (c *SSM) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocumentIn
 
 const opDeleteMaintenanceWindow = "DeleteMaintenanceWindow"
 
-// DeleteMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// DeleteMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the DeleteMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1259,8 +1258,8 @@ const opDeleteMaintenanceWindow = "DeleteMaintenanceWindow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindow
-func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput) (req *request.Request, output *DeleteMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput) (req *aws.Request, output *DeleteMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1305,7 +1304,7 @@ func (c *SSM) DeleteMaintenanceWindow(input *DeleteMaintenanceWindowInput) (*Del
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteMaintenanceWindowWithContext(ctx aws.Context, input *DeleteMaintenanceWindowInput, opts ...request.Option) (*DeleteMaintenanceWindowOutput, error) {
+func (c *SSM) DeleteMaintenanceWindowWithContext(ctx aws.Context, input *DeleteMaintenanceWindowInput, opts ...aws.Option) (*DeleteMaintenanceWindowOutput, error) {
 	req, out := c.DeleteMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1314,7 +1313,7 @@ func (c *SSM) DeleteMaintenanceWindowWithContext(ctx aws.Context, input *DeleteM
 
 const opDeleteParameter = "DeleteParameter"
 
-// DeleteParameterRequest generates a "aws/request.Request" representing the
+// DeleteParameterRequest generates a "aws.Request" representing the
 // client's request for the DeleteParameter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1338,8 +1337,8 @@ const opDeleteParameter = "DeleteParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameter
-func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) (req *request.Request, output *DeleteParameterOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) (req *aws.Request, output *DeleteParameterOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteParameter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1387,7 +1386,7 @@ func (c *SSM) DeleteParameter(input *DeleteParameterInput) (*DeleteParameterOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteParameterWithContext(ctx aws.Context, input *DeleteParameterInput, opts ...request.Option) (*DeleteParameterOutput, error) {
+func (c *SSM) DeleteParameterWithContext(ctx aws.Context, input *DeleteParameterInput, opts ...aws.Option) (*DeleteParameterOutput, error) {
 	req, out := c.DeleteParameterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1396,7 +1395,7 @@ func (c *SSM) DeleteParameterWithContext(ctx aws.Context, input *DeleteParameter
 
 const opDeleteParameters = "DeleteParameters"
 
-// DeleteParametersRequest generates a "aws/request.Request" representing the
+// DeleteParametersRequest generates a "aws.Request" representing the
 // client's request for the DeleteParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1420,8 +1419,8 @@ const opDeleteParameters = "DeleteParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameters
-func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) (req *request.Request, output *DeleteParametersOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) (req *aws.Request, output *DeleteParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1467,7 +1466,7 @@ func (c *SSM) DeleteParameters(input *DeleteParametersInput) (*DeleteParametersO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteParametersWithContext(ctx aws.Context, input *DeleteParametersInput, opts ...request.Option) (*DeleteParametersOutput, error) {
+func (c *SSM) DeleteParametersWithContext(ctx aws.Context, input *DeleteParametersInput, opts ...aws.Option) (*DeleteParametersOutput, error) {
 	req, out := c.DeleteParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1476,7 +1475,7 @@ func (c *SSM) DeleteParametersWithContext(ctx aws.Context, input *DeleteParamete
 
 const opDeletePatchBaseline = "DeletePatchBaseline"
 
-// DeletePatchBaselineRequest generates a "aws/request.Request" representing the
+// DeletePatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the DeletePatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1500,8 +1499,8 @@ const opDeletePatchBaseline = "DeletePatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaseline
-func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) (req *request.Request, output *DeletePatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) (req *aws.Request, output *DeletePatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1550,7 +1549,7 @@ func (c *SSM) DeletePatchBaseline(input *DeletePatchBaselineInput) (*DeletePatch
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeletePatchBaselineWithContext(ctx aws.Context, input *DeletePatchBaselineInput, opts ...request.Option) (*DeletePatchBaselineOutput, error) {
+func (c *SSM) DeletePatchBaselineWithContext(ctx aws.Context, input *DeletePatchBaselineInput, opts ...aws.Option) (*DeletePatchBaselineOutput, error) {
 	req, out := c.DeletePatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1559,7 +1558,7 @@ func (c *SSM) DeletePatchBaselineWithContext(ctx aws.Context, input *DeletePatch
 
 const opDeleteResourceDataSync = "DeleteResourceDataSync"
 
-// DeleteResourceDataSyncRequest generates a "aws/request.Request" representing the
+// DeleteResourceDataSyncRequest generates a "aws.Request" representing the
 // client's request for the DeleteResourceDataSync operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1583,8 +1582,8 @@ const opDeleteResourceDataSync = "DeleteResourceDataSync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteResourceDataSync
-func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) (req *request.Request, output *DeleteResourceDataSyncOutput) {
-	op := &request.Operation{
+func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) (req *aws.Request, output *DeleteResourceDataSyncOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteResourceDataSync,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1635,7 +1634,7 @@ func (c *SSM) DeleteResourceDataSync(input *DeleteResourceDataSyncInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeleteResourceDataSyncWithContext(ctx aws.Context, input *DeleteResourceDataSyncInput, opts ...request.Option) (*DeleteResourceDataSyncOutput, error) {
+func (c *SSM) DeleteResourceDataSyncWithContext(ctx aws.Context, input *DeleteResourceDataSyncInput, opts ...aws.Option) (*DeleteResourceDataSyncOutput, error) {
 	req, out := c.DeleteResourceDataSyncRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1644,7 +1643,7 @@ func (c *SSM) DeleteResourceDataSyncWithContext(ctx aws.Context, input *DeleteRe
 
 const opDeregisterManagedInstance = "DeregisterManagedInstance"
 
-// DeregisterManagedInstanceRequest generates a "aws/request.Request" representing the
+// DeregisterManagedInstanceRequest generates a "aws.Request" representing the
 // client's request for the DeregisterManagedInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1668,8 +1667,8 @@ const opDeregisterManagedInstance = "DeregisterManagedInstance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstance
-func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceInput) (req *request.Request, output *DeregisterManagedInstanceOutput) {
-	op := &request.Operation{
+func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceInput) (req *aws.Request, output *DeregisterManagedInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterManagedInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1731,7 +1730,7 @@ func (c *SSM) DeregisterManagedInstance(input *DeregisterManagedInstanceInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeregisterManagedInstanceWithContext(ctx aws.Context, input *DeregisterManagedInstanceInput, opts ...request.Option) (*DeregisterManagedInstanceOutput, error) {
+func (c *SSM) DeregisterManagedInstanceWithContext(ctx aws.Context, input *DeregisterManagedInstanceInput, opts ...aws.Option) (*DeregisterManagedInstanceOutput, error) {
 	req, out := c.DeregisterManagedInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1740,7 +1739,7 @@ func (c *SSM) DeregisterManagedInstanceWithContext(ctx aws.Context, input *Dereg
 
 const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchGroup"
 
-// DeregisterPatchBaselineForPatchGroupRequest generates a "aws/request.Request" representing the
+// DeregisterPatchBaselineForPatchGroupRequest generates a "aws.Request" representing the
 // client's request for the DeregisterPatchBaselineForPatchGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1764,8 +1763,8 @@ const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchG
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroup
-func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatchBaselineForPatchGroupInput) (req *request.Request, output *DeregisterPatchBaselineForPatchGroupOutput) {
-	op := &request.Operation{
+func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatchBaselineForPatchGroupInput) (req *aws.Request, output *DeregisterPatchBaselineForPatchGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1814,7 +1813,7 @@ func (c *SSM) DeregisterPatchBaselineForPatchGroup(input *DeregisterPatchBaselin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeregisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *DeregisterPatchBaselineForPatchGroupInput, opts ...request.Option) (*DeregisterPatchBaselineForPatchGroupOutput, error) {
+func (c *SSM) DeregisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *DeregisterPatchBaselineForPatchGroupInput, opts ...aws.Option) (*DeregisterPatchBaselineForPatchGroupOutput, error) {
 	req, out := c.DeregisterPatchBaselineForPatchGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1823,7 +1822,7 @@ func (c *SSM) DeregisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, i
 
 const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenanceWindow"
 
-// DeregisterTargetFromMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// DeregisterTargetFromMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the DeregisterTargetFromMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1847,8 +1846,8 @@ const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenance
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindow
-func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTargetFromMaintenanceWindowInput) (req *request.Request, output *DeregisterTargetFromMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTargetFromMaintenanceWindowInput) (req *aws.Request, output *DeregisterTargetFromMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterTargetFromMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1901,7 +1900,7 @@ func (c *SSM) DeregisterTargetFromMaintenanceWindow(input *DeregisterTargetFromM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeregisterTargetFromMaintenanceWindowWithContext(ctx aws.Context, input *DeregisterTargetFromMaintenanceWindowInput, opts ...request.Option) (*DeregisterTargetFromMaintenanceWindowOutput, error) {
+func (c *SSM) DeregisterTargetFromMaintenanceWindowWithContext(ctx aws.Context, input *DeregisterTargetFromMaintenanceWindowInput, opts ...aws.Option) (*DeregisterTargetFromMaintenanceWindowOutput, error) {
 	req, out := c.DeregisterTargetFromMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1910,7 +1909,7 @@ func (c *SSM) DeregisterTargetFromMaintenanceWindowWithContext(ctx aws.Context, 
 
 const opDeregisterTaskFromMaintenanceWindow = "DeregisterTaskFromMaintenanceWindow"
 
-// DeregisterTaskFromMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// DeregisterTaskFromMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the DeregisterTaskFromMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1934,8 +1933,8 @@ const opDeregisterTaskFromMaintenanceWindow = "DeregisterTaskFromMaintenanceWind
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindow
-func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFromMaintenanceWindowInput) (req *request.Request, output *DeregisterTaskFromMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFromMaintenanceWindowInput) (req *aws.Request, output *DeregisterTaskFromMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterTaskFromMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1984,7 +1983,7 @@ func (c *SSM) DeregisterTaskFromMaintenanceWindow(input *DeregisterTaskFromMaint
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DeregisterTaskFromMaintenanceWindowWithContext(ctx aws.Context, input *DeregisterTaskFromMaintenanceWindowInput, opts ...request.Option) (*DeregisterTaskFromMaintenanceWindowOutput, error) {
+func (c *SSM) DeregisterTaskFromMaintenanceWindowWithContext(ctx aws.Context, input *DeregisterTaskFromMaintenanceWindowInput, opts ...aws.Option) (*DeregisterTaskFromMaintenanceWindowOutput, error) {
 	req, out := c.DeregisterTaskFromMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1993,7 +1992,7 @@ func (c *SSM) DeregisterTaskFromMaintenanceWindowWithContext(ctx aws.Context, in
 
 const opDescribeActivations = "DescribeActivations"
 
-// DescribeActivationsRequest generates a "aws/request.Request" representing the
+// DescribeActivationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeActivations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2017,12 +2016,12 @@ const opDescribeActivations = "DescribeActivations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations
-func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) (req *request.Request, output *DescribeActivationsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) (req *aws.Request, output *DescribeActivationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeActivations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2078,7 +2077,7 @@ func (c *SSM) DescribeActivations(input *DescribeActivationsInput) (*DescribeAct
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeActivationsWithContext(ctx aws.Context, input *DescribeActivationsInput, opts ...request.Option) (*DescribeActivationsOutput, error) {
+func (c *SSM) DescribeActivationsWithContext(ctx aws.Context, input *DescribeActivationsInput, opts ...aws.Option) (*DescribeActivationsOutput, error) {
 	req, out := c.DescribeActivationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2113,9 +2112,9 @@ func (c *SSM) DescribeActivationsPages(input *DescribeActivationsInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeActivationsPagesWithContext(ctx aws.Context, input *DescribeActivationsInput, fn func(*DescribeActivationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) DescribeActivationsPagesWithContext(ctx aws.Context, input *DescribeActivationsInput, fn func(*DescribeActivationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeActivationsInput
 			if input != nil {
 				tmp := *input
@@ -2137,7 +2136,7 @@ func (c *SSM) DescribeActivationsPagesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeAssociation = "DescribeAssociation"
 
-// DescribeAssociationRequest generates a "aws/request.Request" representing the
+// DescribeAssociationRequest generates a "aws.Request" representing the
 // client's request for the DescribeAssociation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2161,8 +2160,8 @@ const opDescribeAssociation = "DescribeAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation
-func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) (req *request.Request, output *DescribeAssociationOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) (req *aws.Request, output *DescribeAssociationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2234,7 +2233,7 @@ func (c *SSM) DescribeAssociation(input *DescribeAssociationInput) (*DescribeAss
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeAssociationWithContext(ctx aws.Context, input *DescribeAssociationInput, opts ...request.Option) (*DescribeAssociationOutput, error) {
+func (c *SSM) DescribeAssociationWithContext(ctx aws.Context, input *DescribeAssociationInput, opts ...aws.Option) (*DescribeAssociationOutput, error) {
 	req, out := c.DescribeAssociationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2243,7 +2242,7 @@ func (c *SSM) DescribeAssociationWithContext(ctx aws.Context, input *DescribeAss
 
 const opDescribeAutomationExecutions = "DescribeAutomationExecutions"
 
-// DescribeAutomationExecutionsRequest generates a "aws/request.Request" representing the
+// DescribeAutomationExecutionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAutomationExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2267,8 +2266,8 @@ const opDescribeAutomationExecutions = "DescribeAutomationExecutions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutions
-func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecutionsInput) (req *request.Request, output *DescribeAutomationExecutionsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecutionsInput) (req *aws.Request, output *DescribeAutomationExecutionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAutomationExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2316,7 +2315,7 @@ func (c *SSM) DescribeAutomationExecutions(input *DescribeAutomationExecutionsIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeAutomationExecutionsWithContext(ctx aws.Context, input *DescribeAutomationExecutionsInput, opts ...request.Option) (*DescribeAutomationExecutionsOutput, error) {
+func (c *SSM) DescribeAutomationExecutionsWithContext(ctx aws.Context, input *DescribeAutomationExecutionsInput, opts ...aws.Option) (*DescribeAutomationExecutionsOutput, error) {
 	req, out := c.DescribeAutomationExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2325,7 +2324,7 @@ func (c *SSM) DescribeAutomationExecutionsWithContext(ctx aws.Context, input *De
 
 const opDescribeAvailablePatches = "DescribeAvailablePatches"
 
-// DescribeAvailablePatchesRequest generates a "aws/request.Request" representing the
+// DescribeAvailablePatchesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAvailablePatches operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2349,8 +2348,8 @@ const opDescribeAvailablePatches = "DescribeAvailablePatches"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatches
-func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInput) (req *request.Request, output *DescribeAvailablePatchesOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInput) (req *aws.Request, output *DescribeAvailablePatchesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAvailablePatches,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2395,7 +2394,7 @@ func (c *SSM) DescribeAvailablePatches(input *DescribeAvailablePatchesInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeAvailablePatchesWithContext(ctx aws.Context, input *DescribeAvailablePatchesInput, opts ...request.Option) (*DescribeAvailablePatchesOutput, error) {
+func (c *SSM) DescribeAvailablePatchesWithContext(ctx aws.Context, input *DescribeAvailablePatchesInput, opts ...aws.Option) (*DescribeAvailablePatchesOutput, error) {
 	req, out := c.DescribeAvailablePatchesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2404,7 +2403,7 @@ func (c *SSM) DescribeAvailablePatchesWithContext(ctx aws.Context, input *Descri
 
 const opDescribeDocument = "DescribeDocument"
 
-// DescribeDocumentRequest generates a "aws/request.Request" representing the
+// DescribeDocumentRequest generates a "aws.Request" representing the
 // client's request for the DescribeDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2428,8 +2427,8 @@ const opDescribeDocument = "DescribeDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument
-func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) (req *request.Request, output *DescribeDocumentOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) (req *aws.Request, output *DescribeDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2480,7 +2479,7 @@ func (c *SSM) DescribeDocument(input *DescribeDocumentInput) (*DescribeDocumentO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeDocumentWithContext(ctx aws.Context, input *DescribeDocumentInput, opts ...request.Option) (*DescribeDocumentOutput, error) {
+func (c *SSM) DescribeDocumentWithContext(ctx aws.Context, input *DescribeDocumentInput, opts ...aws.Option) (*DescribeDocumentOutput, error) {
 	req, out := c.DescribeDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2489,7 +2488,7 @@ func (c *SSM) DescribeDocumentWithContext(ctx aws.Context, input *DescribeDocume
 
 const opDescribeDocumentPermission = "DescribeDocumentPermission"
 
-// DescribeDocumentPermissionRequest generates a "aws/request.Request" representing the
+// DescribeDocumentPermissionRequest generates a "aws.Request" representing the
 // client's request for the DescribeDocumentPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2513,8 +2512,8 @@ const opDescribeDocumentPermission = "DescribeDocumentPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermission
-func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissionInput) (req *request.Request, output *DescribeDocumentPermissionOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissionInput) (req *aws.Request, output *DescribeDocumentPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDocumentPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2568,7 +2567,7 @@ func (c *SSM) DescribeDocumentPermission(input *DescribeDocumentPermissionInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeDocumentPermissionWithContext(ctx aws.Context, input *DescribeDocumentPermissionInput, opts ...request.Option) (*DescribeDocumentPermissionOutput, error) {
+func (c *SSM) DescribeDocumentPermissionWithContext(ctx aws.Context, input *DescribeDocumentPermissionInput, opts ...aws.Option) (*DescribeDocumentPermissionOutput, error) {
 	req, out := c.DescribeDocumentPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2577,7 +2576,7 @@ func (c *SSM) DescribeDocumentPermissionWithContext(ctx aws.Context, input *Desc
 
 const opDescribeEffectiveInstanceAssociations = "DescribeEffectiveInstanceAssociations"
 
-// DescribeEffectiveInstanceAssociationsRequest generates a "aws/request.Request" representing the
+// DescribeEffectiveInstanceAssociationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEffectiveInstanceAssociations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2601,8 +2600,8 @@ const opDescribeEffectiveInstanceAssociations = "DescribeEffectiveInstanceAssoci
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociations
-func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffectiveInstanceAssociationsInput) (req *request.Request, output *DescribeEffectiveInstanceAssociationsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffectiveInstanceAssociationsInput) (req *aws.Request, output *DescribeEffectiveInstanceAssociationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEffectiveInstanceAssociations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2665,7 +2664,7 @@ func (c *SSM) DescribeEffectiveInstanceAssociations(input *DescribeEffectiveInst
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeEffectiveInstanceAssociationsWithContext(ctx aws.Context, input *DescribeEffectiveInstanceAssociationsInput, opts ...request.Option) (*DescribeEffectiveInstanceAssociationsOutput, error) {
+func (c *SSM) DescribeEffectiveInstanceAssociationsWithContext(ctx aws.Context, input *DescribeEffectiveInstanceAssociationsInput, opts ...aws.Option) (*DescribeEffectiveInstanceAssociationsOutput, error) {
 	req, out := c.DescribeEffectiveInstanceAssociationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2674,7 +2673,7 @@ func (c *SSM) DescribeEffectiveInstanceAssociationsWithContext(ctx aws.Context, 
 
 const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForPatchBaseline"
 
-// DescribeEffectivePatchesForPatchBaselineRequest generates a "aws/request.Request" representing the
+// DescribeEffectivePatchesForPatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the DescribeEffectivePatchesForPatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2698,8 +2697,8 @@ const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForP
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaseline
-func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEffectivePatchesForPatchBaselineInput) (req *request.Request, output *DescribeEffectivePatchesForPatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEffectivePatchesForPatchBaselineInput) (req *aws.Request, output *DescribeEffectivePatchesForPatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEffectivePatchesForPatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2759,7 +2758,7 @@ func (c *SSM) DescribeEffectivePatchesForPatchBaseline(input *DescribeEffectiveP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeEffectivePatchesForPatchBaselineWithContext(ctx aws.Context, input *DescribeEffectivePatchesForPatchBaselineInput, opts ...request.Option) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
+func (c *SSM) DescribeEffectivePatchesForPatchBaselineWithContext(ctx aws.Context, input *DescribeEffectivePatchesForPatchBaselineInput, opts ...aws.Option) (*DescribeEffectivePatchesForPatchBaselineOutput, error) {
 	req, out := c.DescribeEffectivePatchesForPatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2768,7 +2767,7 @@ func (c *SSM) DescribeEffectivePatchesForPatchBaselineWithContext(ctx aws.Contex
 
 const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus"
 
-// DescribeInstanceAssociationsStatusRequest generates a "aws/request.Request" representing the
+// DescribeInstanceAssociationsStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstanceAssociationsStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2792,8 +2791,8 @@ const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatus
-func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceAssociationsStatusInput) (req *request.Request, output *DescribeInstanceAssociationsStatusOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceAssociationsStatusInput) (req *aws.Request, output *DescribeInstanceAssociationsStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstanceAssociationsStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2856,7 +2855,7 @@ func (c *SSM) DescribeInstanceAssociationsStatus(input *DescribeInstanceAssociat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeInstanceAssociationsStatusWithContext(ctx aws.Context, input *DescribeInstanceAssociationsStatusInput, opts ...request.Option) (*DescribeInstanceAssociationsStatusOutput, error) {
+func (c *SSM) DescribeInstanceAssociationsStatusWithContext(ctx aws.Context, input *DescribeInstanceAssociationsStatusInput, opts ...aws.Option) (*DescribeInstanceAssociationsStatusOutput, error) {
 	req, out := c.DescribeInstanceAssociationsStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2865,7 +2864,7 @@ func (c *SSM) DescribeInstanceAssociationsStatusWithContext(ctx aws.Context, inp
 
 const opDescribeInstanceInformation = "DescribeInstanceInformation"
 
-// DescribeInstanceInformationRequest generates a "aws/request.Request" representing the
+// DescribeInstanceInformationRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstanceInformation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2889,12 +2888,12 @@ const opDescribeInstanceInformation = "DescribeInstanceInformation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation
-func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformationInput) (req *request.Request, output *DescribeInstanceInformationOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformationInput) (req *aws.Request, output *DescribeInstanceInformationOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstanceInformation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2970,7 +2969,7 @@ func (c *SSM) DescribeInstanceInformation(input *DescribeInstanceInformationInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeInstanceInformationWithContext(ctx aws.Context, input *DescribeInstanceInformationInput, opts ...request.Option) (*DescribeInstanceInformationOutput, error) {
+func (c *SSM) DescribeInstanceInformationWithContext(ctx aws.Context, input *DescribeInstanceInformationInput, opts ...aws.Option) (*DescribeInstanceInformationOutput, error) {
 	req, out := c.DescribeInstanceInformationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3005,9 +3004,9 @@ func (c *SSM) DescribeInstanceInformationPages(input *DescribeInstanceInformatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeInstanceInformationPagesWithContext(ctx aws.Context, input *DescribeInstanceInformationInput, fn func(*DescribeInstanceInformationOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) DescribeInstanceInformationPagesWithContext(ctx aws.Context, input *DescribeInstanceInformationInput, fn func(*DescribeInstanceInformationOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeInstanceInformationInput
 			if input != nil {
 				tmp := *input
@@ -3029,7 +3028,7 @@ func (c *SSM) DescribeInstanceInformationPagesWithContext(ctx aws.Context, input
 
 const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
 
-// DescribeInstancePatchStatesRequest generates a "aws/request.Request" representing the
+// DescribeInstancePatchStatesRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstancePatchStates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3053,8 +3052,8 @@ const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates
-func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchStatesInput) (req *request.Request, output *DescribeInstancePatchStatesOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchStatesInput) (req *aws.Request, output *DescribeInstancePatchStatesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstancePatchStates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3102,7 +3101,7 @@ func (c *SSM) DescribeInstancePatchStates(input *DescribeInstancePatchStatesInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeInstancePatchStatesWithContext(ctx aws.Context, input *DescribeInstancePatchStatesInput, opts ...request.Option) (*DescribeInstancePatchStatesOutput, error) {
+func (c *SSM) DescribeInstancePatchStatesWithContext(ctx aws.Context, input *DescribeInstancePatchStatesInput, opts ...aws.Option) (*DescribeInstancePatchStatesOutput, error) {
 	req, out := c.DescribeInstancePatchStatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3111,7 +3110,7 @@ func (c *SSM) DescribeInstancePatchStatesWithContext(ctx aws.Context, input *Des
 
 const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesForPatchGroup"
 
-// DescribeInstancePatchStatesForPatchGroupRequest generates a "aws/request.Request" representing the
+// DescribeInstancePatchStatesForPatchGroupRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstancePatchStatesForPatchGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3135,8 +3134,8 @@ const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesF
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup
-func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeInstancePatchStatesForPatchGroupInput) (req *request.Request, output *DescribeInstancePatchStatesForPatchGroupOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeInstancePatchStatesForPatchGroupInput) (req *aws.Request, output *DescribeInstancePatchStatesForPatchGroupOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstancePatchStatesForPatchGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3189,7 +3188,7 @@ func (c *SSM) DescribeInstancePatchStatesForPatchGroup(input *DescribeInstancePa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeInstancePatchStatesForPatchGroupWithContext(ctx aws.Context, input *DescribeInstancePatchStatesForPatchGroupInput, opts ...request.Option) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
+func (c *SSM) DescribeInstancePatchStatesForPatchGroupWithContext(ctx aws.Context, input *DescribeInstancePatchStatesForPatchGroupInput, opts ...aws.Option) (*DescribeInstancePatchStatesForPatchGroupOutput, error) {
 	req, out := c.DescribeInstancePatchStatesForPatchGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3198,7 +3197,7 @@ func (c *SSM) DescribeInstancePatchStatesForPatchGroupWithContext(ctx aws.Contex
 
 const opDescribeInstancePatches = "DescribeInstancePatches"
 
-// DescribeInstancePatchesRequest generates a "aws/request.Request" representing the
+// DescribeInstancePatchesRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstancePatches operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3222,8 +3221,8 @@ const opDescribeInstancePatches = "DescribeInstancePatches"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatches
-func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput) (req *request.Request, output *DescribeInstancePatchesOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput) (req *aws.Request, output *DescribeInstancePatchesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstancePatches,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3291,7 +3290,7 @@ func (c *SSM) DescribeInstancePatches(input *DescribeInstancePatchesInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeInstancePatchesWithContext(ctx aws.Context, input *DescribeInstancePatchesInput, opts ...request.Option) (*DescribeInstancePatchesOutput, error) {
+func (c *SSM) DescribeInstancePatchesWithContext(ctx aws.Context, input *DescribeInstancePatchesInput, opts ...aws.Option) (*DescribeInstancePatchesOutput, error) {
 	req, out := c.DescribeInstancePatchesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3300,7 +3299,7 @@ func (c *SSM) DescribeInstancePatchesWithContext(ctx aws.Context, input *Describ
 
 const opDescribeMaintenanceWindowExecutionTaskInvocations = "DescribeMaintenanceWindowExecutionTaskInvocations"
 
-// DescribeMaintenanceWindowExecutionTaskInvocationsRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceWindowExecutionTaskInvocationsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceWindowExecutionTaskInvocations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3324,8 +3323,8 @@ const opDescribeMaintenanceWindowExecutionTaskInvocations = "DescribeMaintenance
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTaskInvocations
-func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *DescribeMaintenanceWindowExecutionTaskInvocationsInput) (req *request.Request, output *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *DescribeMaintenanceWindowExecutionTaskInvocationsInput) (req *aws.Request, output *DescribeMaintenanceWindowExecutionTaskInvocationsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutionTaskInvocations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3375,7 +3374,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocations(input *DescribeM
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionTaskInvocationsInput, opts ...request.Option) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
+func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionTaskInvocationsInput, opts ...aws.Option) (*DescribeMaintenanceWindowExecutionTaskInvocationsOutput, error) {
 	req, out := c.DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3384,7 +3383,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsWithContext(ctx a
 
 const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExecutionTasks"
 
-// DescribeMaintenanceWindowExecutionTasksRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceWindowExecutionTasksRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceWindowExecutionTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3408,8 +3407,8 @@ const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExec
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks
-func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMaintenanceWindowExecutionTasksInput) (req *request.Request, output *DescribeMaintenanceWindowExecutionTasksOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMaintenanceWindowExecutionTasksInput) (req *aws.Request, output *DescribeMaintenanceWindowExecutionTasksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutionTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3458,7 +3457,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTasks(input *DescribeMaintenance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowExecutionTasksWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionTasksInput, opts ...request.Option) (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
+func (c *SSM) DescribeMaintenanceWindowExecutionTasksWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionTasksInput, opts ...aws.Option) (*DescribeMaintenanceWindowExecutionTasksOutput, error) {
 	req, out := c.DescribeMaintenanceWindowExecutionTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3467,7 +3466,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTasksWithContext(ctx aws.Context
 
 const opDescribeMaintenanceWindowExecutions = "DescribeMaintenanceWindowExecutions"
 
-// DescribeMaintenanceWindowExecutionsRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceWindowExecutionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceWindowExecutions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3491,8 +3490,8 @@ const opDescribeMaintenanceWindowExecutions = "DescribeMaintenanceWindowExecutio
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutions
-func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintenanceWindowExecutionsInput) (req *request.Request, output *DescribeMaintenanceWindowExecutionsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintenanceWindowExecutionsInput) (req *aws.Request, output *DescribeMaintenanceWindowExecutionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowExecutions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3539,7 +3538,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutions(input *DescribeMaintenanceWind
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowExecutionsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionsInput, opts ...request.Option) (*DescribeMaintenanceWindowExecutionsOutput, error) {
+func (c *SSM) DescribeMaintenanceWindowExecutionsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowExecutionsInput, opts ...aws.Option) (*DescribeMaintenanceWindowExecutionsOutput, error) {
 	req, out := c.DescribeMaintenanceWindowExecutionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3548,7 +3547,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionsWithContext(ctx aws.Context, in
 
 const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 
-// DescribeMaintenanceWindowTargetsRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceWindowTargetsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceWindowTargets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3572,8 +3571,8 @@ const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargets
-func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenanceWindowTargetsInput) (req *request.Request, output *DescribeMaintenanceWindowTargetsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenanceWindowTargetsInput) (req *aws.Request, output *DescribeMaintenanceWindowTargetsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowTargets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3622,7 +3621,7 @@ func (c *SSM) DescribeMaintenanceWindowTargets(input *DescribeMaintenanceWindowT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowTargetsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowTargetsInput, opts ...request.Option) (*DescribeMaintenanceWindowTargetsOutput, error) {
+func (c *SSM) DescribeMaintenanceWindowTargetsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowTargetsInput, opts ...aws.Option) (*DescribeMaintenanceWindowTargetsOutput, error) {
 	req, out := c.DescribeMaintenanceWindowTargetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3631,7 +3630,7 @@ func (c *SSM) DescribeMaintenanceWindowTargetsWithContext(ctx aws.Context, input
 
 const opDescribeMaintenanceWindowTasks = "DescribeMaintenanceWindowTasks"
 
-// DescribeMaintenanceWindowTasksRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceWindowTasksRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceWindowTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3655,8 +3654,8 @@ const opDescribeMaintenanceWindowTasks = "DescribeMaintenanceWindowTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasks
-func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWindowTasksInput) (req *request.Request, output *DescribeMaintenanceWindowTasksOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWindowTasksInput) (req *aws.Request, output *DescribeMaintenanceWindowTasksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindowTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3705,7 +3704,7 @@ func (c *SSM) DescribeMaintenanceWindowTasks(input *DescribeMaintenanceWindowTas
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowTasksWithContext(ctx aws.Context, input *DescribeMaintenanceWindowTasksInput, opts ...request.Option) (*DescribeMaintenanceWindowTasksOutput, error) {
+func (c *SSM) DescribeMaintenanceWindowTasksWithContext(ctx aws.Context, input *DescribeMaintenanceWindowTasksInput, opts ...aws.Option) (*DescribeMaintenanceWindowTasksOutput, error) {
 	req, out := c.DescribeMaintenanceWindowTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3714,7 +3713,7 @@ func (c *SSM) DescribeMaintenanceWindowTasksWithContext(ctx aws.Context, input *
 
 const opDescribeMaintenanceWindows = "DescribeMaintenanceWindows"
 
-// DescribeMaintenanceWindowsRequest generates a "aws/request.Request" representing the
+// DescribeMaintenanceWindowsRequest generates a "aws.Request" representing the
 // client's request for the DescribeMaintenanceWindows operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3738,8 +3737,8 @@ const opDescribeMaintenanceWindows = "DescribeMaintenanceWindows"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindows
-func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindowsInput) (req *request.Request, output *DescribeMaintenanceWindowsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindowsInput) (req *aws.Request, output *DescribeMaintenanceWindowsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMaintenanceWindows,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3784,7 +3783,7 @@ func (c *SSM) DescribeMaintenanceWindows(input *DescribeMaintenanceWindowsInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeMaintenanceWindowsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowsInput, opts ...request.Option) (*DescribeMaintenanceWindowsOutput, error) {
+func (c *SSM) DescribeMaintenanceWindowsWithContext(ctx aws.Context, input *DescribeMaintenanceWindowsInput, opts ...aws.Option) (*DescribeMaintenanceWindowsOutput, error) {
 	req, out := c.DescribeMaintenanceWindowsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3793,7 +3792,7 @@ func (c *SSM) DescribeMaintenanceWindowsWithContext(ctx aws.Context, input *Desc
 
 const opDescribeParameters = "DescribeParameters"
 
-// DescribeParametersRequest generates a "aws/request.Request" representing the
+// DescribeParametersRequest generates a "aws.Request" representing the
 // client's request for the DescribeParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3817,12 +3816,12 @@ const opDescribeParameters = "DescribeParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters
-func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) (req *request.Request, output *DescribeParametersOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) (req *aws.Request, output *DescribeParametersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3890,7 +3889,7 @@ func (c *SSM) DescribeParameters(input *DescribeParametersInput) (*DescribeParam
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeParametersWithContext(ctx aws.Context, input *DescribeParametersInput, opts ...request.Option) (*DescribeParametersOutput, error) {
+func (c *SSM) DescribeParametersWithContext(ctx aws.Context, input *DescribeParametersInput, opts ...aws.Option) (*DescribeParametersOutput, error) {
 	req, out := c.DescribeParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3925,9 +3924,9 @@ func (c *SSM) DescribeParametersPages(input *DescribeParametersInput, fn func(*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribeParametersPagesWithContext(ctx aws.Context, input *DescribeParametersInput, fn func(*DescribeParametersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) DescribeParametersPagesWithContext(ctx aws.Context, input *DescribeParametersInput, fn func(*DescribeParametersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeParametersInput
 			if input != nil {
 				tmp := *input
@@ -3949,7 +3948,7 @@ func (c *SSM) DescribeParametersPagesWithContext(ctx aws.Context, input *Describ
 
 const opDescribePatchBaselines = "DescribePatchBaselines"
 
-// DescribePatchBaselinesRequest generates a "aws/request.Request" representing the
+// DescribePatchBaselinesRequest generates a "aws.Request" representing the
 // client's request for the DescribePatchBaselines operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3973,8 +3972,8 @@ const opDescribePatchBaselines = "DescribePatchBaselines"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselines
-func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) (req *request.Request, output *DescribePatchBaselinesOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) (req *aws.Request, output *DescribePatchBaselinesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePatchBaselines,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4019,7 +4018,7 @@ func (c *SSM) DescribePatchBaselines(input *DescribePatchBaselinesInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribePatchBaselinesWithContext(ctx aws.Context, input *DescribePatchBaselinesInput, opts ...request.Option) (*DescribePatchBaselinesOutput, error) {
+func (c *SSM) DescribePatchBaselinesWithContext(ctx aws.Context, input *DescribePatchBaselinesInput, opts ...aws.Option) (*DescribePatchBaselinesOutput, error) {
 	req, out := c.DescribePatchBaselinesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4028,7 +4027,7 @@ func (c *SSM) DescribePatchBaselinesWithContext(ctx aws.Context, input *Describe
 
 const opDescribePatchGroupState = "DescribePatchGroupState"
 
-// DescribePatchGroupStateRequest generates a "aws/request.Request" representing the
+// DescribePatchGroupStateRequest generates a "aws.Request" representing the
 // client's request for the DescribePatchGroupState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4052,8 +4051,8 @@ const opDescribePatchGroupState = "DescribePatchGroupState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState
-func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput) (req *request.Request, output *DescribePatchGroupStateOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput) (req *aws.Request, output *DescribePatchGroupStateOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePatchGroupState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4101,7 +4100,7 @@ func (c *SSM) DescribePatchGroupState(input *DescribePatchGroupStateInput) (*Des
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribePatchGroupStateWithContext(ctx aws.Context, input *DescribePatchGroupStateInput, opts ...request.Option) (*DescribePatchGroupStateOutput, error) {
+func (c *SSM) DescribePatchGroupStateWithContext(ctx aws.Context, input *DescribePatchGroupStateInput, opts ...aws.Option) (*DescribePatchGroupStateOutput, error) {
 	req, out := c.DescribePatchGroupStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4110,7 +4109,7 @@ func (c *SSM) DescribePatchGroupStateWithContext(ctx aws.Context, input *Describ
 
 const opDescribePatchGroups = "DescribePatchGroups"
 
-// DescribePatchGroupsRequest generates a "aws/request.Request" representing the
+// DescribePatchGroupsRequest generates a "aws.Request" representing the
 // client's request for the DescribePatchGroups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4134,8 +4133,8 @@ const opDescribePatchGroups = "DescribePatchGroups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroups
-func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) (req *request.Request, output *DescribePatchGroupsOutput) {
-	op := &request.Operation{
+func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) (req *aws.Request, output *DescribePatchGroupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribePatchGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4180,7 +4179,7 @@ func (c *SSM) DescribePatchGroups(input *DescribePatchGroupsInput) (*DescribePat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) DescribePatchGroupsWithContext(ctx aws.Context, input *DescribePatchGroupsInput, opts ...request.Option) (*DescribePatchGroupsOutput, error) {
+func (c *SSM) DescribePatchGroupsWithContext(ctx aws.Context, input *DescribePatchGroupsInput, opts ...aws.Option) (*DescribePatchGroupsOutput, error) {
 	req, out := c.DescribePatchGroupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4189,7 +4188,7 @@ func (c *SSM) DescribePatchGroupsWithContext(ctx aws.Context, input *DescribePat
 
 const opGetAutomationExecution = "GetAutomationExecution"
 
-// GetAutomationExecutionRequest generates a "aws/request.Request" representing the
+// GetAutomationExecutionRequest generates a "aws.Request" representing the
 // client's request for the GetAutomationExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4213,8 +4212,8 @@ const opGetAutomationExecution = "GetAutomationExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution
-func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) (req *request.Request, output *GetAutomationExecutionOutput) {
-	op := &request.Operation{
+func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) (req *aws.Request, output *GetAutomationExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opGetAutomationExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4263,7 +4262,7 @@ func (c *SSM) GetAutomationExecution(input *GetAutomationExecutionInput) (*GetAu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetAutomationExecutionWithContext(ctx aws.Context, input *GetAutomationExecutionInput, opts ...request.Option) (*GetAutomationExecutionOutput, error) {
+func (c *SSM) GetAutomationExecutionWithContext(ctx aws.Context, input *GetAutomationExecutionInput, opts ...aws.Option) (*GetAutomationExecutionOutput, error) {
 	req, out := c.GetAutomationExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4272,7 +4271,7 @@ func (c *SSM) GetAutomationExecutionWithContext(ctx aws.Context, input *GetAutom
 
 const opGetCommandInvocation = "GetCommandInvocation"
 
-// GetCommandInvocationRequest generates a "aws/request.Request" representing the
+// GetCommandInvocationRequest generates a "aws.Request" representing the
 // client's request for the GetCommandInvocation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4296,8 +4295,8 @@ const opGetCommandInvocation = "GetCommandInvocation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation
-func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) (req *request.Request, output *GetCommandInvocationOutput) {
-	op := &request.Operation{
+func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) (req *aws.Request, output *GetCommandInvocationOutput) {
+	op := &aws.Operation{
 		Name:       opGetCommandInvocation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4367,7 +4366,7 @@ func (c *SSM) GetCommandInvocation(input *GetCommandInvocationInput) (*GetComman
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetCommandInvocationWithContext(ctx aws.Context, input *GetCommandInvocationInput, opts ...request.Option) (*GetCommandInvocationOutput, error) {
+func (c *SSM) GetCommandInvocationWithContext(ctx aws.Context, input *GetCommandInvocationInput, opts ...aws.Option) (*GetCommandInvocationOutput, error) {
 	req, out := c.GetCommandInvocationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4376,7 +4375,7 @@ func (c *SSM) GetCommandInvocationWithContext(ctx aws.Context, input *GetCommand
 
 const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
 
-// GetDefaultPatchBaselineRequest generates a "aws/request.Request" representing the
+// GetDefaultPatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the GetDefaultPatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4400,8 +4399,8 @@ const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline
-func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput) (req *request.Request, output *GetDefaultPatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput) (req *aws.Request, output *GetDefaultPatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opGetDefaultPatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4448,7 +4447,7 @@ func (c *SSM) GetDefaultPatchBaseline(input *GetDefaultPatchBaselineInput) (*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetDefaultPatchBaselineWithContext(ctx aws.Context, input *GetDefaultPatchBaselineInput, opts ...request.Option) (*GetDefaultPatchBaselineOutput, error) {
+func (c *SSM) GetDefaultPatchBaselineWithContext(ctx aws.Context, input *GetDefaultPatchBaselineInput, opts ...aws.Option) (*GetDefaultPatchBaselineOutput, error) {
 	req, out := c.GetDefaultPatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4457,7 +4456,7 @@ func (c *SSM) GetDefaultPatchBaselineWithContext(ctx aws.Context, input *GetDefa
 
 const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForInstance"
 
-// GetDeployablePatchSnapshotForInstanceRequest generates a "aws/request.Request" representing the
+// GetDeployablePatchSnapshotForInstanceRequest generates a "aws.Request" representing the
 // client's request for the GetDeployablePatchSnapshotForInstance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4481,8 +4480,8 @@ const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForIn
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstance
-func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployablePatchSnapshotForInstanceInput) (req *request.Request, output *GetDeployablePatchSnapshotForInstanceOutput) {
-	op := &request.Operation{
+func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployablePatchSnapshotForInstanceInput) (req *aws.Request, output *GetDeployablePatchSnapshotForInstanceOutput) {
+	op := &aws.Operation{
 		Name:       opGetDeployablePatchSnapshotForInstance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4533,7 +4532,7 @@ func (c *SSM) GetDeployablePatchSnapshotForInstance(input *GetDeployablePatchSna
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetDeployablePatchSnapshotForInstanceWithContext(ctx aws.Context, input *GetDeployablePatchSnapshotForInstanceInput, opts ...request.Option) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
+func (c *SSM) GetDeployablePatchSnapshotForInstanceWithContext(ctx aws.Context, input *GetDeployablePatchSnapshotForInstanceInput, opts ...aws.Option) (*GetDeployablePatchSnapshotForInstanceOutput, error) {
 	req, out := c.GetDeployablePatchSnapshotForInstanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4542,7 +4541,7 @@ func (c *SSM) GetDeployablePatchSnapshotForInstanceWithContext(ctx aws.Context, 
 
 const opGetDocument = "GetDocument"
 
-// GetDocumentRequest generates a "aws/request.Request" representing the
+// GetDocumentRequest generates a "aws.Request" representing the
 // client's request for the GetDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4566,8 +4565,8 @@ const opGetDocument = "GetDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument
-func (c *SSM) GetDocumentRequest(input *GetDocumentInput) (req *request.Request, output *GetDocumentOutput) {
-	op := &request.Operation{
+func (c *SSM) GetDocumentRequest(input *GetDocumentInput) (req *aws.Request, output *GetDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opGetDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4618,7 +4617,7 @@ func (c *SSM) GetDocument(input *GetDocumentInput) (*GetDocumentOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInput, opts ...request.Option) (*GetDocumentOutput, error) {
+func (c *SSM) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInput, opts ...aws.Option) (*GetDocumentOutput, error) {
 	req, out := c.GetDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4627,7 +4626,7 @@ func (c *SSM) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInput, o
 
 const opGetInventory = "GetInventory"
 
-// GetInventoryRequest generates a "aws/request.Request" representing the
+// GetInventoryRequest generates a "aws.Request" representing the
 // client's request for the GetInventory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4651,8 +4650,8 @@ const opGetInventory = "GetInventory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventory
-func (c *SSM) GetInventoryRequest(input *GetInventoryInput) (req *request.Request, output *GetInventoryOutput) {
-	op := &request.Operation{
+func (c *SSM) GetInventoryRequest(input *GetInventoryInput) (req *aws.Request, output *GetInventoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetInventory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4710,7 +4709,7 @@ func (c *SSM) GetInventory(input *GetInventoryInput) (*GetInventoryOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetInventoryWithContext(ctx aws.Context, input *GetInventoryInput, opts ...request.Option) (*GetInventoryOutput, error) {
+func (c *SSM) GetInventoryWithContext(ctx aws.Context, input *GetInventoryInput, opts ...aws.Option) (*GetInventoryOutput, error) {
 	req, out := c.GetInventoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4719,7 +4718,7 @@ func (c *SSM) GetInventoryWithContext(ctx aws.Context, input *GetInventoryInput,
 
 const opGetInventorySchema = "GetInventorySchema"
 
-// GetInventorySchemaRequest generates a "aws/request.Request" representing the
+// GetInventorySchemaRequest generates a "aws.Request" representing the
 // client's request for the GetInventorySchema operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4743,8 +4742,8 @@ const opGetInventorySchema = "GetInventorySchema"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchema
-func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) (req *request.Request, output *GetInventorySchemaOutput) {
-	op := &request.Operation{
+func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) (req *aws.Request, output *GetInventorySchemaOutput) {
+	op := &aws.Operation{
 		Name:       opGetInventorySchema,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4796,7 +4795,7 @@ func (c *SSM) GetInventorySchema(input *GetInventorySchemaInput) (*GetInventoryS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetInventorySchemaWithContext(ctx aws.Context, input *GetInventorySchemaInput, opts ...request.Option) (*GetInventorySchemaOutput, error) {
+func (c *SSM) GetInventorySchemaWithContext(ctx aws.Context, input *GetInventorySchemaInput, opts ...aws.Option) (*GetInventorySchemaOutput, error) {
 	req, out := c.GetInventorySchemaRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4805,7 +4804,7 @@ func (c *SSM) GetInventorySchemaWithContext(ctx aws.Context, input *GetInventory
 
 const opGetMaintenanceWindow = "GetMaintenanceWindow"
 
-// GetMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// GetMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the GetMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4829,8 +4828,8 @@ const opGetMaintenanceWindow = "GetMaintenanceWindow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindow
-func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) (req *request.Request, output *GetMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) (req *aws.Request, output *GetMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opGetMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4879,7 +4878,7 @@ func (c *SSM) GetMaintenanceWindow(input *GetMaintenanceWindowInput) (*GetMainte
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowWithContext(ctx aws.Context, input *GetMaintenanceWindowInput, opts ...request.Option) (*GetMaintenanceWindowOutput, error) {
+func (c *SSM) GetMaintenanceWindowWithContext(ctx aws.Context, input *GetMaintenanceWindowInput, opts ...aws.Option) (*GetMaintenanceWindowOutput, error) {
 	req, out := c.GetMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4888,7 +4887,7 @@ func (c *SSM) GetMaintenanceWindowWithContext(ctx aws.Context, input *GetMainten
 
 const opGetMaintenanceWindowExecution = "GetMaintenanceWindowExecution"
 
-// GetMaintenanceWindowExecutionRequest generates a "aws/request.Request" representing the
+// GetMaintenanceWindowExecutionRequest generates a "aws.Request" representing the
 // client's request for the GetMaintenanceWindowExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4912,8 +4911,8 @@ const opGetMaintenanceWindowExecution = "GetMaintenanceWindowExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecution
-func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowExecutionInput) (req *request.Request, output *GetMaintenanceWindowExecutionOutput) {
-	op := &request.Operation{
+func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowExecutionInput) (req *aws.Request, output *GetMaintenanceWindowExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4963,7 +4962,7 @@ func (c *SSM) GetMaintenanceWindowExecution(input *GetMaintenanceWindowExecution
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowExecutionWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionInput, opts ...request.Option) (*GetMaintenanceWindowExecutionOutput, error) {
+func (c *SSM) GetMaintenanceWindowExecutionWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionInput, opts ...aws.Option) (*GetMaintenanceWindowExecutionOutput, error) {
 	req, out := c.GetMaintenanceWindowExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4972,7 +4971,7 @@ func (c *SSM) GetMaintenanceWindowExecutionWithContext(ctx aws.Context, input *G
 
 const opGetMaintenanceWindowExecutionTask = "GetMaintenanceWindowExecutionTask"
 
-// GetMaintenanceWindowExecutionTaskRequest generates a "aws/request.Request" representing the
+// GetMaintenanceWindowExecutionTaskRequest generates a "aws.Request" representing the
 // client's request for the GetMaintenanceWindowExecutionTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4996,8 +4995,8 @@ const opGetMaintenanceWindowExecutionTask = "GetMaintenanceWindowExecutionTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTask
-func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWindowExecutionTaskInput) (req *request.Request, output *GetMaintenanceWindowExecutionTaskOutput) {
-	op := &request.Operation{
+func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWindowExecutionTaskInput) (req *aws.Request, output *GetMaintenanceWindowExecutionTaskOutput) {
+	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowExecutionTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5047,7 +5046,7 @@ func (c *SSM) GetMaintenanceWindowExecutionTask(input *GetMaintenanceWindowExecu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowExecutionTaskWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionTaskInput, opts ...request.Option) (*GetMaintenanceWindowExecutionTaskOutput, error) {
+func (c *SSM) GetMaintenanceWindowExecutionTaskWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionTaskInput, opts ...aws.Option) (*GetMaintenanceWindowExecutionTaskOutput, error) {
 	req, out := c.GetMaintenanceWindowExecutionTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5056,7 +5055,7 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskWithContext(ctx aws.Context, inpu
 
 const opGetMaintenanceWindowExecutionTaskInvocation = "GetMaintenanceWindowExecutionTaskInvocation"
 
-// GetMaintenanceWindowExecutionTaskInvocationRequest generates a "aws/request.Request" representing the
+// GetMaintenanceWindowExecutionTaskInvocationRequest generates a "aws.Request" representing the
 // client's request for the GetMaintenanceWindowExecutionTaskInvocation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5080,8 +5079,8 @@ const opGetMaintenanceWindowExecutionTaskInvocation = "GetMaintenanceWindowExecu
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskInvocation
-func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaintenanceWindowExecutionTaskInvocationInput) (req *request.Request, output *GetMaintenanceWindowExecutionTaskInvocationOutput) {
-	op := &request.Operation{
+func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaintenanceWindowExecutionTaskInvocationInput) (req *aws.Request, output *GetMaintenanceWindowExecutionTaskInvocationOutput) {
+	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowExecutionTaskInvocation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5131,7 +5130,7 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskInvocation(input *GetMaintenanceW
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionTaskInvocationInput, opts ...request.Option) (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
+func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationWithContext(ctx aws.Context, input *GetMaintenanceWindowExecutionTaskInvocationInput, opts ...aws.Option) (*GetMaintenanceWindowExecutionTaskInvocationOutput, error) {
 	req, out := c.GetMaintenanceWindowExecutionTaskInvocationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5140,7 +5139,7 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationWithContext(ctx aws.Con
 
 const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 
-// GetMaintenanceWindowTaskRequest generates a "aws/request.Request" representing the
+// GetMaintenanceWindowTaskRequest generates a "aws.Request" representing the
 // client's request for the GetMaintenanceWindowTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5164,8 +5163,8 @@ const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowTask
-func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInput) (req *request.Request, output *GetMaintenanceWindowTaskOutput) {
-	op := &request.Operation{
+func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInput) (req *aws.Request, output *GetMaintenanceWindowTaskOutput) {
+	op := &aws.Operation{
 		Name:       opGetMaintenanceWindowTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5214,7 +5213,7 @@ func (c *SSM) GetMaintenanceWindowTask(input *GetMaintenanceWindowTaskInput) (*G
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetMaintenanceWindowTaskWithContext(ctx aws.Context, input *GetMaintenanceWindowTaskInput, opts ...request.Option) (*GetMaintenanceWindowTaskOutput, error) {
+func (c *SSM) GetMaintenanceWindowTaskWithContext(ctx aws.Context, input *GetMaintenanceWindowTaskInput, opts ...aws.Option) (*GetMaintenanceWindowTaskOutput, error) {
 	req, out := c.GetMaintenanceWindowTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5223,7 +5222,7 @@ func (c *SSM) GetMaintenanceWindowTaskWithContext(ctx aws.Context, input *GetMai
 
 const opGetParameter = "GetParameter"
 
-// GetParameterRequest generates a "aws/request.Request" representing the
+// GetParameterRequest generates a "aws.Request" representing the
 // client's request for the GetParameter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5247,8 +5246,8 @@ const opGetParameter = "GetParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameter
-func (c *SSM) GetParameterRequest(input *GetParameterInput) (req *request.Request, output *GetParameterOutput) {
-	op := &request.Operation{
+func (c *SSM) GetParameterRequest(input *GetParameterInput) (req *aws.Request, output *GetParameterOutput) {
+	op := &aws.Operation{
 		Name:       opGetParameter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5299,7 +5298,7 @@ func (c *SSM) GetParameter(input *GetParameterInput) (*GetParameterOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetParameterWithContext(ctx aws.Context, input *GetParameterInput, opts ...request.Option) (*GetParameterOutput, error) {
+func (c *SSM) GetParameterWithContext(ctx aws.Context, input *GetParameterInput, opts ...aws.Option) (*GetParameterOutput, error) {
 	req, out := c.GetParameterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5308,7 +5307,7 @@ func (c *SSM) GetParameterWithContext(ctx aws.Context, input *GetParameterInput,
 
 const opGetParameterHistory = "GetParameterHistory"
 
-// GetParameterHistoryRequest generates a "aws/request.Request" representing the
+// GetParameterHistoryRequest generates a "aws.Request" representing the
 // client's request for the GetParameterHistory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5332,12 +5331,12 @@ const opGetParameterHistory = "GetParameterHistory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory
-func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) (req *request.Request, output *GetParameterHistoryOutput) {
-	op := &request.Operation{
+func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) (req *aws.Request, output *GetParameterHistoryOutput) {
+	op := &aws.Operation{
 		Name:       opGetParameterHistory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5393,7 +5392,7 @@ func (c *SSM) GetParameterHistory(input *GetParameterHistoryInput) (*GetParamete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetParameterHistoryWithContext(ctx aws.Context, input *GetParameterHistoryInput, opts ...request.Option) (*GetParameterHistoryOutput, error) {
+func (c *SSM) GetParameterHistoryWithContext(ctx aws.Context, input *GetParameterHistoryInput, opts ...aws.Option) (*GetParameterHistoryOutput, error) {
 	req, out := c.GetParameterHistoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5428,9 +5427,9 @@ func (c *SSM) GetParameterHistoryPages(input *GetParameterHistoryInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetParameterHistoryPagesWithContext(ctx aws.Context, input *GetParameterHistoryInput, fn func(*GetParameterHistoryOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) GetParameterHistoryPagesWithContext(ctx aws.Context, input *GetParameterHistoryInput, fn func(*GetParameterHistoryOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetParameterHistoryInput
 			if input != nil {
 				tmp := *input
@@ -5452,7 +5451,7 @@ func (c *SSM) GetParameterHistoryPagesWithContext(ctx aws.Context, input *GetPar
 
 const opGetParameters = "GetParameters"
 
-// GetParametersRequest generates a "aws/request.Request" representing the
+// GetParametersRequest generates a "aws.Request" representing the
 // client's request for the GetParameters operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5476,8 +5475,8 @@ const opGetParameters = "GetParameters"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameters
-func (c *SSM) GetParametersRequest(input *GetParametersInput) (req *request.Request, output *GetParametersOutput) {
-	op := &request.Operation{
+func (c *SSM) GetParametersRequest(input *GetParametersInput) (req *aws.Request, output *GetParametersOutput) {
+	op := &aws.Operation{
 		Name:       opGetParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5525,7 +5524,7 @@ func (c *SSM) GetParameters(input *GetParametersInput) (*GetParametersOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetParametersWithContext(ctx aws.Context, input *GetParametersInput, opts ...request.Option) (*GetParametersOutput, error) {
+func (c *SSM) GetParametersWithContext(ctx aws.Context, input *GetParametersInput, opts ...aws.Option) (*GetParametersOutput, error) {
 	req, out := c.GetParametersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5534,7 +5533,7 @@ func (c *SSM) GetParametersWithContext(ctx aws.Context, input *GetParametersInpu
 
 const opGetParametersByPath = "GetParametersByPath"
 
-// GetParametersByPathRequest generates a "aws/request.Request" representing the
+// GetParametersByPathRequest generates a "aws.Request" representing the
 // client's request for the GetParametersByPath operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5558,12 +5557,12 @@ const opGetParametersByPath = "GetParametersByPath"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersByPath
-func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) (req *request.Request, output *GetParametersByPathOutput) {
-	op := &request.Operation{
+func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) (req *aws.Request, output *GetParametersByPathOutput) {
+	op := &aws.Operation{
 		Name:       opGetParametersByPath,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5635,7 +5634,7 @@ func (c *SSM) GetParametersByPath(input *GetParametersByPathInput) (*GetParamete
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetParametersByPathWithContext(ctx aws.Context, input *GetParametersByPathInput, opts ...request.Option) (*GetParametersByPathOutput, error) {
+func (c *SSM) GetParametersByPathWithContext(ctx aws.Context, input *GetParametersByPathInput, opts ...aws.Option) (*GetParametersByPathOutput, error) {
 	req, out := c.GetParametersByPathRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5670,9 +5669,9 @@ func (c *SSM) GetParametersByPathPages(input *GetParametersByPathInput, fn func(
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetParametersByPathPagesWithContext(ctx aws.Context, input *GetParametersByPathInput, fn func(*GetParametersByPathOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) GetParametersByPathPagesWithContext(ctx aws.Context, input *GetParametersByPathInput, fn func(*GetParametersByPathOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetParametersByPathInput
 			if input != nil {
 				tmp := *input
@@ -5694,7 +5693,7 @@ func (c *SSM) GetParametersByPathPagesWithContext(ctx aws.Context, input *GetPar
 
 const opGetPatchBaseline = "GetPatchBaseline"
 
-// GetPatchBaselineRequest generates a "aws/request.Request" representing the
+// GetPatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the GetPatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5718,8 +5717,8 @@ const opGetPatchBaseline = "GetPatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaseline
-func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) (req *request.Request, output *GetPatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) (req *aws.Request, output *GetPatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opGetPatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5772,7 +5771,7 @@ func (c *SSM) GetPatchBaseline(input *GetPatchBaselineInput) (*GetPatchBaselineO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetPatchBaselineWithContext(ctx aws.Context, input *GetPatchBaselineInput, opts ...request.Option) (*GetPatchBaselineOutput, error) {
+func (c *SSM) GetPatchBaselineWithContext(ctx aws.Context, input *GetPatchBaselineInput, opts ...aws.Option) (*GetPatchBaselineOutput, error) {
 	req, out := c.GetPatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5781,7 +5780,7 @@ func (c *SSM) GetPatchBaselineWithContext(ctx aws.Context, input *GetPatchBaseli
 
 const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
 
-// GetPatchBaselineForPatchGroupRequest generates a "aws/request.Request" representing the
+// GetPatchBaselineForPatchGroupRequest generates a "aws.Request" representing the
 // client's request for the GetPatchBaselineForPatchGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5805,8 +5804,8 @@ const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup
-func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPatchGroupInput) (req *request.Request, output *GetPatchBaselineForPatchGroupOutput) {
-	op := &request.Operation{
+func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPatchGroupInput) (req *aws.Request, output *GetPatchBaselineForPatchGroupOutput) {
+	op := &aws.Operation{
 		Name:       opGetPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5852,7 +5851,7 @@ func (c *SSM) GetPatchBaselineForPatchGroup(input *GetPatchBaselineForPatchGroup
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) GetPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *GetPatchBaselineForPatchGroupInput, opts ...request.Option) (*GetPatchBaselineForPatchGroupOutput, error) {
+func (c *SSM) GetPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *GetPatchBaselineForPatchGroupInput, opts ...aws.Option) (*GetPatchBaselineForPatchGroupOutput, error) {
 	req, out := c.GetPatchBaselineForPatchGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5861,7 +5860,7 @@ func (c *SSM) GetPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *G
 
 const opListAssociationVersions = "ListAssociationVersions"
 
-// ListAssociationVersionsRequest generates a "aws/request.Request" representing the
+// ListAssociationVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListAssociationVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5885,8 +5884,8 @@ const opListAssociationVersions = "ListAssociationVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions
-func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput) (req *request.Request, output *ListAssociationVersionsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput) (req *aws.Request, output *ListAssociationVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListAssociationVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5937,7 +5936,7 @@ func (c *SSM) ListAssociationVersions(input *ListAssociationVersionsInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListAssociationVersionsWithContext(ctx aws.Context, input *ListAssociationVersionsInput, opts ...request.Option) (*ListAssociationVersionsOutput, error) {
+func (c *SSM) ListAssociationVersionsWithContext(ctx aws.Context, input *ListAssociationVersionsInput, opts ...aws.Option) (*ListAssociationVersionsOutput, error) {
 	req, out := c.ListAssociationVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5946,7 +5945,7 @@ func (c *SSM) ListAssociationVersionsWithContext(ctx aws.Context, input *ListAss
 
 const opListAssociations = "ListAssociations"
 
-// ListAssociationsRequest generates a "aws/request.Request" representing the
+// ListAssociationsRequest generates a "aws.Request" representing the
 // client's request for the ListAssociations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5970,12 +5969,12 @@ const opListAssociations = "ListAssociations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations
-func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) (req *request.Request, output *ListAssociationsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) (req *aws.Request, output *ListAssociationsOutput) {
+	op := &aws.Operation{
 		Name:       opListAssociations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6025,7 +6024,7 @@ func (c *SSM) ListAssociations(input *ListAssociationsInput) (*ListAssociationsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListAssociationsWithContext(ctx aws.Context, input *ListAssociationsInput, opts ...request.Option) (*ListAssociationsOutput, error) {
+func (c *SSM) ListAssociationsWithContext(ctx aws.Context, input *ListAssociationsInput, opts ...aws.Option) (*ListAssociationsOutput, error) {
 	req, out := c.ListAssociationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6060,9 +6059,9 @@ func (c *SSM) ListAssociationsPages(input *ListAssociationsInput, fn func(*ListA
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListAssociationsPagesWithContext(ctx aws.Context, input *ListAssociationsInput, fn func(*ListAssociationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) ListAssociationsPagesWithContext(ctx aws.Context, input *ListAssociationsInput, fn func(*ListAssociationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAssociationsInput
 			if input != nil {
 				tmp := *input
@@ -6084,7 +6083,7 @@ func (c *SSM) ListAssociationsPagesWithContext(ctx aws.Context, input *ListAssoc
 
 const opListCommandInvocations = "ListCommandInvocations"
 
-// ListCommandInvocationsRequest generates a "aws/request.Request" representing the
+// ListCommandInvocationsRequest generates a "aws.Request" representing the
 // client's request for the ListCommandInvocations operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6108,12 +6107,12 @@ const opListCommandInvocations = "ListCommandInvocations"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations
-func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) (req *request.Request, output *ListCommandInvocationsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) (req *aws.Request, output *ListCommandInvocationsOutput) {
+	op := &aws.Operation{
 		Name:       opListCommandInvocations,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6187,7 +6186,7 @@ func (c *SSM) ListCommandInvocations(input *ListCommandInvocationsInput) (*ListC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListCommandInvocationsWithContext(ctx aws.Context, input *ListCommandInvocationsInput, opts ...request.Option) (*ListCommandInvocationsOutput, error) {
+func (c *SSM) ListCommandInvocationsWithContext(ctx aws.Context, input *ListCommandInvocationsInput, opts ...aws.Option) (*ListCommandInvocationsOutput, error) {
 	req, out := c.ListCommandInvocationsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6222,9 +6221,9 @@ func (c *SSM) ListCommandInvocationsPages(input *ListCommandInvocationsInput, fn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListCommandInvocationsPagesWithContext(ctx aws.Context, input *ListCommandInvocationsInput, fn func(*ListCommandInvocationsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) ListCommandInvocationsPagesWithContext(ctx aws.Context, input *ListCommandInvocationsInput, fn func(*ListCommandInvocationsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCommandInvocationsInput
 			if input != nil {
 				tmp := *input
@@ -6246,7 +6245,7 @@ func (c *SSM) ListCommandInvocationsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListCommands = "ListCommands"
 
-// ListCommandsRequest generates a "aws/request.Request" representing the
+// ListCommandsRequest generates a "aws.Request" representing the
 // client's request for the ListCommands operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6270,12 +6269,12 @@ const opListCommands = "ListCommands"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands
-func (c *SSM) ListCommandsRequest(input *ListCommandsInput) (req *request.Request, output *ListCommandsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListCommandsRequest(input *ListCommandsInput) (req *aws.Request, output *ListCommandsOutput) {
+	op := &aws.Operation{
 		Name:       opListCommands,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6345,7 +6344,7 @@ func (c *SSM) ListCommands(input *ListCommandsInput) (*ListCommandsOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListCommandsWithContext(ctx aws.Context, input *ListCommandsInput, opts ...request.Option) (*ListCommandsOutput, error) {
+func (c *SSM) ListCommandsWithContext(ctx aws.Context, input *ListCommandsInput, opts ...aws.Option) (*ListCommandsOutput, error) {
 	req, out := c.ListCommandsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6380,9 +6379,9 @@ func (c *SSM) ListCommandsPages(input *ListCommandsInput, fn func(*ListCommandsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListCommandsPagesWithContext(ctx aws.Context, input *ListCommandsInput, fn func(*ListCommandsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) ListCommandsPagesWithContext(ctx aws.Context, input *ListCommandsInput, fn func(*ListCommandsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCommandsInput
 			if input != nil {
 				tmp := *input
@@ -6404,7 +6403,7 @@ func (c *SSM) ListCommandsPagesWithContext(ctx aws.Context, input *ListCommandsI
 
 const opListComplianceItems = "ListComplianceItems"
 
-// ListComplianceItemsRequest generates a "aws/request.Request" representing the
+// ListComplianceItemsRequest generates a "aws.Request" representing the
 // client's request for the ListComplianceItems operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6428,8 +6427,8 @@ const opListComplianceItems = "ListComplianceItems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceItems
-func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) (req *request.Request, output *ListComplianceItemsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) (req *aws.Request, output *ListComplianceItemsOutput) {
+	op := &aws.Operation{
 		Name:       opListComplianceItems,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6492,7 +6491,7 @@ func (c *SSM) ListComplianceItems(input *ListComplianceItemsInput) (*ListComplia
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListComplianceItemsWithContext(ctx aws.Context, input *ListComplianceItemsInput, opts ...request.Option) (*ListComplianceItemsOutput, error) {
+func (c *SSM) ListComplianceItemsWithContext(ctx aws.Context, input *ListComplianceItemsInput, opts ...aws.Option) (*ListComplianceItemsOutput, error) {
 	req, out := c.ListComplianceItemsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6501,7 +6500,7 @@ func (c *SSM) ListComplianceItemsWithContext(ctx aws.Context, input *ListComplia
 
 const opListComplianceSummaries = "ListComplianceSummaries"
 
-// ListComplianceSummariesRequest generates a "aws/request.Request" representing the
+// ListComplianceSummariesRequest generates a "aws.Request" representing the
 // client's request for the ListComplianceSummaries operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6525,8 +6524,8 @@ const opListComplianceSummaries = "ListComplianceSummaries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListComplianceSummaries
-func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput) (req *request.Request, output *ListComplianceSummariesOutput) {
-	op := &request.Operation{
+func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput) (req *aws.Request, output *ListComplianceSummariesOutput) {
+	op := &aws.Operation{
 		Name:       opListComplianceSummaries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6580,7 +6579,7 @@ func (c *SSM) ListComplianceSummaries(input *ListComplianceSummariesInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListComplianceSummariesWithContext(ctx aws.Context, input *ListComplianceSummariesInput, opts ...request.Option) (*ListComplianceSummariesOutput, error) {
+func (c *SSM) ListComplianceSummariesWithContext(ctx aws.Context, input *ListComplianceSummariesInput, opts ...aws.Option) (*ListComplianceSummariesOutput, error) {
 	req, out := c.ListComplianceSummariesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6589,7 +6588,7 @@ func (c *SSM) ListComplianceSummariesWithContext(ctx aws.Context, input *ListCom
 
 const opListDocumentVersions = "ListDocumentVersions"
 
-// ListDocumentVersionsRequest generates a "aws/request.Request" representing the
+// ListDocumentVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListDocumentVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6613,8 +6612,8 @@ const opListDocumentVersions = "ListDocumentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions
-func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) (req *request.Request, output *ListDocumentVersionsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) (req *aws.Request, output *ListDocumentVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListDocumentVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6665,7 +6664,7 @@ func (c *SSM) ListDocumentVersions(input *ListDocumentVersionsInput) (*ListDocum
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListDocumentVersionsWithContext(ctx aws.Context, input *ListDocumentVersionsInput, opts ...request.Option) (*ListDocumentVersionsOutput, error) {
+func (c *SSM) ListDocumentVersionsWithContext(ctx aws.Context, input *ListDocumentVersionsInput, opts ...aws.Option) (*ListDocumentVersionsOutput, error) {
 	req, out := c.ListDocumentVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6674,7 +6673,7 @@ func (c *SSM) ListDocumentVersionsWithContext(ctx aws.Context, input *ListDocume
 
 const opListDocuments = "ListDocuments"
 
-// ListDocumentsRequest generates a "aws/request.Request" representing the
+// ListDocumentsRequest generates a "aws.Request" representing the
 // client's request for the ListDocuments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6698,12 +6697,12 @@ const opListDocuments = "ListDocuments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments
-func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) (req *request.Request, output *ListDocumentsOutput) {
-	op := &request.Operation{
+func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) (req *aws.Request, output *ListDocumentsOutput) {
+	op := &aws.Operation{
 		Name:       opListDocuments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -6756,7 +6755,7 @@ func (c *SSM) ListDocuments(input *ListDocumentsInput) (*ListDocumentsOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListDocumentsWithContext(ctx aws.Context, input *ListDocumentsInput, opts ...request.Option) (*ListDocumentsOutput, error) {
+func (c *SSM) ListDocumentsWithContext(ctx aws.Context, input *ListDocumentsInput, opts ...aws.Option) (*ListDocumentsOutput, error) {
 	req, out := c.ListDocumentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6791,9 +6790,9 @@ func (c *SSM) ListDocumentsPages(input *ListDocumentsInput, fn func(*ListDocumen
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListDocumentsPagesWithContext(ctx aws.Context, input *ListDocumentsInput, fn func(*ListDocumentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SSM) ListDocumentsPagesWithContext(ctx aws.Context, input *ListDocumentsInput, fn func(*ListDocumentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDocumentsInput
 			if input != nil {
 				tmp := *input
@@ -6815,7 +6814,7 @@ func (c *SSM) ListDocumentsPagesWithContext(ctx aws.Context, input *ListDocument
 
 const opListInventoryEntries = "ListInventoryEntries"
 
-// ListInventoryEntriesRequest generates a "aws/request.Request" representing the
+// ListInventoryEntriesRequest generates a "aws.Request" representing the
 // client's request for the ListInventoryEntries operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6839,8 +6838,8 @@ const opListInventoryEntries = "ListInventoryEntries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntries
-func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) (req *request.Request, output *ListInventoryEntriesOutput) {
-	op := &request.Operation{
+func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) (req *aws.Request, output *ListInventoryEntriesOutput) {
+	op := &aws.Operation{
 		Name:       opListInventoryEntries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6910,7 +6909,7 @@ func (c *SSM) ListInventoryEntries(input *ListInventoryEntriesInput) (*ListInven
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListInventoryEntriesWithContext(ctx aws.Context, input *ListInventoryEntriesInput, opts ...request.Option) (*ListInventoryEntriesOutput, error) {
+func (c *SSM) ListInventoryEntriesWithContext(ctx aws.Context, input *ListInventoryEntriesInput, opts ...aws.Option) (*ListInventoryEntriesOutput, error) {
 	req, out := c.ListInventoryEntriesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6919,7 +6918,7 @@ func (c *SSM) ListInventoryEntriesWithContext(ctx aws.Context, input *ListInvent
 
 const opListResourceComplianceSummaries = "ListResourceComplianceSummaries"
 
-// ListResourceComplianceSummariesRequest generates a "aws/request.Request" representing the
+// ListResourceComplianceSummariesRequest generates a "aws.Request" representing the
 // client's request for the ListResourceComplianceSummaries operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6943,8 +6942,8 @@ const opListResourceComplianceSummaries = "ListResourceComplianceSummaries"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceComplianceSummaries
-func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplianceSummariesInput) (req *request.Request, output *ListResourceComplianceSummariesOutput) {
-	op := &request.Operation{
+func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplianceSummariesInput) (req *aws.Request, output *ListResourceComplianceSummariesOutput) {
+	op := &aws.Operation{
 		Name:       opListResourceComplianceSummaries,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6998,7 +6997,7 @@ func (c *SSM) ListResourceComplianceSummaries(input *ListResourceComplianceSumma
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListResourceComplianceSummariesWithContext(ctx aws.Context, input *ListResourceComplianceSummariesInput, opts ...request.Option) (*ListResourceComplianceSummariesOutput, error) {
+func (c *SSM) ListResourceComplianceSummariesWithContext(ctx aws.Context, input *ListResourceComplianceSummariesInput, opts ...aws.Option) (*ListResourceComplianceSummariesOutput, error) {
 	req, out := c.ListResourceComplianceSummariesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7007,7 +7006,7 @@ func (c *SSM) ListResourceComplianceSummariesWithContext(ctx aws.Context, input 
 
 const opListResourceDataSync = "ListResourceDataSync"
 
-// ListResourceDataSyncRequest generates a "aws/request.Request" representing the
+// ListResourceDataSyncRequest generates a "aws.Request" representing the
 // client's request for the ListResourceDataSync operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7031,8 +7030,8 @@ const opListResourceDataSync = "ListResourceDataSync"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync
-func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) (req *request.Request, output *ListResourceDataSyncOutput) {
-	op := &request.Operation{
+func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) (req *aws.Request, output *ListResourceDataSyncOutput) {
+	op := &aws.Operation{
 		Name:       opListResourceDataSync,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7089,7 +7088,7 @@ func (c *SSM) ListResourceDataSync(input *ListResourceDataSyncInput) (*ListResou
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListResourceDataSyncWithContext(ctx aws.Context, input *ListResourceDataSyncInput, opts ...request.Option) (*ListResourceDataSyncOutput, error) {
+func (c *SSM) ListResourceDataSyncWithContext(ctx aws.Context, input *ListResourceDataSyncInput, opts ...aws.Option) (*ListResourceDataSyncOutput, error) {
 	req, out := c.ListResourceDataSyncRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7098,7 +7097,7 @@ func (c *SSM) ListResourceDataSyncWithContext(ctx aws.Context, input *ListResour
 
 const opListTagsForResource = "ListTagsForResource"
 
-// ListTagsForResourceRequest generates a "aws/request.Request" representing the
+// ListTagsForResourceRequest generates a "aws.Request" representing the
 // client's request for the ListTagsForResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7122,8 +7121,8 @@ const opListTagsForResource = "ListTagsForResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListTagsForResource
-func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *request.Request, output *ListTagsForResourceOutput) {
-	op := &request.Operation{
+func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) (req *aws.Request, output *ListTagsForResourceOutput) {
+	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7176,7 +7175,7 @@ func (c *SSM) ListTagsForResource(input *ListTagsForResourceInput) (*ListTagsFor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...request.Option) (*ListTagsForResourceOutput, error) {
+func (c *SSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsForResourceInput, opts ...aws.Option) (*ListTagsForResourceOutput, error) {
 	req, out := c.ListTagsForResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7185,7 +7184,7 @@ func (c *SSM) ListTagsForResourceWithContext(ctx aws.Context, input *ListTagsFor
 
 const opModifyDocumentPermission = "ModifyDocumentPermission"
 
-// ModifyDocumentPermissionRequest generates a "aws/request.Request" representing the
+// ModifyDocumentPermissionRequest generates a "aws.Request" representing the
 // client's request for the ModifyDocumentPermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7209,8 +7208,8 @@ const opModifyDocumentPermission = "ModifyDocumentPermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermission
-func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInput) (req *request.Request, output *ModifyDocumentPermissionOutput) {
-	op := &request.Operation{
+func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInput) (req *aws.Request, output *ModifyDocumentPermissionOutput) {
+	op := &aws.Operation{
 		Name:       opModifyDocumentPermission,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7273,7 +7272,7 @@ func (c *SSM) ModifyDocumentPermission(input *ModifyDocumentPermissionInput) (*M
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) ModifyDocumentPermissionWithContext(ctx aws.Context, input *ModifyDocumentPermissionInput, opts ...request.Option) (*ModifyDocumentPermissionOutput, error) {
+func (c *SSM) ModifyDocumentPermissionWithContext(ctx aws.Context, input *ModifyDocumentPermissionInput, opts ...aws.Option) (*ModifyDocumentPermissionOutput, error) {
 	req, out := c.ModifyDocumentPermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7282,7 +7281,7 @@ func (c *SSM) ModifyDocumentPermissionWithContext(ctx aws.Context, input *Modify
 
 const opPutComplianceItems = "PutComplianceItems"
 
-// PutComplianceItemsRequest generates a "aws/request.Request" representing the
+// PutComplianceItemsRequest generates a "aws.Request" representing the
 // client's request for the PutComplianceItems operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7306,8 +7305,8 @@ const opPutComplianceItems = "PutComplianceItems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutComplianceItems
-func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) (req *request.Request, output *PutComplianceItemsOutput) {
-	op := &request.Operation{
+func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) (req *aws.Request, output *PutComplianceItemsOutput) {
+	op := &aws.Operation{
 		Name:       opPutComplianceItems,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7377,7 +7376,7 @@ func (c *SSM) PutComplianceItems(input *PutComplianceItemsInput) (*PutCompliance
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) PutComplianceItemsWithContext(ctx aws.Context, input *PutComplianceItemsInput, opts ...request.Option) (*PutComplianceItemsOutput, error) {
+func (c *SSM) PutComplianceItemsWithContext(ctx aws.Context, input *PutComplianceItemsInput, opts ...aws.Option) (*PutComplianceItemsOutput, error) {
 	req, out := c.PutComplianceItemsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7386,7 +7385,7 @@ func (c *SSM) PutComplianceItemsWithContext(ctx aws.Context, input *PutComplianc
 
 const opPutInventory = "PutInventory"
 
-// PutInventoryRequest generates a "aws/request.Request" representing the
+// PutInventoryRequest generates a "aws.Request" representing the
 // client's request for the PutInventory operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7410,8 +7409,8 @@ const opPutInventory = "PutInventory"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory
-func (c *SSM) PutInventoryRequest(input *PutInventoryInput) (req *request.Request, output *PutInventoryOutput) {
-	op := &request.Operation{
+func (c *SSM) PutInventoryRequest(input *PutInventoryInput) (req *aws.Request, output *PutInventoryOutput) {
+	op := &aws.Operation{
 		Name:       opPutInventory,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7509,7 +7508,7 @@ func (c *SSM) PutInventory(input *PutInventoryInput) (*PutInventoryOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) PutInventoryWithContext(ctx aws.Context, input *PutInventoryInput, opts ...request.Option) (*PutInventoryOutput, error) {
+func (c *SSM) PutInventoryWithContext(ctx aws.Context, input *PutInventoryInput, opts ...aws.Option) (*PutInventoryOutput, error) {
 	req, out := c.PutInventoryRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7518,7 +7517,7 @@ func (c *SSM) PutInventoryWithContext(ctx aws.Context, input *PutInventoryInput,
 
 const opPutParameter = "PutParameter"
 
-// PutParameterRequest generates a "aws/request.Request" representing the
+// PutParameterRequest generates a "aws.Request" representing the
 // client's request for the PutParameter operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7542,8 +7541,8 @@ const opPutParameter = "PutParameter"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter
-func (c *SSM) PutParameterRequest(input *PutParameterInput) (req *request.Request, output *PutParameterOutput) {
-	op := &request.Operation{
+func (c *SSM) PutParameterRequest(input *PutParameterInput) (req *aws.Request, output *PutParameterOutput) {
+	op := &aws.Operation{
 		Name:       opPutParameter,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7623,7 +7622,7 @@ func (c *SSM) PutParameter(input *PutParameterInput) (*PutParameterOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) PutParameterWithContext(ctx aws.Context, input *PutParameterInput, opts ...request.Option) (*PutParameterOutput, error) {
+func (c *SSM) PutParameterWithContext(ctx aws.Context, input *PutParameterInput, opts ...aws.Option) (*PutParameterOutput, error) {
 	req, out := c.PutParameterRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7632,7 +7631,7 @@ func (c *SSM) PutParameterWithContext(ctx aws.Context, input *PutParameterInput,
 
 const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
 
-// RegisterDefaultPatchBaselineRequest generates a "aws/request.Request" representing the
+// RegisterDefaultPatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the RegisterDefaultPatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7656,8 +7655,8 @@ const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaseline
-func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBaselineInput) (req *request.Request, output *RegisterDefaultPatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBaselineInput) (req *aws.Request, output *RegisterDefaultPatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterDefaultPatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7710,7 +7709,7 @@ func (c *SSM) RegisterDefaultPatchBaseline(input *RegisterDefaultPatchBaselineIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) RegisterDefaultPatchBaselineWithContext(ctx aws.Context, input *RegisterDefaultPatchBaselineInput, opts ...request.Option) (*RegisterDefaultPatchBaselineOutput, error) {
+func (c *SSM) RegisterDefaultPatchBaselineWithContext(ctx aws.Context, input *RegisterDefaultPatchBaselineInput, opts ...aws.Option) (*RegisterDefaultPatchBaselineOutput, error) {
 	req, out := c.RegisterDefaultPatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7719,7 +7718,7 @@ func (c *SSM) RegisterDefaultPatchBaselineWithContext(ctx aws.Context, input *Re
 
 const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup"
 
-// RegisterPatchBaselineForPatchGroupRequest generates a "aws/request.Request" representing the
+// RegisterPatchBaselineForPatchGroupRequest generates a "aws.Request" representing the
 // client's request for the RegisterPatchBaselineForPatchGroup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7743,8 +7742,8 @@ const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroup
-func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBaselineForPatchGroupInput) (req *request.Request, output *RegisterPatchBaselineForPatchGroupOutput) {
-	op := &request.Operation{
+func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBaselineForPatchGroupInput) (req *aws.Request, output *RegisterPatchBaselineForPatchGroupOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterPatchBaselineForPatchGroup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7805,7 +7804,7 @@ func (c *SSM) RegisterPatchBaselineForPatchGroup(input *RegisterPatchBaselineFor
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) RegisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *RegisterPatchBaselineForPatchGroupInput, opts ...request.Option) (*RegisterPatchBaselineForPatchGroupOutput, error) {
+func (c *SSM) RegisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, input *RegisterPatchBaselineForPatchGroupInput, opts ...aws.Option) (*RegisterPatchBaselineForPatchGroupOutput, error) {
 	req, out := c.RegisterPatchBaselineForPatchGroupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7814,7 +7813,7 @@ func (c *SSM) RegisterPatchBaselineForPatchGroupWithContext(ctx aws.Context, inp
 
 const opRegisterTargetWithMaintenanceWindow = "RegisterTargetWithMaintenanceWindow"
 
-// RegisterTargetWithMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// RegisterTargetWithMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the RegisterTargetWithMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7838,8 +7837,8 @@ const opRegisterTargetWithMaintenanceWindow = "RegisterTargetWithMaintenanceWind
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindow
-func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWithMaintenanceWindowInput) (req *request.Request, output *RegisterTargetWithMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWithMaintenanceWindowInput) (req *aws.Request, output *RegisterTargetWithMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterTargetWithMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7896,7 +7895,7 @@ func (c *SSM) RegisterTargetWithMaintenanceWindow(input *RegisterTargetWithMaint
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) RegisterTargetWithMaintenanceWindowWithContext(ctx aws.Context, input *RegisterTargetWithMaintenanceWindowInput, opts ...request.Option) (*RegisterTargetWithMaintenanceWindowOutput, error) {
+func (c *SSM) RegisterTargetWithMaintenanceWindowWithContext(ctx aws.Context, input *RegisterTargetWithMaintenanceWindowInput, opts ...aws.Option) (*RegisterTargetWithMaintenanceWindowOutput, error) {
 	req, out := c.RegisterTargetWithMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7905,7 +7904,7 @@ func (c *SSM) RegisterTargetWithMaintenanceWindowWithContext(ctx aws.Context, in
 
 const opRegisterTaskWithMaintenanceWindow = "RegisterTaskWithMaintenanceWindow"
 
-// RegisterTaskWithMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// RegisterTaskWithMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the RegisterTaskWithMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7929,8 +7928,8 @@ const opRegisterTaskWithMaintenanceWindow = "RegisterTaskWithMaintenanceWindow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindow
-func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMaintenanceWindowInput) (req *request.Request, output *RegisterTaskWithMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMaintenanceWindowInput) (req *aws.Request, output *RegisterTaskWithMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterTaskWithMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7991,7 +7990,7 @@ func (c *SSM) RegisterTaskWithMaintenanceWindow(input *RegisterTaskWithMaintenan
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) RegisterTaskWithMaintenanceWindowWithContext(ctx aws.Context, input *RegisterTaskWithMaintenanceWindowInput, opts ...request.Option) (*RegisterTaskWithMaintenanceWindowOutput, error) {
+func (c *SSM) RegisterTaskWithMaintenanceWindowWithContext(ctx aws.Context, input *RegisterTaskWithMaintenanceWindowInput, opts ...aws.Option) (*RegisterTaskWithMaintenanceWindowOutput, error) {
 	req, out := c.RegisterTaskWithMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8000,7 +7999,7 @@ func (c *SSM) RegisterTaskWithMaintenanceWindowWithContext(ctx aws.Context, inpu
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
 
-// RemoveTagsFromResourceRequest generates a "aws/request.Request" representing the
+// RemoveTagsFromResourceRequest generates a "aws.Request" representing the
 // client's request for the RemoveTagsFromResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8024,8 +8023,8 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResource
-func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *request.Request, output *RemoveTagsFromResourceOutput) {
-	op := &request.Operation{
+func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) (req *aws.Request, output *RemoveTagsFromResourceOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTagsFromResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8078,7 +8077,7 @@ func (c *SSM) RemoveTagsFromResource(input *RemoveTagsFromResourceInput) (*Remov
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...request.Option) (*RemoveTagsFromResourceOutput, error) {
+func (c *SSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTagsFromResourceInput, opts ...aws.Option) (*RemoveTagsFromResourceOutput, error) {
 	req, out := c.RemoveTagsFromResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8087,7 +8086,7 @@ func (c *SSM) RemoveTagsFromResourceWithContext(ctx aws.Context, input *RemoveTa
 
 const opSendAutomationSignal = "SendAutomationSignal"
 
-// SendAutomationSignalRequest generates a "aws/request.Request" representing the
+// SendAutomationSignalRequest generates a "aws.Request" representing the
 // client's request for the SendAutomationSignal operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8111,8 +8110,8 @@ const opSendAutomationSignal = "SendAutomationSignal"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendAutomationSignal
-func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) (req *request.Request, output *SendAutomationSignalOutput) {
-	op := &request.Operation{
+func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) (req *aws.Request, output *SendAutomationSignalOutput) {
+	op := &aws.Operation{
 		Name:       opSendAutomationSignal,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8165,7 +8164,7 @@ func (c *SSM) SendAutomationSignal(input *SendAutomationSignalInput) (*SendAutom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) SendAutomationSignalWithContext(ctx aws.Context, input *SendAutomationSignalInput, opts ...request.Option) (*SendAutomationSignalOutput, error) {
+func (c *SSM) SendAutomationSignalWithContext(ctx aws.Context, input *SendAutomationSignalInput, opts ...aws.Option) (*SendAutomationSignalOutput, error) {
 	req, out := c.SendAutomationSignalRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8174,7 +8173,7 @@ func (c *SSM) SendAutomationSignalWithContext(ctx aws.Context, input *SendAutoma
 
 const opSendCommand = "SendCommand"
 
-// SendCommandRequest generates a "aws/request.Request" representing the
+// SendCommandRequest generates a "aws.Request" representing the
 // client's request for the SendCommand operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8198,8 +8197,8 @@ const opSendCommand = "SendCommand"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand
-func (c *SSM) SendCommandRequest(input *SendCommandInput) (req *request.Request, output *SendCommandOutput) {
-	op := &request.Operation{
+func (c *SSM) SendCommandRequest(input *SendCommandInput) (req *aws.Request, output *SendCommandOutput) {
+	op := &aws.Operation{
 		Name:       opSendCommand,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8291,7 +8290,7 @@ func (c *SSM) SendCommand(input *SendCommandInput) (*SendCommandOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) SendCommandWithContext(ctx aws.Context, input *SendCommandInput, opts ...request.Option) (*SendCommandOutput, error) {
+func (c *SSM) SendCommandWithContext(ctx aws.Context, input *SendCommandInput, opts ...aws.Option) (*SendCommandOutput, error) {
 	req, out := c.SendCommandRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8300,7 +8299,7 @@ func (c *SSM) SendCommandWithContext(ctx aws.Context, input *SendCommandInput, o
 
 const opStartAutomationExecution = "StartAutomationExecution"
 
-// StartAutomationExecutionRequest generates a "aws/request.Request" representing the
+// StartAutomationExecutionRequest generates a "aws.Request" representing the
 // client's request for the StartAutomationExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8324,8 +8323,8 @@ const opStartAutomationExecution = "StartAutomationExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecution
-func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInput) (req *request.Request, output *StartAutomationExecutionOutput) {
-	op := &request.Operation{
+func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInput) (req *aws.Request, output *StartAutomationExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStartAutomationExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8389,7 +8388,7 @@ func (c *SSM) StartAutomationExecution(input *StartAutomationExecutionInput) (*S
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) StartAutomationExecutionWithContext(ctx aws.Context, input *StartAutomationExecutionInput, opts ...request.Option) (*StartAutomationExecutionOutput, error) {
+func (c *SSM) StartAutomationExecutionWithContext(ctx aws.Context, input *StartAutomationExecutionInput, opts ...aws.Option) (*StartAutomationExecutionOutput, error) {
 	req, out := c.StartAutomationExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8398,7 +8397,7 @@ func (c *SSM) StartAutomationExecutionWithContext(ctx aws.Context, input *StartA
 
 const opStopAutomationExecution = "StopAutomationExecution"
 
-// StopAutomationExecutionRequest generates a "aws/request.Request" representing the
+// StopAutomationExecutionRequest generates a "aws.Request" representing the
 // client's request for the StopAutomationExecution operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8422,8 +8421,8 @@ const opStopAutomationExecution = "StopAutomationExecution"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecution
-func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput) (req *request.Request, output *StopAutomationExecutionOutput) {
-	op := &request.Operation{
+func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput) (req *aws.Request, output *StopAutomationExecutionOutput) {
+	op := &aws.Operation{
 		Name:       opStopAutomationExecution,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8472,7 +8471,7 @@ func (c *SSM) StopAutomationExecution(input *StopAutomationExecutionInput) (*Sto
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) StopAutomationExecutionWithContext(ctx aws.Context, input *StopAutomationExecutionInput, opts ...request.Option) (*StopAutomationExecutionOutput, error) {
+func (c *SSM) StopAutomationExecutionWithContext(ctx aws.Context, input *StopAutomationExecutionInput, opts ...aws.Option) (*StopAutomationExecutionOutput, error) {
 	req, out := c.StopAutomationExecutionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8481,7 +8480,7 @@ func (c *SSM) StopAutomationExecutionWithContext(ctx aws.Context, input *StopAut
 
 const opUpdateAssociation = "UpdateAssociation"
 
-// UpdateAssociationRequest generates a "aws/request.Request" representing the
+// UpdateAssociationRequest generates a "aws.Request" representing the
 // client's request for the UpdateAssociation operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8505,8 +8504,8 @@ const opUpdateAssociation = "UpdateAssociation"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation
-func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) (req *request.Request, output *UpdateAssociationOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) (req *aws.Request, output *UpdateAssociationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateAssociation,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8592,7 +8591,7 @@ func (c *SSM) UpdateAssociation(input *UpdateAssociationInput) (*UpdateAssociati
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateAssociationWithContext(ctx aws.Context, input *UpdateAssociationInput, opts ...request.Option) (*UpdateAssociationOutput, error) {
+func (c *SSM) UpdateAssociationWithContext(ctx aws.Context, input *UpdateAssociationInput, opts ...aws.Option) (*UpdateAssociationOutput, error) {
 	req, out := c.UpdateAssociationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8601,7 +8600,7 @@ func (c *SSM) UpdateAssociationWithContext(ctx aws.Context, input *UpdateAssocia
 
 const opUpdateAssociationStatus = "UpdateAssociationStatus"
 
-// UpdateAssociationStatusRequest generates a "aws/request.Request" representing the
+// UpdateAssociationStatusRequest generates a "aws.Request" representing the
 // client's request for the UpdateAssociationStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8625,8 +8624,8 @@ const opUpdateAssociationStatus = "UpdateAssociationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus
-func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) (req *request.Request, output *UpdateAssociationStatusOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput) (req *aws.Request, output *UpdateAssociationStatusOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateAssociationStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8700,7 +8699,7 @@ func (c *SSM) UpdateAssociationStatus(input *UpdateAssociationStatusInput) (*Upd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateAssociationStatusWithContext(ctx aws.Context, input *UpdateAssociationStatusInput, opts ...request.Option) (*UpdateAssociationStatusOutput, error) {
+func (c *SSM) UpdateAssociationStatusWithContext(ctx aws.Context, input *UpdateAssociationStatusInput, opts ...aws.Option) (*UpdateAssociationStatusOutput, error) {
 	req, out := c.UpdateAssociationStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8709,7 +8708,7 @@ func (c *SSM) UpdateAssociationStatusWithContext(ctx aws.Context, input *UpdateA
 
 const opUpdateDocument = "UpdateDocument"
 
-// UpdateDocumentRequest generates a "aws/request.Request" representing the
+// UpdateDocumentRequest generates a "aws.Request" representing the
 // client's request for the UpdateDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8733,8 +8732,8 @@ const opUpdateDocument = "UpdateDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument
-func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) (req *request.Request, output *UpdateDocumentOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) (req *aws.Request, output *UpdateDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDocument,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8802,7 +8801,7 @@ func (c *SSM) UpdateDocument(input *UpdateDocumentInput) (*UpdateDocumentOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocumentInput, opts ...request.Option) (*UpdateDocumentOutput, error) {
+func (c *SSM) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocumentInput, opts ...aws.Option) (*UpdateDocumentOutput, error) {
 	req, out := c.UpdateDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8811,7 +8810,7 @@ func (c *SSM) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocumentIn
 
 const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
 
-// UpdateDocumentDefaultVersionRequest generates a "aws/request.Request" representing the
+// UpdateDocumentDefaultVersionRequest generates a "aws.Request" representing the
 // client's request for the UpdateDocumentDefaultVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8835,8 +8834,8 @@ const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersion
-func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVersionInput) (req *request.Request, output *UpdateDocumentDefaultVersionOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVersionInput) (req *aws.Request, output *UpdateDocumentDefaultVersionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDocumentDefaultVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8890,7 +8889,7 @@ func (c *SSM) UpdateDocumentDefaultVersion(input *UpdateDocumentDefaultVersionIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateDocumentDefaultVersionWithContext(ctx aws.Context, input *UpdateDocumentDefaultVersionInput, opts ...request.Option) (*UpdateDocumentDefaultVersionOutput, error) {
+func (c *SSM) UpdateDocumentDefaultVersionWithContext(ctx aws.Context, input *UpdateDocumentDefaultVersionInput, opts ...aws.Option) (*UpdateDocumentDefaultVersionOutput, error) {
 	req, out := c.UpdateDocumentDefaultVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8899,7 +8898,7 @@ func (c *SSM) UpdateDocumentDefaultVersionWithContext(ctx aws.Context, input *Up
 
 const opUpdateMaintenanceWindow = "UpdateMaintenanceWindow"
 
-// UpdateMaintenanceWindowRequest generates a "aws/request.Request" representing the
+// UpdateMaintenanceWindowRequest generates a "aws.Request" representing the
 // client's request for the UpdateMaintenanceWindow operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -8923,8 +8922,8 @@ const opUpdateMaintenanceWindow = "UpdateMaintenanceWindow"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindow
-func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput) (req *request.Request, output *UpdateMaintenanceWindowOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput) (req *aws.Request, output *UpdateMaintenanceWindowOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMaintenanceWindow,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -8973,7 +8972,7 @@ func (c *SSM) UpdateMaintenanceWindow(input *UpdateMaintenanceWindowInput) (*Upd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateMaintenanceWindowWithContext(ctx aws.Context, input *UpdateMaintenanceWindowInput, opts ...request.Option) (*UpdateMaintenanceWindowOutput, error) {
+func (c *SSM) UpdateMaintenanceWindowWithContext(ctx aws.Context, input *UpdateMaintenanceWindowInput, opts ...aws.Option) (*UpdateMaintenanceWindowOutput, error) {
 	req, out := c.UpdateMaintenanceWindowRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -8982,7 +8981,7 @@ func (c *SSM) UpdateMaintenanceWindowWithContext(ctx aws.Context, input *UpdateM
 
 const opUpdateMaintenanceWindowTarget = "UpdateMaintenanceWindowTarget"
 
-// UpdateMaintenanceWindowTargetRequest generates a "aws/request.Request" representing the
+// UpdateMaintenanceWindowTargetRequest generates a "aws.Request" representing the
 // client's request for the UpdateMaintenanceWindowTarget operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9006,8 +9005,8 @@ const opUpdateMaintenanceWindowTarget = "UpdateMaintenanceWindowTarget"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTarget
-func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindowTargetInput) (req *request.Request, output *UpdateMaintenanceWindowTargetOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindowTargetInput) (req *aws.Request, output *UpdateMaintenanceWindowTargetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMaintenanceWindowTarget,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9072,7 +9071,7 @@ func (c *SSM) UpdateMaintenanceWindowTarget(input *UpdateMaintenanceWindowTarget
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateMaintenanceWindowTargetWithContext(ctx aws.Context, input *UpdateMaintenanceWindowTargetInput, opts ...request.Option) (*UpdateMaintenanceWindowTargetOutput, error) {
+func (c *SSM) UpdateMaintenanceWindowTargetWithContext(ctx aws.Context, input *UpdateMaintenanceWindowTargetInput, opts ...aws.Option) (*UpdateMaintenanceWindowTargetOutput, error) {
 	req, out := c.UpdateMaintenanceWindowTargetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9081,7 +9080,7 @@ func (c *SSM) UpdateMaintenanceWindowTargetWithContext(ctx aws.Context, input *U
 
 const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
 
-// UpdateMaintenanceWindowTaskRequest generates a "aws/request.Request" representing the
+// UpdateMaintenanceWindowTaskRequest generates a "aws.Request" representing the
 // client's request for the UpdateMaintenanceWindowTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9105,8 +9104,8 @@ const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowTask
-func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowTaskInput) (req *request.Request, output *UpdateMaintenanceWindowTaskOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowTaskInput) (req *aws.Request, output *UpdateMaintenanceWindowTaskOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateMaintenanceWindowTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9174,7 +9173,7 @@ func (c *SSM) UpdateMaintenanceWindowTask(input *UpdateMaintenanceWindowTaskInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateMaintenanceWindowTaskWithContext(ctx aws.Context, input *UpdateMaintenanceWindowTaskInput, opts ...request.Option) (*UpdateMaintenanceWindowTaskOutput, error) {
+func (c *SSM) UpdateMaintenanceWindowTaskWithContext(ctx aws.Context, input *UpdateMaintenanceWindowTaskInput, opts ...aws.Option) (*UpdateMaintenanceWindowTaskOutput, error) {
 	req, out := c.UpdateMaintenanceWindowTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9183,7 +9182,7 @@ func (c *SSM) UpdateMaintenanceWindowTaskWithContext(ctx aws.Context, input *Upd
 
 const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 
-// UpdateManagedInstanceRoleRequest generates a "aws/request.Request" representing the
+// UpdateManagedInstanceRoleRequest generates a "aws.Request" representing the
 // client's request for the UpdateManagedInstanceRole operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9207,8 +9206,8 @@ const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRole
-func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleInput) (req *request.Request, output *UpdateManagedInstanceRoleOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleInput) (req *aws.Request, output *UpdateManagedInstanceRoleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateManagedInstanceRole,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9269,7 +9268,7 @@ func (c *SSM) UpdateManagedInstanceRole(input *UpdateManagedInstanceRoleInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdateManagedInstanceRoleWithContext(ctx aws.Context, input *UpdateManagedInstanceRoleInput, opts ...request.Option) (*UpdateManagedInstanceRoleOutput, error) {
+func (c *SSM) UpdateManagedInstanceRoleWithContext(ctx aws.Context, input *UpdateManagedInstanceRoleInput, opts ...aws.Option) (*UpdateManagedInstanceRoleOutput, error) {
 	req, out := c.UpdateManagedInstanceRoleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9278,7 +9277,7 @@ func (c *SSM) UpdateManagedInstanceRoleWithContext(ctx aws.Context, input *Updat
 
 const opUpdatePatchBaseline = "UpdatePatchBaseline"
 
-// UpdatePatchBaselineRequest generates a "aws/request.Request" representing the
+// UpdatePatchBaselineRequest generates a "aws.Request" representing the
 // client's request for the UpdatePatchBaseline operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -9302,8 +9301,8 @@ const opUpdatePatchBaseline = "UpdatePatchBaseline"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline
-func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) (req *request.Request, output *UpdatePatchBaselineOutput) {
-	op := &request.Operation{
+func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) (req *aws.Request, output *UpdatePatchBaselineOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePatchBaseline,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -9353,7 +9352,7 @@ func (c *SSM) UpdatePatchBaseline(input *UpdatePatchBaselineInput) (*UpdatePatch
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SSM) UpdatePatchBaselineWithContext(ctx aws.Context, input *UpdatePatchBaselineInput, opts ...request.Option) (*UpdatePatchBaselineOutput, error) {
+func (c *SSM) UpdatePatchBaselineWithContext(ctx aws.Context, input *UpdatePatchBaselineInput, opts ...aws.Option) (*UpdatePatchBaselineOutput, error) {
 	req, out := c.UpdatePatchBaselineRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -9495,15 +9494,15 @@ func (s AddTagsToResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsToResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsToResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsToResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -9511,7 +9510,7 @@ func (s *AddTagsToResourceInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9850,15 +9849,15 @@ func (s AssociationFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociationFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociationFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociationFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9960,18 +9959,18 @@ func (s AssociationStatus) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociationStatus) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociationStatus"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociationStatus"}
 	if s.Date == nil {
-		invalidParams.Add(request.NewErrParamRequired("Date"))
+		invalidParams.Add(aws.NewErrParamRequired("Date"))
 	}
 	if s.Message == nil {
-		invalidParams.Add(request.NewErrParamRequired("Message"))
+		invalidParams.Add(aws.NewErrParamRequired("Message"))
 	}
 	if s.Message != nil && len(*s.Message) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Message", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Message", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10255,15 +10254,15 @@ func (s AutomationExecutionFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AutomationExecutionFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AutomationExecutionFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "AutomationExecutionFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10410,12 +10409,12 @@ func (s CancelCommandInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelCommandInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelCommandInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelCommandInput"}
 	if s.CommandId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommandId"))
+		invalidParams.Add(aws.NewErrParamRequired("CommandId"))
 	}
 	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("CommandId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10729,15 +10728,15 @@ func (s CommandFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CommandFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CommandFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "CommandFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11184,9 +11183,9 @@ func (s ComplianceExecutionSummary) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComplianceExecutionSummary) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComplianceExecutionSummary"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComplianceExecutionSummary"}
 	if s.ExecutionTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExecutionTime"))
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionTime"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11360,15 +11359,15 @@ func (s ComplianceItemEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComplianceItemEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComplianceItemEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComplianceItemEntry"}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Severity == nil {
-		invalidParams.Add(request.NewErrParamRequired("Severity"))
+		invalidParams.Add(aws.NewErrParamRequired("Severity"))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11435,12 +11434,12 @@ func (s ComplianceStringFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComplianceStringFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComplianceStringFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComplianceStringFilter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11585,12 +11584,12 @@ func (s CreateActivationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateActivationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateActivationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateActivationInput"}
 	if s.IamRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamRole"))
+		invalidParams.Add(aws.NewErrParamRequired("IamRole"))
 	}
 	if s.RegistrationLimit != nil && *s.RegistrationLimit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("RegistrationLimit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("RegistrationLimit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11686,12 +11685,12 @@ func (s CreateAssociationBatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationBatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAssociationBatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationBatchInput"}
 	if s.Entries == nil {
-		invalidParams.Add(request.NewErrParamRequired("Entries"))
+		invalidParams.Add(aws.NewErrParamRequired("Entries"))
 	}
 	if s.Entries != nil && len(s.Entries) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Entries", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Entries", 1))
 	}
 	if s.Entries != nil {
 		for i, v := range s.Entries {
@@ -11699,7 +11698,7 @@ func (s *CreateAssociationBatchInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Entries", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11793,16 +11792,16 @@ func (s CreateAssociationBatchRequestEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationBatchRequestEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAssociationBatchRequestEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationBatchRequestEntry"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ScheduleExpression != nil && len(*s.ScheduleExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ScheduleExpression", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ScheduleExpression", 1))
 	}
 	if s.OutputLocation != nil {
 		if err := s.OutputLocation.Validate(); err != nil {
-			invalidParams.AddNested("OutputLocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OutputLocation", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Targets != nil {
@@ -11811,7 +11810,7 @@ func (s *CreateAssociationBatchRequestEntry) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11914,16 +11913,16 @@ func (s CreateAssociationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAssociationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAssociationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAssociationInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ScheduleExpression != nil && len(*s.ScheduleExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ScheduleExpression", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ScheduleExpression", 1))
 	}
 	if s.OutputLocation != nil {
 		if err := s.OutputLocation.Validate(); err != nil {
-			invalidParams.AddNested("OutputLocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OutputLocation", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Targets != nil {
@@ -11932,7 +11931,7 @@ func (s *CreateAssociationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12046,15 +12045,15 @@ func (s CreateDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDocumentInput"}
 	if s.Content == nil {
-		invalidParams.Add(request.NewErrParamRequired("Content"))
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Content", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12161,36 +12160,36 @@ func (s CreateMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateMaintenanceWindowInput"}
 	if s.AllowUnassociatedTargets == nil {
-		invalidParams.Add(request.NewErrParamRequired("AllowUnassociatedTargets"))
+		invalidParams.Add(aws.NewErrParamRequired("AllowUnassociatedTargets"))
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
 	if s.Cutoff == nil {
-		invalidParams.Add(request.NewErrParamRequired("Cutoff"))
+		invalidParams.Add(aws.NewErrParamRequired("Cutoff"))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Duration == nil {
-		invalidParams.Add(request.NewErrParamRequired("Duration"))
+		invalidParams.Add(aws.NewErrParamRequired("Duration"))
 	}
 	if s.Duration != nil && *s.Duration < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Duration", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Duration", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.Schedule == nil {
-		invalidParams.Add(request.NewErrParamRequired("Schedule"))
+		invalidParams.Add(aws.NewErrParamRequired("Schedule"))
 	}
 	if s.Schedule != nil && len(*s.Schedule) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Schedule", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Schedule", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12316,27 +12315,27 @@ func (s CreatePatchBaselineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePatchBaselineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePatchBaselineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePatchBaselineInput"}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.ApprovalRules != nil {
 		if err := s.ApprovalRules.Validate(); err != nil {
-			invalidParams.AddNested("ApprovalRules", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ApprovalRules", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.GlobalFilters != nil {
 		if err := s.GlobalFilters.Validate(); err != nil {
-			invalidParams.AddNested("GlobalFilters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GlobalFilters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12451,19 +12450,19 @@ func (s CreateResourceDataSyncInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateResourceDataSyncInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateResourceDataSyncInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceDataSyncInput"}
 	if s.S3Destination == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Destination"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Destination"))
 	}
 	if s.SyncName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SyncName"))
+		invalidParams.Add(aws.NewErrParamRequired("SyncName"))
 	}
 	if s.SyncName != nil && len(*s.SyncName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SyncName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SyncName", 1))
 	}
 	if s.S3Destination != nil {
 		if err := s.S3Destination.Validate(); err != nil {
-			invalidParams.AddNested("S3Destination", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Destination", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12522,9 +12521,9 @@ func (s DeleteActivationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteActivationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteActivationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteActivationInput"}
 	if s.ActivationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivationId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12633,9 +12632,9 @@ func (s DeleteDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12687,12 +12686,12 @@ func (s DeleteMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMaintenanceWindowInput"}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12753,12 +12752,12 @@ func (s DeleteParameterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteParameterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteParameterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteParameterInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12810,12 +12809,12 @@ func (s DeleteParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteParametersInput"}
 	if s.Names == nil {
-		invalidParams.Add(request.NewErrParamRequired("Names"))
+		invalidParams.Add(aws.NewErrParamRequired("Names"))
 	}
 	if s.Names != nil && len(s.Names) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Names", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Names", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12886,12 +12885,12 @@ func (s DeletePatchBaselineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePatchBaselineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePatchBaselineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePatchBaselineInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12952,12 +12951,12 @@ func (s DeleteResourceDataSyncInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteResourceDataSyncInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteResourceDataSyncInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceDataSyncInput"}
 	if s.SyncName == nil {
-		invalidParams.Add(request.NewErrParamRequired("SyncName"))
+		invalidParams.Add(aws.NewErrParamRequired("SyncName"))
 	}
 	if s.SyncName != nil && len(*s.SyncName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SyncName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SyncName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13010,9 +13009,9 @@ func (s DeregisterManagedInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterManagedInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterManagedInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterManagedInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13069,18 +13068,18 @@ func (s DeregisterPatchBaselineForPatchGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterPatchBaselineForPatchGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterPatchBaselineForPatchGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterPatchBaselineForPatchGroupInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 	if s.PatchGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
 	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PatchGroup", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13166,18 +13165,18 @@ func (s DeregisterTargetFromMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTargetFromMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterTargetFromMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTargetFromMaintenanceWindowInput"}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.WindowTargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowTargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowTargetId"))
 	}
 	if s.WindowTargetId != nil && len(*s.WindowTargetId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowTargetId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowTargetId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13264,18 +13263,18 @@ func (s DeregisterTaskFromMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterTaskFromMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterTaskFromMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterTaskFromMaintenanceWindowInput"}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.WindowTaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowTaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
 	}
 	if s.WindowTaskId != nil && len(*s.WindowTaskId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowTaskId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowTaskId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13391,9 +13390,9 @@ func (s DescribeActivationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeActivationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivationsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13561,12 +13560,12 @@ func (s DescribeAutomationExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAutomationExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAutomationExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAutomationExecutionsInput"}
 	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Filters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -13574,7 +13573,7 @@ func (s *DescribeAutomationExecutionsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -13665,9 +13664,9 @@ func (s DescribeAvailablePatchesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAvailablePatchesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAvailablePatchesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAvailablePatchesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -13675,7 +13674,7 @@ func (s *DescribeAvailablePatchesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -13764,9 +13763,9 @@ func (s DescribeDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13838,12 +13837,12 @@ func (s DescribeDocumentPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDocumentPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDocumentPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentPermissionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.PermissionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("PermissionType"))
+		invalidParams.Add(aws.NewErrParamRequired("PermissionType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13920,12 +13919,12 @@ func (s DescribeEffectiveInstanceAssociationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEffectiveInstanceAssociationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEffectiveInstanceAssociationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEffectiveInstanceAssociationsInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14015,15 +14014,15 @@ func (s DescribeEffectivePatchesForPatchBaselineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEffectivePatchesForPatchBaselineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEffectivePatchesForPatchBaselineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEffectivePatchesForPatchBaselineInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14115,12 +14114,12 @@ func (s DescribeInstanceAssociationsStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstanceAssociationsStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstanceAssociationsStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceAssociationsStatusInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14213,9 +14212,9 @@ func (s DescribeInstanceInformationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstanceInformationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstanceInformationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceInformationInput"}
 	if s.MaxResults != nil && *s.MaxResults < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 5))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -14223,7 +14222,7 @@ func (s *DescribeInstanceInformationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14233,7 +14232,7 @@ func (s *DescribeInstanceInformationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceInformationFilterList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "InstanceInformationFilterList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14341,15 +14340,15 @@ func (s DescribeInstancePatchStatesForPatchGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancePatchStatesForPatchGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstancePatchStatesForPatchGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchStatesForPatchGroupInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.PatchGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
 	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PatchGroup", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -14357,7 +14356,7 @@ func (s *DescribeInstancePatchStatesForPatchGroupInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14455,12 +14454,12 @@ func (s DescribeInstancePatchStatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancePatchStatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstancePatchStatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchStatesInput"}
 	if s.InstanceIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceIds"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceIds"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14557,12 +14556,12 @@ func (s DescribeInstancePatchesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstancePatchesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstancePatchesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstancePatchesInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -14570,7 +14569,7 @@ func (s *DescribeInstancePatchesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14696,21 +14695,21 @@ func (s DescribeMaintenanceWindowExecutionTaskInvocationsInput) GoString() strin
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionTaskInvocationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionTaskInvocationsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.TaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 36))
 	}
 	if s.WindowExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
 	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -14718,7 +14717,7 @@ func (s *DescribeMaintenanceWindowExecutionTaskInvocationsInput) Validate() erro
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14830,15 +14829,15 @@ func (s DescribeMaintenanceWindowExecutionTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceWindowExecutionTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionTasksInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.WindowExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
 	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -14846,7 +14845,7 @@ func (s *DescribeMaintenanceWindowExecutionTasksInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14956,15 +14955,15 @@ func (s DescribeMaintenanceWindowExecutionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceWindowExecutionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowExecutionsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -14972,7 +14971,7 @@ func (s *DescribeMaintenanceWindowExecutionsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15076,15 +15075,15 @@ func (s DescribeMaintenanceWindowTargetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceWindowTargetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceWindowTargetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowTargetsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -15092,7 +15091,7 @@ func (s *DescribeMaintenanceWindowTargetsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15196,15 +15195,15 @@ func (s DescribeMaintenanceWindowTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceWindowTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceWindowTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowTasksInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -15212,7 +15211,7 @@ func (s *DescribeMaintenanceWindowTasksInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15311,9 +15310,9 @@ func (s DescribeMaintenanceWindowsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMaintenanceWindowsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMaintenanceWindowsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMaintenanceWindowsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 10 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 10))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 10))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -15321,7 +15320,7 @@ func (s *DescribeMaintenanceWindowsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15416,9 +15415,9 @@ func (s DescribeParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeParametersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -15426,7 +15425,7 @@ func (s *DescribeParametersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15436,7 +15435,7 @@ func (s *DescribeParametersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15536,9 +15535,9 @@ func (s DescribePatchBaselinesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePatchBaselinesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePatchBaselinesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchBaselinesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -15546,7 +15545,7 @@ func (s *DescribePatchBaselinesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15631,12 +15630,12 @@ func (s DescribePatchGroupStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePatchGroupStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePatchGroupStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchGroupStateInput"}
 	if s.PatchGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
 	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PatchGroup", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15749,9 +15748,9 @@ func (s DescribePatchGroupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribePatchGroupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribePatchGroupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribePatchGroupsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -15759,7 +15758,7 @@ func (s *DescribePatchGroupsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -16052,15 +16051,15 @@ func (s DocumentFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DocumentFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "DocumentFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16208,9 +16207,9 @@ func (s DocumentKeyValuesFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DocumentKeyValuesFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DocumentKeyValuesFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "DocumentKeyValuesFilter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16492,12 +16491,12 @@ func (s GetAutomationExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAutomationExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAutomationExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAutomationExecutionInput"}
 	if s.AutomationExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AutomationExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
 	}
 	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("AutomationExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16570,18 +16569,18 @@ func (s GetCommandInvocationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCommandInvocationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCommandInvocationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCommandInvocationInput"}
 	if s.CommandId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommandId"))
+		invalidParams.Add(aws.NewErrParamRequired("CommandId"))
 	}
 	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("CommandId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
 	}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.PluginName != nil && len(*s.PluginName) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("PluginName", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("PluginName", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16912,15 +16911,15 @@ func (s GetDeployablePatchSnapshotForInstanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeployablePatchSnapshotForInstanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeployablePatchSnapshotForInstanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeployablePatchSnapshotForInstanceInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.SnapshotId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SnapshotId"))
+		invalidParams.Add(aws.NewErrParamRequired("SnapshotId"))
 	}
 	if s.SnapshotId != nil && len(*s.SnapshotId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("SnapshotId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("SnapshotId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17018,9 +17017,9 @@ func (s GetDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17124,15 +17123,15 @@ func (s GetInventoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInventoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInventoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInventoryInput"}
 	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Filters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ResultAttributes != nil && len(s.ResultAttributes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResultAttributes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResultAttributes", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -17140,7 +17139,7 @@ func (s *GetInventoryInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17150,7 +17149,7 @@ func (s *GetInventoryInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResultAttributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResultAttributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -17251,9 +17250,9 @@ func (s GetInventorySchemaInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetInventorySchemaInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetInventorySchemaInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetInventorySchemaInput"}
 	if s.MaxResults != nil && *s.MaxResults < 50 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 50))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 50))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17342,12 +17341,12 @@ func (s GetMaintenanceWindowExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionInput"}
 	if s.WindowExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
 	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17459,18 +17458,18 @@ func (s GetMaintenanceWindowExecutionTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowExecutionTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionTaskInput"}
 	if s.TaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 36))
 	}
 	if s.WindowExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
 	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17524,24 +17523,24 @@ func (s GetMaintenanceWindowExecutionTaskInvocationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowExecutionTaskInvocationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionTaskInvocationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowExecutionTaskInvocationInput"}
 	if s.InvocationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InvocationId"))
+		invalidParams.Add(aws.NewErrParamRequired("InvocationId"))
 	}
 	if s.InvocationId != nil && len(*s.InvocationId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("InvocationId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("InvocationId", 36))
 	}
 	if s.TaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskId"))
 	}
 	if s.TaskId != nil && len(*s.TaskId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskId", 36))
 	}
 	if s.WindowExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowExecutionId"))
 	}
 	if s.WindowExecutionId != nil && len(*s.WindowExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowExecutionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17855,12 +17854,12 @@ func (s GetMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowInput"}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18009,18 +18008,18 @@ func (s GetMaintenanceWindowTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMaintenanceWindowTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMaintenanceWindowTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMaintenanceWindowTaskInput"}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.WindowTaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowTaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
 	}
 	if s.WindowTaskId != nil && len(*s.WindowTaskId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowTaskId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowTaskId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18221,15 +18220,15 @@ func (s GetParameterHistoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParameterHistoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetParameterHistoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetParameterHistoryInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18322,12 +18321,12 @@ func (s GetParameterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParameterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetParameterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetParameterInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18415,15 +18414,15 @@ func (s GetParametersByPathInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParametersByPathInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetParametersByPathInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetParametersByPathInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Path == nil {
-		invalidParams.Add(request.NewErrParamRequired("Path"))
+		invalidParams.Add(aws.NewErrParamRequired("Path"))
 	}
 	if s.Path != nil && len(*s.Path) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Path", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
 	}
 	if s.ParameterFilters != nil {
 		for i, v := range s.ParameterFilters {
@@ -18431,7 +18430,7 @@ func (s *GetParametersByPathInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterFilters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -18539,12 +18538,12 @@ func (s GetParametersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetParametersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetParametersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetParametersInput"}
 	if s.Names == nil {
-		invalidParams.Add(request.NewErrParamRequired("Names"))
+		invalidParams.Add(aws.NewErrParamRequired("Names"))
 	}
 	if s.Names != nil && len(s.Names) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Names", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Names", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18625,12 +18624,12 @@ func (s GetPatchBaselineForPatchGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPatchBaselineForPatchGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPatchBaselineForPatchGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPatchBaselineForPatchGroupInput"}
 	if s.PatchGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
 	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PatchGroup", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18715,12 +18714,12 @@ func (s GetPatchBaselineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPatchBaselineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPatchBaselineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPatchBaselineInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -18966,10 +18965,10 @@ func (s InstanceAssociationOutputLocation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceAssociationOutputLocation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceAssociationOutputLocation"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceAssociationOutputLocation"}
 	if s.S3Location != nil {
 		if err := s.S3Location.Validate(); err != nil {
-			invalidParams.AddNested("S3Location", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Location", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -19351,15 +19350,15 @@ func (s InstanceInformationFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceInformationFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceInformationFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceInformationFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.ValueSet == nil {
-		invalidParams.Add(request.NewErrParamRequired("ValueSet"))
+		invalidParams.Add(aws.NewErrParamRequired("ValueSet"))
 	}
 	if s.ValueSet != nil && len(s.ValueSet) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ValueSet", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ValueSet", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19411,18 +19410,18 @@ func (s InstanceInformationStringFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceInformationStringFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstanceInformationStringFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstanceInformationStringFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19635,21 +19634,21 @@ func (s InstancePatchStateFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstancePatchStateFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstancePatchStateFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstancePatchStateFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19709,18 +19708,18 @@ func (s InventoryFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventoryFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -19798,18 +19797,18 @@ func (s InventoryItem) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InventoryItem) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InventoryItem"}
+	invalidParams := aws.ErrInvalidParams{Context: "InventoryItem"}
 	if s.CaptureTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("CaptureTime"))
+		invalidParams.Add(aws.NewErrParamRequired("CaptureTime"))
 	}
 	if s.SchemaVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("SchemaVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("SchemaVersion"))
 	}
 	if s.TypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
 	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20082,12 +20081,12 @@ func (s ListAssociationVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssociationVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAssociationVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAssociationVersionsInput"}
 	if s.AssociationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssociationId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20178,12 +20177,12 @@ func (s ListAssociationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssociationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAssociationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAssociationsInput"}
 	if s.AssociationFilterList != nil && len(s.AssociationFilterList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AssociationFilterList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AssociationFilterList", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.AssociationFilterList != nil {
 		for i, v := range s.AssociationFilterList {
@@ -20191,7 +20190,7 @@ func (s *ListAssociationsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AssociationFilterList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AssociationFilterList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20294,15 +20293,15 @@ func (s ListCommandInvocationsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCommandInvocationsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCommandInvocationsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCommandInvocationsInput"}
 	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("CommandId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
 	}
 	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Filters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -20310,7 +20309,7 @@ func (s *ListCommandInvocationsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20427,15 +20426,15 @@ func (s ListCommandsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCommandsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCommandsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCommandsInput"}
 	if s.CommandId != nil && len(*s.CommandId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("CommandId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("CommandId", 36))
 	}
 	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Filters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -20443,7 +20442,7 @@ func (s *ListCommandsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20555,15 +20554,15 @@ func (s ListComplianceItemsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListComplianceItemsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListComplianceItemsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListComplianceItemsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ResourceIds != nil && len(s.ResourceIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIds", 1))
 	}
 	if s.ResourceTypes != nil && len(s.ResourceTypes) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceTypes", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceTypes", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -20571,7 +20570,7 @@ func (s *ListComplianceItemsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20675,9 +20674,9 @@ func (s ListComplianceSummariesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListComplianceSummariesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListComplianceSummariesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListComplianceSummariesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -20685,7 +20684,7 @@ func (s *ListComplianceSummariesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20781,12 +20780,12 @@ func (s ListDocumentVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDocumentVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDocumentVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDocumentVersionsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -20879,12 +20878,12 @@ func (s ListDocumentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDocumentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDocumentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDocumentsInput"}
 	if s.DocumentFilterList != nil && len(s.DocumentFilterList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentFilterList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentFilterList", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.DocumentFilterList != nil {
 		for i, v := range s.DocumentFilterList {
@@ -20892,7 +20891,7 @@ func (s *ListDocumentsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DocumentFilterList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DocumentFilterList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -20902,7 +20901,7 @@ func (s *ListDocumentsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -21010,21 +21009,21 @@ func (s ListInventoryEntriesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListInventoryEntriesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListInventoryEntriesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListInventoryEntriesInput"}
 	if s.Filters != nil && len(s.Filters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Filters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Filters", 1))
 	}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.TypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
 	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -21032,7 +21031,7 @@ func (s *ListInventoryEntriesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -21171,9 +21170,9 @@ func (s ListResourceComplianceSummariesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceComplianceSummariesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourceComplianceSummariesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourceComplianceSummariesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Filters != nil {
 		for i, v := range s.Filters {
@@ -21181,7 +21180,7 @@ func (s *ListResourceComplianceSummariesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -21271,9 +21270,9 @@ func (s ListResourceDataSyncInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListResourceDataSyncInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListResourceDataSyncInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourceDataSyncInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21355,12 +21354,12 @@ func (s ListTagsForResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTagsForResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21436,18 +21435,18 @@ func (s LoggingInfo) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingInfo) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LoggingInfo"}
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingInfo"}
 	if s.S3BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("S3BucketName"))
 	}
 	if s.S3BucketName != nil && len(*s.S3BucketName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("S3BucketName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("S3BucketName", 3))
 	}
 	if s.S3Region == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Region"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Region"))
 	}
 	if s.S3Region != nil && len(*s.S3Region) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("S3Region", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("S3Region", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21498,9 +21497,9 @@ func (s MaintenanceWindowAutomationParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaintenanceWindowAutomationParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaintenanceWindowAutomationParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaintenanceWindowAutomationParameters"}
 	if s.Parameters != nil && len(s.Parameters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Parameters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21835,9 +21834,9 @@ func (s MaintenanceWindowFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaintenanceWindowFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaintenanceWindowFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaintenanceWindowFilter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -21963,12 +21962,12 @@ func (s MaintenanceWindowLambdaParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaintenanceWindowLambdaParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaintenanceWindowLambdaParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaintenanceWindowLambdaParameters"}
 	if s.ClientContext != nil && len(*s.ClientContext) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientContext", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientContext", 1))
 	}
 	if s.Qualifier != nil && len(*s.Qualifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Qualifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Qualifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22043,12 +22042,12 @@ func (s MaintenanceWindowRunCommandParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaintenanceWindowRunCommandParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaintenanceWindowRunCommandParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaintenanceWindowRunCommandParameters"}
 	if s.OutputS3BucketName != nil && len(*s.OutputS3BucketName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputS3BucketName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputS3BucketName", 3))
 	}
 	if s.TimeoutSeconds != nil && *s.TimeoutSeconds < 30 {
-		invalidParams.Add(request.NewErrParamMinValue("TimeoutSeconds", 30))
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutSeconds", 30))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22135,9 +22134,9 @@ func (s MaintenanceWindowStepFunctionsParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaintenanceWindowStepFunctionsParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaintenanceWindowStepFunctionsParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaintenanceWindowStepFunctionsParameters"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22409,25 +22408,25 @@ func (s MaintenanceWindowTaskInvocationParameters) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *MaintenanceWindowTaskInvocationParameters) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "MaintenanceWindowTaskInvocationParameters"}
+	invalidParams := aws.ErrInvalidParams{Context: "MaintenanceWindowTaskInvocationParameters"}
 	if s.Automation != nil {
 		if err := s.Automation.Validate(); err != nil {
-			invalidParams.AddNested("Automation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Automation", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Lambda != nil {
 		if err := s.Lambda.Validate(); err != nil {
-			invalidParams.AddNested("Lambda", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Lambda", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RunCommand != nil {
 		if err := s.RunCommand.Validate(); err != nil {
-			invalidParams.AddNested("RunCommand", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RunCommand", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.StepFunctions != nil {
 		if err := s.StepFunctions.Validate(); err != nil {
-			invalidParams.AddNested("StepFunctions", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StepFunctions", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -22524,12 +22523,12 @@ func (s ModifyDocumentPermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyDocumentPermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyDocumentPermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyDocumentPermissionInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.PermissionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("PermissionType"))
+		invalidParams.Add(aws.NewErrParamRequired("PermissionType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22909,18 +22908,18 @@ func (s ParameterStringFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParameterStringFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ParameterStringFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ParameterStringFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Option != nil && len(*s.Option) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Option", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Option", 1))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -22975,15 +22974,15 @@ func (s ParametersFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ParametersFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ParametersFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ParametersFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -23316,15 +23315,15 @@ func (s PatchFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PatchFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "PatchFilter"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 	if s.Values != nil && len(s.Values) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Values", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -23368,9 +23367,9 @@ func (s PatchFilterGroup) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchFilterGroup) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PatchFilterGroup"}
+	invalidParams := aws.ErrInvalidParams{Context: "PatchFilterGroup"}
 	if s.PatchFilters == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchFilters"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchFilters"))
 	}
 	if s.PatchFilters != nil {
 		for i, v := range s.PatchFilters {
@@ -23378,7 +23377,7 @@ func (s *PatchFilterGroup) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchFilters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchFilters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -23454,9 +23453,9 @@ func (s PatchOrchestratorFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchOrchestratorFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PatchOrchestratorFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "PatchOrchestratorFilter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -23511,16 +23510,16 @@ func (s PatchRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PatchRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "PatchRule"}
 	if s.ApproveAfterDays == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApproveAfterDays"))
+		invalidParams.Add(aws.NewErrParamRequired("ApproveAfterDays"))
 	}
 	if s.PatchFilterGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchFilterGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchFilterGroup"))
 	}
 	if s.PatchFilterGroup != nil {
 		if err := s.PatchFilterGroup.Validate(); err != nil {
-			invalidParams.AddNested("PatchFilterGroup", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PatchFilterGroup", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -23571,9 +23570,9 @@ func (s PatchRuleGroup) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PatchRuleGroup) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PatchRuleGroup"}
+	invalidParams := aws.ErrInvalidParams{Context: "PatchRuleGroup"}
 	if s.PatchRules == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchRules"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchRules"))
 	}
 	if s.PatchRules != nil {
 		for i, v := range s.PatchRules {
@@ -23581,7 +23580,7 @@ func (s *PatchRuleGroup) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchRules", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchRules", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -23696,34 +23695,34 @@ func (s PutComplianceItemsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutComplianceItemsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutComplianceItemsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutComplianceItemsInput"}
 	if s.ComplianceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComplianceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ComplianceType"))
 	}
 	if s.ComplianceType != nil && len(*s.ComplianceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ComplianceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ComplianceType", 1))
 	}
 	if s.ExecutionSummary == nil {
-		invalidParams.Add(request.NewErrParamRequired("ExecutionSummary"))
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionSummary"))
 	}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.ResourceType != nil && len(*s.ResourceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceType", 1))
 	}
 	if s.ExecutionSummary != nil {
 		if err := s.ExecutionSummary.Validate(); err != nil {
-			invalidParams.AddNested("ExecutionSummary", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExecutionSummary", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Items != nil {
@@ -23732,7 +23731,7 @@ func (s *PutComplianceItemsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -23821,15 +23820,15 @@ func (s PutInventoryInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutInventoryInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutInventoryInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutInventoryInput"}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.Items != nil && len(s.Items) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Items", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Items", 1))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -23837,7 +23836,7 @@ func (s *PutInventoryInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -23923,27 +23922,27 @@ func (s PutParameterInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutParameterInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutParameterInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutParameterInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.KeyId != nil && len(*s.KeyId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KeyId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24031,12 +24030,12 @@ func (s RegisterDefaultPatchBaselineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterDefaultPatchBaselineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterDefaultPatchBaselineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterDefaultPatchBaselineInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24102,18 +24101,18 @@ func (s RegisterPatchBaselineForPatchGroupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterPatchBaselineForPatchGroupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterPatchBaselineForPatchGroupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterPatchBaselineForPatchGroupInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 	if s.PatchGroup == nil {
-		invalidParams.Add(request.NewErrParamRequired("PatchGroup"))
+		invalidParams.Add(aws.NewErrParamRequired("PatchGroup"))
 	}
 	if s.PatchGroup != nil && len(*s.PatchGroup) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PatchGroup", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PatchGroup", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24213,30 +24212,30 @@ func (s RegisterTargetWithMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterTargetWithMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterTargetWithMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterTargetWithMaintenanceWindowInput"}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.OwnerInformation != nil && len(*s.OwnerInformation) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OwnerInformation", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OwnerInformation", 1))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.Targets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Targets"))
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -24244,7 +24243,7 @@ func (s *RegisterTargetWithMaintenanceWindowInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -24399,52 +24398,52 @@ func (s RegisterTaskWithMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterTaskWithMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterTaskWithMaintenanceWindowInput"}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.MaxConcurrency == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxConcurrency"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxConcurrency"))
 	}
 	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MaxConcurrency", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
 	}
 	if s.MaxErrors == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxErrors"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxErrors"))
 	}
 	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MaxErrors", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.ServiceRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
 	if s.Targets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Targets"))
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
 	if s.TaskArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskArn"))
 	}
 	if s.TaskArn != nil && len(*s.TaskArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskArn", 1))
 	}
 	if s.TaskType == nil {
-		invalidParams.Add(request.NewErrParamRequired("TaskType"))
+		invalidParams.Add(aws.NewErrParamRequired("TaskType"))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.LoggingInfo != nil {
 		if err := s.LoggingInfo.Validate(); err != nil {
-			invalidParams.AddNested("LoggingInfo", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LoggingInfo", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Targets != nil {
@@ -24453,13 +24452,13 @@ func (s *RegisterTaskWithMaintenanceWindowInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.TaskInvocationParameters != nil {
 		if err := s.TaskInvocationParameters.Validate(); err != nil {
-			invalidParams.AddNested("TaskInvocationParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskInvocationParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -24609,15 +24608,15 @@ func (s RemoveTagsFromResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsFromResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsFromResourceInput"}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceType"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24859,27 +24858,27 @@ func (s ResourceDataSyncS3Destination) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceDataSyncS3Destination) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResourceDataSyncS3Destination"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceDataSyncS3Destination"}
 	if s.AWSKMSKeyARN != nil && len(*s.AWSKMSKeyARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AWSKMSKeyARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AWSKMSKeyARN", 1))
 	}
 	if s.BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
 	if s.BucketName != nil && len(*s.BucketName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketName", 1))
 	}
 	if s.Prefix != nil && len(*s.Prefix) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Prefix", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Prefix", 1))
 	}
 	if s.Region == nil {
-		invalidParams.Add(request.NewErrParamRequired("Region"))
+		invalidParams.Add(aws.NewErrParamRequired("Region"))
 	}
 	if s.Region != nil && len(*s.Region) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Region", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Region", 1))
 	}
 	if s.SyncFormat == nil {
-		invalidParams.Add(request.NewErrParamRequired("SyncFormat"))
+		invalidParams.Add(aws.NewErrParamRequired("SyncFormat"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24942,12 +24941,12 @@ func (s ResultAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResultAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResultAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResultAttribute"}
 	if s.TypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
 	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -24991,12 +24990,12 @@ func (s S3OutputLocation) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3OutputLocation) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3OutputLocation"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3OutputLocation"}
 	if s.OutputS3BucketName != nil && len(*s.OutputS3BucketName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputS3BucketName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputS3BucketName", 3))
 	}
 	if s.OutputS3Region != nil && len(*s.OutputS3Region) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputS3Region", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputS3Region", 3))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25083,18 +25082,18 @@ func (s SendAutomationSignalInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendAutomationSignalInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendAutomationSignalInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendAutomationSignalInput"}
 	if s.AutomationExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AutomationExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
 	}
 	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("AutomationExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
 	}
 	if s.Payload != nil && len(s.Payload) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Payload", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Payload", 1))
 	}
 	if s.SignalType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SignalType"))
+		invalidParams.Add(aws.NewErrParamRequired("SignalType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25224,24 +25223,24 @@ func (s SendCommandInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SendCommandInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SendCommandInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SendCommandInput"}
 	if s.DocumentName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentName"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentName"))
 	}
 	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MaxConcurrency", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
 	}
 	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MaxErrors", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
 	}
 	if s.OutputS3BucketName != nil && len(*s.OutputS3BucketName) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputS3BucketName", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputS3BucketName", 3))
 	}
 	if s.OutputS3Region != nil && len(*s.OutputS3Region) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("OutputS3Region", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("OutputS3Region", 3))
 	}
 	if s.TimeoutSeconds != nil && *s.TimeoutSeconds < 30 {
-		invalidParams.Add(request.NewErrParamMinValue("TimeoutSeconds", 30))
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutSeconds", 30))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -25249,7 +25248,7 @@ func (s *SendCommandInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -25491,15 +25490,15 @@ func (s StartAutomationExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartAutomationExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartAutomationExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartAutomationExecutionInput"}
 	if s.ClientToken != nil && len(*s.ClientToken) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("ClientToken", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 36))
 	}
 	if s.DocumentName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentName"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentName"))
 	}
 	if s.Parameters != nil && len(s.Parameters) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Parameters", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Parameters", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25697,12 +25696,12 @@ func (s StopAutomationExecutionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopAutomationExecutionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopAutomationExecutionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopAutomationExecutionInput"}
 	if s.AutomationExecutionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AutomationExecutionId"))
+		invalidParams.Add(aws.NewErrParamRequired("AutomationExecutionId"))
 	}
 	if s.AutomationExecutionId != nil && len(*s.AutomationExecutionId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("AutomationExecutionId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("AutomationExecutionId", 36))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25763,18 +25762,18 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25828,9 +25827,9 @@ func (s Target) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Target) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Target"}
+	invalidParams := aws.ErrInvalidParams{Context: "Target"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -25900,16 +25899,16 @@ func (s UpdateAssociationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAssociationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAssociationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssociationInput"}
 	if s.AssociationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssociationId"))
+		invalidParams.Add(aws.NewErrParamRequired("AssociationId"))
 	}
 	if s.ScheduleExpression != nil && len(*s.ScheduleExpression) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ScheduleExpression", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ScheduleExpression", 1))
 	}
 	if s.OutputLocation != nil {
 		if err := s.OutputLocation.Validate(); err != nil {
-			invalidParams.AddNested("OutputLocation", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("OutputLocation", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Targets != nil {
@@ -25918,7 +25917,7 @@ func (s *UpdateAssociationInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -26039,19 +26038,19 @@ func (s UpdateAssociationStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateAssociationStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateAssociationStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAssociationStatusInput"}
 	if s.AssociationStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("AssociationStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("AssociationStatus"))
 	}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.AssociationStatus != nil {
 		if err := s.AssociationStatus.Validate(); err != nil {
-			invalidParams.AddNested("AssociationStatus", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AssociationStatus", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -26130,12 +26129,12 @@ func (s UpdateDocumentDefaultVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentDefaultVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDocumentDefaultVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentDefaultVersionInput"}
 	if s.DocumentVersion == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentVersion"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentVersion"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -26211,15 +26210,15 @@ func (s UpdateDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentInput"}
 	if s.Content == nil {
-		invalidParams.Add(request.NewErrParamRequired("Content"))
+		invalidParams.Add(aws.NewErrParamRequired("Content"))
 	}
 	if s.Content != nil && len(*s.Content) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Content", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -26320,24 +26319,24 @@ func (s UpdateMaintenanceWindowInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMaintenanceWindowInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMaintenanceWindowInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMaintenanceWindowInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Duration != nil && *s.Duration < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Duration", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Duration", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.Schedule != nil && len(*s.Schedule) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Schedule", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Schedule", 1))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -26534,27 +26533,27 @@ func (s UpdateMaintenanceWindowTargetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMaintenanceWindowTargetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMaintenanceWindowTargetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMaintenanceWindowTargetInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.OwnerInformation != nil && len(*s.OwnerInformation) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OwnerInformation", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OwnerInformation", 1))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.WindowTargetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowTargetId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowTargetId"))
 	}
 	if s.WindowTargetId != nil && len(*s.WindowTargetId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowTargetId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowTargetId", 36))
 	}
 	if s.Targets != nil {
 		for i, v := range s.Targets {
@@ -26562,7 +26561,7 @@ func (s *UpdateMaintenanceWindowTargetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -26760,37 +26759,37 @@ func (s UpdateMaintenanceWindowTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateMaintenanceWindowTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateMaintenanceWindowTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateMaintenanceWindowTaskInput"}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.MaxConcurrency != nil && len(*s.MaxConcurrency) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MaxConcurrency", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MaxConcurrency", 1))
 	}
 	if s.MaxErrors != nil && len(*s.MaxErrors) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MaxErrors", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MaxErrors", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.TaskArn != nil && len(*s.TaskArn) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TaskArn", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TaskArn", 1))
 	}
 	if s.WindowId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowId"))
 	}
 	if s.WindowId != nil && len(*s.WindowId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowId", 20))
 	}
 	if s.WindowTaskId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WindowTaskId"))
+		invalidParams.Add(aws.NewErrParamRequired("WindowTaskId"))
 	}
 	if s.WindowTaskId != nil && len(*s.WindowTaskId) < 36 {
-		invalidParams.Add(request.NewErrParamMinLen("WindowTaskId", 36))
+		invalidParams.Add(aws.NewErrParamMinLen("WindowTaskId", 36))
 	}
 	if s.LoggingInfo != nil {
 		if err := s.LoggingInfo.Validate(); err != nil {
-			invalidParams.AddNested("LoggingInfo", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LoggingInfo", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Targets != nil {
@@ -26799,13 +26798,13 @@ func (s *UpdateMaintenanceWindowTaskInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Targets", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.TaskInvocationParameters != nil {
 		if err := s.TaskInvocationParameters.Validate(); err != nil {
-			invalidParams.AddNested("TaskInvocationParameters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TaskInvocationParameters", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -27058,12 +27057,12 @@ func (s UpdateManagedInstanceRoleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateManagedInstanceRoleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateManagedInstanceRoleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateManagedInstanceRoleInput"}
 	if s.IamRole == nil {
-		invalidParams.Add(request.NewErrParamRequired("IamRole"))
+		invalidParams.Add(aws.NewErrParamRequired("IamRole"))
 	}
 	if s.InstanceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceId"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -27142,27 +27141,27 @@ func (s UpdatePatchBaselineInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePatchBaselineInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePatchBaselineInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePatchBaselineInput"}
 	if s.BaselineId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BaselineId"))
+		invalidParams.Add(aws.NewErrParamRequired("BaselineId"))
 	}
 	if s.BaselineId != nil && len(*s.BaselineId) < 20 {
-		invalidParams.Add(request.NewErrParamMinLen("BaselineId", 20))
+		invalidParams.Add(aws.NewErrParamMinLen("BaselineId", 20))
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Description", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 3 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 3))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 3))
 	}
 	if s.ApprovalRules != nil {
 		if err := s.ApprovalRules.Validate(); err != nil {
-			invalidParams.AddNested("ApprovalRules", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ApprovalRules", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.GlobalFilters != nil {
 		if err := s.GlobalFilters.Validate(); err != nil {
-			invalidParams.AddNested("GlobalFilters", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GlobalFilters", err.(aws.ErrInvalidParams))
 		}
 	}
 

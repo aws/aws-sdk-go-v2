@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -142,7 +142,7 @@ var testUnmarshalCases = []testErrorCase{
 
 func TestUnmarshalError(t *testing.T) {
 	for i, c := range testUnmarshalCases {
-		s := s3.New(unit.Session)
+		s := s3.New(unit.Config)
 		s.Handlers.Send.Clear()
 		s.Handlers.Send.PushBack(func(r *request.Request) {
 			r.HTTPResponse = c.RespFn()
@@ -183,7 +183,7 @@ const completeMultiResp = `
 `
 
 func Test200NoErrorUnmarshalError(t *testing.T) {
-	s := s3.New(unit.Session)
+	s := s3.New(unit.Config)
 	s.Handlers.Send.Clear()
 	s.Handlers.Send.PushBack(func(r *request.Request) {
 		r.HTTPResponse = &http.Response{
@@ -213,7 +213,7 @@ func Test200NoErrorUnmarshalError(t *testing.T) {
 const completeMultiErrResp = `<Error><Code>SomeException</Code><Message>Exception message</Message></Error>`
 
 func Test200WithErrorUnmarshalError(t *testing.T) {
-	s := s3.New(unit.Session)
+	s := s3.New(unit.Config)
 	s.Handlers.Send.Clear()
 	s.Handlers.Send.PushBack(func(r *request.Request) {
 		r.HTTPResponse = &http.Response{

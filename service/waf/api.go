@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateByteMatchSet = "CreateByteMatchSet"
 
-// CreateByteMatchSetRequest generates a "aws/request.Request" representing the
+// CreateByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the CreateByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCreateByteMatchSet = "CreateByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateByteMatchSet
-func (c *WAF) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) (req *request.Request, output *CreateByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) (req *aws.Request, output *CreateByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -151,7 +150,7 @@ func (c *WAF) CreateByteMatchSet(input *CreateByteMatchSetInput) (*CreateByteMat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateByteMatchSetWithContext(ctx aws.Context, input *CreateByteMatchSetInput, opts ...request.Option) (*CreateByteMatchSetOutput, error) {
+func (c *WAF) CreateByteMatchSetWithContext(ctx aws.Context, input *CreateByteMatchSetInput, opts ...aws.Option) (*CreateByteMatchSetOutput, error) {
 	req, out := c.CreateByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -160,7 +159,7 @@ func (c *WAF) CreateByteMatchSetWithContext(ctx aws.Context, input *CreateByteMa
 
 const opCreateIPSet = "CreateIPSet"
 
-// CreateIPSetRequest generates a "aws/request.Request" representing the
+// CreateIPSetRequest generates a "aws.Request" representing the
 // client's request for the CreateIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -184,8 +183,8 @@ const opCreateIPSet = "CreateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateIPSet
-func (c *WAF) CreateIPSetRequest(input *CreateIPSetInput) (req *request.Request, output *CreateIPSetOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateIPSetRequest(input *CreateIPSetInput) (req *aws.Request, output *CreateIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -298,7 +297,7 @@ func (c *WAF) CreateIPSet(input *CreateIPSetInput) (*CreateIPSetOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateIPSetWithContext(ctx aws.Context, input *CreateIPSetInput, opts ...request.Option) (*CreateIPSetOutput, error) {
+func (c *WAF) CreateIPSetWithContext(ctx aws.Context, input *CreateIPSetInput, opts ...aws.Option) (*CreateIPSetOutput, error) {
 	req, out := c.CreateIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -307,7 +306,7 @@ func (c *WAF) CreateIPSetWithContext(ctx aws.Context, input *CreateIPSetInput, o
 
 const opCreateRateBasedRule = "CreateRateBasedRule"
 
-// CreateRateBasedRuleRequest generates a "aws/request.Request" representing the
+// CreateRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -331,8 +330,8 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRateBasedRule
-func (c *WAF) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) (req *request.Request, output *CreateRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput) (req *aws.Request, output *CreateRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -480,7 +479,7 @@ func (c *WAF) CreateRateBasedRule(input *CreateRateBasedRuleInput) (*CreateRateB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateRateBasedRuleWithContext(ctx aws.Context, input *CreateRateBasedRuleInput, opts ...request.Option) (*CreateRateBasedRuleOutput, error) {
+func (c *WAF) CreateRateBasedRuleWithContext(ctx aws.Context, input *CreateRateBasedRuleInput, opts ...aws.Option) (*CreateRateBasedRuleOutput, error) {
 	req, out := c.CreateRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -489,7 +488,7 @@ func (c *WAF) CreateRateBasedRuleWithContext(ctx aws.Context, input *CreateRateB
 
 const opCreateRule = "CreateRule"
 
-// CreateRuleRequest generates a "aws/request.Request" representing the
+// CreateRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -513,8 +512,8 @@ const opCreateRule = "CreateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRule
-func (c *WAF) CreateRuleRequest(input *CreateRuleInput) (req *request.Request, output *CreateRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateRuleRequest(input *CreateRuleInput) (req *aws.Request, output *CreateRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -637,7 +636,7 @@ func (c *WAF) CreateRule(input *CreateRuleInput) (*CreateRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateRuleWithContext(ctx aws.Context, input *CreateRuleInput, opts ...request.Option) (*CreateRuleOutput, error) {
+func (c *WAF) CreateRuleWithContext(ctx aws.Context, input *CreateRuleInput, opts ...aws.Option) (*CreateRuleOutput, error) {
 	req, out := c.CreateRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -646,7 +645,7 @@ func (c *WAF) CreateRuleWithContext(ctx aws.Context, input *CreateRuleInput, opt
 
 const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 
-// CreateSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// CreateSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the CreateSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -670,8 +669,8 @@ const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSizeConstraintSet
-func (c *WAF) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetInput) (req *request.Request, output *CreateSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateSizeConstraintSetRequest(input *CreateSizeConstraintSetInput) (req *aws.Request, output *CreateSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -785,7 +784,7 @@ func (c *WAF) CreateSizeConstraintSet(input *CreateSizeConstraintSetInput) (*Cre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateSizeConstraintSetWithContext(ctx aws.Context, input *CreateSizeConstraintSetInput, opts ...request.Option) (*CreateSizeConstraintSetOutput, error) {
+func (c *WAF) CreateSizeConstraintSetWithContext(ctx aws.Context, input *CreateSizeConstraintSetInput, opts ...aws.Option) (*CreateSizeConstraintSetOutput, error) {
 	req, out := c.CreateSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -794,7 +793,7 @@ func (c *WAF) CreateSizeConstraintSetWithContext(ctx aws.Context, input *CreateS
 
 const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
 
-// CreateSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// CreateSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the CreateSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -818,8 +817,8 @@ const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSqlInjectionMatchSet
-func (c *WAF) CreateSqlInjectionMatchSetRequest(input *CreateSqlInjectionMatchSetInput) (req *request.Request, output *CreateSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateSqlInjectionMatchSetRequest(input *CreateSqlInjectionMatchSetInput) (req *aws.Request, output *CreateSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -929,7 +928,7 @@ func (c *WAF) CreateSqlInjectionMatchSet(input *CreateSqlInjectionMatchSetInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateSqlInjectionMatchSetWithContext(ctx aws.Context, input *CreateSqlInjectionMatchSetInput, opts ...request.Option) (*CreateSqlInjectionMatchSetOutput, error) {
+func (c *WAF) CreateSqlInjectionMatchSetWithContext(ctx aws.Context, input *CreateSqlInjectionMatchSetInput, opts ...aws.Option) (*CreateSqlInjectionMatchSetOutput, error) {
 	req, out := c.CreateSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -938,7 +937,7 @@ func (c *WAF) CreateSqlInjectionMatchSetWithContext(ctx aws.Context, input *Crea
 
 const opCreateWebACL = "CreateWebACL"
 
-// CreateWebACLRequest generates a "aws/request.Request" representing the
+// CreateWebACLRequest generates a "aws.Request" representing the
 // client's request for the CreateWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -962,8 +961,8 @@ const opCreateWebACL = "CreateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACL
-func (c *WAF) CreateWebACLRequest(input *CreateWebACLInput) (req *request.Request, output *CreateWebACLOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateWebACLRequest(input *CreateWebACLInput) (req *aws.Request, output *CreateWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opCreateWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1085,7 +1084,7 @@ func (c *WAF) CreateWebACL(input *CreateWebACLInput) (*CreateWebACLOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateWebACLWithContext(ctx aws.Context, input *CreateWebACLInput, opts ...request.Option) (*CreateWebACLOutput, error) {
+func (c *WAF) CreateWebACLWithContext(ctx aws.Context, input *CreateWebACLInput, opts ...aws.Option) (*CreateWebACLOutput, error) {
 	req, out := c.CreateWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1094,7 +1093,7 @@ func (c *WAF) CreateWebACLWithContext(ctx aws.Context, input *CreateWebACLInput,
 
 const opCreateXssMatchSet = "CreateXssMatchSet"
 
-// CreateXssMatchSetRequest generates a "aws/request.Request" representing the
+// CreateXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the CreateXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1118,8 +1117,8 @@ const opCreateXssMatchSet = "CreateXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateXssMatchSet
-func (c *WAF) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) (req *request.Request, output *CreateXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) (req *aws.Request, output *CreateXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1230,7 +1229,7 @@ func (c *WAF) CreateXssMatchSet(input *CreateXssMatchSetInput) (*CreateXssMatchS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) CreateXssMatchSetWithContext(ctx aws.Context, input *CreateXssMatchSetInput, opts ...request.Option) (*CreateXssMatchSetOutput, error) {
+func (c *WAF) CreateXssMatchSetWithContext(ctx aws.Context, input *CreateXssMatchSetInput, opts ...aws.Option) (*CreateXssMatchSetOutput, error) {
 	req, out := c.CreateXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1239,7 +1238,7 @@ func (c *WAF) CreateXssMatchSetWithContext(ctx aws.Context, input *CreateXssMatc
 
 const opDeleteByteMatchSet = "DeleteByteMatchSet"
 
-// DeleteByteMatchSetRequest generates a "aws/request.Request" representing the
+// DeleteByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1263,8 +1262,8 @@ const opDeleteByteMatchSet = "DeleteByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteByteMatchSet
-func (c *WAF) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) (req *request.Request, output *DeleteByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) (req *aws.Request, output *DeleteByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1357,7 +1356,7 @@ func (c *WAF) DeleteByteMatchSet(input *DeleteByteMatchSetInput) (*DeleteByteMat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteByteMatchSetWithContext(ctx aws.Context, input *DeleteByteMatchSetInput, opts ...request.Option) (*DeleteByteMatchSetOutput, error) {
+func (c *WAF) DeleteByteMatchSetWithContext(ctx aws.Context, input *DeleteByteMatchSetInput, opts ...aws.Option) (*DeleteByteMatchSetOutput, error) {
 	req, out := c.DeleteByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1366,7 +1365,7 @@ func (c *WAF) DeleteByteMatchSetWithContext(ctx aws.Context, input *DeleteByteMa
 
 const opDeleteIPSet = "DeleteIPSet"
 
-// DeleteIPSetRequest generates a "aws/request.Request" representing the
+// DeleteIPSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1390,8 +1389,8 @@ const opDeleteIPSet = "DeleteIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteIPSet
-func (c *WAF) DeleteIPSetRequest(input *DeleteIPSetInput) (req *request.Request, output *DeleteIPSetOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteIPSetRequest(input *DeleteIPSetInput) (req *aws.Request, output *DeleteIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1483,7 +1482,7 @@ func (c *WAF) DeleteIPSet(input *DeleteIPSetInput) (*DeleteIPSetOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteIPSetWithContext(ctx aws.Context, input *DeleteIPSetInput, opts ...request.Option) (*DeleteIPSetOutput, error) {
+func (c *WAF) DeleteIPSetWithContext(ctx aws.Context, input *DeleteIPSetInput, opts ...aws.Option) (*DeleteIPSetOutput, error) {
 	req, out := c.DeleteIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1492,7 +1491,7 @@ func (c *WAF) DeleteIPSetWithContext(ctx aws.Context, input *DeleteIPSetInput, o
 
 const opDeleteRateBasedRule = "DeleteRateBasedRule"
 
-// DeleteRateBasedRuleRequest generates a "aws/request.Request" representing the
+// DeleteRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1516,8 +1515,8 @@ const opDeleteRateBasedRule = "DeleteRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRateBasedRule
-func (c *WAF) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) (req *request.Request, output *DeleteRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput) (req *aws.Request, output *DeleteRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1611,7 +1610,7 @@ func (c *WAF) DeleteRateBasedRule(input *DeleteRateBasedRuleInput) (*DeleteRateB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteRateBasedRuleWithContext(ctx aws.Context, input *DeleteRateBasedRuleInput, opts ...request.Option) (*DeleteRateBasedRuleOutput, error) {
+func (c *WAF) DeleteRateBasedRuleWithContext(ctx aws.Context, input *DeleteRateBasedRuleInput, opts ...aws.Option) (*DeleteRateBasedRuleOutput, error) {
 	req, out := c.DeleteRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1620,7 +1619,7 @@ func (c *WAF) DeleteRateBasedRuleWithContext(ctx aws.Context, input *DeleteRateB
 
 const opDeleteRule = "DeleteRule"
 
-// DeleteRuleRequest generates a "aws/request.Request" representing the
+// DeleteRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1644,8 +1643,8 @@ const opDeleteRule = "DeleteRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRule
-func (c *WAF) DeleteRuleRequest(input *DeleteRuleInput) (req *request.Request, output *DeleteRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteRuleRequest(input *DeleteRuleInput) (req *aws.Request, output *DeleteRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1737,7 +1736,7 @@ func (c *WAF) DeleteRule(input *DeleteRuleInput) (*DeleteRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...request.Option) (*DeleteRuleOutput, error) {
+func (c *WAF) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opts ...aws.Option) (*DeleteRuleOutput, error) {
 	req, out := c.DeleteRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1746,7 +1745,7 @@ func (c *WAF) DeleteRuleWithContext(ctx aws.Context, input *DeleteRuleInput, opt
 
 const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 
-// DeleteSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// DeleteSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1770,8 +1769,8 @@ const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSizeConstraintSet
-func (c *WAF) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetInput) (req *request.Request, output *DeleteSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraintSetInput) (req *aws.Request, output *DeleteSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1864,7 +1863,7 @@ func (c *WAF) DeleteSizeConstraintSet(input *DeleteSizeConstraintSetInput) (*Del
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteSizeConstraintSetWithContext(ctx aws.Context, input *DeleteSizeConstraintSetInput, opts ...request.Option) (*DeleteSizeConstraintSetOutput, error) {
+func (c *WAF) DeleteSizeConstraintSetWithContext(ctx aws.Context, input *DeleteSizeConstraintSetInput, opts ...aws.Option) (*DeleteSizeConstraintSetOutput, error) {
 	req, out := c.DeleteSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1873,7 +1872,7 @@ func (c *WAF) DeleteSizeConstraintSetWithContext(ctx aws.Context, input *DeleteS
 
 const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 
-// DeleteSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// DeleteSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1897,8 +1896,8 @@ const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSqlInjectionMatchSet
-func (c *WAF) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatchSetInput) (req *request.Request, output *DeleteSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectionMatchSetInput) (req *aws.Request, output *DeleteSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1992,7 +1991,7 @@ func (c *WAF) DeleteSqlInjectionMatchSet(input *DeleteSqlInjectionMatchSetInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteSqlInjectionMatchSetWithContext(ctx aws.Context, input *DeleteSqlInjectionMatchSetInput, opts ...request.Option) (*DeleteSqlInjectionMatchSetOutput, error) {
+func (c *WAF) DeleteSqlInjectionMatchSetWithContext(ctx aws.Context, input *DeleteSqlInjectionMatchSetInput, opts ...aws.Option) (*DeleteSqlInjectionMatchSetOutput, error) {
 	req, out := c.DeleteSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2001,7 +2000,7 @@ func (c *WAF) DeleteSqlInjectionMatchSetWithContext(ctx aws.Context, input *Dele
 
 const opDeleteWebACL = "DeleteWebACL"
 
-// DeleteWebACLRequest generates a "aws/request.Request" representing the
+// DeleteWebACLRequest generates a "aws.Request" representing the
 // client's request for the DeleteWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2025,8 +2024,8 @@ const opDeleteWebACL = "DeleteWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteWebACL
-func (c *WAF) DeleteWebACLRequest(input *DeleteWebACLInput) (req *request.Request, output *DeleteWebACLOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteWebACLRequest(input *DeleteWebACLInput) (req *aws.Request, output *DeleteWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2115,7 +2114,7 @@ func (c *WAF) DeleteWebACL(input *DeleteWebACLInput) (*DeleteWebACLOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteWebACLWithContext(ctx aws.Context, input *DeleteWebACLInput, opts ...request.Option) (*DeleteWebACLOutput, error) {
+func (c *WAF) DeleteWebACLWithContext(ctx aws.Context, input *DeleteWebACLInput, opts ...aws.Option) (*DeleteWebACLOutput, error) {
 	req, out := c.DeleteWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2124,7 +2123,7 @@ func (c *WAF) DeleteWebACLWithContext(ctx aws.Context, input *DeleteWebACLInput,
 
 const opDeleteXssMatchSet = "DeleteXssMatchSet"
 
-// DeleteXssMatchSetRequest generates a "aws/request.Request" representing the
+// DeleteXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the DeleteXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2148,8 +2147,8 @@ const opDeleteXssMatchSet = "DeleteXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteXssMatchSet
-func (c *WAF) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) (req *request.Request, output *DeleteXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) (req *aws.Request, output *DeleteXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2242,7 +2241,7 @@ func (c *WAF) DeleteXssMatchSet(input *DeleteXssMatchSetInput) (*DeleteXssMatchS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) DeleteXssMatchSetWithContext(ctx aws.Context, input *DeleteXssMatchSetInput, opts ...request.Option) (*DeleteXssMatchSetOutput, error) {
+func (c *WAF) DeleteXssMatchSetWithContext(ctx aws.Context, input *DeleteXssMatchSetInput, opts ...aws.Option) (*DeleteXssMatchSetOutput, error) {
 	req, out := c.DeleteXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2251,7 +2250,7 @@ func (c *WAF) DeleteXssMatchSetWithContext(ctx aws.Context, input *DeleteXssMatc
 
 const opGetByteMatchSet = "GetByteMatchSet"
 
-// GetByteMatchSetRequest generates a "aws/request.Request" representing the
+// GetByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the GetByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2275,8 +2274,8 @@ const opGetByteMatchSet = "GetByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetByteMatchSet
-func (c *WAF) GetByteMatchSetRequest(input *GetByteMatchSetInput) (req *request.Request, output *GetByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) GetByteMatchSetRequest(input *GetByteMatchSetInput) (req *aws.Request, output *GetByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2329,7 +2328,7 @@ func (c *WAF) GetByteMatchSet(input *GetByteMatchSetInput) (*GetByteMatchSetOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetByteMatchSetWithContext(ctx aws.Context, input *GetByteMatchSetInput, opts ...request.Option) (*GetByteMatchSetOutput, error) {
+func (c *WAF) GetByteMatchSetWithContext(ctx aws.Context, input *GetByteMatchSetInput, opts ...aws.Option) (*GetByteMatchSetOutput, error) {
 	req, out := c.GetByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2338,7 +2337,7 @@ func (c *WAF) GetByteMatchSetWithContext(ctx aws.Context, input *GetByteMatchSet
 
 const opGetChangeToken = "GetChangeToken"
 
-// GetChangeTokenRequest generates a "aws/request.Request" representing the
+// GetChangeTokenRequest generates a "aws.Request" representing the
 // client's request for the GetChangeToken operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2362,8 +2361,8 @@ const opGetChangeToken = "GetChangeToken"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeToken
-func (c *WAF) GetChangeTokenRequest(input *GetChangeTokenInput) (req *request.Request, output *GetChangeTokenOutput) {
-	op := &request.Operation{
+func (c *WAF) GetChangeTokenRequest(input *GetChangeTokenInput) (req *aws.Request, output *GetChangeTokenOutput) {
+	op := &aws.Operation{
 		Name:       opGetChangeToken,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2423,7 +2422,7 @@ func (c *WAF) GetChangeToken(input *GetChangeTokenInput) (*GetChangeTokenOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetChangeTokenWithContext(ctx aws.Context, input *GetChangeTokenInput, opts ...request.Option) (*GetChangeTokenOutput, error) {
+func (c *WAF) GetChangeTokenWithContext(ctx aws.Context, input *GetChangeTokenInput, opts ...aws.Option) (*GetChangeTokenOutput, error) {
 	req, out := c.GetChangeTokenRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2432,7 +2431,7 @@ func (c *WAF) GetChangeTokenWithContext(ctx aws.Context, input *GetChangeTokenIn
 
 const opGetChangeTokenStatus = "GetChangeTokenStatus"
 
-// GetChangeTokenStatusRequest generates a "aws/request.Request" representing the
+// GetChangeTokenStatusRequest generates a "aws.Request" representing the
 // client's request for the GetChangeTokenStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2456,8 +2455,8 @@ const opGetChangeTokenStatus = "GetChangeTokenStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenStatus
-func (c *WAF) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) (req *request.Request, output *GetChangeTokenStatusOutput) {
-	op := &request.Operation{
+func (c *WAF) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInput) (req *aws.Request, output *GetChangeTokenStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetChangeTokenStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2516,7 +2515,7 @@ func (c *WAF) GetChangeTokenStatus(input *GetChangeTokenStatusInput) (*GetChange
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetChangeTokenStatusWithContext(ctx aws.Context, input *GetChangeTokenStatusInput, opts ...request.Option) (*GetChangeTokenStatusOutput, error) {
+func (c *WAF) GetChangeTokenStatusWithContext(ctx aws.Context, input *GetChangeTokenStatusInput, opts ...aws.Option) (*GetChangeTokenStatusOutput, error) {
 	req, out := c.GetChangeTokenStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2525,7 +2524,7 @@ func (c *WAF) GetChangeTokenStatusWithContext(ctx aws.Context, input *GetChangeT
 
 const opGetIPSet = "GetIPSet"
 
-// GetIPSetRequest generates a "aws/request.Request" representing the
+// GetIPSetRequest generates a "aws.Request" representing the
 // client's request for the GetIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2549,8 +2548,8 @@ const opGetIPSet = "GetIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetIPSet
-func (c *WAF) GetIPSetRequest(input *GetIPSetInput) (req *request.Request, output *GetIPSetOutput) {
-	op := &request.Operation{
+func (c *WAF) GetIPSetRequest(input *GetIPSetInput) (req *aws.Request, output *GetIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2603,7 +2602,7 @@ func (c *WAF) GetIPSet(input *GetIPSetInput) (*GetIPSetOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetIPSetWithContext(ctx aws.Context, input *GetIPSetInput, opts ...request.Option) (*GetIPSetOutput, error) {
+func (c *WAF) GetIPSetWithContext(ctx aws.Context, input *GetIPSetInput, opts ...aws.Option) (*GetIPSetOutput, error) {
 	req, out := c.GetIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2612,7 +2611,7 @@ func (c *WAF) GetIPSetWithContext(ctx aws.Context, input *GetIPSetInput, opts ..
 
 const opGetRateBasedRule = "GetRateBasedRule"
 
-// GetRateBasedRuleRequest generates a "aws/request.Request" representing the
+// GetRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the GetRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2636,8 +2635,8 @@ const opGetRateBasedRule = "GetRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRule
-func (c *WAF) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) (req *request.Request, output *GetRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) (req *aws.Request, output *GetRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2691,7 +2690,7 @@ func (c *WAF) GetRateBasedRule(input *GetRateBasedRuleInput) (*GetRateBasedRuleO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetRateBasedRuleWithContext(ctx aws.Context, input *GetRateBasedRuleInput, opts ...request.Option) (*GetRateBasedRuleOutput, error) {
+func (c *WAF) GetRateBasedRuleWithContext(ctx aws.Context, input *GetRateBasedRuleInput, opts ...aws.Option) (*GetRateBasedRuleOutput, error) {
 	req, out := c.GetRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2700,7 +2699,7 @@ func (c *WAF) GetRateBasedRuleWithContext(ctx aws.Context, input *GetRateBasedRu
 
 const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 
-// GetRateBasedRuleManagedKeysRequest generates a "aws/request.Request" representing the
+// GetRateBasedRuleManagedKeysRequest generates a "aws.Request" representing the
 // client's request for the GetRateBasedRuleManagedKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2724,8 +2723,8 @@ const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRateBasedRuleManagedKeys
-func (c *WAF) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManagedKeysInput) (req *request.Request, output *GetRateBasedRuleManagedKeysOutput) {
-	op := &request.Operation{
+func (c *WAF) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRuleManagedKeysInput) (req *aws.Request, output *GetRateBasedRuleManagedKeysOutput) {
+	op := &aws.Operation{
 		Name:       opGetRateBasedRuleManagedKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2810,7 +2809,7 @@ func (c *WAF) GetRateBasedRuleManagedKeys(input *GetRateBasedRuleManagedKeysInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetRateBasedRuleManagedKeysWithContext(ctx aws.Context, input *GetRateBasedRuleManagedKeysInput, opts ...request.Option) (*GetRateBasedRuleManagedKeysOutput, error) {
+func (c *WAF) GetRateBasedRuleManagedKeysWithContext(ctx aws.Context, input *GetRateBasedRuleManagedKeysInput, opts ...aws.Option) (*GetRateBasedRuleManagedKeysOutput, error) {
 	req, out := c.GetRateBasedRuleManagedKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2819,7 +2818,7 @@ func (c *WAF) GetRateBasedRuleManagedKeysWithContext(ctx aws.Context, input *Get
 
 const opGetRule = "GetRule"
 
-// GetRuleRequest generates a "aws/request.Request" representing the
+// GetRuleRequest generates a "aws.Request" representing the
 // client's request for the GetRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2843,8 +2842,8 @@ const opGetRule = "GetRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRule
-func (c *WAF) GetRuleRequest(input *GetRuleInput) (req *request.Request, output *GetRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) GetRuleRequest(input *GetRuleInput) (req *aws.Request, output *GetRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2898,7 +2897,7 @@ func (c *WAF) GetRule(input *GetRuleInput) (*GetRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetRuleWithContext(ctx aws.Context, input *GetRuleInput, opts ...request.Option) (*GetRuleOutput, error) {
+func (c *WAF) GetRuleWithContext(ctx aws.Context, input *GetRuleInput, opts ...aws.Option) (*GetRuleOutput, error) {
 	req, out := c.GetRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2907,7 +2906,7 @@ func (c *WAF) GetRuleWithContext(ctx aws.Context, input *GetRuleInput, opts ...r
 
 const opGetSampledRequests = "GetSampledRequests"
 
-// GetSampledRequestsRequest generates a "aws/request.Request" representing the
+// GetSampledRequestsRequest generates a "aws.Request" representing the
 // client's request for the GetSampledRequests operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2931,8 +2930,8 @@ const opGetSampledRequests = "GetSampledRequests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSampledRequests
-func (c *WAF) GetSampledRequestsRequest(input *GetSampledRequestsInput) (req *request.Request, output *GetSampledRequestsOutput) {
-	op := &request.Operation{
+func (c *WAF) GetSampledRequestsRequest(input *GetSampledRequestsInput) (req *aws.Request, output *GetSampledRequestsOutput) {
+	op := &aws.Operation{
 		Name:       opGetSampledRequests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2991,7 +2990,7 @@ func (c *WAF) GetSampledRequests(input *GetSampledRequestsInput) (*GetSampledReq
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetSampledRequestsWithContext(ctx aws.Context, input *GetSampledRequestsInput, opts ...request.Option) (*GetSampledRequestsOutput, error) {
+func (c *WAF) GetSampledRequestsWithContext(ctx aws.Context, input *GetSampledRequestsInput, opts ...aws.Option) (*GetSampledRequestsOutput, error) {
 	req, out := c.GetSampledRequestsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3000,7 +2999,7 @@ func (c *WAF) GetSampledRequestsWithContext(ctx aws.Context, input *GetSampledRe
 
 const opGetSizeConstraintSet = "GetSizeConstraintSet"
 
-// GetSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// GetSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the GetSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3024,8 +3023,8 @@ const opGetSizeConstraintSet = "GetSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSizeConstraintSet
-func (c *WAF) GetSizeConstraintSetRequest(input *GetSizeConstraintSetInput) (req *request.Request, output *GetSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAF) GetSizeConstraintSetRequest(input *GetSizeConstraintSetInput) (req *aws.Request, output *GetSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3078,7 +3077,7 @@ func (c *WAF) GetSizeConstraintSet(input *GetSizeConstraintSetInput) (*GetSizeCo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetSizeConstraintSetWithContext(ctx aws.Context, input *GetSizeConstraintSetInput, opts ...request.Option) (*GetSizeConstraintSetOutput, error) {
+func (c *WAF) GetSizeConstraintSetWithContext(ctx aws.Context, input *GetSizeConstraintSetInput, opts ...aws.Option) (*GetSizeConstraintSetOutput, error) {
 	req, out := c.GetSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3087,7 +3086,7 @@ func (c *WAF) GetSizeConstraintSetWithContext(ctx aws.Context, input *GetSizeCon
 
 const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 
-// GetSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// GetSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the GetSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3111,8 +3110,8 @@ const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSqlInjectionMatchSet
-func (c *WAF) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetInput) (req *request.Request, output *GetSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatchSetInput) (req *aws.Request, output *GetSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3165,7 +3164,7 @@ func (c *WAF) GetSqlInjectionMatchSet(input *GetSqlInjectionMatchSetInput) (*Get
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetSqlInjectionMatchSetWithContext(ctx aws.Context, input *GetSqlInjectionMatchSetInput, opts ...request.Option) (*GetSqlInjectionMatchSetOutput, error) {
+func (c *WAF) GetSqlInjectionMatchSetWithContext(ctx aws.Context, input *GetSqlInjectionMatchSetInput, opts ...aws.Option) (*GetSqlInjectionMatchSetOutput, error) {
 	req, out := c.GetSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3174,7 +3173,7 @@ func (c *WAF) GetSqlInjectionMatchSetWithContext(ctx aws.Context, input *GetSqlI
 
 const opGetWebACL = "GetWebACL"
 
-// GetWebACLRequest generates a "aws/request.Request" representing the
+// GetWebACLRequest generates a "aws.Request" representing the
 // client's request for the GetWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3198,8 +3197,8 @@ const opGetWebACL = "GetWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACL
-func (c *WAF) GetWebACLRequest(input *GetWebACLInput) (req *request.Request, output *GetWebACLOutput) {
-	op := &request.Operation{
+func (c *WAF) GetWebACLRequest(input *GetWebACLInput) (req *aws.Request, output *GetWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opGetWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3252,7 +3251,7 @@ func (c *WAF) GetWebACL(input *GetWebACLInput) (*GetWebACLOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetWebACLWithContext(ctx aws.Context, input *GetWebACLInput, opts ...request.Option) (*GetWebACLOutput, error) {
+func (c *WAF) GetWebACLWithContext(ctx aws.Context, input *GetWebACLInput, opts ...aws.Option) (*GetWebACLOutput, error) {
 	req, out := c.GetWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3261,7 +3260,7 @@ func (c *WAF) GetWebACLWithContext(ctx aws.Context, input *GetWebACLInput, opts 
 
 const opGetXssMatchSet = "GetXssMatchSet"
 
-// GetXssMatchSetRequest generates a "aws/request.Request" representing the
+// GetXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the GetXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3285,8 +3284,8 @@ const opGetXssMatchSet = "GetXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetXssMatchSet
-func (c *WAF) GetXssMatchSetRequest(input *GetXssMatchSetInput) (req *request.Request, output *GetXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) GetXssMatchSetRequest(input *GetXssMatchSetInput) (req *aws.Request, output *GetXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opGetXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3339,7 +3338,7 @@ func (c *WAF) GetXssMatchSet(input *GetXssMatchSetInput) (*GetXssMatchSetOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) GetXssMatchSetWithContext(ctx aws.Context, input *GetXssMatchSetInput, opts ...request.Option) (*GetXssMatchSetOutput, error) {
+func (c *WAF) GetXssMatchSetWithContext(ctx aws.Context, input *GetXssMatchSetInput, opts ...aws.Option) (*GetXssMatchSetOutput, error) {
 	req, out := c.GetXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3348,7 +3347,7 @@ func (c *WAF) GetXssMatchSetWithContext(ctx aws.Context, input *GetXssMatchSetIn
 
 const opListByteMatchSets = "ListByteMatchSets"
 
-// ListByteMatchSetsRequest generates a "aws/request.Request" representing the
+// ListByteMatchSetsRequest generates a "aws.Request" representing the
 // client's request for the ListByteMatchSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3372,8 +3371,8 @@ const opListByteMatchSets = "ListByteMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListByteMatchSets
-func (c *WAF) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) (req *request.Request, output *ListByteMatchSetsOutput) {
-	op := &request.Operation{
+func (c *WAF) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) (req *aws.Request, output *ListByteMatchSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListByteMatchSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3423,7 +3422,7 @@ func (c *WAF) ListByteMatchSets(input *ListByteMatchSetsInput) (*ListByteMatchSe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListByteMatchSetsWithContext(ctx aws.Context, input *ListByteMatchSetsInput, opts ...request.Option) (*ListByteMatchSetsOutput, error) {
+func (c *WAF) ListByteMatchSetsWithContext(ctx aws.Context, input *ListByteMatchSetsInput, opts ...aws.Option) (*ListByteMatchSetsOutput, error) {
 	req, out := c.ListByteMatchSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3432,7 +3431,7 @@ func (c *WAF) ListByteMatchSetsWithContext(ctx aws.Context, input *ListByteMatch
 
 const opListIPSets = "ListIPSets"
 
-// ListIPSetsRequest generates a "aws/request.Request" representing the
+// ListIPSetsRequest generates a "aws.Request" representing the
 // client's request for the ListIPSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3456,8 +3455,8 @@ const opListIPSets = "ListIPSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListIPSets
-func (c *WAF) ListIPSetsRequest(input *ListIPSetsInput) (req *request.Request, output *ListIPSetsOutput) {
-	op := &request.Operation{
+func (c *WAF) ListIPSetsRequest(input *ListIPSetsInput) (req *aws.Request, output *ListIPSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListIPSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3507,7 +3506,7 @@ func (c *WAF) ListIPSets(input *ListIPSetsInput) (*ListIPSetsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListIPSetsWithContext(ctx aws.Context, input *ListIPSetsInput, opts ...request.Option) (*ListIPSetsOutput, error) {
+func (c *WAF) ListIPSetsWithContext(ctx aws.Context, input *ListIPSetsInput, opts ...aws.Option) (*ListIPSetsOutput, error) {
 	req, out := c.ListIPSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3516,7 +3515,7 @@ func (c *WAF) ListIPSetsWithContext(ctx aws.Context, input *ListIPSetsInput, opt
 
 const opListRateBasedRules = "ListRateBasedRules"
 
-// ListRateBasedRulesRequest generates a "aws/request.Request" representing the
+// ListRateBasedRulesRequest generates a "aws.Request" representing the
 // client's request for the ListRateBasedRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3540,8 +3539,8 @@ const opListRateBasedRules = "ListRateBasedRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRateBasedRules
-func (c *WAF) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) (req *request.Request, output *ListRateBasedRulesOutput) {
-	op := &request.Operation{
+func (c *WAF) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) (req *aws.Request, output *ListRateBasedRulesOutput) {
+	op := &aws.Operation{
 		Name:       opListRateBasedRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3591,7 +3590,7 @@ func (c *WAF) ListRateBasedRules(input *ListRateBasedRulesInput) (*ListRateBased
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListRateBasedRulesWithContext(ctx aws.Context, input *ListRateBasedRulesInput, opts ...request.Option) (*ListRateBasedRulesOutput, error) {
+func (c *WAF) ListRateBasedRulesWithContext(ctx aws.Context, input *ListRateBasedRulesInput, opts ...aws.Option) (*ListRateBasedRulesOutput, error) {
 	req, out := c.ListRateBasedRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3600,7 +3599,7 @@ func (c *WAF) ListRateBasedRulesWithContext(ctx aws.Context, input *ListRateBase
 
 const opListRules = "ListRules"
 
-// ListRulesRequest generates a "aws/request.Request" representing the
+// ListRulesRequest generates a "aws.Request" representing the
 // client's request for the ListRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3624,8 +3623,8 @@ const opListRules = "ListRules"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRules
-func (c *WAF) ListRulesRequest(input *ListRulesInput) (req *request.Request, output *ListRulesOutput) {
-	op := &request.Operation{
+func (c *WAF) ListRulesRequest(input *ListRulesInput) (req *aws.Request, output *ListRulesOutput) {
+	op := &aws.Operation{
 		Name:       opListRules,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3675,7 +3674,7 @@ func (c *WAF) ListRules(input *ListRulesInput) (*ListRulesOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListRulesWithContext(ctx aws.Context, input *ListRulesInput, opts ...request.Option) (*ListRulesOutput, error) {
+func (c *WAF) ListRulesWithContext(ctx aws.Context, input *ListRulesInput, opts ...aws.Option) (*ListRulesOutput, error) {
 	req, out := c.ListRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3684,7 +3683,7 @@ func (c *WAF) ListRulesWithContext(ctx aws.Context, input *ListRulesInput, opts 
 
 const opListSizeConstraintSets = "ListSizeConstraintSets"
 
-// ListSizeConstraintSetsRequest generates a "aws/request.Request" representing the
+// ListSizeConstraintSetsRequest generates a "aws.Request" representing the
 // client's request for the ListSizeConstraintSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3708,8 +3707,8 @@ const opListSizeConstraintSets = "ListSizeConstraintSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSizeConstraintSets
-func (c *WAF) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInput) (req *request.Request, output *ListSizeConstraintSetsOutput) {
-	op := &request.Operation{
+func (c *WAF) ListSizeConstraintSetsRequest(input *ListSizeConstraintSetsInput) (req *aws.Request, output *ListSizeConstraintSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListSizeConstraintSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3759,7 +3758,7 @@ func (c *WAF) ListSizeConstraintSets(input *ListSizeConstraintSetsInput) (*ListS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListSizeConstraintSetsWithContext(ctx aws.Context, input *ListSizeConstraintSetsInput, opts ...request.Option) (*ListSizeConstraintSetsOutput, error) {
+func (c *WAF) ListSizeConstraintSetsWithContext(ctx aws.Context, input *ListSizeConstraintSetsInput, opts ...aws.Option) (*ListSizeConstraintSetsOutput, error) {
 	req, out := c.ListSizeConstraintSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3768,7 +3767,7 @@ func (c *WAF) ListSizeConstraintSetsWithContext(ctx aws.Context, input *ListSize
 
 const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 
-// ListSqlInjectionMatchSetsRequest generates a "aws/request.Request" representing the
+// ListSqlInjectionMatchSetsRequest generates a "aws.Request" representing the
 // client's request for the ListSqlInjectionMatchSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3792,8 +3791,8 @@ const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSqlInjectionMatchSets
-func (c *WAF) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSetsInput) (req *request.Request, output *ListSqlInjectionMatchSetsOutput) {
-	op := &request.Operation{
+func (c *WAF) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMatchSetsInput) (req *aws.Request, output *ListSqlInjectionMatchSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListSqlInjectionMatchSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3843,7 +3842,7 @@ func (c *WAF) ListSqlInjectionMatchSets(input *ListSqlInjectionMatchSetsInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListSqlInjectionMatchSetsWithContext(ctx aws.Context, input *ListSqlInjectionMatchSetsInput, opts ...request.Option) (*ListSqlInjectionMatchSetsOutput, error) {
+func (c *WAF) ListSqlInjectionMatchSetsWithContext(ctx aws.Context, input *ListSqlInjectionMatchSetsInput, opts ...aws.Option) (*ListSqlInjectionMatchSetsOutput, error) {
 	req, out := c.ListSqlInjectionMatchSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3852,7 +3851,7 @@ func (c *WAF) ListSqlInjectionMatchSetsWithContext(ctx aws.Context, input *ListS
 
 const opListWebACLs = "ListWebACLs"
 
-// ListWebACLsRequest generates a "aws/request.Request" representing the
+// ListWebACLsRequest generates a "aws.Request" representing the
 // client's request for the ListWebACLs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3876,8 +3875,8 @@ const opListWebACLs = "ListWebACLs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListWebACLs
-func (c *WAF) ListWebACLsRequest(input *ListWebACLsInput) (req *request.Request, output *ListWebACLsOutput) {
-	op := &request.Operation{
+func (c *WAF) ListWebACLsRequest(input *ListWebACLsInput) (req *aws.Request, output *ListWebACLsOutput) {
+	op := &aws.Operation{
 		Name:       opListWebACLs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3927,7 +3926,7 @@ func (c *WAF) ListWebACLs(input *ListWebACLsInput) (*ListWebACLsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListWebACLsWithContext(ctx aws.Context, input *ListWebACLsInput, opts ...request.Option) (*ListWebACLsOutput, error) {
+func (c *WAF) ListWebACLsWithContext(ctx aws.Context, input *ListWebACLsInput, opts ...aws.Option) (*ListWebACLsOutput, error) {
 	req, out := c.ListWebACLsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3936,7 +3935,7 @@ func (c *WAF) ListWebACLsWithContext(ctx aws.Context, input *ListWebACLsInput, o
 
 const opListXssMatchSets = "ListXssMatchSets"
 
-// ListXssMatchSetsRequest generates a "aws/request.Request" representing the
+// ListXssMatchSetsRequest generates a "aws.Request" representing the
 // client's request for the ListXssMatchSets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3960,8 +3959,8 @@ const opListXssMatchSets = "ListXssMatchSets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListXssMatchSets
-func (c *WAF) ListXssMatchSetsRequest(input *ListXssMatchSetsInput) (req *request.Request, output *ListXssMatchSetsOutput) {
-	op := &request.Operation{
+func (c *WAF) ListXssMatchSetsRequest(input *ListXssMatchSetsInput) (req *aws.Request, output *ListXssMatchSetsOutput) {
+	op := &aws.Operation{
 		Name:       opListXssMatchSets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4011,7 +4010,7 @@ func (c *WAF) ListXssMatchSets(input *ListXssMatchSetsInput) (*ListXssMatchSetsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) ListXssMatchSetsWithContext(ctx aws.Context, input *ListXssMatchSetsInput, opts ...request.Option) (*ListXssMatchSetsOutput, error) {
+func (c *WAF) ListXssMatchSetsWithContext(ctx aws.Context, input *ListXssMatchSetsInput, opts ...aws.Option) (*ListXssMatchSetsOutput, error) {
 	req, out := c.ListXssMatchSetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4020,7 +4019,7 @@ func (c *WAF) ListXssMatchSetsWithContext(ctx aws.Context, input *ListXssMatchSe
 
 const opUpdateByteMatchSet = "UpdateByteMatchSet"
 
-// UpdateByteMatchSetRequest generates a "aws/request.Request" representing the
+// UpdateByteMatchSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateByteMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4044,8 +4043,8 @@ const opUpdateByteMatchSet = "UpdateByteMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateByteMatchSet
-func (c *WAF) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) (req *request.Request, output *UpdateByteMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) (req *aws.Request, output *UpdateByteMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateByteMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4210,7 +4209,7 @@ func (c *WAF) UpdateByteMatchSet(input *UpdateByteMatchSetInput) (*UpdateByteMat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateByteMatchSetWithContext(ctx aws.Context, input *UpdateByteMatchSetInput, opts ...request.Option) (*UpdateByteMatchSetOutput, error) {
+func (c *WAF) UpdateByteMatchSetWithContext(ctx aws.Context, input *UpdateByteMatchSetInput, opts ...aws.Option) (*UpdateByteMatchSetOutput, error) {
 	req, out := c.UpdateByteMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4219,7 +4218,7 @@ func (c *WAF) UpdateByteMatchSetWithContext(ctx aws.Context, input *UpdateByteMa
 
 const opUpdateIPSet = "UpdateIPSet"
 
-// UpdateIPSetRequest generates a "aws/request.Request" representing the
+// UpdateIPSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateIPSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4243,8 +4242,8 @@ const opUpdateIPSet = "UpdateIPSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSet
-func (c *WAF) UpdateIPSetRequest(input *UpdateIPSetInput) (req *request.Request, output *UpdateIPSetOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateIPSetRequest(input *UpdateIPSetInput) (req *aws.Request, output *UpdateIPSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateIPSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4429,7 +4428,7 @@ func (c *WAF) UpdateIPSet(input *UpdateIPSetInput) (*UpdateIPSetOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateIPSetWithContext(ctx aws.Context, input *UpdateIPSetInput, opts ...request.Option) (*UpdateIPSetOutput, error) {
+func (c *WAF) UpdateIPSetWithContext(ctx aws.Context, input *UpdateIPSetInput, opts ...aws.Option) (*UpdateIPSetOutput, error) {
 	req, out := c.UpdateIPSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4438,7 +4437,7 @@ func (c *WAF) UpdateIPSetWithContext(ctx aws.Context, input *UpdateIPSetInput, o
 
 const opUpdateRateBasedRule = "UpdateRateBasedRule"
 
-// UpdateRateBasedRuleRequest generates a "aws/request.Request" representing the
+// UpdateRateBasedRuleRequest generates a "aws.Request" representing the
 // client's request for the UpdateRateBasedRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4462,8 +4461,8 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRateBasedRule
-func (c *WAF) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) (req *request.Request, output *UpdateRateBasedRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput) (req *aws.Request, output *UpdateRateBasedRuleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRateBasedRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4637,7 +4636,7 @@ func (c *WAF) UpdateRateBasedRule(input *UpdateRateBasedRuleInput) (*UpdateRateB
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateRateBasedRuleWithContext(ctx aws.Context, input *UpdateRateBasedRuleInput, opts ...request.Option) (*UpdateRateBasedRuleOutput, error) {
+func (c *WAF) UpdateRateBasedRuleWithContext(ctx aws.Context, input *UpdateRateBasedRuleInput, opts ...aws.Option) (*UpdateRateBasedRuleOutput, error) {
 	req, out := c.UpdateRateBasedRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4646,7 +4645,7 @@ func (c *WAF) UpdateRateBasedRuleWithContext(ctx aws.Context, input *UpdateRateB
 
 const opUpdateRule = "UpdateRule"
 
-// UpdateRuleRequest generates a "aws/request.Request" representing the
+// UpdateRuleRequest generates a "aws.Request" representing the
 // client's request for the UpdateRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4670,8 +4669,8 @@ const opUpdateRule = "UpdateRule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRule
-func (c *WAF) UpdateRuleRequest(input *UpdateRuleInput) (req *request.Request, output *UpdateRuleOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateRuleRequest(input *UpdateRuleInput) (req *aws.Request, output *UpdateRuleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4840,7 +4839,7 @@ func (c *WAF) UpdateRule(input *UpdateRuleInput) (*UpdateRuleOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateRuleWithContext(ctx aws.Context, input *UpdateRuleInput, opts ...request.Option) (*UpdateRuleOutput, error) {
+func (c *WAF) UpdateRuleWithContext(ctx aws.Context, input *UpdateRuleInput, opts ...aws.Option) (*UpdateRuleOutput, error) {
 	req, out := c.UpdateRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4849,7 +4848,7 @@ func (c *WAF) UpdateRuleWithContext(ctx aws.Context, input *UpdateRuleInput, opt
 
 const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
 
-// UpdateSizeConstraintSetRequest generates a "aws/request.Request" representing the
+// UpdateSizeConstraintSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateSizeConstraintSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4873,8 +4872,8 @@ const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSizeConstraintSet
-func (c *WAF) UpdateSizeConstraintSetRequest(input *UpdateSizeConstraintSetInput) (req *request.Request, output *UpdateSizeConstraintSetOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateSizeConstraintSetRequest(input *UpdateSizeConstraintSetInput) (req *aws.Request, output *UpdateSizeConstraintSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSizeConstraintSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5049,7 +5048,7 @@ func (c *WAF) UpdateSizeConstraintSet(input *UpdateSizeConstraintSetInput) (*Upd
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateSizeConstraintSetWithContext(ctx aws.Context, input *UpdateSizeConstraintSetInput, opts ...request.Option) (*UpdateSizeConstraintSetOutput, error) {
+func (c *WAF) UpdateSizeConstraintSetWithContext(ctx aws.Context, input *UpdateSizeConstraintSetInput, opts ...aws.Option) (*UpdateSizeConstraintSetOutput, error) {
 	req, out := c.UpdateSizeConstraintSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5058,7 +5057,7 @@ func (c *WAF) UpdateSizeConstraintSetWithContext(ctx aws.Context, input *UpdateS
 
 const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 
-// UpdateSqlInjectionMatchSetRequest generates a "aws/request.Request" representing the
+// UpdateSqlInjectionMatchSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateSqlInjectionMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5082,8 +5081,8 @@ const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSqlInjectionMatchSet
-func (c *WAF) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatchSetInput) (req *request.Request, output *UpdateSqlInjectionMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectionMatchSetInput) (req *aws.Request, output *UpdateSqlInjectionMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateSqlInjectionMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5243,7 +5242,7 @@ func (c *WAF) UpdateSqlInjectionMatchSet(input *UpdateSqlInjectionMatchSetInput)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateSqlInjectionMatchSetWithContext(ctx aws.Context, input *UpdateSqlInjectionMatchSetInput, opts ...request.Option) (*UpdateSqlInjectionMatchSetOutput, error) {
+func (c *WAF) UpdateSqlInjectionMatchSetWithContext(ctx aws.Context, input *UpdateSqlInjectionMatchSetInput, opts ...aws.Option) (*UpdateSqlInjectionMatchSetOutput, error) {
 	req, out := c.UpdateSqlInjectionMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5252,7 +5251,7 @@ func (c *WAF) UpdateSqlInjectionMatchSetWithContext(ctx aws.Context, input *Upda
 
 const opUpdateWebACL = "UpdateWebACL"
 
-// UpdateWebACLRequest generates a "aws/request.Request" representing the
+// UpdateWebACLRequest generates a "aws.Request" representing the
 // client's request for the UpdateWebACL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5276,8 +5275,8 @@ const opUpdateWebACL = "UpdateWebACL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateWebACL
-func (c *WAF) UpdateWebACLRequest(input *UpdateWebACLInput) (req *request.Request, output *UpdateWebACLOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateWebACLRequest(input *UpdateWebACLInput) (req *aws.Request, output *UpdateWebACLOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateWebACL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5461,7 +5460,7 @@ func (c *WAF) UpdateWebACL(input *UpdateWebACLInput) (*UpdateWebACLOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateWebACLWithContext(ctx aws.Context, input *UpdateWebACLInput, opts ...request.Option) (*UpdateWebACLOutput, error) {
+func (c *WAF) UpdateWebACLWithContext(ctx aws.Context, input *UpdateWebACLInput, opts ...aws.Option) (*UpdateWebACLOutput, error) {
 	req, out := c.UpdateWebACLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5470,7 +5469,7 @@ func (c *WAF) UpdateWebACLWithContext(ctx aws.Context, input *UpdateWebACLInput,
 
 const opUpdateXssMatchSet = "UpdateXssMatchSet"
 
-// UpdateXssMatchSetRequest generates a "aws/request.Request" representing the
+// UpdateXssMatchSetRequest generates a "aws.Request" representing the
 // client's request for the UpdateXssMatchSet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5494,8 +5493,8 @@ const opUpdateXssMatchSet = "UpdateXssMatchSet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateXssMatchSet
-func (c *WAF) UpdateXssMatchSetRequest(input *UpdateXssMatchSetInput) (req *request.Request, output *UpdateXssMatchSetOutput) {
-	op := &request.Operation{
+func (c *WAF) UpdateXssMatchSetRequest(input *UpdateXssMatchSetInput) (req *aws.Request, output *UpdateXssMatchSetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateXssMatchSet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5655,7 +5654,7 @@ func (c *WAF) UpdateXssMatchSet(input *UpdateXssMatchSetInput) (*UpdateXssMatchS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WAF) UpdateXssMatchSetWithContext(ctx aws.Context, input *UpdateXssMatchSetInput, opts ...request.Option) (*UpdateXssMatchSetOutput, error) {
+func (c *WAF) UpdateXssMatchSetWithContext(ctx aws.Context, input *UpdateXssMatchSetInput, opts ...aws.Option) (*UpdateXssMatchSetOutput, error) {
 	req, out := c.UpdateXssMatchSetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5725,22 +5724,22 @@ func (s ActivatedRule) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivatedRule) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ActivatedRule"}
+	invalidParams := aws.ErrInvalidParams{Context: "ActivatedRule"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Priority == nil {
-		invalidParams.Add(request.NewErrParamRequired("Priority"))
+		invalidParams.Add(aws.NewErrParamRequired("Priority"))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 	if s.Action != nil {
 		if err := s.Action.Validate(); err != nil {
-			invalidParams.AddNested("Action", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5913,16 +5912,16 @@ func (s ByteMatchSetUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ByteMatchSetUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ByteMatchSetUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "ByteMatchSetUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.ByteMatchTuple == nil {
-		invalidParams.Add(request.NewErrParamRequired("ByteMatchTuple"))
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchTuple"))
 	}
 	if s.ByteMatchTuple != nil {
 		if err := s.ByteMatchTuple.Validate(); err != nil {
-			invalidParams.AddNested("ByteMatchTuple", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ByteMatchTuple", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6144,22 +6143,22 @@ func (s ByteMatchTuple) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ByteMatchTuple) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ByteMatchTuple"}
+	invalidParams := aws.ErrInvalidParams{Context: "ByteMatchTuple"}
 	if s.FieldToMatch == nil {
-		invalidParams.Add(request.NewErrParamRequired("FieldToMatch"))
+		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
 	if s.PositionalConstraint == nil {
-		invalidParams.Add(request.NewErrParamRequired("PositionalConstraint"))
+		invalidParams.Add(aws.NewErrParamRequired("PositionalConstraint"))
 	}
 	if s.TargetString == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetString"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetString"))
 	}
 	if s.TextTransformation == nil {
-		invalidParams.Add(request.NewErrParamRequired("TextTransformation"))
+		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
 		if err := s.FieldToMatch.Validate(); err != nil {
-			invalidParams.AddNested("FieldToMatch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FieldToMatch", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6221,18 +6220,18 @@ func (s CreateByteMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateByteMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateByteMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateByteMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6316,18 +6315,18 @@ func (s CreateIPSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateIPSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateIPSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateIPSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6438,30 +6437,30 @@ func (s CreateRateBasedRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRateBasedRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRateBasedRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRateBasedRuleInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.RateKey == nil {
-		invalidParams.Add(request.NewErrParamRequired("RateKey"))
+		invalidParams.Add(aws.NewErrParamRequired("RateKey"))
 	}
 	if s.RateLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("RateLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
 	}
 	if s.RateLimit != nil && *s.RateLimit < 2000 {
-		invalidParams.Add(request.NewErrParamMinValue("RateLimit", 2000))
+		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6571,21 +6570,21 @@ func (s CreateRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRuleInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6675,18 +6674,18 @@ func (s CreateSizeConstraintSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSizeConstraintSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSizeConstraintSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSizeConstraintSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6771,18 +6770,18 @@ func (s CreateSqlInjectionMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateSqlInjectionMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateSqlInjectionMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6881,28 +6880,28 @@ func (s CreateWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateWebACLInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.DefaultAction == nil {
-		invalidParams.Add(request.NewErrParamRequired("DefaultAction"))
+		invalidParams.Add(aws.NewErrParamRequired("DefaultAction"))
 	}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.DefaultAction != nil {
 		if err := s.DefaultAction.Validate(); err != nil {
-			invalidParams.AddNested("DefaultAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DefaultAction", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7000,18 +6999,18 @@ func (s CreateXssMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateXssMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateXssMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateXssMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7096,18 +7095,18 @@ func (s DeleteByteMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteByteMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteByteMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteByteMatchSetInput"}
 	if s.ByteMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ByteMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
 	}
 	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ByteMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
 	}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7182,18 +7181,18 @@ func (s DeleteIPSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteIPSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteIPSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIPSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.IPSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("IPSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
 	}
 	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IPSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7268,18 +7267,18 @@ func (s DeleteRateBasedRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRateBasedRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRateBasedRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRateBasedRuleInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7354,18 +7353,18 @@ func (s DeleteRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRuleInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7440,18 +7439,18 @@ func (s DeleteSizeConstraintSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSizeConstraintSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSizeConstraintSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSizeConstraintSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.SizeConstraintSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SizeConstraintSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
 	}
 	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SizeConstraintSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7527,18 +7526,18 @@ func (s DeleteSqlInjectionMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteSqlInjectionMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteSqlInjectionMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.SqlInjectionMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SqlInjectionMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
 	}
 	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7614,18 +7613,18 @@ func (s DeleteWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebACLInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.WebACLId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebACLId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
 	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WebACLId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7701,18 +7700,18 @@ func (s DeleteXssMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteXssMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteXssMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteXssMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.XssMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("XssMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
 	}
 	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("XssMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7813,9 +7812,9 @@ func (s FieldToMatch) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FieldToMatch) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FieldToMatch"}
+	invalidParams := aws.ErrInvalidParams{Context: "FieldToMatch"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7859,12 +7858,12 @@ func (s GetByteMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetByteMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetByteMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetByteMatchSetInput"}
 	if s.ByteMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ByteMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
 	}
 	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ByteMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7975,12 +7974,12 @@ func (s GetChangeTokenStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetChangeTokenStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetChangeTokenStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetChangeTokenStatusInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8042,12 +8041,12 @@ func (s GetIPSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetIPSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetIPSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetIPSetInput"}
 	if s.IPSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("IPSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
 	}
 	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IPSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8115,12 +8114,12 @@ func (s GetRateBasedRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRateBasedRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRateBasedRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleInput"}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8161,15 +8160,15 @@ func (s GetRateBasedRuleManagedKeysInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRateBasedRuleManagedKeysInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRateBasedRuleManagedKeysInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRateBasedRuleManagedKeysInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8271,12 +8270,12 @@ func (s GetRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRuleInput"}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8371,31 +8370,31 @@ func (s GetSampledRequestsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSampledRequestsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSampledRequestsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSampledRequestsInput"}
 	if s.MaxItems == nil {
-		invalidParams.Add(request.NewErrParamRequired("MaxItems"))
+		invalidParams.Add(aws.NewErrParamRequired("MaxItems"))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxItems", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 	if s.TimeWindow == nil {
-		invalidParams.Add(request.NewErrParamRequired("TimeWindow"))
+		invalidParams.Add(aws.NewErrParamRequired("TimeWindow"))
 	}
 	if s.WebAclId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebAclId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebAclId"))
 	}
 	if s.WebAclId != nil && len(*s.WebAclId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WebAclId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WebAclId", 1))
 	}
 	if s.TimeWindow != nil {
 		if err := s.TimeWindow.Validate(); err != nil {
-			invalidParams.AddNested("TimeWindow", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TimeWindow", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8500,12 +8499,12 @@ func (s GetSizeConstraintSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSizeConstraintSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSizeConstraintSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSizeConstraintSetInput"}
 	if s.SizeConstraintSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SizeConstraintSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
 	}
 	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SizeConstraintSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8578,12 +8577,12 @@ func (s GetSqlInjectionMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSqlInjectionMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSqlInjectionMatchSetInput"}
 	if s.SqlInjectionMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SqlInjectionMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
 	}
 	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8655,12 +8654,12 @@ func (s GetWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetWebACLInput"}
 	if s.WebACLId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebACLId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
 	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WebACLId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8734,12 +8733,12 @@ func (s GetXssMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetXssMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetXssMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetXssMatchSetInput"}
 	if s.XssMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("XssMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
 	}
 	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("XssMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9021,12 +9020,12 @@ func (s IPSetDescriptor) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IPSetDescriptor) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IPSetDescriptor"}
+	invalidParams := aws.ErrInvalidParams{Context: "IPSetDescriptor"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9116,16 +9115,16 @@ func (s IPSetUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *IPSetUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "IPSetUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "IPSetUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.IPSetDescriptor == nil {
-		invalidParams.Add(request.NewErrParamRequired("IPSetDescriptor"))
+		invalidParams.Add(aws.NewErrParamRequired("IPSetDescriptor"))
 	}
 	if s.IPSetDescriptor != nil {
 		if err := s.IPSetDescriptor.Validate(); err != nil {
-			invalidParams.AddNested("IPSetDescriptor", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("IPSetDescriptor", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9177,9 +9176,9 @@ func (s ListByteMatchSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListByteMatchSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListByteMatchSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListByteMatchSetsInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9267,9 +9266,9 @@ func (s ListIPSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListIPSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListIPSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListIPSetsInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9355,9 +9354,9 @@ func (s ListRateBasedRulesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRateBasedRulesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRateBasedRulesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRateBasedRulesInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9443,9 +9442,9 @@ func (s ListRulesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRulesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRulesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRulesInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9532,9 +9531,9 @@ func (s ListSizeConstraintSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSizeConstraintSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSizeConstraintSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSizeConstraintSetsInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9624,9 +9623,9 @@ func (s ListSqlInjectionMatchSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSqlInjectionMatchSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSqlInjectionMatchSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSqlInjectionMatchSetsInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9716,9 +9715,9 @@ func (s ListWebACLsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListWebACLsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListWebACLsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListWebACLsInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9806,9 +9805,9 @@ func (s ListXssMatchSetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListXssMatchSetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListXssMatchSetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListXssMatchSetsInput"}
 	if s.NextMarker != nil && len(*s.NextMarker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextMarker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextMarker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9914,18 +9913,18 @@ func (s Predicate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Predicate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Predicate"}
+	invalidParams := aws.ErrInvalidParams{Context: "Predicate"}
 	if s.DataId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataId"))
+		invalidParams.Add(aws.NewErrParamRequired("DataId"))
 	}
 	if s.DataId != nil && len(*s.DataId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataId", 1))
 	}
 	if s.Negated == nil {
-		invalidParams.Add(request.NewErrParamRequired("Negated"))
+		invalidParams.Add(aws.NewErrParamRequired("Negated"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10210,16 +10209,16 @@ func (s RuleUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RuleUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RuleUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "RuleUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.Predicate == nil {
-		invalidParams.Add(request.NewErrParamRequired("Predicate"))
+		invalidParams.Add(aws.NewErrParamRequired("Predicate"))
 	}
 	if s.Predicate != nil {
 		if err := s.Predicate.Validate(); err != nil {
-			invalidParams.AddNested("Predicate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Predicate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10443,22 +10442,22 @@ func (s SizeConstraint) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SizeConstraint) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SizeConstraint"}
+	invalidParams := aws.ErrInvalidParams{Context: "SizeConstraint"}
 	if s.ComparisonOperator == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComparisonOperator"))
+		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
 	}
 	if s.FieldToMatch == nil {
-		invalidParams.Add(request.NewErrParamRequired("FieldToMatch"))
+		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
 	if s.Size == nil {
-		invalidParams.Add(request.NewErrParamRequired("Size"))
+		invalidParams.Add(aws.NewErrParamRequired("Size"))
 	}
 	if s.TextTransformation == nil {
-		invalidParams.Add(request.NewErrParamRequired("TextTransformation"))
+		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
 		if err := s.FieldToMatch.Validate(); err != nil {
-			invalidParams.AddNested("FieldToMatch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FieldToMatch", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10626,16 +10625,16 @@ func (s SizeConstraintSetUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SizeConstraintSetUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SizeConstraintSetUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "SizeConstraintSetUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.SizeConstraint == nil {
-		invalidParams.Add(request.NewErrParamRequired("SizeConstraint"))
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraint"))
 	}
 	if s.SizeConstraint != nil {
 		if err := s.SizeConstraint.Validate(); err != nil {
-			invalidParams.AddNested("SizeConstraint", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SizeConstraint", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10793,16 +10792,16 @@ func (s SqlInjectionMatchSetUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SqlInjectionMatchSetUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SqlInjectionMatchSetUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "SqlInjectionMatchSetUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.SqlInjectionMatchTuple == nil {
-		invalidParams.Add(request.NewErrParamRequired("SqlInjectionMatchTuple"))
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchTuple"))
 	}
 	if s.SqlInjectionMatchTuple != nil {
 		if err := s.SqlInjectionMatchTuple.Validate(); err != nil {
-			invalidParams.AddNested("SqlInjectionMatchTuple", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SqlInjectionMatchTuple", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10923,16 +10922,16 @@ func (s SqlInjectionMatchTuple) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SqlInjectionMatchTuple) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SqlInjectionMatchTuple"}
+	invalidParams := aws.ErrInvalidParams{Context: "SqlInjectionMatchTuple"}
 	if s.FieldToMatch == nil {
-		invalidParams.Add(request.NewErrParamRequired("FieldToMatch"))
+		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
 	if s.TextTransformation == nil {
-		invalidParams.Add(request.NewErrParamRequired("TextTransformation"))
+		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
 		if err := s.FieldToMatch.Validate(); err != nil {
-			invalidParams.AddNested("FieldToMatch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FieldToMatch", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10997,12 +10996,12 @@ func (s TimeWindow) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TimeWindow) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TimeWindow"}
+	invalidParams := aws.ErrInvalidParams{Context: "TimeWindow"}
 	if s.EndTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndTime"))
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
 	}
 	if s.StartTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("StartTime"))
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11064,21 +11063,21 @@ func (s UpdateByteMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateByteMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateByteMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateByteMatchSetInput"}
 	if s.ByteMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ByteMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("ByteMatchSetId"))
 	}
 	if s.ByteMatchSetId != nil && len(*s.ByteMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ByteMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ByteMatchSetId", 1))
 	}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11086,7 +11085,7 @@ func (s *UpdateByteMatchSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11179,21 +11178,21 @@ func (s UpdateIPSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateIPSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateIPSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateIPSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.IPSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("IPSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("IPSetId"))
 	}
 	if s.IPSetId != nil && len(*s.IPSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IPSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IPSetId", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11201,7 +11200,7 @@ func (s *UpdateIPSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11299,27 +11298,27 @@ func (s UpdateRateBasedRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRateBasedRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRateBasedRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRateBasedRuleInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.RateLimit == nil {
-		invalidParams.Add(request.NewErrParamRequired("RateLimit"))
+		invalidParams.Add(aws.NewErrParamRequired("RateLimit"))
 	}
 	if s.RateLimit != nil && *s.RateLimit < 2000 {
-		invalidParams.Add(request.NewErrParamMinValue("RateLimit", 2000))
+		invalidParams.Add(aws.NewErrParamMinValue("RateLimit", 2000))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11327,7 +11326,7 @@ func (s *UpdateRateBasedRuleInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11428,21 +11427,21 @@ func (s UpdateRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRuleInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.RuleId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleId"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleId"))
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11450,7 +11449,7 @@ func (s *UpdateRuleInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11547,21 +11546,21 @@ func (s UpdateSizeConstraintSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSizeConstraintSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSizeConstraintSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSizeConstraintSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.SizeConstraintSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SizeConstraintSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SizeConstraintSetId"))
 	}
 	if s.SizeConstraintSetId != nil && len(*s.SizeConstraintSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SizeConstraintSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SizeConstraintSetId", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11569,7 +11568,7 @@ func (s *UpdateSizeConstraintSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11666,21 +11665,21 @@ func (s UpdateSqlInjectionMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateSqlInjectionMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateSqlInjectionMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.SqlInjectionMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SqlInjectionMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SqlInjectionMatchSetId"))
 	}
 	if s.SqlInjectionMatchSetId != nil && len(*s.SqlInjectionMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SqlInjectionMatchSetId", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11688,7 +11687,7 @@ func (s *UpdateSqlInjectionMatchSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11789,22 +11788,22 @@ func (s UpdateWebACLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateWebACLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateWebACLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateWebACLInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.WebACLId == nil {
-		invalidParams.Add(request.NewErrParamRequired("WebACLId"))
+		invalidParams.Add(aws.NewErrParamRequired("WebACLId"))
 	}
 	if s.WebACLId != nil && len(*s.WebACLId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("WebACLId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("WebACLId", 1))
 	}
 	if s.DefaultAction != nil {
 		if err := s.DefaultAction.Validate(); err != nil {
-			invalidParams.AddNested("DefaultAction", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DefaultAction", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Updates != nil {
@@ -11813,7 +11812,7 @@ func (s *UpdateWebACLInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11915,21 +11914,21 @@ func (s UpdateXssMatchSetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateXssMatchSetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateXssMatchSetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateXssMatchSetInput"}
 	if s.ChangeToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("ChangeToken"))
+		invalidParams.Add(aws.NewErrParamRequired("ChangeToken"))
 	}
 	if s.ChangeToken != nil && len(*s.ChangeToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ChangeToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ChangeToken", 1))
 	}
 	if s.Updates == nil {
-		invalidParams.Add(request.NewErrParamRequired("Updates"))
+		invalidParams.Add(aws.NewErrParamRequired("Updates"))
 	}
 	if s.XssMatchSetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("XssMatchSetId"))
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchSetId"))
 	}
 	if s.XssMatchSetId != nil && len(*s.XssMatchSetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("XssMatchSetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("XssMatchSetId", 1))
 	}
 	if s.Updates != nil {
 		for i, v := range s.Updates {
@@ -11937,7 +11936,7 @@ func (s *UpdateXssMatchSetInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Updates", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -12030,9 +12029,9 @@ func (s WafAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WafAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WafAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "WafAction"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12204,16 +12203,16 @@ func (s WebACLUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *WebACLUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "WebACLUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "WebACLUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.ActivatedRule == nil {
-		invalidParams.Add(request.NewErrParamRequired("ActivatedRule"))
+		invalidParams.Add(aws.NewErrParamRequired("ActivatedRule"))
 	}
 	if s.ActivatedRule != nil {
 		if err := s.ActivatedRule.Validate(); err != nil {
-			invalidParams.AddNested("ActivatedRule", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ActivatedRule", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12369,16 +12368,16 @@ func (s XssMatchSetUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *XssMatchSetUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "XssMatchSetUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "XssMatchSetUpdate"}
 	if s.Action == nil {
-		invalidParams.Add(request.NewErrParamRequired("Action"))
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
 	}
 	if s.XssMatchTuple == nil {
-		invalidParams.Add(request.NewErrParamRequired("XssMatchTuple"))
+		invalidParams.Add(aws.NewErrParamRequired("XssMatchTuple"))
 	}
 	if s.XssMatchTuple != nil {
 		if err := s.XssMatchTuple.Validate(); err != nil {
-			invalidParams.AddNested("XssMatchTuple", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("XssMatchTuple", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12499,16 +12498,16 @@ func (s XssMatchTuple) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *XssMatchTuple) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "XssMatchTuple"}
+	invalidParams := aws.ErrInvalidParams{Context: "XssMatchTuple"}
 	if s.FieldToMatch == nil {
-		invalidParams.Add(request.NewErrParamRequired("FieldToMatch"))
+		invalidParams.Add(aws.NewErrParamRequired("FieldToMatch"))
 	}
 	if s.TextTransformation == nil {
-		invalidParams.Add(request.NewErrParamRequired("TextTransformation"))
+		invalidParams.Add(aws.NewErrParamRequired("TextTransformation"))
 	}
 	if s.FieldToMatch != nil {
 		if err := s.FieldToMatch.Validate(); err != nil {
-			invalidParams.AddNested("FieldToMatch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FieldToMatch", err.(aws.ErrInvalidParams))
 		}
 	}
 

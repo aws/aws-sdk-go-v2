@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAddTags = "AddTags"
 
-// AddTagsRequest generates a "aws/request.Request" representing the
+// AddTagsRequest generates a "aws.Request" representing the
 // client's request for the AddTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAddTags = "AddTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTags
-func (c *ELB) AddTagsRequest(input *AddTagsInput) (req *request.Request, output *AddTagsOutput) {
-	op := &request.Operation{
+func (c *ELB) AddTagsRequest(input *AddTagsInput) (req *aws.Request, output *AddTagsOutput) {
+	op := &aws.Operation{
 		Name:       opAddTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -97,7 +96,7 @@ func (c *ELB) AddTags(input *AddTagsInput) (*AddTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...request.Option) (*AddTagsOutput, error) {
+func (c *ELB) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...aws.Option) (*AddTagsOutput, error) {
 	req, out := c.AddTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -106,7 +105,7 @@ func (c *ELB) AddTagsWithContext(ctx aws.Context, input *AddTagsInput, opts ...r
 
 const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
 
-// ApplySecurityGroupsToLoadBalancerRequest generates a "aws/request.Request" representing the
+// ApplySecurityGroupsToLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the ApplySecurityGroupsToLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -130,8 +129,8 @@ const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancer
-func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroupsToLoadBalancerInput) (req *request.Request, output *ApplySecurityGroupsToLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroupsToLoadBalancerInput) (req *aws.Request, output *ApplySecurityGroupsToLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opApplySecurityGroupsToLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -187,7 +186,7 @@ func (c *ELB) ApplySecurityGroupsToLoadBalancer(input *ApplySecurityGroupsToLoad
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) ApplySecurityGroupsToLoadBalancerWithContext(ctx aws.Context, input *ApplySecurityGroupsToLoadBalancerInput, opts ...request.Option) (*ApplySecurityGroupsToLoadBalancerOutput, error) {
+func (c *ELB) ApplySecurityGroupsToLoadBalancerWithContext(ctx aws.Context, input *ApplySecurityGroupsToLoadBalancerInput, opts ...aws.Option) (*ApplySecurityGroupsToLoadBalancerOutput, error) {
 	req, out := c.ApplySecurityGroupsToLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -196,7 +195,7 @@ func (c *ELB) ApplySecurityGroupsToLoadBalancerWithContext(ctx aws.Context, inpu
 
 const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
 
-// AttachLoadBalancerToSubnetsRequest generates a "aws/request.Request" representing the
+// AttachLoadBalancerToSubnetsRequest generates a "aws.Request" representing the
 // client's request for the AttachLoadBalancerToSubnets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -220,8 +219,8 @@ const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnets
-func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubnetsInput) (req *request.Request, output *AttachLoadBalancerToSubnetsOutput) {
-	op := &request.Operation{
+func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubnetsInput) (req *aws.Request, output *AttachLoadBalancerToSubnetsOutput) {
+	op := &aws.Operation{
 		Name:       opAttachLoadBalancerToSubnets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -281,7 +280,7 @@ func (c *ELB) AttachLoadBalancerToSubnets(input *AttachLoadBalancerToSubnetsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) AttachLoadBalancerToSubnetsWithContext(ctx aws.Context, input *AttachLoadBalancerToSubnetsInput, opts ...request.Option) (*AttachLoadBalancerToSubnetsOutput, error) {
+func (c *ELB) AttachLoadBalancerToSubnetsWithContext(ctx aws.Context, input *AttachLoadBalancerToSubnetsInput, opts ...aws.Option) (*AttachLoadBalancerToSubnetsOutput, error) {
 	req, out := c.AttachLoadBalancerToSubnetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -290,7 +289,7 @@ func (c *ELB) AttachLoadBalancerToSubnetsWithContext(ctx aws.Context, input *Att
 
 const opConfigureHealthCheck = "ConfigureHealthCheck"
 
-// ConfigureHealthCheckRequest generates a "aws/request.Request" representing the
+// ConfigureHealthCheckRequest generates a "aws.Request" representing the
 // client's request for the ConfigureHealthCheck operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -314,8 +313,8 @@ const opConfigureHealthCheck = "ConfigureHealthCheck"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheck
-func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) (req *request.Request, output *ConfigureHealthCheckOutput) {
-	op := &request.Operation{
+func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) (req *aws.Request, output *ConfigureHealthCheckOutput) {
+	op := &aws.Operation{
 		Name:       opConfigureHealthCheck,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -365,7 +364,7 @@ func (c *ELB) ConfigureHealthCheck(input *ConfigureHealthCheckInput) (*Configure
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) ConfigureHealthCheckWithContext(ctx aws.Context, input *ConfigureHealthCheckInput, opts ...request.Option) (*ConfigureHealthCheckOutput, error) {
+func (c *ELB) ConfigureHealthCheckWithContext(ctx aws.Context, input *ConfigureHealthCheckInput, opts ...aws.Option) (*ConfigureHealthCheckOutput, error) {
 	req, out := c.ConfigureHealthCheckRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -374,7 +373,7 @@ func (c *ELB) ConfigureHealthCheckWithContext(ctx aws.Context, input *ConfigureH
 
 const opCreateAppCookieStickinessPolicy = "CreateAppCookieStickinessPolicy"
 
-// CreateAppCookieStickinessPolicyRequest generates a "aws/request.Request" representing the
+// CreateAppCookieStickinessPolicyRequest generates a "aws.Request" representing the
 // client's request for the CreateAppCookieStickinessPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -398,8 +397,8 @@ const opCreateAppCookieStickinessPolicy = "CreateAppCookieStickinessPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicy
-func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStickinessPolicyInput) (req *request.Request, output *CreateAppCookieStickinessPolicyOutput) {
-	op := &request.Operation{
+func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStickinessPolicyInput) (req *aws.Request, output *CreateAppCookieStickinessPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opCreateAppCookieStickinessPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -467,7 +466,7 @@ func (c *ELB) CreateAppCookieStickinessPolicy(input *CreateAppCookieStickinessPo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) CreateAppCookieStickinessPolicyWithContext(ctx aws.Context, input *CreateAppCookieStickinessPolicyInput, opts ...request.Option) (*CreateAppCookieStickinessPolicyOutput, error) {
+func (c *ELB) CreateAppCookieStickinessPolicyWithContext(ctx aws.Context, input *CreateAppCookieStickinessPolicyInput, opts ...aws.Option) (*CreateAppCookieStickinessPolicyOutput, error) {
 	req, out := c.CreateAppCookieStickinessPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -476,7 +475,7 @@ func (c *ELB) CreateAppCookieStickinessPolicyWithContext(ctx aws.Context, input 
 
 const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
 
-// CreateLBCookieStickinessPolicyRequest generates a "aws/request.Request" representing the
+// CreateLBCookieStickinessPolicyRequest generates a "aws.Request" representing the
 // client's request for the CreateLBCookieStickinessPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -500,8 +499,8 @@ const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicy
-func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickinessPolicyInput) (req *request.Request, output *CreateLBCookieStickinessPolicyOutput) {
-	op := &request.Operation{
+func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickinessPolicyInput) (req *aws.Request, output *CreateLBCookieStickinessPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLBCookieStickinessPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -571,7 +570,7 @@ func (c *ELB) CreateLBCookieStickinessPolicy(input *CreateLBCookieStickinessPoli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) CreateLBCookieStickinessPolicyWithContext(ctx aws.Context, input *CreateLBCookieStickinessPolicyInput, opts ...request.Option) (*CreateLBCookieStickinessPolicyOutput, error) {
+func (c *ELB) CreateLBCookieStickinessPolicyWithContext(ctx aws.Context, input *CreateLBCookieStickinessPolicyInput, opts ...aws.Option) (*CreateLBCookieStickinessPolicyOutput, error) {
 	req, out := c.CreateLBCookieStickinessPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -580,7 +579,7 @@ func (c *ELB) CreateLBCookieStickinessPolicyWithContext(ctx aws.Context, input *
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
 
-// CreateLoadBalancerRequest generates a "aws/request.Request" representing the
+// CreateLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the CreateLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -604,8 +603,8 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancer
-func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) (req *request.Request, output *CreateLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) (req *aws.Request, output *CreateLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -697,7 +696,7 @@ func (c *ELB) CreateLoadBalancer(input *CreateLoadBalancerInput) (*CreateLoadBal
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoadBalancerInput, opts ...request.Option) (*CreateLoadBalancerOutput, error) {
+func (c *ELB) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoadBalancerInput, opts ...aws.Option) (*CreateLoadBalancerOutput, error) {
 	req, out := c.CreateLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -706,7 +705,7 @@ func (c *ELB) CreateLoadBalancerWithContext(ctx aws.Context, input *CreateLoadBa
 
 const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
 
-// CreateLoadBalancerListenersRequest generates a "aws/request.Request" representing the
+// CreateLoadBalancerListenersRequest generates a "aws.Request" representing the
 // client's request for the CreateLoadBalancerListeners operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -730,8 +729,8 @@ const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListeners
-func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListenersInput) (req *request.Request, output *CreateLoadBalancerListenersOutput) {
-	op := &request.Operation{
+func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListenersInput) (req *aws.Request, output *CreateLoadBalancerListenersOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLoadBalancerListeners,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -798,7 +797,7 @@ func (c *ELB) CreateLoadBalancerListeners(input *CreateLoadBalancerListenersInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) CreateLoadBalancerListenersWithContext(ctx aws.Context, input *CreateLoadBalancerListenersInput, opts ...request.Option) (*CreateLoadBalancerListenersOutput, error) {
+func (c *ELB) CreateLoadBalancerListenersWithContext(ctx aws.Context, input *CreateLoadBalancerListenersInput, opts ...aws.Option) (*CreateLoadBalancerListenersOutput, error) {
 	req, out := c.CreateLoadBalancerListenersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -807,7 +806,7 @@ func (c *ELB) CreateLoadBalancerListenersWithContext(ctx aws.Context, input *Cre
 
 const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
 
-// CreateLoadBalancerPolicyRequest generates a "aws/request.Request" representing the
+// CreateLoadBalancerPolicyRequest generates a "aws.Request" representing the
 // client's request for the CreateLoadBalancerPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -831,8 +830,8 @@ const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicy
-func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInput) (req *request.Request, output *CreateLoadBalancerPolicyOutput) {
-	op := &request.Operation{
+func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInput) (req *aws.Request, output *CreateLoadBalancerPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLoadBalancerPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -893,7 +892,7 @@ func (c *ELB) CreateLoadBalancerPolicy(input *CreateLoadBalancerPolicyInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) CreateLoadBalancerPolicyWithContext(ctx aws.Context, input *CreateLoadBalancerPolicyInput, opts ...request.Option) (*CreateLoadBalancerPolicyOutput, error) {
+func (c *ELB) CreateLoadBalancerPolicyWithContext(ctx aws.Context, input *CreateLoadBalancerPolicyInput, opts ...aws.Option) (*CreateLoadBalancerPolicyOutput, error) {
 	req, out := c.CreateLoadBalancerPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -902,7 +901,7 @@ func (c *ELB) CreateLoadBalancerPolicyWithContext(ctx aws.Context, input *Create
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
 
-// DeleteLoadBalancerRequest generates a "aws/request.Request" representing the
+// DeleteLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the DeleteLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -926,8 +925,8 @@ const opDeleteLoadBalancer = "DeleteLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancer
-func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) (req *request.Request, output *DeleteLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) (req *aws.Request, output *DeleteLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -976,7 +975,7 @@ func (c *ELB) DeleteLoadBalancer(input *DeleteLoadBalancerInput) (*DeleteLoadBal
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoadBalancerInput, opts ...request.Option) (*DeleteLoadBalancerOutput, error) {
+func (c *ELB) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoadBalancerInput, opts ...aws.Option) (*DeleteLoadBalancerOutput, error) {
 	req, out := c.DeleteLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,7 +984,7 @@ func (c *ELB) DeleteLoadBalancerWithContext(ctx aws.Context, input *DeleteLoadBa
 
 const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
 
-// DeleteLoadBalancerListenersRequest generates a "aws/request.Request" representing the
+// DeleteLoadBalancerListenersRequest generates a "aws.Request" representing the
 // client's request for the DeleteLoadBalancerListeners operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1009,8 +1008,8 @@ const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListeners
-func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListenersInput) (req *request.Request, output *DeleteLoadBalancerListenersOutput) {
-	op := &request.Operation{
+func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListenersInput) (req *aws.Request, output *DeleteLoadBalancerListenersOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerListeners,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1055,7 +1054,7 @@ func (c *ELB) DeleteLoadBalancerListeners(input *DeleteLoadBalancerListenersInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DeleteLoadBalancerListenersWithContext(ctx aws.Context, input *DeleteLoadBalancerListenersInput, opts ...request.Option) (*DeleteLoadBalancerListenersOutput, error) {
+func (c *ELB) DeleteLoadBalancerListenersWithContext(ctx aws.Context, input *DeleteLoadBalancerListenersInput, opts ...aws.Option) (*DeleteLoadBalancerListenersOutput, error) {
 	req, out := c.DeleteLoadBalancerListenersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1064,7 +1063,7 @@ func (c *ELB) DeleteLoadBalancerListenersWithContext(ctx aws.Context, input *Del
 
 const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
 
-// DeleteLoadBalancerPolicyRequest generates a "aws/request.Request" representing the
+// DeleteLoadBalancerPolicyRequest generates a "aws.Request" representing the
 // client's request for the DeleteLoadBalancerPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1088,8 +1087,8 @@ const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicy
-func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInput) (req *request.Request, output *DeleteLoadBalancerPolicyOutput) {
-	op := &request.Operation{
+func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInput) (req *aws.Request, output *DeleteLoadBalancerPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLoadBalancerPolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1138,7 +1137,7 @@ func (c *ELB) DeleteLoadBalancerPolicy(input *DeleteLoadBalancerPolicyInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DeleteLoadBalancerPolicyWithContext(ctx aws.Context, input *DeleteLoadBalancerPolicyInput, opts ...request.Option) (*DeleteLoadBalancerPolicyOutput, error) {
+func (c *ELB) DeleteLoadBalancerPolicyWithContext(ctx aws.Context, input *DeleteLoadBalancerPolicyInput, opts ...aws.Option) (*DeleteLoadBalancerPolicyOutput, error) {
 	req, out := c.DeleteLoadBalancerPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1147,7 +1146,7 @@ func (c *ELB) DeleteLoadBalancerPolicyWithContext(ctx aws.Context, input *Delete
 
 const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalancer"
 
-// DeregisterInstancesFromLoadBalancerRequest generates a "aws/request.Request" representing the
+// DeregisterInstancesFromLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the DeregisterInstancesFromLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1171,8 +1170,8 @@ const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalanc
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterInstancesFromLoadBalancer
-func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstancesFromLoadBalancerInput) (req *request.Request, output *DeregisterInstancesFromLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstancesFromLoadBalancerInput) (req *aws.Request, output *DeregisterInstancesFromLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opDeregisterInstancesFromLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1228,7 +1227,7 @@ func (c *ELB) DeregisterInstancesFromLoadBalancer(input *DeregisterInstancesFrom
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DeregisterInstancesFromLoadBalancerWithContext(ctx aws.Context, input *DeregisterInstancesFromLoadBalancerInput, opts ...request.Option) (*DeregisterInstancesFromLoadBalancerOutput, error) {
+func (c *ELB) DeregisterInstancesFromLoadBalancerWithContext(ctx aws.Context, input *DeregisterInstancesFromLoadBalancerInput, opts ...aws.Option) (*DeregisterInstancesFromLoadBalancerOutput, error) {
 	req, out := c.DeregisterInstancesFromLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1237,7 +1236,7 @@ func (c *ELB) DeregisterInstancesFromLoadBalancerWithContext(ctx aws.Context, in
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
 
-// DescribeAccountLimitsRequest generates a "aws/request.Request" representing the
+// DescribeAccountLimitsRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccountLimits operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1261,8 +1260,8 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimits
-func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *request.Request, output *DescribeAccountLimitsOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) (req *aws.Request, output *DescribeAccountLimitsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccountLimits,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1306,7 +1305,7 @@ func (c *ELB) DescribeAccountLimits(input *DescribeAccountLimitsInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...request.Option) (*DescribeAccountLimitsOutput, error) {
+func (c *ELB) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeAccountLimitsInput, opts ...aws.Option) (*DescribeAccountLimitsOutput, error) {
 	req, out := c.DescribeAccountLimitsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1315,7 +1314,7 @@ func (c *ELB) DescribeAccountLimitsWithContext(ctx aws.Context, input *DescribeA
 
 const opDescribeInstanceHealth = "DescribeInstanceHealth"
 
-// DescribeInstanceHealthRequest generates a "aws/request.Request" representing the
+// DescribeInstanceHealthRequest generates a "aws.Request" representing the
 // client's request for the DescribeInstanceHealth operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1339,8 +1338,8 @@ const opDescribeInstanceHealth = "DescribeInstanceHealth"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth
-func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) (req *request.Request, output *DescribeInstanceHealthOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) (req *aws.Request, output *DescribeInstanceHealthOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeInstanceHealth,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1393,7 +1392,7 @@ func (c *ELB) DescribeInstanceHealth(input *DescribeInstanceHealthInput) (*Descr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeInstanceHealthWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...request.Option) (*DescribeInstanceHealthOutput, error) {
+func (c *ELB) DescribeInstanceHealthWithContext(ctx aws.Context, input *DescribeInstanceHealthInput, opts ...aws.Option) (*DescribeInstanceHealthOutput, error) {
 	req, out := c.DescribeInstanceHealthRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1402,7 +1401,7 @@ func (c *ELB) DescribeInstanceHealthWithContext(ctx aws.Context, input *Describe
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 
-// DescribeLoadBalancerAttributesRequest generates a "aws/request.Request" representing the
+// DescribeLoadBalancerAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBalancerAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1426,8 +1425,8 @@ const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributes
-func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) (req *request.Request, output *DescribeLoadBalancerAttributesOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerAttributesInput) (req *aws.Request, output *DescribeLoadBalancerAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1475,7 +1474,7 @@ func (c *ELB) DescribeLoadBalancerAttributes(input *DescribeLoadBalancerAttribut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input *DescribeLoadBalancerAttributesInput, opts ...request.Option) (*DescribeLoadBalancerAttributesOutput, error) {
+func (c *ELB) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input *DescribeLoadBalancerAttributesInput, opts ...aws.Option) (*DescribeLoadBalancerAttributesOutput, error) {
 	req, out := c.DescribeLoadBalancerAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1484,7 +1483,7 @@ func (c *ELB) DescribeLoadBalancerAttributesWithContext(ctx aws.Context, input *
 
 const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
 
-// DescribeLoadBalancerPoliciesRequest generates a "aws/request.Request" representing the
+// DescribeLoadBalancerPoliciesRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBalancerPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1508,8 +1507,8 @@ const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicies
-func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPoliciesInput) (req *request.Request, output *DescribeLoadBalancerPoliciesOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPoliciesInput) (req *aws.Request, output *DescribeLoadBalancerPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerPolicies,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1564,7 +1563,7 @@ func (c *ELB) DescribeLoadBalancerPolicies(input *DescribeLoadBalancerPoliciesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancerPoliciesWithContext(ctx aws.Context, input *DescribeLoadBalancerPoliciesInput, opts ...request.Option) (*DescribeLoadBalancerPoliciesOutput, error) {
+func (c *ELB) DescribeLoadBalancerPoliciesWithContext(ctx aws.Context, input *DescribeLoadBalancerPoliciesInput, opts ...aws.Option) (*DescribeLoadBalancerPoliciesOutput, error) {
 	req, out := c.DescribeLoadBalancerPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1573,7 +1572,7 @@ func (c *ELB) DescribeLoadBalancerPoliciesWithContext(ctx aws.Context, input *De
 
 const opDescribeLoadBalancerPolicyTypes = "DescribeLoadBalancerPolicyTypes"
 
-// DescribeLoadBalancerPolicyTypesRequest generates a "aws/request.Request" representing the
+// DescribeLoadBalancerPolicyTypesRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBalancerPolicyTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1597,8 +1596,8 @@ const opDescribeLoadBalancerPolicyTypes = "DescribeLoadBalancerPolicyTypes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypes
-func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancerPolicyTypesInput) (req *request.Request, output *DescribeLoadBalancerPolicyTypesOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancerPolicyTypesInput) (req *aws.Request, output *DescribeLoadBalancerPolicyTypesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBalancerPolicyTypes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1654,7 +1653,7 @@ func (c *ELB) DescribeLoadBalancerPolicyTypes(input *DescribeLoadBalancerPolicyT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancerPolicyTypesWithContext(ctx aws.Context, input *DescribeLoadBalancerPolicyTypesInput, opts ...request.Option) (*DescribeLoadBalancerPolicyTypesOutput, error) {
+func (c *ELB) DescribeLoadBalancerPolicyTypesWithContext(ctx aws.Context, input *DescribeLoadBalancerPolicyTypesInput, opts ...aws.Option) (*DescribeLoadBalancerPolicyTypesOutput, error) {
 	req, out := c.DescribeLoadBalancerPolicyTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1663,7 +1662,7 @@ func (c *ELB) DescribeLoadBalancerPolicyTypesWithContext(ctx aws.Context, input 
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
 
-// DescribeLoadBalancersRequest generates a "aws/request.Request" representing the
+// DescribeLoadBalancersRequest generates a "aws.Request" representing the
 // client's request for the DescribeLoadBalancers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1687,12 +1686,12 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancers
-func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (req *request.Request, output *DescribeLoadBalancersOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) (req *aws.Request, output *DescribeLoadBalancersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeLoadBalancers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"NextMarker"},
 			LimitToken:      "",
@@ -1742,7 +1741,7 @@ func (c *ELB) DescribeLoadBalancers(input *DescribeLoadBalancersInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancersWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...request.Option) (*DescribeLoadBalancersOutput, error) {
+func (c *ELB) DescribeLoadBalancersWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, opts ...aws.Option) (*DescribeLoadBalancersOutput, error) {
 	req, out := c.DescribeLoadBalancersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1777,9 +1776,9 @@ func (c *ELB) DescribeLoadBalancersPages(input *DescribeLoadBalancersInput, fn f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
 			if input != nil {
 				tmp := *input
@@ -1801,7 +1800,7 @@ func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *Desc
 
 const opDescribeTags = "DescribeTags"
 
-// DescribeTagsRequest generates a "aws/request.Request" representing the
+// DescribeTagsRequest generates a "aws.Request" representing the
 // client's request for the DescribeTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1825,8 +1824,8 @@ const opDescribeTags = "DescribeTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTags
-func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) (req *request.Request, output *DescribeTagsOutput) {
-	op := &request.Operation{
+func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) (req *aws.Request, output *DescribeTagsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1871,7 +1870,7 @@ func (c *ELB) DescribeTags(input *DescribeTagsInput) (*DescribeTagsOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...request.Option) (*DescribeTagsOutput, error) {
+func (c *ELB) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput, opts ...aws.Option) (*DescribeTagsOutput, error) {
 	req, out := c.DescribeTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1880,7 +1879,7 @@ func (c *ELB) DescribeTagsWithContext(ctx aws.Context, input *DescribeTagsInput,
 
 const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
 
-// DetachLoadBalancerFromSubnetsRequest generates a "aws/request.Request" representing the
+// DetachLoadBalancerFromSubnetsRequest generates a "aws.Request" representing the
 // client's request for the DetachLoadBalancerFromSubnets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1904,8 +1903,8 @@ const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnets
-func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFromSubnetsInput) (req *request.Request, output *DetachLoadBalancerFromSubnetsOutput) {
-	op := &request.Operation{
+func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFromSubnetsInput) (req *aws.Request, output *DetachLoadBalancerFromSubnetsOutput) {
+	op := &aws.Operation{
 		Name:       opDetachLoadBalancerFromSubnets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1958,7 +1957,7 @@ func (c *ELB) DetachLoadBalancerFromSubnets(input *DetachLoadBalancerFromSubnets
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DetachLoadBalancerFromSubnetsWithContext(ctx aws.Context, input *DetachLoadBalancerFromSubnetsInput, opts ...request.Option) (*DetachLoadBalancerFromSubnetsOutput, error) {
+func (c *ELB) DetachLoadBalancerFromSubnetsWithContext(ctx aws.Context, input *DetachLoadBalancerFromSubnetsInput, opts ...aws.Option) (*DetachLoadBalancerFromSubnetsOutput, error) {
 	req, out := c.DetachLoadBalancerFromSubnetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1967,7 +1966,7 @@ func (c *ELB) DetachLoadBalancerFromSubnetsWithContext(ctx aws.Context, input *D
 
 const opDisableAvailabilityZonesForLoadBalancer = "DisableAvailabilityZonesForLoadBalancer"
 
-// DisableAvailabilityZonesForLoadBalancerRequest generates a "aws/request.Request" representing the
+// DisableAvailabilityZonesForLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the DisableAvailabilityZonesForLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1991,8 +1990,8 @@ const opDisableAvailabilityZonesForLoadBalancer = "DisableAvailabilityZonesForLo
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DisableAvailabilityZonesForLoadBalancer
-func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvailabilityZonesForLoadBalancerInput) (req *request.Request, output *DisableAvailabilityZonesForLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvailabilityZonesForLoadBalancerInput) (req *aws.Request, output *DisableAvailabilityZonesForLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opDisableAvailabilityZonesForLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2050,7 +2049,7 @@ func (c *ELB) DisableAvailabilityZonesForLoadBalancer(input *DisableAvailability
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) DisableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context, input *DisableAvailabilityZonesForLoadBalancerInput, opts ...request.Option) (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
+func (c *ELB) DisableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context, input *DisableAvailabilityZonesForLoadBalancerInput, opts ...aws.Option) (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
 	req, out := c.DisableAvailabilityZonesForLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2059,7 +2058,7 @@ func (c *ELB) DisableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context
 
 const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoadBalancer"
 
-// EnableAvailabilityZonesForLoadBalancerRequest generates a "aws/request.Request" representing the
+// EnableAvailabilityZonesForLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the EnableAvailabilityZonesForLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2083,8 +2082,8 @@ const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoad
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/EnableAvailabilityZonesForLoadBalancer
-func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailabilityZonesForLoadBalancerInput) (req *request.Request, output *EnableAvailabilityZonesForLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailabilityZonesForLoadBalancerInput) (req *aws.Request, output *EnableAvailabilityZonesForLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opEnableAvailabilityZonesForLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2136,7 +2135,7 @@ func (c *ELB) EnableAvailabilityZonesForLoadBalancer(input *EnableAvailabilityZo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) EnableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context, input *EnableAvailabilityZonesForLoadBalancerInput, opts ...request.Option) (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
+func (c *ELB) EnableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context, input *EnableAvailabilityZonesForLoadBalancerInput, opts ...aws.Option) (*EnableAvailabilityZonesForLoadBalancerOutput, error) {
 	req, out := c.EnableAvailabilityZonesForLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2145,7 +2144,7 @@ func (c *ELB) EnableAvailabilityZonesForLoadBalancerWithContext(ctx aws.Context,
 
 const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 
-// ModifyLoadBalancerAttributesRequest generates a "aws/request.Request" representing the
+// ModifyLoadBalancerAttributesRequest generates a "aws.Request" representing the
 // client's request for the ModifyLoadBalancerAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2169,8 +2168,8 @@ const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributes
-func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) (req *request.Request, output *ModifyLoadBalancerAttributesOutput) {
-	op := &request.Operation{
+func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttributesInput) (req *aws.Request, output *ModifyLoadBalancerAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opModifyLoadBalancerAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2236,7 +2235,7 @@ func (c *ELB) ModifyLoadBalancerAttributes(input *ModifyLoadBalancerAttributesIn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *ModifyLoadBalancerAttributesInput, opts ...request.Option) (*ModifyLoadBalancerAttributesOutput, error) {
+func (c *ELB) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *ModifyLoadBalancerAttributesInput, opts ...aws.Option) (*ModifyLoadBalancerAttributesOutput, error) {
 	req, out := c.ModifyLoadBalancerAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2245,7 +2244,7 @@ func (c *ELB) ModifyLoadBalancerAttributesWithContext(ctx aws.Context, input *Mo
 
 const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
 
-// RegisterInstancesWithLoadBalancerRequest generates a "aws/request.Request" representing the
+// RegisterInstancesWithLoadBalancerRequest generates a "aws.Request" representing the
 // client's request for the RegisterInstancesWithLoadBalancer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2269,8 +2268,8 @@ const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterInstancesWithLoadBalancer
-func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesWithLoadBalancerInput) (req *request.Request, output *RegisterInstancesWithLoadBalancerOutput) {
-	op := &request.Operation{
+func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesWithLoadBalancerInput) (req *aws.Request, output *RegisterInstancesWithLoadBalancerOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterInstancesWithLoadBalancer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2340,7 +2339,7 @@ func (c *ELB) RegisterInstancesWithLoadBalancer(input *RegisterInstancesWithLoad
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) RegisterInstancesWithLoadBalancerWithContext(ctx aws.Context, input *RegisterInstancesWithLoadBalancerInput, opts ...request.Option) (*RegisterInstancesWithLoadBalancerOutput, error) {
+func (c *ELB) RegisterInstancesWithLoadBalancerWithContext(ctx aws.Context, input *RegisterInstancesWithLoadBalancerInput, opts ...aws.Option) (*RegisterInstancesWithLoadBalancerOutput, error) {
 	req, out := c.RegisterInstancesWithLoadBalancerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2349,7 +2348,7 @@ func (c *ELB) RegisterInstancesWithLoadBalancerWithContext(ctx aws.Context, inpu
 
 const opRemoveTags = "RemoveTags"
 
-// RemoveTagsRequest generates a "aws/request.Request" representing the
+// RemoveTagsRequest generates a "aws.Request" representing the
 // client's request for the RemoveTags operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2373,8 +2372,8 @@ const opRemoveTags = "RemoveTags"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTags
-func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) (req *request.Request, output *RemoveTagsOutput) {
-	op := &request.Operation{
+func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) (req *aws.Request, output *RemoveTagsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveTags,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2419,7 +2418,7 @@ func (c *ELB) RemoveTags(input *RemoveTagsInput) (*RemoveTagsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...request.Option) (*RemoveTagsOutput, error) {
+func (c *ELB) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opts ...aws.Option) (*RemoveTagsOutput, error) {
 	req, out := c.RemoveTagsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2428,7 +2427,7 @@ func (c *ELB) RemoveTagsWithContext(ctx aws.Context, input *RemoveTagsInput, opt
 
 const opSetLoadBalancerListenerSSLCertificate = "SetLoadBalancerListenerSSLCertificate"
 
-// SetLoadBalancerListenerSSLCertificateRequest generates a "aws/request.Request" representing the
+// SetLoadBalancerListenerSSLCertificateRequest generates a "aws.Request" representing the
 // client's request for the SetLoadBalancerListenerSSLCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2452,8 +2451,8 @@ const opSetLoadBalancerListenerSSLCertificate = "SetLoadBalancerListenerSSLCerti
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificate
-func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalancerListenerSSLCertificateInput) (req *request.Request, output *SetLoadBalancerListenerSSLCertificateOutput) {
-	op := &request.Operation{
+func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalancerListenerSSLCertificateInput) (req *aws.Request, output *SetLoadBalancerListenerSSLCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opSetLoadBalancerListenerSSLCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2519,7 +2518,7 @@ func (c *ELB) SetLoadBalancerListenerSSLCertificate(input *SetLoadBalancerListen
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) SetLoadBalancerListenerSSLCertificateWithContext(ctx aws.Context, input *SetLoadBalancerListenerSSLCertificateInput, opts ...request.Option) (*SetLoadBalancerListenerSSLCertificateOutput, error) {
+func (c *ELB) SetLoadBalancerListenerSSLCertificateWithContext(ctx aws.Context, input *SetLoadBalancerListenerSSLCertificateInput, opts ...aws.Option) (*SetLoadBalancerListenerSSLCertificateOutput, error) {
 	req, out := c.SetLoadBalancerListenerSSLCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2528,7 +2527,7 @@ func (c *ELB) SetLoadBalancerListenerSSLCertificateWithContext(ctx aws.Context, 
 
 const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBackendServer"
 
-// SetLoadBalancerPoliciesForBackendServerRequest generates a "aws/request.Request" representing the
+// SetLoadBalancerPoliciesForBackendServerRequest generates a "aws.Request" representing the
 // client's request for the SetLoadBalancerPoliciesForBackendServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2552,8 +2551,8 @@ const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBac
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer
-func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalancerPoliciesForBackendServerInput) (req *request.Request, output *SetLoadBalancerPoliciesForBackendServerOutput) {
-	op := &request.Operation{
+func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalancerPoliciesForBackendServerInput) (req *aws.Request, output *SetLoadBalancerPoliciesForBackendServerOutput) {
+	op := &aws.Operation{
 		Name:       opSetLoadBalancerPoliciesForBackendServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2619,7 +2618,7 @@ func (c *ELB) SetLoadBalancerPoliciesForBackendServer(input *SetLoadBalancerPoli
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) SetLoadBalancerPoliciesForBackendServerWithContext(ctx aws.Context, input *SetLoadBalancerPoliciesForBackendServerInput, opts ...request.Option) (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
+func (c *ELB) SetLoadBalancerPoliciesForBackendServerWithContext(ctx aws.Context, input *SetLoadBalancerPoliciesForBackendServerInput, opts ...aws.Option) (*SetLoadBalancerPoliciesForBackendServerOutput, error) {
 	req, out := c.SetLoadBalancerPoliciesForBackendServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2628,7 +2627,7 @@ func (c *ELB) SetLoadBalancerPoliciesForBackendServerWithContext(ctx aws.Context
 
 const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
 
-// SetLoadBalancerPoliciesOfListenerRequest generates a "aws/request.Request" representing the
+// SetLoadBalancerPoliciesOfListenerRequest generates a "aws.Request" representing the
 // client's request for the SetLoadBalancerPoliciesOfListener operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2652,8 +2651,8 @@ const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListener
-func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPoliciesOfListenerInput) (req *request.Request, output *SetLoadBalancerPoliciesOfListenerOutput) {
-	op := &request.Operation{
+func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPoliciesOfListenerInput) (req *aws.Request, output *SetLoadBalancerPoliciesOfListenerOutput) {
+	op := &aws.Operation{
 		Name:       opSetLoadBalancerPoliciesOfListener,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2716,7 +2715,7 @@ func (c *ELB) SetLoadBalancerPoliciesOfListener(input *SetLoadBalancerPoliciesOf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ELB) SetLoadBalancerPoliciesOfListenerWithContext(ctx aws.Context, input *SetLoadBalancerPoliciesOfListenerInput, opts ...request.Option) (*SetLoadBalancerPoliciesOfListenerOutput, error) {
+func (c *ELB) SetLoadBalancerPoliciesOfListenerWithContext(ctx aws.Context, input *SetLoadBalancerPoliciesOfListenerInput, opts ...aws.Option) (*SetLoadBalancerPoliciesOfListenerOutput, error) {
 	req, out := c.SetLoadBalancerPoliciesOfListenerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2760,9 +2759,9 @@ func (s AccessLog) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AccessLog) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AccessLog"}
+	invalidParams := aws.ErrInvalidParams{Context: "AccessLog"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2823,15 +2822,15 @@ func (s AddTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddTagsInput"}
 	if s.LoadBalancerNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerNames"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -2839,7 +2838,7 @@ func (s *AddTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2976,12 +2975,12 @@ func (s ApplySecurityGroupsToLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ApplySecurityGroupsToLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ApplySecurityGroupsToLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ApplySecurityGroupsToLoadBalancerInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.SecurityGroups == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecurityGroups"))
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroups"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3056,12 +3055,12 @@ func (s AttachLoadBalancerToSubnetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachLoadBalancerToSubnetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachLoadBalancerToSubnetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachLoadBalancerToSubnetsInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.Subnets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subnets"))
+		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3169,16 +3168,16 @@ func (s ConfigureHealthCheckInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConfigureHealthCheckInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConfigureHealthCheckInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConfigureHealthCheckInput"}
 	if s.HealthCheck == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthCheck"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthCheck"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.HealthCheck != nil {
 		if err := s.HealthCheck.Validate(); err != nil {
-			invalidParams.AddNested("HealthCheck", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("HealthCheck", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3252,9 +3251,9 @@ func (s ConnectionDraining) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectionDraining) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConnectionDraining"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConnectionDraining"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3299,12 +3298,12 @@ func (s ConnectionSettings) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectionSettings) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConnectionSettings"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConnectionSettings"}
 	if s.IdleTimeout == nil {
-		invalidParams.Add(request.NewErrParamRequired("IdleTimeout"))
+		invalidParams.Add(aws.NewErrParamRequired("IdleTimeout"))
 	}
 	if s.IdleTimeout != nil && *s.IdleTimeout < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("IdleTimeout", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("IdleTimeout", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3354,15 +3353,15 @@ func (s CreateAppCookieStickinessPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateAppCookieStickinessPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateAppCookieStickinessPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAppCookieStickinessPolicyInput"}
 	if s.CookieName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CookieName"))
+		invalidParams.Add(aws.NewErrParamRequired("CookieName"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3441,12 +3440,12 @@ func (s CreateLBCookieStickinessPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLBCookieStickinessPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLBCookieStickinessPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLBCookieStickinessPolicyInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3558,15 +3557,15 @@ func (s CreateLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerInput"}
 	if s.Listeners == nil {
-		invalidParams.Add(request.NewErrParamRequired("Listeners"))
+		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Listeners != nil {
 		for i, v := range s.Listeners {
@@ -3574,7 +3573,7 @@ func (s *CreateLoadBalancerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3584,7 +3583,7 @@ func (s *CreateLoadBalancerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3665,12 +3664,12 @@ func (s CreateLoadBalancerListenersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerListenersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLoadBalancerListenersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerListenersInput"}
 	if s.Listeners == nil {
-		invalidParams.Add(request.NewErrParamRequired("Listeners"))
+		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.Listeners != nil {
 		for i, v := range s.Listeners {
@@ -3678,7 +3677,7 @@ func (s *CreateLoadBalancerListenersInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3779,15 +3778,15 @@ func (s CreateLoadBalancerPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLoadBalancerPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLoadBalancerPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLoadBalancerPolicyInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyTypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyTypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyTypeName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3859,9 +3858,9 @@ func (s CrossZoneLoadBalancing) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CrossZoneLoadBalancing) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CrossZoneLoadBalancing"}
+	invalidParams := aws.ErrInvalidParams{Context: "CrossZoneLoadBalancing"}
 	if s.Enabled == nil {
-		invalidParams.Add(request.NewErrParamRequired("Enabled"))
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3899,9 +3898,9 @@ func (s DeleteLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3944,12 +3943,12 @@ func (s DeleteLoadBalancerListenersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerListenersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLoadBalancerListenersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerListenersInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.LoadBalancerPorts == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerPorts"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPorts"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4030,12 +4029,12 @@ func (s DeleteLoadBalancerPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLoadBalancerPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLoadBalancerPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLoadBalancerPolicyInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4100,12 +4099,12 @@ func (s DeregisterInstancesFromLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeregisterInstancesFromLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeregisterInstancesFromLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterInstancesFromLoadBalancerInput"}
 	if s.Instances == nil {
-		invalidParams.Add(request.NewErrParamRequired("Instances"))
+		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4175,9 +4174,9 @@ func (s DescribeAccountLimitsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeAccountLimitsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeAccountLimitsInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4258,9 +4257,9 @@ func (s DescribeInstanceHealthInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeInstanceHealthInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeInstanceHealthInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeInstanceHealthInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4329,9 +4328,9 @@ func (s DescribeLoadBalancerAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancerAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancerAttributesInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4510,9 +4509,9 @@ func (s DescribeLoadBalancersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeLoadBalancersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeLoadBalancersInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4597,12 +4596,12 @@ func (s DescribeTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeTagsInput"}
 	if s.LoadBalancerNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerNames"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
 	if s.LoadBalancerNames != nil && len(s.LoadBalancerNames) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LoadBalancerNames", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LoadBalancerNames", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4670,12 +4669,12 @@ func (s DetachLoadBalancerFromSubnetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachLoadBalancerFromSubnetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachLoadBalancerFromSubnetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachLoadBalancerFromSubnetsInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.Subnets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Subnets"))
+		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4749,12 +4748,12 @@ func (s DisableAvailabilityZonesForLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableAvailabilityZonesForLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableAvailabilityZonesForLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableAvailabilityZonesForLoadBalancerInput"}
 	if s.AvailabilityZones == nil {
-		invalidParams.Add(request.NewErrParamRequired("AvailabilityZones"))
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZones"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4828,12 +4827,12 @@ func (s EnableAvailabilityZonesForLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableAvailabilityZonesForLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableAvailabilityZonesForLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableAvailabilityZonesForLoadBalancerInput"}
 	if s.AvailabilityZones == nil {
-		invalidParams.Add(request.NewErrParamRequired("AvailabilityZones"))
+		invalidParams.Add(aws.NewErrParamRequired("AvailabilityZones"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4945,33 +4944,33 @@ func (s HealthCheck) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *HealthCheck) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "HealthCheck"}
+	invalidParams := aws.ErrInvalidParams{Context: "HealthCheck"}
 	if s.HealthyThreshold == nil {
-		invalidParams.Add(request.NewErrParamRequired("HealthyThreshold"))
+		invalidParams.Add(aws.NewErrParamRequired("HealthyThreshold"))
 	}
 	if s.HealthyThreshold != nil && *s.HealthyThreshold < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("HealthyThreshold", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("HealthyThreshold", 2))
 	}
 	if s.Interval == nil {
-		invalidParams.Add(request.NewErrParamRequired("Interval"))
+		invalidParams.Add(aws.NewErrParamRequired("Interval"))
 	}
 	if s.Interval != nil && *s.Interval < 5 {
-		invalidParams.Add(request.NewErrParamMinValue("Interval", 5))
+		invalidParams.Add(aws.NewErrParamMinValue("Interval", 5))
 	}
 	if s.Target == nil {
-		invalidParams.Add(request.NewErrParamRequired("Target"))
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
 	}
 	if s.Timeout == nil {
-		invalidParams.Add(request.NewErrParamRequired("Timeout"))
+		invalidParams.Add(aws.NewErrParamRequired("Timeout"))
 	}
 	if s.Timeout != nil && *s.Timeout < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("Timeout", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 2))
 	}
 	if s.UnhealthyThreshold == nil {
-		invalidParams.Add(request.NewErrParamRequired("UnhealthyThreshold"))
+		invalidParams.Add(aws.NewErrParamRequired("UnhealthyThreshold"))
 	}
 	if s.UnhealthyThreshold != nil && *s.UnhealthyThreshold < 2 {
-		invalidParams.Add(request.NewErrParamMinValue("UnhealthyThreshold", 2))
+		invalidParams.Add(aws.NewErrParamMinValue("UnhealthyThreshold", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5251,18 +5250,18 @@ func (s Listener) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Listener) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Listener"}
+	invalidParams := aws.ErrInvalidParams{Context: "Listener"}
 	if s.InstancePort == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstancePort"))
+		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
 	}
 	if s.InstancePort != nil && *s.InstancePort < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("InstancePort", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("InstancePort", 1))
 	}
 	if s.LoadBalancerPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerPort"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
 	}
 	if s.Protocol == nil {
-		invalidParams.Add(request.NewErrParamRequired("Protocol"))
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5386,25 +5385,25 @@ func (s LoadBalancerAttributes) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoadBalancerAttributes) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LoadBalancerAttributes"}
+	invalidParams := aws.ErrInvalidParams{Context: "LoadBalancerAttributes"}
 	if s.AccessLog != nil {
 		if err := s.AccessLog.Validate(); err != nil {
-			invalidParams.AddNested("AccessLog", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("AccessLog", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ConnectionDraining != nil {
 		if err := s.ConnectionDraining.Validate(); err != nil {
-			invalidParams.AddNested("ConnectionDraining", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConnectionDraining", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ConnectionSettings != nil {
 		if err := s.ConnectionSettings.Validate(); err != nil {
-			invalidParams.AddNested("ConnectionSettings", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConnectionSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CrossZoneLoadBalancing != nil {
 		if err := s.CrossZoneLoadBalancing.Validate(); err != nil {
-			invalidParams.AddNested("CrossZoneLoadBalancing", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CrossZoneLoadBalancing", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5645,16 +5644,16 @@ func (s ModifyLoadBalancerAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ModifyLoadBalancerAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyLoadBalancerAttributesInput"}
 	if s.LoadBalancerAttributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerAttributes"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerAttributes"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.LoadBalancerAttributes != nil {
 		if err := s.LoadBalancerAttributes.Validate(); err != nil {
-			invalidParams.AddNested("LoadBalancerAttributes", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LoadBalancerAttributes", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6007,12 +6006,12 @@ func (s RegisterInstancesWithLoadBalancerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterInstancesWithLoadBalancerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterInstancesWithLoadBalancerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterInstancesWithLoadBalancerInput"}
 	if s.Instances == nil {
-		invalidParams.Add(request.NewErrParamRequired("Instances"))
+		invalidParams.Add(aws.NewErrParamRequired("Instances"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6087,15 +6086,15 @@ func (s RemoveTagsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveTagsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveTagsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveTagsInput"}
 	if s.LoadBalancerNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerNames"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerNames"))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
@@ -6103,7 +6102,7 @@ func (s *RemoveTagsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -6175,15 +6174,15 @@ func (s SetLoadBalancerListenerSSLCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBalancerListenerSSLCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetLoadBalancerListenerSSLCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerListenerSSLCertificateInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.LoadBalancerPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerPort"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
 	}
 	if s.SSLCertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SSLCertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("SSLCertificateId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6260,15 +6259,15 @@ func (s SetLoadBalancerPoliciesForBackendServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBalancerPoliciesForBackendServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetLoadBalancerPoliciesForBackendServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerPoliciesForBackendServerInput"}
 	if s.InstancePort == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstancePort"))
+		invalidParams.Add(aws.NewErrParamRequired("InstancePort"))
 	}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.PolicyNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyNames"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6346,15 +6345,15 @@ func (s SetLoadBalancerPoliciesOfListenerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoadBalancerPoliciesOfListenerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetLoadBalancerPoliciesOfListenerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetLoadBalancerPoliciesOfListenerInput"}
 	if s.LoadBalancerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerName"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerName"))
 	}
 	if s.LoadBalancerPort == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoadBalancerPort"))
+		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerPort"))
 	}
 	if s.PolicyNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyNames"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyNames"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6457,12 +6456,12 @@ func (s Tag) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Tag) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Tag"}
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6538,9 +6537,9 @@ func (s TagKeyOnly) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagKeyOnly) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagKeyOnly"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagKeyOnly"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {

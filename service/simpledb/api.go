@@ -6,15 +6,14 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/query"
 )
 
 const opBatchDeleteAttributes = "BatchDeleteAttributes"
 
-// BatchDeleteAttributesRequest generates a "aws/request.Request" representing the
+// BatchDeleteAttributesRequest generates a "aws.Request" representing the
 // client's request for the BatchDeleteAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opBatchDeleteAttributes = "BatchDeleteAttributes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput) (req *request.Request, output *BatchDeleteAttributesOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInput) (req *aws.Request, output *BatchDeleteAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opBatchDeleteAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -101,7 +100,7 @@ func (c *SimpleDB) BatchDeleteAttributes(input *BatchDeleteAttributesInput) (*Ba
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) BatchDeleteAttributesWithContext(ctx aws.Context, input *BatchDeleteAttributesInput, opts ...request.Option) (*BatchDeleteAttributesOutput, error) {
+func (c *SimpleDB) BatchDeleteAttributesWithContext(ctx aws.Context, input *BatchDeleteAttributesInput, opts ...aws.Option) (*BatchDeleteAttributesOutput, error) {
 	req, out := c.BatchDeleteAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -110,7 +109,7 @@ func (c *SimpleDB) BatchDeleteAttributesWithContext(ctx aws.Context, input *Batc
 
 const opBatchPutAttributes = "BatchPutAttributes"
 
-// BatchPutAttributesRequest generates a "aws/request.Request" representing the
+// BatchPutAttributesRequest generates a "aws.Request" representing the
 // client's request for the BatchPutAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -132,8 +131,8 @@ const opBatchPutAttributes = "BatchPutAttributes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (req *request.Request, output *BatchPutAttributesOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) (req *aws.Request, output *BatchPutAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opBatchPutAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -245,7 +244,7 @@ func (c *SimpleDB) BatchPutAttributes(input *BatchPutAttributesInput) (*BatchPut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) BatchPutAttributesWithContext(ctx aws.Context, input *BatchPutAttributesInput, opts ...request.Option) (*BatchPutAttributesOutput, error) {
+func (c *SimpleDB) BatchPutAttributesWithContext(ctx aws.Context, input *BatchPutAttributesInput, opts ...aws.Option) (*BatchPutAttributesOutput, error) {
 	req, out := c.BatchPutAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -254,7 +253,7 @@ func (c *SimpleDB) BatchPutAttributesWithContext(ctx aws.Context, input *BatchPu
 
 const opCreateDomain = "CreateDomain"
 
-// CreateDomainRequest generates a "aws/request.Request" representing the
+// CreateDomainRequest generates a "aws.Request" representing the
 // client's request for the CreateDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -276,8 +275,8 @@ const opCreateDomain = "CreateDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *request.Request, output *CreateDomainOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) (req *aws.Request, output *CreateDomainOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -337,7 +336,7 @@ func (c *SimpleDB) CreateDomain(input *CreateDomainInput) (*CreateDomainOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...request.Option) (*CreateDomainOutput, error) {
+func (c *SimpleDB) CreateDomainWithContext(ctx aws.Context, input *CreateDomainInput, opts ...aws.Option) (*CreateDomainOutput, error) {
 	req, out := c.CreateDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -346,7 +345,7 @@ func (c *SimpleDB) CreateDomainWithContext(ctx aws.Context, input *CreateDomainI
 
 const opDeleteAttributes = "DeleteAttributes"
 
-// DeleteAttributesRequest generates a "aws/request.Request" representing the
+// DeleteAttributesRequest generates a "aws.Request" representing the
 // client's request for the DeleteAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -368,8 +367,8 @@ const opDeleteAttributes = "DeleteAttributes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *request.Request, output *DeleteAttributesOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) (req *aws.Request, output *DeleteAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -434,7 +433,7 @@ func (c *SimpleDB) DeleteAttributes(input *DeleteAttributesInput) (*DeleteAttrib
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttributesInput, opts ...request.Option) (*DeleteAttributesOutput, error) {
+func (c *SimpleDB) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAttributesInput, opts ...aws.Option) (*DeleteAttributesOutput, error) {
 	req, out := c.DeleteAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -443,7 +442,7 @@ func (c *SimpleDB) DeleteAttributesWithContext(ctx aws.Context, input *DeleteAtt
 
 const opDeleteDomain = "DeleteDomain"
 
-// DeleteDomainRequest generates a "aws/request.Request" representing the
+// DeleteDomainRequest generates a "aws.Request" representing the
 // client's request for the DeleteDomain operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -465,8 +464,8 @@ const opDeleteDomain = "DeleteDomain"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *request.Request, output *DeleteDomainOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) (req *aws.Request, output *DeleteDomainOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDomain,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -517,7 +516,7 @@ func (c *SimpleDB) DeleteDomain(input *DeleteDomainInput) (*DeleteDomainOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...request.Option) (*DeleteDomainOutput, error) {
+func (c *SimpleDB) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainInput, opts ...aws.Option) (*DeleteDomainOutput, error) {
 	req, out := c.DeleteDomainRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -526,7 +525,7 @@ func (c *SimpleDB) DeleteDomainWithContext(ctx aws.Context, input *DeleteDomainI
 
 const opDomainMetadata = "DomainMetadata"
 
-// DomainMetadataRequest generates a "aws/request.Request" representing the
+// DomainMetadataRequest generates a "aws.Request" representing the
 // client's request for the DomainMetadata operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -548,8 +547,8 @@ const opDomainMetadata = "DomainMetadata"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) (req *request.Request, output *DomainMetadataOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) (req *aws.Request, output *DomainMetadataOutput) {
+	op := &aws.Operation{
 		Name:       opDomainMetadata,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -598,7 +597,7 @@ func (c *SimpleDB) DomainMetadata(input *DomainMetadataInput) (*DomainMetadataOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) DomainMetadataWithContext(ctx aws.Context, input *DomainMetadataInput, opts ...request.Option) (*DomainMetadataOutput, error) {
+func (c *SimpleDB) DomainMetadataWithContext(ctx aws.Context, input *DomainMetadataInput, opts ...aws.Option) (*DomainMetadataOutput, error) {
 	req, out := c.DomainMetadataRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -607,7 +606,7 @@ func (c *SimpleDB) DomainMetadataWithContext(ctx aws.Context, input *DomainMetad
 
 const opGetAttributes = "GetAttributes"
 
-// GetAttributesRequest generates a "aws/request.Request" representing the
+// GetAttributesRequest generates a "aws.Request" representing the
 // client's request for the GetAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -629,8 +628,8 @@ const opGetAttributes = "GetAttributes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *request.Request, output *GetAttributesOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) (req *aws.Request, output *GetAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opGetAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -689,7 +688,7 @@ func (c *SimpleDB) GetAttributes(input *GetAttributesInput) (*GetAttributesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) GetAttributesWithContext(ctx aws.Context, input *GetAttributesInput, opts ...request.Option) (*GetAttributesOutput, error) {
+func (c *SimpleDB) GetAttributesWithContext(ctx aws.Context, input *GetAttributesInput, opts ...aws.Option) (*GetAttributesOutput, error) {
 	req, out := c.GetAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -698,7 +697,7 @@ func (c *SimpleDB) GetAttributesWithContext(ctx aws.Context, input *GetAttribute
 
 const opListDomains = "ListDomains"
 
-// ListDomainsRequest generates a "aws/request.Request" representing the
+// ListDomainsRequest generates a "aws.Request" representing the
 // client's request for the ListDomains operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -720,12 +719,12 @@ const opListDomains = "ListDomains"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) (req *request.Request, output *ListDomainsOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) (req *aws.Request, output *ListDomainsOutput) {
+	op := &aws.Operation{
 		Name:       opListDomains,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxNumberOfDomains",
@@ -779,7 +778,7 @@ func (c *SimpleDB) ListDomains(input *ListDomainsInput) (*ListDomainsOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...request.Option) (*ListDomainsOutput, error) {
+func (c *SimpleDB) ListDomainsWithContext(ctx aws.Context, input *ListDomainsInput, opts ...aws.Option) (*ListDomainsOutput, error) {
 	req, out := c.ListDomainsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -814,9 +813,9 @@ func (c *SimpleDB) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomain
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDomainsInput
 			if input != nil {
 				tmp := *input
@@ -838,7 +837,7 @@ func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomai
 
 const opPutAttributes = "PutAttributes"
 
-// PutAttributesRequest generates a "aws/request.Request" representing the
+// PutAttributesRequest generates a "aws.Request" representing the
 // client's request for the PutAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -860,8 +859,8 @@ const opPutAttributes = "PutAttributes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *request.Request, output *PutAttributesOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) (req *aws.Request, output *PutAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opPutAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -955,7 +954,7 @@ func (c *SimpleDB) PutAttributes(input *PutAttributesInput) (*PutAttributesOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInput, opts ...request.Option) (*PutAttributesOutput, error) {
+func (c *SimpleDB) PutAttributesWithContext(ctx aws.Context, input *PutAttributesInput, opts ...aws.Option) (*PutAttributesOutput, error) {
 	req, out := c.PutAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -964,7 +963,7 @@ func (c *SimpleDB) PutAttributesWithContext(ctx aws.Context, input *PutAttribute
 
 const opSelect = "Select"
 
-// SelectRequest generates a "aws/request.Request" representing the
+// SelectRequest generates a "aws.Request" representing the
 // client's request for the Select operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -986,12 +985,12 @@ const opSelect = "Select"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *SimpleDB) SelectRequest(input *SelectInput) (req *request.Request, output *SelectOutput) {
-	op := &request.Operation{
+func (c *SimpleDB) SelectRequest(input *SelectInput) (req *aws.Request, output *SelectOutput) {
+	op := &aws.Operation{
 		Name:       opSelect,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "",
@@ -1072,7 +1071,7 @@ func (c *SimpleDB) Select(input *SelectInput) (*SelectOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) SelectWithContext(ctx aws.Context, input *SelectInput, opts ...request.Option) (*SelectOutput, error) {
+func (c *SimpleDB) SelectWithContext(ctx aws.Context, input *SelectInput, opts ...aws.Option) (*SelectOutput, error) {
 	req, out := c.SelectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1107,9 +1106,9 @@ func (c *SimpleDB) SelectPages(input *SelectInput, fn func(*SelectOutput, bool) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *SimpleDB) SelectPagesWithContext(ctx aws.Context, input *SelectInput, fn func(*SelectOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *SimpleDB) SelectPagesWithContext(ctx aws.Context, input *SelectInput, fn func(*SelectOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *SelectInput
 			if input != nil {
 				tmp := *input
@@ -1207,12 +1206,12 @@ func (s BatchDeleteAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteAttributesInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -1220,7 +1219,7 @@ func (s *BatchDeleteAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1283,12 +1282,12 @@ func (s BatchPutAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchPutAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchPutAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchPutAttributesInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.Items == nil {
-		invalidParams.Add(request.NewErrParamRequired("Items"))
+		invalidParams.Add(aws.NewErrParamRequired("Items"))
 	}
 	if s.Items != nil {
 		for i, v := range s.Items {
@@ -1296,7 +1295,7 @@ func (s *BatchPutAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1355,9 +1354,9 @@ func (s CreateDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1410,9 +1409,9 @@ func (s DeletableAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletableAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletableAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletableAttribute"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1454,9 +1453,9 @@ func (s DeletableItem) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletableItem) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletableItem"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletableItem"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -1464,7 +1463,7 @@ func (s *DeletableItem) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1523,12 +1522,12 @@ func (s DeleteAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAttributesInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.ItemName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ItemName"))
+		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -1536,7 +1535,7 @@ func (s *DeleteAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -1606,9 +1605,9 @@ func (s DeleteDomainInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDomainInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDomainInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDomainInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1658,9 +1657,9 @@ func (s DomainMetadataInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DomainMetadataInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DomainMetadataInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DomainMetadataInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1785,12 +1784,12 @@ func (s GetAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetAttributesInput"}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.ItemName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ItemName"))
+		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1993,15 +1992,15 @@ func (s PutAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutAttributesInput"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.DomainName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainName"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
 	}
 	if s.ItemName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ItemName"))
+		invalidParams.Add(aws.NewErrParamRequired("ItemName"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -2009,7 +2008,7 @@ func (s *PutAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2088,12 +2087,12 @@ func (s ReplaceableAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceableAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReplaceableAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReplaceableAttribute"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2146,12 +2145,12 @@ func (s ReplaceableItem) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceableItem) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReplaceableItem"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReplaceableItem"}
 	if s.Attributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("Attributes"))
+		invalidParams.Add(aws.NewErrParamRequired("Attributes"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
@@ -2159,7 +2158,7 @@ func (s *ReplaceableItem) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Attributes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2210,9 +2209,9 @@ func (s SelectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SelectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SelectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SelectInput"}
 	if s.SelectExpression == nil {
-		invalidParams.Add(request.NewErrParamRequired("SelectExpression"))
+		invalidParams.Add(aws.NewErrParamRequired("SelectExpression"))
 	}
 
 	if invalidParams.Len() > 0 {

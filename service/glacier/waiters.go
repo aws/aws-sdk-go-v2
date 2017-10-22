@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilVaultExists uses the Amazon Glacier API operation
@@ -25,25 +24,25 @@ func (c *Glacier) WaitUntilVaultExists(input *DescribeVaultInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) WaitUntilVaultExistsWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Glacier) WaitUntilVaultExistsWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVaultExists",
 		MaxAttempts: 15,
-		Delay:       request.ConstantWaiterDelay(3 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(3 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ResourceNotFoundException",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVaultInput
 			if input != nil {
 				tmp := *input
@@ -76,25 +75,25 @@ func (c *Glacier) WaitUntilVaultNotExists(input *DescribeVaultInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glacier) WaitUntilVaultNotExistsWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *Glacier) WaitUntilVaultNotExistsWithContext(ctx aws.Context, input *DescribeVaultInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilVaultNotExists",
 		MaxAttempts: 15,
-		Delay:       request.ConstantWaiterDelay(3 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(3 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:    request.RetryWaiterState,
-				Matcher:  request.StatusWaiterMatch,
+				State:    aws.RetryWaiterState,
+				Matcher:  aws.StatusWaiterMatch,
 				Expected: 200,
 			},
 			{
-				State:    request.SuccessWaiterState,
-				Matcher:  request.ErrorWaiterMatch,
+				State:    aws.SuccessWaiterState,
+				Matcher:  aws.ErrorWaiterMatch,
 				Expected: "ResourceNotFoundException",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeVaultInput
 			if input != nil {
 				tmp := *input

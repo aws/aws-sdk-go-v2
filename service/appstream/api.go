@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateFleet = "AssociateFleet"
 
-// AssociateFleetRequest generates a "aws/request.Request" representing the
+// AssociateFleetRequest generates a "aws.Request" representing the
 // client's request for the AssociateFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAssociateFleet = "AssociateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleet
-func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) (req *request.Request, output *AssociateFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) (req *aws.Request, output *AssociateFleetOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -95,7 +94,7 @@ func (c *AppStream) AssociateFleet(input *AssociateFleetInput) (*AssociateFleetO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) AssociateFleetWithContext(ctx aws.Context, input *AssociateFleetInput, opts ...request.Option) (*AssociateFleetOutput, error) {
+func (c *AppStream) AssociateFleetWithContext(ctx aws.Context, input *AssociateFleetInput, opts ...aws.Option) (*AssociateFleetOutput, error) {
 	req, out := c.AssociateFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -104,7 +103,7 @@ func (c *AppStream) AssociateFleetWithContext(ctx aws.Context, input *AssociateF
 
 const opCreateDirectoryConfig = "CreateDirectoryConfig"
 
-// CreateDirectoryConfigRequest generates a "aws/request.Request" representing the
+// CreateDirectoryConfigRequest generates a "aws.Request" representing the
 // client's request for the CreateDirectoryConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -128,8 +127,8 @@ const opCreateDirectoryConfig = "CreateDirectoryConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfig
-func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput) (req *request.Request, output *CreateDirectoryConfigOutput) {
-	op := &request.Operation{
+func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInput) (req *aws.Request, output *CreateDirectoryConfigOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDirectoryConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -177,7 +176,7 @@ func (c *AppStream) CreateDirectoryConfig(input *CreateDirectoryConfigInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) CreateDirectoryConfigWithContext(ctx aws.Context, input *CreateDirectoryConfigInput, opts ...request.Option) (*CreateDirectoryConfigOutput, error) {
+func (c *AppStream) CreateDirectoryConfigWithContext(ctx aws.Context, input *CreateDirectoryConfigInput, opts ...aws.Option) (*CreateDirectoryConfigOutput, error) {
 	req, out := c.CreateDirectoryConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -186,7 +185,7 @@ func (c *AppStream) CreateDirectoryConfigWithContext(ctx aws.Context, input *Cre
 
 const opCreateFleet = "CreateFleet"
 
-// CreateFleetRequest generates a "aws/request.Request" representing the
+// CreateFleetRequest generates a "aws.Request" representing the
 // client's request for the CreateFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -210,8 +209,8 @@ const opCreateFleet = "CreateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet
-func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) (req *request.Request, output *CreateFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) (req *aws.Request, output *CreateFleetOutput) {
+	op := &aws.Operation{
 		Name:       opCreateFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -277,7 +276,7 @@ func (c *AppStream) CreateFleet(input *CreateFleetInput) (*CreateFleetOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInput, opts ...request.Option) (*CreateFleetOutput, error) {
+func (c *AppStream) CreateFleetWithContext(ctx aws.Context, input *CreateFleetInput, opts ...aws.Option) (*CreateFleetOutput, error) {
 	req, out := c.CreateFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -286,7 +285,7 @@ func (c *AppStream) CreateFleetWithContext(ctx aws.Context, input *CreateFleetIn
 
 const opCreateImageBuilder = "CreateImageBuilder"
 
-// CreateImageBuilderRequest generates a "aws/request.Request" representing the
+// CreateImageBuilderRequest generates a "aws.Request" representing the
 // client's request for the CreateImageBuilder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -310,8 +309,8 @@ const opCreateImageBuilder = "CreateImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder
-func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) (req *request.Request, output *CreateImageBuilderOutput) {
-	op := &request.Operation{
+func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) (req *aws.Request, output *CreateImageBuilderOutput) {
+	op := &aws.Operation{
 		Name:       opCreateImageBuilder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -375,7 +374,7 @@ func (c *AppStream) CreateImageBuilder(input *CreateImageBuilderInput) (*CreateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) CreateImageBuilderWithContext(ctx aws.Context, input *CreateImageBuilderInput, opts ...request.Option) (*CreateImageBuilderOutput, error) {
+func (c *AppStream) CreateImageBuilderWithContext(ctx aws.Context, input *CreateImageBuilderInput, opts ...aws.Option) (*CreateImageBuilderOutput, error) {
 	req, out := c.CreateImageBuilderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -384,7 +383,7 @@ func (c *AppStream) CreateImageBuilderWithContext(ctx aws.Context, input *Create
 
 const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
 
-// CreateImageBuilderStreamingURLRequest generates a "aws/request.Request" representing the
+// CreateImageBuilderStreamingURLRequest generates a "aws.Request" representing the
 // client's request for the CreateImageBuilderStreamingURL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -408,8 +407,8 @@ const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURL
-func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilderStreamingURLInput) (req *request.Request, output *CreateImageBuilderStreamingURLOutput) {
-	op := &request.Operation{
+func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuilderStreamingURLInput) (req *aws.Request, output *CreateImageBuilderStreamingURLOutput) {
+	op := &aws.Operation{
 		Name:       opCreateImageBuilderStreamingURL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -455,7 +454,7 @@ func (c *AppStream) CreateImageBuilderStreamingURL(input *CreateImageBuilderStre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) CreateImageBuilderStreamingURLWithContext(ctx aws.Context, input *CreateImageBuilderStreamingURLInput, opts ...request.Option) (*CreateImageBuilderStreamingURLOutput, error) {
+func (c *AppStream) CreateImageBuilderStreamingURLWithContext(ctx aws.Context, input *CreateImageBuilderStreamingURLInput, opts ...aws.Option) (*CreateImageBuilderStreamingURLOutput, error) {
 	req, out := c.CreateImageBuilderStreamingURLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -464,7 +463,7 @@ func (c *AppStream) CreateImageBuilderStreamingURLWithContext(ctx aws.Context, i
 
 const opCreateStack = "CreateStack"
 
-// CreateStackRequest generates a "aws/request.Request" representing the
+// CreateStackRequest generates a "aws.Request" representing the
 // client's request for the CreateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -488,8 +487,8 @@ const opCreateStack = "CreateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack
-func (c *AppStream) CreateStackRequest(input *CreateStackInput) (req *request.Request, output *CreateStackOutput) {
-	op := &request.Operation{
+func (c *AppStream) CreateStackRequest(input *CreateStackInput) (req *aws.Request, output *CreateStackOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -549,7 +548,7 @@ func (c *AppStream) CreateStack(input *CreateStackInput) (*CreateStackOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...request.Option) (*CreateStackOutput, error) {
+func (c *AppStream) CreateStackWithContext(ctx aws.Context, input *CreateStackInput, opts ...aws.Option) (*CreateStackOutput, error) {
 	req, out := c.CreateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -558,7 +557,7 @@ func (c *AppStream) CreateStackWithContext(ctx aws.Context, input *CreateStackIn
 
 const opCreateStreamingURL = "CreateStreamingURL"
 
-// CreateStreamingURLRequest generates a "aws/request.Request" representing the
+// CreateStreamingURLRequest generates a "aws.Request" representing the
 // client's request for the CreateStreamingURL operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -582,8 +581,8 @@ const opCreateStreamingURL = "CreateStreamingURL"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURL
-func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) (req *request.Request, output *CreateStreamingURLOutput) {
-	op := &request.Operation{
+func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) (req *aws.Request, output *CreateStreamingURLOutput) {
+	op := &aws.Operation{
 		Name:       opCreateStreamingURL,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -640,7 +639,7 @@ func (c *AppStream) CreateStreamingURL(input *CreateStreamingURLInput) (*CreateS
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) CreateStreamingURLWithContext(ctx aws.Context, input *CreateStreamingURLInput, opts ...request.Option) (*CreateStreamingURLOutput, error) {
+func (c *AppStream) CreateStreamingURLWithContext(ctx aws.Context, input *CreateStreamingURLInput, opts ...aws.Option) (*CreateStreamingURLOutput, error) {
 	req, out := c.CreateStreamingURLRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -649,7 +648,7 @@ func (c *AppStream) CreateStreamingURLWithContext(ctx aws.Context, input *Create
 
 const opDeleteDirectoryConfig = "DeleteDirectoryConfig"
 
-// DeleteDirectoryConfigRequest generates a "aws/request.Request" representing the
+// DeleteDirectoryConfigRequest generates a "aws.Request" representing the
 // client's request for the DeleteDirectoryConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -673,8 +672,8 @@ const opDeleteDirectoryConfig = "DeleteDirectoryConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfig
-func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInput) (req *request.Request, output *DeleteDirectoryConfigOutput) {
-	op := &request.Operation{
+func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInput) (req *aws.Request, output *DeleteDirectoryConfigOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDirectoryConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -722,7 +721,7 @@ func (c *AppStream) DeleteDirectoryConfig(input *DeleteDirectoryConfigInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DeleteDirectoryConfigWithContext(ctx aws.Context, input *DeleteDirectoryConfigInput, opts ...request.Option) (*DeleteDirectoryConfigOutput, error) {
+func (c *AppStream) DeleteDirectoryConfigWithContext(ctx aws.Context, input *DeleteDirectoryConfigInput, opts ...aws.Option) (*DeleteDirectoryConfigOutput, error) {
 	req, out := c.DeleteDirectoryConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -731,7 +730,7 @@ func (c *AppStream) DeleteDirectoryConfigWithContext(ctx aws.Context, input *Del
 
 const opDeleteFleet = "DeleteFleet"
 
-// DeleteFleetRequest generates a "aws/request.Request" representing the
+// DeleteFleetRequest generates a "aws.Request" representing the
 // client's request for the DeleteFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -755,8 +754,8 @@ const opDeleteFleet = "DeleteFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleet
-func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) (req *request.Request, output *DeleteFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) (req *aws.Request, output *DeleteFleetOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -807,7 +806,7 @@ func (c *AppStream) DeleteFleet(input *DeleteFleetInput) (*DeleteFleetOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInput, opts ...request.Option) (*DeleteFleetOutput, error) {
+func (c *AppStream) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetInput, opts ...aws.Option) (*DeleteFleetOutput, error) {
 	req, out := c.DeleteFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -816,7 +815,7 @@ func (c *AppStream) DeleteFleetWithContext(ctx aws.Context, input *DeleteFleetIn
 
 const opDeleteImage = "DeleteImage"
 
-// DeleteImageRequest generates a "aws/request.Request" representing the
+// DeleteImageRequest generates a "aws.Request" representing the
 // client's request for the DeleteImage operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -840,8 +839,8 @@ const opDeleteImage = "DeleteImage"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage
-func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) (req *request.Request, output *DeleteImageOutput) {
-	op := &request.Operation{
+func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) (req *aws.Request, output *DeleteImageOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteImage,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -893,7 +892,7 @@ func (c *AppStream) DeleteImage(input *DeleteImageInput) (*DeleteImageOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DeleteImageWithContext(ctx aws.Context, input *DeleteImageInput, opts ...request.Option) (*DeleteImageOutput, error) {
+func (c *AppStream) DeleteImageWithContext(ctx aws.Context, input *DeleteImageInput, opts ...aws.Option) (*DeleteImageOutput, error) {
 	req, out := c.DeleteImageRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -902,7 +901,7 @@ func (c *AppStream) DeleteImageWithContext(ctx aws.Context, input *DeleteImageIn
 
 const opDeleteImageBuilder = "DeleteImageBuilder"
 
-// DeleteImageBuilderRequest generates a "aws/request.Request" representing the
+// DeleteImageBuilderRequest generates a "aws.Request" representing the
 // client's request for the DeleteImageBuilder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -926,8 +925,8 @@ const opDeleteImageBuilder = "DeleteImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder
-func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) (req *request.Request, output *DeleteImageBuilderOutput) {
-	op := &request.Operation{
+func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) (req *aws.Request, output *DeleteImageBuilderOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteImageBuilder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -976,7 +975,7 @@ func (c *AppStream) DeleteImageBuilder(input *DeleteImageBuilderInput) (*DeleteI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DeleteImageBuilderWithContext(ctx aws.Context, input *DeleteImageBuilderInput, opts ...request.Option) (*DeleteImageBuilderOutput, error) {
+func (c *AppStream) DeleteImageBuilderWithContext(ctx aws.Context, input *DeleteImageBuilderInput, opts ...aws.Option) (*DeleteImageBuilderOutput, error) {
 	req, out := c.DeleteImageBuilderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,7 +984,7 @@ func (c *AppStream) DeleteImageBuilderWithContext(ctx aws.Context, input *Delete
 
 const opDeleteStack = "DeleteStack"
 
-// DeleteStackRequest generates a "aws/request.Request" representing the
+// DeleteStackRequest generates a "aws.Request" representing the
 // client's request for the DeleteStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1009,8 +1008,8 @@ const opDeleteStack = "DeleteStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStack
-func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) (req *request.Request, output *DeleteStackOutput) {
-	op := &request.Operation{
+func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) (req *aws.Request, output *DeleteStackOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1062,7 +1061,7 @@ func (c *AppStream) DeleteStack(input *DeleteStackInput) (*DeleteStackOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...request.Option) (*DeleteStackOutput, error) {
+func (c *AppStream) DeleteStackWithContext(ctx aws.Context, input *DeleteStackInput, opts ...aws.Option) (*DeleteStackOutput, error) {
 	req, out := c.DeleteStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1071,7 +1070,7 @@ func (c *AppStream) DeleteStackWithContext(ctx aws.Context, input *DeleteStackIn
 
 const opDescribeDirectoryConfigs = "DescribeDirectoryConfigs"
 
-// DescribeDirectoryConfigsRequest generates a "aws/request.Request" representing the
+// DescribeDirectoryConfigsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDirectoryConfigs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1095,8 +1094,8 @@ const opDescribeDirectoryConfigs = "DescribeDirectoryConfigs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigs
-func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConfigsInput) (req *request.Request, output *DescribeDirectoryConfigsOutput) {
-	op := &request.Operation{
+func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConfigsInput) (req *aws.Request, output *DescribeDirectoryConfigsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDirectoryConfigs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1141,7 +1140,7 @@ func (c *AppStream) DescribeDirectoryConfigs(input *DescribeDirectoryConfigsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DescribeDirectoryConfigsWithContext(ctx aws.Context, input *DescribeDirectoryConfigsInput, opts ...request.Option) (*DescribeDirectoryConfigsOutput, error) {
+func (c *AppStream) DescribeDirectoryConfigsWithContext(ctx aws.Context, input *DescribeDirectoryConfigsInput, opts ...aws.Option) (*DescribeDirectoryConfigsOutput, error) {
 	req, out := c.DescribeDirectoryConfigsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1150,7 +1149,7 @@ func (c *AppStream) DescribeDirectoryConfigsWithContext(ctx aws.Context, input *
 
 const opDescribeFleets = "DescribeFleets"
 
-// DescribeFleetsRequest generates a "aws/request.Request" representing the
+// DescribeFleetsRequest generates a "aws.Request" representing the
 // client's request for the DescribeFleets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1174,8 +1173,8 @@ const opDescribeFleets = "DescribeFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets
-func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) (req *request.Request, output *DescribeFleetsOutput) {
-	op := &request.Operation{
+func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) (req *aws.Request, output *DescribeFleetsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFleets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1220,7 +1219,7 @@ func (c *AppStream) DescribeFleets(input *DescribeFleetsInput) (*DescribeFleetsO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DescribeFleetsWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...request.Option) (*DescribeFleetsOutput, error) {
+func (c *AppStream) DescribeFleetsWithContext(ctx aws.Context, input *DescribeFleetsInput, opts ...aws.Option) (*DescribeFleetsOutput, error) {
 	req, out := c.DescribeFleetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1229,7 +1228,7 @@ func (c *AppStream) DescribeFleetsWithContext(ctx aws.Context, input *DescribeFl
 
 const opDescribeImageBuilders = "DescribeImageBuilders"
 
-// DescribeImageBuildersRequest generates a "aws/request.Request" representing the
+// DescribeImageBuildersRequest generates a "aws.Request" representing the
 // client's request for the DescribeImageBuilders operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1253,8 +1252,8 @@ const opDescribeImageBuilders = "DescribeImageBuilders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders
-func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInput) (req *request.Request, output *DescribeImageBuildersOutput) {
-	op := &request.Operation{
+func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInput) (req *aws.Request, output *DescribeImageBuildersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeImageBuilders,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1297,7 +1296,7 @@ func (c *AppStream) DescribeImageBuilders(input *DescribeImageBuildersInput) (*D
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DescribeImageBuildersWithContext(ctx aws.Context, input *DescribeImageBuildersInput, opts ...request.Option) (*DescribeImageBuildersOutput, error) {
+func (c *AppStream) DescribeImageBuildersWithContext(ctx aws.Context, input *DescribeImageBuildersInput, opts ...aws.Option) (*DescribeImageBuildersOutput, error) {
 	req, out := c.DescribeImageBuildersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1306,7 +1305,7 @@ func (c *AppStream) DescribeImageBuildersWithContext(ctx aws.Context, input *Des
 
 const opDescribeImages = "DescribeImages"
 
-// DescribeImagesRequest generates a "aws/request.Request" representing the
+// DescribeImagesRequest generates a "aws.Request" representing the
 // client's request for the DescribeImages operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1330,8 +1329,8 @@ const opDescribeImages = "DescribeImages"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages
-func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) (req *request.Request, output *DescribeImagesOutput) {
-	op := &request.Operation{
+func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) (req *aws.Request, output *DescribeImagesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeImages,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1376,7 +1375,7 @@ func (c *AppStream) DescribeImages(input *DescribeImagesInput) (*DescribeImagesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DescribeImagesWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...request.Option) (*DescribeImagesOutput, error) {
+func (c *AppStream) DescribeImagesWithContext(ctx aws.Context, input *DescribeImagesInput, opts ...aws.Option) (*DescribeImagesOutput, error) {
 	req, out := c.DescribeImagesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1385,7 +1384,7 @@ func (c *AppStream) DescribeImagesWithContext(ctx aws.Context, input *DescribeIm
 
 const opDescribeSessions = "DescribeSessions"
 
-// DescribeSessionsRequest generates a "aws/request.Request" representing the
+// DescribeSessionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeSessions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1409,8 +1408,8 @@ const opDescribeSessions = "DescribeSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions
-func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) (req *request.Request, output *DescribeSessionsOutput) {
-	op := &request.Operation{
+func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) (req *aws.Request, output *DescribeSessionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1458,7 +1457,7 @@ func (c *AppStream) DescribeSessions(input *DescribeSessionsInput) (*DescribeSes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DescribeSessionsWithContext(ctx aws.Context, input *DescribeSessionsInput, opts ...request.Option) (*DescribeSessionsOutput, error) {
+func (c *AppStream) DescribeSessionsWithContext(ctx aws.Context, input *DescribeSessionsInput, opts ...aws.Option) (*DescribeSessionsOutput, error) {
 	req, out := c.DescribeSessionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1467,7 +1466,7 @@ func (c *AppStream) DescribeSessionsWithContext(ctx aws.Context, input *Describe
 
 const opDescribeStacks = "DescribeStacks"
 
-// DescribeStacksRequest generates a "aws/request.Request" representing the
+// DescribeStacksRequest generates a "aws.Request" representing the
 // client's request for the DescribeStacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1491,8 +1490,8 @@ const opDescribeStacks = "DescribeStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks
-func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) (req *request.Request, output *DescribeStacksOutput) {
-	op := &request.Operation{
+func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) (req *aws.Request, output *DescribeStacksOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeStacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1537,7 +1536,7 @@ func (c *AppStream) DescribeStacks(input *DescribeStacksInput) (*DescribeStacksO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...request.Option) (*DescribeStacksOutput, error) {
+func (c *AppStream) DescribeStacksWithContext(ctx aws.Context, input *DescribeStacksInput, opts ...aws.Option) (*DescribeStacksOutput, error) {
 	req, out := c.DescribeStacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1546,7 +1545,7 @@ func (c *AppStream) DescribeStacksWithContext(ctx aws.Context, input *DescribeSt
 
 const opDisassociateFleet = "DisassociateFleet"
 
-// DisassociateFleetRequest generates a "aws/request.Request" representing the
+// DisassociateFleetRequest generates a "aws.Request" representing the
 // client's request for the DisassociateFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1570,8 +1569,8 @@ const opDisassociateFleet = "DisassociateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleet
-func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) (req *request.Request, output *DisassociateFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) (req *aws.Request, output *DisassociateFleetOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1622,7 +1621,7 @@ func (c *AppStream) DisassociateFleet(input *DisassociateFleetInput) (*Disassoci
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) DisassociateFleetWithContext(ctx aws.Context, input *DisassociateFleetInput, opts ...request.Option) (*DisassociateFleetOutput, error) {
+func (c *AppStream) DisassociateFleetWithContext(ctx aws.Context, input *DisassociateFleetInput, opts ...aws.Option) (*DisassociateFleetOutput, error) {
 	req, out := c.DisassociateFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1631,7 +1630,7 @@ func (c *AppStream) DisassociateFleetWithContext(ctx aws.Context, input *Disasso
 
 const opExpireSession = "ExpireSession"
 
-// ExpireSessionRequest generates a "aws/request.Request" representing the
+// ExpireSessionRequest generates a "aws.Request" representing the
 // client's request for the ExpireSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1655,8 +1654,8 @@ const opExpireSession = "ExpireSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSession
-func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) (req *request.Request, output *ExpireSessionOutput) {
-	op := &request.Operation{
+func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) (req *aws.Request, output *ExpireSessionOutput) {
+	op := &aws.Operation{
 		Name:       opExpireSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1696,7 +1695,7 @@ func (c *AppStream) ExpireSession(input *ExpireSessionInput) (*ExpireSessionOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) ExpireSessionWithContext(ctx aws.Context, input *ExpireSessionInput, opts ...request.Option) (*ExpireSessionOutput, error) {
+func (c *AppStream) ExpireSessionWithContext(ctx aws.Context, input *ExpireSessionInput, opts ...aws.Option) (*ExpireSessionOutput, error) {
 	req, out := c.ExpireSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1705,7 +1704,7 @@ func (c *AppStream) ExpireSessionWithContext(ctx aws.Context, input *ExpireSessi
 
 const opListAssociatedFleets = "ListAssociatedFleets"
 
-// ListAssociatedFleetsRequest generates a "aws/request.Request" representing the
+// ListAssociatedFleetsRequest generates a "aws.Request" representing the
 // client's request for the ListAssociatedFleets operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1729,8 +1728,8 @@ const opListAssociatedFleets = "ListAssociatedFleets"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleets
-func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) (req *request.Request, output *ListAssociatedFleetsOutput) {
-	op := &request.Operation{
+func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput) (req *aws.Request, output *ListAssociatedFleetsOutput) {
+	op := &aws.Operation{
 		Name:       opListAssociatedFleets,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1770,7 +1769,7 @@ func (c *AppStream) ListAssociatedFleets(input *ListAssociatedFleetsInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) ListAssociatedFleetsWithContext(ctx aws.Context, input *ListAssociatedFleetsInput, opts ...request.Option) (*ListAssociatedFleetsOutput, error) {
+func (c *AppStream) ListAssociatedFleetsWithContext(ctx aws.Context, input *ListAssociatedFleetsInput, opts ...aws.Option) (*ListAssociatedFleetsOutput, error) {
 	req, out := c.ListAssociatedFleetsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1779,7 +1778,7 @@ func (c *AppStream) ListAssociatedFleetsWithContext(ctx aws.Context, input *List
 
 const opListAssociatedStacks = "ListAssociatedStacks"
 
-// ListAssociatedStacksRequest generates a "aws/request.Request" representing the
+// ListAssociatedStacksRequest generates a "aws.Request" representing the
 // client's request for the ListAssociatedStacks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1803,8 +1802,8 @@ const opListAssociatedStacks = "ListAssociatedStacks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacks
-func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) (req *request.Request, output *ListAssociatedStacksOutput) {
-	op := &request.Operation{
+func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput) (req *aws.Request, output *ListAssociatedStacksOutput) {
+	op := &aws.Operation{
 		Name:       opListAssociatedStacks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1844,7 +1843,7 @@ func (c *AppStream) ListAssociatedStacks(input *ListAssociatedStacksInput) (*Lis
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) ListAssociatedStacksWithContext(ctx aws.Context, input *ListAssociatedStacksInput, opts ...request.Option) (*ListAssociatedStacksOutput, error) {
+func (c *AppStream) ListAssociatedStacksWithContext(ctx aws.Context, input *ListAssociatedStacksInput, opts ...aws.Option) (*ListAssociatedStacksOutput, error) {
 	req, out := c.ListAssociatedStacksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1853,7 +1852,7 @@ func (c *AppStream) ListAssociatedStacksWithContext(ctx aws.Context, input *List
 
 const opStartFleet = "StartFleet"
 
-// StartFleetRequest generates a "aws/request.Request" representing the
+// StartFleetRequest generates a "aws.Request" representing the
 // client's request for the StartFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1877,8 +1876,8 @@ const opStartFleet = "StartFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleet
-func (c *AppStream) StartFleetRequest(input *StartFleetInput) (req *request.Request, output *StartFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) StartFleetRequest(input *StartFleetInput) (req *aws.Request, output *StartFleetOutput) {
+	op := &aws.Operation{
 		Name:       opStartFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1932,7 +1931,7 @@ func (c *AppStream) StartFleet(input *StartFleetInput) (*StartFleetOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) StartFleetWithContext(ctx aws.Context, input *StartFleetInput, opts ...request.Option) (*StartFleetOutput, error) {
+func (c *AppStream) StartFleetWithContext(ctx aws.Context, input *StartFleetInput, opts ...aws.Option) (*StartFleetOutput, error) {
 	req, out := c.StartFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1941,7 +1940,7 @@ func (c *AppStream) StartFleetWithContext(ctx aws.Context, input *StartFleetInpu
 
 const opStartImageBuilder = "StartImageBuilder"
 
-// StartImageBuilderRequest generates a "aws/request.Request" representing the
+// StartImageBuilderRequest generates a "aws.Request" representing the
 // client's request for the StartImageBuilder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1965,8 +1964,8 @@ const opStartImageBuilder = "StartImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder
-func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) (req *request.Request, output *StartImageBuilderOutput) {
-	op := &request.Operation{
+func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) (req *aws.Request, output *StartImageBuilderOutput) {
+	op := &aws.Operation{
 		Name:       opStartImageBuilder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2015,7 +2014,7 @@ func (c *AppStream) StartImageBuilder(input *StartImageBuilderInput) (*StartImag
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) StartImageBuilderWithContext(ctx aws.Context, input *StartImageBuilderInput, opts ...request.Option) (*StartImageBuilderOutput, error) {
+func (c *AppStream) StartImageBuilderWithContext(ctx aws.Context, input *StartImageBuilderInput, opts ...aws.Option) (*StartImageBuilderOutput, error) {
 	req, out := c.StartImageBuilderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2024,7 +2023,7 @@ func (c *AppStream) StartImageBuilderWithContext(ctx aws.Context, input *StartIm
 
 const opStopFleet = "StopFleet"
 
-// StopFleetRequest generates a "aws/request.Request" representing the
+// StopFleetRequest generates a "aws.Request" representing the
 // client's request for the StopFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2048,8 +2047,8 @@ const opStopFleet = "StopFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleet
-func (c *AppStream) StopFleetRequest(input *StopFleetInput) (req *request.Request, output *StopFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) StopFleetRequest(input *StopFleetInput) (req *aws.Request, output *StopFleetOutput) {
+	op := &aws.Operation{
 		Name:       opStopFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2097,7 +2096,7 @@ func (c *AppStream) StopFleet(input *StopFleetInput) (*StopFleetOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) StopFleetWithContext(ctx aws.Context, input *StopFleetInput, opts ...request.Option) (*StopFleetOutput, error) {
+func (c *AppStream) StopFleetWithContext(ctx aws.Context, input *StopFleetInput, opts ...aws.Option) (*StopFleetOutput, error) {
 	req, out := c.StopFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2106,7 +2105,7 @@ func (c *AppStream) StopFleetWithContext(ctx aws.Context, input *StopFleetInput,
 
 const opStopImageBuilder = "StopImageBuilder"
 
-// StopImageBuilderRequest generates a "aws/request.Request" representing the
+// StopImageBuilderRequest generates a "aws.Request" representing the
 // client's request for the StopImageBuilder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2130,8 +2129,8 @@ const opStopImageBuilder = "StopImageBuilder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder
-func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) (req *request.Request, output *StopImageBuilderOutput) {
-	op := &request.Operation{
+func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) (req *aws.Request, output *StopImageBuilderOutput) {
+	op := &aws.Operation{
 		Name:       opStopImageBuilder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2180,7 +2179,7 @@ func (c *AppStream) StopImageBuilder(input *StopImageBuilderInput) (*StopImageBu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) StopImageBuilderWithContext(ctx aws.Context, input *StopImageBuilderInput, opts ...request.Option) (*StopImageBuilderOutput, error) {
+func (c *AppStream) StopImageBuilderWithContext(ctx aws.Context, input *StopImageBuilderInput, opts ...aws.Option) (*StopImageBuilderOutput, error) {
 	req, out := c.StopImageBuilderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2189,7 +2188,7 @@ func (c *AppStream) StopImageBuilderWithContext(ctx aws.Context, input *StopImag
 
 const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 
-// UpdateDirectoryConfigRequest generates a "aws/request.Request" representing the
+// UpdateDirectoryConfigRequest generates a "aws.Request" representing the
 // client's request for the UpdateDirectoryConfig operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2213,8 +2212,8 @@ const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfig
-func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput) (req *request.Request, output *UpdateDirectoryConfigOutput) {
-	op := &request.Operation{
+func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInput) (req *aws.Request, output *UpdateDirectoryConfigOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDirectoryConfig,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2265,7 +2264,7 @@ func (c *AppStream) UpdateDirectoryConfig(input *UpdateDirectoryConfigInput) (*U
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) UpdateDirectoryConfigWithContext(ctx aws.Context, input *UpdateDirectoryConfigInput, opts ...request.Option) (*UpdateDirectoryConfigOutput, error) {
+func (c *AppStream) UpdateDirectoryConfigWithContext(ctx aws.Context, input *UpdateDirectoryConfigInput, opts ...aws.Option) (*UpdateDirectoryConfigOutput, error) {
 	req, out := c.UpdateDirectoryConfigRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2274,7 +2273,7 @@ func (c *AppStream) UpdateDirectoryConfigWithContext(ctx aws.Context, input *Upd
 
 const opUpdateFleet = "UpdateFleet"
 
-// UpdateFleetRequest generates a "aws/request.Request" representing the
+// UpdateFleetRequest generates a "aws.Request" representing the
 // client's request for the UpdateFleet operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2298,8 +2297,8 @@ const opUpdateFleet = "UpdateFleet"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet
-func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) (req *request.Request, output *UpdateFleetOutput) {
-	op := &request.Operation{
+func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) (req *aws.Request, output *UpdateFleetOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFleet,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2373,7 +2372,7 @@ func (c *AppStream) UpdateFleet(input *UpdateFleetInput) (*UpdateFleetOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) UpdateFleetWithContext(ctx aws.Context, input *UpdateFleetInput, opts ...request.Option) (*UpdateFleetOutput, error) {
+func (c *AppStream) UpdateFleetWithContext(ctx aws.Context, input *UpdateFleetInput, opts ...aws.Option) (*UpdateFleetOutput, error) {
 	req, out := c.UpdateFleetRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2382,7 +2381,7 @@ func (c *AppStream) UpdateFleetWithContext(ctx aws.Context, input *UpdateFleetIn
 
 const opUpdateStack = "UpdateStack"
 
-// UpdateStackRequest generates a "aws/request.Request" representing the
+// UpdateStackRequest generates a "aws.Request" representing the
 // client's request for the UpdateStack operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2406,8 +2405,8 @@ const opUpdateStack = "UpdateStack"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack
-func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) (req *request.Request, output *UpdateStackOutput) {
-	op := &request.Operation{
+func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) (req *aws.Request, output *UpdateStackOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateStack,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2467,7 +2466,7 @@ func (c *AppStream) UpdateStack(input *UpdateStackInput) (*UpdateStackOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *AppStream) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...request.Option) (*UpdateStackOutput, error) {
+func (c *AppStream) UpdateStackWithContext(ctx aws.Context, input *UpdateStackInput, opts ...aws.Option) (*UpdateStackOutput, error) {
 	req, out := c.UpdateStackRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2580,18 +2579,18 @@ func (s AssociateFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateFleetInput"}
 	if s.FleetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetName"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2650,9 +2649,9 @@ func (s ComputeCapacity) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ComputeCapacity) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ComputeCapacity"}
+	invalidParams := aws.ErrInvalidParams{Context: "ComputeCapacity"}
 	if s.DesiredInstances == nil {
-		invalidParams.Add(request.NewErrParamRequired("DesiredInstances"))
+		invalidParams.Add(aws.NewErrParamRequired("DesiredInstances"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2754,19 +2753,19 @@ func (s CreateDirectoryConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDirectoryConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDirectoryConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDirectoryConfigInput"}
 	if s.DirectoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
 	}
 	if s.OrganizationalUnitDistinguishedNames == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationalUnitDistinguishedNames"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationalUnitDistinguishedNames"))
 	}
 	if s.ServiceAccountCredentials == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceAccountCredentials"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceAccountCredentials"))
 	}
 	if s.ServiceAccountCredentials != nil {
 		if err := s.ServiceAccountCredentials.Validate(); err != nil {
-			invalidParams.AddNested("ServiceAccountCredentials", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ServiceAccountCredentials", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2923,28 +2922,28 @@ func (s CreateFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
 	if s.ComputeCapacity == nil {
-		invalidParams.Add(request.NewErrParamRequired("ComputeCapacity"))
+		invalidParams.Add(aws.NewErrParamRequired("ComputeCapacity"))
 	}
 	if s.ImageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImageName"))
+		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
 	}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImageName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
 	}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ComputeCapacity != nil {
 		if err := s.ComputeCapacity.Validate(); err != nil {
-			invalidParams.AddNested("ComputeCapacity", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ComputeCapacity", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3088,21 +3087,21 @@ func (s CreateImageBuilderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageBuilderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateImageBuilderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderInput"}
 	if s.ImageName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ImageName"))
+		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
 	}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImageName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
 	}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3204,12 +3203,12 @@ func (s CreateImageBuilderStreamingURLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageBuilderStreamingURLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateImageBuilderStreamingURLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderStreamingURLInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3292,12 +3291,12 @@ func (s CreateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStackInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
@@ -3305,7 +3304,7 @@ func (s *CreateStackInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3406,30 +3405,30 @@ func (s CreateStreamingURLInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStreamingURLInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateStreamingURLInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateStreamingURLInput"}
 	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
 	}
 	if s.FleetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetName"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
 	if s.SessionContext != nil && len(*s.SessionContext) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SessionContext", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SessionContext", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3529,9 +3528,9 @@ func (s DeleteDirectoryConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDirectoryConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDirectoryConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDirectoryConfigInput"}
 	if s.DirectoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3583,12 +3582,12 @@ func (s DeleteFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3638,9 +3637,9 @@ func (s DeleteImageBuilderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteImageBuilderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteImageBuilderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteImageBuilderInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3698,9 +3697,9 @@ func (s DeleteImageInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteImageInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteImageInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteImageInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3761,12 +3760,12 @@ func (s DeleteStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteStackInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3823,9 +3822,9 @@ func (s DescribeDirectoryConfigsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDirectoryConfigsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDirectoryConfigsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDirectoryConfigsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3910,9 +3909,9 @@ func (s DescribeFleetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFleetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFleetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3990,9 +3989,9 @@ func (s DescribeImageBuildersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeImageBuildersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeImageBuildersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeImageBuildersInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4141,24 +4140,24 @@ func (s DescribeSessionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeSessionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeSessionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeSessionsInput"}
 	if s.FleetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetName"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 	if s.UserId != nil && len(*s.UserId) < 2 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 2))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 2))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4261,9 +4260,9 @@ func (s DescribeStacksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeStacksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeStacksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeStacksInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4400,18 +4399,18 @@ func (s DisassociateFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateFleetInput"}
 	if s.FleetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetName"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4503,12 +4502,12 @@ func (s ExpireSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExpireSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExpireSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExpireSessionInput"}
 	if s.SessionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SessionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SessionId"))
 	}
 	if s.SessionId != nil && len(*s.SessionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SessionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SessionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5105,15 +5104,15 @@ func (s ListAssociatedFleetsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssociatedFleetsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAssociatedFleetsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAssociatedFleetsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 	if s.StackName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StackName"))
+		invalidParams.Add(aws.NewErrParamRequired("StackName"))
 	}
 	if s.StackName != nil && len(*s.StackName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("StackName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("StackName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5194,15 +5193,15 @@ func (s ListAssociatedStacksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListAssociatedStacksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListAssociatedStacksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListAssociatedStacksInput"}
 	if s.FleetName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FleetName"))
+		invalidParams.Add(aws.NewErrParamRequired("FleetName"))
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FleetName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5327,18 +5326,18 @@ func (s ServiceAccountCredentials) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServiceAccountCredentials) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ServiceAccountCredentials"}
+	invalidParams := aws.ErrInvalidParams{Context: "ServiceAccountCredentials"}
 	if s.AccountName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountName"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountName"))
 	}
 	if s.AccountName != nil && len(*s.AccountName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountName", 1))
 	}
 	if s.AccountPassword == nil {
-		invalidParams.Add(request.NewErrParamRequired("AccountPassword"))
+		invalidParams.Add(aws.NewErrParamRequired("AccountPassword"))
 	}
 	if s.AccountPassword != nil && len(*s.AccountPassword) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AccountPassword", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AccountPassword", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5577,12 +5576,12 @@ func (s StartFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartFleetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5632,12 +5631,12 @@ func (s StartImageBuilderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartImageBuilderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartImageBuilderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartImageBuilderInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5697,12 +5696,12 @@ func (s StopFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopFleetInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5752,12 +5751,12 @@ func (s StopImageBuilderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopImageBuilderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopImageBuilderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopImageBuilderInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5821,12 +5820,12 @@ func (s StorageConnector) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StorageConnector) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StorageConnector"}
+	invalidParams := aws.ErrInvalidParams{Context: "StorageConnector"}
 	if s.ConnectorType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectorType"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectorType"))
 	}
 	if s.ResourceIdentifier != nil && len(*s.ResourceIdentifier) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceIdentifier", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceIdentifier", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5876,13 +5875,13 @@ func (s UpdateDirectoryConfigInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDirectoryConfigInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDirectoryConfigInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDirectoryConfigInput"}
 	if s.DirectoryName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DirectoryName"))
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryName"))
 	}
 	if s.ServiceAccountCredentials != nil {
 		if err := s.ServiceAccountCredentials.Validate(); err != nil {
-			invalidParams.AddNested("ServiceAccountCredentials", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ServiceAccountCredentials", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6037,22 +6036,22 @@ func (s UpdateFleetInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFleetInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFleetInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFleetInput"}
 	if s.ImageName != nil && len(*s.ImageName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ImageName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ImageName", 1))
 	}
 	if s.InstanceType != nil && len(*s.InstanceType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("InstanceType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceType", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ComputeCapacity != nil {
 		if err := s.ComputeCapacity.Validate(); err != nil {
-			invalidParams.AddNested("ComputeCapacity", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ComputeCapacity", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6198,12 +6197,12 @@ func (s UpdateStackInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateStackInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
@@ -6211,7 +6210,7 @@ func (s *UpdateStackInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

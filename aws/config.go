@@ -4,62 +4,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
-// UseServiceDefaultRetries instructs the config to use the service's own
-// default number of retries. This will be the default action if
-// Config.MaxRetries is nil also.
-const UseServiceDefaultRetries = -1
-
-// RequestRetryer is an alias for a type that implements the request.Retryer
-// interface.
-type RequestRetryer interface{}
-
-// A Config provides service configuration for service clients. By default,
-// all clients will use the defaults.DefaultConfig tructure.
-//
-//     // Create Session with MaxRetry configuration to be shared by multiple
-//     // service clients.
-//     sess := session.Must(session.NewSession(&aws.Config{
-//         MaxRetries: aws.Int(3),
-//     }))
-//
-//     // Create S3 service client with a specific Region.
-//     svc := s3.New(sess, &aws.Config{
-//         Region: aws.String("us-west-2"),
-//     })
+// A Config provides service configuration for service clients.
 type Config struct {
-	// Enables verbose error printing of all credential chain errors.
-	// Should be used when wanting to see all errors while attempting to
-	// retrieve credentials.
-	CredentialsChainVerboseErrors *bool
-
-	// The credentials object to use when signing requests. Defaults to a
-	// chain of credential providers to search for credentials in environment
-	// variables, shared credential file, and EC2 Instance Roles.
-	Credentials *credentials.Credentials
-
-	// An optional endpoint URL (hostname only or fully qualified URI)
-	// that overrides the default generated endpoint for a client. Set this
-	// to `""` to use the default generated endpoint.
-	//
-	// @note You must still provide a `Region` value when specifying an
-	//   endpoint for a client.
-	Endpoint *string
-
-	// The resolver to use for looking up endpoints for AWS service clients
-	// to use based on region.
-	EndpointResolver endpoints.Resolver
-
-	// EnforceShouldRetryCheck is used in the AfterRetryHandler to always call
-	// ShouldRetry regardless of whether or not if request.Retryable is set.
-	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
-	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
-	// Proper handling of the request.Retryable field is important when setting this field.
-	EnforceShouldRetryCheck *bool
-
 	// The region to send requests to. This parameter is required and must
 	// be configured globally or on a per-client basis unless otherwise
 	// noted. A full list of regions is found in the "Regions and Endpoints"
@@ -69,27 +18,21 @@ type Config struct {
 	//   AWS Regions and Endpoints
 	Region *string
 
-	// Set this to `true` to disable SSL when sending requests. Defaults
-	// to `false`.
-	DisableSSL *bool
+	// The credentials object to use when signing requests. Defaults to a
+	// chain of credential providers to search for credentials in environment
+	// variables, shared credential file, and EC2 Instance Roles.
+	CredentialsLoader *CredentialsLoader
+
+	// The resolver to use for looking up endpoints for AWS service clients
+	// to use based on region.
+	EndpointResolver EndpointResolver
 
 	// The HTTP client to use when sending requests. Defaults to
 	// `http.DefaultClient`.
 	HTTPClient *http.Client
 
-	// An integer value representing the logging level. The default log level
-	// is zero (LogOff), which represents no logging. To enable logging set
-	// to a LogLevel Value.
-	LogLevel *LogLevelType
-
-	// The logger writer interface to write logging messages to. Defaults to
-	// standard out.
-	Logger Logger
-
-	// The maximum number of times that a request will be retried for failures.
-	// Defaults to -1, which defers the max retry setting to the service
-	// specific configuration.
-	MaxRetries *int
+	// TODO document
+	Handlers Handlers
 
 	// Retryer guides how HTTP requests should be retried in case of
 	// recoverable failures.
@@ -105,7 +48,27 @@ type Config struct {
 	//
 	//   cfg := request.WithRetryer(aws.NewConfig(), myRetryer)
 	//
-	Retryer RequestRetryer
+	Retryer Retryer
+
+	// An integer value representing the logging level. The default log level
+	// is zero (LogOff), which represents no logging. To enable logging set
+	// to a LogLevel Value.
+	LogLevel *LogLevelType
+
+	// The logger writer interface to write logging messages to. Defaults to
+	// standard out.
+	Logger Logger
+
+	// EnforceShouldRetryCheck is used in the AfterRetryHandler to always call
+	// ShouldRetry regardless of whether or not if request.Retryable is set.
+	// This will utilize ShouldRetry method of custom retryers. If EnforceShouldRetryCheck
+	// is not set, then ShouldRetry will only be called if request.Retryable is nil.
+	// Proper handling of the request.Retryable field is important when setting this field.
+	EnforceShouldRetryCheck *bool
+
+	// Set this to `true` to disable SSL when sending requests. Defaults
+	// to `false`.
+	DisableSSL *bool
 
 	// Disables semantic parameter validation, which validates input for
 	// missing required fields and/or other semantic request input errors.
@@ -218,145 +181,37 @@ type Config struct {
 
 // NewConfig returns a new Config pointer that can be chained with builder
 // methods to set multiple configuration values inline without using pointers.
-//
-//     // Create Session with MaxRetry configuration to be shared by multiple
-//     // service clients.
-//     sess := session.Must(session.NewSession(aws.NewConfig().
-//         WithMaxRetries(3),
-//     ))
-//
-//     // Create S3 service client with a specific Region.
-//     svc := s3.New(sess, aws.NewConfig().
-//         WithRegion("us-west-2"),
-//     )
 func NewConfig() *Config {
 	return &Config{}
 }
 
-// WithCredentialsChainVerboseErrors sets a config verbose errors boolean and returning
-// a Config pointer.
-func (c *Config) WithCredentialsChainVerboseErrors(verboseErrs bool) *Config {
-	c.CredentialsChainVerboseErrors = &verboseErrs
-	return c
-}
+// ClientConfig is a temporary mock for session until full trasition to Config.
+func (c Config) ClientConfig(serviceName string, cfgs ...*Config) ClientConfig {
+	cfg := c.Copy(cfgs...)
 
-// WithCredentials sets a config Credentials value returning a Config pointer
-// for chaining.
-func (c *Config) WithCredentials(creds *credentials.Credentials) *Config {
-	c.Credentials = creds
-	return c
-}
+	// TODO better handling of error
+	endpoint, _ := cfg.EndpointResolver.EndpointFor(
+		serviceName, StringValue(cfg.Region),
+		func(opt *endpoints.Options) {
+			// TODO Where should these options go?
+			opt.DisableSSL = BoolValue(cfg.DisableSSL)
+			opt.UseDualStack = BoolValue(cfg.UseDualStack)
 
-// WithEndpoint sets a config Endpoint value returning a Config pointer for
-// chaining.
-func (c *Config) WithEndpoint(endpoint string) *Config {
-	c.Endpoint = &endpoint
-	return c
-}
+			// Support the condition where the service is modeled but its
+			// endpoint metadata is not available.
+			opt.ResolveUnknownService = true
+		},
+	)
 
-// WithEndpointResolver sets a config EndpointResolver value returning a
-// Config pointer for chaining.
-func (c *Config) WithEndpointResolver(resolver endpoints.Resolver) *Config {
-	c.EndpointResolver = resolver
-	return c
-}
+	clientCfg := ClientConfig{
+		Config:        cfg,
+		Handlers:      cfg.Handlers,
+		Endpoint:      endpoint.URL,
+		SigningRegion: endpoint.SigningRegion,
+		SigningName:   endpoint.SigningName,
+	}
 
-// WithRegion sets a config Region value returning a Config pointer for
-// chaining.
-func (c *Config) WithRegion(region string) *Config {
-	c.Region = &region
-	return c
-}
-
-// WithDisableSSL sets a config DisableSSL value returning a Config pointer
-// for chaining.
-func (c *Config) WithDisableSSL(disable bool) *Config {
-	c.DisableSSL = &disable
-	return c
-}
-
-// WithHTTPClient sets a config HTTPClient value returning a Config pointer
-// for chaining.
-func (c *Config) WithHTTPClient(client *http.Client) *Config {
-	c.HTTPClient = client
-	return c
-}
-
-// WithMaxRetries sets a config MaxRetries value returning a Config pointer
-// for chaining.
-func (c *Config) WithMaxRetries(max int) *Config {
-	c.MaxRetries = &max
-	return c
-}
-
-// WithDisableParamValidation sets a config DisableParamValidation value
-// returning a Config pointer for chaining.
-func (c *Config) WithDisableParamValidation(disable bool) *Config {
-	c.DisableParamValidation = &disable
-	return c
-}
-
-// WithDisableComputeChecksums sets a config DisableComputeChecksums value
-// returning a Config pointer for chaining.
-func (c *Config) WithDisableComputeChecksums(disable bool) *Config {
-	c.DisableComputeChecksums = &disable
-	return c
-}
-
-// WithLogLevel sets a config LogLevel value returning a Config pointer for
-// chaining.
-func (c *Config) WithLogLevel(level LogLevelType) *Config {
-	c.LogLevel = &level
-	return c
-}
-
-// WithLogger sets a config Logger value returning a Config pointer for
-// chaining.
-func (c *Config) WithLogger(logger Logger) *Config {
-	c.Logger = logger
-	return c
-}
-
-// WithS3ForcePathStyle sets a config S3ForcePathStyle value returning a Config
-// pointer for chaining.
-func (c *Config) WithS3ForcePathStyle(force bool) *Config {
-	c.S3ForcePathStyle = &force
-	return c
-}
-
-// WithS3Disable100Continue sets a config S3Disable100Continue value returning
-// a Config pointer for chaining.
-func (c *Config) WithS3Disable100Continue(disable bool) *Config {
-	c.S3Disable100Continue = &disable
-	return c
-}
-
-// WithS3UseAccelerate sets a config S3UseAccelerate value returning a Config
-// pointer for chaining.
-func (c *Config) WithS3UseAccelerate(enable bool) *Config {
-	c.S3UseAccelerate = &enable
-	return c
-}
-
-// WithUseDualStack sets a config UseDualStack value returning a Config
-// pointer for chaining.
-func (c *Config) WithUseDualStack(enable bool) *Config {
-	c.UseDualStack = &enable
-	return c
-}
-
-// WithEC2MetadataDisableTimeoutOverride sets a config EC2MetadataDisableTimeoutOverride value
-// returning a Config pointer for chaining.
-func (c *Config) WithEC2MetadataDisableTimeoutOverride(enable bool) *Config {
-	c.EC2MetadataDisableTimeoutOverride = &enable
-	return c
-}
-
-// WithSleepDelay overrides the function used to sleep while waiting for the
-// next retry. Defaults to time.Sleep.
-func (c *Config) WithSleepDelay(fn func(time.Duration)) *Config {
-	c.SleepDelay = fn
-	return c
+	return clientCfg
 }
 
 // MergeIn merges the passed in configs into the existing config object.
@@ -371,16 +226,8 @@ func mergeInConfig(dst *Config, other *Config) {
 		return
 	}
 
-	if other.CredentialsChainVerboseErrors != nil {
-		dst.CredentialsChainVerboseErrors = other.CredentialsChainVerboseErrors
-	}
-
-	if other.Credentials != nil {
-		dst.Credentials = other.Credentials
-	}
-
-	if other.Endpoint != nil {
-		dst.Endpoint = other.Endpoint
+	if other.CredentialsLoader != nil {
+		dst.CredentialsLoader = other.CredentialsLoader
 	}
 
 	if other.EndpointResolver != nil {
@@ -405,10 +252,6 @@ func mergeInConfig(dst *Config, other *Config) {
 
 	if other.Logger != nil {
 		dst.Logger = other.Logger
-	}
-
-	if other.MaxRetries != nil {
-		dst.MaxRetries = other.MaxRetries
 	}
 
 	if other.Retryer != nil {
@@ -459,12 +302,12 @@ func mergeInConfig(dst *Config, other *Config) {
 // Copy will return a shallow copy of the Config object. If any additional
 // configurations are provided they will be merged into the new config returned.
 func (c *Config) Copy(cfgs ...*Config) *Config {
-	dst := &Config{}
-	dst.MergeIn(c)
+	dst := *c
+	dst.Handlers = dst.Handlers.Copy()
 
 	for _, cfg := range cfgs {
 		dst.MergeIn(cfg)
 	}
 
-	return dst
+	return &dst
 }

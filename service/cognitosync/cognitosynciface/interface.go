@@ -10,7 +10,6 @@ package cognitosynciface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := cognitosync.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := cognitosync.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,72 +64,72 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CognitoSyncAPI interface {
 	BulkPublish(*cognitosync.BulkPublishInput) (*cognitosync.BulkPublishOutput, error)
-	BulkPublishWithContext(aws.Context, *cognitosync.BulkPublishInput, ...request.Option) (*cognitosync.BulkPublishOutput, error)
-	BulkPublishRequest(*cognitosync.BulkPublishInput) (*request.Request, *cognitosync.BulkPublishOutput)
+	BulkPublishWithContext(aws.Context, *cognitosync.BulkPublishInput, ...aws.Option) (*cognitosync.BulkPublishOutput, error)
+	BulkPublishRequest(*cognitosync.BulkPublishInput) (*aws.Request, *cognitosync.BulkPublishOutput)
 
 	DeleteDataset(*cognitosync.DeleteDatasetInput) (*cognitosync.DeleteDatasetOutput, error)
-	DeleteDatasetWithContext(aws.Context, *cognitosync.DeleteDatasetInput, ...request.Option) (*cognitosync.DeleteDatasetOutput, error)
-	DeleteDatasetRequest(*cognitosync.DeleteDatasetInput) (*request.Request, *cognitosync.DeleteDatasetOutput)
+	DeleteDatasetWithContext(aws.Context, *cognitosync.DeleteDatasetInput, ...aws.Option) (*cognitosync.DeleteDatasetOutput, error)
+	DeleteDatasetRequest(*cognitosync.DeleteDatasetInput) (*aws.Request, *cognitosync.DeleteDatasetOutput)
 
 	DescribeDataset(*cognitosync.DescribeDatasetInput) (*cognitosync.DescribeDatasetOutput, error)
-	DescribeDatasetWithContext(aws.Context, *cognitosync.DescribeDatasetInput, ...request.Option) (*cognitosync.DescribeDatasetOutput, error)
-	DescribeDatasetRequest(*cognitosync.DescribeDatasetInput) (*request.Request, *cognitosync.DescribeDatasetOutput)
+	DescribeDatasetWithContext(aws.Context, *cognitosync.DescribeDatasetInput, ...aws.Option) (*cognitosync.DescribeDatasetOutput, error)
+	DescribeDatasetRequest(*cognitosync.DescribeDatasetInput) (*aws.Request, *cognitosync.DescribeDatasetOutput)
 
 	DescribeIdentityPoolUsage(*cognitosync.DescribeIdentityPoolUsageInput) (*cognitosync.DescribeIdentityPoolUsageOutput, error)
-	DescribeIdentityPoolUsageWithContext(aws.Context, *cognitosync.DescribeIdentityPoolUsageInput, ...request.Option) (*cognitosync.DescribeIdentityPoolUsageOutput, error)
-	DescribeIdentityPoolUsageRequest(*cognitosync.DescribeIdentityPoolUsageInput) (*request.Request, *cognitosync.DescribeIdentityPoolUsageOutput)
+	DescribeIdentityPoolUsageWithContext(aws.Context, *cognitosync.DescribeIdentityPoolUsageInput, ...aws.Option) (*cognitosync.DescribeIdentityPoolUsageOutput, error)
+	DescribeIdentityPoolUsageRequest(*cognitosync.DescribeIdentityPoolUsageInput) (*aws.Request, *cognitosync.DescribeIdentityPoolUsageOutput)
 
 	DescribeIdentityUsage(*cognitosync.DescribeIdentityUsageInput) (*cognitosync.DescribeIdentityUsageOutput, error)
-	DescribeIdentityUsageWithContext(aws.Context, *cognitosync.DescribeIdentityUsageInput, ...request.Option) (*cognitosync.DescribeIdentityUsageOutput, error)
-	DescribeIdentityUsageRequest(*cognitosync.DescribeIdentityUsageInput) (*request.Request, *cognitosync.DescribeIdentityUsageOutput)
+	DescribeIdentityUsageWithContext(aws.Context, *cognitosync.DescribeIdentityUsageInput, ...aws.Option) (*cognitosync.DescribeIdentityUsageOutput, error)
+	DescribeIdentityUsageRequest(*cognitosync.DescribeIdentityUsageInput) (*aws.Request, *cognitosync.DescribeIdentityUsageOutput)
 
 	GetBulkPublishDetails(*cognitosync.GetBulkPublishDetailsInput) (*cognitosync.GetBulkPublishDetailsOutput, error)
-	GetBulkPublishDetailsWithContext(aws.Context, *cognitosync.GetBulkPublishDetailsInput, ...request.Option) (*cognitosync.GetBulkPublishDetailsOutput, error)
-	GetBulkPublishDetailsRequest(*cognitosync.GetBulkPublishDetailsInput) (*request.Request, *cognitosync.GetBulkPublishDetailsOutput)
+	GetBulkPublishDetailsWithContext(aws.Context, *cognitosync.GetBulkPublishDetailsInput, ...aws.Option) (*cognitosync.GetBulkPublishDetailsOutput, error)
+	GetBulkPublishDetailsRequest(*cognitosync.GetBulkPublishDetailsInput) (*aws.Request, *cognitosync.GetBulkPublishDetailsOutput)
 
 	GetCognitoEvents(*cognitosync.GetCognitoEventsInput) (*cognitosync.GetCognitoEventsOutput, error)
-	GetCognitoEventsWithContext(aws.Context, *cognitosync.GetCognitoEventsInput, ...request.Option) (*cognitosync.GetCognitoEventsOutput, error)
-	GetCognitoEventsRequest(*cognitosync.GetCognitoEventsInput) (*request.Request, *cognitosync.GetCognitoEventsOutput)
+	GetCognitoEventsWithContext(aws.Context, *cognitosync.GetCognitoEventsInput, ...aws.Option) (*cognitosync.GetCognitoEventsOutput, error)
+	GetCognitoEventsRequest(*cognitosync.GetCognitoEventsInput) (*aws.Request, *cognitosync.GetCognitoEventsOutput)
 
 	GetIdentityPoolConfiguration(*cognitosync.GetIdentityPoolConfigurationInput) (*cognitosync.GetIdentityPoolConfigurationOutput, error)
-	GetIdentityPoolConfigurationWithContext(aws.Context, *cognitosync.GetIdentityPoolConfigurationInput, ...request.Option) (*cognitosync.GetIdentityPoolConfigurationOutput, error)
-	GetIdentityPoolConfigurationRequest(*cognitosync.GetIdentityPoolConfigurationInput) (*request.Request, *cognitosync.GetIdentityPoolConfigurationOutput)
+	GetIdentityPoolConfigurationWithContext(aws.Context, *cognitosync.GetIdentityPoolConfigurationInput, ...aws.Option) (*cognitosync.GetIdentityPoolConfigurationOutput, error)
+	GetIdentityPoolConfigurationRequest(*cognitosync.GetIdentityPoolConfigurationInput) (*aws.Request, *cognitosync.GetIdentityPoolConfigurationOutput)
 
 	ListDatasets(*cognitosync.ListDatasetsInput) (*cognitosync.ListDatasetsOutput, error)
-	ListDatasetsWithContext(aws.Context, *cognitosync.ListDatasetsInput, ...request.Option) (*cognitosync.ListDatasetsOutput, error)
-	ListDatasetsRequest(*cognitosync.ListDatasetsInput) (*request.Request, *cognitosync.ListDatasetsOutput)
+	ListDatasetsWithContext(aws.Context, *cognitosync.ListDatasetsInput, ...aws.Option) (*cognitosync.ListDatasetsOutput, error)
+	ListDatasetsRequest(*cognitosync.ListDatasetsInput) (*aws.Request, *cognitosync.ListDatasetsOutput)
 
 	ListIdentityPoolUsage(*cognitosync.ListIdentityPoolUsageInput) (*cognitosync.ListIdentityPoolUsageOutput, error)
-	ListIdentityPoolUsageWithContext(aws.Context, *cognitosync.ListIdentityPoolUsageInput, ...request.Option) (*cognitosync.ListIdentityPoolUsageOutput, error)
-	ListIdentityPoolUsageRequest(*cognitosync.ListIdentityPoolUsageInput) (*request.Request, *cognitosync.ListIdentityPoolUsageOutput)
+	ListIdentityPoolUsageWithContext(aws.Context, *cognitosync.ListIdentityPoolUsageInput, ...aws.Option) (*cognitosync.ListIdentityPoolUsageOutput, error)
+	ListIdentityPoolUsageRequest(*cognitosync.ListIdentityPoolUsageInput) (*aws.Request, *cognitosync.ListIdentityPoolUsageOutput)
 
 	ListRecords(*cognitosync.ListRecordsInput) (*cognitosync.ListRecordsOutput, error)
-	ListRecordsWithContext(aws.Context, *cognitosync.ListRecordsInput, ...request.Option) (*cognitosync.ListRecordsOutput, error)
-	ListRecordsRequest(*cognitosync.ListRecordsInput) (*request.Request, *cognitosync.ListRecordsOutput)
+	ListRecordsWithContext(aws.Context, *cognitosync.ListRecordsInput, ...aws.Option) (*cognitosync.ListRecordsOutput, error)
+	ListRecordsRequest(*cognitosync.ListRecordsInput) (*aws.Request, *cognitosync.ListRecordsOutput)
 
 	RegisterDevice(*cognitosync.RegisterDeviceInput) (*cognitosync.RegisterDeviceOutput, error)
-	RegisterDeviceWithContext(aws.Context, *cognitosync.RegisterDeviceInput, ...request.Option) (*cognitosync.RegisterDeviceOutput, error)
-	RegisterDeviceRequest(*cognitosync.RegisterDeviceInput) (*request.Request, *cognitosync.RegisterDeviceOutput)
+	RegisterDeviceWithContext(aws.Context, *cognitosync.RegisterDeviceInput, ...aws.Option) (*cognitosync.RegisterDeviceOutput, error)
+	RegisterDeviceRequest(*cognitosync.RegisterDeviceInput) (*aws.Request, *cognitosync.RegisterDeviceOutput)
 
 	SetCognitoEvents(*cognitosync.SetCognitoEventsInput) (*cognitosync.SetCognitoEventsOutput, error)
-	SetCognitoEventsWithContext(aws.Context, *cognitosync.SetCognitoEventsInput, ...request.Option) (*cognitosync.SetCognitoEventsOutput, error)
-	SetCognitoEventsRequest(*cognitosync.SetCognitoEventsInput) (*request.Request, *cognitosync.SetCognitoEventsOutput)
+	SetCognitoEventsWithContext(aws.Context, *cognitosync.SetCognitoEventsInput, ...aws.Option) (*cognitosync.SetCognitoEventsOutput, error)
+	SetCognitoEventsRequest(*cognitosync.SetCognitoEventsInput) (*aws.Request, *cognitosync.SetCognitoEventsOutput)
 
 	SetIdentityPoolConfiguration(*cognitosync.SetIdentityPoolConfigurationInput) (*cognitosync.SetIdentityPoolConfigurationOutput, error)
-	SetIdentityPoolConfigurationWithContext(aws.Context, *cognitosync.SetIdentityPoolConfigurationInput, ...request.Option) (*cognitosync.SetIdentityPoolConfigurationOutput, error)
-	SetIdentityPoolConfigurationRequest(*cognitosync.SetIdentityPoolConfigurationInput) (*request.Request, *cognitosync.SetIdentityPoolConfigurationOutput)
+	SetIdentityPoolConfigurationWithContext(aws.Context, *cognitosync.SetIdentityPoolConfigurationInput, ...aws.Option) (*cognitosync.SetIdentityPoolConfigurationOutput, error)
+	SetIdentityPoolConfigurationRequest(*cognitosync.SetIdentityPoolConfigurationInput) (*aws.Request, *cognitosync.SetIdentityPoolConfigurationOutput)
 
 	SubscribeToDataset(*cognitosync.SubscribeToDatasetInput) (*cognitosync.SubscribeToDatasetOutput, error)
-	SubscribeToDatasetWithContext(aws.Context, *cognitosync.SubscribeToDatasetInput, ...request.Option) (*cognitosync.SubscribeToDatasetOutput, error)
-	SubscribeToDatasetRequest(*cognitosync.SubscribeToDatasetInput) (*request.Request, *cognitosync.SubscribeToDatasetOutput)
+	SubscribeToDatasetWithContext(aws.Context, *cognitosync.SubscribeToDatasetInput, ...aws.Option) (*cognitosync.SubscribeToDatasetOutput, error)
+	SubscribeToDatasetRequest(*cognitosync.SubscribeToDatasetInput) (*aws.Request, *cognitosync.SubscribeToDatasetOutput)
 
 	UnsubscribeFromDataset(*cognitosync.UnsubscribeFromDatasetInput) (*cognitosync.UnsubscribeFromDatasetOutput, error)
-	UnsubscribeFromDatasetWithContext(aws.Context, *cognitosync.UnsubscribeFromDatasetInput, ...request.Option) (*cognitosync.UnsubscribeFromDatasetOutput, error)
-	UnsubscribeFromDatasetRequest(*cognitosync.UnsubscribeFromDatasetInput) (*request.Request, *cognitosync.UnsubscribeFromDatasetOutput)
+	UnsubscribeFromDatasetWithContext(aws.Context, *cognitosync.UnsubscribeFromDatasetInput, ...aws.Option) (*cognitosync.UnsubscribeFromDatasetOutput, error)
+	UnsubscribeFromDatasetRequest(*cognitosync.UnsubscribeFromDatasetInput) (*aws.Request, *cognitosync.UnsubscribeFromDatasetOutput)
 
 	UpdateRecords(*cognitosync.UpdateRecordsInput) (*cognitosync.UpdateRecordsOutput, error)
-	UpdateRecordsWithContext(aws.Context, *cognitosync.UpdateRecordsInput, ...request.Option) (*cognitosync.UpdateRecordsOutput, error)
-	UpdateRecordsRequest(*cognitosync.UpdateRecordsInput) (*request.Request, *cognitosync.UpdateRecordsOutput)
+	UpdateRecordsWithContext(aws.Context, *cognitosync.UpdateRecordsInput, ...aws.Option) (*cognitosync.UpdateRecordsOutput, error)
+	UpdateRecordsRequest(*cognitosync.UpdateRecordsInput) (*aws.Request, *cognitosync.UpdateRecordsOutput)
 }
 
 var _ CognitoSyncAPI = (*cognitosync.CognitoSync)(nil)

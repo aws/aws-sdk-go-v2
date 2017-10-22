@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // WaitUntilClusterRunning uses the Amazon EMR API operation
@@ -25,40 +24,40 @@ func (c *EMR) WaitUntilClusterRunning(input *DescribeClusterInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) WaitUntilClusterRunningWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EMR) WaitUntilClusterRunningWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilClusterRunning",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "RUNNING",
 			},
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "WAITING",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "TERMINATING",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "TERMINATED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "TERMINATED_WITH_ERRORS",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeClusterInput
 			if input != nil {
 				tmp := *input
@@ -91,25 +90,25 @@ func (c *EMR) WaitUntilClusterTerminated(input *DescribeClusterInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) WaitUntilClusterTerminatedWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EMR) WaitUntilClusterTerminatedWithContext(ctx aws.Context, input *DescribeClusterInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilClusterTerminated",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "TERMINATED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Cluster.Status.State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Cluster.Status.State",
 				Expected: "TERMINATED_WITH_ERRORS",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeClusterInput
 			if input != nil {
 				tmp := *input
@@ -142,30 +141,30 @@ func (c *EMR) WaitUntilStepComplete(input *DescribeStepInput) error {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *EMR) WaitUntilStepCompleteWithContext(ctx aws.Context, input *DescribeStepInput, opts ...request.WaiterOption) error {
-	w := request.Waiter{
+func (c *EMR) WaitUntilStepCompleteWithContext(ctx aws.Context, input *DescribeStepInput, opts ...aws.WaiterOption) error {
+	w := aws.Waiter{
 		Name:        "WaitUntilStepComplete",
 		MaxAttempts: 60,
-		Delay:       request.ConstantWaiterDelay(30 * time.Second),
-		Acceptors: []request.WaiterAcceptor{
+		Delay:       aws.ConstantWaiterDelay(30 * time.Second),
+		Acceptors: []aws.WaiterAcceptor{
 			{
-				State:   request.SuccessWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Step.Status.State",
+				State:   aws.SuccessWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Step.Status.State",
 				Expected: "COMPLETED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Step.Status.State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Step.Status.State",
 				Expected: "FAILED",
 			},
 			{
-				State:   request.FailureWaiterState,
-				Matcher: request.PathWaiterMatch, Argument: "Step.Status.State",
+				State:   aws.FailureWaiterState,
+				Matcher: aws.PathWaiterMatch, Argument: "Step.Status.State",
 				Expected: "CANCELLED",
 			},
 		},
 		Logger: c.Config.Logger,
-		NewRequest: func(opts []request.Option) (*request.Request, error) {
+		NewRequest: func(opts []aws.Option) (*aws.Request, error) {
 			var inCpy *DescribeStepInput
 			if input != nil {
 				tmp := *input

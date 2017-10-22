@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 
-// AssociateCreatedArtifactRequest generates a "aws/request.Request" representing the
+// AssociateCreatedArtifactRequest generates a "aws.Request" representing the
 // client's request for the AssociateCreatedArtifact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifact
-func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) (req *request.Request, output *AssociateCreatedArtifactOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedArtifactInput) (req *aws.Request, output *AssociateCreatedArtifactOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateCreatedArtifact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -121,7 +120,7 @@ func (c *MigrationHub) AssociateCreatedArtifact(input *AssociateCreatedArtifactI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) AssociateCreatedArtifactWithContext(ctx aws.Context, input *AssociateCreatedArtifactInput, opts ...request.Option) (*AssociateCreatedArtifactOutput, error) {
+func (c *MigrationHub) AssociateCreatedArtifactWithContext(ctx aws.Context, input *AssociateCreatedArtifactInput, opts ...aws.Option) (*AssociateCreatedArtifactOutput, error) {
 	req, out := c.AssociateCreatedArtifactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -130,7 +129,7 @@ func (c *MigrationHub) AssociateCreatedArtifactWithContext(ctx aws.Context, inpu
 
 const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 
-// AssociateDiscoveredResourceRequest generates a "aws/request.Request" representing the
+// AssociateDiscoveredResourceRequest generates a "aws.Request" representing the
 // client's request for the AssociateDiscoveredResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -154,8 +153,8 @@ const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateDiscoveredResource
-func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredResourceInput) (req *request.Request, output *AssociateDiscoveredResourceOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscoveredResourceInput) (req *aws.Request, output *AssociateDiscoveredResourceOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateDiscoveredResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -232,7 +231,7 @@ func (c *MigrationHub) AssociateDiscoveredResource(input *AssociateDiscoveredRes
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) AssociateDiscoveredResourceWithContext(ctx aws.Context, input *AssociateDiscoveredResourceInput, opts ...request.Option) (*AssociateDiscoveredResourceOutput, error) {
+func (c *MigrationHub) AssociateDiscoveredResourceWithContext(ctx aws.Context, input *AssociateDiscoveredResourceInput, opts ...aws.Option) (*AssociateDiscoveredResourceOutput, error) {
 	req, out := c.AssociateDiscoveredResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -241,7 +240,7 @@ func (c *MigrationHub) AssociateDiscoveredResourceWithContext(ctx aws.Context, i
 
 const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 
-// CreateProgressUpdateStreamRequest generates a "aws/request.Request" representing the
+// CreateProgressUpdateStreamRequest generates a "aws.Request" representing the
 // client's request for the CreateProgressUpdateStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -265,8 +264,8 @@ const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/CreateProgressUpdateStream
-func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) (req *request.Request, output *CreateProgressUpdateStreamOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUpdateStreamInput) (req *aws.Request, output *CreateProgressUpdateStreamOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProgressUpdateStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -336,7 +335,7 @@ func (c *MigrationHub) CreateProgressUpdateStream(input *CreateProgressUpdateStr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) CreateProgressUpdateStreamWithContext(ctx aws.Context, input *CreateProgressUpdateStreamInput, opts ...request.Option) (*CreateProgressUpdateStreamOutput, error) {
+func (c *MigrationHub) CreateProgressUpdateStreamWithContext(ctx aws.Context, input *CreateProgressUpdateStreamInput, opts ...aws.Option) (*CreateProgressUpdateStreamOutput, error) {
 	req, out := c.CreateProgressUpdateStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -345,7 +344,7 @@ func (c *MigrationHub) CreateProgressUpdateStreamWithContext(ctx aws.Context, in
 
 const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 
-// DeleteProgressUpdateStreamRequest generates a "aws/request.Request" representing the
+// DeleteProgressUpdateStreamRequest generates a "aws.Request" representing the
 // client's request for the DeleteProgressUpdateStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -369,8 +368,8 @@ const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DeleteProgressUpdateStream
-func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) (req *request.Request, output *DeleteProgressUpdateStreamOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUpdateStreamInput) (req *aws.Request, output *DeleteProgressUpdateStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProgressUpdateStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -463,7 +462,7 @@ func (c *MigrationHub) DeleteProgressUpdateStream(input *DeleteProgressUpdateStr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) DeleteProgressUpdateStreamWithContext(ctx aws.Context, input *DeleteProgressUpdateStreamInput, opts ...request.Option) (*DeleteProgressUpdateStreamOutput, error) {
+func (c *MigrationHub) DeleteProgressUpdateStreamWithContext(ctx aws.Context, input *DeleteProgressUpdateStreamInput, opts ...aws.Option) (*DeleteProgressUpdateStreamOutput, error) {
 	req, out := c.DeleteProgressUpdateStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -472,7 +471,7 @@ func (c *MigrationHub) DeleteProgressUpdateStreamWithContext(ctx aws.Context, in
 
 const opDescribeApplicationState = "DescribeApplicationState"
 
-// DescribeApplicationStateRequest generates a "aws/request.Request" representing the
+// DescribeApplicationStateRequest generates a "aws.Request" representing the
 // client's request for the DescribeApplicationState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -496,8 +495,8 @@ const opDescribeApplicationState = "DescribeApplicationState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeApplicationState
-func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) (req *request.Request, output *DescribeApplicationStateOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicationStateInput) (req *aws.Request, output *DescribeApplicationStateOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeApplicationState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -565,7 +564,7 @@ func (c *MigrationHub) DescribeApplicationState(input *DescribeApplicationStateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) DescribeApplicationStateWithContext(ctx aws.Context, input *DescribeApplicationStateInput, opts ...request.Option) (*DescribeApplicationStateOutput, error) {
+func (c *MigrationHub) DescribeApplicationStateWithContext(ctx aws.Context, input *DescribeApplicationStateInput, opts ...aws.Option) (*DescribeApplicationStateOutput, error) {
 	req, out := c.DescribeApplicationStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -574,7 +573,7 @@ func (c *MigrationHub) DescribeApplicationStateWithContext(ctx aws.Context, inpu
 
 const opDescribeMigrationTask = "DescribeMigrationTask"
 
-// DescribeMigrationTaskRequest generates a "aws/request.Request" representing the
+// DescribeMigrationTaskRequest generates a "aws.Request" representing the
 // client's request for the DescribeMigrationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -598,8 +597,8 @@ const opDescribeMigrationTask = "DescribeMigrationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask
-func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) (req *request.Request, output *DescribeMigrationTaskOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTaskInput) (req *aws.Request, output *DescribeMigrationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeMigrationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -662,7 +661,7 @@ func (c *MigrationHub) DescribeMigrationTask(input *DescribeMigrationTaskInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) DescribeMigrationTaskWithContext(ctx aws.Context, input *DescribeMigrationTaskInput, opts ...request.Option) (*DescribeMigrationTaskOutput, error) {
+func (c *MigrationHub) DescribeMigrationTaskWithContext(ctx aws.Context, input *DescribeMigrationTaskInput, opts ...aws.Option) (*DescribeMigrationTaskOutput, error) {
 	req, out := c.DescribeMigrationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -671,7 +670,7 @@ func (c *MigrationHub) DescribeMigrationTaskWithContext(ctx aws.Context, input *
 
 const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 
-// DisassociateCreatedArtifactRequest generates a "aws/request.Request" representing the
+// DisassociateCreatedArtifactRequest generates a "aws.Request" representing the
 // client's request for the DisassociateCreatedArtifact operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -695,8 +694,8 @@ const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateCreatedArtifact
-func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) (req *request.Request, output *DisassociateCreatedArtifactOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCreatedArtifactInput) (req *aws.Request, output *DisassociateCreatedArtifactOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateCreatedArtifact,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -779,7 +778,7 @@ func (c *MigrationHub) DisassociateCreatedArtifact(input *DisassociateCreatedArt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) DisassociateCreatedArtifactWithContext(ctx aws.Context, input *DisassociateCreatedArtifactInput, opts ...request.Option) (*DisassociateCreatedArtifactOutput, error) {
+func (c *MigrationHub) DisassociateCreatedArtifactWithContext(ctx aws.Context, input *DisassociateCreatedArtifactInput, opts ...aws.Option) (*DisassociateCreatedArtifactOutput, error) {
 	req, out := c.DisassociateCreatedArtifactRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -788,7 +787,7 @@ func (c *MigrationHub) DisassociateCreatedArtifactWithContext(ctx aws.Context, i
 
 const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 
-// DisassociateDiscoveredResourceRequest generates a "aws/request.Request" representing the
+// DisassociateDiscoveredResourceRequest generates a "aws.Request" representing the
 // client's request for the DisassociateDiscoveredResource operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -812,8 +811,8 @@ const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DisassociateDiscoveredResource
-func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) (req *request.Request, output *DisassociateDiscoveredResourceOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *DisassociateDiscoveredResourceInput) (req *aws.Request, output *DisassociateDiscoveredResourceOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateDiscoveredResource,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -885,7 +884,7 @@ func (c *MigrationHub) DisassociateDiscoveredResource(input *DisassociateDiscove
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) DisassociateDiscoveredResourceWithContext(ctx aws.Context, input *DisassociateDiscoveredResourceInput, opts ...request.Option) (*DisassociateDiscoveredResourceOutput, error) {
+func (c *MigrationHub) DisassociateDiscoveredResourceWithContext(ctx aws.Context, input *DisassociateDiscoveredResourceInput, opts ...aws.Option) (*DisassociateDiscoveredResourceOutput, error) {
 	req, out := c.DisassociateDiscoveredResourceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -894,7 +893,7 @@ func (c *MigrationHub) DisassociateDiscoveredResourceWithContext(ctx aws.Context
 
 const opImportMigrationTask = "ImportMigrationTask"
 
-// ImportMigrationTaskRequest generates a "aws/request.Request" representing the
+// ImportMigrationTaskRequest generates a "aws.Request" representing the
 // client's request for the ImportMigrationTask operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -918,8 +917,8 @@ const opImportMigrationTask = "ImportMigrationTask"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ImportMigrationTask
-func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) (req *request.Request, output *ImportMigrationTaskOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInput) (req *aws.Request, output *ImportMigrationTaskOutput) {
+	op := &aws.Operation{
 		Name:       opImportMigrationTask,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -995,7 +994,7 @@ func (c *MigrationHub) ImportMigrationTask(input *ImportMigrationTaskInput) (*Im
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) ImportMigrationTaskWithContext(ctx aws.Context, input *ImportMigrationTaskInput, opts ...request.Option) (*ImportMigrationTaskOutput, error) {
+func (c *MigrationHub) ImportMigrationTaskWithContext(ctx aws.Context, input *ImportMigrationTaskInput, opts ...aws.Option) (*ImportMigrationTaskOutput, error) {
 	req, out := c.ImportMigrationTaskRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1004,7 +1003,7 @@ func (c *MigrationHub) ImportMigrationTaskWithContext(ctx aws.Context, input *Im
 
 const opListCreatedArtifacts = "ListCreatedArtifacts"
 
-// ListCreatedArtifactsRequest generates a "aws/request.Request" representing the
+// ListCreatedArtifactsRequest generates a "aws.Request" representing the
 // client's request for the ListCreatedArtifacts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1028,8 +1027,8 @@ const opListCreatedArtifacts = "ListCreatedArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListCreatedArtifacts
-func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) (req *request.Request, output *ListCreatedArtifactsOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsInput) (req *aws.Request, output *ListCreatedArtifactsOutput) {
+	op := &aws.Operation{
 		Name:       opListCreatedArtifacts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1100,7 +1099,7 @@ func (c *MigrationHub) ListCreatedArtifacts(input *ListCreatedArtifactsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) ListCreatedArtifactsWithContext(ctx aws.Context, input *ListCreatedArtifactsInput, opts ...request.Option) (*ListCreatedArtifactsOutput, error) {
+func (c *MigrationHub) ListCreatedArtifactsWithContext(ctx aws.Context, input *ListCreatedArtifactsInput, opts ...aws.Option) (*ListCreatedArtifactsOutput, error) {
 	req, out := c.ListCreatedArtifactsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1109,7 +1108,7 @@ func (c *MigrationHub) ListCreatedArtifactsWithContext(ctx aws.Context, input *L
 
 const opListDiscoveredResources = "ListDiscoveredResources"
 
-// ListDiscoveredResourcesRequest generates a "aws/request.Request" representing the
+// ListDiscoveredResourcesRequest generates a "aws.Request" representing the
 // client's request for the ListDiscoveredResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1133,8 +1132,8 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListDiscoveredResources
-func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *request.Request, output *ListDiscoveredResourcesOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResourcesInput) (req *aws.Request, output *ListDiscoveredResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opListDiscoveredResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1197,7 +1196,7 @@ func (c *MigrationHub) ListDiscoveredResources(input *ListDiscoveredResourcesInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) ListDiscoveredResourcesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, opts ...request.Option) (*ListDiscoveredResourcesOutput, error) {
+func (c *MigrationHub) ListDiscoveredResourcesWithContext(ctx aws.Context, input *ListDiscoveredResourcesInput, opts ...aws.Option) (*ListDiscoveredResourcesOutput, error) {
 	req, out := c.ListDiscoveredResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1206,7 +1205,7 @@ func (c *MigrationHub) ListDiscoveredResourcesWithContext(ctx aws.Context, input
 
 const opListMigrationTasks = "ListMigrationTasks"
 
-// ListMigrationTasksRequest generates a "aws/request.Request" representing the
+// ListMigrationTasksRequest generates a "aws.Request" representing the
 // client's request for the ListMigrationTasks operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1230,8 +1229,8 @@ const opListMigrationTasks = "ListMigrationTasks"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListMigrationTasks
-func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput) (req *request.Request, output *ListMigrationTasksOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput) (req *aws.Request, output *ListMigrationTasksOutput) {
+	op := &aws.Operation{
 		Name:       opListMigrationTasks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1307,7 +1306,7 @@ func (c *MigrationHub) ListMigrationTasks(input *ListMigrationTasksInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) ListMigrationTasksWithContext(ctx aws.Context, input *ListMigrationTasksInput, opts ...request.Option) (*ListMigrationTasksOutput, error) {
+func (c *MigrationHub) ListMigrationTasksWithContext(ctx aws.Context, input *ListMigrationTasksInput, opts ...aws.Option) (*ListMigrationTasksOutput, error) {
 	req, out := c.ListMigrationTasksRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1316,7 +1315,7 @@ func (c *MigrationHub) ListMigrationTasksWithContext(ctx aws.Context, input *Lis
 
 const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 
-// ListProgressUpdateStreamsRequest generates a "aws/request.Request" representing the
+// ListProgressUpdateStreamsRequest generates a "aws.Request" representing the
 // client's request for the ListProgressUpdateStreams operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1340,8 +1339,8 @@ const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ListProgressUpdateStreams
-func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStreamsInput) (req *request.Request, output *ListProgressUpdateStreamsOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdateStreamsInput) (req *aws.Request, output *ListProgressUpdateStreamsOutput) {
+	op := &aws.Operation{
 		Name:       opListProgressUpdateStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1400,7 +1399,7 @@ func (c *MigrationHub) ListProgressUpdateStreams(input *ListProgressUpdateStream
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) ListProgressUpdateStreamsWithContext(ctx aws.Context, input *ListProgressUpdateStreamsInput, opts ...request.Option) (*ListProgressUpdateStreamsOutput, error) {
+func (c *MigrationHub) ListProgressUpdateStreamsWithContext(ctx aws.Context, input *ListProgressUpdateStreamsInput, opts ...aws.Option) (*ListProgressUpdateStreamsOutput, error) {
 	req, out := c.ListProgressUpdateStreamsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1409,7 +1408,7 @@ func (c *MigrationHub) ListProgressUpdateStreamsWithContext(ctx aws.Context, inp
 
 const opNotifyApplicationState = "NotifyApplicationState"
 
-// NotifyApplicationStateRequest generates a "aws/request.Request" representing the
+// NotifyApplicationStateRequest generates a "aws.Request" representing the
 // client's request for the NotifyApplicationState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1433,8 +1432,8 @@ const opNotifyApplicationState = "NotifyApplicationState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyApplicationState
-func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) (req *request.Request, output *NotifyApplicationStateOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationStateInput) (req *aws.Request, output *NotifyApplicationStateOutput) {
+	op := &aws.Operation{
 		Name:       opNotifyApplicationState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1512,7 +1511,7 @@ func (c *MigrationHub) NotifyApplicationState(input *NotifyApplicationStateInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) NotifyApplicationStateWithContext(ctx aws.Context, input *NotifyApplicationStateInput, opts ...request.Option) (*NotifyApplicationStateOutput, error) {
+func (c *MigrationHub) NotifyApplicationStateWithContext(ctx aws.Context, input *NotifyApplicationStateInput, opts ...aws.Option) (*NotifyApplicationStateOutput, error) {
 	req, out := c.NotifyApplicationStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1521,7 +1520,7 @@ func (c *MigrationHub) NotifyApplicationStateWithContext(ctx aws.Context, input 
 
 const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
 
-// NotifyMigrationTaskStateRequest generates a "aws/request.Request" representing the
+// NotifyMigrationTaskStateRequest generates a "aws.Request" representing the
 // client's request for the NotifyMigrationTaskState operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1545,8 +1544,8 @@ const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/NotifyMigrationTaskState
-func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskStateInput) (req *request.Request, output *NotifyMigrationTaskStateOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTaskStateInput) (req *aws.Request, output *NotifyMigrationTaskStateOutput) {
+	op := &aws.Operation{
 		Name:       opNotifyMigrationTaskState,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1626,7 +1625,7 @@ func (c *MigrationHub) NotifyMigrationTaskState(input *NotifyMigrationTaskStateI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) NotifyMigrationTaskStateWithContext(ctx aws.Context, input *NotifyMigrationTaskStateInput, opts ...request.Option) (*NotifyMigrationTaskStateOutput, error) {
+func (c *MigrationHub) NotifyMigrationTaskStateWithContext(ctx aws.Context, input *NotifyMigrationTaskStateInput, opts ...aws.Option) (*NotifyMigrationTaskStateOutput, error) {
 	req, out := c.NotifyMigrationTaskStateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1635,7 +1634,7 @@ func (c *MigrationHub) NotifyMigrationTaskStateWithContext(ctx aws.Context, inpu
 
 const opPutResourceAttributes = "PutResourceAttributes"
 
-// PutResourceAttributesRequest generates a "aws/request.Request" representing the
+// PutResourceAttributesRequest generates a "aws.Request" representing the
 // client's request for the PutResourceAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1659,8 +1658,8 @@ const opPutResourceAttributes = "PutResourceAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/PutResourceAttributes
-func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributesInput) (req *request.Request, output *PutResourceAttributesOutput) {
-	op := &request.Operation{
+func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributesInput) (req *aws.Request, output *PutResourceAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opPutResourceAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1743,7 +1742,7 @@ func (c *MigrationHub) PutResourceAttributes(input *PutResourceAttributesInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *MigrationHub) PutResourceAttributesWithContext(ctx aws.Context, input *PutResourceAttributesInput, opts ...request.Option) (*PutResourceAttributesOutput, error) {
+func (c *MigrationHub) PutResourceAttributesWithContext(ctx aws.Context, input *PutResourceAttributesInput, opts ...aws.Option) (*PutResourceAttributesOutput, error) {
 	req, out := c.PutResourceAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1787,25 +1786,25 @@ func (s AssociateCreatedArtifactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateCreatedArtifactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateCreatedArtifactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateCreatedArtifactInput"}
 	if s.CreatedArtifact == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreatedArtifact"))
+		invalidParams.Add(aws.NewErrParamRequired("CreatedArtifact"))
 	}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 	if s.CreatedArtifact != nil {
 		if err := s.CreatedArtifact.Validate(); err != nil {
-			invalidParams.AddNested("CreatedArtifact", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CreatedArtifact", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1890,25 +1889,25 @@ func (s AssociateDiscoveredResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateDiscoveredResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateDiscoveredResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateDiscoveredResourceInput"}
 	if s.DiscoveredResource == nil {
-		invalidParams.Add(request.NewErrParamRequired("DiscoveredResource"))
+		invalidParams.Add(aws.NewErrParamRequired("DiscoveredResource"))
 	}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 	if s.DiscoveredResource != nil {
 		if err := s.DiscoveredResource.Validate(); err != nil {
-			invalidParams.AddNested("DiscoveredResource", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DiscoveredResource", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1983,12 +1982,12 @@ func (s CreateProgressUpdateStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProgressUpdateStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProgressUpdateStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProgressUpdateStreamInput"}
 	if s.ProgressUpdateStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStreamName"))
 	}
 	if s.ProgressUpdateStreamName != nil && len(*s.ProgressUpdateStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2052,12 +2051,12 @@ func (s CreatedArtifact) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatedArtifact) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatedArtifact"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatedArtifact"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2104,12 +2103,12 @@ func (s DeleteProgressUpdateStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProgressUpdateStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProgressUpdateStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProgressUpdateStreamInput"}
 	if s.ProgressUpdateStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStreamName"))
 	}
 	if s.ProgressUpdateStreamName != nil && len(*s.ProgressUpdateStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2167,12 +2166,12 @@ func (s DescribeApplicationStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeApplicationStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeApplicationStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeApplicationStateInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2247,18 +2246,18 @@ func (s DescribeMigrationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMigrationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeMigrationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeMigrationTaskInput"}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2341,24 +2340,24 @@ func (s DisassociateCreatedArtifactInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateCreatedArtifactInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateCreatedArtifactInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateCreatedArtifactInput"}
 	if s.CreatedArtifactName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CreatedArtifactName"))
+		invalidParams.Add(aws.NewErrParamRequired("CreatedArtifactName"))
 	}
 	if s.CreatedArtifactName != nil && len(*s.CreatedArtifactName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CreatedArtifactName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CreatedArtifactName", 1))
 	}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2442,24 +2441,24 @@ func (s DisassociateDiscoveredResourceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateDiscoveredResourceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateDiscoveredResourceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateDiscoveredResourceInput"}
 	if s.ConfigurationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
 	if s.ConfigurationId != nil && len(*s.ConfigurationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigurationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationId", 1))
 	}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2534,12 +2533,12 @@ func (s DiscoveredResource) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DiscoveredResource) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DiscoveredResource"}
+	invalidParams := aws.ErrInvalidParams{Context: "DiscoveredResource"}
 	if s.ConfigurationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConfigurationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ConfigurationId"))
 	}
 	if s.ConfigurationId != nil && len(*s.ConfigurationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConfigurationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConfigurationId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2591,18 +2590,18 @@ func (s ImportMigrationTaskInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportMigrationTaskInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportMigrationTaskInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportMigrationTaskInput"}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2679,21 +2678,21 @@ func (s ListCreatedArtifactsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCreatedArtifactsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCreatedArtifactsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCreatedArtifactsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2796,21 +2795,21 @@ func (s ListDiscoveredResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDiscoveredResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDiscoveredResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDiscoveredResourcesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2905,12 +2904,12 @@ func (s ListMigrationTasksInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListMigrationTasksInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListMigrationTasksInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListMigrationTasksInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ResourceName != nil && len(*s.ResourceName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2997,9 +2996,9 @@ func (s ListProgressUpdateStreamsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProgressUpdateStreamsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProgressUpdateStreamsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProgressUpdateStreamsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3217,15 +3216,15 @@ func (s NotifyApplicationStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotifyApplicationStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NotifyApplicationStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "NotifyApplicationStateInput"}
 	if s.ApplicationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ApplicationId"))
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
 	if s.ApplicationId != nil && len(*s.ApplicationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ApplicationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ApplicationId", 1))
 	}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3315,31 +3314,31 @@ func (s NotifyMigrationTaskStateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *NotifyMigrationTaskStateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "NotifyMigrationTaskStateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "NotifyMigrationTaskStateInput"}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.NextUpdateSeconds == nil {
-		invalidParams.Add(request.NewErrParamRequired("NextUpdateSeconds"))
+		invalidParams.Add(aws.NewErrParamRequired("NextUpdateSeconds"))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 	if s.Task == nil {
-		invalidParams.Add(request.NewErrParamRequired("Task"))
+		invalidParams.Add(aws.NewErrParamRequired("Task"))
 	}
 	if s.UpdateDateTime == nil {
-		invalidParams.Add(request.NewErrParamRequired("UpdateDateTime"))
+		invalidParams.Add(aws.NewErrParamRequired("UpdateDateTime"))
 	}
 	if s.Task != nil {
 		if err := s.Task.Validate(); err != nil {
-			invalidParams.AddNested("Task", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Task", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3464,24 +3463,24 @@ func (s PutResourceAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutResourceAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutResourceAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutResourceAttributesInput"}
 	if s.MigrationTaskName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MigrationTaskName"))
+		invalidParams.Add(aws.NewErrParamRequired("MigrationTaskName"))
 	}
 	if s.MigrationTaskName != nil && len(*s.MigrationTaskName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("MigrationTaskName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("MigrationTaskName", 1))
 	}
 	if s.ProgressUpdateStream == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProgressUpdateStream"))
+		invalidParams.Add(aws.NewErrParamRequired("ProgressUpdateStream"))
 	}
 	if s.ProgressUpdateStream != nil && len(*s.ProgressUpdateStream) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ProgressUpdateStream", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ProgressUpdateStream", 1))
 	}
 	if s.ResourceAttributeList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceAttributeList"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceAttributeList"))
 	}
 	if s.ResourceAttributeList != nil && len(s.ResourceAttributeList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceAttributeList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceAttributeList", 1))
 	}
 	if s.ResourceAttributeList != nil {
 		for i, v := range s.ResourceAttributeList {
@@ -3489,7 +3488,7 @@ func (s *PutResourceAttributesInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceAttributeList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceAttributeList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3567,15 +3566,15 @@ func (s ResourceAttribute) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceAttribute) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResourceAttribute"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceAttribute"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 	if s.Value != nil && len(*s.Value) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Value", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Value", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3627,9 +3626,9 @@ func (s Task) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Task) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Task"}
+	invalidParams := aws.ErrInvalidParams{Context: "Task"}
 	if s.Status == nil {
-		invalidParams.Add(request.NewErrParamRequired("Status"))
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {

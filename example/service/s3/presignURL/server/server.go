@@ -15,7 +15,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
@@ -40,9 +40,12 @@ import (
 func main() {
 	addr, bucket, region := loadConfig()
 
-	// Create a AWS SDK for Go Session that will load credentials using the SDK's
+	// Create a AWS SDK for Go config that will load credentials using the SDK's
 	// default credential change.
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 
 	// Use the GetBucketRegion utility to lookup the bucket's region automatically.
 	// The service.go will only do this correctly for AWS regions. For AWS China
@@ -50,9 +53,9 @@ func main() {
 	// to look in those partitions instead of AWS.
 	if len(region) == 0 {
 		var err error
-		region, err = s3manager.GetBucketRegion(aws.BackgroundContext(), sess, bucket, endpoints.UsWest2RegionID)
+		region, err = s3manager.GetBucketRegion(aws.BackgroundContext(), cfg, bucket, endpoints.UsWest2RegionID)
 		if err != nil {
-			exitError(fmt.Errorf("failed to get bucket region, %v", err))
+			exitErrorf("failed to get bucket region, %v", err)
 		}
 	}
 
@@ -60,14 +63,14 @@ func main() {
 	// presigned URLs with. Not actual API requests will be made with this client.
 	// The credentials loaded when the Session was created above will be used
 	// to sign the requests with.
-	s3Svc := s3.New(sess, &aws.Config{
+	s3Svc := s3.New(cfg, &aws.Config{
 		Region: aws.String(region),
 	})
 
 	// Start the server listening and serve presigned URLs for GetObject and
 	// PutObject requests.
 	if err := listenAndServe(addr, bucket, s3Svc); err != nil {
-		exitError(err)
+		exitErrorf("failed to listen, %v", err)
 	}
 }
 
@@ -78,9 +81,8 @@ func loadConfig() (addr, bucket, region string) {
 	flag.Parse()
 
 	if len(bucket) == 0 {
-		fmt.Fprintln(os.Stderr, "bucket is required")
 		flag.PrintDefaults()
-		os.Exit(1)
+		exitErrorf("bucket is required")
 	}
 
 	return addr, bucket, region
@@ -180,7 +182,7 @@ type PresignResp struct {
 	Header      http.Header
 }
 
-func exitError(err error) {
-	fmt.Fprintln(os.Stderr, err.Error())
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }

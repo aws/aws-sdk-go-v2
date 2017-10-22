@@ -10,7 +10,6 @@ package daxiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/dax"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := dax.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := dax.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,88 +64,88 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type DAXAPI interface {
 	CreateCluster(*dax.CreateClusterInput) (*dax.CreateClusterOutput, error)
-	CreateClusterWithContext(aws.Context, *dax.CreateClusterInput, ...request.Option) (*dax.CreateClusterOutput, error)
-	CreateClusterRequest(*dax.CreateClusterInput) (*request.Request, *dax.CreateClusterOutput)
+	CreateClusterWithContext(aws.Context, *dax.CreateClusterInput, ...aws.Option) (*dax.CreateClusterOutput, error)
+	CreateClusterRequest(*dax.CreateClusterInput) (*aws.Request, *dax.CreateClusterOutput)
 
 	CreateParameterGroup(*dax.CreateParameterGroupInput) (*dax.CreateParameterGroupOutput, error)
-	CreateParameterGroupWithContext(aws.Context, *dax.CreateParameterGroupInput, ...request.Option) (*dax.CreateParameterGroupOutput, error)
-	CreateParameterGroupRequest(*dax.CreateParameterGroupInput) (*request.Request, *dax.CreateParameterGroupOutput)
+	CreateParameterGroupWithContext(aws.Context, *dax.CreateParameterGroupInput, ...aws.Option) (*dax.CreateParameterGroupOutput, error)
+	CreateParameterGroupRequest(*dax.CreateParameterGroupInput) (*aws.Request, *dax.CreateParameterGroupOutput)
 
 	CreateSubnetGroup(*dax.CreateSubnetGroupInput) (*dax.CreateSubnetGroupOutput, error)
-	CreateSubnetGroupWithContext(aws.Context, *dax.CreateSubnetGroupInput, ...request.Option) (*dax.CreateSubnetGroupOutput, error)
-	CreateSubnetGroupRequest(*dax.CreateSubnetGroupInput) (*request.Request, *dax.CreateSubnetGroupOutput)
+	CreateSubnetGroupWithContext(aws.Context, *dax.CreateSubnetGroupInput, ...aws.Option) (*dax.CreateSubnetGroupOutput, error)
+	CreateSubnetGroupRequest(*dax.CreateSubnetGroupInput) (*aws.Request, *dax.CreateSubnetGroupOutput)
 
 	DecreaseReplicationFactor(*dax.DecreaseReplicationFactorInput) (*dax.DecreaseReplicationFactorOutput, error)
-	DecreaseReplicationFactorWithContext(aws.Context, *dax.DecreaseReplicationFactorInput, ...request.Option) (*dax.DecreaseReplicationFactorOutput, error)
-	DecreaseReplicationFactorRequest(*dax.DecreaseReplicationFactorInput) (*request.Request, *dax.DecreaseReplicationFactorOutput)
+	DecreaseReplicationFactorWithContext(aws.Context, *dax.DecreaseReplicationFactorInput, ...aws.Option) (*dax.DecreaseReplicationFactorOutput, error)
+	DecreaseReplicationFactorRequest(*dax.DecreaseReplicationFactorInput) (*aws.Request, *dax.DecreaseReplicationFactorOutput)
 
 	DeleteCluster(*dax.DeleteClusterInput) (*dax.DeleteClusterOutput, error)
-	DeleteClusterWithContext(aws.Context, *dax.DeleteClusterInput, ...request.Option) (*dax.DeleteClusterOutput, error)
-	DeleteClusterRequest(*dax.DeleteClusterInput) (*request.Request, *dax.DeleteClusterOutput)
+	DeleteClusterWithContext(aws.Context, *dax.DeleteClusterInput, ...aws.Option) (*dax.DeleteClusterOutput, error)
+	DeleteClusterRequest(*dax.DeleteClusterInput) (*aws.Request, *dax.DeleteClusterOutput)
 
 	DeleteParameterGroup(*dax.DeleteParameterGroupInput) (*dax.DeleteParameterGroupOutput, error)
-	DeleteParameterGroupWithContext(aws.Context, *dax.DeleteParameterGroupInput, ...request.Option) (*dax.DeleteParameterGroupOutput, error)
-	DeleteParameterGroupRequest(*dax.DeleteParameterGroupInput) (*request.Request, *dax.DeleteParameterGroupOutput)
+	DeleteParameterGroupWithContext(aws.Context, *dax.DeleteParameterGroupInput, ...aws.Option) (*dax.DeleteParameterGroupOutput, error)
+	DeleteParameterGroupRequest(*dax.DeleteParameterGroupInput) (*aws.Request, *dax.DeleteParameterGroupOutput)
 
 	DeleteSubnetGroup(*dax.DeleteSubnetGroupInput) (*dax.DeleteSubnetGroupOutput, error)
-	DeleteSubnetGroupWithContext(aws.Context, *dax.DeleteSubnetGroupInput, ...request.Option) (*dax.DeleteSubnetGroupOutput, error)
-	DeleteSubnetGroupRequest(*dax.DeleteSubnetGroupInput) (*request.Request, *dax.DeleteSubnetGroupOutput)
+	DeleteSubnetGroupWithContext(aws.Context, *dax.DeleteSubnetGroupInput, ...aws.Option) (*dax.DeleteSubnetGroupOutput, error)
+	DeleteSubnetGroupRequest(*dax.DeleteSubnetGroupInput) (*aws.Request, *dax.DeleteSubnetGroupOutput)
 
 	DescribeClusters(*dax.DescribeClustersInput) (*dax.DescribeClustersOutput, error)
-	DescribeClustersWithContext(aws.Context, *dax.DescribeClustersInput, ...request.Option) (*dax.DescribeClustersOutput, error)
-	DescribeClustersRequest(*dax.DescribeClustersInput) (*request.Request, *dax.DescribeClustersOutput)
+	DescribeClustersWithContext(aws.Context, *dax.DescribeClustersInput, ...aws.Option) (*dax.DescribeClustersOutput, error)
+	DescribeClustersRequest(*dax.DescribeClustersInput) (*aws.Request, *dax.DescribeClustersOutput)
 
 	DescribeDefaultParameters(*dax.DescribeDefaultParametersInput) (*dax.DescribeDefaultParametersOutput, error)
-	DescribeDefaultParametersWithContext(aws.Context, *dax.DescribeDefaultParametersInput, ...request.Option) (*dax.DescribeDefaultParametersOutput, error)
-	DescribeDefaultParametersRequest(*dax.DescribeDefaultParametersInput) (*request.Request, *dax.DescribeDefaultParametersOutput)
+	DescribeDefaultParametersWithContext(aws.Context, *dax.DescribeDefaultParametersInput, ...aws.Option) (*dax.DescribeDefaultParametersOutput, error)
+	DescribeDefaultParametersRequest(*dax.DescribeDefaultParametersInput) (*aws.Request, *dax.DescribeDefaultParametersOutput)
 
 	DescribeEvents(*dax.DescribeEventsInput) (*dax.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *dax.DescribeEventsInput, ...request.Option) (*dax.DescribeEventsOutput, error)
-	DescribeEventsRequest(*dax.DescribeEventsInput) (*request.Request, *dax.DescribeEventsOutput)
+	DescribeEventsWithContext(aws.Context, *dax.DescribeEventsInput, ...aws.Option) (*dax.DescribeEventsOutput, error)
+	DescribeEventsRequest(*dax.DescribeEventsInput) (*aws.Request, *dax.DescribeEventsOutput)
 
 	DescribeParameterGroups(*dax.DescribeParameterGroupsInput) (*dax.DescribeParameterGroupsOutput, error)
-	DescribeParameterGroupsWithContext(aws.Context, *dax.DescribeParameterGroupsInput, ...request.Option) (*dax.DescribeParameterGroupsOutput, error)
-	DescribeParameterGroupsRequest(*dax.DescribeParameterGroupsInput) (*request.Request, *dax.DescribeParameterGroupsOutput)
+	DescribeParameterGroupsWithContext(aws.Context, *dax.DescribeParameterGroupsInput, ...aws.Option) (*dax.DescribeParameterGroupsOutput, error)
+	DescribeParameterGroupsRequest(*dax.DescribeParameterGroupsInput) (*aws.Request, *dax.DescribeParameterGroupsOutput)
 
 	DescribeParameters(*dax.DescribeParametersInput) (*dax.DescribeParametersOutput, error)
-	DescribeParametersWithContext(aws.Context, *dax.DescribeParametersInput, ...request.Option) (*dax.DescribeParametersOutput, error)
-	DescribeParametersRequest(*dax.DescribeParametersInput) (*request.Request, *dax.DescribeParametersOutput)
+	DescribeParametersWithContext(aws.Context, *dax.DescribeParametersInput, ...aws.Option) (*dax.DescribeParametersOutput, error)
+	DescribeParametersRequest(*dax.DescribeParametersInput) (*aws.Request, *dax.DescribeParametersOutput)
 
 	DescribeSubnetGroups(*dax.DescribeSubnetGroupsInput) (*dax.DescribeSubnetGroupsOutput, error)
-	DescribeSubnetGroupsWithContext(aws.Context, *dax.DescribeSubnetGroupsInput, ...request.Option) (*dax.DescribeSubnetGroupsOutput, error)
-	DescribeSubnetGroupsRequest(*dax.DescribeSubnetGroupsInput) (*request.Request, *dax.DescribeSubnetGroupsOutput)
+	DescribeSubnetGroupsWithContext(aws.Context, *dax.DescribeSubnetGroupsInput, ...aws.Option) (*dax.DescribeSubnetGroupsOutput, error)
+	DescribeSubnetGroupsRequest(*dax.DescribeSubnetGroupsInput) (*aws.Request, *dax.DescribeSubnetGroupsOutput)
 
 	IncreaseReplicationFactor(*dax.IncreaseReplicationFactorInput) (*dax.IncreaseReplicationFactorOutput, error)
-	IncreaseReplicationFactorWithContext(aws.Context, *dax.IncreaseReplicationFactorInput, ...request.Option) (*dax.IncreaseReplicationFactorOutput, error)
-	IncreaseReplicationFactorRequest(*dax.IncreaseReplicationFactorInput) (*request.Request, *dax.IncreaseReplicationFactorOutput)
+	IncreaseReplicationFactorWithContext(aws.Context, *dax.IncreaseReplicationFactorInput, ...aws.Option) (*dax.IncreaseReplicationFactorOutput, error)
+	IncreaseReplicationFactorRequest(*dax.IncreaseReplicationFactorInput) (*aws.Request, *dax.IncreaseReplicationFactorOutput)
 
 	ListTags(*dax.ListTagsInput) (*dax.ListTagsOutput, error)
-	ListTagsWithContext(aws.Context, *dax.ListTagsInput, ...request.Option) (*dax.ListTagsOutput, error)
-	ListTagsRequest(*dax.ListTagsInput) (*request.Request, *dax.ListTagsOutput)
+	ListTagsWithContext(aws.Context, *dax.ListTagsInput, ...aws.Option) (*dax.ListTagsOutput, error)
+	ListTagsRequest(*dax.ListTagsInput) (*aws.Request, *dax.ListTagsOutput)
 
 	RebootNode(*dax.RebootNodeInput) (*dax.RebootNodeOutput, error)
-	RebootNodeWithContext(aws.Context, *dax.RebootNodeInput, ...request.Option) (*dax.RebootNodeOutput, error)
-	RebootNodeRequest(*dax.RebootNodeInput) (*request.Request, *dax.RebootNodeOutput)
+	RebootNodeWithContext(aws.Context, *dax.RebootNodeInput, ...aws.Option) (*dax.RebootNodeOutput, error)
+	RebootNodeRequest(*dax.RebootNodeInput) (*aws.Request, *dax.RebootNodeOutput)
 
 	TagResource(*dax.TagResourceInput) (*dax.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *dax.TagResourceInput, ...request.Option) (*dax.TagResourceOutput, error)
-	TagResourceRequest(*dax.TagResourceInput) (*request.Request, *dax.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *dax.TagResourceInput, ...aws.Option) (*dax.TagResourceOutput, error)
+	TagResourceRequest(*dax.TagResourceInput) (*aws.Request, *dax.TagResourceOutput)
 
 	UntagResource(*dax.UntagResourceInput) (*dax.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *dax.UntagResourceInput, ...request.Option) (*dax.UntagResourceOutput, error)
-	UntagResourceRequest(*dax.UntagResourceInput) (*request.Request, *dax.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *dax.UntagResourceInput, ...aws.Option) (*dax.UntagResourceOutput, error)
+	UntagResourceRequest(*dax.UntagResourceInput) (*aws.Request, *dax.UntagResourceOutput)
 
 	UpdateCluster(*dax.UpdateClusterInput) (*dax.UpdateClusterOutput, error)
-	UpdateClusterWithContext(aws.Context, *dax.UpdateClusterInput, ...request.Option) (*dax.UpdateClusterOutput, error)
-	UpdateClusterRequest(*dax.UpdateClusterInput) (*request.Request, *dax.UpdateClusterOutput)
+	UpdateClusterWithContext(aws.Context, *dax.UpdateClusterInput, ...aws.Option) (*dax.UpdateClusterOutput, error)
+	UpdateClusterRequest(*dax.UpdateClusterInput) (*aws.Request, *dax.UpdateClusterOutput)
 
 	UpdateParameterGroup(*dax.UpdateParameterGroupInput) (*dax.UpdateParameterGroupOutput, error)
-	UpdateParameterGroupWithContext(aws.Context, *dax.UpdateParameterGroupInput, ...request.Option) (*dax.UpdateParameterGroupOutput, error)
-	UpdateParameterGroupRequest(*dax.UpdateParameterGroupInput) (*request.Request, *dax.UpdateParameterGroupOutput)
+	UpdateParameterGroupWithContext(aws.Context, *dax.UpdateParameterGroupInput, ...aws.Option) (*dax.UpdateParameterGroupOutput, error)
+	UpdateParameterGroupRequest(*dax.UpdateParameterGroupInput) (*aws.Request, *dax.UpdateParameterGroupOutput)
 
 	UpdateSubnetGroup(*dax.UpdateSubnetGroupInput) (*dax.UpdateSubnetGroupOutput, error)
-	UpdateSubnetGroupWithContext(aws.Context, *dax.UpdateSubnetGroupInput, ...request.Option) (*dax.UpdateSubnetGroupOutput, error)
-	UpdateSubnetGroupRequest(*dax.UpdateSubnetGroupInput) (*request.Request, *dax.UpdateSubnetGroupOutput)
+	UpdateSubnetGroupWithContext(aws.Context, *dax.UpdateSubnetGroupInput, ...aws.Option) (*dax.UpdateSubnetGroupOutput, error)
+	UpdateSubnetGroupRequest(*dax.UpdateSubnetGroupInput) (*aws.Request, *dax.UpdateSubnetGroupOutput)
 }
 
 var _ DAXAPI = (*dax.DAX)(nil)

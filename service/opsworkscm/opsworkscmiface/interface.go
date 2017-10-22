@@ -10,7 +10,6 @@ package opsworkscmiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := opsworkscm.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := opsworkscm.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,64 +64,64 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type OpsWorksCMAPI interface {
 	AssociateNode(*opsworkscm.AssociateNodeInput) (*opsworkscm.AssociateNodeOutput, error)
-	AssociateNodeWithContext(aws.Context, *opsworkscm.AssociateNodeInput, ...request.Option) (*opsworkscm.AssociateNodeOutput, error)
-	AssociateNodeRequest(*opsworkscm.AssociateNodeInput) (*request.Request, *opsworkscm.AssociateNodeOutput)
+	AssociateNodeWithContext(aws.Context, *opsworkscm.AssociateNodeInput, ...aws.Option) (*opsworkscm.AssociateNodeOutput, error)
+	AssociateNodeRequest(*opsworkscm.AssociateNodeInput) (*aws.Request, *opsworkscm.AssociateNodeOutput)
 
 	CreateBackup(*opsworkscm.CreateBackupInput) (*opsworkscm.CreateBackupOutput, error)
-	CreateBackupWithContext(aws.Context, *opsworkscm.CreateBackupInput, ...request.Option) (*opsworkscm.CreateBackupOutput, error)
-	CreateBackupRequest(*opsworkscm.CreateBackupInput) (*request.Request, *opsworkscm.CreateBackupOutput)
+	CreateBackupWithContext(aws.Context, *opsworkscm.CreateBackupInput, ...aws.Option) (*opsworkscm.CreateBackupOutput, error)
+	CreateBackupRequest(*opsworkscm.CreateBackupInput) (*aws.Request, *opsworkscm.CreateBackupOutput)
 
 	CreateServer(*opsworkscm.CreateServerInput) (*opsworkscm.CreateServerOutput, error)
-	CreateServerWithContext(aws.Context, *opsworkscm.CreateServerInput, ...request.Option) (*opsworkscm.CreateServerOutput, error)
-	CreateServerRequest(*opsworkscm.CreateServerInput) (*request.Request, *opsworkscm.CreateServerOutput)
+	CreateServerWithContext(aws.Context, *opsworkscm.CreateServerInput, ...aws.Option) (*opsworkscm.CreateServerOutput, error)
+	CreateServerRequest(*opsworkscm.CreateServerInput) (*aws.Request, *opsworkscm.CreateServerOutput)
 
 	DeleteBackup(*opsworkscm.DeleteBackupInput) (*opsworkscm.DeleteBackupOutput, error)
-	DeleteBackupWithContext(aws.Context, *opsworkscm.DeleteBackupInput, ...request.Option) (*opsworkscm.DeleteBackupOutput, error)
-	DeleteBackupRequest(*opsworkscm.DeleteBackupInput) (*request.Request, *opsworkscm.DeleteBackupOutput)
+	DeleteBackupWithContext(aws.Context, *opsworkscm.DeleteBackupInput, ...aws.Option) (*opsworkscm.DeleteBackupOutput, error)
+	DeleteBackupRequest(*opsworkscm.DeleteBackupInput) (*aws.Request, *opsworkscm.DeleteBackupOutput)
 
 	DeleteServer(*opsworkscm.DeleteServerInput) (*opsworkscm.DeleteServerOutput, error)
-	DeleteServerWithContext(aws.Context, *opsworkscm.DeleteServerInput, ...request.Option) (*opsworkscm.DeleteServerOutput, error)
-	DeleteServerRequest(*opsworkscm.DeleteServerInput) (*request.Request, *opsworkscm.DeleteServerOutput)
+	DeleteServerWithContext(aws.Context, *opsworkscm.DeleteServerInput, ...aws.Option) (*opsworkscm.DeleteServerOutput, error)
+	DeleteServerRequest(*opsworkscm.DeleteServerInput) (*aws.Request, *opsworkscm.DeleteServerOutput)
 
 	DescribeAccountAttributes(*opsworkscm.DescribeAccountAttributesInput) (*opsworkscm.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesWithContext(aws.Context, *opsworkscm.DescribeAccountAttributesInput, ...request.Option) (*opsworkscm.DescribeAccountAttributesOutput, error)
-	DescribeAccountAttributesRequest(*opsworkscm.DescribeAccountAttributesInput) (*request.Request, *opsworkscm.DescribeAccountAttributesOutput)
+	DescribeAccountAttributesWithContext(aws.Context, *opsworkscm.DescribeAccountAttributesInput, ...aws.Option) (*opsworkscm.DescribeAccountAttributesOutput, error)
+	DescribeAccountAttributesRequest(*opsworkscm.DescribeAccountAttributesInput) (*aws.Request, *opsworkscm.DescribeAccountAttributesOutput)
 
 	DescribeBackups(*opsworkscm.DescribeBackupsInput) (*opsworkscm.DescribeBackupsOutput, error)
-	DescribeBackupsWithContext(aws.Context, *opsworkscm.DescribeBackupsInput, ...request.Option) (*opsworkscm.DescribeBackupsOutput, error)
-	DescribeBackupsRequest(*opsworkscm.DescribeBackupsInput) (*request.Request, *opsworkscm.DescribeBackupsOutput)
+	DescribeBackupsWithContext(aws.Context, *opsworkscm.DescribeBackupsInput, ...aws.Option) (*opsworkscm.DescribeBackupsOutput, error)
+	DescribeBackupsRequest(*opsworkscm.DescribeBackupsInput) (*aws.Request, *opsworkscm.DescribeBackupsOutput)
 
 	DescribeEvents(*opsworkscm.DescribeEventsInput) (*opsworkscm.DescribeEventsOutput, error)
-	DescribeEventsWithContext(aws.Context, *opsworkscm.DescribeEventsInput, ...request.Option) (*opsworkscm.DescribeEventsOutput, error)
-	DescribeEventsRequest(*opsworkscm.DescribeEventsInput) (*request.Request, *opsworkscm.DescribeEventsOutput)
+	DescribeEventsWithContext(aws.Context, *opsworkscm.DescribeEventsInput, ...aws.Option) (*opsworkscm.DescribeEventsOutput, error)
+	DescribeEventsRequest(*opsworkscm.DescribeEventsInput) (*aws.Request, *opsworkscm.DescribeEventsOutput)
 
 	DescribeNodeAssociationStatus(*opsworkscm.DescribeNodeAssociationStatusInput) (*opsworkscm.DescribeNodeAssociationStatusOutput, error)
-	DescribeNodeAssociationStatusWithContext(aws.Context, *opsworkscm.DescribeNodeAssociationStatusInput, ...request.Option) (*opsworkscm.DescribeNodeAssociationStatusOutput, error)
-	DescribeNodeAssociationStatusRequest(*opsworkscm.DescribeNodeAssociationStatusInput) (*request.Request, *opsworkscm.DescribeNodeAssociationStatusOutput)
+	DescribeNodeAssociationStatusWithContext(aws.Context, *opsworkscm.DescribeNodeAssociationStatusInput, ...aws.Option) (*opsworkscm.DescribeNodeAssociationStatusOutput, error)
+	DescribeNodeAssociationStatusRequest(*opsworkscm.DescribeNodeAssociationStatusInput) (*aws.Request, *opsworkscm.DescribeNodeAssociationStatusOutput)
 
 	DescribeServers(*opsworkscm.DescribeServersInput) (*opsworkscm.DescribeServersOutput, error)
-	DescribeServersWithContext(aws.Context, *opsworkscm.DescribeServersInput, ...request.Option) (*opsworkscm.DescribeServersOutput, error)
-	DescribeServersRequest(*opsworkscm.DescribeServersInput) (*request.Request, *opsworkscm.DescribeServersOutput)
+	DescribeServersWithContext(aws.Context, *opsworkscm.DescribeServersInput, ...aws.Option) (*opsworkscm.DescribeServersOutput, error)
+	DescribeServersRequest(*opsworkscm.DescribeServersInput) (*aws.Request, *opsworkscm.DescribeServersOutput)
 
 	DisassociateNode(*opsworkscm.DisassociateNodeInput) (*opsworkscm.DisassociateNodeOutput, error)
-	DisassociateNodeWithContext(aws.Context, *opsworkscm.DisassociateNodeInput, ...request.Option) (*opsworkscm.DisassociateNodeOutput, error)
-	DisassociateNodeRequest(*opsworkscm.DisassociateNodeInput) (*request.Request, *opsworkscm.DisassociateNodeOutput)
+	DisassociateNodeWithContext(aws.Context, *opsworkscm.DisassociateNodeInput, ...aws.Option) (*opsworkscm.DisassociateNodeOutput, error)
+	DisassociateNodeRequest(*opsworkscm.DisassociateNodeInput) (*aws.Request, *opsworkscm.DisassociateNodeOutput)
 
 	RestoreServer(*opsworkscm.RestoreServerInput) (*opsworkscm.RestoreServerOutput, error)
-	RestoreServerWithContext(aws.Context, *opsworkscm.RestoreServerInput, ...request.Option) (*opsworkscm.RestoreServerOutput, error)
-	RestoreServerRequest(*opsworkscm.RestoreServerInput) (*request.Request, *opsworkscm.RestoreServerOutput)
+	RestoreServerWithContext(aws.Context, *opsworkscm.RestoreServerInput, ...aws.Option) (*opsworkscm.RestoreServerOutput, error)
+	RestoreServerRequest(*opsworkscm.RestoreServerInput) (*aws.Request, *opsworkscm.RestoreServerOutput)
 
 	StartMaintenance(*opsworkscm.StartMaintenanceInput) (*opsworkscm.StartMaintenanceOutput, error)
-	StartMaintenanceWithContext(aws.Context, *opsworkscm.StartMaintenanceInput, ...request.Option) (*opsworkscm.StartMaintenanceOutput, error)
-	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) (*request.Request, *opsworkscm.StartMaintenanceOutput)
+	StartMaintenanceWithContext(aws.Context, *opsworkscm.StartMaintenanceInput, ...aws.Option) (*opsworkscm.StartMaintenanceOutput, error)
+	StartMaintenanceRequest(*opsworkscm.StartMaintenanceInput) (*aws.Request, *opsworkscm.StartMaintenanceOutput)
 
 	UpdateServer(*opsworkscm.UpdateServerInput) (*opsworkscm.UpdateServerOutput, error)
-	UpdateServerWithContext(aws.Context, *opsworkscm.UpdateServerInput, ...request.Option) (*opsworkscm.UpdateServerOutput, error)
-	UpdateServerRequest(*opsworkscm.UpdateServerInput) (*request.Request, *opsworkscm.UpdateServerOutput)
+	UpdateServerWithContext(aws.Context, *opsworkscm.UpdateServerInput, ...aws.Option) (*opsworkscm.UpdateServerOutput, error)
+	UpdateServerRequest(*opsworkscm.UpdateServerInput) (*aws.Request, *opsworkscm.UpdateServerOutput)
 
 	UpdateServerEngineAttributes(*opsworkscm.UpdateServerEngineAttributesInput) (*opsworkscm.UpdateServerEngineAttributesOutput, error)
-	UpdateServerEngineAttributesWithContext(aws.Context, *opsworkscm.UpdateServerEngineAttributesInput, ...request.Option) (*opsworkscm.UpdateServerEngineAttributesOutput, error)
-	UpdateServerEngineAttributesRequest(*opsworkscm.UpdateServerEngineAttributesInput) (*request.Request, *opsworkscm.UpdateServerEngineAttributesOutput)
+	UpdateServerEngineAttributesWithContext(aws.Context, *opsworkscm.UpdateServerEngineAttributesInput, ...aws.Option) (*opsworkscm.UpdateServerEngineAttributesOutput, error)
+	UpdateServerEngineAttributesRequest(*opsworkscm.UpdateServerEngineAttributesInput) (*aws.Request, *opsworkscm.UpdateServerEngineAttributesOutput)
 }
 
 var _ OpsWorksCMAPI = (*opsworkscm.OpsWorksCM)(nil)

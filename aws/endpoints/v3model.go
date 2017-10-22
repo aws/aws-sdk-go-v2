@@ -159,6 +159,9 @@ func (s *service) endpointForRegion(region string) (endpoint, bool) {
 type endpoints map[string]endpoint
 
 type endpoint struct {
+	// True if the endpoint cannot be resolved for this partition/region/service
+	Unresolveable boxedBool `json:"-"`
+
 	Hostname        string          `json:"hostname"`
 	Protocols       []string        `json:"protocols"`
 	CredentialScope credentialScope `json:"credentialScope"`
@@ -208,19 +211,23 @@ func (e endpoint) resolve(service, region, dnsSuffix string, defs []endpoint, op
 	merged.mergeIn(e)
 	e = merged
 
-	hostname := e.Hostname
+	var u string
+	if e.Unresolveable != boxedTrue {
+		// Only attempt to resolve the endpoint if it can be resolved.
+		hostname := e.Hostname
 
-	// Offset the hostname for dualstack if enabled
-	if opts.UseDualStack && e.HasDualStack == boxedTrue {
-		hostname = e.DualStackHostname
+		// Offset the hostname for dualstack if enabled
+		if opts.UseDualStack && e.HasDualStack == boxedTrue {
+			hostname = e.DualStackHostname
+		}
+
+		u = strings.Replace(hostname, "{service}", service, 1)
+		u = strings.Replace(u, "{region}", region, 1)
+		u = strings.Replace(u, "{dnsSuffix}", dnsSuffix, 1)
+
+		scheme := getEndpointScheme(e.Protocols, opts.DisableSSL)
+		u = fmt.Sprintf("%s://%s", scheme, u)
 	}
-
-	u := strings.Replace(hostname, "{service}", service, 1)
-	u = strings.Replace(u, "{region}", region, 1)
-	u = strings.Replace(u, "{dnsSuffix}", dnsSuffix, 1)
-
-	scheme := getEndpointScheme(e.Protocols, opts.DisableSSL)
-	u = fmt.Sprintf("%s://%s", scheme, u)
 
 	signingRegion := e.CredentialScope.Region
 	if len(signingRegion) == 0 {
@@ -248,6 +255,9 @@ func getEndpointScheme(protocols []string, disableSSL bool) string {
 }
 
 func (e *endpoint) mergeIn(other endpoint) {
+	if other.Unresolveable != boxedBoolUnset {
+		e.Unresolveable = other.Unresolveable
+	}
 	if len(other.Hostname) > 0 {
 		e.Hostname = other.Hostname
 	}

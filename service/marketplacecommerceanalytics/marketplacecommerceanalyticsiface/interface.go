@@ -10,7 +10,6 @@ package marketplacecommerceanalyticsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := marketplacecommerceanalytics.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := marketplacecommerceanalytics.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,12 +64,12 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type MarketplaceCommerceAnalyticsAPI interface {
 	GenerateDataSet(*marketplacecommerceanalytics.GenerateDataSetInput) (*marketplacecommerceanalytics.GenerateDataSetOutput, error)
-	GenerateDataSetWithContext(aws.Context, *marketplacecommerceanalytics.GenerateDataSetInput, ...request.Option) (*marketplacecommerceanalytics.GenerateDataSetOutput, error)
-	GenerateDataSetRequest(*marketplacecommerceanalytics.GenerateDataSetInput) (*request.Request, *marketplacecommerceanalytics.GenerateDataSetOutput)
+	GenerateDataSetWithContext(aws.Context, *marketplacecommerceanalytics.GenerateDataSetInput, ...aws.Option) (*marketplacecommerceanalytics.GenerateDataSetOutput, error)
+	GenerateDataSetRequest(*marketplacecommerceanalytics.GenerateDataSetInput) (*aws.Request, *marketplacecommerceanalytics.GenerateDataSetOutput)
 
 	StartSupportDataExport(*marketplacecommerceanalytics.StartSupportDataExportInput) (*marketplacecommerceanalytics.StartSupportDataExportOutput, error)
-	StartSupportDataExportWithContext(aws.Context, *marketplacecommerceanalytics.StartSupportDataExportInput, ...request.Option) (*marketplacecommerceanalytics.StartSupportDataExportOutput, error)
-	StartSupportDataExportRequest(*marketplacecommerceanalytics.StartSupportDataExportInput) (*request.Request, *marketplacecommerceanalytics.StartSupportDataExportOutput)
+	StartSupportDataExportWithContext(aws.Context, *marketplacecommerceanalytics.StartSupportDataExportInput, ...aws.Option) (*marketplacecommerceanalytics.StartSupportDataExportOutput, error)
+	StartSupportDataExportRequest(*marketplacecommerceanalytics.StartSupportDataExportInput) (*aws.Request, *marketplacecommerceanalytics.StartSupportDataExportOutput)
 }
 
 var _ MarketplaceCommerceAnalyticsAPI = (*marketplacecommerceanalytics.MarketplaceCommerceAnalytics)(nil)

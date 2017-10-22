@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
 )
@@ -28,7 +28,7 @@ var statusCodeErrorTests = []struct {
 
 func TestStatusCodeError(t *testing.T) {
 	for _, test := range statusCodeErrorTests {
-		s := simpledb.New(unit.Session)
+		s := simpledb.New(unit.Config)
 		s.Handlers.Send.Clear()
 		s.Handlers.Send.PushBack(func(r *request.Request) {
 			body := ioutil.NopCloser(bytes.NewReader([]byte{}))
@@ -99,7 +99,7 @@ var responseErrorTests = []struct {
 
 func TestResponseError(t *testing.T) {
 	for _, test := range responseErrorTests {
-		s := simpledb.New(unit.Session)
+		s := simpledb.New(unit.Config)
 		s.Handlers.Send.Clear()
 		s.Handlers.Send.PushBack(func(r *request.Request) {
 			xml := createXMLResponse(test.requestID, test.errors)

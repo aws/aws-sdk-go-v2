@@ -5,8 +5,8 @@ import (
 	"encoding/base64"
 	"io"
 
+	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 )
 
 // contentMD5 computes and sets the HTTP Content-MD5 header for requests that

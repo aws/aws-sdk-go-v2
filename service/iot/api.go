@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opAcceptCertificateTransfer = "AcceptCertificateTransfer"
 
-// AcceptCertificateTransferRequest generates a "aws/request.Request" representing the
+// AcceptCertificateTransferRequest generates a "aws.Request" representing the
 // client's request for the AcceptCertificateTransfer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opAcceptCertificateTransfer = "AcceptCertificateTransfer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) AcceptCertificateTransferRequest(input *AcceptCertificateTransferInput) (req *request.Request, output *AcceptCertificateTransferOutput) {
-	op := &request.Operation{
+func (c *IoT) AcceptCertificateTransferRequest(input *AcceptCertificateTransferInput) (req *aws.Request, output *AcceptCertificateTransferOutput) {
+	op := &aws.Operation{
 		Name:       opAcceptCertificateTransfer,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/accept-certificate-transfer/{certificateId}",
@@ -107,7 +106,7 @@ func (c *IoT) AcceptCertificateTransfer(input *AcceptCertificateTransferInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) AcceptCertificateTransferWithContext(ctx aws.Context, input *AcceptCertificateTransferInput, opts ...request.Option) (*AcceptCertificateTransferOutput, error) {
+func (c *IoT) AcceptCertificateTransferWithContext(ctx aws.Context, input *AcceptCertificateTransferInput, opts ...aws.Option) (*AcceptCertificateTransferOutput, error) {
 	req, out := c.AcceptCertificateTransferRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -116,7 +115,7 @@ func (c *IoT) AcceptCertificateTransferWithContext(ctx aws.Context, input *Accep
 
 const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
 
-// AttachPrincipalPolicyRequest generates a "aws/request.Request" representing the
+// AttachPrincipalPolicyRequest generates a "aws.Request" representing the
 // client's request for the AttachPrincipalPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -138,8 +137,8 @@ const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput) (req *request.Request, output *AttachPrincipalPolicyOutput) {
-	op := &request.Operation{
+func (c *IoT) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput) (req *aws.Request, output *AttachPrincipalPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opAttachPrincipalPolicy,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/principal-policies/{policyName}",
@@ -204,7 +203,7 @@ func (c *IoT) AttachPrincipalPolicy(input *AttachPrincipalPolicyInput) (*AttachP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) AttachPrincipalPolicyWithContext(ctx aws.Context, input *AttachPrincipalPolicyInput, opts ...request.Option) (*AttachPrincipalPolicyOutput, error) {
+func (c *IoT) AttachPrincipalPolicyWithContext(ctx aws.Context, input *AttachPrincipalPolicyInput, opts ...aws.Option) (*AttachPrincipalPolicyOutput, error) {
 	req, out := c.AttachPrincipalPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -213,7 +212,7 @@ func (c *IoT) AttachPrincipalPolicyWithContext(ctx aws.Context, input *AttachPri
 
 const opAttachThingPrincipal = "AttachThingPrincipal"
 
-// AttachThingPrincipalRequest generates a "aws/request.Request" representing the
+// AttachThingPrincipalRequest generates a "aws.Request" representing the
 // client's request for the AttachThingPrincipal operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -235,8 +234,8 @@ const opAttachThingPrincipal = "AttachThingPrincipal"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) (req *request.Request, output *AttachThingPrincipalOutput) {
-	op := &request.Operation{
+func (c *IoT) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) (req *aws.Request, output *AttachThingPrincipalOutput) {
+	op := &aws.Operation{
 		Name:       opAttachThingPrincipal,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/things/{thingName}/principals",
@@ -295,7 +294,7 @@ func (c *IoT) AttachThingPrincipal(input *AttachThingPrincipalInput) (*AttachThi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) AttachThingPrincipalWithContext(ctx aws.Context, input *AttachThingPrincipalInput, opts ...request.Option) (*AttachThingPrincipalOutput, error) {
+func (c *IoT) AttachThingPrincipalWithContext(ctx aws.Context, input *AttachThingPrincipalInput, opts ...aws.Option) (*AttachThingPrincipalOutput, error) {
 	req, out := c.AttachThingPrincipalRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -304,7 +303,7 @@ func (c *IoT) AttachThingPrincipalWithContext(ctx aws.Context, input *AttachThin
 
 const opCancelCertificateTransfer = "CancelCertificateTransfer"
 
-// CancelCertificateTransferRequest generates a "aws/request.Request" representing the
+// CancelCertificateTransferRequest generates a "aws.Request" representing the
 // client's request for the CancelCertificateTransfer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -326,8 +325,8 @@ const opCancelCertificateTransfer = "CancelCertificateTransfer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CancelCertificateTransferRequest(input *CancelCertificateTransferInput) (req *request.Request, output *CancelCertificateTransferOutput) {
-	op := &request.Operation{
+func (c *IoT) CancelCertificateTransferRequest(input *CancelCertificateTransferInput) (req *aws.Request, output *CancelCertificateTransferOutput) {
+	op := &aws.Operation{
 		Name:       opCancelCertificateTransfer,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/cancel-certificate-transfer/{certificateId}",
@@ -401,7 +400,7 @@ func (c *IoT) CancelCertificateTransfer(input *CancelCertificateTransferInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CancelCertificateTransferWithContext(ctx aws.Context, input *CancelCertificateTransferInput, opts ...request.Option) (*CancelCertificateTransferOutput, error) {
+func (c *IoT) CancelCertificateTransferWithContext(ctx aws.Context, input *CancelCertificateTransferInput, opts ...aws.Option) (*CancelCertificateTransferOutput, error) {
 	req, out := c.CancelCertificateTransferRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -410,7 +409,7 @@ func (c *IoT) CancelCertificateTransferWithContext(ctx aws.Context, input *Cance
 
 const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
 
-// CreateCertificateFromCsrRequest generates a "aws/request.Request" representing the
+// CreateCertificateFromCsrRequest generates a "aws.Request" representing the
 // client's request for the CreateCertificateFromCsr operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -432,8 +431,8 @@ const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsrInput) (req *request.Request, output *CreateCertificateFromCsrOutput) {
-	op := &request.Operation{
+func (c *IoT) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsrInput) (req *aws.Request, output *CreateCertificateFromCsrOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCertificateFromCsr,
 		HTTPMethod: "POST",
 		HTTPPath:   "/certificates",
@@ -530,7 +529,7 @@ func (c *IoT) CreateCertificateFromCsr(input *CreateCertificateFromCsrInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreateCertificateFromCsrWithContext(ctx aws.Context, input *CreateCertificateFromCsrInput, opts ...request.Option) (*CreateCertificateFromCsrOutput, error) {
+func (c *IoT) CreateCertificateFromCsrWithContext(ctx aws.Context, input *CreateCertificateFromCsrInput, opts ...aws.Option) (*CreateCertificateFromCsrOutput, error) {
 	req, out := c.CreateCertificateFromCsrRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -539,7 +538,7 @@ func (c *IoT) CreateCertificateFromCsrWithContext(ctx aws.Context, input *Create
 
 const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
 
-// CreateKeysAndCertificateRequest generates a "aws/request.Request" representing the
+// CreateKeysAndCertificateRequest generates a "aws.Request" representing the
 // client's request for the CreateKeysAndCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -561,8 +560,8 @@ const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificateInput) (req *request.Request, output *CreateKeysAndCertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificateInput) (req *aws.Request, output *CreateKeysAndCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opCreateKeysAndCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/keys-and-certificate",
@@ -622,7 +621,7 @@ func (c *IoT) CreateKeysAndCertificate(input *CreateKeysAndCertificateInput) (*C
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreateKeysAndCertificateWithContext(ctx aws.Context, input *CreateKeysAndCertificateInput, opts ...request.Option) (*CreateKeysAndCertificateOutput, error) {
+func (c *IoT) CreateKeysAndCertificateWithContext(ctx aws.Context, input *CreateKeysAndCertificateInput, opts ...aws.Option) (*CreateKeysAndCertificateOutput, error) {
 	req, out := c.CreateKeysAndCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -631,7 +630,7 @@ func (c *IoT) CreateKeysAndCertificateWithContext(ctx aws.Context, input *Create
 
 const opCreatePolicy = "CreatePolicy"
 
-// CreatePolicyRequest generates a "aws/request.Request" representing the
+// CreatePolicyRequest generates a "aws.Request" representing the
 // client's request for the CreatePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -653,8 +652,8 @@ const opCreatePolicy = "CreatePolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreatePolicyRequest(input *CreatePolicyInput) (req *request.Request, output *CreatePolicyOutput) {
-	op := &request.Operation{
+func (c *IoT) CreatePolicyRequest(input *CreatePolicyInput) (req *aws.Request, output *CreatePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePolicy,
 		HTTPMethod: "POST",
 		HTTPPath:   "/policies/{policyName}",
@@ -720,7 +719,7 @@ func (c *IoT) CreatePolicy(input *CreatePolicyInput) (*CreatePolicyOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreatePolicyWithContext(ctx aws.Context, input *CreatePolicyInput, opts ...request.Option) (*CreatePolicyOutput, error) {
+func (c *IoT) CreatePolicyWithContext(ctx aws.Context, input *CreatePolicyInput, opts ...aws.Option) (*CreatePolicyOutput, error) {
 	req, out := c.CreatePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -729,7 +728,7 @@ func (c *IoT) CreatePolicyWithContext(ctx aws.Context, input *CreatePolicyInput,
 
 const opCreatePolicyVersion = "CreatePolicyVersion"
 
-// CreatePolicyVersionRequest generates a "aws/request.Request" representing the
+// CreatePolicyVersionRequest generates a "aws.Request" representing the
 // client's request for the CreatePolicyVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -751,8 +750,8 @@ const opCreatePolicyVersion = "CreatePolicyVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) (req *request.Request, output *CreatePolicyVersionOutput) {
-	op := &request.Operation{
+func (c *IoT) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) (req *aws.Request, output *CreatePolicyVersionOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePolicyVersion,
 		HTTPMethod: "POST",
 		HTTPPath:   "/policies/{policyName}/version",
@@ -824,7 +823,7 @@ func (c *IoT) CreatePolicyVersion(input *CreatePolicyVersionInput) (*CreatePolic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreatePolicyVersionWithContext(ctx aws.Context, input *CreatePolicyVersionInput, opts ...request.Option) (*CreatePolicyVersionOutput, error) {
+func (c *IoT) CreatePolicyVersionWithContext(ctx aws.Context, input *CreatePolicyVersionInput, opts ...aws.Option) (*CreatePolicyVersionOutput, error) {
 	req, out := c.CreatePolicyVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -833,7 +832,7 @@ func (c *IoT) CreatePolicyVersionWithContext(ctx aws.Context, input *CreatePolic
 
 const opCreateThing = "CreateThing"
 
-// CreateThingRequest generates a "aws/request.Request" representing the
+// CreateThingRequest generates a "aws.Request" representing the
 // client's request for the CreateThing operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -855,8 +854,8 @@ const opCreateThing = "CreateThing"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreateThingRequest(input *CreateThingInput) (req *request.Request, output *CreateThingOutput) {
-	op := &request.Operation{
+func (c *IoT) CreateThingRequest(input *CreateThingInput) (req *aws.Request, output *CreateThingOutput) {
+	op := &aws.Operation{
 		Name:       opCreateThing,
 		HTTPMethod: "POST",
 		HTTPPath:   "/things/{thingName}",
@@ -918,7 +917,7 @@ func (c *IoT) CreateThing(input *CreateThingInput) (*CreateThingOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreateThingWithContext(ctx aws.Context, input *CreateThingInput, opts ...request.Option) (*CreateThingOutput, error) {
+func (c *IoT) CreateThingWithContext(ctx aws.Context, input *CreateThingInput, opts ...aws.Option) (*CreateThingOutput, error) {
 	req, out := c.CreateThingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -927,7 +926,7 @@ func (c *IoT) CreateThingWithContext(ctx aws.Context, input *CreateThingInput, o
 
 const opCreateThingType = "CreateThingType"
 
-// CreateThingTypeRequest generates a "aws/request.Request" representing the
+// CreateThingTypeRequest generates a "aws.Request" representing the
 // client's request for the CreateThingType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -949,8 +948,8 @@ const opCreateThingType = "CreateThingType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreateThingTypeRequest(input *CreateThingTypeInput) (req *request.Request, output *CreateThingTypeOutput) {
-	op := &request.Operation{
+func (c *IoT) CreateThingTypeRequest(input *CreateThingTypeInput) (req *aws.Request, output *CreateThingTypeOutput) {
+	op := &aws.Operation{
 		Name:       opCreateThingType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/thing-types/{thingTypeName}",
@@ -1009,7 +1008,7 @@ func (c *IoT) CreateThingType(input *CreateThingTypeInput) (*CreateThingTypeOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreateThingTypeWithContext(ctx aws.Context, input *CreateThingTypeInput, opts ...request.Option) (*CreateThingTypeOutput, error) {
+func (c *IoT) CreateThingTypeWithContext(ctx aws.Context, input *CreateThingTypeInput, opts ...aws.Option) (*CreateThingTypeOutput, error) {
 	req, out := c.CreateThingTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1018,7 +1017,7 @@ func (c *IoT) CreateThingTypeWithContext(ctx aws.Context, input *CreateThingType
 
 const opCreateTopicRule = "CreateTopicRule"
 
-// CreateTopicRuleRequest generates a "aws/request.Request" representing the
+// CreateTopicRuleRequest generates a "aws.Request" representing the
 // client's request for the CreateTopicRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1040,8 +1039,8 @@ const opCreateTopicRule = "CreateTopicRule"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) CreateTopicRuleRequest(input *CreateTopicRuleInput) (req *request.Request, output *CreateTopicRuleOutput) {
-	op := &request.Operation{
+func (c *IoT) CreateTopicRuleRequest(input *CreateTopicRuleInput) (req *aws.Request, output *CreateTopicRuleOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTopicRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/rules/{ruleName}",
@@ -1101,7 +1100,7 @@ func (c *IoT) CreateTopicRule(input *CreateTopicRuleInput) (*CreateTopicRuleOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) CreateTopicRuleWithContext(ctx aws.Context, input *CreateTopicRuleInput, opts ...request.Option) (*CreateTopicRuleOutput, error) {
+func (c *IoT) CreateTopicRuleWithContext(ctx aws.Context, input *CreateTopicRuleInput, opts ...aws.Option) (*CreateTopicRuleOutput, error) {
 	req, out := c.CreateTopicRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1110,7 +1109,7 @@ func (c *IoT) CreateTopicRuleWithContext(ctx aws.Context, input *CreateTopicRule
 
 const opDeleteCACertificate = "DeleteCACertificate"
 
-// DeleteCACertificateRequest generates a "aws/request.Request" representing the
+// DeleteCACertificateRequest generates a "aws.Request" representing the
 // client's request for the DeleteCACertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1132,8 +1131,8 @@ const opDeleteCACertificate = "DeleteCACertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeleteCACertificateRequest(input *DeleteCACertificateInput) (req *request.Request, output *DeleteCACertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) DeleteCACertificateRequest(input *DeleteCACertificateInput) (req *aws.Request, output *DeleteCACertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCACertificate,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/cacertificate/{caCertificateId}",
@@ -1195,7 +1194,7 @@ func (c *IoT) DeleteCACertificate(input *DeleteCACertificateInput) (*DeleteCACer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeleteCACertificateWithContext(ctx aws.Context, input *DeleteCACertificateInput, opts ...request.Option) (*DeleteCACertificateOutput, error) {
+func (c *IoT) DeleteCACertificateWithContext(ctx aws.Context, input *DeleteCACertificateInput, opts ...aws.Option) (*DeleteCACertificateOutput, error) {
 	req, out := c.DeleteCACertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1204,7 +1203,7 @@ func (c *IoT) DeleteCACertificateWithContext(ctx aws.Context, input *DeleteCACer
 
 const opDeleteCertificate = "DeleteCertificate"
 
-// DeleteCertificateRequest generates a "aws/request.Request" representing the
+// DeleteCertificateRequest generates a "aws.Request" representing the
 // client's request for the DeleteCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1226,8 +1225,8 @@ const opDeleteCertificate = "DeleteCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeleteCertificateRequest(input *DeleteCertificateInput) (req *request.Request, output *DeleteCertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) DeleteCertificateRequest(input *DeleteCertificateInput) (req *aws.Request, output *DeleteCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCertificate,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/certificates/{certificateId}",
@@ -1299,7 +1298,7 @@ func (c *IoT) DeleteCertificate(input *DeleteCertificateInput) (*DeleteCertifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...request.Option) (*DeleteCertificateOutput, error) {
+func (c *IoT) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertificateInput, opts ...aws.Option) (*DeleteCertificateOutput, error) {
 	req, out := c.DeleteCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1308,7 +1307,7 @@ func (c *IoT) DeleteCertificateWithContext(ctx aws.Context, input *DeleteCertifi
 
 const opDeletePolicy = "DeletePolicy"
 
-// DeletePolicyRequest generates a "aws/request.Request" representing the
+// DeletePolicyRequest generates a "aws.Request" representing the
 // client's request for the DeletePolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1330,8 +1329,8 @@ const opDeletePolicy = "DeletePolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeletePolicyRequest(input *DeletePolicyInput) (req *request.Request, output *DeletePolicyOutput) {
-	op := &request.Operation{
+func (c *IoT) DeletePolicyRequest(input *DeletePolicyInput) (req *aws.Request, output *DeletePolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePolicy,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/policies/{policyName}",
@@ -1405,7 +1404,7 @@ func (c *IoT) DeletePolicy(input *DeletePolicyInput) (*DeletePolicyOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput, opts ...request.Option) (*DeletePolicyOutput, error) {
+func (c *IoT) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput, opts ...aws.Option) (*DeletePolicyOutput, error) {
 	req, out := c.DeletePolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1414,7 +1413,7 @@ func (c *IoT) DeletePolicyWithContext(ctx aws.Context, input *DeletePolicyInput,
 
 const opDeletePolicyVersion = "DeletePolicyVersion"
 
-// DeletePolicyVersionRequest generates a "aws/request.Request" representing the
+// DeletePolicyVersionRequest generates a "aws.Request" representing the
 // client's request for the DeletePolicyVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1436,8 +1435,8 @@ const opDeletePolicyVersion = "DeletePolicyVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) (req *request.Request, output *DeletePolicyVersionOutput) {
-	op := &request.Operation{
+func (c *IoT) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) (req *aws.Request, output *DeletePolicyVersionOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePolicyVersion,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/policies/{policyName}/version/{policyVersionId}",
@@ -1504,7 +1503,7 @@ func (c *IoT) DeletePolicyVersion(input *DeletePolicyVersionInput) (*DeletePolic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeletePolicyVersionWithContext(ctx aws.Context, input *DeletePolicyVersionInput, opts ...request.Option) (*DeletePolicyVersionOutput, error) {
+func (c *IoT) DeletePolicyVersionWithContext(ctx aws.Context, input *DeletePolicyVersionInput, opts ...aws.Option) (*DeletePolicyVersionOutput, error) {
 	req, out := c.DeletePolicyVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1513,7 +1512,7 @@ func (c *IoT) DeletePolicyVersionWithContext(ctx aws.Context, input *DeletePolic
 
 const opDeleteRegistrationCode = "DeleteRegistrationCode"
 
-// DeleteRegistrationCodeRequest generates a "aws/request.Request" representing the
+// DeleteRegistrationCodeRequest generates a "aws.Request" representing the
 // client's request for the DeleteRegistrationCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1535,8 +1534,8 @@ const opDeleteRegistrationCode = "DeleteRegistrationCode"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInput) (req *request.Request, output *DeleteRegistrationCodeOutput) {
-	op := &request.Operation{
+func (c *IoT) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInput) (req *aws.Request, output *DeleteRegistrationCodeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRegistrationCode,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/registrationcode",
@@ -1592,7 +1591,7 @@ func (c *IoT) DeleteRegistrationCode(input *DeleteRegistrationCodeInput) (*Delet
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeleteRegistrationCodeWithContext(ctx aws.Context, input *DeleteRegistrationCodeInput, opts ...request.Option) (*DeleteRegistrationCodeOutput, error) {
+func (c *IoT) DeleteRegistrationCodeWithContext(ctx aws.Context, input *DeleteRegistrationCodeInput, opts ...aws.Option) (*DeleteRegistrationCodeOutput, error) {
 	req, out := c.DeleteRegistrationCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1601,7 +1600,7 @@ func (c *IoT) DeleteRegistrationCodeWithContext(ctx aws.Context, input *DeleteRe
 
 const opDeleteThing = "DeleteThing"
 
-// DeleteThingRequest generates a "aws/request.Request" representing the
+// DeleteThingRequest generates a "aws.Request" representing the
 // client's request for the DeleteThing operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1623,8 +1622,8 @@ const opDeleteThing = "DeleteThing"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeleteThingRequest(input *DeleteThingInput) (req *request.Request, output *DeleteThingOutput) {
-	op := &request.Operation{
+func (c *IoT) DeleteThingRequest(input *DeleteThingInput) (req *aws.Request, output *DeleteThingOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteThing,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/things/{thingName}",
@@ -1687,7 +1686,7 @@ func (c *IoT) DeleteThing(input *DeleteThingInput) (*DeleteThingOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeleteThingWithContext(ctx aws.Context, input *DeleteThingInput, opts ...request.Option) (*DeleteThingOutput, error) {
+func (c *IoT) DeleteThingWithContext(ctx aws.Context, input *DeleteThingInput, opts ...aws.Option) (*DeleteThingOutput, error) {
 	req, out := c.DeleteThingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1696,7 +1695,7 @@ func (c *IoT) DeleteThingWithContext(ctx aws.Context, input *DeleteThingInput, o
 
 const opDeleteThingType = "DeleteThingType"
 
-// DeleteThingTypeRequest generates a "aws/request.Request" representing the
+// DeleteThingTypeRequest generates a "aws.Request" representing the
 // client's request for the DeleteThingType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1718,8 +1717,8 @@ const opDeleteThingType = "DeleteThingType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeleteThingTypeRequest(input *DeleteThingTypeInput) (req *request.Request, output *DeleteThingTypeOutput) {
-	op := &request.Operation{
+func (c *IoT) DeleteThingTypeRequest(input *DeleteThingTypeInput) (req *aws.Request, output *DeleteThingTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteThingType,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/thing-types/{thingTypeName}",
@@ -1782,7 +1781,7 @@ func (c *IoT) DeleteThingType(input *DeleteThingTypeInput) (*DeleteThingTypeOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeleteThingTypeWithContext(ctx aws.Context, input *DeleteThingTypeInput, opts ...request.Option) (*DeleteThingTypeOutput, error) {
+func (c *IoT) DeleteThingTypeWithContext(ctx aws.Context, input *DeleteThingTypeInput, opts ...aws.Option) (*DeleteThingTypeOutput, error) {
 	req, out := c.DeleteThingTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1791,7 +1790,7 @@ func (c *IoT) DeleteThingTypeWithContext(ctx aws.Context, input *DeleteThingType
 
 const opDeleteTopicRule = "DeleteTopicRule"
 
-// DeleteTopicRuleRequest generates a "aws/request.Request" representing the
+// DeleteTopicRuleRequest generates a "aws.Request" representing the
 // client's request for the DeleteTopicRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1813,8 +1812,8 @@ const opDeleteTopicRule = "DeleteTopicRule"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeleteTopicRuleRequest(input *DeleteTopicRuleInput) (req *request.Request, output *DeleteTopicRuleOutput) {
-	op := &request.Operation{
+func (c *IoT) DeleteTopicRuleRequest(input *DeleteTopicRuleInput) (req *aws.Request, output *DeleteTopicRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTopicRule,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/rules/{ruleName}",
@@ -1869,7 +1868,7 @@ func (c *IoT) DeleteTopicRule(input *DeleteTopicRuleInput) (*DeleteTopicRuleOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeleteTopicRuleWithContext(ctx aws.Context, input *DeleteTopicRuleInput, opts ...request.Option) (*DeleteTopicRuleOutput, error) {
+func (c *IoT) DeleteTopicRuleWithContext(ctx aws.Context, input *DeleteTopicRuleInput, opts ...aws.Option) (*DeleteTopicRuleOutput, error) {
 	req, out := c.DeleteTopicRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1878,7 +1877,7 @@ func (c *IoT) DeleteTopicRuleWithContext(ctx aws.Context, input *DeleteTopicRule
 
 const opDeprecateThingType = "DeprecateThingType"
 
-// DeprecateThingTypeRequest generates a "aws/request.Request" representing the
+// DeprecateThingTypeRequest generates a "aws.Request" representing the
 // client's request for the DeprecateThingType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1900,8 +1899,8 @@ const opDeprecateThingType = "DeprecateThingType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DeprecateThingTypeRequest(input *DeprecateThingTypeInput) (req *request.Request, output *DeprecateThingTypeOutput) {
-	op := &request.Operation{
+func (c *IoT) DeprecateThingTypeRequest(input *DeprecateThingTypeInput) (req *aws.Request, output *DeprecateThingTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDeprecateThingType,
 		HTTPMethod: "POST",
 		HTTPPath:   "/thing-types/{thingTypeName}/deprecate",
@@ -1961,7 +1960,7 @@ func (c *IoT) DeprecateThingType(input *DeprecateThingTypeInput) (*DeprecateThin
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DeprecateThingTypeWithContext(ctx aws.Context, input *DeprecateThingTypeInput, opts ...request.Option) (*DeprecateThingTypeOutput, error) {
+func (c *IoT) DeprecateThingTypeWithContext(ctx aws.Context, input *DeprecateThingTypeInput, opts ...aws.Option) (*DeprecateThingTypeOutput, error) {
 	req, out := c.DeprecateThingTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1970,7 +1969,7 @@ func (c *IoT) DeprecateThingTypeWithContext(ctx aws.Context, input *DeprecateThi
 
 const opDescribeCACertificate = "DescribeCACertificate"
 
-// DescribeCACertificateRequest generates a "aws/request.Request" representing the
+// DescribeCACertificateRequest generates a "aws.Request" representing the
 // client's request for the DescribeCACertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1992,8 +1991,8 @@ const opDescribeCACertificate = "DescribeCACertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DescribeCACertificateRequest(input *DescribeCACertificateInput) (req *request.Request, output *DescribeCACertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) DescribeCACertificateRequest(input *DescribeCACertificateInput) (req *aws.Request, output *DescribeCACertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCACertificate,
 		HTTPMethod: "GET",
 		HTTPPath:   "/cacertificate/{caCertificateId}",
@@ -2052,7 +2051,7 @@ func (c *IoT) DescribeCACertificate(input *DescribeCACertificateInput) (*Describ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DescribeCACertificateWithContext(ctx aws.Context, input *DescribeCACertificateInput, opts ...request.Option) (*DescribeCACertificateOutput, error) {
+func (c *IoT) DescribeCACertificateWithContext(ctx aws.Context, input *DescribeCACertificateInput, opts ...aws.Option) (*DescribeCACertificateOutput, error) {
 	req, out := c.DescribeCACertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2061,7 +2060,7 @@ func (c *IoT) DescribeCACertificateWithContext(ctx aws.Context, input *DescribeC
 
 const opDescribeCertificate = "DescribeCertificate"
 
-// DescribeCertificateRequest generates a "aws/request.Request" representing the
+// DescribeCertificateRequest generates a "aws.Request" representing the
 // client's request for the DescribeCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2083,8 +2082,8 @@ const opDescribeCertificate = "DescribeCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DescribeCertificateRequest(input *DescribeCertificateInput) (req *request.Request, output *DescribeCertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) DescribeCertificateRequest(input *DescribeCertificateInput) (req *aws.Request, output *DescribeCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeCertificate,
 		HTTPMethod: "GET",
 		HTTPPath:   "/certificates/{certificateId}",
@@ -2143,7 +2142,7 @@ func (c *IoT) DescribeCertificate(input *DescribeCertificateInput) (*DescribeCer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCertificateInput, opts ...request.Option) (*DescribeCertificateOutput, error) {
+func (c *IoT) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCertificateInput, opts ...aws.Option) (*DescribeCertificateOutput, error) {
 	req, out := c.DescribeCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2152,7 +2151,7 @@ func (c *IoT) DescribeCertificateWithContext(ctx aws.Context, input *DescribeCer
 
 const opDescribeEndpoint = "DescribeEndpoint"
 
-// DescribeEndpointRequest generates a "aws/request.Request" representing the
+// DescribeEndpointRequest generates a "aws.Request" representing the
 // client's request for the DescribeEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2174,8 +2173,8 @@ const opDescribeEndpoint = "DescribeEndpoint"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DescribeEndpointRequest(input *DescribeEndpointInput) (req *request.Request, output *DescribeEndpointOutput) {
-	op := &request.Operation{
+func (c *IoT) DescribeEndpointRequest(input *DescribeEndpointInput) (req *aws.Request, output *DescribeEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEndpoint,
 		HTTPMethod: "GET",
 		HTTPPath:   "/endpoint",
@@ -2225,7 +2224,7 @@ func (c *IoT) DescribeEndpoint(input *DescribeEndpointInput) (*DescribeEndpointO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DescribeEndpointWithContext(ctx aws.Context, input *DescribeEndpointInput, opts ...request.Option) (*DescribeEndpointOutput, error) {
+func (c *IoT) DescribeEndpointWithContext(ctx aws.Context, input *DescribeEndpointInput, opts ...aws.Option) (*DescribeEndpointOutput, error) {
 	req, out := c.DescribeEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2234,7 +2233,7 @@ func (c *IoT) DescribeEndpointWithContext(ctx aws.Context, input *DescribeEndpoi
 
 const opDescribeThing = "DescribeThing"
 
-// DescribeThingRequest generates a "aws/request.Request" representing the
+// DescribeThingRequest generates a "aws.Request" representing the
 // client's request for the DescribeThing operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2256,8 +2255,8 @@ const opDescribeThing = "DescribeThing"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DescribeThingRequest(input *DescribeThingInput) (req *request.Request, output *DescribeThingOutput) {
-	op := &request.Operation{
+func (c *IoT) DescribeThingRequest(input *DescribeThingInput) (req *aws.Request, output *DescribeThingOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeThing,
 		HTTPMethod: "GET",
 		HTTPPath:   "/things/{thingName}",
@@ -2316,7 +2315,7 @@ func (c *IoT) DescribeThing(input *DescribeThingInput) (*DescribeThingOutput, er
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DescribeThingWithContext(ctx aws.Context, input *DescribeThingInput, opts ...request.Option) (*DescribeThingOutput, error) {
+func (c *IoT) DescribeThingWithContext(ctx aws.Context, input *DescribeThingInput, opts ...aws.Option) (*DescribeThingOutput, error) {
 	req, out := c.DescribeThingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2325,7 +2324,7 @@ func (c *IoT) DescribeThingWithContext(ctx aws.Context, input *DescribeThingInpu
 
 const opDescribeThingType = "DescribeThingType"
 
-// DescribeThingTypeRequest generates a "aws/request.Request" representing the
+// DescribeThingTypeRequest generates a "aws.Request" representing the
 // client's request for the DescribeThingType operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2347,8 +2346,8 @@ const opDescribeThingType = "DescribeThingType"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DescribeThingTypeRequest(input *DescribeThingTypeInput) (req *request.Request, output *DescribeThingTypeOutput) {
-	op := &request.Operation{
+func (c *IoT) DescribeThingTypeRequest(input *DescribeThingTypeInput) (req *aws.Request, output *DescribeThingTypeOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeThingType,
 		HTTPMethod: "GET",
 		HTTPPath:   "/thing-types/{thingTypeName}",
@@ -2407,7 +2406,7 @@ func (c *IoT) DescribeThingType(input *DescribeThingTypeInput) (*DescribeThingTy
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DescribeThingTypeWithContext(ctx aws.Context, input *DescribeThingTypeInput, opts ...request.Option) (*DescribeThingTypeOutput, error) {
+func (c *IoT) DescribeThingTypeWithContext(ctx aws.Context, input *DescribeThingTypeInput, opts ...aws.Option) (*DescribeThingTypeOutput, error) {
 	req, out := c.DescribeThingTypeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2416,7 +2415,7 @@ func (c *IoT) DescribeThingTypeWithContext(ctx aws.Context, input *DescribeThing
 
 const opDetachPrincipalPolicy = "DetachPrincipalPolicy"
 
-// DetachPrincipalPolicyRequest generates a "aws/request.Request" representing the
+// DetachPrincipalPolicyRequest generates a "aws.Request" representing the
 // client's request for the DetachPrincipalPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2438,8 +2437,8 @@ const opDetachPrincipalPolicy = "DetachPrincipalPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DetachPrincipalPolicyRequest(input *DetachPrincipalPolicyInput) (req *request.Request, output *DetachPrincipalPolicyOutput) {
-	op := &request.Operation{
+func (c *IoT) DetachPrincipalPolicyRequest(input *DetachPrincipalPolicyInput) (req *aws.Request, output *DetachPrincipalPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opDetachPrincipalPolicy,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/principal-policies/{policyName}",
@@ -2500,7 +2499,7 @@ func (c *IoT) DetachPrincipalPolicy(input *DetachPrincipalPolicyInput) (*DetachP
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DetachPrincipalPolicyWithContext(ctx aws.Context, input *DetachPrincipalPolicyInput, opts ...request.Option) (*DetachPrincipalPolicyOutput, error) {
+func (c *IoT) DetachPrincipalPolicyWithContext(ctx aws.Context, input *DetachPrincipalPolicyInput, opts ...aws.Option) (*DetachPrincipalPolicyOutput, error) {
 	req, out := c.DetachPrincipalPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2509,7 +2508,7 @@ func (c *IoT) DetachPrincipalPolicyWithContext(ctx aws.Context, input *DetachPri
 
 const opDetachThingPrincipal = "DetachThingPrincipal"
 
-// DetachThingPrincipalRequest generates a "aws/request.Request" representing the
+// DetachThingPrincipalRequest generates a "aws.Request" representing the
 // client's request for the DetachThingPrincipal operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2531,8 +2530,8 @@ const opDetachThingPrincipal = "DetachThingPrincipal"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) (req *request.Request, output *DetachThingPrincipalOutput) {
-	op := &request.Operation{
+func (c *IoT) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) (req *aws.Request, output *DetachThingPrincipalOutput) {
+	op := &aws.Operation{
 		Name:       opDetachThingPrincipal,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/things/{thingName}/principals",
@@ -2591,7 +2590,7 @@ func (c *IoT) DetachThingPrincipal(input *DetachThingPrincipalInput) (*DetachThi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DetachThingPrincipalWithContext(ctx aws.Context, input *DetachThingPrincipalInput, opts ...request.Option) (*DetachThingPrincipalOutput, error) {
+func (c *IoT) DetachThingPrincipalWithContext(ctx aws.Context, input *DetachThingPrincipalInput, opts ...aws.Option) (*DetachThingPrincipalOutput, error) {
 	req, out := c.DetachThingPrincipalRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2600,7 +2599,7 @@ func (c *IoT) DetachThingPrincipalWithContext(ctx aws.Context, input *DetachThin
 
 const opDisableTopicRule = "DisableTopicRule"
 
-// DisableTopicRuleRequest generates a "aws/request.Request" representing the
+// DisableTopicRuleRequest generates a "aws.Request" representing the
 // client's request for the DisableTopicRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2622,8 +2621,8 @@ const opDisableTopicRule = "DisableTopicRule"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) DisableTopicRuleRequest(input *DisableTopicRuleInput) (req *request.Request, output *DisableTopicRuleOutput) {
-	op := &request.Operation{
+func (c *IoT) DisableTopicRuleRequest(input *DisableTopicRuleInput) (req *aws.Request, output *DisableTopicRuleOutput) {
+	op := &aws.Operation{
 		Name:       opDisableTopicRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/rules/{ruleName}/disable",
@@ -2678,7 +2677,7 @@ func (c *IoT) DisableTopicRule(input *DisableTopicRuleInput) (*DisableTopicRuleO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) DisableTopicRuleWithContext(ctx aws.Context, input *DisableTopicRuleInput, opts ...request.Option) (*DisableTopicRuleOutput, error) {
+func (c *IoT) DisableTopicRuleWithContext(ctx aws.Context, input *DisableTopicRuleInput, opts ...aws.Option) (*DisableTopicRuleOutput, error) {
 	req, out := c.DisableTopicRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2687,7 +2686,7 @@ func (c *IoT) DisableTopicRuleWithContext(ctx aws.Context, input *DisableTopicRu
 
 const opEnableTopicRule = "EnableTopicRule"
 
-// EnableTopicRuleRequest generates a "aws/request.Request" representing the
+// EnableTopicRuleRequest generates a "aws.Request" representing the
 // client's request for the EnableTopicRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2709,8 +2708,8 @@ const opEnableTopicRule = "EnableTopicRule"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) EnableTopicRuleRequest(input *EnableTopicRuleInput) (req *request.Request, output *EnableTopicRuleOutput) {
-	op := &request.Operation{
+func (c *IoT) EnableTopicRuleRequest(input *EnableTopicRuleInput) (req *aws.Request, output *EnableTopicRuleOutput) {
+	op := &aws.Operation{
 		Name:       opEnableTopicRule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/rules/{ruleName}/enable",
@@ -2765,7 +2764,7 @@ func (c *IoT) EnableTopicRule(input *EnableTopicRuleInput) (*EnableTopicRuleOutp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) EnableTopicRuleWithContext(ctx aws.Context, input *EnableTopicRuleInput, opts ...request.Option) (*EnableTopicRuleOutput, error) {
+func (c *IoT) EnableTopicRuleWithContext(ctx aws.Context, input *EnableTopicRuleInput, opts ...aws.Option) (*EnableTopicRuleOutput, error) {
 	req, out := c.EnableTopicRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2774,7 +2773,7 @@ func (c *IoT) EnableTopicRuleWithContext(ctx aws.Context, input *EnableTopicRule
 
 const opGetLoggingOptions = "GetLoggingOptions"
 
-// GetLoggingOptionsRequest generates a "aws/request.Request" representing the
+// GetLoggingOptionsRequest generates a "aws.Request" representing the
 // client's request for the GetLoggingOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2796,8 +2795,8 @@ const opGetLoggingOptions = "GetLoggingOptions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) (req *request.Request, output *GetLoggingOptionsOutput) {
-	op := &request.Operation{
+func (c *IoT) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) (req *aws.Request, output *GetLoggingOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetLoggingOptions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/loggingOptions",
@@ -2847,7 +2846,7 @@ func (c *IoT) GetLoggingOptions(input *GetLoggingOptionsInput) (*GetLoggingOptio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) GetLoggingOptionsWithContext(ctx aws.Context, input *GetLoggingOptionsInput, opts ...request.Option) (*GetLoggingOptionsOutput, error) {
+func (c *IoT) GetLoggingOptionsWithContext(ctx aws.Context, input *GetLoggingOptionsInput, opts ...aws.Option) (*GetLoggingOptionsOutput, error) {
 	req, out := c.GetLoggingOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2856,7 +2855,7 @@ func (c *IoT) GetLoggingOptionsWithContext(ctx aws.Context, input *GetLoggingOpt
 
 const opGetPolicy = "GetPolicy"
 
-// GetPolicyRequest generates a "aws/request.Request" representing the
+// GetPolicyRequest generates a "aws.Request" representing the
 // client's request for the GetPolicy operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2878,8 +2877,8 @@ const opGetPolicy = "GetPolicy"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) GetPolicyRequest(input *GetPolicyInput) (req *request.Request, output *GetPolicyOutput) {
-	op := &request.Operation{
+func (c *IoT) GetPolicyRequest(input *GetPolicyInput) (req *aws.Request, output *GetPolicyOutput) {
+	op := &aws.Operation{
 		Name:       opGetPolicy,
 		HTTPMethod: "GET",
 		HTTPPath:   "/policies/{policyName}",
@@ -2939,7 +2938,7 @@ func (c *IoT) GetPolicy(input *GetPolicyInput) (*GetPolicyOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts ...request.Option) (*GetPolicyOutput, error) {
+func (c *IoT) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts ...aws.Option) (*GetPolicyOutput, error) {
 	req, out := c.GetPolicyRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2948,7 +2947,7 @@ func (c *IoT) GetPolicyWithContext(ctx aws.Context, input *GetPolicyInput, opts 
 
 const opGetPolicyVersion = "GetPolicyVersion"
 
-// GetPolicyVersionRequest generates a "aws/request.Request" representing the
+// GetPolicyVersionRequest generates a "aws.Request" representing the
 // client's request for the GetPolicyVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2970,8 +2969,8 @@ const opGetPolicyVersion = "GetPolicyVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) GetPolicyVersionRequest(input *GetPolicyVersionInput) (req *request.Request, output *GetPolicyVersionOutput) {
-	op := &request.Operation{
+func (c *IoT) GetPolicyVersionRequest(input *GetPolicyVersionInput) (req *aws.Request, output *GetPolicyVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetPolicyVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/policies/{policyName}/version/{policyVersionId}",
@@ -3030,7 +3029,7 @@ func (c *IoT) GetPolicyVersion(input *GetPolicyVersionInput) (*GetPolicyVersionO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) GetPolicyVersionWithContext(ctx aws.Context, input *GetPolicyVersionInput, opts ...request.Option) (*GetPolicyVersionOutput, error) {
+func (c *IoT) GetPolicyVersionWithContext(ctx aws.Context, input *GetPolicyVersionInput, opts ...aws.Option) (*GetPolicyVersionOutput, error) {
 	req, out := c.GetPolicyVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3039,7 +3038,7 @@ func (c *IoT) GetPolicyVersionWithContext(ctx aws.Context, input *GetPolicyVersi
 
 const opGetRegistrationCode = "GetRegistrationCode"
 
-// GetRegistrationCodeRequest generates a "aws/request.Request" representing the
+// GetRegistrationCodeRequest generates a "aws.Request" representing the
 // client's request for the GetRegistrationCode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3061,8 +3060,8 @@ const opGetRegistrationCode = "GetRegistrationCode"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) (req *request.Request, output *GetRegistrationCodeOutput) {
-	op := &request.Operation{
+func (c *IoT) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) (req *aws.Request, output *GetRegistrationCodeOutput) {
+	op := &aws.Operation{
 		Name:       opGetRegistrationCode,
 		HTTPMethod: "GET",
 		HTTPPath:   "/registrationcode",
@@ -3118,7 +3117,7 @@ func (c *IoT) GetRegistrationCode(input *GetRegistrationCodeInput) (*GetRegistra
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) GetRegistrationCodeWithContext(ctx aws.Context, input *GetRegistrationCodeInput, opts ...request.Option) (*GetRegistrationCodeOutput, error) {
+func (c *IoT) GetRegistrationCodeWithContext(ctx aws.Context, input *GetRegistrationCodeInput, opts ...aws.Option) (*GetRegistrationCodeOutput, error) {
 	req, out := c.GetRegistrationCodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3127,7 +3126,7 @@ func (c *IoT) GetRegistrationCodeWithContext(ctx aws.Context, input *GetRegistra
 
 const opGetTopicRule = "GetTopicRule"
 
-// GetTopicRuleRequest generates a "aws/request.Request" representing the
+// GetTopicRuleRequest generates a "aws.Request" representing the
 // client's request for the GetTopicRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3149,8 +3148,8 @@ const opGetTopicRule = "GetTopicRule"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) GetTopicRuleRequest(input *GetTopicRuleInput) (req *request.Request, output *GetTopicRuleOutput) {
-	op := &request.Operation{
+func (c *IoT) GetTopicRuleRequest(input *GetTopicRuleInput) (req *aws.Request, output *GetTopicRuleOutput) {
+	op := &aws.Operation{
 		Name:       opGetTopicRule,
 		HTTPMethod: "GET",
 		HTTPPath:   "/rules/{ruleName}",
@@ -3203,7 +3202,7 @@ func (c *IoT) GetTopicRule(input *GetTopicRuleInput) (*GetTopicRuleOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) GetTopicRuleWithContext(ctx aws.Context, input *GetTopicRuleInput, opts ...request.Option) (*GetTopicRuleOutput, error) {
+func (c *IoT) GetTopicRuleWithContext(ctx aws.Context, input *GetTopicRuleInput, opts ...aws.Option) (*GetTopicRuleOutput, error) {
 	req, out := c.GetTopicRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3212,7 +3211,7 @@ func (c *IoT) GetTopicRuleWithContext(ctx aws.Context, input *GetTopicRuleInput,
 
 const opListCACertificates = "ListCACertificates"
 
-// ListCACertificatesRequest generates a "aws/request.Request" representing the
+// ListCACertificatesRequest generates a "aws.Request" representing the
 // client's request for the ListCACertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3234,8 +3233,8 @@ const opListCACertificates = "ListCACertificates"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListCACertificatesRequest(input *ListCACertificatesInput) (req *request.Request, output *ListCACertificatesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListCACertificatesRequest(input *ListCACertificatesInput) (req *aws.Request, output *ListCACertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opListCACertificates,
 		HTTPMethod: "GET",
 		HTTPPath:   "/cacertificates",
@@ -3294,7 +3293,7 @@ func (c *IoT) ListCACertificates(input *ListCACertificatesInput) (*ListCACertifi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListCACertificatesWithContext(ctx aws.Context, input *ListCACertificatesInput, opts ...request.Option) (*ListCACertificatesOutput, error) {
+func (c *IoT) ListCACertificatesWithContext(ctx aws.Context, input *ListCACertificatesInput, opts ...aws.Option) (*ListCACertificatesOutput, error) {
 	req, out := c.ListCACertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3303,7 +3302,7 @@ func (c *IoT) ListCACertificatesWithContext(ctx aws.Context, input *ListCACertif
 
 const opListCertificates = "ListCertificates"
 
-// ListCertificatesRequest generates a "aws/request.Request" representing the
+// ListCertificatesRequest generates a "aws.Request" representing the
 // client's request for the ListCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3325,8 +3324,8 @@ const opListCertificates = "ListCertificates"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListCertificatesRequest(input *ListCertificatesInput) (req *request.Request, output *ListCertificatesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListCertificatesRequest(input *ListCertificatesInput) (req *aws.Request, output *ListCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opListCertificates,
 		HTTPMethod: "GET",
 		HTTPPath:   "/certificates",
@@ -3385,7 +3384,7 @@ func (c *IoT) ListCertificates(input *ListCertificatesInput) (*ListCertificatesO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListCertificatesWithContext(ctx aws.Context, input *ListCertificatesInput, opts ...request.Option) (*ListCertificatesOutput, error) {
+func (c *IoT) ListCertificatesWithContext(ctx aws.Context, input *ListCertificatesInput, opts ...aws.Option) (*ListCertificatesOutput, error) {
 	req, out := c.ListCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3394,7 +3393,7 @@ func (c *IoT) ListCertificatesWithContext(ctx aws.Context, input *ListCertificat
 
 const opListCertificatesByCA = "ListCertificatesByCA"
 
-// ListCertificatesByCARequest generates a "aws/request.Request" representing the
+// ListCertificatesByCARequest generates a "aws.Request" representing the
 // client's request for the ListCertificatesByCA operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3416,8 +3415,8 @@ const opListCertificatesByCA = "ListCertificatesByCA"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListCertificatesByCARequest(input *ListCertificatesByCAInput) (req *request.Request, output *ListCertificatesByCAOutput) {
-	op := &request.Operation{
+func (c *IoT) ListCertificatesByCARequest(input *ListCertificatesByCAInput) (req *aws.Request, output *ListCertificatesByCAOutput) {
+	op := &aws.Operation{
 		Name:       opListCertificatesByCA,
 		HTTPMethod: "GET",
 		HTTPPath:   "/certificates-by-ca/{caCertificateId}",
@@ -3473,7 +3472,7 @@ func (c *IoT) ListCertificatesByCA(input *ListCertificatesByCAInput) (*ListCerti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListCertificatesByCAWithContext(ctx aws.Context, input *ListCertificatesByCAInput, opts ...request.Option) (*ListCertificatesByCAOutput, error) {
+func (c *IoT) ListCertificatesByCAWithContext(ctx aws.Context, input *ListCertificatesByCAInput, opts ...aws.Option) (*ListCertificatesByCAOutput, error) {
 	req, out := c.ListCertificatesByCARequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3482,7 +3481,7 @@ func (c *IoT) ListCertificatesByCAWithContext(ctx aws.Context, input *ListCertif
 
 const opListOutgoingCertificates = "ListOutgoingCertificates"
 
-// ListOutgoingCertificatesRequest generates a "aws/request.Request" representing the
+// ListOutgoingCertificatesRequest generates a "aws.Request" representing the
 // client's request for the ListOutgoingCertificates operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3504,8 +3503,8 @@ const opListOutgoingCertificates = "ListOutgoingCertificates"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListOutgoingCertificatesRequest(input *ListOutgoingCertificatesInput) (req *request.Request, output *ListOutgoingCertificatesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListOutgoingCertificatesRequest(input *ListOutgoingCertificatesInput) (req *aws.Request, output *ListOutgoingCertificatesOutput) {
+	op := &aws.Operation{
 		Name:       opListOutgoingCertificates,
 		HTTPMethod: "GET",
 		HTTPPath:   "/certificates-out-going",
@@ -3561,7 +3560,7 @@ func (c *IoT) ListOutgoingCertificates(input *ListOutgoingCertificatesInput) (*L
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListOutgoingCertificatesWithContext(ctx aws.Context, input *ListOutgoingCertificatesInput, opts ...request.Option) (*ListOutgoingCertificatesOutput, error) {
+func (c *IoT) ListOutgoingCertificatesWithContext(ctx aws.Context, input *ListOutgoingCertificatesInput, opts ...aws.Option) (*ListOutgoingCertificatesOutput, error) {
 	req, out := c.ListOutgoingCertificatesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3570,7 +3569,7 @@ func (c *IoT) ListOutgoingCertificatesWithContext(ctx aws.Context, input *ListOu
 
 const opListPolicies = "ListPolicies"
 
-// ListPoliciesRequest generates a "aws/request.Request" representing the
+// ListPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3592,8 +3591,8 @@ const opListPolicies = "ListPolicies"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListPoliciesRequest(input *ListPoliciesInput) (req *request.Request, output *ListPoliciesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListPoliciesRequest(input *ListPoliciesInput) (req *aws.Request, output *ListPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListPolicies,
 		HTTPMethod: "GET",
 		HTTPPath:   "/policies",
@@ -3649,7 +3648,7 @@ func (c *IoT) ListPolicies(input *ListPoliciesInput) (*ListPoliciesOutput, error
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListPoliciesWithContext(ctx aws.Context, input *ListPoliciesInput, opts ...request.Option) (*ListPoliciesOutput, error) {
+func (c *IoT) ListPoliciesWithContext(ctx aws.Context, input *ListPoliciesInput, opts ...aws.Option) (*ListPoliciesOutput, error) {
 	req, out := c.ListPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3658,7 +3657,7 @@ func (c *IoT) ListPoliciesWithContext(ctx aws.Context, input *ListPoliciesInput,
 
 const opListPolicyPrincipals = "ListPolicyPrincipals"
 
-// ListPolicyPrincipalsRequest generates a "aws/request.Request" representing the
+// ListPolicyPrincipalsRequest generates a "aws.Request" representing the
 // client's request for the ListPolicyPrincipals operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3680,8 +3679,8 @@ const opListPolicyPrincipals = "ListPolicyPrincipals"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListPolicyPrincipalsRequest(input *ListPolicyPrincipalsInput) (req *request.Request, output *ListPolicyPrincipalsOutput) {
-	op := &request.Operation{
+func (c *IoT) ListPolicyPrincipalsRequest(input *ListPolicyPrincipalsInput) (req *aws.Request, output *ListPolicyPrincipalsOutput) {
+	op := &aws.Operation{
 		Name:       opListPolicyPrincipals,
 		HTTPMethod: "GET",
 		HTTPPath:   "/policy-principals",
@@ -3740,7 +3739,7 @@ func (c *IoT) ListPolicyPrincipals(input *ListPolicyPrincipalsInput) (*ListPolic
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListPolicyPrincipalsWithContext(ctx aws.Context, input *ListPolicyPrincipalsInput, opts ...request.Option) (*ListPolicyPrincipalsOutput, error) {
+func (c *IoT) ListPolicyPrincipalsWithContext(ctx aws.Context, input *ListPolicyPrincipalsInput, opts ...aws.Option) (*ListPolicyPrincipalsOutput, error) {
 	req, out := c.ListPolicyPrincipalsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3749,7 +3748,7 @@ func (c *IoT) ListPolicyPrincipalsWithContext(ctx aws.Context, input *ListPolicy
 
 const opListPolicyVersions = "ListPolicyVersions"
 
-// ListPolicyVersionsRequest generates a "aws/request.Request" representing the
+// ListPolicyVersionsRequest generates a "aws.Request" representing the
 // client's request for the ListPolicyVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3771,8 +3770,8 @@ const opListPolicyVersions = "ListPolicyVersions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) (req *request.Request, output *ListPolicyVersionsOutput) {
-	op := &request.Operation{
+func (c *IoT) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) (req *aws.Request, output *ListPolicyVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opListPolicyVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/policies/{policyName}/version",
@@ -3831,7 +3830,7 @@ func (c *IoT) ListPolicyVersions(input *ListPolicyVersionsInput) (*ListPolicyVer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListPolicyVersionsWithContext(ctx aws.Context, input *ListPolicyVersionsInput, opts ...request.Option) (*ListPolicyVersionsOutput, error) {
+func (c *IoT) ListPolicyVersionsWithContext(ctx aws.Context, input *ListPolicyVersionsInput, opts ...aws.Option) (*ListPolicyVersionsOutput, error) {
 	req, out := c.ListPolicyVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3840,7 +3839,7 @@ func (c *IoT) ListPolicyVersionsWithContext(ctx aws.Context, input *ListPolicyVe
 
 const opListPrincipalPolicies = "ListPrincipalPolicies"
 
-// ListPrincipalPoliciesRequest generates a "aws/request.Request" representing the
+// ListPrincipalPoliciesRequest generates a "aws.Request" representing the
 // client's request for the ListPrincipalPolicies operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3862,8 +3861,8 @@ const opListPrincipalPolicies = "ListPrincipalPolicies"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListPrincipalPoliciesRequest(input *ListPrincipalPoliciesInput) (req *request.Request, output *ListPrincipalPoliciesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListPrincipalPoliciesRequest(input *ListPrincipalPoliciesInput) (req *aws.Request, output *ListPrincipalPoliciesOutput) {
+	op := &aws.Operation{
 		Name:       opListPrincipalPolicies,
 		HTTPMethod: "GET",
 		HTTPPath:   "/principal-policies",
@@ -3923,7 +3922,7 @@ func (c *IoT) ListPrincipalPolicies(input *ListPrincipalPoliciesInput) (*ListPri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListPrincipalPoliciesWithContext(ctx aws.Context, input *ListPrincipalPoliciesInput, opts ...request.Option) (*ListPrincipalPoliciesOutput, error) {
+func (c *IoT) ListPrincipalPoliciesWithContext(ctx aws.Context, input *ListPrincipalPoliciesInput, opts ...aws.Option) (*ListPrincipalPoliciesOutput, error) {
 	req, out := c.ListPrincipalPoliciesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3932,7 +3931,7 @@ func (c *IoT) ListPrincipalPoliciesWithContext(ctx aws.Context, input *ListPrinc
 
 const opListPrincipalThings = "ListPrincipalThings"
 
-// ListPrincipalThingsRequest generates a "aws/request.Request" representing the
+// ListPrincipalThingsRequest generates a "aws.Request" representing the
 // client's request for the ListPrincipalThings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3954,8 +3953,8 @@ const opListPrincipalThings = "ListPrincipalThings"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) (req *request.Request, output *ListPrincipalThingsOutput) {
-	op := &request.Operation{
+func (c *IoT) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) (req *aws.Request, output *ListPrincipalThingsOutput) {
+	op := &aws.Operation{
 		Name:       opListPrincipalThings,
 		HTTPMethod: "GET",
 		HTTPPath:   "/principals/things",
@@ -4014,7 +4013,7 @@ func (c *IoT) ListPrincipalThings(input *ListPrincipalThingsInput) (*ListPrincip
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListPrincipalThingsWithContext(ctx aws.Context, input *ListPrincipalThingsInput, opts ...request.Option) (*ListPrincipalThingsOutput, error) {
+func (c *IoT) ListPrincipalThingsWithContext(ctx aws.Context, input *ListPrincipalThingsInput, opts ...aws.Option) (*ListPrincipalThingsOutput, error) {
 	req, out := c.ListPrincipalThingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4023,7 +4022,7 @@ func (c *IoT) ListPrincipalThingsWithContext(ctx aws.Context, input *ListPrincip
 
 const opListThingPrincipals = "ListThingPrincipals"
 
-// ListThingPrincipalsRequest generates a "aws/request.Request" representing the
+// ListThingPrincipalsRequest generates a "aws.Request" representing the
 // client's request for the ListThingPrincipals operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4045,8 +4044,8 @@ const opListThingPrincipals = "ListThingPrincipals"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) (req *request.Request, output *ListThingPrincipalsOutput) {
-	op := &request.Operation{
+func (c *IoT) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) (req *aws.Request, output *ListThingPrincipalsOutput) {
+	op := &aws.Operation{
 		Name:       opListThingPrincipals,
 		HTTPMethod: "GET",
 		HTTPPath:   "/things/{thingName}/principals",
@@ -4105,7 +4104,7 @@ func (c *IoT) ListThingPrincipals(input *ListThingPrincipalsInput) (*ListThingPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListThingPrincipalsWithContext(ctx aws.Context, input *ListThingPrincipalsInput, opts ...request.Option) (*ListThingPrincipalsOutput, error) {
+func (c *IoT) ListThingPrincipalsWithContext(ctx aws.Context, input *ListThingPrincipalsInput, opts ...aws.Option) (*ListThingPrincipalsOutput, error) {
 	req, out := c.ListThingPrincipalsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4114,7 +4113,7 @@ func (c *IoT) ListThingPrincipalsWithContext(ctx aws.Context, input *ListThingPr
 
 const opListThingTypes = "ListThingTypes"
 
-// ListThingTypesRequest generates a "aws/request.Request" representing the
+// ListThingTypesRequest generates a "aws.Request" representing the
 // client's request for the ListThingTypes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4136,8 +4135,8 @@ const opListThingTypes = "ListThingTypes"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListThingTypesRequest(input *ListThingTypesInput) (req *request.Request, output *ListThingTypesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListThingTypesRequest(input *ListThingTypesInput) (req *aws.Request, output *ListThingTypesOutput) {
+	op := &aws.Operation{
 		Name:       opListThingTypes,
 		HTTPMethod: "GET",
 		HTTPPath:   "/thing-types",
@@ -4193,7 +4192,7 @@ func (c *IoT) ListThingTypes(input *ListThingTypesInput) (*ListThingTypesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListThingTypesWithContext(ctx aws.Context, input *ListThingTypesInput, opts ...request.Option) (*ListThingTypesOutput, error) {
+func (c *IoT) ListThingTypesWithContext(ctx aws.Context, input *ListThingTypesInput, opts ...aws.Option) (*ListThingTypesOutput, error) {
 	req, out := c.ListThingTypesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4202,7 +4201,7 @@ func (c *IoT) ListThingTypesWithContext(ctx aws.Context, input *ListThingTypesIn
 
 const opListThings = "ListThings"
 
-// ListThingsRequest generates a "aws/request.Request" representing the
+// ListThingsRequest generates a "aws.Request" representing the
 // client's request for the ListThings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4224,8 +4223,8 @@ const opListThings = "ListThings"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListThingsRequest(input *ListThingsInput) (req *request.Request, output *ListThingsOutput) {
-	op := &request.Operation{
+func (c *IoT) ListThingsRequest(input *ListThingsInput) (req *aws.Request, output *ListThingsOutput) {
+	op := &aws.Operation{
 		Name:       opListThings,
 		HTTPMethod: "GET",
 		HTTPPath:   "/things",
@@ -4284,7 +4283,7 @@ func (c *IoT) ListThings(input *ListThingsInput) (*ListThingsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListThingsWithContext(ctx aws.Context, input *ListThingsInput, opts ...request.Option) (*ListThingsOutput, error) {
+func (c *IoT) ListThingsWithContext(ctx aws.Context, input *ListThingsInput, opts ...aws.Option) (*ListThingsOutput, error) {
 	req, out := c.ListThingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4293,7 +4292,7 @@ func (c *IoT) ListThingsWithContext(ctx aws.Context, input *ListThingsInput, opt
 
 const opListTopicRules = "ListTopicRules"
 
-// ListTopicRulesRequest generates a "aws/request.Request" representing the
+// ListTopicRulesRequest generates a "aws.Request" representing the
 // client's request for the ListTopicRules operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4315,8 +4314,8 @@ const opListTopicRules = "ListTopicRules"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ListTopicRulesRequest(input *ListTopicRulesInput) (req *request.Request, output *ListTopicRulesOutput) {
-	op := &request.Operation{
+func (c *IoT) ListTopicRulesRequest(input *ListTopicRulesInput) (req *aws.Request, output *ListTopicRulesOutput) {
+	op := &aws.Operation{
 		Name:       opListTopicRules,
 		HTTPMethod: "GET",
 		HTTPPath:   "/rules",
@@ -4366,7 +4365,7 @@ func (c *IoT) ListTopicRules(input *ListTopicRulesInput) (*ListTopicRulesOutput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ListTopicRulesWithContext(ctx aws.Context, input *ListTopicRulesInput, opts ...request.Option) (*ListTopicRulesOutput, error) {
+func (c *IoT) ListTopicRulesWithContext(ctx aws.Context, input *ListTopicRulesInput, opts ...aws.Option) (*ListTopicRulesOutput, error) {
 	req, out := c.ListTopicRulesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4375,7 +4374,7 @@ func (c *IoT) ListTopicRulesWithContext(ctx aws.Context, input *ListTopicRulesIn
 
 const opRegisterCACertificate = "RegisterCACertificate"
 
-// RegisterCACertificateRequest generates a "aws/request.Request" representing the
+// RegisterCACertificateRequest generates a "aws.Request" representing the
 // client's request for the RegisterCACertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4397,8 +4396,8 @@ const opRegisterCACertificate = "RegisterCACertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) RegisterCACertificateRequest(input *RegisterCACertificateInput) (req *request.Request, output *RegisterCACertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) RegisterCACertificateRequest(input *RegisterCACertificateInput) (req *aws.Request, output *RegisterCACertificateOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterCACertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/cacertificate",
@@ -4472,7 +4471,7 @@ func (c *IoT) RegisterCACertificate(input *RegisterCACertificateInput) (*Registe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) RegisterCACertificateWithContext(ctx aws.Context, input *RegisterCACertificateInput, opts ...request.Option) (*RegisterCACertificateOutput, error) {
+func (c *IoT) RegisterCACertificateWithContext(ctx aws.Context, input *RegisterCACertificateInput, opts ...aws.Option) (*RegisterCACertificateOutput, error) {
 	req, out := c.RegisterCACertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4481,7 +4480,7 @@ func (c *IoT) RegisterCACertificateWithContext(ctx aws.Context, input *RegisterC
 
 const opRegisterCertificate = "RegisterCertificate"
 
-// RegisterCertificateRequest generates a "aws/request.Request" representing the
+// RegisterCertificateRequest generates a "aws.Request" representing the
 // client's request for the RegisterCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4503,8 +4502,8 @@ const opRegisterCertificate = "RegisterCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) RegisterCertificateRequest(input *RegisterCertificateInput) (req *request.Request, output *RegisterCertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) RegisterCertificateRequest(input *RegisterCertificateInput) (req *aws.Request, output *RegisterCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opRegisterCertificate,
 		HTTPMethod: "POST",
 		HTTPPath:   "/certificate/register",
@@ -4576,7 +4575,7 @@ func (c *IoT) RegisterCertificate(input *RegisterCertificateInput) (*RegisterCer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) RegisterCertificateWithContext(ctx aws.Context, input *RegisterCertificateInput, opts ...request.Option) (*RegisterCertificateOutput, error) {
+func (c *IoT) RegisterCertificateWithContext(ctx aws.Context, input *RegisterCertificateInput, opts ...aws.Option) (*RegisterCertificateOutput, error) {
 	req, out := c.RegisterCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4585,7 +4584,7 @@ func (c *IoT) RegisterCertificateWithContext(ctx aws.Context, input *RegisterCer
 
 const opRejectCertificateTransfer = "RejectCertificateTransfer"
 
-// RejectCertificateTransferRequest generates a "aws/request.Request" representing the
+// RejectCertificateTransferRequest generates a "aws.Request" representing the
 // client's request for the RejectCertificateTransfer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4607,8 +4606,8 @@ const opRejectCertificateTransfer = "RejectCertificateTransfer"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) RejectCertificateTransferRequest(input *RejectCertificateTransferInput) (req *request.Request, output *RejectCertificateTransferOutput) {
-	op := &request.Operation{
+func (c *IoT) RejectCertificateTransferRequest(input *RejectCertificateTransferInput) (req *aws.Request, output *RejectCertificateTransferOutput) {
+	op := &aws.Operation{
 		Name:       opRejectCertificateTransfer,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/reject-certificate-transfer/{certificateId}",
@@ -4681,7 +4680,7 @@ func (c *IoT) RejectCertificateTransfer(input *RejectCertificateTransferInput) (
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) RejectCertificateTransferWithContext(ctx aws.Context, input *RejectCertificateTransferInput, opts ...request.Option) (*RejectCertificateTransferOutput, error) {
+func (c *IoT) RejectCertificateTransferWithContext(ctx aws.Context, input *RejectCertificateTransferInput, opts ...aws.Option) (*RejectCertificateTransferOutput, error) {
 	req, out := c.RejectCertificateTransferRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4690,7 +4689,7 @@ func (c *IoT) RejectCertificateTransferWithContext(ctx aws.Context, input *Rejec
 
 const opReplaceTopicRule = "ReplaceTopicRule"
 
-// ReplaceTopicRuleRequest generates a "aws/request.Request" representing the
+// ReplaceTopicRuleRequest generates a "aws.Request" representing the
 // client's request for the ReplaceTopicRule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4712,8 +4711,8 @@ const opReplaceTopicRule = "ReplaceTopicRule"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) ReplaceTopicRuleRequest(input *ReplaceTopicRuleInput) (req *request.Request, output *ReplaceTopicRuleOutput) {
-	op := &request.Operation{
+func (c *IoT) ReplaceTopicRuleRequest(input *ReplaceTopicRuleInput) (req *aws.Request, output *ReplaceTopicRuleOutput) {
+	op := &aws.Operation{
 		Name:       opReplaceTopicRule,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/rules/{ruleName}",
@@ -4773,7 +4772,7 @@ func (c *IoT) ReplaceTopicRule(input *ReplaceTopicRuleInput) (*ReplaceTopicRuleO
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) ReplaceTopicRuleWithContext(ctx aws.Context, input *ReplaceTopicRuleInput, opts ...request.Option) (*ReplaceTopicRuleOutput, error) {
+func (c *IoT) ReplaceTopicRuleWithContext(ctx aws.Context, input *ReplaceTopicRuleInput, opts ...aws.Option) (*ReplaceTopicRuleOutput, error) {
 	req, out := c.ReplaceTopicRuleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4782,7 +4781,7 @@ func (c *IoT) ReplaceTopicRuleWithContext(ctx aws.Context, input *ReplaceTopicRu
 
 const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 
-// SetDefaultPolicyVersionRequest generates a "aws/request.Request" representing the
+// SetDefaultPolicyVersionRequest generates a "aws.Request" representing the
 // client's request for the SetDefaultPolicyVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4804,8 +4803,8 @@ const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput) (req *request.Request, output *SetDefaultPolicyVersionOutput) {
-	op := &request.Operation{
+func (c *IoT) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput) (req *aws.Request, output *SetDefaultPolicyVersionOutput) {
+	op := &aws.Operation{
 		Name:       opSetDefaultPolicyVersion,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/policies/{policyName}/version/{policyVersionId}",
@@ -4869,7 +4868,7 @@ func (c *IoT) SetDefaultPolicyVersion(input *SetDefaultPolicyVersionInput) (*Set
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) SetDefaultPolicyVersionWithContext(ctx aws.Context, input *SetDefaultPolicyVersionInput, opts ...request.Option) (*SetDefaultPolicyVersionOutput, error) {
+func (c *IoT) SetDefaultPolicyVersionWithContext(ctx aws.Context, input *SetDefaultPolicyVersionInput, opts ...aws.Option) (*SetDefaultPolicyVersionOutput, error) {
 	req, out := c.SetDefaultPolicyVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4878,7 +4877,7 @@ func (c *IoT) SetDefaultPolicyVersionWithContext(ctx aws.Context, input *SetDefa
 
 const opSetLoggingOptions = "SetLoggingOptions"
 
-// SetLoggingOptionsRequest generates a "aws/request.Request" representing the
+// SetLoggingOptionsRequest generates a "aws.Request" representing the
 // client's request for the SetLoggingOptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4900,8 +4899,8 @@ const opSetLoggingOptions = "SetLoggingOptions"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) (req *request.Request, output *SetLoggingOptionsOutput) {
-	op := &request.Operation{
+func (c *IoT) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) (req *aws.Request, output *SetLoggingOptionsOutput) {
+	op := &aws.Operation{
 		Name:       opSetLoggingOptions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/loggingOptions",
@@ -4953,7 +4952,7 @@ func (c *IoT) SetLoggingOptions(input *SetLoggingOptionsInput) (*SetLoggingOptio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) SetLoggingOptionsWithContext(ctx aws.Context, input *SetLoggingOptionsInput, opts ...request.Option) (*SetLoggingOptionsOutput, error) {
+func (c *IoT) SetLoggingOptionsWithContext(ctx aws.Context, input *SetLoggingOptionsInput, opts ...aws.Option) (*SetLoggingOptionsOutput, error) {
 	req, out := c.SetLoggingOptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4962,7 +4961,7 @@ func (c *IoT) SetLoggingOptionsWithContext(ctx aws.Context, input *SetLoggingOpt
 
 const opTransferCertificate = "TransferCertificate"
 
-// TransferCertificateRequest generates a "aws/request.Request" representing the
+// TransferCertificateRequest generates a "aws.Request" representing the
 // client's request for the TransferCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4984,8 +4983,8 @@ const opTransferCertificate = "TransferCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) TransferCertificateRequest(input *TransferCertificateInput) (req *request.Request, output *TransferCertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) TransferCertificateRequest(input *TransferCertificateInput) (req *aws.Request, output *TransferCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opTransferCertificate,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/transfer-certificate/{certificateId}",
@@ -5062,7 +5061,7 @@ func (c *IoT) TransferCertificate(input *TransferCertificateInput) (*TransferCer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) TransferCertificateWithContext(ctx aws.Context, input *TransferCertificateInput, opts ...request.Option) (*TransferCertificateOutput, error) {
+func (c *IoT) TransferCertificateWithContext(ctx aws.Context, input *TransferCertificateInput, opts ...aws.Option) (*TransferCertificateOutput, error) {
 	req, out := c.TransferCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5071,7 +5070,7 @@ func (c *IoT) TransferCertificateWithContext(ctx aws.Context, input *TransferCer
 
 const opUpdateCACertificate = "UpdateCACertificate"
 
-// UpdateCACertificateRequest generates a "aws/request.Request" representing the
+// UpdateCACertificateRequest generates a "aws.Request" representing the
 // client's request for the UpdateCACertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5093,8 +5092,8 @@ const opUpdateCACertificate = "UpdateCACertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) UpdateCACertificateRequest(input *UpdateCACertificateInput) (req *request.Request, output *UpdateCACertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) UpdateCACertificateRequest(input *UpdateCACertificateInput) (req *aws.Request, output *UpdateCACertificateOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCACertificate,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/cacertificate/{caCertificateId}",
@@ -5155,7 +5154,7 @@ func (c *IoT) UpdateCACertificate(input *UpdateCACertificateInput) (*UpdateCACer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) UpdateCACertificateWithContext(ctx aws.Context, input *UpdateCACertificateInput, opts ...request.Option) (*UpdateCACertificateOutput, error) {
+func (c *IoT) UpdateCACertificateWithContext(ctx aws.Context, input *UpdateCACertificateInput, opts ...aws.Option) (*UpdateCACertificateOutput, error) {
 	req, out := c.UpdateCACertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5164,7 +5163,7 @@ func (c *IoT) UpdateCACertificateWithContext(ctx aws.Context, input *UpdateCACer
 
 const opUpdateCertificate = "UpdateCertificate"
 
-// UpdateCertificateRequest generates a "aws/request.Request" representing the
+// UpdateCertificateRequest generates a "aws.Request" representing the
 // client's request for the UpdateCertificate operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5186,8 +5185,8 @@ const opUpdateCertificate = "UpdateCertificate"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) UpdateCertificateRequest(input *UpdateCertificateInput) (req *request.Request, output *UpdateCertificateOutput) {
-	op := &request.Operation{
+func (c *IoT) UpdateCertificateRequest(input *UpdateCertificateInput) (req *aws.Request, output *UpdateCertificateOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCertificate,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/certificates/{certificateId}",
@@ -5257,7 +5256,7 @@ func (c *IoT) UpdateCertificate(input *UpdateCertificateInput) (*UpdateCertifica
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) UpdateCertificateWithContext(ctx aws.Context, input *UpdateCertificateInput, opts ...request.Option) (*UpdateCertificateOutput, error) {
+func (c *IoT) UpdateCertificateWithContext(ctx aws.Context, input *UpdateCertificateInput, opts ...aws.Option) (*UpdateCertificateOutput, error) {
 	req, out := c.UpdateCertificateRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5266,7 +5265,7 @@ func (c *IoT) UpdateCertificateWithContext(ctx aws.Context, input *UpdateCertifi
 
 const opUpdateThing = "UpdateThing"
 
-// UpdateThingRequest generates a "aws/request.Request" representing the
+// UpdateThingRequest generates a "aws.Request" representing the
 // client's request for the UpdateThing operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5288,8 +5287,8 @@ const opUpdateThing = "UpdateThing"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *IoT) UpdateThingRequest(input *UpdateThingInput) (req *request.Request, output *UpdateThingOutput) {
-	op := &request.Operation{
+func (c *IoT) UpdateThingRequest(input *UpdateThingInput) (req *aws.Request, output *UpdateThingOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateThing,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/things/{thingName}",
@@ -5352,7 +5351,7 @@ func (c *IoT) UpdateThing(input *UpdateThingInput) (*UpdateThingOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *IoT) UpdateThingWithContext(ctx aws.Context, input *UpdateThingInput, opts ...request.Option) (*UpdateThingOutput, error) {
+func (c *IoT) UpdateThingWithContext(ctx aws.Context, input *UpdateThingInput, opts ...aws.Option) (*UpdateThingOutput, error) {
 	req, out := c.UpdateThingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5384,12 +5383,12 @@ func (s AcceptCertificateTransferInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AcceptCertificateTransferInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AcceptCertificateTransferInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AcceptCertificateTransferInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5482,70 +5481,70 @@ func (s Action) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Action) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Action"}
+	invalidParams := aws.ErrInvalidParams{Context: "Action"}
 	if s.CloudwatchAlarm != nil {
 		if err := s.CloudwatchAlarm.Validate(); err != nil {
-			invalidParams.AddNested("CloudwatchAlarm", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudwatchAlarm", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.CloudwatchMetric != nil {
 		if err := s.CloudwatchMetric.Validate(); err != nil {
-			invalidParams.AddNested("CloudwatchMetric", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CloudwatchMetric", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DynamoDB != nil {
 		if err := s.DynamoDB.Validate(); err != nil {
-			invalidParams.AddNested("DynamoDB", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DynamoDB", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.DynamoDBv2 != nil {
 		if err := s.DynamoDBv2.Validate(); err != nil {
-			invalidParams.AddNested("DynamoDBv2", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DynamoDBv2", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Elasticsearch != nil {
 		if err := s.Elasticsearch.Validate(); err != nil {
-			invalidParams.AddNested("Elasticsearch", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Elasticsearch", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Firehose != nil {
 		if err := s.Firehose.Validate(); err != nil {
-			invalidParams.AddNested("Firehose", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Firehose", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Kinesis != nil {
 		if err := s.Kinesis.Validate(); err != nil {
-			invalidParams.AddNested("Kinesis", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Kinesis", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Lambda != nil {
 		if err := s.Lambda.Validate(); err != nil {
-			invalidParams.AddNested("Lambda", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Lambda", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Republish != nil {
 		if err := s.Republish.Validate(); err != nil {
-			invalidParams.AddNested("Republish", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Republish", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3 != nil {
 		if err := s.S3.Validate(); err != nil {
-			invalidParams.AddNested("S3", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Salesforce != nil {
 		if err := s.Salesforce.Validate(); err != nil {
-			invalidParams.AddNested("Salesforce", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Salesforce", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Sns != nil {
 		if err := s.Sns.Validate(); err != nil {
-			invalidParams.AddNested("Sns", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Sns", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Sqs != nil {
 		if err := s.Sqs.Validate(); err != nil {
-			invalidParams.AddNested("Sqs", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Sqs", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -5661,15 +5660,15 @@ func (s AttachPrincipalPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPrincipalPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachPrincipalPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachPrincipalPolicyInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5731,15 +5730,15 @@ func (s AttachThingPrincipalInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachThingPrincipalInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AttachThingPrincipalInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AttachThingPrincipalInput"}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5970,12 +5969,12 @@ func (s CancelCertificateTransferInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CancelCertificateTransferInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CancelCertificateTransferInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CancelCertificateTransferInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6199,18 +6198,18 @@ func (s CloudwatchAlarmAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudwatchAlarmAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudwatchAlarmAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudwatchAlarmAction"}
 	if s.AlarmName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AlarmName"))
+		invalidParams.Add(aws.NewErrParamRequired("AlarmName"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.StateReason == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateReason"))
+		invalidParams.Add(aws.NewErrParamRequired("StateReason"))
 	}
 	if s.StateValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("StateValue"))
+		invalidParams.Add(aws.NewErrParamRequired("StateValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6289,21 +6288,21 @@ func (s CloudwatchMetricAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CloudwatchMetricAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CloudwatchMetricAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "CloudwatchMetricAction"}
 	if s.MetricName == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricName"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricName"))
 	}
 	if s.MetricNamespace == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricNamespace"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricNamespace"))
 	}
 	if s.MetricUnit == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricUnit"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricUnit"))
 	}
 	if s.MetricValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("MetricValue"))
+		invalidParams.Add(aws.NewErrParamRequired("MetricValue"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6373,12 +6372,12 @@ func (s CreateCertificateFromCsrInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCertificateFromCsrInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCertificateFromCsrInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCertificateFromCsrInput"}
 	if s.CertificateSigningRequest == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateSigningRequest"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateSigningRequest"))
 	}
 	if s.CertificateSigningRequest != nil && len(*s.CertificateSigningRequest) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateSigningRequest", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateSigningRequest", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6547,15 +6546,15 @@ func (s CreatePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyInput"}
 	if s.PolicyDocument == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyDocument"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6660,15 +6659,15 @@ func (s CreatePolicyVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePolicyVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePolicyVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePolicyVersionInput"}
 	if s.PolicyDocument == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyDocument"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyDocument"))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6777,15 +6776,15 @@ func (s CreateThingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateThingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateThingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateThingInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6872,12 +6871,12 @@ func (s CreateThingTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateThingTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateThingTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateThingTypeInput"}
 	if s.ThingTypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingTypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6958,19 +6957,19 @@ func (s CreateTopicRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTopicRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTopicRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTopicRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
 	if s.TopicRulePayload == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicRulePayload"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicRulePayload"))
 	}
 	if s.TopicRulePayload != nil {
 		if err := s.TopicRulePayload.Validate(); err != nil {
-			invalidParams.AddNested("TopicRulePayload", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TopicRulePayload", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7028,12 +7027,12 @@ func (s DeleteCACertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCACertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCACertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCACertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7085,12 +7084,12 @@ func (s DeleteCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7141,12 +7140,12 @@ func (s DeletePolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7202,15 +7201,15 @@ func (s DeletePolicyVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePolicyVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePolicyVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePolicyVersionInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.PolicyVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7302,12 +7301,12 @@ func (s DeleteThingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteThingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteThingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7365,12 +7364,12 @@ func (s DeleteThingTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteThingTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteThingTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteThingTypeInput"}
 	if s.ThingTypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingTypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7422,12 +7421,12 @@ func (s DeleteTopicRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTopicRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTopicRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTopicRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7482,12 +7481,12 @@ func (s DeprecateThingTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeprecateThingTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeprecateThingTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeprecateThingTypeInput"}
 	if s.ThingTypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingTypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7545,12 +7544,12 @@ func (s DescribeCACertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCACertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCACertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCACertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7611,12 +7610,12 @@ func (s DescribeCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7716,12 +7715,12 @@ func (s DescribeThingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeThingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeThingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeThingInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7822,12 +7821,12 @@ func (s DescribeThingTypeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeThingTypeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeThingTypeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeThingTypeInput"}
 	if s.ThingTypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingTypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingTypeName"))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7917,15 +7916,15 @@ func (s DetachPrincipalPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachPrincipalPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachPrincipalPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachPrincipalPolicyInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7989,15 +7988,15 @@ func (s DetachThingPrincipalInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetachThingPrincipalInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DetachThingPrincipalInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DetachThingPrincipalInput"}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8055,12 +8054,12 @@ func (s DisableTopicRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisableTopicRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisableTopicRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisableTopicRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8162,18 +8161,18 @@ func (s DynamoDBAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DynamoDBAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DynamoDBAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "DynamoDBAction"}
 	if s.HashKeyField == nil {
-		invalidParams.Add(request.NewErrParamRequired("HashKeyField"))
+		invalidParams.Add(aws.NewErrParamRequired("HashKeyField"))
 	}
 	if s.HashKeyValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("HashKeyValue"))
+		invalidParams.Add(aws.NewErrParamRequired("HashKeyValue"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8275,10 +8274,10 @@ func (s DynamoDBv2Action) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DynamoDBv2Action) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DynamoDBv2Action"}
+	invalidParams := aws.ErrInvalidParams{Context: "DynamoDBv2Action"}
 	if s.PutItem != nil {
 		if err := s.PutItem.Validate(); err != nil {
-			invalidParams.AddNested("PutItem", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PutItem", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8342,21 +8341,21 @@ func (s ElasticsearchAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchAction"}
 	if s.Endpoint == nil {
-		invalidParams.Add(request.NewErrParamRequired("Endpoint"))
+		invalidParams.Add(aws.NewErrParamRequired("Endpoint"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Index == nil {
-		invalidParams.Add(request.NewErrParamRequired("Index"))
+		invalidParams.Add(aws.NewErrParamRequired("Index"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8417,12 +8416,12 @@ func (s EnableTopicRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EnableTopicRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EnableTopicRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "EnableTopicRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8483,12 +8482,12 @@ func (s FirehoseAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FirehoseAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "FirehoseAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "FirehoseAction"}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8585,12 +8584,12 @@ func (s GetPolicyInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPolicyInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8683,15 +8682,15 @@ func (s GetPolicyVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPolicyVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPolicyVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPolicyVersionInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.PolicyVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8833,12 +8832,12 @@ func (s GetTopicRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTopicRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTopicRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTopicRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8949,12 +8948,12 @@ func (s KinesisAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisAction"}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.StreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("StreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("StreamName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9003,9 +9002,9 @@ func (s LambdaAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LambdaAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LambdaAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "LambdaAction"}
 	if s.FunctionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9046,9 +9045,9 @@ func (s ListCACertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCACertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCACertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCACertificatesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9141,15 +9140,15 @@ func (s ListCertificatesByCAInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCertificatesByCAInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCertificatesByCAInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCertificatesByCAInput"}
 	if s.CaCertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CaCertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CaCertificateId"))
 	}
 	if s.CaCertificateId != nil && len(*s.CaCertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CaCertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CaCertificateId", 64))
 	}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9243,9 +9242,9 @@ func (s ListCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListCertificatesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9333,9 +9332,9 @@ func (s ListOutgoingCertificatesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOutgoingCertificatesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOutgoingCertificatesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOutgoingCertificatesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9422,9 +9421,9 @@ func (s ListPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPoliciesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9517,15 +9516,15 @@ func (s ListPolicyPrincipalsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPolicyPrincipalsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPolicyPrincipalsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyPrincipalsInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9614,12 +9613,12 @@ func (s ListPolicyVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPolicyVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPolicyVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPolicyVersionsInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9690,12 +9689,12 @@ func (s ListPrincipalPoliciesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPrincipalPoliciesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPrincipalPoliciesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPrincipalPoliciesInput"}
 	if s.PageSize != nil && *s.PageSize < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("PageSize", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("PageSize", 1))
 	}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9791,12 +9790,12 @@ func (s ListPrincipalThingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListPrincipalThingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListPrincipalThingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListPrincipalThingsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Principal == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principal"))
+		invalidParams.Add(aws.NewErrParamRequired("Principal"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9879,12 +9878,12 @@ func (s ListThingPrincipalsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListThingPrincipalsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListThingPrincipalsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListThingPrincipalsInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9950,12 +9949,12 @@ func (s ListThingTypesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListThingTypesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListThingTypesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListThingTypesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10049,12 +10048,12 @@ func (s ListThingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListThingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListThingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListThingsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10156,9 +10155,9 @@ func (s ListTopicRulesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTopicRulesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTopicRulesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTopicRulesInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10249,9 +10248,9 @@ func (s LoggingOptionsPayload) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *LoggingOptionsPayload) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "LoggingOptionsPayload"}
+	invalidParams := aws.ErrInvalidParams{Context: "LoggingOptionsPayload"}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10439,9 +10438,9 @@ func (s PutItemInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutItemInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutItemInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutItemInput"}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10489,18 +10488,18 @@ func (s RegisterCACertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterCACertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterCACertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterCACertificateInput"}
 	if s.CaCertificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("CaCertificate"))
+		invalidParams.Add(aws.NewErrParamRequired("CaCertificate"))
 	}
 	if s.CaCertificate != nil && len(*s.CaCertificate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CaCertificate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CaCertificate", 1))
 	}
 	if s.VerificationCertificate == nil {
-		invalidParams.Add(request.NewErrParamRequired("VerificationCertificate"))
+		invalidParams.Add(aws.NewErrParamRequired("VerificationCertificate"))
 	}
 	if s.VerificationCertificate != nil && len(*s.VerificationCertificate) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VerificationCertificate", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VerificationCertificate", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10597,15 +10596,15 @@ func (s RegisterCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RegisterCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RegisterCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterCertificateInput"}
 	if s.CaCertificatePem != nil && len(*s.CaCertificatePem) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CaCertificatePem", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CaCertificatePem", 1))
 	}
 	if s.CertificatePem == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificatePem"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificatePem"))
 	}
 	if s.CertificatePem != nil && len(*s.CertificatePem) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificatePem", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificatePem", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10696,12 +10695,12 @@ func (s RejectCertificateTransferInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RejectCertificateTransferInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RejectCertificateTransferInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RejectCertificateTransferInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10763,19 +10762,19 @@ func (s ReplaceTopicRuleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ReplaceTopicRuleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ReplaceTopicRuleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ReplaceTopicRuleInput"}
 	if s.RuleName == nil {
-		invalidParams.Add(request.NewErrParamRequired("RuleName"))
+		invalidParams.Add(aws.NewErrParamRequired("RuleName"))
 	}
 	if s.RuleName != nil && len(*s.RuleName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RuleName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RuleName", 1))
 	}
 	if s.TopicRulePayload == nil {
-		invalidParams.Add(request.NewErrParamRequired("TopicRulePayload"))
+		invalidParams.Add(aws.NewErrParamRequired("TopicRulePayload"))
 	}
 	if s.TopicRulePayload != nil {
 		if err := s.TopicRulePayload.Validate(); err != nil {
-			invalidParams.AddNested("TopicRulePayload", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TopicRulePayload", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10838,12 +10837,12 @@ func (s RepublishAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RepublishAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RepublishAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "RepublishAction"}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.Topic == nil {
-		invalidParams.Add(request.NewErrParamRequired("Topic"))
+		invalidParams.Add(aws.NewErrParamRequired("Topic"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10900,15 +10899,15 @@ func (s S3Action) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3Action) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3Action"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3Action"}
 	if s.BucketName == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketName"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketName"))
 	}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10971,15 +10970,15 @@ func (s SalesforceAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SalesforceAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SalesforceAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "SalesforceAction"}
 	if s.Token == nil {
-		invalidParams.Add(request.NewErrParamRequired("Token"))
+		invalidParams.Add(aws.NewErrParamRequired("Token"))
 	}
 	if s.Token != nil && len(*s.Token) < 40 {
-		invalidParams.Add(request.NewErrParamMinLen("Token", 40))
+		invalidParams.Add(aws.NewErrParamMinLen("Token", 40))
 	}
 	if s.Url == nil {
-		invalidParams.Add(request.NewErrParamRequired("Url"))
+		invalidParams.Add(aws.NewErrParamRequired("Url"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11027,15 +11026,15 @@ func (s SetDefaultPolicyVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetDefaultPolicyVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetDefaultPolicyVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetDefaultPolicyVersionInput"}
 	if s.PolicyName == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyName"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyName"))
 	}
 	if s.PolicyName != nil && len(*s.PolicyName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PolicyName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PolicyName", 1))
 	}
 	if s.PolicyVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PolicyVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("PolicyVersionId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11092,13 +11091,13 @@ func (s SetLoggingOptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SetLoggingOptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SetLoggingOptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SetLoggingOptionsInput"}
 	if s.LoggingOptionsPayload == nil {
-		invalidParams.Add(request.NewErrParamRequired("LoggingOptionsPayload"))
+		invalidParams.Add(aws.NewErrParamRequired("LoggingOptionsPayload"))
 	}
 	if s.LoggingOptionsPayload != nil {
 		if err := s.LoggingOptionsPayload.Validate(); err != nil {
-			invalidParams.AddNested("LoggingOptionsPayload", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("LoggingOptionsPayload", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11163,12 +11162,12 @@ func (s SnsAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SnsAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SnsAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "SnsAction"}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.TargetArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetArn"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11225,12 +11224,12 @@ func (s SqsAction) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SqsAction) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SqsAction"}
+	invalidParams := aws.ErrInvalidParams{Context: "SqsAction"}
 	if s.QueueUrl == nil {
-		invalidParams.Add(request.NewErrParamRequired("QueueUrl"))
+		invalidParams.Add(aws.NewErrParamRequired("QueueUrl"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11609,12 +11608,12 @@ func (s TopicRulePayload) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TopicRulePayload) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TopicRulePayload"}
+	invalidParams := aws.ErrInvalidParams{Context: "TopicRulePayload"}
 	if s.Actions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Actions"))
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
 	if s.Sql == nil {
-		invalidParams.Add(request.NewErrParamRequired("Sql"))
+		invalidParams.Add(aws.NewErrParamRequired("Sql"))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
@@ -11622,7 +11621,7 @@ func (s *TopicRulePayload) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -11693,15 +11692,15 @@ func (s TransferCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TransferCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TransferCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TransferCertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 	if s.TargetAwsAccount == nil {
-		invalidParams.Add(request.NewErrParamRequired("TargetAwsAccount"))
+		invalidParams.Add(aws.NewErrParamRequired("TargetAwsAccount"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11844,12 +11843,12 @@ func (s UpdateCACertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCACertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCACertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCACertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11924,15 +11923,15 @@ func (s UpdateCertificateInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCertificateInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCertificateInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCertificateInput"}
 	if s.CertificateId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CertificateId"))
+		invalidParams.Add(aws.NewErrParamRequired("CertificateId"))
 	}
 	if s.CertificateId != nil && len(*s.CertificateId) < 64 {
-		invalidParams.Add(request.NewErrParamMinLen("CertificateId", 64))
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateId", 64))
 	}
 	if s.NewStatus == nil {
-		invalidParams.Add(request.NewErrParamRequired("NewStatus"))
+		invalidParams.Add(aws.NewErrParamRequired("NewStatus"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12008,15 +12007,15 @@ func (s UpdateThingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateThingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateThingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateThingInput"}
 	if s.ThingName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ThingName"))
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
 	}
 	if s.ThingName != nil && len(*s.ThingName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
 	}
 	if s.ThingTypeName != nil && len(*s.ThingTypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThingTypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThingTypeName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

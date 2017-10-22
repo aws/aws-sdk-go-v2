@@ -7,15 +7,14 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opAbortDocumentVersionUpload = "AbortDocumentVersionUpload"
 
-// AbortDocumentVersionUploadRequest generates a "aws/request.Request" representing the
+// AbortDocumentVersionUploadRequest generates a "aws.Request" representing the
 // client's request for the AbortDocumentVersionUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -39,8 +38,8 @@ const opAbortDocumentVersionUpload = "AbortDocumentVersionUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUpload
-func (c *WorkDocs) AbortDocumentVersionUploadRequest(input *AbortDocumentVersionUploadInput) (req *request.Request, output *AbortDocumentVersionUploadOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) AbortDocumentVersionUploadRequest(input *AbortDocumentVersionUploadInput) (req *aws.Request, output *AbortDocumentVersionUploadOutput) {
+	op := &aws.Operation{
 		Name:       opAbortDocumentVersionUpload,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}",
@@ -106,7 +105,7 @@ func (c *WorkDocs) AbortDocumentVersionUpload(input *AbortDocumentVersionUploadI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) AbortDocumentVersionUploadWithContext(ctx aws.Context, input *AbortDocumentVersionUploadInput, opts ...request.Option) (*AbortDocumentVersionUploadOutput, error) {
+func (c *WorkDocs) AbortDocumentVersionUploadWithContext(ctx aws.Context, input *AbortDocumentVersionUploadInput, opts ...aws.Option) (*AbortDocumentVersionUploadOutput, error) {
 	req, out := c.AbortDocumentVersionUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -115,7 +114,7 @@ func (c *WorkDocs) AbortDocumentVersionUploadWithContext(ctx aws.Context, input 
 
 const opActivateUser = "ActivateUser"
 
-// ActivateUserRequest generates a "aws/request.Request" representing the
+// ActivateUserRequest generates a "aws.Request" representing the
 // client's request for the ActivateUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -139,8 +138,8 @@ const opActivateUser = "ActivateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUser
-func (c *WorkDocs) ActivateUserRequest(input *ActivateUserInput) (req *request.Request, output *ActivateUserOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) ActivateUserRequest(input *ActivateUserInput) (req *aws.Request, output *ActivateUserOutput) {
+	op := &aws.Operation{
 		Name:       opActivateUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/users/{UserId}/activation",
@@ -199,7 +198,7 @@ func (c *WorkDocs) ActivateUser(input *ActivateUserInput) (*ActivateUserOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) ActivateUserWithContext(ctx aws.Context, input *ActivateUserInput, opts ...request.Option) (*ActivateUserOutput, error) {
+func (c *WorkDocs) ActivateUserWithContext(ctx aws.Context, input *ActivateUserInput, opts ...aws.Option) (*ActivateUserOutput, error) {
 	req, out := c.ActivateUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -208,7 +207,7 @@ func (c *WorkDocs) ActivateUserWithContext(ctx aws.Context, input *ActivateUserI
 
 const opAddResourcePermissions = "AddResourcePermissions"
 
-// AddResourcePermissionsRequest generates a "aws/request.Request" representing the
+// AddResourcePermissionsRequest generates a "aws.Request" representing the
 // client's request for the AddResourcePermissions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -232,8 +231,8 @@ const opAddResourcePermissions = "AddResourcePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissions
-func (c *WorkDocs) AddResourcePermissionsRequest(input *AddResourcePermissionsInput) (req *request.Request, output *AddResourcePermissionsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) AddResourcePermissionsRequest(input *AddResourcePermissionsInput) (req *aws.Request, output *AddResourcePermissionsOutput) {
+	op := &aws.Operation{
 		Name:       opAddResourcePermissions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/permissions",
@@ -290,7 +289,7 @@ func (c *WorkDocs) AddResourcePermissions(input *AddResourcePermissionsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) AddResourcePermissionsWithContext(ctx aws.Context, input *AddResourcePermissionsInput, opts ...request.Option) (*AddResourcePermissionsOutput, error) {
+func (c *WorkDocs) AddResourcePermissionsWithContext(ctx aws.Context, input *AddResourcePermissionsInput, opts ...aws.Option) (*AddResourcePermissionsOutput, error) {
 	req, out := c.AddResourcePermissionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -299,7 +298,7 @@ func (c *WorkDocs) AddResourcePermissionsWithContext(ctx aws.Context, input *Add
 
 const opCreateComment = "CreateComment"
 
-// CreateCommentRequest generates a "aws/request.Request" representing the
+// CreateCommentRequest generates a "aws.Request" representing the
 // client's request for the CreateComment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -323,8 +322,8 @@ const opCreateComment = "CreateComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateComment
-func (c *WorkDocs) CreateCommentRequest(input *CreateCommentInput) (req *request.Request, output *CreateCommentOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) CreateCommentRequest(input *CreateCommentInput) (req *aws.Request, output *CreateCommentOutput) {
+	op := &aws.Operation{
 		Name:       opCreateComment,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}/comment",
@@ -390,7 +389,7 @@ func (c *WorkDocs) CreateComment(input *CreateCommentInput) (*CreateCommentOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) CreateCommentWithContext(ctx aws.Context, input *CreateCommentInput, opts ...request.Option) (*CreateCommentOutput, error) {
+func (c *WorkDocs) CreateCommentWithContext(ctx aws.Context, input *CreateCommentInput, opts ...aws.Option) (*CreateCommentOutput, error) {
 	req, out := c.CreateCommentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -399,7 +398,7 @@ func (c *WorkDocs) CreateCommentWithContext(ctx aws.Context, input *CreateCommen
 
 const opCreateCustomMetadata = "CreateCustomMetadata"
 
-// CreateCustomMetadataRequest generates a "aws/request.Request" representing the
+// CreateCustomMetadataRequest generates a "aws.Request" representing the
 // client's request for the CreateCustomMetadata operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -423,8 +422,8 @@ const opCreateCustomMetadata = "CreateCustomMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateCustomMetadata
-func (c *WorkDocs) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) (req *request.Request, output *CreateCustomMetadataOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) CreateCustomMetadataRequest(input *CreateCustomMetadataInput) (req *aws.Request, output *CreateCustomMetadataOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCustomMetadata,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/customMetadata",
@@ -491,7 +490,7 @@ func (c *WorkDocs) CreateCustomMetadata(input *CreateCustomMetadataInput) (*Crea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) CreateCustomMetadataWithContext(ctx aws.Context, input *CreateCustomMetadataInput, opts ...request.Option) (*CreateCustomMetadataOutput, error) {
+func (c *WorkDocs) CreateCustomMetadataWithContext(ctx aws.Context, input *CreateCustomMetadataInput, opts ...aws.Option) (*CreateCustomMetadataOutput, error) {
 	req, out := c.CreateCustomMetadataRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -500,7 +499,7 @@ func (c *WorkDocs) CreateCustomMetadataWithContext(ctx aws.Context, input *Creat
 
 const opCreateFolder = "CreateFolder"
 
-// CreateFolderRequest generates a "aws/request.Request" representing the
+// CreateFolderRequest generates a "aws.Request" representing the
 // client's request for the CreateFolder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -524,8 +523,8 @@ const opCreateFolder = "CreateFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolder
-func (c *WorkDocs) CreateFolderRequest(input *CreateFolderInput) (req *request.Request, output *CreateFolderOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) CreateFolderRequest(input *CreateFolderInput) (req *aws.Request, output *CreateFolderOutput) {
+	op := &aws.Operation{
 		Name:       opCreateFolder,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/folders",
@@ -593,7 +592,7 @@ func (c *WorkDocs) CreateFolder(input *CreateFolderInput) (*CreateFolderOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) CreateFolderWithContext(ctx aws.Context, input *CreateFolderInput, opts ...request.Option) (*CreateFolderOutput, error) {
+func (c *WorkDocs) CreateFolderWithContext(ctx aws.Context, input *CreateFolderInput, opts ...aws.Option) (*CreateFolderOutput, error) {
 	req, out := c.CreateFolderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -602,7 +601,7 @@ func (c *WorkDocs) CreateFolderWithContext(ctx aws.Context, input *CreateFolderI
 
 const opCreateLabels = "CreateLabels"
 
-// CreateLabelsRequest generates a "aws/request.Request" representing the
+// CreateLabelsRequest generates a "aws.Request" representing the
 // client's request for the CreateLabels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -626,8 +625,8 @@ const opCreateLabels = "CreateLabels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateLabels
-func (c *WorkDocs) CreateLabelsRequest(input *CreateLabelsInput) (req *request.Request, output *CreateLabelsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) CreateLabelsRequest(input *CreateLabelsInput) (req *aws.Request, output *CreateLabelsOutput) {
+	op := &aws.Operation{
 		Name:       opCreateLabels,
 		HTTPMethod: "PUT",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/labels",
@@ -689,7 +688,7 @@ func (c *WorkDocs) CreateLabels(input *CreateLabelsInput) (*CreateLabelsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) CreateLabelsWithContext(ctx aws.Context, input *CreateLabelsInput, opts ...request.Option) (*CreateLabelsOutput, error) {
+func (c *WorkDocs) CreateLabelsWithContext(ctx aws.Context, input *CreateLabelsInput, opts ...aws.Option) (*CreateLabelsOutput, error) {
 	req, out := c.CreateLabelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -698,7 +697,7 @@ func (c *WorkDocs) CreateLabelsWithContext(ctx aws.Context, input *CreateLabelsI
 
 const opCreateNotificationSubscription = "CreateNotificationSubscription"
 
-// CreateNotificationSubscriptionRequest generates a "aws/request.Request" representing the
+// CreateNotificationSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the CreateNotificationSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -722,8 +721,8 @@ const opCreateNotificationSubscription = "CreateNotificationSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscription
-func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificationSubscriptionInput) (req *request.Request, output *CreateNotificationSubscriptionOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificationSubscriptionInput) (req *aws.Request, output *CreateNotificationSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateNotificationSubscription,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/organizations/{OrganizationId}/subscriptions",
@@ -779,7 +778,7 @@ func (c *WorkDocs) CreateNotificationSubscription(input *CreateNotificationSubsc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) CreateNotificationSubscriptionWithContext(ctx aws.Context, input *CreateNotificationSubscriptionInput, opts ...request.Option) (*CreateNotificationSubscriptionOutput, error) {
+func (c *WorkDocs) CreateNotificationSubscriptionWithContext(ctx aws.Context, input *CreateNotificationSubscriptionInput, opts ...aws.Option) (*CreateNotificationSubscriptionOutput, error) {
 	req, out := c.CreateNotificationSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -788,7 +787,7 @@ func (c *WorkDocs) CreateNotificationSubscriptionWithContext(ctx aws.Context, in
 
 const opCreateUser = "CreateUser"
 
-// CreateUserRequest generates a "aws/request.Request" representing the
+// CreateUserRequest generates a "aws.Request" representing the
 // client's request for the CreateUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -812,8 +811,8 @@ const opCreateUser = "CreateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUser
-func (c *WorkDocs) CreateUserRequest(input *CreateUserInput) (req *request.Request, output *CreateUserOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) CreateUserRequest(input *CreateUserInput) (req *aws.Request, output *CreateUserOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUser,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/users",
@@ -873,7 +872,7 @@ func (c *WorkDocs) CreateUser(input *CreateUserInput) (*CreateUserOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) CreateUserWithContext(ctx aws.Context, input *CreateUserInput, opts ...request.Option) (*CreateUserOutput, error) {
+func (c *WorkDocs) CreateUserWithContext(ctx aws.Context, input *CreateUserInput, opts ...aws.Option) (*CreateUserOutput, error) {
 	req, out := c.CreateUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -882,7 +881,7 @@ func (c *WorkDocs) CreateUserWithContext(ctx aws.Context, input *CreateUserInput
 
 const opDeactivateUser = "DeactivateUser"
 
-// DeactivateUserRequest generates a "aws/request.Request" representing the
+// DeactivateUserRequest generates a "aws.Request" representing the
 // client's request for the DeactivateUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -906,8 +905,8 @@ const opDeactivateUser = "DeactivateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUser
-func (c *WorkDocs) DeactivateUserRequest(input *DeactivateUserInput) (req *request.Request, output *DeactivateUserOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeactivateUserRequest(input *DeactivateUserInput) (req *aws.Request, output *DeactivateUserOutput) {
+	op := &aws.Operation{
 		Name:       opDeactivateUser,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/users/{UserId}/activation",
@@ -969,7 +968,7 @@ func (c *WorkDocs) DeactivateUser(input *DeactivateUserInput) (*DeactivateUserOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeactivateUserWithContext(ctx aws.Context, input *DeactivateUserInput, opts ...request.Option) (*DeactivateUserOutput, error) {
+func (c *WorkDocs) DeactivateUserWithContext(ctx aws.Context, input *DeactivateUserInput, opts ...aws.Option) (*DeactivateUserOutput, error) {
 	req, out := c.DeactivateUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -978,7 +977,7 @@ func (c *WorkDocs) DeactivateUserWithContext(ctx aws.Context, input *DeactivateU
 
 const opDeleteComment = "DeleteComment"
 
-// DeleteCommentRequest generates a "aws/request.Request" representing the
+// DeleteCommentRequest generates a "aws.Request" representing the
 // client's request for the DeleteComment operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1002,8 +1001,8 @@ const opDeleteComment = "DeleteComment"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteComment
-func (c *WorkDocs) DeleteCommentRequest(input *DeleteCommentInput) (req *request.Request, output *DeleteCommentOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteCommentRequest(input *DeleteCommentInput) (req *aws.Request, output *DeleteCommentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteComment,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}/comment/{CommentId}",
@@ -1071,7 +1070,7 @@ func (c *WorkDocs) DeleteComment(input *DeleteCommentInput) (*DeleteCommentOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteCommentWithContext(ctx aws.Context, input *DeleteCommentInput, opts ...request.Option) (*DeleteCommentOutput, error) {
+func (c *WorkDocs) DeleteCommentWithContext(ctx aws.Context, input *DeleteCommentInput, opts ...aws.Option) (*DeleteCommentOutput, error) {
 	req, out := c.DeleteCommentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1080,7 +1079,7 @@ func (c *WorkDocs) DeleteCommentWithContext(ctx aws.Context, input *DeleteCommen
 
 const opDeleteCustomMetadata = "DeleteCustomMetadata"
 
-// DeleteCustomMetadataRequest generates a "aws/request.Request" representing the
+// DeleteCustomMetadataRequest generates a "aws.Request" representing the
 // client's request for the DeleteCustomMetadata operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1104,8 +1103,8 @@ const opDeleteCustomMetadata = "DeleteCustomMetadata"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteCustomMetadata
-func (c *WorkDocs) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) (req *request.Request, output *DeleteCustomMetadataOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput) (req *aws.Request, output *DeleteCustomMetadataOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCustomMetadata,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/customMetadata",
@@ -1167,7 +1166,7 @@ func (c *WorkDocs) DeleteCustomMetadata(input *DeleteCustomMetadataInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteCustomMetadataWithContext(ctx aws.Context, input *DeleteCustomMetadataInput, opts ...request.Option) (*DeleteCustomMetadataOutput, error) {
+func (c *WorkDocs) DeleteCustomMetadataWithContext(ctx aws.Context, input *DeleteCustomMetadataInput, opts ...aws.Option) (*DeleteCustomMetadataOutput, error) {
 	req, out := c.DeleteCustomMetadataRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1176,7 +1175,7 @@ func (c *WorkDocs) DeleteCustomMetadataWithContext(ctx aws.Context, input *Delet
 
 const opDeleteDocument = "DeleteDocument"
 
-// DeleteDocumentRequest generates a "aws/request.Request" representing the
+// DeleteDocumentRequest generates a "aws.Request" representing the
 // client's request for the DeleteDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1200,8 +1199,8 @@ const opDeleteDocument = "DeleteDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocument
-func (c *WorkDocs) DeleteDocumentRequest(input *DeleteDocumentInput) (req *request.Request, output *DeleteDocumentOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteDocumentRequest(input *DeleteDocumentInput) (req *aws.Request, output *DeleteDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDocument,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/documents/{DocumentId}",
@@ -1268,7 +1267,7 @@ func (c *WorkDocs) DeleteDocument(input *DeleteDocumentInput) (*DeleteDocumentOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocumentInput, opts ...request.Option) (*DeleteDocumentOutput, error) {
+func (c *WorkDocs) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocumentInput, opts ...aws.Option) (*DeleteDocumentOutput, error) {
 	req, out := c.DeleteDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1277,7 +1276,7 @@ func (c *WorkDocs) DeleteDocumentWithContext(ctx aws.Context, input *DeleteDocum
 
 const opDeleteFolder = "DeleteFolder"
 
-// DeleteFolderRequest generates a "aws/request.Request" representing the
+// DeleteFolderRequest generates a "aws.Request" representing the
 // client's request for the DeleteFolder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1301,8 +1300,8 @@ const opDeleteFolder = "DeleteFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolder
-func (c *WorkDocs) DeleteFolderRequest(input *DeleteFolderInput) (req *request.Request, output *DeleteFolderOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteFolderRequest(input *DeleteFolderInput) (req *aws.Request, output *DeleteFolderOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFolder,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/folders/{FolderId}",
@@ -1369,7 +1368,7 @@ func (c *WorkDocs) DeleteFolder(input *DeleteFolderInput) (*DeleteFolderOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteFolderWithContext(ctx aws.Context, input *DeleteFolderInput, opts ...request.Option) (*DeleteFolderOutput, error) {
+func (c *WorkDocs) DeleteFolderWithContext(ctx aws.Context, input *DeleteFolderInput, opts ...aws.Option) (*DeleteFolderOutput, error) {
 	req, out := c.DeleteFolderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1378,7 +1377,7 @@ func (c *WorkDocs) DeleteFolderWithContext(ctx aws.Context, input *DeleteFolderI
 
 const opDeleteFolderContents = "DeleteFolderContents"
 
-// DeleteFolderContentsRequest generates a "aws/request.Request" representing the
+// DeleteFolderContentsRequest generates a "aws.Request" representing the
 // client's request for the DeleteFolderContents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1402,8 +1401,8 @@ const opDeleteFolderContents = "DeleteFolderContents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContents
-func (c *WorkDocs) DeleteFolderContentsRequest(input *DeleteFolderContentsInput) (req *request.Request, output *DeleteFolderContentsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteFolderContentsRequest(input *DeleteFolderContentsInput) (req *aws.Request, output *DeleteFolderContentsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteFolderContents,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/folders/{FolderId}/contents",
@@ -1464,7 +1463,7 @@ func (c *WorkDocs) DeleteFolderContents(input *DeleteFolderContentsInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteFolderContentsWithContext(ctx aws.Context, input *DeleteFolderContentsInput, opts ...request.Option) (*DeleteFolderContentsOutput, error) {
+func (c *WorkDocs) DeleteFolderContentsWithContext(ctx aws.Context, input *DeleteFolderContentsInput, opts ...aws.Option) (*DeleteFolderContentsOutput, error) {
 	req, out := c.DeleteFolderContentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1473,7 +1472,7 @@ func (c *WorkDocs) DeleteFolderContentsWithContext(ctx aws.Context, input *Delet
 
 const opDeleteLabels = "DeleteLabels"
 
-// DeleteLabelsRequest generates a "aws/request.Request" representing the
+// DeleteLabelsRequest generates a "aws.Request" representing the
 // client's request for the DeleteLabels operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1497,8 +1496,8 @@ const opDeleteLabels = "DeleteLabels"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteLabels
-func (c *WorkDocs) DeleteLabelsRequest(input *DeleteLabelsInput) (req *request.Request, output *DeleteLabelsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteLabelsRequest(input *DeleteLabelsInput) (req *aws.Request, output *DeleteLabelsOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteLabels,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/labels",
@@ -1557,7 +1556,7 @@ func (c *WorkDocs) DeleteLabels(input *DeleteLabelsInput) (*DeleteLabelsOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteLabelsWithContext(ctx aws.Context, input *DeleteLabelsInput, opts ...request.Option) (*DeleteLabelsOutput, error) {
+func (c *WorkDocs) DeleteLabelsWithContext(ctx aws.Context, input *DeleteLabelsInput, opts ...aws.Option) (*DeleteLabelsOutput, error) {
 	req, out := c.DeleteLabelsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1566,7 +1565,7 @@ func (c *WorkDocs) DeleteLabelsWithContext(ctx aws.Context, input *DeleteLabelsI
 
 const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
 
-// DeleteNotificationSubscriptionRequest generates a "aws/request.Request" representing the
+// DeleteNotificationSubscriptionRequest generates a "aws.Request" representing the
 // client's request for the DeleteNotificationSubscription operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1590,8 +1589,8 @@ const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscription
-func (c *WorkDocs) DeleteNotificationSubscriptionRequest(input *DeleteNotificationSubscriptionInput) (req *request.Request, output *DeleteNotificationSubscriptionOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteNotificationSubscriptionRequest(input *DeleteNotificationSubscriptionInput) (req *aws.Request, output *DeleteNotificationSubscriptionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteNotificationSubscription,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/organizations/{OrganizationId}/subscriptions/{SubscriptionId}",
@@ -1647,7 +1646,7 @@ func (c *WorkDocs) DeleteNotificationSubscription(input *DeleteNotificationSubsc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteNotificationSubscriptionWithContext(ctx aws.Context, input *DeleteNotificationSubscriptionInput, opts ...request.Option) (*DeleteNotificationSubscriptionOutput, error) {
+func (c *WorkDocs) DeleteNotificationSubscriptionWithContext(ctx aws.Context, input *DeleteNotificationSubscriptionInput, opts ...aws.Option) (*DeleteNotificationSubscriptionOutput, error) {
 	req, out := c.DeleteNotificationSubscriptionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1656,7 +1655,7 @@ func (c *WorkDocs) DeleteNotificationSubscriptionWithContext(ctx aws.Context, in
 
 const opDeleteUser = "DeleteUser"
 
-// DeleteUserRequest generates a "aws/request.Request" representing the
+// DeleteUserRequest generates a "aws.Request" representing the
 // client's request for the DeleteUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1680,8 +1679,8 @@ const opDeleteUser = "DeleteUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUser
-func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) (req *request.Request, output *DeleteUserOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) (req *aws.Request, output *DeleteUserOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUser,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/users/{UserId}",
@@ -1742,7 +1741,7 @@ func (c *WorkDocs) DeleteUser(input *DeleteUserInput) (*DeleteUserOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput, opts ...request.Option) (*DeleteUserOutput, error) {
+func (c *WorkDocs) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput, opts ...aws.Option) (*DeleteUserOutput, error) {
 	req, out := c.DeleteUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1751,7 +1750,7 @@ func (c *WorkDocs) DeleteUserWithContext(ctx aws.Context, input *DeleteUserInput
 
 const opDescribeActivities = "DescribeActivities"
 
-// DescribeActivitiesRequest generates a "aws/request.Request" representing the
+// DescribeActivitiesRequest generates a "aws.Request" representing the
 // client's request for the DescribeActivities operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1775,8 +1774,8 @@ const opDescribeActivities = "DescribeActivities"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeActivities
-func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) (req *request.Request, output *DescribeActivitiesOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) (req *aws.Request, output *DescribeActivitiesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeActivities,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/activities",
@@ -1835,7 +1834,7 @@ func (c *WorkDocs) DescribeActivities(input *DescribeActivitiesInput) (*Describe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeActivitiesWithContext(ctx aws.Context, input *DescribeActivitiesInput, opts ...request.Option) (*DescribeActivitiesOutput, error) {
+func (c *WorkDocs) DescribeActivitiesWithContext(ctx aws.Context, input *DescribeActivitiesInput, opts ...aws.Option) (*DescribeActivitiesOutput, error) {
 	req, out := c.DescribeActivitiesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1844,7 +1843,7 @@ func (c *WorkDocs) DescribeActivitiesWithContext(ctx aws.Context, input *Describ
 
 const opDescribeComments = "DescribeComments"
 
-// DescribeCommentsRequest generates a "aws/request.Request" representing the
+// DescribeCommentsRequest generates a "aws.Request" representing the
 // client's request for the DescribeComments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1868,8 +1867,8 @@ const opDescribeComments = "DescribeComments"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeComments
-func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) (req *request.Request, output *DescribeCommentsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) (req *aws.Request, output *DescribeCommentsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeComments,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}/comments",
@@ -1931,7 +1930,7 @@ func (c *WorkDocs) DescribeComments(input *DescribeCommentsInput) (*DescribeComm
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeCommentsWithContext(ctx aws.Context, input *DescribeCommentsInput, opts ...request.Option) (*DescribeCommentsOutput, error) {
+func (c *WorkDocs) DescribeCommentsWithContext(ctx aws.Context, input *DescribeCommentsInput, opts ...aws.Option) (*DescribeCommentsOutput, error) {
 	req, out := c.DescribeCommentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1940,7 +1939,7 @@ func (c *WorkDocs) DescribeCommentsWithContext(ctx aws.Context, input *DescribeC
 
 const opDescribeDocumentVersions = "DescribeDocumentVersions"
 
-// DescribeDocumentVersionsRequest generates a "aws/request.Request" representing the
+// DescribeDocumentVersionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeDocumentVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1964,12 +1963,12 @@ const opDescribeDocumentVersions = "DescribeDocumentVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersions
-func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersionsInput) (req *request.Request, output *DescribeDocumentVersionsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersionsInput) (req *aws.Request, output *DescribeDocumentVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDocumentVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -2038,7 +2037,7 @@ func (c *WorkDocs) DescribeDocumentVersions(input *DescribeDocumentVersionsInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeDocumentVersionsWithContext(ctx aws.Context, input *DescribeDocumentVersionsInput, opts ...request.Option) (*DescribeDocumentVersionsOutput, error) {
+func (c *WorkDocs) DescribeDocumentVersionsWithContext(ctx aws.Context, input *DescribeDocumentVersionsInput, opts ...aws.Option) (*DescribeDocumentVersionsOutput, error) {
 	req, out := c.DescribeDocumentVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2073,9 +2072,9 @@ func (c *WorkDocs) DescribeDocumentVersionsPages(input *DescribeDocumentVersions
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeDocumentVersionsPagesWithContext(ctx aws.Context, input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *WorkDocs) DescribeDocumentVersionsPagesWithContext(ctx aws.Context, input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDocumentVersionsInput
 			if input != nil {
 				tmp := *input
@@ -2097,7 +2096,7 @@ func (c *WorkDocs) DescribeDocumentVersionsPagesWithContext(ctx aws.Context, inp
 
 const opDescribeFolderContents = "DescribeFolderContents"
 
-// DescribeFolderContentsRequest generates a "aws/request.Request" representing the
+// DescribeFolderContentsRequest generates a "aws.Request" representing the
 // client's request for the DescribeFolderContents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2121,12 +2120,12 @@ const opDescribeFolderContents = "DescribeFolderContents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContents
-func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsInput) (req *request.Request, output *DescribeFolderContentsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsInput) (req *aws.Request, output *DescribeFolderContentsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeFolderContents,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/folders/{FolderId}/contents",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -2196,7 +2195,7 @@ func (c *WorkDocs) DescribeFolderContents(input *DescribeFolderContentsInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeFolderContentsWithContext(ctx aws.Context, input *DescribeFolderContentsInput, opts ...request.Option) (*DescribeFolderContentsOutput, error) {
+func (c *WorkDocs) DescribeFolderContentsWithContext(ctx aws.Context, input *DescribeFolderContentsInput, opts ...aws.Option) (*DescribeFolderContentsOutput, error) {
 	req, out := c.DescribeFolderContentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2231,9 +2230,9 @@ func (c *WorkDocs) DescribeFolderContentsPages(input *DescribeFolderContentsInpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeFolderContentsPagesWithContext(ctx aws.Context, input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *WorkDocs) DescribeFolderContentsPagesWithContext(ctx aws.Context, input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeFolderContentsInput
 			if input != nil {
 				tmp := *input
@@ -2255,7 +2254,7 @@ func (c *WorkDocs) DescribeFolderContentsPagesWithContext(ctx aws.Context, input
 
 const opDescribeNotificationSubscriptions = "DescribeNotificationSubscriptions"
 
-// DescribeNotificationSubscriptionsRequest generates a "aws/request.Request" representing the
+// DescribeNotificationSubscriptionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeNotificationSubscriptions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2279,8 +2278,8 @@ const opDescribeNotificationSubscriptions = "DescribeNotificationSubscriptions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptions
-func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotificationSubscriptionsInput) (req *request.Request, output *DescribeNotificationSubscriptionsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotificationSubscriptionsInput) (req *aws.Request, output *DescribeNotificationSubscriptionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeNotificationSubscriptions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/organizations/{OrganizationId}/subscriptions",
@@ -2331,7 +2330,7 @@ func (c *WorkDocs) DescribeNotificationSubscriptions(input *DescribeNotification
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeNotificationSubscriptionsWithContext(ctx aws.Context, input *DescribeNotificationSubscriptionsInput, opts ...request.Option) (*DescribeNotificationSubscriptionsOutput, error) {
+func (c *WorkDocs) DescribeNotificationSubscriptionsWithContext(ctx aws.Context, input *DescribeNotificationSubscriptionsInput, opts ...aws.Option) (*DescribeNotificationSubscriptionsOutput, error) {
 	req, out := c.DescribeNotificationSubscriptionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2340,7 +2339,7 @@ func (c *WorkDocs) DescribeNotificationSubscriptionsWithContext(ctx aws.Context,
 
 const opDescribeResourcePermissions = "DescribeResourcePermissions"
 
-// DescribeResourcePermissionsRequest generates a "aws/request.Request" representing the
+// DescribeResourcePermissionsRequest generates a "aws.Request" representing the
 // client's request for the DescribeResourcePermissions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2364,8 +2363,8 @@ const opDescribeResourcePermissions = "DescribeResourcePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissions
-func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePermissionsInput) (req *request.Request, output *DescribeResourcePermissionsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePermissionsInput) (req *aws.Request, output *DescribeResourcePermissionsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeResourcePermissions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/permissions",
@@ -2421,7 +2420,7 @@ func (c *WorkDocs) DescribeResourcePermissions(input *DescribeResourcePermission
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeResourcePermissionsWithContext(ctx aws.Context, input *DescribeResourcePermissionsInput, opts ...request.Option) (*DescribeResourcePermissionsOutput, error) {
+func (c *WorkDocs) DescribeResourcePermissionsWithContext(ctx aws.Context, input *DescribeResourcePermissionsInput, opts ...aws.Option) (*DescribeResourcePermissionsOutput, error) {
 	req, out := c.DescribeResourcePermissionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2430,7 +2429,7 @@ func (c *WorkDocs) DescribeResourcePermissionsWithContext(ctx aws.Context, input
 
 const opDescribeRootFolders = "DescribeRootFolders"
 
-// DescribeRootFoldersRequest generates a "aws/request.Request" representing the
+// DescribeRootFoldersRequest generates a "aws.Request" representing the
 // client's request for the DescribeRootFolders operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2454,8 +2453,8 @@ const opDescribeRootFolders = "DescribeRootFolders"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeRootFolders
-func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) (req *request.Request, output *DescribeRootFoldersOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) (req *aws.Request, output *DescribeRootFoldersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeRootFolders,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/me/root",
@@ -2517,7 +2516,7 @@ func (c *WorkDocs) DescribeRootFolders(input *DescribeRootFoldersInput) (*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeRootFoldersWithContext(ctx aws.Context, input *DescribeRootFoldersInput, opts ...request.Option) (*DescribeRootFoldersOutput, error) {
+func (c *WorkDocs) DescribeRootFoldersWithContext(ctx aws.Context, input *DescribeRootFoldersInput, opts ...aws.Option) (*DescribeRootFoldersOutput, error) {
 	req, out := c.DescribeRootFoldersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2526,7 +2525,7 @@ func (c *WorkDocs) DescribeRootFoldersWithContext(ctx aws.Context, input *Descri
 
 const opDescribeUsers = "DescribeUsers"
 
-// DescribeUsersRequest generates a "aws/request.Request" representing the
+// DescribeUsersRequest generates a "aws.Request" representing the
 // client's request for the DescribeUsers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2550,12 +2549,12 @@ const opDescribeUsers = "DescribeUsers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsers
-func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) (req *request.Request, output *DescribeUsersOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) (req *aws.Request, output *DescribeUsersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeUsers,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/users",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"Marker"},
 			LimitToken:      "Limit",
@@ -2621,7 +2620,7 @@ func (c *WorkDocs) DescribeUsers(input *DescribeUsersInput) (*DescribeUsersOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeUsersWithContext(ctx aws.Context, input *DescribeUsersInput, opts ...request.Option) (*DescribeUsersOutput, error) {
+func (c *WorkDocs) DescribeUsersWithContext(ctx aws.Context, input *DescribeUsersInput, opts ...aws.Option) (*DescribeUsersOutput, error) {
 	req, out := c.DescribeUsersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2656,9 +2655,9 @@ func (c *WorkDocs) DescribeUsersPages(input *DescribeUsersInput, fn func(*Descri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) DescribeUsersPagesWithContext(ctx aws.Context, input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *WorkDocs) DescribeUsersPagesWithContext(ctx aws.Context, input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeUsersInput
 			if input != nil {
 				tmp := *input
@@ -2680,7 +2679,7 @@ func (c *WorkDocs) DescribeUsersPagesWithContext(ctx aws.Context, input *Describ
 
 const opGetCurrentUser = "GetCurrentUser"
 
-// GetCurrentUserRequest generates a "aws/request.Request" representing the
+// GetCurrentUserRequest generates a "aws.Request" representing the
 // client's request for the GetCurrentUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2704,8 +2703,8 @@ const opGetCurrentUser = "GetCurrentUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetCurrentUser
-func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) (req *request.Request, output *GetCurrentUserOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) (req *aws.Request, output *GetCurrentUserOutput) {
+	op := &aws.Operation{
 		Name:       opGetCurrentUser,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/me",
@@ -2765,7 +2764,7 @@ func (c *WorkDocs) GetCurrentUser(input *GetCurrentUserInput) (*GetCurrentUserOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) GetCurrentUserWithContext(ctx aws.Context, input *GetCurrentUserInput, opts ...request.Option) (*GetCurrentUserOutput, error) {
+func (c *WorkDocs) GetCurrentUserWithContext(ctx aws.Context, input *GetCurrentUserInput, opts ...aws.Option) (*GetCurrentUserOutput, error) {
 	req, out := c.GetCurrentUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2774,7 +2773,7 @@ func (c *WorkDocs) GetCurrentUserWithContext(ctx aws.Context, input *GetCurrentU
 
 const opGetDocument = "GetDocument"
 
-// GetDocumentRequest generates a "aws/request.Request" representing the
+// GetDocumentRequest generates a "aws.Request" representing the
 // client's request for the GetDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2798,8 +2797,8 @@ const opGetDocument = "GetDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocument
-func (c *WorkDocs) GetDocumentRequest(input *GetDocumentInput) (req *request.Request, output *GetDocumentOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) GetDocumentRequest(input *GetDocumentInput) (req *aws.Request, output *GetDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opGetDocument,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/documents/{DocumentId}",
@@ -2861,7 +2860,7 @@ func (c *WorkDocs) GetDocument(input *GetDocumentInput) (*GetDocumentOutput, err
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInput, opts ...request.Option) (*GetDocumentOutput, error) {
+func (c *WorkDocs) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInput, opts ...aws.Option) (*GetDocumentOutput, error) {
 	req, out := c.GetDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2870,7 +2869,7 @@ func (c *WorkDocs) GetDocumentWithContext(ctx aws.Context, input *GetDocumentInp
 
 const opGetDocumentPath = "GetDocumentPath"
 
-// GetDocumentPathRequest generates a "aws/request.Request" representing the
+// GetDocumentPathRequest generates a "aws.Request" representing the
 // client's request for the GetDocumentPath operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2894,8 +2893,8 @@ const opGetDocumentPath = "GetDocumentPath"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPath
-func (c *WorkDocs) GetDocumentPathRequest(input *GetDocumentPathInput) (req *request.Request, output *GetDocumentPathOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) GetDocumentPathRequest(input *GetDocumentPathInput) (req *aws.Request, output *GetDocumentPathOutput) {
+	op := &aws.Operation{
 		Name:       opGetDocumentPath,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/path",
@@ -2960,7 +2959,7 @@ func (c *WorkDocs) GetDocumentPath(input *GetDocumentPathInput) (*GetDocumentPat
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) GetDocumentPathWithContext(ctx aws.Context, input *GetDocumentPathInput, opts ...request.Option) (*GetDocumentPathOutput, error) {
+func (c *WorkDocs) GetDocumentPathWithContext(ctx aws.Context, input *GetDocumentPathInput, opts ...aws.Option) (*GetDocumentPathOutput, error) {
 	req, out := c.GetDocumentPathRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2969,7 +2968,7 @@ func (c *WorkDocs) GetDocumentPathWithContext(ctx aws.Context, input *GetDocumen
 
 const opGetDocumentVersion = "GetDocumentVersion"
 
-// GetDocumentVersionRequest generates a "aws/request.Request" representing the
+// GetDocumentVersionRequest generates a "aws.Request" representing the
 // client's request for the GetDocumentVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2993,8 +2992,8 @@ const opGetDocumentVersion = "GetDocumentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersion
-func (c *WorkDocs) GetDocumentVersionRequest(input *GetDocumentVersionInput) (req *request.Request, output *GetDocumentVersionOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) GetDocumentVersionRequest(input *GetDocumentVersionInput) (req *aws.Request, output *GetDocumentVersionOutput) {
+	op := &aws.Operation{
 		Name:       opGetDocumentVersion,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}",
@@ -3056,7 +3055,7 @@ func (c *WorkDocs) GetDocumentVersion(input *GetDocumentVersionInput) (*GetDocum
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) GetDocumentVersionWithContext(ctx aws.Context, input *GetDocumentVersionInput, opts ...request.Option) (*GetDocumentVersionOutput, error) {
+func (c *WorkDocs) GetDocumentVersionWithContext(ctx aws.Context, input *GetDocumentVersionInput, opts ...aws.Option) (*GetDocumentVersionOutput, error) {
 	req, out := c.GetDocumentVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3065,7 +3064,7 @@ func (c *WorkDocs) GetDocumentVersionWithContext(ctx aws.Context, input *GetDocu
 
 const opGetFolder = "GetFolder"
 
-// GetFolderRequest generates a "aws/request.Request" representing the
+// GetFolderRequest generates a "aws.Request" representing the
 // client's request for the GetFolder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3089,8 +3088,8 @@ const opGetFolder = "GetFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolder
-func (c *WorkDocs) GetFolderRequest(input *GetFolderInput) (req *request.Request, output *GetFolderOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) GetFolderRequest(input *GetFolderInput) (req *aws.Request, output *GetFolderOutput) {
+	op := &aws.Operation{
 		Name:       opGetFolder,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/folders/{FolderId}",
@@ -3155,7 +3154,7 @@ func (c *WorkDocs) GetFolder(input *GetFolderInput) (*GetFolderOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) GetFolderWithContext(ctx aws.Context, input *GetFolderInput, opts ...request.Option) (*GetFolderOutput, error) {
+func (c *WorkDocs) GetFolderWithContext(ctx aws.Context, input *GetFolderInput, opts ...aws.Option) (*GetFolderOutput, error) {
 	req, out := c.GetFolderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3164,7 +3163,7 @@ func (c *WorkDocs) GetFolderWithContext(ctx aws.Context, input *GetFolderInput, 
 
 const opGetFolderPath = "GetFolderPath"
 
-// GetFolderPathRequest generates a "aws/request.Request" representing the
+// GetFolderPathRequest generates a "aws.Request" representing the
 // client's request for the GetFolderPath operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3188,8 +3187,8 @@ const opGetFolderPath = "GetFolderPath"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPath
-func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) (req *request.Request, output *GetFolderPathOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) (req *aws.Request, output *GetFolderPathOutput) {
+	op := &aws.Operation{
 		Name:       opGetFolderPath,
 		HTTPMethod: "GET",
 		HTTPPath:   "/api/v1/folders/{FolderId}/path",
@@ -3254,7 +3253,7 @@ func (c *WorkDocs) GetFolderPath(input *GetFolderPathInput) (*GetFolderPathOutpu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) GetFolderPathWithContext(ctx aws.Context, input *GetFolderPathInput, opts ...request.Option) (*GetFolderPathOutput, error) {
+func (c *WorkDocs) GetFolderPathWithContext(ctx aws.Context, input *GetFolderPathInput, opts ...aws.Option) (*GetFolderPathOutput, error) {
 	req, out := c.GetFolderPathRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3263,7 +3262,7 @@ func (c *WorkDocs) GetFolderPathWithContext(ctx aws.Context, input *GetFolderPat
 
 const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 
-// InitiateDocumentVersionUploadRequest generates a "aws/request.Request" representing the
+// InitiateDocumentVersionUploadRequest generates a "aws.Request" representing the
 // client's request for the InitiateDocumentVersionUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3287,8 +3286,8 @@ const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUpload
-func (c *WorkDocs) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVersionUploadInput) (req *request.Request, output *InitiateDocumentVersionUploadOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) InitiateDocumentVersionUploadRequest(input *InitiateDocumentVersionUploadInput) (req *aws.Request, output *InitiateDocumentVersionUploadOutput) {
+	op := &aws.Operation{
 		Name:       opInitiateDocumentVersionUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/api/v1/documents",
@@ -3373,7 +3372,7 @@ func (c *WorkDocs) InitiateDocumentVersionUpload(input *InitiateDocumentVersionU
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) InitiateDocumentVersionUploadWithContext(ctx aws.Context, input *InitiateDocumentVersionUploadInput, opts ...request.Option) (*InitiateDocumentVersionUploadOutput, error) {
+func (c *WorkDocs) InitiateDocumentVersionUploadWithContext(ctx aws.Context, input *InitiateDocumentVersionUploadInput, opts ...aws.Option) (*InitiateDocumentVersionUploadOutput, error) {
 	req, out := c.InitiateDocumentVersionUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3382,7 +3381,7 @@ func (c *WorkDocs) InitiateDocumentVersionUploadWithContext(ctx aws.Context, inp
 
 const opRemoveAllResourcePermissions = "RemoveAllResourcePermissions"
 
-// RemoveAllResourcePermissionsRequest generates a "aws/request.Request" representing the
+// RemoveAllResourcePermissionsRequest generates a "aws.Request" representing the
 // client's request for the RemoveAllResourcePermissions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3406,8 +3405,8 @@ const opRemoveAllResourcePermissions = "RemoveAllResourcePermissions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissions
-func (c *WorkDocs) RemoveAllResourcePermissionsRequest(input *RemoveAllResourcePermissionsInput) (req *request.Request, output *RemoveAllResourcePermissionsOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) RemoveAllResourcePermissionsRequest(input *RemoveAllResourcePermissionsInput) (req *aws.Request, output *RemoveAllResourcePermissionsOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveAllResourcePermissions,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/permissions",
@@ -3465,7 +3464,7 @@ func (c *WorkDocs) RemoveAllResourcePermissions(input *RemoveAllResourcePermissi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) RemoveAllResourcePermissionsWithContext(ctx aws.Context, input *RemoveAllResourcePermissionsInput, opts ...request.Option) (*RemoveAllResourcePermissionsOutput, error) {
+func (c *WorkDocs) RemoveAllResourcePermissionsWithContext(ctx aws.Context, input *RemoveAllResourcePermissionsInput, opts ...aws.Option) (*RemoveAllResourcePermissionsOutput, error) {
 	req, out := c.RemoveAllResourcePermissionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3474,7 +3473,7 @@ func (c *WorkDocs) RemoveAllResourcePermissionsWithContext(ctx aws.Context, inpu
 
 const opRemoveResourcePermission = "RemoveResourcePermission"
 
-// RemoveResourcePermissionRequest generates a "aws/request.Request" representing the
+// RemoveResourcePermissionRequest generates a "aws.Request" representing the
 // client's request for the RemoveResourcePermission operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3498,8 +3497,8 @@ const opRemoveResourcePermission = "RemoveResourcePermission"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermission
-func (c *WorkDocs) RemoveResourcePermissionRequest(input *RemoveResourcePermissionInput) (req *request.Request, output *RemoveResourcePermissionOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) RemoveResourcePermissionRequest(input *RemoveResourcePermissionInput) (req *aws.Request, output *RemoveResourcePermissionOutput) {
+	op := &aws.Operation{
 		Name:       opRemoveResourcePermission,
 		HTTPMethod: "DELETE",
 		HTTPPath:   "/api/v1/resources/{ResourceId}/permissions/{PrincipalId}",
@@ -3557,7 +3556,7 @@ func (c *WorkDocs) RemoveResourcePermission(input *RemoveResourcePermissionInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) RemoveResourcePermissionWithContext(ctx aws.Context, input *RemoveResourcePermissionInput, opts ...request.Option) (*RemoveResourcePermissionOutput, error) {
+func (c *WorkDocs) RemoveResourcePermissionWithContext(ctx aws.Context, input *RemoveResourcePermissionInput, opts ...aws.Option) (*RemoveResourcePermissionOutput, error) {
 	req, out := c.RemoveResourcePermissionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3566,7 +3565,7 @@ func (c *WorkDocs) RemoveResourcePermissionWithContext(ctx aws.Context, input *R
 
 const opUpdateDocument = "UpdateDocument"
 
-// UpdateDocumentRequest generates a "aws/request.Request" representing the
+// UpdateDocumentRequest generates a "aws.Request" representing the
 // client's request for the UpdateDocument operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3590,8 +3589,8 @@ const opUpdateDocument = "UpdateDocument"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocument
-func (c *WorkDocs) UpdateDocumentRequest(input *UpdateDocumentInput) (req *request.Request, output *UpdateDocumentOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) UpdateDocumentRequest(input *UpdateDocumentInput) (req *aws.Request, output *UpdateDocumentOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDocument,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/api/v1/documents/{DocumentId}",
@@ -3665,7 +3664,7 @@ func (c *WorkDocs) UpdateDocument(input *UpdateDocumentInput) (*UpdateDocumentOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocumentInput, opts ...request.Option) (*UpdateDocumentOutput, error) {
+func (c *WorkDocs) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocumentInput, opts ...aws.Option) (*UpdateDocumentOutput, error) {
 	req, out := c.UpdateDocumentRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3674,7 +3673,7 @@ func (c *WorkDocs) UpdateDocumentWithContext(ctx aws.Context, input *UpdateDocum
 
 const opUpdateDocumentVersion = "UpdateDocumentVersion"
 
-// UpdateDocumentVersionRequest generates a "aws/request.Request" representing the
+// UpdateDocumentVersionRequest generates a "aws.Request" representing the
 // client's request for the UpdateDocumentVersion operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3698,8 +3697,8 @@ const opUpdateDocumentVersion = "UpdateDocumentVersion"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersion
-func (c *WorkDocs) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInput) (req *request.Request, output *UpdateDocumentVersionOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInput) (req *aws.Request, output *UpdateDocumentVersionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDocumentVersion,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/api/v1/documents/{DocumentId}/versions/{VersionId}",
@@ -3773,7 +3772,7 @@ func (c *WorkDocs) UpdateDocumentVersion(input *UpdateDocumentVersionInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) UpdateDocumentVersionWithContext(ctx aws.Context, input *UpdateDocumentVersionInput, opts ...request.Option) (*UpdateDocumentVersionOutput, error) {
+func (c *WorkDocs) UpdateDocumentVersionWithContext(ctx aws.Context, input *UpdateDocumentVersionInput, opts ...aws.Option) (*UpdateDocumentVersionOutput, error) {
 	req, out := c.UpdateDocumentVersionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3782,7 +3781,7 @@ func (c *WorkDocs) UpdateDocumentVersionWithContext(ctx aws.Context, input *Upda
 
 const opUpdateFolder = "UpdateFolder"
 
-// UpdateFolderRequest generates a "aws/request.Request" representing the
+// UpdateFolderRequest generates a "aws.Request" representing the
 // client's request for the UpdateFolder operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3806,8 +3805,8 @@ const opUpdateFolder = "UpdateFolder"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolder
-func (c *WorkDocs) UpdateFolderRequest(input *UpdateFolderInput) (req *request.Request, output *UpdateFolderOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) UpdateFolderRequest(input *UpdateFolderInput) (req *aws.Request, output *UpdateFolderOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateFolder,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/api/v1/folders/{FolderId}",
@@ -3881,7 +3880,7 @@ func (c *WorkDocs) UpdateFolder(input *UpdateFolderInput) (*UpdateFolderOutput, 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) UpdateFolderWithContext(ctx aws.Context, input *UpdateFolderInput, opts ...request.Option) (*UpdateFolderOutput, error) {
+func (c *WorkDocs) UpdateFolderWithContext(ctx aws.Context, input *UpdateFolderInput, opts ...aws.Option) (*UpdateFolderOutput, error) {
 	req, out := c.UpdateFolderRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3890,7 +3889,7 @@ func (c *WorkDocs) UpdateFolderWithContext(ctx aws.Context, input *UpdateFolderI
 
 const opUpdateUser = "UpdateUser"
 
-// UpdateUserRequest generates a "aws/request.Request" representing the
+// UpdateUserRequest generates a "aws.Request" representing the
 // client's request for the UpdateUser operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3914,8 +3913,8 @@ const opUpdateUser = "UpdateUser"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUser
-func (c *WorkDocs) UpdateUserRequest(input *UpdateUserInput) (req *request.Request, output *UpdateUserOutput) {
-	op := &request.Operation{
+func (c *WorkDocs) UpdateUserRequest(input *UpdateUserInput) (req *aws.Request, output *UpdateUserOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUser,
 		HTTPMethod: "PATCH",
 		HTTPPath:   "/api/v1/users/{UserId}",
@@ -3981,7 +3980,7 @@ func (c *WorkDocs) UpdateUser(input *UpdateUserInput) (*UpdateUserOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *WorkDocs) UpdateUserWithContext(ctx aws.Context, input *UpdateUserInput, opts ...request.Option) (*UpdateUserOutput, error) {
+func (c *WorkDocs) UpdateUserWithContext(ctx aws.Context, input *UpdateUserInput, opts ...aws.Option) (*UpdateUserOutput, error) {
 	req, out := c.UpdateUserRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4019,21 +4018,21 @@ func (s AbortDocumentVersionUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AbortDocumentVersionUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AbortDocumentVersionUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AbortDocumentVersionUploadInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.VersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4101,15 +4100,15 @@ func (s ActivateUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ActivateUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ActivateUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ActivateUserInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4277,18 +4276,18 @@ func (s AddResourcePermissionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AddResourcePermissionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AddResourcePermissionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AddResourcePermissionsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Principals == nil {
-		invalidParams.Add(request.NewErrParamRequired("Principals"))
+		invalidParams.Add(aws.NewErrParamRequired("Principals"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.Principals != nil {
 		for i, v := range s.Principals {
@@ -4296,7 +4295,7 @@ func (s *AddResourcePermissionsInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Principals", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Principals", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4561,33 +4560,33 @@ func (s CreateCommentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCommentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCommentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCommentInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.ParentId != nil && len(*s.ParentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ParentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ParentId", 1))
 	}
 	if s.Text == nil {
-		invalidParams.Add(request.NewErrParamRequired("Text"))
+		invalidParams.Add(aws.NewErrParamRequired("Text"))
 	}
 	if s.Text != nil && len(*s.Text) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Text", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Text", 1))
 	}
 	if s.ThreadId != nil && len(*s.ThreadId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ThreadId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ThreadId", 1))
 	}
 	if s.VersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4703,24 +4702,24 @@ func (s CreateCustomMetadataInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCustomMetadataInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCustomMetadataInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCustomMetadataInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.CustomMetadata == nil {
-		invalidParams.Add(request.NewErrParamRequired("CustomMetadata"))
+		invalidParams.Add(aws.NewErrParamRequired("CustomMetadata"))
 	}
 	if s.CustomMetadata != nil && len(s.CustomMetadata) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CustomMetadata", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CustomMetadata", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4797,18 +4796,18 @@ func (s CreateFolderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateFolderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateFolderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFolderInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ParentFolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentFolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentFolderId"))
 	}
 	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ParentFolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4890,18 +4889,18 @@ func (s CreateLabelsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateLabelsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateLabelsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateLabelsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Labels == nil {
-		invalidParams.Add(request.NewErrParamRequired("Labels"))
+		invalidParams.Add(aws.NewErrParamRequired("Labels"))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -4982,24 +4981,24 @@ func (s CreateNotificationSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNotificationSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateNotificationSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateNotificationSubscriptionInput"}
 	if s.Endpoint == nil {
-		invalidParams.Add(request.NewErrParamRequired("Endpoint"))
+		invalidParams.Add(aws.NewErrParamRequired("Endpoint"))
 	}
 	if s.Endpoint != nil && len(*s.Endpoint) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Endpoint", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Endpoint", 1))
 	}
 	if s.OrganizationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
 	if s.Protocol == nil {
-		invalidParams.Add(request.NewErrParamRequired("Protocol"))
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
 	}
 	if s.SubscriptionType == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionType"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5109,42 +5108,42 @@ func (s CreateUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("EmailAddress", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 1))
 	}
 	if s.GivenName == nil {
-		invalidParams.Add(request.NewErrParamRequired("GivenName"))
+		invalidParams.Add(aws.NewErrParamRequired("GivenName"))
 	}
 	if s.GivenName != nil && len(*s.GivenName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GivenName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GivenName", 1))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 4))
 	}
 	if s.Surname == nil {
-		invalidParams.Add(request.NewErrParamRequired("Surname"))
+		invalidParams.Add(aws.NewErrParamRequired("Surname"))
 	}
 	if s.Surname != nil && len(*s.Surname) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Surname", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Surname", 1))
 	}
 	if s.TimeZoneId != nil && len(*s.TimeZoneId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TimeZoneId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TimeZoneId", 1))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5257,15 +5256,15 @@ func (s DeactivateUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeactivateUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeactivateUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeactivateUserInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5337,27 +5336,27 @@ func (s DeleteCommentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCommentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCommentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCommentInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.CommentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CommentId"))
+		invalidParams.Add(aws.NewErrParamRequired("CommentId"))
 	}
 	if s.CommentId != nil && len(*s.CommentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CommentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CommentId", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.VersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5442,18 +5441,18 @@ func (s DeleteCustomMetadataInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCustomMetadataInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCustomMetadataInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCustomMetadataInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5533,15 +5532,15 @@ func (s DeleteDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDocumentInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5603,15 +5602,15 @@ func (s DeleteFolderContentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFolderContentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFolderContentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFolderContentsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.FolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
 	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5673,15 +5672,15 @@ func (s DeleteFolderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteFolderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteFolderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFolderInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.FolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
 	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5749,15 +5748,15 @@ func (s DeleteLabelsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteLabelsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteLabelsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteLabelsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5832,18 +5831,18 @@ func (s DeleteNotificationSubscriptionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNotificationSubscriptionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteNotificationSubscriptionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotificationSubscriptionInput"}
 	if s.OrganizationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
 	if s.SubscriptionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubscriptionId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubscriptionId"))
 	}
 	if s.SubscriptionId != nil && len(*s.SubscriptionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubscriptionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubscriptionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5905,15 +5904,15 @@ func (s DeleteUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5994,21 +5993,21 @@ func (s DescribeActivitiesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeActivitiesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeActivitiesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeActivitiesInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6130,27 +6129,27 @@ func (s DescribeCommentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeCommentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeCommentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeCommentsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.VersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6264,27 +6263,27 @@ func (s DescribeDocumentVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDocumentVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDocumentVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDocumentVersionsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Fields", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
 	if s.Include != nil && len(*s.Include) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Include", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Include", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6408,24 +6407,24 @@ func (s DescribeFolderContentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeFolderContentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeFolderContentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFolderContentsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.FolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
 	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
 	}
 	if s.Include != nil && len(*s.Include) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Include", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Include", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6554,18 +6553,18 @@ func (s DescribeNotificationSubscriptionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNotificationSubscriptionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeNotificationSubscriptionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNotificationSubscriptionsInput"}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.OrganizationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("OrganizationId"))
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6659,21 +6658,21 @@ func (s DescribeResourcePermissionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeResourcePermissionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeResourcePermissionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeResourcePermissionsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6770,18 +6769,18 @@ func (s DescribeRootFoldersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeRootFoldersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeRootFoldersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeRootFoldersInput"}
 	if s.AuthenticationToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthenticationToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationToken"))
 	}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6891,27 +6890,27 @@ func (s DescribeUsersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeUsersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeUsersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeUsersInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Fields", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.OrganizationId != nil && len(*s.OrganizationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OrganizationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OrganizationId", 1))
 	}
 	if s.Query != nil && len(*s.Query) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Query", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Query", 1))
 	}
 	if s.UserIds != nil && len(*s.UserIds) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserIds", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserIds", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7381,12 +7380,12 @@ func (s GetCurrentUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCurrentUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCurrentUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCurrentUserInput"}
 	if s.AuthenticationToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("AuthenticationToken"))
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationToken"))
 	}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7454,15 +7453,15 @@ func (s GetDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7558,24 +7557,24 @@ func (s GetDocumentPathInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentPathInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentPathInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentPathInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Fields", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7676,24 +7675,24 @@ func (s GetDocumentVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDocumentVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDocumentVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDocumentVersionInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Fields", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
 	if s.VersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7794,15 +7793,15 @@ func (s GetFolderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFolderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFolderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFolderInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.FolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
 	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7898,24 +7897,24 @@ func (s GetFolderPathInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetFolderPathInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetFolderPathInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetFolderPathInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.Fields != nil && len(*s.Fields) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Fields", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Fields", 1))
 	}
 	if s.FolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
 	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 	if s.Marker != nil && len(*s.Marker) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Marker", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8056,24 +8055,24 @@ func (s InitiateDocumentVersionUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InitiateDocumentVersionUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InitiateDocumentVersionUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InitiateDocumentVersionUploadInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.ContentType != nil && len(*s.ContentType) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ContentType", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ContentType", 1))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ParentFolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParentFolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("ParentFolderId"))
 	}
 	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ParentFolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8300,15 +8299,15 @@ func (s RemoveAllResourcePermissionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveAllResourcePermissionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveAllResourcePermissionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveAllResourcePermissionsInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8378,21 +8377,21 @@ func (s RemoveResourcePermissionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RemoveResourcePermissionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RemoveResourcePermissionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RemoveResourcePermissionInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.PrincipalId == nil {
-		invalidParams.Add(request.NewErrParamRequired("PrincipalId"))
+		invalidParams.Add(aws.NewErrParamRequired("PrincipalId"))
 	}
 	if s.PrincipalId != nil && len(*s.PrincipalId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("PrincipalId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("PrincipalId", 1))
 	}
 	if s.ResourceId == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceId"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceId"))
 	}
 	if s.ResourceId != nil && len(*s.ResourceId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8612,18 +8611,18 @@ func (s SharePrincipal) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SharePrincipal) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SharePrincipal"}
+	invalidParams := aws.ErrInvalidParams{Context: "SharePrincipal"}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8824,21 +8823,21 @@ func (s UpdateDocumentInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDocumentInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ParentFolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8926,21 +8925,21 @@ func (s UpdateDocumentVersionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDocumentVersionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDocumentVersionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDocumentVersionInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.DocumentId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DocumentId"))
+		invalidParams.Add(aws.NewErrParamRequired("DocumentId"))
 	}
 	if s.DocumentId != nil && len(*s.DocumentId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DocumentId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DocumentId", 1))
 	}
 	if s.VersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("VersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("VersionId"))
 	}
 	if s.VersionId != nil && len(*s.VersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("VersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("VersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9024,21 +9023,21 @@ func (s UpdateFolderInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateFolderInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateFolderInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFolderInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.FolderId == nil {
-		invalidParams.Add(request.NewErrParamRequired("FolderId"))
+		invalidParams.Add(aws.NewErrParamRequired("FolderId"))
 	}
 	if s.FolderId != nil && len(*s.FolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FolderId", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ParentFolderId != nil && len(*s.ParentFolderId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ParentFolderId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ParentFolderId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9136,24 +9135,24 @@ func (s UpdateUserInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserInput"}
 	if s.AuthenticationToken != nil && len(*s.AuthenticationToken) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AuthenticationToken", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AuthenticationToken", 1))
 	}
 	if s.GivenName != nil && len(*s.GivenName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GivenName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GivenName", 1))
 	}
 	if s.Surname != nil && len(*s.Surname) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Surname", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Surname", 1))
 	}
 	if s.TimeZoneId != nil && len(*s.TimeZoneId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TimeZoneId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TimeZoneId", 1))
 	}
 	if s.UserId == nil {
-		invalidParams.Add(request.NewErrParamRequired("UserId"))
+		invalidParams.Add(aws.NewErrParamRequired("UserId"))
 	}
 	if s.UserId != nil && len(*s.UserId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("UserId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("UserId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

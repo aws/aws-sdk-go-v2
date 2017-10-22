@@ -6,13 +6,12 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opSearch = "Search"
 
-// SearchRequest generates a "aws/request.Request" representing the
+// SearchRequest generates a "aws.Request" representing the
 // client's request for the Search operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -34,8 +33,8 @@ const opSearch = "Search"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearchDomain) SearchRequest(input *SearchInput) (req *request.Request, output *SearchOutput) {
-	op := &request.Operation{
+func (c *CloudSearchDomain) SearchRequest(input *SearchInput) (req *aws.Request, output *SearchOutput) {
+	op := &aws.Operation{
 		Name:       opSearch,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-01-01/search?format=sdk&pretty=true",
@@ -99,7 +98,7 @@ func (c *CloudSearchDomain) Search(input *SearchInput) (*SearchOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearchDomain) SearchWithContext(ctx aws.Context, input *SearchInput, opts ...request.Option) (*SearchOutput, error) {
+func (c *CloudSearchDomain) SearchWithContext(ctx aws.Context, input *SearchInput, opts ...aws.Option) (*SearchOutput, error) {
 	req, out := c.SearchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -108,7 +107,7 @@ func (c *CloudSearchDomain) SearchWithContext(ctx aws.Context, input *SearchInpu
 
 const opSuggest = "Suggest"
 
-// SuggestRequest generates a "aws/request.Request" representing the
+// SuggestRequest generates a "aws.Request" representing the
 // client's request for the Suggest operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -130,8 +129,8 @@ const opSuggest = "Suggest"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) (req *request.Request, output *SuggestOutput) {
-	op := &request.Operation{
+func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) (req *aws.Request, output *SuggestOutput) {
+	op := &aws.Operation{
 		Name:       opSuggest,
 		HTTPMethod: "GET",
 		HTTPPath:   "/2013-01-01/suggest?format=sdk&pretty=true",
@@ -191,7 +190,7 @@ func (c *CloudSearchDomain) Suggest(input *SuggestInput) (*SuggestOutput, error)
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearchDomain) SuggestWithContext(ctx aws.Context, input *SuggestInput, opts ...request.Option) (*SuggestOutput, error) {
+func (c *CloudSearchDomain) SuggestWithContext(ctx aws.Context, input *SuggestInput, opts ...aws.Option) (*SuggestOutput, error) {
 	req, out := c.SuggestRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -200,7 +199,7 @@ func (c *CloudSearchDomain) SuggestWithContext(ctx aws.Context, input *SuggestIn
 
 const opUploadDocuments = "UploadDocuments"
 
-// UploadDocumentsRequest generates a "aws/request.Request" representing the
+// UploadDocumentsRequest generates a "aws.Request" representing the
 // client's request for the UploadDocuments operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -222,8 +221,8 @@ const opUploadDocuments = "UploadDocuments"
 //    if err == nil { // resp is now filled
 //        fmt.Println(resp)
 //    }
-func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) (req *request.Request, output *UploadDocumentsOutput) {
-	op := &request.Operation{
+func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) (req *aws.Request, output *UploadDocumentsOutput) {
+	op := &aws.Operation{
 		Name:       opUploadDocuments,
 		HTTPMethod: "POST",
 		HTTPPath:   "/2013-01-01/documents/batch?format=sdk",
@@ -288,7 +287,7 @@ func (c *CloudSearchDomain) UploadDocuments(input *UploadDocumentsInput) (*Uploa
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *CloudSearchDomain) UploadDocumentsWithContext(ctx aws.Context, input *UploadDocumentsInput, opts ...request.Option) (*UploadDocumentsOutput, error) {
+func (c *CloudSearchDomain) UploadDocumentsWithContext(ctx aws.Context, input *UploadDocumentsInput, opts ...aws.Option) (*UploadDocumentsOutput, error) {
 	req, out := c.UploadDocumentsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -905,9 +904,9 @@ func (s SearchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SearchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SearchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SearchInput"}
 	if s.Query == nil {
-		invalidParams.Add(request.NewErrParamRequired("Query"))
+		invalidParams.Add(aws.NewErrParamRequired("Query"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1116,12 +1115,12 @@ func (s SuggestInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SuggestInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SuggestInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "SuggestInput"}
 	if s.Query == nil {
-		invalidParams.Add(request.NewErrParamRequired("Query"))
+		invalidParams.Add(aws.NewErrParamRequired("Query"))
 	}
 	if s.Suggester == nil {
-		invalidParams.Add(request.NewErrParamRequired("Suggester"))
+		invalidParams.Add(aws.NewErrParamRequired("Suggester"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1331,12 +1330,12 @@ func (s UploadDocumentsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UploadDocumentsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UploadDocumentsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UploadDocumentsInput"}
 	if s.ContentType == nil {
-		invalidParams.Add(request.NewErrParamRequired("ContentType"))
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
 	if s.Documents == nil {
-		invalidParams.Add(request.NewErrParamRequired("Documents"))
+		invalidParams.Add(aws.NewErrParamRequired("Documents"))
 	}
 
 	if invalidParams.Len() > 0 {

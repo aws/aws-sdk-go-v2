@@ -10,7 +10,6 @@ package lexmodelbuildingserviceiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := lexmodelbuildingservice.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := lexmodelbuildingservice.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,170 +64,170 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type LexModelBuildingServiceAPI interface {
 	CreateBotVersion(*lexmodelbuildingservice.CreateBotVersionInput) (*lexmodelbuildingservice.CreateBotVersionOutput, error)
-	CreateBotVersionWithContext(aws.Context, *lexmodelbuildingservice.CreateBotVersionInput, ...request.Option) (*lexmodelbuildingservice.CreateBotVersionOutput, error)
-	CreateBotVersionRequest(*lexmodelbuildingservice.CreateBotVersionInput) (*request.Request, *lexmodelbuildingservice.CreateBotVersionOutput)
+	CreateBotVersionWithContext(aws.Context, *lexmodelbuildingservice.CreateBotVersionInput, ...aws.Option) (*lexmodelbuildingservice.CreateBotVersionOutput, error)
+	CreateBotVersionRequest(*lexmodelbuildingservice.CreateBotVersionInput) (*aws.Request, *lexmodelbuildingservice.CreateBotVersionOutput)
 
 	CreateIntentVersion(*lexmodelbuildingservice.CreateIntentVersionInput) (*lexmodelbuildingservice.CreateIntentVersionOutput, error)
-	CreateIntentVersionWithContext(aws.Context, *lexmodelbuildingservice.CreateIntentVersionInput, ...request.Option) (*lexmodelbuildingservice.CreateIntentVersionOutput, error)
-	CreateIntentVersionRequest(*lexmodelbuildingservice.CreateIntentVersionInput) (*request.Request, *lexmodelbuildingservice.CreateIntentVersionOutput)
+	CreateIntentVersionWithContext(aws.Context, *lexmodelbuildingservice.CreateIntentVersionInput, ...aws.Option) (*lexmodelbuildingservice.CreateIntentVersionOutput, error)
+	CreateIntentVersionRequest(*lexmodelbuildingservice.CreateIntentVersionInput) (*aws.Request, *lexmodelbuildingservice.CreateIntentVersionOutput)
 
 	CreateSlotTypeVersion(*lexmodelbuildingservice.CreateSlotTypeVersionInput) (*lexmodelbuildingservice.CreateSlotTypeVersionOutput, error)
-	CreateSlotTypeVersionWithContext(aws.Context, *lexmodelbuildingservice.CreateSlotTypeVersionInput, ...request.Option) (*lexmodelbuildingservice.CreateSlotTypeVersionOutput, error)
-	CreateSlotTypeVersionRequest(*lexmodelbuildingservice.CreateSlotTypeVersionInput) (*request.Request, *lexmodelbuildingservice.CreateSlotTypeVersionOutput)
+	CreateSlotTypeVersionWithContext(aws.Context, *lexmodelbuildingservice.CreateSlotTypeVersionInput, ...aws.Option) (*lexmodelbuildingservice.CreateSlotTypeVersionOutput, error)
+	CreateSlotTypeVersionRequest(*lexmodelbuildingservice.CreateSlotTypeVersionInput) (*aws.Request, *lexmodelbuildingservice.CreateSlotTypeVersionOutput)
 
 	DeleteBot(*lexmodelbuildingservice.DeleteBotInput) (*lexmodelbuildingservice.DeleteBotOutput, error)
-	DeleteBotWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotInput, ...request.Option) (*lexmodelbuildingservice.DeleteBotOutput, error)
-	DeleteBotRequest(*lexmodelbuildingservice.DeleteBotInput) (*request.Request, *lexmodelbuildingservice.DeleteBotOutput)
+	DeleteBotWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotInput, ...aws.Option) (*lexmodelbuildingservice.DeleteBotOutput, error)
+	DeleteBotRequest(*lexmodelbuildingservice.DeleteBotInput) (*aws.Request, *lexmodelbuildingservice.DeleteBotOutput)
 
 	DeleteBotAlias(*lexmodelbuildingservice.DeleteBotAliasInput) (*lexmodelbuildingservice.DeleteBotAliasOutput, error)
-	DeleteBotAliasWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotAliasInput, ...request.Option) (*lexmodelbuildingservice.DeleteBotAliasOutput, error)
-	DeleteBotAliasRequest(*lexmodelbuildingservice.DeleteBotAliasInput) (*request.Request, *lexmodelbuildingservice.DeleteBotAliasOutput)
+	DeleteBotAliasWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotAliasInput, ...aws.Option) (*lexmodelbuildingservice.DeleteBotAliasOutput, error)
+	DeleteBotAliasRequest(*lexmodelbuildingservice.DeleteBotAliasInput) (*aws.Request, *lexmodelbuildingservice.DeleteBotAliasOutput)
 
 	DeleteBotChannelAssociation(*lexmodelbuildingservice.DeleteBotChannelAssociationInput) (*lexmodelbuildingservice.DeleteBotChannelAssociationOutput, error)
-	DeleteBotChannelAssociationWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotChannelAssociationInput, ...request.Option) (*lexmodelbuildingservice.DeleteBotChannelAssociationOutput, error)
-	DeleteBotChannelAssociationRequest(*lexmodelbuildingservice.DeleteBotChannelAssociationInput) (*request.Request, *lexmodelbuildingservice.DeleteBotChannelAssociationOutput)
+	DeleteBotChannelAssociationWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotChannelAssociationInput, ...aws.Option) (*lexmodelbuildingservice.DeleteBotChannelAssociationOutput, error)
+	DeleteBotChannelAssociationRequest(*lexmodelbuildingservice.DeleteBotChannelAssociationInput) (*aws.Request, *lexmodelbuildingservice.DeleteBotChannelAssociationOutput)
 
 	DeleteBotVersion(*lexmodelbuildingservice.DeleteBotVersionInput) (*lexmodelbuildingservice.DeleteBotVersionOutput, error)
-	DeleteBotVersionWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotVersionInput, ...request.Option) (*lexmodelbuildingservice.DeleteBotVersionOutput, error)
-	DeleteBotVersionRequest(*lexmodelbuildingservice.DeleteBotVersionInput) (*request.Request, *lexmodelbuildingservice.DeleteBotVersionOutput)
+	DeleteBotVersionWithContext(aws.Context, *lexmodelbuildingservice.DeleteBotVersionInput, ...aws.Option) (*lexmodelbuildingservice.DeleteBotVersionOutput, error)
+	DeleteBotVersionRequest(*lexmodelbuildingservice.DeleteBotVersionInput) (*aws.Request, *lexmodelbuildingservice.DeleteBotVersionOutput)
 
 	DeleteIntent(*lexmodelbuildingservice.DeleteIntentInput) (*lexmodelbuildingservice.DeleteIntentOutput, error)
-	DeleteIntentWithContext(aws.Context, *lexmodelbuildingservice.DeleteIntentInput, ...request.Option) (*lexmodelbuildingservice.DeleteIntentOutput, error)
-	DeleteIntentRequest(*lexmodelbuildingservice.DeleteIntentInput) (*request.Request, *lexmodelbuildingservice.DeleteIntentOutput)
+	DeleteIntentWithContext(aws.Context, *lexmodelbuildingservice.DeleteIntentInput, ...aws.Option) (*lexmodelbuildingservice.DeleteIntentOutput, error)
+	DeleteIntentRequest(*lexmodelbuildingservice.DeleteIntentInput) (*aws.Request, *lexmodelbuildingservice.DeleteIntentOutput)
 
 	DeleteIntentVersion(*lexmodelbuildingservice.DeleteIntentVersionInput) (*lexmodelbuildingservice.DeleteIntentVersionOutput, error)
-	DeleteIntentVersionWithContext(aws.Context, *lexmodelbuildingservice.DeleteIntentVersionInput, ...request.Option) (*lexmodelbuildingservice.DeleteIntentVersionOutput, error)
-	DeleteIntentVersionRequest(*lexmodelbuildingservice.DeleteIntentVersionInput) (*request.Request, *lexmodelbuildingservice.DeleteIntentVersionOutput)
+	DeleteIntentVersionWithContext(aws.Context, *lexmodelbuildingservice.DeleteIntentVersionInput, ...aws.Option) (*lexmodelbuildingservice.DeleteIntentVersionOutput, error)
+	DeleteIntentVersionRequest(*lexmodelbuildingservice.DeleteIntentVersionInput) (*aws.Request, *lexmodelbuildingservice.DeleteIntentVersionOutput)
 
 	DeleteSlotType(*lexmodelbuildingservice.DeleteSlotTypeInput) (*lexmodelbuildingservice.DeleteSlotTypeOutput, error)
-	DeleteSlotTypeWithContext(aws.Context, *lexmodelbuildingservice.DeleteSlotTypeInput, ...request.Option) (*lexmodelbuildingservice.DeleteSlotTypeOutput, error)
-	DeleteSlotTypeRequest(*lexmodelbuildingservice.DeleteSlotTypeInput) (*request.Request, *lexmodelbuildingservice.DeleteSlotTypeOutput)
+	DeleteSlotTypeWithContext(aws.Context, *lexmodelbuildingservice.DeleteSlotTypeInput, ...aws.Option) (*lexmodelbuildingservice.DeleteSlotTypeOutput, error)
+	DeleteSlotTypeRequest(*lexmodelbuildingservice.DeleteSlotTypeInput) (*aws.Request, *lexmodelbuildingservice.DeleteSlotTypeOutput)
 
 	DeleteSlotTypeVersion(*lexmodelbuildingservice.DeleteSlotTypeVersionInput) (*lexmodelbuildingservice.DeleteSlotTypeVersionOutput, error)
-	DeleteSlotTypeVersionWithContext(aws.Context, *lexmodelbuildingservice.DeleteSlotTypeVersionInput, ...request.Option) (*lexmodelbuildingservice.DeleteSlotTypeVersionOutput, error)
-	DeleteSlotTypeVersionRequest(*lexmodelbuildingservice.DeleteSlotTypeVersionInput) (*request.Request, *lexmodelbuildingservice.DeleteSlotTypeVersionOutput)
+	DeleteSlotTypeVersionWithContext(aws.Context, *lexmodelbuildingservice.DeleteSlotTypeVersionInput, ...aws.Option) (*lexmodelbuildingservice.DeleteSlotTypeVersionOutput, error)
+	DeleteSlotTypeVersionRequest(*lexmodelbuildingservice.DeleteSlotTypeVersionInput) (*aws.Request, *lexmodelbuildingservice.DeleteSlotTypeVersionOutput)
 
 	DeleteUtterances(*lexmodelbuildingservice.DeleteUtterancesInput) (*lexmodelbuildingservice.DeleteUtterancesOutput, error)
-	DeleteUtterancesWithContext(aws.Context, *lexmodelbuildingservice.DeleteUtterancesInput, ...request.Option) (*lexmodelbuildingservice.DeleteUtterancesOutput, error)
-	DeleteUtterancesRequest(*lexmodelbuildingservice.DeleteUtterancesInput) (*request.Request, *lexmodelbuildingservice.DeleteUtterancesOutput)
+	DeleteUtterancesWithContext(aws.Context, *lexmodelbuildingservice.DeleteUtterancesInput, ...aws.Option) (*lexmodelbuildingservice.DeleteUtterancesOutput, error)
+	DeleteUtterancesRequest(*lexmodelbuildingservice.DeleteUtterancesInput) (*aws.Request, *lexmodelbuildingservice.DeleteUtterancesOutput)
 
 	GetBot(*lexmodelbuildingservice.GetBotInput) (*lexmodelbuildingservice.GetBotOutput, error)
-	GetBotWithContext(aws.Context, *lexmodelbuildingservice.GetBotInput, ...request.Option) (*lexmodelbuildingservice.GetBotOutput, error)
-	GetBotRequest(*lexmodelbuildingservice.GetBotInput) (*request.Request, *lexmodelbuildingservice.GetBotOutput)
+	GetBotWithContext(aws.Context, *lexmodelbuildingservice.GetBotInput, ...aws.Option) (*lexmodelbuildingservice.GetBotOutput, error)
+	GetBotRequest(*lexmodelbuildingservice.GetBotInput) (*aws.Request, *lexmodelbuildingservice.GetBotOutput)
 
 	GetBotAlias(*lexmodelbuildingservice.GetBotAliasInput) (*lexmodelbuildingservice.GetBotAliasOutput, error)
-	GetBotAliasWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasInput, ...request.Option) (*lexmodelbuildingservice.GetBotAliasOutput, error)
-	GetBotAliasRequest(*lexmodelbuildingservice.GetBotAliasInput) (*request.Request, *lexmodelbuildingservice.GetBotAliasOutput)
+	GetBotAliasWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasInput, ...aws.Option) (*lexmodelbuildingservice.GetBotAliasOutput, error)
+	GetBotAliasRequest(*lexmodelbuildingservice.GetBotAliasInput) (*aws.Request, *lexmodelbuildingservice.GetBotAliasOutput)
 
 	GetBotAliases(*lexmodelbuildingservice.GetBotAliasesInput) (*lexmodelbuildingservice.GetBotAliasesOutput, error)
-	GetBotAliasesWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasesInput, ...request.Option) (*lexmodelbuildingservice.GetBotAliasesOutput, error)
-	GetBotAliasesRequest(*lexmodelbuildingservice.GetBotAliasesInput) (*request.Request, *lexmodelbuildingservice.GetBotAliasesOutput)
+	GetBotAliasesWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasesInput, ...aws.Option) (*lexmodelbuildingservice.GetBotAliasesOutput, error)
+	GetBotAliasesRequest(*lexmodelbuildingservice.GetBotAliasesInput) (*aws.Request, *lexmodelbuildingservice.GetBotAliasesOutput)
 
 	GetBotAliasesPages(*lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool) error
-	GetBotAliasesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool, ...request.Option) error
+	GetBotAliasesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool, ...aws.Option) error
 
 	GetBotChannelAssociation(*lexmodelbuildingservice.GetBotChannelAssociationInput) (*lexmodelbuildingservice.GetBotChannelAssociationOutput, error)
-	GetBotChannelAssociationWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationInput, ...request.Option) (*lexmodelbuildingservice.GetBotChannelAssociationOutput, error)
-	GetBotChannelAssociationRequest(*lexmodelbuildingservice.GetBotChannelAssociationInput) (*request.Request, *lexmodelbuildingservice.GetBotChannelAssociationOutput)
+	GetBotChannelAssociationWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationInput, ...aws.Option) (*lexmodelbuildingservice.GetBotChannelAssociationOutput, error)
+	GetBotChannelAssociationRequest(*lexmodelbuildingservice.GetBotChannelAssociationInput) (*aws.Request, *lexmodelbuildingservice.GetBotChannelAssociationOutput)
 
 	GetBotChannelAssociations(*lexmodelbuildingservice.GetBotChannelAssociationsInput) (*lexmodelbuildingservice.GetBotChannelAssociationsOutput, error)
-	GetBotChannelAssociationsWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationsInput, ...request.Option) (*lexmodelbuildingservice.GetBotChannelAssociationsOutput, error)
-	GetBotChannelAssociationsRequest(*lexmodelbuildingservice.GetBotChannelAssociationsInput) (*request.Request, *lexmodelbuildingservice.GetBotChannelAssociationsOutput)
+	GetBotChannelAssociationsWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationsInput, ...aws.Option) (*lexmodelbuildingservice.GetBotChannelAssociationsOutput, error)
+	GetBotChannelAssociationsRequest(*lexmodelbuildingservice.GetBotChannelAssociationsInput) (*aws.Request, *lexmodelbuildingservice.GetBotChannelAssociationsOutput)
 
 	GetBotChannelAssociationsPages(*lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool) error
-	GetBotChannelAssociationsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool, ...request.Option) error
+	GetBotChannelAssociationsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool, ...aws.Option) error
 
 	GetBotVersions(*lexmodelbuildingservice.GetBotVersionsInput) (*lexmodelbuildingservice.GetBotVersionsOutput, error)
-	GetBotVersionsWithContext(aws.Context, *lexmodelbuildingservice.GetBotVersionsInput, ...request.Option) (*lexmodelbuildingservice.GetBotVersionsOutput, error)
-	GetBotVersionsRequest(*lexmodelbuildingservice.GetBotVersionsInput) (*request.Request, *lexmodelbuildingservice.GetBotVersionsOutput)
+	GetBotVersionsWithContext(aws.Context, *lexmodelbuildingservice.GetBotVersionsInput, ...aws.Option) (*lexmodelbuildingservice.GetBotVersionsOutput, error)
+	GetBotVersionsRequest(*lexmodelbuildingservice.GetBotVersionsInput) (*aws.Request, *lexmodelbuildingservice.GetBotVersionsOutput)
 
 	GetBotVersionsPages(*lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool) error
-	GetBotVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool, ...request.Option) error
+	GetBotVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool, ...aws.Option) error
 
 	GetBots(*lexmodelbuildingservice.GetBotsInput) (*lexmodelbuildingservice.GetBotsOutput, error)
-	GetBotsWithContext(aws.Context, *lexmodelbuildingservice.GetBotsInput, ...request.Option) (*lexmodelbuildingservice.GetBotsOutput, error)
-	GetBotsRequest(*lexmodelbuildingservice.GetBotsInput) (*request.Request, *lexmodelbuildingservice.GetBotsOutput)
+	GetBotsWithContext(aws.Context, *lexmodelbuildingservice.GetBotsInput, ...aws.Option) (*lexmodelbuildingservice.GetBotsOutput, error)
+	GetBotsRequest(*lexmodelbuildingservice.GetBotsInput) (*aws.Request, *lexmodelbuildingservice.GetBotsOutput)
 
 	GetBotsPages(*lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool) error
-	GetBotsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool, ...request.Option) error
+	GetBotsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool, ...aws.Option) error
 
 	GetBuiltinIntent(*lexmodelbuildingservice.GetBuiltinIntentInput) (*lexmodelbuildingservice.GetBuiltinIntentOutput, error)
-	GetBuiltinIntentWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentInput, ...request.Option) (*lexmodelbuildingservice.GetBuiltinIntentOutput, error)
-	GetBuiltinIntentRequest(*lexmodelbuildingservice.GetBuiltinIntentInput) (*request.Request, *lexmodelbuildingservice.GetBuiltinIntentOutput)
+	GetBuiltinIntentWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentInput, ...aws.Option) (*lexmodelbuildingservice.GetBuiltinIntentOutput, error)
+	GetBuiltinIntentRequest(*lexmodelbuildingservice.GetBuiltinIntentInput) (*aws.Request, *lexmodelbuildingservice.GetBuiltinIntentOutput)
 
 	GetBuiltinIntents(*lexmodelbuildingservice.GetBuiltinIntentsInput) (*lexmodelbuildingservice.GetBuiltinIntentsOutput, error)
-	GetBuiltinIntentsWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentsInput, ...request.Option) (*lexmodelbuildingservice.GetBuiltinIntentsOutput, error)
-	GetBuiltinIntentsRequest(*lexmodelbuildingservice.GetBuiltinIntentsInput) (*request.Request, *lexmodelbuildingservice.GetBuiltinIntentsOutput)
+	GetBuiltinIntentsWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentsInput, ...aws.Option) (*lexmodelbuildingservice.GetBuiltinIntentsOutput, error)
+	GetBuiltinIntentsRequest(*lexmodelbuildingservice.GetBuiltinIntentsInput) (*aws.Request, *lexmodelbuildingservice.GetBuiltinIntentsOutput)
 
 	GetBuiltinIntentsPages(*lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool) error
-	GetBuiltinIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool, ...request.Option) error
+	GetBuiltinIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool, ...aws.Option) error
 
 	GetBuiltinSlotTypes(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) (*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, error)
-	GetBuiltinSlotTypesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinSlotTypesInput, ...request.Option) (*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, error)
-	GetBuiltinSlotTypesRequest(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) (*request.Request, *lexmodelbuildingservice.GetBuiltinSlotTypesOutput)
+	GetBuiltinSlotTypesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinSlotTypesInput, ...aws.Option) (*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, error)
+	GetBuiltinSlotTypesRequest(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) (*aws.Request, *lexmodelbuildingservice.GetBuiltinSlotTypesOutput)
 
 	GetBuiltinSlotTypesPages(*lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool) error
-	GetBuiltinSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool, ...request.Option) error
+	GetBuiltinSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool, ...aws.Option) error
 
 	GetExport(*lexmodelbuildingservice.GetExportInput) (*lexmodelbuildingservice.GetExportOutput, error)
-	GetExportWithContext(aws.Context, *lexmodelbuildingservice.GetExportInput, ...request.Option) (*lexmodelbuildingservice.GetExportOutput, error)
-	GetExportRequest(*lexmodelbuildingservice.GetExportInput) (*request.Request, *lexmodelbuildingservice.GetExportOutput)
+	GetExportWithContext(aws.Context, *lexmodelbuildingservice.GetExportInput, ...aws.Option) (*lexmodelbuildingservice.GetExportOutput, error)
+	GetExportRequest(*lexmodelbuildingservice.GetExportInput) (*aws.Request, *lexmodelbuildingservice.GetExportOutput)
 
 	GetIntent(*lexmodelbuildingservice.GetIntentInput) (*lexmodelbuildingservice.GetIntentOutput, error)
-	GetIntentWithContext(aws.Context, *lexmodelbuildingservice.GetIntentInput, ...request.Option) (*lexmodelbuildingservice.GetIntentOutput, error)
-	GetIntentRequest(*lexmodelbuildingservice.GetIntentInput) (*request.Request, *lexmodelbuildingservice.GetIntentOutput)
+	GetIntentWithContext(aws.Context, *lexmodelbuildingservice.GetIntentInput, ...aws.Option) (*lexmodelbuildingservice.GetIntentOutput, error)
+	GetIntentRequest(*lexmodelbuildingservice.GetIntentInput) (*aws.Request, *lexmodelbuildingservice.GetIntentOutput)
 
 	GetIntentVersions(*lexmodelbuildingservice.GetIntentVersionsInput) (*lexmodelbuildingservice.GetIntentVersionsOutput, error)
-	GetIntentVersionsWithContext(aws.Context, *lexmodelbuildingservice.GetIntentVersionsInput, ...request.Option) (*lexmodelbuildingservice.GetIntentVersionsOutput, error)
-	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) (*request.Request, *lexmodelbuildingservice.GetIntentVersionsOutput)
+	GetIntentVersionsWithContext(aws.Context, *lexmodelbuildingservice.GetIntentVersionsInput, ...aws.Option) (*lexmodelbuildingservice.GetIntentVersionsOutput, error)
+	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) (*aws.Request, *lexmodelbuildingservice.GetIntentVersionsOutput)
 
 	GetIntentVersionsPages(*lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool) error
-	GetIntentVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool, ...request.Option) error
+	GetIntentVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool, ...aws.Option) error
 
 	GetIntents(*lexmodelbuildingservice.GetIntentsInput) (*lexmodelbuildingservice.GetIntentsOutput, error)
-	GetIntentsWithContext(aws.Context, *lexmodelbuildingservice.GetIntentsInput, ...request.Option) (*lexmodelbuildingservice.GetIntentsOutput, error)
-	GetIntentsRequest(*lexmodelbuildingservice.GetIntentsInput) (*request.Request, *lexmodelbuildingservice.GetIntentsOutput)
+	GetIntentsWithContext(aws.Context, *lexmodelbuildingservice.GetIntentsInput, ...aws.Option) (*lexmodelbuildingservice.GetIntentsOutput, error)
+	GetIntentsRequest(*lexmodelbuildingservice.GetIntentsInput) (*aws.Request, *lexmodelbuildingservice.GetIntentsOutput)
 
 	GetIntentsPages(*lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool) error
-	GetIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool, ...request.Option) error
+	GetIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool, ...aws.Option) error
 
 	GetSlotType(*lexmodelbuildingservice.GetSlotTypeInput) (*lexmodelbuildingservice.GetSlotTypeOutput, error)
-	GetSlotTypeWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeInput, ...request.Option) (*lexmodelbuildingservice.GetSlotTypeOutput, error)
-	GetSlotTypeRequest(*lexmodelbuildingservice.GetSlotTypeInput) (*request.Request, *lexmodelbuildingservice.GetSlotTypeOutput)
+	GetSlotTypeWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeInput, ...aws.Option) (*lexmodelbuildingservice.GetSlotTypeOutput, error)
+	GetSlotTypeRequest(*lexmodelbuildingservice.GetSlotTypeInput) (*aws.Request, *lexmodelbuildingservice.GetSlotTypeOutput)
 
 	GetSlotTypeVersions(*lexmodelbuildingservice.GetSlotTypeVersionsInput) (*lexmodelbuildingservice.GetSlotTypeVersionsOutput, error)
-	GetSlotTypeVersionsWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeVersionsInput, ...request.Option) (*lexmodelbuildingservice.GetSlotTypeVersionsOutput, error)
-	GetSlotTypeVersionsRequest(*lexmodelbuildingservice.GetSlotTypeVersionsInput) (*request.Request, *lexmodelbuildingservice.GetSlotTypeVersionsOutput)
+	GetSlotTypeVersionsWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeVersionsInput, ...aws.Option) (*lexmodelbuildingservice.GetSlotTypeVersionsOutput, error)
+	GetSlotTypeVersionsRequest(*lexmodelbuildingservice.GetSlotTypeVersionsInput) (*aws.Request, *lexmodelbuildingservice.GetSlotTypeVersionsOutput)
 
 	GetSlotTypeVersionsPages(*lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool) error
-	GetSlotTypeVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool, ...request.Option) error
+	GetSlotTypeVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool, ...aws.Option) error
 
 	GetSlotTypes(*lexmodelbuildingservice.GetSlotTypesInput) (*lexmodelbuildingservice.GetSlotTypesOutput, error)
-	GetSlotTypesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypesInput, ...request.Option) (*lexmodelbuildingservice.GetSlotTypesOutput, error)
-	GetSlotTypesRequest(*lexmodelbuildingservice.GetSlotTypesInput) (*request.Request, *lexmodelbuildingservice.GetSlotTypesOutput)
+	GetSlotTypesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypesInput, ...aws.Option) (*lexmodelbuildingservice.GetSlotTypesOutput, error)
+	GetSlotTypesRequest(*lexmodelbuildingservice.GetSlotTypesInput) (*aws.Request, *lexmodelbuildingservice.GetSlotTypesOutput)
 
 	GetSlotTypesPages(*lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool) error
-	GetSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool, ...request.Option) error
+	GetSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool, ...aws.Option) error
 
 	GetUtterancesView(*lexmodelbuildingservice.GetUtterancesViewInput) (*lexmodelbuildingservice.GetUtterancesViewOutput, error)
-	GetUtterancesViewWithContext(aws.Context, *lexmodelbuildingservice.GetUtterancesViewInput, ...request.Option) (*lexmodelbuildingservice.GetUtterancesViewOutput, error)
-	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) (*request.Request, *lexmodelbuildingservice.GetUtterancesViewOutput)
+	GetUtterancesViewWithContext(aws.Context, *lexmodelbuildingservice.GetUtterancesViewInput, ...aws.Option) (*lexmodelbuildingservice.GetUtterancesViewOutput, error)
+	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) (*aws.Request, *lexmodelbuildingservice.GetUtterancesViewOutput)
 
 	PutBot(*lexmodelbuildingservice.PutBotInput) (*lexmodelbuildingservice.PutBotOutput, error)
-	PutBotWithContext(aws.Context, *lexmodelbuildingservice.PutBotInput, ...request.Option) (*lexmodelbuildingservice.PutBotOutput, error)
-	PutBotRequest(*lexmodelbuildingservice.PutBotInput) (*request.Request, *lexmodelbuildingservice.PutBotOutput)
+	PutBotWithContext(aws.Context, *lexmodelbuildingservice.PutBotInput, ...aws.Option) (*lexmodelbuildingservice.PutBotOutput, error)
+	PutBotRequest(*lexmodelbuildingservice.PutBotInput) (*aws.Request, *lexmodelbuildingservice.PutBotOutput)
 
 	PutBotAlias(*lexmodelbuildingservice.PutBotAliasInput) (*lexmodelbuildingservice.PutBotAliasOutput, error)
-	PutBotAliasWithContext(aws.Context, *lexmodelbuildingservice.PutBotAliasInput, ...request.Option) (*lexmodelbuildingservice.PutBotAliasOutput, error)
-	PutBotAliasRequest(*lexmodelbuildingservice.PutBotAliasInput) (*request.Request, *lexmodelbuildingservice.PutBotAliasOutput)
+	PutBotAliasWithContext(aws.Context, *lexmodelbuildingservice.PutBotAliasInput, ...aws.Option) (*lexmodelbuildingservice.PutBotAliasOutput, error)
+	PutBotAliasRequest(*lexmodelbuildingservice.PutBotAliasInput) (*aws.Request, *lexmodelbuildingservice.PutBotAliasOutput)
 
 	PutIntent(*lexmodelbuildingservice.PutIntentInput) (*lexmodelbuildingservice.PutIntentOutput, error)
-	PutIntentWithContext(aws.Context, *lexmodelbuildingservice.PutIntentInput, ...request.Option) (*lexmodelbuildingservice.PutIntentOutput, error)
-	PutIntentRequest(*lexmodelbuildingservice.PutIntentInput) (*request.Request, *lexmodelbuildingservice.PutIntentOutput)
+	PutIntentWithContext(aws.Context, *lexmodelbuildingservice.PutIntentInput, ...aws.Option) (*lexmodelbuildingservice.PutIntentOutput, error)
+	PutIntentRequest(*lexmodelbuildingservice.PutIntentInput) (*aws.Request, *lexmodelbuildingservice.PutIntentOutput)
 
 	PutSlotType(*lexmodelbuildingservice.PutSlotTypeInput) (*lexmodelbuildingservice.PutSlotTypeOutput, error)
-	PutSlotTypeWithContext(aws.Context, *lexmodelbuildingservice.PutSlotTypeInput, ...request.Option) (*lexmodelbuildingservice.PutSlotTypeOutput, error)
-	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) (*request.Request, *lexmodelbuildingservice.PutSlotTypeOutput)
+	PutSlotTypeWithContext(aws.Context, *lexmodelbuildingservice.PutSlotTypeInput, ...aws.Option) (*lexmodelbuildingservice.PutSlotTypeOutput, error)
+	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) (*aws.Request, *lexmodelbuildingservice.PutSlotTypeOutput)
 }
 
 var _ LexModelBuildingServiceAPI = (*lexmodelbuildingservice.LexModelBuildingService)(nil)

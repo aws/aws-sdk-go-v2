@@ -10,7 +10,6 @@ package cloudwatchlogsiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := cloudwatchlogs.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := cloudwatchlogs.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,157 +64,157 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CloudWatchLogsAPI interface {
 	AssociateKmsKey(*cloudwatchlogs.AssociateKmsKeyInput) (*cloudwatchlogs.AssociateKmsKeyOutput, error)
-	AssociateKmsKeyWithContext(aws.Context, *cloudwatchlogs.AssociateKmsKeyInput, ...request.Option) (*cloudwatchlogs.AssociateKmsKeyOutput, error)
-	AssociateKmsKeyRequest(*cloudwatchlogs.AssociateKmsKeyInput) (*request.Request, *cloudwatchlogs.AssociateKmsKeyOutput)
+	AssociateKmsKeyWithContext(aws.Context, *cloudwatchlogs.AssociateKmsKeyInput, ...aws.Option) (*cloudwatchlogs.AssociateKmsKeyOutput, error)
+	AssociateKmsKeyRequest(*cloudwatchlogs.AssociateKmsKeyInput) (*aws.Request, *cloudwatchlogs.AssociateKmsKeyOutput)
 
 	CancelExportTask(*cloudwatchlogs.CancelExportTaskInput) (*cloudwatchlogs.CancelExportTaskOutput, error)
-	CancelExportTaskWithContext(aws.Context, *cloudwatchlogs.CancelExportTaskInput, ...request.Option) (*cloudwatchlogs.CancelExportTaskOutput, error)
-	CancelExportTaskRequest(*cloudwatchlogs.CancelExportTaskInput) (*request.Request, *cloudwatchlogs.CancelExportTaskOutput)
+	CancelExportTaskWithContext(aws.Context, *cloudwatchlogs.CancelExportTaskInput, ...aws.Option) (*cloudwatchlogs.CancelExportTaskOutput, error)
+	CancelExportTaskRequest(*cloudwatchlogs.CancelExportTaskInput) (*aws.Request, *cloudwatchlogs.CancelExportTaskOutput)
 
 	CreateExportTask(*cloudwatchlogs.CreateExportTaskInput) (*cloudwatchlogs.CreateExportTaskOutput, error)
-	CreateExportTaskWithContext(aws.Context, *cloudwatchlogs.CreateExportTaskInput, ...request.Option) (*cloudwatchlogs.CreateExportTaskOutput, error)
-	CreateExportTaskRequest(*cloudwatchlogs.CreateExportTaskInput) (*request.Request, *cloudwatchlogs.CreateExportTaskOutput)
+	CreateExportTaskWithContext(aws.Context, *cloudwatchlogs.CreateExportTaskInput, ...aws.Option) (*cloudwatchlogs.CreateExportTaskOutput, error)
+	CreateExportTaskRequest(*cloudwatchlogs.CreateExportTaskInput) (*aws.Request, *cloudwatchlogs.CreateExportTaskOutput)
 
 	CreateLogGroup(*cloudwatchlogs.CreateLogGroupInput) (*cloudwatchlogs.CreateLogGroupOutput, error)
-	CreateLogGroupWithContext(aws.Context, *cloudwatchlogs.CreateLogGroupInput, ...request.Option) (*cloudwatchlogs.CreateLogGroupOutput, error)
-	CreateLogGroupRequest(*cloudwatchlogs.CreateLogGroupInput) (*request.Request, *cloudwatchlogs.CreateLogGroupOutput)
+	CreateLogGroupWithContext(aws.Context, *cloudwatchlogs.CreateLogGroupInput, ...aws.Option) (*cloudwatchlogs.CreateLogGroupOutput, error)
+	CreateLogGroupRequest(*cloudwatchlogs.CreateLogGroupInput) (*aws.Request, *cloudwatchlogs.CreateLogGroupOutput)
 
 	CreateLogStream(*cloudwatchlogs.CreateLogStreamInput) (*cloudwatchlogs.CreateLogStreamOutput, error)
-	CreateLogStreamWithContext(aws.Context, *cloudwatchlogs.CreateLogStreamInput, ...request.Option) (*cloudwatchlogs.CreateLogStreamOutput, error)
-	CreateLogStreamRequest(*cloudwatchlogs.CreateLogStreamInput) (*request.Request, *cloudwatchlogs.CreateLogStreamOutput)
+	CreateLogStreamWithContext(aws.Context, *cloudwatchlogs.CreateLogStreamInput, ...aws.Option) (*cloudwatchlogs.CreateLogStreamOutput, error)
+	CreateLogStreamRequest(*cloudwatchlogs.CreateLogStreamInput) (*aws.Request, *cloudwatchlogs.CreateLogStreamOutput)
 
 	DeleteDestination(*cloudwatchlogs.DeleteDestinationInput) (*cloudwatchlogs.DeleteDestinationOutput, error)
-	DeleteDestinationWithContext(aws.Context, *cloudwatchlogs.DeleteDestinationInput, ...request.Option) (*cloudwatchlogs.DeleteDestinationOutput, error)
-	DeleteDestinationRequest(*cloudwatchlogs.DeleteDestinationInput) (*request.Request, *cloudwatchlogs.DeleteDestinationOutput)
+	DeleteDestinationWithContext(aws.Context, *cloudwatchlogs.DeleteDestinationInput, ...aws.Option) (*cloudwatchlogs.DeleteDestinationOutput, error)
+	DeleteDestinationRequest(*cloudwatchlogs.DeleteDestinationInput) (*aws.Request, *cloudwatchlogs.DeleteDestinationOutput)
 
 	DeleteLogGroup(*cloudwatchlogs.DeleteLogGroupInput) (*cloudwatchlogs.DeleteLogGroupOutput, error)
-	DeleteLogGroupWithContext(aws.Context, *cloudwatchlogs.DeleteLogGroupInput, ...request.Option) (*cloudwatchlogs.DeleteLogGroupOutput, error)
-	DeleteLogGroupRequest(*cloudwatchlogs.DeleteLogGroupInput) (*request.Request, *cloudwatchlogs.DeleteLogGroupOutput)
+	DeleteLogGroupWithContext(aws.Context, *cloudwatchlogs.DeleteLogGroupInput, ...aws.Option) (*cloudwatchlogs.DeleteLogGroupOutput, error)
+	DeleteLogGroupRequest(*cloudwatchlogs.DeleteLogGroupInput) (*aws.Request, *cloudwatchlogs.DeleteLogGroupOutput)
 
 	DeleteLogStream(*cloudwatchlogs.DeleteLogStreamInput) (*cloudwatchlogs.DeleteLogStreamOutput, error)
-	DeleteLogStreamWithContext(aws.Context, *cloudwatchlogs.DeleteLogStreamInput, ...request.Option) (*cloudwatchlogs.DeleteLogStreamOutput, error)
-	DeleteLogStreamRequest(*cloudwatchlogs.DeleteLogStreamInput) (*request.Request, *cloudwatchlogs.DeleteLogStreamOutput)
+	DeleteLogStreamWithContext(aws.Context, *cloudwatchlogs.DeleteLogStreamInput, ...aws.Option) (*cloudwatchlogs.DeleteLogStreamOutput, error)
+	DeleteLogStreamRequest(*cloudwatchlogs.DeleteLogStreamInput) (*aws.Request, *cloudwatchlogs.DeleteLogStreamOutput)
 
 	DeleteMetricFilter(*cloudwatchlogs.DeleteMetricFilterInput) (*cloudwatchlogs.DeleteMetricFilterOutput, error)
-	DeleteMetricFilterWithContext(aws.Context, *cloudwatchlogs.DeleteMetricFilterInput, ...request.Option) (*cloudwatchlogs.DeleteMetricFilterOutput, error)
-	DeleteMetricFilterRequest(*cloudwatchlogs.DeleteMetricFilterInput) (*request.Request, *cloudwatchlogs.DeleteMetricFilterOutput)
+	DeleteMetricFilterWithContext(aws.Context, *cloudwatchlogs.DeleteMetricFilterInput, ...aws.Option) (*cloudwatchlogs.DeleteMetricFilterOutput, error)
+	DeleteMetricFilterRequest(*cloudwatchlogs.DeleteMetricFilterInput) (*aws.Request, *cloudwatchlogs.DeleteMetricFilterOutput)
 
 	DeleteResourcePolicy(*cloudwatchlogs.DeleteResourcePolicyInput) (*cloudwatchlogs.DeleteResourcePolicyOutput, error)
-	DeleteResourcePolicyWithContext(aws.Context, *cloudwatchlogs.DeleteResourcePolicyInput, ...request.Option) (*cloudwatchlogs.DeleteResourcePolicyOutput, error)
-	DeleteResourcePolicyRequest(*cloudwatchlogs.DeleteResourcePolicyInput) (*request.Request, *cloudwatchlogs.DeleteResourcePolicyOutput)
+	DeleteResourcePolicyWithContext(aws.Context, *cloudwatchlogs.DeleteResourcePolicyInput, ...aws.Option) (*cloudwatchlogs.DeleteResourcePolicyOutput, error)
+	DeleteResourcePolicyRequest(*cloudwatchlogs.DeleteResourcePolicyInput) (*aws.Request, *cloudwatchlogs.DeleteResourcePolicyOutput)
 
 	DeleteRetentionPolicy(*cloudwatchlogs.DeleteRetentionPolicyInput) (*cloudwatchlogs.DeleteRetentionPolicyOutput, error)
-	DeleteRetentionPolicyWithContext(aws.Context, *cloudwatchlogs.DeleteRetentionPolicyInput, ...request.Option) (*cloudwatchlogs.DeleteRetentionPolicyOutput, error)
-	DeleteRetentionPolicyRequest(*cloudwatchlogs.DeleteRetentionPolicyInput) (*request.Request, *cloudwatchlogs.DeleteRetentionPolicyOutput)
+	DeleteRetentionPolicyWithContext(aws.Context, *cloudwatchlogs.DeleteRetentionPolicyInput, ...aws.Option) (*cloudwatchlogs.DeleteRetentionPolicyOutput, error)
+	DeleteRetentionPolicyRequest(*cloudwatchlogs.DeleteRetentionPolicyInput) (*aws.Request, *cloudwatchlogs.DeleteRetentionPolicyOutput)
 
 	DeleteSubscriptionFilter(*cloudwatchlogs.DeleteSubscriptionFilterInput) (*cloudwatchlogs.DeleteSubscriptionFilterOutput, error)
-	DeleteSubscriptionFilterWithContext(aws.Context, *cloudwatchlogs.DeleteSubscriptionFilterInput, ...request.Option) (*cloudwatchlogs.DeleteSubscriptionFilterOutput, error)
-	DeleteSubscriptionFilterRequest(*cloudwatchlogs.DeleteSubscriptionFilterInput) (*request.Request, *cloudwatchlogs.DeleteSubscriptionFilterOutput)
+	DeleteSubscriptionFilterWithContext(aws.Context, *cloudwatchlogs.DeleteSubscriptionFilterInput, ...aws.Option) (*cloudwatchlogs.DeleteSubscriptionFilterOutput, error)
+	DeleteSubscriptionFilterRequest(*cloudwatchlogs.DeleteSubscriptionFilterInput) (*aws.Request, *cloudwatchlogs.DeleteSubscriptionFilterOutput)
 
 	DescribeDestinations(*cloudwatchlogs.DescribeDestinationsInput) (*cloudwatchlogs.DescribeDestinationsOutput, error)
-	DescribeDestinationsWithContext(aws.Context, *cloudwatchlogs.DescribeDestinationsInput, ...request.Option) (*cloudwatchlogs.DescribeDestinationsOutput, error)
-	DescribeDestinationsRequest(*cloudwatchlogs.DescribeDestinationsInput) (*request.Request, *cloudwatchlogs.DescribeDestinationsOutput)
+	DescribeDestinationsWithContext(aws.Context, *cloudwatchlogs.DescribeDestinationsInput, ...aws.Option) (*cloudwatchlogs.DescribeDestinationsOutput, error)
+	DescribeDestinationsRequest(*cloudwatchlogs.DescribeDestinationsInput) (*aws.Request, *cloudwatchlogs.DescribeDestinationsOutput)
 
 	DescribeDestinationsPages(*cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool) error
-	DescribeDestinationsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool, ...request.Option) error
+	DescribeDestinationsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool, ...aws.Option) error
 
 	DescribeExportTasks(*cloudwatchlogs.DescribeExportTasksInput) (*cloudwatchlogs.DescribeExportTasksOutput, error)
-	DescribeExportTasksWithContext(aws.Context, *cloudwatchlogs.DescribeExportTasksInput, ...request.Option) (*cloudwatchlogs.DescribeExportTasksOutput, error)
-	DescribeExportTasksRequest(*cloudwatchlogs.DescribeExportTasksInput) (*request.Request, *cloudwatchlogs.DescribeExportTasksOutput)
+	DescribeExportTasksWithContext(aws.Context, *cloudwatchlogs.DescribeExportTasksInput, ...aws.Option) (*cloudwatchlogs.DescribeExportTasksOutput, error)
+	DescribeExportTasksRequest(*cloudwatchlogs.DescribeExportTasksInput) (*aws.Request, *cloudwatchlogs.DescribeExportTasksOutput)
 
 	DescribeLogGroups(*cloudwatchlogs.DescribeLogGroupsInput) (*cloudwatchlogs.DescribeLogGroupsOutput, error)
-	DescribeLogGroupsWithContext(aws.Context, *cloudwatchlogs.DescribeLogGroupsInput, ...request.Option) (*cloudwatchlogs.DescribeLogGroupsOutput, error)
-	DescribeLogGroupsRequest(*cloudwatchlogs.DescribeLogGroupsInput) (*request.Request, *cloudwatchlogs.DescribeLogGroupsOutput)
+	DescribeLogGroupsWithContext(aws.Context, *cloudwatchlogs.DescribeLogGroupsInput, ...aws.Option) (*cloudwatchlogs.DescribeLogGroupsOutput, error)
+	DescribeLogGroupsRequest(*cloudwatchlogs.DescribeLogGroupsInput) (*aws.Request, *cloudwatchlogs.DescribeLogGroupsOutput)
 
 	DescribeLogGroupsPages(*cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool) error
-	DescribeLogGroupsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool, ...request.Option) error
+	DescribeLogGroupsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeLogStreams(*cloudwatchlogs.DescribeLogStreamsInput) (*cloudwatchlogs.DescribeLogStreamsOutput, error)
-	DescribeLogStreamsWithContext(aws.Context, *cloudwatchlogs.DescribeLogStreamsInput, ...request.Option) (*cloudwatchlogs.DescribeLogStreamsOutput, error)
-	DescribeLogStreamsRequest(*cloudwatchlogs.DescribeLogStreamsInput) (*request.Request, *cloudwatchlogs.DescribeLogStreamsOutput)
+	DescribeLogStreamsWithContext(aws.Context, *cloudwatchlogs.DescribeLogStreamsInput, ...aws.Option) (*cloudwatchlogs.DescribeLogStreamsOutput, error)
+	DescribeLogStreamsRequest(*cloudwatchlogs.DescribeLogStreamsInput) (*aws.Request, *cloudwatchlogs.DescribeLogStreamsOutput)
 
 	DescribeLogStreamsPages(*cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool) error
-	DescribeLogStreamsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool, ...request.Option) error
+	DescribeLogStreamsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool, ...aws.Option) error
 
 	DescribeMetricFilters(*cloudwatchlogs.DescribeMetricFiltersInput) (*cloudwatchlogs.DescribeMetricFiltersOutput, error)
-	DescribeMetricFiltersWithContext(aws.Context, *cloudwatchlogs.DescribeMetricFiltersInput, ...request.Option) (*cloudwatchlogs.DescribeMetricFiltersOutput, error)
-	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) (*request.Request, *cloudwatchlogs.DescribeMetricFiltersOutput)
+	DescribeMetricFiltersWithContext(aws.Context, *cloudwatchlogs.DescribeMetricFiltersInput, ...aws.Option) (*cloudwatchlogs.DescribeMetricFiltersOutput, error)
+	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) (*aws.Request, *cloudwatchlogs.DescribeMetricFiltersOutput)
 
 	DescribeMetricFiltersPages(*cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool) error
-	DescribeMetricFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool, ...request.Option) error
+	DescribeMetricFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool, ...aws.Option) error
 
 	DescribeResourcePolicies(*cloudwatchlogs.DescribeResourcePoliciesInput) (*cloudwatchlogs.DescribeResourcePoliciesOutput, error)
-	DescribeResourcePoliciesWithContext(aws.Context, *cloudwatchlogs.DescribeResourcePoliciesInput, ...request.Option) (*cloudwatchlogs.DescribeResourcePoliciesOutput, error)
-	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) (*request.Request, *cloudwatchlogs.DescribeResourcePoliciesOutput)
+	DescribeResourcePoliciesWithContext(aws.Context, *cloudwatchlogs.DescribeResourcePoliciesInput, ...aws.Option) (*cloudwatchlogs.DescribeResourcePoliciesOutput, error)
+	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) (*aws.Request, *cloudwatchlogs.DescribeResourcePoliciesOutput)
 
 	DescribeSubscriptionFilters(*cloudwatchlogs.DescribeSubscriptionFiltersInput) (*cloudwatchlogs.DescribeSubscriptionFiltersOutput, error)
-	DescribeSubscriptionFiltersWithContext(aws.Context, *cloudwatchlogs.DescribeSubscriptionFiltersInput, ...request.Option) (*cloudwatchlogs.DescribeSubscriptionFiltersOutput, error)
-	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) (*request.Request, *cloudwatchlogs.DescribeSubscriptionFiltersOutput)
+	DescribeSubscriptionFiltersWithContext(aws.Context, *cloudwatchlogs.DescribeSubscriptionFiltersInput, ...aws.Option) (*cloudwatchlogs.DescribeSubscriptionFiltersOutput, error)
+	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) (*aws.Request, *cloudwatchlogs.DescribeSubscriptionFiltersOutput)
 
 	DescribeSubscriptionFiltersPages(*cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool) error
-	DescribeSubscriptionFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool, ...request.Option) error
+	DescribeSubscriptionFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool, ...aws.Option) error
 
 	DisassociateKmsKey(*cloudwatchlogs.DisassociateKmsKeyInput) (*cloudwatchlogs.DisassociateKmsKeyOutput, error)
-	DisassociateKmsKeyWithContext(aws.Context, *cloudwatchlogs.DisassociateKmsKeyInput, ...request.Option) (*cloudwatchlogs.DisassociateKmsKeyOutput, error)
-	DisassociateKmsKeyRequest(*cloudwatchlogs.DisassociateKmsKeyInput) (*request.Request, *cloudwatchlogs.DisassociateKmsKeyOutput)
+	DisassociateKmsKeyWithContext(aws.Context, *cloudwatchlogs.DisassociateKmsKeyInput, ...aws.Option) (*cloudwatchlogs.DisassociateKmsKeyOutput, error)
+	DisassociateKmsKeyRequest(*cloudwatchlogs.DisassociateKmsKeyInput) (*aws.Request, *cloudwatchlogs.DisassociateKmsKeyOutput)
 
 	FilterLogEvents(*cloudwatchlogs.FilterLogEventsInput) (*cloudwatchlogs.FilterLogEventsOutput, error)
-	FilterLogEventsWithContext(aws.Context, *cloudwatchlogs.FilterLogEventsInput, ...request.Option) (*cloudwatchlogs.FilterLogEventsOutput, error)
-	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) (*request.Request, *cloudwatchlogs.FilterLogEventsOutput)
+	FilterLogEventsWithContext(aws.Context, *cloudwatchlogs.FilterLogEventsInput, ...aws.Option) (*cloudwatchlogs.FilterLogEventsOutput, error)
+	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) (*aws.Request, *cloudwatchlogs.FilterLogEventsOutput)
 
 	FilterLogEventsPages(*cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool) error
-	FilterLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool, ...request.Option) error
+	FilterLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool, ...aws.Option) error
 
 	GetLogEvents(*cloudwatchlogs.GetLogEventsInput) (*cloudwatchlogs.GetLogEventsOutput, error)
-	GetLogEventsWithContext(aws.Context, *cloudwatchlogs.GetLogEventsInput, ...request.Option) (*cloudwatchlogs.GetLogEventsOutput, error)
-	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) (*request.Request, *cloudwatchlogs.GetLogEventsOutput)
+	GetLogEventsWithContext(aws.Context, *cloudwatchlogs.GetLogEventsInput, ...aws.Option) (*cloudwatchlogs.GetLogEventsOutput, error)
+	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) (*aws.Request, *cloudwatchlogs.GetLogEventsOutput)
 
 	GetLogEventsPages(*cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool) error
-	GetLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool, ...request.Option) error
+	GetLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsLogGroup(*cloudwatchlogs.ListTagsLogGroupInput) (*cloudwatchlogs.ListTagsLogGroupOutput, error)
-	ListTagsLogGroupWithContext(aws.Context, *cloudwatchlogs.ListTagsLogGroupInput, ...request.Option) (*cloudwatchlogs.ListTagsLogGroupOutput, error)
-	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) (*request.Request, *cloudwatchlogs.ListTagsLogGroupOutput)
+	ListTagsLogGroupWithContext(aws.Context, *cloudwatchlogs.ListTagsLogGroupInput, ...aws.Option) (*cloudwatchlogs.ListTagsLogGroupOutput, error)
+	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) (*aws.Request, *cloudwatchlogs.ListTagsLogGroupOutput)
 
 	PutDestination(*cloudwatchlogs.PutDestinationInput) (*cloudwatchlogs.PutDestinationOutput, error)
-	PutDestinationWithContext(aws.Context, *cloudwatchlogs.PutDestinationInput, ...request.Option) (*cloudwatchlogs.PutDestinationOutput, error)
-	PutDestinationRequest(*cloudwatchlogs.PutDestinationInput) (*request.Request, *cloudwatchlogs.PutDestinationOutput)
+	PutDestinationWithContext(aws.Context, *cloudwatchlogs.PutDestinationInput, ...aws.Option) (*cloudwatchlogs.PutDestinationOutput, error)
+	PutDestinationRequest(*cloudwatchlogs.PutDestinationInput) (*aws.Request, *cloudwatchlogs.PutDestinationOutput)
 
 	PutDestinationPolicy(*cloudwatchlogs.PutDestinationPolicyInput) (*cloudwatchlogs.PutDestinationPolicyOutput, error)
-	PutDestinationPolicyWithContext(aws.Context, *cloudwatchlogs.PutDestinationPolicyInput, ...request.Option) (*cloudwatchlogs.PutDestinationPolicyOutput, error)
-	PutDestinationPolicyRequest(*cloudwatchlogs.PutDestinationPolicyInput) (*request.Request, *cloudwatchlogs.PutDestinationPolicyOutput)
+	PutDestinationPolicyWithContext(aws.Context, *cloudwatchlogs.PutDestinationPolicyInput, ...aws.Option) (*cloudwatchlogs.PutDestinationPolicyOutput, error)
+	PutDestinationPolicyRequest(*cloudwatchlogs.PutDestinationPolicyInput) (*aws.Request, *cloudwatchlogs.PutDestinationPolicyOutput)
 
 	PutLogEvents(*cloudwatchlogs.PutLogEventsInput) (*cloudwatchlogs.PutLogEventsOutput, error)
-	PutLogEventsWithContext(aws.Context, *cloudwatchlogs.PutLogEventsInput, ...request.Option) (*cloudwatchlogs.PutLogEventsOutput, error)
-	PutLogEventsRequest(*cloudwatchlogs.PutLogEventsInput) (*request.Request, *cloudwatchlogs.PutLogEventsOutput)
+	PutLogEventsWithContext(aws.Context, *cloudwatchlogs.PutLogEventsInput, ...aws.Option) (*cloudwatchlogs.PutLogEventsOutput, error)
+	PutLogEventsRequest(*cloudwatchlogs.PutLogEventsInput) (*aws.Request, *cloudwatchlogs.PutLogEventsOutput)
 
 	PutMetricFilter(*cloudwatchlogs.PutMetricFilterInput) (*cloudwatchlogs.PutMetricFilterOutput, error)
-	PutMetricFilterWithContext(aws.Context, *cloudwatchlogs.PutMetricFilterInput, ...request.Option) (*cloudwatchlogs.PutMetricFilterOutput, error)
-	PutMetricFilterRequest(*cloudwatchlogs.PutMetricFilterInput) (*request.Request, *cloudwatchlogs.PutMetricFilterOutput)
+	PutMetricFilterWithContext(aws.Context, *cloudwatchlogs.PutMetricFilterInput, ...aws.Option) (*cloudwatchlogs.PutMetricFilterOutput, error)
+	PutMetricFilterRequest(*cloudwatchlogs.PutMetricFilterInput) (*aws.Request, *cloudwatchlogs.PutMetricFilterOutput)
 
 	PutResourcePolicy(*cloudwatchlogs.PutResourcePolicyInput) (*cloudwatchlogs.PutResourcePolicyOutput, error)
-	PutResourcePolicyWithContext(aws.Context, *cloudwatchlogs.PutResourcePolicyInput, ...request.Option) (*cloudwatchlogs.PutResourcePolicyOutput, error)
-	PutResourcePolicyRequest(*cloudwatchlogs.PutResourcePolicyInput) (*request.Request, *cloudwatchlogs.PutResourcePolicyOutput)
+	PutResourcePolicyWithContext(aws.Context, *cloudwatchlogs.PutResourcePolicyInput, ...aws.Option) (*cloudwatchlogs.PutResourcePolicyOutput, error)
+	PutResourcePolicyRequest(*cloudwatchlogs.PutResourcePolicyInput) (*aws.Request, *cloudwatchlogs.PutResourcePolicyOutput)
 
 	PutRetentionPolicy(*cloudwatchlogs.PutRetentionPolicyInput) (*cloudwatchlogs.PutRetentionPolicyOutput, error)
-	PutRetentionPolicyWithContext(aws.Context, *cloudwatchlogs.PutRetentionPolicyInput, ...request.Option) (*cloudwatchlogs.PutRetentionPolicyOutput, error)
-	PutRetentionPolicyRequest(*cloudwatchlogs.PutRetentionPolicyInput) (*request.Request, *cloudwatchlogs.PutRetentionPolicyOutput)
+	PutRetentionPolicyWithContext(aws.Context, *cloudwatchlogs.PutRetentionPolicyInput, ...aws.Option) (*cloudwatchlogs.PutRetentionPolicyOutput, error)
+	PutRetentionPolicyRequest(*cloudwatchlogs.PutRetentionPolicyInput) (*aws.Request, *cloudwatchlogs.PutRetentionPolicyOutput)
 
 	PutSubscriptionFilter(*cloudwatchlogs.PutSubscriptionFilterInput) (*cloudwatchlogs.PutSubscriptionFilterOutput, error)
-	PutSubscriptionFilterWithContext(aws.Context, *cloudwatchlogs.PutSubscriptionFilterInput, ...request.Option) (*cloudwatchlogs.PutSubscriptionFilterOutput, error)
-	PutSubscriptionFilterRequest(*cloudwatchlogs.PutSubscriptionFilterInput) (*request.Request, *cloudwatchlogs.PutSubscriptionFilterOutput)
+	PutSubscriptionFilterWithContext(aws.Context, *cloudwatchlogs.PutSubscriptionFilterInput, ...aws.Option) (*cloudwatchlogs.PutSubscriptionFilterOutput, error)
+	PutSubscriptionFilterRequest(*cloudwatchlogs.PutSubscriptionFilterInput) (*aws.Request, *cloudwatchlogs.PutSubscriptionFilterOutput)
 
 	TagLogGroup(*cloudwatchlogs.TagLogGroupInput) (*cloudwatchlogs.TagLogGroupOutput, error)
-	TagLogGroupWithContext(aws.Context, *cloudwatchlogs.TagLogGroupInput, ...request.Option) (*cloudwatchlogs.TagLogGroupOutput, error)
-	TagLogGroupRequest(*cloudwatchlogs.TagLogGroupInput) (*request.Request, *cloudwatchlogs.TagLogGroupOutput)
+	TagLogGroupWithContext(aws.Context, *cloudwatchlogs.TagLogGroupInput, ...aws.Option) (*cloudwatchlogs.TagLogGroupOutput, error)
+	TagLogGroupRequest(*cloudwatchlogs.TagLogGroupInput) (*aws.Request, *cloudwatchlogs.TagLogGroupOutput)
 
 	TestMetricFilter(*cloudwatchlogs.TestMetricFilterInput) (*cloudwatchlogs.TestMetricFilterOutput, error)
-	TestMetricFilterWithContext(aws.Context, *cloudwatchlogs.TestMetricFilterInput, ...request.Option) (*cloudwatchlogs.TestMetricFilterOutput, error)
-	TestMetricFilterRequest(*cloudwatchlogs.TestMetricFilterInput) (*request.Request, *cloudwatchlogs.TestMetricFilterOutput)
+	TestMetricFilterWithContext(aws.Context, *cloudwatchlogs.TestMetricFilterInput, ...aws.Option) (*cloudwatchlogs.TestMetricFilterOutput, error)
+	TestMetricFilterRequest(*cloudwatchlogs.TestMetricFilterInput) (*aws.Request, *cloudwatchlogs.TestMetricFilterOutput)
 
 	UntagLogGroup(*cloudwatchlogs.UntagLogGroupInput) (*cloudwatchlogs.UntagLogGroupOutput, error)
-	UntagLogGroupWithContext(aws.Context, *cloudwatchlogs.UntagLogGroupInput, ...request.Option) (*cloudwatchlogs.UntagLogGroupOutput, error)
-	UntagLogGroupRequest(*cloudwatchlogs.UntagLogGroupInput) (*request.Request, *cloudwatchlogs.UntagLogGroupOutput)
+	UntagLogGroupWithContext(aws.Context, *cloudwatchlogs.UntagLogGroupInput, ...aws.Option) (*cloudwatchlogs.UntagLogGroupOutput, error)
+	UntagLogGroupRequest(*cloudwatchlogs.UntagLogGroupInput) (*aws.Request, *cloudwatchlogs.UntagLogGroupOutput)
 }
 
 var _ CloudWatchLogsAPI = (*cloudwatchlogs.CloudWatchLogs)(nil)

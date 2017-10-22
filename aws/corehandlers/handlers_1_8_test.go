@@ -3,58 +3,38 @@
 package corehandlers_test
 
 import (
-	"crypto/tls"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/credentials"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"golang.org/x/net/http2"
 )
 
 func TestSendHandler_HEADNoBody(t *testing.T) {
-	TLSBundleCertFile, TLSBundleKeyFile, TLSBundleCAFile, err := awstesting.CreateTLSBundleFiles()
-	if err != nil {
-		panic(err)
-	}
-	defer awstesting.CleanupTLSBundleFiles(TLSBundleCertFile, TLSBundleKeyFile, TLSBundleCAFile)
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	}))
 
-	endpoint, err := awstesting.CreateTLSServer(TLSBundleCertFile, TLSBundleKeyFile, nil)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
+	cfg := defaults.Config()
+	cfg.Region = aws.String("mock-region")
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.S3ForcePathStyle = aws.Bool(true)
 
-	transport := http.DefaultTransport.(*http.Transport)
-	// test server's certificate is self-signed certificate
-	transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
-	http2.ConfigureTransport(transport)
-
-	sess, err := session.NewSessionWithOptions(session.Options{
-		Config: aws.Config{
-			HTTPClient:       &http.Client{},
-			Endpoint:         aws.String(endpoint),
-			Region:           aws.String("mock-region"),
-			Credentials:      credentials.AnonymousCredentials,
-			S3ForcePathStyle: aws.Bool(true),
-		},
-	})
-
-	svc := s3.New(sess)
+	svc := s3.New(cfg)
 
 	req, _ := svc.HeadObjectRequest(&s3.HeadObjectInput{
 		Bucket: aws.String("bucketname"),
 		Key:    aws.String("keyname"),
 	})
 
-	if e, a := request.NoBody, req.HTTPRequest.Body; e != a {
+	if e, a := aws.NoBody, req.HTTPRequest.Body; e != a {
 		t.Fatalf("expect %T request body, got %T", e, a)
 	}
 
-	err = req.Send()
+	err := req.Send()
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}

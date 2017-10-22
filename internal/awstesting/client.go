@@ -2,23 +2,19 @@ package awstesting
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/client"
-	"github.com/aws/aws-sdk-go-v2/aws/client/metadata"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 )
 
 // NewClient creates and initializes a generic service client for testing.
-func NewClient(cfgs ...*aws.Config) *client.Client {
-	info := metadata.ClientInfo{
-		Endpoint:    "http://endpoint",
-		SigningName: "",
-	}
-	def := defaults.Get()
-	def.Config.MergeIn(cfgs...)
+func NewClient(cfgs ...*aws.Config) *aws.Client {
+	cfg := defaults.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("http://endpoint")
+	cfg.MergeIn(cfgs...)
 
-	if v := aws.StringValue(def.Config.Endpoint); len(v) > 0 {
-		info.Endpoint = v
+	endpoint, _ := cfg.EndpointResolver.EndpointFor("mock-client", aws.StringValue(cfg.Region))
+	info := aws.ClientInfo{
+		Endpoint: endpoint.URL,
 	}
 
-	return client.New(*def.Config, info, def.Handlers)
+	return aws.NewClient(cfg, info, cfg.Handlers)
 }

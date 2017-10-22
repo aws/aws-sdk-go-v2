@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateDevicePool = "CreateDevicePool"
 
-// CreateDevicePoolRequest generates a "aws/request.Request" representing the
+// CreateDevicePoolRequest generates a "aws.Request" representing the
 // client's request for the CreateDevicePool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opCreateDevicePool = "CreateDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePool
-func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) (req *request.Request, output *CreateDevicePoolOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) (req *aws.Request, output *CreateDevicePoolOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDevicePool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -91,7 +90,7 @@ func (c *DeviceFarm) CreateDevicePool(input *CreateDevicePoolInput) (*CreateDevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) CreateDevicePoolWithContext(ctx aws.Context, input *CreateDevicePoolInput, opts ...request.Option) (*CreateDevicePoolOutput, error) {
+func (c *DeviceFarm) CreateDevicePoolWithContext(ctx aws.Context, input *CreateDevicePoolInput, opts ...aws.Option) (*CreateDevicePoolOutput, error) {
 	req, out := c.CreateDevicePoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -100,7 +99,7 @@ func (c *DeviceFarm) CreateDevicePoolWithContext(ctx aws.Context, input *CreateD
 
 const opCreateNetworkProfile = "CreateNetworkProfile"
 
-// CreateNetworkProfileRequest generates a "aws/request.Request" representing the
+// CreateNetworkProfileRequest generates a "aws.Request" representing the
 // client's request for the CreateNetworkProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -124,8 +123,8 @@ const opCreateNetworkProfile = "CreateNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfile
-func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInput) (req *request.Request, output *CreateNetworkProfileOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInput) (req *aws.Request, output *CreateNetworkProfileOutput) {
+	op := &aws.Operation{
 		Name:       opCreateNetworkProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -179,7 +178,7 @@ func (c *DeviceFarm) CreateNetworkProfile(input *CreateNetworkProfileInput) (*Cr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) CreateNetworkProfileWithContext(ctx aws.Context, input *CreateNetworkProfileInput, opts ...request.Option) (*CreateNetworkProfileOutput, error) {
+func (c *DeviceFarm) CreateNetworkProfileWithContext(ctx aws.Context, input *CreateNetworkProfileInput, opts ...aws.Option) (*CreateNetworkProfileOutput, error) {
 	req, out := c.CreateNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -188,7 +187,7 @@ func (c *DeviceFarm) CreateNetworkProfileWithContext(ctx aws.Context, input *Cre
 
 const opCreateProject = "CreateProject"
 
-// CreateProjectRequest generates a "aws/request.Request" representing the
+// CreateProjectRequest generates a "aws.Request" representing the
 // client's request for the CreateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -212,8 +211,8 @@ const opCreateProject = "CreateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject
-func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) (req *request.Request, output *CreateProjectOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) (req *aws.Request, output *CreateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opCreateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -267,7 +266,7 @@ func (c *DeviceFarm) CreateProject(input *CreateProjectInput) (*CreateProjectOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...request.Option) (*CreateProjectOutput, error) {
+func (c *DeviceFarm) CreateProjectWithContext(ctx aws.Context, input *CreateProjectInput, opts ...aws.Option) (*CreateProjectOutput, error) {
 	req, out := c.CreateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -276,7 +275,7 @@ func (c *DeviceFarm) CreateProjectWithContext(ctx aws.Context, input *CreateProj
 
 const opCreateRemoteAccessSession = "CreateRemoteAccessSession"
 
-// CreateRemoteAccessSessionRequest generates a "aws/request.Request" representing the
+// CreateRemoteAccessSessionRequest generates a "aws.Request" representing the
 // client's request for the CreateRemoteAccessSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -300,8 +299,8 @@ const opCreateRemoteAccessSession = "CreateRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession
-func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessSessionInput) (req *request.Request, output *CreateRemoteAccessSessionOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessSessionInput) (req *aws.Request, output *CreateRemoteAccessSessionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateRemoteAccessSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -355,7 +354,7 @@ func (c *DeviceFarm) CreateRemoteAccessSession(input *CreateRemoteAccessSessionI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) CreateRemoteAccessSessionWithContext(ctx aws.Context, input *CreateRemoteAccessSessionInput, opts ...request.Option) (*CreateRemoteAccessSessionOutput, error) {
+func (c *DeviceFarm) CreateRemoteAccessSessionWithContext(ctx aws.Context, input *CreateRemoteAccessSessionInput, opts ...aws.Option) (*CreateRemoteAccessSessionOutput, error) {
 	req, out := c.CreateRemoteAccessSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -364,7 +363,7 @@ func (c *DeviceFarm) CreateRemoteAccessSessionWithContext(ctx aws.Context, input
 
 const opCreateUpload = "CreateUpload"
 
-// CreateUploadRequest generates a "aws/request.Request" representing the
+// CreateUploadRequest generates a "aws.Request" representing the
 // client's request for the CreateUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -388,8 +387,8 @@ const opCreateUpload = "CreateUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUpload
-func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) (req *request.Request, output *CreateUploadOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) (req *aws.Request, output *CreateUploadOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -443,7 +442,7 @@ func (c *DeviceFarm) CreateUpload(input *CreateUploadInput) (*CreateUploadOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) CreateUploadWithContext(ctx aws.Context, input *CreateUploadInput, opts ...request.Option) (*CreateUploadOutput, error) {
+func (c *DeviceFarm) CreateUploadWithContext(ctx aws.Context, input *CreateUploadInput, opts ...aws.Option) (*CreateUploadOutput, error) {
 	req, out := c.CreateUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -452,7 +451,7 @@ func (c *DeviceFarm) CreateUploadWithContext(ctx aws.Context, input *CreateUploa
 
 const opDeleteDevicePool = "DeleteDevicePool"
 
-// DeleteDevicePoolRequest generates a "aws/request.Request" representing the
+// DeleteDevicePoolRequest generates a "aws.Request" representing the
 // client's request for the DeleteDevicePool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -476,8 +475,8 @@ const opDeleteDevicePool = "DeleteDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePool
-func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) (req *request.Request, output *DeleteDevicePoolOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) (req *aws.Request, output *DeleteDevicePoolOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDevicePool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -532,7 +531,7 @@ func (c *DeviceFarm) DeleteDevicePool(input *DeleteDevicePoolInput) (*DeleteDevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) DeleteDevicePoolWithContext(ctx aws.Context, input *DeleteDevicePoolInput, opts ...request.Option) (*DeleteDevicePoolOutput, error) {
+func (c *DeviceFarm) DeleteDevicePoolWithContext(ctx aws.Context, input *DeleteDevicePoolInput, opts ...aws.Option) (*DeleteDevicePoolOutput, error) {
 	req, out := c.DeleteDevicePoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -541,7 +540,7 @@ func (c *DeviceFarm) DeleteDevicePoolWithContext(ctx aws.Context, input *DeleteD
 
 const opDeleteNetworkProfile = "DeleteNetworkProfile"
 
-// DeleteNetworkProfileRequest generates a "aws/request.Request" representing the
+// DeleteNetworkProfileRequest generates a "aws.Request" representing the
 // client's request for the DeleteNetworkProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -565,8 +564,8 @@ const opDeleteNetworkProfile = "DeleteNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfile
-func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) (req *request.Request, output *DeleteNetworkProfileOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInput) (req *aws.Request, output *DeleteNetworkProfileOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteNetworkProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -620,7 +619,7 @@ func (c *DeviceFarm) DeleteNetworkProfile(input *DeleteNetworkProfileInput) (*De
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) DeleteNetworkProfileWithContext(ctx aws.Context, input *DeleteNetworkProfileInput, opts ...request.Option) (*DeleteNetworkProfileOutput, error) {
+func (c *DeviceFarm) DeleteNetworkProfileWithContext(ctx aws.Context, input *DeleteNetworkProfileInput, opts ...aws.Option) (*DeleteNetworkProfileOutput, error) {
 	req, out := c.DeleteNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -629,7 +628,7 @@ func (c *DeviceFarm) DeleteNetworkProfileWithContext(ctx aws.Context, input *Del
 
 const opDeleteProject = "DeleteProject"
 
-// DeleteProjectRequest generates a "aws/request.Request" representing the
+// DeleteProjectRequest generates a "aws.Request" representing the
 // client's request for the DeleteProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -653,8 +652,8 @@ const opDeleteProject = "DeleteProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProject
-func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) (req *request.Request, output *DeleteProjectOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) (req *aws.Request, output *DeleteProjectOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -710,7 +709,7 @@ func (c *DeviceFarm) DeleteProject(input *DeleteProjectInput) (*DeleteProjectOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...request.Option) (*DeleteProjectOutput, error) {
+func (c *DeviceFarm) DeleteProjectWithContext(ctx aws.Context, input *DeleteProjectInput, opts ...aws.Option) (*DeleteProjectOutput, error) {
 	req, out := c.DeleteProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -719,7 +718,7 @@ func (c *DeviceFarm) DeleteProjectWithContext(ctx aws.Context, input *DeleteProj
 
 const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
 
-// DeleteRemoteAccessSessionRequest generates a "aws/request.Request" representing the
+// DeleteRemoteAccessSessionRequest generates a "aws.Request" representing the
 // client's request for the DeleteRemoteAccessSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -743,8 +742,8 @@ const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSession
-func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessionInput) (req *request.Request, output *DeleteRemoteAccessSessionOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessSessionInput) (req *aws.Request, output *DeleteRemoteAccessSessionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRemoteAccessSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -798,7 +797,7 @@ func (c *DeviceFarm) DeleteRemoteAccessSession(input *DeleteRemoteAccessSessionI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) DeleteRemoteAccessSessionWithContext(ctx aws.Context, input *DeleteRemoteAccessSessionInput, opts ...request.Option) (*DeleteRemoteAccessSessionOutput, error) {
+func (c *DeviceFarm) DeleteRemoteAccessSessionWithContext(ctx aws.Context, input *DeleteRemoteAccessSessionInput, opts ...aws.Option) (*DeleteRemoteAccessSessionOutput, error) {
 	req, out := c.DeleteRemoteAccessSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -807,7 +806,7 @@ func (c *DeviceFarm) DeleteRemoteAccessSessionWithContext(ctx aws.Context, input
 
 const opDeleteRun = "DeleteRun"
 
-// DeleteRunRequest generates a "aws/request.Request" representing the
+// DeleteRunRequest generates a "aws.Request" representing the
 // client's request for the DeleteRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -831,8 +830,8 @@ const opDeleteRun = "DeleteRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRun
-func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) (req *request.Request, output *DeleteRunOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) (req *aws.Request, output *DeleteRunOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -888,7 +887,7 @@ func (c *DeviceFarm) DeleteRun(input *DeleteRunInput) (*DeleteRunOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) DeleteRunWithContext(ctx aws.Context, input *DeleteRunInput, opts ...request.Option) (*DeleteRunOutput, error) {
+func (c *DeviceFarm) DeleteRunWithContext(ctx aws.Context, input *DeleteRunInput, opts ...aws.Option) (*DeleteRunOutput, error) {
 	req, out := c.DeleteRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -897,7 +896,7 @@ func (c *DeviceFarm) DeleteRunWithContext(ctx aws.Context, input *DeleteRunInput
 
 const opDeleteUpload = "DeleteUpload"
 
-// DeleteUploadRequest generates a "aws/request.Request" representing the
+// DeleteUploadRequest generates a "aws.Request" representing the
 // client's request for the DeleteUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -921,8 +920,8 @@ const opDeleteUpload = "DeleteUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUpload
-func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) (req *request.Request, output *DeleteUploadOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) (req *aws.Request, output *DeleteUploadOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -976,7 +975,7 @@ func (c *DeviceFarm) DeleteUpload(input *DeleteUploadInput) (*DeleteUploadOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) DeleteUploadWithContext(ctx aws.Context, input *DeleteUploadInput, opts ...request.Option) (*DeleteUploadOutput, error) {
+func (c *DeviceFarm) DeleteUploadWithContext(ctx aws.Context, input *DeleteUploadInput, opts ...aws.Option) (*DeleteUploadOutput, error) {
 	req, out := c.DeleteUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -985,7 +984,7 @@ func (c *DeviceFarm) DeleteUploadWithContext(ctx aws.Context, input *DeleteUploa
 
 const opGetAccountSettings = "GetAccountSettings"
 
-// GetAccountSettingsRequest generates a "aws/request.Request" representing the
+// GetAccountSettingsRequest generates a "aws.Request" representing the
 // client's request for the GetAccountSettings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1009,8 +1008,8 @@ const opGetAccountSettings = "GetAccountSettings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings
-func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *request.Request, output *GetAccountSettingsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) (req *aws.Request, output *GetAccountSettingsOutput) {
+	op := &aws.Operation{
 		Name:       opGetAccountSettings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1065,7 +1064,7 @@ func (c *DeviceFarm) GetAccountSettings(input *GetAccountSettingsInput) (*GetAcc
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccountSettingsInput, opts ...request.Option) (*GetAccountSettingsOutput, error) {
+func (c *DeviceFarm) GetAccountSettingsWithContext(ctx aws.Context, input *GetAccountSettingsInput, opts ...aws.Option) (*GetAccountSettingsOutput, error) {
 	req, out := c.GetAccountSettingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1074,7 +1073,7 @@ func (c *DeviceFarm) GetAccountSettingsWithContext(ctx aws.Context, input *GetAc
 
 const opGetDevice = "GetDevice"
 
-// GetDeviceRequest generates a "aws/request.Request" representing the
+// GetDeviceRequest generates a "aws.Request" representing the
 // client's request for the GetDevice operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1098,8 +1097,8 @@ const opGetDevice = "GetDevice"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevice
-func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) (req *request.Request, output *GetDeviceOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) (req *aws.Request, output *GetDeviceOutput) {
+	op := &aws.Operation{
 		Name:       opGetDevice,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1153,7 +1152,7 @@ func (c *DeviceFarm) GetDevice(input *GetDeviceInput) (*GetDeviceOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput, opts ...request.Option) (*GetDeviceOutput, error) {
+func (c *DeviceFarm) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput, opts ...aws.Option) (*GetDeviceOutput, error) {
 	req, out := c.GetDeviceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1162,7 +1161,7 @@ func (c *DeviceFarm) GetDeviceWithContext(ctx aws.Context, input *GetDeviceInput
 
 const opGetDevicePool = "GetDevicePool"
 
-// GetDevicePoolRequest generates a "aws/request.Request" representing the
+// GetDevicePoolRequest generates a "aws.Request" representing the
 // client's request for the GetDevicePool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1186,8 +1185,8 @@ const opGetDevicePool = "GetDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePool
-func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) (req *request.Request, output *GetDevicePoolOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) (req *aws.Request, output *GetDevicePoolOutput) {
+	op := &aws.Operation{
 		Name:       opGetDevicePool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1241,7 +1240,7 @@ func (c *DeviceFarm) GetDevicePool(input *GetDevicePoolInput) (*GetDevicePoolOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetDevicePoolWithContext(ctx aws.Context, input *GetDevicePoolInput, opts ...request.Option) (*GetDevicePoolOutput, error) {
+func (c *DeviceFarm) GetDevicePoolWithContext(ctx aws.Context, input *GetDevicePoolInput, opts ...aws.Option) (*GetDevicePoolOutput, error) {
 	req, out := c.GetDevicePoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1250,7 +1249,7 @@ func (c *DeviceFarm) GetDevicePoolWithContext(ctx aws.Context, input *GetDeviceP
 
 const opGetDevicePoolCompatibility = "GetDevicePoolCompatibility"
 
-// GetDevicePoolCompatibilityRequest generates a "aws/request.Request" representing the
+// GetDevicePoolCompatibilityRequest generates a "aws.Request" representing the
 // client's request for the GetDevicePoolCompatibility operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1274,8 +1273,8 @@ const opGetDevicePoolCompatibility = "GetDevicePoolCompatibility"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility
-func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompatibilityInput) (req *request.Request, output *GetDevicePoolCompatibilityOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompatibilityInput) (req *aws.Request, output *GetDevicePoolCompatibilityOutput) {
+	op := &aws.Operation{
 		Name:       opGetDevicePoolCompatibility,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1329,7 +1328,7 @@ func (c *DeviceFarm) GetDevicePoolCompatibility(input *GetDevicePoolCompatibilit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetDevicePoolCompatibilityWithContext(ctx aws.Context, input *GetDevicePoolCompatibilityInput, opts ...request.Option) (*GetDevicePoolCompatibilityOutput, error) {
+func (c *DeviceFarm) GetDevicePoolCompatibilityWithContext(ctx aws.Context, input *GetDevicePoolCompatibilityInput, opts ...aws.Option) (*GetDevicePoolCompatibilityOutput, error) {
 	req, out := c.GetDevicePoolCompatibilityRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1338,7 +1337,7 @@ func (c *DeviceFarm) GetDevicePoolCompatibilityWithContext(ctx aws.Context, inpu
 
 const opGetJob = "GetJob"
 
-// GetJobRequest generates a "aws/request.Request" representing the
+// GetJobRequest generates a "aws.Request" representing the
 // client's request for the GetJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1362,8 +1361,8 @@ const opGetJob = "GetJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob
-func (c *DeviceFarm) GetJobRequest(input *GetJobInput) (req *request.Request, output *GetJobOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetJobRequest(input *GetJobInput) (req *aws.Request, output *GetJobOutput) {
+	op := &aws.Operation{
 		Name:       opGetJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1417,7 +1416,7 @@ func (c *DeviceFarm) GetJob(input *GetJobInput) (*GetJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...request.Option) (*GetJobOutput, error) {
+func (c *DeviceFarm) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...aws.Option) (*GetJobOutput, error) {
 	req, out := c.GetJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1426,7 +1425,7 @@ func (c *DeviceFarm) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts
 
 const opGetNetworkProfile = "GetNetworkProfile"
 
-// GetNetworkProfileRequest generates a "aws/request.Request" representing the
+// GetNetworkProfileRequest generates a "aws.Request" representing the
 // client's request for the GetNetworkProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1450,8 +1449,8 @@ const opGetNetworkProfile = "GetNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfile
-func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) (req *request.Request, output *GetNetworkProfileOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) (req *aws.Request, output *GetNetworkProfileOutput) {
+	op := &aws.Operation{
 		Name:       opGetNetworkProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1505,7 +1504,7 @@ func (c *DeviceFarm) GetNetworkProfile(input *GetNetworkProfileInput) (*GetNetwo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetNetworkProfileWithContext(ctx aws.Context, input *GetNetworkProfileInput, opts ...request.Option) (*GetNetworkProfileOutput, error) {
+func (c *DeviceFarm) GetNetworkProfileWithContext(ctx aws.Context, input *GetNetworkProfileInput, opts ...aws.Option) (*GetNetworkProfileOutput, error) {
 	req, out := c.GetNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1514,7 +1513,7 @@ func (c *DeviceFarm) GetNetworkProfileWithContext(ctx aws.Context, input *GetNet
 
 const opGetOfferingStatus = "GetOfferingStatus"
 
-// GetOfferingStatusRequest generates a "aws/request.Request" representing the
+// GetOfferingStatusRequest generates a "aws.Request" representing the
 // client's request for the GetOfferingStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1538,12 +1537,12 @@ const opGetOfferingStatus = "GetOfferingStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatus
-func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) (req *request.Request, output *GetOfferingStatusOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) (req *aws.Request, output *GetOfferingStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetOfferingStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -1608,7 +1607,7 @@ func (c *DeviceFarm) GetOfferingStatus(input *GetOfferingStatusInput) (*GetOffer
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetOfferingStatusWithContext(ctx aws.Context, input *GetOfferingStatusInput, opts ...request.Option) (*GetOfferingStatusOutput, error) {
+func (c *DeviceFarm) GetOfferingStatusWithContext(ctx aws.Context, input *GetOfferingStatusInput, opts ...aws.Option) (*GetOfferingStatusOutput, error) {
 	req, out := c.GetOfferingStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1643,9 +1642,9 @@ func (c *DeviceFarm) GetOfferingStatusPages(input *GetOfferingStatusInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetOfferingStatusPagesWithContext(ctx aws.Context, input *GetOfferingStatusInput, fn func(*GetOfferingStatusOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) GetOfferingStatusPagesWithContext(ctx aws.Context, input *GetOfferingStatusInput, fn func(*GetOfferingStatusOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetOfferingStatusInput
 			if input != nil {
 				tmp := *input
@@ -1667,7 +1666,7 @@ func (c *DeviceFarm) GetOfferingStatusPagesWithContext(ctx aws.Context, input *G
 
 const opGetProject = "GetProject"
 
-// GetProjectRequest generates a "aws/request.Request" representing the
+// GetProjectRequest generates a "aws.Request" representing the
 // client's request for the GetProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1691,8 +1690,8 @@ const opGetProject = "GetProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject
-func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) (req *request.Request, output *GetProjectOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) (req *aws.Request, output *GetProjectOutput) {
+	op := &aws.Operation{
 		Name:       opGetProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1746,7 +1745,7 @@ func (c *DeviceFarm) GetProject(input *GetProjectInput) (*GetProjectOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetProjectWithContext(ctx aws.Context, input *GetProjectInput, opts ...request.Option) (*GetProjectOutput, error) {
+func (c *DeviceFarm) GetProjectWithContext(ctx aws.Context, input *GetProjectInput, opts ...aws.Option) (*GetProjectOutput, error) {
 	req, out := c.GetProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1755,7 +1754,7 @@ func (c *DeviceFarm) GetProjectWithContext(ctx aws.Context, input *GetProjectInp
 
 const opGetRemoteAccessSession = "GetRemoteAccessSession"
 
-// GetRemoteAccessSessionRequest generates a "aws/request.Request" representing the
+// GetRemoteAccessSessionRequest generates a "aws.Request" representing the
 // client's request for the GetRemoteAccessSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1779,8 +1778,8 @@ const opGetRemoteAccessSession = "GetRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession
-func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInput) (req *request.Request, output *GetRemoteAccessSessionOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSessionInput) (req *aws.Request, output *GetRemoteAccessSessionOutput) {
+	op := &aws.Operation{
 		Name:       opGetRemoteAccessSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1834,7 +1833,7 @@ func (c *DeviceFarm) GetRemoteAccessSession(input *GetRemoteAccessSessionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetRemoteAccessSessionWithContext(ctx aws.Context, input *GetRemoteAccessSessionInput, opts ...request.Option) (*GetRemoteAccessSessionOutput, error) {
+func (c *DeviceFarm) GetRemoteAccessSessionWithContext(ctx aws.Context, input *GetRemoteAccessSessionInput, opts ...aws.Option) (*GetRemoteAccessSessionOutput, error) {
 	req, out := c.GetRemoteAccessSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1843,7 +1842,7 @@ func (c *DeviceFarm) GetRemoteAccessSessionWithContext(ctx aws.Context, input *G
 
 const opGetRun = "GetRun"
 
-// GetRunRequest generates a "aws/request.Request" representing the
+// GetRunRequest generates a "aws.Request" representing the
 // client's request for the GetRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1867,8 +1866,8 @@ const opGetRun = "GetRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun
-func (c *DeviceFarm) GetRunRequest(input *GetRunInput) (req *request.Request, output *GetRunOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetRunRequest(input *GetRunInput) (req *aws.Request, output *GetRunOutput) {
+	op := &aws.Operation{
 		Name:       opGetRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1922,7 +1921,7 @@ func (c *DeviceFarm) GetRun(input *GetRunInput) (*GetRunOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetRunWithContext(ctx aws.Context, input *GetRunInput, opts ...request.Option) (*GetRunOutput, error) {
+func (c *DeviceFarm) GetRunWithContext(ctx aws.Context, input *GetRunInput, opts ...aws.Option) (*GetRunOutput, error) {
 	req, out := c.GetRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1931,7 +1930,7 @@ func (c *DeviceFarm) GetRunWithContext(ctx aws.Context, input *GetRunInput, opts
 
 const opGetSuite = "GetSuite"
 
-// GetSuiteRequest generates a "aws/request.Request" representing the
+// GetSuiteRequest generates a "aws.Request" representing the
 // client's request for the GetSuite operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1955,8 +1954,8 @@ const opGetSuite = "GetSuite"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuite
-func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) (req *request.Request, output *GetSuiteOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) (req *aws.Request, output *GetSuiteOutput) {
+	op := &aws.Operation{
 		Name:       opGetSuite,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2010,7 +2009,7 @@ func (c *DeviceFarm) GetSuite(input *GetSuiteInput) (*GetSuiteOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetSuiteWithContext(ctx aws.Context, input *GetSuiteInput, opts ...request.Option) (*GetSuiteOutput, error) {
+func (c *DeviceFarm) GetSuiteWithContext(ctx aws.Context, input *GetSuiteInput, opts ...aws.Option) (*GetSuiteOutput, error) {
 	req, out := c.GetSuiteRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2019,7 +2018,7 @@ func (c *DeviceFarm) GetSuiteWithContext(ctx aws.Context, input *GetSuiteInput, 
 
 const opGetTest = "GetTest"
 
-// GetTestRequest generates a "aws/request.Request" representing the
+// GetTestRequest generates a "aws.Request" representing the
 // client's request for the GetTest operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2043,8 +2042,8 @@ const opGetTest = "GetTest"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTest
-func (c *DeviceFarm) GetTestRequest(input *GetTestInput) (req *request.Request, output *GetTestOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetTestRequest(input *GetTestInput) (req *aws.Request, output *GetTestOutput) {
+	op := &aws.Operation{
 		Name:       opGetTest,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2098,7 +2097,7 @@ func (c *DeviceFarm) GetTest(input *GetTestInput) (*GetTestOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetTestWithContext(ctx aws.Context, input *GetTestInput, opts ...request.Option) (*GetTestOutput, error) {
+func (c *DeviceFarm) GetTestWithContext(ctx aws.Context, input *GetTestInput, opts ...aws.Option) (*GetTestOutput, error) {
 	req, out := c.GetTestRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2107,7 +2106,7 @@ func (c *DeviceFarm) GetTestWithContext(ctx aws.Context, input *GetTestInput, op
 
 const opGetUpload = "GetUpload"
 
-// GetUploadRequest generates a "aws/request.Request" representing the
+// GetUploadRequest generates a "aws.Request" representing the
 // client's request for the GetUpload operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2131,8 +2130,8 @@ const opGetUpload = "GetUpload"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUpload
-func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) (req *request.Request, output *GetUploadOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) (req *aws.Request, output *GetUploadOutput) {
+	op := &aws.Operation{
 		Name:       opGetUpload,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2186,7 +2185,7 @@ func (c *DeviceFarm) GetUpload(input *GetUploadInput) (*GetUploadOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) GetUploadWithContext(ctx aws.Context, input *GetUploadInput, opts ...request.Option) (*GetUploadOutput, error) {
+func (c *DeviceFarm) GetUploadWithContext(ctx aws.Context, input *GetUploadInput, opts ...aws.Option) (*GetUploadOutput, error) {
 	req, out := c.GetUploadRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2195,7 +2194,7 @@ func (c *DeviceFarm) GetUploadWithContext(ctx aws.Context, input *GetUploadInput
 
 const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
 
-// InstallToRemoteAccessSessionRequest generates a "aws/request.Request" representing the
+// InstallToRemoteAccessSessionRequest generates a "aws.Request" representing the
 // client's request for the InstallToRemoteAccessSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2219,8 +2218,8 @@ const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSession
-func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAccessSessionInput) (req *request.Request, output *InstallToRemoteAccessSessionOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteAccessSessionInput) (req *aws.Request, output *InstallToRemoteAccessSessionOutput) {
+	op := &aws.Operation{
 		Name:       opInstallToRemoteAccessSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2276,7 +2275,7 @@ func (c *DeviceFarm) InstallToRemoteAccessSession(input *InstallToRemoteAccessSe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) InstallToRemoteAccessSessionWithContext(ctx aws.Context, input *InstallToRemoteAccessSessionInput, opts ...request.Option) (*InstallToRemoteAccessSessionOutput, error) {
+func (c *DeviceFarm) InstallToRemoteAccessSessionWithContext(ctx aws.Context, input *InstallToRemoteAccessSessionInput, opts ...aws.Option) (*InstallToRemoteAccessSessionOutput, error) {
 	req, out := c.InstallToRemoteAccessSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2285,7 +2284,7 @@ func (c *DeviceFarm) InstallToRemoteAccessSessionWithContext(ctx aws.Context, in
 
 const opListArtifacts = "ListArtifacts"
 
-// ListArtifactsRequest generates a "aws/request.Request" representing the
+// ListArtifactsRequest generates a "aws.Request" representing the
 // client's request for the ListArtifacts operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2309,12 +2308,12 @@ const opListArtifacts = "ListArtifacts"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifacts
-func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) (req *request.Request, output *ListArtifactsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) (req *aws.Request, output *ListArtifactsOutput) {
+	op := &aws.Operation{
 		Name:       opListArtifacts,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2370,7 +2369,7 @@ func (c *DeviceFarm) ListArtifacts(input *ListArtifactsInput) (*ListArtifactsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListArtifactsWithContext(ctx aws.Context, input *ListArtifactsInput, opts ...request.Option) (*ListArtifactsOutput, error) {
+func (c *DeviceFarm) ListArtifactsWithContext(ctx aws.Context, input *ListArtifactsInput, opts ...aws.Option) (*ListArtifactsOutput, error) {
 	req, out := c.ListArtifactsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2405,9 +2404,9 @@ func (c *DeviceFarm) ListArtifactsPages(input *ListArtifactsInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListArtifactsPagesWithContext(ctx aws.Context, input *ListArtifactsInput, fn func(*ListArtifactsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListArtifactsPagesWithContext(ctx aws.Context, input *ListArtifactsInput, fn func(*ListArtifactsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListArtifactsInput
 			if input != nil {
 				tmp := *input
@@ -2429,7 +2428,7 @@ func (c *DeviceFarm) ListArtifactsPagesWithContext(ctx aws.Context, input *ListA
 
 const opListDevicePools = "ListDevicePools"
 
-// ListDevicePoolsRequest generates a "aws/request.Request" representing the
+// ListDevicePoolsRequest generates a "aws.Request" representing the
 // client's request for the ListDevicePools operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2453,12 +2452,12 @@ const opListDevicePools = "ListDevicePools"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePools
-func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) (req *request.Request, output *ListDevicePoolsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) (req *aws.Request, output *ListDevicePoolsOutput) {
+	op := &aws.Operation{
 		Name:       opListDevicePools,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2514,7 +2513,7 @@ func (c *DeviceFarm) ListDevicePools(input *ListDevicePoolsInput) (*ListDevicePo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListDevicePoolsWithContext(ctx aws.Context, input *ListDevicePoolsInput, opts ...request.Option) (*ListDevicePoolsOutput, error) {
+func (c *DeviceFarm) ListDevicePoolsWithContext(ctx aws.Context, input *ListDevicePoolsInput, opts ...aws.Option) (*ListDevicePoolsOutput, error) {
 	req, out := c.ListDevicePoolsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2549,9 +2548,9 @@ func (c *DeviceFarm) ListDevicePoolsPages(input *ListDevicePoolsInput, fn func(*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListDevicePoolsPagesWithContext(ctx aws.Context, input *ListDevicePoolsInput, fn func(*ListDevicePoolsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListDevicePoolsPagesWithContext(ctx aws.Context, input *ListDevicePoolsInput, fn func(*ListDevicePoolsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDevicePoolsInput
 			if input != nil {
 				tmp := *input
@@ -2573,7 +2572,7 @@ func (c *DeviceFarm) ListDevicePoolsPagesWithContext(ctx aws.Context, input *Lis
 
 const opListDevices = "ListDevices"
 
-// ListDevicesRequest generates a "aws/request.Request" representing the
+// ListDevicesRequest generates a "aws.Request" representing the
 // client's request for the ListDevices operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2597,12 +2596,12 @@ const opListDevices = "ListDevices"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices
-func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) (req *request.Request, output *ListDevicesOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) (req *aws.Request, output *ListDevicesOutput) {
+	op := &aws.Operation{
 		Name:       opListDevices,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2658,7 +2657,7 @@ func (c *DeviceFarm) ListDevices(input *ListDevicesInput) (*ListDevicesOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListDevicesWithContext(ctx aws.Context, input *ListDevicesInput, opts ...request.Option) (*ListDevicesOutput, error) {
+func (c *DeviceFarm) ListDevicesWithContext(ctx aws.Context, input *ListDevicesInput, opts ...aws.Option) (*ListDevicesOutput, error) {
 	req, out := c.ListDevicesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2693,9 +2692,9 @@ func (c *DeviceFarm) ListDevicesPages(input *ListDevicesInput, fn func(*ListDevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListDevicesPagesWithContext(ctx aws.Context, input *ListDevicesInput, fn func(*ListDevicesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListDevicesPagesWithContext(ctx aws.Context, input *ListDevicesInput, fn func(*ListDevicesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDevicesInput
 			if input != nil {
 				tmp := *input
@@ -2717,7 +2716,7 @@ func (c *DeviceFarm) ListDevicesPagesWithContext(ctx aws.Context, input *ListDev
 
 const opListJobs = "ListJobs"
 
-// ListJobsRequest generates a "aws/request.Request" representing the
+// ListJobsRequest generates a "aws.Request" representing the
 // client's request for the ListJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2741,12 +2740,12 @@ const opListJobs = "ListJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs
-func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) (req *request.Request, output *ListJobsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) (req *aws.Request, output *ListJobsOutput) {
+	op := &aws.Operation{
 		Name:       opListJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -2802,7 +2801,7 @@ func (c *DeviceFarm) ListJobs(input *ListJobsInput) (*ListJobsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...request.Option) (*ListJobsOutput, error) {
+func (c *DeviceFarm) ListJobsWithContext(ctx aws.Context, input *ListJobsInput, opts ...aws.Option) (*ListJobsOutput, error) {
 	req, out := c.ListJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2837,9 +2836,9 @@ func (c *DeviceFarm) ListJobsPages(input *ListJobsInput, fn func(*ListJobsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsInput
 			if input != nil {
 				tmp := *input
@@ -2861,7 +2860,7 @@ func (c *DeviceFarm) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsIn
 
 const opListNetworkProfiles = "ListNetworkProfiles"
 
-// ListNetworkProfilesRequest generates a "aws/request.Request" representing the
+// ListNetworkProfilesRequest generates a "aws.Request" representing the
 // client's request for the ListNetworkProfiles operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2885,8 +2884,8 @@ const opListNetworkProfiles = "ListNetworkProfiles"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfiles
-func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) (req *request.Request, output *ListNetworkProfilesOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput) (req *aws.Request, output *ListNetworkProfilesOutput) {
+	op := &aws.Operation{
 		Name:       opListNetworkProfiles,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2940,7 +2939,7 @@ func (c *DeviceFarm) ListNetworkProfiles(input *ListNetworkProfilesInput) (*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListNetworkProfilesWithContext(ctx aws.Context, input *ListNetworkProfilesInput, opts ...request.Option) (*ListNetworkProfilesOutput, error) {
+func (c *DeviceFarm) ListNetworkProfilesWithContext(ctx aws.Context, input *ListNetworkProfilesInput, opts ...aws.Option) (*ListNetworkProfilesOutput, error) {
 	req, out := c.ListNetworkProfilesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2949,7 +2948,7 @@ func (c *DeviceFarm) ListNetworkProfilesWithContext(ctx aws.Context, input *List
 
 const opListOfferingPromotions = "ListOfferingPromotions"
 
-// ListOfferingPromotionsRequest generates a "aws/request.Request" representing the
+// ListOfferingPromotionsRequest generates a "aws.Request" representing the
 // client's request for the ListOfferingPromotions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2973,8 +2972,8 @@ const opListOfferingPromotions = "ListOfferingPromotions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotions
-func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInput) (req *request.Request, output *ListOfferingPromotionsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotionsInput) (req *aws.Request, output *ListOfferingPromotionsOutput) {
+	op := &aws.Operation{
 		Name:       opListOfferingPromotions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3036,7 +3035,7 @@ func (c *DeviceFarm) ListOfferingPromotions(input *ListOfferingPromotionsInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingPromotionsWithContext(ctx aws.Context, input *ListOfferingPromotionsInput, opts ...request.Option) (*ListOfferingPromotionsOutput, error) {
+func (c *DeviceFarm) ListOfferingPromotionsWithContext(ctx aws.Context, input *ListOfferingPromotionsInput, opts ...aws.Option) (*ListOfferingPromotionsOutput, error) {
 	req, out := c.ListOfferingPromotionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3045,7 +3044,7 @@ func (c *DeviceFarm) ListOfferingPromotionsWithContext(ctx aws.Context, input *L
 
 const opListOfferingTransactions = "ListOfferingTransactions"
 
-// ListOfferingTransactionsRequest generates a "aws/request.Request" representing the
+// ListOfferingTransactionsRequest generates a "aws.Request" representing the
 // client's request for the ListOfferingTransactions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3069,12 +3068,12 @@ const opListOfferingTransactions = "ListOfferingTransactions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactions
-func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransactionsInput) (req *request.Request, output *ListOfferingTransactionsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransactionsInput) (req *aws.Request, output *ListOfferingTransactionsOutput) {
+	op := &aws.Operation{
 		Name:       opListOfferingTransactions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3139,7 +3138,7 @@ func (c *DeviceFarm) ListOfferingTransactions(input *ListOfferingTransactionsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingTransactionsWithContext(ctx aws.Context, input *ListOfferingTransactionsInput, opts ...request.Option) (*ListOfferingTransactionsOutput, error) {
+func (c *DeviceFarm) ListOfferingTransactionsWithContext(ctx aws.Context, input *ListOfferingTransactionsInput, opts ...aws.Option) (*ListOfferingTransactionsOutput, error) {
 	req, out := c.ListOfferingTransactionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3174,9 +3173,9 @@ func (c *DeviceFarm) ListOfferingTransactionsPages(input *ListOfferingTransactio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingTransactionsPagesWithContext(ctx aws.Context, input *ListOfferingTransactionsInput, fn func(*ListOfferingTransactionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListOfferingTransactionsPagesWithContext(ctx aws.Context, input *ListOfferingTransactionsInput, fn func(*ListOfferingTransactionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOfferingTransactionsInput
 			if input != nil {
 				tmp := *input
@@ -3198,7 +3197,7 @@ func (c *DeviceFarm) ListOfferingTransactionsPagesWithContext(ctx aws.Context, i
 
 const opListOfferings = "ListOfferings"
 
-// ListOfferingsRequest generates a "aws/request.Request" representing the
+// ListOfferingsRequest generates a "aws.Request" representing the
 // client's request for the ListOfferings operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3222,12 +3221,12 @@ const opListOfferings = "ListOfferings"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferings
-func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) (req *request.Request, output *ListOfferingsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) (req *aws.Request, output *ListOfferingsOutput) {
+	op := &aws.Operation{
 		Name:       opListOfferings,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3292,7 +3291,7 @@ func (c *DeviceFarm) ListOfferings(input *ListOfferingsInput) (*ListOfferingsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingsWithContext(ctx aws.Context, input *ListOfferingsInput, opts ...request.Option) (*ListOfferingsOutput, error) {
+func (c *DeviceFarm) ListOfferingsWithContext(ctx aws.Context, input *ListOfferingsInput, opts ...aws.Option) (*ListOfferingsOutput, error) {
 	req, out := c.ListOfferingsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3327,9 +3326,9 @@ func (c *DeviceFarm) ListOfferingsPages(input *ListOfferingsInput, fn func(*List
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListOfferingsPagesWithContext(ctx aws.Context, input *ListOfferingsInput, fn func(*ListOfferingsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListOfferingsPagesWithContext(ctx aws.Context, input *ListOfferingsInput, fn func(*ListOfferingsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOfferingsInput
 			if input != nil {
 				tmp := *input
@@ -3351,7 +3350,7 @@ func (c *DeviceFarm) ListOfferingsPagesWithContext(ctx aws.Context, input *ListO
 
 const opListProjects = "ListProjects"
 
-// ListProjectsRequest generates a "aws/request.Request" representing the
+// ListProjectsRequest generates a "aws.Request" representing the
 // client's request for the ListProjects operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3375,12 +3374,12 @@ const opListProjects = "ListProjects"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects
-func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) (req *request.Request, output *ListProjectsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) (req *aws.Request, output *ListProjectsOutput) {
+	op := &aws.Operation{
 		Name:       opListProjects,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3436,7 +3435,7 @@ func (c *DeviceFarm) ListProjects(input *ListProjectsInput) (*ListProjectsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...request.Option) (*ListProjectsOutput, error) {
+func (c *DeviceFarm) ListProjectsWithContext(ctx aws.Context, input *ListProjectsInput, opts ...aws.Option) (*ListProjectsOutput, error) {
 	req, out := c.ListProjectsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3471,9 +3470,9 @@ func (c *DeviceFarm) ListProjectsPages(input *ListProjectsInput, fn func(*ListPr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjectsInput, fn func(*ListProjectsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListProjectsPagesWithContext(ctx aws.Context, input *ListProjectsInput, fn func(*ListProjectsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListProjectsInput
 			if input != nil {
 				tmp := *input
@@ -3495,7 +3494,7 @@ func (c *DeviceFarm) ListProjectsPagesWithContext(ctx aws.Context, input *ListPr
 
 const opListRemoteAccessSessions = "ListRemoteAccessSessions"
 
-// ListRemoteAccessSessionsRequest generates a "aws/request.Request" representing the
+// ListRemoteAccessSessionsRequest generates a "aws.Request" representing the
 // client's request for the ListRemoteAccessSessions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3519,8 +3518,8 @@ const opListRemoteAccessSessions = "ListRemoteAccessSessions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions
-func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessionsInput) (req *request.Request, output *ListRemoteAccessSessionsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSessionsInput) (req *aws.Request, output *ListRemoteAccessSessionsOutput) {
+	op := &aws.Operation{
 		Name:       opListRemoteAccessSessions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3574,7 +3573,7 @@ func (c *DeviceFarm) ListRemoteAccessSessions(input *ListRemoteAccessSessionsInp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListRemoteAccessSessionsWithContext(ctx aws.Context, input *ListRemoteAccessSessionsInput, opts ...request.Option) (*ListRemoteAccessSessionsOutput, error) {
+func (c *DeviceFarm) ListRemoteAccessSessionsWithContext(ctx aws.Context, input *ListRemoteAccessSessionsInput, opts ...aws.Option) (*ListRemoteAccessSessionsOutput, error) {
 	req, out := c.ListRemoteAccessSessionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3583,7 +3582,7 @@ func (c *DeviceFarm) ListRemoteAccessSessionsWithContext(ctx aws.Context, input 
 
 const opListRuns = "ListRuns"
 
-// ListRunsRequest generates a "aws/request.Request" representing the
+// ListRunsRequest generates a "aws.Request" representing the
 // client's request for the ListRuns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3607,12 +3606,12 @@ const opListRuns = "ListRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns
-func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) (req *request.Request, output *ListRunsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) (req *aws.Request, output *ListRunsOutput) {
+	op := &aws.Operation{
 		Name:       opListRuns,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3668,7 +3667,7 @@ func (c *DeviceFarm) ListRuns(input *ListRunsInput) (*ListRunsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListRunsWithContext(ctx aws.Context, input *ListRunsInput, opts ...request.Option) (*ListRunsOutput, error) {
+func (c *DeviceFarm) ListRunsWithContext(ctx aws.Context, input *ListRunsInput, opts ...aws.Option) (*ListRunsOutput, error) {
 	req, out := c.ListRunsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3703,9 +3702,9 @@ func (c *DeviceFarm) ListRunsPages(input *ListRunsInput, fn func(*ListRunsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListRunsPagesWithContext(ctx aws.Context, input *ListRunsInput, fn func(*ListRunsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListRunsPagesWithContext(ctx aws.Context, input *ListRunsInput, fn func(*ListRunsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListRunsInput
 			if input != nil {
 				tmp := *input
@@ -3727,7 +3726,7 @@ func (c *DeviceFarm) ListRunsPagesWithContext(ctx aws.Context, input *ListRunsIn
 
 const opListSamples = "ListSamples"
 
-// ListSamplesRequest generates a "aws/request.Request" representing the
+// ListSamplesRequest generates a "aws.Request" representing the
 // client's request for the ListSamples operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3751,12 +3750,12 @@ const opListSamples = "ListSamples"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamples
-func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) (req *request.Request, output *ListSamplesOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) (req *aws.Request, output *ListSamplesOutput) {
+	op := &aws.Operation{
 		Name:       opListSamples,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3812,7 +3811,7 @@ func (c *DeviceFarm) ListSamples(input *ListSamplesInput) (*ListSamplesOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListSamplesWithContext(ctx aws.Context, input *ListSamplesInput, opts ...request.Option) (*ListSamplesOutput, error) {
+func (c *DeviceFarm) ListSamplesWithContext(ctx aws.Context, input *ListSamplesInput, opts ...aws.Option) (*ListSamplesOutput, error) {
 	req, out := c.ListSamplesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3847,9 +3846,9 @@ func (c *DeviceFarm) ListSamplesPages(input *ListSamplesInput, fn func(*ListSamp
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListSamplesPagesWithContext(ctx aws.Context, input *ListSamplesInput, fn func(*ListSamplesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListSamplesPagesWithContext(ctx aws.Context, input *ListSamplesInput, fn func(*ListSamplesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListSamplesInput
 			if input != nil {
 				tmp := *input
@@ -3871,7 +3870,7 @@ func (c *DeviceFarm) ListSamplesPagesWithContext(ctx aws.Context, input *ListSam
 
 const opListSuites = "ListSuites"
 
-// ListSuitesRequest generates a "aws/request.Request" representing the
+// ListSuitesRequest generates a "aws.Request" representing the
 // client's request for the ListSuites operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3895,12 +3894,12 @@ const opListSuites = "ListSuites"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuites
-func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) (req *request.Request, output *ListSuitesOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) (req *aws.Request, output *ListSuitesOutput) {
+	op := &aws.Operation{
 		Name:       opListSuites,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -3956,7 +3955,7 @@ func (c *DeviceFarm) ListSuites(input *ListSuitesInput) (*ListSuitesOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListSuitesWithContext(ctx aws.Context, input *ListSuitesInput, opts ...request.Option) (*ListSuitesOutput, error) {
+func (c *DeviceFarm) ListSuitesWithContext(ctx aws.Context, input *ListSuitesInput, opts ...aws.Option) (*ListSuitesOutput, error) {
 	req, out := c.ListSuitesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3991,9 +3990,9 @@ func (c *DeviceFarm) ListSuitesPages(input *ListSuitesInput, fn func(*ListSuites
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListSuitesPagesWithContext(ctx aws.Context, input *ListSuitesInput, fn func(*ListSuitesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListSuitesPagesWithContext(ctx aws.Context, input *ListSuitesInput, fn func(*ListSuitesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListSuitesInput
 			if input != nil {
 				tmp := *input
@@ -4015,7 +4014,7 @@ func (c *DeviceFarm) ListSuitesPagesWithContext(ctx aws.Context, input *ListSuit
 
 const opListTests = "ListTests"
 
-// ListTestsRequest generates a "aws/request.Request" representing the
+// ListTestsRequest generates a "aws.Request" representing the
 // client's request for the ListTests operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4039,12 +4038,12 @@ const opListTests = "ListTests"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTests
-func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) (req *request.Request, output *ListTestsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) (req *aws.Request, output *ListTestsOutput) {
+	op := &aws.Operation{
 		Name:       opListTests,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -4100,7 +4099,7 @@ func (c *DeviceFarm) ListTests(input *ListTestsInput) (*ListTestsOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListTestsWithContext(ctx aws.Context, input *ListTestsInput, opts ...request.Option) (*ListTestsOutput, error) {
+func (c *DeviceFarm) ListTestsWithContext(ctx aws.Context, input *ListTestsInput, opts ...aws.Option) (*ListTestsOutput, error) {
 	req, out := c.ListTestsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4135,9 +4134,9 @@ func (c *DeviceFarm) ListTestsPages(input *ListTestsInput, fn func(*ListTestsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListTestsPagesWithContext(ctx aws.Context, input *ListTestsInput, fn func(*ListTestsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListTestsPagesWithContext(ctx aws.Context, input *ListTestsInput, fn func(*ListTestsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTestsInput
 			if input != nil {
 				tmp := *input
@@ -4159,7 +4158,7 @@ func (c *DeviceFarm) ListTestsPagesWithContext(ctx aws.Context, input *ListTests
 
 const opListUniqueProblems = "ListUniqueProblems"
 
-// ListUniqueProblemsRequest generates a "aws/request.Request" representing the
+// ListUniqueProblemsRequest generates a "aws.Request" representing the
 // client's request for the ListUniqueProblems operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4183,12 +4182,12 @@ const opListUniqueProblems = "ListUniqueProblems"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblems
-func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) (req *request.Request, output *ListUniqueProblemsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) (req *aws.Request, output *ListUniqueProblemsOutput) {
+	op := &aws.Operation{
 		Name:       opListUniqueProblems,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -4244,7 +4243,7 @@ func (c *DeviceFarm) ListUniqueProblems(input *ListUniqueProblemsInput) (*ListUn
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListUniqueProblemsWithContext(ctx aws.Context, input *ListUniqueProblemsInput, opts ...request.Option) (*ListUniqueProblemsOutput, error) {
+func (c *DeviceFarm) ListUniqueProblemsWithContext(ctx aws.Context, input *ListUniqueProblemsInput, opts ...aws.Option) (*ListUniqueProblemsOutput, error) {
 	req, out := c.ListUniqueProblemsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4279,9 +4278,9 @@ func (c *DeviceFarm) ListUniqueProblemsPages(input *ListUniqueProblemsInput, fn 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListUniqueProblemsPagesWithContext(ctx aws.Context, input *ListUniqueProblemsInput, fn func(*ListUniqueProblemsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListUniqueProblemsPagesWithContext(ctx aws.Context, input *ListUniqueProblemsInput, fn func(*ListUniqueProblemsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListUniqueProblemsInput
 			if input != nil {
 				tmp := *input
@@ -4303,7 +4302,7 @@ func (c *DeviceFarm) ListUniqueProblemsPagesWithContext(ctx aws.Context, input *
 
 const opListUploads = "ListUploads"
 
-// ListUploadsRequest generates a "aws/request.Request" representing the
+// ListUploadsRequest generates a "aws.Request" representing the
 // client's request for the ListUploads operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4327,12 +4326,12 @@ const opListUploads = "ListUploads"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploads
-func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) (req *request.Request, output *ListUploadsOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) (req *aws.Request, output *ListUploadsOutput) {
+	op := &aws.Operation{
 		Name:       opListUploads,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"nextToken"},
 			OutputTokens:    []string{"nextToken"},
 			LimitToken:      "",
@@ -4388,7 +4387,7 @@ func (c *DeviceFarm) ListUploads(input *ListUploadsInput) (*ListUploadsOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListUploadsWithContext(ctx aws.Context, input *ListUploadsInput, opts ...request.Option) (*ListUploadsOutput, error) {
+func (c *DeviceFarm) ListUploadsWithContext(ctx aws.Context, input *ListUploadsInput, opts ...aws.Option) (*ListUploadsOutput, error) {
 	req, out := c.ListUploadsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4423,9 +4422,9 @@ func (c *DeviceFarm) ListUploadsPages(input *ListUploadsInput, fn func(*ListUplo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ListUploadsPagesWithContext(ctx aws.Context, input *ListUploadsInput, fn func(*ListUploadsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *DeviceFarm) ListUploadsPagesWithContext(ctx aws.Context, input *ListUploadsInput, fn func(*ListUploadsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListUploadsInput
 			if input != nil {
 				tmp := *input
@@ -4447,7 +4446,7 @@ func (c *DeviceFarm) ListUploadsPagesWithContext(ctx aws.Context, input *ListUpl
 
 const opPurchaseOffering = "PurchaseOffering"
 
-// PurchaseOfferingRequest generates a "aws/request.Request" representing the
+// PurchaseOfferingRequest generates a "aws.Request" representing the
 // client's request for the PurchaseOffering operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4471,8 +4470,8 @@ const opPurchaseOffering = "PurchaseOffering"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOffering
-func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) (req *request.Request, output *PurchaseOfferingOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) (req *aws.Request, output *PurchaseOfferingOutput) {
+	op := &aws.Operation{
 		Name:       opPurchaseOffering,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4535,7 +4534,7 @@ func (c *DeviceFarm) PurchaseOffering(input *PurchaseOfferingInput) (*PurchaseOf
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) PurchaseOfferingWithContext(ctx aws.Context, input *PurchaseOfferingInput, opts ...request.Option) (*PurchaseOfferingOutput, error) {
+func (c *DeviceFarm) PurchaseOfferingWithContext(ctx aws.Context, input *PurchaseOfferingInput, opts ...aws.Option) (*PurchaseOfferingOutput, error) {
 	req, out := c.PurchaseOfferingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4544,7 +4543,7 @@ func (c *DeviceFarm) PurchaseOfferingWithContext(ctx aws.Context, input *Purchas
 
 const opRenewOffering = "RenewOffering"
 
-// RenewOfferingRequest generates a "aws/request.Request" representing the
+// RenewOfferingRequest generates a "aws.Request" representing the
 // client's request for the RenewOffering operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4568,8 +4567,8 @@ const opRenewOffering = "RenewOffering"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOffering
-func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) (req *request.Request, output *RenewOfferingOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) (req *aws.Request, output *RenewOfferingOutput) {
+	op := &aws.Operation{
 		Name:       opRenewOffering,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4631,7 +4630,7 @@ func (c *DeviceFarm) RenewOffering(input *RenewOfferingInput) (*RenewOfferingOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) RenewOfferingWithContext(ctx aws.Context, input *RenewOfferingInput, opts ...request.Option) (*RenewOfferingOutput, error) {
+func (c *DeviceFarm) RenewOfferingWithContext(ctx aws.Context, input *RenewOfferingInput, opts ...aws.Option) (*RenewOfferingOutput, error) {
 	req, out := c.RenewOfferingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4640,7 +4639,7 @@ func (c *DeviceFarm) RenewOfferingWithContext(ctx aws.Context, input *RenewOffer
 
 const opScheduleRun = "ScheduleRun"
 
-// ScheduleRunRequest generates a "aws/request.Request" representing the
+// ScheduleRunRequest generates a "aws.Request" representing the
 // client's request for the ScheduleRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4664,8 +4663,8 @@ const opScheduleRun = "ScheduleRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun
-func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) (req *request.Request, output *ScheduleRunOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) (req *aws.Request, output *ScheduleRunOutput) {
+	op := &aws.Operation{
 		Name:       opScheduleRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4722,7 +4721,7 @@ func (c *DeviceFarm) ScheduleRun(input *ScheduleRunInput) (*ScheduleRunOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) ScheduleRunWithContext(ctx aws.Context, input *ScheduleRunInput, opts ...request.Option) (*ScheduleRunOutput, error) {
+func (c *DeviceFarm) ScheduleRunWithContext(ctx aws.Context, input *ScheduleRunInput, opts ...aws.Option) (*ScheduleRunOutput, error) {
 	req, out := c.ScheduleRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4731,7 +4730,7 @@ func (c *DeviceFarm) ScheduleRunWithContext(ctx aws.Context, input *ScheduleRunI
 
 const opStopRemoteAccessSession = "StopRemoteAccessSession"
 
-// StopRemoteAccessSessionRequest generates a "aws/request.Request" representing the
+// StopRemoteAccessSessionRequest generates a "aws.Request" representing the
 // client's request for the StopRemoteAccessSession operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4755,8 +4754,8 @@ const opStopRemoteAccessSession = "StopRemoteAccessSession"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession
-func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionInput) (req *request.Request, output *StopRemoteAccessSessionOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessionInput) (req *aws.Request, output *StopRemoteAccessSessionOutput) {
+	op := &aws.Operation{
 		Name:       opStopRemoteAccessSession,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4810,7 +4809,7 @@ func (c *DeviceFarm) StopRemoteAccessSession(input *StopRemoteAccessSessionInput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) StopRemoteAccessSessionWithContext(ctx aws.Context, input *StopRemoteAccessSessionInput, opts ...request.Option) (*StopRemoteAccessSessionOutput, error) {
+func (c *DeviceFarm) StopRemoteAccessSessionWithContext(ctx aws.Context, input *StopRemoteAccessSessionInput, opts ...aws.Option) (*StopRemoteAccessSessionOutput, error) {
 	req, out := c.StopRemoteAccessSessionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4819,7 +4818,7 @@ func (c *DeviceFarm) StopRemoteAccessSessionWithContext(ctx aws.Context, input *
 
 const opStopRun = "StopRun"
 
-// StopRunRequest generates a "aws/request.Request" representing the
+// StopRunRequest generates a "aws.Request" representing the
 // client's request for the StopRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4843,8 +4842,8 @@ const opStopRun = "StopRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun
-func (c *DeviceFarm) StopRunRequest(input *StopRunInput) (req *request.Request, output *StopRunOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) StopRunRequest(input *StopRunInput) (req *aws.Request, output *StopRunOutput) {
+	op := &aws.Operation{
 		Name:       opStopRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4903,7 +4902,7 @@ func (c *DeviceFarm) StopRun(input *StopRunInput) (*StopRunOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) StopRunWithContext(ctx aws.Context, input *StopRunInput, opts ...request.Option) (*StopRunOutput, error) {
+func (c *DeviceFarm) StopRunWithContext(ctx aws.Context, input *StopRunInput, opts ...aws.Option) (*StopRunOutput, error) {
 	req, out := c.StopRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4912,7 +4911,7 @@ func (c *DeviceFarm) StopRunWithContext(ctx aws.Context, input *StopRunInput, op
 
 const opUpdateDevicePool = "UpdateDevicePool"
 
-// UpdateDevicePoolRequest generates a "aws/request.Request" representing the
+// UpdateDevicePoolRequest generates a "aws.Request" representing the
 // client's request for the UpdateDevicePool operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4936,8 +4935,8 @@ const opUpdateDevicePool = "UpdateDevicePool"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePool
-func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) (req *request.Request, output *UpdateDevicePoolOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) (req *aws.Request, output *UpdateDevicePoolOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDevicePool,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4993,7 +4992,7 @@ func (c *DeviceFarm) UpdateDevicePool(input *UpdateDevicePoolInput) (*UpdateDevi
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) UpdateDevicePoolWithContext(ctx aws.Context, input *UpdateDevicePoolInput, opts ...request.Option) (*UpdateDevicePoolOutput, error) {
+func (c *DeviceFarm) UpdateDevicePoolWithContext(ctx aws.Context, input *UpdateDevicePoolInput, opts ...aws.Option) (*UpdateDevicePoolOutput, error) {
 	req, out := c.UpdateDevicePoolRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5002,7 +5001,7 @@ func (c *DeviceFarm) UpdateDevicePoolWithContext(ctx aws.Context, input *UpdateD
 
 const opUpdateNetworkProfile = "UpdateNetworkProfile"
 
-// UpdateNetworkProfileRequest generates a "aws/request.Request" representing the
+// UpdateNetworkProfileRequest generates a "aws.Request" representing the
 // client's request for the UpdateNetworkProfile operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5026,8 +5025,8 @@ const opUpdateNetworkProfile = "UpdateNetworkProfile"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfile
-func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInput) (req *request.Request, output *UpdateNetworkProfileOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInput) (req *aws.Request, output *UpdateNetworkProfileOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateNetworkProfile,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5081,7 +5080,7 @@ func (c *DeviceFarm) UpdateNetworkProfile(input *UpdateNetworkProfileInput) (*Up
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) UpdateNetworkProfileWithContext(ctx aws.Context, input *UpdateNetworkProfileInput, opts ...request.Option) (*UpdateNetworkProfileOutput, error) {
+func (c *DeviceFarm) UpdateNetworkProfileWithContext(ctx aws.Context, input *UpdateNetworkProfileInput, opts ...aws.Option) (*UpdateNetworkProfileOutput, error) {
 	req, out := c.UpdateNetworkProfileRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5090,7 +5089,7 @@ func (c *DeviceFarm) UpdateNetworkProfileWithContext(ctx aws.Context, input *Upd
 
 const opUpdateProject = "UpdateProject"
 
-// UpdateProjectRequest generates a "aws/request.Request" representing the
+// UpdateProjectRequest generates a "aws.Request" representing the
 // client's request for the UpdateProject operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5114,8 +5113,8 @@ const opUpdateProject = "UpdateProject"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject
-func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) (req *request.Request, output *UpdateProjectOutput) {
-	op := &request.Operation{
+func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) (req *aws.Request, output *UpdateProjectOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateProject,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5169,7 +5168,7 @@ func (c *DeviceFarm) UpdateProject(input *UpdateProjectInput) (*UpdateProjectOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *DeviceFarm) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...request.Option) (*UpdateProjectOutput, error) {
+func (c *DeviceFarm) UpdateProjectWithContext(ctx aws.Context, input *UpdateProjectInput, opts ...aws.Option) (*UpdateProjectOutput, error) {
 	req, out := c.UpdateProjectRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5531,18 +5530,18 @@ func (s CreateDevicePoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDevicePoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDevicePoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDevicePoolInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ProjectArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
 	if s.Rules == nil {
-		invalidParams.Add(request.NewErrParamRequired("Rules"))
+		invalidParams.Add(aws.NewErrParamRequired("Rules"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5662,15 +5661,15 @@ func (s CreateNetworkProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateNetworkProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateNetworkProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateNetworkProfileInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ProjectArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5803,9 +5802,9 @@ func (s CreateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProjectInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5928,18 +5927,18 @@ func (s CreateRemoteAccessSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateRemoteAccessSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateRemoteAccessSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateRemoteAccessSessionInput"}
 	if s.DeviceArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeviceArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DeviceArn"))
 	}
 	if s.DeviceArn != nil && len(*s.DeviceArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("DeviceArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("DeviceArn", 32))
 	}
 	if s.ProjectArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6095,18 +6094,18 @@ func (s CreateUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUploadInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.ProjectArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6239,12 +6238,12 @@ func (s DeleteDevicePoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDevicePoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDevicePoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDevicePoolInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6297,12 +6296,12 @@ func (s DeleteNetworkProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteNetworkProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteNetworkProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteNetworkProfileInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6356,12 +6355,12 @@ func (s DeleteProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProjectInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6416,12 +6415,12 @@ func (s DeleteRemoteAccessSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRemoteAccessSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRemoteAccessSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRemoteAccessSessionInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6476,12 +6475,12 @@ func (s DeleteRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRunInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6536,12 +6535,12 @@ func (s DeleteUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUploadInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7032,12 +7031,12 @@ func (s GetDeviceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDeviceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDeviceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7141,19 +7140,19 @@ func (s GetDevicePoolCompatibilityInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDevicePoolCompatibilityInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDevicePoolCompatibilityInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDevicePoolCompatibilityInput"}
 	if s.AppArn != nil && len(*s.AppArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("AppArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
 	}
 	if s.DevicePoolArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DevicePoolArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DevicePoolArn"))
 	}
 	if s.DevicePoolArn != nil && len(*s.DevicePoolArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("DevicePoolArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("DevicePoolArn", 32))
 	}
 	if s.Test != nil {
 		if err := s.Test.Validate(); err != nil {
-			invalidParams.AddNested("Test", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Test", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -7244,12 +7243,12 @@ func (s GetDevicePoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDevicePoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDevicePoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDevicePoolInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7312,12 +7311,12 @@ func (s GetJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7380,12 +7379,12 @@ func (s GetNetworkProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetNetworkProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetNetworkProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetNetworkProfileInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7447,9 +7446,9 @@ func (s GetOfferingStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetOfferingStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetOfferingStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetOfferingStatusInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7531,12 +7530,12 @@ func (s GetProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetProjectInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7601,12 +7600,12 @@ func (s GetRemoteAccessSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRemoteAccessSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRemoteAccessSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRemoteAccessSessionInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7670,12 +7669,12 @@ func (s GetRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetRunInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7738,12 +7737,12 @@ func (s GetSuiteInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetSuiteInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetSuiteInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetSuiteInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7806,12 +7805,12 @@ func (s GetTestInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTestInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTestInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTestInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7874,12 +7873,12 @@ func (s GetUploadInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUploadInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUploadInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUploadInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7998,18 +7997,18 @@ func (s InstallToRemoteAccessSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstallToRemoteAccessSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "InstallToRemoteAccessSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "InstallToRemoteAccessSessionInput"}
 	if s.AppArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("AppArn"))
+		invalidParams.Add(aws.NewErrParamRequired("AppArn"))
 	}
 	if s.AppArn != nil && len(*s.AppArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("AppArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
 	}
 	if s.RemoteAccessSessionArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RemoteAccessSessionArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RemoteAccessSessionArn"))
 	}
 	if s.RemoteAccessSessionArn != nil && len(*s.RemoteAccessSessionArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("RemoteAccessSessionArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("RemoteAccessSessionArn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8288,18 +8287,18 @@ func (s ListArtifactsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListArtifactsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListArtifactsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListArtifactsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8399,15 +8398,15 @@ func (s ListDevicePoolsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDevicePoolsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDevicePoolsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDevicePoolsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8495,12 +8494,12 @@ func (s ListDevicesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDevicesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDevicesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDevicesInput"}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8584,15 +8583,15 @@ func (s ListJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListJobsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8680,15 +8679,15 @@ func (s ListNetworkProfilesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListNetworkProfilesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListNetworkProfilesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListNetworkProfilesInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8770,9 +8769,9 @@ func (s ListOfferingPromotionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOfferingPromotionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOfferingPromotionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingPromotionsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8843,9 +8842,9 @@ func (s ListOfferingTransactionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOfferingTransactionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOfferingTransactionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingTransactionsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8918,9 +8917,9 @@ func (s ListOfferingsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListOfferingsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListOfferingsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListOfferingsInput"}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8997,12 +8996,12 @@ func (s ListProjectsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListProjectsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListProjectsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListProjectsInput"}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9087,15 +9086,15 @@ func (s ListRemoteAccessSessionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRemoteAccessSessionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRemoteAccessSessionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRemoteAccessSessionsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9181,15 +9180,15 @@ func (s ListRunsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListRunsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListRunsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListRunsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9274,15 +9273,15 @@ func (s ListSamplesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSamplesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSamplesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSamplesInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9366,15 +9365,15 @@ func (s ListSuitesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListSuitesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListSuitesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListSuitesInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9458,15 +9457,15 @@ func (s ListTestsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTestsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListTestsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListTestsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9550,15 +9549,15 @@ func (s ListUniqueProblemsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUniqueProblemsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUniqueProblemsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUniqueProblemsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9659,15 +9658,15 @@ func (s ListUploadsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListUploadsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListUploadsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListUploadsInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 	if s.NextToken != nil && len(*s.NextToken) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("NextToken", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9755,12 +9754,12 @@ func (s Location) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Location) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Location"}
+	invalidParams := aws.ErrInvalidParams{Context: "Location"}
 	if s.Latitude == nil {
-		invalidParams.Add(request.NewErrParamRequired("Latitude"))
+		invalidParams.Add(aws.NewErrParamRequired("Latitude"))
 	}
 	if s.Longitude == nil {
-		invalidParams.Add(request.NewErrParamRequired("Longitude"))
+		invalidParams.Add(aws.NewErrParamRequired("Longitude"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10361,12 +10360,12 @@ func (s PurchaseOfferingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PurchaseOfferingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PurchaseOfferingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PurchaseOfferingInput"}
 	if s.OfferingId != nil && len(*s.OfferingId) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("OfferingId", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("OfferingId", 32))
 	}
 	if s.OfferingPromotionId != nil && len(*s.OfferingPromotionId) < 4 {
-		invalidParams.Add(request.NewErrParamMinLen("OfferingPromotionId", 4))
+		invalidParams.Add(aws.NewErrParamMinLen("OfferingPromotionId", 4))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10728,9 +10727,9 @@ func (s RenewOfferingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RenewOfferingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RenewOfferingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RenewOfferingInput"}
 	if s.OfferingId != nil && len(*s.OfferingId) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("OfferingId", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("OfferingId", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11277,16 +11276,16 @@ func (s ScheduleRunConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleRunConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScheduleRunConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleRunConfiguration"}
 	if s.ExtraDataPackageArn != nil && len(*s.ExtraDataPackageArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ExtraDataPackageArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ExtraDataPackageArn", 32))
 	}
 	if s.NetworkProfileArn != nil && len(*s.NetworkProfileArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("NetworkProfileArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("NetworkProfileArn", 32))
 	}
 	if s.Location != nil {
 		if err := s.Location.Validate(); err != nil {
-			invalidParams.AddNested("Location", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Location", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11390,33 +11389,33 @@ func (s ScheduleRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScheduleRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleRunInput"}
 	if s.AppArn != nil && len(*s.AppArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("AppArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("AppArn", 32))
 	}
 	if s.DevicePoolArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("DevicePoolArn"))
+		invalidParams.Add(aws.NewErrParamRequired("DevicePoolArn"))
 	}
 	if s.DevicePoolArn != nil && len(*s.DevicePoolArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("DevicePoolArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("DevicePoolArn", 32))
 	}
 	if s.ProjectArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ProjectArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ProjectArn"))
 	}
 	if s.ProjectArn != nil && len(*s.ProjectArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("ProjectArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectArn", 32))
 	}
 	if s.Test == nil {
-		invalidParams.Add(request.NewErrParamRequired("Test"))
+		invalidParams.Add(aws.NewErrParamRequired("Test"))
 	}
 	if s.Configuration != nil {
 		if err := s.Configuration.Validate(); err != nil {
-			invalidParams.AddNested("Configuration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Configuration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Test != nil {
 		if err := s.Test.Validate(); err != nil {
-			invalidParams.AddNested("Test", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Test", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -11629,12 +11628,12 @@ func (s ScheduleRunTest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ScheduleRunTest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ScheduleRunTest"}
+	invalidParams := aws.ErrInvalidParams{Context: "ScheduleRunTest"}
 	if s.TestPackageArn != nil && len(*s.TestPackageArn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("TestPackageArn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("TestPackageArn", 32))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11690,12 +11689,12 @@ func (s StopRemoteAccessSessionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopRemoteAccessSessionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopRemoteAccessSessionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopRemoteAccessSessionInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11761,12 +11760,12 @@ func (s StopRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopRunInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12275,12 +12274,12 @@ func (s UpdateDevicePoolInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDevicePoolInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDevicePoolInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevicePoolInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12399,12 +12398,12 @@ func (s UpdateNetworkProfileInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateNetworkProfileInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateNetworkProfileInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateNetworkProfileInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12539,12 +12538,12 @@ func (s UpdateProjectInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateProjectInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateProjectInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateProjectInput"}
 	if s.Arn == nil {
-		invalidParams.Add(request.NewErrParamRequired("Arn"))
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
 	}
 	if s.Arn != nil && len(*s.Arn) < 32 {
-		invalidParams.Add(request.NewErrParamMinLen("Arn", 32))
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -10,7 +10,6 @@ package cloudfrontiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := cloudfront.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := cloudfront.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,133 +64,133 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type CloudFrontAPI interface {
 	CreateCloudFrontOriginAccessIdentity(*cloudfront.CreateCloudFrontOriginAccessIdentityInput) (*cloudfront.CreateCloudFrontOriginAccessIdentityOutput, error)
-	CreateCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.CreateCloudFrontOriginAccessIdentityInput, ...request.Option) (*cloudfront.CreateCloudFrontOriginAccessIdentityOutput, error)
-	CreateCloudFrontOriginAccessIdentityRequest(*cloudfront.CreateCloudFrontOriginAccessIdentityInput) (*request.Request, *cloudfront.CreateCloudFrontOriginAccessIdentityOutput)
+	CreateCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.CreateCloudFrontOriginAccessIdentityInput, ...aws.Option) (*cloudfront.CreateCloudFrontOriginAccessIdentityOutput, error)
+	CreateCloudFrontOriginAccessIdentityRequest(*cloudfront.CreateCloudFrontOriginAccessIdentityInput) (*aws.Request, *cloudfront.CreateCloudFrontOriginAccessIdentityOutput)
 
 	CreateDistribution(*cloudfront.CreateDistributionInput) (*cloudfront.CreateDistributionOutput, error)
-	CreateDistributionWithContext(aws.Context, *cloudfront.CreateDistributionInput, ...request.Option) (*cloudfront.CreateDistributionOutput, error)
-	CreateDistributionRequest(*cloudfront.CreateDistributionInput) (*request.Request, *cloudfront.CreateDistributionOutput)
+	CreateDistributionWithContext(aws.Context, *cloudfront.CreateDistributionInput, ...aws.Option) (*cloudfront.CreateDistributionOutput, error)
+	CreateDistributionRequest(*cloudfront.CreateDistributionInput) (*aws.Request, *cloudfront.CreateDistributionOutput)
 
 	CreateDistributionWithTags(*cloudfront.CreateDistributionWithTagsInput) (*cloudfront.CreateDistributionWithTagsOutput, error)
-	CreateDistributionWithTagsWithContext(aws.Context, *cloudfront.CreateDistributionWithTagsInput, ...request.Option) (*cloudfront.CreateDistributionWithTagsOutput, error)
-	CreateDistributionWithTagsRequest(*cloudfront.CreateDistributionWithTagsInput) (*request.Request, *cloudfront.CreateDistributionWithTagsOutput)
+	CreateDistributionWithTagsWithContext(aws.Context, *cloudfront.CreateDistributionWithTagsInput, ...aws.Option) (*cloudfront.CreateDistributionWithTagsOutput, error)
+	CreateDistributionWithTagsRequest(*cloudfront.CreateDistributionWithTagsInput) (*aws.Request, *cloudfront.CreateDistributionWithTagsOutput)
 
 	CreateInvalidation(*cloudfront.CreateInvalidationInput) (*cloudfront.CreateInvalidationOutput, error)
-	CreateInvalidationWithContext(aws.Context, *cloudfront.CreateInvalidationInput, ...request.Option) (*cloudfront.CreateInvalidationOutput, error)
-	CreateInvalidationRequest(*cloudfront.CreateInvalidationInput) (*request.Request, *cloudfront.CreateInvalidationOutput)
+	CreateInvalidationWithContext(aws.Context, *cloudfront.CreateInvalidationInput, ...aws.Option) (*cloudfront.CreateInvalidationOutput, error)
+	CreateInvalidationRequest(*cloudfront.CreateInvalidationInput) (*aws.Request, *cloudfront.CreateInvalidationOutput)
 
 	CreateStreamingDistribution(*cloudfront.CreateStreamingDistributionInput) (*cloudfront.CreateStreamingDistributionOutput, error)
-	CreateStreamingDistributionWithContext(aws.Context, *cloudfront.CreateStreamingDistributionInput, ...request.Option) (*cloudfront.CreateStreamingDistributionOutput, error)
-	CreateStreamingDistributionRequest(*cloudfront.CreateStreamingDistributionInput) (*request.Request, *cloudfront.CreateStreamingDistributionOutput)
+	CreateStreamingDistributionWithContext(aws.Context, *cloudfront.CreateStreamingDistributionInput, ...aws.Option) (*cloudfront.CreateStreamingDistributionOutput, error)
+	CreateStreamingDistributionRequest(*cloudfront.CreateStreamingDistributionInput) (*aws.Request, *cloudfront.CreateStreamingDistributionOutput)
 
 	CreateStreamingDistributionWithTags(*cloudfront.CreateStreamingDistributionWithTagsInput) (*cloudfront.CreateStreamingDistributionWithTagsOutput, error)
-	CreateStreamingDistributionWithTagsWithContext(aws.Context, *cloudfront.CreateStreamingDistributionWithTagsInput, ...request.Option) (*cloudfront.CreateStreamingDistributionWithTagsOutput, error)
-	CreateStreamingDistributionWithTagsRequest(*cloudfront.CreateStreamingDistributionWithTagsInput) (*request.Request, *cloudfront.CreateStreamingDistributionWithTagsOutput)
+	CreateStreamingDistributionWithTagsWithContext(aws.Context, *cloudfront.CreateStreamingDistributionWithTagsInput, ...aws.Option) (*cloudfront.CreateStreamingDistributionWithTagsOutput, error)
+	CreateStreamingDistributionWithTagsRequest(*cloudfront.CreateStreamingDistributionWithTagsInput) (*aws.Request, *cloudfront.CreateStreamingDistributionWithTagsOutput)
 
 	DeleteCloudFrontOriginAccessIdentity(*cloudfront.DeleteCloudFrontOriginAccessIdentityInput) (*cloudfront.DeleteCloudFrontOriginAccessIdentityOutput, error)
-	DeleteCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.DeleteCloudFrontOriginAccessIdentityInput, ...request.Option) (*cloudfront.DeleteCloudFrontOriginAccessIdentityOutput, error)
-	DeleteCloudFrontOriginAccessIdentityRequest(*cloudfront.DeleteCloudFrontOriginAccessIdentityInput) (*request.Request, *cloudfront.DeleteCloudFrontOriginAccessIdentityOutput)
+	DeleteCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.DeleteCloudFrontOriginAccessIdentityInput, ...aws.Option) (*cloudfront.DeleteCloudFrontOriginAccessIdentityOutput, error)
+	DeleteCloudFrontOriginAccessIdentityRequest(*cloudfront.DeleteCloudFrontOriginAccessIdentityInput) (*aws.Request, *cloudfront.DeleteCloudFrontOriginAccessIdentityOutput)
 
 	DeleteDistribution(*cloudfront.DeleteDistributionInput) (*cloudfront.DeleteDistributionOutput, error)
-	DeleteDistributionWithContext(aws.Context, *cloudfront.DeleteDistributionInput, ...request.Option) (*cloudfront.DeleteDistributionOutput, error)
-	DeleteDistributionRequest(*cloudfront.DeleteDistributionInput) (*request.Request, *cloudfront.DeleteDistributionOutput)
+	DeleteDistributionWithContext(aws.Context, *cloudfront.DeleteDistributionInput, ...aws.Option) (*cloudfront.DeleteDistributionOutput, error)
+	DeleteDistributionRequest(*cloudfront.DeleteDistributionInput) (*aws.Request, *cloudfront.DeleteDistributionOutput)
 
 	DeleteStreamingDistribution(*cloudfront.DeleteStreamingDistributionInput) (*cloudfront.DeleteStreamingDistributionOutput, error)
-	DeleteStreamingDistributionWithContext(aws.Context, *cloudfront.DeleteStreamingDistributionInput, ...request.Option) (*cloudfront.DeleteStreamingDistributionOutput, error)
-	DeleteStreamingDistributionRequest(*cloudfront.DeleteStreamingDistributionInput) (*request.Request, *cloudfront.DeleteStreamingDistributionOutput)
+	DeleteStreamingDistributionWithContext(aws.Context, *cloudfront.DeleteStreamingDistributionInput, ...aws.Option) (*cloudfront.DeleteStreamingDistributionOutput, error)
+	DeleteStreamingDistributionRequest(*cloudfront.DeleteStreamingDistributionInput) (*aws.Request, *cloudfront.DeleteStreamingDistributionOutput)
 
 	GetCloudFrontOriginAccessIdentity(*cloudfront.GetCloudFrontOriginAccessIdentityInput) (*cloudfront.GetCloudFrontOriginAccessIdentityOutput, error)
-	GetCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.GetCloudFrontOriginAccessIdentityInput, ...request.Option) (*cloudfront.GetCloudFrontOriginAccessIdentityOutput, error)
-	GetCloudFrontOriginAccessIdentityRequest(*cloudfront.GetCloudFrontOriginAccessIdentityInput) (*request.Request, *cloudfront.GetCloudFrontOriginAccessIdentityOutput)
+	GetCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.GetCloudFrontOriginAccessIdentityInput, ...aws.Option) (*cloudfront.GetCloudFrontOriginAccessIdentityOutput, error)
+	GetCloudFrontOriginAccessIdentityRequest(*cloudfront.GetCloudFrontOriginAccessIdentityInput) (*aws.Request, *cloudfront.GetCloudFrontOriginAccessIdentityOutput)
 
 	GetCloudFrontOriginAccessIdentityConfig(*cloudfront.GetCloudFrontOriginAccessIdentityConfigInput) (*cloudfront.GetCloudFrontOriginAccessIdentityConfigOutput, error)
-	GetCloudFrontOriginAccessIdentityConfigWithContext(aws.Context, *cloudfront.GetCloudFrontOriginAccessIdentityConfigInput, ...request.Option) (*cloudfront.GetCloudFrontOriginAccessIdentityConfigOutput, error)
-	GetCloudFrontOriginAccessIdentityConfigRequest(*cloudfront.GetCloudFrontOriginAccessIdentityConfigInput) (*request.Request, *cloudfront.GetCloudFrontOriginAccessIdentityConfigOutput)
+	GetCloudFrontOriginAccessIdentityConfigWithContext(aws.Context, *cloudfront.GetCloudFrontOriginAccessIdentityConfigInput, ...aws.Option) (*cloudfront.GetCloudFrontOriginAccessIdentityConfigOutput, error)
+	GetCloudFrontOriginAccessIdentityConfigRequest(*cloudfront.GetCloudFrontOriginAccessIdentityConfigInput) (*aws.Request, *cloudfront.GetCloudFrontOriginAccessIdentityConfigOutput)
 
 	GetDistribution(*cloudfront.GetDistributionInput) (*cloudfront.GetDistributionOutput, error)
-	GetDistributionWithContext(aws.Context, *cloudfront.GetDistributionInput, ...request.Option) (*cloudfront.GetDistributionOutput, error)
-	GetDistributionRequest(*cloudfront.GetDistributionInput) (*request.Request, *cloudfront.GetDistributionOutput)
+	GetDistributionWithContext(aws.Context, *cloudfront.GetDistributionInput, ...aws.Option) (*cloudfront.GetDistributionOutput, error)
+	GetDistributionRequest(*cloudfront.GetDistributionInput) (*aws.Request, *cloudfront.GetDistributionOutput)
 
 	GetDistributionConfig(*cloudfront.GetDistributionConfigInput) (*cloudfront.GetDistributionConfigOutput, error)
-	GetDistributionConfigWithContext(aws.Context, *cloudfront.GetDistributionConfigInput, ...request.Option) (*cloudfront.GetDistributionConfigOutput, error)
-	GetDistributionConfigRequest(*cloudfront.GetDistributionConfigInput) (*request.Request, *cloudfront.GetDistributionConfigOutput)
+	GetDistributionConfigWithContext(aws.Context, *cloudfront.GetDistributionConfigInput, ...aws.Option) (*cloudfront.GetDistributionConfigOutput, error)
+	GetDistributionConfigRequest(*cloudfront.GetDistributionConfigInput) (*aws.Request, *cloudfront.GetDistributionConfigOutput)
 
 	GetInvalidation(*cloudfront.GetInvalidationInput) (*cloudfront.GetInvalidationOutput, error)
-	GetInvalidationWithContext(aws.Context, *cloudfront.GetInvalidationInput, ...request.Option) (*cloudfront.GetInvalidationOutput, error)
-	GetInvalidationRequest(*cloudfront.GetInvalidationInput) (*request.Request, *cloudfront.GetInvalidationOutput)
+	GetInvalidationWithContext(aws.Context, *cloudfront.GetInvalidationInput, ...aws.Option) (*cloudfront.GetInvalidationOutput, error)
+	GetInvalidationRequest(*cloudfront.GetInvalidationInput) (*aws.Request, *cloudfront.GetInvalidationOutput)
 
 	GetStreamingDistribution(*cloudfront.GetStreamingDistributionInput) (*cloudfront.GetStreamingDistributionOutput, error)
-	GetStreamingDistributionWithContext(aws.Context, *cloudfront.GetStreamingDistributionInput, ...request.Option) (*cloudfront.GetStreamingDistributionOutput, error)
-	GetStreamingDistributionRequest(*cloudfront.GetStreamingDistributionInput) (*request.Request, *cloudfront.GetStreamingDistributionOutput)
+	GetStreamingDistributionWithContext(aws.Context, *cloudfront.GetStreamingDistributionInput, ...aws.Option) (*cloudfront.GetStreamingDistributionOutput, error)
+	GetStreamingDistributionRequest(*cloudfront.GetStreamingDistributionInput) (*aws.Request, *cloudfront.GetStreamingDistributionOutput)
 
 	GetStreamingDistributionConfig(*cloudfront.GetStreamingDistributionConfigInput) (*cloudfront.GetStreamingDistributionConfigOutput, error)
-	GetStreamingDistributionConfigWithContext(aws.Context, *cloudfront.GetStreamingDistributionConfigInput, ...request.Option) (*cloudfront.GetStreamingDistributionConfigOutput, error)
-	GetStreamingDistributionConfigRequest(*cloudfront.GetStreamingDistributionConfigInput) (*request.Request, *cloudfront.GetStreamingDistributionConfigOutput)
+	GetStreamingDistributionConfigWithContext(aws.Context, *cloudfront.GetStreamingDistributionConfigInput, ...aws.Option) (*cloudfront.GetStreamingDistributionConfigOutput, error)
+	GetStreamingDistributionConfigRequest(*cloudfront.GetStreamingDistributionConfigInput) (*aws.Request, *cloudfront.GetStreamingDistributionConfigOutput)
 
 	ListCloudFrontOriginAccessIdentities(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) (*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, error)
-	ListCloudFrontOriginAccessIdentitiesWithContext(aws.Context, *cloudfront.ListCloudFrontOriginAccessIdentitiesInput, ...request.Option) (*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, error)
-	ListCloudFrontOriginAccessIdentitiesRequest(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) (*request.Request, *cloudfront.ListCloudFrontOriginAccessIdentitiesOutput)
+	ListCloudFrontOriginAccessIdentitiesWithContext(aws.Context, *cloudfront.ListCloudFrontOriginAccessIdentitiesInput, ...aws.Option) (*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, error)
+	ListCloudFrontOriginAccessIdentitiesRequest(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) (*aws.Request, *cloudfront.ListCloudFrontOriginAccessIdentitiesOutput)
 
 	ListCloudFrontOriginAccessIdentitiesPages(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool) error
-	ListCloudFrontOriginAccessIdentitiesPagesWithContext(aws.Context, *cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool, ...request.Option) error
+	ListCloudFrontOriginAccessIdentitiesPagesWithContext(aws.Context, *cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool, ...aws.Option) error
 
 	ListDistributions(*cloudfront.ListDistributionsInput) (*cloudfront.ListDistributionsOutput, error)
-	ListDistributionsWithContext(aws.Context, *cloudfront.ListDistributionsInput, ...request.Option) (*cloudfront.ListDistributionsOutput, error)
-	ListDistributionsRequest(*cloudfront.ListDistributionsInput) (*request.Request, *cloudfront.ListDistributionsOutput)
+	ListDistributionsWithContext(aws.Context, *cloudfront.ListDistributionsInput, ...aws.Option) (*cloudfront.ListDistributionsOutput, error)
+	ListDistributionsRequest(*cloudfront.ListDistributionsInput) (*aws.Request, *cloudfront.ListDistributionsOutput)
 
 	ListDistributionsPages(*cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool) error
-	ListDistributionsPagesWithContext(aws.Context, *cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool, ...request.Option) error
+	ListDistributionsPagesWithContext(aws.Context, *cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool, ...aws.Option) error
 
 	ListDistributionsByWebACLId(*cloudfront.ListDistributionsByWebACLIdInput) (*cloudfront.ListDistributionsByWebACLIdOutput, error)
-	ListDistributionsByWebACLIdWithContext(aws.Context, *cloudfront.ListDistributionsByWebACLIdInput, ...request.Option) (*cloudfront.ListDistributionsByWebACLIdOutput, error)
-	ListDistributionsByWebACLIdRequest(*cloudfront.ListDistributionsByWebACLIdInput) (*request.Request, *cloudfront.ListDistributionsByWebACLIdOutput)
+	ListDistributionsByWebACLIdWithContext(aws.Context, *cloudfront.ListDistributionsByWebACLIdInput, ...aws.Option) (*cloudfront.ListDistributionsByWebACLIdOutput, error)
+	ListDistributionsByWebACLIdRequest(*cloudfront.ListDistributionsByWebACLIdInput) (*aws.Request, *cloudfront.ListDistributionsByWebACLIdOutput)
 
 	ListInvalidations(*cloudfront.ListInvalidationsInput) (*cloudfront.ListInvalidationsOutput, error)
-	ListInvalidationsWithContext(aws.Context, *cloudfront.ListInvalidationsInput, ...request.Option) (*cloudfront.ListInvalidationsOutput, error)
-	ListInvalidationsRequest(*cloudfront.ListInvalidationsInput) (*request.Request, *cloudfront.ListInvalidationsOutput)
+	ListInvalidationsWithContext(aws.Context, *cloudfront.ListInvalidationsInput, ...aws.Option) (*cloudfront.ListInvalidationsOutput, error)
+	ListInvalidationsRequest(*cloudfront.ListInvalidationsInput) (*aws.Request, *cloudfront.ListInvalidationsOutput)
 
 	ListInvalidationsPages(*cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool) error
-	ListInvalidationsPagesWithContext(aws.Context, *cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool, ...request.Option) error
+	ListInvalidationsPagesWithContext(aws.Context, *cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool, ...aws.Option) error
 
 	ListStreamingDistributions(*cloudfront.ListStreamingDistributionsInput) (*cloudfront.ListStreamingDistributionsOutput, error)
-	ListStreamingDistributionsWithContext(aws.Context, *cloudfront.ListStreamingDistributionsInput, ...request.Option) (*cloudfront.ListStreamingDistributionsOutput, error)
-	ListStreamingDistributionsRequest(*cloudfront.ListStreamingDistributionsInput) (*request.Request, *cloudfront.ListStreamingDistributionsOutput)
+	ListStreamingDistributionsWithContext(aws.Context, *cloudfront.ListStreamingDistributionsInput, ...aws.Option) (*cloudfront.ListStreamingDistributionsOutput, error)
+	ListStreamingDistributionsRequest(*cloudfront.ListStreamingDistributionsInput) (*aws.Request, *cloudfront.ListStreamingDistributionsOutput)
 
 	ListStreamingDistributionsPages(*cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool) error
-	ListStreamingDistributionsPagesWithContext(aws.Context, *cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool, ...request.Option) error
+	ListStreamingDistributionsPagesWithContext(aws.Context, *cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForResource(*cloudfront.ListTagsForResourceInput) (*cloudfront.ListTagsForResourceOutput, error)
-	ListTagsForResourceWithContext(aws.Context, *cloudfront.ListTagsForResourceInput, ...request.Option) (*cloudfront.ListTagsForResourceOutput, error)
-	ListTagsForResourceRequest(*cloudfront.ListTagsForResourceInput) (*request.Request, *cloudfront.ListTagsForResourceOutput)
+	ListTagsForResourceWithContext(aws.Context, *cloudfront.ListTagsForResourceInput, ...aws.Option) (*cloudfront.ListTagsForResourceOutput, error)
+	ListTagsForResourceRequest(*cloudfront.ListTagsForResourceInput) (*aws.Request, *cloudfront.ListTagsForResourceOutput)
 
 	TagResource(*cloudfront.TagResourceInput) (*cloudfront.TagResourceOutput, error)
-	TagResourceWithContext(aws.Context, *cloudfront.TagResourceInput, ...request.Option) (*cloudfront.TagResourceOutput, error)
-	TagResourceRequest(*cloudfront.TagResourceInput) (*request.Request, *cloudfront.TagResourceOutput)
+	TagResourceWithContext(aws.Context, *cloudfront.TagResourceInput, ...aws.Option) (*cloudfront.TagResourceOutput, error)
+	TagResourceRequest(*cloudfront.TagResourceInput) (*aws.Request, *cloudfront.TagResourceOutput)
 
 	UntagResource(*cloudfront.UntagResourceInput) (*cloudfront.UntagResourceOutput, error)
-	UntagResourceWithContext(aws.Context, *cloudfront.UntagResourceInput, ...request.Option) (*cloudfront.UntagResourceOutput, error)
-	UntagResourceRequest(*cloudfront.UntagResourceInput) (*request.Request, *cloudfront.UntagResourceOutput)
+	UntagResourceWithContext(aws.Context, *cloudfront.UntagResourceInput, ...aws.Option) (*cloudfront.UntagResourceOutput, error)
+	UntagResourceRequest(*cloudfront.UntagResourceInput) (*aws.Request, *cloudfront.UntagResourceOutput)
 
 	UpdateCloudFrontOriginAccessIdentity(*cloudfront.UpdateCloudFrontOriginAccessIdentityInput) (*cloudfront.UpdateCloudFrontOriginAccessIdentityOutput, error)
-	UpdateCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.UpdateCloudFrontOriginAccessIdentityInput, ...request.Option) (*cloudfront.UpdateCloudFrontOriginAccessIdentityOutput, error)
-	UpdateCloudFrontOriginAccessIdentityRequest(*cloudfront.UpdateCloudFrontOriginAccessIdentityInput) (*request.Request, *cloudfront.UpdateCloudFrontOriginAccessIdentityOutput)
+	UpdateCloudFrontOriginAccessIdentityWithContext(aws.Context, *cloudfront.UpdateCloudFrontOriginAccessIdentityInput, ...aws.Option) (*cloudfront.UpdateCloudFrontOriginAccessIdentityOutput, error)
+	UpdateCloudFrontOriginAccessIdentityRequest(*cloudfront.UpdateCloudFrontOriginAccessIdentityInput) (*aws.Request, *cloudfront.UpdateCloudFrontOriginAccessIdentityOutput)
 
 	UpdateDistribution(*cloudfront.UpdateDistributionInput) (*cloudfront.UpdateDistributionOutput, error)
-	UpdateDistributionWithContext(aws.Context, *cloudfront.UpdateDistributionInput, ...request.Option) (*cloudfront.UpdateDistributionOutput, error)
-	UpdateDistributionRequest(*cloudfront.UpdateDistributionInput) (*request.Request, *cloudfront.UpdateDistributionOutput)
+	UpdateDistributionWithContext(aws.Context, *cloudfront.UpdateDistributionInput, ...aws.Option) (*cloudfront.UpdateDistributionOutput, error)
+	UpdateDistributionRequest(*cloudfront.UpdateDistributionInput) (*aws.Request, *cloudfront.UpdateDistributionOutput)
 
 	UpdateStreamingDistribution(*cloudfront.UpdateStreamingDistributionInput) (*cloudfront.UpdateStreamingDistributionOutput, error)
-	UpdateStreamingDistributionWithContext(aws.Context, *cloudfront.UpdateStreamingDistributionInput, ...request.Option) (*cloudfront.UpdateStreamingDistributionOutput, error)
-	UpdateStreamingDistributionRequest(*cloudfront.UpdateStreamingDistributionInput) (*request.Request, *cloudfront.UpdateStreamingDistributionOutput)
+	UpdateStreamingDistributionWithContext(aws.Context, *cloudfront.UpdateStreamingDistributionInput, ...aws.Option) (*cloudfront.UpdateStreamingDistributionOutput, error)
+	UpdateStreamingDistributionRequest(*cloudfront.UpdateStreamingDistributionInput) (*aws.Request, *cloudfront.UpdateStreamingDistributionOutput)
 
 	WaitUntilDistributionDeployed(*cloudfront.GetDistributionInput) error
-	WaitUntilDistributionDeployedWithContext(aws.Context, *cloudfront.GetDistributionInput, ...request.WaiterOption) error
+	WaitUntilDistributionDeployedWithContext(aws.Context, *cloudfront.GetDistributionInput, ...aws.WaiterOption) error
 
 	WaitUntilInvalidationCompleted(*cloudfront.GetInvalidationInput) error
-	WaitUntilInvalidationCompletedWithContext(aws.Context, *cloudfront.GetInvalidationInput, ...request.WaiterOption) error
+	WaitUntilInvalidationCompletedWithContext(aws.Context, *cloudfront.GetInvalidationInput, ...aws.WaiterOption) error
 
 	WaitUntilStreamingDistributionDeployed(*cloudfront.GetStreamingDistributionInput) error
-	WaitUntilStreamingDistributionDeployedWithContext(aws.Context, *cloudfront.GetStreamingDistributionInput, ...request.WaiterOption) error
+	WaitUntilStreamingDistributionDeployedWithContext(aws.Context, *cloudfront.GetStreamingDistributionInput, ...aws.WaiterOption) error
 }
 
 var _ CloudFrontAPI = (*cloudfront.CloudFront)(nil)

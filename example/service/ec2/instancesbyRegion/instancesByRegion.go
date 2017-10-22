@@ -9,9 +9,14 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
+
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
+	os.Exit(1)
+}
 
 // Prints a list of instances for each region. If no regions are provided
 // all regions will be searched. The state is required.
@@ -22,10 +27,8 @@ import (
 // Usage: instancesByRegion -state <value> [-state val...] [-region region...]
 func main() {
 	states, regions := parseArguments()
-
 	if len(states) == 0 {
-		fmt.Fprintf(os.Stderr, "error: %v\n", usage())
-		os.Exit(1)
+		exitErrorf("invalid arguments, %v", usage())
 	}
 	instanceCriteria := " "
 	for _, state := range states {
@@ -36,20 +39,21 @@ func main() {
 		var err error
 		regions, err = fetchRegion()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
+			exitErrorf("unable to get region, %v", err)
 		}
 	}
 
 	for _, region := range regions {
-		sess := session.Must(session.NewSession(&aws.Config{
-			Region: aws.String(region),
-		}))
+		cfg, err := external.LoadDefaultAWSConfig()
+		if err != nil {
+			exitErrorf("failed to load config, %v", err)
+		}
+		cfg.Region = aws.String(region)
 
-		ec2Svc := ec2.New(sess)
+		ec2Svc := ec2.New(cfg)
 		params := &ec2.DescribeInstancesInput{
 			Filters: []*ec2.Filter{
-				&ec2.Filter{
+				{
 					Name:   aws.String("instance-state-name"),
 					Values: aws.StringSlice(states),
 				},
@@ -58,7 +62,7 @@ func main() {
 
 		result, err := ec2Svc.DescribeInstances(params)
 		if err != nil {
-			fmt.Println("Error", err)
+			exitErrorf("failed to describe instances, %v", err)
 		} else {
 			fmt.Printf("\n\n\nFetching instace details  for region: %s with criteria: %s**\n ", region, instanceCriteria)
 			if len(result.Reservations) == 0 {
@@ -78,9 +82,12 @@ func main() {
 }
 
 func fetchRegion() ([]string, error) {
-	awsSession := session.Must(session.NewSession(&aws.Config{}))
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 
-	svc := ec2.New(awsSession)
+	svc := ec2.New(cfg)
 	awsRegions, err := svc.DescribeRegions(&ec2.DescribeRegionsInput{})
 	if err != nil {
 		return nil, err

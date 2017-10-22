@@ -6,13 +6,12 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opGetResources = "GetResources"
 
-// GetResourcesRequest generates a "aws/request.Request" representing the
+// GetResourcesRequest generates a "aws.Request" representing the
 // client's request for the GetResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,12 +35,12 @@ const opGetResources = "GetResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetResources
-func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput) (req *request.Request, output *GetResourcesOutput) {
-	op := &request.Operation{
+func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput) (req *aws.Request, output *GetResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opGetResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PaginationToken"},
 			OutputTokens:    []string{"PaginationToken"},
 			LimitToken:      "ResourcesPerPage",
@@ -105,7 +104,7 @@ func (c *ResourceGroupsTaggingAPI) GetResources(input *GetResourcesInput) (*GetR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetResourcesWithContext(ctx aws.Context, input *GetResourcesInput, opts ...request.Option) (*GetResourcesOutput, error) {
+func (c *ResourceGroupsTaggingAPI) GetResourcesWithContext(ctx aws.Context, input *GetResourcesInput, opts ...aws.Option) (*GetResourcesOutput, error) {
 	req, out := c.GetResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -140,9 +139,9 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesPages(input *GetResourcesInput, f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetResourcesInput
 			if input != nil {
 				tmp := *input
@@ -164,7 +163,7 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context,
 
 const opGetTagKeys = "GetTagKeys"
 
-// GetTagKeysRequest generates a "aws/request.Request" representing the
+// GetTagKeysRequest generates a "aws.Request" representing the
 // client's request for the GetTagKeys operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -188,12 +187,12 @@ const opGetTagKeys = "GetTagKeys"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagKeys
-func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) (req *request.Request, output *GetTagKeysOutput) {
-	op := &request.Operation{
+func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) (req *aws.Request, output *GetTagKeysOutput) {
+	op := &aws.Operation{
 		Name:       opGetTagKeys,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PaginationToken"},
 			OutputTokens:    []string{"PaginationToken"},
 			LimitToken:      "",
@@ -252,7 +251,7 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeys(input *GetTagKeysInput) (*GetTagKe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagKeysWithContext(ctx aws.Context, input *GetTagKeysInput, opts ...request.Option) (*GetTagKeysOutput, error) {
+func (c *ResourceGroupsTaggingAPI) GetTagKeysWithContext(ctx aws.Context, input *GetTagKeysInput, opts ...aws.Option) (*GetTagKeysOutput, error) {
 	req, out := c.GetTagKeysRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -287,9 +286,9 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysPages(input *GetTagKeysInput, fn fu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, input *GetTagKeysInput, fn func(*GetTagKeysOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, input *GetTagKeysInput, fn func(*GetTagKeysOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTagKeysInput
 			if input != nil {
 				tmp := *input
@@ -311,7 +310,7 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, i
 
 const opGetTagValues = "GetTagValues"
 
-// GetTagValuesRequest generates a "aws/request.Request" representing the
+// GetTagValuesRequest generates a "aws.Request" representing the
 // client's request for the GetTagValues operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -335,12 +334,12 @@ const opGetTagValues = "GetTagValues"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/GetTagValues
-func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput) (req *request.Request, output *GetTagValuesOutput) {
-	op := &request.Operation{
+func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput) (req *aws.Request, output *GetTagValuesOutput) {
+	op := &aws.Operation{
 		Name:       opGetTagValues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"PaginationToken"},
 			OutputTokens:    []string{"PaginationToken"},
 			LimitToken:      "",
@@ -400,7 +399,7 @@ func (c *ResourceGroupsTaggingAPI) GetTagValues(input *GetTagValuesInput) (*GetT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagValuesWithContext(ctx aws.Context, input *GetTagValuesInput, opts ...request.Option) (*GetTagValuesOutput, error) {
+func (c *ResourceGroupsTaggingAPI) GetTagValuesWithContext(ctx aws.Context, input *GetTagValuesInput, opts ...aws.Option) (*GetTagValuesOutput, error) {
 	req, out := c.GetTagValuesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -435,9 +434,9 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesPages(input *GetTagValuesInput, f
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context, input *GetTagValuesInput, fn func(*GetTagValuesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context, input *GetTagValuesInput, fn func(*GetTagValuesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTagValuesInput
 			if input != nil {
 				tmp := *input
@@ -459,7 +458,7 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context,
 
 const opTagResources = "TagResources"
 
-// TagResourcesRequest generates a "aws/request.Request" representing the
+// TagResourcesRequest generates a "aws.Request" representing the
 // client's request for the TagResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -483,8 +482,8 @@ const opTagResources = "TagResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/TagResources
-func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput) (req *request.Request, output *TagResourcesOutput) {
-	op := &request.Operation{
+func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput) (req *aws.Request, output *TagResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opTagResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -553,7 +552,7 @@ func (c *ResourceGroupsTaggingAPI) TagResources(input *TagResourcesInput) (*TagR
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) TagResourcesWithContext(ctx aws.Context, input *TagResourcesInput, opts ...request.Option) (*TagResourcesOutput, error) {
+func (c *ResourceGroupsTaggingAPI) TagResourcesWithContext(ctx aws.Context, input *TagResourcesInput, opts ...aws.Option) (*TagResourcesOutput, error) {
 	req, out := c.TagResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -562,7 +561,7 @@ func (c *ResourceGroupsTaggingAPI) TagResourcesWithContext(ctx aws.Context, inpu
 
 const opUntagResources = "UntagResources"
 
-// UntagResourcesRequest generates a "aws/request.Request" representing the
+// UntagResourcesRequest generates a "aws.Request" representing the
 // client's request for the UntagResources operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -586,8 +585,8 @@ const opUntagResources = "UntagResources"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resourcegroupstaggingapi-2017-01-26/UntagResources
-func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesInput) (req *request.Request, output *UntagResourcesOutput) {
-	op := &request.Operation{
+func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesInput) (req *aws.Request, output *UntagResourcesOutput) {
+	op := &aws.Operation{
 		Name:       opUntagResources,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -651,7 +650,7 @@ func (c *ResourceGroupsTaggingAPI) UntagResources(input *UntagResourcesInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) UntagResourcesWithContext(ctx aws.Context, input *UntagResourcesInput, opts ...request.Option) (*UntagResourcesOutput, error) {
+func (c *ResourceGroupsTaggingAPI) UntagResourcesWithContext(ctx aws.Context, input *UntagResourcesInput, opts ...aws.Option) (*UntagResourcesOutput, error) {
 	req, out := c.UntagResourcesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -778,14 +777,14 @@ func (s GetResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourcesInput"}
 	if s.TagFilters != nil {
 		for i, v := range s.TagFilters {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagFilters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagFilters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -950,12 +949,12 @@ func (s GetTagValuesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTagValuesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTagValuesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTagValuesInput"}
 	if s.Key == nil {
-		invalidParams.Add(request.NewErrParamRequired("Key"))
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
 	}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1116,9 +1115,9 @@ func (s TagFilter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagFilter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagFilter"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagFilter"}
 	if s.Key != nil && len(*s.Key) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Key", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1171,18 +1170,18 @@ func (s TagResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TagResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TagResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourcesInput"}
 	if s.ResourceARNList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARNList"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARNList"))
 	}
 	if s.ResourceARNList != nil && len(s.ResourceARNList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNList", 1))
 	}
 	if s.Tags == nil {
-		invalidParams.Add(request.NewErrParamRequired("Tags"))
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Tags", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1259,18 +1258,18 @@ func (s UntagResourcesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UntagResourcesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UntagResourcesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourcesInput"}
 	if s.ResourceARNList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ResourceARNList"))
+		invalidParams.Add(aws.NewErrParamRequired("ResourceARNList"))
 	}
 	if s.ResourceARNList != nil && len(s.ResourceARNList) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ResourceARNList", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceARNList", 1))
 	}
 	if s.TagKeys == nil {
-		invalidParams.Add(request.NewErrParamRequired("TagKeys"))
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
 	}
 	if s.TagKeys != nil && len(s.TagKeys) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TagKeys", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
 	}
 
 	if invalidParams.Len() > 0 {

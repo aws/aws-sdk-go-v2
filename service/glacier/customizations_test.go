@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
 )
 
@@ -21,7 +21,7 @@ var (
 		return bytes.NewReader(buf)
 	}()
 
-	svc = glacier.New(unit.Session)
+	svc = glacier.New(unit.Config)
 )
 
 func TestCustomizations(t *testing.T) {

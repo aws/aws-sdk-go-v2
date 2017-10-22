@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opCreateDeliveryStream = "CreateDeliveryStream"
 
-// CreateDeliveryStreamRequest generates a "aws/request.Request" representing the
+// CreateDeliveryStreamRequest generates a "aws.Request" representing the
 // client's request for the CreateDeliveryStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opCreateDeliveryStream = "CreateDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream
-func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput) (req *request.Request, output *CreateDeliveryStreamOutput) {
-	op := &request.Operation{
+func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput) (req *aws.Request, output *CreateDeliveryStreamOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDeliveryStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -140,7 +139,7 @@ func (c *Firehose) CreateDeliveryStream(input *CreateDeliveryStreamInput) (*Crea
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) CreateDeliveryStreamWithContext(ctx aws.Context, input *CreateDeliveryStreamInput, opts ...request.Option) (*CreateDeliveryStreamOutput, error) {
+func (c *Firehose) CreateDeliveryStreamWithContext(ctx aws.Context, input *CreateDeliveryStreamInput, opts ...aws.Option) (*CreateDeliveryStreamOutput, error) {
 	req, out := c.CreateDeliveryStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -149,7 +148,7 @@ func (c *Firehose) CreateDeliveryStreamWithContext(ctx aws.Context, input *Creat
 
 const opDeleteDeliveryStream = "DeleteDeliveryStream"
 
-// DeleteDeliveryStreamRequest generates a "aws/request.Request" representing the
+// DeleteDeliveryStreamRequest generates a "aws.Request" representing the
 // client's request for the DeleteDeliveryStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -173,8 +172,8 @@ const opDeleteDeliveryStream = "DeleteDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream
-func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) (req *request.Request, output *DeleteDeliveryStreamOutput) {
-	op := &request.Operation{
+func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput) (req *aws.Request, output *DeleteDeliveryStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDeliveryStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -233,7 +232,7 @@ func (c *Firehose) DeleteDeliveryStream(input *DeleteDeliveryStreamInput) (*Dele
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) DeleteDeliveryStreamWithContext(ctx aws.Context, input *DeleteDeliveryStreamInput, opts ...request.Option) (*DeleteDeliveryStreamOutput, error) {
+func (c *Firehose) DeleteDeliveryStreamWithContext(ctx aws.Context, input *DeleteDeliveryStreamInput, opts ...aws.Option) (*DeleteDeliveryStreamOutput, error) {
 	req, out := c.DeleteDeliveryStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -242,7 +241,7 @@ func (c *Firehose) DeleteDeliveryStreamWithContext(ctx aws.Context, input *Delet
 
 const opDescribeDeliveryStream = "DescribeDeliveryStream"
 
-// DescribeDeliveryStreamRequest generates a "aws/request.Request" representing the
+// DescribeDeliveryStreamRequest generates a "aws.Request" representing the
 // client's request for the DescribeDeliveryStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -266,8 +265,8 @@ const opDescribeDeliveryStream = "DescribeDeliveryStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream
-func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInput) (req *request.Request, output *DescribeDeliveryStreamOutput) {
-	op := &request.Operation{
+func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamInput) (req *aws.Request, output *DescribeDeliveryStreamOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeDeliveryStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -315,7 +314,7 @@ func (c *Firehose) DescribeDeliveryStream(input *DescribeDeliveryStreamInput) (*
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) DescribeDeliveryStreamWithContext(ctx aws.Context, input *DescribeDeliveryStreamInput, opts ...request.Option) (*DescribeDeliveryStreamOutput, error) {
+func (c *Firehose) DescribeDeliveryStreamWithContext(ctx aws.Context, input *DescribeDeliveryStreamInput, opts ...aws.Option) (*DescribeDeliveryStreamOutput, error) {
 	req, out := c.DescribeDeliveryStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -324,7 +323,7 @@ func (c *Firehose) DescribeDeliveryStreamWithContext(ctx aws.Context, input *Des
 
 const opGetKinesisStream = "GetKinesisStream"
 
-// GetKinesisStreamRequest generates a "aws/request.Request" representing the
+// GetKinesisStreamRequest generates a "aws.Request" representing the
 // client's request for the GetKinesisStream operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -348,8 +347,8 @@ const opGetKinesisStream = "GetKinesisStream"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStream
-func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) (req *request.Request, output *GetKinesisStreamOutput) {
-	op := &request.Operation{
+func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) (req *aws.Request, output *GetKinesisStreamOutput) {
+	op := &aws.Operation{
 		Name:       opGetKinesisStream,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -397,7 +396,7 @@ func (c *Firehose) GetKinesisStream(input *GetKinesisStreamInput) (*GetKinesisSt
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) GetKinesisStreamWithContext(ctx aws.Context, input *GetKinesisStreamInput, opts ...request.Option) (*GetKinesisStreamOutput, error) {
+func (c *Firehose) GetKinesisStreamWithContext(ctx aws.Context, input *GetKinesisStreamInput, opts ...aws.Option) (*GetKinesisStreamOutput, error) {
 	req, out := c.GetKinesisStreamRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -406,7 +405,7 @@ func (c *Firehose) GetKinesisStreamWithContext(ctx aws.Context, input *GetKinesi
 
 const opListDeliveryStreams = "ListDeliveryStreams"
 
-// ListDeliveryStreamsRequest generates a "aws/request.Request" representing the
+// ListDeliveryStreamsRequest generates a "aws.Request" representing the
 // client's request for the ListDeliveryStreams operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -430,8 +429,8 @@ const opListDeliveryStreams = "ListDeliveryStreams"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams
-func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) (req *request.Request, output *ListDeliveryStreamsOutput) {
-	op := &request.Operation{
+func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) (req *aws.Request, output *ListDeliveryStreamsOutput) {
+	op := &aws.Operation{
 		Name:       opListDeliveryStreams,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -479,7 +478,7 @@ func (c *Firehose) ListDeliveryStreams(input *ListDeliveryStreamsInput) (*ListDe
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) ListDeliveryStreamsWithContext(ctx aws.Context, input *ListDeliveryStreamsInput, opts ...request.Option) (*ListDeliveryStreamsOutput, error) {
+func (c *Firehose) ListDeliveryStreamsWithContext(ctx aws.Context, input *ListDeliveryStreamsInput, opts ...aws.Option) (*ListDeliveryStreamsOutput, error) {
 	req, out := c.ListDeliveryStreamsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -488,7 +487,7 @@ func (c *Firehose) ListDeliveryStreamsWithContext(ctx aws.Context, input *ListDe
 
 const opPutRecord = "PutRecord"
 
-// PutRecordRequest generates a "aws/request.Request" representing the
+// PutRecordRequest generates a "aws.Request" representing the
 // client's request for the PutRecord operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -512,8 +511,8 @@ const opPutRecord = "PutRecord"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord
-func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *request.Request, output *PutRecordOutput) {
-	op := &request.Operation{
+func (c *Firehose) PutRecordRequest(input *PutRecordInput) (req *aws.Request, output *PutRecordOutput) {
+	op := &aws.Operation{
 		Name:       opPutRecord,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -599,7 +598,7 @@ func (c *Firehose) PutRecord(input *PutRecordInput) (*PutRecordOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, opts ...request.Option) (*PutRecordOutput, error) {
+func (c *Firehose) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, opts ...aws.Option) (*PutRecordOutput, error) {
 	req, out := c.PutRecordRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -608,7 +607,7 @@ func (c *Firehose) PutRecordWithContext(ctx aws.Context, input *PutRecordInput, 
 
 const opPutRecordBatch = "PutRecordBatch"
 
-// PutRecordBatchRequest generates a "aws/request.Request" representing the
+// PutRecordBatchRequest generates a "aws.Request" representing the
 // client's request for the PutRecordBatch operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -632,8 +631,8 @@ const opPutRecordBatch = "PutRecordBatch"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch
-func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *request.Request, output *PutRecordBatchOutput) {
-	op := &request.Operation{
+func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) (req *aws.Request, output *PutRecordBatchOutput) {
+	op := &aws.Operation{
 		Name:       opPutRecordBatch,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -744,7 +743,7 @@ func (c *Firehose) PutRecordBatch(input *PutRecordBatchInput) (*PutRecordBatchOu
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) PutRecordBatchWithContext(ctx aws.Context, input *PutRecordBatchInput, opts ...request.Option) (*PutRecordBatchOutput, error) {
+func (c *Firehose) PutRecordBatchWithContext(ctx aws.Context, input *PutRecordBatchInput, opts ...aws.Option) (*PutRecordBatchOutput, error) {
 	req, out := c.PutRecordBatchRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -753,7 +752,7 @@ func (c *Firehose) PutRecordBatchWithContext(ctx aws.Context, input *PutRecordBa
 
 const opUpdateDestination = "UpdateDestination"
 
-// UpdateDestinationRequest generates a "aws/request.Request" representing the
+// UpdateDestinationRequest generates a "aws.Request" representing the
 // client's request for the UpdateDestination operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -777,8 +776,8 @@ const opUpdateDestination = "UpdateDestination"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination
-func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req *request.Request, output *UpdateDestinationOutput) {
-	op := &request.Operation{
+func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) (req *aws.Request, output *UpdateDestinationOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDestination,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -862,7 +861,7 @@ func (c *Firehose) UpdateDestination(input *UpdateDestinationInput) (*UpdateDest
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Firehose) UpdateDestinationWithContext(ctx aws.Context, input *UpdateDestinationInput, opts ...request.Option) (*UpdateDestinationOutput, error) {
+func (c *Firehose) UpdateDestinationWithContext(ctx aws.Context, input *UpdateDestinationInput, opts ...aws.Option) (*UpdateDestinationOutput, error) {
 	req, out := c.UpdateDestinationRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -901,12 +900,12 @@ func (s BufferingHints) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BufferingHints) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BufferingHints"}
+	invalidParams := aws.ErrInvalidParams{Context: "BufferingHints"}
 	if s.IntervalInSeconds != nil && *s.IntervalInSeconds < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("IntervalInSeconds", 60))
+		invalidParams.Add(aws.NewErrParamMinValue("IntervalInSeconds", 60))
 	}
 	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("SizeInMBs", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1020,12 +1019,12 @@ func (s CopyCommand) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CopyCommand) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CopyCommand"}
+	invalidParams := aws.ErrInvalidParams{Context: "CopyCommand"}
 	if s.DataTableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DataTableName"))
+		invalidParams.Add(aws.NewErrParamRequired("DataTableName"))
 	}
 	if s.DataTableName != nil && len(*s.DataTableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DataTableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DataTableName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1100,36 +1099,36 @@ func (s CreateDeliveryStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDeliveryStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDeliveryStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDeliveryStreamInput"}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
 	if s.ElasticsearchDestinationConfiguration != nil {
 		if err := s.ElasticsearchDestinationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ElasticsearchDestinationConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ElasticsearchDestinationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ExtendedS3DestinationConfiguration != nil {
 		if err := s.ExtendedS3DestinationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ExtendedS3DestinationConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExtendedS3DestinationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.KinesisStreamSourceConfiguration != nil {
 		if err := s.KinesisStreamSourceConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("KinesisStreamSourceConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KinesisStreamSourceConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RedshiftDestinationConfiguration != nil {
 		if err := s.RedshiftDestinationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("RedshiftDestinationConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RedshiftDestinationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3DestinationConfiguration != nil {
 		if err := s.S3DestinationConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("S3DestinationConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3DestinationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1227,12 +1226,12 @@ func (s DeleteDeliveryStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDeliveryStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDeliveryStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDeliveryStreamInput"}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1421,18 +1420,18 @@ func (s DescribeDeliveryStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeDeliveryStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeDeliveryStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDeliveryStreamInput"}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
 	if s.ExclusiveStartDestinationId != nil && len(*s.ExclusiveStartDestinationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartDestinationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartDestinationId", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1579,12 +1578,12 @@ func (s ElasticsearchBufferingHints) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchBufferingHints) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchBufferingHints"}
+	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchBufferingHints"}
 	if s.IntervalInSeconds != nil && *s.IntervalInSeconds < 60 {
-		invalidParams.Add(request.NewErrParamMinValue("IntervalInSeconds", 60))
+		invalidParams.Add(aws.NewErrParamMinValue("IntervalInSeconds", 60))
 	}
 	if s.SizeInMBs != nil && *s.SizeInMBs < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("SizeInMBs", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("SizeInMBs", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1682,47 +1681,47 @@ func (s ElasticsearchDestinationConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchDestinationConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchDestinationConfiguration"}
 	if s.DomainARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("DomainARN"))
+		invalidParams.Add(aws.NewErrParamRequired("DomainARN"))
 	}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainARN", 1))
 	}
 	if s.IndexName == nil {
-		invalidParams.Add(request.NewErrParamRequired("IndexName"))
+		invalidParams.Add(aws.NewErrParamRequired("IndexName"))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.S3Configuration == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Configuration"))
 	}
 	if s.TypeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TypeName"))
+		invalidParams.Add(aws.NewErrParamRequired("TypeName"))
 	}
 	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
-			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BufferingHints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Configuration != nil {
 		if err := s.S3Configuration.Validate(); err != nil {
-			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Configuration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -1970,32 +1969,32 @@ func (s ElasticsearchDestinationUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ElasticsearchDestinationUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ElasticsearchDestinationUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "ElasticsearchDestinationUpdate"}
 	if s.DomainARN != nil && len(*s.DomainARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DomainARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DomainARN", 1))
 	}
 	if s.IndexName != nil && len(*s.IndexName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("IndexName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("IndexName", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.TypeName != nil && len(*s.TypeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TypeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TypeName", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
-			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BufferingHints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Update != nil {
 		if err := s.S3Update.Validate(); err != nil {
-			invalidParams.AddNested("S3Update", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Update", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2120,10 +2119,10 @@ func (s EncryptionConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EncryptionConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "EncryptionConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptionConfiguration"}
 	if s.KMSEncryptionConfig != nil {
 		if err := s.KMSEncryptionConfig.Validate(); err != nil {
-			invalidParams.AddNested("KMSEncryptionConfig", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("KMSEncryptionConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2202,37 +2201,37 @@ func (s ExtendedS3DestinationConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtendedS3DestinationConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExtendedS3DestinationConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExtendedS3DestinationConfiguration"}
 	if s.BucketARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketARN"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
-			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BufferingHints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EncryptionConfiguration != nil {
 		if err := s.EncryptionConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EncryptionConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3BackupConfiguration != nil {
 		if err := s.S3BackupConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("S3BackupConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3BackupConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2476,31 +2475,31 @@ func (s ExtendedS3DestinationUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ExtendedS3DestinationUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ExtendedS3DestinationUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "ExtendedS3DestinationUpdate"}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
-			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BufferingHints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EncryptionConfiguration != nil {
 		if err := s.EncryptionConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EncryptionConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3BackupUpdate != nil {
 		if err := s.S3BackupUpdate.Validate(); err != nil {
-			invalidParams.AddNested("S3BackupUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3BackupUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2590,12 +2589,12 @@ func (s GetKinesisStreamInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetKinesisStreamInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetKinesisStreamInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetKinesisStreamInput"}
 	if s.DeliveryStreamARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamARN"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamARN"))
 	}
 	if s.DeliveryStreamARN != nil && len(*s.DeliveryStreamARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2665,12 +2664,12 @@ func (s KMSEncryptionConfig) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KMSEncryptionConfig) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KMSEncryptionConfig"}
+	invalidParams := aws.ErrInvalidParams{Context: "KMSEncryptionConfig"}
 	if s.AWSKMSKeyARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("AWSKMSKeyARN"))
+		invalidParams.Add(aws.NewErrParamRequired("AWSKMSKeyARN"))
 	}
 	if s.AWSKMSKeyARN != nil && len(*s.AWSKMSKeyARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AWSKMSKeyARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AWSKMSKeyARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2714,18 +2713,18 @@ func (s KinesisStreamSourceConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *KinesisStreamSourceConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "KinesisStreamSourceConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "KinesisStreamSourceConfiguration"}
 	if s.KinesisStreamARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("KinesisStreamARN"))
+		invalidParams.Add(aws.NewErrParamRequired("KinesisStreamARN"))
 	}
 	if s.KinesisStreamARN != nil && len(*s.KinesisStreamARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("KinesisStreamARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("KinesisStreamARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2825,12 +2824,12 @@ func (s ListDeliveryStreamsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListDeliveryStreamsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ListDeliveryStreamsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeliveryStreamsInput"}
 	if s.ExclusiveStartDeliveryStreamName != nil && len(*s.ExclusiveStartDeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ExclusiveStartDeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartDeliveryStreamName", 1))
 	}
 	if s.Limit != nil && *s.Limit < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("Limit", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2918,14 +2917,14 @@ func (s ProcessingConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProcessingConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProcessingConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessingConfiguration"}
 	if s.Processors != nil {
 		for i, v := range s.Processors {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Processors", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Processors", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -2974,9 +2973,9 @@ func (s Processor) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Processor) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Processor"}
+	invalidParams := aws.ErrInvalidParams{Context: "Processor"}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Parameters != nil {
 		for i, v := range s.Parameters {
@@ -2984,7 +2983,7 @@ func (s *Processor) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Parameters", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Parameters", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3035,15 +3034,15 @@ func (s ProcessorParameter) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ProcessorParameter) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ProcessorParameter"}
+	invalidParams := aws.ErrInvalidParams{Context: "ProcessorParameter"}
 	if s.ParameterName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterName"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterName"))
 	}
 	if s.ParameterValue == nil {
-		invalidParams.Add(request.NewErrParamRequired("ParameterValue"))
+		invalidParams.Add(aws.NewErrParamRequired("ParameterValue"))
 	}
 	if s.ParameterValue != nil && len(*s.ParameterValue) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ParameterValue", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ParameterValue", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3091,18 +3090,18 @@ func (s PutRecordBatchInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordBatchInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRecordBatchInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRecordBatchInput"}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
 	if s.Records == nil {
-		invalidParams.Add(request.NewErrParamRequired("Records"))
+		invalidParams.Add(aws.NewErrParamRequired("Records"))
 	}
 	if s.Records != nil && len(s.Records) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Records", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Records", 1))
 	}
 	if s.Records != nil {
 		for i, v := range s.Records {
@@ -3110,7 +3109,7 @@ func (s *PutRecordBatchInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Records", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -3244,19 +3243,19 @@ func (s PutRecordInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutRecordInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PutRecordInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PutRecordInput"}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
 	if s.Record == nil {
-		invalidParams.Add(request.NewErrParamRequired("Record"))
+		invalidParams.Add(aws.NewErrParamRequired("Record"))
 	}
 	if s.Record != nil {
 		if err := s.Record.Validate(); err != nil {
-			invalidParams.AddNested("Record", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Record", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3330,9 +3329,9 @@ func (s Record) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Record) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Record"}
+	invalidParams := aws.ErrInvalidParams{Context: "Record"}
 	if s.Data == nil {
-		invalidParams.Add(request.NewErrParamRequired("Data"))
+		invalidParams.Add(aws.NewErrParamRequired("Data"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3416,55 +3415,55 @@ func (s RedshiftDestinationConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDestinationConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RedshiftDestinationConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDestinationConfiguration"}
 	if s.ClusterJDBCURL == nil {
-		invalidParams.Add(request.NewErrParamRequired("ClusterJDBCURL"))
+		invalidParams.Add(aws.NewErrParamRequired("ClusterJDBCURL"))
 	}
 	if s.ClusterJDBCURL != nil && len(*s.ClusterJDBCURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterJDBCURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterJDBCURL", 1))
 	}
 	if s.CopyCommand == nil {
-		invalidParams.Add(request.NewErrParamRequired("CopyCommand"))
+		invalidParams.Add(aws.NewErrParamRequired("CopyCommand"))
 	}
 	if s.Password == nil {
-		invalidParams.Add(request.NewErrParamRequired("Password"))
+		invalidParams.Add(aws.NewErrParamRequired("Password"))
 	}
 	if s.Password != nil && len(*s.Password) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.S3Configuration == nil {
-		invalidParams.Add(request.NewErrParamRequired("S3Configuration"))
+		invalidParams.Add(aws.NewErrParamRequired("S3Configuration"))
 	}
 	if s.Username == nil {
-		invalidParams.Add(request.NewErrParamRequired("Username"))
+		invalidParams.Add(aws.NewErrParamRequired("Username"))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 	if s.CopyCommand != nil {
 		if err := s.CopyCommand.Validate(); err != nil {
-			invalidParams.AddNested("CopyCommand", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CopyCommand", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3BackupConfiguration != nil {
 		if err := s.S3BackupConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("S3BackupConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3BackupConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Configuration != nil {
 		if err := s.S3Configuration.Validate(); err != nil {
-			invalidParams.AddNested("S3Configuration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Configuration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3713,37 +3712,37 @@ func (s RedshiftDestinationUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RedshiftDestinationUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RedshiftDestinationUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "RedshiftDestinationUpdate"}
 	if s.ClusterJDBCURL != nil && len(*s.ClusterJDBCURL) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClusterJDBCURL", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClusterJDBCURL", 1))
 	}
 	if s.Password != nil && len(*s.Password) < 6 {
-		invalidParams.Add(request.NewErrParamMinLen("Password", 6))
+		invalidParams.Add(aws.NewErrParamMinLen("Password", 6))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.Username != nil && len(*s.Username) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Username", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
 	if s.CopyCommand != nil {
 		if err := s.CopyCommand.Validate(); err != nil {
-			invalidParams.AddNested("CopyCommand", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("CopyCommand", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ProcessingConfiguration != nil {
 		if err := s.ProcessingConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("ProcessingConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3BackupUpdate != nil {
 		if err := s.S3BackupUpdate.Validate(); err != nil {
-			invalidParams.AddNested("S3BackupUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3BackupUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3Update != nil {
 		if err := s.S3Update.Validate(); err != nil {
-			invalidParams.AddNested("S3Update", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3Update", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3902,27 +3901,27 @@ func (s S3DestinationConfiguration) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3DestinationConfiguration) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3DestinationConfiguration"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3DestinationConfiguration"}
 	if s.BucketARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("BucketARN"))
+		invalidParams.Add(aws.NewErrParamRequired("BucketARN"))
 	}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
 	if s.RoleARN == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleARN"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleARN"))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
-			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BufferingHints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EncryptionConfiguration != nil {
 		if err := s.EncryptionConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EncryptionConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4118,21 +4117,21 @@ func (s S3DestinationUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *S3DestinationUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "S3DestinationUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "S3DestinationUpdate"}
 	if s.BucketARN != nil && len(*s.BucketARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("BucketARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("BucketARN", 1))
 	}
 	if s.RoleARN != nil && len(*s.RoleARN) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RoleARN", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RoleARN", 1))
 	}
 	if s.BufferingHints != nil {
 		if err := s.BufferingHints.Validate(); err != nil {
-			invalidParams.AddNested("BufferingHints", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("BufferingHints", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.EncryptionConfiguration != nil {
 		if err := s.EncryptionConfiguration.Validate(); err != nil {
-			invalidParams.AddNested("EncryptionConfiguration", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("EncryptionConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4310,43 +4309,43 @@ func (s UpdateDestinationInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDestinationInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDestinationInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDestinationInput"}
 	if s.CurrentDeliveryStreamVersionId == nil {
-		invalidParams.Add(request.NewErrParamRequired("CurrentDeliveryStreamVersionId"))
+		invalidParams.Add(aws.NewErrParamRequired("CurrentDeliveryStreamVersionId"))
 	}
 	if s.CurrentDeliveryStreamVersionId != nil && len(*s.CurrentDeliveryStreamVersionId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CurrentDeliveryStreamVersionId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CurrentDeliveryStreamVersionId", 1))
 	}
 	if s.DeliveryStreamName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DeliveryStreamName"))
+		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamName"))
 	}
 	if s.DeliveryStreamName != nil && len(*s.DeliveryStreamName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DeliveryStreamName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamName", 1))
 	}
 	if s.DestinationId == nil {
-		invalidParams.Add(request.NewErrParamRequired("DestinationId"))
+		invalidParams.Add(aws.NewErrParamRequired("DestinationId"))
 	}
 	if s.DestinationId != nil && len(*s.DestinationId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DestinationId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationId", 1))
 	}
 	if s.ElasticsearchDestinationUpdate != nil {
 		if err := s.ElasticsearchDestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ElasticsearchDestinationUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ElasticsearchDestinationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.ExtendedS3DestinationUpdate != nil {
 		if err := s.ExtendedS3DestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("ExtendedS3DestinationUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ExtendedS3DestinationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.RedshiftDestinationUpdate != nil {
 		if err := s.RedshiftDestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("RedshiftDestinationUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("RedshiftDestinationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.S3DestinationUpdate != nil {
 		if err := s.S3DestinationUpdate.Validate(); err != nil {
-			invalidParams.AddNested("S3DestinationUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("S3DestinationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 

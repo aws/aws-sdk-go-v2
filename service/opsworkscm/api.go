@@ -6,13 +6,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opAssociateNode = "AssociateNode"
 
-// AssociateNodeRequest generates a "aws/request.Request" representing the
+// AssociateNodeRequest generates a "aws.Request" representing the
 // client's request for the AssociateNode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -36,8 +35,8 @@ const opAssociateNode = "AssociateNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNode
-func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) (req *request.Request, output *AssociateNodeOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) (req *aws.Request, output *AssociateNodeOutput) {
+	op := &aws.Operation{
 		Name:       opAssociateNode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -101,7 +100,7 @@ func (c *OpsWorksCM) AssociateNode(input *AssociateNodeInput) (*AssociateNodeOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) AssociateNodeWithContext(ctx aws.Context, input *AssociateNodeInput, opts ...request.Option) (*AssociateNodeOutput, error) {
+func (c *OpsWorksCM) AssociateNodeWithContext(ctx aws.Context, input *AssociateNodeInput, opts ...aws.Option) (*AssociateNodeOutput, error) {
 	req, out := c.AssociateNodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -110,7 +109,7 @@ func (c *OpsWorksCM) AssociateNodeWithContext(ctx aws.Context, input *AssociateN
 
 const opCreateBackup = "CreateBackup"
 
-// CreateBackupRequest generates a "aws/request.Request" representing the
+// CreateBackupRequest generates a "aws.Request" representing the
 // client's request for the CreateBackup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -134,8 +133,8 @@ const opCreateBackup = "CreateBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackup
-func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) (req *request.Request, output *CreateBackupOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) (req *aws.Request, output *CreateBackupOutput) {
+	op := &aws.Operation{
 		Name:       opCreateBackup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -203,7 +202,7 @@ func (c *OpsWorksCM) CreateBackup(input *CreateBackupInput) (*CreateBackupOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) CreateBackupWithContext(ctx aws.Context, input *CreateBackupInput, opts ...request.Option) (*CreateBackupOutput, error) {
+func (c *OpsWorksCM) CreateBackupWithContext(ctx aws.Context, input *CreateBackupInput, opts ...aws.Option) (*CreateBackupOutput, error) {
 	req, out := c.CreateBackupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -212,7 +211,7 @@ func (c *OpsWorksCM) CreateBackupWithContext(ctx aws.Context, input *CreateBacku
 
 const opCreateServer = "CreateServer"
 
-// CreateServerRequest generates a "aws/request.Request" representing the
+// CreateServerRequest generates a "aws.Request" representing the
 // client's request for the CreateServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -236,8 +235,8 @@ const opCreateServer = "CreateServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServer
-func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) (req *request.Request, output *CreateServerOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) (req *aws.Request, output *CreateServerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -311,7 +310,7 @@ func (c *OpsWorksCM) CreateServer(input *CreateServerInput) (*CreateServerOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) CreateServerWithContext(ctx aws.Context, input *CreateServerInput, opts ...request.Option) (*CreateServerOutput, error) {
+func (c *OpsWorksCM) CreateServerWithContext(ctx aws.Context, input *CreateServerInput, opts ...aws.Option) (*CreateServerOutput, error) {
 	req, out := c.CreateServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -320,7 +319,7 @@ func (c *OpsWorksCM) CreateServerWithContext(ctx aws.Context, input *CreateServe
 
 const opDeleteBackup = "DeleteBackup"
 
-// DeleteBackupRequest generates a "aws/request.Request" representing the
+// DeleteBackupRequest generates a "aws.Request" representing the
 // client's request for the DeleteBackup operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -344,8 +343,8 @@ const opDeleteBackup = "DeleteBackup"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackup
-func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) (req *request.Request, output *DeleteBackupOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) (req *aws.Request, output *DeleteBackupOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteBackup,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -402,7 +401,7 @@ func (c *OpsWorksCM) DeleteBackup(input *DeleteBackupInput) (*DeleteBackupOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DeleteBackupWithContext(ctx aws.Context, input *DeleteBackupInput, opts ...request.Option) (*DeleteBackupOutput, error) {
+func (c *OpsWorksCM) DeleteBackupWithContext(ctx aws.Context, input *DeleteBackupInput, opts ...aws.Option) (*DeleteBackupOutput, error) {
 	req, out := c.DeleteBackupRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -411,7 +410,7 @@ func (c *OpsWorksCM) DeleteBackupWithContext(ctx aws.Context, input *DeleteBacku
 
 const opDeleteServer = "DeleteServer"
 
-// DeleteServerRequest generates a "aws/request.Request" representing the
+// DeleteServerRequest generates a "aws.Request" representing the
 // client's request for the DeleteServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -435,8 +434,8 @@ const opDeleteServer = "DeleteServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServer
-func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) (req *request.Request, output *DeleteServerOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) (req *aws.Request, output *DeleteServerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -498,7 +497,7 @@ func (c *OpsWorksCM) DeleteServer(input *DeleteServerInput) (*DeleteServerOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DeleteServerWithContext(ctx aws.Context, input *DeleteServerInput, opts ...request.Option) (*DeleteServerOutput, error) {
+func (c *OpsWorksCM) DeleteServerWithContext(ctx aws.Context, input *DeleteServerInput, opts ...aws.Option) (*DeleteServerOutput, error) {
 	req, out := c.DeleteServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -507,7 +506,7 @@ func (c *OpsWorksCM) DeleteServerWithContext(ctx aws.Context, input *DeleteServe
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
 
-// DescribeAccountAttributesRequest generates a "aws/request.Request" representing the
+// DescribeAccountAttributesRequest generates a "aws.Request" representing the
 // client's request for the DescribeAccountAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -531,8 +530,8 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributes
-func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *request.Request, output *DescribeAccountAttributesOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) (req *aws.Request, output *DescribeAccountAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeAccountAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -575,7 +574,7 @@ func (c *OpsWorksCM) DescribeAccountAttributes(input *DescribeAccountAttributesI
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...request.Option) (*DescribeAccountAttributesOutput, error) {
+func (c *OpsWorksCM) DescribeAccountAttributesWithContext(ctx aws.Context, input *DescribeAccountAttributesInput, opts ...aws.Option) (*DescribeAccountAttributesOutput, error) {
 	req, out := c.DescribeAccountAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -584,7 +583,7 @@ func (c *OpsWorksCM) DescribeAccountAttributesWithContext(ctx aws.Context, input
 
 const opDescribeBackups = "DescribeBackups"
 
-// DescribeBackupsRequest generates a "aws/request.Request" representing the
+// DescribeBackupsRequest generates a "aws.Request" representing the
 // client's request for the DescribeBackups operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -608,8 +607,8 @@ const opDescribeBackups = "DescribeBackups"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups
-func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) (req *request.Request, output *DescribeBackupsOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) (req *aws.Request, output *DescribeBackupsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeBackups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -666,7 +665,7 @@ func (c *OpsWorksCM) DescribeBackups(input *DescribeBackupsInput) (*DescribeBack
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DescribeBackupsWithContext(ctx aws.Context, input *DescribeBackupsInput, opts ...request.Option) (*DescribeBackupsOutput, error) {
+func (c *OpsWorksCM) DescribeBackupsWithContext(ctx aws.Context, input *DescribeBackupsInput, opts ...aws.Option) (*DescribeBackupsOutput, error) {
 	req, out := c.DescribeBackupsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -675,7 +674,7 @@ func (c *OpsWorksCM) DescribeBackupsWithContext(ctx aws.Context, input *Describe
 
 const opDescribeEvents = "DescribeEvents"
 
-// DescribeEventsRequest generates a "aws/request.Request" representing the
+// DescribeEventsRequest generates a "aws.Request" representing the
 // client's request for the DescribeEvents operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -699,8 +698,8 @@ const opDescribeEvents = "DescribeEvents"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEvents
-func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) (req *request.Request, output *DescribeEventsOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) (req *aws.Request, output *DescribeEventsOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeEvents,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -757,7 +756,7 @@ func (c *OpsWorksCM) DescribeEvents(input *DescribeEventsInput) (*DescribeEvents
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...request.Option) (*DescribeEventsOutput, error) {
+func (c *OpsWorksCM) DescribeEventsWithContext(ctx aws.Context, input *DescribeEventsInput, opts ...aws.Option) (*DescribeEventsOutput, error) {
 	req, out := c.DescribeEventsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -766,7 +765,7 @@ func (c *OpsWorksCM) DescribeEventsWithContext(ctx aws.Context, input *DescribeE
 
 const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 
-// DescribeNodeAssociationStatusRequest generates a "aws/request.Request" representing the
+// DescribeNodeAssociationStatusRequest generates a "aws.Request" representing the
 // client's request for the DescribeNodeAssociationStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -790,8 +789,8 @@ const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus
-func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssociationStatusInput) (req *request.Request, output *DescribeNodeAssociationStatusOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAssociationStatusInput) (req *aws.Request, output *DescribeNodeAssociationStatusOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeNodeAssociationStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -843,7 +842,7 @@ func (c *OpsWorksCM) DescribeNodeAssociationStatus(input *DescribeNodeAssociatio
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DescribeNodeAssociationStatusWithContext(ctx aws.Context, input *DescribeNodeAssociationStatusInput, opts ...request.Option) (*DescribeNodeAssociationStatusOutput, error) {
+func (c *OpsWorksCM) DescribeNodeAssociationStatusWithContext(ctx aws.Context, input *DescribeNodeAssociationStatusInput, opts ...aws.Option) (*DescribeNodeAssociationStatusOutput, error) {
 	req, out := c.DescribeNodeAssociationStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -852,7 +851,7 @@ func (c *OpsWorksCM) DescribeNodeAssociationStatusWithContext(ctx aws.Context, i
 
 const opDescribeServers = "DescribeServers"
 
-// DescribeServersRequest generates a "aws/request.Request" representing the
+// DescribeServersRequest generates a "aws.Request" representing the
 // client's request for the DescribeServers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -876,8 +875,8 @@ const opDescribeServers = "DescribeServers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers
-func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) (req *request.Request, output *DescribeServersOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) (req *aws.Request, output *DescribeServersOutput) {
+	op := &aws.Operation{
 		Name:       opDescribeServers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -935,7 +934,7 @@ func (c *OpsWorksCM) DescribeServers(input *DescribeServersInput) (*DescribeServ
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DescribeServersWithContext(ctx aws.Context, input *DescribeServersInput, opts ...request.Option) (*DescribeServersOutput, error) {
+func (c *OpsWorksCM) DescribeServersWithContext(ctx aws.Context, input *DescribeServersInput, opts ...aws.Option) (*DescribeServersOutput, error) {
 	req, out := c.DescribeServersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -944,7 +943,7 @@ func (c *OpsWorksCM) DescribeServersWithContext(ctx aws.Context, input *Describe
 
 const opDisassociateNode = "DisassociateNode"
 
-// DisassociateNodeRequest generates a "aws/request.Request" representing the
+// DisassociateNodeRequest generates a "aws.Request" representing the
 // client's request for the DisassociateNode operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -968,8 +967,8 @@ const opDisassociateNode = "DisassociateNode"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode
-func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) (req *request.Request, output *DisassociateNodeOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) (req *aws.Request, output *DisassociateNodeOutput) {
+	op := &aws.Operation{
 		Name:       opDisassociateNode,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1029,7 +1028,7 @@ func (c *OpsWorksCM) DisassociateNode(input *DisassociateNodeInput) (*Disassocia
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) DisassociateNodeWithContext(ctx aws.Context, input *DisassociateNodeInput, opts ...request.Option) (*DisassociateNodeOutput, error) {
+func (c *OpsWorksCM) DisassociateNodeWithContext(ctx aws.Context, input *DisassociateNodeInput, opts ...aws.Option) (*DisassociateNodeOutput, error) {
 	req, out := c.DisassociateNodeRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1038,7 +1037,7 @@ func (c *OpsWorksCM) DisassociateNodeWithContext(ctx aws.Context, input *Disasso
 
 const opRestoreServer = "RestoreServer"
 
-// RestoreServerRequest generates a "aws/request.Request" representing the
+// RestoreServerRequest generates a "aws.Request" representing the
 // client's request for the RestoreServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1062,8 +1061,8 @@ const opRestoreServer = "RestoreServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer
-func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) (req *request.Request, output *RestoreServerOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) (req *aws.Request, output *RestoreServerOutput) {
+	op := &aws.Operation{
 		Name:       opRestoreServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1125,7 +1124,7 @@ func (c *OpsWorksCM) RestoreServer(input *RestoreServerInput) (*RestoreServerOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) RestoreServerWithContext(ctx aws.Context, input *RestoreServerInput, opts ...request.Option) (*RestoreServerOutput, error) {
+func (c *OpsWorksCM) RestoreServerWithContext(ctx aws.Context, input *RestoreServerInput, opts ...aws.Option) (*RestoreServerOutput, error) {
 	req, out := c.RestoreServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1134,7 +1133,7 @@ func (c *OpsWorksCM) RestoreServerWithContext(ctx aws.Context, input *RestoreSer
 
 const opStartMaintenance = "StartMaintenance"
 
-// StartMaintenanceRequest generates a "aws/request.Request" representing the
+// StartMaintenanceRequest generates a "aws.Request" representing the
 // client's request for the StartMaintenance operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1158,8 +1157,8 @@ const opStartMaintenance = "StartMaintenance"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenance
-func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) (req *request.Request, output *StartMaintenanceOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) (req *aws.Request, output *StartMaintenanceOutput) {
+	op := &aws.Operation{
 		Name:       opStartMaintenance,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1219,7 +1218,7 @@ func (c *OpsWorksCM) StartMaintenance(input *StartMaintenanceInput) (*StartMaint
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) StartMaintenanceWithContext(ctx aws.Context, input *StartMaintenanceInput, opts ...request.Option) (*StartMaintenanceOutput, error) {
+func (c *OpsWorksCM) StartMaintenanceWithContext(ctx aws.Context, input *StartMaintenanceInput, opts ...aws.Option) (*StartMaintenanceOutput, error) {
 	req, out := c.StartMaintenanceRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1228,7 +1227,7 @@ func (c *OpsWorksCM) StartMaintenanceWithContext(ctx aws.Context, input *StartMa
 
 const opUpdateServer = "UpdateServer"
 
-// UpdateServerRequest generates a "aws/request.Request" representing the
+// UpdateServerRequest generates a "aws.Request" representing the
 // client's request for the UpdateServer operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1252,8 +1251,8 @@ const opUpdateServer = "UpdateServer"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServer
-func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) (req *request.Request, output *UpdateServerOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) (req *aws.Request, output *UpdateServerOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateServer,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1307,7 +1306,7 @@ func (c *OpsWorksCM) UpdateServer(input *UpdateServerInput) (*UpdateServerOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) UpdateServerWithContext(ctx aws.Context, input *UpdateServerInput, opts ...request.Option) (*UpdateServerOutput, error) {
+func (c *OpsWorksCM) UpdateServerWithContext(ctx aws.Context, input *UpdateServerInput, opts ...aws.Option) (*UpdateServerOutput, error) {
 	req, out := c.UpdateServerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1316,7 +1315,7 @@ func (c *OpsWorksCM) UpdateServerWithContext(ctx aws.Context, input *UpdateServe
 
 const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 
-// UpdateServerEngineAttributesRequest generates a "aws/request.Request" representing the
+// UpdateServerEngineAttributesRequest generates a "aws.Request" representing the
 // client's request for the UpdateServerEngineAttributes operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1340,8 +1339,8 @@ const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributes
-func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAttributesInput) (req *request.Request, output *UpdateServerEngineAttributesOutput) {
-	op := &request.Operation{
+func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngineAttributesInput) (req *aws.Request, output *UpdateServerEngineAttributesOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateServerEngineAttributes,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1403,7 +1402,7 @@ func (c *OpsWorksCM) UpdateServerEngineAttributes(input *UpdateServerEngineAttri
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *OpsWorksCM) UpdateServerEngineAttributesWithContext(ctx aws.Context, input *UpdateServerEngineAttributesInput, opts ...request.Option) (*UpdateServerEngineAttributesOutput, error) {
+func (c *OpsWorksCM) UpdateServerEngineAttributesWithContext(ctx aws.Context, input *UpdateServerEngineAttributesInput, opts ...aws.Option) (*UpdateServerEngineAttributesOutput, error) {
 	req, out := c.UpdateServerEngineAttributesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1501,18 +1500,18 @@ func (s AssociateNodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociateNodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "AssociateNodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateNodeInput"}
 	if s.EngineAttributes == nil {
-		invalidParams.Add(request.NewErrParamRequired("EngineAttributes"))
+		invalidParams.Add(aws.NewErrParamRequired("EngineAttributes"))
 	}
 	if s.NodeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeName"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeName"))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1830,12 +1829,12 @@ func (s CreateBackupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateBackupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateBackupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupInput"}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2033,24 +2032,24 @@ func (s CreateServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateServerInput"}
 	if s.BackupRetentionCount != nil && *s.BackupRetentionCount < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("BackupRetentionCount", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("BackupRetentionCount", 1))
 	}
 	if s.InstanceProfileArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceProfileArn"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceProfileArn"))
 	}
 	if s.InstanceType == nil {
-		invalidParams.Add(request.NewErrParamRequired("InstanceType"))
+		invalidParams.Add(aws.NewErrParamRequired("InstanceType"))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 	if s.ServiceRoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServiceRoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("ServiceRoleArn"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2208,9 +2207,9 @@ func (s DeleteBackupInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteBackupInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteBackupInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupInput"}
 	if s.BackupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BackupId"))
+		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2262,12 +2261,12 @@ func (s DeleteServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteServerInput"}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2376,12 +2375,12 @@ func (s DescribeBackupsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeBackupsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeBackupsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBackupsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2493,15 +2492,15 @@ func (s DescribeEventsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeEventsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeEventsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeEventsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2595,15 +2594,15 @@ func (s DescribeNodeAssociationStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeNodeAssociationStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeNodeAssociationStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNodeAssociationStatusInput"}
 	if s.NodeAssociationStatusToken == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeAssociationStatusToken"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeAssociationStatusToken"))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2702,12 +2701,12 @@ func (s DescribeServersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeServersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DescribeServersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeServersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2809,15 +2808,15 @@ func (s DisassociateNodeInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociateNodeInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DisassociateNodeInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateNodeInput"}
 	if s.NodeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeName"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeName"))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2940,15 +2939,15 @@ func (s RestoreServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RestoreServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "RestoreServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreServerInput"}
 	if s.BackupId == nil {
-		invalidParams.Add(request.NewErrParamRequired("BackupId"))
+		invalidParams.Add(aws.NewErrParamRequired("BackupId"))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3322,12 +3321,12 @@ func (s StartMaintenanceInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartMaintenanceInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartMaintenanceInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartMaintenanceInput"}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3402,18 +3401,18 @@ func (s UpdateServerEngineAttributesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServerEngineAttributesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateServerEngineAttributesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateServerEngineAttributesInput"}
 	if s.AttributeName == nil {
-		invalidParams.Add(request.NewErrParamRequired("AttributeName"))
+		invalidParams.Add(aws.NewErrParamRequired("AttributeName"))
 	}
 	if s.AttributeName != nil && len(*s.AttributeName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AttributeName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AttributeName", 1))
 	}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3505,12 +3504,12 @@ func (s UpdateServerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateServerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateServerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateServerInput"}
 	if s.ServerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ServerName"))
+		invalidParams.Add(aws.NewErrParamRequired("ServerName"))
 	}
 	if s.ServerName != nil && len(*s.ServerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ServerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ServerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {

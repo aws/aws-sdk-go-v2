@@ -10,12 +10,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-func exit(msg ...interface{}) {
-	fmt.Fprintln(os.Stderr, msg...)
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
 
@@ -35,15 +35,14 @@ func main() {
 		go func(acc string) {
 			defer wg.Done()
 
-			sess, err := session.NewSessionWithOptions(session.Options{
-				Profile: acc,
-			})
+			cfg, err := external.LoadDefaultAWSConfig(
+				external.WithSharedConfigProfile(acc),
+			)
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "failed to create session for account, %s, %v\n", acc, err)
-				return
+				exitErrorf("failed to load config for account, %s, %v\n", acc, err)
 			}
-			if err = getAccountBuckets(sess, bucketCh, acc); err != nil {
-				fmt.Fprintf(os.Stderr, "failed to get account %s's bucket info, %v\n", acc, err)
+			if err = getAccountBuckets(cfg, bucketCh, acc); err != nil {
+				exitErrorf("failed to get account %s's bucket info, %v\n", acc, err)
 			}
 		}(acc)
 	}
@@ -65,7 +64,7 @@ func main() {
 	sortBuckets(buckets)
 	for _, b := range buckets {
 		if b.Error != nil {
-			fmt.Printf("Bucket %s, owned by: %s, failed: %v\n", b.Name, b.Owner, b.Error)
+			fmt.Fprintf(os.Stderr, "Bucket %s, owned by: %s, failed: %v\n", b.Name, b.Owner, b.Error)
 			continue
 		}
 
@@ -101,8 +100,8 @@ func (s sortalbeBuckets) Less(a, b int) bool {
 	return false
 }
 
-func getAccountBuckets(sess *session.Session, bucketCh chan<- *Bucket, owner string) error {
-	svc := s3.New(sess)
+func getAccountBuckets(cfg aws.Config, bucketCh chan<- *Bucket, owner string) error {
+	svc := s3.New(cfg)
 	buckets, err := listBuckets(svc)
 	if err != nil {
 		return fmt.Errorf("failed to list buckets, %v", err)
@@ -113,9 +112,9 @@ func getAccountBuckets(sess *session.Session, bucketCh chan<- *Bucket, owner str
 			continue
 		}
 
-		bckSvc := s3.New(sess, &aws.Config{
-			Region:      aws.String(bucket.Region),
-			Credentials: svc.Config.Credentials,
+		bckSvc := s3.New(cfg, &aws.Config{
+			Region:            aws.String(bucket.Region),
+			CredentialsLoader: svc.Config.CredentialsLoader,
 		})
 		bucketDetails(bckSvc, bucket)
 		bucketCh <- bucket

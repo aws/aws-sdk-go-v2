@@ -10,7 +10,6 @@ package migrationhubiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := migrationhub.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := migrationhub.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,68 +64,68 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type MigrationHubAPI interface {
 	AssociateCreatedArtifact(*migrationhub.AssociateCreatedArtifactInput) (*migrationhub.AssociateCreatedArtifactOutput, error)
-	AssociateCreatedArtifactWithContext(aws.Context, *migrationhub.AssociateCreatedArtifactInput, ...request.Option) (*migrationhub.AssociateCreatedArtifactOutput, error)
-	AssociateCreatedArtifactRequest(*migrationhub.AssociateCreatedArtifactInput) (*request.Request, *migrationhub.AssociateCreatedArtifactOutput)
+	AssociateCreatedArtifactWithContext(aws.Context, *migrationhub.AssociateCreatedArtifactInput, ...aws.Option) (*migrationhub.AssociateCreatedArtifactOutput, error)
+	AssociateCreatedArtifactRequest(*migrationhub.AssociateCreatedArtifactInput) (*aws.Request, *migrationhub.AssociateCreatedArtifactOutput)
 
 	AssociateDiscoveredResource(*migrationhub.AssociateDiscoveredResourceInput) (*migrationhub.AssociateDiscoveredResourceOutput, error)
-	AssociateDiscoveredResourceWithContext(aws.Context, *migrationhub.AssociateDiscoveredResourceInput, ...request.Option) (*migrationhub.AssociateDiscoveredResourceOutput, error)
-	AssociateDiscoveredResourceRequest(*migrationhub.AssociateDiscoveredResourceInput) (*request.Request, *migrationhub.AssociateDiscoveredResourceOutput)
+	AssociateDiscoveredResourceWithContext(aws.Context, *migrationhub.AssociateDiscoveredResourceInput, ...aws.Option) (*migrationhub.AssociateDiscoveredResourceOutput, error)
+	AssociateDiscoveredResourceRequest(*migrationhub.AssociateDiscoveredResourceInput) (*aws.Request, *migrationhub.AssociateDiscoveredResourceOutput)
 
 	CreateProgressUpdateStream(*migrationhub.CreateProgressUpdateStreamInput) (*migrationhub.CreateProgressUpdateStreamOutput, error)
-	CreateProgressUpdateStreamWithContext(aws.Context, *migrationhub.CreateProgressUpdateStreamInput, ...request.Option) (*migrationhub.CreateProgressUpdateStreamOutput, error)
-	CreateProgressUpdateStreamRequest(*migrationhub.CreateProgressUpdateStreamInput) (*request.Request, *migrationhub.CreateProgressUpdateStreamOutput)
+	CreateProgressUpdateStreamWithContext(aws.Context, *migrationhub.CreateProgressUpdateStreamInput, ...aws.Option) (*migrationhub.CreateProgressUpdateStreamOutput, error)
+	CreateProgressUpdateStreamRequest(*migrationhub.CreateProgressUpdateStreamInput) (*aws.Request, *migrationhub.CreateProgressUpdateStreamOutput)
 
 	DeleteProgressUpdateStream(*migrationhub.DeleteProgressUpdateStreamInput) (*migrationhub.DeleteProgressUpdateStreamOutput, error)
-	DeleteProgressUpdateStreamWithContext(aws.Context, *migrationhub.DeleteProgressUpdateStreamInput, ...request.Option) (*migrationhub.DeleteProgressUpdateStreamOutput, error)
-	DeleteProgressUpdateStreamRequest(*migrationhub.DeleteProgressUpdateStreamInput) (*request.Request, *migrationhub.DeleteProgressUpdateStreamOutput)
+	DeleteProgressUpdateStreamWithContext(aws.Context, *migrationhub.DeleteProgressUpdateStreamInput, ...aws.Option) (*migrationhub.DeleteProgressUpdateStreamOutput, error)
+	DeleteProgressUpdateStreamRequest(*migrationhub.DeleteProgressUpdateStreamInput) (*aws.Request, *migrationhub.DeleteProgressUpdateStreamOutput)
 
 	DescribeApplicationState(*migrationhub.DescribeApplicationStateInput) (*migrationhub.DescribeApplicationStateOutput, error)
-	DescribeApplicationStateWithContext(aws.Context, *migrationhub.DescribeApplicationStateInput, ...request.Option) (*migrationhub.DescribeApplicationStateOutput, error)
-	DescribeApplicationStateRequest(*migrationhub.DescribeApplicationStateInput) (*request.Request, *migrationhub.DescribeApplicationStateOutput)
+	DescribeApplicationStateWithContext(aws.Context, *migrationhub.DescribeApplicationStateInput, ...aws.Option) (*migrationhub.DescribeApplicationStateOutput, error)
+	DescribeApplicationStateRequest(*migrationhub.DescribeApplicationStateInput) (*aws.Request, *migrationhub.DescribeApplicationStateOutput)
 
 	DescribeMigrationTask(*migrationhub.DescribeMigrationTaskInput) (*migrationhub.DescribeMigrationTaskOutput, error)
-	DescribeMigrationTaskWithContext(aws.Context, *migrationhub.DescribeMigrationTaskInput, ...request.Option) (*migrationhub.DescribeMigrationTaskOutput, error)
-	DescribeMigrationTaskRequest(*migrationhub.DescribeMigrationTaskInput) (*request.Request, *migrationhub.DescribeMigrationTaskOutput)
+	DescribeMigrationTaskWithContext(aws.Context, *migrationhub.DescribeMigrationTaskInput, ...aws.Option) (*migrationhub.DescribeMigrationTaskOutput, error)
+	DescribeMigrationTaskRequest(*migrationhub.DescribeMigrationTaskInput) (*aws.Request, *migrationhub.DescribeMigrationTaskOutput)
 
 	DisassociateCreatedArtifact(*migrationhub.DisassociateCreatedArtifactInput) (*migrationhub.DisassociateCreatedArtifactOutput, error)
-	DisassociateCreatedArtifactWithContext(aws.Context, *migrationhub.DisassociateCreatedArtifactInput, ...request.Option) (*migrationhub.DisassociateCreatedArtifactOutput, error)
-	DisassociateCreatedArtifactRequest(*migrationhub.DisassociateCreatedArtifactInput) (*request.Request, *migrationhub.DisassociateCreatedArtifactOutput)
+	DisassociateCreatedArtifactWithContext(aws.Context, *migrationhub.DisassociateCreatedArtifactInput, ...aws.Option) (*migrationhub.DisassociateCreatedArtifactOutput, error)
+	DisassociateCreatedArtifactRequest(*migrationhub.DisassociateCreatedArtifactInput) (*aws.Request, *migrationhub.DisassociateCreatedArtifactOutput)
 
 	DisassociateDiscoveredResource(*migrationhub.DisassociateDiscoveredResourceInput) (*migrationhub.DisassociateDiscoveredResourceOutput, error)
-	DisassociateDiscoveredResourceWithContext(aws.Context, *migrationhub.DisassociateDiscoveredResourceInput, ...request.Option) (*migrationhub.DisassociateDiscoveredResourceOutput, error)
-	DisassociateDiscoveredResourceRequest(*migrationhub.DisassociateDiscoveredResourceInput) (*request.Request, *migrationhub.DisassociateDiscoveredResourceOutput)
+	DisassociateDiscoveredResourceWithContext(aws.Context, *migrationhub.DisassociateDiscoveredResourceInput, ...aws.Option) (*migrationhub.DisassociateDiscoveredResourceOutput, error)
+	DisassociateDiscoveredResourceRequest(*migrationhub.DisassociateDiscoveredResourceInput) (*aws.Request, *migrationhub.DisassociateDiscoveredResourceOutput)
 
 	ImportMigrationTask(*migrationhub.ImportMigrationTaskInput) (*migrationhub.ImportMigrationTaskOutput, error)
-	ImportMigrationTaskWithContext(aws.Context, *migrationhub.ImportMigrationTaskInput, ...request.Option) (*migrationhub.ImportMigrationTaskOutput, error)
-	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) (*request.Request, *migrationhub.ImportMigrationTaskOutput)
+	ImportMigrationTaskWithContext(aws.Context, *migrationhub.ImportMigrationTaskInput, ...aws.Option) (*migrationhub.ImportMigrationTaskOutput, error)
+	ImportMigrationTaskRequest(*migrationhub.ImportMigrationTaskInput) (*aws.Request, *migrationhub.ImportMigrationTaskOutput)
 
 	ListCreatedArtifacts(*migrationhub.ListCreatedArtifactsInput) (*migrationhub.ListCreatedArtifactsOutput, error)
-	ListCreatedArtifactsWithContext(aws.Context, *migrationhub.ListCreatedArtifactsInput, ...request.Option) (*migrationhub.ListCreatedArtifactsOutput, error)
-	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) (*request.Request, *migrationhub.ListCreatedArtifactsOutput)
+	ListCreatedArtifactsWithContext(aws.Context, *migrationhub.ListCreatedArtifactsInput, ...aws.Option) (*migrationhub.ListCreatedArtifactsOutput, error)
+	ListCreatedArtifactsRequest(*migrationhub.ListCreatedArtifactsInput) (*aws.Request, *migrationhub.ListCreatedArtifactsOutput)
 
 	ListDiscoveredResources(*migrationhub.ListDiscoveredResourcesInput) (*migrationhub.ListDiscoveredResourcesOutput, error)
-	ListDiscoveredResourcesWithContext(aws.Context, *migrationhub.ListDiscoveredResourcesInput, ...request.Option) (*migrationhub.ListDiscoveredResourcesOutput, error)
-	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) (*request.Request, *migrationhub.ListDiscoveredResourcesOutput)
+	ListDiscoveredResourcesWithContext(aws.Context, *migrationhub.ListDiscoveredResourcesInput, ...aws.Option) (*migrationhub.ListDiscoveredResourcesOutput, error)
+	ListDiscoveredResourcesRequest(*migrationhub.ListDiscoveredResourcesInput) (*aws.Request, *migrationhub.ListDiscoveredResourcesOutput)
 
 	ListMigrationTasks(*migrationhub.ListMigrationTasksInput) (*migrationhub.ListMigrationTasksOutput, error)
-	ListMigrationTasksWithContext(aws.Context, *migrationhub.ListMigrationTasksInput, ...request.Option) (*migrationhub.ListMigrationTasksOutput, error)
-	ListMigrationTasksRequest(*migrationhub.ListMigrationTasksInput) (*request.Request, *migrationhub.ListMigrationTasksOutput)
+	ListMigrationTasksWithContext(aws.Context, *migrationhub.ListMigrationTasksInput, ...aws.Option) (*migrationhub.ListMigrationTasksOutput, error)
+	ListMigrationTasksRequest(*migrationhub.ListMigrationTasksInput) (*aws.Request, *migrationhub.ListMigrationTasksOutput)
 
 	ListProgressUpdateStreams(*migrationhub.ListProgressUpdateStreamsInput) (*migrationhub.ListProgressUpdateStreamsOutput, error)
-	ListProgressUpdateStreamsWithContext(aws.Context, *migrationhub.ListProgressUpdateStreamsInput, ...request.Option) (*migrationhub.ListProgressUpdateStreamsOutput, error)
-	ListProgressUpdateStreamsRequest(*migrationhub.ListProgressUpdateStreamsInput) (*request.Request, *migrationhub.ListProgressUpdateStreamsOutput)
+	ListProgressUpdateStreamsWithContext(aws.Context, *migrationhub.ListProgressUpdateStreamsInput, ...aws.Option) (*migrationhub.ListProgressUpdateStreamsOutput, error)
+	ListProgressUpdateStreamsRequest(*migrationhub.ListProgressUpdateStreamsInput) (*aws.Request, *migrationhub.ListProgressUpdateStreamsOutput)
 
 	NotifyApplicationState(*migrationhub.NotifyApplicationStateInput) (*migrationhub.NotifyApplicationStateOutput, error)
-	NotifyApplicationStateWithContext(aws.Context, *migrationhub.NotifyApplicationStateInput, ...request.Option) (*migrationhub.NotifyApplicationStateOutput, error)
-	NotifyApplicationStateRequest(*migrationhub.NotifyApplicationStateInput) (*request.Request, *migrationhub.NotifyApplicationStateOutput)
+	NotifyApplicationStateWithContext(aws.Context, *migrationhub.NotifyApplicationStateInput, ...aws.Option) (*migrationhub.NotifyApplicationStateOutput, error)
+	NotifyApplicationStateRequest(*migrationhub.NotifyApplicationStateInput) (*aws.Request, *migrationhub.NotifyApplicationStateOutput)
 
 	NotifyMigrationTaskState(*migrationhub.NotifyMigrationTaskStateInput) (*migrationhub.NotifyMigrationTaskStateOutput, error)
-	NotifyMigrationTaskStateWithContext(aws.Context, *migrationhub.NotifyMigrationTaskStateInput, ...request.Option) (*migrationhub.NotifyMigrationTaskStateOutput, error)
-	NotifyMigrationTaskStateRequest(*migrationhub.NotifyMigrationTaskStateInput) (*request.Request, *migrationhub.NotifyMigrationTaskStateOutput)
+	NotifyMigrationTaskStateWithContext(aws.Context, *migrationhub.NotifyMigrationTaskStateInput, ...aws.Option) (*migrationhub.NotifyMigrationTaskStateOutput, error)
+	NotifyMigrationTaskStateRequest(*migrationhub.NotifyMigrationTaskStateInput) (*aws.Request, *migrationhub.NotifyMigrationTaskStateOutput)
 
 	PutResourceAttributes(*migrationhub.PutResourceAttributesInput) (*migrationhub.PutResourceAttributesOutput, error)
-	PutResourceAttributesWithContext(aws.Context, *migrationhub.PutResourceAttributesInput, ...request.Option) (*migrationhub.PutResourceAttributesOutput, error)
-	PutResourceAttributesRequest(*migrationhub.PutResourceAttributesInput) (*request.Request, *migrationhub.PutResourceAttributesOutput)
+	PutResourceAttributesWithContext(aws.Context, *migrationhub.PutResourceAttributesInput, ...aws.Option) (*migrationhub.PutResourceAttributesOutput, error)
+	PutResourceAttributesRequest(*migrationhub.PutResourceAttributesInput) (*aws.Request, *migrationhub.PutResourceAttributesOutput)
 }
 
 var _ MigrationHubAPI = (*migrationhub.MigrationHub)(nil)

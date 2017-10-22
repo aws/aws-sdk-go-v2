@@ -6,9 +6,14 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
+
+func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, msg+"\n", args...)
+	os.Exit(1)
+}
 
 // Lists all objects in a bucket using pagination
 //
@@ -16,16 +21,18 @@ import (
 // listObjects <bucket>
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("you must specify a bucket")
-		return
+		exitErrorf("you must specify a bucket")
 	}
 
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		exitErrorf("failed to load config, %v", err)
+	}
 
-	svc := s3.New(sess)
+	svc := s3.New(cfg)
 
 	i := 0
-	err := svc.ListObjectsPages(&s3.ListObjectsInput{
+	err = svc.ListObjectsPages(&s3.ListObjectsInput{
 		Bucket: &os.Args[1],
 	}, func(p *s3.ListObjectsOutput, last bool) (shouldContinue bool) {
 		fmt.Println("Page,", i)
@@ -37,7 +44,6 @@ func main() {
 		return true
 	})
 	if err != nil {
-		fmt.Println("failed to list objects", err)
-		return
+		exitErrorf("failed to list objects, %v", err)
 	}
 }

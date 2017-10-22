@@ -10,7 +10,6 @@ package iotdataplaneiface
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 )
 
@@ -30,8 +29,12 @@ import (
 //    }
 //
 //    func main() {
-//        sess := session.New()
-//        svc := iotdataplane.New(sess)
+//        cfg, err := external.LoadDefaultAWSConfig()
+//        if err != nil {
+//            panic("failed to load config, " + err.Error())
+//        }
+//
+//        svc := iotdataplane.New(cfg)
 //
 //        myFunc(svc)
 //    }
@@ -61,20 +64,20 @@ import (
 // tooling to generate mocks to satisfy the interfaces.
 type IoTDataPlaneAPI interface {
 	DeleteThingShadow(*iotdataplane.DeleteThingShadowInput) (*iotdataplane.DeleteThingShadowOutput, error)
-	DeleteThingShadowWithContext(aws.Context, *iotdataplane.DeleteThingShadowInput, ...request.Option) (*iotdataplane.DeleteThingShadowOutput, error)
-	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) (*request.Request, *iotdataplane.DeleteThingShadowOutput)
+	DeleteThingShadowWithContext(aws.Context, *iotdataplane.DeleteThingShadowInput, ...aws.Option) (*iotdataplane.DeleteThingShadowOutput, error)
+	DeleteThingShadowRequest(*iotdataplane.DeleteThingShadowInput) (*aws.Request, *iotdataplane.DeleteThingShadowOutput)
 
 	GetThingShadow(*iotdataplane.GetThingShadowInput) (*iotdataplane.GetThingShadowOutput, error)
-	GetThingShadowWithContext(aws.Context, *iotdataplane.GetThingShadowInput, ...request.Option) (*iotdataplane.GetThingShadowOutput, error)
-	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) (*request.Request, *iotdataplane.GetThingShadowOutput)
+	GetThingShadowWithContext(aws.Context, *iotdataplane.GetThingShadowInput, ...aws.Option) (*iotdataplane.GetThingShadowOutput, error)
+	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) (*aws.Request, *iotdataplane.GetThingShadowOutput)
 
 	Publish(*iotdataplane.PublishInput) (*iotdataplane.PublishOutput, error)
-	PublishWithContext(aws.Context, *iotdataplane.PublishInput, ...request.Option) (*iotdataplane.PublishOutput, error)
-	PublishRequest(*iotdataplane.PublishInput) (*request.Request, *iotdataplane.PublishOutput)
+	PublishWithContext(aws.Context, *iotdataplane.PublishInput, ...aws.Option) (*iotdataplane.PublishOutput, error)
+	PublishRequest(*iotdataplane.PublishInput) (*aws.Request, *iotdataplane.PublishOutput)
 
 	UpdateThingShadow(*iotdataplane.UpdateThingShadowInput) (*iotdataplane.UpdateThingShadowOutput, error)
-	UpdateThingShadowWithContext(aws.Context, *iotdataplane.UpdateThingShadowInput, ...request.Option) (*iotdataplane.UpdateThingShadowOutput, error)
-	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) (*request.Request, *iotdataplane.UpdateThingShadowOutput)
+	UpdateThingShadowWithContext(aws.Context, *iotdataplane.UpdateThingShadowInput, ...aws.Option) (*iotdataplane.UpdateThingShadowOutput, error)
+	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) (*aws.Request, *iotdataplane.UpdateThingShadowOutput)
 }
 
 var _ IoTDataPlaneAPI = (*iotdataplane.IoTDataPlane)(nil)

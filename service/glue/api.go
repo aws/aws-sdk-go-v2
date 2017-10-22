@@ -7,13 +7,12 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awsutil"
-	"github.com/aws/aws-sdk-go-v2/aws/request"
+	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
 const opBatchCreatePartition = "BatchCreatePartition"
 
-// BatchCreatePartitionRequest generates a "aws/request.Request" representing the
+// BatchCreatePartitionRequest generates a "aws.Request" representing the
 // client's request for the BatchCreatePartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -37,8 +36,8 @@ const opBatchCreatePartition = "BatchCreatePartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchCreatePartition
-func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) (req *request.Request, output *BatchCreatePartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) (req *aws.Request, output *BatchCreatePartitionOutput) {
+	op := &aws.Operation{
 		Name:       opBatchCreatePartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -98,7 +97,7 @@ func (c *Glue) BatchCreatePartition(input *BatchCreatePartitionInput) (*BatchCre
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) BatchCreatePartitionWithContext(ctx aws.Context, input *BatchCreatePartitionInput, opts ...request.Option) (*BatchCreatePartitionOutput, error) {
+func (c *Glue) BatchCreatePartitionWithContext(ctx aws.Context, input *BatchCreatePartitionInput, opts ...aws.Option) (*BatchCreatePartitionOutput, error) {
 	req, out := c.BatchCreatePartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -107,7 +106,7 @@ func (c *Glue) BatchCreatePartitionWithContext(ctx aws.Context, input *BatchCrea
 
 const opBatchDeleteConnection = "BatchDeleteConnection"
 
-// BatchDeleteConnectionRequest generates a "aws/request.Request" representing the
+// BatchDeleteConnectionRequest generates a "aws.Request" representing the
 // client's request for the BatchDeleteConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -131,8 +130,8 @@ const opBatchDeleteConnection = "BatchDeleteConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteConnection
-func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) (req *request.Request, output *BatchDeleteConnectionOutput) {
-	op := &request.Operation{
+func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) (req *aws.Request, output *BatchDeleteConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opBatchDeleteConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -180,7 +179,7 @@ func (c *Glue) BatchDeleteConnection(input *BatchDeleteConnectionInput) (*BatchD
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) BatchDeleteConnectionWithContext(ctx aws.Context, input *BatchDeleteConnectionInput, opts ...request.Option) (*BatchDeleteConnectionOutput, error) {
+func (c *Glue) BatchDeleteConnectionWithContext(ctx aws.Context, input *BatchDeleteConnectionInput, opts ...aws.Option) (*BatchDeleteConnectionOutput, error) {
 	req, out := c.BatchDeleteConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -189,7 +188,7 @@ func (c *Glue) BatchDeleteConnectionWithContext(ctx aws.Context, input *BatchDel
 
 const opBatchDeletePartition = "BatchDeletePartition"
 
-// BatchDeletePartitionRequest generates a "aws/request.Request" representing the
+// BatchDeletePartitionRequest generates a "aws.Request" representing the
 // client's request for the BatchDeletePartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -213,8 +212,8 @@ const opBatchDeletePartition = "BatchDeletePartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeletePartition
-func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) (req *request.Request, output *BatchDeletePartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) (req *aws.Request, output *BatchDeletePartitionOutput) {
+	op := &aws.Operation{
 		Name:       opBatchDeletePartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -268,7 +267,7 @@ func (c *Glue) BatchDeletePartition(input *BatchDeletePartitionInput) (*BatchDel
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) BatchDeletePartitionWithContext(ctx aws.Context, input *BatchDeletePartitionInput, opts ...request.Option) (*BatchDeletePartitionOutput, error) {
+func (c *Glue) BatchDeletePartitionWithContext(ctx aws.Context, input *BatchDeletePartitionInput, opts ...aws.Option) (*BatchDeletePartitionOutput, error) {
 	req, out := c.BatchDeletePartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -277,7 +276,7 @@ func (c *Glue) BatchDeletePartitionWithContext(ctx aws.Context, input *BatchDele
 
 const opBatchDeleteTable = "BatchDeleteTable"
 
-// BatchDeleteTableRequest generates a "aws/request.Request" representing the
+// BatchDeleteTableRequest generates a "aws.Request" representing the
 // client's request for the BatchDeleteTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -301,8 +300,8 @@ const opBatchDeleteTable = "BatchDeleteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTable
-func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) (req *request.Request, output *BatchDeleteTableOutput) {
-	op := &request.Operation{
+func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) (req *aws.Request, output *BatchDeleteTableOutput) {
+	op := &aws.Operation{
 		Name:       opBatchDeleteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -356,7 +355,7 @@ func (c *Glue) BatchDeleteTable(input *BatchDeleteTableInput) (*BatchDeleteTable
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) BatchDeleteTableWithContext(ctx aws.Context, input *BatchDeleteTableInput, opts ...request.Option) (*BatchDeleteTableOutput, error) {
+func (c *Glue) BatchDeleteTableWithContext(ctx aws.Context, input *BatchDeleteTableInput, opts ...aws.Option) (*BatchDeleteTableOutput, error) {
 	req, out := c.BatchDeleteTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -365,7 +364,7 @@ func (c *Glue) BatchDeleteTableWithContext(ctx aws.Context, input *BatchDeleteTa
 
 const opBatchGetPartition = "BatchGetPartition"
 
-// BatchGetPartitionRequest generates a "aws/request.Request" representing the
+// BatchGetPartitionRequest generates a "aws.Request" representing the
 // client's request for the BatchGetPartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -389,8 +388,8 @@ const opBatchGetPartition = "BatchGetPartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartition
-func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) (req *request.Request, output *BatchGetPartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) (req *aws.Request, output *BatchGetPartitionOutput) {
+	op := &aws.Operation{
 		Name:       opBatchGetPartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -444,7 +443,7 @@ func (c *Glue) BatchGetPartition(input *BatchGetPartitionInput) (*BatchGetPartit
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) BatchGetPartitionWithContext(ctx aws.Context, input *BatchGetPartitionInput, opts ...request.Option) (*BatchGetPartitionOutput, error) {
+func (c *Glue) BatchGetPartitionWithContext(ctx aws.Context, input *BatchGetPartitionInput, opts ...aws.Option) (*BatchGetPartitionOutput, error) {
 	req, out := c.BatchGetPartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -453,7 +452,7 @@ func (c *Glue) BatchGetPartitionWithContext(ctx aws.Context, input *BatchGetPart
 
 const opCreateClassifier = "CreateClassifier"
 
-// CreateClassifierRequest generates a "aws/request.Request" representing the
+// CreateClassifierRequest generates a "aws.Request" representing the
 // client's request for the CreateClassifier operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -477,8 +476,8 @@ const opCreateClassifier = "CreateClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifier
-func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) (req *request.Request, output *CreateClassifierOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) (req *aws.Request, output *CreateClassifierOutput) {
+	op := &aws.Operation{
 		Name:       opCreateClassifier,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -529,7 +528,7 @@ func (c *Glue) CreateClassifier(input *CreateClassifierInput) (*CreateClassifier
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateClassifierWithContext(ctx aws.Context, input *CreateClassifierInput, opts ...request.Option) (*CreateClassifierOutput, error) {
+func (c *Glue) CreateClassifierWithContext(ctx aws.Context, input *CreateClassifierInput, opts ...aws.Option) (*CreateClassifierOutput, error) {
 	req, out := c.CreateClassifierRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -538,7 +537,7 @@ func (c *Glue) CreateClassifierWithContext(ctx aws.Context, input *CreateClassif
 
 const opCreateConnection = "CreateConnection"
 
-// CreateConnectionRequest generates a "aws/request.Request" representing the
+// CreateConnectionRequest generates a "aws.Request" representing the
 // client's request for the CreateConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -562,8 +561,8 @@ const opCreateConnection = "CreateConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnection
-func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) (req *request.Request, output *CreateConnectionOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) (req *aws.Request, output *CreateConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -614,7 +613,7 @@ func (c *Glue) CreateConnection(input *CreateConnectionInput) (*CreateConnection
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateConnectionWithContext(ctx aws.Context, input *CreateConnectionInput, opts ...request.Option) (*CreateConnectionOutput, error) {
+func (c *Glue) CreateConnectionWithContext(ctx aws.Context, input *CreateConnectionInput, opts ...aws.Option) (*CreateConnectionOutput, error) {
 	req, out := c.CreateConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -623,7 +622,7 @@ func (c *Glue) CreateConnectionWithContext(ctx aws.Context, input *CreateConnect
 
 const opCreateCrawler = "CreateCrawler"
 
-// CreateCrawlerRequest generates a "aws/request.Request" representing the
+// CreateCrawlerRequest generates a "aws.Request" representing the
 // client's request for the CreateCrawler operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -647,8 +646,8 @@ const opCreateCrawler = "CreateCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawler
-func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) (req *request.Request, output *CreateCrawlerOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) (req *aws.Request, output *CreateCrawlerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateCrawler,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -704,7 +703,7 @@ func (c *Glue) CreateCrawler(input *CreateCrawlerInput) (*CreateCrawlerOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateCrawlerWithContext(ctx aws.Context, input *CreateCrawlerInput, opts ...request.Option) (*CreateCrawlerOutput, error) {
+func (c *Glue) CreateCrawlerWithContext(ctx aws.Context, input *CreateCrawlerInput, opts ...aws.Option) (*CreateCrawlerOutput, error) {
 	req, out := c.CreateCrawlerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -713,7 +712,7 @@ func (c *Glue) CreateCrawlerWithContext(ctx aws.Context, input *CreateCrawlerInp
 
 const opCreateDatabase = "CreateDatabase"
 
-// CreateDatabaseRequest generates a "aws/request.Request" representing the
+// CreateDatabaseRequest generates a "aws.Request" representing the
 // client's request for the CreateDatabase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -737,8 +736,8 @@ const opCreateDatabase = "CreateDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDatabase
-func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) (req *request.Request, output *CreateDatabaseOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) (req *aws.Request, output *CreateDatabaseOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDatabase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -795,7 +794,7 @@ func (c *Glue) CreateDatabase(input *CreateDatabaseInput) (*CreateDatabaseOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateDatabaseWithContext(ctx aws.Context, input *CreateDatabaseInput, opts ...request.Option) (*CreateDatabaseOutput, error) {
+func (c *Glue) CreateDatabaseWithContext(ctx aws.Context, input *CreateDatabaseInput, opts ...aws.Option) (*CreateDatabaseOutput, error) {
 	req, out := c.CreateDatabaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -804,7 +803,7 @@ func (c *Glue) CreateDatabaseWithContext(ctx aws.Context, input *CreateDatabaseI
 
 const opCreateDevEndpoint = "CreateDevEndpoint"
 
-// CreateDevEndpointRequest generates a "aws/request.Request" representing the
+// CreateDevEndpointRequest generates a "aws.Request" representing the
 // client's request for the CreateDevEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -828,8 +827,8 @@ const opCreateDevEndpoint = "CreateDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateDevEndpoint
-func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) (req *request.Request, output *CreateDevEndpointOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) (req *aws.Request, output *CreateDevEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opCreateDevEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -895,7 +894,7 @@ func (c *Glue) CreateDevEndpoint(input *CreateDevEndpointInput) (*CreateDevEndpo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateDevEndpointWithContext(ctx aws.Context, input *CreateDevEndpointInput, opts ...request.Option) (*CreateDevEndpointOutput, error) {
+func (c *Glue) CreateDevEndpointWithContext(ctx aws.Context, input *CreateDevEndpointInput, opts ...aws.Option) (*CreateDevEndpointOutput, error) {
 	req, out := c.CreateDevEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -904,7 +903,7 @@ func (c *Glue) CreateDevEndpointWithContext(ctx aws.Context, input *CreateDevEnd
 
 const opCreateJob = "CreateJob"
 
-// CreateJobRequest generates a "aws/request.Request" representing the
+// CreateJobRequest generates a "aws.Request" representing the
 // client's request for the CreateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -928,8 +927,8 @@ const opCreateJob = "CreateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJob
-func (c *Glue) CreateJobRequest(input *CreateJobInput) (req *request.Request, output *CreateJobOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateJobRequest(input *CreateJobInput) (req *aws.Request, output *CreateJobOutput) {
+	op := &aws.Operation{
 		Name:       opCreateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -989,7 +988,7 @@ func (c *Glue) CreateJob(input *CreateJobInput) (*CreateJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...request.Option) (*CreateJobOutput, error) {
+func (c *Glue) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts ...aws.Option) (*CreateJobOutput, error) {
 	req, out := c.CreateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -998,7 +997,7 @@ func (c *Glue) CreateJobWithContext(ctx aws.Context, input *CreateJobInput, opts
 
 const opCreatePartition = "CreatePartition"
 
-// CreatePartitionRequest generates a "aws/request.Request" representing the
+// CreatePartitionRequest generates a "aws.Request" representing the
 // client's request for the CreatePartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1022,8 +1021,8 @@ const opCreatePartition = "CreatePartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreatePartition
-func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) (req *request.Request, output *CreatePartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) (req *aws.Request, output *CreatePartitionOutput) {
+	op := &aws.Operation{
 		Name:       opCreatePartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1083,7 +1082,7 @@ func (c *Glue) CreatePartition(input *CreatePartitionInput) (*CreatePartitionOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreatePartitionWithContext(ctx aws.Context, input *CreatePartitionInput, opts ...request.Option) (*CreatePartitionOutput, error) {
+func (c *Glue) CreatePartitionWithContext(ctx aws.Context, input *CreatePartitionInput, opts ...aws.Option) (*CreatePartitionOutput, error) {
 	req, out := c.CreatePartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1092,7 +1091,7 @@ func (c *Glue) CreatePartitionWithContext(ctx aws.Context, input *CreatePartitio
 
 const opCreateScript = "CreateScript"
 
-// CreateScriptRequest generates a "aws/request.Request" representing the
+// CreateScriptRequest generates a "aws.Request" representing the
 // client's request for the CreateScript operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1116,8 +1115,8 @@ const opCreateScript = "CreateScript"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScript
-func (c *Glue) CreateScriptRequest(input *CreateScriptInput) (req *request.Request, output *CreateScriptOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateScriptRequest(input *CreateScriptInput) (req *aws.Request, output *CreateScriptOutput) {
+	op := &aws.Operation{
 		Name:       opCreateScript,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1168,7 +1167,7 @@ func (c *Glue) CreateScript(input *CreateScriptInput) (*CreateScriptOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateScriptWithContext(ctx aws.Context, input *CreateScriptInput, opts ...request.Option) (*CreateScriptOutput, error) {
+func (c *Glue) CreateScriptWithContext(ctx aws.Context, input *CreateScriptInput, opts ...aws.Option) (*CreateScriptOutput, error) {
 	req, out := c.CreateScriptRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1177,7 +1176,7 @@ func (c *Glue) CreateScriptWithContext(ctx aws.Context, input *CreateScriptInput
 
 const opCreateTable = "CreateTable"
 
-// CreateTableRequest generates a "aws/request.Request" representing the
+// CreateTableRequest generates a "aws.Request" representing the
 // client's request for the CreateTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1201,8 +1200,8 @@ const opCreateTable = "CreateTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable
-func (c *Glue) CreateTableRequest(input *CreateTableInput) (req *request.Request, output *CreateTableOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateTableRequest(input *CreateTableInput) (req *aws.Request, output *CreateTableOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1262,7 +1261,7 @@ func (c *Glue) CreateTable(input *CreateTableInput) (*CreateTableOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, opts ...request.Option) (*CreateTableOutput, error) {
+func (c *Glue) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, opts ...aws.Option) (*CreateTableOutput, error) {
 	req, out := c.CreateTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1271,7 +1270,7 @@ func (c *Glue) CreateTableWithContext(ctx aws.Context, input *CreateTableInput, 
 
 const opCreateTrigger = "CreateTrigger"
 
-// CreateTriggerRequest generates a "aws/request.Request" representing the
+// CreateTriggerRequest generates a "aws.Request" representing the
 // client's request for the CreateTrigger operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1295,8 +1294,8 @@ const opCreateTrigger = "CreateTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTrigger
-func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) (req *request.Request, output *CreateTriggerOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) (req *aws.Request, output *CreateTriggerOutput) {
+	op := &aws.Operation{
 		Name:       opCreateTrigger,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1353,7 +1352,7 @@ func (c *Glue) CreateTrigger(input *CreateTriggerInput) (*CreateTriggerOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateTriggerWithContext(ctx aws.Context, input *CreateTriggerInput, opts ...request.Option) (*CreateTriggerOutput, error) {
+func (c *Glue) CreateTriggerWithContext(ctx aws.Context, input *CreateTriggerInput, opts ...aws.Option) (*CreateTriggerOutput, error) {
 	req, out := c.CreateTriggerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1362,7 +1361,7 @@ func (c *Glue) CreateTriggerWithContext(ctx aws.Context, input *CreateTriggerInp
 
 const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
 
-// CreateUserDefinedFunctionRequest generates a "aws/request.Request" representing the
+// CreateUserDefinedFunctionRequest generates a "aws.Request" representing the
 // client's request for the CreateUserDefinedFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1386,8 +1385,8 @@ const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUserDefinedFunction
-func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunctionInput) (req *request.Request, output *CreateUserDefinedFunctionOutput) {
-	op := &request.Operation{
+func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunctionInput) (req *aws.Request, output *CreateUserDefinedFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opCreateUserDefinedFunction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1444,7 +1443,7 @@ func (c *Glue) CreateUserDefinedFunction(input *CreateUserDefinedFunctionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) CreateUserDefinedFunctionWithContext(ctx aws.Context, input *CreateUserDefinedFunctionInput, opts ...request.Option) (*CreateUserDefinedFunctionOutput, error) {
+func (c *Glue) CreateUserDefinedFunctionWithContext(ctx aws.Context, input *CreateUserDefinedFunctionInput, opts ...aws.Option) (*CreateUserDefinedFunctionOutput, error) {
 	req, out := c.CreateUserDefinedFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1453,7 +1452,7 @@ func (c *Glue) CreateUserDefinedFunctionWithContext(ctx aws.Context, input *Crea
 
 const opDeleteClassifier = "DeleteClassifier"
 
-// DeleteClassifierRequest generates a "aws/request.Request" representing the
+// DeleteClassifierRequest generates a "aws.Request" representing the
 // client's request for the DeleteClassifier operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1477,8 +1476,8 @@ const opDeleteClassifier = "DeleteClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteClassifier
-func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) (req *request.Request, output *DeleteClassifierOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) (req *aws.Request, output *DeleteClassifierOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteClassifier,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1526,7 +1525,7 @@ func (c *Glue) DeleteClassifier(input *DeleteClassifierInput) (*DeleteClassifier
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteClassifierWithContext(ctx aws.Context, input *DeleteClassifierInput, opts ...request.Option) (*DeleteClassifierOutput, error) {
+func (c *Glue) DeleteClassifierWithContext(ctx aws.Context, input *DeleteClassifierInput, opts ...aws.Option) (*DeleteClassifierOutput, error) {
 	req, out := c.DeleteClassifierRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1535,7 +1534,7 @@ func (c *Glue) DeleteClassifierWithContext(ctx aws.Context, input *DeleteClassif
 
 const opDeleteConnection = "DeleteConnection"
 
-// DeleteConnectionRequest generates a "aws/request.Request" representing the
+// DeleteConnectionRequest generates a "aws.Request" representing the
 // client's request for the DeleteConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1559,8 +1558,8 @@ const opDeleteConnection = "DeleteConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteConnection
-func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) (req *request.Request, output *DeleteConnectionOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) (req *aws.Request, output *DeleteConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1608,7 +1607,7 @@ func (c *Glue) DeleteConnection(input *DeleteConnectionInput) (*DeleteConnection
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnectionInput, opts ...request.Option) (*DeleteConnectionOutput, error) {
+func (c *Glue) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnectionInput, opts ...aws.Option) (*DeleteConnectionOutput, error) {
 	req, out := c.DeleteConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1617,7 +1616,7 @@ func (c *Glue) DeleteConnectionWithContext(ctx aws.Context, input *DeleteConnect
 
 const opDeleteCrawler = "DeleteCrawler"
 
-// DeleteCrawlerRequest generates a "aws/request.Request" representing the
+// DeleteCrawlerRequest generates a "aws.Request" representing the
 // client's request for the DeleteCrawler operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1641,8 +1640,8 @@ const opDeleteCrawler = "DeleteCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawler
-func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) (req *request.Request, output *DeleteCrawlerOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) (req *aws.Request, output *DeleteCrawlerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteCrawler,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1697,7 +1696,7 @@ func (c *Glue) DeleteCrawler(input *DeleteCrawlerInput) (*DeleteCrawlerOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteCrawlerWithContext(ctx aws.Context, input *DeleteCrawlerInput, opts ...request.Option) (*DeleteCrawlerOutput, error) {
+func (c *Glue) DeleteCrawlerWithContext(ctx aws.Context, input *DeleteCrawlerInput, opts ...aws.Option) (*DeleteCrawlerOutput, error) {
 	req, out := c.DeleteCrawlerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1706,7 +1705,7 @@ func (c *Glue) DeleteCrawlerWithContext(ctx aws.Context, input *DeleteCrawlerInp
 
 const opDeleteDatabase = "DeleteDatabase"
 
-// DeleteDatabaseRequest generates a "aws/request.Request" representing the
+// DeleteDatabaseRequest generates a "aws.Request" representing the
 // client's request for the DeleteDatabase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1730,8 +1729,8 @@ const opDeleteDatabase = "DeleteDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabase
-func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) (req *request.Request, output *DeleteDatabaseOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) (req *aws.Request, output *DeleteDatabaseOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDatabase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1785,7 +1784,7 @@ func (c *Glue) DeleteDatabase(input *DeleteDatabaseInput) (*DeleteDatabaseOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteDatabaseWithContext(ctx aws.Context, input *DeleteDatabaseInput, opts ...request.Option) (*DeleteDatabaseOutput, error) {
+func (c *Glue) DeleteDatabaseWithContext(ctx aws.Context, input *DeleteDatabaseInput, opts ...aws.Option) (*DeleteDatabaseOutput, error) {
 	req, out := c.DeleteDatabaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1794,7 +1793,7 @@ func (c *Glue) DeleteDatabaseWithContext(ctx aws.Context, input *DeleteDatabaseI
 
 const opDeleteDevEndpoint = "DeleteDevEndpoint"
 
-// DeleteDevEndpointRequest generates a "aws/request.Request" representing the
+// DeleteDevEndpointRequest generates a "aws.Request" representing the
 // client's request for the DeleteDevEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1818,8 +1817,8 @@ const opDeleteDevEndpoint = "DeleteDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDevEndpoint
-func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) (req *request.Request, output *DeleteDevEndpointOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) (req *aws.Request, output *DeleteDevEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteDevEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1873,7 +1872,7 @@ func (c *Glue) DeleteDevEndpoint(input *DeleteDevEndpointInput) (*DeleteDevEndpo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteDevEndpointWithContext(ctx aws.Context, input *DeleteDevEndpointInput, opts ...request.Option) (*DeleteDevEndpointOutput, error) {
+func (c *Glue) DeleteDevEndpointWithContext(ctx aws.Context, input *DeleteDevEndpointInput, opts ...aws.Option) (*DeleteDevEndpointOutput, error) {
 	req, out := c.DeleteDevEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1882,7 +1881,7 @@ func (c *Glue) DeleteDevEndpointWithContext(ctx aws.Context, input *DeleteDevEnd
 
 const opDeleteJob = "DeleteJob"
 
-// DeleteJobRequest generates a "aws/request.Request" representing the
+// DeleteJobRequest generates a "aws.Request" representing the
 // client's request for the DeleteJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1906,8 +1905,8 @@ const opDeleteJob = "DeleteJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteJob
-func (c *Glue) DeleteJobRequest(input *DeleteJobInput) (req *request.Request, output *DeleteJobOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteJobRequest(input *DeleteJobInput) (req *aws.Request, output *DeleteJobOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -1958,7 +1957,7 @@ func (c *Glue) DeleteJob(input *DeleteJobInput) (*DeleteJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteJobWithContext(ctx aws.Context, input *DeleteJobInput, opts ...request.Option) (*DeleteJobOutput, error) {
+func (c *Glue) DeleteJobWithContext(ctx aws.Context, input *DeleteJobInput, opts ...aws.Option) (*DeleteJobOutput, error) {
 	req, out := c.DeleteJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -1967,7 +1966,7 @@ func (c *Glue) DeleteJobWithContext(ctx aws.Context, input *DeleteJobInput, opts
 
 const opDeletePartition = "DeletePartition"
 
-// DeletePartitionRequest generates a "aws/request.Request" representing the
+// DeletePartitionRequest generates a "aws.Request" representing the
 // client's request for the DeletePartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -1991,8 +1990,8 @@ const opDeletePartition = "DeletePartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeletePartition
-func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) (req *request.Request, output *DeletePartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) (req *aws.Request, output *DeletePartitionOutput) {
+	op := &aws.Operation{
 		Name:       opDeletePartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2046,7 +2045,7 @@ func (c *Glue) DeletePartition(input *DeletePartitionInput) (*DeletePartitionOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeletePartitionWithContext(ctx aws.Context, input *DeletePartitionInput, opts ...request.Option) (*DeletePartitionOutput, error) {
+func (c *Glue) DeletePartitionWithContext(ctx aws.Context, input *DeletePartitionInput, opts ...aws.Option) (*DeletePartitionOutput, error) {
 	req, out := c.DeletePartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2055,7 +2054,7 @@ func (c *Glue) DeletePartitionWithContext(ctx aws.Context, input *DeletePartitio
 
 const opDeleteTable = "DeleteTable"
 
-// DeleteTableRequest generates a "aws/request.Request" representing the
+// DeleteTableRequest generates a "aws.Request" representing the
 // client's request for the DeleteTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2079,8 +2078,8 @@ const opDeleteTable = "DeleteTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTable
-func (c *Glue) DeleteTableRequest(input *DeleteTableInput) (req *request.Request, output *DeleteTableOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteTableRequest(input *DeleteTableInput) (req *aws.Request, output *DeleteTableOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2134,7 +2133,7 @@ func (c *Glue) DeleteTable(input *DeleteTableInput) (*DeleteTableOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, opts ...request.Option) (*DeleteTableOutput, error) {
+func (c *Glue) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, opts ...aws.Option) (*DeleteTableOutput, error) {
 	req, out := c.DeleteTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2143,7 +2142,7 @@ func (c *Glue) DeleteTableWithContext(ctx aws.Context, input *DeleteTableInput, 
 
 const opDeleteTrigger = "DeleteTrigger"
 
-// DeleteTriggerRequest generates a "aws/request.Request" representing the
+// DeleteTriggerRequest generates a "aws.Request" representing the
 // client's request for the DeleteTrigger operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2167,8 +2166,8 @@ const opDeleteTrigger = "DeleteTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTrigger
-func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) (req *request.Request, output *DeleteTriggerOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) (req *aws.Request, output *DeleteTriggerOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteTrigger,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2219,7 +2218,7 @@ func (c *Glue) DeleteTrigger(input *DeleteTriggerInput) (*DeleteTriggerOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteTriggerWithContext(ctx aws.Context, input *DeleteTriggerInput, opts ...request.Option) (*DeleteTriggerOutput, error) {
+func (c *Glue) DeleteTriggerWithContext(ctx aws.Context, input *DeleteTriggerInput, opts ...aws.Option) (*DeleteTriggerOutput, error) {
 	req, out := c.DeleteTriggerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2228,7 +2227,7 @@ func (c *Glue) DeleteTriggerWithContext(ctx aws.Context, input *DeleteTriggerInp
 
 const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
 
-// DeleteUserDefinedFunctionRequest generates a "aws/request.Request" representing the
+// DeleteUserDefinedFunctionRequest generates a "aws.Request" representing the
 // client's request for the DeleteUserDefinedFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2252,8 +2251,8 @@ const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUserDefinedFunction
-func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunctionInput) (req *request.Request, output *DeleteUserDefinedFunctionOutput) {
-	op := &request.Operation{
+func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunctionInput) (req *aws.Request, output *DeleteUserDefinedFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opDeleteUserDefinedFunction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2307,7 +2306,7 @@ func (c *Glue) DeleteUserDefinedFunction(input *DeleteUserDefinedFunctionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) DeleteUserDefinedFunctionWithContext(ctx aws.Context, input *DeleteUserDefinedFunctionInput, opts ...request.Option) (*DeleteUserDefinedFunctionOutput, error) {
+func (c *Glue) DeleteUserDefinedFunctionWithContext(ctx aws.Context, input *DeleteUserDefinedFunctionInput, opts ...aws.Option) (*DeleteUserDefinedFunctionOutput, error) {
 	req, out := c.DeleteUserDefinedFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2316,7 +2315,7 @@ func (c *Glue) DeleteUserDefinedFunctionWithContext(ctx aws.Context, input *Dele
 
 const opGetCatalogImportStatus = "GetCatalogImportStatus"
 
-// GetCatalogImportStatusRequest generates a "aws/request.Request" representing the
+// GetCatalogImportStatusRequest generates a "aws.Request" representing the
 // client's request for the GetCatalogImportStatus operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2340,8 +2339,8 @@ const opGetCatalogImportStatus = "GetCatalogImportStatus"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCatalogImportStatus
-func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput) (req *request.Request, output *GetCatalogImportStatusOutput) {
-	op := &request.Operation{
+func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput) (req *aws.Request, output *GetCatalogImportStatusOutput) {
+	op := &aws.Operation{
 		Name:       opGetCatalogImportStatus,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2389,7 +2388,7 @@ func (c *Glue) GetCatalogImportStatus(input *GetCatalogImportStatusInput) (*GetC
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetCatalogImportStatusWithContext(ctx aws.Context, input *GetCatalogImportStatusInput, opts ...request.Option) (*GetCatalogImportStatusOutput, error) {
+func (c *Glue) GetCatalogImportStatusWithContext(ctx aws.Context, input *GetCatalogImportStatusInput, opts ...aws.Option) (*GetCatalogImportStatusOutput, error) {
 	req, out := c.GetCatalogImportStatusRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2398,7 +2397,7 @@ func (c *Glue) GetCatalogImportStatusWithContext(ctx aws.Context, input *GetCata
 
 const opGetClassifier = "GetClassifier"
 
-// GetClassifierRequest generates a "aws/request.Request" representing the
+// GetClassifierRequest generates a "aws.Request" representing the
 // client's request for the GetClassifier operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2422,8 +2421,8 @@ const opGetClassifier = "GetClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier
-func (c *Glue) GetClassifierRequest(input *GetClassifierInput) (req *request.Request, output *GetClassifierOutput) {
-	op := &request.Operation{
+func (c *Glue) GetClassifierRequest(input *GetClassifierInput) (req *aws.Request, output *GetClassifierOutput) {
+	op := &aws.Operation{
 		Name:       opGetClassifier,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2471,7 +2470,7 @@ func (c *Glue) GetClassifier(input *GetClassifierInput) (*GetClassifierOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetClassifierWithContext(ctx aws.Context, input *GetClassifierInput, opts ...request.Option) (*GetClassifierOutput, error) {
+func (c *Glue) GetClassifierWithContext(ctx aws.Context, input *GetClassifierInput, opts ...aws.Option) (*GetClassifierOutput, error) {
 	req, out := c.GetClassifierRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2480,7 +2479,7 @@ func (c *Glue) GetClassifierWithContext(ctx aws.Context, input *GetClassifierInp
 
 const opGetClassifiers = "GetClassifiers"
 
-// GetClassifiersRequest generates a "aws/request.Request" representing the
+// GetClassifiersRequest generates a "aws.Request" representing the
 // client's request for the GetClassifiers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2504,12 +2503,12 @@ const opGetClassifiers = "GetClassifiers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers
-func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) (req *request.Request, output *GetClassifiersOutput) {
-	op := &request.Operation{
+func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) (req *aws.Request, output *GetClassifiersOutput) {
+	op := &aws.Operation{
 		Name:       opGetClassifiers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2556,7 +2555,7 @@ func (c *Glue) GetClassifiers(input *GetClassifiersInput) (*GetClassifiersOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetClassifiersWithContext(ctx aws.Context, input *GetClassifiersInput, opts ...request.Option) (*GetClassifiersOutput, error) {
+func (c *Glue) GetClassifiersWithContext(ctx aws.Context, input *GetClassifiersInput, opts ...aws.Option) (*GetClassifiersOutput, error) {
 	req, out := c.GetClassifiersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2591,9 +2590,9 @@ func (c *Glue) GetClassifiersPages(input *GetClassifiersInput, fn func(*GetClass
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetClassifiersPagesWithContext(ctx aws.Context, input *GetClassifiersInput, fn func(*GetClassifiersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetClassifiersPagesWithContext(ctx aws.Context, input *GetClassifiersInput, fn func(*GetClassifiersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetClassifiersInput
 			if input != nil {
 				tmp := *input
@@ -2615,7 +2614,7 @@ func (c *Glue) GetClassifiersPagesWithContext(ctx aws.Context, input *GetClassif
 
 const opGetConnection = "GetConnection"
 
-// GetConnectionRequest generates a "aws/request.Request" representing the
+// GetConnectionRequest generates a "aws.Request" representing the
 // client's request for the GetConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2639,8 +2638,8 @@ const opGetConnection = "GetConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnection
-func (c *Glue) GetConnectionRequest(input *GetConnectionInput) (req *request.Request, output *GetConnectionOutput) {
-	op := &request.Operation{
+func (c *Glue) GetConnectionRequest(input *GetConnectionInput) (req *aws.Request, output *GetConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opGetConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2688,7 +2687,7 @@ func (c *Glue) GetConnection(input *GetConnectionInput) (*GetConnectionOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetConnectionWithContext(ctx aws.Context, input *GetConnectionInput, opts ...request.Option) (*GetConnectionOutput, error) {
+func (c *Glue) GetConnectionWithContext(ctx aws.Context, input *GetConnectionInput, opts ...aws.Option) (*GetConnectionOutput, error) {
 	req, out := c.GetConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2697,7 +2696,7 @@ func (c *Glue) GetConnectionWithContext(ctx aws.Context, input *GetConnectionInp
 
 const opGetConnections = "GetConnections"
 
-// GetConnectionsRequest generates a "aws/request.Request" representing the
+// GetConnectionsRequest generates a "aws.Request" representing the
 // client's request for the GetConnections operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2721,12 +2720,12 @@ const opGetConnections = "GetConnections"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnections
-func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) (req *request.Request, output *GetConnectionsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) (req *aws.Request, output *GetConnectionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetConnections,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2776,7 +2775,7 @@ func (c *Glue) GetConnections(input *GetConnectionsInput) (*GetConnectionsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetConnectionsWithContext(ctx aws.Context, input *GetConnectionsInput, opts ...request.Option) (*GetConnectionsOutput, error) {
+func (c *Glue) GetConnectionsWithContext(ctx aws.Context, input *GetConnectionsInput, opts ...aws.Option) (*GetConnectionsOutput, error) {
 	req, out := c.GetConnectionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2811,9 +2810,9 @@ func (c *Glue) GetConnectionsPages(input *GetConnectionsInput, fn func(*GetConne
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetConnectionsPagesWithContext(ctx aws.Context, input *GetConnectionsInput, fn func(*GetConnectionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetConnectionsPagesWithContext(ctx aws.Context, input *GetConnectionsInput, fn func(*GetConnectionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetConnectionsInput
 			if input != nil {
 				tmp := *input
@@ -2835,7 +2834,7 @@ func (c *Glue) GetConnectionsPagesWithContext(ctx aws.Context, input *GetConnect
 
 const opGetCrawler = "GetCrawler"
 
-// GetCrawlerRequest generates a "aws/request.Request" representing the
+// GetCrawlerRequest generates a "aws.Request" representing the
 // client's request for the GetCrawler operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2859,8 +2858,8 @@ const opGetCrawler = "GetCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler
-func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) (req *request.Request, output *GetCrawlerOutput) {
-	op := &request.Operation{
+func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) (req *aws.Request, output *GetCrawlerOutput) {
+	op := &aws.Operation{
 		Name:       opGetCrawler,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -2908,7 +2907,7 @@ func (c *Glue) GetCrawler(input *GetCrawlerInput) (*GetCrawlerOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetCrawlerWithContext(ctx aws.Context, input *GetCrawlerInput, opts ...request.Option) (*GetCrawlerOutput, error) {
+func (c *Glue) GetCrawlerWithContext(ctx aws.Context, input *GetCrawlerInput, opts ...aws.Option) (*GetCrawlerOutput, error) {
 	req, out := c.GetCrawlerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -2917,7 +2916,7 @@ func (c *Glue) GetCrawlerWithContext(ctx aws.Context, input *GetCrawlerInput, op
 
 const opGetCrawlerMetrics = "GetCrawlerMetrics"
 
-// GetCrawlerMetricsRequest generates a "aws/request.Request" representing the
+// GetCrawlerMetricsRequest generates a "aws.Request" representing the
 // client's request for the GetCrawlerMetrics operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -2941,12 +2940,12 @@ const opGetCrawlerMetrics = "GetCrawlerMetrics"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlerMetrics
-func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) (req *request.Request, output *GetCrawlerMetricsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) (req *aws.Request, output *GetCrawlerMetricsOutput) {
+	op := &aws.Operation{
 		Name:       opGetCrawlerMetrics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -2993,7 +2992,7 @@ func (c *Glue) GetCrawlerMetrics(input *GetCrawlerMetricsInput) (*GetCrawlerMetr
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetCrawlerMetricsWithContext(ctx aws.Context, input *GetCrawlerMetricsInput, opts ...request.Option) (*GetCrawlerMetricsOutput, error) {
+func (c *Glue) GetCrawlerMetricsWithContext(ctx aws.Context, input *GetCrawlerMetricsInput, opts ...aws.Option) (*GetCrawlerMetricsOutput, error) {
 	req, out := c.GetCrawlerMetricsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3028,9 +3027,9 @@ func (c *Glue) GetCrawlerMetricsPages(input *GetCrawlerMetricsInput, fn func(*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetCrawlerMetricsPagesWithContext(ctx aws.Context, input *GetCrawlerMetricsInput, fn func(*GetCrawlerMetricsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetCrawlerMetricsPagesWithContext(ctx aws.Context, input *GetCrawlerMetricsInput, fn func(*GetCrawlerMetricsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetCrawlerMetricsInput
 			if input != nil {
 				tmp := *input
@@ -3052,7 +3051,7 @@ func (c *Glue) GetCrawlerMetricsPagesWithContext(ctx aws.Context, input *GetCraw
 
 const opGetCrawlers = "GetCrawlers"
 
-// GetCrawlersRequest generates a "aws/request.Request" representing the
+// GetCrawlersRequest generates a "aws.Request" representing the
 // client's request for the GetCrawlers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3076,12 +3075,12 @@ const opGetCrawlers = "GetCrawlers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers
-func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) (req *request.Request, output *GetCrawlersOutput) {
-	op := &request.Operation{
+func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) (req *aws.Request, output *GetCrawlersOutput) {
+	op := &aws.Operation{
 		Name:       opGetCrawlers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3128,7 +3127,7 @@ func (c *Glue) GetCrawlers(input *GetCrawlersInput) (*GetCrawlersOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetCrawlersWithContext(ctx aws.Context, input *GetCrawlersInput, opts ...request.Option) (*GetCrawlersOutput, error) {
+func (c *Glue) GetCrawlersWithContext(ctx aws.Context, input *GetCrawlersInput, opts ...aws.Option) (*GetCrawlersOutput, error) {
 	req, out := c.GetCrawlersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3163,9 +3162,9 @@ func (c *Glue) GetCrawlersPages(input *GetCrawlersInput, fn func(*GetCrawlersOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetCrawlersPagesWithContext(ctx aws.Context, input *GetCrawlersInput, fn func(*GetCrawlersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetCrawlersPagesWithContext(ctx aws.Context, input *GetCrawlersInput, fn func(*GetCrawlersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetCrawlersInput
 			if input != nil {
 				tmp := *input
@@ -3187,7 +3186,7 @@ func (c *Glue) GetCrawlersPagesWithContext(ctx aws.Context, input *GetCrawlersIn
 
 const opGetDatabase = "GetDatabase"
 
-// GetDatabaseRequest generates a "aws/request.Request" representing the
+// GetDatabaseRequest generates a "aws.Request" representing the
 // client's request for the GetDatabase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3211,8 +3210,8 @@ const opGetDatabase = "GetDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabase
-func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) (req *request.Request, output *GetDatabaseOutput) {
-	op := &request.Operation{
+func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) (req *aws.Request, output *GetDatabaseOutput) {
+	op := &aws.Operation{
 		Name:       opGetDatabase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3266,7 +3265,7 @@ func (c *Glue) GetDatabase(input *GetDatabaseInput) (*GetDatabaseOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDatabaseWithContext(ctx aws.Context, input *GetDatabaseInput, opts ...request.Option) (*GetDatabaseOutput, error) {
+func (c *Glue) GetDatabaseWithContext(ctx aws.Context, input *GetDatabaseInput, opts ...aws.Option) (*GetDatabaseOutput, error) {
 	req, out := c.GetDatabaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3275,7 +3274,7 @@ func (c *Glue) GetDatabaseWithContext(ctx aws.Context, input *GetDatabaseInput, 
 
 const opGetDatabases = "GetDatabases"
 
-// GetDatabasesRequest generates a "aws/request.Request" representing the
+// GetDatabasesRequest generates a "aws.Request" representing the
 // client's request for the GetDatabases operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3299,12 +3298,12 @@ const opGetDatabases = "GetDatabases"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabases
-func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) (req *request.Request, output *GetDatabasesOutput) {
-	op := &request.Operation{
+func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) (req *aws.Request, output *GetDatabasesOutput) {
+	op := &aws.Operation{
 		Name:       opGetDatabases,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3357,7 +3356,7 @@ func (c *Glue) GetDatabases(input *GetDatabasesInput) (*GetDatabasesOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDatabasesWithContext(ctx aws.Context, input *GetDatabasesInput, opts ...request.Option) (*GetDatabasesOutput, error) {
+func (c *Glue) GetDatabasesWithContext(ctx aws.Context, input *GetDatabasesInput, opts ...aws.Option) (*GetDatabasesOutput, error) {
 	req, out := c.GetDatabasesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3392,9 +3391,9 @@ func (c *Glue) GetDatabasesPages(input *GetDatabasesInput, fn func(*GetDatabases
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDatabasesPagesWithContext(ctx aws.Context, input *GetDatabasesInput, fn func(*GetDatabasesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetDatabasesPagesWithContext(ctx aws.Context, input *GetDatabasesInput, fn func(*GetDatabasesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDatabasesInput
 			if input != nil {
 				tmp := *input
@@ -3416,7 +3415,7 @@ func (c *Glue) GetDatabasesPagesWithContext(ctx aws.Context, input *GetDatabases
 
 const opGetDataflowGraph = "GetDataflowGraph"
 
-// GetDataflowGraphRequest generates a "aws/request.Request" representing the
+// GetDataflowGraphRequest generates a "aws.Request" representing the
 // client's request for the GetDataflowGraph operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3440,8 +3439,8 @@ const opGetDataflowGraph = "GetDataflowGraph"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataflowGraph
-func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) (req *request.Request, output *GetDataflowGraphOutput) {
-	op := &request.Operation{
+func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) (req *aws.Request, output *GetDataflowGraphOutput) {
+	op := &aws.Operation{
 		Name:       opGetDataflowGraph,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3492,7 +3491,7 @@ func (c *Glue) GetDataflowGraph(input *GetDataflowGraphInput) (*GetDataflowGraph
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDataflowGraphWithContext(ctx aws.Context, input *GetDataflowGraphInput, opts ...request.Option) (*GetDataflowGraphOutput, error) {
+func (c *Glue) GetDataflowGraphWithContext(ctx aws.Context, input *GetDataflowGraphInput, opts ...aws.Option) (*GetDataflowGraphOutput, error) {
 	req, out := c.GetDataflowGraphRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3501,7 +3500,7 @@ func (c *Glue) GetDataflowGraphWithContext(ctx aws.Context, input *GetDataflowGr
 
 const opGetDevEndpoint = "GetDevEndpoint"
 
-// GetDevEndpointRequest generates a "aws/request.Request" representing the
+// GetDevEndpointRequest generates a "aws.Request" representing the
 // client's request for the GetDevEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3525,8 +3524,8 @@ const opGetDevEndpoint = "GetDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoint
-func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) (req *request.Request, output *GetDevEndpointOutput) {
-	op := &request.Operation{
+func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) (req *aws.Request, output *GetDevEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opGetDevEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3580,7 +3579,7 @@ func (c *Glue) GetDevEndpoint(input *GetDevEndpointInput) (*GetDevEndpointOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDevEndpointWithContext(ctx aws.Context, input *GetDevEndpointInput, opts ...request.Option) (*GetDevEndpointOutput, error) {
+func (c *Glue) GetDevEndpointWithContext(ctx aws.Context, input *GetDevEndpointInput, opts ...aws.Option) (*GetDevEndpointOutput, error) {
 	req, out := c.GetDevEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3589,7 +3588,7 @@ func (c *Glue) GetDevEndpointWithContext(ctx aws.Context, input *GetDevEndpointI
 
 const opGetDevEndpoints = "GetDevEndpoints"
 
-// GetDevEndpointsRequest generates a "aws/request.Request" representing the
+// GetDevEndpointsRequest generates a "aws.Request" representing the
 // client's request for the GetDevEndpoints operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3613,12 +3612,12 @@ const opGetDevEndpoints = "GetDevEndpoints"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDevEndpoints
-func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) (req *request.Request, output *GetDevEndpointsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) (req *aws.Request, output *GetDevEndpointsOutput) {
+	op := &aws.Operation{
 		Name:       opGetDevEndpoints,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3674,7 +3673,7 @@ func (c *Glue) GetDevEndpoints(input *GetDevEndpointsInput) (*GetDevEndpointsOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDevEndpointsWithContext(ctx aws.Context, input *GetDevEndpointsInput, opts ...request.Option) (*GetDevEndpointsOutput, error) {
+func (c *Glue) GetDevEndpointsWithContext(ctx aws.Context, input *GetDevEndpointsInput, opts ...aws.Option) (*GetDevEndpointsOutput, error) {
 	req, out := c.GetDevEndpointsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3709,9 +3708,9 @@ func (c *Glue) GetDevEndpointsPages(input *GetDevEndpointsInput, fn func(*GetDev
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetDevEndpointsPagesWithContext(ctx aws.Context, input *GetDevEndpointsInput, fn func(*GetDevEndpointsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetDevEndpointsPagesWithContext(ctx aws.Context, input *GetDevEndpointsInput, fn func(*GetDevEndpointsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDevEndpointsInput
 			if input != nil {
 				tmp := *input
@@ -3733,7 +3732,7 @@ func (c *Glue) GetDevEndpointsPagesWithContext(ctx aws.Context, input *GetDevEnd
 
 const opGetJob = "GetJob"
 
-// GetJobRequest generates a "aws/request.Request" representing the
+// GetJobRequest generates a "aws.Request" representing the
 // client's request for the GetJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3757,8 +3756,8 @@ const opGetJob = "GetJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob
-func (c *Glue) GetJobRequest(input *GetJobInput) (req *request.Request, output *GetJobOutput) {
-	op := &request.Operation{
+func (c *Glue) GetJobRequest(input *GetJobInput) (req *aws.Request, output *GetJobOutput) {
+	op := &aws.Operation{
 		Name:       opGetJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3812,7 +3811,7 @@ func (c *Glue) GetJob(input *GetJobInput) (*GetJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...request.Option) (*GetJobOutput, error) {
+func (c *Glue) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...aws.Option) (*GetJobOutput, error) {
 	req, out := c.GetJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3821,7 +3820,7 @@ func (c *Glue) GetJobWithContext(ctx aws.Context, input *GetJobInput, opts ...re
 
 const opGetJobRun = "GetJobRun"
 
-// GetJobRunRequest generates a "aws/request.Request" representing the
+// GetJobRunRequest generates a "aws.Request" representing the
 // client's request for the GetJobRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3845,8 +3844,8 @@ const opGetJobRun = "GetJobRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun
-func (c *Glue) GetJobRunRequest(input *GetJobRunInput) (req *request.Request, output *GetJobRunOutput) {
-	op := &request.Operation{
+func (c *Glue) GetJobRunRequest(input *GetJobRunInput) (req *aws.Request, output *GetJobRunOutput) {
+	op := &aws.Operation{
 		Name:       opGetJobRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -3900,7 +3899,7 @@ func (c *Glue) GetJobRun(input *GetJobRunInput) (*GetJobRunOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetJobRunWithContext(ctx aws.Context, input *GetJobRunInput, opts ...request.Option) (*GetJobRunOutput, error) {
+func (c *Glue) GetJobRunWithContext(ctx aws.Context, input *GetJobRunInput, opts ...aws.Option) (*GetJobRunOutput, error) {
 	req, out := c.GetJobRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -3909,7 +3908,7 @@ func (c *Glue) GetJobRunWithContext(ctx aws.Context, input *GetJobRunInput, opts
 
 const opGetJobRuns = "GetJobRuns"
 
-// GetJobRunsRequest generates a "aws/request.Request" representing the
+// GetJobRunsRequest generates a "aws.Request" representing the
 // client's request for the GetJobRuns operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -3933,12 +3932,12 @@ const opGetJobRuns = "GetJobRuns"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns
-func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) (req *request.Request, output *GetJobRunsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) (req *aws.Request, output *GetJobRunsOutput) {
+	op := &aws.Operation{
 		Name:       opGetJobRuns,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -3994,7 +3993,7 @@ func (c *Glue) GetJobRuns(input *GetJobRunsInput) (*GetJobRunsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetJobRunsWithContext(ctx aws.Context, input *GetJobRunsInput, opts ...request.Option) (*GetJobRunsOutput, error) {
+func (c *Glue) GetJobRunsWithContext(ctx aws.Context, input *GetJobRunsInput, opts ...aws.Option) (*GetJobRunsOutput, error) {
 	req, out := c.GetJobRunsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4029,9 +4028,9 @@ func (c *Glue) GetJobRunsPages(input *GetJobRunsInput, fn func(*GetJobRunsOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetJobRunsPagesWithContext(ctx aws.Context, input *GetJobRunsInput, fn func(*GetJobRunsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetJobRunsPagesWithContext(ctx aws.Context, input *GetJobRunsInput, fn func(*GetJobRunsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetJobRunsInput
 			if input != nil {
 				tmp := *input
@@ -4053,7 +4052,7 @@ func (c *Glue) GetJobRunsPagesWithContext(ctx aws.Context, input *GetJobRunsInpu
 
 const opGetJobs = "GetJobs"
 
-// GetJobsRequest generates a "aws/request.Request" representing the
+// GetJobsRequest generates a "aws.Request" representing the
 // client's request for the GetJobs operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4077,12 +4076,12 @@ const opGetJobs = "GetJobs"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs
-func (c *Glue) GetJobsRequest(input *GetJobsInput) (req *request.Request, output *GetJobsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetJobsRequest(input *GetJobsInput) (req *aws.Request, output *GetJobsOutput) {
+	op := &aws.Operation{
 		Name:       opGetJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4138,7 +4137,7 @@ func (c *Glue) GetJobs(input *GetJobsInput) (*GetJobsOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetJobsWithContext(ctx aws.Context, input *GetJobsInput, opts ...request.Option) (*GetJobsOutput, error) {
+func (c *Glue) GetJobsWithContext(ctx aws.Context, input *GetJobsInput, opts ...aws.Option) (*GetJobsOutput, error) {
 	req, out := c.GetJobsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4173,9 +4172,9 @@ func (c *Glue) GetJobsPages(input *GetJobsInput, fn func(*GetJobsOutput, bool) b
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetJobsPagesWithContext(ctx aws.Context, input *GetJobsInput, fn func(*GetJobsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetJobsPagesWithContext(ctx aws.Context, input *GetJobsInput, fn func(*GetJobsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetJobsInput
 			if input != nil {
 				tmp := *input
@@ -4197,7 +4196,7 @@ func (c *Glue) GetJobsPagesWithContext(ctx aws.Context, input *GetJobsInput, fn 
 
 const opGetMapping = "GetMapping"
 
-// GetMappingRequest generates a "aws/request.Request" representing the
+// GetMappingRequest generates a "aws.Request" representing the
 // client's request for the GetMapping operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4221,8 +4220,8 @@ const opGetMapping = "GetMapping"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetMapping
-func (c *Glue) GetMappingRequest(input *GetMappingInput) (req *request.Request, output *GetMappingOutput) {
-	op := &request.Operation{
+func (c *Glue) GetMappingRequest(input *GetMappingInput) (req *aws.Request, output *GetMappingOutput) {
+	op := &aws.Operation{
 		Name:       opGetMapping,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4273,7 +4272,7 @@ func (c *Glue) GetMapping(input *GetMappingInput) (*GetMappingOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetMappingWithContext(ctx aws.Context, input *GetMappingInput, opts ...request.Option) (*GetMappingOutput, error) {
+func (c *Glue) GetMappingWithContext(ctx aws.Context, input *GetMappingInput, opts ...aws.Option) (*GetMappingOutput, error) {
 	req, out := c.GetMappingRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4282,7 +4281,7 @@ func (c *Glue) GetMappingWithContext(ctx aws.Context, input *GetMappingInput, op
 
 const opGetPartition = "GetPartition"
 
-// GetPartitionRequest generates a "aws/request.Request" representing the
+// GetPartitionRequest generates a "aws.Request" representing the
 // client's request for the GetPartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4306,8 +4305,8 @@ const opGetPartition = "GetPartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartition
-func (c *Glue) GetPartitionRequest(input *GetPartitionInput) (req *request.Request, output *GetPartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) GetPartitionRequest(input *GetPartitionInput) (req *aws.Request, output *GetPartitionOutput) {
+	op := &aws.Operation{
 		Name:       opGetPartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4361,7 +4360,7 @@ func (c *Glue) GetPartition(input *GetPartitionInput) (*GetPartitionOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetPartitionWithContext(ctx aws.Context, input *GetPartitionInput, opts ...request.Option) (*GetPartitionOutput, error) {
+func (c *Glue) GetPartitionWithContext(ctx aws.Context, input *GetPartitionInput, opts ...aws.Option) (*GetPartitionOutput, error) {
 	req, out := c.GetPartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4370,7 +4369,7 @@ func (c *Glue) GetPartitionWithContext(ctx aws.Context, input *GetPartitionInput
 
 const opGetPartitions = "GetPartitions"
 
-// GetPartitionsRequest generates a "aws/request.Request" representing the
+// GetPartitionsRequest generates a "aws.Request" representing the
 // client's request for the GetPartitions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4394,12 +4393,12 @@ const opGetPartitions = "GetPartitions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPartitions
-func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) (req *request.Request, output *GetPartitionsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) (req *aws.Request, output *GetPartitionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetPartitions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4455,7 +4454,7 @@ func (c *Glue) GetPartitions(input *GetPartitionsInput) (*GetPartitionsOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetPartitionsWithContext(ctx aws.Context, input *GetPartitionsInput, opts ...request.Option) (*GetPartitionsOutput, error) {
+func (c *Glue) GetPartitionsWithContext(ctx aws.Context, input *GetPartitionsInput, opts ...aws.Option) (*GetPartitionsOutput, error) {
 	req, out := c.GetPartitionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4490,9 +4489,9 @@ func (c *Glue) GetPartitionsPages(input *GetPartitionsInput, fn func(*GetPartiti
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetPartitionsPagesWithContext(ctx aws.Context, input *GetPartitionsInput, fn func(*GetPartitionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetPartitionsPagesWithContext(ctx aws.Context, input *GetPartitionsInput, fn func(*GetPartitionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetPartitionsInput
 			if input != nil {
 				tmp := *input
@@ -4514,7 +4513,7 @@ func (c *Glue) GetPartitionsPagesWithContext(ctx aws.Context, input *GetPartitio
 
 const opGetPlan = "GetPlan"
 
-// GetPlanRequest generates a "aws/request.Request" representing the
+// GetPlanRequest generates a "aws.Request" representing the
 // client's request for the GetPlan operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4538,8 +4537,8 @@ const opGetPlan = "GetPlan"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlan
-func (c *Glue) GetPlanRequest(input *GetPlanInput) (req *request.Request, output *GetPlanOutput) {
-	op := &request.Operation{
+func (c *Glue) GetPlanRequest(input *GetPlanInput) (req *aws.Request, output *GetPlanOutput) {
+	op := &aws.Operation{
 		Name:       opGetPlan,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4590,7 +4589,7 @@ func (c *Glue) GetPlan(input *GetPlanInput) (*GetPlanOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetPlanWithContext(ctx aws.Context, input *GetPlanInput, opts ...request.Option) (*GetPlanOutput, error) {
+func (c *Glue) GetPlanWithContext(ctx aws.Context, input *GetPlanInput, opts ...aws.Option) (*GetPlanOutput, error) {
 	req, out := c.GetPlanRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4599,7 +4598,7 @@ func (c *Glue) GetPlanWithContext(ctx aws.Context, input *GetPlanInput, opts ...
 
 const opGetTable = "GetTable"
 
-// GetTableRequest generates a "aws/request.Request" representing the
+// GetTableRequest generates a "aws.Request" representing the
 // client's request for the GetTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4623,8 +4622,8 @@ const opGetTable = "GetTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable
-func (c *Glue) GetTableRequest(input *GetTableInput) (req *request.Request, output *GetTableOutput) {
-	op := &request.Operation{
+func (c *Glue) GetTableRequest(input *GetTableInput) (req *aws.Request, output *GetTableOutput) {
+	op := &aws.Operation{
 		Name:       opGetTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -4678,7 +4677,7 @@ func (c *Glue) GetTable(input *GetTableInput) (*GetTableOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTableWithContext(ctx aws.Context, input *GetTableInput, opts ...request.Option) (*GetTableOutput, error) {
+func (c *Glue) GetTableWithContext(ctx aws.Context, input *GetTableInput, opts ...aws.Option) (*GetTableOutput, error) {
 	req, out := c.GetTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4687,7 +4686,7 @@ func (c *Glue) GetTableWithContext(ctx aws.Context, input *GetTableInput, opts .
 
 const opGetTableVersions = "GetTableVersions"
 
-// GetTableVersionsRequest generates a "aws/request.Request" representing the
+// GetTableVersionsRequest generates a "aws.Request" representing the
 // client's request for the GetTableVersions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4711,12 +4710,12 @@ const opGetTableVersions = "GetTableVersions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersions
-func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) (req *request.Request, output *GetTableVersionsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) (req *aws.Request, output *GetTableVersionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetTableVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4773,7 +4772,7 @@ func (c *Glue) GetTableVersions(input *GetTableVersionsInput) (*GetTableVersions
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTableVersionsWithContext(ctx aws.Context, input *GetTableVersionsInput, opts ...request.Option) (*GetTableVersionsOutput, error) {
+func (c *Glue) GetTableVersionsWithContext(ctx aws.Context, input *GetTableVersionsInput, opts ...aws.Option) (*GetTableVersionsOutput, error) {
 	req, out := c.GetTableVersionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4808,9 +4807,9 @@ func (c *Glue) GetTableVersionsPages(input *GetTableVersionsInput, fn func(*GetT
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTableVersionsPagesWithContext(ctx aws.Context, input *GetTableVersionsInput, fn func(*GetTableVersionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetTableVersionsPagesWithContext(ctx aws.Context, input *GetTableVersionsInput, fn func(*GetTableVersionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTableVersionsInput
 			if input != nil {
 				tmp := *input
@@ -4832,7 +4831,7 @@ func (c *Glue) GetTableVersionsPagesWithContext(ctx aws.Context, input *GetTable
 
 const opGetTables = "GetTables"
 
-// GetTablesRequest generates a "aws/request.Request" representing the
+// GetTablesRequest generates a "aws.Request" representing the
 // client's request for the GetTables operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -4856,12 +4855,12 @@ const opGetTables = "GetTables"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables
-func (c *Glue) GetTablesRequest(input *GetTablesInput) (req *request.Request, output *GetTablesOutput) {
-	op := &request.Operation{
+func (c *Glue) GetTablesRequest(input *GetTablesInput) (req *aws.Request, output *GetTablesOutput) {
+	op := &aws.Operation{
 		Name:       opGetTables,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -4917,7 +4916,7 @@ func (c *Glue) GetTables(input *GetTablesInput) (*GetTablesOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTablesWithContext(ctx aws.Context, input *GetTablesInput, opts ...request.Option) (*GetTablesOutput, error) {
+func (c *Glue) GetTablesWithContext(ctx aws.Context, input *GetTablesInput, opts ...aws.Option) (*GetTablesOutput, error) {
 	req, out := c.GetTablesRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -4952,9 +4951,9 @@ func (c *Glue) GetTablesPages(input *GetTablesInput, fn func(*GetTablesOutput, b
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTablesPagesWithContext(ctx aws.Context, input *GetTablesInput, fn func(*GetTablesOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetTablesPagesWithContext(ctx aws.Context, input *GetTablesInput, fn func(*GetTablesOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTablesInput
 			if input != nil {
 				tmp := *input
@@ -4976,7 +4975,7 @@ func (c *Glue) GetTablesPagesWithContext(ctx aws.Context, input *GetTablesInput,
 
 const opGetTrigger = "GetTrigger"
 
-// GetTriggerRequest generates a "aws/request.Request" representing the
+// GetTriggerRequest generates a "aws.Request" representing the
 // client's request for the GetTrigger operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5000,8 +4999,8 @@ const opGetTrigger = "GetTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger
-func (c *Glue) GetTriggerRequest(input *GetTriggerInput) (req *request.Request, output *GetTriggerOutput) {
-	op := &request.Operation{
+func (c *Glue) GetTriggerRequest(input *GetTriggerInput) (req *aws.Request, output *GetTriggerOutput) {
+	op := &aws.Operation{
 		Name:       opGetTrigger,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5055,7 +5054,7 @@ func (c *Glue) GetTrigger(input *GetTriggerInput) (*GetTriggerOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTriggerWithContext(ctx aws.Context, input *GetTriggerInput, opts ...request.Option) (*GetTriggerOutput, error) {
+func (c *Glue) GetTriggerWithContext(ctx aws.Context, input *GetTriggerInput, opts ...aws.Option) (*GetTriggerOutput, error) {
 	req, out := c.GetTriggerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5064,7 +5063,7 @@ func (c *Glue) GetTriggerWithContext(ctx aws.Context, input *GetTriggerInput, op
 
 const opGetTriggers = "GetTriggers"
 
-// GetTriggersRequest generates a "aws/request.Request" representing the
+// GetTriggersRequest generates a "aws.Request" representing the
 // client's request for the GetTriggers operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5088,12 +5087,12 @@ const opGetTriggers = "GetTriggers"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers
-func (c *Glue) GetTriggersRequest(input *GetTriggersInput) (req *request.Request, output *GetTriggersOutput) {
-	op := &request.Operation{
+func (c *Glue) GetTriggersRequest(input *GetTriggersInput) (req *aws.Request, output *GetTriggersOutput) {
+	op := &aws.Operation{
 		Name:       opGetTriggers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5149,7 +5148,7 @@ func (c *Glue) GetTriggers(input *GetTriggersInput) (*GetTriggersOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTriggersWithContext(ctx aws.Context, input *GetTriggersInput, opts ...request.Option) (*GetTriggersOutput, error) {
+func (c *Glue) GetTriggersWithContext(ctx aws.Context, input *GetTriggersInput, opts ...aws.Option) (*GetTriggersOutput, error) {
 	req, out := c.GetTriggersRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5184,9 +5183,9 @@ func (c *Glue) GetTriggersPages(input *GetTriggersInput, fn func(*GetTriggersOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetTriggersPagesWithContext(ctx aws.Context, input *GetTriggersInput, fn func(*GetTriggersOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetTriggersPagesWithContext(ctx aws.Context, input *GetTriggersInput, fn func(*GetTriggersOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTriggersInput
 			if input != nil {
 				tmp := *input
@@ -5208,7 +5207,7 @@ func (c *Glue) GetTriggersPagesWithContext(ctx aws.Context, input *GetTriggersIn
 
 const opGetUserDefinedFunction = "GetUserDefinedFunction"
 
-// GetUserDefinedFunctionRequest generates a "aws/request.Request" representing the
+// GetUserDefinedFunctionRequest generates a "aws.Request" representing the
 // client's request for the GetUserDefinedFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5232,8 +5231,8 @@ const opGetUserDefinedFunction = "GetUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunction
-func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput) (req *request.Request, output *GetUserDefinedFunctionOutput) {
-	op := &request.Operation{
+func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput) (req *aws.Request, output *GetUserDefinedFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opGetUserDefinedFunction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5287,7 +5286,7 @@ func (c *Glue) GetUserDefinedFunction(input *GetUserDefinedFunctionInput) (*GetU
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetUserDefinedFunctionWithContext(ctx aws.Context, input *GetUserDefinedFunctionInput, opts ...request.Option) (*GetUserDefinedFunctionOutput, error) {
+func (c *Glue) GetUserDefinedFunctionWithContext(ctx aws.Context, input *GetUserDefinedFunctionInput, opts ...aws.Option) (*GetUserDefinedFunctionOutput, error) {
 	req, out := c.GetUserDefinedFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5296,7 +5295,7 @@ func (c *Glue) GetUserDefinedFunctionWithContext(ctx aws.Context, input *GetUser
 
 const opGetUserDefinedFunctions = "GetUserDefinedFunctions"
 
-// GetUserDefinedFunctionsRequest generates a "aws/request.Request" representing the
+// GetUserDefinedFunctionsRequest generates a "aws.Request" representing the
 // client's request for the GetUserDefinedFunctions operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5320,12 +5319,12 @@ const opGetUserDefinedFunctions = "GetUserDefinedFunctions"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunctions
-func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInput) (req *request.Request, output *GetUserDefinedFunctionsOutput) {
-	op := &request.Operation{
+func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInput) (req *aws.Request, output *GetUserDefinedFunctionsOutput) {
+	op := &aws.Operation{
 		Name:       opGetUserDefinedFunctions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
-		Paginator: &request.Paginator{
+		Paginator: &aws.Paginator{
 			InputTokens:     []string{"NextToken"},
 			OutputTokens:    []string{"NextToken"},
 			LimitToken:      "MaxResults",
@@ -5381,7 +5380,7 @@ func (c *Glue) GetUserDefinedFunctions(input *GetUserDefinedFunctionsInput) (*Ge
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetUserDefinedFunctionsWithContext(ctx aws.Context, input *GetUserDefinedFunctionsInput, opts ...request.Option) (*GetUserDefinedFunctionsOutput, error) {
+func (c *Glue) GetUserDefinedFunctionsWithContext(ctx aws.Context, input *GetUserDefinedFunctionsInput, opts ...aws.Option) (*GetUserDefinedFunctionsOutput, error) {
 	req, out := c.GetUserDefinedFunctionsRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5416,9 +5415,9 @@ func (c *Glue) GetUserDefinedFunctionsPages(input *GetUserDefinedFunctionsInput,
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) GetUserDefinedFunctionsPagesWithContext(ctx aws.Context, input *GetUserDefinedFunctionsInput, fn func(*GetUserDefinedFunctionsOutput, bool) bool, opts ...request.Option) error {
-	p := request.Pagination{
-		NewRequest: func() (*request.Request, error) {
+func (c *Glue) GetUserDefinedFunctionsPagesWithContext(ctx aws.Context, input *GetUserDefinedFunctionsInput, fn func(*GetUserDefinedFunctionsOutput, bool) bool, opts ...aws.Option) error {
+	p := aws.Pagination{
+		NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetUserDefinedFunctionsInput
 			if input != nil {
 				tmp := *input
@@ -5440,7 +5439,7 @@ func (c *Glue) GetUserDefinedFunctionsPagesWithContext(ctx aws.Context, input *G
 
 const opImportCatalogToGlue = "ImportCatalogToGlue"
 
-// ImportCatalogToGlueRequest generates a "aws/request.Request" representing the
+// ImportCatalogToGlueRequest generates a "aws.Request" representing the
 // client's request for the ImportCatalogToGlue operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5464,8 +5463,8 @@ const opImportCatalogToGlue = "ImportCatalogToGlue"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ImportCatalogToGlue
-func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) (req *request.Request, output *ImportCatalogToGlueOutput) {
-	op := &request.Operation{
+func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) (req *aws.Request, output *ImportCatalogToGlueOutput) {
+	op := &aws.Operation{
 		Name:       opImportCatalogToGlue,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5513,7 +5512,7 @@ func (c *Glue) ImportCatalogToGlue(input *ImportCatalogToGlueInput) (*ImportCata
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) ImportCatalogToGlueWithContext(ctx aws.Context, input *ImportCatalogToGlueInput, opts ...request.Option) (*ImportCatalogToGlueOutput, error) {
+func (c *Glue) ImportCatalogToGlueWithContext(ctx aws.Context, input *ImportCatalogToGlueInput, opts ...aws.Option) (*ImportCatalogToGlueOutput, error) {
 	req, out := c.ImportCatalogToGlueRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5522,7 +5521,7 @@ func (c *Glue) ImportCatalogToGlueWithContext(ctx aws.Context, input *ImportCata
 
 const opResetJobBookmark = "ResetJobBookmark"
 
-// ResetJobBookmarkRequest generates a "aws/request.Request" representing the
+// ResetJobBookmarkRequest generates a "aws.Request" representing the
 // client's request for the ResetJobBookmark operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5546,8 +5545,8 @@ const opResetJobBookmark = "ResetJobBookmark"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResetJobBookmark
-func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) (req *request.Request, output *ResetJobBookmarkOutput) {
-	op := &request.Operation{
+func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) (req *aws.Request, output *ResetJobBookmarkOutput) {
+	op := &aws.Operation{
 		Name:       opResetJobBookmark,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5601,7 +5600,7 @@ func (c *Glue) ResetJobBookmark(input *ResetJobBookmarkInput) (*ResetJobBookmark
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) ResetJobBookmarkWithContext(ctx aws.Context, input *ResetJobBookmarkInput, opts ...request.Option) (*ResetJobBookmarkOutput, error) {
+func (c *Glue) ResetJobBookmarkWithContext(ctx aws.Context, input *ResetJobBookmarkInput, opts ...aws.Option) (*ResetJobBookmarkOutput, error) {
 	req, out := c.ResetJobBookmarkRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5610,7 +5609,7 @@ func (c *Glue) ResetJobBookmarkWithContext(ctx aws.Context, input *ResetJobBookm
 
 const opStartCrawler = "StartCrawler"
 
-// StartCrawlerRequest generates a "aws/request.Request" representing the
+// StartCrawlerRequest generates a "aws.Request" representing the
 // client's request for the StartCrawler operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5634,8 +5633,8 @@ const opStartCrawler = "StartCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawler
-func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) (req *request.Request, output *StartCrawlerOutput) {
-	op := &request.Operation{
+func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) (req *aws.Request, output *StartCrawlerOutput) {
+	op := &aws.Operation{
 		Name:       opStartCrawler,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5687,7 +5686,7 @@ func (c *Glue) StartCrawler(input *StartCrawlerInput) (*StartCrawlerOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StartCrawlerWithContext(ctx aws.Context, input *StartCrawlerInput, opts ...request.Option) (*StartCrawlerOutput, error) {
+func (c *Glue) StartCrawlerWithContext(ctx aws.Context, input *StartCrawlerInput, opts ...aws.Option) (*StartCrawlerOutput, error) {
 	req, out := c.StartCrawlerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5696,7 +5695,7 @@ func (c *Glue) StartCrawlerWithContext(ctx aws.Context, input *StartCrawlerInput
 
 const opStartCrawlerSchedule = "StartCrawlerSchedule"
 
-// StartCrawlerScheduleRequest generates a "aws/request.Request" representing the
+// StartCrawlerScheduleRequest generates a "aws.Request" representing the
 // client's request for the StartCrawlerSchedule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5720,8 +5719,8 @@ const opStartCrawlerSchedule = "StartCrawlerSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartCrawlerSchedule
-func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) (req *request.Request, output *StartCrawlerScheduleOutput) {
-	op := &request.Operation{
+func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) (req *aws.Request, output *StartCrawlerScheduleOutput) {
+	op := &aws.Operation{
 		Name:       opStartCrawlerSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5779,7 +5778,7 @@ func (c *Glue) StartCrawlerSchedule(input *StartCrawlerScheduleInput) (*StartCra
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StartCrawlerScheduleWithContext(ctx aws.Context, input *StartCrawlerScheduleInput, opts ...request.Option) (*StartCrawlerScheduleOutput, error) {
+func (c *Glue) StartCrawlerScheduleWithContext(ctx aws.Context, input *StartCrawlerScheduleInput, opts ...aws.Option) (*StartCrawlerScheduleOutput, error) {
 	req, out := c.StartCrawlerScheduleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5788,7 +5787,7 @@ func (c *Glue) StartCrawlerScheduleWithContext(ctx aws.Context, input *StartCraw
 
 const opStartJobRun = "StartJobRun"
 
-// StartJobRunRequest generates a "aws/request.Request" representing the
+// StartJobRunRequest generates a "aws.Request" representing the
 // client's request for the StartJobRun operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5812,8 +5811,8 @@ const opStartJobRun = "StartJobRun"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRun
-func (c *Glue) StartJobRunRequest(input *StartJobRunInput) (req *request.Request, output *StartJobRunOutput) {
-	op := &request.Operation{
+func (c *Glue) StartJobRunRequest(input *StartJobRunInput) (req *aws.Request, output *StartJobRunOutput) {
+	op := &aws.Operation{
 		Name:       opStartJobRun,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5873,7 +5872,7 @@ func (c *Glue) StartJobRun(input *StartJobRunInput) (*StartJobRunOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StartJobRunWithContext(ctx aws.Context, input *StartJobRunInput, opts ...request.Option) (*StartJobRunOutput, error) {
+func (c *Glue) StartJobRunWithContext(ctx aws.Context, input *StartJobRunInput, opts ...aws.Option) (*StartJobRunOutput, error) {
 	req, out := c.StartJobRunRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5882,7 +5881,7 @@ func (c *Glue) StartJobRunWithContext(ctx aws.Context, input *StartJobRunInput, 
 
 const opStartTrigger = "StartTrigger"
 
-// StartTriggerRequest generates a "aws/request.Request" representing the
+// StartTriggerRequest generates a "aws.Request" representing the
 // client's request for the StartTrigger operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -5906,8 +5905,8 @@ const opStartTrigger = "StartTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartTrigger
-func (c *Glue) StartTriggerRequest(input *StartTriggerInput) (req *request.Request, output *StartTriggerOutput) {
-	op := &request.Operation{
+func (c *Glue) StartTriggerRequest(input *StartTriggerInput) (req *aws.Request, output *StartTriggerOutput) {
+	op := &aws.Operation{
 		Name:       opStartTrigger,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -5967,7 +5966,7 @@ func (c *Glue) StartTrigger(input *StartTriggerInput) (*StartTriggerOutput, erro
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StartTriggerWithContext(ctx aws.Context, input *StartTriggerInput, opts ...request.Option) (*StartTriggerOutput, error) {
+func (c *Glue) StartTriggerWithContext(ctx aws.Context, input *StartTriggerInput, opts ...aws.Option) (*StartTriggerOutput, error) {
 	req, out := c.StartTriggerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -5976,7 +5975,7 @@ func (c *Glue) StartTriggerWithContext(ctx aws.Context, input *StartTriggerInput
 
 const opStopCrawler = "StopCrawler"
 
-// StopCrawlerRequest generates a "aws/request.Request" representing the
+// StopCrawlerRequest generates a "aws.Request" representing the
 // client's request for the StopCrawler operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6000,8 +5999,8 @@ const opStopCrawler = "StopCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawler
-func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) (req *request.Request, output *StopCrawlerOutput) {
-	op := &request.Operation{
+func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) (req *aws.Request, output *StopCrawlerOutput) {
+	op := &aws.Operation{
 		Name:       opStopCrawler,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6055,7 +6054,7 @@ func (c *Glue) StopCrawler(input *StopCrawlerInput) (*StopCrawlerOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StopCrawlerWithContext(ctx aws.Context, input *StopCrawlerInput, opts ...request.Option) (*StopCrawlerOutput, error) {
+func (c *Glue) StopCrawlerWithContext(ctx aws.Context, input *StopCrawlerInput, opts ...aws.Option) (*StopCrawlerOutput, error) {
 	req, out := c.StopCrawlerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6064,7 +6063,7 @@ func (c *Glue) StopCrawlerWithContext(ctx aws.Context, input *StopCrawlerInput, 
 
 const opStopCrawlerSchedule = "StopCrawlerSchedule"
 
-// StopCrawlerScheduleRequest generates a "aws/request.Request" representing the
+// StopCrawlerScheduleRequest generates a "aws.Request" representing the
 // client's request for the StopCrawlerSchedule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6088,8 +6087,8 @@ const opStopCrawlerSchedule = "StopCrawlerSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerSchedule
-func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) (req *request.Request, output *StopCrawlerScheduleOutput) {
-	op := &request.Operation{
+func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) (req *aws.Request, output *StopCrawlerScheduleOutput) {
+	op := &aws.Operation{
 		Name:       opStopCrawlerSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6144,7 +6143,7 @@ func (c *Glue) StopCrawlerSchedule(input *StopCrawlerScheduleInput) (*StopCrawle
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StopCrawlerScheduleWithContext(ctx aws.Context, input *StopCrawlerScheduleInput, opts ...request.Option) (*StopCrawlerScheduleOutput, error) {
+func (c *Glue) StopCrawlerScheduleWithContext(ctx aws.Context, input *StopCrawlerScheduleInput, opts ...aws.Option) (*StopCrawlerScheduleOutput, error) {
 	req, out := c.StopCrawlerScheduleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6153,7 +6152,7 @@ func (c *Glue) StopCrawlerScheduleWithContext(ctx aws.Context, input *StopCrawle
 
 const opStopTrigger = "StopTrigger"
 
-// StopTriggerRequest generates a "aws/request.Request" representing the
+// StopTriggerRequest generates a "aws.Request" representing the
 // client's request for the StopTrigger operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6177,8 +6176,8 @@ const opStopTrigger = "StopTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopTrigger
-func (c *Glue) StopTriggerRequest(input *StopTriggerInput) (req *request.Request, output *StopTriggerOutput) {
-	op := &request.Operation{
+func (c *Glue) StopTriggerRequest(input *StopTriggerInput) (req *aws.Request, output *StopTriggerOutput) {
+	op := &aws.Operation{
 		Name:       opStopTrigger,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6232,7 +6231,7 @@ func (c *Glue) StopTrigger(input *StopTriggerInput) (*StopTriggerOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) StopTriggerWithContext(ctx aws.Context, input *StopTriggerInput, opts ...request.Option) (*StopTriggerOutput, error) {
+func (c *Glue) StopTriggerWithContext(ctx aws.Context, input *StopTriggerInput, opts ...aws.Option) (*StopTriggerOutput, error) {
 	req, out := c.StopTriggerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6241,7 +6240,7 @@ func (c *Glue) StopTriggerWithContext(ctx aws.Context, input *StopTriggerInput, 
 
 const opUpdateClassifier = "UpdateClassifier"
 
-// UpdateClassifierRequest generates a "aws/request.Request" representing the
+// UpdateClassifierRequest generates a "aws.Request" representing the
 // client's request for the UpdateClassifier operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6265,8 +6264,8 @@ const opUpdateClassifier = "UpdateClassifier"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifier
-func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) (req *request.Request, output *UpdateClassifierOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) (req *aws.Request, output *UpdateClassifierOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateClassifier,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6320,7 +6319,7 @@ func (c *Glue) UpdateClassifier(input *UpdateClassifierInput) (*UpdateClassifier
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateClassifierWithContext(ctx aws.Context, input *UpdateClassifierInput, opts ...request.Option) (*UpdateClassifierOutput, error) {
+func (c *Glue) UpdateClassifierWithContext(ctx aws.Context, input *UpdateClassifierInput, opts ...aws.Option) (*UpdateClassifierOutput, error) {
 	req, out := c.UpdateClassifierRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6329,7 +6328,7 @@ func (c *Glue) UpdateClassifierWithContext(ctx aws.Context, input *UpdateClassif
 
 const opUpdateConnection = "UpdateConnection"
 
-// UpdateConnectionRequest generates a "aws/request.Request" representing the
+// UpdateConnectionRequest generates a "aws.Request" representing the
 // client's request for the UpdateConnection operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6353,8 +6352,8 @@ const opUpdateConnection = "UpdateConnection"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateConnection
-func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) (req *request.Request, output *UpdateConnectionOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) (req *aws.Request, output *UpdateConnectionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateConnection,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6405,7 +6404,7 @@ func (c *Glue) UpdateConnection(input *UpdateConnectionInput) (*UpdateConnection
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateConnectionWithContext(ctx aws.Context, input *UpdateConnectionInput, opts ...request.Option) (*UpdateConnectionOutput, error) {
+func (c *Glue) UpdateConnectionWithContext(ctx aws.Context, input *UpdateConnectionInput, opts ...aws.Option) (*UpdateConnectionOutput, error) {
 	req, out := c.UpdateConnectionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6414,7 +6413,7 @@ func (c *Glue) UpdateConnectionWithContext(ctx aws.Context, input *UpdateConnect
 
 const opUpdateCrawler = "UpdateCrawler"
 
-// UpdateCrawlerRequest generates a "aws/request.Request" representing the
+// UpdateCrawlerRequest generates a "aws.Request" representing the
 // client's request for the UpdateCrawler operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6438,8 +6437,8 @@ const opUpdateCrawler = "UpdateCrawler"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawler
-func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) (req *request.Request, output *UpdateCrawlerOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) (req *aws.Request, output *UpdateCrawlerOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCrawler,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6497,7 +6496,7 @@ func (c *Glue) UpdateCrawler(input *UpdateCrawlerInput) (*UpdateCrawlerOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateCrawlerWithContext(ctx aws.Context, input *UpdateCrawlerInput, opts ...request.Option) (*UpdateCrawlerOutput, error) {
+func (c *Glue) UpdateCrawlerWithContext(ctx aws.Context, input *UpdateCrawlerInput, opts ...aws.Option) (*UpdateCrawlerOutput, error) {
 	req, out := c.UpdateCrawlerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6506,7 +6505,7 @@ func (c *Glue) UpdateCrawlerWithContext(ctx aws.Context, input *UpdateCrawlerInp
 
 const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
 
-// UpdateCrawlerScheduleRequest generates a "aws/request.Request" representing the
+// UpdateCrawlerScheduleRequest generates a "aws.Request" representing the
 // client's request for the UpdateCrawlerSchedule operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6530,8 +6529,8 @@ const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerSchedule
-func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) (req *request.Request, output *UpdateCrawlerScheduleOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) (req *aws.Request, output *UpdateCrawlerScheduleOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateCrawlerSchedule,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6588,7 +6587,7 @@ func (c *Glue) UpdateCrawlerSchedule(input *UpdateCrawlerScheduleInput) (*Update
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateCrawlerScheduleWithContext(ctx aws.Context, input *UpdateCrawlerScheduleInput, opts ...request.Option) (*UpdateCrawlerScheduleOutput, error) {
+func (c *Glue) UpdateCrawlerScheduleWithContext(ctx aws.Context, input *UpdateCrawlerScheduleInput, opts ...aws.Option) (*UpdateCrawlerScheduleOutput, error) {
 	req, out := c.UpdateCrawlerScheduleRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6597,7 +6596,7 @@ func (c *Glue) UpdateCrawlerScheduleWithContext(ctx aws.Context, input *UpdateCr
 
 const opUpdateDatabase = "UpdateDatabase"
 
-// UpdateDatabaseRequest generates a "aws/request.Request" representing the
+// UpdateDatabaseRequest generates a "aws.Request" representing the
 // client's request for the UpdateDatabase operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6621,8 +6620,8 @@ const opUpdateDatabase = "UpdateDatabase"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDatabase
-func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) (req *request.Request, output *UpdateDatabaseOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) (req *aws.Request, output *UpdateDatabaseOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDatabase,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6676,7 +6675,7 @@ func (c *Glue) UpdateDatabase(input *UpdateDatabaseInput) (*UpdateDatabaseOutput
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateDatabaseWithContext(ctx aws.Context, input *UpdateDatabaseInput, opts ...request.Option) (*UpdateDatabaseOutput, error) {
+func (c *Glue) UpdateDatabaseWithContext(ctx aws.Context, input *UpdateDatabaseInput, opts ...aws.Option) (*UpdateDatabaseOutput, error) {
 	req, out := c.UpdateDatabaseRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6685,7 +6684,7 @@ func (c *Glue) UpdateDatabaseWithContext(ctx aws.Context, input *UpdateDatabaseI
 
 const opUpdateDevEndpoint = "UpdateDevEndpoint"
 
-// UpdateDevEndpointRequest generates a "aws/request.Request" representing the
+// UpdateDevEndpointRequest generates a "aws.Request" representing the
 // client's request for the UpdateDevEndpoint operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6709,8 +6708,8 @@ const opUpdateDevEndpoint = "UpdateDevEndpoint"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateDevEndpoint
-func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) (req *request.Request, output *UpdateDevEndpointOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) (req *aws.Request, output *UpdateDevEndpointOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateDevEndpoint,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6767,7 +6766,7 @@ func (c *Glue) UpdateDevEndpoint(input *UpdateDevEndpointInput) (*UpdateDevEndpo
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateDevEndpointWithContext(ctx aws.Context, input *UpdateDevEndpointInput, opts ...request.Option) (*UpdateDevEndpointOutput, error) {
+func (c *Glue) UpdateDevEndpointWithContext(ctx aws.Context, input *UpdateDevEndpointInput, opts ...aws.Option) (*UpdateDevEndpointOutput, error) {
 	req, out := c.UpdateDevEndpointRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6776,7 +6775,7 @@ func (c *Glue) UpdateDevEndpointWithContext(ctx aws.Context, input *UpdateDevEnd
 
 const opUpdateJob = "UpdateJob"
 
-// UpdateJobRequest generates a "aws/request.Request" representing the
+// UpdateJobRequest generates a "aws.Request" representing the
 // client's request for the UpdateJob operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6800,8 +6799,8 @@ const opUpdateJob = "UpdateJob"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJob
-func (c *Glue) UpdateJobRequest(input *UpdateJobInput) (req *request.Request, output *UpdateJobOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateJobRequest(input *UpdateJobInput) (req *aws.Request, output *UpdateJobOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateJob,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6855,7 +6854,7 @@ func (c *Glue) UpdateJob(input *UpdateJobInput) (*UpdateJobOutput, error) {
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts ...request.Option) (*UpdateJobOutput, error) {
+func (c *Glue) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts ...aws.Option) (*UpdateJobOutput, error) {
 	req, out := c.UpdateJobRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6864,7 +6863,7 @@ func (c *Glue) UpdateJobWithContext(ctx aws.Context, input *UpdateJobInput, opts
 
 const opUpdatePartition = "UpdatePartition"
 
-// UpdatePartitionRequest generates a "aws/request.Request" representing the
+// UpdatePartitionRequest generates a "aws.Request" representing the
 // client's request for the UpdatePartition operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6888,8 +6887,8 @@ const opUpdatePartition = "UpdatePartition"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdatePartition
-func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) (req *request.Request, output *UpdatePartitionOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) (req *aws.Request, output *UpdatePartitionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdatePartition,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -6943,7 +6942,7 @@ func (c *Glue) UpdatePartition(input *UpdatePartitionInput) (*UpdatePartitionOut
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdatePartitionWithContext(ctx aws.Context, input *UpdatePartitionInput, opts ...request.Option) (*UpdatePartitionOutput, error) {
+func (c *Glue) UpdatePartitionWithContext(ctx aws.Context, input *UpdatePartitionInput, opts ...aws.Option) (*UpdatePartitionOutput, error) {
 	req, out := c.UpdatePartitionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -6952,7 +6951,7 @@ func (c *Glue) UpdatePartitionWithContext(ctx aws.Context, input *UpdatePartitio
 
 const opUpdateTable = "UpdateTable"
 
-// UpdateTableRequest generates a "aws/request.Request" representing the
+// UpdateTableRequest generates a "aws.Request" representing the
 // client's request for the UpdateTable operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -6976,8 +6975,8 @@ const opUpdateTable = "UpdateTable"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable
-func (c *Glue) UpdateTableRequest(input *UpdateTableInput) (req *request.Request, output *UpdateTableOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateTableRequest(input *UpdateTableInput) (req *aws.Request, output *UpdateTableOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTable,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7034,7 +7033,7 @@ func (c *Glue) UpdateTable(input *UpdateTableInput) (*UpdateTableOutput, error) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, opts ...request.Option) (*UpdateTableOutput, error) {
+func (c *Glue) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, opts ...aws.Option) (*UpdateTableOutput, error) {
 	req, out := c.UpdateTableRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7043,7 +7042,7 @@ func (c *Glue) UpdateTableWithContext(ctx aws.Context, input *UpdateTableInput, 
 
 const opUpdateTrigger = "UpdateTrigger"
 
-// UpdateTriggerRequest generates a "aws/request.Request" representing the
+// UpdateTriggerRequest generates a "aws.Request" representing the
 // client's request for the UpdateTrigger operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7067,8 +7066,8 @@ const opUpdateTrigger = "UpdateTrigger"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger
-func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) (req *request.Request, output *UpdateTriggerOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) (req *aws.Request, output *UpdateTriggerOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateTrigger,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7122,7 +7121,7 @@ func (c *Glue) UpdateTrigger(input *UpdateTriggerInput) (*UpdateTriggerOutput, e
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateTriggerWithContext(ctx aws.Context, input *UpdateTriggerInput, opts ...request.Option) (*UpdateTriggerOutput, error) {
+func (c *Glue) UpdateTriggerWithContext(ctx aws.Context, input *UpdateTriggerInput, opts ...aws.Option) (*UpdateTriggerOutput, error) {
 	req, out := c.UpdateTriggerRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7131,7 +7130,7 @@ func (c *Glue) UpdateTriggerWithContext(ctx aws.Context, input *UpdateTriggerInp
 
 const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
 
-// UpdateUserDefinedFunctionRequest generates a "aws/request.Request" representing the
+// UpdateUserDefinedFunctionRequest generates a "aws.Request" representing the
 // client's request for the UpdateUserDefinedFunction operation. The "output" return
 // value will be populated with the request's response once the request complets
 // successfuly.
@@ -7155,8 +7154,8 @@ const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
 //    }
 //
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUserDefinedFunction
-func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunctionInput) (req *request.Request, output *UpdateUserDefinedFunctionOutput) {
-	op := &request.Operation{
+func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunctionInput) (req *aws.Request, output *UpdateUserDefinedFunctionOutput) {
+	op := &aws.Operation{
 		Name:       opUpdateUserDefinedFunction,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
@@ -7210,7 +7209,7 @@ func (c *Glue) UpdateUserDefinedFunction(input *UpdateUserDefinedFunctionInput) 
 // the context is nil a panic will occur. In the future the SDK may create
 // sub-contexts for http.Requests. See https://golang.org/pkg/context/
 // for more information on using Contexts.
-func (c *Glue) UpdateUserDefinedFunctionWithContext(ctx aws.Context, input *UpdateUserDefinedFunctionInput, opts ...request.Option) (*UpdateUserDefinedFunctionOutput, error) {
+func (c *Glue) UpdateUserDefinedFunctionWithContext(ctx aws.Context, input *UpdateUserDefinedFunctionInput, opts ...aws.Option) (*UpdateUserDefinedFunctionOutput, error) {
 	req, out := c.UpdateUserDefinedFunctionRequest(input)
 	req.SetContext(ctx)
 	req.ApplyOptions(opts...)
@@ -7238,9 +7237,9 @@ func (s Action) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Action) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Action"}
+	invalidParams := aws.ErrInvalidParams{Context: "Action"}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7297,24 +7296,24 @@ func (s BatchCreatePartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCreatePartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchCreatePartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchCreatePartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionInputList == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionInputList"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionInputList"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.PartitionInputList != nil {
 		for i, v := range s.PartitionInputList {
@@ -7322,7 +7321,7 @@ func (s *BatchCreatePartitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionInputList", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionInputList", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7407,12 +7406,12 @@ func (s BatchDeleteConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteConnectionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.ConnectionNameList == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionNameList"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionNameList"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7503,24 +7502,24 @@ func (s BatchDeletePartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeletePartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeletePartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeletePartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionsToDelete == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionsToDelete"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionsToDelete"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.PartitionsToDelete != nil {
 		for i, v := range s.PartitionsToDelete {
@@ -7528,7 +7527,7 @@ func (s *BatchDeletePartitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToDelete", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToDelete", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7618,18 +7617,18 @@ func (s BatchDeleteTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDeleteTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchDeleteTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchDeleteTableInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.TablesToDelete == nil {
-		invalidParams.Add(request.NewErrParamRequired("TablesToDelete"))
+		invalidParams.Add(aws.NewErrParamRequired("TablesToDelete"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7716,24 +7715,24 @@ func (s BatchGetPartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchGetPartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "BatchGetPartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetPartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionsToGet == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionsToGet"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionsToGet"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.PartitionsToGet != nil {
 		for i, v := range s.PartitionsToGet {
@@ -7741,7 +7740,7 @@ func (s *BatchGetPartitionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToGet", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionsToGet", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -7838,18 +7837,18 @@ func (s CatalogEntry) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CatalogEntry) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CatalogEntry"}
+	invalidParams := aws.ErrInvalidParams{Context: "CatalogEntry"}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -7973,18 +7972,18 @@ func (s CodeGenEdge) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeGenEdge) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CodeGenEdge"}
+	invalidParams := aws.ErrInvalidParams{Context: "CodeGenEdge"}
 	if s.Source == nil {
-		invalidParams.Add(request.NewErrParamRequired("Source"))
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Source != nil && len(*s.Source) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Source", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Source", 1))
 	}
 	if s.Target == nil {
-		invalidParams.Add(request.NewErrParamRequired("Target"))
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
 	}
 	if s.Target != nil && len(*s.Target) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Target", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Target", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8047,18 +8046,18 @@ func (s CodeGenNode) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeGenNode) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CodeGenNode"}
+	invalidParams := aws.ErrInvalidParams{Context: "CodeGenNode"}
 	if s.Args == nil {
-		invalidParams.Add(request.NewErrParamRequired("Args"))
+		invalidParams.Add(aws.NewErrParamRequired("Args"))
 	}
 	if s.Id == nil {
-		invalidParams.Add(request.NewErrParamRequired("Id"))
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
 	if s.Id != nil && len(*s.Id) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Id", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}
 	if s.NodeType == nil {
-		invalidParams.Add(request.NewErrParamRequired("NodeType"))
+		invalidParams.Add(aws.NewErrParamRequired("NodeType"))
 	}
 	if s.Args != nil {
 		for i, v := range s.Args {
@@ -8066,7 +8065,7 @@ func (s *CodeGenNode) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Args", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Args", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -8132,12 +8131,12 @@ func (s CodeGenNodeArg) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CodeGenNodeArg) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CodeGenNodeArg"}
+	invalidParams := aws.ErrInvalidParams{Context: "CodeGenNodeArg"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Value == nil {
-		invalidParams.Add(request.NewErrParamRequired("Value"))
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8193,12 +8192,12 @@ func (s Column) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Column) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Column"}
+	invalidParams := aws.ErrInvalidParams{Context: "Column"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8248,9 +8247,9 @@ func (s Condition) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Condition) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Condition"}
+	invalidParams := aws.ErrInvalidParams{Context: "Condition"}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -8412,13 +8411,13 @@ func (s ConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ConnectionInput"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.PhysicalConnectionRequirements != nil {
 		if err := s.PhysicalConnectionRequirements.Validate(); err != nil {
-			invalidParams.AddNested("PhysicalConnectionRequirements", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PhysicalConnectionRequirements", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8788,10 +8787,10 @@ func (s CreateClassifierInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateClassifierInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateClassifierInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateClassifierInput"}
 	if s.GrokClassifier != nil {
 		if err := s.GrokClassifier.Validate(); err != nil {
-			invalidParams.AddNested("GrokClassifier", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GrokClassifier", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8848,16 +8847,16 @@ func (s CreateConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateConnectionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.ConnectionInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionInput"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionInput"))
 	}
 	if s.ConnectionInput != nil {
 		if err := s.ConnectionInput.Validate(); err != nil {
-			invalidParams.AddNested("ConnectionInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConnectionInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -8950,21 +8949,21 @@ func (s CreateCrawlerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateCrawlerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateCrawlerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateCrawlerInput"}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 	if s.Targets == nil {
-		invalidParams.Add(request.NewErrParamRequired("Targets"))
+		invalidParams.Add(aws.NewErrParamRequired("Targets"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9068,16 +9067,16 @@ func (s CreateDatabaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDatabaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDatabaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDatabaseInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseInput"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseInput"))
 	}
 	if s.DatabaseInput != nil {
 		if err := s.DatabaseInput.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DatabaseInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9165,18 +9164,18 @@ func (s CreateDevEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateDevEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateDevEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateDevEndpointInput"}
 	if s.EndpointName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointName"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
 	if s.RoleArn == nil {
-		invalidParams.Add(request.NewErrParamRequired("RoleArn"))
+		invalidParams.Add(aws.NewErrParamRequired("RoleArn"))
 	}
 	if s.SecurityGroupIds == nil {
-		invalidParams.Add(request.NewErrParamRequired("SecurityGroupIds"))
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
 	}
 	if s.SubnetId == nil {
-		invalidParams.Add(request.NewErrParamRequired("SubnetId"))
+		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9404,21 +9403,21 @@ func (s CreateGrokClassifierRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateGrokClassifierRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateGrokClassifierRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGrokClassifierRequest"}
 	if s.Classification == nil {
-		invalidParams.Add(request.NewErrParamRequired("Classification"))
+		invalidParams.Add(aws.NewErrParamRequired("Classification"))
 	}
 	if s.GrokPattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("GrokPattern"))
+		invalidParams.Add(aws.NewErrParamRequired("GrokPattern"))
 	}
 	if s.GrokPattern != nil && len(*s.GrokPattern) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GrokPattern", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GrokPattern", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9505,18 +9504,18 @@ func (s CreateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateJobInput"}
 	if s.Command == nil {
-		invalidParams.Add(request.NewErrParamRequired("Command"))
+		invalidParams.Add(aws.NewErrParamRequired("Command"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Role == nil {
-		invalidParams.Add(request.NewErrParamRequired("Role"))
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -9645,28 +9644,28 @@ func (s CreatePartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreatePartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreatePartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionInput"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionInput"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.PartitionInput != nil {
 		if err := s.PartitionInput.Validate(); err != nil {
-			invalidParams.AddNested("PartitionInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PartitionInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9738,14 +9737,14 @@ func (s CreateScriptInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateScriptInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateScriptInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateScriptInput"}
 	if s.DagEdges != nil {
 		for i, v := range s.DagEdges {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagEdges", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagEdges", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9755,7 +9754,7 @@ func (s *CreateScriptInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagNodes", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DagNodes", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -9833,22 +9832,22 @@ func (s CreateTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTableInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.TableInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableInput"))
+		invalidParams.Add(aws.NewErrParamRequired("TableInput"))
 	}
 	if s.TableInput != nil {
 		if err := s.TableInput.Validate(); err != nil {
-			invalidParams.AddNested("TableInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TableInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -9932,18 +9931,18 @@ func (s CreateTriggerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateTriggerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateTriggerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateTriggerInput"}
 	if s.Actions == nil {
-		invalidParams.Add(request.NewErrParamRequired("Actions"))
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Type == nil {
-		invalidParams.Add(request.NewErrParamRequired("Type"))
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
@@ -9951,13 +9950,13 @@ func (s *CreateTriggerInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Predicate != nil {
 		if err := s.Predicate.Validate(); err != nil {
-			invalidParams.AddNested("Predicate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Predicate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10058,22 +10057,22 @@ func (s CreateUserDefinedFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateUserDefinedFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "CreateUserDefinedFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "CreateUserDefinedFunctionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.FunctionInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionInput"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionInput"))
 	}
 	if s.FunctionInput != nil {
 		if err := s.FunctionInput.Validate(); err != nil {
-			invalidParams.AddNested("FunctionInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FunctionInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -10212,15 +10211,15 @@ func (s DatabaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DatabaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DatabaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DatabaseInput"}
 	if s.LocationUri != nil && len(*s.LocationUri) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("LocationUri", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("LocationUri", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10275,12 +10274,12 @@ func (s DeleteClassifierInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteClassifierInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteClassifierInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteClassifierInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10336,15 +10335,15 @@ func (s DeleteConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteConnectionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.ConnectionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionName"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionName"))
 	}
 	if s.ConnectionName != nil && len(*s.ConnectionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ConnectionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ConnectionName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10402,12 +10401,12 @@ func (s DeleteCrawlerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteCrawlerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteCrawlerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCrawlerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10463,15 +10462,15 @@ func (s DeleteDatabaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDatabaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDatabaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDatabaseInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10529,9 +10528,9 @@ func (s DeleteDevEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteDevEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteDevEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteDevEndpointInput"}
 	if s.EndpointName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointName"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10583,12 +10582,12 @@ func (s DeleteJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10663,24 +10662,24 @@ func (s DeletePartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeletePartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeletePartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionValues"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionValues"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10759,21 +10758,21 @@ func (s DeleteTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTableInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10837,12 +10836,12 @@ func (s DeleteTriggerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteTriggerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteTriggerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTriggerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -10912,21 +10911,21 @@ func (s DeleteUserDefinedFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteUserDefinedFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "DeleteUserDefinedFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteUserDefinedFunctionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11255,9 +11254,9 @@ func (s GetCatalogImportStatusInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCatalogImportStatusInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCatalogImportStatusInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCatalogImportStatusInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11318,12 +11317,12 @@ func (s GetClassifierInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClassifierInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetClassifierInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetClassifierInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11385,9 +11384,9 @@ func (s GetClassifiersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetClassifiersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetClassifiersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetClassifiersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11467,15 +11466,15 @@ func (s GetConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetConnectionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11585,12 +11584,12 @@ func (s GetConnectionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetConnectionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetConnectionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetConnectionsInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11679,12 +11678,12 @@ func (s GetCrawlerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCrawlerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCrawlerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11725,9 +11724,9 @@ func (s GetCrawlerMetricsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCrawlerMetricsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCrawlerMetricsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlerMetricsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11835,9 +11834,9 @@ func (s GetCrawlersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetCrawlersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetCrawlersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetCrawlersInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11918,15 +11917,15 @@ func (s GetDatabaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDatabaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDatabaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDatabaseInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11998,12 +11997,12 @@ func (s GetDatabasesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDatabasesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDatabasesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDatabasesInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12145,9 +12144,9 @@ func (s GetDevEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDevEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDevEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDevEndpointInput"}
 	if s.EndpointName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointName"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12209,9 +12208,9 @@ func (s GetDevEndpointsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetDevEndpointsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetDevEndpointsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetDevEndpointsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12287,12 +12286,12 @@ func (s GetJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12361,18 +12360,18 @@ func (s GetJobRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobRunInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 	if s.RunId == nil {
-		invalidParams.Add(request.NewErrParamRequired("RunId"))
+		invalidParams.Add(aws.NewErrParamRequired("RunId"))
 	}
 	if s.RunId != nil && len(*s.RunId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("RunId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("RunId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12451,15 +12450,15 @@ func (s GetJobRunsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobRunsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobRunsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobRunsInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12542,9 +12541,9 @@ func (s GetJobsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetJobsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetJobsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetJobsInput"}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12626,13 +12625,13 @@ func (s GetMappingInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetMappingInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetMappingInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetMappingInput"}
 	if s.Source == nil {
-		invalidParams.Add(request.NewErrParamRequired("Source"))
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Location != nil {
 		if err := s.Location.Validate(); err != nil {
-			invalidParams.AddNested("Location", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Location", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Sinks != nil {
@@ -12641,13 +12640,13 @@ func (s *GetMappingInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Source != nil {
 		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12737,24 +12736,24 @@ func (s GetPartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionValues == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionValues"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionValues"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12854,28 +12853,28 @@ func (s GetPartitionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPartitionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPartitionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPartitionsInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.Segment != nil {
 		if err := s.Segment.Validate(); err != nil {
-			invalidParams.AddNested("Segment", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Segment", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -12994,16 +12993,16 @@ func (s GetPlanInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetPlanInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetPlanInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetPlanInput"}
 	if s.Mapping == nil {
-		invalidParams.Add(request.NewErrParamRequired("Mapping"))
+		invalidParams.Add(aws.NewErrParamRequired("Mapping"))
 	}
 	if s.Source == nil {
-		invalidParams.Add(request.NewErrParamRequired("Source"))
+		invalidParams.Add(aws.NewErrParamRequired("Source"))
 	}
 	if s.Location != nil {
 		if err := s.Location.Validate(); err != nil {
-			invalidParams.AddNested("Location", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Location", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Sinks != nil {
@@ -13012,13 +13011,13 @@ func (s *GetPlanInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sinks", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Source != nil {
 		if err := s.Source.Validate(); err != nil {
-			invalidParams.AddNested("Source", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Source", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -13107,21 +13106,21 @@ func (s GetTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTableInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13209,24 +13208,24 @@ func (s GetTableVersionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTableVersionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTableVersionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTableVersionsInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13335,18 +13334,18 @@ func (s GetTablesInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTablesInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTablesInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTablesInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13440,12 +13439,12 @@ func (s GetTriggerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTriggerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTriggerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTriggerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13510,12 +13509,12 @@ func (s GetTriggersInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetTriggersInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetTriggersInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetTriggersInput"}
 	if s.DependentJobName != nil && len(*s.DependentJobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DependentJobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DependentJobName", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13606,21 +13605,21 @@ func (s GetUserDefinedFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserDefinedFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUserDefinedFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUserDefinedFunctionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13709,24 +13708,24 @@ func (s GetUserDefinedFunctionsInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetUserDefinedFunctionsInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "GetUserDefinedFunctionsInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "GetUserDefinedFunctionsInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("MaxResults", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
 	}
 	if s.Pattern == nil {
-		invalidParams.Add(request.NewErrParamRequired("Pattern"))
+		invalidParams.Add(aws.NewErrParamRequired("Pattern"))
 	}
 	if s.Pattern != nil && len(*s.Pattern) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Pattern", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Pattern", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -13906,9 +13905,9 @@ func (s ImportCatalogToGlueInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ImportCatalogToGlueInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ImportCatalogToGlueInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ImportCatalogToGlueInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14526,14 +14525,14 @@ func (s Location) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Location) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Location"}
+	invalidParams := aws.ErrInvalidParams{Context: "Location"}
 	if s.Jdbc != nil {
 		for i, v := range s.Jdbc {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Jdbc", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Jdbc", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14543,7 +14542,7 @@ func (s *Location) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "S3", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -14665,15 +14664,15 @@ func (s Order) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Order) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Order"}
+	invalidParams := aws.ErrInvalidParams{Context: "Order"}
 	if s.Column == nil {
-		invalidParams.Add(request.NewErrParamRequired("Column"))
+		invalidParams.Add(aws.NewErrParamRequired("Column"))
 	}
 	if s.Column != nil && len(*s.Column) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Column", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Column", 1))
 	}
 	if s.SortOrder == nil {
-		invalidParams.Add(request.NewErrParamRequired("SortOrder"))
+		invalidParams.Add(aws.NewErrParamRequired("SortOrder"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14849,10 +14848,10 @@ func (s PartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "PartitionInput"}
 	if s.StorageDescriptor != nil {
 		if err := s.StorageDescriptor.Validate(); err != nil {
-			invalidParams.AddNested("StorageDescriptor", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StorageDescriptor", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -14912,9 +14911,9 @@ func (s PartitionValueList) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PartitionValueList) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PartitionValueList"}
+	invalidParams := aws.ErrInvalidParams{Context: "PartitionValueList"}
 	if s.Values == nil {
-		invalidParams.Add(request.NewErrParamRequired("Values"))
+		invalidParams.Add(aws.NewErrParamRequired("Values"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -14956,12 +14955,12 @@ func (s PhysicalConnectionRequirements) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PhysicalConnectionRequirements) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "PhysicalConnectionRequirements"}
+	invalidParams := aws.ErrInvalidParams{Context: "PhysicalConnectionRequirements"}
 	if s.AvailabilityZone != nil && len(*s.AvailabilityZone) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("AvailabilityZone", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("AvailabilityZone", 1))
 	}
 	if s.SubnetId != nil && len(*s.SubnetId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SubnetId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15046,14 +15045,14 @@ func (s Predicate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Predicate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Predicate"}
+	invalidParams := aws.ErrInvalidParams{Context: "Predicate"}
 	if s.Conditions != nil {
 		for i, v := range s.Conditions {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Conditions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Conditions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -15098,9 +15097,9 @@ func (s ResetJobBookmarkInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResetJobBookmarkInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResetJobBookmarkInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResetJobBookmarkInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15163,9 +15162,9 @@ func (s ResourceUri) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ResourceUri) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "ResourceUri"}
+	invalidParams := aws.ErrInvalidParams{Context: "ResourceUri"}
 	if s.Uri != nil && len(*s.Uri) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Uri", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Uri", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15322,15 +15321,15 @@ func (s Segment) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Segment) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "Segment"}
+	invalidParams := aws.ErrInvalidParams{Context: "Segment"}
 	if s.SegmentNumber == nil {
-		invalidParams.Add(request.NewErrParamRequired("SegmentNumber"))
+		invalidParams.Add(aws.NewErrParamRequired("SegmentNumber"))
 	}
 	if s.TotalSegments == nil {
-		invalidParams.Add(request.NewErrParamRequired("TotalSegments"))
+		invalidParams.Add(aws.NewErrParamRequired("TotalSegments"))
 	}
 	if s.TotalSegments != nil && *s.TotalSegments < 1 {
-		invalidParams.Add(request.NewErrParamMinValue("TotalSegments", 1))
+		invalidParams.Add(aws.NewErrParamMinValue("TotalSegments", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15379,12 +15378,12 @@ func (s SerDeInfo) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *SerDeInfo) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "SerDeInfo"}
+	invalidParams := aws.ErrInvalidParams{Context: "SerDeInfo"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.SerializationLibrary != nil && len(*s.SerializationLibrary) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("SerializationLibrary", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("SerializationLibrary", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15477,12 +15476,12 @@ func (s StartCrawlerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartCrawlerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartCrawlerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartCrawlerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15534,12 +15533,12 @@ func (s StartCrawlerScheduleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartCrawlerScheduleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartCrawlerScheduleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartCrawlerScheduleInput"}
 	if s.CrawlerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CrawlerName"))
+		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
 	}
 	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CrawlerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15600,15 +15599,15 @@ func (s StartJobRunInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartJobRunInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartJobRunInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartJobRunInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 	if s.JobRunId != nil && len(*s.JobRunId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobRunId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobRunId", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15687,12 +15686,12 @@ func (s StartTriggerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartTriggerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StartTriggerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StartTriggerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15753,12 +15752,12 @@ func (s StopCrawlerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopCrawlerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopCrawlerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopCrawlerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15810,12 +15809,12 @@ func (s StopCrawlerScheduleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopCrawlerScheduleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopCrawlerScheduleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopCrawlerScheduleInput"}
 	if s.CrawlerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CrawlerName"))
+		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
 	}
 	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CrawlerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15867,12 +15866,12 @@ func (s StopTriggerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StopTriggerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StopTriggerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "StopTriggerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -15971,20 +15970,20 @@ func (s StorageDescriptor) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StorageDescriptor) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "StorageDescriptor"}
+	invalidParams := aws.ErrInvalidParams{Context: "StorageDescriptor"}
 	if s.Columns != nil {
 		for i, v := range s.Columns {
 			if v == nil {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Columns", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Columns", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.SerdeInfo != nil {
 		if err := s.SerdeInfo.Validate(); err != nil {
-			invalidParams.AddNested("SerdeInfo", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("SerdeInfo", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.SortColumns != nil {
@@ -15993,7 +15992,7 @@ func (s *StorageDescriptor) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortColumns", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortColumns", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -16333,15 +16332,15 @@ func (s TableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "TableInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Owner != nil && len(*s.Owner) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Owner", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Owner", 1))
 	}
 	if s.PartitionKeys != nil {
 		for i, v := range s.PartitionKeys {
@@ -16349,13 +16348,13 @@ func (s *TableInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionKeys", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PartitionKeys", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.StorageDescriptor != nil {
 		if err := s.StorageDescriptor.Validate(); err != nil {
-			invalidParams.AddNested("StorageDescriptor", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("StorageDescriptor", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16590,9 +16589,9 @@ func (s TriggerUpdate) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TriggerUpdate) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "TriggerUpdate"}
+	invalidParams := aws.ErrInvalidParams{Context: "TriggerUpdate"}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.Actions != nil {
 		for i, v := range s.Actions {
@@ -16600,13 +16599,13 @@ func (s *TriggerUpdate) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Actions", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
 	if s.Predicate != nil {
 		if err := s.Predicate.Validate(); err != nil {
-			invalidParams.AddNested("Predicate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("Predicate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16666,10 +16665,10 @@ func (s UpdateClassifierInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateClassifierInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateClassifierInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateClassifierInput"}
 	if s.GrokClassifier != nil {
 		if err := s.GrokClassifier.Validate(); err != nil {
-			invalidParams.AddNested("GrokClassifier", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("GrokClassifier", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16731,22 +16730,22 @@ func (s UpdateConnectionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateConnectionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateConnectionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateConnectionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.ConnectionInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("ConnectionInput"))
+		invalidParams.Add(aws.NewErrParamRequired("ConnectionInput"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.ConnectionInput != nil {
 		if err := s.ConnectionInput.Validate(); err != nil {
-			invalidParams.AddNested("ConnectionInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("ConnectionInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -16839,12 +16838,12 @@ func (s UpdateCrawlerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCrawlerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCrawlerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCrawlerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16947,12 +16946,12 @@ func (s UpdateCrawlerScheduleInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateCrawlerScheduleInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateCrawlerScheduleInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCrawlerScheduleInput"}
 	if s.CrawlerName == nil {
-		invalidParams.Add(request.NewErrParamRequired("CrawlerName"))
+		invalidParams.Add(aws.NewErrParamRequired("CrawlerName"))
 	}
 	if s.CrawlerName != nil && len(*s.CrawlerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CrawlerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CrawlerName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17020,22 +17019,22 @@ func (s UpdateDatabaseInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDatabaseInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDatabaseInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDatabaseInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseInput"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseInput"))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.DatabaseInput != nil {
 		if err := s.DatabaseInput.Validate(); err != nil {
-			invalidParams.AddNested("DatabaseInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("DatabaseInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17106,9 +17105,9 @@ func (s UpdateDevEndpointInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateDevEndpointInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateDevEndpointInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDevEndpointInput"}
 	if s.EndpointName == nil {
-		invalidParams.Add(request.NewErrParamRequired("EndpointName"))
+		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17183,15 +17182,15 @@ func (s UpdateGrokClassifierRequest) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateGrokClassifierRequest) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateGrokClassifierRequest"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGrokClassifierRequest"}
 	if s.GrokPattern != nil && len(*s.GrokPattern) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("GrokPattern", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("GrokPattern", 1))
 	}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17251,15 +17250,15 @@ func (s UpdateJobInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateJobInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateJobInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateJobInput"}
 	if s.JobName == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobName"))
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
 	}
 	if s.JobName != nil && len(*s.JobName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("JobName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
 	}
 	if s.JobUpdate == nil {
-		invalidParams.Add(request.NewErrParamRequired("JobUpdate"))
+		invalidParams.Add(aws.NewErrParamRequired("JobUpdate"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -17345,31 +17344,31 @@ func (s UpdatePartitionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdatePartitionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdatePartitionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePartitionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.PartitionInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionInput"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionInput"))
 	}
 	if s.PartitionValueList == nil {
-		invalidParams.Add(request.NewErrParamRequired("PartitionValueList"))
+		invalidParams.Add(aws.NewErrParamRequired("PartitionValueList"))
 	}
 	if s.TableName == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableName"))
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
 	}
 	if s.TableName != nil && len(*s.TableName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("TableName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 1))
 	}
 	if s.PartitionInput != nil {
 		if err := s.PartitionInput.Validate(); err != nil {
-			invalidParams.AddNested("PartitionInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("PartitionInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17455,22 +17454,22 @@ func (s UpdateTableInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTableInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTableInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTableInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.TableInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("TableInput"))
+		invalidParams.Add(aws.NewErrParamRequired("TableInput"))
 	}
 	if s.TableInput != nil {
 		if err := s.TableInput.Validate(); err != nil {
-			invalidParams.AddNested("TableInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TableInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17540,19 +17539,19 @@ func (s UpdateTriggerInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateTriggerInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateTriggerInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateTriggerInput"}
 	if s.Name == nil {
-		invalidParams.Add(request.NewErrParamRequired("Name"))
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("Name", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
 	if s.TriggerUpdate == nil {
-		invalidParams.Add(request.NewErrParamRequired("TriggerUpdate"))
+		invalidParams.Add(aws.NewErrParamRequired("TriggerUpdate"))
 	}
 	if s.TriggerUpdate != nil {
 		if err := s.TriggerUpdate.Validate(); err != nil {
-			invalidParams.AddNested("TriggerUpdate", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("TriggerUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17634,28 +17633,28 @@ func (s UpdateUserDefinedFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateUserDefinedFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UpdateUserDefinedFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateUserDefinedFunctionInput"}
 	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("CatalogId", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
 	}
 	if s.DatabaseName == nil {
-		invalidParams.Add(request.NewErrParamRequired("DatabaseName"))
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("DatabaseName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
 	}
 	if s.FunctionInput == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionInput"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionInput"))
 	}
 	if s.FunctionName == nil {
-		invalidParams.Add(request.NewErrParamRequired("FunctionName"))
+		invalidParams.Add(aws.NewErrParamRequired("FunctionName"))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.FunctionInput != nil {
 		if err := s.FunctionInput.Validate(); err != nil {
-			invalidParams.AddNested("FunctionInput", err.(request.ErrInvalidParams))
+			invalidParams.AddNested("FunctionInput", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -17807,15 +17806,15 @@ func (s UserDefinedFunctionInput) GoString() string {
 
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UserDefinedFunctionInput) Validate() error {
-	invalidParams := request.ErrInvalidParams{Context: "UserDefinedFunctionInput"}
+	invalidParams := aws.ErrInvalidParams{Context: "UserDefinedFunctionInput"}
 	if s.ClassName != nil && len(*s.ClassName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("ClassName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("ClassName", 1))
 	}
 	if s.FunctionName != nil && len(*s.FunctionName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("FunctionName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("FunctionName", 1))
 	}
 	if s.OwnerName != nil && len(*s.OwnerName) < 1 {
-		invalidParams.Add(request.NewErrParamMinLen("OwnerName", 1))
+		invalidParams.Add(aws.NewErrParamMinLen("OwnerName", 1))
 	}
 	if s.ResourceUris != nil {
 		for i, v := range s.ResourceUris {
@@ -17823,7 +17822,7 @@ func (s *UserDefinedFunctionInput) Validate() error {
 				continue
 			}
 			if err := v.Validate(); err != nil {
-				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceUris", i), err.(request.ErrInvalidParams))
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ResourceUris", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
