@@ -291,7 +291,6 @@ func TestResolveFallbackEC2Credentials(t *testing.T) {
 	configs := Configs{}
 
 	cfg := unit.Config.Copy()
-	cfg.CredentialsLoader = nil
 
 	if err := ResolveFallbackEC2Credentials(cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
