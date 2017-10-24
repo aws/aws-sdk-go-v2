@@ -1,51 +1,3 @@
-// Package aws need to fillout this docs
-//
-// The CredentialsLoader is the primary method of getting access to and managing
-// credentials Values. Using dependency injection retrieval of the credential
-// values is handled by a object which satisfies the CredentialsProvider interface.
-//
-// By default the CredentialsLoader.Get() will cache the successful result of a
-// CredentialsProvider's Retrieve() until CredentialsProvider.IsExpired() returns true. At which
-// point CredentialsLoader will call CredentialsProvider's Retrieve() to get new credential Credentials.
-//
-// The CredentialsProvider is responsible for determining when credentials Credentials have expired.
-// It is also important to note that CredentialsLoader will always call Retrieve the
-// first time CredentialsLoader.Get() is called.
-//
-// Example of using the environment variable credentials.
-//
-//     creds := aws.NewEnvCredentials()
-//
-//     // Retrieve the credentials value
-//     credValue, err := creds.Get()
-//     if err != nil {
-//         // handle error
-//     }
-//
-// Example of forcing credentials to expire and be refreshed on the next Get().
-// This may be helpful to proactively expire credentials and refresh them sooner
-// than they would naturally expire on their own.
-//
-//     creds := aws.NewCredentials(&ec2rolecreds.EC2RoleProvider{})
-//     creds.Expire()
-//     credsValue, err := creds.Get()
-//     // New credentials will be retrieved instead of from cache.
-//
-//
-// Custom CredentialsProvider
-//
-// Each CredentialsProvider built into this package also provides a helper method to generate
-// a CredentialsLoader pointer setup with the CredentialsProvider. To use a custom CredentialsProvider just
-// create a type which satisfies the CredentialsProvider interface and pass it to the
-// NewCredentials method.
-//
-//     type MyProvider struct{}
-//     func (m *MyProvider) Retrieve() (Credentials, error) {...}
-//     func (m *MyProvider) IsExpired() bool {...}
-//
-//     creds := aws.NewCredentials(&MyProvider{})
-//     credValue, err := creds.Get()
-//
 package aws
 
 import (
@@ -58,14 +10,13 @@ import (
 //
 // This CredentialsLoader can be used to configure a service to not sign requests
 // when making service API calls. For example, when accessing public
-// s3 buckets.
+// s3 objects.
 //
-//     svc := s3.New(session.Must(session.NewSession(&aws.Config{
-//       CredentialsLoader: aws.AnonymousCredentials,
-//     })))
-//     // Access public S3 buckets.
+//     cfg, err := external.LoadDefaultAWSconfig()
+//     cfg.CredentialsLoader = aws.AnonymousCredentials
 //
-// @readonly
+//     svc := s3.New(cfg)
+//     // Get Public S3 Object
 var AnonymousCredentials = NewCredentialsLoader(StaticCredentialsProvider{
 	Value: Credentials{Source: "AnonymousCredentials"},
 })
@@ -100,31 +51,12 @@ type CredentialsProvider interface {
 	// Retrieve returns nil if it successfully retrieved the value.
 	// Error is returned if the value were not obtainable, or empty.
 	Retrieve() (Credentials, error)
-
-	// IsExpired returns if the credentials are no longer valid, and need
-	// to be retrieved.
-	IsExpired() bool
 }
 
-// An ErrorProvider is a stub credentials CredentialsProvider that always returns an error
-// this is used by the SDK when construction a known CredentialsProvider is not possible
-// due to an error.
-type ErrorProvider struct {
-	// The error to be returned from Retrieve
-	Err error
-
-	// The CredentialsProvider name to set on the Retrieved returned Credentials
-	Source string
-}
-
-// Retrieve will always return the error that the ErrorProvider was created with.
-func (p ErrorProvider) Retrieve() (Credentials, error) {
-	return Credentials{Source: p.Source}, p.Err
-}
-
-// IsExpired will always return not expired.
-func (p ErrorProvider) IsExpired() bool {
-	return false
+// Expirer is an interface for expiring values.
+type Expirer interface {
+	// Retrunes when the value expires.
+	Expires() time.Time
 }
 
 // A Expiry provides shared expiration logic to be used by credentials
@@ -132,20 +64,9 @@ func (p ErrorProvider) IsExpired() bool {
 //
 // The best method to use this struct is as an anonymous field within the
 // CredentialsProvider's struct.
-//
-// Example:
-//     type EC2RoleProvider struct {
-//         Expiry
-//         ...
-//     }
 type Expiry struct {
 	// The date/time when to expire on
 	expiration time.Time
-
-	// If set will be used by IsExpired to determine the current time.
-	// Defaults to time.Now if CurrentTime is not set.  Available for testing
-	// to be able to mock out the current time.
-	CurrentTime func() time.Time
 }
 
 // SetExpiration sets the expiration IsExpired will check when called.
@@ -163,12 +84,9 @@ func (e *Expiry) SetExpiration(expiration time.Time, window time.Duration) {
 	}
 }
 
-// IsExpired returns if the credentials are expired.
-func (e *Expiry) IsExpired() bool {
-	if e.CurrentTime == nil {
-		e.CurrentTime = time.Now
-	}
-	return e.expiration.Before(e.CurrentTime())
+// Expires returns when the credentials will expire.
+func (e *Expiry) Expires() time.Time {
+	return e.expiration
 }
 
 // A CredentialsLoader provides synchronous safe retrieval of AWS credentials Credentials.
@@ -187,7 +105,8 @@ type CredentialsLoader struct {
 	forceRefresh bool
 	m            sync.Mutex
 
-	Provider CredentialsProvider
+	Provider    CredentialsProvider
+	CurrentTime func() time.Time
 }
 
 // NewCredentialsLoader returns a pointer to a new CredentialsLoader with the CredentialsProvider set.
@@ -247,7 +166,20 @@ func (c *CredentialsLoader) IsExpired() bool {
 	return c.isExpired()
 }
 
-// isExpired helper method wrapping the definition of expired credentials.
 func (c *CredentialsLoader) isExpired() bool {
-	return c.forceRefresh || c.Provider.IsExpired()
+	if c.forceRefresh {
+		return true
+	}
+
+	e, ok := c.Provider.(Expirer)
+	if !ok {
+		return false
+	}
+
+	nowTime := c.CurrentTime
+	if nowTime == nil {
+		nowTime = time.Now
+	}
+
+	return e.Expires().Before(nowTime())
 }

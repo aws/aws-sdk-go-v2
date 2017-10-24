@@ -167,7 +167,6 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 //
 // Config providers used:
 func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
-	// TODO need implemented with assume role information from SharedConfig
 	v, found, err := GetAssumeRoleConfig(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?

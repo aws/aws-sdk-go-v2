@@ -76,9 +76,13 @@ func (c *ChainProvider) Retrieve() (Credentials, error) {
 // IsExpired will returned the expired state of the currently cached provider
 // if there is one.  If there is no current provider, true will be returned.
 func (c *ChainProvider) IsExpired() bool {
-	if c.curr != nil {
-		return c.curr.IsExpired()
+	if c.curr == nil {
+		return true
 	}
 
-	return true
+	if e, ok := c.curr.(Expirer); ok {
+		return e.Expires().Before(NowTime())
+	}
+
+	return false
 }
