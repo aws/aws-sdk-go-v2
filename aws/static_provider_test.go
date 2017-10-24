@@ -6,8 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestStaticProviderGet(t *testing.T) {
-	s := StaticProvider{
+func TestStaticCredentialsProviderGet(t *testing.T) {
+	s := StaticCredentialsProvider{
 		Value: Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",
@@ -22,8 +22,8 @@ func TestStaticProviderGet(t *testing.T) {
 	assert.Empty(t, creds.SessionToken, "Expect no session token")
 }
 
-func TestStaticProviderIsExpired(t *testing.T) {
-	s := StaticProvider{
+func TestStaticCredentialsProviderIsExpired(t *testing.T) {
+	s := StaticCredentialsProvider{
 		Value: Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",

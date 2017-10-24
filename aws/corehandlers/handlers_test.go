@@ -59,7 +59,7 @@ type mockCredsProvider struct {
 
 func (m *mockCredsProvider) Retrieve() (aws.Credentials, error) {
 	m.retrieveCalled = true
-	return aws.Credentials{ProviderName: "mockCredsProvider"}, nil
+	return aws.Credentials{Source: "mockCredsProvider"}, nil
 }
 
 func (m *mockCredsProvider) IsExpired() bool {

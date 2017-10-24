@@ -66,8 +66,8 @@ import (
 //     // Access public S3 buckets.
 //
 // @readonly
-var AnonymousCredentials = NewCredentialsLoader(StaticProvider{
-	Value: Credentials{ProviderName: "AnonymousCredentials"},
+var AnonymousCredentials = NewCredentialsLoader(StaticCredentialsProvider{
+	Value: Credentials{Source: "AnonymousCredentials"},
 })
 
 // A Credentials is the AWS credentials value for individual credential fields.
@@ -81,14 +81,12 @@ type Credentials struct {
 	// AWS Session Token
 	SessionToken string
 
-	// CredentialsProvider used to get credentials
-	// TODO this should be named: Source
-	ProviderName string
+	// Source of the credentials
+	Source string
 }
 
-// Valid returns if the credentials are valid and can be used to sign
-// a AWS v4 request.
-func (v Credentials) Valid() bool {
+// HasKeys returns if the credentials keys are set.
+func (v Credentials) HasKeys() bool {
 	return len(v.AccessKeyID) > 0 && len(v.SecretAccessKey) > 0
 }
 
@@ -116,12 +114,12 @@ type ErrorProvider struct {
 	Err error
 
 	// The CredentialsProvider name to set on the Retrieved returned Credentials
-	ProviderName string
+	Source string
 }
 
 // Retrieve will always return the error that the ErrorProvider was created with.
 func (p ErrorProvider) Retrieve() (Credentials, error) {
-	return Credentials{ProviderName: p.ProviderName}, p.Err
+	return Credentials{Source: p.Source}, p.Err
 }
 
 // IsExpired will always return not expired.

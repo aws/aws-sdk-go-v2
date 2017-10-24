@@ -1,6 +1,7 @@
 package external
 
 import (
+	"net/http"
 	"strings"
 	"testing"
 	"time"
@@ -9,11 +10,27 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
-func TestResolveCABundle(t *testing.T) {
-	t.Errorf("pending HTTP client builder")
+func TestResolveCustomCABundle(t *testing.T) {
+	configs := Configs{
+		WithCustomCABundle(awstesting.TLSBundleCA),
+	}
+
+	cfg := aws.Config{
+		HTTPClient: &http.Client{Transport: &http.Transport{}},
+	}
+
+	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	transport := cfg.HTTPClient.Transport.(*http.Transport)
+	if transport.TLSClientConfig.RootCAs == nil {
+		t.Errorf("expect root CAs set")
+	}
 }
 
 func TestResolveRegion(t *testing.T) {
@@ -37,14 +54,14 @@ func TestResolveRegion(t *testing.T) {
 func TestResolveCredentialsValue(t *testing.T) {
 	configs := Configs{
 		WithCredentialsValue(aws.Credentials{
-			ProviderName: "invalid provider",
+			Source: "invalid provider",
 		}),
 		WithCredentialsValue(aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-			ProviderName: "valid",
+			Source: "valid",
 		}),
 		WithCredentialsValue(aws.Credentials{
-			ProviderName: "invalid provider 2",
+			Source: "invalid provider 2",
 		}),
 	}
 
@@ -55,14 +72,14 @@ func TestResolveCredentialsValue(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	p := cfg.CredentialsLoader.Provider.(aws.StaticProvider)
+	p := cfg.CredentialsLoader.Provider.(aws.StaticCredentialsProvider)
 	if e, a := "AKID", p.Value.AccessKeyID; e != a {
 		t.Errorf("expect %v key, got %v", e, a)
 	}
 	if e, a := "SECRET", p.Value.SecretAccessKey; e != a {
 		t.Errorf("expect %v secret, got %v", e, a)
 	}
-	if e, a := "valid", p.Value.ProviderName; e != a {
+	if e, a := "valid", p.Value.Source; e != a {
 		t.Errorf("expect %v provider name, got %v", e, a)
 	}
 
@@ -70,7 +87,7 @@ func TestResolveCredentialsValue(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	if e, a := "valid", creds.ProviderName; e != a {
+	if e, a := "valid", creds.Source; e != a {
 		t.Errorf("expect %v creds, got %v", e, a)
 	}
 }

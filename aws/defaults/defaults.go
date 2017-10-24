@@ -49,9 +49,18 @@ func Config() aws.Config {
 		EndpointResolver: endpoints.DefaultResolver(),
 		// TODO need to handle case of default credentials should be nil not set
 		CredentialsLoader: aws.AnonymousCredentials,
-		HTTPClient:        &http.Client{},
+		HTTPClient:        HTTPClient(),
 		Logger:            Logger(),
 		Handlers:          Handlers(),
+	}
+}
+
+// HTTPClient will return a new HTTP Client configured for the SDK.
+//
+// Does not use http.DefaultClient nor http.DefaultTransport.
+func HTTPClient() *http.Client {
+	return &http.Client{
+		Transport: &http.Transport{},
 	}
 }
 

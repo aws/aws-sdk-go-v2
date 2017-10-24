@@ -150,7 +150,7 @@ func New(p *plugin.Plugin) (Provider, error) {
 // from the underlying plugin provider. An error will be returned otherwise.
 func (p Provider) Retrieve() (aws.Credentials, error) {
 	creds := aws.Credentials{
-		ProviderName: ProviderName,
+		Source: ProviderName,
 	}
 
 	k, s, t, err := p.RetrieveFn()

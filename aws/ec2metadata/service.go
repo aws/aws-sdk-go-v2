@@ -7,7 +7,6 @@ import (
 	"errors"
 	"io"
 	"net/http"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
@@ -27,43 +26,19 @@ type EC2Metadata struct {
 //
 // Example:
 //     // Create a EC2Metadata client from just a session.
-//     svc := ec2metadata.New(mySession)
-//
-//     // Create a EC2Metadata client with additional configuration
-//     svc := ec2metadata.New(mySession, aws.NewConfig().WithLogLevel(aws.LogDebugHTTPBody))
+//     svc := ec2metadata.New(cfg)
 func New(p aws.ConfigProvider, cfgs ...*aws.Config) *EC2Metadata {
 	c := p.ClientConfig(ServiceName, cfgs...)
-	return NewClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion)
-}
-
-// NewClient returns a new EC2Metadata client. Should be used to create
-// a client when not using a session. Generally using just New with a session
-// is preferred.
-//
-// If an unmodified HTTP client is provided from the stdlib default, or no client
-// the EC2RoleProvider's EC2Metadata HTTP client's timeout will be shortened.
-// To disable this set Config.EC2MetadataDisableTimeoutOverride to false. Enabled by default.
-func NewClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion string, opts ...func(*aws.Client)) *EC2Metadata {
-	if !aws.BoolValue(cfg.EC2MetadataDisableTimeoutOverride) && httpClientZero(cfg.HTTPClient) {
-		// If the http client is unmodified and this feature is not disabled
-		// set custom timeouts for EC2Metadata requests.
-		cfg.HTTPClient = &http.Client{
-			// use a shorter timeout than default because the metadata
-			// service is local if it is running, and to fail faster
-			// if not running on an ec2 instance.
-			Timeout: 5 * time.Second,
-		}
-	}
 
 	svc := &EC2Metadata{
 		Client: aws.NewClient(
-			cfg,
+			*c.Config,
 			aws.ClientInfo{
 				ServiceName: ServiceName,
-				Endpoint:    endpoint,
+				Endpoint:    c.Endpoint,
 				APIVersion:  "latest",
 			},
-			handlers,
+			c.Handlers,
 		),
 	}
 
@@ -71,11 +46,6 @@ func NewClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion st
 	svc.Handlers.UnmarshalError.PushBack(unmarshalError)
 	svc.Handlers.Validate.Clear()
 	svc.Handlers.Validate.PushBack(validateEndpointHandler)
-
-	// Add additional options to the service config
-	for _, option := range opts {
-		option(svc.Client)
-	}
 
 	return svc
 }

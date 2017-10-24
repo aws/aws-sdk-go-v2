@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
-var _ CustomCABundleFileProvider = (*EnvConfig)(nil)
+var _ CustomCABundleProvider = (*EnvConfig)(nil)
 var _ RegionProvider = (*EnvConfig)(nil)
 var _ CredentialsValueProvider = (*EnvConfig)(nil)
 var _ SharedConfigProfileProvider = (*EnvConfig)(nil)
@@ -54,7 +54,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			},
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-				ProviderName: CredentialsSourceName,
+				Source: CredentialsSourceName,
 			},
 		},
 		{
@@ -64,7 +64,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			},
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
-				ProviderName: CredentialsSourceName,
+				Source: CredentialsSourceName,
 			},
 		},
 		{
@@ -75,7 +75,7 @@ func TestNewEnvConfig_Creds(t *testing.T) {
 			},
 			Val: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "TOKEN",
-				ProviderName: CredentialsSourceName,
+				Source: CredentialsSourceName,
 			},
 		},
 	}

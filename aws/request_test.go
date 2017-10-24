@@ -230,7 +230,7 @@ func TestRequestRecoverExpiredCreds(t *testing.T) {
 	s := awstesting.NewClient(&aws.Config{
 		Retryer: aws.DefaultRetryer{NumMaxRetries: 10},
 		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticProvider("AKID", "SECRET", ""),
+			aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
 		),
 	})
 	s.Handlers.Validate.Clear()

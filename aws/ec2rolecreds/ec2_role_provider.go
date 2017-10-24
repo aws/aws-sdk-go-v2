@@ -57,17 +57,17 @@ type Provider struct {
 func (m *Provider) Retrieve() (aws.Credentials, error) {
 	credsList, err := requestCredList(m.Client)
 	if err != nil {
-		return aws.Credentials{ProviderName: ProviderName}, err
+		return aws.Credentials{Source: ProviderName}, err
 	}
 
 	if len(credsList) == 0 {
-		return aws.Credentials{ProviderName: ProviderName}, awserr.New("EmptyEC2RoleList", "empty EC2 Role list", nil)
+		return aws.Credentials{Source: ProviderName}, awserr.New("EmptyEC2RoleList", "empty EC2 Role list", nil)
 	}
 	credsName := credsList[0]
 
 	roleCreds, err := requestCred(m.Client, credsName)
 	if err != nil {
-		return aws.Credentials{ProviderName: ProviderName}, err
+		return aws.Credentials{Source: ProviderName}, err
 	}
 
 	m.SetExpiration(roleCreds.Expiration, m.ExpiryWindow)
@@ -76,7 +76,7 @@ func (m *Provider) Retrieve() (aws.Credentials, error) {
 		AccessKeyID:     roleCreds.AccessKeyID,
 		SecretAccessKey: roleCreds.SecretAccessKey,
 		SessionToken:    roleCreds.Token,
-		ProviderName:    ProviderName,
+		Source:          ProviderName,
 	}, nil
 }
 

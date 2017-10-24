@@ -4,24 +4,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 )
 
-// StaticProviderName provides a name of Static provider
-const StaticProviderName = "StaticProvider"
+// StaticCredentialsProviderName provides a name of Static provider
+const StaticCredentialsProviderName = "StaticCredentialsProvider"
 
 var (
 	// ErrStaticCredentialsEmpty is emitted when static credentials are empty.
 	ErrStaticCredentialsEmpty = awserr.New("EmptyStaticCreds", "static credentials are empty", nil)
 )
 
-// A StaticProvider is a set of credentials which are set programmatically,
+// A StaticCredentialsProvider is a set of credentials which are set programmatically,
 // and will never expire.
-type StaticProvider struct {
+type StaticCredentialsProvider struct {
 	Value Credentials
 }
 
-// NewStaticProvider return a StaticProvider initialized with the AWS credentials
+// NewStaticCredentialsProvider return a StaticCredentialsProvider initialized with the AWS credentials
 // passed in.
-func NewStaticProvider(key, secret, session string) StaticProvider {
-	return StaticProvider{
+func NewStaticCredentialsProvider(key, secret, session string) StaticCredentialsProvider {
+	return StaticCredentialsProvider{
 		Value: Credentials{
 			AccessKeyID:     key,
 			SecretAccessKey: secret,
@@ -31,14 +31,14 @@ func NewStaticProvider(key, secret, session string) StaticProvider {
 }
 
 // Retrieve returns the credentials or error if the credentials are invalid.
-func (s StaticProvider) Retrieve() (Credentials, error) {
+func (s StaticCredentialsProvider) Retrieve() (Credentials, error) {
 	v := s.Value
 	if v.AccessKeyID == "" || v.SecretAccessKey == "" {
-		return Credentials{ProviderName: StaticProviderName}, ErrStaticCredentialsEmpty
+		return Credentials{Source: StaticCredentialsProviderName}, ErrStaticCredentialsEmpty
 	}
 
-	if len(v.ProviderName) == 0 {
-		v.ProviderName = StaticProviderName
+	if len(v.Source) == 0 {
+		v.Source = StaticCredentialsProviderName
 	}
 
 	return v, nil
@@ -46,7 +46,7 @@ func (s StaticProvider) Retrieve() (Credentials, error) {
 
 // IsExpired returns if the credentials are expired.
 //
-// For StaticProvider, the credentials never expired.
-func (s StaticProvider) IsExpired() bool {
+// For StaticCredentialsProvider, the credentials never expired.
+func (s StaticCredentialsProvider) IsExpired() bool {
 	return false
 }

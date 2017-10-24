@@ -113,7 +113,7 @@ func getAccountBuckets(cfg aws.Config, bucketCh chan<- *Bucket, owner string) er
 		}
 
 		bckSvc := s3.New(cfg, &aws.Config{
-			Region:      aws.String(bucket.Region),
+			Region:            aws.String(bucket.Region),
 			CredentialsLoader: svc.Config.CredentialsLoader,
 		})
 		bucketDetails(bckSvc, bucket)
