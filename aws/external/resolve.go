@@ -167,7 +167,6 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 //
 // Config providers used:
 func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
-	// TODO need implemented with assume role information from SharedConfig
 	v, found, err := GetAssumeRoleConfig(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
@@ -210,12 +209,8 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 }
 
 // ResolveFallbackEC2Credentials will configure the AWS config credentials to
-// use EC2 Instance Role if the config's Credentials field is not already set.
+// use EC2 Instance Role always.
 func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
-	if cfg.CredentialsLoader != nil {
-		return nil
-	}
-
 	cfgCp := cfg.Copy()
 	cfgCp.HTTPClient = shallowCopyHTTPClient(cfgCp.HTTPClient)
 	cfgCp.HTTPClient.Timeout = 5 * time.Second

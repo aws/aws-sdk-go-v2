@@ -46,8 +46,7 @@ func (l defaultLogger) Log(args ...interface{}) {
 // existing service client or session.
 func Config() aws.Config {
 	return aws.Config{
-		EndpointResolver: endpoints.DefaultResolver(),
-		// TODO need to handle case of default credentials should be nil not set
+		EndpointResolver:  endpoints.DefaultResolver(),
 		CredentialsLoader: aws.AnonymousCredentials,
 		HTTPClient:        HTTPClient(),
 		Logger:            Logger(),
