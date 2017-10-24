@@ -40,26 +40,21 @@ const (
 //
 //     // Create a ECS client with additional configuration
 //     svc := ecs.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *ECS {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *ECS {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *ECS {
 	svc := &ECS{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2014-11-13",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AmazonEC2ContainerServiceV20141113",
 			},
-			handlers,
 		),
 	}
 

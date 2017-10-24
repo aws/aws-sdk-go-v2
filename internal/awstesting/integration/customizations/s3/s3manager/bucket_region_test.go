@@ -11,10 +11,12 @@ import (
 )
 
 func TestGetBucketRegion(t *testing.T) {
-	expectRegion := aws.StringValue(integration.Session.Config.Region)
+	cfg := integration.Config()
+
+	expectRegion := aws.StringValue(cfg.Region)
 
 	ctx := aws.BackgroundContext()
-	region, err := s3manager.GetBucketRegion(ctx, integration.Session,
+	region, err := s3manager.GetBucketRegion(ctx, cfg,
 		aws.StringValue(bucketName), expectRegion)
 
 	if err != nil {

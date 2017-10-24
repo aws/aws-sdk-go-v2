@@ -40,29 +40,22 @@ const (
 //
 //     // Create a OpsWorksCM client with additional configuration
 //     svc := opsworkscm.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *OpsWorksCM {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *OpsWorksCM {
+	var signingName string
+	signingName = "opsworks-cm"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *OpsWorksCM {
-	if len(signingName) == 0 {
-		signingName = "opsworks-cm"
-	}
 	svc := &OpsWorksCM{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2016-11-01",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "OpsWorksCM_V2016_11_01",
 			},
-			handlers,
 		),
 	}
 

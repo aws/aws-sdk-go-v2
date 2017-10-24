@@ -15,36 +15,31 @@ func init() {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	// TODO getting a default populated config should be in the "defaults" package
-	*Config = defaults.Config()
-	Config.Region = aws.String("mock-region")
-	Config.EndpointResolver = aws.ResolveWithEndpoint(endpoints.ResolvedEndpoint{
+	config = defaults.Config()
+	config.Region = aws.String("mock-region")
+	config.EndpointResolver = aws.ResolveWithEndpoint(endpoints.ResolvedEndpoint{
 		URL:           server.URL,
-		SigningRegion: aws.StringValue(Config.Region),
+		SigningRegion: aws.StringValue(config.Region),
 	})
 }
 
 // Config is a mock configuration for a localhost mock server returning 200 status.
-var Config = &aws.Config{}
+var config aws.Config
+
+// Config returns a copy of the mock configuration for tests.
+func Config() aws.Config { return config.Copy() }
 
 // NewMockClient creates and initializes a client that will connect to the
 // mock server
-func NewMockClient(cfgs ...*aws.Config) *aws.Client {
-	c := Config.Copy(cfgs...)
-
-	endpoint, _ := c.EndpointResolver.EndpointFor("Mock", aws.StringValue(c.Region))
-	svc := aws.NewClient(
-		*c,
+func NewMockClient(cfg aws.Config) *aws.Client {
+	return aws.NewClient(
+		cfg,
 		aws.ClientInfo{
 			ServiceName:   "Mock",
-			SigningRegion: endpoint.SigningRegion,
-			Endpoint:      endpoint.URL,
+			SigningRegion: aws.StringValue(cfg.Region),
 			APIVersion:    "2015-12-08",
 			JSONVersion:   "1.1",
 			TargetPrefix:  "MockServer",
 		},
-		c.Handlers,
 	)
-
-	return svc
 }

@@ -28,7 +28,7 @@ func dlLoggingSvc(data []byte) (*s3.S3, *[]string, *[]string) {
 	names := []string{}
 	ranges := []string{}
 
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -65,7 +65,7 @@ func dlLoggingSvcNoChunk(data []byte) (*s3.S3, *[]string) {
 	var m sync.Mutex
 	names := []string{}
 
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -87,9 +87,9 @@ func dlLoggingSvcNoChunk(data []byte) (*s3.S3, *[]string) {
 func dlLoggingSvcNoContentRangeLength(data []byte, states []int) (*s3.S3, *[]string) {
 	var m sync.Mutex
 	names := []string{}
-	var index int = 0
+	var index int
 
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -112,9 +112,9 @@ func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.S3, *[]str
 	var m sync.Mutex
 	names := []string{}
 	ranges := []string{}
-	var index int = 0
+	var index int
 
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -158,11 +158,13 @@ func dlLoggingSvcContentRangeTotalAny(data []byte, states []int) (*s3.S3, *[]str
 func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.S3, *[]string) {
 	var m sync.Mutex
 	names := []string{}
-	var index int = 0
+	var index int
 
-	svc := s3.New(unit.Config, &aws.Config{
-		Retryer: aws.DefaultRetryer{NumMaxRetries: len(cases) - 1},
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: len(cases) - 1}
+
+	svc := s3.New(cfg)
+
 	svc.Handlers.Send.Clear()
 	svc.Handlers.Send.PushBack(func(r *request.Request) {
 		m.Lock()
@@ -517,7 +519,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 }
 
 func TestDownloadWithContextCanceled(t *testing.T) {
-	d := s3manager.NewDownloader(unit.Config)
+	d := s3manager.NewDownloader(unit.Config())
 
 	params := s3.GetObjectInput{
 		Bucket: aws.String("Bucket"),
@@ -579,7 +581,7 @@ func TestDownload_WithRange(t *testing.T) {
 }
 
 func TestDownload_WithFailure(t *testing.T) {
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Send.Clear()
 
 	first := true

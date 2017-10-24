@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 const (
@@ -88,6 +89,9 @@ type Operation struct {
 func New(cfg Config, clientInfo ClientInfo, handlers Handlers,
 	retryer Retryer, operation *Operation, params interface{}, data interface{}) *Request {
 
+	// TODO improve this experiance for config copy?
+	cfg = cfg.Copy()
+
 	method := operation.HTTPMethod
 	if method == "" {
 		method = "POST"
@@ -95,11 +99,34 @@ func New(cfg Config, clientInfo ClientInfo, handlers Handlers,
 
 	httpReq, _ := http.NewRequest(method, "", nil)
 
-	var err error
-	httpReq.URL, err = url.Parse(clientInfo.Endpoint + operation.HTTPPath)
-	if err != nil {
-		httpReq.URL = &url.URL{}
-		err = awserr.New("InvalidEndpointURL", "invalid endpoint uri", err)
+	// TODO need better way of handling this error... NeqRequest should return error.
+	endpoint, err := cfg.EndpointResolver.EndpointFor(
+		clientInfo.ServiceName, StringValue(cfg.Region),
+		func(opt *endpoints.Options) {
+			// TODO Where should these options go?
+			opt.DisableSSL = BoolValue(cfg.DisableSSL)
+			opt.UseDualStack = BoolValue(cfg.UseDualStack)
+
+			// Support the condition where the service is modeled but its
+			// endpoint metadata is not available.
+			opt.ResolveUnknownService = true
+		},
+	)
+	if err == nil {
+		// TODO so ugly
+		clientInfo.Endpoint = endpoint.URL
+		if len(endpoint.SigningName) > 0 {
+			clientInfo.SigningName = endpoint.SigningName
+		}
+		if len(endpoint.SigningRegion) > 0 {
+			clientInfo.SigningRegion = endpoint.SigningRegion
+		}
+
+		httpReq.URL, err = url.Parse(endpoint.URL + operation.HTTPPath)
+		if err != nil {
+			httpReq.URL = &url.URL{}
+			err = awserr.New("InvalidEndpointURL", "invalid endpoint uri", err)
+		}
 	}
 
 	r := &Request{

@@ -4,13 +4,14 @@
 package support
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
+	_ "github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
 	"github.com/aws/aws-sdk-go-v2/service/support"
 	"github.com/gucumber/gucumber"
 )
 
 func init() {
 	gucumber.Before("@support", func() {
-		gucumber.World["client"] = support.New(smoke.Session)
+		gucumber.World["client"] = support.New(integration.Config())
 	})
 }

@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
@@ -19,9 +19,12 @@ import (
 // Usage:
 //    go run deleteBuckets.go <bucketPrefix>
 func main() {
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
+	if err != nil {
+		panic(err)
+	}
 
-	svc := s3.New(sess)
+	svc := s3.New(cfg)
 	buckets, err := svc.ListBuckets(&s3.ListBucketsInput{})
 	if err != nil {
 		panic(fmt.Sprintf("failed to list buckets, %v", err))

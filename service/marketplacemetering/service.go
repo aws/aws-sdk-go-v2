@@ -40,29 +40,22 @@ const (
 //
 //     // Create a MarketplaceMetering client with additional configuration
 //     svc := marketplacemetering.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *MarketplaceMetering {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *MarketplaceMetering {
+	var signingName string
+	signingName = "aws-marketplace"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *MarketplaceMetering {
-	if len(signingName) == 0 {
-		signingName = "aws-marketplace"
-	}
 	svc := &MarketplaceMetering{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2016-01-14",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AWSMPMeteringService",
 			},
-			handlers,
 		),
 	}
 

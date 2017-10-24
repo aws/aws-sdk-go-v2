@@ -13,7 +13,7 @@ import (
 )
 
 func TestPredictEndpoint(t *testing.T) {
-	ml := machinelearning.New(unit.Config)
+	ml := machinelearning.New(unit.Config())
 	ml.Handlers.Send.Clear()
 	ml.Handlers.Send.PushBack(func(r *request.Request) {
 		r.HTTPResponse = &http.Response{

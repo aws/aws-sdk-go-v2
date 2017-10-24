@@ -430,35 +430,28 @@ const (
 //
 //     // Create a {{ .StructName }} client with additional configuration
 //     svc := {{ .PackageName }}.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *{{ .StructName }} {
-	c := p.ClientConfig({{ EndpointsIDValue . }}, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
-
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *{{ .StructName }} {
+func New(config aws.Config) *{{ .StructName }} {
+	var signingName string
 	{{- if .Metadata.SigningName }}
-		if len(signingName) == 0 {
-			signingName = "{{ .Metadata.SigningName }}"
-		}
+		signingName = "{{ .Metadata.SigningName }}"
 	{{- end }}
+	signingRegion := aws.StringValue(config.Region)
+
     svc := &{{ .StructName }}{
     	Client: aws.NewClient(
-    		cfg,
+    		config,
     		aws.ClientInfo{
-			ServiceName: {{ ServiceNameValue . }},
-			SigningName: signingName,
-			SigningRegion: signingRegion,
-			Endpoint:     endpoint,
-			APIVersion:   "{{ .Metadata.APIVersion }}",
-			{{ if .Metadata.JSONVersion -}}
-				JSONVersion:  "{{ .Metadata.JSONVersion }}",
-			{{- end }}
-			{{ if .Metadata.TargetPrefix -}}
-				TargetPrefix: "{{ .Metadata.TargetPrefix }}",
-			{{- end }}
+				ServiceName: {{ ServiceNameValue . }},
+				SigningName: signingName,
+				SigningRegion: signingRegion,
+				APIVersion:   "{{ .Metadata.APIVersion }}",
+				{{ if .Metadata.JSONVersion -}}
+					JSONVersion:  "{{ .Metadata.JSONVersion }}",
+				{{- end }}
+				{{ if .Metadata.TargetPrefix -}}
+					TargetPrefix: "{{ .Metadata.TargetPrefix }}",
+				{{- end }}
     		},
-    		handlers,
     	),
     }
 

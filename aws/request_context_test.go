@@ -8,10 +8,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/corehandlers"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func TestRequest_SetContext(t *testing.T) {
-	svc := awstesting.NewClient()
+	svc := awstesting.NewClient(unit.Config())
+
 	svc.Handlers.Clear()
 	svc.Handlers.Send.PushBackNamed(corehandlers.SendHandler)
 

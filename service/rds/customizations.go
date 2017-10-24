@@ -113,7 +113,7 @@ func presignURL(r *request.Request, sourceRegion *string, newParams interface{})
 	clientInfo.SigningRegion = resolved.SigningRegion
 
 	// Presign a request with modified params
-	req := request.New(*cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
+	req := request.New(cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
 	req.Operation.HTTPMethod = "GET"
 	uri, err := req.Presign(5 * time.Minute) // 5 minutes should be enough.
 	if err != nil {                          // bubble error back up to original request

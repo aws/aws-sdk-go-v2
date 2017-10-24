@@ -10,6 +10,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -142,12 +143,14 @@ func TestMoreComplexSignRequest(t *testing.T) {
 
 func TestGet(t *testing.T) {
 	assert := assert.New(t)
-	svc := awstesting.NewClient(&aws.Config{
-		CredentialsLoader: aws.NewCredentialsLoader(
-			aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-		),
-		Region: aws.String("ap-southeast-2"),
-	})
+
+	cfg := unit.Config()
+	cfg.CredentialsLoader = aws.NewCredentialsLoader(
+		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+	)
+	cfg.Region = aws.String("ap-southeast-2")
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "OpName",
@@ -170,10 +173,12 @@ func TestGet(t *testing.T) {
 
 func TestAnonymousCredentials(t *testing.T) {
 	assert := assert.New(t)
-	svc := awstesting.NewClient(&aws.Config{
-		CredentialsLoader: aws.AnonymousCredentials,
-		Region:            aws.String("ap-southeast-2"),
-	})
+
+	cfg := unit.Config()
+	cfg.CredentialsLoader = aws.AnonymousCredentials
+	cfg.Region = aws.String("ap-southeast-2")
+
+	svc := awstesting.NewClient(cfg)
 	r := svc.NewRequest(
 		&aws.Operation{
 			Name:       "PutAttributes",

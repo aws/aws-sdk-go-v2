@@ -21,7 +21,6 @@ func BenchmarkTimeoutReadCloser(b *testing.B) {
 	`
 
 	handlers := aws.Handlers{}
-
 	handlers.Send.PushBack(func(r *aws.Request) {
 		r.HTTPResponse = &http.Response{
 			StatusCode: http.StatusOK,
@@ -50,8 +49,11 @@ func BenchmarkTimeoutReadCloser(b *testing.B) {
 		TargetPrefix:  "Foo",
 	}
 
+	cfg := unit.Config()
+	cfg.Handlers = handlers
+
 	req := aws.New(
-		*unit.Config,
+		cfg,
 		meta,
 		handlers,
 		aws.DefaultRetryer{NumMaxRetries: 5},

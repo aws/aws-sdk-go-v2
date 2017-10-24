@@ -40,26 +40,21 @@ const (
 //
 //     // Create a WAFRegional client with additional configuration
 //     svc := wafregional.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *WAFRegional {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *WAFRegional {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *WAFRegional {
 	svc := &WAFRegional{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2016-11-28",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AWSWAF_Regional_20161128",
 			},
-			handlers,
 		),
 	}
 

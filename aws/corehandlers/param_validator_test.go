@@ -14,7 +14,7 @@ import (
 
 var testSvc = func() *aws.Client {
 	s := &aws.Client{
-		Config: aws.Config{},
+		Config: unit.Config(),
 		ClientInfo: aws.ClientInfo{
 			ServiceName: "mock-service",
 			APIVersion:  "2015-01-01",
@@ -271,7 +271,7 @@ func BenchmarkValidateAny(b *testing.B) {
 		input.Records = append(input.Records, record)
 	}
 
-	req, _ := kinesis.New(unit.Config).PutRecordsRequest(input)
+	req, _ := kinesis.New(unit.Config()).PutRecordsRequest(input)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {

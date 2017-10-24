@@ -40,26 +40,21 @@ const (
 //
 //     // Create a ApplicationDiscoveryService client with additional configuration
 //     svc := applicationdiscoveryservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *ApplicationDiscoveryService {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *ApplicationDiscoveryService {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *ApplicationDiscoveryService {
 	svc := &ApplicationDiscoveryService{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2015-11-01",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "AWSPoseidonService_V2015_11_01",
 			},
-			handlers,
 		),
 	}
 

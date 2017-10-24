@@ -4,13 +4,14 @@
 package elasticloadbalancing
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
+	_ "github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/smoke"
 	"github.com/aws/aws-sdk-go-v2/service/elb"
 	"github.com/gucumber/gucumber"
 )
 
 func init() {
 	gucumber.Before("@elasticloadbalancing", func() {
-		gucumber.World["client"] = elb.New(smoke.Session)
+		gucumber.World["client"] = elb.New(integration.Config())
 	})
 }

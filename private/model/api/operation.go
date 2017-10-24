@@ -44,6 +44,7 @@ func (o *Operation) HasOutput() bool {
 	return o.OutputRef.ShapeName != ""
 }
 
+// GetSigner returns the signer to use for a request.
 func (o *Operation) GetSigner() string {
 	if o.AuthType == "v4-unsigned-body" {
 		o.API.imports["github.com/aws/aws-sdk-go-v2/aws/signer/v4"] = true

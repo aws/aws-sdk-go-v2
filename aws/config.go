@@ -3,8 +3,6 @@ package aws
 import (
 	"net/http"
 	"time"
-
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 // A Config provides service configuration for service clients.
@@ -185,129 +183,11 @@ func NewConfig() *Config {
 	return &Config{}
 }
 
-// ClientConfig is a temporary mock for session until full trasition to Config.
-func (c Config) ClientConfig(serviceName string, cfgs ...*Config) ClientConfig {
-	cfg := c.Copy(cfgs...)
-
-	// TODO better handling of error
-	endpoint, _ := cfg.EndpointResolver.EndpointFor(
-		serviceName, StringValue(cfg.Region),
-		func(opt *endpoints.Options) {
-			// TODO Where should these options go?
-			opt.DisableSSL = BoolValue(cfg.DisableSSL)
-			opt.UseDualStack = BoolValue(cfg.UseDualStack)
-
-			// Support the condition where the service is modeled but its
-			// endpoint metadata is not available.
-			opt.ResolveUnknownService = true
-		},
-	)
-
-	clientCfg := ClientConfig{
-		Config:        cfg,
-		Handlers:      cfg.Handlers,
-		Endpoint:      endpoint.URL,
-		SigningRegion: endpoint.SigningRegion,
-		SigningName:   endpoint.SigningName,
-	}
-
-	return clientCfg
-}
-
-// MergeIn merges the passed in configs into the existing config object.
-func (c *Config) MergeIn(cfgs ...*Config) {
-	for _, other := range cfgs {
-		mergeInConfig(c, other)
-	}
-}
-
-func mergeInConfig(dst *Config, other *Config) {
-	if other == nil {
-		return
-	}
-
-	if other.CredentialsLoader != nil {
-		dst.CredentialsLoader = other.CredentialsLoader
-	}
-
-	if other.EndpointResolver != nil {
-		dst.EndpointResolver = other.EndpointResolver
-	}
-
-	if other.Region != nil {
-		dst.Region = other.Region
-	}
-
-	if other.DisableSSL != nil {
-		dst.DisableSSL = other.DisableSSL
-	}
-
-	if other.HTTPClient != nil {
-		dst.HTTPClient = other.HTTPClient
-	}
-
-	if other.LogLevel != nil {
-		dst.LogLevel = other.LogLevel
-	}
-
-	if other.Logger != nil {
-		dst.Logger = other.Logger
-	}
-
-	if other.Retryer != nil {
-		dst.Retryer = other.Retryer
-	}
-
-	if other.DisableParamValidation != nil {
-		dst.DisableParamValidation = other.DisableParamValidation
-	}
-
-	if other.DisableComputeChecksums != nil {
-		dst.DisableComputeChecksums = other.DisableComputeChecksums
-	}
-
-	if other.S3ForcePathStyle != nil {
-		dst.S3ForcePathStyle = other.S3ForcePathStyle
-	}
-
-	if other.S3Disable100Continue != nil {
-		dst.S3Disable100Continue = other.S3Disable100Continue
-	}
-
-	if other.S3UseAccelerate != nil {
-		dst.S3UseAccelerate = other.S3UseAccelerate
-	}
-
-	if other.UseDualStack != nil {
-		dst.UseDualStack = other.UseDualStack
-	}
-
-	if other.EC2MetadataDisableTimeoutOverride != nil {
-		dst.EC2MetadataDisableTimeoutOverride = other.EC2MetadataDisableTimeoutOverride
-	}
-
-	if other.SleepDelay != nil {
-		dst.SleepDelay = other.SleepDelay
-	}
-
-	if other.DisableRestProtocolURICleaning != nil {
-		dst.DisableRestProtocolURICleaning = other.DisableRestProtocolURICleaning
-	}
-
-	if other.EnforceShouldRetryCheck != nil {
-		dst.EnforceShouldRetryCheck = other.EnforceShouldRetryCheck
-	}
-}
-
 // Copy will return a shallow copy of the Config object. If any additional
 // configurations are provided they will be merged into the new config returned.
-func (c *Config) Copy(cfgs ...*Config) *Config {
-	dst := *c
-	dst.Handlers = dst.Handlers.Copy()
+func (c Config) Copy() Config {
+	cp := c
+	cp.Handlers = cp.Handlers.Copy()
 
-	for _, cfg := range cfgs {
-		dst.MergeIn(cfg)
-	}
-
-	return &dst
+	return cp
 }

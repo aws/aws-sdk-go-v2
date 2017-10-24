@@ -54,9 +54,8 @@ func BuildNewMockRequest(c *mockClient, in *MockInput) func([]aws.Option) (*aws.
 }
 
 func TestWaiterPathAll(t *testing.T) {
-	svc := &mockClient{Client: awstesting.NewClient(&aws.Config{
-		Region: aws.String("mock-region"),
-	})}
+	svc := &mockClient{Client: awstesting.NewClient(unit.Config())}
+
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
@@ -119,9 +118,8 @@ func TestWaiterPathAll(t *testing.T) {
 }
 
 func TestWaiterPath(t *testing.T) {
-	svc := &mockClient{Client: awstesting.NewClient(&aws.Config{
-		Region: aws.String("mock-region"),
-	})}
+	svc := &mockClient{Client: awstesting.NewClient(unit.Config())}
+
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
@@ -184,9 +182,8 @@ func TestWaiterPath(t *testing.T) {
 }
 
 func TestWaiterFailure(t *testing.T) {
-	svc := &mockClient{Client: awstesting.NewClient(&aws.Config{
-		Region: aws.String("mock-region"),
-	})}
+	svc := &mockClient{Client: awstesting.NewClient(unit.Config())}
+
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
@@ -257,9 +254,7 @@ func TestWaiterFailure(t *testing.T) {
 }
 
 func TestWaiterError(t *testing.T) {
-	svc := &mockClient{Client: awstesting.NewClient(&aws.Config{
-		Region: aws.String("mock-region"),
-	})}
+	svc := &mockClient{Client: awstesting.NewClient(unit.Config())}
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
@@ -365,9 +360,7 @@ func TestWaiterError(t *testing.T) {
 }
 
 func TestWaiterStatus(t *testing.T) {
-	svc := &mockClient{Client: awstesting.NewClient(&aws.Config{
-		Region: aws.String("mock-region"),
-	})}
+	svc := &mockClient{Client: awstesting.NewClient(unit.Config())}
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Unmarshal.Clear()
 	svc.Handlers.UnmarshalMeta.Clear()
@@ -444,7 +437,7 @@ func TestWaiter_ApplyOptions(t *testing.T) {
 }
 
 func TestWaiter_WithContextCanceled(t *testing.T) {
-	c := awstesting.NewClient()
+	c := awstesting.NewClient(unit.Config())
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	reqCount := 0
@@ -504,7 +497,7 @@ func TestWaiter_WithContextCanceled(t *testing.T) {
 }
 
 func TestWaiter_WithContext(t *testing.T) {
-	c := awstesting.NewClient()
+	c := awstesting.NewClient(unit.Config())
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	reqCount := 0
@@ -552,7 +545,7 @@ func TestWaiter_WithContext(t *testing.T) {
 }
 
 func TestWaiter_AttemptsExpires(t *testing.T) {
-	c := awstesting.NewClient()
+	c := awstesting.NewClient(unit.Config())
 
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
 	reqCount := 0
@@ -602,7 +595,7 @@ func TestWaiterNilInput(t *testing.T) {
 	// other than being run via unit tests in the SDK. This should be fixed
 	// So code generation can be validated independently.
 
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Validate.Clear()
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Send.PushBack(func(r *aws.Request) {
@@ -628,7 +621,7 @@ func TestWaiterWithContextNilInput(t *testing.T) {
 	// other than being run via unit tests in the SDK. This should be fixed
 	// So code generation can be validated independently.
 
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 	svc.Handlers.Validate.Clear()
 	svc.Handlers.Send.Clear() // mock sending
 	svc.Handlers.Send.PushBack(func(r *aws.Request) {

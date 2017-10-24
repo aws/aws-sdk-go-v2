@@ -13,7 +13,7 @@ import (
 )
 
 func TestStandaloneSign(t *testing.T) {
-	creds := unit.Config.CredentialsLoader
+	creds := unit.Config().CredentialsLoader
 	signer := v4.NewSigner(creds)
 
 	for _, c := range standaloneSignCases {
@@ -49,7 +49,7 @@ func TestStandaloneSign(t *testing.T) {
 }
 
 func TestStandaloneSign_RawPath(t *testing.T) {
-	creds := unit.Config.CredentialsLoader
+	creds := unit.Config().CredentialsLoader
 	signer := v4.NewSigner(creds)
 
 	for _, c := range standaloneSignCases {

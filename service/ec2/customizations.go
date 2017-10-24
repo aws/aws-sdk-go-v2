@@ -56,7 +56,7 @@ func fillPresignedURL(r *request.Request) {
 	clientInfo.SigningRegion = resolved.SigningRegion
 
 	// Presign a CopySnapshot request with modified params
-	req := request.New(*cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
+	req := request.New(cfgCp, clientInfo, r.Handlers, r.Retryer, r.Operation, newParams, r.Data)
 	url, err := req.Presign(5 * time.Minute) // 5 minutes should be enough.
 	if err != nil {                          // bubble error back up to original request
 		r.Error = err

@@ -61,9 +61,11 @@ func main() {
 			SigningRegion: "custom-signing-region",
 		}, nil
 	}
-	ddbSvc := dynamodb.New(cfg, &aws.Config{
-		EndpointResolver: endpoints.ResolverFunc(ddbCustResolverFn),
-	})
+
+	cfgCp := cfg.Copy()
+	cfgCp.EndpointResolver = endpoints.ResolverFunc(ddbCustResolverFn)
+
+	ddbSvc := dynamodb.New(cfgCp)
 	// Operation calls will be made to the custom endpoint set in the
 	// ddCustResolverFn.
 	ddbSvc.ListTables(&dynamodb.ListTablesInput{})
@@ -71,8 +73,9 @@ func main() {
 	// Setting Config's Endpoint will override the EndpointResolver. Forcing
 	// the service clien to make all operation to the endpoint specified
 	// the in the config.
-	ddbSvcLocal := dynamodb.New(cfg, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("http://localhost:8088"),
-	})
+	cfgCp = cfg.Copy()
+	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL("http://localhost:8088")
+
+	ddbSvcLocal := dynamodb.New(cfgCp)
 	ddbSvcLocal.ListTables(&dynamodb.ListTablesInput{})
 }

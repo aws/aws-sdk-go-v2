@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
@@ -75,49 +76,65 @@ func runTests(t *testing.T, svc *s3.S3, tests []s3BucketTest) {
 }
 
 func TestAccelerateBucketBuild(t *testing.T) {
-	s := s3.New(unit.Config, &aws.Config{
-		S3UseAccelerate: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.S3UseAccelerate = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	runTests(t, s, accelerateTests)
 }
 
 func TestAccelerateNoSSLBucketBuild(t *testing.T) {
-	s := s3.New(unit.Config, &aws.Config{
-		S3UseAccelerate: aws.Bool(true),
-		DisableSSL:      aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.S3UseAccelerate = aws.Bool(true)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	runTests(t, s, accelerateNoSSLTests)
 }
 
 func TestAccelerateDualstackBucketBuild(t *testing.T) {
-	s := s3.New(unit.Config, &aws.Config{
-		S3UseAccelerate: aws.Bool(true),
-		UseDualStack:    aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.S3UseAccelerate = aws.Bool(true)
+	cfg.UseDualStack = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	runTests(t, s, accelerateDualstack)
 }
 
 func TestHostStyleBucketBuild(t *testing.T) {
-	s := s3.New(unit.Config)
+	cfg := unit.Config()
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	runTests(t, s, sslTests)
 }
 
 func TestHostStyleBucketBuildNoSSL(t *testing.T) {
-	s := s3.New(unit.Config, &aws.Config{
-		DisableSSL: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	runTests(t, s, nosslTests)
 }
 
 func TestPathStyleBucketBuild(t *testing.T) {
-	s := s3.New(unit.Config, &aws.Config{
-		S3ForcePathStyle: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	runTests(t, s, forcepathTests)
 }
 
 func TestHostStyleBucketGetBucketLocation(t *testing.T) {
-	s := s3.New(unit.Config)
+	cfg := unit.Config()
+	cfg.EndpointResolver = endpoints.DefaultResolver()
+
+	s := s3.New(cfg)
 	req, _ := s.GetBucketLocationRequest(&s3.GetBucketLocationInput{
 		Bucket: aws.String("bucket"),
 	})

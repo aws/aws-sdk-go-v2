@@ -395,15 +395,15 @@ func TestBatchDeleteList(t *testing.T) {
 }
 
 func buildS3SvcClient(u string) *s3.S3 {
-	return s3.New(unit.Config, &aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL(u),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-		CredentialsLoader: credentials.NewCredentialsLoader(
-			aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-		),
-	})
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(u)
+	cfg.S3ForcePathStyle = aws.Bool(true)
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.CredentialsLoader = credentials.NewCredentialsLoader(
+		aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+	)
 
+	return s3.New(cfg)
 }
 
 func TestBatchDeleteList_EmptyListObjects(t *testing.T) {

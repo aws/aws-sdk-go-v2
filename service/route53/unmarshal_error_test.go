@@ -14,7 +14,7 @@ import (
 )
 
 func makeClientWithResponse(response string) *route53.Route53 {
-	r := route53.New(unit.Config)
+	r := route53.New(unit.Config())
 	r.Handlers.Send.Clear()
 	r.Handlers.Send.PushBack(func(r *request.Request) {
 		body := ioutil.NopCloser(bytes.NewReader([]byte(response)))

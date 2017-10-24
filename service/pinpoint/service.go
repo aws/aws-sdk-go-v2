@@ -40,28 +40,21 @@ const (
 //
 //     // Create a Pinpoint client with additional configuration
 //     svc := pinpoint.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *Pinpoint {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *Pinpoint {
+	var signingName string
+	signingName = "mobiletargeting"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *Pinpoint {
-	if len(signingName) == 0 {
-		signingName = "mobiletargeting"
-	}
 	svc := &Pinpoint{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2016-12-01",
 				JSONVersion:   "1.1",
 			},
-			handlers,
 		),
 	}
 

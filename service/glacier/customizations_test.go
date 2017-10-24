@@ -21,7 +21,7 @@ var (
 		return bytes.NewReader(buf)
 	}()
 
-	svc = glacier.New(unit.Config)
+	svc = glacier.New(unit.Config())
 )
 
 func TestCustomizations(t *testing.T) {

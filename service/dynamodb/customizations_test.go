@@ -18,9 +18,10 @@ import (
 var db *dynamodb.DynamoDB
 
 func TestMain(m *testing.M) {
-	db = dynamodb.New(unit.Config, &aws.Config{
-		Retryer: aws.DefaultRetryer{NumMaxRetries: 2},
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
+
+	db = dynamodb.New(cfg)
 	db.Handlers.Send.Clear() // mock sending
 
 	os.Exit(m.Run())
@@ -44,19 +45,21 @@ func mockCRCResponse(svc *dynamodb.DynamoDB, status int, body, crc string) (req 
 }
 
 func TestDefaultRetryRules(t *testing.T) {
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.Retryer = nil
-	d := dynamodb.New(unit.Config)
-	if e, a := 10, d.MaxRetries(); e != a {
+
+	svc := dynamodb.New(cfg)
+	if e, a := 10, svc.Retryer.MaxRetries(); e != a {
 		t.Errorf("expect %d max retries, got %d", e, a)
 	}
 }
 
 func TestCustomRetryRules(t *testing.T) {
-	d := dynamodb.New(unit.Config, &aws.Config{
-		Retryer: aws.DefaultRetryer{NumMaxRetries: 2},
-	})
-	if e, a := 2, d.MaxRetries(); e != a {
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
+
+	svc := dynamodb.New(cfg)
+	if e, a := 2, svc.Retryer.MaxRetries(); e != a {
 		t.Errorf("expect %d max retries, got %d", e, a)
 	}
 }
@@ -66,15 +69,14 @@ type testCustomRetryer struct {
 }
 
 func TestCustomRetry_FromConfig(t *testing.T) {
-	d := dynamodb.New(unit.Config, &aws.Config{
-		Retryer: testCustomRetryer{client.DefaultRetryer{NumMaxRetries: 9}},
-	})
+	cfg := unit.Config()
+	cfg.Retryer = testCustomRetryer{client.DefaultRetryer{NumMaxRetries: 9}}
 
-	if _, ok := d.Retryer.(testCustomRetryer); !ok {
-		t.Errorf("expect retryer to be testCustomRetryer, but got %T", d.Retryer)
-	}
+	svc := dynamodb.New(cfg)
 
-	if e, a := 9, d.MaxRetries(); e != a {
+	retryer := svc.Retryer.(testCustomRetryer)
+
+	if e, a := 9, retryer.MaxRetries(); e != a {
 		t.Errorf("expect %d max retries from custom retryer, got %d", e, a)
 	}
 }
@@ -134,10 +136,11 @@ func TestValidateCRC32DoesNotMatch(t *testing.T) {
 }
 
 func TestValidateCRC32DoesNotMatchNoComputeChecksum(t *testing.T) {
-	svc := dynamodb.New(unit.Config, &aws.Config{
-		Retryer:                 aws.DefaultRetryer{NumMaxRetries: 2},
-		DisableComputeChecksums: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 2}
+	cfg.DisableComputeChecksums = aws.Bool(true)
+
+	svc := dynamodb.New(cfg)
 	svc.Handlers.Send.Clear() // mock sending
 
 	req := mockCRCResponse(svc, 200, `{"TableNames":["A"]}`, "1234")

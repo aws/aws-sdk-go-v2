@@ -9,14 +9,16 @@ import (
 )
 
 func TestRequireEndpointIfRegionProvided(t *testing.T) {
-	svc := cloudsearchdomain.New(unit.Config, &aws.Config{
-		Region:                 aws.String("mock-region"),
-		DisableParamValidation: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.Region = aws.String("mock-region")
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
+
+	svc := cloudsearchdomain.New(cfg)
 	req, _ := svc.SearchRequest(nil)
 	err := req.Build()
 
-	if e, a := "", svc.Endpoint; e != a {
+	if e, a := "", req.ClientInfo.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -28,13 +30,15 @@ func TestRequireEndpointIfRegionProvided(t *testing.T) {
 }
 
 func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
-	svc := cloudsearchdomain.New(unit.Config, &aws.Config{
-		DisableParamValidation: aws.Bool(true),
-	})
+	cfg := unit.Config()
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("")
+
+	svc := cloudsearchdomain.New(cfg)
 	req, _ := svc.SearchRequest(nil)
 	err := req.Build()
 
-	if e, a := "", svc.Endpoint; e != a {
+	if e, a := "", req.ClientInfo.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err == nil {
@@ -46,15 +50,16 @@ func TestRequireEndpointIfNoRegionProvided(t *testing.T) {
 }
 
 func TestRequireEndpointUsed(t *testing.T) {
-	svc := cloudsearchdomain.New(unit.Config, &aws.Config{
-		Region:                 aws.String("mock-region"),
-		DisableParamValidation: aws.Bool(true),
-		EndpointResolver:       aws.ResolveWithEndpointURL("https://endpoint"),
-	})
+	cfg := unit.Config()
+	cfg.Region = aws.String("mock-region")
+	cfg.DisableParamValidation = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
+
+	svc := cloudsearchdomain.New(cfg)
 	req, _ := svc.SearchRequest(nil)
 	err := req.Build()
 
-	if e, a := "https://endpoint", svc.Endpoint; e != a {
+	if e, a := "https://endpoint", req.ClientInfo.Endpoint; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if err != nil {

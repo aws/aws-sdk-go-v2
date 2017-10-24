@@ -19,10 +19,11 @@ func TestRequestCancelRetry(t *testing.T) {
 	c := make(chan struct{})
 
 	reqNum := 0
-	s := mock.NewMockClient(unit.Config.Copy(&aws.Config{
-		EndpointResolver: aws.ResolveWithEndpointURL("http://endpoint"),
-		Retryer:          aws.DefaultRetryer{NumMaxRetries: 10},
-	}))
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("http://endpoint")
+	cfg.Retryer = aws.DefaultRetryer{NumMaxRetries: 10}
+	s := mock.NewMockClient(cfg)
+	
 	s.Handlers.Validate.Clear()
 	s.Handlers.Unmarshal.Clear()
 	s.Handlers.UnmarshalMeta.Clear()

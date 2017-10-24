@@ -197,7 +197,7 @@ func TestStopHandlers(t *testing.T) {
 }
 
 func BenchmarkNewRequest(b *testing.B) {
-	svc := s3.New(unit.Config)
+	svc := s3.New(unit.Config())
 
 	for i := 0; i < b.N; i++ {
 		r, _ := svc.GetObjectRequest(nil)

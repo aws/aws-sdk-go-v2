@@ -99,10 +99,10 @@ func TestResolveEndpointCredentials(t *testing.T) {
 		WithCredentialsEndpoint(u),
 	}
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.CredentialsLoader = nil
 
-	if err := ResolveEndpointCredentials(cfg, configs); err != nil {
+	if err := ResolveEndpointCredentials(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -110,7 +110,13 @@ func TestResolveEndpointCredentials(t *testing.T) {
 	if p.Client == nil {
 		t.Errorf("expect client set")
 	}
-	if e, a := u, p.Client.ClientInfo.Endpoint; e != a {
+
+	endpoint, err := p.Client.EndpointResolver.EndpointFor(endpointcreds.ProviderName, "")
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if e, a := u, endpoint.URL; e != a {
 		t.Errorf("expect %q endpoint, got %q", e, a)
 	}
 }
@@ -119,9 +125,9 @@ func TestResolveEndpointCredentials_ValidateEndpoint(t *testing.T) {
 	configs := Configs{
 		WithCredentialsEndpoint("http://notvalid.com"),
 	}
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 
-	err := ResolveEndpointCredentials(cfg, configs)
+	err := ResolveEndpointCredentials(&cfg, configs)
 	if err == nil {
 		t.Fatalf("expect error")
 	}
@@ -157,10 +163,10 @@ func TestResolveContainerEndpointPathCredentials(t *testing.T) {
 		WithContainerCredentialsEndpointPath(u),
 	}
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.CredentialsLoader = nil
 
-	if err := ResolveContainerEndpointPathCredentials(cfg, configs); err != nil {
+	if err := ResolveContainerEndpointPathCredentials(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -170,7 +176,13 @@ func TestResolveContainerEndpointPathCredentials(t *testing.T) {
 	}
 
 	expect := containerCredentialsEndpoint + u
-	if e, a := expect, p.Client.ClientInfo.Endpoint; e != a {
+
+	endpoint, err := p.Client.EndpointResolver.EndpointFor(endpointcreds.ProviderName, "")
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	if e, a := expect, endpoint.URL; e != a {
 		t.Errorf("expect %q endpoint, got %q", e, a)
 	}
 }
@@ -189,10 +201,10 @@ func TestResolveAssumeRoleCredentials(t *testing.T) {
 		}),
 	}
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.CredentialsLoader = nil
 
-	if err := ResolveAssumeRoleCredentials(cfg, configs); err != nil {
+	if err := ResolveAssumeRoleCredentials(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -232,10 +244,10 @@ func TestResolveAssumeRoleCredentials_WithMFAToken(t *testing.T) {
 		}),
 	}
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.CredentialsLoader = nil
 
-	if err := ResolveAssumeRoleCredentials(cfg, configs); err != nil {
+	if err := ResolveAssumeRoleCredentials(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
@@ -272,10 +284,10 @@ func TestResolveAssumeRoleCredentials_WithMFATokenError(t *testing.T) {
 		}),
 	}
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
 	cfg.CredentialsLoader = nil
 
-	err := ResolveAssumeRoleCredentials(cfg, configs)
+	err := ResolveAssumeRoleCredentials(&cfg, configs)
 	if err == nil {
 		t.Fatalf("expect error")
 	}
@@ -290,9 +302,10 @@ func TestResolveAssumeRoleCredentials_WithMFATokenError(t *testing.T) {
 func TestResolveFallbackEC2Credentials(t *testing.T) {
 	configs := Configs{}
 
-	cfg := unit.Config.Copy()
+	cfg := unit.Config()
+	cfg.CredentialsLoader = nil
 
-	if err := ResolveFallbackEC2Credentials(cfg, configs); err != nil {
+	if err := ResolveFallbackEC2Credentials(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
 

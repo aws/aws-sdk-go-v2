@@ -58,11 +58,11 @@ func TestRequest_FollowPUTRedirects(t *testing.T) {
 		}
 	}))
 
-	svc := awstesting.NewClient(&aws.Config{
-		Region:           unit.Config.Region,
-		DisableSSL:       aws.Bool(true),
-		EndpointResolver: aws.ResolveWithEndpointURL(server.URL),
-	})
+	cfg := unit.Config()
+	cfg.DisableSSL = aws.Bool(true)
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+
+	svc := awstesting.NewClient(cfg)
 
 	req := svc.NewRequest(&aws.Operation{
 		Name:       "Operation",

@@ -40,28 +40,21 @@ const (
 //
 //     // Create a CloudSearchDomain client with additional configuration
 //     svc := cloudsearchdomain.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *CloudSearchDomain {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *CloudSearchDomain {
+	var signingName string
+	signingName = "cloudsearch"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *CloudSearchDomain {
-	if len(signingName) == 0 {
-		signingName = "cloudsearch"
-	}
 	svc := &CloudSearchDomain{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2013-01-01",
 				JSONVersion:   "1.1",
 			},
-			handlers,
 		),
 	}
 

@@ -40,27 +40,20 @@ const (
 //
 //     // Create a IoTDataPlane client with additional configuration
 //     svc := iotdataplane.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *IoTDataPlane {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *IoTDataPlane {
+	var signingName string
+	signingName = "iotdata"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *IoTDataPlane {
-	if len(signingName) == 0 {
-		signingName = "iotdata"
-	}
 	svc := &IoTDataPlane{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2015-05-28",
 			},
-			handlers,
 		),
 	}
 

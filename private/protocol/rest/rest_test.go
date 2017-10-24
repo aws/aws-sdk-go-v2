@@ -15,18 +15,14 @@ import (
 )
 
 func TestUnsetHeaders(t *testing.T) {
-	cfg := &aws.Config{Region: aws.String("us-west-2")}
-	c := unit.Config.ClientConfig("testService", cfg)
+	cfg := unit.Config()
+	cfg.Region = aws.String("us-west-2")
+
 	svc := aws.NewClient(
-		*cfg,
+		cfg,
 		metadata.ClientInfo{
 			ServiceName:   "testService",
-			SigningName:   c.SigningName,
-			SigningRegion: c.SigningRegion,
-			Endpoint:      c.Endpoint,
-			APIVersion:    "",
 		},
-		c.Handlers,
 	)
 
 	// Handlers

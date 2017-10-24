@@ -48,7 +48,7 @@ func TestMain(m *testing.M) {
 }
 
 func setup() error {
-	svc := s3.New(integration.Session)
+	svc := s3.New(integration.Config())
 
 	// Create a bucket for testing
 	bucketName = aws.String(
@@ -69,7 +69,7 @@ func setup() error {
 
 // Delete the bucket
 func teardown() error {
-	svc := s3.New(integration.Session)
+	svc := s3.New(integration.Config())
 
 	objs, err := svc.ListObjects(&s3.ListObjectsInput{Bucket: bucketName})
 	if err != nil {
@@ -126,7 +126,7 @@ func (d dlwriter) WriteAt(p []byte, pos int64) (n int, err error) {
 }
 
 func validate(t *testing.T, key string, md5value string) {
-	mgr := s3manager.NewDownloader(integration.Session)
+	mgr := s3manager.NewDownloader(integration.Config())
 	params := &s3.GetObjectInput{Bucket: bucketName, Key: &key}
 
 	w := newDLWriter(1024 * 1024 * 20)
@@ -141,7 +141,7 @@ func validate(t *testing.T, key string, md5value string) {
 
 func TestUploadConcurrently(t *testing.T) {
 	key := "12mb-1"
-	mgr := s3manager.NewUploader(integration.Session)
+	mgr := s3manager.NewUploader(integration.Config())
 	out, err := mgr.Upload(&s3manager.UploadInput{
 		Bucket: bucketName,
 		Key:    &key,
@@ -164,7 +164,7 @@ func TestUploadConcurrently(t *testing.T) {
 }
 
 func TestUploadFailCleanup(t *testing.T) {
-	svc := s3.New(integration.Session)
+	svc := s3.New(integration.Config())
 
 	// Break checksum on 2nd part so it fails
 	part := 0

@@ -40,26 +40,21 @@ const (
 //
 //     // Create a ResourceGroupsTaggingAPI client with additional configuration
 //     svc := resourcegroupstaggingapi.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *ResourceGroupsTaggingAPI {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *ResourceGroupsTaggingAPI {
+	var signingName string
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *ResourceGroupsTaggingAPI {
 	svc := &ResourceGroupsTaggingAPI{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2017-01-26",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "ResourceGroupsTaggingAPI_20170126",
 			},
-			handlers,
 		),
 	}
 

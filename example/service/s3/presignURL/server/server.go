@@ -58,14 +58,13 @@ func main() {
 			exitErrorf("failed to get bucket region, %v", err)
 		}
 	}
+	cfg.Region = aws.String(region)
 
 	// Create a new S3 service client that will be use by the service to generate
 	// presigned URLs with. Not actual API requests will be made with this client.
 	// The credentials loaded when the Session was created above will be used
 	// to sign the requests with.
-	s3Svc := s3.New(cfg, &aws.Config{
-		Region: aws.String(region),
-	})
+	s3Svc := s3.New(cfg)
 
 	// Start the server listening and serve presigned URLs for GetObject and
 	// PutObject requests.

@@ -9,7 +9,6 @@ import (
 	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	client "github.com/aws/aws-sdk-go-v2/aws"
 	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -74,9 +73,9 @@ func WithDownloaderRequestOptions(opts ...request.Option) func(*Downloader) {
 //     downloader := s3manager.NewDownloader(sess, func(d *s3manager.Downloader) {
 //          d.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
-func NewDownloader(c client.ConfigProvider, options ...func(*Downloader)) *Downloader {
+func NewDownloader(cfg aws.Config, options ...func(*Downloader)) *Downloader {
 	d := &Downloader{
-		S3:          s3.New(c),
+		S3:          s3.New(cfg),
 		PartSize:    DefaultDownloadPartSize,
 		Concurrency: DefaultDownloadConcurrency,
 	}
@@ -119,8 +118,8 @@ func NewDownloaderWithClient(svc s3iface.S3API, options ...func(*Downloader)) *D
 	return d
 }
 
-type maxRetrier interface {
-	MaxRetries() int
+type retryer interface {
+	GetRetryer() aws.Retryer
 }
 
 // Download downloads an object in S3 and writes the payload into w using
@@ -173,8 +172,8 @@ func (d Downloader) DownloadWithContext(ctx aws.Context, w io.WriterAt, input *s
 	}
 	impl.cfg.RequestOptions = append(impl.cfg.RequestOptions, request.WithAppendUserAgent("S3Manager"))
 
-	if s, ok := d.S3.(maxRetrier); ok {
-		impl.partBodyMaxRetries = s.MaxRetries()
+	if v, ok := d.S3.(retryer); ok {
+		impl.partBodyMaxRetries = v.GetRetryer().MaxRetries()
 	}
 
 	impl.totalBytes = -1

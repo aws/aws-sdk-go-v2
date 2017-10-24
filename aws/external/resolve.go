@@ -109,7 +109,7 @@ func ResolveEndpointCredentials(cfg *aws.Config, configs Configs) error {
 	cfgCp := cfg.Copy()
 	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL(v)
 
-	provider := endpointcreds.New(*cfgCp)
+	provider := endpointcreds.New(cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
 
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
@@ -154,7 +154,7 @@ func ResolveContainerEndpointPathCredentials(cfg *aws.Config, configs Configs) e
 	v = containerCredentialsEndpoint + v
 	cfgCp.EndpointResolver = aws.ResolveWithEndpointURL(v)
 
-	provider := endpointcreds.New(*cfgCp)
+	provider := endpointcreds.New(cfgCp)
 	provider.ExpiryWindow = 5 * time.Minute
 
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
@@ -216,7 +216,7 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 	cfgCp.HTTPClient.Timeout = 5 * time.Second
 
 	provider := &ec2rolecreds.Provider{
-		Client:       ec2metadata.New(*cfgCp),
+		Client:       ec2metadata.New(cfgCp),
 		ExpiryWindow: 5 * time.Minute,
 	}
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)

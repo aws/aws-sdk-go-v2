@@ -40,29 +40,22 @@ const (
 //
 //     // Create a CloudHSMV2 client with additional configuration
 //     svc := cloudhsmv2.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
-func New(p aws.ConfigProvider, cfgs ...*aws.Config) *CloudHSMV2 {
-	c := p.ClientConfig(EndpointsID, cfgs...)
-	return newClient(*c.Config, c.Handlers, c.Endpoint, c.SigningRegion, c.SigningName)
-}
+func New(config aws.Config) *CloudHSMV2 {
+	var signingName string
+	signingName = "cloudhsm"
+	signingRegion := aws.StringValue(config.Region)
 
-// newClient creates, initializes and returns a new service client instance.
-func newClient(cfg aws.Config, handlers aws.Handlers, endpoint, signingRegion, signingName string) *CloudHSMV2 {
-	if len(signingName) == 0 {
-		signingName = "cloudhsm"
-	}
 	svc := &CloudHSMV2{
 		Client: aws.NewClient(
-			cfg,
+			config,
 			aws.ClientInfo{
 				ServiceName:   ServiceName,
 				SigningName:   signingName,
 				SigningRegion: signingRegion,
-				Endpoint:      endpoint,
 				APIVersion:    "2017-04-28",
 				JSONVersion:   "1.1",
 				TargetPrefix:  "BaldrApiService",
 			},
-			handlers,
 		),
 	}
 
