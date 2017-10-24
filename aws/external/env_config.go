@@ -1,6 +1,7 @@
 package external
 
 import (
+	"io/ioutil"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -147,11 +148,11 @@ func NewEnvConfig() (EnvConfig, error) {
 	var cfg EnvConfig
 
 	creds := aws.Credentials{
-		ProviderName: CredentialsSourceName,
+		Source: CredentialsSourceName,
 	}
 	setFromEnvVal(&creds.AccessKeyID, credAccessEnvKeys)
 	setFromEnvVal(&creds.SecretAccessKey, credSecretEnvKeys)
-	if creds.Valid() {
+	if creds.HasKeys() {
 		creds.SessionToken = os.Getenv(AWSSessionTokenEnvVar)
 		cfg.Credentials = creds
 	}
@@ -216,10 +217,13 @@ func (c EnvConfig) GetSharedConfigFiles() ([]string, error) {
 	return files, nil
 }
 
-// GetCustomCABundleFile returns the custom CA bundle filename if it was sent
-// with the environment. Empty string will be returned if unset.
-func (c EnvConfig) GetCustomCABundleFile() (string, error) {
-	return c.CustomCABundle, nil
+// GetCustomCABundle returns the custom CA bundle's PEM bytes if the file was
+func (c EnvConfig) GetCustomCABundle() ([]byte, error) {
+	if len(c.CustomCABundle) == 0 {
+		return nil, nil
+	}
+
+	return ioutil.ReadFile(c.CustomCABundle)
 }
 
 func setFromEnvVal(dst *string, keys []string) {

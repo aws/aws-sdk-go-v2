@@ -2,6 +2,7 @@ package external
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 	"time"
 
@@ -29,9 +30,9 @@ func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
 // to be configured with the custom CA bundle.
 //
 // Config provider used:
-// * CustomCABundleFileProvider
+// * CustomCABundleProvider
 func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
-	v, found, err := GetCustomCABundleFile(configs)
+	v, found, err := GetCustomCABundle(configs)
 	if err != nil {
 		// TODO error handling, What is the best way to handle this?
 		// capture previous errors continue. error out if all errors
@@ -41,8 +42,7 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	// TODO need to suport custom CA bundle. Adding it to the TLs cert pool.
-	return fmt.Errorf("ResolveCustomeCABundle pending HTTP Client builder, %s", v)
+	return addHTTPClientCABundle(cfg.HTTPClient, v)
 }
 
 // ResolveRegion extracts the first instance of a Region from the Configs slice.
@@ -80,7 +80,7 @@ func ResolveCredentialsValue(cfg *aws.Config, configs Configs) error {
 		return nil
 	}
 
-	provider := aws.StaticProvider{Value: v}
+	provider := aws.StaticCredentialsProvider{Value: v}
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
@@ -181,7 +181,7 @@ func ResolveAssumeRoleCredentials(cfg *aws.Config, configs Configs) error {
 	cfgCp := cfg.Copy()
 	// TODO support additional credential providers that are already set?
 	cfgCp.CredentialsLoader = aws.NewCredentialsLoader(
-		aws.StaticProvider{Value: v.Source.Credentials},
+		aws.StaticCredentialsProvider{Value: v.Source.Credentials},
 	)
 
 	provider := &stscreds.AssumeRoleProvider{
@@ -217,6 +217,8 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 	}
 
 	cfgCp := cfg.Copy()
+	cfgCp.HTTPClient = shallowCopyHTTPClient(cfgCp.HTTPClient)
+	cfgCp.HTTPClient.Timeout = 5 * time.Second
 
 	provider := &ec2rolecreds.Provider{
 		Client:       ec2metadata.New(*cfgCp),
@@ -225,4 +227,13 @@ func ResolveFallbackEC2Credentials(cfg *aws.Config, configs Configs) error {
 	cfg.CredentialsLoader = aws.NewCredentialsLoader(provider)
 
 	return nil
+}
+
+func shallowCopyHTTPClient(client *http.Client) *http.Client {
+	return &http.Client{
+		Transport:     client.Transport,
+		CheckRedirect: client.CheckRedirect,
+		Jar:           client.Jar,
+		Timeout:       client.Timeout,
+	}
 }

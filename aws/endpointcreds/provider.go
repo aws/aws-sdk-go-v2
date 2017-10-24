@@ -103,7 +103,7 @@ func (p *Provider) IsExpired() bool {
 func (p *Provider) Retrieve() (aws.Credentials, error) {
 	resp, err := p.getCredentials()
 	if err != nil {
-		return aws.Credentials{ProviderName: ProviderName},
+		return aws.Credentials{Source: ProviderName},
 			awserr.New("CredentialsEndpointError", "failed to load credentials", err)
 	}
 
@@ -117,7 +117,7 @@ func (p *Provider) Retrieve() (aws.Credentials, error) {
 		AccessKeyID:     resp.AccessKeyID,
 		SecretAccessKey: resp.SecretAccessKey,
 		SessionToken:    resp.Token,
-		ProviderName:    ProviderName,
+		Source:          ProviderName,
 	}, nil
 }
 

@@ -31,8 +31,8 @@ func TestBuildAuthToken(t *testing.T) {
 
 	for _, c := range cases {
 		creds := credentials.NewCredentialsLoader(
-			credentials.NewStaticProvider("AKID", "SECRET", "SESSION"),
-			)
+			credentials.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+		)
 		url, err := rdsutils.BuildAuthToken(c.endpoint, c.region, c.user, creds)
 		if err != nil {
 			t.Errorf("expect no error, got %v", err)

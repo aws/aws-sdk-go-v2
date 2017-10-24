@@ -16,7 +16,7 @@ type secondStubProvider struct {
 
 func (s *secondStubProvider) Retrieve() (Credentials, error) {
 	s.expired = false
-	s.creds.ProviderName = "secondStubProvider"
+	s.creds.Source = "secondStubProvider"
 	return s.creds, s.err
 }
 func (s *secondStubProvider) IsExpired() bool {
@@ -47,7 +47,7 @@ func TestChainProviderWithNames(t *testing.T) {
 
 	creds, err := p.Retrieve()
 	assert.Nil(t, err, "Expect no error")
-	assert.Equal(t, "secondStubProvider", creds.ProviderName, "Expect provider name to match")
+	assert.Equal(t, "secondStubProvider", creds.Source, "Expect provider name to match")
 
 	// Also check credentials
 	assert.Equal(t, "AKIF", creds.AccessKeyID, "Expect access key ID to match")

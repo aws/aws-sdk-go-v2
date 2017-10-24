@@ -48,7 +48,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "shared_config_akid",
 					SecretAccessKey: "shared_config_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 			},
 		},
@@ -61,7 +61,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "shared_config_other_akid",
 					SecretAccessKey: "shared_config_other_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigOtherFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigOtherFilename),
 				},
 			},
 		},
@@ -78,7 +78,7 @@ func TestNewSharedConfig(t *testing.T) {
 						Credentials: aws.Credentials{
 							AccessKeyID:     "complete_creds_akid",
 							SecretAccessKey: "complete_creds_secret",
-							ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+							Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 						},
 					},
 				},
@@ -104,7 +104,7 @@ func TestNewSharedConfig(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "assume_role_w_creds_akid",
 					SecretAccessKey: "assume_role_w_creds_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 				AssumeRole: AssumeRoleConfig{
 					RoleARN:         "assume_role_w_creds_role_arn",
@@ -116,7 +116,7 @@ func TestNewSharedConfig(t *testing.T) {
 						Credentials: aws.Credentials{
 							AccessKeyID:     "assume_role_w_creds_akid",
 							SecretAccessKey: "assume_role_w_creds_secret",
-							ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+							Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 						},
 					},
 				},
@@ -194,7 +194,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "complete_creds_akid",
 					SecretAccessKey: "complete_creds_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 			},
 		},
@@ -205,7 +205,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 					AccessKeyID:     "complete_creds_with_token_akid",
 					SecretAccessKey: "complete_creds_with_token_secret",
 					SessionToken:    "complete_creds_with_token_token",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 			},
 		},
@@ -215,7 +215,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 				Credentials: aws.Credentials{
 					AccessKeyID:     "full_profile_akid",
 					SecretAccessKey: "full_profile_secret",
-					ProviderName:    fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testConfigFilename),
 				},
 				Region: "full_profile_region",
 			},
@@ -314,5 +314,69 @@ func cmpFiles(expects, actuals []sharedConfigFile) bool {
 }
 
 func TestLoadSharedConfig(t *testing.T) {
-	t.Errorf("not tested")
+	origProf := DefaultSharedConfigProfile
+	origFiles := DefaultSharedConfigFiles
+	defer func() {
+		DefaultSharedConfigProfile = origProf
+		DefaultSharedConfigFiles = origFiles
+	}()
+
+	cases := []struct {
+		Configs Configs
+		Files   []string
+		Profile string
+		Expect  SharedConfig
+		Err     string
+	}{
+		{
+			Configs: Configs{
+				WithSharedConfigProfile("alt_profile_name"),
+			},
+			Files: []string{
+				filepath.Join("testdata", "shared_config"),
+			},
+			Expect: SharedConfig{
+				Profile: "alt_profile_name",
+				Region:  "alt_profile_name_region",
+			},
+		},
+		{
+			Configs: Configs{
+				WithSharedConfigFiles([]string{
+					filepath.Join("testdata", "shared_config"),
+				}),
+			},
+			Profile: "alt_profile_name",
+			Expect: SharedConfig{
+				Profile: "alt_profile_name",
+				Region:  "alt_profile_name_region",
+			},
+		},
+	}
+
+	for i, c := range cases {
+		DefaultSharedConfigProfile = origProf
+		DefaultSharedConfigFiles = origFiles
+
+		if len(c.Profile) > 0 {
+			DefaultSharedConfigProfile = c.Profile
+		}
+		if len(c.Files) > 0 {
+			DefaultSharedConfigFiles = c.Files
+		}
+
+		cfg, err := LoadSharedConfig(c.Configs)
+		if len(c.Err) > 0 {
+			if e, a := c.Err, err.Error(); !strings.Contains(a, e) {
+				t.Errorf("%d, expect %q to be in %q", i, e, a)
+			}
+			continue
+		} else if err != nil {
+			t.Fatalf("%d, expect no error, got %v", i, err)
+		}
+
+		if e, a := c.Expect, cfg; !reflect.DeepEqual(e, a) {
+			t.Errorf("expect %v got %v", e, a)
+		}
+	}
 }
